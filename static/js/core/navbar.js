@@ -145,7 +145,12 @@ function toggleCommandPalette() {
 
 function renderNavbar() {
   const navPlaceholder = document.querySelector('global.thenav');
-  if (!navPlaceholder) return;
+  if (!navPlaceholder) {
+    if (document.querySelector('[data-navbar-controls]')) {
+      setupNavbarInteractions('', true);
+    }
+    return;
+  }
 
   const authenticated = navPlaceholder.dataset.authenticated !== 'false';
   const hasSidebar = navPlaceholder.dataset.hasSidebar !== 'false';

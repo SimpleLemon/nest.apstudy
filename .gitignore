@@ -49,6 +49,7 @@ dist/
 # The notes editor bundle is deployed from Flask's static directory.
 !static/js/notes/dist/
 static/js/notes/dist/*
+!static/js/notes/dist/notes-editor-bundle-15.js
 !static/js/notes/dist/notes-editor-*.woff
 !static/js/notes/dist/notes-editor-*.woff2
 

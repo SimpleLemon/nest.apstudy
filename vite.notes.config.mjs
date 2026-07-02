@@ -17,7 +17,7 @@ export default defineConfig({
         rollupOptions: {
             input: path.resolve(rootDir, 'static/js/notes/editor-entry.js'),
             output: {
-                entryFileNames: 'notes-editor.js',
+                entryFileNames: 'notes-editor-bundle-15.js',
                 chunkFileNames: 'notes-editor-[name].js',
                 assetFileNames: (assetInfo) => (
                     assetInfo.name?.endsWith('.css')

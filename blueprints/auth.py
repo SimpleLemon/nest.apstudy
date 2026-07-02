@@ -43,7 +43,7 @@ from avatar_images import DEFAULT_AVATAR_URL
 from services.avatar_storage import delete_avatar_file, store_avatar_from_url
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
-from services import discord_bridge
+from services import discord_bridge, notes_collaboration
 from services.user_profile import (
     is_early_member as _is_early_member,
     is_emory_school as _is_emory_school,
@@ -1020,6 +1020,11 @@ def _complete_appwrite_login(
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session["email"] = email or remote_email
     _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
+    if email or remote_email:
+        try:
+            notes_collaboration.claim_pending_invitations(session["user_id"], email or remote_email)
+        except Exception:
+            logger.exception("Failed to claim pending note invitations for %s", session["user_id"])
 
     if discord_id_value:
         try:

@@ -24,12 +24,24 @@ import {
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './editor/keyboard-shortcuts.js';
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
+import { collaborationStateVectorBase64, createNoteCollaborationSession } from './editor/collaboration.js';
+import { bindReviewPanel } from './editor/review-panel.js';
+import {
+    captureCommentAnchor,
+    commentAnchorViewportTop,
+    createNotesReviewExtension,
+    scrollToCommentAnchor,
+    updateCommentDecorations,
+} from './editor/comments.js';
 import { bindNotePrintController, printNote } from './editor/print.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 
 const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
 const noteId = noteContext.noteId || noteIdFromPath();
-const canEdit = noteContext.access?.can_edit === true;
+const canDirectEdit = noteContext.access?.can_edit === true;
+const canReview = noteContext.access?.can_review === true;
+let canEdit = canDirectEdit;
+let forcedReadOnly = false;
 const SAVE_DEBOUNCE_MS = 800;
 const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
@@ -43,6 +55,13 @@ const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
 const ZOOM_LEVELS = [0.85, 1, 1.15, 1.3, 1.5];
 const DEFAULT_ZOOM_INDEX = 1;
 const PAGE_SETUP_SAVE_DEBOUNCE_MS = 500;
+const EDITOR_MODE_STORAGE_PREFIX = 'apstudy.notes.editor.mode.';
+const TOPBAR_COLLAPSE_STORAGE_KEY = 'apstudy.notes.editor.topbar-collapsed';
+const EDITOR_MODES = {
+    editing: { label: 'Editing', icon: 'edit' },
+    suggesting: { label: 'Suggesting', icon: 'rate_review' },
+    viewing: { label: 'Viewing', icon: 'visibility' },
+};
 const PAGE_SETUP_DEFAULTS = {
     pageColor: 'default',
     fontType: 'default',
@@ -127,6 +146,12 @@ let editorLoadController = null;
 let editorReadyTimer = null;
 let editorInitialFocusTimer = null;
 let editorPageDisposed = false;
+let activeCollaborationSession = null;
+let noteCollaborationEnabled = false;
+let activeCollaborativeTitleCleanup = null;
+let reviewPanelController = null;
+let floatingCommentButton = null;
+let editorMode = 'viewing';
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -138,9 +163,166 @@ const editorPage = document.getElementById('editor-page');
 const zoomValue = document.getElementById('notes-zoom-value');
 const pageSetupPopover = document.getElementById('notes-page-setup-popover');
 const shareButton = document.getElementById('notes-share-button');
+const collaboratorsRoot = document.getElementById('notes-active-collaborators');
+const reviewPanel = document.getElementById('notes-review-panel');
+const reviewButton = document.getElementById('notes-review-button');
+const historyButton = document.getElementById('notes-history-button');
+const commentButton = document.getElementById('notes-comment-button');
+const modeButton = document.getElementById('notes-editor-mode-button');
+const modeMenu = document.getElementById('notes-editor-mode-menu');
+const topbar = document.getElementById('editor-topbar');
+const topbarCollapseButton = document.getElementById('notes-topbar-collapse');
+const toolbarSaveStatus = document.getElementById('notes-toolbar-save-status');
 const pageSetupScopeInput = document.querySelector('[data-page-setup-scope]');
 const sideMarginsValue = document.getElementById('notes-side-margins-value');
 const notePrintButtons = Array.from(document.querySelectorAll('[data-note-print]'));
+
+function setEditorReadOnlyMode(readOnly) {
+    forcedReadOnly = readOnly;
+    canEdit = !readOnly && editorMode !== 'viewing' && (canDirectEdit || (canReview && editorMode === 'suggesting'));
+    const effectiveReadOnly = readOnly || !canEdit;
+    document.body.dataset.noteReadOnly = effectiveReadOnly ? 'true' : 'false';
+    if (titleInput) {
+        const titleReadOnly = effectiveReadOnly || editorMode === 'viewing';
+        titleInput.readOnly = titleReadOnly;
+        titleInput.setAttribute('aria-readonly', titleReadOnly ? 'true' : 'false');
+    }
+    editorInstance?._tiptapEditor?.setEditable?.(canEdit);
+}
+
+function allowedEditorModes() {
+    if (canDirectEdit) return ['editing', 'suggesting', 'viewing'];
+    if (canReview) return ['suggesting', 'viewing'];
+    return ['viewing'];
+}
+
+function defaultEditorMode() {
+    if (canDirectEdit) return 'editing';
+    if (canReview) return 'suggesting';
+    return 'viewing';
+}
+
+function loadEditorMode() {
+    try {
+        const stored = window.sessionStorage?.getItem(`${EDITOR_MODE_STORAGE_PREFIX}${noteId}`);
+        return allowedEditorModes().includes(stored) ? stored : defaultEditorMode();
+    } catch (error) {
+        return defaultEditorMode();
+    }
+}
+
+function renderEditorModeMenu() {
+    if (!modeMenu) return;
+    modeMenu.innerHTML = allowedEditorModes().map((mode) => `
+        <button type="button" role="menuitemradio" aria-checked="${mode === editorMode}" data-editor-mode="${mode}">
+            <span class="material-symbols-outlined" aria-hidden="true">${EDITOR_MODES[mode].icon}</span>
+            <span>${EDITOR_MODES[mode].label}</span>
+        </button>
+    `).join('');
+}
+
+function applyEditorMode(mode, { persist = true } = {}) {
+    if (!allowedEditorModes().includes(mode)) mode = defaultEditorMode();
+    editorMode = mode;
+    document.body.dataset.noteMode = mode;
+    if (persist) {
+        try { window.sessionStorage?.setItem(`${EDITOR_MODE_STORAGE_PREFIX}${noteId}`, mode); } catch (error) { /* unavailable */ }
+    }
+    const definition = EDITOR_MODES[mode];
+    modeButton?.querySelector('[data-editor-mode-icon]')?.replaceChildren(definition.icon);
+    const label = modeButton?.querySelector('[data-editor-mode-label]');
+    if (label) label.textContent = definition.label;
+    modeButton?.setAttribute('aria-label', `${definition.label} mode`);
+    renderEditorModeMenu();
+    setEditorReadOnlyMode(forcedReadOnly);
+    activeCollaborationSession?.setMode?.(mode);
+    updateEditorChrome({ immediate: true });
+}
+
+function setTopbarCollapsed(collapsed, { persist = true } = {}) {
+    document.body.classList.toggle('notes-topbar-collapsed', collapsed);
+    if (topbar) topbar.hidden = collapsed;
+    if (topbarCollapseButton) {
+        topbarCollapseButton.setAttribute('aria-pressed', String(collapsed));
+        topbarCollapseButton.setAttribute('aria-label', collapsed ? 'Expand topbar' : 'Collapse topbar');
+        topbarCollapseButton.title = collapsed ? 'Expand topbar' : 'Collapse topbar';
+        const icon = topbarCollapseButton.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = collapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up';
+    }
+    if (persist) {
+        try { window.sessionStorage?.setItem(TOPBAR_COLLAPSE_STORAGE_KEY, String(collapsed)); } catch (error) { /* unavailable */ }
+    }
+    if (toolbarSaveStatus) {
+        toolbarSaveStatus.hidden = !collapsed || !toolbarSaveStatus.textContent;
+    }
+    toolbarOverflowController?.refresh();
+}
+
+async function submitSuggestion(payload) {
+    if (!canReview || editorMode !== 'suggesting') return;
+    const response = await fetch(`/api/notes/${encodeURIComponent(noteId)}/suggestions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            ...payload,
+            base_state_vector: payload.base_state_vector || collaborationStateVectorBase64(activeCollaborationSession?.document),
+            client_request_id: globalThis.crypto?.randomUUID?.() || `suggestion-${Date.now()}-${Math.random()}`,
+        }),
+    });
+    if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        window.APStudyToast?.show?.({ message: data.error || 'Unable to create suggestion.', type: 'error' });
+        return;
+    }
+    reviewPanelController?.open?.('review');
+}
+
+function bindCollaborativeTitle(session, fallbackTitle) {
+    if (!session || !titleInput) return null;
+    const yTitle = session.document.getText('title');
+    let applyingRemoteTitle = false;
+    const applyRemoteTitle = () => {
+        const nextTitle = yTitle.toString();
+        if (titleInput.value === nextTitle) return;
+        applyingRemoteTitle = true;
+        titleInput.value = nextTitle;
+        applyingRemoteTitle = false;
+    };
+    const maybeInitializeTitle = () => {
+        if (yTitle.length === 0 && fallbackTitle) {
+            yTitle.insert(0, fallbackTitle);
+        }
+        applyRemoteTitle();
+    };
+    const handleTitleInput = () => {
+        if (applyingRemoteTitle || !canEdit) return;
+        if (editorMode === 'suggesting') {
+            const proposedTitle = titleInput.value;
+            applyingRemoteTitle = true;
+            titleInput.value = yTitle.toString();
+            applyingRemoteTitle = false;
+            void submitSuggestion({
+                operation_kind: 'title_replace',
+                target_kind: 'title',
+                summary: `Change title to “${proposedTitle || 'Untitled'}”`,
+                operations: [{ type: 'replace_title', before: yTitle.toString(), after: proposedTitle }],
+            });
+            return;
+        }
+        yTitle.delete(0, yTitle.length);
+        yTitle.insert(0, titleInput.value);
+    };
+    yTitle.observe(applyRemoteTitle);
+    session.provider.on?.('synced', ({ state }) => {
+        if (state) maybeInitializeTitle();
+    });
+    titleInput.addEventListener('input', handleTitleInput);
+    maybeInitializeTitle();
+    return () => {
+        yTitle.unobserve(applyRemoteTitle);
+        titleInput.removeEventListener('input', handleTitleInput);
+    };
+}
 
 function clampZoomIndex(index) {
     return Math.min(ZOOM_LEVELS.length - 1, Math.max(0, index));
@@ -509,7 +691,7 @@ function openPageSetupPopover(trigger, triggerRect = null) {
 }
 
 async function saveNotePageSetup() {
-    if (!canEdit || !noteId) return;
+    if (!canEdit || !noteId || noteCollaborationEnabled) return;
     try {
         const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
@@ -569,6 +751,18 @@ function schedulePageSetupSave() {
 
 function updateCurrentPageSetup(key, value) {
     const nextValue = key === 'sideMargins' ? clampSideMargins(value) : value;
+    if (editorMode === 'suggesting') {
+        const before = pageSetupScope === 'global' ? { ...globalPageSetup } : { ...notePageSetup };
+        void submitSuggestion({
+            operation_kind: 'page_setting_patch',
+            target_kind: 'page_setup',
+            scope: { page_setup_scope: pageSetupScope },
+            summary: `Change ${key} to ${nextValue}`,
+            operations: [{ type: 'patch_page_setup', key, before: before[key] ?? null, after: nextValue }],
+        });
+        updatePageSetupControls();
+        return;
+    }
     if (pageSetupScope === 'global') {
         globalPageSetup = normalizePageSetup({ ...globalPageSetup, [key]: nextValue });
     } else {
@@ -857,6 +1051,15 @@ function setLastSavedAt(value) {
 }
 
 function setSaveStatus(status, options = {}) {
+    if (toolbarSaveStatus) {
+        const compact = {
+            saving: 'Saving…', connecting: 'Connecting…', reconnecting: 'Reconnecting…',
+            'offline-readonly': 'Offline', saved: 'Saved', error: 'Save failed',
+        }[status] || '';
+        toolbarSaveStatus.textContent = compact;
+        toolbarSaveStatus.hidden = !document.body.classList.contains('notes-topbar-collapsed') || !compact;
+        toolbarSaveStatus.classList.toggle('is-error', status === 'error' || status === 'offline-readonly');
+    }
     if (!saveStatus) return;
     if (saveRetry) saveRetry.hidden = true;
 
@@ -869,8 +1072,30 @@ function setSaveStatus(status, options = {}) {
 
     if (status === 'saving') {
         clearSavedTimeRefresh();
-        saveStatus.textContent = 'Saving...';
+        saveStatus.textContent = options.message || 'Saving...';
         saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'connecting') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Connecting...';
+        saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'reconnecting') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Reconnecting...';
+        saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'offline-readonly') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Offline — read only';
+        saveStatus.classList.add('save-status-error');
+        if (saveRetry) saveRetry.hidden = true;
         return;
     }
 
@@ -889,7 +1114,7 @@ function setSaveStatus(status, options = {}) {
 }
 
 async function saveNote() {
-    if (!canEdit || !noteId || !titleInput || !editorInstance) return;
+    if (!canEdit || editorMode !== 'editing' || !noteId || !titleInput || !editorInstance || noteCollaborationEnabled) return;
 
     const documentSnapshot = currentDocumentSnapshot();
     const content = JSON.stringify(documentSnapshot);
@@ -1909,7 +2134,7 @@ function renderMissingNoteState(message = 'This note could not be opened.') {
 }
 
 function triggerDebouncedSave() {
-    if (!canEdit) return;
+    if (!canEdit || noteCollaborationEnabled) return;
     noteHasPendingChanges = true;
     if (saveDebounceTimer) {
         clearTimeout(saveDebounceTimer);
@@ -2174,25 +2399,42 @@ function NotesSideMenu(props) {
     );
 }
 
-function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
+function NoteEditor({ initialContent, initialContentWasNormalized = false, collaborationSession = null }) {
     const historyDepth = historyDepthForDocument(initialContent);
-    const editor = useCreateBlockNote({
-        initialContent,
+    const tiptapExtensions = [
+        createNotesReviewExtension({
+            getMode: () => editorMode,
+            onSuggestion: (payload) => void submitSuggestion(payload),
+        }),
+        preserveRangeSelectionShortcuts,
+        listItemHardBreakShortcuts,
+    ];
+    if (!collaborationSession) {
+        tiptapExtensions.unshift(History.configure({ depth: historyDepth, newGroupDelay: 500 }));
+    }
+    const editorOptions = {
         schema: notesEditorSchema,
         pasteHandler: handleNotesPaste,
         disableExtensions: ['history'],
         _tiptapOptions: {
-            extensions: [
-                History.configure({ depth: historyDepth, newGroupDelay: 500 }),
-                preserveRangeSelectionShortcuts,
-                listItemHardBreakShortcuts,
-            ],
+            extensions: tiptapExtensions,
         },
         placeholders: {
             default: undefined,
             emptyDocument: "Enter text or type '/' for commands",
         },
-    });
+    };
+    if (collaborationSession) {
+        editorOptions.collaboration = {
+            fragment: collaborationSession.fragment,
+            provider: collaborationSession.provider,
+            user: collaborationSession.user,
+            showCursorLabels: 'activity',
+        };
+    } else {
+        editorOptions.initialContent = initialContent;
+    }
+    const editor = useCreateBlockNote(editorOptions);
 
     const getSlashItems = React.useCallback(async (query) => (
         filterBlockCatalog(query).map((item) => ({
@@ -2213,7 +2455,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             invalidateDocumentSnapshot();
             const documentSnapshot = currentDocumentSnapshot();
             updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-            if (canEdit && initialContentWasNormalized) {
+            if (canEdit && initialContentWasNormalized && !collaborationSession) {
                 triggerDebouncedSave();
             }
         }, 0);
@@ -2247,7 +2489,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
             onChange: () => {
                 invalidateDocumentSnapshot();
-                if (!canEdit) return;
+                if (!canEdit || editorMode !== 'editing') return;
                 if (normalizingEditorDocument) {
                     const documentSnapshot = currentDocumentSnapshot();
                     updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
@@ -2312,12 +2554,47 @@ async function initEditorPage() {
     globalPageSetup = normalizePageSetup(note?.global_page_setup);
     applyPageSetupVariables();
     updatePageSetupControls();
+    noteCollaborationEnabled = note?.collaboration_enabled === true;
     if (note?.updated_at) {
         setSaveStatus('saved', { savedAt: note.updated_at });
     }
     if (typeof note?.content === 'string') {
         lastSavedPayloadFingerprint = notePayloadFingerprint(noteTitle, note.content);
     }
+
+    if (noteCollaborationEnabled) {
+        setSaveStatus('connecting');
+        try {
+            activeCollaborationSession = await createNoteCollaborationSession({
+                noteId,
+                access: note?.access || noteContext.access,
+                presenceRoot: collaboratorsRoot,
+                onStatus: (status) => setSaveStatus(status),
+                onReviewEvent: () => void reviewPanelController?.refresh?.(),
+            });
+            activeCollaborationSession.setMode?.(editorMode);
+            activeCollaborativeTitleCleanup = bindCollaborativeTitle(activeCollaborationSession, noteTitle);
+        } catch (error) {
+            console.error('Failed to connect note collaboration', error);
+            activeCollaborationSession = null;
+            setEditorReadOnlyMode(true);
+            setSaveStatus('offline-readonly');
+        }
+    }
+    reviewPanelController = bindReviewPanel({
+        noteId,
+        canReview: note?.access?.can_review === true,
+        canManageReviews: note?.access?.can_manage_reviews === true,
+        canViewVersions: note?.access?.can_edit === true,
+        panel: reviewPanel,
+        reviewButton,
+        historyButton,
+        toast: window.APStudyToast,
+        captureAnchor: () => captureCommentAnchor(editorInstance),
+        onThreads: (threads, activeId) => updateCommentDecorations(editorInstance, threads, activeId),
+        onSelectThread: (thread) => scrollToCommentAnchor(editorInstance, thread),
+        anchorTop: (thread) => commentAnchorViewportTop(editorInstance, thread),
+    });
 
     let parsedContent = undefined;
     let parsedContentWasNormalized = false;
@@ -2341,16 +2618,17 @@ async function initEditorPage() {
         noteEditorReactRoot.render(React.createElement(NoteEditor, {
             initialContent: parsedContent,
             initialContentWasNormalized: parsedContentWasNormalized,
+            collaborationSession: activeCollaborationSession,
         }));
-        if (canEdit) bindWritingToolbar();
+        if (canReview) bindWritingToolbar();
     } catch (error) {
         console.error('Failed to mount note editor', error);
         setSaveStatus('error');
     }
 
-    if (canEdit) {
+    if (canReview) {
         titleInput.addEventListener('input', () => {
-            triggerDebouncedSave();
+            if (editorMode === 'editing') triggerDebouncedSave();
         });
         titleInput.addEventListener('keydown', (event) => {
             if (event.key !== 'Enter') return;
@@ -2379,7 +2657,7 @@ async function initEditorPage() {
         const isNewBlankNote = isBlankTitle(noteTitle) && !documentHasText(parsedContent);
         const documentSnapshot = currentDocumentSnapshot();
         updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-        if (!canEdit || !isNewBlankNote) return;
+        if (!canEdit || editorMode !== 'editing' || !isNewBlankNote) return;
         titleInput.focus({ preventScroll: true });
         titleInput.select();
     }, 0);
@@ -2405,6 +2683,68 @@ function clearEditorTimersAndFrames() {
     clearSavedTimeRefresh();
 }
 
+function removeFloatingCommentButton() {
+    floatingCommentButton?.remove();
+    floatingCommentButton = null;
+}
+
+function showFloatingCommentButton() {
+    removeFloatingCommentButton();
+    if (!canReview || editorMode === 'viewing' && !noteContext.access?.can_review) return;
+    const selection = window.getSelection?.();
+    if (!selection || selection.isCollapsed || !selection.rangeCount || !blocknoteRoot?.contains(selection.anchorNode)) return;
+    const rect = selection.getRangeAt(0).getBoundingClientRect();
+    if (!rect.width && !rect.height) return;
+    floatingCommentButton = document.createElement('button');
+    floatingCommentButton.type = 'button';
+    floatingCommentButton.className = 'notes-floating-comment-button';
+    floatingCommentButton.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">add_comment</span><span>Add comment</span>';
+    floatingCommentButton.style.left = `${Math.min(window.innerWidth - 150, Math.max(8, rect.right + 8))}px`;
+    floatingCommentButton.style.top = `${Math.max(8, rect.top - 8)}px`;
+    floatingCommentButton.addEventListener('pointerdown', (event) => event.preventDefault());
+    floatingCommentButton.addEventListener('click', () => {
+        const anchor = captureCommentAnchor(editorInstance);
+        removeFloatingCommentButton();
+        reviewPanelController?.startComment?.(anchor);
+    }, { once: true });
+    document.body.appendChild(floatingCommentButton);
+}
+
+function bindReviewToolbarControls() {
+    modeButton?.addEventListener('click', () => {
+        const opening = modeMenu?.hidden !== false;
+        if (modeMenu) modeMenu.hidden = !opening;
+        modeButton.setAttribute('aria-expanded', String(opening));
+    });
+    modeMenu?.addEventListener('click', (event) => {
+        const option = event.target.closest('[data-editor-mode]');
+        if (!option) return;
+        applyEditorMode(option.dataset.editorMode);
+        modeMenu.hidden = true;
+        modeButton?.setAttribute('aria-expanded', 'false');
+    });
+    topbarCollapseButton?.addEventListener('click', () => {
+        setTopbarCollapsed(!document.body.classList.contains('notes-topbar-collapsed'));
+    });
+    commentButton?.addEventListener('click', () => reviewPanelController?.startComment?.(captureCommentAnchor(editorInstance)));
+    document.addEventListener('keydown', (event) => {
+        if (!(event.altKey && (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'm')) return;
+        if (!canReview) return;
+        event.preventDefault();
+        reviewPanelController?.startComment?.(captureCommentAnchor(editorInstance));
+    });
+    blocknoteRoot?.addEventListener('mouseup', () => window.setTimeout(showFloatingCommentButton, 0));
+    blocknoteRoot?.addEventListener('keyup', (event) => {
+        if (event.key === 'Shift' || event.key.startsWith('Arrow')) window.setTimeout(showFloatingCommentButton, 0);
+    });
+    blocknoteRoot?.addEventListener('click', (event) => {
+        const highlight = event.target.closest('[data-comment-id]');
+        if (!highlight) return;
+        reviewPanelController?.open?.('review');
+        reviewPanelController?.selectThread?.(highlight.dataset.commentId);
+    });
+}
+
 function releaseNoteEditorRuntime() {
     if (editorPageDisposed) return;
     editorPageDisposed = true;
@@ -2417,6 +2757,14 @@ function releaseNoteEditorRuntime() {
     closePageSetupPopover();
     closePageSetupDropdowns();
     removeUrlBlockPopover();
+    activeCollaborativeTitleCleanup?.();
+    activeCollaborativeTitleCleanup = null;
+    activeCollaborationSession?.destroy?.();
+    activeCollaborationSession = null;
+    reviewPanelController?.destroy?.();
+    reviewPanelController = null;
+    floatingCommentButton?.remove();
+    floatingCommentButton = null;
     noteEditorReactRoot?.unmount();
     noteEditorReactRoot = null;
     editorInstance = null;
@@ -2441,6 +2789,14 @@ saveRetry?.addEventListener('click', () => {
 });
 
 bindNotePrintControls();
+editorMode = loadEditorMode();
+applyEditorMode(editorMode, { persist: false });
+try {
+    setTopbarCollapsed(window.sessionStorage?.getItem(TOPBAR_COLLAPSE_STORAGE_KEY) === 'true', { persist: false });
+} catch (error) {
+    setTopbarCollapsed(false, { persist: false });
+}
+bindReviewToolbarControls();
 zoomIndex = loadStoredZoomIndex();
 applyEditorZoom();
 initEditorPage();

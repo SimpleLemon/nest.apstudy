@@ -38,8 +38,9 @@ BOOLEAN_COLUMNS = {
     "tasks": {"completed", "starred"},
     "shared_files": {"is_public"},
     "file_folders": {"is_public"},
-    "notes": {"is_pinned", "is_archived"},
+    "notes": {"is_pinned", "is_archived", "collaboration_enabled"},
     "chat_channels": {"read_only", "approved"},
+    "user_notifications": {"is_read"},
 }
 
 
@@ -160,13 +161,22 @@ def _apply_migration(conn, filename):
     _validate_migration_sql(sql, filename)
 
     try:
-        # executescript otherwise commits any pending transaction before running.
-        # Starting the transaction inside the script keeps its DDL and marker atomic.
-        conn.executescript(f"BEGIN IMMEDIATE;\n{sql}")
-        if not conn.in_transaction:
-            raise sqlite3.OperationalError(
-                f"Migration {filename} ended its managed transaction"
-            )
+        # Acquire the write lock before checking the marker again. Multiple
+        # Gunicorn workers can initialize concurrently during a deploy; a
+        # worker that waited for another worker's migration must not replay it.
+        conn.execute("BEGIN IMMEDIATE")
+        applied = conn.execute(
+            "SELECT 1 FROM schema_migrations WHERE version = ?",
+            [version],
+        ).fetchone()
+        if applied:
+            conn.commit()
+            return
+
+        # executescript commits pending transactions, so execute the already
+        # validated complete statements individually inside our lock.
+        for statement in _migration_statements(sql):
+            conn.execute(statement)
         conn.execute(
             "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES (?, ?)",
             [version, utcnow_iso()],

@@ -12,10 +12,13 @@ test('notes editor bundle keeps generated assets relative to its Flask static di
     const scripts = fs.readdirSync(distDir)
         .filter((filename) => filename.endsWith('.js'))
         .map((filename) => fs.readFileSync(path.join(distDir, filename), 'utf8'));
+    const versionedEntry = path.join(distDir, 'notes-editor-bundle-15.js');
 
+    assert.ok(fs.existsSync(versionedEntry), 'missing versioned notes editor entry');
     assert.doesNotMatch(css, /url\(\s*["']?\/notes-editor/);
     scripts.forEach((script) => {
         assert.doesNotMatch(script, /(?:from|import\()\s*["']\/notes-editor/);
+        assert.doesNotMatch(script, /notes-editor-bundle-15\.js\?/);
     });
     assert.match(css, /url\(\.\/notes-editor/);
 

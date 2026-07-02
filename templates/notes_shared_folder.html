@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-sharing-1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-share-2">
     <title>{{ (folder.name if folder else 'Shared Folder') }} - APStudy Nest</title>
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     {% if viewer_authenticated %}<script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>{% endif %}
-    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}?v=notes-share-2" defer></script>
 </head>
 <body class="{% if not viewer_authenticated %}notes-no-sidebar {% endif %}bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
     <global class="thenav"

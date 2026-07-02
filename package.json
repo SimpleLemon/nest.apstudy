@@ -8,6 +8,7 @@
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
     "build:notes": "vite build --config vite.notes.config.mjs",
     "build": "npm run build:css && npm run build:notes",
+    "collab:start": "node collaboration/server.mjs",
     "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
     "test": "npm run test:js && npm run test:py",
     "test:js": "node --test tests/js/*.test.cjs tests/js/*.test.mjs",
@@ -37,6 +38,8 @@
     "@blocknote/core": "^0.28.0",
     "@blocknote/mantine": "^0.28.0",
     "@blocknote/react": "^0.28.0",
+    "@hocuspocus/provider": "^2.15.3",
+    "@hocuspocus/server": "^2.15.3",
     "@mantine/core": "^8.2.8",
     "@mantine/hooks": "^8.2.8",
     "@tiptap/core": "^2.27.2",
@@ -44,6 +47,7 @@
     "@tiptap/pm": "^2.27.2",
     "appwrite": "^25.0.0",
     "cmdk": "^1.1.1",
+    "jsdom": "^26.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }

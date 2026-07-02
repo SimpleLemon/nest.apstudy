@@ -60,7 +60,7 @@
     function preloadEditorBundle() {
         if (editorBundlePreloaded) return;
         editorBundlePreloaded = true;
-        const scriptPath = '/static/js/notes/dist/notes-editor.js';
+        const scriptPath = '/static/js/notes/dist/notes-editor-bundle-15.js';
         if (document.querySelector(`link[rel="modulepreload"][href="${scriptPath}"]`)) return;
         const link = document.createElement('link');
         link.rel = 'modulepreload';

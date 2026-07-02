@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { JSDOM } from "jsdom";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -65,6 +66,8 @@ if (false) {
     await import("../../static/js/landing.js");
     await import("../../static/js/notes/editor.js");
     await import("../../static/js/notes/editor/block-catalog.js");
+    await import("../../static/js/notes/editor/comments.js");
+    await import("../../static/js/notes/editor/review-panel.js");
     await import("../../static/js/notes/editor/print.js");
     await import("../../static/js/notes/editor/utils.js");
     await import("../../static/js/notes/export.js");
@@ -383,6 +386,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     const catalogSource = await sourceFor("static/js/notes/editor/block-catalog.js");
     const keyboardSource = await sourceFor("static/js/notes/editor/keyboard-shortcuts.js");
     const printSource = await sourceFor("static/js/notes/editor/print.js");
+    const listUtils = await sourceFor("static/js/notes/list/utils.js");
     const styles = await sourceFor("static/css/notes.css");
     const editorTemplate = await sourceFor("templates/notes_editor.html");
     const notesTemplate = await sourceFor("templates/notes.html");
@@ -406,11 +410,14 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
     assert.match(source, /pause: releaseNoteEditorRuntime/);
     assert.match(editorTemplate, /data-navigation-retention="discard"/);
-    assert.doesNotMatch(editorTemplate, /js\/core\/navbar\.js/);
+    assert.match(editorTemplate, /js\/core\/navbar\.js/);
     assert.doesNotMatch(editorTemplate, /<global class="thenav"/);
     assert.match(editorTemplate, /data-sidebar-mobile-toggle/);
+    assert.match(editorTemplate, /data-navbar-controls/);
+    assert.match(editorTemplate, /id="navbar-avatar-btn"[\s\S]*?id="profile-dropdown"/);
     assert.match(styles, /body\.notes-editor-body\s*\{[^}]*--navbar-height:\s*0px;[^}]*grid-template-rows:\s*minmax\(0, 1fr\);/s);
     assert.match(styles, /body\.notes-editor-body main\s*\{[^}]*grid-row:\s*1;[^}]*max-width:\s*none;[^}]*padding:\s*0;/s);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*order:\s*-1;[^}]*margin:\s*0 calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);[^}]*padding:\s*3px/s);
     assert.match(source, /preserveRangeSelectionShortcuts/);
     assert.match(source, /listItemHardBreakShortcuts/);
     assert.match(source, /from '\.\/toolbar\.js'/);
@@ -501,9 +508,13 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-editor-content-width: 720px/);
     assert.match(styles, /max-width: var\(--notes-editor-content-width\)/);
     assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--notes-topbar-height\);[^}]*z-index:\s*45;/s);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*background:\s*var\(--notes-bg-toolbar\);/s);
+    assert.match(styles, /\.notes-toolbar-menu\s*\{[^}]*background:\s*var\(--notes-bg-toolbar\);/s);
+    assert.match(styles, /\.notes-page-setup-popover\s*\{[^}]*background:\s*var\(--notes-bg-toolbar\);/s);
+    assert.match(styles, /\.notes-editor-mode-menu\s*\{[^}]*background:\s*var\(--notes-bg-surface\);/s);
     assert.match(styles, /\.notes-toolbar-segment \+ \.notes-toolbar-segment::before,[^{]*\{[^}]*width:\s*1px;[^}]*height:\s*22px;/s);
     assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.editor-title-input\s*\{[^}]*max-width:\s*none;[^}]*text-align:\s*center;/s);
-    assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.notes-writing-toolbar\s*\{[^}]*width:\s*auto;[^}]*margin-inline:\s*calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);/s);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*margin:\s*0 calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);/s);
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
@@ -558,8 +569,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /background:\s*#ffffff !important/);
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
-    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-2/);
-    assert.match(editorTemplate, /notes-editor-bundle-13/);
+    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-share-2/);
+    assert.match(editorTemplate, /notes-editor-bundle-15/);
+    assert.match(editorTemplate, /type="module" src="\{\{ url_for\('static', filename='js\/notes\/dist\/notes-editor-bundle-15\.js'\) \}\}"><\/script>/);
+    assert.doesNotMatch(editorTemplate, /notes-editor-bundle-15\.js'\) \}\}\?v=/);
+    assert.match(listUtils, /const scriptPath = '\/static\/js\/notes\/dist\/notes-editor-bundle-15\.js'/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -616,25 +630,49 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
 
     assert.match(sharingSource, /\/api\/notes\/share-users\?q=/);
-    assert.match(sharingSource, /public: modal\.querySelector\('\[data-share-public\]'\)\.value === 'public'/);
-    assert.match(sharingSource, /user_ids: users\.map\(\(user\) => user\.id\)/);
+    assert.match(sharingSource, /public: modal\._sharePublic/);
+    assert.match(sharingSource, /grants: users\.map\(\(user\) => \(\{ user_id: user\.id, role: normalizeRole\(user\.role\) \}\)\)/);
+    assert.match(sharingSource, /invitations: pending\.map\(\(invite\) => \(\{ email: invite\.email, role: normalizeRole\(invite\.role\) \}\)\)/);
+    assert.match(sharingSource, /Pending invitations/);
+    assert.match(sharingSource, /OAuth signup/);
     assert.match(sharingSource, /Anyone with the link/);
     assert.match(sharingSource, /Viewer/);
+    assert.match(sharingSource, /Reviewer/);
+    assert.match(sharingSource, /Editor/);
     assert.match(sharingSource, /data-share-copy/);
+    assert.match(sharingSource, /data-share-menu-trigger/);
+    assert.match(sharingSource, /role="listbox"/);
+    assert.match(sharingSource, /data-share-empty-state/);
+    assert.doesNotMatch(sharingSource, /<select/);
+    assert.match(styles, /\.notes-share-invite-card/);
+    assert.match(styles, /\.notes-share-menu-popover/);
 
-    assert.match(editorSource, /const canEdit = noteContext\.access\?\.can_edit === true/);
+    assert.match(editorSource, /const canDirectEdit = noteContext\.access\?\.can_edit === true/);
     assert.match(editorSource, /editable: canEdit/);
-    assert.match(editorSource, /if \(!canEdit \|\| !noteId \|\| !titleInput \|\| !editorInstance\) return/);
+    assert.match(editorSource, /if \(!canEdit \|\| editorMode !== 'editing' \|\| !noteId/);
+    assert.match(editorSource, /createNoteCollaborationSession/);
+    assert.match(editorSource, /collaborationSession\.fragment/);
+    assert.match(editorSource, /bindCollaborativeTitle/);
     assert.match(editorSource, /canEdit \? React\.createElement\(SuggestionMenuController/);
     assert.match(editorSource, /canEdit \? React\.createElement\(SideMenuController/);
     assert.match(editorSource, /if \(!canEdit\) \{\s*button\?\.remove\(\);/);
     assert.match(editorTemplate, /id="notes-share-button"[\s\S]*?data-notes-share-resource="note"/);
+    assert.match(editorTemplate, /id="notes-active-collaborators"/);
     assert.match(editorTemplate, /js\/notes\/sharing\.js/);
     assert.match(editorTemplate, /Shared by <a class="notes-viewer-owner" href="\{\{ owner\.profile_url \}\}">\{\{ owner\.name \}\}<\/a>/);
     assert.match(styles, /body\.notes-editor-body\s*\{[^}]*--navbar-height:\s*0px;[^}]*display:\s*grid !important;[^}]*grid-template-rows:\s*minmax\(0, 1fr\);/s);
+    assert.match(styles, /\.notes-collaborator-stack/);
+    assert.match(styles, /\.notes-collaborator-indicator--suggesting/);
     assert.match(styles, /body\[data-note-read-only="true"\] \.blocknote-container \.notes-block-selected > \.bn-block\s*\{[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
     assert.match(editorSource, /if \(!canEdit\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
-    assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
+    assert.match(editorTemplate, /{% if access\.can_review %}[\s\S]*?notes-toolbar-page-setup/);
+    assert.match(editorTemplate, /id="notes-editor-mode-button"/);
+    assert.match(editorTemplate, /id="notes-topbar-collapse"/);
+    assert.match(styles, /\.editor-topbar\[hidden\]\s*\{[^}]*display:\s*none !important;/s);
+    assert.match(editorTemplate, /id="notes-comment-button"/);
+    assert.match(editorSource, /captureCommentAnchor/);
+    assert.match(editorSource, /EDITOR_MODE_STORAGE_PREFIX/);
+    assert.match(styles, /\.notes-comment-highlight/);
     assert.match(editorSource, /handlePageSetupToolbarClick\([\s\S]*?writingToolbar,[\s\S]*?pageSetupPopover,[\s\S]*?openPageSetupPopover,[\s\S]*?closePageSetupPopover/);
 
     assert.match(folderTemplate, /folder_shared/);
@@ -642,6 +680,47 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.match(folderTemplate, /meta name="robots" content="noindex,nofollow"/);
     assert.match(navbarSource, /navPlaceholder\.dataset\.authenticated !== 'false'/);
     assert.match(navbarSource, /navbar-login-button/);
+});
+
+test("notes sharing renders an uncluttered empty state with custom role menus", async () => {
+    const source = await sourceFor("static/js/notes/sharing.js");
+    const dom = new JSDOM("<!doctype html><html><body></body></html>", {
+        runScripts: "outside-only",
+        url: "https://nest.test/notes/demo",
+    });
+    const sharing = {
+        revision: 3,
+        public: false,
+        share_url: "https://nest.test/notes/demo",
+        users: [],
+        pending_invitations: [],
+        inherited: [],
+    };
+    dom.window.fetch = async () => ({ ok: true, json: async () => sharing });
+    dom.window.eval(source);
+
+    await dom.window.APStudyNotesSharing.open({
+        resourceType: "note",
+        resourceId: "demo",
+        resourceTitle: "Project notes",
+    });
+
+    const modal = dom.window.document.querySelector(".notes-share-panel");
+    assert.ok(modal);
+    assert.equal(modal.querySelectorAll("select").length, 0);
+    assert.equal(modal.querySelector("[data-share-empty-title]").textContent, "Only you have access");
+    assert.equal(modal.querySelector('[data-share-section="direct"]').hidden, true);
+    assert.equal(modal.querySelector('[data-share-section="pending"]').hidden, true);
+
+    const addRole = modal.querySelector("[data-share-add-role]");
+    addRole.querySelector("[data-share-menu-trigger]").click();
+    assert.equal(addRole.querySelector("[data-share-menu-trigger]").getAttribute("aria-expanded"), "true");
+    addRole.querySelector('[data-share-menu-option="editor"]').click();
+    assert.equal(addRole.dataset.shareMenuValue, "editor");
+    assert.equal(addRole.querySelector("[data-share-menu-label]").textContent, "Editor");
+
+    dom.window.APStudyNotesSharing.close();
+    dom.window.close();
 });
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {

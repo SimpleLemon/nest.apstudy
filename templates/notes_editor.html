@@ -35,18 +35,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-2">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-13">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-share-2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-15">
     <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     {% if viewer_authenticated %}
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     {% endif %}
-    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/sharing.js') }}?v=notes-share-2" defer></script>
     {% if page_state == 'ready' %}
-    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-13"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor-bundle-15.js') }}"></script>
     {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -95,6 +96,12 @@
                         <span>Share</span>
                     </button>
                     {% endif %}
+                    {% if access.can_edit %}
+                    <button id="notes-history-button" class="notes-share-button notes-history-button" type="button" aria-label="Open version history">
+                        <span class="material-symbols-outlined" aria-hidden="true">history</span>
+                        <span>History</span>
+                    </button>
+                    {% endif %}
                     {% else %}
                     <div class="notes-viewer-status">
                         <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
@@ -105,8 +112,37 @@
                         <span class="notes-viewer-print-label">Print</span>
                     </button>
                     {% endif %}
+                    <div id="notes-active-collaborators" class="notes-active-collaborators" aria-label="Active editors and reviewers" hidden></div>
+                    {% if viewer_authenticated %}
+                    <div class="navbar-avatar-wrapper notes-editor-profile" data-navbar-controls>
+                        <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
+                            <img src="{{ (user.picture or '')|avatar_url(48) }}" srcset="{{ (user.picture or '')|avatar_url(48) }} 1x, {{ (user.picture or '')|avatar_url(96) }} 2x" sizes="36px" alt="Profile" width="36" height="36" decoding="async" />
+                        </button>
+                        <div id="profile-dropdown" class="profile-dropdown" role="menu">
+                            <div class="profile-dropdown-item email">{{ user.email }}</div>
+                            <button type="button" class="profile-dropdown-button" id="navbar-account-btn" role="menuitem">
+                                <span>Account</span>
+                                <span class="profile-dropdown-icon material-symbols-outlined" aria-hidden="true">account_circle</span>
+                            </button>
+                            <button type="button" class="profile-dropdown-button profile-dropdown-button--danger" id="navbar-logout-btn" role="menuitem">
+                                <span>Sign Out</span>
+                                <span class="profile-dropdown-icon material-symbols-outlined" aria-hidden="true">logout</span>
+                            </button>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
+
+            <aside id="notes-review-panel" class="notes-review-panel" aria-labelledby="notes-review-panel-title" hidden>
+                <header class="notes-review-panel-header">
+                    <h2 id="notes-review-panel-title" data-review-panel-title>Review</h2>
+                    <button type="button" class="notes-icon-button" data-review-panel-close aria-label="Close review panel">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </header>
+                <div class="notes-review-panel-body" data-review-panel-body></div>
+            </aside>
 
             <div class="notes-editor-surface">
                 <!-- Title input -->
@@ -121,7 +157,7 @@
                     {% if not access.can_edit %}readonly aria-readonly="true"{% endif %}
                 />
 
-                {% if access.can_edit %}
+                {% if access.can_review %}
                 <div id="notes-writing-toolbar" class="notes-writing-toolbar" aria-label="Writing tools" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <div class="notes-toolbar-main" data-toolbar-main>
                     <div class="notes-toolbar-segment notes-toolbar-page-setup" data-toolbar-item data-overflow-priority="5" aria-label="Page setup and printing">
@@ -222,6 +258,26 @@
                         </button>
                         <div class="notes-toolbar-menu notes-toolbar-overflow-menu" data-toolbar-menu="overflow" role="toolbar" aria-label="More writing tools" aria-orientation="horizontal" hidden></div>
                     </div>
+                    </div>
+                    <div class="notes-toolbar-trailing" data-toolbar-trailing>
+                        <span id="notes-toolbar-save-status" class="notes-toolbar-save-status" aria-live="polite" hidden></span>
+                        <button id="notes-comment-button" type="button" title="Add comment" aria-label="Add comment">
+                            <span class="material-symbols-outlined" aria-hidden="true">add_comment</span>
+                        </button>
+                        <button id="notes-review-button" type="button" title="Open review" aria-label="Open review">
+                            <span class="material-symbols-outlined" aria-hidden="true">comment</span>
+                        </button>
+                        <div class="notes-editor-mode-control">
+                            <button id="notes-editor-mode-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="notes-editor-mode-menu">
+                                <span class="material-symbols-outlined" data-editor-mode-icon aria-hidden="true">edit</span>
+                                <span class="notes-editor-mode-label" data-editor-mode-label>Editing</span>
+                                <span class="material-symbols-outlined notes-toolbar-chevron" aria-hidden="true">expand_more</span>
+                            </button>
+                            <div id="notes-editor-mode-menu" class="notes-editor-mode-menu" role="menu" hidden></div>
+                        </div>
+                        <button id="notes-topbar-collapse" type="button" title="Collapse topbar" aria-label="Collapse topbar" aria-pressed="false">
+                            <span class="material-symbols-outlined" aria-hidden="true">keyboard_arrow_up</span>
+                        </button>
                     </div>
                     <div class="notes-toolbar-menu notes-style-menu" data-toolbar-menu="block-style" hidden>
                         <button type="button" class="notes-toolbar-menu-item" data-editor-action="set-block" data-block-type="paragraph" data-menu-check="paragraph">

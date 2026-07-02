@@ -7,6 +7,7 @@ from flask import Flask, g, jsonify, redirect, render_template, request, session
 from dotenv import load_dotenv
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.middleware.proxy_fix import ProxyFix
+import click
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -215,6 +216,31 @@ def create_app():
         from services.file_cleanup import cleanup_expired_files
 
         cleanup_expired_files()
+
+    @app.cli.command("cleanup-notes-collaboration")
+    def cleanup_notes_collaboration_command():
+        from services.notes_collaboration import cleanup_expired_collaboration_rows
+
+        result = cleanup_expired_collaboration_rows()
+        print(
+            "Expired note invitations: {invitations_expired}; expired note versions deleted: {versions_deleted}".format(
+                **result
+            )
+        )
+
+    @app.cli.command("migrate-notes-collaboration")
+    @click.option("--apply", "apply_changes", is_flag=True, help="Persist verified Yjs documents.")
+    @click.option("--note-id", "note_ids", multiple=True, help="Limit conversion to specific notes.")
+    def migrate_notes_collaboration_command(apply_changes, note_ids):
+        from services.notes_collaboration import migrate_notes_to_collaboration
+
+        result = migrate_notes_to_collaboration(
+            report_only=not apply_changes,
+            note_ids=note_ids,
+        )
+        print(jsonify(result).get_data(as_text=True))
+        if result["failed"]:
+            raise SystemExit(1)
 
     @app.cli.command("backup-db")
     def backup_db_command():

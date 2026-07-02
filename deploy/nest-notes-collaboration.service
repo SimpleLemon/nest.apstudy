@@ -1,0 +1,23 @@
+[Unit]
+Description=Nest notes collaboration sidecar
+After=network.target nest.service
+Requires=nest.service
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/nest.apstudy.org
+Environment=NODE_ENV=production
+Environment=NOTES_COLLABORATION_HOST=127.0.0.1
+Environment=NOTES_COLLABORATION_PORT=1234
+Environment=NEST_FLASK_INTERNAL_URL=http://127.0.0.1:8000
+EnvironmentFile=-/var/www/nest.apstudy.org/.env
+ExecStart=/usr/bin/npm run collab:start
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

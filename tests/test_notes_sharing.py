@@ -1,5 +1,7 @@
+import base64
 import os
 import sqlite3
+import subprocess
 import tempfile
 import unittest
 from types import SimpleNamespace
@@ -9,7 +11,7 @@ from flask import Blueprint, Flask
 
 import blueprints.dashboard as dashboard
 import blueprints.notes_api as notes_api
-from services import note_store
+from services import note_store, notes_collaboration
 
 
 class NotesSharingStoreTests(unittest.TestCase):
@@ -41,11 +43,17 @@ class NotesSharingStoreTests(unittest.TestCase):
             root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             with open(os.path.join(root, "migrations", "003_notes_sharing.sql"), encoding="utf-8") as migration:
                 conn.executescript(migration.read())
+            with open(os.path.join(root, "migrations", "004_notes_collaboration.sql"), encoding="utf-8") as migration:
+                conn.executescript(migration.read())
+            with open(os.path.join(root, "migrations", "005_inline_note_comments.sql"), encoding="utf-8") as migration:
+                conn.executescript(migration.read())
             conn.executemany(
                 "INSERT INTO users (id, name, username, email, picture_url, created_at) VALUES (?, ?, ?, ?, '', ?)",
                 [
                     ("owner", "Owner Name", "owner", "owner@example.test", "2026-01-01T00:00:00Z"),
                     ("viewer", "Viewer Name", "viewer", "viewer@example.test", "2026-01-01T00:00:00Z"),
+                    ("editor", "Editor Name", "editor", "editor@example.test", "2026-01-01T00:00:00Z"),
+                    ("reviewer", "Reviewer Name", "reviewer", "reviewer@example.test", "2026-01-01T00:00:00Z"),
                     ("other", "Other User", "other", "other@example.test", "2026-01-01T00:00:00Z"),
                 ],
             )
@@ -83,6 +91,110 @@ class NotesSharingStoreTests(unittest.TestCase):
             "note", "folder-note", "owner", public=False, user_ids=["viewer"], granted_by_user_id="owner"
         )
         self.assertEqual(note_store.resolve_note_access(moved, "viewer")["source"], "note_user")
+
+    def test_comment_creation_is_idempotent_and_preserves_anchor(self):
+        payload = {
+            "body": "Check this wording",
+            "client_request_id": "request-1",
+            "anchor": {
+                "kind": "legacy",
+                "state": "attached",
+                "start_block_id": "block-1",
+                "start_offset": 2,
+                "end_block_id": "block-1",
+                "end_offset": 8,
+                "quoted_text": "wording",
+            },
+        }
+        first = notes_collaboration.create_comment("standalone-note", "reviewer", payload)
+        second = notes_collaboration.create_comment("standalone-note", "reviewer", payload)
+        self.assertEqual(first["id"], second["id"])
+        self.assertFalse(first["replayed"])
+        self.assertTrue(second["replayed"])
+        self.assertEqual(second["anchor"]["start_block_id"], "block-1")
+        with sqlite3.connect(self.path) as conn:
+            count = conn.execute("SELECT COUNT(*) FROM note_comment_threads").fetchone()[0]
+        self.assertEqual(count, 1)
+
+    def test_comment_author_can_edit_and_manager_can_delete(self):
+        thread = notes_collaboration.create_comment(
+            "standalone-note",
+            "reviewer",
+            {"body": "Original", "client_request_id": "request-2", "anchor": {"kind": "document"}},
+        )
+        updated = notes_collaboration.update_comment(
+            "standalone-note", thread["id"], "reviewer", "Updated"
+        )
+        self.assertEqual(updated["body"], "Updated")
+        self.assertIsNotNone(updated["edited_at"])
+        with self.assertRaises(PermissionError):
+            notes_collaboration.update_comment(
+                "standalone-note", thread["id"], "other", "No access"
+            )
+        deleted = notes_collaboration.delete_comment(
+            "standalone-note", thread["id"], "editor", can_manage=True
+        )
+        self.assertEqual(deleted["body"], "")
+        self.assertIsNotNone(deleted["deleted_at"])
+
+    def test_collaboration_migration_verifies_before_enabling_note(self):
+        report = notes_collaboration.migrate_notes_to_collaboration(
+            report_only=True, note_ids=["standalone-note"]
+        )
+        self.assertEqual(report["ready"], 1)
+        self.assertEqual(report["migrated"], 0)
+        applied = notes_collaboration.migrate_notes_to_collaboration(
+            report_only=False, note_ids=["standalone-note"]
+        )
+        self.assertEqual(applied["migrated"], 1)
+        with sqlite3.connect(self.path) as conn:
+            enabled = conn.execute(
+                "SELECT collaboration_enabled FROM notes WHERE id = 'standalone-note'"
+            ).fetchone()[0]
+            blob_size = conn.execute(
+                "SELECT length(ydoc_blob) FROM note_collaboration_documents WHERE note_id = 'standalone-note'"
+            ).fetchone()[0]
+        self.assertEqual(enabled, 1)
+        self.assertGreater(blob_size, 20)
+
+    def test_accepted_title_suggestion_updates_canonical_yjs_and_projection(self):
+        notes_collaboration.migrate_notes_to_collaboration(
+            report_only=False, note_ids=["standalone-note"]
+        )
+        with sqlite3.connect(self.path) as conn:
+            blob = conn.execute(
+                "SELECT ydoc_blob FROM note_collaboration_documents WHERE note_id = 'standalone-note'"
+            ).fetchone()[0]
+        vector = subprocess.run(
+            [
+                "node", "--input-type=module", "-e",
+                "import * as Y from 'yjs';let s='';for await(const c of process.stdin)s+=c;"
+                "const d=new Y.Doc();Y.applyUpdate(d,Buffer.from(s,'base64'));"
+                "process.stdout.write(Buffer.from(Y.encodeStateVector(d)).toString('base64'));",
+            ],
+            cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            input=base64.b64encode(blob).decode("ascii"),
+            text=True,
+            capture_output=True,
+            check=True,
+        ).stdout
+        suggestion = notes_collaboration.create_suggestion(
+            "standalone-note",
+            "reviewer",
+            {
+                "client_request_id": "title-suggestion",
+                "target_kind": "title",
+                "operation_kind": "title_replace",
+                "base_state_vector": vector,
+                "summary": "Rename",
+                "operations": [{"type": "replace_title", "after": "Renamed collaboratively"}],
+            },
+        )
+        resolved = notes_collaboration.resolve_suggestion(
+            "standalone-note", suggestion["id"], "owner", "accepted"
+        )
+        self.assertEqual(resolved["status"], "accepted")
+        self.assertEqual(note_store.get_note("standalone-note")["title"], "Renamed collaboratively")
 
     def test_grants_are_unique_replaceable_and_removed_with_resource(self):
         note_store.replace_resource_grants(
@@ -147,8 +259,9 @@ class NotesSharingStoreTests(unittest.TestCase):
 
     def test_user_search_uses_public_profile_fields_only(self):
         results = note_store.search_share_users("@view", "owner")
-        self.assertEqual([user["id"] for user in results], ["viewer"])
-        self.assertNotIn("email", results[0])
+        self.assertIn("viewer", [user["id"] for user in results])
+        for result in results:
+            self.assertNotIn("email", result)
 
     def test_public_note_api_returns_owner_and_read_only_capabilities(self):
         note_store.replace_resource_grants(
@@ -201,6 +314,102 @@ class NotesSharingStoreTests(unittest.TestCase):
         payload = response.get_json()
         self.assertTrue(payload["public"])
         self.assertEqual([user["id"] for user in payload["users"]], ["viewer"])
+
+    def test_role_grants_and_highest_inherited_role_win(self):
+        note_store.replace_resource_grants(
+            "folder", "folder-1", "owner", public=False,
+            grants=[{"user_id": "reviewer", "role": "reviewer"}],
+            granted_by_user_id="owner",
+        )
+        note_store.replace_resource_grants(
+            "note", "folder-note", "owner", public=False,
+            grants=[{"user_id": "reviewer", "role": "viewer"}],
+            granted_by_user_id="owner",
+        )
+        access = note_store.resolve_note_access(note_store.get_note("folder-note"), "reviewer")
+        self.assertEqual(access["role"], "reviewer")
+        self.assertTrue(access["can_review"])
+        self.assertFalse(access["can_edit"])
+
+        note_store.replace_resource_grants(
+            "note", "folder-note", "owner", public=False,
+            grants=[{"user_id": "reviewer", "role": "editor"}],
+            granted_by_user_id="owner",
+        )
+        access = note_store.resolve_note_access(note_store.get_note("folder-note"), "reviewer")
+        self.assertEqual(access["role"], "editor")
+        self.assertTrue(access["can_share"])
+
+    def test_editor_can_update_named_sharing_and_pending_email_invites(self):
+        note_store.replace_resource_grants(
+            "note", "standalone-note", "owner", public=False,
+            grants=[{"user_id": "editor", "role": "editor"}],
+            granted_by_user_id="owner",
+        )
+        app = Flask(__name__)
+        app.secret_key = "test"
+        editor = SimpleNamespace(id="editor", is_authenticated=True)
+        with app.test_request_context(
+            "/api/notes/standalone-note/sharing",
+            method="PATCH",
+            json={
+                "public": False,
+                "grants": [{"user_id": "reviewer", "role": "reviewer"}],
+                "invitations": [{"email": "new.person@example.test", "role": "viewer"}],
+            },
+        ):
+            with patch.object(notes_api, "current_user", editor), patch.object(
+                notes_api, "_sharing_url", return_value="https://example.test/notes/standalone-note"
+            ):
+                response = notes_api.note_sharing.__wrapped__("standalone-note")
+        payload = response.get_json()
+        self.assertEqual([user["id"] for user in payload["users"]], ["reviewer"])
+        self.assertEqual(payload["users"][0]["role"], "reviewer")
+        self.assertEqual(payload["pending_invitations"][0]["email"], "new.person@example.test")
+        self.assertEqual(payload["pending_invitations"][0]["role"], "viewer")
+
+    def test_valid_email_search_is_exact_and_privacy_preserving(self):
+        app = Flask(__name__)
+        app.secret_key = "test"
+        owner = SimpleNamespace(id="owner", is_authenticated=True)
+        with app.test_request_context("/api/notes/share-users?q=viewer@example.test"):
+            with patch.object(notes_api, "current_user", owner):
+                response = notes_api.search_note_share_users.__wrapped__()
+        payload = response.get_json()
+        self.assertEqual(payload["email"]["status"], "matched")
+        self.assertEqual(payload["results"][0]["id"], "viewer")
+        self.assertNotIn("email", payload["results"][0])
+
+        with app.test_request_context("/api/notes/share-users?q=missing@example.test"):
+            with patch.object(notes_api, "current_user", owner):
+                response = notes_api.search_note_share_users.__wrapped__()
+        payload = response.get_json()
+        self.assertEqual(payload["email"]["status"], "unmatched")
+        self.assertEqual(payload["results"], [])
+        self.assertIn("OAuth", payload["email"]["warning"])
+
+    def test_sharing_revision_conflict_returns_fresh_state(self):
+        app = Flask(__name__)
+        app.secret_key = "test"
+        owner = SimpleNamespace(id="owner", is_authenticated=True)
+        note_store.replace_resource_grants(
+            "note", "standalone-note", "owner", public=False,
+            grants=[{"user_id": "viewer", "role": "viewer"}],
+            granted_by_user_id="owner",
+        )
+        with app.test_request_context(
+            "/api/notes/standalone-note/sharing",
+            method="PATCH",
+            json={"public": False, "grants": [], "expected_revision": 1},
+        ):
+            with patch.object(notes_api, "current_user", owner), patch.object(
+                notes_api, "_sharing_url", return_value="https://example.test/notes/standalone-note"
+            ):
+                response, status = notes_api.note_sharing.__wrapped__("standalone-note")
+        self.assertEqual(status, 409)
+        payload = response.get_json()
+        self.assertEqual(payload["code"], "sharing_revision_conflict")
+        self.assertEqual(payload["sharing"]["users"][0]["id"], "viewer")
 
     def test_sharing_update_rejects_non_boolean_public_state(self):
         app = Flask(__name__)

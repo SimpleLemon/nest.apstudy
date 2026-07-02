@@ -1,11 +1,14 @@
 import logging
+import base64
 import json
+import os
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
 
-from flask import Blueprint, abort, jsonify, request, url_for
+from flask import Blueprint, Response, abort, current_app, jsonify, request, session, url_for
 from flask_login import current_user, login_required
+from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -17,7 +20,8 @@ from appwrite_helpers import (
 )
 from services.discord_audit import emit_creation_event, format_actor
 from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
-from services import note_store
+from services.database import db_connection
+from services import note_store, notes_collaboration
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -101,6 +105,7 @@ def _note_to_payload(note, global_page_setup=None, *, access=None, owner=None):
         "content": note.get("content") or "",
         "preview_text": note.get("preview_text") or "",
         "order": note.get("order") or 0,
+        "collaboration_enabled": bool(note.get("collaboration_enabled")),
         "page_setup": _parse_page_setup(note.get("page_setup_json")),
         "global_page_setup": global_page_setup if global_page_setup is not None else {},
         "created_at": note.get("created_at"),
@@ -125,18 +130,130 @@ def _access_denied_response():
     return jsonify({"error": "Not found."}), 404
 
 
+def _note_or_404(note_id):
+    note = note_store.get_note(note_id)
+    if not note:
+        abort(404)
+    return note
+
+
+def _folder_or_404(folder_id):
+    folder = note_store.get_folder(folder_id)
+    if not folder:
+        abort(404)
+    return folder
+
+
+def _require_note_access(note_id, capability="can_view"):
+    note = _note_or_404(note_id)
+    access = note_store.resolve_note_access(note, _viewer_id())
+    if not access.get(capability):
+        abort(404)
+    return note, access
+
+
+def _require_folder_access(folder_id, capability="can_view"):
+    folder = _folder_or_404(folder_id)
+    access = note_store.resolve_folder_access(folder, _viewer_id())
+    if not access.get(capability):
+        abort(404)
+    return folder, access
+
+
+def _is_owner_access(access):
+    return (access or {}).get("role") == "owner"
+
+
+def _collaboration_serializer():
+    secret = os.environ.get("NOTES_COLLABORATION_SECRET") or current_app.secret_key
+    return URLSafeTimedSerializer(secret_key=secret, salt="nest-notes-collaboration-token")
+
+
+def _internal_collaboration_authorized():
+    secret = os.environ.get("NOTES_COLLABORATION_INTERNAL_SECRET") or os.environ.get("NOTES_COLLABORATION_SECRET")
+    provided = request.headers.get("X-Nest-Collaboration-Secret") or request.args.get("secret")
+    if secret:
+        return provided == secret
+    if (os.environ.get("FLASK_ENV") or "").strip().lower() == "production":
+        return False
+    return request.remote_addr in {"127.0.0.1", "::1", "localhost", None}
+
+
 def _sharing_url(resource_type, resource_id):
     endpoint = "dashboard.note_document" if resource_type == "note" else "dashboard.shared_note_folder"
     key = "note_id" if resource_type == "note" else "folder_id"
     return url_for(endpoint, **{key: resource_id}, _external=True)
 
 
+def _direct_grants_for_payload(resource_type, resource_id):
+    users = []
+    public = False
+    for grant in note_store.resource_grants(resource_type, resource_id):
+        if grant.get("principal_type") == "public":
+            public = True
+            continue
+        if grant.get("principal_type") != "user":
+            continue
+        user = note_store.get_safe_user(grant.get("principal_id"))
+        if user:
+            users.append({**user, "role": note_store._normalized_access_level(grant.get("access_level"))})
+    users.sort(key=lambda user: (user.get("name") or "").lower())
+    return public, users
+
+
+def _inherited_grants_for_payload(resource_type, resource_id):
+    if resource_type != "note":
+        return []
+    note = note_store.get_note(resource_id)
+    folder_id = note.get("folder_id") if note else None
+    if not folder_id:
+        return []
+    folder = note_store.get_folder(folder_id)
+    if not folder:
+        return []
+    inherited = []
+    for grant in note_store.resource_grants("folder", folder_id):
+        if grant.get("principal_type") == "public":
+            inherited.append({
+                "id": "*",
+                "name": "Anyone with the folder link",
+                "role": "viewer",
+                "source": "folder",
+                "source_id": folder_id,
+                "source_label": folder.get("name") or "Folder",
+            })
+            continue
+        if grant.get("principal_type") != "user":
+            continue
+        user = note_store.get_safe_user(grant.get("principal_id"))
+        if user:
+            inherited.append({
+                **user,
+                "role": note_store._normalized_access_level(grant.get("access_level")),
+                "source": "folder",
+                "source_id": folder_id,
+                "source_label": folder.get("name") or "Folder",
+            })
+    inherited.sort(key=lambda user: (user.get("name") or "").lower())
+    return inherited
+
+
 def _sharing_payload(resource_type, resource_id):
     state = note_store.sharing_state(resource_type, resource_id)
+    resource = note_store.get_note(resource_id) if resource_type == "note" else note_store.get_folder(resource_id)
+    owner = note_store.get_safe_user(resource.get("user_id")) if resource else None
+    actor_access = None
+    if current_user.is_authenticated and resource:
+        resolver = note_store.resolve_note_access if resource_type == "note" else note_store.resolve_folder_access
+        actor_access = resolver(resource, current_user.id)
     return {
         "resource_type": resource_type,
         "resource_id": resource_id,
         "share_url": _sharing_url(resource_type, resource_id),
+        "owner": owner,
+        "pending_invitations": notes_collaboration.list_pending_invitations(resource_type, resource_id),
+        "inherited": _inherited_grants_for_payload(resource_type, resource_id),
+        "capabilities": actor_access or {},
         **state,
     }
 
@@ -283,8 +400,25 @@ def list_shared_notes():
 @notes_api_bp.route("/api/notes/share-users", methods=["GET"])
 @login_required
 def search_note_share_users():
+    query = (request.args.get("q") or "").strip()
+    if "@" in query and notes_collaboration.EMAIL_RE.fullmatch(query):
+        try:
+            match = note_store.find_user_by_email(query, current_user.id)
+        except AppwriteException:
+            return jsonify({"results": [], "error": "Unable to resolve email recipient."}), 500
+        return jsonify({
+            "results": [match] if match else [],
+            "email": {
+                "query": query,
+                "status": "matched" if match else "unmatched",
+                "warning": None if match else (
+                    "This email is not attached to a Nest account yet. The recipient must sign up "
+                    "with OAuth using exactly this email before access can activate."
+                ),
+            },
+        })
     try:
-        return jsonify({"results": note_store.search_share_users(request.args.get("q"), current_user.id)})
+        return jsonify({"results": note_store.search_share_users(query, current_user.id)})
     except AppwriteException:
         return jsonify({"results": [], "error": "Unable to search users."}), 500
 
@@ -353,7 +487,7 @@ def get_note(note_id):
 @notes_api_bp.route("/api/notes/<note_id>", methods=["PATCH"])
 @login_required
 def update_note(note_id):
-    note = _note_owner_or_404(note_id)
+    note = _note_or_404(note_id)
     access = note_store.resolve_note_access(note, current_user.id)
     if not access["can_edit"]:
         abort(404)
@@ -361,6 +495,15 @@ def update_note(note_id):
 
     allowed = {"title", "content", "folder_id", "order", "page_setup_json"}
     updates = {key: payload[key] for key in allowed if key in payload}
+    structure_fields = {"folder_id", "order"} & updates.keys()
+    if structure_fields and not _is_owner_access(access):
+        return jsonify({"error": "Only the note owner can move or reorder notes."}), 403
+    collaborative_fields = {"title", "content", "page_setup_json"} & updates.keys()
+    if note.get("collaboration_enabled") and collaborative_fields:
+        return jsonify({
+            "error": "This note is collaboration-enabled. Use the collaboration provider instead.",
+            "code": "collaboration_required",
+        }), 409
     if "title" in updates:
         updates["title"] = (updates.get("title") or "").strip() or "Untitled"
     if "folder_id" in updates:
@@ -386,18 +529,18 @@ def update_note(note_id):
         return jsonify({"error": "Unable to update note."}), 500
 
     try:
-        global_page_setup = _load_global_notes_page_setup(note.get("user_id"))
+        global_page_setup = _load_global_notes_page_setup(updated.get("user_id") or note.get("user_id"))
     except AppwriteException:
         logger.exception("Failed to load note page setup defaults")
         global_page_setup = {}
-    owner = note_store.get_safe_user(note.get("user_id"))
+    owner = note_store.get_safe_user(updated.get("user_id") or note.get("user_id"))
     return jsonify(_note_to_payload(updated, global_page_setup=global_page_setup, access=access, owner=owner))
 
 
 @notes_api_bp.route("/api/notes/<note_id>/sharing", methods=["GET", "PATCH"])
 @login_required
 def note_sharing(note_id):
-    note = _note_owner_or_404(note_id)
+    note = _note_or_404(note_id)
     access = note_store.resolve_note_access(note, current_user.id)
     if not access["can_share"]:
         abort(404)
@@ -497,7 +640,7 @@ def update_folder(folder_id):
 @notes_api_bp.route("/api/notes/folders/<folder_id>/sharing", methods=["GET", "PATCH"])
 @login_required
 def folder_sharing(folder_id):
-    folder = _folder_owner_or_404(folder_id)
+    folder = _folder_or_404(folder_id)
     access = note_store.resolve_folder_access(folder, current_user.id)
     if not access["can_share"]:
         abort(404)
@@ -522,27 +665,81 @@ def delete_folder(folder_id):
 
 def _replace_sharing(resource_type, resource_id, owner_user_id):
     payload = request.get_json(silent=True) or {}
-    public = payload.get("public")
+    public = payload.get("public", payload.get("public_view_link_enabled"))
     if not isinstance(public, bool):
         return jsonify({"error": "public must be a boolean."}), 400
-    raw_user_ids = payload.get("user_ids", [])
-    if not isinstance(raw_user_ids, list):
-        return jsonify({"error": "user_ids must be a list."}), 400
-    if len(raw_user_ids) > 100:
+    expected_revision = payload.get("expected_revision", payload.get("revision"))
+
+    if "grants" in payload:
+        raw_grants = payload.get("grants")
+        if not isinstance(raw_grants, list):
+            return jsonify({"error": "grants must be a list."}), 400
+    elif "users" in payload:
+        raw_users = payload.get("users")
+        if not isinstance(raw_users, list):
+            return jsonify({"error": "users must be a list."}), 400
+        raw_grants = [{"user_id": user.get("id"), "role": user.get("role", "viewer")} for user in raw_users if isinstance(user, dict)]
+    else:
+        raw_user_ids = payload.get("user_ids", [])
+        if not isinstance(raw_user_ids, list):
+            return jsonify({"error": "user_ids must be a list."}), 400
+        raw_grants = [{"user_id": user_id, "role": "viewer"} for user_id in raw_user_ids]
+
+    raw_invitations = payload.get("invitations", payload.get("pending_invitations", []))
+    if not isinstance(raw_invitations, list):
+        return jsonify({"error": "invitations must be a list."}), 400
+    if len(raw_grants) + len(raw_invitations) > 100:
         return jsonify({"error": "A resource can be shared with at most 100 users."}), 400
 
-    user_ids = []
-    for value in raw_user_ids:
-        if not isinstance(value, str):
-            return jsonify({"error": "Every user_id must be a valid Nest user ID."}), 400
-        user_id = value.strip()
+    grants = []
+    seen_user_ids = set()
+    matched_from_email = []
+    for entry in raw_grants:
+        if not isinstance(entry, dict):
+            return jsonify({"error": "Every grant must be an object."}), 400
+        user_id = str(entry.get("user_id") or entry.get("id") or "").strip()
         if not user_id or user_id == str(owner_user_id):
             return jsonify({"error": "Every user_id must be a valid recipient."}), 400
-        if user_id in user_ids:
+        if user_id in seen_user_ids:
             continue
+        try:
+            role = notes_collaboration.normalize_role(entry.get("role", "viewer"))
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
         if not note_store.get_safe_user(user_id):
             return jsonify({"error": "One or more selected users no longer exist."}), 400
-        user_ids.append(user_id)
+        seen_user_ids.add(user_id)
+        grants.append({"user_id": user_id, "role": role})
+
+    invitations = []
+    seen_emails = set()
+    for invitation in raw_invitations:
+        if not isinstance(invitation, dict):
+            return jsonify({"error": "Every invitation must be an object."}), 400
+        try:
+            email_normalized, email_display = notes_collaboration.normalize_email(invitation.get("email"))
+            role = notes_collaboration.normalize_role(invitation.get("role", "viewer"))
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
+        if email_normalized in seen_emails:
+            continue
+        seen_emails.add(email_normalized)
+        try:
+            matched_user = note_store.find_user_by_email(email_display, owner_user_id)
+        except AppwriteException:
+            logger.exception("Failed to resolve invitation email")
+            return jsonify({"error": "Unable to resolve email recipient."}), 500
+        if matched_user:
+            matched_user_id = matched_user["id"]
+            if matched_user_id not in seen_user_ids:
+                grants.append({"user_id": matched_user_id, "role": role})
+                seen_user_ids.add(matched_user_id)
+                matched_from_email.append(matched_user)
+            continue
+        invitations.append({"email": email_display, "role": role})
+
+    previous_public, previous_users = _direct_grants_for_payload(resource_type, resource_id)
+    previous_roles = {user["id"]: user.get("role") for user in previous_users}
 
     try:
         note_store.replace_resource_grants(
@@ -550,9 +747,449 @@ def _replace_sharing(resource_type, resource_id, owner_user_id):
             resource_id,
             owner_user_id,
             public=public,
-            user_ids=user_ids,
+            grants=grants,
             granted_by_user_id=current_user.id,
+            expected_revision=expected_revision,
         )
+        notes_collaboration.replace_pending_invitations(
+            resource_type,
+            resource_id,
+            owner_user_id,
+            invitations,
+            current_user.id,
+        )
+    except ValueError as exc:
+        if str(exc) == "sharing_revision_conflict":
+            return jsonify({
+                "error": "Sharing changed in another tab.",
+                "code": "sharing_revision_conflict",
+                "sharing": _sharing_payload(resource_type, resource_id),
+            }), 409
+        return jsonify({"error": str(exc)}), 400
     except AppwriteException:
         return jsonify({"error": "Unable to update sharing."}), 500
-    return jsonify(_sharing_payload(resource_type, resource_id))
+
+    notes_collaboration.record_access_event(
+        current_user.id,
+        resource_type,
+        resource_id,
+        "sharing_updated",
+        old_access_level="public" if previous_public else "private",
+        new_access_level="public" if public else "private",
+    )
+    if payload.get("notify_users") or payload.get("notify"):
+        for grant in grants:
+            if previous_roles.get(grant["user_id"]) != grant["role"]:
+                notes_collaboration.create_notification(
+                    grant["user_id"],
+                    "note_sharing_grant",
+                    "A note or notes folder was shared with you.",
+                    actor_user_id=current_user.id,
+                    note_id=resource_id if resource_type == "note" else None,
+                )
+
+    response = _sharing_payload(resource_type, resource_id)
+    if matched_from_email:
+        response["matched_email_users"] = matched_from_email
+    return jsonify(response)
+
+
+@notes_api_bp.route("/api/notes/<note_id>/collaboration-token", methods=["POST"])
+def create_note_collaboration_token(note_id):
+    note = _note_or_404(note_id)
+    access = note_store.resolve_note_access(note, _viewer_id())
+    if not access["can_view"]:
+        return _access_denied_response()
+    is_anonymous = not current_user.is_authenticated
+    is_public = "public" in str(access.get("source") or "")
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=5)
+    token_payload = {
+        "token_id": str(uuid.uuid4()),
+        "user_id": str(current_user.id) if current_user.is_authenticated else None,
+        "session_id": session.get("_id"),
+        "note_id": str(note_id),
+        "role": access.get("role") or "viewer",
+        "access_revision": int(note.get("access_version") or 1),
+        "public": bool(is_public),
+        "anonymous": bool(is_anonymous),
+        "expires_at": expires_at.isoformat().replace("+00:00", "Z"),
+    }
+    token = _collaboration_serializer().dumps(token_payload)
+    return jsonify({
+        "token": token,
+        "expires_in": 300,
+        "ws_url": f"/ws/notes/{note_id}?ticket={token}",
+        "provider_url": "/ws/notes",
+        "access": access,
+        "awareness_allowed": not is_anonymous and not is_public,
+        "user": note_store.get_safe_user(current_user.id) if current_user.is_authenticated else None,
+    })
+
+
+@notes_api_bp.route("/api/notes/<note_id>/suggestions", methods=["GET", "POST"])
+@login_required
+def note_suggestions(note_id):
+    _note, access = _require_note_access(note_id, "can_review")
+    if request.method == "GET":
+        return jsonify({"suggestions": notes_collaboration.list_suggestions(note_id)})
+    try:
+        suggestion = notes_collaboration.create_suggestion(note_id, current_user.id, request.get_json(silent=True) or {})
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    return jsonify(suggestion), 201
+
+
+@notes_api_bp.route("/api/notes/<note_id>/suggestions/<suggestion_id>/<action>", methods=["POST"])
+@login_required
+def resolve_note_suggestion(note_id, suggestion_id, action):
+    _note, access = _require_note_access(note_id, "can_manage_reviews")
+    status_map = {"accept": "accepted", "reject": "rejected", "conflict": "conflicted"}
+    status = status_map.get(action)
+    if not status:
+        return jsonify({"error": "Unsupported suggestion action."}), 400
+    try:
+        suggestion = notes_collaboration.resolve_suggestion(note_id, suggestion_id, current_user.id, status)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not suggestion:
+        abort(404)
+    return jsonify(suggestion)
+
+
+@notes_api_bp.route("/api/notes/<note_id>/comments", methods=["GET", "POST"])
+@login_required
+def note_comments(note_id):
+    _note, access = _require_note_access(note_id, "can_review")
+    if request.method == "GET":
+        return jsonify({"threads": notes_collaboration.list_comments(
+            note_id,
+            current_user.id,
+            access.get("can_manage_reviews") is True,
+        )})
+    try:
+        thread = notes_collaboration.create_comment(note_id, current_user.id, request.get_json(silent=True) or {})
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    return jsonify(thread), 200 if thread.get("replayed") else 201
+
+
+@notes_api_bp.route("/api/notes/<note_id>/comments/<thread_id>/replies", methods=["POST"])
+@login_required
+def reply_to_note_comment(note_id, thread_id):
+    _note, access = _require_note_access(note_id, "can_review")
+    payload = request.get_json(silent=True) or {}
+    try:
+        thread = notes_collaboration.reply_to_comment(
+            note_id,
+            thread_id,
+            current_user.id,
+            payload.get("body"),
+            payload.get("client_request_id"),
+        )
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not thread:
+        abort(404)
+    return jsonify(thread), 200 if thread.get("replayed") else 201
+
+
+@notes_api_bp.route("/api/notes/<note_id>/comments/<thread_id>", methods=["PATCH", "DELETE"])
+@login_required
+def mutate_note_comment(note_id, thread_id):
+    _note, access = _require_note_access(note_id, "can_review")
+    try:
+        if request.method == "DELETE":
+            thread = notes_collaboration.delete_comment(
+                note_id,
+                thread_id,
+                current_user.id,
+                can_manage=access.get("can_manage_reviews") is True,
+            )
+        else:
+            payload = request.get_json(silent=True) or {}
+            thread = notes_collaboration.update_comment(
+                note_id,
+                thread_id,
+                current_user.id,
+                payload.get("body"),
+                can_manage=access.get("can_manage_reviews") is True,
+            )
+    except PermissionError as exc:
+        return jsonify({"error": str(exc)}), 403
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not thread:
+        abort(404)
+    return jsonify(thread)
+
+
+@notes_api_bp.route(
+    "/api/notes/<note_id>/comments/<thread_id>/replies/<reply_id>",
+    methods=["PATCH", "DELETE"],
+)
+@login_required
+def mutate_note_comment_reply(note_id, thread_id, reply_id):
+    _note, access = _require_note_access(note_id, "can_review")
+    payload = request.get_json(silent=True) or {}
+    try:
+        thread = notes_collaboration.update_comment_reply(
+            note_id,
+            thread_id,
+            reply_id,
+            current_user.id,
+            payload.get("body"),
+            can_manage=access.get("can_manage_reviews") is True,
+            delete=request.method == "DELETE",
+        )
+    except PermissionError as exc:
+        return jsonify({"error": str(exc)}), 403
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not thread:
+        abort(404)
+    return jsonify(thread)
+
+
+@notes_api_bp.route("/api/notes/<note_id>/comments/<thread_id>/<action>", methods=["POST"])
+@login_required
+def update_note_comment_status(note_id, thread_id, action):
+    _note, access = _require_note_access(note_id, "can_manage_reviews")
+    status_map = {"resolve": "resolved", "reopen": "open"}
+    status = status_map.get(action)
+    if not status:
+        return jsonify({"error": "Unsupported comment action."}), 400
+    try:
+        thread = notes_collaboration.set_comment_status(note_id, thread_id, current_user.id, status)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not thread:
+        abort(404)
+    return jsonify(thread)
+
+
+@notes_api_bp.route("/api/notes/<note_id>/versions", methods=["GET", "POST"])
+@login_required
+def note_versions(note_id):
+    _note, access = _require_note_access(note_id, "can_edit")
+    if request.method == "GET":
+        return jsonify({"versions": notes_collaboration.list_versions(note_id)})
+    payload = request.get_json(silent=True) or {}
+    version = notes_collaboration.create_version(
+        note_id,
+        current_user.id,
+        reason="named",
+        name=(payload.get("name") or "Manual snapshot"),
+    )
+    if not version:
+        abort(404)
+    return jsonify(version), 201
+
+
+@notes_api_bp.route("/api/notes/<note_id>/versions/<version_id>/restore", methods=["POST"])
+@login_required
+def restore_note_version(note_id, version_id):
+    _note, access = _require_note_access(note_id, "can_edit")
+    restored = notes_collaboration.restore_version(note_id, version_id, current_user.id)
+    if not restored:
+        abort(404)
+    try:
+        global_page_setup = _load_global_notes_page_setup(restored.get("user_id"))
+    except AppwriteException:
+        global_page_setup = {}
+    return jsonify(_note_to_payload(
+        restored,
+        global_page_setup=global_page_setup,
+        access=note_store.resolve_note_access(restored, current_user.id),
+        owner=note_store.get_safe_user(restored.get("user_id")),
+    ))
+
+
+@notes_api_bp.route("/api/notes/<note_id>/transfer", methods=["POST"])
+@login_required
+def transfer_note_ownership(note_id):
+    note, access = _require_note_access(note_id, "can_transfer")
+    payload = request.get_json(silent=True) or {}
+    if not payload.get("confirm"):
+        return jsonify({"error": "Ownership transfer requires explicit confirmation."}), 400
+    new_owner_id = str(payload.get("new_owner_user_id") or payload.get("user_id") or "").strip()
+    if not new_owner_id:
+        return jsonify({"error": "Choose a target owner."}), 400
+    try:
+        transferred = notes_collaboration.transfer_note(note_id, note.get("user_id"), new_owner_id)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not transferred:
+        abort(404)
+    notes_collaboration.record_access_event(
+        current_user.id,
+        "note",
+        note_id,
+        "ownership_transferred",
+        target_type="user",
+        target_id=new_owner_id,
+    )
+    return jsonify(_note_to_payload(
+        transferred,
+        access=note_store.resolve_note_access(transferred, current_user.id),
+        owner=note_store.get_safe_user(transferred.get("user_id")),
+    ))
+
+
+@notes_api_bp.route("/api/notes/folders/<folder_id>/transfer", methods=["POST"])
+@login_required
+def transfer_folder_ownership(folder_id):
+    folder, access = _require_folder_access(folder_id, "can_transfer")
+    payload = request.get_json(silent=True) or {}
+    if not payload.get("confirm"):
+        return jsonify({"error": "Ownership transfer requires explicit confirmation."}), 400
+    new_owner_id = str(payload.get("new_owner_user_id") or payload.get("user_id") or "").strip()
+    if not new_owner_id:
+        return jsonify({"error": "Choose a target owner."}), 400
+    try:
+        transferred = notes_collaboration.transfer_folder(folder_id, folder.get("user_id"), new_owner_id)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not transferred:
+        abort(404)
+    notes_collaboration.record_access_event(
+        current_user.id,
+        "folder",
+        folder_id,
+        "ownership_transferred",
+        target_type="user",
+        target_id=new_owner_id,
+    )
+    return jsonify({
+        "folder": note_store.folder_payload(transferred),
+        "access": note_store.resolve_folder_access(transferred, current_user.id),
+        "owner": note_store.get_safe_user(transferred.get("user_id")),
+    })
+
+
+@notes_api_bp.route("/api/notifications", methods=["GET"])
+@login_required
+def list_user_notifications():
+    return jsonify(notes_collaboration.list_notifications(current_user.id, request.args.get("limit", 50)))
+
+
+@notes_api_bp.route("/api/notifications/read", methods=["POST"])
+@login_required
+def mark_user_notifications_read():
+    payload = request.get_json(silent=True) or {}
+    notification_ids = payload.get("ids")
+    if notification_ids is not None and not isinstance(notification_ids, list):
+        return jsonify({"error": "ids must be a list."}), 400
+    return jsonify(notes_collaboration.mark_notifications_read(current_user.id, notification_ids))
+
+
+@notes_api_bp.route("/api/internal/notes/<note_id>/collaboration-document", methods=["GET"])
+def internal_get_collaboration_document(note_id):
+    if not _internal_collaboration_authorized():
+        abort(403)
+    doc = notes_collaboration.get_collaboration_document(note_id)
+    if not doc:
+        return jsonify({"error": "collaboration_document_not_found"}), 404
+    response = Response(doc["ydoc_blob"], mimetype="application/octet-stream")
+    response.headers["X-Nest-Durable-Revision"] = str(doc.get("durable_revision") or 0)
+    response.headers["X-Nest-Schema-Version"] = str(doc.get("schema_version") or 1)
+    return response
+
+
+@notes_api_bp.route("/api/internal/notes/<note_id>/collaboration-document", methods=["PUT", "POST"])
+def internal_store_collaboration_document(note_id):
+    if not _internal_collaboration_authorized():
+        abort(403)
+    payload = request.get_json(silent=True) or {}
+    encoded = payload.get("ydoc_base64")
+    if not isinstance(encoded, str):
+        return jsonify({"error": "ydoc_base64 is required."}), 400
+    try:
+        blob = base64.b64decode(encoded.encode("ascii"), validate=True)
+        result = notes_collaboration.store_collaboration_document(
+            note_id,
+            blob,
+            title=payload.get("title"),
+            content=payload.get("content"),
+            page_setup_json=payload.get("page_setup_json"),
+            schema_version=int(payload.get("schema_version") or 1),
+        )
+    except (ValueError, TypeError) as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not result:
+        abort(404)
+    return jsonify(result)
+
+
+@notes_api_bp.route("/api/internal/notes/access-invalidation", methods=["POST"])
+def internal_note_access_invalidation():
+    if not _internal_collaboration_authorized():
+        abort(403)
+    return jsonify({"ok": True, "message": "Sidecar should close or downgrade sessions for the submitted resources."})
+
+
+@notes_api_bp.route("/api/internal/notes/collaboration-health", methods=["GET"])
+def internal_note_collaboration_health():
+    if not _internal_collaboration_authorized():
+        abort(403)
+    try:
+        with db_connection() as conn:
+            collab_table = conn.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'note_collaboration_documents'"
+            ).fetchone()
+            notes_columns = {
+                row["name"] for row in conn.execute("PRAGMA table_info(notes)").fetchall()
+            }
+    except Exception:
+        logger.exception("Collaboration health check failed")
+        return jsonify({"ok": False, "schema_version": 0}), 503
+    schema_ready = bool(collab_table) and {"collaboration_enabled", "access_version"}.issubset(notes_columns)
+    return jsonify({
+        "ok": schema_ready,
+        "schema_version": 1 if schema_ready else 0,
+        "persistence": "sqlite",
+    }), 200 if schema_ready else 503
+
+
+@notes_api_bp.route("/api/internal/notes/collaboration-token/verify", methods=["POST"])
+def internal_verify_collaboration_token():
+    if not _internal_collaboration_authorized():
+        abort(403)
+    payload = request.get_json(silent=True) or {}
+    ticket = payload.get("ticket")
+    requested_note_id = str(payload.get("note_id") or "").strip()
+    if not isinstance(ticket, str) or not ticket:
+        return jsonify({"error": "ticket is required."}), 400
+    try:
+        claims = _collaboration_serializer().loads(ticket, max_age=300)
+    except SignatureExpired:
+        return jsonify({"error": "collaboration_token_expired"}), 401
+    except BadSignature:
+        return jsonify({"error": "collaboration_token_invalid"}), 401
+    note_id = str(claims.get("note_id") or "")
+    if requested_note_id and requested_note_id != note_id:
+        return jsonify({"error": "collaboration_token_note_mismatch"}), 403
+    note = note_store.get_note(note_id)
+    if not note:
+        return jsonify({"error": "note_not_found"}), 404
+    token_revision = int(claims.get("access_revision") or 0)
+    current_revision = int(note.get("access_version") or 1)
+    if token_revision != current_revision:
+        return jsonify({"error": "collaboration_token_stale", "access_revision": current_revision}), 401
+    user_id = claims.get("user_id")
+    access = note_store.resolve_note_access(note, user_id)
+    if not access["can_view"] and not claims.get("public"):
+        return jsonify({"error": "collaboration_access_revoked"}), 403
+    role = access.get("role") if access["can_view"] else "viewer"
+    return jsonify({
+        "ok": True,
+        "note_id": note_id,
+        "user_id": user_id,
+        "role": role,
+        "can_write": role in {"owner", "editor"},
+        "can_review": role in {"owner", "editor", "reviewer"},
+        "awareness_allowed": bool(user_id and not claims.get("public") and not claims.get("anonymous")),
+        "public": bool(claims.get("public")),
+        "anonymous": bool(claims.get("anonymous")),
+        "access_revision": current_revision,
+        "user": note_store.get_safe_user(user_id) if user_id else None,
+    })
