@@ -1639,11 +1639,11 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   box-shadow: none !important;
 }
 
+.blocknote-container .ProseMirror-selectednode,
 .blocknote-container .bn-block-content.ProseMirror-selectednode > *,
 .blocknote-container .ProseMirror-selectednode > .bn-block-content > * {
-  outline: 2px solid color-mix(in srgb, var(--notes-accent) 42%, transparent) !important;
-  outline-offset: 2px !important;
-  border-radius: 6px;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .blocknote-container .notes-block-selected > .bn-block {
@@ -1792,6 +1792,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
 .blocknote-container .bn-block-content[data-content-type="bulletListItem"],
 .blocknote-container .bn-block-content[data-content-type="numberedListItem"] {
   display: flex !important;
+  align-items: baseline !important;
   gap: 0.5em !important;
 }
 
@@ -2519,7 +2520,14 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
 
 .blocknote-container .bn-block-content[data-content-type="checkListItem"] > div {
   display: flex !important;
+  align-items: flex-start !important;
   width: 100% !important;
+}
+
+.blocknote-container .bn-block-content[data-content-type="checkListItem"] > div > div:has(> input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  min-height: 1.7em;
 }
 
 .blocknote-container .bn-block-content[data-content-type="checkListItem"] input[type="checkbox"] {
@@ -2530,7 +2538,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   flex: 0 0 18px;
   place-content: center;
   appearance: none;
-  margin: 0.18em 0.6em 0 0 !important;
+  margin: 0 0.6em 0 0 !important;
   border: 1.5px solid color-mix(in srgb, var(--notes-text-muted) 62%, transparent);
   border-radius: 5px;
   background: color-mix(in srgb, var(--notes-bg-base) 82%, var(--notes-bg-toolbar));

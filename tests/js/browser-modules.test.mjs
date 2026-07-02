@@ -507,7 +507,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.notes-writing-toolbar\s*\{[^}]*width:\s*auto;[^}]*margin-inline:\s*calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);/s);
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
-    assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]/);
+    assert.match(styles, /\.bn-block-content\[data-content-type="bulletListItem"\],[^{]*\.bn-block-content\[data-content-type="numberedListItem"\]\s*\{[^}]*align-items:\s*baseline !important;/s);
+    assert.match(styles, /\.bn-block-content\[data-content-type="checkListItem"\] > div > div:has\(> input\[type="checkbox"\]\)\s*\{[^}]*align-items:\s*center;[^}]*min-height:\s*1\.7em;/s);
+    assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="checkListItem"\] input\[type="checkbox"\]\s*\{[^}]*margin:\s*0 0\.6em 0 0 !important;/s);
+    assert.match(styles, /\.blocknote-container \.ProseMirror-selectednode,[^{]*\{[^}]*outline:\s*none !important;[^}]*box-shadow:\s*none !important;/s);
     assert.match(styles, /\.blocknote-container \[data-content-type="table"\] table/);
     assert.match(styles, /\.bn-inline-content:has\(> \.ProseMirror-trailingBreak:only-child\):before\s*\{[^}]*font-size:\s*inherit !important;[^}]*font-weight:\s*inherit !important;[^}]*line-height:\s*inherit !important;/s);
     assert.match(styles, /\.blocknote-container \.bn-block-content\[data-content-type="quote"\]/);
