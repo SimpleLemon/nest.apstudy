@@ -24,6 +24,8 @@ import {
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './editor/keyboard-shortcuts.js';
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
+import { createNoteCollaborationSession } from './editor/collaboration.js';
+import { bindReviewPanel } from './editor/review-panel.js';
 import { bindNotePrintController, printNote } from './editor/print.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 import {
@@ -35,7 +37,7 @@ import { bindImageRuntime, insertInlineImageFile, insertInlineImageNode, request
 
 const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
 const noteId = noteContext.noteId || noteIdFromPath();
-const canEdit = noteContext.access?.can_edit === true;
+let canEdit = noteContext.access?.can_edit === true;
 const SAVE_DEBOUNCE_MS = 800;
 const SAVE_DEBOUNCE_LARGE_DOC_MS = 1500;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
@@ -133,6 +135,10 @@ let editorLoadController = null;
 let editorReadyTimer = null;
 let editorInitialFocusTimer = null;
 let editorPageDisposed = false;
+let activeCollaborationSession = null;
+let noteCollaborationEnabled = false;
+let activeCollaborativeTitleCleanup = null;
+let reviewPanelController = null;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -144,9 +150,56 @@ const editorPage = document.getElementById('editor-page');
 const zoomValue = document.getElementById('notes-zoom-value');
 const pageSetupPopover = document.getElementById('notes-page-setup-popover');
 const shareButton = document.getElementById('notes-share-button');
+const collaboratorsRoot = document.getElementById('notes-active-collaborators');
+const reviewPanel = document.getElementById('notes-review-panel');
+const reviewButton = document.getElementById('notes-review-button');
+const historyButton = document.getElementById('notes-history-button');
 const pageSetupScopeInput = document.querySelector('[data-page-setup-scope]');
 const sideMarginsValue = document.getElementById('notes-side-margins-value');
 const notePrintButtons = Array.from(document.querySelectorAll('[data-note-print]'));
+
+function setEditorReadOnlyMode(readOnly) {
+    canEdit = !readOnly && noteContext.access?.can_edit === true;
+    document.body.dataset.noteReadOnly = readOnly ? 'true' : 'false';
+    if (titleInput) {
+        titleInput.readOnly = readOnly;
+        titleInput.setAttribute('aria-readonly', readOnly ? 'true' : 'false');
+    }
+}
+
+function bindCollaborativeTitle(session, fallbackTitle) {
+    if (!session || !titleInput) return null;
+    const yTitle = session.document.getText('title');
+    let applyingRemoteTitle = false;
+    const applyRemoteTitle = () => {
+        const nextTitle = yTitle.toString();
+        if (titleInput.value === nextTitle) return;
+        applyingRemoteTitle = true;
+        titleInput.value = nextTitle;
+        applyingRemoteTitle = false;
+    };
+    const maybeInitializeTitle = () => {
+        if (yTitle.length === 0 && fallbackTitle) {
+            yTitle.insert(0, fallbackTitle);
+        }
+        applyRemoteTitle();
+    };
+    const handleTitleInput = () => {
+        if (applyingRemoteTitle || !canEdit) return;
+        yTitle.delete(0, yTitle.length);
+        yTitle.insert(0, titleInput.value);
+    };
+    yTitle.observe(applyRemoteTitle);
+    session.provider.on?.('synced', ({ state }) => {
+        if (state) maybeInitializeTitle();
+    });
+    titleInput.addEventListener('input', handleTitleInput);
+    maybeInitializeTitle();
+    return () => {
+        yTitle.unobserve(applyRemoteTitle);
+        titleInput.removeEventListener('input', handleTitleInput);
+    };
+}
 
 function clampZoomIndex(index) {
     return Math.min(ZOOM_LEVELS.length - 1, Math.max(0, index));
@@ -532,7 +585,7 @@ function openPageSetupPopover(trigger, triggerRect = null) {
 }
 
 async function saveNotePageSetup() {
-    if (!canEdit || !noteId) return;
+    if (!canEdit || !noteId || noteCollaborationEnabled) return;
     try {
         const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
             method: 'PATCH',
@@ -892,8 +945,30 @@ function setSaveStatus(status, options = {}) {
 
     if (status === 'saving') {
         clearSavedTimeRefresh();
-        saveStatus.textContent = 'Saving...';
+        saveStatus.textContent = options.message || 'Saving...';
         saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'connecting') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Connecting...';
+        saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'reconnecting') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Reconnecting...';
+        saveStatus.classList.add('save-status-saving');
+        return;
+    }
+
+    if (status === 'offline-readonly') {
+        clearSavedTimeRefresh();
+        saveStatus.textContent = 'Offline — read only';
+        saveStatus.classList.add('save-status-error');
+        if (saveRetry) saveRetry.hidden = true;
         return;
     }
 
@@ -912,7 +987,7 @@ function setSaveStatus(status, options = {}) {
 }
 
 async function saveNote() {
-    if (!canEdit || !noteId || !titleInput || !editorInstance) return;
+    if (!canEdit || !noteId || !titleInput || !editorInstance || noteCollaborationEnabled) return;
 
     const documentSnapshot = currentDocumentSnapshot();
     const content = JSON.stringify(documentSnapshot);
@@ -1939,7 +2014,7 @@ function renderMissingNoteState(message = 'This note could not be opened.') {
 }
 
 function triggerDebouncedSave() {
-    if (!canEdit) return;
+    if (!canEdit || noteCollaborationEnabled) return;
     noteHasPendingChanges = true;
     if (saveDebounceTimer) {
         clearTimeout(saveDebounceTimer);
@@ -2222,25 +2297,38 @@ function NotesSideMenu(props) {
     );
 }
 
-function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
+function NoteEditor({ initialContent, initialContentWasNormalized = false, collaborationSession = null }) {
     const historyDepth = historyDepthForDocument(initialContent);
-    const editor = useCreateBlockNote({
-        initialContent,
+    const tiptapExtensions = [
+        preserveRangeSelectionShortcuts,
+        listItemHardBreakShortcuts,
+    ];
+    if (!collaborationSession) {
+        tiptapExtensions.unshift(History.configure({ depth: historyDepth, newGroupDelay: 500 }));
+    }
+    const editorOptions = {
         schema: notesEditorSchema,
         pasteHandler: handleNotesPaste,
         disableExtensions: ['history'],
         _tiptapOptions: {
-            extensions: [
-                History.configure({ depth: historyDepth, newGroupDelay: 500 }),
-                preserveRangeSelectionShortcuts,
-                listItemHardBreakShortcuts,
-            ],
+            extensions: tiptapExtensions,
         },
         placeholders: {
             default: undefined,
             emptyDocument: "Enter text or type '/' for commands",
         },
-    });
+    };
+    if (collaborationSession) {
+        editorOptions.collaboration = {
+            fragment: collaborationSession.fragment,
+            provider: collaborationSession.provider,
+            user: collaborationSession.user,
+            showCursorLabels: 'activity',
+        };
+    } else {
+        editorOptions.initialContent = initialContent;
+    }
+    const editor = useCreateBlockNote(editorOptions);
 
     const getSlashItems = React.useCallback(async (query) => (
         filterBlockCatalog(query).map((item) => ({
@@ -2261,7 +2349,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
             invalidateDocumentSnapshot();
             const documentSnapshot = currentDocumentSnapshot();
             updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-            if (canEdit && initialContentWasNormalized) {
+            if (canEdit && initialContentWasNormalized && !collaborationSession) {
                 triggerDebouncedSave();
             }
         }, 0);
@@ -2370,12 +2458,41 @@ async function initEditorPage() {
     globalPageSetup = normalizePageSetup(note?.global_page_setup);
     applyPageSetupVariables();
     updatePageSetupControls();
+    noteCollaborationEnabled = note?.collaboration_enabled === true;
     if (note?.updated_at) {
         setSaveStatus('saved', { savedAt: note.updated_at });
     }
     if (typeof note?.content === 'string') {
         lastSavedPayloadFingerprint = notePayloadFingerprint(noteTitle, note.content);
     }
+
+    if (noteCollaborationEnabled) {
+        setSaveStatus('connecting');
+        try {
+            activeCollaborationSession = await createNoteCollaborationSession({
+                noteId,
+                access: note?.access || noteContext.access,
+                presenceRoot: collaboratorsRoot,
+                onStatus: (status) => setSaveStatus(status),
+            });
+            activeCollaborativeTitleCleanup = bindCollaborativeTitle(activeCollaborationSession, noteTitle);
+        } catch (error) {
+            console.error('Failed to connect note collaboration', error);
+            activeCollaborationSession = null;
+            setEditorReadOnlyMode(true);
+            setSaveStatus('offline-readonly');
+        }
+    }
+    reviewPanelController = bindReviewPanel({
+        noteId,
+        canReview: note?.access?.can_review === true,
+        canManageReviews: note?.access?.can_manage_reviews === true,
+        canViewVersions: note?.access?.can_edit === true,
+        panel: reviewPanel,
+        reviewButton,
+        historyButton,
+        toast: window.APStudyToast,
+    });
 
     let parsedContent = undefined;
     let parsedContentWasNormalized = false;
@@ -2399,6 +2516,7 @@ async function initEditorPage() {
         noteEditorReactRoot.render(React.createElement(NoteEditor, {
             initialContent: parsedContent,
             initialContentWasNormalized: parsedContentWasNormalized,
+            collaborationSession: activeCollaborationSession,
         }));
         if (canEdit) bindWritingToolbar();
     } catch (error) {
@@ -2475,6 +2593,12 @@ function releaseNoteEditorRuntime() {
     closePageSetupPopover();
     closePageSetupDropdowns();
     removeUrlBlockPopover();
+    activeCollaborativeTitleCleanup?.();
+    activeCollaborativeTitleCleanup = null;
+    activeCollaborationSession?.destroy?.();
+    activeCollaborationSession = null;
+    reviewPanelController?.close?.();
+    reviewPanelController = null;
     noteEditorReactRoot?.unmount();
     noteEditorReactRoot = null;
     editorInstance = null;

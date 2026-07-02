@@ -216,6 +216,17 @@ def create_app():
 
         cleanup_expired_files()
 
+    @app.cli.command("cleanup-notes-collaboration")
+    def cleanup_notes_collaboration_command():
+        from services.notes_collaboration import cleanup_expired_collaboration_rows
+
+        result = cleanup_expired_collaboration_rows()
+        print(
+            "Expired note invitations: {invitations_expired}; expired note versions deleted: {versions_deleted}".format(
+                **result
+            )
+        )
+
     @app.cli.command("backup-db")
     def backup_db_command():
         from pathlib import Path

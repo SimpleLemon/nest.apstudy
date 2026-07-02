@@ -32,6 +32,16 @@ _RELATION_TABLES = (
         COLLECTIONS.get("note_access_grants", "note_access_grants"),
         ("owner_user_id", "principal_id", "granted_by_user_id"),
     ),
+    (
+        COLLECTIONS.get("note_share_invitations", "note_share_invitations"),
+        ("owner_user_id", "invited_by_user_id", "accepted_user_id"),
+    ),
+    (COLLECTIONS.get("note_versions", "note_versions"), ("actor_user_id",)),
+    (COLLECTIONS.get("note_suggestions", "note_suggestions"), ("author_user_id", "resolved_by_user_id")),
+    (COLLECTIONS.get("note_comment_threads", "note_comment_threads"), ("author_user_id", "resolved_by_user_id")),
+    (COLLECTIONS.get("note_comment_replies", "note_comment_replies"), ("author_user_id",)),
+    (COLLECTIONS.get("note_access_events", "note_access_events"), ("actor_user_id", "target_id")),
+    (COLLECTIONS.get("user_notifications", "user_notifications"), ("user_id", "actor_user_id")),
     (COLLECTIONS.get("chat_dm_threads", "chat_dm_threads"), ("participant_a", "participant_b")),
     (COLLECTIONS.get("chat_blocks", "chat_blocks"), ("blocker_id", "blocked_id")),
 )

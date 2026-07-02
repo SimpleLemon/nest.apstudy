@@ -504,7 +504,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*position:\s*sticky;[^}]*top:\s*var\(--notes-topbar-height\);[^}]*z-index:\s*45;/s);
     assert.match(styles, /\.notes-toolbar-segment \+ \.notes-toolbar-segment::before,[^{]*\{[^}]*width:\s*1px;[^}]*height:\s*22px;/s);
     assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.editor-title-input\s*\{[^}]*max-width:\s*none;[^}]*text-align:\s*center;/s);
-    assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.notes-writing-toolbar\s*\{[^}]*width:\s*auto;[^}]*margin-inline:\s*calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);/s);
+    assert.match(styles, /\.notes-writing-toolbar\s*\{[^}]*order:\s*-1;[^}]*margin:\s*0 calc\(-1 \* var\(--notes-editor-surface-padding-inline\)\);[^}]*border-radius:\s*0;/s);
+    assert.match(styles, /@media \(min-width:\s*701px\)[\s\S]*?\.notes-writing-toolbar\s*\{[^}]*width:\s*auto;/s);
     assert.ok(styles.includes('content: "\\2022" !important;'));
     assert.ok(styles.includes('content: attr(data-index) "." !important;'));
     assert.match(styles, /\.bn-block-content\[data-content-type="bulletListItem"\],[^{]*\.bn-block-content\[data-content-type="numberedListItem"\]\s*\{[^}]*align-items:\s*baseline !important;/s);
@@ -621,14 +622,16 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
 
     assert.match(sharingSource, /\/api\/notes\/share-users\?q=/);
     assert.match(sharingSource, /public: modal\.querySelector\('\[data-share-public\]'\)\.value === 'public'/);
-    assert.match(sharingSource, /user_ids: users\.map\(\(user\) => user\.id\)/);
+    assert.match(sharingSource, /expected_revision: sharing\.revision/);
+    assert.match(sharingSource, /grants: users\.map\(\(user\) => \(\{ user_id: user\.id, role: normalizeRole\(user\.role\) \}\)\)/);
+    assert.match(sharingSource, /invitations: pending\.map\(\(invite\) => \(\{ email: invite\.email, role: normalizeRole\(invite\.role\) \}\)\)/);
     assert.match(sharingSource, /Anyone with the link/);
     assert.match(sharingSource, /Viewer/);
     assert.match(sharingSource, /data-share-copy/);
 
-    assert.match(editorSource, /const canEdit = noteContext\.access\?\.can_edit === true/);
+    assert.match(editorSource, /let canEdit = noteContext\.access\?\.can_edit === true/);
     assert.match(editorSource, /editable: canEdit/);
-    assert.match(editorSource, /if \(!canEdit \|\| !noteId \|\| !titleInput \|\| !editorInstance\) return/);
+    assert.match(editorSource, /if \(!canEdit \|\| !noteId \|\| !titleInput \|\| !editorInstance \|\| noteCollaborationEnabled\) return/);
     assert.match(editorSource, /canEdit \? React\.createElement\(SuggestionMenuController/);
     assert.match(editorSource, /canEdit \? React\.createElement\(SideMenuController/);
     assert.match(editorSource, /if \(!canEdit\) \{\s*button\?\.remove\(\);/);

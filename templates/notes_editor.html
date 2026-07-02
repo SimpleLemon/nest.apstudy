@@ -95,6 +95,18 @@
                         <span>Share</span>
                     </button>
                     {% endif %}
+                    {% if access.can_review %}
+                    <button id="notes-review-button" class="notes-share-button notes-review-button" type="button" aria-label="Open review panel">
+                        <span class="material-symbols-outlined" aria-hidden="true">rate_review</span>
+                        <span>Review</span>
+                    </button>
+                    {% endif %}
+                    {% if access.can_edit %}
+                    <button id="notes-history-button" class="notes-share-button notes-history-button" type="button" aria-label="Open version history">
+                        <span class="material-symbols-outlined" aria-hidden="true">history</span>
+                        <span>History</span>
+                    </button>
+                    {% endif %}
                     {% else %}
                     <div class="notes-viewer-status">
                         <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
@@ -105,8 +117,19 @@
                         <span class="notes-viewer-print-label">Print</span>
                     </button>
                     {% endif %}
+                    <div id="notes-active-collaborators" class="notes-active-collaborators" aria-label="Active editors and reviewers" hidden></div>
                 </div>
             </div>
+
+            <aside id="notes-review-panel" class="notes-review-panel" aria-labelledby="notes-review-panel-title" hidden>
+                <header class="notes-review-panel-header">
+                    <h2 id="notes-review-panel-title" data-review-panel-title>Review</h2>
+                    <button type="button" class="notes-icon-button" data-review-panel-close aria-label="Close review panel">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </header>
+                <div class="notes-review-panel-body" data-review-panel-body></div>
+            </aside>
 
             <div class="notes-editor-surface">
                 <!-- Title input -->

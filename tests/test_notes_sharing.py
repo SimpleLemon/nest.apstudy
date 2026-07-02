@@ -39,8 +39,9 @@ class NotesSharingStoreTests(unittest.TestCase):
                 """
             )
             root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            with open(os.path.join(root, "migrations", "003_notes_sharing.sql"), encoding="utf-8") as migration:
-                conn.executescript(migration.read())
+            for filename in ("003_notes_sharing.sql", "004_notes_collaboration.sql"):
+                with open(os.path.join(root, "migrations", filename), encoding="utf-8") as migration:
+                    conn.executescript(migration.read())
             conn.executemany(
                 "INSERT INTO users (id, name, username, email, picture_url, created_at) VALUES (?, ?, ?, ?, '', ?)",
                 [

@@ -1,4 +1,10 @@
 (function registerNotesSharing(global) {
+    const ROLE_OPTIONS = [
+        { value: 'viewer', label: 'Viewer', description: 'Can view live content.' },
+        { value: 'reviewer', label: 'Reviewer', description: 'Can comment and suggest changes.' },
+        { value: 'editor', label: 'Editor', description: 'Can edit and manage sharing.' },
+    ];
+    const VALID_ROLES = new Set(ROLE_OPTIONS.map((role) => role.value));
     let activeModal = null;
     let returnFocus = null;
     let searchTimer = null;
@@ -12,13 +18,43 @@
             .replace(/'/g, '&#39;');
     }
 
+    function normalizeRole(value) {
+        const role = String(value || 'viewer').toLowerCase();
+        return VALID_ROLES.has(role) ? role : 'viewer';
+    }
+
+    function roleLabel(role) {
+        return ROLE_OPTIONS.find((option) => option.value === normalizeRole(role))?.label || 'Viewer';
+    }
+
+    function roleSelectHtml(selectedRole, attrs = '') {
+        const role = normalizeRole(selectedRole);
+        return `
+            <select class="notes-share-role-select" ${attrs}>
+                ${ROLE_OPTIONS.map((option) => `
+                    <option value="${option.value}" ${option.value === role ? 'selected' : ''}>${option.label}</option>
+                `).join('')}
+            </select>
+        `;
+    }
+
+    function initialsFor(value) {
+        const words = String(value || 'Nest User').trim().split(/\s+/).filter(Boolean);
+        return words.slice(0, 2).map((word) => word[0]?.toUpperCase() || '').join('') || 'N';
+    }
+
     async function apiJson(url, options = {}) {
         const response = await fetch(url, {
             ...options,
             headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
         });
         const payload = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(payload.error || 'Unable to update sharing.');
+        if (!response.ok) {
+            const error = new Error(payload.error || 'Unable to update sharing.');
+            error.payload = payload;
+            error.status = response.status;
+            throw error;
+        }
         return payload;
     }
 
@@ -54,38 +90,90 @@
         input.remove();
     }
 
+    function avatarHtml(person) {
+        if (person?.picture_url) {
+            return `<img src="${escapeHtml(person.picture_url)}" alt="" loading="lazy">`;
+        }
+        return `<span class="notes-share-initials" aria-hidden="true">${escapeHtml(initialsFor(person?.name || person?.username))}</span>`;
+    }
+
     function renderSelected(modal, users) {
         const list = modal.querySelector('[data-share-selected]');
         if (!list) return;
         list.innerHTML = users.length ? users.map((user) => `
             <div class="notes-share-person" data-selected-user="${escapeHtml(user.id)}">
-                ${user.picture_url ? `<img src="${escapeHtml(user.picture_url)}" alt="" loading="lazy">` : '<span class="material-symbols-outlined" aria-hidden="true">account_circle</span>'}
+                ${avatarHtml(user)}
                 <span class="notes-share-person-copy">
                     <strong>${escapeHtml(user.name || user.username || 'Nest User')}</strong>
                     <small>${escapeHtml(user.username ? `@${user.username}` : 'Nest user')}</small>
                 </span>
-                <span class="notes-share-role">Viewer</span>
+                ${roleSelectHtml(user.role, `data-user-role="${escapeHtml(user.id)}" aria-label="Role for ${escapeHtml(user.name || user.username || 'user')}"`)}
                 <button type="button" class="notes-share-remove" data-remove-user="${escapeHtml(user.id)}" aria-label="Remove ${escapeHtml(user.name || user.username || 'user')}">
                     <span class="material-symbols-outlined" aria-hidden="true">close</span>
                 </button>
             </div>
-        `).join('') : '<p class="notes-share-empty">No people have access yet.</p>';
+        `).join('') : '<p class="notes-share-empty">No direct user grants yet.</p>';
     }
 
-    function renderSearchResults(modal, results, selectedIds) {
+    function renderPending(modal, pending) {
+        const list = modal.querySelector('[data-share-pending]');
+        if (!list) return;
+        list.innerHTML = pending.length ? pending.map((invite) => `
+            <div class="notes-share-person notes-share-person--pending" data-pending-email="${escapeHtml(invite.email)}">
+                <span class="notes-share-initials" aria-hidden="true">@</span>
+                <span class="notes-share-person-copy">
+                    <strong>${escapeHtml(invite.email)}</strong>
+                    <small>Pending · expires ${escapeHtml(invite.expires_at || 'in 7 days')}</small>
+                </span>
+                ${roleSelectHtml(invite.role, `data-pending-role="${escapeHtml(invite.email)}" aria-label="Pending role for ${escapeHtml(invite.email)}"`)}
+                <button type="button" class="notes-share-remove" data-remove-pending="${escapeHtml(invite.email)}" aria-label="Remove pending invitation for ${escapeHtml(invite.email)}">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </div>
+        `).join('') : '<p class="notes-share-empty">No pending email invitations.</p>';
+    }
+
+    function renderInherited(modal, inherited) {
+        const list = modal.querySelector('[data-share-inherited]');
+        if (!list) return;
+        list.innerHTML = inherited.length ? inherited.map((entry) => `
+            <div class="notes-share-person notes-share-person--inherited">
+                ${entry.id === '*' ? '<span class="material-symbols-outlined" aria-hidden="true">link</span>' : avatarHtml(entry)}
+                <span class="notes-share-person-copy">
+                    <strong>${escapeHtml(entry.name || entry.username || 'Inherited access')}</strong>
+                    <small>${escapeHtml(roleLabel(entry.role))} from ${escapeHtml(entry.source_label || 'folder')}</small>
+                </span>
+                <span class="notes-share-role">${escapeHtml(roleLabel(entry.role))}</span>
+            </div>
+        `).join('') : '<p class="notes-share-empty">No inherited access.</p>';
+    }
+
+    function renderSearchResults(modal, results, selectedIds, emailState) {
         const container = modal.querySelector('[data-share-results]');
         if (!container) return;
         const available = results.filter((user) => !selectedIds.has(String(user.id)));
         container.hidden = false;
-        container.innerHTML = available.length ? available.map((user) => `
+        const resultHtml = available.map((user) => `
             <button type="button" class="notes-share-result" data-add-user="${escapeHtml(user.id)}">
-                ${user.picture_url ? `<img src="${escapeHtml(user.picture_url)}" alt="" loading="lazy">` : '<span class="material-symbols-outlined" aria-hidden="true">account_circle</span>'}
+                ${avatarHtml(user)}
                 <span>
                     <strong>${escapeHtml(user.name || user.username || 'Nest User')}</strong>
-                    <small>${escapeHtml(user.username ? `@${user.username}` : 'Nest user')}</small>
+                    <small>${escapeHtml(user.username ? `@${user.username}` : 'Nest user')} · add as ${escapeHtml(roleLabel(modal._shareAddRole))}</small>
                 </span>
             </button>
-        `).join('') : '<p class="notes-share-empty">No matching users.</p>';
+        `).join('');
+        const emailHtml = emailState?.status === 'unmatched' ? `
+            <button type="button" class="notes-share-result notes-share-result--email" data-add-email="${escapeHtml(emailState.query)}">
+                <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>
+                <span>
+                    <strong>${escapeHtml(emailState.query)}</strong>
+                    <small>${escapeHtml(emailState.warning || 'Invite by email. Recipient must sign up with this OAuth email.')}</small>
+                </span>
+            </button>
+        ` : '';
+        container.innerHTML = resultHtml || emailHtml
+            ? `${resultHtml}${emailHtml}`
+            : '<p class="notes-share-empty">No matching users.</p>';
     }
 
     function setError(modal, message = '') {
@@ -96,18 +184,21 @@
     }
 
     function buildModal(resourceType, resourceId, resourceTitle, sharing, onSaved) {
-        const users = [...(sharing.users || [])];
+        const users = [...(sharing.users || [])].map((user) => ({ ...user, role: normalizeRole(user.role) }));
+        const pending = [...(sharing.pending_invitations || [])].map((invite) => ({ ...invite, role: normalizeRole(invite.role) }));
+        const inherited = [...(sharing.inherited || [])];
         const modal = document.createElement('div');
         modal.className = 'notes-modal';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
         modal.setAttribute('aria-labelledby', 'notes-share-title');
+        modal._shareAddRole = 'viewer';
         modal.innerHTML = `
             <div class="notes-modal-panel notes-share-panel">
                 <header class="notes-modal-header">
                     <div>
                         <h2 id="notes-share-title">Share ${escapeHtml(resourceTitle || (resourceType === 'folder' ? 'folder' : 'note'))}</h2>
-                        <p>Anyone you add receives view-only access.</p>
+                        <p>Add Nest users directly or invite an email to claim access after OAuth signup.</p>
                     </div>
                     <button type="button" class="notes-icon-button" data-share-close aria-label="Close sharing">
                         <span class="material-symbols-outlined" aria-hidden="true">close</span>
@@ -117,7 +208,7 @@
                     <span>General access</span>
                     <select data-share-public>
                         <option value="restricted" ${sharing.public ? '' : 'selected'}>Restricted</option>
-                        <option value="public" ${sharing.public ? 'selected' : ''}>Anyone with the link</option>
+                        <option value="public" ${sharing.public ? 'selected' : ''}>Anyone with the link · Viewer</option>
                     </select>
                 </label>
                 <div class="notes-share-link-row">
@@ -125,12 +216,32 @@
                     <button type="button" class="btn-secondary" data-share-copy>Copy link</button>
                 </div>
                 <div class="notes-share-people">
-                    <label class="notes-field">
-                        <span>People with access</span>
-                        <input type="search" autocomplete="off" placeholder="Search by name or @username" data-share-search>
-                    </label>
+                    <div class="notes-share-add-row">
+                        <label class="notes-field">
+                            <span>Add people or email</span>
+                            <input type="search" autocomplete="off" placeholder="Search name, @username, or exact email" data-share-search>
+                        </label>
+                        <label class="notes-field notes-share-role-field">
+                            <span>Role</span>
+                            ${roleSelectHtml('viewer', 'data-share-add-role')}
+                        </label>
+                    </div>
                     <div class="notes-share-results" data-share-results hidden></div>
-                    <div class="notes-share-selected" data-share-selected></div>
+                    <section class="notes-share-section">
+                        <h3>Direct access</h3>
+                        <div class="notes-share-selected" data-share-selected></div>
+                    </section>
+                    <section class="notes-share-section">
+                        <h3>Pending email invitations</h3>
+                        <p class="notes-share-help">Pending recipients must register through OAuth using exactly the invited email.</p>
+                        <div class="notes-share-selected" data-share-pending></div>
+                    </section>
+                    ${inherited.length ? `
+                    <section class="notes-share-section">
+                        <h3>Inherited access</h3>
+                        <div class="notes-share-selected" data-share-inherited></div>
+                    </section>
+                    ` : ''}
                 </div>
                 <div class="notes-form-error" data-share-error role="alert" hidden></div>
                 <footer class="notes-modal-actions">
@@ -140,9 +251,29 @@
             </div>
         `;
         renderSelected(modal, users);
+        renderPending(modal, pending);
+        renderInherited(modal, inherited);
 
         modal.addEventListener('mousedown', (event) => {
             if (event.target === modal) close();
+        });
+        modal.addEventListener('change', (event) => {
+            const userRole = event.target.closest('[data-user-role]');
+            if (userRole) {
+                const user = users.find((entry) => String(entry.id) === userRole.dataset.userRole);
+                if (user) user.role = normalizeRole(userRole.value);
+                return;
+            }
+            const pendingRole = event.target.closest('[data-pending-role]');
+            if (pendingRole) {
+                const invite = pending.find((entry) => String(entry.email) === pendingRole.dataset.pendingRole);
+                if (invite) invite.role = normalizeRole(pendingRole.value);
+                return;
+            }
+            const addRole = event.target.closest('[data-share-add-role]');
+            if (addRole) {
+                modal._shareAddRole = normalizeRole(addRole.value);
+            }
         });
         modal.addEventListener('click', async (event) => {
             if (event.target.closest('[data-share-close]')) {
@@ -156,12 +287,32 @@
                 renderSelected(modal, users);
                 return;
             }
+            const removePending = event.target.closest('[data-remove-pending]');
+            if (removePending) {
+                const index = pending.findIndex((invite) => String(invite.email) === removePending.dataset.removePending);
+                if (index >= 0) pending.splice(index, 1);
+                renderPending(modal, pending);
+                return;
+            }
             const add = event.target.closest('[data-add-user]');
             if (add) {
                 const results = modal._shareSearchResults || [];
                 const user = results.find((entry) => String(entry.id) === add.dataset.addUser);
-                if (user && !users.some((entry) => String(entry.id) === String(user.id))) users.push(user);
+                if (user && !users.some((entry) => String(entry.id) === String(user.id))) {
+                    users.push({ ...user, role: normalizeRole(modal._shareAddRole) });
+                }
                 renderSelected(modal, users);
+                modal.querySelector('[data-share-results]').hidden = true;
+                modal.querySelector('[data-share-search]').value = '';
+                return;
+            }
+            const addEmail = event.target.closest('[data-add-email]');
+            if (addEmail) {
+                const email = addEmail.dataset.addEmail;
+                if (email && !pending.some((entry) => String(entry.email).toLowerCase() === email.toLowerCase())) {
+                    pending.push({ email, role: normalizeRole(modal._shareAddRole), status: 'pending' });
+                }
+                renderPending(modal, pending);
                 modal.querySelector('[data-share-results]').hidden = true;
                 modal.querySelector('[data-share-search]').value = '';
                 return;
@@ -183,15 +334,18 @@
                 const updated = await apiJson(endpointFor(resourceType, resourceId), {
                     method: 'PATCH',
                     body: JSON.stringify({
+                        expected_revision: sharing.revision,
                         public: modal.querySelector('[data-share-public]').value === 'public',
-                        user_ids: users.map((user) => user.id),
+                        grants: users.map((user) => ({ user_id: user.id, role: normalizeRole(user.role) })),
+                        invitations: pending.map((invite) => ({ email: invite.email, role: normalizeRole(invite.role) })),
                     }),
                 });
                 onSaved?.(updated);
                 global.APStudyToast?.show?.({ message: 'Sharing updated.', type: 'success' });
                 close();
             } catch (error) {
-                setError(modal, error.message || 'Unable to update sharing.');
+                const conflict = error.payload?.code === 'sharing_revision_conflict';
+                setError(modal, conflict ? 'Sharing changed in another tab. Reopen this dialog to review the latest access.' : (error.message || 'Unable to update sharing.'));
                 save.disabled = false;
             }
         });
@@ -210,7 +364,12 @@
                 try {
                     const payload = await apiJson(`/api/notes/share-users?q=${encodeURIComponent(query)}`);
                     modal._shareSearchResults = payload.results || [];
-                    renderSearchResults(modal, modal._shareSearchResults, new Set(users.map((user) => String(user.id))));
+                    renderSearchResults(
+                        modal,
+                        modal._shareSearchResults,
+                        new Set(users.map((user) => String(user.id))),
+                        payload.email
+                    );
                 } catch (error) {
                     results.hidden = false;
                     results.innerHTML = `<p class="notes-share-empty">${escapeHtml(error.message)}</p>`;
