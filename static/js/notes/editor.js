@@ -26,6 +26,12 @@ import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './e
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
 import { bindNotePrintController, printNote } from './editor/print.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
+import {
+    clipboardHtmlImageSources,
+    clipboardImageFiles,
+    dataImageFile,
+} from './editor/images.js';
+import { bindImageRuntime, insertInlineImageFile, insertInlineImageNode, requestImageSource } from './editor/image-runtime.js';
 
 const noteContext = window.APSTUDY_NOTE_CONTEXT || {};
 const noteId = noteContext.noteId || noteIdFromPath();
@@ -399,6 +405,10 @@ function isBlockStyleSelected(block, option) {
 
 function getSelectedTextAlignment() {
     if (!editorInstance) return 'left';
+    const inlineSelection = editorInstance._tiptapEditor?.state?.selection;
+    if (inlineSelection?.node?.type?.name === 'inlineImage') {
+        return inlineSelection.node.attrs?.alignment || 'left';
+    }
     const blocks = selectedBlocks();
     const block = blocks[0];
     if (!block) return 'left';
@@ -424,6 +434,19 @@ function getSelectedTextAlignment() {
 function applyTextAlignment(textAlignment) {
     if (!editorInstance) return;
     editorInstance.focus();
+
+    const inlineSelection = editorInstance._tiptapEditor?.state?.selection;
+    if (inlineSelection?.node?.type?.name === 'inlineImage') {
+        const transaction = editorInstance._tiptapEditor.state.tr.setNodeMarkup(
+            inlineSelection.from,
+            undefined,
+            { ...inlineSelection.node.attrs, layout: 'break', alignment: textAlignment === 'justify' ? 'left' : textAlignment }
+        );
+        editorInstance.dispatch(transaction);
+        updateEditorChrome();
+        triggerDebouncedSave();
+        return;
+    }
 
     selectedBlocks().forEach((block) => {
         if (checkBlockTypeHasDefaultProp('textAlignment', block.type, editorInstance)) {
@@ -951,13 +974,13 @@ function openBlockSuggestionMenu(block) {
     focusEditorBody();
 }
 
-function removeUrlBlockPopover() {
+function removeUrlBlockPopover(result = null) {
     if (!urlBlockPopover) return;
     const resolve = urlBlockResolve;
     urlBlockPopover.remove();
     urlBlockPopover = null;
     urlBlockResolve = null;
-    resolve?.(null);
+    resolve?.(result);
 }
 
 function positionUrlBlockPopover(anchorRect) {
@@ -965,7 +988,7 @@ function positionUrlBlockPopover(anchorRect) {
     const rect = anchorRect || editorPage?.getBoundingClientRect() || { left: 16, bottom: 80 };
     const width = Math.min(360, window.innerWidth - 16);
     const left = Math.max(8, Math.min(rect.left || 8, window.innerWidth - width - 8));
-    const top = Math.max(8, Math.min((rect.bottom || 80) + 8, window.innerHeight - 160));
+    const top = Math.max(8, Math.min((rect.bottom || 80) + 8, window.innerHeight - 380));
     urlBlockPopover.style.width = `${width}px`;
     urlBlockPopover.style.left = `${Math.round(left)}px`;
     urlBlockPopover.style.top = `${Math.round(top)}px`;
@@ -1009,14 +1032,20 @@ function requestUrlForBlock(item, anchorRect = null) {
                 }
                 return;
             }
-            removeUrlBlockPopover();
-            resolve(url);
+            removeUrlBlockPopover(url);
         });
         urlBlockPopover.querySelector('[data-url-block-cancel]')?.addEventListener('click', () => {
-            removeUrlBlockPopover();
-            resolve('');
+            removeUrlBlockPopover('');
         });
     });
+}
+
+async function insertImageFromDialog(anchorRect = null, editor = editorInstance) {
+    const source = await requestImageSource(anchorRect, noteUrl);
+    if (!source) return null;
+    closeToolbarMenus();
+    if (source.file) return insertInlineImageFile(editor, source.file, { noteId, onChange: triggerDebouncedSave });
+    return insertInlineImageNode(editor, { url: source.url, mediaId: '', clientId: `url-${Date.now()}`, alt: '', width: 240, layout: 'inline', alignment: 'left', status: 'ready', error: '' });
 }
 
 async function previewForBookmark(url) {
@@ -1092,6 +1121,7 @@ function insertBlockPayload(block, editor = editorInstance) {
 }
 
 async function insertCatalogItem(item, anchorRect = null, editor = editorInstance) {
+    if (item?.type === 'inlineImage') return insertImageFromDialog(anchorRect, editor);
     const payload = await payloadForCatalogItem(item, anchorRect);
     if (!payload) {
         focusEditorBody();
@@ -1958,6 +1988,24 @@ function schedulePastedContentNormalization() {
 
 function handleNotesPaste({ event, editor, defaultPasteHandler }) {
     const clipboardData = event.clipboardData;
+    const imageFiles = clipboardImageFiles(clipboardData);
+    if (imageFiles.length) {
+        event.preventDefault();
+        imageFiles.forEach((file) => insertInlineImageFile(editor, file, { noteId, onChange: triggerDebouncedSave }));
+        return true;
+    }
+    const htmlImages = clipboardHtmlImageSources(clipboardData);
+    if (htmlImages.length) {
+        event.preventDefault();
+        htmlImages.forEach((source, index) => {
+            if (/^data:/i.test(source)) {
+                void dataImageFile(source, index).then((file) => insertInlineImageFile(editor, file, { noteId, onChange: triggerDebouncedSave }));
+            } else {
+                insertInlineImageNode(editor, { url: source, mediaId: '', clientId: `url-${Date.now()}-${index}`, alt: '', width: 240, layout: 'inline', alignment: 'left', status: 'ready', error: '' });
+            }
+        });
+        return true;
+    }
     const rawPlainText = clipboardData?.getData('text/plain') || '';
     const blockJson = clipboardData?.getData('application/x-nest-blocknote+json') || '';
     if (blockJson) {
@@ -2228,6 +2276,16 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false }) {
                 setNotePrintReady(false);
             }
         };
+    }, [editor]);
+
+    React.useEffect(() => {
+        return bindImageRuntime({
+            editor,
+            editorPage,
+            noteId,
+            onChange: triggerDebouncedSave,
+            openDialog: insertImageFromDialog,
+        });
     }, [editor]);
 
     useEditorContentOrSelectionChange(() => {

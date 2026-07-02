@@ -27,14 +27,12 @@ test("block catalog filters turn-into and atom blocks", async () => {
     assert.equal(catalogItemByKey("callout")?.type, "callout");
 });
 
-test("block catalog builds URL block payloads", async () => {
+test("block catalog exposes inline images and builds URL block payloads", async () => {
     const { blockPayloadForCatalogItem, catalogItemByKey } = await importBrowserModule("static/js/notes/editor/block-catalog.js");
 
-    const image = blockPayloadForCatalogItem(catalogItemByKey("image"), { url: "https://example.com/a.png" });
-    assert.equal(image.type, "image");
-    assert.equal(image.props.url, "https://example.com/a.png");
-    assert.equal(image.props.showPreview, true);
-    assert.equal(image.props.previewWidth, 512);
+    const image = catalogItemByKey("image");
+    assert.equal(image.type, "inlineImage");
+    assert.equal(image.inline, true);
 
     const bookmark = blockPayloadForCatalogItem(catalogItemByKey("bookmark"), {
         url: "https://example.com",
@@ -62,12 +60,27 @@ test("notes image block renderer keeps image props and lazy-loads previews", asy
     const source = await readFile(path.join(repoRoot, "static/js/notes/toolbar.js"), "utf8");
 
     assert.match(source, /imageBlockConfig/);
-    assert.match(source, /const \{ url, caption, name, showPreview, previewWidth \} = props\.block\.props/);
+    assert.match(source, /const \{ url, caption, name, showPreview, previewWidth, textAlignment \} = props\.block\.props/);
     assert.match(source, /loading: 'lazy'/);
     assert.match(source, /decoding: 'async'/);
     assert.match(source, /fetchPriority: 'low'/);
     assert.match(source, /rootMargin: '900px 0px'/);
     assert.match(source, /parse: imageParse/);
+    assert.match(source, /inlineImageSpec/);
+});
+
+test("notes editor handles image clipboard uploads and selected-image alignment", async () => {
+    const editor = await readFile(path.join(repoRoot, "static/js/notes/editor.js"), "utf8");
+    const images = await readFile(path.join(repoRoot, "static/js/notes/editor/images.js"), "utf8");
+    const runtime = await readFile(path.join(repoRoot, "static/js/notes/editor/image-runtime.js"), "utf8");
+
+    assert.match(editor, /clipboardImageFiles\(clipboardData\)/);
+    assert.match(runtime, /insertInlineContent/);
+    assert.match(editor, /layout: 'break', alignment/);
+    assert.match(runtime, /notes-image-upload-progress/);
+    assert.match(images, /type: 'inlineImage'/);
+    assert.match(images, /min: 48, max: 900/);
+    assert.match(images, /notes-image-retry/);
 });
 
 test("heading collapse hides blocks until same-or-higher heading", async () => {

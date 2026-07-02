@@ -422,7 +422,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(toolbarSource, /type: 'bookmark'/);
     assert.match(toolbarSource, /type: 'divider'/);
     assert.match(toolbarSource, /const lazyImageBlock = createReactBlockSpec\(imageBlockConfig/);
-    assert.match(toolbarSource, /function LazyImagePreview\(\{ url, alt, width \}\)/);
+    assert.match(toolbarSource, /function LazyImagePreview\(\{ url, alt, width, alignment = 'left' \}\)/);
+    assert.match(toolbarSource, /inlineImageSpec/);
     assert.match(toolbarSource, /IntersectionObserver/);
     assert.match(toolbarSource, /loading: 'lazy'/);
     assert.match(toolbarSource, /decoding: 'async'/);
@@ -559,7 +560,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
     assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-2/);
-    assert.match(editorTemplate, /notes-editor-bundle-13/);
+    assert.match(editorTemplate, /notes-editor-bundle-14/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);

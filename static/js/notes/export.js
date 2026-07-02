@@ -30,15 +30,25 @@
         return value.replace(/[^a-zA-Z0-9._-]+/g, '_');
     }
 
+    function inlineContentToMarkdown(item) {
+        if (typeof item === 'string') return item;
+        if (item?.type === 'link') {
+            const label = parseBlockContent(item.content);
+            return item.href ? `[${label}](${item.href})` : label;
+        }
+        if (item?.type === 'inlineImage') {
+            const props = item.props || {};
+            const alt = String(props.alt || 'Image').replaceAll(']', '\\]');
+            return props.url ? `![${alt}](${props.url})` : alt;
+        }
+        if (item && typeof item.text === 'string') return item.text;
+        return '';
+    }
+
     function parseBlockContent(contentNode) {
         if (!Array.isArray(contentNode)) return '';
         return contentNode
-            .map((item) => {
-                if (typeof item === 'string') return item;
-                if (item?.type === 'link') return parseBlockContent(item.content);
-                if (item && typeof item.text === 'string') return item.text;
-                return '';
-            })
+            .map((item) => inlineContentToMarkdown(item))
             .join('')
             .trim();
     }
@@ -131,6 +141,8 @@
     function blockNoteJsonToPlainText(blockNoteJson) {
         const markdown = blockNoteJsonToMarkdown(blockNoteJson);
         return markdown
+            .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+            .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
             .replace(/^#{1,6}\s+/gm, '')
             .replace(/^>\s+/gm, '')
             .replace(/^-\s\[[ x]\]\s+/gm, '')

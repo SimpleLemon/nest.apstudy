@@ -41,6 +41,9 @@ def _inline_text(item):
         return ""
     if item.get("type") == "link" and isinstance(item.get("content"), list):
         return "".join(_inline_text(child) for child in item["content"])
+    if item.get("type") == "inlineImage":
+        props = item.get("props") if isinstance(item.get("props"), dict) else {}
+        return str(props.get("alt") or props.get("url") or "Image")
     text = item.get("text")
     return text if isinstance(text, str) else ""
 

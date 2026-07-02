@@ -1,10 +1,11 @@
 import logging
 import json
+import io
 import uuid
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
-from flask import Blueprint, abort, jsonify, request, url_for
+from flask import Blueprint, abort, jsonify, request, send_file, url_for
 from flask_login import current_user, login_required
 
 from appwrite.exception import AppwriteException
@@ -18,6 +19,7 @@ from appwrite_helpers import (
 from services.discord_audit import emit_creation_event, format_actor
 from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
 from services import note_store
+from services import note_media
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -333,6 +335,82 @@ def notes_link_preview():
     return jsonify(payload), status
 
 
+def _media_payload(note_id, media):
+    media_id = media.get("$id") or media.get("id")
+    return {
+        "id": media_id,
+        "url": url_for("notes_api.get_note_media", note_id=note_id, media_id=media_id),
+        "name": media.get("original_filename") or "Image",
+        "mimeType": media.get("mime_type"),
+        "size": media.get("file_size_bytes"),
+        "width": media.get("width"),
+        "height": media.get("height"),
+    }
+
+
+@notes_api_bp.route("/api/notes/<note_id>/media", methods=["POST"])
+@login_required
+def upload_note_media(note_id):
+    note = _note_owner_or_404(note_id)
+    access = note_store.resolve_note_access(note, current_user.id)
+    if not access["can_edit"]:
+        abort(404)
+    uploaded_file = request.files.get("file")
+    if not uploaded_file or not uploaded_file.filename:
+        return jsonify({"error": "Choose an image to upload."}), 400
+    try:
+        media = note_media.create_media(note_id, current_user.id, uploaded_file)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    except AppwriteException:
+        logger.exception("Failed to upload note media")
+        return jsonify({"error": "Unable to store this image."}), 500
+    return jsonify(_media_payload(note_id, media)), 201
+
+
+@notes_api_bp.route("/api/notes/<note_id>/media/<media_id>", methods=["GET"])
+def get_note_media(note_id, media_id):
+    note = note_store.get_note(note_id)
+    media = note_media.get_media(media_id)
+    if not note or not media or str(media.get("note_id")) != str(note_id):
+        abort(404)
+    access = note_store.resolve_note_access(note, _viewer_id())
+    if not access["can_view"]:
+        return _access_denied_response()
+    try:
+        data = note_media.media_bytes(media)
+    except AppwriteException:
+        logger.exception("Failed to read note media")
+        abort(404)
+    response = send_file(
+        io.BytesIO(data),
+        mimetype=media.get("mime_type") or "application/octet-stream",
+        as_attachment=False,
+        download_name=media.get("original_filename") or "image",
+        conditional=True,
+    )
+    response.headers["Cache-Control"] = "private, no-cache"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.set_etag(str(media.get("storage_file_id") or media_id))
+    return response.make_conditional(request)
+
+
+@notes_api_bp.route("/api/notes/<note_id>/media/<media_id>", methods=["DELETE"])
+@login_required
+def delete_note_media(note_id, media_id):
+    note = _note_owner_or_404(note_id)
+    access = note_store.resolve_note_access(note, current_user.id)
+    media = note_media.get_media(media_id)
+    if not access["can_edit"] or not media or str(media.get("note_id")) != str(note_id):
+        abort(404)
+    try:
+        note_media.delete_media(media)
+    except AppwriteException:
+        logger.exception("Failed to delete note media")
+        return jsonify({"error": "Unable to delete this image."}), 500
+    return jsonify({"ok": True})
+
+
 @notes_api_bp.route("/api/notes/<note_id>", methods=["GET"])
 def get_note(note_id):
     note = note_store.get_note(note_id)
@@ -384,6 +462,11 @@ def update_note(note_id):
     except AppwriteException:
         logger.exception("Failed to update note")
         return jsonify({"error": "Unable to update note."}), 500
+    if "content" in updates:
+        try:
+            note_media.sync_note_media(note_id, updates["content"])
+        except AppwriteException:
+            logger.exception("Failed to synchronize note media references")
 
     try:
         global_page_setup = _load_global_notes_page_setup(note.get("user_id"))
@@ -411,6 +494,7 @@ def note_sharing(note_id):
 def delete_note(note_id):
     _note_owner_or_404(note_id)
     try:
+        note_media.delete_note_media(note_id)
         note_store.delete_note(note_id)
     except AppwriteException:
         logger.exception("Failed to delete note")
@@ -512,6 +596,8 @@ def delete_folder(folder_id):
     _folder_owner_or_404(folder_id)
 
     try:
+        for note in note_store.list_notes_in_folder(folder_id):
+            note_media.delete_note_media(note.get("$id") or note.get("id"))
         note_store.delete_folder_and_notes(current_user.id, folder_id)
     except AppwriteException:
         logger.exception("Failed to delete note folder")

@@ -221,6 +221,7 @@ PROJECT_ID = _project
 ENDPOINT = _endpoint
 PROFILE_AVATAR_BUCKET_ID = os.environ.get("APPWRITE_PROFILE_AVATAR_BUCKET_ID", "profile_avatars")
 FILE_SHARE_BUCKET_ID = os.environ.get("APPWRITE_FILE_SHARE_BUCKET_ID", "file_share_files")
+NOTES_MEDIA_BUCKET_ID = os.environ.get("APPWRITE_NOTES_MEDIA_BUCKET_ID", "notes_media")
 
 COLLECTIONS = {
 	"users": "users",
@@ -242,6 +243,7 @@ COLLECTIONS = {
 	"file_folders": "file_folders",
 	"note_folders": "note_folders",
 	"notes": "notes",
+	"note_media": "note_media",
 	"note_access_grants": "note_access_grants",
 	"chat_channels": "chat_channels",
 	"chat_messages": "chat_messages",

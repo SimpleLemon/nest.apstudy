@@ -478,6 +478,17 @@ def _sync_discord_chat(app):
     _reconcile_discord_chat(app)
 
 
+def _cleanup_note_media(app):
+    with app.app_context():
+        try:
+            from services.note_media import cleanup_abandoned_media
+            deleted = cleanup_abandoned_media()
+            if deleted:
+                logger.info("Deleted %s abandoned note media upload(s).", deleted)
+        except Exception:
+            logger.exception("Note media cleanup failed")
+
+
 def init_scheduler(app):
     """
     Initialize and start the background scheduler.
@@ -562,6 +573,16 @@ def init_scheduler(app):
             name="Fetch ZenQuotes daily quote at 00:15 UTC",
             replace_existing=True,
             max_instances=1,
+        )
+
+        _scheduler.add_job(
+            func=lambda: _cleanup_note_media(app),
+            trigger=CronTrigger(hour=3, minute=20, timezone=timezone.utc),
+            id="cleanup_note_media",
+            name="Clean abandoned note media daily",
+            replace_existing=True,
+            max_instances=1,
+            coalesce=True,
         )
 
         discord_role_sync_minutes = int(os.environ.get("DISCORD_ROLE_SYNC_MINUTES", "30"))

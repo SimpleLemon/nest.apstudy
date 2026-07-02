@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createReactBlockSpec, createReactStyleSpec } from '@blocknote/react';
-import { BlockNoteSchema, defaultBlockSpecs, defaultStyleSpecs, imageBlockConfig, imageParse } from '@blocknote/core';
+import { BlockNoteSchema, defaultBlockSpecs, defaultInlineContentSpecs, defaultStyleSpecs, imageBlockConfig, imageParse } from '@blocknote/core';
+import { inlineImageSpec } from './editor/images.js';
 
 const indentLevelProp = {
     default: 0,
@@ -54,7 +55,7 @@ const dividerBlock = createReactBlockSpec(
     }
 );
 
-function LazyImagePreview({ url, alt, width }) {
+function LazyImagePreview({ url, alt, width, alignment = 'left' }) {
     const containerRef = React.useRef(null);
     const [shouldLoad, setShouldLoad] = React.useState(false);
 
@@ -84,7 +85,10 @@ function LazyImagePreview({ url, alt, width }) {
         {
             ref: containerRef,
             className: `bn-visual-media-wrapper notes-lazy-image-frame${shouldLoad ? ' is-loaded' : ''}`,
-            style: { maxWidth: `${Math.max(96, Number(width || 512))}px` },
+            style: {
+                maxWidth: `${Math.max(96, Number(width || 512))}px`,
+                marginInline: alignment === 'center' ? 'auto' : alignment === 'right' ? '0 0 0 auto' : '0 auto 0 0',
+            },
         },
         shouldLoad
             ? React.createElement('img', {
@@ -114,7 +118,7 @@ function LazyImagePreview({ url, alt, width }) {
 }
 
 function LazyImageBlock(props) {
-    const { url, caption, name, showPreview, previewWidth } = props.block.props;
+    const { url, caption, name, showPreview, previewWidth, textAlignment } = props.block.props;
     const label = name || caption || url || 'Image';
     if (!url) {
         return React.createElement(
@@ -122,7 +126,19 @@ function LazyImageBlock(props) {
             { className: 'bn-file-block-content-wrapper' },
             React.createElement(
                 'div',
-                { className: 'bn-add-file-button', contentEditable: 'false' },
+                {
+                    className: 'bn-add-file-button',
+                    contentEditable: 'false',
+                    role: 'button',
+                    tabIndex: 0,
+                    onClick: (event) => window.dispatchEvent(new CustomEvent('notes-image-insert', { detail: { anchorRect: event.currentTarget.getBoundingClientRect(), blockId: props.block.id } })),
+                    onKeyDown: (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            window.dispatchEvent(new CustomEvent('notes-image-insert', { detail: { anchorRect: event.currentTarget.getBoundingClientRect(), blockId: props.block.id } }));
+                        }
+                    },
+                },
                 React.createElement(
                     'div',
                     { className: 'bn-add-file-button-icon' },
@@ -161,7 +177,7 @@ function LazyImageBlock(props) {
     return React.createElement(
         'div',
         { className: 'bn-file-block-content-wrapper' },
-        React.createElement(LazyImagePreview, { url, alt: label, width: previewWidth }),
+        React.createElement(LazyImagePreview, { url, alt: label, width: previewWidth, alignment: textAlignment }),
         caption ? React.createElement('p', { className: 'bn-file-caption' }, caption) : null
     );
 }
@@ -341,5 +357,9 @@ export const notesEditorSchema = BlockNoteSchema.create({
     styleSpecs: {
         ...defaultStyleSpecs,
         fontSize: fontSizeStyle,
+    },
+    inlineContentSpecs: {
+        ...defaultInlineContentSpecs,
+        inlineImage: inlineImageSpec,
     },
 });

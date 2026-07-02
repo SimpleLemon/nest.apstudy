@@ -60,6 +60,14 @@ def delete_user_data(user_id):
     user_id = str(user_id)
 
     try:
+        from services.note_media import NOTE_MEDIA_TABLE_ID, delete_media
+        for media in list_rows_all(NOTE_MEDIA_TABLE_ID, [Query.equal("user_id", [user_id])]):
+            delete_media(media)
+    except AppwriteException:
+        logger.exception("Failed to delete note media for user %s", user_id)
+        errors.append("note_media")
+
+    try:
         delete_calendar_rows_by_user(user_id)
     except AppwriteException:
         logger.exception("Failed to delete calendar rows for user %s", user_id)
