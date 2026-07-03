@@ -32,7 +32,7 @@ class LegalPagesTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("<title>Privacy Policy - APStudy Nest</title>", body)
-        self.assertIn("Last Updated: July 2, 2026", body)
+        self.assertIn("Last Updated: July 3, 2026", body)
         self.assertIn('href="/privacy-policy"', body)
         self.assertIn('href="/terms-of-service"', body)
         self.assertIn('href="mailto:derek.chen@emory.edu"', body)
@@ -46,6 +46,9 @@ class LegalPagesTestCase(unittest.TestCase):
         self.assertIn("withdrawal does not affect", body.lower())
         self.assertIn("Cookie settings", body)
         self.assertIn("six months", body)
+        self.assertIn("active by default", body)
+        self.assertIn("authenticated application", body)
+        self.assertIn('data-analytics-mode="public-choice"', body)
         self.assertNotIn('class="thesidebar"', body)
 
     def test_terms_of_service_renders_logged_out(self):

@@ -85,11 +85,11 @@ PUBLIC_PROFILE_CSP = "; ".join([
     "base-uri 'self'",
     "object-src 'none'",
     "frame-ancestors 'none'",
-    "script-src 'self' https://cdn.jsdelivr.net",
+    "script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com",
     "style-src 'self' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' https: data:",
-    "connect-src 'self' https://nyc.cloud.appwrite.io",
+    "connect-src 'self' https://nyc.cloud.appwrite.io https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com",
     "form-action 'self'",
 ])
 

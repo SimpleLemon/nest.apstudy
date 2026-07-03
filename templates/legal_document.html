@@ -38,7 +38,7 @@
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     {% endif %}
 </head>
-<body class="legal-page{% if viewer %} legal-page--authenticated{% endif %}">
+<body class="legal-page{% if viewer %} legal-page--authenticated{% endif %}" data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L">
     {% if viewer %}
     <global class="thenav" data-profile-picture="{{ (viewer.picture or '')|avatar_url(32) }}" data-user-email="{{ viewer.email }}"></global>
     {% set sidebar_user_emory_student = viewer.emory_student %}
@@ -135,8 +135,8 @@
                         <li>Your approximate geographic location derived from IP address, at the city or region level.</li>
                         <li>How you arrived at the Service and where you navigate within it.</li>
                     </ul>
-                    <p>Google Analytics uses cookies to distinguish unique users and sessions. We do not load Google Analytics or permit it to set cookies unless you first choose "Accept analytics" in our consent controls. The data collected is aggregated and used solely to understand usage trends and improve the Service. We do not use Google Analytics to personally identify individual users.</p>
-                    <p><strong>Google Analytics Choice:</strong> You can reject analytics when first asked, or change and withdraw your choice at any time using the persistent "Cookie settings" control. Rejecting analytics does not limit the Service's core features.</p>
+                    <p>Google Analytics uses cookies to distinguish unique users and sessions. Analytics is active by default on public content and throughout the authenticated application. The data collected is aggregated and used solely to understand usage trends and improve the Service. We do not use Google Analytics to personally identify individual users.</p>
+                    <p><strong>Google Analytics Choice on Public Pages:</strong> Public content provides controls to reject or later re-enable analytics. A public-page rejection does not limit core features and remains effective when you return to public content. Authenticated application, editor, and administration pages automatically use analytics and do not display these public-page controls.</p>
                     <p>For more information about how Google collects and processes data, visit <a href="https://policies.google.com/privacy">Google's Privacy & Terms page</a>.</p>
                 </section>
 
@@ -172,23 +172,23 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Analytics Cookies (Google Analytics)</strong></td>
-                                    <td>With your consent only, distinguish unique users, track session information, and record how you interact with the Service.</td>
+                                    <td>Distinguish unique users, track session information, and record how you interact with public content and the authenticated application. Public content provides a rejection control.</td>
                                     <td><code>_ga</code>: 2 years; <code>_ga_*</code>: 2 years; <code>_gid</code>: 24 hours.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <h3>4.3 Third-Party Cookies</h3>
-                    <p>Google Analytics may set cookies on your device only after you accept analytics. These cookies are governed by Google's privacy policy. We do not allow any other third-party advertising or tracking cookies on the Service.</p>
+                    <p>Google Analytics may set cookies when you visit eligible public content or use the authenticated application. These cookies are governed by Google's privacy policy. We do not allow any other third-party advertising or tracking cookies on the Service.</p>
                     <h3>4.4 Managing Cookies</h3>
-                    <p>On your first visit, our consent banner offers equally accessible options to accept or reject optional analytics. Your versioned choice and its date are stored in your browser for six months and are not synchronized to your account. If the choice expires or this consent policy changes, analytics remains off until you make a new choice.</p>
+                    <p>On your first visit to eligible public content, analytics is active by default while a compact preference panel and Cookie settings control offer equally accessible options to accept or reject it. Your versioned public-page choice and its date are stored in your browser for six months and are not synchronized to your account. If the choice expires, is invalid, or this policy version changes, public-page analytics returns to its default active state and the preference panel is shown again.</p>
                     <ul>
-                        <li><strong>Cookie Settings:</strong> Use the persistent "Cookie settings" control on any page to change or withdraw consent. If you reject or withdraw, we disable future analytics, remove Google Analytics cookies accessible to the Service, and do not reactivate analytics unless you later accept.</li>
+                        <li><strong>Cookie Settings:</strong> Use the persistent control on public content to reject or re-enable public-page analytics. Rejecting disables analytics on those pages and removes Google Analytics cookies accessible to the Service. The setting is ignored inside the authenticated application, where the control is not shown.</li>
                         <li><strong>Browser Settings:</strong> Most browsers allow you to block or delete cookies through their settings. Blocking essential cookies will prevent the Service from functioning properly.</li>
                         <li><strong>Google Analytics Opt-Out:</strong> Install the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-Out Browser Add-on</a>.</li>
-                        <li><strong>Privacy Signals:</strong> When your browser sends a Do Not Track or Global Privacy Control signal, analytics remains off unless you make an explicit choice to accept it.</li>
+                        <li><strong>Privacy Signals:</strong> The Service does not currently translate Do Not Track or Global Privacy Control signals into a stored analytics choice. Use Reject analytics on public content or browser-level blocking tools.</li>
                     </ul>
-                    <p>Disabling optional analytics does not limit your ability to use the Service. Disabling essential authentication or security storage through browser settings may prevent some features from working.</p>
+                    <p>Rejecting public-page analytics does not limit your ability to use public content. Disabling essential authentication or security storage through browser settings may prevent some features from working.</p>
                 </section>
 
                 <section id="data-retention">
@@ -226,7 +226,7 @@
                     <h3>7.4 Restriction and Objection</h3>
                     <p>Where applicable, you may ask us to restrict certain processing or object to processing based on legitimate interests, direct marketing, or other grounds recognized by law.</p>
                     <h3>7.5 Withdraw Consent</h3>
-                    <p>Where processing is based on consent, you may withdraw it at any time. For analytics, use the persistent "Cookie settings" control. Withdrawal does not affect the lawfulness of processing completed before you withdrew consent.</p>
+                    <p>Where processing is based on consent, you may withdraw it at any time. For public-page analytics, use the persistent Cookie settings control to reject future collection on eligible public content. You may contact us to exercise any applicable objection or withdrawal right concerning other processing. Withdrawal does not affect the lawfulness of processing completed before you withdrew consent.</p>
                     <h3>7.6 Appeals and Other Applicable Rights</h3>
                     <p>Some jurisdictions provide additional rights, including the right to appeal a denied privacy request, opt out of certain sales, sharing, or targeted advertising, and receive information about automated decision-making. We do not sell personal data or use it for targeted advertising. If an additional right applies to you, you may exercise it through the privacy contact below.</p>
                     <h3>7.7 How to Exercise Your Rights</h3>

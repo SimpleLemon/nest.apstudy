@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user-profile.css') }}">
 </head>
-<body class="user-profile-page">
+<body class="user-profile-page" data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L">
     {% if viewer %}
     <global class="thenav" data-profile-picture="{{ (viewer.picture or '')|avatar_url(32) }}" data-user-email="{{ viewer.email }}"></global>
     {% endif %}

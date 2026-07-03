@@ -52,7 +52,7 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}" data-navigation-retention="discard">
+<body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}" data-navigation-retention="discard" data-analytics-mode="{{ 'authenticated' if viewer_authenticated and access.role == 'owner' else 'public-choice' }}" data-analytics-measurement-id="G-0NT330ZX5L">
     {% if viewer_authenticated %}
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}

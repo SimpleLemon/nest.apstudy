@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing-demos.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
     <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
@@ -34,7 +35,7 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/landing.js') }}" defer></script>
 </head>
-<body class="landing-page" data-analytics-measurement-id="G-0NT330ZX5L">
+<body class="landing-page" data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L">
     {% set landing_is_authenticated = landing_user_authenticated if landing_user_authenticated is defined else current_user.is_authenticated %}
     {% set landing_cta_href = '/dashboard' if landing_is_authenticated else url_for('auth.login') %}
     {% set landing_nav_cta_label = 'Open Nest' if landing_is_authenticated else 'Log in' %}
@@ -95,19 +96,215 @@
                 <div class="feature-panels" data-reveal>
                     <article id="panel-command" class="feature-panel feature-panel--dashboard is-active" role="tabpanel" aria-labelledby="tab-command" data-landing-panel="command">
                         <div class="feature-copy"><p class="landing-eyebrow">Start here</p><h3>The day, weighted by what needs attention.</h3><p>Calendar, tasks, and course context share one overview while the most urgent work stays visually dominant.</p><a href="/dashboard">View dashboard <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
-                        <div class="landing-preview preview-dashboard" aria-hidden="true"><section class="preview-calendar ui-panel"><header><strong>This week</strong><span>4 events</span></header><div class="preview-week"><span>Mon<i></i></span><span>Tue<i></i><i></i></span><span>Wed</span><span>Thu<i></i></span><span>Fri<i></i></span></div></section><div class="preview-summary-stack"><section class="ui-card"><strong>Next task</strong><p>Finish BIOL 141 lab draft</p></section><section class="ui-card"><strong>Recent note</strong><p>Cell respiration review</p></section><section class="ui-card"><strong>Course pulse</strong><p>Two sections still open</p></section></div></div>
+                        <div class="product-mockup landing-app-demo landing-app-demo-dashboard" aria-hidden="true">
+                        <div class="demo-dashboard-tiles">
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">calendar_today</span>
+                                    <strong>Calendar: Week</strong>
+                                </header>
+                                <div class="demo-dashboard-week">
+                                    <div class="demo-dashboard-week-days">
+                                        <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+                                    </div>
+                                    <div class="demo-dashboard-week-grid" data-dashboard-week-grid>
+                                        <span data-week-date>7</span><span class="is-current" data-week-date>8</span><span data-week-date>9</span><span data-week-date>10</span><span data-week-date>11</span><span data-week-date>12</span><span data-week-date>13</span>
+                                        <i class="event-blue day-monday"></i>
+                                        <i class="event-orange day-tuesday"></i>
+                                        <i class="event-red day-wednesday"></i>
+                                        <i class="event-blue day-wednesday event-slot-2"></i>
+                                        <i class="event-orange day-wednesday event-slot-3"></i>
+                                        <i class="event-red day-thursday"></i>
+                                        <i class="event-blue day-friday"></i>
+                                        <i class="event-orange day-friday event-slot-2"></i>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">check_circle</span>
+                                    <strong>Upcoming Tasks</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>Review Biology Class Syllabus</span><b>high</b></p>
+                                    <p><span>Complete reading assignments</span></p>
+                                    <p><span>Attend office hours</span></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">folder</span>
+                                    <strong>Recent Files</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>LabWorksheet.pdf</span><b>1.8 MB</b></p>
+                                    <p><span>Bio_Review.docx</span><b>5.2 MB</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">article</span>
+                                    <strong>Recent Notes</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>BIOL 141 notes</span><b>Note</b></p>
+                                    <p><span>Weekly planning</span><b>Note</b></p>
+                                    <p><span>Small steps every day become the work you are proud of.</span><b>Quote</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">chat_bubble</span>
+                                    <strong>Messages</strong>
+                                </header>
+                                <div class="demo-dashboard-list">
+                                    <p><span>Your University</span><b>Channel</b></p>
+                                    <p><span>Nest Announcements</span><b>Channel</b></p>
+                                </div>
+                            </article>
+                            <article class="demo-dashboard-card">
+                                <header>
+                                    <span class="demo-dashboard-icon material-symbols-outlined" aria-hidden="true">school</span>
+                                    <strong>Courses</strong>
+                                </header>
+                                <div class="demo-dashboard-courses">
+                                    <span><b>BIOL 141</b><small>Foundations of...</small></span>
+                                    <span><b>CHEM 150</b><small>Structure and...</small></span>
+                                    <span><b>HLTH 100</b><small>It's Your Health...</small></span>
+                                    <span><b>BIOL 141L</b><small>Foundations of...</small></span>
+                                    <span><b>CHEM 150L</b><small>Structure and...</small></span>
+                                    <span><b>JPN 101</b><small>Elementary Japanese...</small></span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
                     </article>
                     <article id="panel-calendar" class="feature-panel feature-panel--calendar" role="tabpanel" aria-labelledby="tab-calendar" data-landing-panel="calendar" hidden>
                         <div class="feature-copy"><p class="landing-eyebrow">Make time visible</p><h3>A calendar that reads like the week you will live.</h3><p>Classes, focused work, and personal commitments keep their place without turning the view into a wall of labels.</p><a href="/calendar">Explore calendar <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
-                        <div class="landing-preview preview-calendar-agenda" aria-hidden="true"><header><strong>Wednesday</strong><span>June 10</span></header><div class="agenda-row"><time>9:00</time><p><strong>CHEM 150</strong><span>Atwood 210</span></p></div><div class="agenda-row is-primary"><time>11:30</time><p><strong>Study block</strong><span>BIOL lab draft</span></p></div><div class="agenda-row"><time>2:30</time><p><strong>BIOL 141</strong><span>White Hall 208</span></p></div><div class="schedule-strip"><i></i><i></i><i></i><i></i><i></i></div></div>
+                        <div class="product-mockup landing-app-demo landing-app-demo-calendar" aria-hidden="true">
+                        <header class="demo-page-head demo-calendar-head">
+                            <div><h4 data-landing-calendar-title>Week of Jun 7 - Jun 13</h4><p>Weekly view with course and personal calendars</p></div>
+                            <div class="demo-segment"><b>Weekly</b><span>Monthly</span></div>
+                        </header>
+                        <div class="demo-week-shell demo-calendar-week">
+                            <div class="demo-week-header" data-landing-calendar-days>
+                                <span></span>
+                                <span><b>Sun</b><em>7</em></span>
+                                <span><b>Mon</b><em>8</em></span>
+                                <span><b>Tue</b><em>9</em></span>
+                                <span><b>Wed</b><em>10</em></span>
+                                <span><b>Thu</b><em>11</em></span>
+                                <span><b>Fri</b><em>12</em></span>
+                                <span><b>Sat</b><em>13</em></span>
+                            </div>
+                            <div class="demo-week-body">
+                                <div class="demo-time-axis">
+                                    <span>8 AM</span>
+                                    <span>9 AM</span>
+                                    <span>10 AM</span>
+                                    <span>11 AM</span>
+                                    <span>12 PM</span>
+                                    <span>1 PM</span>
+                                    <span>2 PM</span>
+                                    <span>3 PM</span>
+                                    <span>4 PM</span>
+                                    <span>5 PM</span>
+                                </div>
+                                <div class="demo-week-grid" data-landing-calendar-events>
+                                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-mobile-agenda" data-landing-calendar-agenda>
+                            <p><strong>Mon</strong><span>BIOL 141, 2:30-3:45 PM</span></p>
+                            <p><strong>Tue</strong><span>CHEM 150, 11:30 AM-12:45 PM</span></p>
+                            <p><strong>Wed</strong><span>Work, 8:30-10:00 AM</span></p>
+                            <p><strong>Thu</strong><span>CHEM 150L, 4:30-5:00 PM</span></p>
+                        </div>
+                    </div>
                     </article>
                     <article id="panel-tasks" class="feature-panel feature-panel--tasks" role="tabpanel" aria-labelledby="tab-tasks" data-landing-panel="tasks" hidden>
                         <div class="feature-copy"><p class="landing-eyebrow">Choose the next move</p><h3>Tasks organized by consequence, not decoration.</h3><p>Deadlines and lists provide structure while completed work stays present without competing for attention.</p><a href="/tasks">Organize tasks <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
-                        <div class="landing-preview preview-tasks" aria-hidden="true"><header><strong>School</strong><span>3 open</span></header><div class="preview-task is-urgent"><i></i><p><strong>Finish BIOL 141 lab draft</strong><span>Today · 5:00 PM</span></p><b>High</b></div><div class="preview-task"><i></i><p><strong>Read CHEM chapter 4</strong><span>Tomorrow</span></p></div><div class="preview-task"><i></i><p><strong>Prepare advising questions</strong><span>Friday</span></p></div><footer><strong>Completed this week</strong><span>8 tasks</span></footer></div>
+                        <div class="product-mockup landing-app-demo landing-app-demo-tasks" aria-hidden="true">
+                        <div class="demo-task-app">
+                            <aside class="demo-task-rail">
+                                <button type="button">
+                                    <span class="material-symbols-outlined">task_alt</span>
+                                    <b>5</b>
+                                </button>
+                                <button class="is-active" type="button">
+                                    <span class="material-symbols-outlined">school</span>
+                                    <b>2</b>
+                                </button>
+                                <button type="button">
+                                    <span class="material-symbols-outlined">person</span>
+                                    <b>3</b>
+                                </button>
+                            </aside>
+                            <section class="demo-task-surface">
+                                <header class="demo-task-head">
+                                    <div>
+                                        <h4>School Tasks</h4>
+                                    </div>
+                                </header>
+                                <div class="demo-task-add">
+                                    <span class="material-symbols-outlined">add</span>
+                                    <strong>Add task to School</strong>
+                                </div>
+                                <div class="demo-task-list-preview">
+                                    <article class="demo-task-row">
+                                        <span class="demo-task-check"></span>
+                                        <div>
+                                            <strong>Finish BIOL 141 lab draft</strong>
+                                            <p><span class="material-symbols-outlined">schedule</span>Tomorrow, 11:59 PM</p>
+                                        </div>
+                                        <b class="is-high"><span class="material-symbols-outlined">flag</span>High</b>
+                                    </article>
+                                    <article class="demo-task-row">
+                                        <span class="demo-task-check"></span>
+                                        <div>
+                                            <strong>Review chapter notes</strong>
+                                            <p><span class="material-symbols-outlined">schedule</span>Friday, 4:00 PM</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <section class="demo-task-completed">
+                                    <button type="button">
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                        <strong>Completed</strong>
+                                        <b>2</b>
+                                    </button>
+                                    <p><span class="demo-task-check is-checked"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>Upload worksheet scan</p>
+                                    <p><span class="demo-task-check is-checked"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>Email study group</p>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
                     </article>
                     <article id="panel-workspace" class="feature-panel feature-panel--workspace" role="tabpanel" aria-labelledby="tab-workspace" data-landing-panel="workspace" hidden>
                         <div class="feature-copy"><p class="landing-eyebrow">Context stays close</p><h3>The work and the conversation share an address.</h3><p>Notes lead the composition; files and chat support them without becoming another grid of identical cards.</p><a href="/notes">Open workspace <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
-                        <div class="landing-preview preview-workspace" aria-hidden="true"><section class="preview-note ui-panel"><span>BIOL 141</span><strong>Cellular respiration</strong><p>Energy moves through each stage of the pathway, from glycolysis to the electron transport chain.</p></section><aside><div><strong>Attached files</strong><p>Lab worksheet.pdf</p><p>Study guide.pdf</p></div><div><strong>Course chat</strong><p>“Office hours moved to 3 PM.”</p></div></aside></div>
+                        <div class="product-mockup landing-app-demo landing-app-demo-workspace" aria-hidden="true">
+                        <section class="demo-workspace-grid">
+                            <article class="demo-notes-surface">
+                                <header><h4>Notes</h4></header>
+                                <p><strong>BIOL 141 lecture notes</strong><span>Biomolecules, enzymes, and cell structure. So much fun!</span></p>
+                                <p><strong>Exam review folder</strong><span>3 notes updated this week</span></p>
+                            </article>
+                            <article class="demo-files-surface">
+                                <header><h4>File manager</h4></header>
+                                <p><span class="material-symbols-outlined">folder</span><strong>Lab reports</strong><small>4 files</small></p>
+                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Study guide.pdf</strong></p>
+                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Course syllabus.pdf</strong></p>
+                            </article>
+                            <article class="demo-chat-surface">
+                                <header><h4>Chat</h4></header>
+                                <div class="demo-chat-channels">
+                                    <p><span class="demo-channel-symbol">#</span><strong>Nest Chat</strong><small>Chat Directly to Discord</small></p>
+                                    <p><span class="demo-channel-symbol">U</span><strong>Your University</strong><small>University Chat Channel</small></p>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
                     </article>
                 </div>
             </div>
@@ -115,7 +312,29 @@
 
         <section id="courses" class="landing-section landing-section--wide landing-courses" aria-labelledby="courses-title">
             <div class="landing-split-copy" data-reveal><p class="landing-eyebrow">Emory</p><h2 id="courses-title">Build the schedule before the semester builds it for you</h2><p>Search by title, professor, term, day, or time. Then compare the sections that matter without losing the shape of your week.</p><dl class="course-metadata"><div><dt>Course</dt><dd>BIOL 141</dd></div><div><dt>Credits</dt><dd>3</dd></div><div><dt>Sections</dt><dd>7</dd></div></dl></div>
-            <div class="course-browser ui-panel" data-reveal aria-hidden="true"><header><div><span>Fall 2026</span><strong>Foundations of Modern Biology I</strong></div><p>Aug 26 – Dec 9</p></header><ul class="course-section-list"><li><div><strong>Section 1 · CRN 1655</strong><span>MW · 8:30–9:45 AM · A. Stark</span></div><b class="ui-status status-open">Open</b></li><li><div><strong>Section 2 · CRN 1656</strong><span>TTh · 10:00–11:15 AM · S. Rogers</span></div><b class="ui-status status-waitlist">Waitlist</b></li><li><div><strong>Section 3 · CRN 1657</strong><span>TTh · 11:30 AM–12:45 PM · D. Blake</span></div><b class="ui-status status-closed">Closed</b></li></ul></div>
+            <div class="course-visual course-planner-demo" data-reveal aria-hidden="true">
+                <section class="course-detail-hero">
+                    <span class="course-detail-kicker">Fall 2026 - BIOL 141</span>
+                    <h3>Foundations of Modern Biol I</h3>
+                    <p class="course-detail-term">Aug 26, 2026 - Dec 9, 2026</p>
+                    <div class="course-detail-chips">
+                        <span>3 credits</span>
+                        <span>7 sections</span>
+                    </div>
+                    <p class="course-detail-description">Major topics include: biomolecules, cell structure and function, energy metabolism, and cell reproduction. Fulfills biology major and pre-health requirements.</p>
+                    <div class="course-detail-stats">
+                        <span><strong>3</strong> Open</span>
+                        <span><strong>2</strong> Closed</span>
+                        <span><strong>2</strong> Waitlist</span>
+                    </div>
+                </section>
+                <section class="course-section-preview" aria-label="BIOL 141 representative sections">
+                    <article><strong>Section 1</strong><span>Open</span><p>CRN 1655 <br> MW 8:30-9:45a <br> Professor A. Stark</p></article>
+                    <article><strong>Section 2</strong><span>Open</span><p>CRN 1656 <br> TTh 10-11:15a <br> Professor S. Rogers</p></article>
+                    <article><strong>Section 3</strong><span>Closed</span><p>CRN 1657 <br> TTh 11:30a-12:45p <br> Professor D. Blake</p></article>
+                    <article><strong>Section 4</strong><span>Open</span><p>CRN 1658 <br> TThF 9-9:50a <br> Professor C. Barton</p></article>
+                </section>
+            </div>
         </section>
 
         <section id="security" class="landing-connection-band" aria-labelledby="capabilities-title">

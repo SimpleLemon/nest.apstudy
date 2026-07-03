@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const source = await readFile(path.join(repoRoot, "static/js/core/cookie-consent.js"), "utf8");
+const globalStyles = await readFile(path.join(repoRoot, "static/css/global.css"), "utf8");
 
 class FakeElement {
     constructor(tagName, document) {
@@ -39,7 +40,7 @@ class FakeElement {
     }
 }
 
-function createHarness({ stored = null, cookie = "", dnt = "0", measurementId = "G-0NT330ZX5L" } = {}) {
+function createHarness({ stored = null, cookie = "", dnt = "0", mode = "public-choice", measurementId = "G-0NT330ZX5L" } = {}) {
     const values = new Map();
     if (stored !== null) values.set("apstudy_cookie_consent", stored);
     const cookieWrites = [];
@@ -55,6 +56,7 @@ function createHarness({ stored = null, cookie = "", dnt = "0", measurementId = 
     };
     document.head = new FakeElement("head", document);
     document.body = new FakeElement("body", document);
+    document.body.dataset.analyticsMode = mode;
     document.body.dataset.analyticsMeasurementId = measurementId;
     Object.defineProperty(document, "cookie", {
         get: () => cookie,
@@ -93,20 +95,21 @@ function createHarness({ stored = null, cookie = "", dnt = "0", measurementId = 
 
 function decision(choice, ageMs = 0) {
     return JSON.stringify({
-        version: 1,
+        version: 2,
         choice,
         decidedAt: new Date(Date.now() - ageMs).toISOString(),
     });
 }
 
-test("analytics is denied by default and when consent data is malformed or expired", () => {
+test("public analytics defaults on and asks again for missing, malformed, or expired state", () => {
     const defaultHarness = createHarness();
     const malformedHarness = createHarness({ stored: "not-json" });
     const expiredHarness = createHarness({ stored: decision("accepted", 184 * 24 * 60 * 60 * 1000) });
 
-    assert.equal(defaultHarness.document.head.children.length, 0);
-    assert.equal(malformedHarness.document.head.children.length, 0);
-    assert.equal(expiredHarness.document.head.children.length, 0);
+    assert.equal(defaultHarness.document.head.children.length, 1);
+    assert.equal(malformedHarness.document.head.children.length, 1);
+    assert.equal(expiredHarness.document.head.children.length, 1);
+    assert.equal(defaultHarness.document.body.children.length, 1);
     assert.equal(defaultHarness.window.APStudyCookieConsent.getDecision(), null);
 });
 
@@ -134,6 +137,21 @@ test("a saved acceptance loads analytics while rejection keeps it disabled", () 
     assert.equal(rejectedHarness.document.head.children.length, 0);
 });
 
+test("authenticated pages load analytics despite public rejection and render no controls", () => {
+    const harness = createHarness({ mode: "authenticated", stored: decision("rejected") });
+
+    assert.equal(harness.document.head.children.length, 1);
+    assert.equal(harness.document.body.children.length, 0);
+    assert.equal(harness.window.APStudyCookieConsent.getMode(), "authenticated");
+});
+
+test("off-mode pages neither load analytics nor render controls", () => {
+    const harness = createHarness({ mode: "off", stored: decision("accepted") });
+
+    assert.equal(harness.document.head.children.length, 0);
+    assert.equal(harness.document.body.children.length, 0);
+});
+
 test("rejection persists, clears legacy Google cookies, and reloads after withdrawal", () => {
     const harness = createHarness({ cookie: "_ga=one; _ga_ABC=two; _gid=three; session=keep" });
     harness.window.APStudyCookieConsent.setChoice("accepted");
@@ -148,13 +166,13 @@ test("rejection persists, clears legacy Google cookies, and reloads after withdr
     assert.ok(harness.cookieWrites.every((value) => !value.startsWith("session=")));
 });
 
-test("privacy signals never start analytics without explicit acceptance", () => {
+test("privacy signals do not override the public default-on policy", () => {
     const harness = createHarness({ dnt: "1" });
-    assert.equal(harness.document.head.children.length, 0);
-    assert.match(harness.document.body.children[0].innerHTML, /privacy signal/);
-
-    harness.window.APStudyCookieConsent.setChoice("accepted");
     assert.equal(harness.document.head.children.length, 1);
+    assert.doesNotMatch(harness.document.body.children[0].innerHTML, /privacy signal/);
+
+    harness.window.APStudyCookieConsent.setChoice("rejected");
+    assert.equal(harness.document.head.children.length, 0);
 });
 
 test("accept and reject controls use the same action class and prominence", () => {
@@ -164,14 +182,30 @@ test("accept and reject controls use the same action class and prominence", () =
     assert.match(source, /keepDialogFocus/);
 });
 
-test("only the previously tracked templates opt into consent-gated analytics", async () => {
-    const eligibleTemplates = [
-        "landing.html",
-        "settings.html",
-        "files.html",
-        "calendar.html",
-        "file_share_download.html",
+test("public analytics controls form a compact bottom-left responsive stack", () => {
+    assert.match(source, /class="apstudy-consent-stack"/);
+    assert.match(globalStyles, /\.apstudy-consent-stack\s*\{[^}]*left:\s*20px;[^}]*bottom:\s*20px;[^}]*width:\s*min\(420px,/s);
+    assert.match(globalStyles, /\.apstudy-consent-dialog__panel\s*\{[^}]*left:\s*20px;[^}]*bottom:\s*20px;[^}]*width:\s*min\(420px,/s);
+    assert.match(globalStyles, /@media \(max-width:\s*767px\)/);
+});
+
+test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
+    const authenticatedTemplates = [
+        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html",
+        "calendar.html", "chat.html", "courses.html", "dashboard.html", "files.html", "notes.html",
+        "onboarding.html", "settings.html", "task.html",
     ];
+    const publicTemplates = [
+        "landing.html",
+        "legal_document.html",
+        "user_profile.html",
+        "calendar_share.html",
+        "file_share_download.html",
+        "file_share_folder.html",
+        "notes_shared_folder.html",
+    ];
+    const offTemplates = ["404.html", "login.html"];
+    const hybridTemplates = ["notes_editor.html"];
     const templateDirectory = path.join(repoRoot, "templates");
     const { readdir } = await import("node:fs/promises");
     const templateNames = (await readdir(templateDirectory)).filter((name) => name.endsWith(".html"));
@@ -179,7 +213,14 @@ test("only the previously tracked templates opt into consent-gated analytics", a
     for (const name of templateNames) {
         const templateSource = await readFile(path.join(templateDirectory, name), "utf8");
         assert.doesNotMatch(templateSource, /googletagmanager\.com\/gtag/, `${name} must not load GA directly`);
-        const isEligible = templateSource.includes('data-analytics-measurement-id="G-0NT330ZX5L"');
-        assert.equal(isEligible, eligibleTemplates.includes(name), `${name} analytics eligibility changed unexpectedly`);
+        if (!templateSource.includes("<!DOCTYPE html>")) continue;
+        if (authenticatedTemplates.includes(name)) assert.match(templateSource, /data-analytics-mode="authenticated"/);
+        else if (publicTemplates.includes(name)) assert.match(templateSource, /data-analytics-mode="public-choice"/);
+        else if (offTemplates.includes(name)) assert.match(templateSource, /data-analytics-mode="off"/);
+        else if (hybridTemplates.includes(name)) {
+            assert.match(templateSource, /data-analytics-mode="\{\{ 'authenticated' if viewer_authenticated and access\.role == 'owner' else 'public-choice' \}\}"/);
+        } else {
+            assert.fail(`${name} has no expected analytics mode`);
+        }
     }
 });

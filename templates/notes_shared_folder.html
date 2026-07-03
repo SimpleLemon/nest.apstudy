@@ -22,7 +22,7 @@
     {% if viewer_authenticated %}<script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>{% endif %}
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
 </head>
-<body class="{% if not viewer_authenticated %}notes-no-sidebar {% endif %}bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
+<body class="{% if not viewer_authenticated %}notes-no-sidebar {% endif %}bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav"
         data-authenticated="{{ 'true' if viewer_authenticated else 'false' }}"
         data-has-sidebar="{{ 'true' if viewer_authenticated else 'false' }}"

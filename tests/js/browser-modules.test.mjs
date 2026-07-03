@@ -91,6 +91,23 @@ async function sourceFor(relativePath) {
     return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 
+function cssBlockStackAt(source, targetIndex) {
+    const stack = [];
+    let blockStart = 0;
+
+    for (let index = 0; index < targetIndex; index += 1) {
+        if (source[index] === "{") {
+            stack.push(source.slice(blockStart, index).trim());
+            blockStart = index + 1;
+        } else if (source[index] === "}") {
+            stack.pop();
+            blockStart = index + 1;
+        }
+    }
+
+    return stack;
+}
+
 test("command palette keeps primary navigation, theme actions, and global controls wired", async () => {
     const source = await sourceFor("static/js/core/command-palette.js");
 
@@ -254,6 +271,15 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
     assert.match(layoutStyles, /transform: translateX\(-105%\)/);
     assert.match(layoutStyles, /body\.mobile-sidebar-open/);
     assert.match(layoutStyles, /min-height: 48px/);
+
+    const collapsedWidthUsages = [...layoutStyles.matchAll(/var\(--sidebar-collapsed\)/g)];
+    assert.ok(collapsedWidthUsages.length >= 3);
+    for (const usage of collapsedWidthUsages) {
+        assert.ok(
+            cssBlockStackAt(layoutStyles, usage.index).includes("@media (min-width: 1025px)"),
+            "collapsed sidebar geometry must not override the mobile drawer",
+        );
+    }
 });
 
 test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
@@ -867,6 +893,7 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     const template = await sourceFor("templates/landing.html");
     const source = await sourceFor("static/js/landing.js");
     const styles = await sourceFor("static/css/landing.css");
+    const demoStyles = await sourceFor("static/css/landing-demos.css");
 
     assert.match(template, /css\/landing\.css/);
     assert.match(template, /js\/landing\.js/);
@@ -884,7 +911,11 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(template, /id="panel-tasks"/);
     assert.match(template, /data-landing-tab="tasks"/);
     assert.match(template, /data-landing-panel="tasks"/);
-    assert.match(template, /course-section-list/);
+    assert.match(template, /landing-app-demo-dashboard/);
+    assert.match(template, /landing-app-demo-calendar/);
+    assert.match(template, /landing-app-demo-tasks/);
+    assert.match(template, /landing-app-demo-workspace/);
+    assert.match(template, /course-planner-demo/);
     assert.match(template, /A school day, in sequence/);
     assert.match(template, /A closer look at Nest/);
     assert.match(template, /Build the schedule before the semester builds it for you/);
@@ -893,10 +924,11 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(template, /Finish BIOL 141 lab draft/);
     assert.match(template, /School/);
     assert.match(template, /Completed/);
-    assert.match(template, /Foundations of Modern Biology I/);
-    assert.match(template, />Open<\/b>/);
-    assert.match(template, />Waitlist<\/b>/);
-    assert.match(template, />Closed<\/b>/);
+    assert.match(template, /Foundations of Modern Biol I/);
+    assert.match(template, /data-dashboard-week-grid/);
+    assert.match(template, /data-landing-calendar-title/);
+    assert.match(template, /data-landing-calendar-events/);
+    assert.match(template, /data-landing-calendar-agenda/);
     assert.match(template, /View dashboard/);
     assert.match(template, /Explore calendar/);
     assert.match(template, /Organize tasks/);
@@ -909,11 +941,10 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.doesNotMatch(template, /googletagmanager\.com\/gtag/);
     assert.doesNotMatch(template, /cdn\.tailwindcss\.com/);
     assert.doesNotMatch(template, /placehold\.co/);
-    assert.match(styles, /\.preview-dashboard/);
-    assert.match(styles, /\.preview-calendar-agenda/);
-    assert.match(styles, /\.preview-tasks/);
-    assert.match(styles, /\.preview-workspace/);
-    assert.match(styles, /\.course-section-list/);
+    assert.match(demoStyles, /\.landing-app-demo-dashboard/);
+    assert.match(demoStyles, /\.demo-week-shell/);
+    assert.match(demoStyles, /\.demo-mobile-agenda/);
+    assert.match(demoStyles, /\.course-planner-demo/);
     assert.match(styles, /@media \(max-width: 980px\)/);
     assert.match(styles, /@media \(max-width: 760px\)/);
     assert.doesNotMatch(styles, /\.landing-final-cta\s*\{[^}]*var\(--color-inverse-surface\)/);
@@ -927,6 +958,9 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(source, /event\.key === "ArrowRight"/);
     assert.match(source, /event\.key === "Home"/);
     assert.match(source, /event\.key === "End"/);
+    assert.match(source, /querySelector\("\[data-dashboard-week-grid\]"\)/);
+    assert.match(source, /Week of \$\{monthDay\(weekStart\)\} - \$\{monthDay\(weekEnd\)\}/);
+    assert.match(source, /showcaseEvents\.map/);
 });
 
 test("navbar keeps avatar sizing, command palette shortcut, and logout/account flows", async () => {

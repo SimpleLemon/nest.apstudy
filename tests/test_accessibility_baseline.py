@@ -124,7 +124,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
             "Create my workspace", "Continue in Nest",
         ):
             self.assertIn(label, template)
-        self.assertEqual(4, len(re.findall(r'class="landing-preview [^"]+" aria-hidden="true"', template)))
+        self.assertEqual(4, len(re.findall(r'class="product-mockup landing-app-demo [^"]+" aria-hidden="true"', template)))
         self.assertIn('class="workflow-sequence"', template)
         self.assertNotIn('class="capability-grid"', template)
 

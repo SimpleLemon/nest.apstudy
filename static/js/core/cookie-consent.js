@@ -2,22 +2,25 @@
     if (window.APStudyCookieConsent) return;
 
     const STORAGE_KEY = "apstudy_cookie_consent";
-    const POLICY_VERSION = 1;
+    const POLICY_VERSION = 2;
     const MAX_AGE_MS = 183 * 24 * 60 * 60 * 1000;
     const ACCEPTED = "accepted";
     const REJECTED = "rejected";
+    const MODE_AUTHENTICATED = "authenticated";
+    const MODE_PUBLIC = "public-choice";
+    const MODE_OFF = "off";
     const ANALYTICS_SCRIPT_ID = "apstudy-google-analytics";
     let analyticsLoaded = false;
     let preferencesOpen = false;
     let previousFocus = null;
 
-    function analyticsId() {
-        return document.body?.dataset?.analyticsMeasurementId || "";
+    function analyticsMode() {
+        const value = document.body?.dataset?.analyticsMode || MODE_OFF;
+        return [MODE_AUTHENTICATED, MODE_PUBLIC, MODE_OFF].includes(value) ? value : MODE_OFF;
     }
 
-    function privacySignalEnabled() {
-        const dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-        return navigator.globalPrivacyControl === true || dnt === "1" || dnt === "yes";
+    function analyticsId() {
+        return document.body?.dataset?.analyticsMeasurementId || "";
     }
 
     function readStoredDecision() {
@@ -43,7 +46,7 @@
         try {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(decision));
         } catch (_error) {
-            // Consent remains valid for this page even when storage is unavailable.
+            // The choice still applies to this page when browser storage is unavailable.
         }
         return decision;
     }
@@ -77,6 +80,7 @@
         if (!measurementId || analyticsLoaded || document.getElementById(ANALYTICS_SCRIPT_ID)) return;
 
         analyticsLoaded = true;
+        window[`ga-disable-${measurementId}`] = false;
         window.dataLayer = window.dataLayer || [];
         window.gtag = window.gtag || function gtag() {
             window.dataLayer.push(arguments);
@@ -104,6 +108,7 @@
         const measurementId = analyticsId();
         if (measurementId) window[`ga-disable-${measurementId}`] = true;
         document.getElementById(ANALYTICS_SCRIPT_ID)?.remove();
+        analyticsLoaded = false;
         clearAnalyticsCookies();
     }
 
@@ -111,14 +116,12 @@
         return {
             banner: document.getElementById("apstudy-consent-banner"),
             dialog: document.getElementById("apstudy-consent-dialog"),
-            signal: document.getElementById("apstudy-consent-signal"),
         };
     }
 
     function syncUi(decision = readStoredDecision()) {
-        const elements = ui();
-        if (elements.banner) elements.banner.hidden = Boolean(decision);
-        if (elements.signal) elements.signal.hidden = !privacySignalEnabled();
+        const { banner } = ui();
+        if (banner) banner.hidden = Boolean(decision);
         document.querySelectorAll("[data-apstudy-consent-choice]").forEach((button) => {
             button.setAttribute("aria-pressed", String(button.dataset.apstudyConsentChoice === decision?.choice));
         });
@@ -167,7 +170,7 @@
         syncUi(decision);
         closePreferences();
 
-        if (choice === ACCEPTED) {
+        if (analyticsMode() === MODE_AUTHENTICATED || choice === ACCEPTED) {
             loadAnalytics();
         } else {
             removeAnalyticsRuntime();
@@ -179,28 +182,29 @@
         window.dispatchEvent(new CustomEvent("apstudy-consent-change", { detail: decision }));
     }
 
-    function render() {
+    function renderPublicControls() {
         const root = document.createElement("div");
         root.id = "apstudy-consent-root";
         root.innerHTML = `
-            <section id="apstudy-consent-banner" class="apstudy-consent-banner" role="region" aria-label="Cookie consent" hidden>
-                <div class="apstudy-consent-banner__copy">
-                    <strong>Choose your analytics preference</strong>
-                    <p>Essential storage keeps Nest secure and working. Optional Google Analytics helps us understand usage and stays off unless you accept. <a href="/privacy-policy#cookie-policy">Privacy and cookie details</a>.</p>
-                    <p id="apstudy-consent-signal" class="apstudy-consent-signal" hidden>Your browser is sending a privacy signal, so analytics remains off unless you explicitly accept.</p>
-                </div>
-                <div class="apstudy-consent-actions" aria-label="Analytics consent options">
-                    <button type="button" data-apstudy-consent-choice="rejected">Reject analytics</button>
-                    <button type="button" data-apstudy-consent-choice="accepted">Accept analytics</button>
-                </div>
-            </section>
-            <button class="apstudy-consent-settings" type="button" data-apstudy-consent-settings aria-haspopup="dialog">Cookie settings</button>
+            <div class="apstudy-consent-stack">
+                <section id="apstudy-consent-banner" class="apstudy-consent-banner" role="region" aria-label="Analytics preference" hidden>
+                    <div class="apstudy-consent-banner__copy">
+                        <strong>Choose your analytics preference</strong>
+                        <p>Google Analytics is active by default on public pages to help improve Nest. You can reject it now or change this choice later. <a href="/privacy-policy#cookie-policy">Privacy details</a>.</p>
+                    </div>
+                    <div class="apstudy-consent-actions" aria-label="Analytics preference options">
+                        <button type="button" data-apstudy-consent-choice="rejected">Reject analytics</button>
+                        <button type="button" data-apstudy-consent-choice="accepted">Accept analytics</button>
+                    </div>
+                </section>
+                <button class="apstudy-consent-settings" type="button" data-apstudy-consent-settings aria-haspopup="dialog">Cookie settings</button>
+            </div>
             <div id="apstudy-consent-dialog" class="apstudy-consent-dialog" role="dialog" aria-modal="true" aria-labelledby="apstudy-consent-title" hidden>
                 <div class="apstudy-consent-dialog__panel">
                     <button class="apstudy-consent-dialog__close" type="button" data-apstudy-consent-close aria-label="Close cookie settings">&times;</button>
                     <h2 id="apstudy-consent-title">Cookie settings</h2>
                     <p><strong>Essential storage:</strong> Always active where needed for authentication, security, and preferences.</p>
-                    <p><strong>Optional analytics:</strong> Google Analytics is loaded only after you accept. Rejecting or withdrawing consent does not limit core features.</p>
+                    <p><strong>Public-page analytics:</strong> Google Analytics is active by default on public content. Rejecting disables it on public pages without limiting core features.</p>
                     <div class="apstudy-consent-actions" aria-label="Analytics preference">
                         <button type="button" data-apstudy-consent-choice="rejected">Reject analytics</button>
                         <button type="button" data-apstudy-consent-choice="accepted">Accept analytics</button>
@@ -218,7 +222,7 @@
                 return;
             }
             if (event.target.closest?.("[data-apstudy-consent-settings]")) openPreferences();
-            if (event.target.closest?.("[data-apstudy-consent-close]") || event.target === ui().dialog) closePreferences();
+            if (event.target.closest?.("[data-apstudy-consent-close]")) closePreferences();
         });
         root.addEventListener("keydown", (event) => {
             if (event.key === "Escape") closePreferences();
@@ -227,33 +231,54 @@
     }
 
     function initialize() {
-        render();
+        const mode = analyticsMode();
+        if (mode === MODE_OFF) return;
+        if (mode === MODE_AUTHENTICATED) {
+            loadAnalytics();
+            return;
+        }
+
+        renderPublicControls();
         const decision = readStoredDecision();
         syncUi(decision);
-        if (decision?.choice === ACCEPTED) loadAnalytics();
-        if (!decision || decision.choice === REJECTED) clearAnalyticsCookies();
+        if (decision?.choice === REJECTED) {
+            removeAnalyticsRuntime();
+        } else {
+            loadAnalytics();
+        }
     }
 
     window.APStudyCookieConsent = {
         openPreferences,
         closePreferences,
         getDecision: readStoredDecision,
+        getMode: analyticsMode,
         setChoice,
         clearAnalyticsCookies,
         loadAnalytics,
-        constants: { STORAGE_KEY, POLICY_VERSION, MAX_AGE_MS, ACCEPTED, REJECTED },
+        constants: {
+            STORAGE_KEY, POLICY_VERSION, MAX_AGE_MS, ACCEPTED, REJECTED,
+            MODE_AUTHENTICATED, MODE_PUBLIC, MODE_OFF,
+        },
     };
 
     window.addEventListener("storage", (event) => {
         if (event.key !== STORAGE_KEY) return;
+        const mode = analyticsMode();
+        if (mode === MODE_AUTHENTICATED) {
+            loadAnalytics();
+            return;
+        }
+        if (mode !== MODE_PUBLIC) return;
+
         const decision = readStoredDecision();
         syncUi(decision);
-        if (decision?.choice === ACCEPTED) {
-            loadAnalytics();
-        } else {
+        if (decision?.choice === REJECTED) {
             const hadAnalyticsRuntime = analyticsLoaded || Boolean(document.getElementById(ANALYTICS_SCRIPT_ID));
             removeAnalyticsRuntime();
             if (hadAnalyticsRuntime) window.location.reload();
+        } else {
+            loadAnalytics();
         }
     });
 

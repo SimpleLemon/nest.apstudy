@@ -5,7 +5,7 @@ from unittest.mock import patch
 from flask import Flask
 
 import blueprints.auth as auth
-from blueprints.auth import LANDING_CSP, LOGIN_CSP, auth_bp
+from blueprints.auth import LANDING_CSP, LOGIN_CSP, PUBLIC_PROFILE_CSP, auth_bp
 from extensions import login_manager
 
 
@@ -44,6 +44,13 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertNotIn("https://cloudflareinsights.com", directives["connect-src"])
         self.assertNotIn("https://static.cloudflareinsights.com", directives["connect-src"])
 
+    def test_public_profile_csp_allows_consent_managed_analytics(self):
+        directives = _csp_directives(PUBLIC_PROFILE_CSP)
+
+        self.assertIn("https://www.googletagmanager.com", directives["script-src"])
+        self.assertIn("https://www.google-analytics.com", directives["connect-src"])
+        self.assertIn("https://region1.google-analytics.com", directives["connect-src"])
+
     def test_landing_route_renders_with_csp(self):
         app = Flask(__name__, template_folder="../templates", static_folder="../static")
         app.secret_key = "test"
@@ -59,6 +66,7 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertNotIn(b"Open Nest", response.data)
         self.assertIn(b"/apple-touch-icon.png", response.data)
         self.assertIn(b"feature-panel--dashboard", response.data)
+        self.assertIn(b"landing-app-demo-dashboard", response.data)
         self.assertIn(b"static/images/landing/nest-interface-hero.png", response.data)
 
     def test_landing_route_does_not_redirect_authenticated_users(self):
