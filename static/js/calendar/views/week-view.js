@@ -53,7 +53,7 @@
                 return `
                     <div class="px-3 py-3 text-center border-r border-calendar-rule last:border-r-0 flex items-center justify-center">
                         <div class="inline-flex flex-col items-center justify-center gap-0.5 ${todayMarkerClass}">
-                            <div class="text-[11px] uppercase tracking-[0.05em] font-semibold ${dayNameClass}">${weekdays[i]}</div>
+                            <div class="text-xs uppercase tracking-[0.05em] font-semibold ${dayNameClass}">${weekdays[i]}</div>
                             <div class="inline-flex h-7 w-7 items-center justify-center text-sm font-semibold ${dateNumClass}">
                                 ${dateLabel}
                             </div>
@@ -70,7 +70,7 @@
                 const row = typeof ev.rowIndex === "number" ? ev.rowIndex + 1 : 1;
                 return `
                     <div ${getEventElementAttributes(ev)} class="calendar-event-shell relative" style="grid-column: ${colStart} / ${colEnd}; grid-row: ${row};">
-                        <div class="text-[10px] px-2 py-1 rounded-md border truncate" style="${badgeStyle}">
+                        <div class="text-xs px-2 py-1 rounded-md border truncate" style="${badgeStyle}">
                             ${escapeHtml(ev.title || "Untitled")}
                         </div>
                     </div>
@@ -80,7 +80,7 @@
             for (let h = 0; h < 24; h++) {
                 timeAxisCells.push(`
                     <div class="border-b border-calendar-rule relative" style="height:${hourHeightPx}px;">
-                        <span class="absolute right-2 top-0 -translate-y-1/2 text-[11px] text-on-surface-variant font-medium leading-none whitespace-nowrap">${formatHourLabel(h)}</span>
+                        <span class="absolute right-2 top-0 -translate-y-1/2 text-xs text-on-surface-variant font-medium leading-none whitespace-nowrap">${formatHourLabel(h)}</span>
                     </div>
                 `);
             }
@@ -112,7 +112,7 @@
                     </div>
                     ${hasAllDayEvents ? `
                     <div class="grid border-b border-calendar-rule bg-surface-container-low sticky top-[3.75rem] z-20 items-start gap-y-1 px-1 py-0.5" style="grid-template-columns: ${gridCols}; column-gap: 0.1rem; padding-right: var(--scrollbar-offset, 0px);">
-                        <div class="px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold border-r border-calendar-rule flex items-start justify-end" style="grid-row: 1 / span ${allDayRowCount};">All day</div>
+                        <div class="px-2 py-1 text-xs uppercase tracking-[0.08em] text-on-surface-variant font-semibold border-r border-calendar-rule flex items-start justify-end" style="grid-row: 1 / span ${allDayRowCount};">All day</div>
                         ${allDayChips}
                     </div>
                     ` : ""}
@@ -195,8 +195,8 @@
                 <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5${taskClasses}" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
                     <div class="h-full rounded-lg border overflow-hidden shadow-lg shadow-black/10" style="${badgeStyle}">
                         <div class="h-full px-2 py-1.5 flex flex-col gap-0.5 text-left">
-                            <div class="text-[11px] font-semibold leading-tight line-clamp-2">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
-                            <div class="text-[10px]">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatTimeOnly(event.startDate))}</div>
+                            <div class="text-xs font-semibold leading-tight line-clamp-2">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
+                            <div class="text-xs">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatTimeOnly(event.startDate))}</div>
                         </div>
                     </div>
                 </div>

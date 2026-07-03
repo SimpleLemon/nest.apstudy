@@ -88,7 +88,7 @@ body {
 .navbar-logo {
   width: 32px;
   height: 32px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   flex-shrink: 0;
   display: block;
 }
@@ -120,7 +120,7 @@ body {
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   transition: all 0.2s ease;
 }
 .navbar-menu-button {
@@ -137,7 +137,7 @@ body {
   justify-content: center;
   padding: 0 16px;
   border: 1px solid color-mix(in srgb, var(--color-primary) 70%, var(--border-color));
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-primary);
   color: var(--color-on-primary);
   font-size: 14px;
@@ -164,7 +164,7 @@ body {
   height: 36px;
   min-width: 36px;
   min-height: 36px;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   flex-shrink: 0;
   cursor: pointer;
   border: 2px solid transparent;
@@ -248,7 +248,7 @@ html.apstudy-sidebar-collapsed .sidebar-container {
   padding: 0 14px;
 }
 .sidebar-section-label {
-  font-size: 11px;
+  font-size: var(--text-meta);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -281,7 +281,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label::after 
   width: 32px;
   height: 1px;
   background: var(--border-color);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 .sidebar-item {
   display: flex;
@@ -294,7 +294,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label::after 
   text-decoration: none;
   background: none;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -346,10 +346,10 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-section-label::after 
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent-color);
   color: var(--color-on-primary, #fff);
-  font-size: 11px;
+  font-size: var(--text-meta);
   font-weight: 700;
   line-height: 18px;
   text-align: center;
@@ -413,7 +413,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   border: none;
   background: transparent;
   overflow: visible;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   color: var(--sidebar-toggle-color);
   transition: all 0.2s ease-in-out;
 }
@@ -424,7 +424,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   width: 2px;
   height: 15px;
   background: var(--sidebar-toggle-color);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   transition: all 0.2s ease-in-out;
   transform: translateY(-50%);
 }
@@ -435,7 +435,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   display: flex;
   width: 20px;
   height: 20px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: transparent;
   border: none;
   align-items: center;
@@ -475,7 +475,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   background: var(--color-shell-tooltip-bg);
   color: var(--text-primary);
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
@@ -506,7 +506,7 @@ html.apstudy-sidebar-collapsed .sidebar-container .sidebar-chat-badge {
   background: var(--color-shell-tooltip-bg);
   color: var(--text-primary);
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
@@ -575,7 +575,7 @@ body.with-sidebar > footer {
   right: 0;
   background: var(--bg-navbar);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   box-shadow: 0 8px 16px var(--color-shell-shadow);
   min-width: 200px;
   display: none;
@@ -700,7 +700,7 @@ body.with-sidebar > footer {
   }
   .sidebar-section-label {
     color: var(--text-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--text-meta) !important;
     line-height: normal !important;
   }
   .sidebar-container.collapsed .sidebar-section-label::after,
@@ -754,10 +754,10 @@ body.with-sidebar > footer {
     height: 48px;
     min-width: 48px;
     min-height: 48px;
-    border-radius: 10px;
+    border-radius: var(--radius-control);
   }
   .navbar-avatar {
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     padding: 4px;
   }
   .navbar-left,

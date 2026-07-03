@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {% include "_font_assets.html" %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
@@ -53,15 +53,8 @@
     <meta name="twitter:title" content="File Share | APStudy">
     <meta name="twitter:description" content="Upload and share files securely with automatic expiration for APStudy." />
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-0NT330ZX5L');
-    </script>
 </head>
-<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased">
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}

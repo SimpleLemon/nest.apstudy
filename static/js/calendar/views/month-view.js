@@ -81,7 +81,7 @@
                     return `
                         <div class="relative px-1 pb-2.5 space-y-1" style="grid-column:${dayIndex + 1}; grid-row:${dayTimedRowStart} / ${gridEndLine}; z-index:10;">
                             ${dayEvents.slice(0, 3).map((e) => buildEventChip(e, { monthView: true })).join("")}
-                            ${dayEvents.length > 3 ? `<div class="text-[10px] text-on-surface-variant">+${dayEvents.length - 3} more</div>` : ""}
+                            ${dayEvents.length > 3 ? `<div class="text-xs text-on-surface-variant">+${dayEvents.length - 3} more</div>` : ""}
                         </div>
                     `;
                 }).join("");
@@ -96,7 +96,7 @@
             }
             return `
                 <div class="calendar-month-header grid grid-cols-7 border-l border-t border-r border-calendar-rule bg-surface-container-low" style="border-top-left-radius:1rem; border-top-right-radius:1rem;">
-                    ${weekdays.map((d, index) => `<div class="calendar-month-header-cell ${index === 6 ? "calendar-month-header-cell-edge" : ""} text-[11px] uppercase tracking-[0.05em] text-center text-on-surface-variant font-semibold py-2 border-r border-b border-calendar-rule ${index === 6 ? "border-r-0" : ""}">${d}</div>`).join("")}
+                    ${weekdays.map((d, index) => `<div class="calendar-month-header-cell ${index === 6 ? "calendar-month-header-cell-edge" : ""} text-xs uppercase tracking-[0.05em] text-center text-on-surface-variant font-semibold py-2 border-r border-b border-calendar-rule ${index === 6 ? "border-r-0" : ""}">${d}</div>`).join("")}
                 </div>
                 <div class="calendar-month-grid border-l border-r border-calendar-rule shadow-2xl shadow-black/10" style="border-bottom-left-radius:1rem; border-bottom-right-radius:1rem;">
                     ${weeks.join("")}
@@ -179,7 +179,7 @@
             const padRight = event.continuesToNextWeek ? "0" : "0.25rem";
             return `
                 <div ${getEventElementAttributes(event)} class="calendar-event-shell relative" style="grid-column:${colStart} / ${colEnd}; grid-row:${row}; z-index:20; padding-left:${padLeft}; padding-right:${padRight};">
-                    <div class="text-[11px] px-2 py-1 border truncate leading-none" style="${badgeStyle}; ${radiusStyle}">
+                    <div class="text-xs px-2 py-1 border truncate leading-none" style="${badgeStyle}; ${radiusStyle}">
                         ${escapeHtml(event.title || "Untitled")}
                     </div>
                 </div>

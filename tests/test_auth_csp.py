@@ -37,12 +37,12 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertNotIn("https://www.googletagmanager.com", directives["script-src"])
         self.assertNotIn("https://www.google-analytics.com", directives["connect-src"])
 
-    def test_login_csp_allows_cloudflare_web_analytics(self):
+    def test_login_csp_blocks_cloudflare_web_analytics(self):
         directives = _csp_directives(LOGIN_CSP)
 
-        self.assertIn("https://static.cloudflareinsights.com", directives["script-src"])
-        self.assertIn("https://cloudflareinsights.com", directives["connect-src"])
-        self.assertIn("https://static.cloudflareinsights.com", directives["connect-src"])
+        self.assertNotIn("https://static.cloudflareinsights.com", directives["script-src"])
+        self.assertNotIn("https://cloudflareinsights.com", directives["connect-src"])
+        self.assertNotIn("https://static.cloudflareinsights.com", directives["connect-src"])
 
     def test_landing_route_renders_with_csp(self):
         app = Flask(__name__, template_folder="../templates", static_folder="../static")
@@ -55,10 +55,10 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers["Content-Security-Policy"], LANDING_CSP)
         self.assertIn(b"Nest.APStudy", response.data)
-        self.assertIn(b"Log In", response.data)
+        self.assertIn(b"Log in", response.data)
         self.assertNotIn(b"Open Nest", response.data)
         self.assertIn(b"/apple-touch-icon.png", response.data)
-        self.assertIn(b"landing-app-demo-dashboard", response.data)
+        self.assertIn(b"feature-panel--dashboard", response.data)
         self.assertIn(b"static/images/landing/nest-interface-hero.png", response.data)
 
     def test_landing_route_does_not_redirect_authenticated_users(self):
@@ -74,7 +74,7 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertNotIn("Location", response.headers)
         self.assertIn(b"Your Academic Command Center", response.data)
         self.assertIn(b"Open Nest", response.data)
-        self.assertNotIn(b"Log In", response.data)
+        self.assertNotIn(b"Log in", response.data)
 
     def test_login_route_renders_with_csp(self):
         app = Flask(__name__, template_folder="../templates", static_folder="../static")

@@ -134,7 +134,7 @@
                     ? "bg-emerald-500/15 text-emerald-600 border-emerald-500/40"
                     : "bg-red-500/15 text-red-600 border-red-500/40";
                 const cancelledText = section.is_cancelled
-                    ? '<span class="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold border bg-amber-500/15 text-amber-700 border-amber-500/30">Cancelled</span>'
+                    ? '<span class="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold border bg-amber-500/15 text-amber-700 border-amber-500/30">Cancelled</span>'
                     : "";
                 const meetingRows = (Array.isArray(section.meetings) ? section.meetings : []).map((meeting) => {
                     const label = `${meeting.day || "?"} ${formatMeetingTime(meeting.start)}-${formatMeetingTime(meeting.end)}`;

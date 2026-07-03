@@ -224,7 +224,7 @@ test("chat uses message-pane loader and profile toggle tooltip polish", async ()
   assert.match(template, /title="Show user profile"/);
   assert.match(script, /const label = state\.membersCollapsed \? "Show user profile" : "Hide user profile"/);
   assert.match(script, /setAttribute\("title", label\)/);
-  assert.match(styles, /#chat-room-symbol\.is-avatar\s*\{[\s\S]*border-radius: 50%/);
+  assert.match(styles, /#chat-room-symbol\.is-avatar\s*\{[\s\S]*border-radius: var\(--radius-avatar\)/);
   assert.match(styles, /#chat-room-symbol img\s*\{[\s\S]*object-fit: cover/);
 });
 

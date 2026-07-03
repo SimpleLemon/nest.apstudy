@@ -3,8 +3,23 @@
 @tailwind utilities;
 :root {
 	--font-display: "Space Grotesk", system-ui, sans-serif;
-	--font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	--font-body: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 	--font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	--radius-control: 6px;
+	--radius-card: 12px;
+	--radius-panel: 18px;
+	--radius-dialog: 24px;
+	--radius-pill: 999px;
+	--radius-avatar: 50%;
+	--text-meta: 12px;
+	--text-compact: 14px;
+	--text-body: 16px;
+	--content-reading: 760px;
+	--content-standard: 1120px;
+	--content-wide: 1280px;
+	--surface-border: color-mix(in srgb, var(--color-outline-variant, #8f929c) 62%, transparent);
+	--surface-shadow-card: 0 12px 32px rgba(0, 0, 0, 0.12);
+	--surface-shadow-panel: 0 24px 64px rgba(0, 0, 0, 0.18);
 }
 
 *,
@@ -78,6 +93,46 @@ pre,
 	font-family: var(--font-mono);
 }
 
+.ui-section {
+	width: min(100%, var(--content-standard));
+	margin-inline: auto;
+}
+
+.ui-section--reading { max-width: var(--content-reading); }
+.ui-section--wide { max-width: var(--content-wide); }
+
+.ui-card,
+.ui-panel {
+	border: 1px solid var(--surface-border);
+	background: var(--color-surface-container-low, #f7f6f3);
+}
+
+.ui-card {
+	border-radius: var(--radius-card);
+	box-shadow: var(--surface-shadow-card);
+}
+
+.ui-panel {
+	border-radius: var(--radius-panel);
+	box-shadow: var(--surface-shadow-panel);
+}
+
+.ui-status {
+	display: inline-flex;
+	min-height: 26px;
+	align-items: center;
+	padding-inline: 10px;
+	border-radius: var(--radius-pill);
+	font-size: var(--text-meta);
+	font-weight: 700;
+}
+
+.ui-meta {
+	font-family: var(--font-mono);
+	font-size: var(--text-meta);
+	line-height: 1.5;
+}
+
 button,
 input[type="button"],
 input[type="reset"],
@@ -102,6 +157,135 @@ body.apstudy-confirm-open {
 	overflow: hidden;
 }
 
+body.apstudy-consent-open { overflow: hidden; }
+
+.apstudy-consent-banner {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	left: 20px;
+	z-index: 10070;
+	display: flex;
+	width: min(920px, calc(100% - 40px));
+	margin: 0 auto;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 20px;
+	border: 1px solid var(--surface-border);
+	border-radius: var(--radius-panel);
+	background: var(--color-surface, #fff);
+	color: var(--color-on-surface, #202124);
+	box-shadow: var(--surface-shadow-panel);
+}
+
+.apstudy-consent-banner[hidden],
+.apstudy-consent-dialog[hidden] { display: none !important; }
+
+.apstudy-consent-banner__copy { max-width: 600px; }
+
+.apstudy-consent-banner__copy strong,
+.apstudy-consent-dialog__panel h2 {
+	display: block;
+	font-family: var(--font-display);
+	font-size: 20px;
+}
+
+.apstudy-consent-banner__copy p,
+.apstudy-consent-dialog__panel p {
+	margin: 6px 0 0;
+	color: var(--color-on-surface-variant, #555861);
+	font-size: var(--text-compact);
+	line-height: 1.55;
+}
+
+.apstudy-consent-banner a,
+.apstudy-consent-dialog a { color: var(--color-primary, #3157c8); }
+
+.apstudy-consent-signal { margin-top: 8px; font-size: var(--text-meta); }
+
+.apstudy-consent-actions {
+	display: flex;
+	flex: 0 0 auto;
+	gap: 10px;
+}
+
+.apstudy-consent-actions button,
+.apstudy-consent-settings,
+.apstudy-consent-dialog__close {
+	min-height: 44px;
+	border: 1px solid var(--surface-border) !important;
+	border-radius: var(--radius-control);
+	background: var(--color-surface-container-high, #e9e8e4);
+	color: var(--color-on-surface, #202124);
+	font-size: var(--text-compact);
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.apstudy-consent-actions button { min-width: 142px; padding: 10px 16px; }
+
+.apstudy-consent-actions button:hover,
+.apstudy-consent-actions button:focus-visible,
+.apstudy-consent-actions button[aria-pressed="true"] {
+	border-color: var(--color-primary, #3157c8) !important;
+	outline: 2px solid transparent;
+}
+
+.apstudy-consent-settings {
+	position: fixed;
+	right: 18px;
+	bottom: 18px;
+	z-index: 10060;
+	padding: 8px 14px;
+	box-shadow: var(--surface-shadow-card);
+}
+
+.apstudy-consent-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 10080;
+	display: grid;
+	place-items: center;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.56);
+}
+
+.apstudy-consent-dialog__panel {
+	position: relative;
+	width: min(560px, 100%);
+	padding: 28px;
+	border: 1px solid var(--surface-border);
+	border-radius: var(--radius-dialog);
+	background: var(--color-surface, #fff);
+	color: var(--color-on-surface, #202124);
+	box-shadow: var(--surface-shadow-panel);
+}
+
+.apstudy-consent-dialog__panel h2 { margin: 0; font-size: 28px; }
+.apstudy-consent-dialog__panel .apstudy-consent-actions { margin-top: 22px; }
+
+.apstudy-consent-dialog__close {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	width: 40px;
+	min-height: 40px;
+}
+
+.apstudy-consent-dialog__privacy { display: inline-block; margin-top: 18px; }
+
+@media (max-width: 680px) {
+	.apstudy-consent-banner {
+		align-items: stretch;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.apstudy-consent-actions { width: 100%; }
+	.apstudy-consent-actions button { flex: 1 1 0; min-width: 0; }
+}
+
 .apstudy-confirm[hidden] {
 	display: none !important;
 }
@@ -124,7 +308,7 @@ body.apstudy-confirm-open {
 	grid-template-columns: 44px minmax(0, 1fr);
 	gap: 14px;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 58%, transparent);
-	border-radius: 16px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface, #ffffff);
 	color: var(--color-on-surface, #202124);
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
@@ -137,7 +321,7 @@ body.apstudy-confirm-open {
 	height: 44px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: color-mix(in srgb, var(--color-primary, #3b82f6) 14%, transparent);
 	color: var(--color-primary, #3b82f6);
 }
@@ -180,7 +364,7 @@ body.apstudy-confirm-open {
 	min-height: 40px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	font: inherit;
 	font-size: 14px;
 	font-weight: 700;
@@ -239,7 +423,7 @@ body.apstudy-confirm-open {
 	gap: 12px;
 	align-items: start;
 	padding: 14px 14px 16px;
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 60%, transparent);
 	border-left: 4px solid var(--toast-accent);
 	background: var(--color-surface-container-high, #262a31);
@@ -284,7 +468,7 @@ body.apstudy-confirm-open {
 	height: 28px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	margin-top: 1px;
 	color: var(--toast-accent);
 	background: color-mix(in srgb, var(--toast-accent) 16%, transparent);
@@ -328,7 +512,7 @@ body.apstudy-confirm-open {
 	margin-top: 9px;
 	padding: 5px 12px;
 	border: 1px solid color-mix(in srgb, var(--toast-accent) 45%, transparent);
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: color-mix(in srgb, var(--toast-accent) 12%, transparent);
 	color: var(--toast-accent);
 	font: inherit;
@@ -354,7 +538,7 @@ body.apstudy-confirm-open {
 	justify-content: center;
 	padding: 0;
 	border: none;
-	border-radius: 6px;
+	border-radius: var(--radius-control);
 	background: transparent;
 	color: var(--color-on-surface-variant, #c0c7d4);
 	font-size: 16px;
@@ -427,7 +611,7 @@ body.apstudy-confirm-open {
 	left: 8px;
 	z-index: 10100;
 	transform: translateY(calc(-100% - 16px));
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface, #fff);
 	color: var(--color-on-surface, #111);
 	font-weight: 700;
@@ -490,7 +674,7 @@ html body :is(
 	width: 50%;
 	height: 50%;
 	top: 0;
-	border-radius: 50%;
+	border-radius: var(--radius-avatar);
 	background-color: var(--color-error, #ef4444);
 	animation: apstudyLoaderScale50 1s infinite ease-in-out;
 }
@@ -519,7 +703,7 @@ html body :is(
 .calendar-mobile-day {
 	overflow: hidden;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 44%, transparent);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface, #ffffff);
 }
 
@@ -548,7 +732,7 @@ html body :is(
 	min-height: 28px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: color-mix(in srgb, var(--color-primary, #3b82f6) 13%, transparent);
 	color: var(--color-primary, #3b82f6);
 	font-size: 12px;
@@ -566,7 +750,7 @@ html body :is(
 	gap: 10px;
 	min-height: 64px;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 28%, transparent);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface-container-lowest, #ffffff);
 	color: var(--color-on-surface, #202124);
 	padding: 10px;
@@ -579,7 +763,7 @@ html body :is(
 
 .calendar-mobile-event-bar {
 	width: 5px;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 }
 
 .calendar-mobile-event-copy {
@@ -653,7 +837,7 @@ html body :is(
 
 	#courses-modal-panel {
 		height: min(92dvh, calc(100dvh - 20px)) !important;
-		border-radius: 16px !important;
+		border-radius: var(--radius-card) !important;
 	}
 }
 
@@ -687,7 +871,7 @@ html body :is(
 	max-width: calc(100vw - 2rem);
 	overflow: hidden;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 35%, transparent);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface, #ffffff);
 	box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
 	color: var(--color-on-surface, #202124);
@@ -696,7 +880,7 @@ html body :is(
 .calendar-source-notice {
 	margin: 10px 12px 0;
 	padding: 8px 10px;
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	border: 1px solid color-mix(in srgb, var(--color-error, #b3261e) 25%, transparent);
 	background: color-mix(in srgb, var(--color-error-container, #f9dedc) 35%, transparent);
 	color: var(--color-on-surface, #202124);
@@ -733,7 +917,7 @@ html body :is(
 	flex: 0 0 20px;
 	appearance: none;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 45%, transparent);
-	border-radius: 6px;
+	border-radius: var(--radius-control);
 	cursor: pointer;
 }
 
@@ -763,7 +947,7 @@ html body :is(
 
 .calendar-source-meta {
 	color: var(--color-on-surface-variant, #5f6368);
-	font-size: 11px;
+	font-size: var(--text-meta);
 	line-height: 1.35;
 }
 
@@ -774,7 +958,7 @@ html body :is(
 	gap: 8px;
 	padding: 8px 10px 4px 12px;
 	color: var(--color-on-surface-variant, #5f6368);
-	font-size: 10px;
+	font-size: var(--text-meta);
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	line-height: 1.2;
@@ -788,7 +972,7 @@ html body :is(
 	align-items: center;
 	justify-content: center;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 30%, transparent) !important;
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface-variant, #5f6368);
 	transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
@@ -815,7 +999,7 @@ html body :is(
 	align-items: center;
 	justify-content: center;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 22%, transparent) !important;
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface-variant, #5f6368);
 	transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
@@ -845,7 +1029,7 @@ html body :is(
 	max-width: calc(100vw - 1rem);
 	overflow: hidden;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 35%, transparent);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface, #ffffff);
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
 	color: var(--color-on-surface, #202124);
@@ -871,7 +1055,7 @@ html body :is(
 .calendar-context-meta {
 	margin-top: 2px;
 	color: var(--color-on-surface-variant, #5f6368);
-	font-size: 11px;
+	font-size: var(--text-meta);
 	line-height: 1.3;
 }
 
@@ -922,7 +1106,7 @@ html body :is(
 .calendar-context-section-label {
 	margin-bottom: 8px;
 	color: var(--color-on-surface-variant, #5f6368);
-	font-size: 11px;
+	font-size: var(--text-meta);
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	line-height: 1.2;
@@ -939,7 +1123,7 @@ html body :is(
 	width: 30px;
 	height: 30px;
 	border: 2px solid transparent !important;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 	transition: transform 120ms ease, box-shadow 120ms ease;
 }
@@ -961,14 +1145,14 @@ html body :is(
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 6px;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 30%, transparent);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	padding: 4px;
 }
 
 .calendar-source-mode {
 	min-height: 36px;
-	border-radius: 9px;
+	border-radius: var(--radius-control);
 	background: transparent;
 	color: var(--color-on-surface-variant, #5f6368);
 	font-size: 13px;
@@ -996,7 +1180,7 @@ html body :is(
 	min-width: 220px;
 	overflow: hidden;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 58%, transparent);
-	border-radius: 18px;
+	border-radius: var(--radius-panel);
 	background: color-mix(in srgb, var(--color-surface-container, #fff) 96%, transparent);
 	box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
 	color: var(--color-on-surface, #202124);
@@ -1009,7 +1193,7 @@ html body :is(
 	width: 100%;
 	align-items: center;
 	gap: 12px;
-	border-radius: 11px;
+	border-radius: var(--radius-card);
 	background: transparent;
 	color: var(--color-on-surface, #202124);
 	font-size: 14px;
@@ -1046,7 +1230,7 @@ html body :is(
 }
 
 .calendar-event-shell {
-	border-radius: 0.5rem;
+	border-radius: var(--radius-control);
 	cursor: default;
 	outline: none;
 }
@@ -1065,7 +1249,7 @@ html body :is(
 	z-index: 75;
 	overflow: auto;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 44%, transparent);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: color-mix(in srgb, var(--color-surface, #ffffff) 98%, transparent);
 	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
 	color: var(--color-on-surface, #202124);
@@ -1111,7 +1295,7 @@ html body :is(
 
 .calendar-upcoming-toggle {
 	align-self: flex-start;
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: color-mix(in srgb, var(--color-primary, #3b82f6) 14%, transparent);
 	color: var(--color-primary, #3b82f6);
 	font-size: 14px;
@@ -1146,7 +1330,7 @@ html body :is(
 	max-height: calc(100vh - 32px);
 	overflow: hidden auto;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 40%, transparent);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface, #ffffff);
 	box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
 	color: var(--color-on-surface, #202124);
@@ -1195,7 +1379,7 @@ html body :is(
 	align-items: center;
 	justify-content: center;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 30%, transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface-variant, #5f6368);
 	transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
@@ -1229,7 +1413,7 @@ html body :is(
 .calendar-info-stat {
 	min-width: 0;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 25%, transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	padding: 10px 12px;
 }
@@ -1237,7 +1421,7 @@ html body :is(
 .calendar-info-stat-label,
 .calendar-info-label {
 	color: var(--color-on-surface-variant, #5f6368);
-	font-size: 11px;
+	font-size: var(--text-meta);
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	line-height: 1.2;
@@ -1264,7 +1448,7 @@ html body :is(
 	width: 100%;
 	min-width: 0;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 42%, transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface, #202124);
 	font-size: 14px;
@@ -1297,7 +1481,7 @@ html body :is(
 .calendar-info-error {
 	margin: 0;
 	border: 1px solid color-mix(in srgb, var(--color-error, #b3261e) 35%, transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: color-mix(in srgb, var(--color-error-container, #f9dedc) 35%, transparent);
 	color: var(--color-error, #b3261e);
 	font-size: 13px;
@@ -1315,7 +1499,7 @@ html body :is(
 
 .calendar-info-button {
 	min-height: 36px;
-	border-radius: 9px;
+	border-radius: var(--radius-control);
 	font-size: 14px;
 	line-height: 1.2;
 	padding: 8px 14px;
@@ -1355,7 +1539,7 @@ html body :is(
 .calendar-share-dialog {
 	width: min(780px, calc(100vw - 32px));
 	border-color: rgba(148, 163, 184, 0.16);
-	border-radius: 18px;
+	border-radius: var(--radius-panel);
 	background: #0f141b;
 	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.025);
 	color: #e5e7eb;
@@ -1411,7 +1595,7 @@ html body :is(
 
 .calendar-share-dialog .calendar-info-close {
 	border: 0;
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: rgba(255, 255, 255, 0.045);
 	color: #b9c1cd;
 }
@@ -1425,13 +1609,13 @@ html body :is(
 
 .calendar-share-dialog .calendar-info-label {
 	color: #8e98a8;
-	font-size: 10px;
+	font-size: var(--text-meta);
 	letter-spacing: 0.12em;
 }
 
 .calendar-share-dialog .calendar-info-input {
 	border: 1px solid rgba(148, 163, 184, 0.16);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: rgba(255, 255, 255, 0.035);
 	color: #e7ebf2;
 	color-scheme: dark;
@@ -1454,7 +1638,7 @@ html body :is(
 }
 
 .calendar-share-dialog .calendar-info-button {
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	font-weight: 650;
 }
 
@@ -1498,7 +1682,7 @@ html body :is(
 	align-items: center;
 	gap: 12px;
 	border: 1px solid rgba(96, 165, 250, 0.24);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: linear-gradient(135deg, rgba(96, 165, 250, 0.13), rgba(147, 197, 253, 0.055));
 	color: #dbeafe;
 	padding: 12px 14px;
@@ -1529,7 +1713,7 @@ html body :is(
 	width: 28px;
 	height: 28px;
 	flex: 0 0 28px;
-	border-radius: 9px;
+	border-radius: var(--radius-control);
 	background: rgba(96, 165, 250, 0.18);
 	color: #bfdbfe;
 	font-size: 17px;
@@ -1543,7 +1727,7 @@ html body :is(
 	gap: 10px;
 	min-width: 0;
 	border: 1px solid rgba(148, 163, 184, 0.14);
-	border-radius: 13px;
+	border-radius: var(--radius-card);
 	background: rgba(255, 255, 255, 0.035);
 	color: #dbe2ec;
 	font-size: 13px;
@@ -1605,7 +1789,7 @@ html body :is(
 	width: 10px;
 	height: 10px;
 	flex: 0 0 10px;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 }
 
 .calendar-share-fixed-fields[hidden],
@@ -1633,7 +1817,7 @@ html body :is(
 	grid-template-columns: minmax(0, 1fr) auto;
 	gap: 12px;
 	border: 1px solid rgba(148, 163, 184, 0.13);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: rgba(255, 255, 255, 0.032);
 	padding: 12px;
 }
@@ -1673,11 +1857,11 @@ html body :is(
 }
 
 .calendar-share-code {
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: rgba(255, 255, 255, 0.06);
 	color: #9ca7b7;
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: var(--text-meta);
 	padding: 3px 7px;
 }
 
@@ -1716,7 +1900,7 @@ html body :is(
 
 .calendar-share-notice {
 	border: 1px solid rgba(96, 165, 250, 0.2);
-	border-radius: 12px;
+	border-radius: var(--radius-card);
 	background: rgba(96, 165, 250, 0.08);
 	padding: 10px 12px;
 }
@@ -1797,7 +1981,7 @@ html body :is(
 	max-height: calc(100vh - 32px);
 	overflow: hidden auto;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 44%, transparent);
-	border-radius: 18px;
+	border-radius: var(--radius-panel);
 	background: var(--color-surface, #ffffff);
 	box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
 }
@@ -1834,7 +2018,7 @@ html body :is(
 	align-items: center;
 	justify-content: center;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 32%, transparent) !important;
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface-variant, #5f6368);
 	transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
@@ -1868,7 +2052,7 @@ html body :is(
 	width: 100%;
 	min-width: 0;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 46%, transparent);
-	border-radius: 11px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface, #202124);
 	font: inherit;
@@ -1904,7 +2088,7 @@ html body :is(
 	gap: 10px;
 	align-self: end;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 36%, transparent);
-	border-radius: 11px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface-container-low, rgba(0, 0, 0, 0.04));
 	color: var(--color-on-surface, #202124);
 	font-size: 14px;
@@ -1948,7 +2132,7 @@ html body :is(
 	align-items: center;
 	justify-content: center;
 	border: 2px solid transparent !important;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: transparent;
 	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-outline-variant, #8f929c) 38%, transparent);
 	transition: box-shadow 140ms ease, transform 140ms ease, border-color 140ms ease;
@@ -1958,7 +2142,7 @@ html body :is(
 	display: block;
 	width: 24px;
 	height: 24px;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: var(--event-color);
 }
 
@@ -1981,7 +2165,7 @@ html body :is(
 .calendar-event-error {
 	margin: 0;
 	border: 1px solid color-mix(in srgb, var(--color-error, #b3261e) 35%, transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	background: color-mix(in srgb, var(--color-error-container, #f9dedc) 35%, transparent);
 	color: var(--color-error, #b3261e);
 	font-size: 13px;
@@ -1996,7 +2180,7 @@ html body :is(
 
 .calendar-event-button {
 	min-height: 38px;
-	border-radius: 10px;
+	border-radius: var(--radius-control);
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1.2;
@@ -2087,7 +2271,7 @@ html body :is(
 	min-width: max-content;
 	padding: 5px 8px;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
-	border-radius: 6px;
+	border-radius: var(--radius-control);
 	background: var(--color-surface-container-high);
 	box-shadow: 0 10px 30px var(--color-shell-shadow);
 	color: var(--color-on-surface);
@@ -2128,7 +2312,7 @@ html body :is(
 	transform: translate(-50%, -50%);
 	overflow: hidden;
 	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 60%, transparent);
-	border-radius: 14px;
+	border-radius: var(--radius-card);
 	background: var(--color-surface-container-high);
 	box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
 	color: var(--color-on-surface);
@@ -2199,7 +2383,7 @@ html body :is(
 	gap: 13px;
 	min-height: 48px;
 	padding: 0 14px;
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	color: color-mix(in srgb, var(--color-on-surface) 80%, transparent);
 	cursor: pointer;
 	font-size: 16px;
@@ -2292,7 +2476,7 @@ html body :is(
 	.apstudy-command-palette-close {
 		min-height: 36px;
 		padding: 4px 6px;
-		border-radius: 8px;
+		border-radius: var(--radius-control);
 	}
 }
 
@@ -2310,7 +2494,7 @@ html body :is(
 	height: 30px;
 	align-items: center;
 	justify-content: center;
-	border-radius: 8px;
+	border-radius: var(--radius-control);
 	background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
 	color: var(--color-on-surface);
 	font: inherit;
@@ -2374,7 +2558,7 @@ html body :is(
 		width: 100%;
 		max-height: calc(100dvh - 24px);
 		overflow: auto;
-		border-radius: 16px;
+		border-radius: var(--radius-card);
 		grid-template-columns: 40px minmax(0, 1fr);
 	}
 
@@ -2400,7 +2584,7 @@ html body :is(
 	.calendar-event-dialog {
 		width: 100%;
 		max-height: calc(100dvh - 24px);
-		border-radius: 16px;
+		border-radius: var(--radius-card);
 		overflow: auto;
 	}
 

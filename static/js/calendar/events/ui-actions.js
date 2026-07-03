@@ -113,7 +113,7 @@
         }
 
         function buildEventChip(event, options = {}) {
-            const sizeClass = options.compact ? "text-[10px] px-2 py-1" : "text-[11px] px-2 py-1";
+            const sizeClass = options.compact ? "text-xs px-2 py-1" : "text-xs px-2 py-1";
             const badgeStyle = getEventBadgeStyle(event);
             const badgeColors = getEventBadgeColors(event);
             const calendarColor = getCalendarEventColor(event);
@@ -125,7 +125,7 @@
                     <div ${getEventElementAttributes(event)} class="calendar-event-shell relative${completedClass}">
                         <div class="${sizeClass} rounded-md border bg-surface-container-high/50 truncate flex items-center gap-2" style="border-color: ${badgeColors.border};">
                             <span class="inline-block h-4 w-1 rounded-full shrink-0" style="background-color: ${calendarColor};"></span>
-                            ${taskLabel ? `<span class="text-[9px] font-bold uppercase" style="color:${badgeColors.text};">${escapeHtml(taskLabel)}</span>` : ""}
+                            ${taskLabel ? `<span class="text-xs font-bold uppercase" style="color:${badgeColors.text};">${escapeHtml(taskLabel)}</span>` : ""}
                             <span class="truncate text-on-surface font-medium">${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</span>
                         </div>
                     </div>

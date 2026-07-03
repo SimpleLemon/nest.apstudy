@@ -144,7 +144,7 @@
                     <article class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 rounded-xl p-5 sm:p-6 relative overflow-hidden flex flex-col gap-4">
                         <div class="absolute left-0 top-0 bottom-0 w-1 ${accent.bar}"></div>
                         <div class="flex flex-wrap items-start justify-between gap-3">
-                            <span class="text-[11px] uppercase tracking-[0.05em] font-bold px-2.5 py-1 rounded-md ${accent.tag}">${escapeHtml(urgency)}</span>
+                            <span class="text-xs uppercase tracking-[0.05em] font-bold px-2.5 py-1 rounded-md ${accent.tag}">${escapeHtml(urgency)}</span>
                             <span class="text-sm text-on-surface-variant text-right">${escapeHtml(timeDisplay)}</span>
                         </div>
                         <div class="space-y-2">

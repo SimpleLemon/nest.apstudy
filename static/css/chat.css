@@ -55,7 +55,7 @@
 .chat-section-title {
   margin: 0;
   color: var(--color-on-surface-variant);
-  font-size: 11px;
+  font-size: var(--text-meta);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -117,7 +117,7 @@
   gap: 8px;
   min-height: 40px;
   padding: 7px 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-on-surface-variant);
   cursor: pointer;
@@ -163,7 +163,7 @@
 
 .chat-list-button small {
   color: var(--color-on-surface-variant);
-  font-size: 11px;
+  font-size: var(--text-meta);
 }
 
 .chat-room-unread-badge {
@@ -175,10 +175,10 @@
   align-items: center;
   justify-content: center;
   justify-self: end;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--color-primary);
   color: var(--color-on-primary);
-  font-size: 11px;
+  font-size: var(--text-meta);
   font-weight: 800;
   line-height: 1;
   overflow: hidden;
@@ -196,7 +196,7 @@
   gap: 2px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 35%, transparent);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   background: var(--color-surface);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
   color: var(--color-on-surface);
@@ -211,7 +211,7 @@
   min-height: 34px;
   padding: 0 10px;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-on-surface);
   font-size: 13px;
@@ -233,7 +233,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   color: var(--color-on-surface-variant);
   font-weight: 800;
   font-size: 14px;
@@ -249,7 +249,7 @@
 .chat-avatar-mini {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   object-fit: cover;
 }
 
@@ -271,7 +271,7 @@
   width: 9px;
   height: 9px;
   flex: 0 0 9px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-surface);
   box-shadow:
     0 0 0 2px var(--color-surface-container-low),
@@ -323,7 +323,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: color-mix(in srgb, var(--color-primary) 14%, transparent);
   color: var(--color-primary);
   font-weight: 800;
@@ -333,7 +333,7 @@
   overflow: visible;
   padding: 0;
   background: transparent;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
 }
 
 #chat-room-symbol.is-avatar,
@@ -352,7 +352,7 @@
   width: 100%;
   height: 100%;
   display: inline-flex;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
 }
 
 .chat-room-title p {
@@ -368,7 +368,7 @@
 .chat-status,
 .chat-history-limited {
   margin: 12px 18px 0;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
   background: var(--color-surface-container-low);
   color: var(--color-on-surface-variant);
@@ -391,7 +391,7 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-on-surface-variant);
   cursor: pointer;
@@ -459,7 +459,7 @@
   width: min(320px, calc(100vw - 16px));
   max-height: min(70vh, 520px);
   overflow: auto;
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
   background: var(--color-surface-container);
   box-shadow: 0 12px 32px color-mix(in srgb, var(--color-shadow) 24%, transparent);
@@ -529,7 +529,7 @@
   grid-template-columns: var(--chat-message-avatar-size) minmax(0, 1fr);
   gap: 12px;
   padding: 6px 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   animation: chat-message-in 180ms ease-out;
 }
 
@@ -546,7 +546,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   object-fit: cover;
 }
 
@@ -576,7 +576,7 @@
 .chat-message-continuation-time {
   align-self: start;
   color: var(--color-on-surface-variant);
-  font-size: 11px;
+  font-size: var(--text-meta);
   font-weight: 700;
   opacity: 0;
   padding-top: 3px;
@@ -602,7 +602,7 @@
 }
 
 .chat-message-body code {
-  border-radius: 5px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-high);
   padding: 1px 5px;
   font-family: var(--font-mono);
@@ -613,7 +613,7 @@
   display: inline-flex;
   align-items: center;
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   background: color-mix(in srgb, var(--color-primary) 18%, transparent);
   color: var(--color-primary);
   padding: 0 4px;
@@ -642,7 +642,7 @@
   opacity: 0;
   width: 30px;
   height: 30px;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-high);
   color: var(--color-on-surface-variant);
   cursor: pointer;
@@ -658,7 +658,7 @@
   max-width: 520px;
   overflow: hidden;
   border-left: 3px solid var(--color-primary);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-low);
 }
 
@@ -707,7 +707,7 @@
   max-height: 420px;
   width: auto;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   object-fit: contain;
 }
 
@@ -723,7 +723,7 @@
   max-height: 134px;
   margin: 8px 18px 12px;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-low);
   padding: 6px 8px;
 }
@@ -754,7 +754,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: color-mix(in srgb, var(--color-primary) 13%, transparent);
   color: var(--color-primary);
   cursor: pointer;
@@ -778,7 +778,7 @@
   align-items: center;
   justify-content: center;
   border: 2px solid transparent;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   background: color-mix(in srgb, var(--color-primary) 13%, transparent);
   color: var(--color-primary);
   cursor: pointer;
@@ -822,7 +822,7 @@
   align-items: center;
   width: 100%;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-on-surface);
   cursor: pointer;
@@ -836,7 +836,7 @@
 .chat-member img {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   object-fit: cover;
 }
 
@@ -877,7 +877,7 @@
 .chat-profile-card .profile-tile {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 76%, transparent);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-low);
   box-shadow: 0 12px 28px color-mix(in srgb, #000 18%, transparent);
 }
@@ -896,7 +896,7 @@
   height: 76px;
   margin-top: -38px;
   border: 4px solid var(--color-surface-container-low);
-  border-radius: 50%;
+  border-radius: var(--radius-avatar);
   background: var(--color-surface-container-high);
   overflow: hidden;
 }
@@ -937,7 +937,7 @@
 .chat-profile-card .profile-tile-details div {
   position: relative;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   background: color-mix(in srgb, var(--color-surface-container-high) 72%, transparent);
   padding: 8px 10px;
 }
@@ -945,7 +945,7 @@
 .chat-profile-card .profile-tile-details span {
   display: block;
   color: var(--color-on-surface-variant);
-  font-size: 10px;
+  font-size: var(--text-meta);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -988,7 +988,7 @@
   right: 10px;
   width: 42px;
   height: 2px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: linear-gradient(90deg, #fff4a8, #ffbf28);
   transform: skewX(-28deg);
   transform-origin: right center;
@@ -1006,7 +1006,7 @@
 
 .chat-profile-actions button,
 .chat-profile-actions a {
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-high);
   color: var(--color-on-surface);
   padding: 8px 10px;
@@ -1021,7 +1021,7 @@
 .chat-dm-search input {
   width: 100%;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--color-surface-container-lowest);
   color: var(--color-on-surface);
   padding: 9px 10px;
@@ -1099,7 +1099,7 @@
     width: 38px;
     min-height: 64px;
     margin-top: 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: color-mix(in srgb, var(--color-primary) 13%, transparent);
     color: var(--color-primary);
     font-size: 12px;

@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {% include "_font_assets.html" %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
@@ -135,8 +135,8 @@
                         <li>Your approximate geographic location derived from IP address, at the city or region level.</li>
                         <li>How you arrived at the Service and where you navigate within it.</li>
                     </ul>
-                    <p>Google Analytics uses cookies to distinguish unique users and sessions. The data collected is aggregated and used solely to understand usage trends and improve the Service. We do not use Google Analytics to personally identify individual users.</p>
-                    <p><strong>Google Analytics Opt-Out:</strong> You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-Out Browser Add-on</a> or by adjusting your browser's cookie settings.</p>
+                    <p>Google Analytics uses cookies to distinguish unique users and sessions. We do not load Google Analytics or permit it to set cookies unless you first choose "Accept analytics" in our consent controls. The data collected is aggregated and used solely to understand usage trends and improve the Service. We do not use Google Analytics to personally identify individual users.</p>
+                    <p><strong>Google Analytics Choice:</strong> You can reject analytics when first asked, or change and withdraw your choice at any time using the persistent "Cookie settings" control. Rejecting analytics does not limit the Service's core features.</p>
                     <p>For more information about how Google collects and processes data, visit <a href="https://policies.google.com/privacy">Google's Privacy & Terms page</a>.</p>
                 </section>
 
@@ -157,7 +157,7 @@
                             <tbody>
                                 <tr>
                                     <td><strong>Essential/Session Cookies</strong></td>
-                                    <td>Required for login, authentication, and maintaining your session. Without these, the Service cannot function properly.</td>
+                                    <td>Required for login, authentication, security, and maintaining your session. These do not require analytics consent because the Service cannot function securely without them.</td>
                                     <td>Expire when you close your browser or after your session ends.</td>
                                 </tr>
                                 <tr>
@@ -172,29 +172,30 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Analytics Cookies (Google Analytics)</strong></td>
-                                    <td>Distinguish unique users, track session information, and record how you interact with the Service.</td>
+                                    <td>With your consent only, distinguish unique users, track session information, and record how you interact with the Service.</td>
                                     <td><code>_ga</code>: 2 years; <code>_ga_*</code>: 2 years; <code>_gid</code>: 24 hours.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <h3>4.3 Third-Party Cookies</h3>
-                    <p>Google Analytics sets cookies on your device to collect usage data. These cookies are governed by Google's privacy policy. We do not allow any other third-party advertising or tracking cookies on the Service.</p>
+                    <p>Google Analytics may set cookies on your device only after you accept analytics. These cookies are governed by Google's privacy policy. We do not allow any other third-party advertising or tracking cookies on the Service.</p>
                     <h3>4.4 Managing Cookies</h3>
-                    <p>You have several options for managing cookies:</p>
+                    <p>On your first visit, our consent banner offers equally accessible options to accept or reject optional analytics. Your versioned choice and its date are stored in your browser for six months and are not synchronized to your account. If the choice expires or this consent policy changes, analytics remains off until you make a new choice.</p>
                     <ul>
+                        <li><strong>Cookie Settings:</strong> Use the persistent "Cookie settings" control on any page to change or withdraw consent. If you reject or withdraw, we disable future analytics, remove Google Analytics cookies accessible to the Service, and do not reactivate analytics unless you later accept.</li>
                         <li><strong>Browser Settings:</strong> Most browsers allow you to block or delete cookies through their settings. Blocking essential cookies will prevent the Service from functioning properly.</li>
                         <li><strong>Google Analytics Opt-Out:</strong> Install the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-Out Browser Add-on</a>.</li>
-                        <li><strong>Do Not Track:</strong> We respect your browser's "Do Not Track" (DNT) signal. If your browser sends a DNT signal, we will not load analytics cookies.</li>
+                        <li><strong>Privacy Signals:</strong> When your browser sends a Do Not Track or Global Privacy Control signal, analytics remains off unless you make an explicit choice to accept it.</li>
                     </ul>
-                    <p>Please be aware that disabling certain cookies may limit your ability to use some features of the Service.</p>
+                    <p>Disabling optional analytics does not limit your ability to use the Service. Disabling essential authentication or security storage through browser settings may prevent some features from working.</p>
                 </section>
 
                 <section id="data-retention">
                     <h2>5. Data Retention</h2>
                     <p>We retain your information for as long as your account is active or as needed to provide the Service to you:</p>
                     <ul>
-                        <li><strong>Account and User-Generated Data:</strong> Retained for as long as your account exists. When you delete your account, your data is removed as described in Section 7.</li>
+                        <li><strong>Account and User-Generated Data:</strong> Retained for as long as your account exists. When you delete your account, your data is removed as described in Section 9.</li>
                         <li><strong>Analytics Data:</strong> Google Analytics data is retained for 14 months, after which it is automatically deleted from Google's servers.</li>
                         <li><strong>Server Logs:</strong> Basic server access logs, which may include IP addresses and timestamps, are retained for up to 90 days for security and debugging purposes.</li>
                         <li><strong>Backup Data:</strong> Deleted data may persist in encrypted backups for up to 30 days before being permanently purged.</li>
@@ -215,43 +216,57 @@
 
                 <section id="your-rights-and-choices">
                     <h2>7. Your Rights and Choices</h2>
-                    <p>You have the following rights regarding your personal data:</p>
+                    <p>Depending on where you live and the law that applies, you may have some or all of the rights below. We will not discriminate against you for exercising an applicable privacy right.</p>
                     <h3>7.1 Access and Export</h3>
-                    <p>You may request a copy of all personal data we hold about you. Contact us at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> to request a data export.</p>
+                    <p>You may request confirmation that we process your personal data, access to that data, and a copy of it. Where applicable, you may request a portable, machine-readable copy of data you provided to us.</p>
                     <h3>7.2 Correction</h3>
                     <p>If any information we hold about you is inaccurate or incomplete, you can update it directly in your account settings or contact us for assistance.</p>
                     <h3>7.3 Deletion</h3>
-                    <p>You may request deletion of your account and associated data at any time. See Section 8 below for full details on how account deletion works.</p>
+                    <p>You may request deletion or erasure of your account and associated data at any time. See Section 9 below for full details on how account deletion works.</p>
                     <h3>7.4 Restriction and Objection</h3>
-                    <p>You may request that we restrict processing of your data or object to certain types of processing. Contact us to discuss your specific needs.</p>
+                    <p>Where applicable, you may ask us to restrict certain processing or object to processing based on legitimate interests, direct marketing, or other grounds recognized by law.</p>
                     <h3>7.5 Withdraw Consent</h3>
-                    <p>Where processing is based on your consent, such as analytics cookies, you may withdraw consent at any time by adjusting your browser settings or contacting us.</p>
+                    <p>Where processing is based on consent, you may withdraw it at any time. For analytics, use the persistent "Cookie settings" control. Withdrawal does not affect the lawfulness of processing completed before you withdrew consent.</p>
+                    <h3>7.6 Appeals and Other Applicable Rights</h3>
+                    <p>Some jurisdictions provide additional rights, including the right to appeal a denied privacy request, opt out of certain sales, sharing, or targeted advertising, and receive information about automated decision-making. We do not sell personal data or use it for targeted advertising. If an additional right applies to you, you may exercise it through the privacy contact below.</p>
+                    <h3>7.7 How to Exercise Your Rights</h3>
+                    <p>Email our privacy contact at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> and describe your request. We may need to verify your identity before acting. Rights may be limited by lawful exceptions, including security, fraud prevention, legal obligations, and the rights of others. We will respond within the period required by applicable law and explain any denial and available appeal process.</p>
+                </section>
+
+                <section id="complaints-to-data-protection-authority">
+                    <h2>8. Complaints to a Data Protection Authority</h2>
+                    <p>You may raise a privacy concern with us at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a>, but you are not required to contact us before complaining to a competent data protection or consumer-protection authority where the law gives you that right.</p>
+                    <ul>
+                        <li><strong>European Economic Area:</strong> You may complain to the data protection authority where you habitually live, work, or believe an infringement occurred. The <a href="https://www.edpb.europa.eu/sme-data-protection-guide/steps-individuals-can-take-against-you_en">European Data Protection Board</a> provides information about this right and EEA authorities.</li>
+                        <li><strong>United Kingdom:</strong> You may complain to the <a href="https://ico.org.uk/make-a-complaint/">Information Commissioner's Office</a>.</li>
+                        <li><strong>United States:</strong> Depending on your state and the issue, you may contact your state attorney general or consumer-protection authority.</li>
+                    </ul>
                 </section>
 
                 <section id="data-deletion-and-account-deletion">
-                    <h2>8. Data Deletion and Account Deletion</h2>
+                    <h2>9. Data Deletion and Account Deletion</h2>
                     <p>We believe you should be able to leave any service and take your data with you or have it deleted.</p>
-                    <h3>8.1 How to Delete Your Account</h3>
+                    <h3>9.1 How to Delete Your Account</h3>
                     <p>You can delete your account by:</p>
                     <ol>
                         <li><strong>In-App:</strong> Navigate to your Account Settings and select "Delete Account."</li>
                         <li><strong>By Email:</strong> Send a request to <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a> with the subject line "Account Deletion Request" from the email address associated with your account.</li>
                     </ol>
-                    <h3>8.2 What Happens When You Delete Your Account</h3>
+                    <h3>9.2 What Happens When You Delete Your Account</h3>
                     <p>Upon account deletion:</p>
                     <ul>
                         <li><strong>Immediately Deleted:</strong> Your profile information, schedules, tasks, notes, study plans, preferences, and all other user-generated content are permanently removed from our active databases.</li>
                         <li><strong>Within 30 Days:</strong> Your data is purged from encrypted backup systems.</li>
                         <li><strong>Retained Briefly:</strong> Anonymized, aggregated analytics data may remain in Google Analytics. Basic server logs containing your IP address are retained for up to 90 days for security purposes before being automatically purged.</li>
                     </ul>
-                    <h3>8.3 OAuth and Social Login</h3>
+                    <h3>9.3 OAuth and Social Login</h3>
                     <p>If you signed up using Google OAuth or another social login provider, deleting your Nest.APStudy account does not delete your account with that provider. To revoke Nest.APStudy's access to your Google account, visit your <a href="https://myaccount.google.com/permissions">Google Account Permissions page</a>. We recommend revoking access after deleting your account.</p>
-                    <h3>8.4 Exceptions</h3>
+                    <h3>9.4 Exceptions</h3>
                     <p>We may retain limited information beyond the periods described above if required by law or if necessary to prevent fraud or abuse.</p>
                 </section>
 
                 <section id="security">
-                    <h2>9. Security</h2>
+                    <h2>10. Security</h2>
                     <p>We take reasonable measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction:</p>
                     <ul>
                         <li>All data is transmitted over HTTPS with TLS encryption in transit.</li>
@@ -264,19 +279,19 @@
                 </section>
 
                 <section id="childrens-privacy">
-                    <h2>10. Children's Privacy</h2>
+                    <h2>11. Children's Privacy</h2>
                     <p>Nest.APStudy is designed for students and is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a>, and we will take steps to delete such information.</p>
                 </section>
 
                 <section id="changes-to-this-policy">
-                    <h2>11. Changes to This Policy</h2>
+                    <h2>12. Changes to This Policy</h2>
                     <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. If we make material changes, we will notify you by posting a prominent notice on the Service or by sending you an email. Your continued use of the Service after any changes constitutes your acceptance of the updated policy.</p>
                 </section>
 
                 <section id="contact-us">
-                    <h2>12. Contact Us</h2>
-                    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, your personal data, or our privacy practices, please contact us:</p>
-                    <p><strong>Email:</strong> <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a></p>
+                    <h2>13. Contact Us</h2>
+                    <p>For questions, privacy-rights requests, consent withdrawals, or complaints regarding this Privacy Policy, your personal data, or our privacy practices, contact:</p>
+                    <p><strong>Nest.APStudy Privacy Contact:</strong> <a href="mailto:derek.chen@emory.edu">derek.chen@emory.edu</a></p>
                     <p>We will respond to all privacy-related inquiries within 30 days.</p>
                 </section>
                 {% else %}

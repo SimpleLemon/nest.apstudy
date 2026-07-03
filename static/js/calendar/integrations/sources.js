@@ -380,7 +380,7 @@
                     if (!/^#[0-9a-fA-F]{6}$/.test(hexValue)) return;
                     if (saveButton) {
                         saveButton.disabled = true;
-                        saveButton.innerHTML = `<span class="inline-flex flex-col items-center justify-center gap-1 leading-none"><span class="loader" style="width:16px; height:16px;" aria-hidden="true"></span><span class="text-[10px]">Saving...</span></span>`;
+                        saveButton.innerHTML = `<span class="inline-flex flex-col items-center justify-center gap-1 leading-none"><span class="loader" style="width:16px; height:16px;" aria-hidden="true"></span><span class="text-xs">Saving...</span></span>`;
                     }
                     setCalendarColor(calendarName, hexValue);
                     queueCalendarPreferenceSave(calendarName, 0);

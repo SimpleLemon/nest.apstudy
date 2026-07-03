@@ -82,7 +82,7 @@
                 return true;
             });
             const nestSection = `
-                <div class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-[0.08em] text-on-surface-variant font-semibold">Nest</div>
+                <div class="px-3 pt-3 pb-1 text-xs uppercase tracking-[0.08em] text-on-surface-variant font-semibold">Nest</div>
                 ${buildRows(nestCalendars)}
             `;
             const otherSection = `

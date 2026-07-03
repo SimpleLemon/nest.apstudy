@@ -2,7 +2,7 @@
     --legal-nav-height: 64px;
     --legal-page-max: 1180px;
     --legal-content-max: 760px;
-    --legal-radius: 8px;
+    --legal-radius: var(--radius-control);
 }
 
 html,
@@ -63,7 +63,7 @@ body.legal-page {
     width: 32px;
     height: 32px;
     flex: 0 0 auto;
-    border-radius: 6px;
+    border-radius: var(--radius-control);
 }
 
 .legal-public-brand span {
@@ -82,7 +82,7 @@ body.legal-page {
     min-height: 40px;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     color: var(--color-shell-text-secondary, var(--color-on-surface-variant, #4b5563));
     font-size: 13px;
     font-weight: 700;
@@ -155,7 +155,7 @@ body.legal-page {
     min-height: 32px;
     align-items: center;
     border: 1px solid color-mix(in srgb, var(--color-outline-variant, #c5c3ba) 56%, transparent);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: color-mix(in srgb, var(--color-surface-container-low, #f7f6f3) 76%, transparent);
     color: var(--color-on-surface-variant, #4b4a47);
     font-size: 12px;
@@ -301,7 +301,7 @@ body.legal-page {
 
 .legal-document code {
     border: 1px solid color-mix(in srgb, var(--color-outline-variant, #c5c3ba) 50%, transparent);
-    border-radius: 6px;
+    border-radius: var(--radius-control);
     background: var(--color-surface-container-low, #f7f6f3);
     color: var(--color-on-surface, #202124);
     font-family: var(--font-mono);
@@ -370,7 +370,7 @@ body.legal-page {
     gap: 18px;
     border-top: 1px solid color-mix(in srgb, var(--color-outline-variant, #c5c3ba) 46%, transparent);
     color: color-mix(in srgb, var(--color-on-surface-variant, #4b4a47) 70%, transparent);
-    font-size: 11px;
+    font-size: var(--text-meta);
     font-weight: 700;
     line-height: 1.4;
     text-transform: uppercase;
@@ -454,7 +454,7 @@ body.legal-page {
     .legal-public-links a {
         min-width: 48px;
         min-height: 48px;
-        border-radius: 10px;
+        border-radius: var(--radius-control);
         font-size: 12px;
         padding: 0 8px;
     }

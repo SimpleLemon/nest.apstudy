@@ -60,7 +60,7 @@ body.admin-page [hidden] {
     place-items: center;
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     text-decoration: none;
 }
 
@@ -135,7 +135,7 @@ body.admin-page [hidden] {
     gap: 12px;
     min-height: 44px;
     padding: 0 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     color: var(--color-shell-text-secondary, var(--admin-muted));
     font-weight: 600;
     text-decoration: none;
@@ -156,7 +156,7 @@ body.admin-page [hidden] {
     margin-left: auto;
     min-width: 24px;
     height: 24px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     display: grid;
     place-items: center;
     padding: 0 7px;
@@ -180,7 +180,7 @@ body.admin-page [hidden] {
     width: 40px;
     height: 40px;
     flex: 0 0 auto;
-    border-radius: 50%;
+    border-radius: var(--radius-avatar);
     object-fit: cover;
     border: 1px solid var(--color-shell-border, var(--admin-border));
     background: var(--admin-surface);
@@ -298,7 +298,7 @@ body.admin-page [hidden] {
     justify-content: center;
     gap: 8px;
     min-height: 44px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     padding: 10px 18px;
     font-weight: 600;
     font-size: 14px;
@@ -331,7 +331,7 @@ body.admin-page [hidden] {
 
 .admin-alert {
     padding: 12px 16px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     margin-bottom: 18px;
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
@@ -354,7 +354,7 @@ body.admin-page [hidden] {
 .admin-card {
     background: var(--admin-panel);
     border: 1px solid var(--admin-border);
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     padding: 18px;
     box-shadow: var(--admin-shadow);
     min-width: 0;
@@ -383,7 +383,7 @@ body.admin-page [hidden] {
     --profile-banner-color: #fecae1;
     background: var(--admin-panel);
     border: 1px solid var(--admin-border);
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     box-shadow: var(--admin-shadow);
     color: var(--admin-ink);
     overflow: hidden;
@@ -405,7 +405,7 @@ body.admin-page [hidden] {
     width: 150px;
     height: 150px;
     margin-top: -75px;
-    border-radius: 50%;
+    border-radius: var(--radius-avatar);
     padding: 5px;
     background: var(--admin-panel);
     border: 1px solid var(--admin-border);
@@ -415,7 +415,7 @@ body.admin-page [hidden] {
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: 50%;
+    border-radius: var(--radius-avatar);
     object-fit: cover;
 }
 
@@ -448,7 +448,7 @@ body.admin-page [hidden] {
 .admin-profile-overview .profile-tile-details div {
     min-width: 0;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-surface);
     border: 1px solid var(--admin-border);
 }
@@ -456,7 +456,7 @@ body.admin-page [hidden] {
 .admin-profile-overview .profile-tile-details span {
     display: block;
     color: var(--admin-muted);
-    font-size: 11px;
+    font-size: var(--text-meta);
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -521,7 +521,7 @@ body.admin-page [hidden] {
 
 .admin-search input,
 .admin-search select {
-    border-radius: 10px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     background: var(--admin-surface);
     color: var(--admin-ink);
@@ -540,7 +540,7 @@ body.admin-page [hidden] {
     width: 100%;
     border-collapse: collapse;
     background: var(--admin-panel);
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     overflow: hidden;
     border: 1px solid var(--admin-border);
     table-layout: auto;
@@ -646,7 +646,7 @@ body.admin-page [hidden] {
         min-width: max(100%, 12rem);
         max-width: min(24rem, 70vw);
         padding: 8px 10px;
-        border-radius: 8px;
+        border-radius: var(--radius-control);
         border: 1px solid var(--admin-border);
         background: var(--admin-panel-strong);
         color: var(--admin-ink);
@@ -716,7 +716,7 @@ body.admin-page [hidden] {
     display: inline-flex;
     align-items: center;
     padding: 4px 8px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
     font-weight: 600;
     background: var(--admin-accent-soft);
@@ -747,7 +747,7 @@ body.admin-page [hidden] {
     justify-content: center;
     min-height: 44px;
     padding: 8px 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--admin-border);
     background: transparent;
     text-decoration: none;
@@ -780,7 +780,7 @@ button.admin-tab {
     gap: 4px;
     margin-top: 14px;
     padding: 4px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
     max-width: 100%;
@@ -798,7 +798,7 @@ button.admin-tab {
     line-height: 1.2;
     min-height: 40px;
     padding: 8px 16px;
-    border-radius: 9px;
+    border-radius: var(--radius-control);
     cursor: pointer;
     transition: background-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
     white-space: nowrap;
@@ -875,7 +875,7 @@ button.admin-tab {
     flex: 1 1 auto;
     min-width: 0;
     padding: 0 14px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
     min-height: 44px;
@@ -919,7 +919,7 @@ button.admin-tab {
     gap: 8px;
     min-height: 44px;
     padding: 0 14px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
     color: var(--admin-ink);
@@ -947,7 +947,7 @@ button.admin-tab {
     min-width: 22px;
     height: 22px;
     padding: 0 6px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--admin-panel-strong);
     color: var(--admin-muted);
     font-size: 12px;
@@ -961,7 +961,7 @@ button.admin-tab {
     z-index: 30;
     min-width: 220px;
     padding: 8px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel-strong);
     box-shadow: var(--admin-shadow);
@@ -976,7 +976,7 @@ button.admin-tab {
     align-items: center;
     gap: 10px;
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     color: var(--admin-ink);
     font-size: 14px;
     font-weight: 500;
@@ -1025,7 +1025,7 @@ button.admin-tab {
 .admin-auth-users-per-page select {
     min-height: 36px;
     padding: 6px 28px 6px 10px;
-    border-radius: 10px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
     color: var(--admin-ink);
@@ -1051,7 +1051,7 @@ button.admin-tab {
     font-weight: 600;
     min-height: 36px;
     padding: 6px 10px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     cursor: pointer;
 }
 
@@ -1072,7 +1072,7 @@ button.admin-tab {
     min-width: 34px;
     min-height: 34px;
     padding: 0 8px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-panel-strong);
     color: var(--admin-ink);
     font-weight: 700;
@@ -1087,7 +1087,7 @@ button.admin-tab {
 .admin-form input[type="text"],
 .admin-form input[type="number"] {
     min-height: 44px;
-    border-radius: 10px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     padding: 10px 12px;
     background: var(--admin-surface);
@@ -1123,7 +1123,7 @@ button.admin-tab {
     overflow-wrap: anywhere;
     word-break: break-word;
     background: var(--admin-surface);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     padding: 12px;
     border: 1px dashed var(--admin-border);
     font-family: var(--font-mono);
@@ -1133,7 +1133,7 @@ button.admin-tab {
 .admin-note-content {
     white-space: pre-wrap;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     background: var(--admin-surface);
     border: 1px solid var(--admin-border);
     font-family: var(--font-mono);
@@ -1254,7 +1254,7 @@ button.admin-tab {
 }
 
 .admin-ring-label {
-    font-size: 11px;
+    font-size: var(--text-meta);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--admin-muted);
@@ -1299,14 +1299,14 @@ button.admin-tab {
     min-height: 72px;
     justify-content: center;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     background: var(--admin-surface);
 }
 
 .admin-status-chip span {
     color: var(--admin-muted);
-    font-size: 11px;
+    font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -1370,7 +1370,7 @@ button.admin-tab {
 }
 
 .admin-control-tile {
-    border-radius: 14px;
+    border-radius: var(--radius-card);
     min-height: 72px;
     width: 100%;
     padding: 16px 20px;
@@ -1403,7 +1403,7 @@ button.admin-tab {
     width: 100%;
     min-height: 44px;
     padding: 10px 12px;
-    border-radius: 10px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     background: var(--admin-surface);
     color: var(--admin-ink);
@@ -1443,7 +1443,7 @@ button.admin-tab {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     border: 1px solid var(--admin-border);
     background: var(--admin-surface);
 }
@@ -1501,7 +1501,7 @@ button.admin-tab {
     gap: 8px;
     min-height: 44px;
     padding: 0 14px;
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     border: 1px solid var(--admin-border);
     background: var(--admin-panel);
     color: var(--admin-ink);
@@ -1548,7 +1548,7 @@ button.admin-tab {
     margin: 0;
     padding: 8px;
     border: 1px solid var(--admin-border);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     background: var(--admin-panel-strong);
     box-shadow: var(--admin-shadow);
 }
@@ -1567,7 +1567,7 @@ button.admin-tab {
     width: 100%;
     padding: 10px 12px;
     border: 0;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: transparent;
     color: var(--admin-ink);
     font: inherit;
@@ -1680,7 +1680,7 @@ button.admin-tab {
     left: 20%;
     right: 20%;
     height: 4px;
-    border-radius: 0 0 999px 999px;
+    border-radius: 0 0 var(--radius-pill) var(--radius-pill);
     background: transparent;
 }
 
@@ -1734,7 +1734,7 @@ button.admin-tab {
 .admin-analytics-source {
     margin: 0;
     color: var(--admin-muted);
-    font-size: 10px;
+    font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -1871,7 +1871,7 @@ button.admin-tab {
 .admin-analytics-legend-swatch {
     width: 10px;
     height: 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     flex: 0 0 auto;
 }
 
@@ -1973,7 +1973,7 @@ button.admin-tab {
 
 .admin-analytics-bar-track {
     height: 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--admin-panel-strong);
     overflow: hidden;
 }
@@ -2003,7 +2003,7 @@ button.admin-tab {
     min-width: 0;
     padding: 12px;
     border: 1px solid var(--admin-border);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-surface);
 }
 
@@ -2080,7 +2080,7 @@ button.admin-tab {
 
 .admin-analytics-detail-header span {
     color: var(--admin-muted);
-    font-size: 10px;
+    font-size: var(--text-meta);
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -2103,7 +2103,7 @@ button.admin-tab {
 .admin-analytics-range-dropdown--compact .admin-analytics-range-trigger {
     min-height: 34px;
     padding: 8px 10px;
-    font-size: 11px;
+    font-size: var(--text-meta);
 }
 
 .admin-analytics-range-dropdown--compact .admin-analytics-range-menu {
@@ -2112,7 +2112,7 @@ button.admin-tab {
 
 .admin-analytics-range-dropdown--compact .admin-analytics-range-option {
     padding: 8px 10px;
-    font-size: 11px;
+    font-size: var(--text-meta);
 }
 
 .admin-analytics-country-layout {
@@ -2225,7 +2225,7 @@ button.admin-tab {
     place-items: center;
     color: var(--admin-muted);
     border: 1px dashed var(--admin-border);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: color-mix(in srgb, var(--admin-panel) 70%, transparent);
 }
 
@@ -2250,13 +2250,13 @@ button.admin-tab {
     gap: 2px;
     padding: 12px;
     border: 1px solid var(--admin-border);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-surface);
 }
 
 .admin-analytics-ga4-grid span {
     color: var(--admin-muted);
-    font-size: 11px;
+    font-size: var(--text-meta);
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -2290,7 +2290,7 @@ button.admin-tab {
 .admin-inline-notice {
     margin: 0 0 14px;
     padding: 10px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-accent-soft);
     color: var(--admin-accent);
     font-weight: 700;
@@ -2331,7 +2331,7 @@ button.admin-tab {
 .admin-select-field select {
     min-height: 42px;
     border: 1px solid var(--admin-border);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     padding: 0 34px 0 12px;
     background: var(--admin-surface);
     color: var(--admin-ink);
@@ -2354,7 +2354,7 @@ button.admin-tab {
 
 .admin-track-group {
     border: 1px solid var(--admin-border);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: var(--admin-surface);
     overflow: hidden;
 }
@@ -2560,7 +2560,7 @@ button.admin-tab {
     }
 
     .admin-card {
-        border-radius: 12px;
+        border-radius: var(--radius-card);
         padding: 16px;
     }
 
@@ -2695,7 +2695,7 @@ button.admin-tab {
         display: grid;
         overflow: hidden;
         border: 1px solid var(--admin-border);
-        border-radius: 12px;
+        border-radius: var(--radius-card);
         background: var(--admin-panel);
     }
 

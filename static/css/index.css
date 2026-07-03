@@ -7,7 +7,7 @@
 .calendar-today-marker-month {
     box-sizing: border-box;
     border: 1px solid #ef4444;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     min-height: 1.7rem;
     min-width: 1.7rem;
     padding: 0 0.45rem;
@@ -62,7 +62,7 @@
 
 .calendar-today-marker-week::before {
     border: 1px solid #ef4444;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     content: "";
     height: 3.25rem;
     left: 50%;

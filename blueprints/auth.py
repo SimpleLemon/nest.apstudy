@@ -59,11 +59,11 @@ LOGIN_CSP = "; ".join([
     "base-uri 'self'",
     "object-src 'none'",
     "frame-ancestors 'none'",
-    "script-src 'self' https://cdn.jsdelivr.net https://static.cloudflareinsights.com",
+    "script-src 'self' https://cdn.jsdelivr.net",
     "style-src 'self' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' https://resources.apstudy.org data:",
-    "connect-src 'self' https://nyc.cloud.appwrite.io https://cloudflareinsights.com https://static.cloudflareinsights.com",
+    "connect-src 'self' https://nyc.cloud.appwrite.io",
     "form-action 'self'",
 ])
 

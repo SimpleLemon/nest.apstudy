@@ -65,6 +65,69 @@ class _TemplateParser(HTMLParser):
 
 
 class AccessibilityBaselineTests(unittest.TestCase):
+    def test_full_templates_load_self_hosted_shared_fonts(self):
+        full_templates = [
+            template for template in TEMPLATES.glob("*.html")
+            if "<!DOCTYPE html>" in template.read_text()
+        ]
+        self.assertTrue(full_templates)
+        for template in full_templates:
+            source = template.read_text()
+            self.assertIn('{% include "_font_assets.html" %}', source, template.name)
+            self.assertNotIn("family=Inter", source, template.name)
+            self.assertNotIn("family=Space+Grotesk", source, template.name)
+
+        font_css = (ROOT / "static/css/fonts.css").read_text()
+        for family in ("Inter", "Space Grotesk", "IBM Plex Mono"):
+            self.assertIn(f'font-family: "{family}"', font_css)
+        for asset in (
+            "inter-400.woff2", "inter-500.woff2", "inter-600.woff2", "inter-700.woff2",
+            "space-grotesk-latin.woff2", "ibm-plex-mono-400.woff2", "ibm-plex-mono-500.woff2",
+        ):
+            self.assertTrue((ROOT / "static/fonts" / asset).is_file(), asset)
+
+    def test_first_party_css_uses_visual_system_contract(self):
+        global_css = (ROOT / "static/css/global.css").read_text()
+        for token in (
+            "--radius-control: 6px", "--radius-card: 12px", "--radius-panel: 18px",
+            "--radius-dialog: 24px", "--radius-pill: 999px", "--radius-avatar: 50%",
+            "--text-meta: 12px", "--text-compact: 14px", "--text-body: 16px",
+            "--content-reading: 760px", "--content-standard: 1120px", "--content-wide: 1280px",
+        ):
+            self.assertIn(token, global_css)
+        for primitive in (".ui-section", ".ui-card", ".ui-panel", ".ui-status", ".ui-meta"):
+            self.assertIn(primitive, global_css)
+
+        excluded = {"tailwind.css", "themes.css", "fonts.css"}
+        literal_radii = []
+        undersized_text = []
+        for stylesheet in (ROOT / "static/css").glob("*.css"):
+            if stylesheet.name in excluded:
+                continue
+            source = stylesheet.read_text()
+            literal_radii.extend(
+                f"{stylesheet.name}: {match.group(0)}"
+                for match in re.finditer(r"border-radius:\s*[^;]*(?:px|rem)", source)
+            )
+            for match in re.finditer(r"font-size:\s*([0-9.]+)(px|rem)", source):
+                value = float(match.group(1)) * (16 if match.group(2) == "rem" else 1)
+                if value < 12:
+                    undersized_text.append(f"{stylesheet.name}: {match.group(0)}")
+        self.assertEqual([], literal_radii)
+        self.assertEqual([], undersized_text)
+
+    def test_landing_has_distinct_ctas_and_accessible_preview_contract(self):
+        template = (TEMPLATES / "landing.html").read_text()
+        for label in (
+            "Log in", "Open Nest", "Start planning", "Go to dashboard",
+            "View dashboard", "Explore calendar", "Organize tasks", "Open workspace",
+            "Create my workspace", "Continue in Nest",
+        ):
+            self.assertIn(label, template)
+        self.assertEqual(4, len(re.findall(r'class="landing-preview [^"]+" aria-hidden="true"', template)))
+        self.assertIn('class="workflow-sequence"', template)
+        self.assertNotIn('class="capability-grid"', template)
+
     def test_semantic_theme_pairs_meet_normal_text_contrast(self):
         source = (ROOT / "static/css/themes.css").read_text()
         root_values = dict(re.findall(r"(--[\w-]+):\s*(#[0-9a-fA-F]{6})", source.split('[data-theme="obsidian-dark"]', 1)[0]))

@@ -7,7 +7,7 @@
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or 'system-match' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
     {% if viewer_authenticated %}{% include '_sidebar_init.html' %}{% endif %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    {% include "_font_assets.html" %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">

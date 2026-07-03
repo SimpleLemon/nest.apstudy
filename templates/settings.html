@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {% include "_font_assets.html" %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <script src="{{ url_for('static', filename='js/core/global-chrome.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js', v=settings_assets_version) }}" defer></script>
@@ -44,19 +44,12 @@
     <meta name="twitter:title" content="Nest University | APStudy">
     <meta name="twitter:description" content="Settings for your APStudy account, data, and preferences." />
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NT330ZX5L"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-0NT330ZX5L');
-    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <style>
         .settings-theme-choice::after { display: none !important; }
     </style>
 </head>
-<body class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-settings-page="true" data-probe-appwrite-session="false">
+<body class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-settings-page="true" data-probe-appwrite-session="false" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}

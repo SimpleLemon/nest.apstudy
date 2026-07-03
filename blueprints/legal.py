@@ -26,7 +26,7 @@ LEGAL_DOCUMENTS = {
             'Nest.APStudy ("we," "us," "our," or "the Service") collects, how we use it, '
             "and what choices you have."
         ),
-        "last_updated": "June 2025",
+        "last_updated": "July 2, 2026",
         "sections": [
             ("information-we-collect", "Information We Collect"),
             ("how-we-use-your-information", "How We Use Your Information"),
@@ -35,6 +35,7 @@ LEGAL_DOCUMENTS = {
             ("data-retention", "Data Retention"),
             ("who-we-share-data-with", "Who We Share Data With"),
             ("your-rights-and-choices", "Your Rights and Choices"),
+            ("complaints-to-data-protection-authority", "Complaints to a Data Protection Authority"),
             ("data-deletion-and-account-deletion", "Data Deletion and Account Deletion"),
             ("security", "Security"),
             ("childrens-privacy", "Children's Privacy"),
