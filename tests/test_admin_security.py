@@ -132,6 +132,40 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("May 25, 2026 1:00 AM", html)
         self.assertIn("@testuser", html)
 
+    def test_admin_detail_overview_renders_human_readable_account_summary(self):
+        account_doc = {
+            "$id": "account-1",
+            "name": "Test User",
+            "email": "user@example.com",
+            "emailVerification": True,
+            "labels": ["beta", "staff"],
+            "prefs": {"theme": "dark"},
+            "updatedAt": "2026-05-25T02:00:00Z",
+        }
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "get_row_safe", return_value=self.user_doc), \
+                    patch.object(admin, "_fetch_account", return_value=account_doc), \
+                    patch.object(admin, "_safe_count_rows", return_value=0), \
+                    patch.object(admin, "count_calendar_rows", return_value=0), \
+                    patch.object(admin, "_chat_count_summary", return_value={
+                        "chat_messages": 0,
+                        "deleted_chat_messages": 0,
+                        "dm_threads": 0,
+                        "chat_blocks": 0,
+                    }), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/user-1?section=overview")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Appwrite Account", html)
+        self.assertIn("Email verified", html)
+        self.assertIn("Yes", html)
+        self.assertIn("beta, staff", html)
+        self.assertIn("Raw Appwrite payload", html)
+
     def test_admin_requests_renders_csrf_tokens(self):
         requests_rows = [{
             "$id": "request-1",

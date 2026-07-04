@@ -434,6 +434,74 @@ def _fetch_account(user_id):
     return _account_to_dict(account)
 
 
+def _humanize_admin_key(key):
+    text = str(key or "").replace("_", " ").replace("-", " ")
+    text = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", text)
+    return text.strip().title()
+
+
+def _format_admin_value(value):
+    if value in (None, ""):
+        return None
+    if value is True:
+        return "Yes"
+    if value is False:
+        return "No"
+    if isinstance(value, (int, float)):
+        return str(value)
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        if not value:
+            return "None"
+        if all(isinstance(item, (str, int, float, bool)) for item in value):
+            preview = ", ".join(str(item) for item in value[:6])
+            if len(value) > 6:
+                preview = f"{preview}…"
+            return preview
+        return f"{len(value)} items"
+    if isinstance(value, dict):
+        parts = []
+        for key in ("$id", "id", "name", "label", "status", "email", "provider", "type"):
+            item = value.get(key)
+            if item not in (None, ""):
+                parts.append(f"{_humanize_admin_key(key)}: {item}")
+        if parts:
+            return "; ".join(parts)
+        return f"{len(value)} fields"
+    return str(value)
+
+
+def _account_summary_rows(account_data):
+    if not account_data:
+        return []
+
+    fields = [
+        ("$id", "Account ID"),
+        ("name", "Name"),
+        ("email", "Email"),
+        ("status", "Status"),
+        ("emailVerification", "Email verified"),
+        ("phone", "Phone"),
+        ("phoneVerification", "Phone verified"),
+        ("labels", "Labels"),
+        ("prefs", "Preferences"),
+        ("passwordUpdate", "Password updated"),
+        ("registration", "Registered"),
+        ("updatedAt", "Updated"),
+    ]
+
+    rows = []
+    for key, label in fields:
+        value = account_data.get(key)
+        formatted = _format_admin_value(value)
+        if formatted in (None, ""):
+            continue
+        rows.append({"label": label, "value": formatted})
+
+    return rows
+
+
 def _normalize_oauth_provider(user_doc):
     provider = str((user_doc or {}).get("provider") or "").strip().lower()
     if provider in {"google", "discord", "github"}:
@@ -1851,6 +1919,7 @@ def admin_detail(user_id):
         profile=_admin_profile_payload(user_doc),
         user_doc=user_doc,
         account_data=account_data,
+        account_summary_rows=_account_summary_rows(account_data),
         overview_counts=overview_counts,
         section=section,
         section_data=section_data,

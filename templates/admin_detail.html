@@ -193,7 +193,22 @@
                 {% if account_data %}
                     <div class="admin-card">
                         <h2 class="admin-title">Appwrite Account</h2>
-                        <pre class="admin-code-block">{{ account_data | tojson }}</pre>
+                        {% if account_summary_rows %}
+                            <div class="admin-grid">
+                                {% for row in account_summary_rows %}
+                                    <div class="admin-field">
+                                        <span class="admin-field-label">{{ row.label }}</span>
+                                        <span class="admin-field-value">{{ row.value }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>No account metadata found.</p>
+                        {% endif %}
+                        <details class="admin-section">
+                            <summary>Raw Appwrite payload</summary>
+                            <pre class="admin-code-block">{{ account_data | tojson(indent=2) }}</pre>
+                        </details>
                     </div>
                 {% endif %}
 

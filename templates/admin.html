@@ -155,6 +155,7 @@
         </section>
     </main>
 
+    <script src="{{ url_for('static', filename='js/admin-system.js') }}"></script>
     <script>
         (() => {
             const endpoint = "{{ url_for('admin.admin_system_status') }}";
@@ -296,6 +297,15 @@
                     if (payload.stdout) console.log(payload.stdout);
                     if (payload.stderr) console.warn(payload.stderr);
                     console.groupEnd();
+                    if (payload.restart_scheduled) {
+                        setNotice("Git pull completed. Waiting for Nest to restart…");
+                        await window.AdminSystem.waitForRestart({
+                            endpoint,
+                            restartDelaySeconds: payload.restart_delay_seconds,
+                        });
+                        window.location.reload();
+                        return;
+                    }
                     setNotice("Git pull completed. Output was written to the browser console.");
                 } catch (error) {
                     console.error("Admin Git Pull failed", error);
