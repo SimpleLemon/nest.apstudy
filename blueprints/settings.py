@@ -44,6 +44,12 @@ from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
 from services import discord_bridge
 from services.calendar_store import delete_calendar_rows_by_user
+from services.calendar_urls import (
+    MAX_OTHER_CALENDAR_URLS,
+    iter_valid_other_calendar_urls as _iter_valid_other_calendar_urls,
+    load_other_calendar_urls as _load_other_calendar_urls,
+    normalize_calendar_url as _normalize_calendar_url,
+)
 from services.user_cleanup import delete_user_data
 from services.universities import school_payload
 
@@ -53,7 +59,6 @@ logger = logging.getLogger(__name__)
 CANVAS_CALENDAR_HOST_PREFIX = "canvas."
 CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
 CANVAS_CALENDAR_PATH_PREFIXES = ("/feeds/calendar", "/feeds/calendars")
-MAX_OTHER_CALENDAR_URLS = 10
 DEFAULT_BANNER_COLOR = "#fecae1"
 MAX_AVATAR_BYTES = 10 * 1024 * 1024
 ALLOWED_AVATAR_MIME_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
@@ -451,38 +456,6 @@ def delete_account():
     return jsonify({"status": "ok"})
 
 
-def _normalize_calendar_url(url):
-    """Return a normalized URL string for duplicate checks, or None if invalid."""
-    if not isinstance(url, str):
-        return None
-
-    raw = url.strip()
-    if not raw:
-        return None
-
-    parsed = urlparse(raw)
-    scheme = parsed.scheme.lower()
-    if scheme == "webcal":
-        scheme = "https"
-
-    if scheme not in {"http", "https"}:
-        return None
-
-    if not parsed.netloc:
-        return None
-
-    normalized_path = (parsed.path or "").rstrip("/")
-    normalized = urlunparse((
-        scheme,
-        parsed.netloc.lower(),
-        normalized_path,
-        "",
-        parsed.query,
-        "",
-    ))
-    return normalized
-
-
 def _normalize_canvas_calendar_url(url):
     """Return a normalized Canvas calendar URL, or None if invalid."""
     if not isinstance(url, str):
@@ -518,26 +491,6 @@ def _normalize_canvas_calendar_url(url):
     ))
 
 
-def _load_other_calendar_urls(settings):
-    """Load and sanitize persisted optional calendar URLs from JSON text."""
-    if not settings or not settings.get("other_ical_urls_json"):
-        return []
-
-    try:
-        parsed = json.loads(settings.get("other_ical_urls_json"))
-    except json.JSONDecodeError:
-        return []
-
-    if not isinstance(parsed, list):
-        return []
-
-    urls = []
-    for item in parsed:
-        if isinstance(item, str) and item.strip():
-            urls.append(item.strip())
-    return urls[:MAX_OTHER_CALENDAR_URLS]
-
-
 def _validate_other_calendar_urls(other_urls, canvas_url):
     """Validate optional external calendar links and prevent duplicates."""
     if other_urls is None:
@@ -570,7 +523,7 @@ def _validate_other_calendar_urls(other_urls, canvas_url):
             raise ValueError("Duplicate optional calendar links are not allowed.")
 
         seen.add(normalized)
-        cleaned.append(value)
+        cleaned.append(normalized)
 
     if len(cleaned) > MAX_OTHER_CALENDAR_URLS:
         raise ValueError(f"You can add up to {MAX_OTHER_CALENDAR_URLS} optional calendar links.")

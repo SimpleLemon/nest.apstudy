@@ -10,7 +10,7 @@ import hashlib
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, date as date_type, timezone
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin
 
 import icalendar
 import requests as http_requests
@@ -28,6 +28,7 @@ from services.calendar_store import (
     list_calendar_rows_all,
     update_calendar_row,
 )
+from services.calendar_urls import normalize_calendar_url
 from services.feed_diff import diff_events
 from services.outbound_http import redacted_url, require_public_http_url
 
@@ -171,26 +172,7 @@ def _normalize_feed_url(feed_url):
     """Normalize feed URLs to a fetchable HTTPS URL."""
     if feed_url is None:
         return ""
-    normalized = str(feed_url).strip()
-    if not normalized:
-        return ""
-    lower = normalized.lower()
-    if lower.startswith("webcal://"):
-        normalized = "https://" + normalized[len("webcal://"):]
-    elif lower.startswith("http://"):
-        normalized = "https://" + normalized[len("http://"):]
-
-    parsed = urlparse(normalized)
-    if parsed.scheme and parsed.netloc:
-        return urlunparse((
-            parsed.scheme.lower(),
-            parsed.netloc.lower(),
-            (parsed.path or "").rstrip("/"),
-            "",
-            parsed.query,
-            "",
-        ))
-    return normalized
+    return normalize_calendar_url(feed_url) or ""
 
 
 def _feed_url_hash(feed_url):

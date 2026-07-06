@@ -29,8 +29,8 @@ from appwrite_helpers import (
     parse_datetime,
     update_row_safe,
 )
+from services.calendar_urls import iter_valid_other_calendar_urls, load_other_calendar_urls
 from blueprints.settings import (
-    _load_other_calendar_urls,
     _normalize_calendar_url,
     _normalize_canvas_calendar_url,
     _settings_defaults,
@@ -347,16 +347,7 @@ def _configured_feed_urls(settings):
     canvas_url = settings.get("canvas_ical_url")
     if canvas_url:
         urls.append(canvas_url.strip())
-    other_urls = settings.get("other_ical_urls_json")
-    if other_urls:
-        try:
-            extras = json.loads(other_urls)
-            if isinstance(extras, list):
-                for item in extras:
-                    if isinstance(item, str) and item.strip():
-                        urls.append(item.strip())
-        except json.JSONDecodeError:
-            pass
+    urls.extend(load_other_calendar_urls(settings))
     return urls
 
 
@@ -403,8 +394,7 @@ def _configured_feed_sources(settings, cache_events=None, preferences=None, feed
             "legacy_names": ["Canvas"],
         })
 
-    other_urls = _load_other_calendar_urls(settings)
-    for url in other_urls:
+    for raw_url, url in iter_valid_other_calendar_urls(settings):
         feed_hash = _feed_url_hash(url)
         raw_feed_hash = _raw_feed_url_hash(url)
         label_counts = labels_by_hash.get(feed_hash)
@@ -416,7 +406,7 @@ def _configured_feed_sources(settings, cache_events=None, preferences=None, feed
         if label_counts:
             default_name = default_name or label_counts.most_common(1)[0][0]
         default_name = _normalize_source_label(default_name) or _url_fallback_label(url)
-        legacy_source_id = _legacy_feed_source_id(url)
+        legacy_source_id = _legacy_feed_source_id(raw_url)
         legacy_names = [default_name]
         if legacy_source_id != _feed_source_id(url):
             legacy_names.append(legacy_source_id)
@@ -859,7 +849,7 @@ def _settings_payload_for_source_update(settings, source_id, next_url):
         raise ValueError("No calendar settings found.")
 
     current_canvas_url = (settings.get("canvas_ical_url") or "").strip()
-    other_urls = _load_other_calendar_urls(settings)
+    other_urls = load_other_calendar_urls(settings)
 
     if source_id == CANVAS_SOURCE_ID:
         normalized_canvas = _normalize_canvas_calendar_url(next_url)

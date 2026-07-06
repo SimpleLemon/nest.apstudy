@@ -36,6 +36,7 @@ from appwrite_helpers import (
     parse_datetime,
 )
 from services.calendar_store import first_calendar_row
+from services.calendar_urls import load_other_calendar_urls
 from services.app_config import (
     COURSE_TRACKING_REFRESH_INTERVAL_CHOICES,
     get_course_tracking_refresh_minutes,
@@ -196,18 +197,7 @@ def _configured_feed_urls(settings):
     canvas_url = settings.get("canvas_ical_url")
     if canvas_url:
         urls.append(canvas_url.strip())
-
-    other_urls = settings.get("other_ical_urls_json")
-    if other_urls:
-        try:
-            extras = json.loads(other_urls)
-            if isinstance(extras, list):
-                for item in extras:
-                    if isinstance(item, str) and item.strip():
-                        urls.append(item.strip())
-        except json.JSONDecodeError:
-            pass
-
+    urls.extend(load_other_calendar_urls(settings))
     return urls
 
 

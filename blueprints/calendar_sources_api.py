@@ -11,6 +11,7 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import format_datetime, update_row_safe
 from services.calendar_store import list_calendar_rows_all
+from services.calendar_urls import load_other_calendar_urls
 from blueprints.calendar_api import (
     DEFAULT_CALENDAR_COLOR,
     DEFAULT_LOCAL_SOURCE_NAME,
@@ -25,7 +26,6 @@ from blueprints.calendar_api import (
     _load_calendar_feed_metadata,
     _load_calendar_preferences,
     _load_local_calendar_sources,
-    _load_other_calendar_urls,
     _normalize_color,
     _normalize_display_name,
     _update_local_calendar_source_payload,
@@ -125,7 +125,7 @@ def create_url_calendar_source():
     try:
         settings = _ensure_user_settings(user_id)
         current_canvas_url = (settings.get("canvas_ical_url") or "").strip()
-        other_urls = _load_other_calendar_urls(settings)
+        other_urls = load_other_calendar_urls(settings)
         validated_other_urls = _validate_other_calendar_urls(other_urls + [raw_url], current_canvas_url)
         new_url = validated_other_urls[-1]
         settings = update_row_safe(
