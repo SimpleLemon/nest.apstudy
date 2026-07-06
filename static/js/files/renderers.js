@@ -2,7 +2,10 @@
 (() => {
     const {
         escapeHtml,
+        fileExtensionBadgeTone,
+        fileExtensionLabel,
         fileIcon,
+        fileIconForUpload,
         formatBytes,
         formatDateTime,
         formatFileStatus,
@@ -52,30 +55,38 @@
     }
 
     function uploadItemHtml(item, allowedExpiry) {
+        const badgeTone = fileExtensionBadgeTone(item.file);
+        const badgeLabel = fileExtensionLabel(item.file);
+        const iconName = fileIconForUpload(item.file);
         return `
             <article class="files-selected-item" data-upload-id="${escapeHtml(item.id)}">
-                <label class="files-field">
-                    <span>Filename</span>
-                    <input type="text" data-upload-name value="${escapeHtml(item.name)}" maxlength="255">
-                </label>
-                <span class="files-upload-size">${escapeHtml(formatBytes(item.file.size))}</span>
+                <div class="files-upload-file-row">
+                    <div class="files-upload-file-preview">
+                        <span class="material-symbols-outlined files-upload-file-icon" aria-hidden="true">${escapeHtml(iconName)}</span>
+                        <span class="files-upload-file-badge files-upload-file-badge--${escapeHtml(badgeTone)}">${escapeHtml(badgeLabel)}</span>
+                    </div>
+                    <div class="files-upload-file-main">
+                        <input type="text" class="files-upload-filename" data-upload-name value="${escapeHtml(item.name)}" maxlength="255" aria-label="Filename">
+                        <span class="files-upload-size">${escapeHtml(formatBytes(item.file.size))}</span>
+                    </div>
+                    <button class="files-upload-remove" type="button" data-upload-remove aria-label="Remove ${escapeHtml(item.name)}">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </div>
                 <div class="files-selected-controls">
-                    <label class="files-field">
+                    <label class="files-field files-field-compact">
                         <span>Visibility</span>
                         <select data-upload-visibility>
                             <option value="private" ${item.visibility === "private" ? "selected" : ""}>Private</option>
                             <option value="public" ${item.visibility === "public" ? "selected" : ""}>Public link</option>
                         </select>
                     </label>
-                    <label class="files-field">
+                    <label class="files-field files-field-compact">
                         <span>Expires</span>
                         <select data-upload-expiry>
                             ${allowedExpiry.map((days) => `<option value="${days}" ${String(days) === String(item.expiryDays) ? "selected" : ""}>${days} day${Number(days) === 1 ? "" : "s"}</option>`).join("")}
                         </select>
                     </label>
-                    <button class="files-icon-button" type="button" data-upload-remove aria-label="Remove ${escapeHtml(item.name)}">
-                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
-                    </button>
                 </div>
             </article>
         `;

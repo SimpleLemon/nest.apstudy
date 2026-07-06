@@ -115,7 +115,9 @@
             }
             for (const item of state.uploadItems) {
                 if (!item.name.trim()) {
-                    notify("Filename cannot be empty.", "error", { modalError: els.uploadError });
+                    const row = els.selectedList?.querySelector(`[data-upload-id="${item.id}"]`);
+                    const nameInput = row?.querySelector("[data-upload-name]");
+                    notify("Filename cannot be empty.", "error", { modalError: els.uploadError, field: nameInput });
                     return;
                 }
                 if (item.file.size > maxFileSizeBytes) {

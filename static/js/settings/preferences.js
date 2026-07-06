@@ -17,7 +17,6 @@
       getToggleState,
       normalizeSidebarDefault,
       normalizeThemeValue,
-      resolveLocalTimezone,
       setToggleState,
       showToast,
     } = callbacks;
@@ -45,16 +44,6 @@
           applyThemePreference(themeVal);
           syncThemeChoices();
         });
-      });
-    }
-
-    function bindTimezoneHelper() {
-      elements.useCurrentTimezone?.addEventListener('click', () => {
-        if (!elements.timezone) {
-          return;
-        }
-        elements.timezone.value = resolveLocalTimezone();
-        showToast('Timezone updated from your device.', 'success');
       });
     }
 
@@ -130,7 +119,6 @@
 
     return {
       bindThemeChoiceButtons,
-      bindTimezoneHelper,
       savePreferences,
       syncThemeControls,
       syncToggleControls,

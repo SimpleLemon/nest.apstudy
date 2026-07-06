@@ -11,7 +11,8 @@
         notesEmptySubtitle: document.getElementById('notes-empty-subtitle'),
         notesSectionTitle: document.getElementById('notes-section-title'),
         rootBreadcrumb: document.getElementById('notes-root-breadcrumb'),
-        breadcrumbSeparator: document.getElementById('notes-breadcrumb-separator'),
+        breadcrumbSeparatorItem: document.getElementById('notes-breadcrumb-separator-item'),
+        folderBreadcrumbItem: document.getElementById('notes-folder-breadcrumb-item'),
         folderBreadcrumb: document.getElementById('notes-folder-breadcrumb'),
         viewLabel: document.getElementById('notes-view-label'),
         viewMenu: document.getElementById('notes-view-menu'),
@@ -123,16 +124,22 @@
         els.alert.classList.remove('notes-alert-error');
     }
 
-    function showFormError(element, message) {
+    function showFormError(element, message, field) {
         if (!element) return;
         element.textContent = message;
         element.hidden = false;
+        if (field) {
+            window.APStudyFormField?.markInvalid?.(field, { focus: false });
+        }
     }
 
-    function clearFormError(element) {
+    function clearFormError(element, field) {
         if (!element) return;
         element.textContent = '';
         element.hidden = true;
+        if (field) {
+            window.APStudyFormField?.clearInvalid?.(field);
+        }
     }
 
     function setLoadingState(isLoading, label = 'Loading notes...') {
@@ -317,15 +324,15 @@
 
     function updateBreadcrumb() {
         if (state.viewMode === 'shared') {
-            if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = true;
-            if (els.folderBreadcrumb) els.folderBreadcrumb.hidden = true;
+            if (els.breadcrumbSeparatorItem) els.breadcrumbSeparatorItem.hidden = true;
+            if (els.folderBreadcrumbItem) els.folderBreadcrumbItem.hidden = true;
             return;
         }
         const folder = folderById(state.currentFolderId);
         const inFolder = Boolean(folder);
-        if (els.breadcrumbSeparator) els.breadcrumbSeparator.hidden = !inFolder;
+        if (els.breadcrumbSeparatorItem) els.breadcrumbSeparatorItem.hidden = !inFolder;
+        if (els.folderBreadcrumbItem) els.folderBreadcrumbItem.hidden = !inFolder;
         if (els.folderBreadcrumb) {
-            els.folderBreadcrumb.hidden = !inFolder;
             els.folderBreadcrumb.textContent = folder?.name || '';
             if (inFolder) {
                 els.folderBreadcrumb.setAttribute('aria-current', 'page');
@@ -346,7 +353,8 @@
     function openFolderModal(mode, folder = null) {
         state.folderModalMode = mode;
         state.activeFolder = folder;
-        clearFormError(els.folderError);
+        clearFormError(els.folderError, els.folderName);
+        window.APStudyFormField?.clearInvalid?.(els.folderName);
         if (els.folderTitle) els.folderTitle.textContent = mode === 'rename' ? 'Rename folder' : 'New folder';
         if (els.folderSubtitle) {
             els.folderSubtitle.textContent = mode === 'rename'
@@ -480,10 +488,10 @@
     async function saveFolderModal() {
         const name = (els.folderName?.value || '').trim();
         if (!name) {
-            showFormError(els.folderError, 'Enter a folder name.');
+            showFormError(els.folderError, 'Enter a folder name.', els.folderName);
             return;
         }
-        clearFormError(els.folderError);
+        clearFormError(els.folderError, els.folderName);
         setButtonBusy(els.folderSave, true);
         try {
             if (state.folderModalMode === 'rename') {

@@ -117,6 +117,136 @@ pre,
 	box-shadow: var(--surface-shadow-panel);
 }
 
+@layer components {
+	.ui-search-field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		min-width: 0;
+	}
+
+	.ui-search-field__label {
+		font-size: var(--text-meta);
+		font-weight: 600;
+		color: var(--color-on-surface-variant);
+	}
+
+	.ui-search-field__label--sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.ui-search-field__control {
+		position: relative;
+		width: 100%;
+	}
+
+	.ui-search-field__input {
+		width: 100%;
+		height: 42px;
+		border: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+		border-radius: var(--radius-control);
+		background: var(--color-surface);
+		color: var(--color-on-surface);
+		font: 500 13px/1 var(--font-body);
+		padding: 0 2.25rem 0 0.75rem;
+		outline: none;
+		transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+	}
+
+	.ui-search-field__input::placeholder {
+		color: color-mix(in srgb, var(--color-on-surface-variant) 72%, transparent);
+	}
+
+	.ui-search-field__input:focus {
+		border-color: color-mix(in srgb, var(--color-primary) 70%, var(--color-outline-variant));
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+	}
+
+	.ui-search-field__trigger {
+		position: absolute;
+		top: 50%;
+		right: 0.625rem;
+		transform: translateY(-50%);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1rem;
+		height: 1rem;
+		color: var(--color-on-surface-variant);
+		opacity: 0.7;
+		pointer-events: none;
+	}
+
+	.ui-search-field__trigger svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.ui-search-field--admin .ui-search-field__input {
+		height: 44px;
+		min-height: 44px;
+		border-radius: var(--radius-card);
+		border-color: var(--admin-border);
+		background: var(--admin-panel);
+		color: var(--admin-ink);
+		font-size: 14px;
+		font-weight: inherit;
+		padding: 0 2.25rem 0 0.875rem;
+	}
+
+	.ui-search-field--admin .ui-search-field__input::placeholder {
+		color: var(--admin-muted);
+	}
+
+	.ui-search-field--admin:focus-within .ui-search-field__input {
+		outline: 2px solid var(--admin-accent-soft);
+		border-color: color-mix(in srgb, var(--admin-accent) 55%, transparent);
+		box-shadow: none;
+	}
+
+	.ui-search-field--admin .ui-search-field__trigger {
+		color: var(--admin-muted);
+	}
+
+	.ui-search-field--compact .ui-search-field__input {
+		height: 38px;
+		min-height: 38px;
+		font-size: 13px;
+		font-weight: inherit;
+	}
+
+	.ui-search-field--onboarding .ui-search-field__label {
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+	}
+
+	.ui-search-field--onboarding .ui-search-field__input {
+		height: auto;
+		min-height: 44px;
+		padding: 0.75rem 2.25rem 0.75rem 1rem;
+		border-radius: var(--radius-xl);
+		background: var(--color-surface-container-lowest);
+		border-color: color-mix(in srgb, var(--color-outline-variant) 25%, transparent);
+		font-size: 0.875rem;
+		font-weight: 400;
+	}
+
+	.ui-search-field--onboarding .ui-search-field__input:focus {
+		border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+		box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary) 50%, transparent);
+	}
+}
+
 .ui-status {
 	display: inline-flex;
 	min-height: 26px;
@@ -658,6 +788,28 @@ html body :is(
 	input[type="time"], input[type="datetime-local"], select, textarea
 ) {
 	border-color: var(--color-outline, #79786e) !important;
+}
+
+html body :is(
+	input[type="text"], input[type="email"], input[type="password"], input[type="search"],
+	input[type="url"], input[type="tel"], input[type="number"], input[type="date"],
+	input[type="time"], input[type="datetime-local"], select, textarea
+)[aria-invalid="true"] {
+	border-color: var(--color-error, #b3261e) !important;
+}
+
+html body :is(
+	input[type="text"], input[type="email"], input[type="password"], input[type="search"],
+	input[type="url"], input[type="tel"], input[type="number"], input[type="date"],
+	input[type="time"], input[type="datetime-local"], select, textarea
+)[aria-invalid="true"]:is(:focus, :focus-visible) {
+	border-color: var(--color-error, #b3261e) !important;
+	outline-color: color-mix(in srgb, var(--color-error, #b3261e) 70%, transparent) !important;
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error, #b3261e) 50%, transparent) !important;
+}
+
+html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(button, [role="button"]) {
+	border-color: var(--color-error, #b3261e) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

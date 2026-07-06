@@ -29,6 +29,36 @@
 
 .files-toolbar-path {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.files-page-title {
+    margin: 0;
+}
+
+.files-breadcrumbs .breadcrumb-link {
+    padding: 4px 8px;
+    margin: -4px -8px;
+    border-radius: var(--radius-control);
+}
+
+.files-breadcrumbs .breadcrumb-link:first-child {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.files-breadcrumbs .breadcrumb-link:hover,
+.files-breadcrumbs .breadcrumb-link:focus-visible {
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    outline: none;
+}
+
+.files-breadcrumbs {
+    min-height: 34px;
+    overflow-x: auto;
 }
 
 .files-modal-header p,
@@ -208,40 +238,6 @@
     margin-top: 2px;
     color: var(--color-on-surface-variant);
     font-size: 12px;
-}
-
-.files-breadcrumbs {
-    display: flex;
-    min-height: 34px;
-    align-items: center;
-    gap: 4px;
-    overflow-x: auto;
-}
-
-.files-breadcrumbs button {
-    flex: 0 0 auto;
-    padding: 4px 8px;
-    border-radius: var(--radius-control);
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-}
-
-.files-breadcrumbs button:first-child {
-    padding-left: 0;
-}
-
-.files-breadcrumbs button:hover,
-.files-breadcrumbs button:focus-visible {
-    outline: none;
-    background: var(--color-surface-container-low);
-    color: var(--color-on-surface);
-}
-
-.files-breadcrumbs .material-symbols-outlined {
-    flex: 0 0 auto;
-    font-size: 18px;
 }
 
 .files-surface {
@@ -763,7 +759,8 @@ body.files-modal-open {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    gap: 16px;
+    padding: 32px;
     border: 2px dashed color-mix(in srgb, var(--color-outline-variant) 70%, transparent) !important;
     border-radius: var(--radius-card);
     background: var(--color-surface-container-lowest);
@@ -782,82 +779,226 @@ body.files-modal-open {
     color: var(--color-on-surface);
 }
 
-.files-upload-dropzone > .material-symbols-outlined {
-    color: color-mix(in srgb, var(--color-on-surface-variant) 58%, transparent);
-    font-size: 48px;
-}
-
-.files-upload-dropzone h3 {
-    margin: 12px 0 0;
+.files-upload-dropzone:hover .files-upload-icon-ring,
+.files-upload-dropzone:focus-visible .files-upload-icon-ring,
+.files-upload-dropzone.is-active .files-upload-icon-ring {
     color: var(--color-on-surface);
-    font-size: 20px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    border-color: color-mix(in srgb, var(--color-on-surface) 28%, transparent);
 }
 
-.files-upload-dropzone p {
-    margin: 8px 0 0;
+.files-upload-icon-ring {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed color-mix(in srgb, var(--color-on-surface-variant) 42%, transparent);
+    border-radius: var(--radius-pill);
+    color: var(--color-on-surface-variant);
+    transition: color 140ms ease, border-color 140ms ease;
+}
+
+.files-upload-icon-ring .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.files-upload-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.files-upload-title {
+    margin: 0;
     color: var(--color-on-surface-variant);
     font-size: 14px;
+    font-weight: 650;
 }
 
-.files-upload-dropzone button {
-    color: var(--color-primary);
-    background: transparent;
-    font: inherit;
-    font-weight: 720;
-    text-decoration: underline;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
+.files-upload-dropzone:hover .files-upload-title,
+.files-upload-dropzone:focus-visible .files-upload-title,
+.files-upload-dropzone.is-active .files-upload-title {
+    color: var(--color-on-surface);
 }
 
-.files-upload-dropzone button:hover,
-.files-upload-dropzone button:focus-visible {
-    background: transparent;
-    outline: none;
-    box-shadow: none;
-}
-
-.files-upload-dropzone small {
-    margin-top: 12px;
+.files-upload-hint {
+    margin: 0;
     color: var(--color-on-surface-variant);
     font-size: 12px;
+}
+
+.files-upload-browse {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 24px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent) !important;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.files-upload-browse:hover,
+.files-upload-browse:focus-visible {
+    border-color: color-mix(in srgb, var(--color-outline-variant) 78%, transparent) !important;
+    background: var(--color-surface-container-high);
+    color: var(--color-on-surface);
+    outline: none;
 }
 
 .files-selected-list {
     display: flex;
     max-height: 290px;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 14px;
+    gap: 12px;
+    margin-top: 16px;
     overflow: auto;
 }
 
 .files-selected-item {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px;
-    padding: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
     border: 1px solid color-mix(in srgb, var(--color-outline-variant) 48%, transparent) !important;
     border-radius: var(--radius-card);
-    background: var(--color-surface-container-low);
+    background: color-mix(in srgb, var(--color-surface-container-high) 20%, var(--color-surface-container-lowest));
 }
 
-.files-upload-size {
-    align-self: end;
-    padding-bottom: 10px;
+.files-upload-file-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-right: 36px;
+}
+
+.files-upload-file-preview {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.files-upload-file-icon {
+    display: block;
+    color: color-mix(in srgb, var(--color-on-surface-variant) 30%, transparent);
+    font-size: 40px;
+    line-height: 1;
+}
+
+.files-upload-file-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    padding: 0 2px;
+    border: 1px solid currentColor;
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
     color: var(--color-on-surface-variant);
-    font-size: 12px;
-    font-weight: 650;
+    font-size: var(--text-meta);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    transform: translateX(-50%);
     white-space: nowrap;
 }
 
+.files-upload-file-badge--pdf {
+    border-color: var(--color-error);
+    color: var(--color-error);
+}
+
+.files-upload-file-badge--image {
+    border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
+    color: var(--color-primary);
+}
+
+.files-upload-file-badge--video {
+    border-color: color-mix(in srgb, var(--color-tertiary) 70%, transparent);
+    color: var(--color-tertiary);
+}
+
+.files-upload-file-badge--archive {
+    border-color: color-mix(in srgb, var(--color-secondary) 70%, transparent);
+    color: var(--color-secondary);
+}
+
+.files-upload-file-main {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.files-upload-filename {
+    width: 100%;
+    min-height: 0;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.4;
+    outline: none;
+    padding: 0;
+    text-overflow: ellipsis;
+}
+
+.files-upload-filename:focus {
+    border-color: color-mix(in srgb, var(--color-outline-variant) 60%, transparent) !important;
+    background: var(--color-surface-container-lowest);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+    padding: 4px 8px;
+}
+
+.files-upload-size {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 520;
+    white-space: nowrap;
+}
+
+.files-upload-remove {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+    transition: background 140ms ease, color 140ms ease;
+}
+
+.files-upload-remove:hover,
+.files-upload-remove:focus-visible {
+    background: var(--color-surface-container-high);
+    color: var(--color-on-surface);
+    outline: none;
+}
+
+.files-upload-remove .material-symbols-outlined {
+    font-size: 16px;
+}
+
 .files-selected-controls {
-    grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: minmax(130px, 1fr) minmax(130px, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 10px;
 }
 
@@ -870,9 +1011,20 @@ body.files-modal-open {
     font-weight: 700;
 }
 
+.files-field-compact {
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.files-field-compact select {
+    min-height: 34px;
+    font-size: 13px;
+}
+
 .files-field input,
 .files-field select,
-.files-selected-item input,
+.files-selected-item input:not(.files-upload-filename),
 .files-selected-item select {
     width: 100%;
     min-height: 38px;
@@ -889,14 +1041,14 @@ body.files-modal-open {
 
 .files-field input:focus,
 .files-field select:focus,
-.files-selected-item input:focus,
+.files-selected-item input:not(.files-upload-filename):focus,
 .files-selected-item select:focus {
     border-color: var(--color-primary) !important;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
 
 .files-progress {
-    height: 9px;
+    height: 4px;
     margin-top: 16px;
     overflow: hidden;
     border-radius: var(--radius-pill);
@@ -1080,7 +1232,9 @@ body.files-modal-open {
     .files-danger-button,
     .files-icon-button,
     .files-new-menu button,
-    .files-breadcrumbs button {
+    .files-breadcrumbs .breadcrumb-link,
+    .files-breadcrumbs .breadcrumb-trigger,
+    .files-breadcrumbs .breadcrumb-ellipsis {
         min-height: 48px;
     }
 

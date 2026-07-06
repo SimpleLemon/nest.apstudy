@@ -46,20 +46,96 @@
     } = callbacks;
     let schoolSuggestionTimer = null;
 
+    function hasImageFiles(event) {
+      const types = Array.from(event.dataTransfer?.types || []);
+      return types.includes('Files');
+    }
+
+    function setAvatarUploadBusy(isBusy) {
+      if (elements.avatarUpload) elements.avatarUpload.disabled = isBusy;
+      if (elements.avatarUploadButton) elements.avatarUploadButton.disabled = isBusy;
+      elements.avatarUploadDropzone?.classList.toggle('is-uploading', isBusy);
+      if (elements.avatarUploadDropzone) {
+        elements.avatarUploadDropzone.tabIndex = isBusy ? -1 : 0;
+      }
+    }
+
+    function syncAvatarDropzonePreview(value) {
+      const avatarValue = value && String(value).trim() ? String(value).trim() : '';
+      const hasAvatar = Boolean(avatarValue);
+
+      if (elements.avatarDropzonePreview) {
+        if (hasAvatar) {
+          elements.avatarDropzonePreview.src = settingsAvatarUrlForSize(avatarValue, 176);
+          elements.avatarDropzonePreview.removeAttribute('hidden');
+        } else {
+          elements.avatarDropzonePreview.setAttribute('hidden', '');
+        }
+        elements.avatarDropzonePreview.onerror = () => {
+          elements.avatarDropzonePreview.onerror = null;
+          elements.avatarDropzonePreview.setAttribute('hidden', '');
+          elements.avatarDropzonePlaceholder?.removeAttribute('hidden');
+        };
+      }
+
+      if (elements.avatarDropzonePlaceholder) {
+        if (hasAvatar) {
+          elements.avatarDropzonePlaceholder.setAttribute('hidden', '');
+        } else {
+          elements.avatarDropzonePlaceholder.removeAttribute('hidden');
+        }
+      }
+    }
+
+    function handleAvatarFile(file) {
+      if (!file) {
+        return;
+      }
+      void uploadAvatar(file);
+    }
+
     function bindProfilePreviewControls() {
       elements.avatarUploadButton?.addEventListener('click', () => {
         elements.avatarUpload?.click();
       });
       elements.avatarUpload?.addEventListener('change', () => {
         const file = elements.avatarUpload.files && elements.avatarUpload.files[0];
-        if (file) {
-          void uploadAvatar(file);
+        handleAvatarFile(file);
+      });
+      elements.avatarUploadDropzone?.addEventListener('click', () => {
+        elements.avatarUpload?.click();
+      });
+      elements.avatarUploadDropzone?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          elements.avatarUpload?.click();
         }
+      });
+      elements.avatarUploadDropzone?.addEventListener('dragover', (event) => {
+        if (!hasImageFiles(event)) {
+          return;
+        }
+        event.preventDefault();
+        elements.avatarUploadDropzone.classList.add('is-active');
+      });
+      elements.avatarUploadDropzone?.addEventListener('dragleave', () => {
+        elements.avatarUploadDropzone.classList.remove('is-active');
+      });
+      elements.avatarUploadDropzone?.addEventListener('drop', (event) => {
+        if (!hasImageFiles(event)) {
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        elements.avatarUploadDropzone.classList.remove('is-active');
+        const file = event.dataTransfer?.files && event.dataTransfer.files[0];
+        handleAvatarFile(file);
       });
       elements.displayName?.addEventListener('input', renderProfilePreview);
       elements.displayName?.addEventListener('input', updateProfileDirtyState);
       elements.username?.addEventListener('input', renderProfilePreview);
       elements.username?.addEventListener('input', updateProfileDirtyState);
+      global.APStudyFormField?.bindAutoClear?.(elements.username);
       elements.school?.addEventListener('input', renderProfilePreview);
       elements.school?.addEventListener('input', updateProfileDirtyState);
       elements.school?.addEventListener('input', debounceSchoolSuggestions);
@@ -115,22 +191,27 @@
       const currentProfile = state.profile || {};
       const rawUsername = elements.username?.value.trim() || '';
       if (!rawUsername) {
+        global.APStudyFormField?.markInvalid?.(elements.username);
         showToast('Username is required.', 'error');
         return;
       }
       const normalizedUsername = normalizeUsername(rawUsername);
       if (!USERNAME_PATTERN.test(normalizedUsername)) {
+        global.APStudyFormField?.markInvalid?.(elements.username);
         showToast('Please only use numbers, letters, dashes -, or underscores _.', 'error');
         return;
       }
       if (normalizedUsername.length < USERNAME_MIN_LENGTH || normalizedUsername.length > USERNAME_MAX_LENGTH) {
+        global.APStudyFormField?.markInvalid?.(elements.username);
         showToast('Username must be between 3 and 20 characters.', 'error');
         return;
       }
       if (USERNAME_RESERVED.has(normalizedUsername)) {
+        global.APStudyFormField?.markInvalid?.(elements.username);
         showToast('That username is reserved.', 'error');
         return;
       }
+      global.APStudyFormField?.clearInvalid?.(elements.username);
       if (elements.username) {
         elements.username.value = normalizedUsername;
       }
@@ -182,7 +263,7 @@
 
       const formData = new FormData();
       formData.append('avatar', file);
-      if (elements.avatarUpload) elements.avatarUpload.disabled = true;
+      setAvatarUploadBusy(true);
       if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Uploading...';
 
       try {
@@ -200,8 +281,8 @@
         if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'JPG, PNG, GIF, or WebP. Max 10 MB.';
         showToast(error.message || 'Unable to upload avatar.', 'error');
       } finally {
+        setAvatarUploadBusy(false);
         if (elements.avatarUpload) {
-          elements.avatarUpload.disabled = false;
           elements.avatarUpload.value = '';
         }
       }
@@ -245,10 +326,11 @@
     }
 
     function updateAvatarPreview(value) {
+      const avatarValue = value && value.trim() ? value.trim() : '';
+      syncAvatarDropzonePreview(avatarValue);
       if (!elements.avatarPreview) {
         return;
       }
-      const avatarValue = value && value.trim() ? value.trim() : '';
       elements.avatarPreview.src = settingsAvatarUrlForSize(avatarValue, 150);
       elements.avatarPreview.srcset = `${settingsAvatarUrlForSize(avatarValue, 150)} 1x, ${settingsAvatarUrlForSize(avatarValue, 300)} 2x`;
       elements.avatarPreview.sizes = '(max-width: 640px) 96px, 150px';

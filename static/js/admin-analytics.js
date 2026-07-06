@@ -122,26 +122,41 @@
     return `${Math.abs(number).toFixed(1)}%`;
   }
 
+  const TREND_UP_SVG = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="m22 7-7.38 7.335c-.997.991-1.496 1.487-2.115 1.487s-1.117-.496-2.115-1.488l-.24-.238c-.997-.992-1.497-1.489-2.116-1.489s-1.118.497-2.115 1.49L2 18" opacity=".5"/><path d="M22 12.546V7h-5.582"/></svg>';
+  const TREND_DOWN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="m22 18-7.38-7.335c-.997-.991-1.496-1.487-2.115-1.487s-1.117.496-2.115 1.488l-.24.238c-.997.992-1.497 1.489-2.116 1.489s-1.118-.497-2.115-1.49L2 7" opacity=".5"/><path d="M22 12.454V18h-5.582"/></svg>';
+
   function comparisonForMetric(payload, key) {
     return payload?.comparison?.metrics?.[key] || null;
   }
 
   function deltaLabel(comparison) {
     if (!comparison?.available || comparison.percentChange == null) return "";
-    const direction = comparison.direction === "up" ? "up" : comparison.direction === "down" ? "down" : "neutral";
-    const symbol = direction === "up" ? "↑" : direction === "down" ? "↓" : "→";
-    return `${symbol} ${formatPercent(comparison.percentChange)}`;
+    const number = Number(comparison.percentChange);
+    if (!Number.isFinite(number)) return "";
+    const prefix = number > 0 ? "+" : number < 0 ? "-" : "";
+    return `${prefix}${formatPercent(number)}`;
+  }
+
+  function deltaBadgeClass(comparison) {
+    const direction = comparison?.direction === "up" ? "up" : comparison?.direction === "down" ? "down" : "neutral";
+    const base = "admin-stat-delta h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 overflow-hidden text-muted-foreground";
+    if (direction === "up") return `${base} bg-teal-400/10`;
+    if (direction === "down") return `${base} bg-orange-400/10`;
+    return `${base} bg-muted/50`;
+  }
+
+  function deltaTrendSvg(comparison) {
+    return comparison?.direction === "down" ? TREND_DOWN_SVG : TREND_UP_SVG;
   }
 
   function deltaClass(comparison) {
-    const direction = comparison?.direction === "up" ? "up" : comparison?.direction === "down" ? "down" : "neutral";
-    return `admin-analytics-delta admin-analytics-delta--${direction}`;
+    return deltaBadgeClass(comparison);
   }
 
   function deltaMarkup(comparison) {
     const label = deltaLabel(comparison);
     if (!label) return "";
-    return `<span class="${deltaClass(comparison)}">${escapeHtml(label)}</span>`;
+    return `<span data-slot="badge" data-variant="default" class="${deltaBadgeClass(comparison)}"><span class="flex items-center gap-1">${escapeHtml(label)}${deltaTrendSvg(comparison)}</span></span>`;
   }
 
   function escapeHtml(value) {
@@ -519,8 +534,21 @@
       const comparison = comparisonForMetric(payload, key);
       const label = deltaLabel(comparison);
       el.hidden = !label;
-      el.textContent = label;
-      el.className = `admin-analytics-tab-delta ${label ? deltaClass(comparison) : ""}`.trim();
+      if (label) {
+        el.className = deltaBadgeClass(comparison);
+        el.innerHTML = `<span class="flex items-center gap-1">${escapeHtml(label)}${deltaTrendSvg(comparison)}</span>`;
+      } else {
+        el.className = "admin-stat-delta";
+        el.innerHTML = "";
+      }
+    });
+  }
+
+  function syncPeriodLabels(root, label) {
+    const text = String(label || "").trim();
+    if (!text) return;
+    root.querySelectorAll("[data-analytics-period-label]").forEach((el) => {
+      el.textContent = text;
     });
   }
 
@@ -654,6 +682,7 @@
     tabs.forEach((tab) => {
       const selected = tab.dataset.analyticsMetric === key;
       tab.classList.toggle("is-active", selected);
+      tab.classList.toggle("admin-stat-cell--active", selected);
       tab.setAttribute("aria-selected", selected ? "true" : "false");
     });
     if (title) title.textContent = config.title;
@@ -684,7 +713,8 @@
     setMetricCards(root, payload);
     setCard(root, "onboardingRate", payload?.cards?.onboardingRate, "%");
     setMetricDeltas(root, payload);
-
+    const rangeLabel = root.querySelector("[data-analytics-range-dropdown] [data-analytics-range-label]")?.textContent;
+    syncPeriodLabels(root, rangeLabel);
     renderMainMetric(root, payload, root.dataset.activeMetric || "totalUsers");
   }
 

@@ -69,6 +69,10 @@ export function requestImageSource(anchorRect, validateUrl) {
                 tab.setAttribute('aria-selected', String(active));
             });
             activeDialog.querySelectorAll('[data-image-panel]').forEach((panel) => { panel.hidden = panel.dataset.imagePanel !== activeTab; });
+            if (activeTab === 'url') {
+                const urlInput = activeDialog.querySelector('[name="url"]');
+                window.APStudyFormField?.clearInvalid?.(urlInput);
+            }
             showError('');
         }));
         const dropzone = activeDialog.querySelector('.notes-image-dropzone');
@@ -84,8 +88,13 @@ export function requestImageSource(anchorRect, validateUrl) {
         activeDialog.addEventListener('submit', (event) => {
             event.preventDefault();
             if (activeTab === 'url') {
-                const url = validateUrl(activeDialog.querySelector('[name="url"]')?.value);
-                if (!url) return showError('Enter a valid http or https URL.');
+                const urlInput = activeDialog.querySelector('[name="url"]');
+                const url = validateUrl(urlInput?.value);
+                if (!url) {
+                    window.APStudyFormField?.markInvalid?.(urlInput);
+                    return showError('Enter a valid http or https URL.');
+                }
+                window.APStudyFormField?.clearInvalid?.(urlInput);
                 closeImageDialog({ url });
                 return;
             }

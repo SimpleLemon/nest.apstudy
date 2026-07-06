@@ -13,6 +13,7 @@
     } = callbacks;
 
     function bindCalendarControls() {
+      window.APStudyFormField?.bindAutoClear?.(elements.canvasFeedUrl);
       elements.addOtherCalendar?.addEventListener('click', () => {
         const currentRows = getOtherCalendarInputValues({ includeBlank: true });
         if (currentRows.length >= maxOtherCalendars) {
@@ -58,6 +59,7 @@
       if (input) {
         input.value = value || '';
         input.addEventListener('input', updateOtherCalendarCount);
+        window.APStudyFormField?.bindAutoClear?.(input);
       }
       row.querySelector('.settings-calendar-remove')?.addEventListener('click', () => {
         row.remove();
@@ -82,6 +84,37 @@
       return Array.from(elements.otherCalendarLinks.querySelectorAll('[data-other-calendar-url]'))
         .map((input) => input.value.trim())
         .filter((value) => includeBlank || value);
+    }
+
+    function markCalendarFieldErrors() {
+      const formField = window.APStudyFormField;
+      if (!formField) return;
+      formField.clearAll(elements.otherCalendarLinks || document);
+      formField.clearInvalid(elements.canvasFeedUrl);
+
+      const canvasUrl = elements.canvasFeedUrl?.value.trim() || '';
+      const normalizedCanvasUrl = normalizeCalendarLinkForComparison(canvasUrl);
+      const inputs = Array.from(elements.otherCalendarLinks?.querySelectorAll('[data-other-calendar-url]') || []);
+      const seen = new Set();
+
+      for (const input of inputs) {
+        const url = input.value.trim();
+        if (!url) continue;
+        const normalized = normalizeCalendarLinkForComparison(url);
+        if (!normalized) {
+          formField.markInvalid(input);
+          return;
+        }
+        if (normalizedCanvasUrl && normalized === normalizedCanvasUrl) {
+          formField.markInvalid(input);
+          return;
+        }
+        if (seen.has(normalized)) {
+          formField.markInvalid(input);
+          return;
+        }
+        seen.add(normalized);
+      }
     }
 
     function collectCalendarPayload() {
@@ -146,9 +179,13 @@
       try {
         payload = collectCalendarPayload();
       } catch (error) {
+        markCalendarFieldErrors();
         showToast(error.message || 'Check your calendar links.', 'error');
         return;
       }
+
+      window.APStudyFormField?.clearAll(elements.otherCalendarLinks || document);
+      window.APStudyFormField?.clearInvalid(elements.canvasFeedUrl);
 
       const previousLabel = elements.saveCalendarLinks?.textContent || 'Save';
       if (elements.saveCalendarLinks) {

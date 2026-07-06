@@ -124,6 +124,54 @@
       }
     }
 
+    const FALLBACK_TIMEZONES = [
+      'UTC',
+      'America/New_York',
+      'America/Chicago',
+      'America/Denver',
+      'America/Los_Angeles',
+      'America/Phoenix',
+      'America/Anchorage',
+      'Pacific/Honolulu',
+      'Europe/London',
+      'Europe/Paris',
+      'Europe/Berlin',
+      'Asia/Tokyo',
+      'Asia/Shanghai',
+      'Asia/Kolkata',
+      'Australia/Sydney',
+    ];
+
+    function formatTimezoneLabel(timezone) {
+      const value = String(timezone || '').trim();
+      if (!value) {
+        return '';
+      }
+      try {
+        const formatter = new Intl.DateTimeFormat(undefined, {
+          timeZone: value,
+          timeZoneName: 'shortOffset',
+        });
+        const parts = formatter.formatToParts(new Date());
+        const offset = parts.find((part) => part.type === 'timeZoneName')?.value || '';
+        const readable = value.replace(/_/g, ' ');
+        return offset ? `${readable} (${offset})` : readable;
+      } catch (error) {
+        return value.replace(/_/g, ' ');
+      }
+    }
+
+    function listSupportedTimezones() {
+      try {
+        if (typeof Intl.supportedValuesOf === 'function') {
+          return Intl.supportedValuesOf('timeZone').slice().sort((left, right) => left.localeCompare(right));
+        }
+      } catch (error) {
+        // Fall through to the static list.
+      }
+      return FALLBACK_TIMEZONES.slice();
+    }
+
     function formatBytes(bytes) {
       const size = Number(bytes || 0);
       if (!Number.isFinite(size) || size <= 0) {
@@ -264,9 +312,11 @@
       formatBytes,
       formatCount,
       formatDate,
+      formatTimezoneLabel,
       getToggleState,
       isEarlyMember,
       isEmorySchool,
+      listSupportedTimezones,
       normalizeHexColor,
       normalizeSectionId,
       normalizeSidebarDefault,

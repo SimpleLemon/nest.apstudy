@@ -1,0 +1,202 @@
+/* Shared breadcrumb component (shadcn-style) */
+:root {
+    --breadcrumb-muted: var(--color-on-surface-variant);
+    --breadcrumb-foreground: var(--color-on-surface);
+}
+
+.admin-page {
+    --breadcrumb-muted: var(--admin-muted);
+    --breadcrumb-foreground: var(--admin-ink);
+}
+
+.admin-header .breadcrumb {
+    margin-bottom: 6px;
+}
+
+.breadcrumb {
+    display: block;
+    min-width: 0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--breadcrumb-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.breadcrumb-item[hidden] {
+    display: none !important;
+}
+
+.breadcrumb-link,
+.breadcrumb-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.breadcrumb-link:hover,
+.breadcrumb-link:focus-visible,
+.breadcrumb-trigger:hover:not(:disabled),
+.breadcrumb-trigger:focus-visible {
+    color: var(--breadcrumb-foreground);
+    outline: none;
+}
+
+.breadcrumb-page {
+    color: var(--breadcrumb-foreground);
+    font-weight: 400;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.breadcrumb-separator {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--breadcrumb-muted);
+}
+
+.breadcrumb-separator .material-symbols-outlined {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.breadcrumb-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.breadcrumb-ellipsis:hover,
+.breadcrumb-ellipsis:focus-visible {
+    color: var(--breadcrumb-foreground);
+    outline: none;
+}
+
+.breadcrumb-ellipsis .material-symbols-outlined {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.breadcrumb-ellipsis-menu {
+    position: fixed;
+    z-index: 140;
+    min-width: 160px;
+    max-width: min(280px, calc(100vw - 24px));
+    margin: 0;
+    padding: 6px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant, #c5c3ba) 70%, transparent);
+    border-radius: var(--radius-panel);
+    background: var(--color-surface-container-high, #e8e6e1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+    list-style: none;
+}
+
+.breadcrumb-ellipsis-menu[hidden] {
+    display: none !important;
+}
+
+.breadcrumb-ellipsis-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.breadcrumb-ellipsis-menu button:hover,
+.breadcrumb-ellipsis-menu button:focus-visible {
+    background: var(--color-surface-container-low);
+    outline: none;
+}
+
+.breadcrumb-trigger-caret {
+    flex-shrink: 0;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.breadcrumb-trigger[aria-expanded="true"] .breadcrumb-trigger-caret {
+    transform: rotate(180deg);
+}
+
+/* Admin pages: restore uppercase accent trail branding */
+.admin-page .breadcrumb-list {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+.admin-page .breadcrumb-link {
+    color: var(--admin-accent);
+    text-decoration: none;
+}
+
+.admin-page .breadcrumb-link:hover,
+.admin-page .breadcrumb-link:focus-visible {
+    color: var(--admin-accent);
+    text-decoration: underline;
+}
+
+.admin-page .breadcrumb-page {
+    color: var(--admin-ink);
+}
+
+.admin-page .breadcrumb-ellipsis-menu {
+    border-color: var(--admin-border);
+    background: var(--admin-panel);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+.admin-page .breadcrumb-ellipsis-menu button {
+    color: var(--admin-ink);
+}
+
+.admin-page .breadcrumb-ellipsis-menu button:hover,
+.admin-page .breadcrumb-ellipsis-menu button:focus-visible {
+    background: color-mix(in srgb, var(--admin-accent) 10%, transparent);
+}

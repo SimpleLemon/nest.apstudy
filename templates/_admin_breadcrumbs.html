@@ -1,12 +1,1 @@
-<nav class="admin-breadcrumbs" aria-label="Admin breadcrumbs">
-    {% for label, href in breadcrumbs or [("Admin", url_for('admin.admin_index'))] %}
-        {% if not loop.first %}
-            <span class="admin-breadcrumb-separator" aria-hidden="true">&gt;</span>
-        {% endif %}
-        {% if href and not loop.last %}
-            <a href="{{ href }}">{{ label }}</a>
-        {% else %}
-            <span aria-current="{% if loop.last %}page{% endif %}">{{ label }}</span>
-        {% endif %}
-    {% endfor %}
-</nav>
+{% include "partials/_breadcrumb.html" %}

@@ -22,7 +22,8 @@
 
         function openFolderModal(mode, item = null) {
             state.folderModalMode = { mode, item };
-            clearFormError(els.folderError);
+            clearFormError(els.folderError, els.folderName);
+            window.APStudyFormField?.clearInvalid?.(els.folderName);
             const label = els.folderName?.closest(".files-field")?.querySelector("span");
             if (mode === "folder-create") {
                 if (els.folderModalTitle) els.folderModalTitle.textContent = "New folder";
@@ -49,7 +50,7 @@
         async function saveFolderModal() {
             const name = (els.folderName?.value || "").trim();
             if (!name) {
-                notify("Name cannot be empty.", "error", { modalError: els.folderError });
+                notify("Name cannot be empty.", "error", { modalError: els.folderError, field: els.folderName });
                 return;
             }
             const mode = state.folderModalMode?.mode;
@@ -146,6 +147,7 @@
             if (els.confirmMessage) els.confirmMessage.textContent = options.message || "";
             if (els.confirmSubmit) els.confirmSubmit.textContent = options.submitLabel || "Confirm";
             clearFormError(els.confirmError);
+            window.APStudyFormField?.clearInvalid?.(els.confirmInput);
             if (options.requiredText) {
                 if (els.confirmField) els.confirmField.hidden = false;
                 if (els.confirmFieldLabel) els.confirmFieldLabel.textContent = options.requiredLabel || "Type to confirm";
@@ -160,7 +162,7 @@
             const options = state.confirmContext;
             if (!options) return;
             if (options.requiredText && (els.confirmInput?.value || "") !== options.requiredText) {
-                notify("Confirmation text does not match.", "error", { modalError: els.confirmError });
+                notify("Confirmation text does not match.", "error", { modalError: els.confirmError, field: els.confirmInput });
                 return;
             }
             setButtonBusy(els.confirmSubmit, true);

@@ -168,7 +168,9 @@
             </div>
         `;
         m.style.display = "flex";
-        m.querySelector("input[name='title']")?.focus();
+        const form = m.querySelector("form");
+        clearFormErrors(form);
+        form?.querySelector("input[name='title']")?.focus();
     }
 
     function openForm({ mode = "create", data = {} } = {}) {
@@ -233,13 +235,19 @@
         }
 
         if (!payload.title) {
+            window.APStudyFormField?.markInvalid?.(form.title);
             showError("Title is required.");
             return;
         }
         if (!payload.start_date || !payload.end_date) {
+            const fields = [];
+            if (!payload.start_date) fields.push(form.start);
+            if (!payload.end_date) fields.push(form.end);
+            window.APStudyFormField?.markInvalid?.(fields);
             showError("Start and end are required.");
             return;
         }
+        window.APStudyFormField?.clearAll?.(form);
 
         const submit = form.querySelector("[type='submit']");
         const previousLabel = submit?.textContent || "Save";
@@ -292,6 +300,15 @@
         if (!el) return;
         el.textContent = message;
         el.classList.remove("hidden");
+    }
+
+    function clearFormErrors(form) {
+        const errorEl = ensureModal().querySelector("#apstudy-event-error");
+        if (errorEl) {
+            errorEl.textContent = "";
+            errorEl.classList.add("hidden");
+        }
+        window.APStudyFormField?.clearAll?.(form || ensureModal().querySelector("form"));
     }
 
     window.openCalendarEventForm = function (opts) {

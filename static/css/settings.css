@@ -440,9 +440,151 @@
   padding: 0.65rem 0.75rem;
 }
 
-.settings-avatar-upload-control {
+.settings-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.settings-avatar-upload-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 24rem;
+  margin-inline: auto;
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 42%, transparent);
+  background: var(--color-surface-container-lowest);
+  text-align: center;
+}
+
+.settings-avatar-dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  border: 2px dashed color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.settings-avatar-dropzone:hover,
+.settings-avatar-dropzone:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.settings-avatar-dropzone.is-active {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+.settings-avatar-dropzone.is-uploading {
+  opacity: 0.68;
+  cursor: wait;
+  pointer-events: none;
+}
+
+.settings-avatar-dropzone-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.settings-avatar-dropzone-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.settings-avatar-dropzone-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 60%, transparent);
+  background: var(--color-surface-container-lowest);
+  color: var(--color-on-surface-variant);
+  transition: color 200ms ease;
+}
+
+.settings-avatar-dropzone:hover .settings-avatar-dropzone-icon,
+.settings-avatar-dropzone:focus-visible .settings-avatar-dropzone-icon,
+.settings-avatar-dropzone.is-active .settings-avatar-dropzone-icon {
+  color: var(--color-on-surface);
+}
+
+.settings-avatar-dropzone-icon .material-symbols-outlined {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.settings-avatar-dropzone-placeholder p {
+  margin: 0;
+  max-width: 8.75rem;
+  color: var(--color-on-surface-variant);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.settings-avatar-upload-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.settings-avatar-upload-divider::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
+}
+
+.settings-avatar-upload-divider span {
+  position: relative;
+  z-index: 1;
+  padding-inline: 1rem;
+  background: var(--color-surface-container-lowest);
+  color: var(--color-on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.settings-avatar-upload-button {
+  width: 100%;
+}
+
+.settings-avatar-upload-card .settings-help-text {
+  width: 100%;
 }
 
 .settings-color-tile {
@@ -1195,3 +1337,140 @@
 body.settings-discord-modal-open {
   overflow: hidden;
 }
+
+.settings-card:has(.settings-combobox-trigger[aria-expanded="true"]) {
+  overflow: visible;
+  z-index: 2;
+}
+
+.settings-combobox {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.settings-combobox-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.375rem;
+  width: 100%;
+  min-height: 2rem;
+  padding: 0 0.625rem;
+  border-radius: var(--radius-control);
+  font-size: var(--text-compact);
+  font-weight: 400;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
+  background: color-mix(in srgb, var(--color-surface-container-lowest) 92%, var(--color-surface-container-low) 8%);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+
+.settings-combobox-trigger:hover {
+  background: color-mix(in srgb, var(--color-surface-container-high) 72%, var(--color-surface-container-low) 28%);
+  color: var(--color-on-surface);
+}
+
+.settings-combobox-trigger[aria-expanded="true"] {
+  background: color-mix(in srgb, var(--color-surface-container-high) 78%, var(--color-surface-container-low) 22%);
+  color: var(--color-on-surface);
+}
+
+.settings-combobox-trigger:focus-visible {
+  border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.settings-combobox-placeholder {
+  color: var(--color-on-surface-variant);
+}
+
+.settings-combobox-chevron {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.settings-combobox-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: min(18rem, calc(100dvh - 8rem));
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-container-high);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.settings-combobox-menu[hidden] {
+  display: none !important;
+}
+
+.settings-combobox-search {
+  width: 100%;
+  min-height: 2rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+  background: transparent;
+  color: var(--color-on-surface);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.settings-combobox-search:focus-visible {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-primary) 22%, transparent);
+}
+
+.settings-combobox-list {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.35rem;
+  overflow-y: auto;
+}
+
+.settings-combobox-option {
+  display: flex;
+  width: 100%;
+  min-height: 2rem;
+  align-items: center;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-on-surface);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  padding: 0.4rem 0.55rem;
+  cursor: pointer;
+}
+
+.settings-combobox-option:hover,
+.settings-combobox-option:focus-visible,
+.settings-combobox-option.is-focused,
+.settings-combobox-option[aria-selected="true"] {
+  outline: none;
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  color: var(--color-on-surface);
+}
+
+.settings-combobox-quick-action {
+  font-weight: 600;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 35%, transparent);
+  border-radius: 0;
+  margin-bottom: 0.15rem;
+}
+
+.settings-combobox-option[hidden] {
+  display: none !important;
+}
+

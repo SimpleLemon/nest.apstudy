@@ -17,9 +17,11 @@
         || elements.email?.value
         || '';
       if (!email) {
+        global.APStudyFormField?.markInvalid?.(elements.email);
         showToast('Email address is required for password recovery.', 'error');
         return;
       }
+      global.APStudyFormField?.clearInvalid?.(elements.email);
 
       try {
         await fetchJson(endpoints.passwordRecovery, { method: 'POST' });

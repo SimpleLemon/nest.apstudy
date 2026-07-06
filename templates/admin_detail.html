@@ -122,55 +122,68 @@
         </nav>
 
         {% if section == 'overview' %}
+            {% from "partials/admin_statistic_cards.html" import statistic_card_row %}
             <section class="admin-section">
-                <div class="admin-card">
+                <div class="admin-card admin-quick-stats-card">
                     <h2 class="admin-title">Quick Stats</h2>
-                    <div class="admin-grid">
-                        <div class="admin-field">
-                            <span class="admin-field-label">Files</span>
-                            <span class="admin-field-value">{{ overview_counts.files if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Folders</span>
-                            <span class="admin-field-value">{{ overview_counts.folders if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Notes</span>
-                            <span class="admin-field-value">{{ overview_counts.notes if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Calendar Events</span>
-                            <span class="admin-field-value">{{ overview_counts.calendar_cache if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Calendar Feeds</span>
-                            <span class="admin-field-value">{{ overview_counts.calendar_feeds if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Courses</span>
-                            <span class="admin-field-value">{{ overview_counts.courses if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Seat Tracks</span>
-                            <span class="admin-field-value">{{ overview_counts.seat_tracks if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Chat Messages</span>
-                            <span class="admin-field-value">{{ overview_counts.chat_messages if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Deleted Chat Messages</span>
-                            <span class="admin-field-value">{{ overview_counts.deleted_chat_messages if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">DM Threads</span>
-                            <span class="admin-field-value">{{ overview_counts.dm_threads if overview_counts else "--" }}</span>
-                        </div>
-                        <div class="admin-field">
-                            <span class="admin-field-label">Chat Blocks</span>
-                            <span class="admin-field-value">{{ overview_counts.chat_blocks if overview_counts else "--" }}</span>
-                        </div>
-                    </div>
+                    {% set quick_stat_cells = [
+                        {
+                            'title': 'Files',
+                            'value': overview_counts.files if overview_counts else '--',
+                            'icon': 'folder',
+                        },
+                        {
+                            'title': 'Folders',
+                            'value': overview_counts.folders if overview_counts else '--',
+                            'icon': 'create_new_folder',
+                        },
+                        {
+                            'title': 'Notes',
+                            'value': overview_counts.notes if overview_counts else '--',
+                            'icon': 'description',
+                        },
+                        {
+                            'title': 'Calendar Events',
+                            'value': overview_counts.calendar_cache if overview_counts else '--',
+                            'icon': 'event',
+                        },
+                        {
+                            'title': 'Calendar Feeds',
+                            'value': overview_counts.calendar_feeds if overview_counts else '--',
+                            'icon': 'rss_feed',
+                        },
+                        {
+                            'title': 'Courses',
+                            'value': overview_counts.courses if overview_counts else '--',
+                            'icon': 'menu_book',
+                        },
+                        {
+                            'title': 'Seat Tracks',
+                            'value': overview_counts.seat_tracks if overview_counts else '--',
+                            'icon': 'airline_seat_recline_normal',
+                        },
+                        {
+                            'title': 'Chat Messages',
+                            'value': overview_counts.chat_messages if overview_counts else '--',
+                            'icon': 'chat',
+                        },
+                        {
+                            'title': 'Deleted Chat Messages',
+                            'value': overview_counts.deleted_chat_messages if overview_counts else '--',
+                            'icon': 'delete',
+                        },
+                        {
+                            'title': 'DM Threads',
+                            'value': overview_counts.dm_threads if overview_counts else '--',
+                            'icon': 'forum',
+                        },
+                        {
+                            'title': 'Chat Blocks',
+                            'value': overview_counts.chat_blocks if overview_counts else '--',
+                            'icon': 'block',
+                        },
+                    ] %}
+                    {{ statistic_card_row(quick_stat_cells, {'columns': 3, 'row_class': 'admin-quick-stats-card__row'}) }}
                 </div>
 
                 <div class="admin-card">

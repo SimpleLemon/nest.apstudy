@@ -1,0 +1,18 @@
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        {% for label, href in breadcrumbs or [("Admin", url_for('admin.admin_index'))] %}
+            {% if not loop.first %}
+                <li class="breadcrumb-separator" role="presentation" aria-hidden="true">
+                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                </li>
+            {% endif %}
+            <li class="breadcrumb-item">
+                {% if href and not loop.last %}
+                    <a class="breadcrumb-link" href="{{ href }}">{{ label }}</a>
+                {% else %}
+                    <span class="breadcrumb-page"{% if loop.last %} aria-current="page"{% endif %}>{{ label }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ol>
+</nav>

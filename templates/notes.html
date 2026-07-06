@@ -39,28 +39,39 @@
     <main class="workspace-page-shell">
         <div id="notes-page" class="notes-page">
             <div class="notes-page-header">
-                <h1 class="notes-page-title workspace-page-title">
-                    <span class="notes-view-switcher">
-                        <button id="notes-root-breadcrumb" class="notes-breadcrumb-root" type="button" aria-haspopup="menu" aria-expanded="false">
-                            <span id="notes-view-label">My Notes</span>
-                            <span class="material-symbols-outlined notes-view-caret" aria-hidden="true">expand_more</span>
-                        </button>
-                        <span id="notes-view-menu" class="notes-view-menu" role="menu" hidden>
-                            <button id="notes-tab-mine" class="notes-view-option is-active" type="button" role="menuitemradio" data-notes-view="mine" aria-checked="true">
-                                <span class="material-symbols-outlined" aria-hidden="true">description</span>
-                                <span>My Notes</span>
-                                <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
-                            </button>
-                            <button id="notes-tab-shared" class="notes-view-option" type="button" role="menuitemradio" data-notes-view="shared" aria-checked="false">
-                                <span class="material-symbols-outlined" aria-hidden="true">group</span>
-                                <span>Shared with Me</span>
-                                <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
-                            </button>
-                        </span>
-                    </span>
-                    <span id="notes-breadcrumb-separator" class="material-symbols-outlined notes-breadcrumb-separator" aria-hidden="true" hidden>chevron_right</span>
-                    <span id="notes-folder-breadcrumb" class="notes-breadcrumb-current" hidden></span>
-                </h1>
+                <div class="notes-page-heading">
+                    <h1 class="workspace-page-title notes-page-title">Notes</h1>
+                    <nav class="breadcrumb" aria-label="breadcrumb">
+                        <ol class="breadcrumb-list">
+                            <li class="breadcrumb-item">
+                                <span class="notes-view-switcher">
+                                    <button id="notes-root-breadcrumb" class="breadcrumb-trigger" type="button" aria-haspopup="menu" aria-expanded="false">
+                                        <span id="notes-view-label">My Notes</span>
+                                        <span class="material-symbols-outlined breadcrumb-trigger-caret" aria-hidden="true">expand_more</span>
+                                    </button>
+                                    <span id="notes-view-menu" class="notes-view-menu" role="menu" hidden>
+                                        <button id="notes-tab-mine" class="notes-view-option is-active" type="button" role="menuitemradio" data-notes-view="mine" aria-checked="true">
+                                            <span class="material-symbols-outlined" aria-hidden="true">description</span>
+                                            <span>My Notes</span>
+                                            <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
+                                        </button>
+                                        <button id="notes-tab-shared" class="notes-view-option" type="button" role="menuitemradio" data-notes-view="shared" aria-checked="false">
+                                            <span class="material-symbols-outlined" aria-hidden="true">group</span>
+                                            <span>Shared with Me</span>
+                                            <span class="material-symbols-outlined notes-view-check" aria-hidden="true">check</span>
+                                        </button>
+                                    </span>
+                                </span>
+                            </li>
+                            <li id="notes-breadcrumb-separator-item" class="breadcrumb-separator" role="presentation" aria-hidden="true" hidden>
+                                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                            </li>
+                            <li id="notes-folder-breadcrumb-item" class="breadcrumb-item" hidden>
+                                <span id="notes-folder-breadcrumb" class="breadcrumb-page" aria-current="page"></span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="notes-page-actions">
                     <div class="notes-new-menu-wrap">
                         <button id="notes-new-button" class="btn-primary cursor-pointer" type="button" aria-haspopup="menu" aria-expanded="false">

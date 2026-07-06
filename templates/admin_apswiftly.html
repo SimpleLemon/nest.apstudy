@@ -35,23 +35,31 @@
                     <p class="admin-subtitle admin-subtitle--compact">Systemd service state and control API reachability.</p>
                 </div>
             </div>
-            <div class="admin-system-meta admin-apswiftly-meta">
-                <div class="admin-status-chip">
-                    <span>Service</span>
-                    <strong data-apswiftly-role="service-state">{{ apswiftly_status.service_state_display or "Unknown" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>Control API</span>
-                    <strong data-apswiftly-role="api-state">{{ "Reachable" if apswiftly_status.api_reachable else "Unreachable" }}</strong>
-                </div>
-                <div class="admin-status-chip">
-                    <span>Last Checked</span>
-                    <strong
-                        data-apswiftly-role="checked-at"
-                        data-apswiftly-checked-at="{{ apswiftly_status.checked_at or '' }}"
-                    >{{ apswiftly_status.checked_at_display or "—" }}</strong>
-                </div>
-            </div>
+            {% from "partials/admin_statistic_cards.html" import statistic_card_row %}
+            {% set apswiftly_cells = [
+                {
+                    'title': 'Service',
+                    'value': apswiftly_status.service_state_display or 'Unknown',
+                    'icon': 'smart_toy',
+                    'value_tag': 'strong',
+                    'value_attrs': 'data-apswiftly-role="service-state"',
+                },
+                {
+                    'title': 'Control API',
+                    'value': 'Reachable' if apswiftly_status.api_reachable else 'Unreachable',
+                    'icon': 'lan',
+                    'value_tag': 'strong',
+                    'value_attrs': 'data-apswiftly-role="api-state"',
+                },
+                {
+                    'title': 'Last Checked',
+                    'value': apswiftly_status.checked_at_display or '—',
+                    'icon': 'schedule',
+                    'value_tag': 'strong',
+                    'value_attrs': 'data-apswiftly-role="checked-at" data-apswiftly-checked-at="' ~ (apswiftly_status.checked_at or '') ~ '"',
+                },
+            ] %}
+            {{ statistic_card_row(apswiftly_cells, {'columns': 3, 'row_class': 'admin-apswiftly-meta'}) }}
         </section>
 
         <section class="admin-card admin-apswiftly-controls-card" aria-labelledby="apswiftly-controls-title">

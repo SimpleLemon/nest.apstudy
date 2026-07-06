@@ -312,10 +312,13 @@
                     <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="text-color" hidden></div>
                     <div class="notes-toolbar-menu notes-color-menu" data-toolbar-menu="highlight-color" hidden></div>
                     <div class="notes-toolbar-menu notes-add-block-menu" data-toolbar-menu="add-block" hidden>
-                        <label class="notes-add-block-search">
-                            <span class="material-symbols-outlined" aria-hidden="true">search</span>
-                            <input type="search" data-add-block-search placeholder="Search blocks" autocomplete="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" />
-                        </label>
+                        <div class="ui-search-field ui-search-field--compact">
+                            <label class="ui-search-field__label ui-search-field__label--sr-only" for="notes-add-block-search-input">Search blocks</label>
+                            <div class="ui-search-field__control">
+                                <input id="notes-add-block-search-input" type="search" class="ui-search-field__input" data-add-block-search placeholder="Search blocks" autocomplete="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" />
+                                <span class="ui-search-field__trigger" aria-hidden="true">{% include "partials/ui_search_icon.html" %}</span>
+                            </div>
+                        </div>
                         <div class="notes-add-block-group" data-add-block-list>
                             <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-type="paragraph">
                                 <span class="material-symbols-outlined" aria-hidden="true">subject</span>

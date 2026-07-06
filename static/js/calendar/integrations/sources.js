@@ -120,6 +120,7 @@
                 errorEl.classList.remove("hidden");
             };
             if (calendar.kind !== "local" && !payload.url) {
+                window.APStudyFormField?.markInvalid?.(urlInput);
                 showError("Calendar URL is required.");
                 return;
             }
@@ -248,6 +249,8 @@
                     errorEl.classList.remove("hidden");
                 };
                 if (mode === "url" && !calendarUrl) {
+                    const urlInput = modal.querySelector(".js-source-create-url");
+                    window.APStudyFormField?.markInvalid?.(urlInput);
                     showError("Calendar URL is required.");
                     return;
                 }

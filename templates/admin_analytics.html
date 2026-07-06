@@ -33,34 +33,81 @@
         {% endif %}
 
         <section class="admin-analytics-grid">
+            {% from "partials/admin_statistic_cards.html" import statistic_card_row %}
             <article class="admin-card admin-analytics-chart-card admin-analytics-chart-card--wide admin-analytics-main-card">
-                <div class="admin-analytics-tabs" role="tablist" aria-label="Analytics metric">
-                    <button class="admin-analytics-tab is-active" type="button" role="tab" aria-selected="true" data-analytics-metric="totalUsers">
-                        <span>Total Users</span>
-                        <strong data-analytics-card="totalUsers">--</strong>
-                        <small class="admin-analytics-tab-delta" data-analytics-delta="totalUsers" hidden></small>
-                    </button>
-                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="activeUsers">
-                        <span>Users Active</span>
-                        <strong data-analytics-card="activeUsers">--</strong>
-                        <small class="admin-analytics-tab-delta" data-analytics-delta="activeUsers" hidden></small>
-                    </button>
-                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="pageViews">
-                        <span>Views</span>
-                        <strong data-analytics-card="pageViews">--</strong>
-                        <small class="admin-analytics-tab-delta" data-analytics-delta="pageViews" hidden></small>
-                    </button>
-                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="oauth">
-                        <span>OAuth</span>
-                        <strong data-analytics-card="oauth">--</strong>
-                        <small class="admin-analytics-tab-delta" data-analytics-delta="oauth" hidden></small>
-                    </button>
-                    <button class="admin-analytics-tab" type="button" role="tab" aria-selected="false" data-analytics-metric="uniType">
-                        <span>Uni Type</span>
-                        <strong data-analytics-card="uniType">--</strong>
-                        <small class="admin-analytics-tab-delta" data-analytics-delta="uniType" hidden></small>
-                    </button>
-                </div>
+                {% set kpi_cells = [
+                    {
+                        'title': 'Total Users',
+                        'value': '--',
+                        'icon': 'group',
+                        'subtitle': range_options[default_range].label,
+                        'subtitle_attrs': 'data-analytics-period-label',
+                        'tag': 'button',
+                        'active': true,
+                        'attrs': 'type="button" role="tab" aria-selected="true" data-analytics-metric="totalUsers"',
+                        'value_tag': 'strong',
+                        'value_attrs': 'data-analytics-card="totalUsers"',
+                        'delta_attrs': 'data-analytics-delta="totalUsers"',
+                        'col_class': 'w-full',
+                    },
+                    {
+                        'title': 'Users Active',
+                        'value': '--',
+                        'icon': 'person_check',
+                        'subtitle': range_options[default_range].label,
+                        'subtitle_attrs': 'data-analytics-period-label',
+                        'tag': 'button',
+                        'attrs': 'type="button" role="tab" aria-selected="false" data-analytics-metric="activeUsers"',
+                        'value_tag': 'strong',
+                        'value_attrs': 'data-analytics-card="activeUsers"',
+                        'delta_attrs': 'data-analytics-delta="activeUsers"',
+                        'col_class': 'w-full',
+                    },
+                    {
+                        'title': 'Views',
+                        'value': '--',
+                        'icon': 'visibility',
+                        'subtitle': range_options[default_range].label,
+                        'subtitle_attrs': 'data-analytics-period-label',
+                        'tag': 'button',
+                        'attrs': 'type="button" role="tab" aria-selected="false" data-analytics-metric="pageViews"',
+                        'value_tag': 'strong',
+                        'value_attrs': 'data-analytics-card="pageViews"',
+                        'delta_attrs': 'data-analytics-delta="pageViews"',
+                        'col_class': 'w-full',
+                    },
+                    {
+                        'title': 'OAuth',
+                        'value': '--',
+                        'icon': 'key',
+                        'subtitle': range_options[default_range].label,
+                        'subtitle_attrs': 'data-analytics-period-label',
+                        'tag': 'button',
+                        'attrs': 'type="button" role="tab" aria-selected="false" data-analytics-metric="oauth"',
+                        'value_tag': 'strong',
+                        'value_attrs': 'data-analytics-card="oauth"',
+                        'delta_attrs': 'data-analytics-delta="oauth"',
+                        'col_class': 'w-full',
+                    },
+                    {
+                        'title': 'Uni Type',
+                        'value': '--',
+                        'icon': 'school',
+                        'subtitle': range_options[default_range].label,
+                        'subtitle_attrs': 'data-analytics-period-label',
+                        'tag': 'button',
+                        'attrs': 'type="button" role="tab" aria-selected="false" data-analytics-metric="uniType"',
+                        'value_tag': 'strong',
+                        'value_attrs': 'data-analytics-card="uniType"',
+                        'delta_attrs': 'data-analytics-delta="uniType"',
+                        'col_class': 'w-full',
+                    },
+                ] %}
+                {{ statistic_card_row(kpi_cells, {
+                    'columns': 5,
+                    'card_class': 'admin-stat-card-row--tabs',
+                    'grid_attrs': 'role="tablist" aria-label="Analytics metric"',
+                }) }}
                 <div class="admin-section-heading">
                     <p class="admin-analytics-source" data-analytics-main-source></p>
                 </div>
@@ -198,22 +245,52 @@
         </section>
 
         {% set file_storage = metrics.file_storage if metrics else {} %}
-        <section class="admin-card admin-metrics-card" aria-labelledby="admin-metrics-title">
+        <section class="admin-metrics-section" aria-labelledby="admin-metrics-title">
             <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
-            <div class="admin-metric-grid">
-                <div class="admin-metric"><span>Total Users</span><strong>{{ metrics.total_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Emory Users</span><strong>{{ metrics.emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Non-Emory / Unknown</span><strong>{{ metrics.non_emory_users if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Pending Requests</span><strong>{{ metrics.pending_requests if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Saved Courses</span><strong>{{ metrics.saved_courses if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Active Tracks</span><strong>{{ metrics.active_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric"><span>Paused Tracks</span><strong>{{ metrics.paused_course_tracks if metrics else 0 }}</strong></div>
-                <div class="admin-metric">
-                    <span>File Storage</span>
-                    <strong>{{ file_storage.formatted or "--" }}</strong>
-                    <small>{{ file_storage.file_count or 0 }} shared files, {{ file_storage.avatar_count or 0 }} avatars tracked</small>
-                </div>
-            </div>
+            {% set system_cells = [
+                {
+                    'title': 'Total Users',
+                    'value': metrics.total_users if metrics else 0,
+                    'icon': 'group',
+                },
+                {
+                    'title': 'Emory Users',
+                    'value': metrics.emory_users if metrics else 0,
+                    'icon': 'school',
+                },
+                {
+                    'title': 'Non-Emory / Unknown',
+                    'value': metrics.non_emory_users if metrics else 0,
+                    'icon': 'person_search',
+                },
+                {
+                    'title': 'Pending Requests',
+                    'value': metrics.pending_requests if metrics else 0,
+                    'icon': 'pending_actions',
+                },
+                {
+                    'title': 'Saved Courses',
+                    'value': metrics.saved_courses if metrics else 0,
+                    'icon': 'bookmark',
+                },
+                {
+                    'title': 'Active Tracks',
+                    'value': metrics.active_course_tracks if metrics else 0,
+                    'icon': 'play_circle',
+                },
+                {
+                    'title': 'Paused Tracks',
+                    'value': metrics.paused_course_tracks if metrics else 0,
+                    'icon': 'pause_circle',
+                },
+                {
+                    'title': 'File Storage',
+                    'value': file_storage.formatted or '--',
+                    'icon': 'cloud',
+                    'detail': (file_storage.file_count or 0) ~ ' shared files, ' ~ (file_storage.avatar_count or 0) ~ ' avatars tracked',
+                },
+            ] %}
+            {{ statistic_card_row(system_cells, {'columns': 4, 'row_class': 'admin-metrics-section__cards'}) }}
             {% if file_storage.error %}
                 <p class="admin-inline-error">{{ file_storage.error }}</p>
             {% endif %}

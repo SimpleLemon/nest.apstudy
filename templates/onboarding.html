@@ -149,13 +149,13 @@
                                         <div id="term-options" class="grid grid-cols-2 gap-3 sm:grid-cols-3"></div>
                                     </div>
                                     <div class="relative">
-                                        <label class="space-y-2 block">
-                                            <span class="text-xs uppercase tracking-[0.16em] text-on-surface-variant">Search catalog</span>
-                                            <div class="relative">
-                                                <input id="course-search" class="w-full rounded-xl bg-surface-container-lowest border border-outline-variant/25 text-on-surface focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 pl-10 pr-4 py-3 text-sm" placeholder="e.g. CHEM 150 or CS 171" type="text" autocomplete="off" />
-                                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+                                        <div class="ui-search-field ui-search-field--onboarding">
+                                            <label class="ui-search-field__label" for="course-search">Search catalog</label>
+                                            <div class="ui-search-field__control">
+                                                <input id="course-search" class="ui-search-field__input" placeholder="e.g. CHEM 150 or CS 171" type="text" autocomplete="off" />
+                                                <span class="ui-search-field__trigger" aria-hidden="true">{% include "partials/ui_search_icon.html" %}</span>
                                             </div>
-                                        </label>
+                                        </div>
                                         <div id="course-suggestions" class="absolute z-20 left-0 right-0 mt-2 border border-primary/[0.18] rounded-xl bg-background shadow-[0_20px_40px_rgba(0,0,0,0.35)] overflow-hidden hidden max-h-64 overflow-y-auto"></div>
                                     </div>
                                     <div class="grid gap-4 md:grid-cols-2">
@@ -435,6 +435,9 @@
         const themeCards = document.querySelectorAll('#onboarding-theme-cards .theme-card');
         const preferencesStepNumber = document.getElementById('preferences-step-number');
         const confirmStepNumber = document.getElementById('confirm-step-number');
+        const educationLevelGroup = document.getElementById('education-level-group');
+        const emoryStudentGroup = document.getElementById('emory-student-group');
+        const formField = () => window.APStudyFormField;
         function showError(message) {
             wizardStatus.textContent = message;
             wizardStatus.classList.remove('hidden');
@@ -442,6 +445,7 @@
         function clearError() {
             wizardStatus.classList.add('hidden');
             wizardStatus.textContent = '';
+            formField()?.clearAll?.(form);
         }
         function markDirty() {
             onboardingState.dirty = true;
@@ -470,27 +474,33 @@
         function validateAccountStep() {
             const displayName = displayNameInput?.value.trim() || '';
             if (!displayName) {
+                formField()?.markInvalid?.(displayNameInput);
                 showError('Display name is required.');
                 return false;
             }
             const rawUsername = usernameInput?.value.trim() || '';
             if (!rawUsername) {
+                formField()?.markInvalid?.(usernameInput);
                 showError('Username is required.');
                 return false;
             }
             const normalizedUsername = rawUsername.toLowerCase();
             if (!USERNAME_PATTERN.test(normalizedUsername)) {
+                formField()?.markInvalid?.(usernameInput);
                 showError('Please only use numbers, letters, dashes -, or underscores _.');
                 return false;
             }
             if (normalizedUsername.length < USERNAME_MIN_LENGTH || normalizedUsername.length > USERNAME_MAX_LENGTH) {
+                formField()?.markInvalid?.(usernameInput);
                 showError('Username must be between 3 and 20 characters.');
                 return false;
             }
             if (USERNAME_RESERVED.has(normalizedUsername)) {
+                formField()?.markInvalid?.(usernameInput);
                 showError('That username is reserved.');
                 return false;
             }
+            formField()?.clearInvalid?.([displayNameInput, usernameInput]);
             onboardingState.displayName = displayName;
             onboardingState.username = normalizedUsername;
             if (usernameInput) {
@@ -661,6 +671,8 @@
                     <span class="material-symbols-outlined text-lg" data-icon="close">close</span>
                 </button>
             `;
+            const input = row.querySelector('input[data-other-calendar-url]');
+            formField()?.bindAutoClear?.(input);
             return row;
         }
         function normalizeCalendarUrlForDedup(url, options = {}) {
@@ -873,29 +885,37 @@
             }
             const value = classYearInput.value.trim();
             if (!/^[0-9]{4}$/.test(value)) {
+                formField()?.markInvalid?.(classYearInput);
                 showError('Please enter a valid 4-digit class year.');
                 return false;
             }
+            formField()?.clearInvalid?.(classYearInput);
             return true;
         }
         function validateEducationStep() {
             if (!getSelectedEducationLevel()) {
+                formField()?.markInvalid?.(educationLevelGroup);
                 showError('Select an education level before continuing.');
                 return false;
             }
+            formField()?.clearInvalid?.(educationLevelGroup);
             if (!validateClassYear()) {
                 return false;
             }
             if (shouldShowEmoryStudentToggle() && onboardingState.emoryStudent === null) {
+                formField()?.markInvalid?.(emoryStudentGroup);
                 showError('Please choose whether you are an Emory University student.');
                 return false;
             }
+            formField()?.clearInvalid?.(emoryStudentGroup);
             if (shouldShowEmoryEmail()) {
                 const emailValue = emoryEmailInput.value.trim().toLowerCase();
                 if (!emailValue.endsWith('@emory.edu')) {
+                    formField()?.markInvalid?.(emoryEmailInput);
                     showError('Please enter a valid @emory.edu email address.');
                     return false;
                 }
+                formField()?.clearInvalid?.(emoryEmailInput);
             }
             return true;
         }
@@ -1008,9 +1028,11 @@
             const sectionNumberValue = sectionNumber.value.trim();
             const instructorNameValue = instructorName.value.trim();
             if (!courseCodeValue) {
+                formField()?.markInvalid?.(courseCode);
                 showError('Enter a course code first.');
                 return;
             }
+            formField()?.clearInvalid?.(courseCode);
             markDirty();
             const saved = await saveStep(3, {
                 action: 'add_course',
@@ -1141,6 +1163,7 @@
         }
         function onEducationLevelSelected(level) {
             onboardingState.educationLevel = level;
+            formField()?.clearInvalid?.(educationLevelGroup);
             markDirty();
             if (level !== 'Undergraduate') {
                 onboardingState.emoryStudent = null;
@@ -1154,6 +1177,7 @@
         }
         function onEmoryStudentSelected(value) {
             onboardingState.emoryStudent = value === 'yes';
+            formField()?.clearInvalid?.(emoryStudentGroup);
             if (value === 'yes') {
                 onboardingState.school = EMORY_SCHOOL_NAME;
             } else {
@@ -1220,22 +1244,29 @@
                         }
                         const normalizedSeen = new Set();
                         const normalizedCanvas = normalizeCalendarUrlForDedup(feedUrl, { allowMissingScheme: true });
-                        for (const url of otherCalendarUrls) {
+                        const otherCalendarInputs = Array.from(document.querySelectorAll('input[data-other-calendar-url]'));
+                        for (const input of otherCalendarInputs) {
+                            const url = input.value.trim();
+                            if (!url) continue;
                             const normalized = normalizeCalendarUrlForDedup(url);
                             if (!normalized) {
+                                formField()?.markInvalid?.(input);
                                 showError('Each optional calendar link must be a valid http(s) or webcal URL.');
                                 return;
                             }
                             if (normalizedCanvas && normalized === normalizedCanvas) {
+                                formField()?.markInvalid?.(input);
                                 showError('Optional calendar links cannot duplicate the Nest Canvas calendar.');
                                 return;
                             }
                             if (normalizedSeen.has(normalized)) {
+                                formField()?.markInvalid?.(input);
                                 showError('Duplicate optional calendar links are not allowed.');
                                 return;
                             }
                             normalizedSeen.add(normalized);
                         }
+                        formField()?.clearAll?.(form);
                         await fetchJson('{{ url_for("settings.update_feed_url") }}', {
                             method: 'POST',
                             body: JSON.stringify({
@@ -1416,6 +1447,17 @@
             }
             bindHelperText(displayNameInput, displayNameHelp);
             bindHelperText(usernameInput, usernameHelp);
+            formField()?.bindAutoClear?.([
+                displayNameInput,
+                usernameInput,
+                classYearInput,
+                emoryEmailInput,
+                courseCode,
+                document.getElementById('canvas-feed-url'),
+            ]);
+            document.querySelectorAll('input[data-other-calendar-url]').forEach((input) => {
+                formField()?.bindAutoClear?.(input);
+            });
             syncEducationVisibility();
             renderCourseList();
             updateAddCourseButtonState();

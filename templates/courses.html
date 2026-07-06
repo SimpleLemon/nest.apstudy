@@ -73,10 +73,13 @@
                     </button>
                 </div>
                 <div class="courses-search-row">
-                    <label class="courses-search-field">
-                        <span class="material-symbols-outlined" aria-hidden="true">search</span>
-                        <input id="courses-search-input" type="search" autocomplete="off" placeholder="Search classes" aria-label="Search classes" />
-                    </label>
+                    <div class="ui-search-field">
+                        <label class="ui-search-field__label ui-search-field__label--sr-only" for="courses-search-input">Search classes</label>
+                        <div class="ui-search-field__control">
+                            <input id="courses-search-input" type="search" class="ui-search-field__input" autocomplete="off" placeholder="Search classes" aria-label="Search classes" />
+                            <span class="ui-search-field__trigger" aria-hidden="true">{% include "partials/ui_search_icon.html" %}</span>
+                        </div>
+                    </div>
                     <button id="courses-filter-button" class="courses-filter-button" type="button" aria-label="Filter courses" aria-expanded="false" aria-controls="courses-filter-popover">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
                         <span id="courses-filter-count" class="courses-filter-count" hidden>0</span>

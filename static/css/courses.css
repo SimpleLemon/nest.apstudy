@@ -116,22 +116,6 @@ body.courses-body {
   align-items: center;
 }
 
-.courses-search-field {
-  position: relative;
-  display: block;
-}
-
-.courses-search-field .material-symbols-outlined {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-on-surface-variant);
-  font-size: 20px;
-  pointer-events: none;
-}
-
-.courses-search-field input,
 .courses-filter-popover-term select,
 .courses-filter-grid select,
 .courses-time-filter input[type="time"] {
@@ -144,19 +128,9 @@ body.courses-body {
   font: 500 13px/1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-}
-
-.courses-search-field input {
-  padding: 0 12px 0 40px;
-}
-
-.courses-filter-popover-term select,
-.courses-filter-grid select,
-.courses-time-filter input[type="time"] {
   padding: 0 10px;
 }
 
-.courses-search-field input:focus,
 .courses-filter-popover-term select:focus,
 .courses-filter-grid select:focus,
 .courses-time-filter input[type="time"]:focus {
@@ -1267,7 +1241,7 @@ body.courses-body {
     padding: 20px 16px 14px;
   }
 
-  .courses-search-field input,
+  .courses-search-row .ui-search-field__input,
   .courses-filter-popover-term select,
   .courses-filter-grid select,
   .courses-time-filter input[type="time"],

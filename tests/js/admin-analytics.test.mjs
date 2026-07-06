@@ -185,7 +185,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
       }
       const delta = selector.match(/\[data-analytics-delta="([^"]+)"\]/)?.[1];
       if (delta) {
-        if (!deltas.has(delta)) deltas.set(delta, { textContent: "", hidden: true, className: "" });
+        if (!deltas.has(delta)) deltas.set(delta, { textContent: "", innerHTML: "", hidden: true, className: "" });
         return deltas.get(delta);
       }
       if (selector === '[data-chart="main"]') return nodes.main;
@@ -243,9 +243,9 @@ test("admin analytics main card switches to selected metric graph", async () => 
   assert.equal(nodes.source.textContent, "Source: Google Analytics");
   assert.match(nodes.main.innerHTML, /admin-analytics-svg--secondary/);
   assert.equal(cards.get("pageViews").textContent, "12");
-  assert.equal(deltas.get("activeUsers").textContent, "↓ 20.0%");
-  assert.equal(deltas.get("pageViews").textContent, "↑ 50.0%");
-  assert.match(deltas.get("activeUsers").className, /admin-analytics-delta--down/);
+  assert.match(deltas.get("activeUsers").innerHTML, /-20\.0%/);
+  assert.match(deltas.get("pageViews").innerHTML, /\+50\.0%/);
+  assert.match(deltas.get("activeUsers").className, /bg-orange-400\/10/);
   assert.equal(nodes.countryMap.innerHTML, "");
   assert.equal(nodes.countryList.innerHTML, "");
   assert.equal(nodes.pageList.innerHTML, "");
@@ -300,7 +300,7 @@ test("admin analytics GA detail panels render independently with cleaned page la
   assert.doesNotMatch(pagePanel.pageList.innerHTML, /APStudy Nest/);
   assert.match(pagePanel.pageList.innerHTML, /Landing Page/);
   assert.match(pagePanel.pageList.innerHTML, /\/dashboard/);
-  assert.match(pagePanel.pageList.innerHTML, /↓ 25.0%/);
+  assert.match(pagePanel.pageList.innerHTML, /-25\.0%/);
 });
 
 test("admin analytics GA details draw a Google GeoChart when available", async () => {
@@ -365,8 +365,8 @@ test("admin analytics GA details draw a Google GeoChart when available", async (
   assert.deepEqual(Array.from(chartCalls.find((call) => call.type === "load").options.packages), ["geochart"]);
   assert.deepEqual(JSON.parse(JSON.stringify(nodes.countryMap.drawn.data)), [["Country", "Active users"], ["US", 7]]);
   assert.equal(nodes.gaSource.textContent, "Source: Google Analytics");
-  assert.match(nodes.countryList.innerHTML, /↑ 40.0%/);
-  assert.match(nodes.pageList.innerHTML, /↓ 25.0%/);
+  assert.match(nodes.countryList.innerHTML, /\+40\.0%/);
+  assert.match(nodes.pageList.innerHTML, /-25\.0%/);
 });
 
 test("admin analytics range dropdown opens, selects, and closes on outside click", async () => {

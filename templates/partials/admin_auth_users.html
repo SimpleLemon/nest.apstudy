@@ -15,16 +15,21 @@
     {% endif %}
 
     <section class="admin-card admin-auth-users-toolbar">
-        <form class="admin-auth-users-search" data-auth-users-search autocomplete="off">
-            <span class="material-symbols-outlined admin-auth-users-search__icon" aria-hidden="true">search</span>
-            <input
-                type="search"
-                name="q"
-                value="{{ q }}"
-                placeholder="Search by email, username, or Appwrite ID"
-                aria-label="Search users"
-                data-auth-users-search-input
-            />
+        <form class="ui-search-field ui-search-field--admin" data-auth-users-search autocomplete="off">
+            <label class="ui-search-field__label ui-search-field__label--sr-only" for="admin-auth-users-search-input">Search users</label>
+            <div class="ui-search-field__control">
+                <input
+                    id="admin-auth-users-search-input"
+                    type="search"
+                    class="ui-search-field__input"
+                    name="q"
+                    value="{{ q }}"
+                    placeholder="Search by email, username, or Appwrite ID"
+                    aria-label="Search users"
+                    data-auth-users-search-input
+                />
+                <span class="ui-search-field__trigger" aria-hidden="true">{% include "partials/ui_search_icon.html" %}</span>
+            </div>
         </form>
         <div class="admin-auth-columns-wrap">
             <button

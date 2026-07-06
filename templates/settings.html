@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% set settings_assets_version = 'settings-toast-20260614-1' %}
+{% set settings_assets_version = 'settings-combobox-20260705-1' %}
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -26,6 +26,7 @@
     <script src="{{ url_for('static', filename='js/core/navbar.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/utils.js', v=settings_assets_version) }}" defer></script>
+    <script src="{{ url_for('static', filename='js/settings/combobox.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/calendar.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/profile.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/preferences.js', v=settings_assets_version) }}" defer></script>
@@ -131,11 +132,23 @@
                                             </label>
                                             <div class="settings-field">
                                                 <span class="settings-field-label">Avatar</span>
-                                                <div class="settings-avatar-upload-control">
-                                                    <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary">Upload</button>
-                                                    <input id="settings-avatar-upload" name="avatar" class="sr-only" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-label="Upload avatar" />
+                                                <div class="settings-avatar-upload-card">
+                                                    <div id="settings-avatar-dropzone" class="settings-avatar-dropzone" role="button" tabindex="0" aria-label="Upload avatar by drag and drop or click">
+                                                        <img id="settings-avatar-dropzone-preview" class="settings-avatar-dropzone-preview" src="{{ (user.picture or '')|avatar_url(176) }}" alt="" width="176" height="176" loading="lazy" decoding="async" {% if not user.picture %}hidden{% endif %} />
+                                                        <div id="settings-avatar-dropzone-placeholder" class="settings-avatar-dropzone-placeholder" {% if user.picture %}hidden{% endif %}>
+                                                            <span class="settings-avatar-dropzone-icon" aria-hidden="true">
+                                                                <span class="material-symbols-outlined">account_circle</span>
+                                                            </span>
+                                                            <p>Drag and drop your image here</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="settings-avatar-upload-divider" aria-hidden="true">
+                                                        <span>OR</span>
+                                                    </div>
+                                                    <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary settings-avatar-upload-button">Upload a photo</button>
+                                                    <input id="settings-avatar-upload" name="avatar" class="settings-visually-hidden" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-label="Upload avatar" tabindex="-1" />
+                                                    <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
                                                 </div>
-                                                <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
                                             </div>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Banner Color</span>
@@ -375,20 +388,36 @@
                             </div>
                             <div class="settings-card-content">
                                 <div class="settings-field-grid settings-field-grid-two">
-                                    <label class="settings-field">
+                                    <div class="settings-field">
                                         <span class="settings-field-label">Language</span>
-                                        <select id="settings-language" name="language">
-                                            <option value="en">English</option>
-                                            <option value="es">Spanish</option>
-                                            <option value="fr">French</option>
-                                            <option value="de">German</option>
-                                        </select>
-                                    </label>
+                                        <div class="settings-combobox" data-settings-combobox="language">
+                                            <input id="settings-language" name="language" type="hidden" value="en" />
+                                            <button type="button" class="settings-combobox-trigger" data-settings-combobox-trigger role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="settings-language-listbox">
+                                                <span data-settings-combobox-label class="settings-combobox-placeholder">Select language</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="settings-combobox-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                                            </button>
+                                            <div id="settings-language-listbox" class="settings-combobox-menu" data-settings-combobox-menu role="listbox" hidden>
+                                                <div class="settings-combobox-list" data-settings-combobox-list>
+                                                    <button type="button" role="option" class="settings-combobox-option" data-value="en">English</button>
+                                                    <button type="button" role="option" class="settings-combobox-option" data-value="es">Spanish</button>
+                                                    <button type="button" role="option" class="settings-combobox-option" data-value="fr">French</button>
+                                                    <button type="button" role="option" class="settings-combobox-option" data-value="de">German</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="settings-field">
                                         <span class="settings-field-label">Timezone</span>
-                                        <div class="settings-inline-field">
-                                            <input id="settings-timezone" name="timezone" type="text" placeholder="America/New_York" aria-label="Time zone" />
-                                            <button id="settings-use-current-timezone" type="button" class="settings-button settings-button-secondary settings-button-inline">Use Current</button>
+                                        <div class="settings-combobox" data-settings-combobox="timezone">
+                                            <input id="settings-timezone" name="timezone" type="hidden" value="" />
+                                            <button type="button" class="settings-combobox-trigger" data-settings-combobox-trigger role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="settings-timezone-listbox">
+                                                <span data-settings-combobox-label class="settings-combobox-placeholder">Select timezone</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="settings-combobox-chevron" aria-hidden="true"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                                            </button>
+                                            <div id="settings-timezone-listbox" class="settings-combobox-menu" data-settings-combobox-menu role="listbox" hidden>
+                                                <input type="search" class="settings-combobox-search" data-settings-combobox-search aria-label="Search timezones" placeholder="Search timezones…" />
+                                                <div class="settings-combobox-list" data-settings-combobox-list></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

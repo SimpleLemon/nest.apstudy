@@ -78,9 +78,11 @@ const {
   formatBytes,
   formatCount,
   formatDate,
+  formatTimezoneLabel,
   getToggleState,
   isEarlyMember,
   isEmorySchool,
+  listSupportedTimezones,
   normalizeHexColor,
   normalizeSectionId,
   normalizeSidebarDefault,
@@ -160,7 +162,6 @@ const settingsPreferences = window.APStudySettingsPreferences.createSettingsPref
 });
 const {
   bindThemeChoiceButtons,
-  bindTimezoneHelper,
   savePreferences,
   syncThemeControls,
   syncToggleControls,
@@ -181,6 +182,48 @@ const {
   handlePasswordReset,
 } = settingsAccount;
 
+function mountRegionComboboxes() {
+  const mountSettingsCombobox = window.APStudySettingsCombobox?.mountSettingsCombobox;
+  if (!mountSettingsCombobox) {
+    return;
+  }
+
+  if (elements.languageComboboxRoot && elements.language) {
+    elements.languageCombobox = mountSettingsCombobox({
+      root: elements.languageComboboxRoot,
+      input: elements.language,
+      placeholder: 'Select language',
+      searchable: false,
+    });
+  }
+
+  if (elements.timezoneComboboxRoot && elements.timezone) {
+    const timezoneOptions = listSupportedTimezones().map((timezone) => ({
+      value: timezone,
+      label: formatTimezoneLabel(timezone),
+    }));
+
+    elements.timezoneCombobox = mountSettingsCombobox({
+      root: elements.timezoneComboboxRoot,
+      input: elements.timezone,
+      placeholder: 'Select timezone',
+      searchable: true,
+      options: timezoneOptions,
+      quickActions: [{ id: 'device-timezone', label: 'Use device timezone' }],
+      resolveQuickActionValue(action) {
+        if (action.id === 'device-timezone') {
+          const deviceTimezone = resolveLocalTimezone();
+          if (deviceTimezone) {
+            showToast('Timezone updated from your device.', 'success');
+          }
+          return deviceTimezone;
+        }
+        return '';
+      },
+    });
+  }
+}
+
 function initializeSettingsPage() {
   cacheElements();
   bindNavigation();
@@ -190,8 +233,8 @@ function initializeSettingsPage() {
   bindProfilePreviewControls();
   bindCalendarControls();
   bindDiscordControls();
-  bindTimezoneHelper();
   bindUnsavedChangesWarning();
+  mountRegionComboboxes();
   elements.themeChoices = Array.from(document.querySelectorAll('.settings-theme-choice'));
   bindThemeChoiceButtons();
   void bootstrapSettingsPage();
@@ -217,6 +260,9 @@ function cacheElements() {
   elements.shareProfile = document.getElementById('settings-share-profile');
   elements.avatarUpload = document.getElementById('settings-avatar-upload');
   elements.avatarUploadButton = document.getElementById('settings-avatar-upload-button');
+  elements.avatarUploadDropzone = document.getElementById('settings-avatar-dropzone');
+  elements.avatarDropzonePreview = document.getElementById('settings-avatar-dropzone-preview');
+  elements.avatarDropzonePlaceholder = document.getElementById('settings-avatar-dropzone-placeholder');
   elements.avatarUploadStatus = document.getElementById('settings-avatar-upload-status');
   elements.bannerColorPicker = document.getElementById('settings-banner-color-picker');
   elements.bannerSwatch = document.getElementById('settings-banner-swatch');
@@ -243,7 +289,8 @@ function cacheElements() {
   elements.sidebarDefault = document.getElementById('settings-sidebar-default');
   elements.language = document.getElementById('settings-language');
   elements.timezone = document.getElementById('settings-timezone');
-  elements.useCurrentTimezone = document.getElementById('settings-use-current-timezone');
+  elements.languageComboboxRoot = document.querySelector('[data-settings-combobox="language"]');
+  elements.timezoneComboboxRoot = document.querySelector('[data-settings-combobox="timezone"]');
   elements.saveProfile = document.getElementById('settings-save-profile');
   elements.saveAppearance = document.getElementById('settings-save-appearance');
   elements.saveNotifications = document.getElementById('settings-save-notifications');
@@ -433,10 +480,14 @@ function populateFields() {
   captureProfileBaseline();
   renderDiscordButton();
 
-  if (elements.language) {
+  if (elements.languageCombobox) {
+    elements.languageCombobox.setValue(settings.language || 'en');
+  } else if (elements.language) {
     elements.language.value = settings.language || 'en';
   }
-  if (elements.timezone) {
+  if (elements.timezoneCombobox) {
+    elements.timezoneCombobox.setValue(settings.timezone || '');
+  } else if (elements.timezone) {
     elements.timezone.value = settings.timezone || '';
   }
   if (elements.canvasFeedUrl) {

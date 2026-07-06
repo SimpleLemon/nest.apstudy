@@ -229,6 +229,54 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
 })();
 
 (() => {
+    if (window.APStudyFormField) return;
+
+    const autoClearHandlers = new WeakMap();
+
+    function normalizeFields(fields) {
+        if (!fields) return [];
+        return (Array.isArray(fields) ? fields : [fields]).filter(Boolean);
+    }
+
+    function markInvalid(fields, { focus = true } = {}) {
+        const list = normalizeFields(fields);
+        list.forEach((field) => field.setAttribute("aria-invalid", "true"));
+        if (focus && list[0]?.focus) {
+            list[0].focus({ preventScroll: true });
+        }
+        return list[0] || null;
+    }
+
+    function clearInvalid(fields) {
+        normalizeFields(fields).forEach((field) => field.removeAttribute("aria-invalid"));
+    }
+
+    function clearAll(root = document) {
+        if (!root?.querySelectorAll) return;
+        root.querySelectorAll('[aria-invalid="true"]').forEach((field) => {
+            field.removeAttribute("aria-invalid");
+        });
+    }
+
+    function bindAutoClear(fields) {
+        normalizeFields(fields).forEach((field) => {
+            if (autoClearHandlers.has(field)) return;
+            const handler = () => clearInvalid(field);
+            field.addEventListener("input", handler);
+            field.addEventListener("change", handler);
+            autoClearHandlers.set(field, handler);
+        });
+    }
+
+    window.APStudyFormField = {
+        markInvalid,
+        clearInvalid,
+        clearAll,
+        bindAutoClear,
+    };
+})();
+
+(() => {
     if (window.APStudyConfirm) return;
 
     let activeRequest = null;

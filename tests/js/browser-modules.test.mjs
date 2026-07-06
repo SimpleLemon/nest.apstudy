@@ -38,6 +38,7 @@ if (false) {
     await import("../../static/js/calendar/views/render-shell.js");
     await import("../../static/js/calendar/views/week-view.js");
     await import("../../static/js/chat.js");
+    await import("../../static/js/core/breadcrumb.js");
     await import("../../static/js/core/appwrite.js");
     await import("../../static/js/core/command-palette.js");
     await import("../../static/js/core/global.js");
@@ -74,6 +75,7 @@ if (false) {
     await import("../../static/js/notes/toolbar.js");
     await import("../../static/js/settings/account.js");
     await import("../../static/js/settings/calendar.js");
+    await import("../../static/js/settings/combobox.js");
     await import("../../static/js/settings/index.js");
     await import("../../static/js/settings/preferences.js");
     await import("../../static/js/settings/profile.js");
@@ -338,8 +340,9 @@ test("notes, files, and tasks share the compact workspace title style", async ()
     const taskSource = await sourceFor("static/js/tasks/task.js");
 
     assert.match(layoutStyles, /\.workspace-page-title\s*\{[^}]*font-size:\s*20px;[^}]*font-weight:\s*740;/s);
-    assert.match(notesTemplate, /notes-page-title workspace-page-title/);
-    assert.match(filesTemplate, /files-breadcrumbs workspace-page-title/);
+    assert.match(notesTemplate, /aria-label="breadcrumb"/);
+    assert.match(notesTemplate, /breadcrumb-list/);
+    assert.match(filesTemplate, /class="breadcrumb files-breadcrumbs"/);
     assert.match(taskSource, /task-title workspace-page-title/);
 });
 
@@ -387,11 +390,13 @@ test("notes list guards destructive actions and supports safe card menus", async
     assert.match(listSource, /if \(els\.pageActions\) els\.pageActions\.hidden = readOnly/);
     assert.match(listSource, /if \(els\.notesEmptyNewNote\) els\.notesEmptyNewNote\.hidden = readOnly/);
     assert.match(template, /id="notes-root-breadcrumb"[^>]*aria-haspopup="menu"/);
+    assert.match(template, /class="breadcrumb-trigger"/);
     assert.match(template, /id="notes-view-label">My Notes</);
     assert.match(template, /id="notes-new-button"[\s\S]*?add_2[\s\S]*?<span>New<\/span>/);
     assert.match(template, /id="notes-view-menu"[^>]*role="menu"/);
     assert.doesNotMatch(template, /class="notes-view-tabs"/);
     assert.match(template, /id="notes-folder-breadcrumb"/);
+    assert.match(template, /id="notes-breadcrumb-separator-item"/);
     assert.doesNotMatch(template, /id="btn-share-folder"/);
     assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
     assert.match(template, /js\/notes\/sharing\.js/);

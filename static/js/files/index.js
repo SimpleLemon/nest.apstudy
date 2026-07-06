@@ -202,14 +202,15 @@
         const crumbs = state.breadcrumbs.length
             ? state.breadcrumbs
             : [{ id: null, name: "My Files" }];
-        els.breadcrumbs.innerHTML = crumbs.map((crumb, index) => {
-            const separator = index === 0
-                ? ""
-                : `<span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>`;
-            return `${separator}<button type="button" data-folder-id="${escapeHtml(crumb.id || "root")}">${escapeHtml(crumb.name || "My Files")}</button>`;
-        }).join("");
-        els.breadcrumbs.querySelectorAll("button[data-folder-id]").forEach((button) => {
-            button.addEventListener("click", () => void loadFolder(button.dataset.folderId));
+        const items = crumbs.map((crumb, index) => ({
+            label: crumb.name || "My Files",
+            id: crumb.id || "root",
+            current: index === crumbs.length - 1,
+        }));
+        window.APStudyBreadcrumb?.renderBreadcrumb(els.breadcrumbs, items, {
+            collapseAfter: 4,
+            escapeHtml,
+            onNavigate: (folderId) => void loadFolder(folderId),
         });
     }
 
@@ -463,8 +464,8 @@
     }
 
     function notify(message, type = "info", options = {}) {
-        const { modalError } = options;
-        if (modalError) showFormError(modalError, message);
+        const { modalError, field } = options;
+        if (modalError) showFormError(modalError, message, field);
         if (type === "error" || type === "warning") {
             showAlert(message, type);
         }

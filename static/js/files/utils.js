@@ -107,6 +107,56 @@
         return "description";
     }
 
+    function uploadFileMime(file) {
+        return String(file?.type || file?.mimeType || "").toLowerCase();
+    }
+
+    function uploadFileExtension(file) {
+        const name = String(file?.name || "");
+        const dot = name.lastIndexOf(".");
+        if (dot > 0 && dot < name.length - 1) {
+            return name.slice(dot + 1).toLowerCase();
+        }
+        return "";
+    }
+
+    function fileExtensionLabel(file) {
+        const mime = uploadFileMime(file);
+        const extension = uploadFileExtension(file);
+        if (mime.includes("pdf") || extension === "pdf") return "PDF";
+        if (mime.startsWith("image/") || ["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(extension)) {
+            return (extension || "IMG").slice(0, 4).toUpperCase();
+        }
+        if (mime.startsWith("video/") || ["mp4", "mov", "webm", "mkv"].includes(extension)) {
+            return (extension || "VID").slice(0, 4).toUpperCase();
+        }
+        if (mime.includes("zip") || mime.includes("compressed") || ["zip", "rar", "7z", "tar", "gz"].includes(extension)) {
+            return (extension || "ZIP").slice(0, 4).toUpperCase();
+        }
+        if (extension) return extension.slice(0, 4).toUpperCase();
+        return "FILE";
+    }
+
+    function fileExtensionBadgeTone(file) {
+        const mime = uploadFileMime(file);
+        const extension = uploadFileExtension(file);
+        if (mime.includes("pdf") || extension === "pdf") return "pdf";
+        if (mime.startsWith("image/") || ["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(extension)) return "image";
+        if (mime.startsWith("video/") || ["mp4", "mov", "webm", "mkv"].includes(extension)) return "video";
+        if (mime.includes("zip") || mime.includes("compressed") || ["zip", "rar", "7z", "tar", "gz"].includes(extension)) return "archive";
+        return "default";
+    }
+
+    function fileIconForUpload(file) {
+        const mime = uploadFileMime(file);
+        const extension = uploadFileExtension(file);
+        if (mime.startsWith("image/") || ["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(extension)) return "image";
+        if (mime.includes("pdf") || extension === "pdf") return "picture_as_pdf";
+        if (mime.startsWith("video/") || ["mp4", "mov", "webm", "mkv"].includes(extension)) return "movie";
+        if (mime.includes("zip") || mime.includes("compressed") || ["zip", "rar", "7z", "tar", "gz"].includes(extension)) return "folder_zip";
+        return "description";
+    }
+
     function formatFolderStatus(folder) {
         return `${folder.isPublic ? "Shared" : "Private"} / No folder expiry`;
     }
@@ -223,16 +273,22 @@
         return "Upload failed.";
     }
 
-    function showFormError(element, message) {
+    function showFormError(element, message, field) {
         if (!element) return;
         element.textContent = message;
         element.hidden = false;
+        if (field) {
+            window.APStudyFormField?.markInvalid?.(field, { focus: false });
+        }
     }
 
-    function clearFormError(element) {
+    function clearFormError(element, field) {
         if (!element) return;
         element.textContent = "";
         element.hidden = true;
+        if (field) {
+            window.APStudyFormField?.clearInvalid?.(field);
+        }
     }
 
     function setButtonBusy(button, busy) {
@@ -360,6 +416,9 @@
         hasFiles,
         isInteractiveTarget,
         fileIcon,
+        fileExtensionLabel,
+        fileExtensionBadgeTone,
+        fileIconForUpload,
         formatFolderStatus,
         formatFileStatus,
         formatFolderCounts,
