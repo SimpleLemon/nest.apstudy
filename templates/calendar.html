@@ -53,12 +53,12 @@
 {% set sidebar_user_emory_student = user.emory_student %}
 {% include "_sidebar.html" %}
 <!-- Main Content Canvas -->
-<main class="flex-1 w-full px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
+<main class="workspace-page-shell">
 <section class="flex flex-col gap-4 w-full animate-fade-in-up">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
 <div>
-<h1 id="calendar-title" class="text-3xl font-headline font-bold text-on-surface mb-1">Loading calendar...</h1>
-<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<h1 id="calendar-title" class="workspace-page-title">Loading calendar...</h1>
+<p class="workspace-page-subtitle flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px]" aria-hidden="true">calendar_today</span>
 <span id="calendar-subtitle">Pulling events from your feed</span>
 </p>

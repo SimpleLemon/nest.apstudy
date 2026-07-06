@@ -33,7 +33,7 @@
     {% include '_sidebar.html' %}
     {% endif %}
 
-    <main class="flex-1 w-full max-w-[1400px] mx-auto px-6 md:px-8 pt-6 pb-10 relative z-10">
+    <main class="workspace-page-shell">
         {% if page_state != 'ready' %}
         <section class="notes-share-gate" aria-labelledby="notes-folder-gate-title">
             <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if page_state == 'login_required' else 'folder_off' }}</span>

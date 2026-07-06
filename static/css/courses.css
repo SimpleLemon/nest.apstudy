@@ -45,13 +45,6 @@ body.courses-body {
   letter-spacing: -0.02em;
 }
 
-.courses-panel-header h1 {
-  font-size: 28px;
-  line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
 .courses-panel-header p,
 .courses-calendar-header p {
   margin: 6px 0 0;
@@ -1272,11 +1265,6 @@ body.courses-body {
 
   .courses-panel-header {
     padding: 20px 16px 14px;
-  }
-
-  .courses-panel-header h1 {
-    font-size: 26px;
-    line-height: 1.15;
   }
 
   .courses-search-field input,

@@ -14,6 +14,11 @@
   --text-muted: var(--color-shell-text-muted);
   --accent-color: var(--color-shell-accent);
   --accent-hover: var(--color-shell-hover-bg);
+  --workspace-page-padding-x: clamp(24px, 4vw, 32px);
+  --workspace-page-padding-top: 24px;
+  --workspace-page-padding-bottom: 40px;
+  --workspace-page-max-width: 1600px;
+  --workspace-page-gap: 48px;
 }
 /* Reset */
 * {
@@ -38,6 +43,39 @@ html {
   font-weight: 740;
   letter-spacing: -0.015em;
   line-height: 1.2;
+}
+
+.workspace-page-shell {
+  flex: 1;
+  width: 100%;
+  max-width: var(--workspace-page-max-width);
+  margin: 0 auto;
+  padding: var(--workspace-page-padding-top)
+           var(--workspace-page-padding-x)
+           var(--workspace-page-padding-bottom);
+  display: flex;
+  flex-direction: column;
+  gap: var(--workspace-page-gap);
+  position: relative;
+  z-index: 10;
+}
+
+.workspace-page-shell--wide {
+  max-width: 1680px;
+}
+
+.workspace-page-subtitle {
+  margin: 6px 0 0;
+  color: var(--color-on-surface-variant);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .workspace-page-shell {
+    --workspace-page-padding-x: 16px;
+    --workspace-page-gap: 32px;
+  }
 }
 
 body {

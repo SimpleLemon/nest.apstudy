@@ -40,10 +40,10 @@
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
-    <main class="dashboard-main" aria-labelledby="dashboard-title">
+    <main class="workspace-page-shell dashboard-main" aria-labelledby="dashboard-title">
         <header class="dashboard-header">
             <div>
-                <h1 id="dashboard-title">Dashboard</h1>
+                <h1 id="dashboard-title" class="workspace-page-title">Dashboard</h1>
             </div>
             <div class="dashboard-header-actions">
                 <div class="dashboard-add-wrap">

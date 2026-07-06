@@ -5,13 +5,7 @@
 }
 
 .dashboard-main {
-    width: min(1440px, 100%);
-    margin: 0 auto;
-    padding: 28px clamp(18px, 3vw, 36px) 40px;
-    display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
-    gap: 24px;
 }
 
 .dashboard-main > .thefooter {
@@ -104,16 +98,6 @@
     font-weight: 760;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-}
-
-.dashboard-header h1 {
-    margin: 0;
-    color: var(--color-on-surface);
-    font-size: clamp(30px, 4vw, 44px);
-    line-height: 1.02;
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.025em;
 }
 
 .dashboard-header-link,
@@ -977,13 +961,6 @@
 }
 
 @media (max-width: 1024px) {
-    .dashboard-main {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
     .dashboard-header {
         align-items: flex-start;
         flex-direction: column;
@@ -1002,10 +979,6 @@
 }
 
 @media (max-width: 640px) {
-    .dashboard-main {
-        padding: 20px 14px 32px;
-    }
-
     .dashboard-checklist-items,
     .dashboard-courses-list {
         grid-template-columns: minmax(0, 1fr);
@@ -1065,11 +1038,6 @@
     .dashboard-checklist-hide {
         width: 48px;
         height: 48px;
-    }
-
-    .dashboard-header h1 {
-        font-size: 30px;
-        line-height: 1.08;
     }
 
     .dashboard-checklist,

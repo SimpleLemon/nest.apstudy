@@ -58,7 +58,7 @@
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
-    <main class="files-main">
+    <main class="workspace-page-shell">
         <section id="file-share-page" class="files-page" aria-labelledby="file-share-title">
             <h1 id="file-share-title" class="files-visually-hidden">File manager</h1>
             <header class="files-toolbar" aria-label="File manager controls">

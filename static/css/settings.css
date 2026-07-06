@@ -43,14 +43,6 @@
   color: var(--color-on-surface-variant);
 }
 
-.settings-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-}
-
 .settings-subtitle {
   margin: 0;
   max-width: 56rem;
@@ -1001,11 +993,6 @@
 }
 
 @media (max-width: 640px) {
-  .settings-page-main {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
   .settings-tabs {
     width: 100%;
     display: grid;

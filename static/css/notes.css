@@ -469,7 +469,7 @@
 .folder-card:hover .folder-card-menu-btn { opacity: 1; background: var(--notes-card-hover); color: var(--color-on-surface); outline: none; }
 
 /* Page layout */
-.notes-page { width: 100%; padding: 32px clamp(24px, 4vw, 44px); max-width: 1240px; margin: 0 auto; }
+.notes-page { width: 100%; max-width: none; padding: 0; margin: 0; }
 .notes-page-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
 .notes-page-title { display: flex; min-width: 0; align-items: center; gap: 8px; }
 .notes-breadcrumb-root { display: inline-flex; flex-shrink: 0; align-items: center; gap: 5px; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; }
@@ -2998,7 +2998,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   .notes-page {
     width: 100%;
     max-width: 100%;
-    padding: 22px 16px;
+    padding: 0;
   }
 
   .notes-page-header {

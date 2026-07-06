@@ -53,10 +53,10 @@
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
-    <main class="settings-page-main flex-1 w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-0 py-8 md:py-10 flex flex-col">
+    <main class="workspace-page-shell settings-page-main flex flex-col">
         <div class="settings-page-shell mx-auto w-full max-w-5xl xl:max-w-6xl flex flex-col flex-1">
             <header class="settings-hero mb-8 md:mb-10">
-                <h1 class="settings-title">Settings</h1>
+                <h1 class="settings-title workspace-page-title">Settings</h1>
             </header>
             <nav class="settings-tabs" aria-label="Settings sections">
                 <a href="#account" class="settings-tab is-active" data-tab="account">Account</a>

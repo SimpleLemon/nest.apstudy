@@ -442,7 +442,7 @@ function TaskApp({ completeSound, uncompleteSound }) {
             h("header", { className: "task-header" },
                 h("div", null,
                     h("h1", { className: "task-title workspace-page-title" }, "Tasks"),
-                    h("p", { className: "task-subtitle" }, "Lists, deadlines, repeat schedules, and calendar-synced work.")
+                    h("p", { className: "workspace-page-subtitle" }, "Lists, deadlines, repeat schedules, and calendar-synced work.")
                 )
             ),
             lists.length === 0

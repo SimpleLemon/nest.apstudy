@@ -3,13 +3,6 @@
     font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
-.files-main {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 28px clamp(20px, 4vw, 48px) 48px;
-}
-
 .files-page {
     display: flex;
     flex-direction: column;
@@ -1070,11 +1063,6 @@ body.files-modal-open {
 }
 
 @media (max-width: 760px) {
-    .files-main {
-        max-width: 100%;
-        padding: 22px 14px 38px;
-    }
-
     .files-toolbar,
     .files-modal-header {
         flex-direction: column;
