@@ -47,6 +47,18 @@ Nest.APStudy is a web platform for student course planning and productivity, com
 - Appwrite credentials (for auth and file storage)
 - SQLite 3.45+ (included with Python; CLI installed on VPS for backups)
 
+## Appwrite storage buckets
+
+The server uploads binary files to Appwrite Storage. Create these buckets in the Appwrite console (or point the env vars at existing bucket IDs) before enabling the related features:
+
+| Env var | Default bucket ID | Used for |
+|---------|-------------------|----------|
+| `APPWRITE_PROFILE_AVATAR_BUCKET_ID` | `profile_avatars` | Profile avatar uploads |
+| `APPWRITE_FILE_SHARE_BUCKET_ID` | `file_share_files` | File share uploads |
+| `APPWRITE_NOTES_MEDIA_BUCKET_ID` | `notes_media` | Inline images in notes |
+
+Mirror the working `profile_avatars` bucket settings (file security, max size, MIME allowlist). The server API key (`APPWRITE_API_KEY`) needs Storage create, read, and delete access on each bucket. Notes images are limited to 10 MiB (JPEG, PNG, GIF, WebP).
+
 ## Setup & Deployment
 
 <details>

@@ -2,6 +2,11 @@ import { getBlockInfoFromSelection } from '@blocknote/core';
 import { Extension } from '@tiptap/core';
 import { Plugin } from '@tiptap/pm/state';
 import { insertListHardBreak } from './keyboard-shortcuts-helpers.js';
+import {
+    isEditorBodyFocused,
+    selectAllVisibleBlocks,
+    shouldSelectAllBlocks,
+} from './keyboard-shortcuts-select-all.js';
 
 export const preserveRangeSelectionShortcuts = Extension.create({
     name: 'preserveRangeSelectionShortcuts',
@@ -47,3 +52,27 @@ export const listItemHardBreakShortcuts = Extension.create({
         };
     },
 });
+
+export function createSelectAllShortcuts(getBlockNoteEditor) {
+    return Extension.create({
+        name: 'selectAllShortcuts',
+        priority: 1200,
+        addKeyboardShortcuts() {
+            return {
+                'Mod-a': () => {
+                    if (!isEditorBodyFocused()) return false;
+                    const blockNoteEditor = getBlockNoteEditor?.();
+                    if (!blockNoteEditor) return false;
+                    if (shouldSelectAllBlocks(blockNoteEditor)) {
+                        return selectAllVisibleBlocks(blockNoteEditor);
+                    }
+                    const handled = this.editor.commands.selectAll();
+                    if (!handled) {
+                        return selectAllVisibleBlocks(blockNoteEditor);
+                    }
+                    return true;
+                },
+            };
+        },
+    });
+}

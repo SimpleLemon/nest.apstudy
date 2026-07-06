@@ -424,6 +424,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(keyboardSource, /event\.shiftKey[\s\S]*?\(event\.metaKey \|\| event\.ctrlKey\)[\s\S]*?!event\.altKey[\s\S]*?event\.key === 'ArrowUp' \|\| event\.key === 'ArrowDown'/);
     assert.match(keyboardSource, /if \(!isRangeVerticalArrow\) return false;[\s\S]*?return true;/);
     assert.match(keyboardSource, /'Shift-Enter'/);
+    assert.match(keyboardSource, /createSelectAllShortcuts/);
+    assert.match(keyboardSource, /'Mod-a'/);
+    assert.match(keyboardSource, /isEditorBodyFocused/);
+    assert.match(source, /createSelectAllShortcuts\(\(\) => blockNoteEditorRef\)/);
     assert.match(source, /function historyDepthForDocument\(documentValue\)/);
     assert.match(source, /disableExtensions: \['history'\]/);
     assert.match(source, /History\.configure\(\{ depth: historyDepth, newGroupDelay: 500 \}\)/);

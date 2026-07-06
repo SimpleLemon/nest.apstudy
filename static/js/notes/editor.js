@@ -22,7 +22,7 @@ import {
     filterBlockCatalog,
 } from './editor/block-catalog.js';
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
-import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts } from './editor/keyboard-shortcuts.js';
+import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts, createSelectAllShortcuts } from './editor/keyboard-shortcuts.js';
 import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
 import { createNoteCollaborationSession } from './editor/collaboration.js';
 import { bindReviewPanel } from './editor/review-panel.js';
@@ -2299,9 +2299,11 @@ function NotesSideMenu(props) {
 
 function NoteEditor({ initialContent, initialContentWasNormalized = false, collaborationSession = null }) {
     const historyDepth = historyDepthForDocument(initialContent);
+    let blockNoteEditorRef = null;
     const tiptapExtensions = [
         preserveRangeSelectionShortcuts,
         listItemHardBreakShortcuts,
+        createSelectAllShortcuts(() => blockNoteEditorRef),
     ];
     if (!collaborationSession) {
         tiptapExtensions.unshift(History.configure({ depth: historyDepth, newGroupDelay: 500 }));
@@ -2329,6 +2331,7 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false, colla
         editorOptions.initialContent = initialContent;
     }
     const editor = useCreateBlockNote(editorOptions);
+    blockNoteEditorRef = editor;
 
     const getSlashItems = React.useCallback(async (query) => (
         filterBlockCatalog(query).map((item) => ({

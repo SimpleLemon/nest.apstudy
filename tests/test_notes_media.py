@@ -8,6 +8,8 @@ from PIL import Image
 from flask import Flask
 from werkzeug.datastructures import FileStorage
 
+from appwrite.exception import AppwriteException
+
 import blueprints.notes_api as notes_api
 from services import note_media
 
@@ -100,6 +102,46 @@ class NoteMediaApiTests(unittest.TestCase):
             response, status = notes_api.get_note_media("note-1", "media-1")
         self.assertEqual(status, 404)
         self.assertEqual(response.get_json()["error"], "Not found.")
+
+    def test_upload_media_returns_500_when_storage_fails(self):
+        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+        with self.app.test_request_context(
+            "/api/notes/note-1/media",
+            method="POST",
+            data={"file": upload},
+            content_type="multipart/form-data",
+        ), patch.object(notes_api, "_note_owner_or_404", return_value=self.note), patch.object(
+            notes_api.note_store, "resolve_note_access", return_value={"can_edit": True}
+        ), patch.object(
+            notes_api.note_media, "create_media", side_effect=AppwriteException("bucket not found")
+        ), patch.object(notes_api, "current_user", SimpleNamespace(is_authenticated=True, id="owner")):
+            response = notes_api.upload_note_media.__wrapped__("note-1")
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.get_json()["error"], "Unable to store this image.")
+
+    def test_upload_media_accepts_clipboard_file_without_filename(self):
+        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="", content_type="image/png")
+        created = {
+            "id": "media-1",
+            "original_filename": "clipboard-image.png",
+            "mime_type": "image/png",
+            "file_size_bytes": 123,
+            "width": 32,
+            "height": 24,
+        }
+        with self.app.test_request_context(
+            "/api/notes/note-1/media",
+            method="POST",
+            data={"file": upload},
+            content_type="multipart/form-data",
+        ), patch.object(notes_api, "_note_owner_or_404", return_value=self.note), patch.object(
+            notes_api.note_store, "resolve_note_access", return_value={"can_edit": True}
+        ), patch.object(notes_api.note_media, "create_media", return_value=created) as create_media, patch.object(
+            notes_api, "current_user", SimpleNamespace(is_authenticated=True, id="owner")
+        ):
+            response = notes_api.upload_note_media.__wrapped__("note-1")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(create_media.call_args.args[2].filename, "clipboard-image.png")
 
 
 if __name__ == "__main__":

@@ -489,13 +489,22 @@ def upload_note_media(note_id):
     if not access["can_edit"]:
         abort(404)
     uploaded_file = request.files.get("file")
-    if not uploaded_file or not uploaded_file.filename:
+    if not uploaded_file:
         return jsonify({"error": "Choose an image to upload."}), 400
+    if not uploaded_file.filename:
+        uploaded_file.filename = "clipboard-image.png"
     try:
         media = note_media.create_media(note_id, current_user.id, uploaded_file)
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
-    except AppwriteException:
+    except AppwriteException as exc:
+        logger.exception(
+            "Failed to upload note media (code=%s): %s",
+            getattr(exc, "code", None) or getattr(exc, "response_code", None),
+            exc,
+        )
+        return jsonify({"error": "Unable to store this image."}), 500
+    except Exception:
         logger.exception("Failed to upload note media")
         return jsonify({"error": "Unable to store this image."}), 500
     return jsonify(_media_payload(note_id, media)), 201
