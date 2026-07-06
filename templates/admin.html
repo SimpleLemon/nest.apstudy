@@ -113,19 +113,19 @@
                 {% set system_stat_cells = [
                     {
                         'title': 'Memory Used',
-                        'icon': 'memory',
-                        'value_html': '<span class="text-2xl font-semibold text-card-foreground"><span data-role="mem-used">' ~ (('%.1f'|format(mem_used)) if mem_used is not none else '--') ~ '</span> / <span data-role="mem-total">' ~ (('%.1f'|format(mem_total)) if mem_total is not none else '--') ~ '</span> GB</span>',
-                        'col_class': 'w-full',
+                        'value_html': '<span data-role="mem-used">' ~ (('%.1f'|format(mem_used)) if mem_used is not none else '--') ~ '</span> / <span data-role="mem-total">' ~ (('%.1f'|format(mem_total)) if mem_total is not none else '--') ~ '</span> GB',
                     },
                     {
                         'title': 'Storage Used',
-                        'icon': 'storage',
-                        'value_html': '<span class="text-2xl font-semibold text-card-foreground"><span data-role="storage-used">' ~ (('%.1f'|format(storage_used)) if storage_used is not none else '--') ~ '</span> / <span data-role="storage-total">' ~ (('%.0f'|format(storage_total)) if storage_total is not none else '150') ~ '</span> GB</span>',
-                        'col_class': 'w-full',
+                        'value_html': '<span data-role="storage-used">' ~ (('%.1f'|format(storage_used)) if storage_used is not none else '--') ~ '</span> / <span data-role="storage-total">' ~ (('%.0f'|format(storage_total)) if storage_total is not none else '150') ~ '</span> GB',
                     },
                 ] %}
                 <div class="admin-system-stat-row">
-                    {{ statistic_card_row(system_stat_cells, {'columns': 2, 'row_class': 'admin-system-stat-row__cards'}) }}
+                    {{ statistic_card_row(system_stat_cells, {
+                        'variant': 'inline',
+                        'columns': 2,
+                        'row_class': 'admin-system-stat-row__cards',
+                    }) }}
                 </div>
             </div>
         </section>

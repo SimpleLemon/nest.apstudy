@@ -39,7 +39,6 @@
                     {
                         'title': 'Total Users',
                         'value': '--',
-                        'icon': 'group',
                         'subtitle': range_options[default_range].label,
                         'subtitle_attrs': 'data-analytics-period-label',
                         'tag': 'button',
@@ -48,12 +47,10 @@
                         'value_tag': 'strong',
                         'value_attrs': 'data-analytics-card="totalUsers"',
                         'delta_attrs': 'data-analytics-delta="totalUsers"',
-                        'col_class': 'w-full',
                     },
                     {
                         'title': 'Users Active',
                         'value': '--',
-                        'icon': 'person_check',
                         'subtitle': range_options[default_range].label,
                         'subtitle_attrs': 'data-analytics-period-label',
                         'tag': 'button',
@@ -61,12 +58,10 @@
                         'value_tag': 'strong',
                         'value_attrs': 'data-analytics-card="activeUsers"',
                         'delta_attrs': 'data-analytics-delta="activeUsers"',
-                        'col_class': 'w-full',
                     },
                     {
                         'title': 'Views',
                         'value': '--',
-                        'icon': 'visibility',
                         'subtitle': range_options[default_range].label,
                         'subtitle_attrs': 'data-analytics-period-label',
                         'tag': 'button',
@@ -74,12 +69,10 @@
                         'value_tag': 'strong',
                         'value_attrs': 'data-analytics-card="pageViews"',
                         'delta_attrs': 'data-analytics-delta="pageViews"',
-                        'col_class': 'w-full',
                     },
                     {
                         'title': 'OAuth',
                         'value': '--',
-                        'icon': 'key',
                         'subtitle': range_options[default_range].label,
                         'subtitle_attrs': 'data-analytics-period-label',
                         'tag': 'button',
@@ -87,12 +80,10 @@
                         'value_tag': 'strong',
                         'value_attrs': 'data-analytics-card="oauth"',
                         'delta_attrs': 'data-analytics-delta="oauth"',
-                        'col_class': 'w-full',
                     },
                     {
                         'title': 'Uni Type',
                         'value': '--',
-                        'icon': 'school',
                         'subtitle': range_options[default_range].label,
                         'subtitle_attrs': 'data-analytics-period-label',
                         'tag': 'button',
@@ -100,10 +91,10 @@
                         'value_tag': 'strong',
                         'value_attrs': 'data-analytics-card="uniType"',
                         'delta_attrs': 'data-analytics-delta="uniType"',
-                        'col_class': 'w-full',
                     },
                 ] %}
                 {{ statistic_card_row(kpi_cells, {
+                    'variant': 'tabs',
                     'columns': 5,
                     'card_class': 'admin-stat-card-row--tabs',
                     'grid_attrs': 'role="tablist" aria-label="Analytics metric"',
@@ -245,52 +236,48 @@
         </section>
 
         {% set file_storage = metrics.file_storage if metrics else {} %}
-        <section class="admin-metrics-section" aria-labelledby="admin-metrics-title">
+        <section class="admin-card admin-metrics-card admin-metrics-section" aria-labelledby="admin-metrics-title">
             <h2 id="admin-metrics-title" class="admin-title admin-title--small">System Numbers</h2>
             {% set system_cells = [
                 {
                     'title': 'Total Users',
                     'value': metrics.total_users if metrics else 0,
-                    'icon': 'group',
                 },
                 {
                     'title': 'Emory Users',
                     'value': metrics.emory_users if metrics else 0,
-                    'icon': 'school',
                 },
                 {
                     'title': 'Non-Emory / Unknown',
                     'value': metrics.non_emory_users if metrics else 0,
-                    'icon': 'person_search',
                 },
                 {
                     'title': 'Pending Requests',
                     'value': metrics.pending_requests if metrics else 0,
-                    'icon': 'pending_actions',
                 },
                 {
                     'title': 'Saved Courses',
                     'value': metrics.saved_courses if metrics else 0,
-                    'icon': 'bookmark',
                 },
                 {
                     'title': 'Active Tracks',
                     'value': metrics.active_course_tracks if metrics else 0,
-                    'icon': 'play_circle',
                 },
                 {
                     'title': 'Paused Tracks',
                     'value': metrics.paused_course_tracks if metrics else 0,
-                    'icon': 'pause_circle',
                 },
                 {
                     'title': 'File Storage',
                     'value': file_storage.formatted or '--',
-                    'icon': 'cloud',
                     'detail': (file_storage.file_count or 0) ~ ' shared files, ' ~ (file_storage.avatar_count or 0) ~ ' avatars tracked',
                 },
             ] %}
-            {{ statistic_card_row(system_cells, {'columns': 4, 'row_class': 'admin-metrics-section__cards'}) }}
+            {{ statistic_card_row(system_cells, {
+                'variant': 'metrics',
+                'columns': 4,
+                'row_class': 'admin-metrics-section__cards',
+            }) }}
             {% if file_storage.error %}
                 <p class="admin-inline-error">{{ file_storage.error }}</p>
             {% endif %}

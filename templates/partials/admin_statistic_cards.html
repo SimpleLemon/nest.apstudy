@@ -1,88 +1,150 @@
-{% macro statistic_card_cell(cell) -%}
+{% macro statistic_card_cell(cell, variant='metrics') -%}
     {%- set tag = cell.tag or 'div' -%}
-    {%- set col_class = cell.col_class or 'lg:w-3/12 md:w-6/12 w-full' -%}
     {%- set active_class = ' admin-stat-cell--active is-active' if cell.active else '' -%}
     {%- set interactive_class = ' admin-stat-cell--interactive' if tag == 'button' else '' -%}
+
+    {%- if variant == 'tabs' -%}
     <{{ tag }}
-        class="admin-stat-cell {{ col_class }} border-e border-border last:border-e-0{{ active_class }}{{ interactive_class }}{% if cell.class %} {{ cell.class }}{% endif %}"
+        class="admin-stat-cell admin-stat-cell--tab{{ active_class }}{{ interactive_class }}{% if cell.class %} {{ cell.class }}{% endif %}"
         {%- if cell.attrs %}{{ cell.attrs | safe }}{% endif -%}
     >
-        <div class="p-6">
-            <div class="flex flex-col gap-1">
-                <div class="flex justify-between items-start">
-                    <h5 class="text-base font-medium">{{ cell.title }}</h5>
-                    {%- if cell.icon %}
-                    <div class="p-3 rounded-full outline outline-border text-primary" aria-hidden="true">
-                        <span class="material-symbols-outlined text-base leading-none">{{ cell.icon }}</span>
-                    </div>
-                    {%- endif %}
-                </div>
-                <div class="flex flex-col gap-1">
-                    {%- if cell.value_html %}
-                    {{ cell.value_html | safe }}
-                    {%- elif cell.value_tag %}
-                    <{{ cell.value_tag }}
-                        class="text-2xl font-semibold text-card-foreground"
-                        {%- if cell.value_attrs %} {{ cell.value_attrs | safe }}{% endif -%}
-                    >{{ cell.value }}</{{ cell.value_tag }}>
-                    {%- else %}
-                    <h5 class="text-2xl font-semibold text-card-foreground">{{ cell.value }}</h5>
-                    {%- endif %}
-                    {%- if cell.subtitle or cell.delta_html or cell.delta_attrs %}
-                    <div class="flex items-center gap-2 flex-wrap">
-                        {%- if cell.subtitle %}
-                        <p class="text-xs text-muted-foreground"{% if cell.subtitle_attrs %} {{ cell.subtitle_attrs | safe }}{% endif %}>{{ cell.subtitle }}</p>
-                        {%- endif %}
-                        {%- if cell.delta_html %}
-                        {{ cell.delta_html | safe }}
-                        {%- elif cell.delta_attrs %}
-                        <span
-                            data-slot="badge"
-                            data-variant="default"
-                            class="admin-stat-delta h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 overflow-hidden text-muted-foreground"
-                            {{ cell.delta_attrs | safe }}
-                            hidden
-                        ></span>
-                        {%- endif %}
-                    </div>
-                    {%- endif %}
-                    {%- if cell.detail %}
-                    <p class="text-xs text-muted-foreground">{{ cell.detail }}</p>
-                    {%- endif %}
-                </div>
-            </div>
-        </div>
+        <span class="admin-stat-cell__label">{{ cell.title }}</span>
+        {%- if cell.value_html %}
+        {{ cell.value_html | safe }}
+        {%- elif cell.value_tag %}
+        <{{ cell.value_tag }}
+            class="admin-stat-cell__value"
+            {%- if cell.value_attrs %} {{ cell.value_attrs | safe }}{% endif -%}
+        >{{ cell.value }}</{{ cell.value_tag }}>
+        {%- else %}
+        <strong class="admin-stat-cell__value">{{ cell.value }}</strong>
+        {%- endif %}
+        {%- if cell.subtitle %}
+        <small class="admin-stat-cell__meta"{% if cell.subtitle_attrs %} {{ cell.subtitle_attrs | safe }}{% endif %}>{{ cell.subtitle }}</small>
+        {%- endif %}
+        {%- if cell.delta_html %}
+        {{ cell.delta_html | safe }}
+        {%- elif cell.delta_attrs %}
+        <span class="admin-stat-delta" {{ cell.delta_attrs | safe }} hidden></span>
+        {%- endif %}
     </{{ tag }}>
+
+    {%- elif variant == 'inline' -%}
+    <{{ tag }}
+        class="admin-stat-cell admin-stat-cell--inline{% if cell.class %} {{ cell.class }}{% endif %}"
+        {%- if cell.attrs %}{{ cell.attrs | safe }}{% endif -%}
+    >
+        <span class="admin-system-stat-label">{{ cell.title }}</span>
+        {%- if cell.value_html %}
+        <span class="admin-system-stat-value">{{ cell.value_html | safe }}</span>
+        {%- else %}
+        <span class="admin-system-stat-value">{{ cell.value }}</span>
+        {%- endif %}
+    </{{ tag }}>
+
+    {%- elif variant == 'fields' -%}
+    <div class="admin-field{% if cell.class %} {{ cell.class }}{% endif %}"{% if cell.attrs %} {{ cell.attrs | safe }}{% endif %}>
+        <span class="admin-field-label">{{ cell.title }}</span>
+        {%- if cell.value_html %}
+        <span class="admin-field-value">{{ cell.value_html | safe }}</span>
+        {%- elif cell.value_tag %}
+        <{{ cell.value_tag }} class="admin-field-value"{% if cell.value_attrs %} {{ cell.value_attrs | safe }}{% endif %}>{{ cell.value }}</{{ cell.value_tag }}>
+        {%- else %}
+        <span class="admin-field-value">{{ cell.value }}</span>
+        {%- endif %}
+    </div>
+
+    {%- elif variant == 'chips' -%}
+    <div class="admin-status-chip{% if cell.class %} {{ cell.class }}{% endif %}"{% if cell.attrs %} {{ cell.attrs | safe }}{% endif %}>
+        <span>{{ cell.title }}</span>
+        {%- if cell.value_html %}
+        {{ cell.value_html | safe }}
+        {%- elif cell.value_tag %}
+        <{{ cell.value_tag }}{% if cell.value_attrs %} {{ cell.value_attrs | safe }}{% endif %}>{{ cell.value }}</{{ cell.value_tag }}>
+        {%- else %}
+        <strong>{{ cell.value }}</strong>
+        {%- endif %}
+    </div>
+
+    {%- else -%}
+    <{{ tag }}
+        class="admin-stat-cell admin-stat-cell--metric{% if cell.class %} {{ cell.class }}{% endif %}"
+        {%- if cell.attrs %}{{ cell.attrs | safe }}{% endif -%}
+    >
+        <span>{{ cell.title }}</span>
+        {%- if cell.value_html %}
+        {{ cell.value_html | safe }}
+        {%- elif cell.value_tag %}
+        <{{ cell.value_tag }}{% if cell.value_attrs %} {{ cell.value_attrs | safe }}{% endif %}>{{ cell.value }}</{{ cell.value_tag }}>
+        {%- else %}
+        <strong>{{ cell.value }}</strong>
+        {%- endif %}
+        {%- if cell.detail %}
+        <small>{{ cell.detail }}</small>
+        {%- endif %}
+    </{{ tag }}>
+    {%- endif -%}
 {%- endmacro %}
 
 {% macro statistic_card_row(cells, options={}) -%}
+    {%- set variant = options.variant or 'metrics' -%}
     {%- set columns = options.columns or 4 -%}
-    {%- set grid_cols = {
-        2: 'md:grid-cols-2 lg:grid-cols-2',
-        3: 'md:grid-cols-3 lg:grid-cols-3',
-        4: 'md:grid-cols-2 lg:grid-cols-4',
-        5: 'md:grid-cols-2 lg:grid-cols-5',
-        6: 'md:grid-cols-3 lg:grid-cols-6',
-        11: 'md:grid-cols-2 lg:grid-cols-4',
-    } -%}
-    {%- set grid_class = grid_cols.get(columns, 'md:grid-cols-2 lg:grid-cols-4') -%}
     {%- set row_class = options.row_class or '' -%}
     {%- set card_class = options.card_class or '' -%}
-    <div class="admin-stat-card-row {{ row_class }}">
+    {%- set grid_modifier = 'admin-stat-card-grid--' ~ variant -%}
+
+    {%- if variant == 'fields' -%}
+    <div class="admin-stat-card-row admin-stat-card-row--fields {{ row_class }}">
+        <div class="admin-grid admin-stat-card-grid {{ grid_modifier }}"{% if options.grid_attrs %} {{ options.grid_attrs | safe }}{% endif %}>
+            {%- for cell in cells %}
+                {{ statistic_card_cell(cell, variant) }}
+            {%- endfor %}
+        </div>
+    </div>
+
+    {%- elif variant == 'chips' -%}
+    <div class="admin-stat-card-row admin-stat-card-row--chips {{ row_class }}">
+        <div class="admin-system-meta admin-stat-card-grid {{ grid_modifier }}"{% if options.grid_attrs %} {{ options.grid_attrs | safe }}{% endif %}>
+            {%- for cell in cells %}
+                {{ statistic_card_cell(cell, variant) }}
+            {%- endfor %}
+        </div>
+    </div>
+
+    {%- elif variant == 'inline' -%}
+    <div class="admin-stat-card-row admin-stat-card-row--inline {{ row_class }}">
+        <div class="admin-stat-card-grid {{ grid_modifier }}"{% if options.grid_attrs %} {{ options.grid_attrs | safe }}{% endif %}>
+            {%- for cell in cells %}
+                {{ statistic_card_cell(cell, variant) }}
+            {%- endfor %}
+        </div>
+    </div>
+
+    {%- else -%}
+    <div class="admin-stat-card-row admin-stat-card-row--{{ variant }} {{ row_class }}">
+        {%- if variant == 'metrics' -%}
         <div
-            data-slot="card"
-            data-size="default"
-            class="ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl text-sm ring-1 flex flex-col p-0 {{ card_class }}"
+            class="admin-stat-card-grid {{ grid_modifier }}"
+            data-columns="{{ columns }}"
+            {%- if options.grid_attrs %} {{ options.grid_attrs | safe }}{% endif -%}
         >
+            {%- for cell in cells %}
+                {{ statistic_card_cell(cell, variant) }}
+            {%- endfor %}
+        </div>
+        {%- else -%}
+        <div class="admin-stat-card-shell {{ card_class }}">
             <div
-                data-slot="card-content"
-                class="admin-stat-card-grid grid w-full {{ grid_class }} px-0"
+                class="admin-stat-card-grid {{ grid_modifier }}"
+                data-columns="{{ columns }}"
                 {%- if options.grid_attrs %} {{ options.grid_attrs | safe }}{% endif -%}
             >
                 {%- for cell in cells %}
-                    {{ statistic_card_cell(cell) }}
+                    {{ statistic_card_cell(cell, variant) }}
                 {%- endfor %}
             </div>
         </div>
+        {%- endif -%}
     </div>
+    {%- endif -%}
 {%- endmacro %}
