@@ -34,6 +34,7 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.discord_audit import emit_creation_event, format_actor
+from services.appwrite_storage import appwrite_upload_error
 
 
 file_share_bp = Blueprint("file_share", __name__)
@@ -64,17 +65,7 @@ def _status_code(exc):
 
 
 def _appwrite_upload_error(exc):
-    message = str(getattr(exc, "message", "") or "").strip()
-    lowered = message.lower()
-    if "maximum" in lowered and "size" in lowered:
-        return "File exceeds the storage bucket size limit."
-    if "extension" in lowered or "mime" in lowered:
-        return "This file type is not allowed."
-    if "bucket" in lowered and "not found" in lowered:
-        return "File storage is not configured. Contact support."
-    if message:
-        return message
-    return "Unable to upload file."
+    return appwrite_upload_error(exc)
 
 
 def _row_id(row):

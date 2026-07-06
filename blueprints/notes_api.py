@@ -23,6 +23,7 @@ from services.discord_audit import emit_creation_event, format_actor
 from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
 from services.database import db_connection
 from services import note_media, note_store, notes_collaboration
+from services.appwrite_storage import note_media_upload_failure
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -498,12 +499,13 @@ def upload_note_media(note_id):
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
     except AppwriteException as exc:
+        status_code, error = note_media_upload_failure(exc)
         logger.exception(
             "Failed to upload note media (code=%s): %s",
             getattr(exc, "code", None) or getattr(exc, "response_code", None),
             exc,
         )
-        return jsonify({"error": "Unable to store this image."}), 500
+        return jsonify({"error": error}), status_code
     except Exception:
         logger.exception("Failed to upload note media")
         return jsonify({"error": "Unable to store this image."}), 500

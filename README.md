@@ -59,6 +59,15 @@ The server uploads binary files to Appwrite Storage. Create these buckets in the
 
 Mirror the working `profile_avatars` bucket settings (file security, max size, MIME allowlist). The server API key (`APPWRITE_API_KEY`) needs Storage create, read, and delete access on each bucket. Notes images are limited to 10 MiB (JPEG, PNG, GIF, WebP).
 
+Verify bucket configuration from the repository root:
+
+```bash
+python scripts/verify_appwrite_storage.py
+python scripts/verify_appwrite_storage.py --probe-upload
+```
+
+The probe uploads and deletes a 1x1 PNG in `notes_media` to confirm write access. Check server logs for `Failed to upload note media (code=...)` if uploads still return 500.
+
 ## Setup & Deployment
 
 <details>

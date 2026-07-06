@@ -1,6 +1,8 @@
 import io
 import json
+import tempfile
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
@@ -9,9 +11,11 @@ from flask import Flask
 from werkzeug.datastructures import FileStorage
 
 from appwrite.exception import AppwriteException
+from appwrite.permission import Permission
+from appwrite.role import Role
 
 import blueprints.notes_api as notes_api
-from services import note_media
+from services import database, note_media
 
 
 def image_bytes(image_format="PNG", size=(32, 24)):
@@ -39,6 +43,76 @@ class NoteMediaServiceTests(unittest.TestCase):
                 note_media.create_media("note-1", "user-1", upload)
         storage.create_file.assert_called_once()
         storage.delete_file.assert_called_once()
+
+    def test_create_media_passes_read_permissions_to_storage(self):
+        storage = Mock()
+        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+        with patch.object(note_media, "storage_service", return_value=storage), patch.object(
+            note_media, "create_row_safe", return_value={"id": "media-1"}
+        ):
+            note_media.create_media("note-1", "user-1", upload)
+        storage.create_file.assert_called_once()
+        self.assertEqual(
+            storage.create_file.call_args.kwargs.get("permissions"),
+            [Permission.read(Role.any())],
+        )
+
+    def test_create_media_persists_metadata_in_sqlite(self):
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        db_path = Path(temp_dir.name) / "nest-test.sqlite3"
+        app = Flask(__name__)
+        app.config["DATABASE_PATH"] = str(db_path)
+        with app.app_context():
+            database.init_db(app=app)
+            with database.db_connection(db_path) as conn:
+                conn.execute(
+                    "INSERT INTO users (id, google_id, email, name, username, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    ("user-1", "google-1", "user@example.com", "User", "user", "2026-01-01T00:00:00Z"),
+                )
+                conn.execute(
+                    "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
+                    ("note-1", "user-1", "Note", "[]", "2026-01-01T00:00:00Z"),
+                )
+            storage = Mock()
+            upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+            with patch.object(note_media, "storage_service", return_value=storage):
+                media = note_media.create_media("note-1", "user-1", upload)
+            with database.db_connection(db_path) as conn:
+                count = conn.execute(
+                    "SELECT COUNT(*) FROM note_media WHERE id = ? AND note_id = ?",
+                    (media["id"], "note-1"),
+                ).fetchone()[0]
+        self.assertEqual(count, 1)
+
+    def test_create_media_storage_failure_does_not_insert_row(self):
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        db_path = Path(temp_dir.name) / "nest-test.sqlite3"
+        app = Flask(__name__)
+        app.config["DATABASE_PATH"] = str(db_path)
+        with app.app_context():
+            database.init_db(app=app)
+            with database.db_connection(db_path) as conn:
+                conn.execute(
+                    "INSERT INTO users (id, google_id, email, name, username, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    ("user-1", "google-1", "user@example.com", "User", "user", "2026-01-01T00:00:00Z"),
+                )
+                conn.execute(
+                    "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
+                    ("note-1", "user-1", "Note", "[]", "2026-01-01T00:00:00Z"),
+                )
+            storage = Mock()
+            storage.create_file.side_effect = AppwriteException("bucket not found", 404)
+            upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+            with patch.object(note_media, "storage_service", return_value=storage):
+                with self.assertRaises(AppwriteException):
+                    note_media.create_media("note-1", "user-1", upload)
+            with database.db_connection(db_path) as conn:
+                count = conn.execute("SELECT COUNT(*) FROM note_media").fetchone()[0]
+        self.assertEqual(count, 0)
 
     def test_referenced_media_ids_walks_lists_tables_and_children(self):
         content = json.dumps([
@@ -113,11 +187,27 @@ class NoteMediaApiTests(unittest.TestCase):
         ), patch.object(notes_api, "_note_owner_or_404", return_value=self.note), patch.object(
             notes_api.note_store, "resolve_note_access", return_value={"can_edit": True}
         ), patch.object(
-            notes_api.note_media, "create_media", side_effect=AppwriteException("bucket not found")
+            notes_api.note_media, "create_media", side_effect=AppwriteException("Bucket with the requested ID could not be found.", 404)
         ), patch.object(notes_api, "current_user", SimpleNamespace(is_authenticated=True, id="owner")):
             response = notes_api.upload_note_media.__wrapped__("note-1")
         self.assertEqual(response.status_code, 500)
-        self.assertEqual(response.get_json()["error"], "Unable to store this image.")
+        self.assertEqual(response.get_json()["error"], "File storage is not configured. Contact support.")
+
+    def test_upload_media_returns_400_for_disallowed_extension(self):
+        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+        with self.app.test_request_context(
+            "/api/notes/note-1/media",
+            method="POST",
+            data={"file": upload},
+            content_type="multipart/form-data",
+        ), patch.object(notes_api, "_note_owner_or_404", return_value=self.note), patch.object(
+            notes_api.note_store, "resolve_note_access", return_value={"can_edit": True}
+        ), patch.object(
+            notes_api.note_media, "create_media", side_effect=AppwriteException("File extension not allowed", 400)
+        ), patch.object(notes_api, "current_user", SimpleNamespace(is_authenticated=True, id="owner")):
+            response = notes_api.upload_note_media.__wrapped__("note-1")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.get_json()["error"], "This image type is not allowed.")
 
     def test_upload_media_accepts_clipboard_file_without_filename(self):
         upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="", content_type="image/png")

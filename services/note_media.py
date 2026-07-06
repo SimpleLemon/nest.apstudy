@@ -7,7 +7,9 @@ from datetime import datetime, timedelta, timezone
 from PIL import Image, UnidentifiedImageError
 from appwrite.exception import AppwriteException
 from appwrite.input_file import InputFile
+from appwrite.permission import Permission
 from appwrite.query import Query
+from appwrite.role import Role
 from appwrite.services.storage import Storage
 
 from appwrite_client import NOTES_MEDIA_BUCKET_ID, client as appwrite_client
@@ -25,6 +27,7 @@ ALLOWED_IMAGE_FORMATS = {
     "GIF": ("image/gif", "gif"),
     "WEBP": ("image/webp", "webp"),
 }
+NOTE_MEDIA_FILE_PERMISSIONS = [Permission.read(Role.any())]
 
 
 def storage_service():
@@ -60,11 +63,16 @@ def create_media(note_id, user_id, uploaded_file):
     media_id = str(uuid.uuid4())
     storage_file_id = str(uuid.uuid4())
     safe_name = f"{media_id}.{details['extension']}"
-    storage_service().create_file(
-        NOTES_MEDIA_BUCKET_ID,
-        storage_file_id,
-        InputFile.from_bytes(data, filename=safe_name, mime_type=details["mime_type"]),
-    )
+    try:
+        storage_service().create_file(
+            NOTES_MEDIA_BUCKET_ID,
+            storage_file_id,
+            InputFile.from_bytes(data, filename=safe_name, mime_type=details["mime_type"]),
+            permissions=NOTE_MEDIA_FILE_PERMISSIONS,
+        )
+    except AppwriteException:
+        logger.exception("Failed to upload note media to Appwrite Storage")
+        raise
     now = utcnow_iso()
     try:
         return create_row_safe(
@@ -86,6 +94,7 @@ def create_media(note_id, user_id, uploaded_file):
             },
         )
     except Exception:
+        logger.exception("Failed to save note media metadata")
         try:
             storage_service().delete_file(NOTES_MEDIA_BUCKET_ID, storage_file_id)
         except AppwriteException:

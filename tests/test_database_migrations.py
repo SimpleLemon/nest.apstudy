@@ -47,6 +47,12 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
         self.assertEqual(set(versions_before), self._expected_versions())
         self.assertIn("discord_id", user_columns)
         self.assertIn("preview_text", note_columns)
+        self.assertIn("004_notes_media", versions_before)
+        with database.db_connection(self.db_path) as connection:
+            note_media_exists = connection.execute(
+                "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'note_media'"
+            ).fetchone()
+        self.assertIsNotNone(note_media_exists)
 
         database.init_db(path=self.db_path)
 
