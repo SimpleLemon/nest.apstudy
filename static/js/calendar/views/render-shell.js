@@ -91,19 +91,7 @@
             if (!root) return;
             hideCalendarHoverCard();
             if (state.loadingDashboard) {
-                const skeletonHtml = window.APStudySkeleton?.table
-                    ? window.APStudySkeleton.table({
-                        label: "Loading calendar...",
-                        rows: 6,
-                        columns: 4,
-                        className: "apstudy-skeleton-fill calendar-loading-skeleton",
-                    })
-                    : window.APStudyLoader.html("Loading calendar...", { sizePx: 54, textToneClass: "text-on-surface" });
-                root.innerHTML = `
-                    <div class="rounded-2xl border border-calendar-rule bg-surface-container shadow-2xl shadow-black/10 p-10 min-h-[420px] flex items-center justify-center">
-                        ${skeletonHtml}
-                    </div>
-                `;
+                root.innerHTML = buildCalendarSkeletonHtml();
                 return;
             }
             const compactCalendar = isCompactCalendarViewport();
@@ -111,6 +99,58 @@
             if (state.view === "week" && !compactCalendar) {
                 applyWeekAutoScroll();
             }
+        }
+
+        function buildCalendarSkeletonHtml() {
+            const block = (className) => window.APStudySkeleton?.block?.(className)
+                || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
+            if (compactCalendarQuery.matches) {
+                return `
+                    <div class="calendar-skeleton calendar-mobile-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+                        <span class="sr-only">Loading calendar...</span>
+                        <div class="contents" aria-hidden="true">
+                            ${Array.from({ length: 4 }, (_, index) => `
+                                <section class="calendar-mobile-skeleton-day">
+                                    ${block("h-4 w-24")}
+                                    <div class="calendar-mobile-skeleton-event">${block("size-8 rounded-md")} <div class="flex flex-1 flex-col gap-2">${block(index % 2 ? "h-3 w-4/5" : "h-3 w-full")} ${block("h-3 w-2/5")}</div></div>
+                                    <div class="calendar-mobile-skeleton-event">${block("size-8 rounded-md")} <div class="flex flex-1 flex-col gap-2">${block("h-3 w-3/4")} ${block("h-3 w-1/3")}</div></div>
+                                </section>
+                            `).join("")}
+                        </div>
+                    </div>
+                `;
+            }
+            const dayHeaders = Array.from({ length: 7 }, (_, index) => `
+                <div class="calendar-skeleton-week-header-cell">
+                    ${block("h-3 w-8")}
+                    ${block(index === 2 ? "h-7 w-7 rounded-full" : "h-5 w-8")}
+                </div>
+            `).join("");
+            const dayColumns = Array.from({ length: 7 }, (_, index) => `
+                <div class="calendar-skeleton-day-column">
+                    <div class="calendar-skeleton-event calendar-skeleton-event-${index % 3}">${block(index % 2 ? "h-4 w-3/4" : "h-4 w-full")}</div>
+                    ${index % 2 === 0 ? `<div class="calendar-skeleton-event calendar-skeleton-event-late">${block("h-4 w-4/5")}</div>` : ""}
+                </div>
+            `).join("");
+            return `
+                <div class="calendar-skeleton calendar-week-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+                    <span class="sr-only">Loading calendar...</span>
+                    <div class="contents" aria-hidden="true">
+                        <div class="calendar-skeleton-week-frame">
+                            <div class="calendar-skeleton-week-header">
+                                <div class="calendar-skeleton-time-header"></div>
+                                ${dayHeaders}
+                            </div>
+                            <div class="calendar-skeleton-week-body">
+                                <div class="calendar-skeleton-time-axis">
+                                    ${Array.from({ length: 12 }, () => `<div>${block("h-3 w-8")}</div>`).join("")}
+                                </div>
+                                ${dayColumns}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function isCompactCalendarViewport() {

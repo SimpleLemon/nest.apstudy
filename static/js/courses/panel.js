@@ -22,6 +22,31 @@
       parseTimeInput,
     } = utils;
 
+    function buildCourseResultsSkeletonHtml(label = "Loading courses...") {
+      const block = (className) => window.APStudySkeleton?.block?.(className)
+        || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
+      return `
+        <div class="courses-results-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+          <span class="sr-only">${escapeHtml(label)}</span>
+          <div class="contents" aria-hidden="true">
+            ${Array.from({ length: 4 }, (_, index) => `
+              <article class="course-card course-skeleton-card">
+                <div class="course-card-top">
+                  <div class="course-card-title">
+                    ${block(index % 2 ? "h-4 w-28" : "h-4 w-36")}
+                    ${block(index % 2 ? "h-3 w-4/5" : "h-3 w-full")}
+                  </div>
+                  ${block("h-8 w-[72px]")}
+                </div>
+                <div class="course-card-schedule">${block("h-3 w-3/4")}</div>
+                <div class="course-card-meta">${block("h-6 w-14 rounded-full")} ${block("h-6 w-16 rounded-full")} ${block("h-6 w-12 rounded-full")}</div>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
     function renderTermSelect() {
       const select = document.getElementById("courses-term-select");
       if (!select) return;
@@ -46,10 +71,7 @@
 
       if (state.loading) {
         summary.textContent = "Loading Emory Atlas...";
-        const skeletonHtml = window.APStudySkeleton?.cards
-          ? window.APStudySkeleton.cards({ label: "Loading courses...", count: 4 })
-          : window.APStudyLoader.html(["Loading courses", "..."].join(""), { sizePx: 46, textToneClass: "text-on-surface" });
-        content.innerHTML = `<div class="courses-state courses-state-skeleton">${skeletonHtml}</div>`;
+        content.innerHTML = buildCourseResultsSkeletonHtml();
         return;
       }
       if (state.error) {
@@ -69,10 +91,7 @@
       }
       if (state.sectionsLoading) {
         summary.textContent = `Loading ${formatTermLabel(state.selectedTerm)}...`;
-        const skeletonHtml = window.APStudySkeleton?.cards
-          ? window.APStudySkeleton.cards({ label: `Loading sections for ${formatTermLabel(state.selectedTerm)}...`, count: 4 })
-          : window.APStudyLoader.html(`Loading sections for ${formatTermLabel(state.selectedTerm)}...`, { sizePx: 46, textToneClass: "text-on-surface" });
-        content.innerHTML = `<div class="courses-state courses-state-skeleton">${skeletonHtml}</div>`;
+        content.innerHTML = buildCourseResultsSkeletonHtml(`Loading sections for ${formatTermLabel(state.selectedTerm)}...`);
         return;
       }
 

@@ -66,21 +66,36 @@
 
         <section class="dashboard-tiles-region" aria-label="Dashboard tiles">
             <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">
-                <div class="dashboard-loading apstudy-skeleton apstudy-skeleton-cards" role="status" aria-live="polite" aria-busy="true">
+                <div class="dashboard-loading apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
                     <span class="sr-only">Loading your dashboard...</span>
                     <div class="contents" aria-hidden="true">
                         {% for _ in range(4) %}
-                            <div class="apstudy-skeleton-card rounded-md border p-4">
-                                <div class="flex items-center justify-between">
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div>
-                                    <div data-slot="skeleton" class="bg-muted animate-pulse h-8 w-20 rounded-md"></div>
+                            <article class="dashboard-skeleton-tile">
+                                <div class="dashboard-skeleton-tile-inner">
+                                    <div class="dashboard-tile-head">
+                                        <div class="dashboard-tile-title-row">
+                                            <div data-slot="skeleton" class="bg-muted animate-pulse dashboard-skeleton-icon"></div>
+                                            <div class="flex flex-col gap-2">
+                                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-28"></div>
+                                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div>
+                                            </div>
+                                        </div>
+                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-8 w-8"></div>
+                                    </div>
+                                    <div class="dashboard-skeleton-tile-body">
+                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
+                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-5/6"></div>
+                                        <div class="dashboard-skeleton-list">
+                                            <div data-slot="skeleton" class="bg-muted animate-pulse size-5 rounded-md"></div>
+                                            <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 flex-1"></div>
+                                        </div>
+                                        <div class="dashboard-skeleton-list">
+                                            <div data-slot="skeleton" class="bg-muted animate-pulse size-5 rounded-md"></div>
+                                            <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-4/5"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mt-4 flex flex-col gap-2">
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-3/4"></div>
-                                </div>
-                            </div>
+                            </article>
                         {% endfor %}
                     </div>
                 </div>

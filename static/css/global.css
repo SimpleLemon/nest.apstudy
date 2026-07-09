@@ -288,6 +288,119 @@ pre,
 	max-width: none;
 }
 
+.calendar-skeleton-week-frame {
+	overflow: hidden;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+	border-radius: var(--radius-panel);
+	background: var(--color-surface);
+	box-shadow: 0 18px 42px rgba(0, 0, 0, 0.10);
+}
+
+.calendar-skeleton-week-header,
+.calendar-skeleton-week-body {
+	display: grid;
+	grid-template-columns: 4.75rem repeat(7, minmax(100px, 1fr));
+	min-width: 774px;
+}
+
+.calendar-skeleton-week-header {
+	border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+	background: var(--color-surface-container-low);
+}
+
+.calendar-skeleton-week-header-cell {
+	display: grid;
+	min-height: 60px;
+	place-items: center;
+	align-content: center;
+	gap: 6px;
+	border-left: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+}
+
+.calendar-skeleton-week-body {
+	min-height: min(760px, 68vh);
+	overflow: hidden;
+}
+
+.calendar-skeleton-time-axis,
+.calendar-skeleton-day-column {
+	position: relative;
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 59px,
+		color-mix(in srgb, var(--color-outline-variant) 38%, transparent) 60px
+	);
+}
+
+.calendar-skeleton-time-axis {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-end;
+	padding: 10px 8px;
+	border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+	background-color: var(--color-surface-container-low);
+}
+
+.calendar-skeleton-day-column {
+	border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+}
+
+.calendar-skeleton-event {
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	padding: 8px;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 30%, transparent);
+	border-radius: var(--radius-control);
+	background: color-mix(in srgb, var(--color-surface-container-low) 82%, var(--color-surface));
+}
+
+.calendar-skeleton-event-0 { top: 15%; }
+.calendar-skeleton-event-1 { top: 35%; }
+.calendar-skeleton-event-2 { top: 56%; }
+.calendar-skeleton-event-late { top: 73%; }
+
+.calendar-assignments-skeleton .contents {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+.calendar-assignment-skeleton-card {
+	min-height: 188px;
+}
+
+.calendar-mobile-skeleton-day,
+.calendar-mobile-skeleton-event {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.calendar-mobile-skeleton-day {
+	padding: 14px;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 35%, transparent);
+	border-radius: var(--radius-card);
+	background: var(--color-surface-container-low);
+}
+
+.calendar-mobile-skeleton-event {
+	flex-direction: row;
+	align-items: center;
+	padding: 12px;
+	border: 1px solid color-mix(in srgb, var(--color-outline-variant) 25%, transparent);
+	border-radius: var(--radius-control);
+	background: var(--color-surface);
+}
+
+@media (max-width: 640px) {
+	.calendar-week-skeleton .contents { overflow-x: auto; }
+	.calendar-assignments-skeleton .contents { grid-template-columns: 1fr; gap: 12px; }
+	.calendar-assignment-skeleton-card { min-height: 154px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.apstudy-skeleton .animate-pulse {
 		animation: none !important;

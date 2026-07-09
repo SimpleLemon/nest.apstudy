@@ -320,14 +320,6 @@ function renderSettingsSkeleton() {
     return;
   }
   elements.skeleton.hidden = false;
-  elements.skeleton.innerHTML = window.APStudySkeleton?.fieldSet
-    ? window.APStudySkeleton.fieldSet({
-      label: 'Loading settings...',
-      sections: 4,
-      fields: 4,
-      className: 'apstudy-skeleton-fill',
-    })
-    : '<div role="status">Loading settings...</div>';
 }
 
 function clearSettingsSkeleton() {
@@ -337,7 +329,6 @@ function clearSettingsSkeleton() {
     return;
   }
   elements.skeleton.hidden = true;
-  elements.skeleton.innerHTML = '';
 }
 
 function bindNavigation() {

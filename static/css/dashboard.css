@@ -945,8 +945,55 @@
 
 .dashboard-loading {
     grid-column: 1 / -1;
-    min-height: 280px;
     color: var(--color-on-surface-variant);
+}
+
+.dashboard-loading .contents {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: var(--dashboard-tile-height);
+    gap: var(--dashboard-tile-gap);
+}
+
+.dashboard-skeleton-tile {
+    grid-column: span 6;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10);
+}
+
+.dashboard-skeleton-tile-inner {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.dashboard-skeleton-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+}
+
+.dashboard-skeleton-tile-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 18px;
+}
+
+.dashboard-skeleton-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 26%, transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
 }
 
 @media (max-width: 1180px) {
@@ -969,8 +1016,13 @@
 
     .dashboard-tile,
     .dashboard-tile[data-tile-size],
-    .dashboard-tile[data-tile-id="courses"] {
+    .dashboard-tile[data-tile-id="courses"],
+    .dashboard-skeleton-tile {
         grid-column: 1 / -1;
+    }
+
+    .dashboard-loading .contents {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 

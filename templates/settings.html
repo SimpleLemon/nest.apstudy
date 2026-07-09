@@ -64,7 +64,31 @@
                 <a href="#data" class="settings-tab" data-tab="data">Data</a>
                 <a href="#preferences" class="settings-tab" data-tab="preferences">Preferences</a>
             </nav>
-            <div id="settings-skeleton" class="settings-bootstrap-skeleton"></div>
+            <div id="settings-skeleton" class="settings-bootstrap-skeleton">
+                <div class="settings-page-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+                    <span class="sr-only">Loading settings...</span>
+                    <div class="contents settings-skeleton-stack" aria-hidden="true">
+                        <section class="settings-skeleton-account-layout">
+                            <article class="settings-card settings-skeleton-card settings-skeleton-profile-card">
+                                <div class="settings-skeleton-profile-head"><div data-slot="skeleton" class="bg-muted animate-pulse settings-skeleton-avatar"></div><div class="flex flex-1 flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-36"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-28"></div></div></div>
+                                <div class="settings-skeleton-profile-lines"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-full"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-4/5"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-8 w-28"></div></div>
+                            </article>
+                            <article class="settings-card settings-skeleton-card">
+                                <div class="settings-skeleton-card-head"><div class="flex flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-48"></div></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-8 w-20"></div></div>
+                                <div class="settings-skeleton-fields">{% for _ in range(4) %}<div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-10 w-full"></div></div>{% endfor %}</div>
+                            </article>
+                        </section>
+                        <article class="settings-card settings-skeleton-card">
+                            <div class="settings-skeleton-card-head"><div class="flex flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-40"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-56"></div></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-8 w-20"></div></div>
+                            <div class="settings-skeleton-fields settings-skeleton-fields-wide">{% for _ in range(3) %}<div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-24"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-10 w-full"></div></div>{% endfor %}</div>
+                        </article>
+                        <section class="settings-skeleton-data-grid">
+                            <article class="settings-card settings-skeleton-card"><div class="settings-skeleton-card-head"><div class="flex flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-28"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-40"></div></div></div><div class="settings-skeleton-stat"><div data-slot="skeleton" class="bg-muted animate-pulse size-12 rounded-md"></div><div class="flex flex-1 flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-2/3"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-full"></div></div></div></article>
+                            <article class="settings-card settings-skeleton-card"><div class="settings-skeleton-card-head"><div class="flex flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-44"></div></div></div><div class="settings-skeleton-options">{% for _ in range(3) %}<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-10 w-full"></div>{% endfor %}</div></article>
+                        </section>
+                    </div>
+                </div>
+            </div>
             <div class="settings-sections space-y-8 md:space-y-10 is-loading" aria-busy="true">
                 <section id="account" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="account">
                     <div class="settings-account-layout">

@@ -336,6 +336,26 @@ body.courses-body {
   text-align: left;
 }
 
+.courses-results-skeleton .contents {
+  display: grid;
+  gap: 10px;
+}
+
+.course-skeleton-card {
+  min-height: 132px;
+  pointer-events: none;
+}
+
+.course-skeleton-card .course-card-title {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+}
+
+.course-skeleton-card .course-card-schedule {
+  min-height: 17px;
+}
+
 .course-card {
   position: relative;
   width: 100%;
@@ -1017,6 +1037,131 @@ body.courses-body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.courses-schedule-skeleton,
+.courses-schedule-skeleton .contents {
+  display: flex;
+  min-height: 0;
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+}
+
+.courses-skeleton-week-frame {
+  display: flex;
+  min-height: 0;
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+}
+
+.courses-skeleton-week-header,
+.courses-skeleton-week-grid {
+  display: grid;
+  grid-template-columns: var(--courses-time-axis-width) repeat(5, minmax(var(--courses-grid-min-day-width), 1fr));
+  min-width: calc(var(--courses-time-axis-width) + 5 * var(--courses-grid-min-day-width));
+}
+
+.courses-skeleton-week-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  background: var(--color-surface-container-low);
+}
+
+.courses-skeleton-week-header-cell {
+  display: grid;
+  min-height: 58px;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+}
+
+.courses-skeleton-week-scroller {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+}
+
+.courses-skeleton-week-grid {
+  min-height: calc(18 * var(--courses-hour-height));
+}
+
+.courses-skeleton-time-axis,
+.courses-skeleton-day-column {
+  position: relative;
+  min-height: calc(18 * var(--courses-hour-height));
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--courses-hour-height) - 1px),
+    color-mix(in srgb, var(--color-outline-variant) 42%, transparent) var(--courses-hour-height)
+  );
+}
+
+.courses-skeleton-time-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 10px;
+  border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  background-color: var(--color-surface-container-low);
+}
+
+.courses-skeleton-day-column {
+  border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+}
+
+.courses-skeleton-course {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  min-height: 42px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 36%, transparent);
+  border-radius: var(--radius-control);
+  background: color-mix(in srgb, var(--color-surface-container-low) 88%, var(--color-surface));
+}
+
+.courses-skeleton-course-a { top: 16%; }
+.courses-skeleton-course-b { top: 53%; }
+
+.courses-skeleton-mobile-agenda {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .courses-skeleton-week-frame { display: none; }
+
+  .courses-skeleton-mobile-agenda {
+    display: grid;
+    gap: 10px;
+  }
+
+  .courses-skeleton-mobile-day {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 48%, transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+  }
+
+  .courses-skeleton-mobile-event {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 30%, transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+  }
 }
 
 .courses-week-frame {

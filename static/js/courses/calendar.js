@@ -21,6 +21,28 @@
       parseAtlasTimeToken,
     } = utils;
 
+    function buildCourseScheduleSkeletonHtml() {
+      const block = (className) => window.APStudySkeleton?.block?.(className)
+        || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
+      return `
+        <div class="courses-schedule-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+          <span class="sr-only">Loading course schedule...</span>
+          <div class="contents" aria-hidden="true">
+            <div class="courses-skeleton-week-frame">
+              <div class="courses-skeleton-week-header">
+                <div class="courses-skeleton-week-header-cell"></div>
+                ${COURSE_DAYS.map((day) => `<div class="courses-skeleton-week-header-cell">${block("h-3 w-8")} ${block("h-4 w-12")}</div>`).join("")}
+              </div>
+              <div class="courses-skeleton-week-scroller"><div class="courses-skeleton-week-grid"><div class="courses-skeleton-time-axis">${Array.from({ length: 9 }, () => `<div>${block("h-3 w-8")}</div>`).join("")}</div>${COURSE_DAYS.map((day, index) => `<div class="courses-skeleton-day-column"><div class="courses-skeleton-course courses-skeleton-course-a">${block(index % 2 ? "h-3 w-3/4" : "h-3 w-4/5")}</div><div class="courses-skeleton-course courses-skeleton-course-b">${block("h-3 w-3/4")}</div></div>`).join("")}</div></div>
+            </div>
+            <div class="courses-skeleton-mobile-agenda">
+              ${COURSE_DAYS.slice(0, 4).map((day, index) => `<section class="courses-skeleton-mobile-day">${block("h-4 w-24")}<div class="courses-skeleton-mobile-event">${block("size-8 rounded-md")}<div class="flex flex-1 flex-col gap-2">${block(index % 2 ? "h-3 w-4/5" : "h-3 w-full")}${block("h-3 w-2/5")}</div></div></section>`).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderCalendar() {
       const root = document.getElementById("courses-calendar-root");
       const title = document.getElementById("courses-week-title");
@@ -43,14 +65,7 @@
       syncTermControls();
 
       if (state.loading || state.sectionsLoading) {
-        root.innerHTML = window.APStudySkeleton?.table
-          ? window.APStudySkeleton.table({
-            label: "Loading course schedule...",
-            rows: 5,
-            columns: 4,
-            className: "apstudy-skeleton-fill",
-          })
-          : `<div class="courses-state">${window.APStudyLoader.html("Loading course schedule...", { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
+        root.innerHTML = buildCourseScheduleSkeletonHtml();
         return;
       }
 

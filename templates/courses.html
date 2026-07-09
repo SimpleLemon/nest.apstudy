@@ -136,23 +136,21 @@
                 </div>
             </section>
             <section id="courses-panel-content" class="courses-panel-content" aria-live="polite">
-                <div class="courses-state courses-state-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+                <div class="courses-results-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
                     <span class="sr-only">Loading courses...</span>
                     <div class="contents" aria-hidden="true">
                         {% for _ in range(4) %}
-                            <div class="apstudy-skeleton-card rounded-md border p-4">
-                                <div class="flex items-center gap-3">
-                                    <div data-slot="skeleton" class="bg-muted animate-pulse size-8 shrink-0 rounded-full"></div>
-                                    <div class="flex flex-1 flex-col gap-2">
-                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-32"></div>
-                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div>
+                            <article class="course-card course-skeleton-card">
+                                <div class="course-card-top">
+                                    <div class="course-card-title">
+                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-36"></div>
+                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-full"></div>
                                     </div>
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-8 w-[72px]"></div>
                                 </div>
-                                <div class="mt-4 flex flex-col gap-2">
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-full"></div>
-                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-3/4"></div>
-                                </div>
-                            </div>
+                                <div class="course-card-schedule"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-3/4"></div></div>
+                                <div class="course-card-meta"><div data-slot="skeleton" class="bg-muted animate-pulse h-6 w-14 rounded-full"></div><div data-slot="skeleton" class="bg-muted animate-pulse h-6 w-16 rounded-full"></div><div data-slot="skeleton" class="bg-muted animate-pulse h-6 w-12 rounded-full"></div></div>
+                            </article>
                         {% endfor %}
                     </div>
                 </div>
@@ -174,33 +172,22 @@
                 </div>
             </header>
             <div id="courses-calendar-root" class="courses-calendar-root">
-                <div class="apstudy-skeleton apstudy-skeleton-table apstudy-skeleton-fill" role="status" aria-live="polite" aria-busy="true">
+                <div class="courses-schedule-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
                     <span class="sr-only">Loading course schedule...</span>
                     <div class="contents" aria-hidden="true">
-                        <div class="flex w-full flex-col gap-4 rounded-md border p-4">
-                            <div class="flex items-center justify-between">
-                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div>
-                                <div data-slot="skeleton" class="bg-muted animate-pulse h-8 w-20 rounded-md"></div>
-                            </div>
-                            <div class="grid grid-cols-4 gap-4 rounded-md bg-muted px-3 py-2">
-                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div>
-                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-16"></div>
-                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div>
-                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-16"></div>
-                            </div>
-                            <div class="flex flex-col gap-3">
+                        <div class="courses-skeleton-week-frame">
+                            <div class="courses-skeleton-week-header">
+                                <div class="courses-skeleton-week-header-cell"></div>
                                 {% for _ in range(5) %}
-                                    <div class="grid grid-cols-4 items-center gap-4 border-b pb-3 last:border-0 last:pb-0">
-                                        <div class="flex items-center gap-3">
-                                            <div data-slot="skeleton" class="bg-muted animate-pulse size-8 shrink-0 rounded-full"></div>
-                                            <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 flex-1"></div>
-                                        </div>
-                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
-                                        <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
-                                        <div data-slot="skeleton" class="bg-muted animate-pulse h-6 w-16 rounded-full"></div>
-                                    </div>
+                                    <div class="courses-skeleton-week-header-cell"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-8"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-12"></div></div>
                                 {% endfor %}
                             </div>
+                            <div class="courses-skeleton-week-scroller"><div class="courses-skeleton-week-grid"><div class="courses-skeleton-time-axis">{% for _ in range(9) %}<div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-8"></div></div>{% endfor %}</div>{% for _ in range(5) %}<div class="courses-skeleton-day-column"><div class="courses-skeleton-course courses-skeleton-course-a"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-4/5"></div></div><div class="courses-skeleton-course courses-skeleton-course-b"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-3/4"></div></div></div>{% endfor %}</div></div>
+                        </div>
+                        <div class="courses-skeleton-mobile-agenda">
+                            {% for _ in range(4) %}
+                                <section class="courses-skeleton-mobile-day"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-24"></div><div class="courses-skeleton-mobile-event"><div data-slot="skeleton" class="bg-muted animate-pulse size-8 rounded-md"></div><div class="flex flex-1 flex-col gap-2"><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-full"></div><div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-2/5"></div></div></div></section>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

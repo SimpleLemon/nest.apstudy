@@ -41,6 +41,56 @@ import { createRoot } from "react-dom/client";
 
 const h = React.createElement;
 
+function buildTaskLoadingHtml() {
+    const block = (className) => window.APStudySkeleton?.block?.(className)
+        || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
+    const taskRows = Array.from({ length: 5 }, (_, index) => `
+        <div class="task-row task-skeleton-row">
+            <div class="task-row-main">
+                ${block("task-skeleton-checkbox")}
+                <div class="flex flex-1 flex-col gap-2">
+                    ${block(index % 2 ? "h-3 w-3/4" : "h-3 w-full")}
+                    ${block("h-3 w-1/3")}
+                </div>
+                ${block("h-8 w-8")}
+            </div>
+        </div>
+    `).join("");
+
+    return `
+        <div class="task-app task-skeleton-app">
+            <header class="task-header">
+                <div>
+                    <h1 class="task-title workspace-page-title">Tasks</h1>
+                    <p class="workspace-page-subtitle">Lists, deadlines, repeat schedules, and calendar-synced work.</p>
+                </div>
+            </header>
+            <div class="task-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
+                <span class="sr-only">Loading tasks...</span>
+                <div class="contents task-skeleton-layout" aria-hidden="true">
+                    <aside class="task-list-rail task-skeleton-rail">
+                        <div class="task-skeleton-rail-item">${block("size-5")} ${block("h-3 flex-1")}</div>
+                        <div class="task-skeleton-rail-item">${block("size-5")} ${block("h-3 w-4/5")}</div>
+                        <div class="task-skeleton-rail-divider"></div>
+                        ${Array.from({ length: 3 }, (_, index) => `<div class="task-skeleton-rail-item">${block("size-5")} ${block(index === 2 ? "h-3 w-2/3" : "h-3 flex-1")} ${block("h-5 w-6 rounded-full")}</div>`).join("")}
+                    </aside>
+                    <section class="task-workspace">
+                        <article class="task-list-section task-skeleton-section">
+                            <div class="task-list-section-header">
+                                ${block("h-8 w-8")}
+                                <div class="flex flex-col gap-2">${block("h-5 w-36")} ${block("h-3 w-48")}</div>
+                                ${block("h-3 w-12")}
+                                ${block("h-8 w-8")}
+                            </div>
+                            <div class="task-list-body">${taskRows}</div>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function TaskApp({ completeSound, uncompleteSound }) {
     const [lists, setLists] = React.useState([]);
     const [tasks, setTasks] = React.useState([]);
@@ -428,19 +478,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
     const printTasks = printListRecord ? tasksByList.get(printListRecord.id) || [] : [];
 
     if (loading) {
-        const loaderHtml = window.APStudySkeleton?.fieldSet
-            ? window.APStudySkeleton.fieldSet({
-                label: "Loading tasks...",
-                sections: 1,
-                fields: 6,
-                className: "apstudy-skeleton-fill",
-            })
-            : window.APStudyLoader?.html
-                ? window.APStudyLoader.html("Loading tasks...", { sizePx: 54, textToneClass: "text-on-surface" })
-            : '<span class="loader" style="width:54px; height:54px;" aria-hidden="true"></span><span>Loading tasks...</span>';
         return h("div", {
-            className: "task-loading",
-            dangerouslySetInnerHTML: { __html: loaderHtml },
+            dangerouslySetInnerHTML: { __html: buildTaskLoadingHtml() },
         });
     }
 

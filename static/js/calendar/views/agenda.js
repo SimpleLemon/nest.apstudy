@@ -96,18 +96,7 @@
             const root = document.getElementById("assignments-root");
             if (!root) return;
             if (state.loadingDashboard) {
-                const skeletonHtml = window.APStudySkeleton?.cards
-                    ? window.APStudySkeleton.cards({
-                        label: "Loading upcoming events...",
-                        count: 3,
-                        className: "md:col-span-2 lg:col-span-3",
-                    })
-                    : window.APStudyLoader.html("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" });
-                root.innerHTML = `
-                    <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-10 text-center">
-                        ${skeletonHtml}
-                    </div>
-                `;
+                root.innerHTML = buildAssignmentsSkeletonHtml();
                 return;
             }
             const now = new Date();
@@ -165,6 +154,31 @@
                     </article>
                 `;
             }).join("");
+        }
+
+        function buildAssignmentsSkeletonHtml() {
+            const block = (className) => window.APStudySkeleton?.block?.(className)
+                || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
+            return `
+                <div class="calendar-assignments-skeleton apstudy-skeleton md:col-span-2 lg:col-span-3" role="status" aria-live="polite" aria-busy="true">
+                    <span class="sr-only">Loading upcoming events...</span>
+                    <div class="contents" aria-hidden="true">
+                        ${Array.from({ length: 3 }, (_, index) => `
+                            <article class="calendar-assignment-skeleton-card rounded-xl border border-outline-variant/20 bg-surface-container p-5 sm:p-6">
+                                <div class="flex items-start justify-between gap-3">
+                                    ${block("h-6 w-20")}
+                                    ${block("h-4 w-24")}
+                                </div>
+                                <div class="mt-5 flex flex-col gap-3">
+                                    ${block(index === 1 ? "h-5 w-3/4" : "h-5 w-full")}
+                                    <div class="flex items-center gap-2">${block("size-3 rounded-full")} ${block("h-3 w-24")}</div>
+                                </div>
+                                <div class="mt-5 flex flex-col gap-2">${block("h-3 w-full")} ${block("h-3 w-4/5")}</div>
+                            </article>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
         }
 
         function getUpcomingEventRef(event) {

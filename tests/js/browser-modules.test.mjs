@@ -301,8 +301,10 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
     assert.match(calendarSource, /buildMobileCalendarAgendaHtml/);
     assert.match(calendarSource, /calendar-mobile-agenda/);
     assert.match(calendarSource, /compactCalendar \? buildMobileCalendarAgendaHtml\(\)/);
-    assert.match(calendarSource, /APStudySkeleton\?\.table/);
-    assert.match(calendarSource, /APStudySkeleton\?\.cards/);
+    assert.match(calendarSource, /function buildCalendarSkeletonHtml\(\)/);
+    assert.match(calendarSource, /function buildAssignmentsSkeletonHtml\(\)/);
+    assert.match(calendarSource, /calendar-skeleton-week-frame/);
+    assert.doesNotMatch(calendarSource, /APStudySkeleton\?\.(table|cards)/);
 
     assert.match(coursesSource, /COMPACT_COURSES_QUERY = window\.matchMedia\("\(max-width: 640px\)"\)/);
     assert.match(coursesSource, /buildMobileCoursesAgenda/);
@@ -333,6 +335,20 @@ test("dashboard uses the shared theme preference without page-specific remapping
 
     assert.match(template, /js\/core\/theme-init\.js/);
     assert.doesNotMatch(template, /js\/dashboard\/theme\.js/);
+});
+
+test("slow workspace pages reserve their loaded layout with page-specific skeletons", async () => {
+    const dashboardTemplate = await sourceFor("templates/dashboard.html");
+    const taskTemplate = await sourceFor("templates/task.html");
+    const calendarSource = await sourceFor("static/js/calendar/views/render-shell.js");
+    const settingsTemplate = await sourceFor("templates/settings.html");
+
+    assert.match(dashboardTemplate, /dashboard-skeleton-tile/);
+    assert.doesNotMatch(dashboardTemplate, /apstudy-skeleton-cards/);
+    assert.match(taskTemplate, /task-skeleton-layout/);
+    assert.match(calendarSource, /calendar-skeleton-week-frame/);
+    assert.match(settingsTemplate, /settings-skeleton-account-layout/);
+    assert.match(settingsTemplate, /settings-skeleton-data-grid/);
 });
 
 test("notes, files, and tasks share the compact workspace title style", async () => {
@@ -690,6 +706,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
 
 test("courses page keeps Atlas APIs, filtering state, and schedule constants connected", async () => {
     const source = await sourceFor("static/js/courses/index.js");
+    const template = await sourceFor("templates/courses.html");
     const combinedSource = [
         source,
         await sourceFor("static/js/courses/utils.js"),
@@ -737,6 +754,11 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(styles, /\.course-section-inline/);
     assert.match(styles, /\.course-card-tracked/);
     assert.match(styles, /\.course-card-meta-row/);
+    assert.match(combinedSource, /function buildCourseResultsSkeletonHtml\(/);
+    assert.match(combinedSource, /function buildCourseScheduleSkeletonHtml\(/);
+    assert.match(template, /courses-results-skeleton/);
+    assert.match(template, /courses-schedule-skeleton/);
+    assert.match(styles, /\.courses-skeleton-week-frame/);
 });
 
 test("files page keeps upload limits, modal elements, and share/delete endpoints wired", async () => {
@@ -795,7 +817,10 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(source, /'nest-light'/);
     assert.match(source, /'nest-dark'/);
     assert.match(source, /function renderSettingsSkeleton\(\)/);
-    assert.match(source, /APStudySkeleton\?\.fieldSet/);
+    assert.match(template, /settings-page-skeleton/);
+    assert.match(template, /settings-skeleton-account-layout/);
+    assert.match(template, /settings-skeleton-data-grid/);
+    assert.doesNotMatch(source, /APStudySkeleton\?\.fieldSet/);
     assert.match(source, /function clearSettingsSkeleton\(\)/);
     assert.match(source, /interface_theme: interfaceTheme/);
     assert.match(source, /const SETTINGS_MAX_OTHER_CALENDARS = 10/);
@@ -827,6 +852,9 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
     assert.match(source, /taskReactRoot\?\.unmount\(\)/);
     assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
     assert.match(source, /createTaskSounds\(\{ completeSound, uncompleteSound \}\)/);
+    assert.match(source, /function buildTaskLoadingHtml\(\)/);
+    assert.match(template, /task-skeleton-layout/);
+    assert.doesNotMatch(source, /APStudySkeleton\?\.fieldSet/);
     assert.doesNotMatch(source, /use-sound|useSound/);
     assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js|use-sound/);
     assert.match(template, /data-probe-appwrite-session="false"/);
@@ -886,6 +914,7 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.match(source, /function table\(options = \{\}\)/);
     assert.match(source, /function cards\(options = \{\}\)/);
     assert.match(source, /function fieldSet\(options = \{\}\)/);
+    assert.match(source, /block: skeletonBlock/);
     assert.match(source, /data-slot="skeleton"/);
     assert.match(source, /window\.APStudyDate = \{/);
     assert.match(source, /function clearClientState\(options = \{\}\)/);

@@ -93,7 +93,89 @@
 }
 
 .settings-sections.is-loading {
-  display: none;
+    display: none;
+}
+
+.settings-bootstrap-skeleton[hidden] {
+    display: none;
+}
+
+.settings-skeleton-stack {
+    display: grid;
+    gap: 24px;
+}
+
+.settings-skeleton-account-layout,
+.settings-skeleton-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.settings-skeleton-card {
+    display: grid;
+    gap: 20px;
+    min-height: 220px;
+    padding: 24px;
+}
+
+.settings-skeleton-profile-card {
+    align-content: start;
+}
+
+.settings-skeleton-profile-head,
+.settings-skeleton-card-head,
+.settings-skeleton-stat {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.settings-skeleton-avatar {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 auto;
+    border-radius: var(--radius-avatar);
+}
+
+.settings-skeleton-profile-lines,
+.settings-skeleton-options {
+    display: grid;
+    gap: 10px;
+}
+
+.settings-skeleton-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.settings-skeleton-fields > div {
+    display: grid;
+    gap: 8px;
+}
+
+.settings-skeleton-fields-wide {
+    grid-template-columns: 1fr;
+}
+
+.settings-skeleton-stat {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (max-width: 760px) {
+    .settings-skeleton-account-layout,
+    .settings-skeleton-data-grid,
+    .settings-skeleton-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-skeleton-card {
+        min-height: 0;
+        padding: 18px;
+    }
 }
 
 .settings-bootstrap-skeleton {
