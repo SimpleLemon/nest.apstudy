@@ -89,6 +89,14 @@ function avatarImageAttrs(image, image2x) {
   return `src="${src}" srcset="${src} 1x, ${src2x} 2x"`;
 }
 
+function navbarTierClass(tier) {
+  const normalized = String(tier || '').trim().toLowerCase();
+  if (normalized === 'grade_a') return 'navbar-avatar--grade-a';
+  if (normalized === 'grade_aa') return 'navbar-avatar--grade-aa';
+  if (normalized === 'developer') return 'navbar-avatar--developer';
+  return '';
+}
+
 function getCommandPaletteShortcutLabel() {
   const platform = (
     navigator.userAgentData?.platform ||
@@ -158,6 +166,9 @@ function renderNavbar() {
   const profileImageAttrs = avatarImageAttrs(profileImage, profileImage2x);
 
   const userEmail = navPlaceholder.dataset.userEmail || 'user@example.com';
+  const userTier = String(navPlaceholder.dataset.userTier || '').trim().toLowerCase();
+  const tierClass = navbarTierClass(userTier);
+  const tierLabel = userTier === 'grade_a' ? 'Grade A' : userTier === 'grade_aa' ? 'Grade AA' : userTier === 'developer' ? 'Developer' : '';
   const commandShortcut = getCommandPaletteShortcutLabel();
 
   const menuButton = hasSidebar ? `
@@ -170,7 +181,7 @@ function renderNavbar() {
       <span class="navbar-search-tooltip" role="tooltip">${commandShortcut}</span>
     </button>
     <div class="navbar-avatar-wrapper">
-      <button type="button" class="navbar-avatar" id="navbar-avatar-btn" aria-label="Profile menu" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
+      <button type="button" class="navbar-avatar ${tierClass}" id="navbar-avatar-btn" aria-label="Profile menu${tierLabel ? ` · ${tierLabel}` : ''}" title="${tierLabel}" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
         <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
       </button>
       <div id="profile-dropdown" class="profile-dropdown" role="menu">

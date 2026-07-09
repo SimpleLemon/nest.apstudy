@@ -1,8 +1,9 @@
 (() => {
-  const COLUMN_STORAGE_KEY = "nest-admin-auth-user-columns";
+  const COLUMN_STORAGE_KEY = "nest-admin-auth-user-columns-v2";
   const PER_PAGE_STORAGE_KEY = "nest-admin-auth-users-per-page";
   const ALLOWED_PER_PAGE = new Set([5, 10, 25, 50, 100]);
-  const DEFAULT_COLUMNS = ["id", "name", "email", "username", "onboarding", "oauth", "created", "last_login"];
+  const DEFAULT_COLUMNS = ["identity", "status", "profile", "activity", "created"];
+  const AVAILABLE_COLUMNS = ["identity", "status", "profile", "activity", "created", "id"];
 
   function readStoredColumns() {
     try {
@@ -10,7 +11,7 @@
       if (!raw) return [...DEFAULT_COLUMNS];
       const parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) return [...DEFAULT_COLUMNS];
-      const filtered = parsed.filter((key) => DEFAULT_COLUMNS.includes(key));
+      const filtered = parsed.filter((key) => AVAILABLE_COLUMNS.includes(key));
       return filtered.length ? filtered : [...DEFAULT_COLUMNS];
     } catch {
       return [...DEFAULT_COLUMNS];
@@ -39,7 +40,7 @@
 
   let activeColumnsWrap = null;
 
-  function closeColumnsMenu(wrap) {
+  function closeColumnsMenu(wrap, restoreFocus = false) {
     const target = wrap || activeColumnsWrap;
     if (!target) return;
     const trigger = target.querySelector("[data-auth-columns-trigger]");
@@ -49,6 +50,9 @@
     trigger.setAttribute("aria-expanded", "false");
     if (activeColumnsWrap === target) {
       activeColumnsWrap = null;
+    }
+    if (restoreFocus) {
+      trigger.focus();
     }
   }
 
@@ -61,12 +65,13 @@
       }
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeColumnsMenu(activeColumnsWrap);
+      if (event.key === "Escape") closeColumnsMenu(activeColumnsWrap, true);
     });
   }
 
   function applyColumnVisibility(root, visibleColumns) {
     const visible = new Set(visibleColumns);
+    visible.add("identity");
     root.querySelectorAll("[data-column]").forEach((cell) => {
       const key = cell.getAttribute("data-column");
       cell.hidden = !visible.has(key);
@@ -85,7 +90,7 @@
     const section = scope.querySelector("[data-auth-users-section]");
     if (!section) return;
 
-    let visibleColumns = readStoredColumns();
+    let visibleColumns = Array.from(new Set([...readStoredColumns(), "identity"]));
     applyColumnVisibility(section, visibleColumns);
 
     const columnsWrap = section.querySelector(".admin-auth-columns-wrap");
@@ -93,6 +98,8 @@
     const columnsMenu = section.querySelector("[data-auth-columns-menu]");
     const searchForm = section.querySelector("[data-auth-users-search]");
     const searchInput = section.querySelector("[data-auth-users-search-input]");
+    const searchField = section.querySelector("[data-auth-users-search-field]");
+    const clearSearchButton = section.querySelector("[data-auth-users-clear-search]");
     const perPageSelect = section.querySelector("[data-auth-users-per-page]");
 
     columnsTrigger?.addEventListener("click", (event) => {
@@ -119,7 +126,7 @@
       if (input.checked) {
         next.add(key);
       } else {
-        if (next.size <= 1) {
+        if (next.size < 1) {
           input.checked = true;
           return;
         }
@@ -141,7 +148,14 @@
     searchForm?.addEventListener("submit", (event) => {
       event.preventDefault();
       const q = String(searchInput?.value || "").trim();
-      dispatchUsersQueryChange({ q, page: 1, field: "" });
+      const field = String(searchField?.value || "").trim();
+      dispatchUsersQueryChange({ q, page: 1, field });
+    });
+
+    clearSearchButton?.addEventListener("click", () => {
+      if (searchInput) searchInput.value = "";
+      if (searchField) searchField.value = "";
+      dispatchUsersQueryChange({ q: "", page: 1, field: "" });
     });
 
     perPageSelect?.addEventListener("change", () => {

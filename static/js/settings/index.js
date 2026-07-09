@@ -15,6 +15,7 @@ const SETTINGS_STATE = {
   storageUsageBytes: 0,
   notesCount: 0,
   filesCount: 0,
+  entitlements: null,
   connectedServices: [],
   otherCalendarUrls: [],
   discord: { linked: false, username: null },
@@ -286,6 +287,13 @@ function cacheElements() {
   elements.graduationYear = document.getElementById('settings-graduation-year');
   elements.storageUsed = Array.from(document.querySelectorAll('[data-storage-used]'));
   elements.storageDetails = Array.from(document.querySelectorAll('[data-storage-details]'));
+  elements.tierLabel = document.querySelector('[data-tier-label]');
+  elements.tierStorage = document.querySelector('[data-tier-storage]');
+  elements.tierStorageProgress = document.querySelector('[data-tier-storage-progress]');
+  elements.tierWarning = document.querySelector('[data-tier-warning]');
+  elements.tierLimits = Array.from(document.querySelectorAll('[data-tier-limit]'));
+  elements.tierBadge = document.getElementById('settings-tier-badge');
+  elements.previewTierBadge = document.getElementById('settings-preview-tier-badge');
   elements.connectedServices = document.getElementById('settings-connected-services');
   elements.canvasFeedUrl = document.getElementById('settings-canvas-feed-url');
   elements.otherCalendarLinks = document.getElementById('settings-other-calendar-links');
@@ -417,6 +425,7 @@ async function bootstrapSettingsPage() {
     SETTINGS_STATE.storageUsageBytes = Number(bootstrapResponse.storage_usage_bytes || 0);
     SETTINGS_STATE.notesCount = Number(bootstrapResponse.notes_count || 0);
     SETTINGS_STATE.filesCount = Number(bootstrapResponse.files_count || 0);
+    SETTINGS_STATE.entitlements = bootstrapResponse.entitlements || null;
     SETTINGS_STATE.connectedServices = Array.isArray(bootstrapResponse.connected_services)
       ? bootstrapResponse.connected_services
       : [];
@@ -428,6 +437,7 @@ async function bootstrapSettingsPage() {
       : { linked: false, username: null };
 
     populateFields();
+    renderEntitlements();
     notifyDiscordLinkResult();
     renderConnectedServices();
     syncThemeControls();
@@ -440,6 +450,63 @@ async function bootstrapSettingsPage() {
   } finally {
     clearSettingsSkeleton();
   }
+}
+
+function renderEntitlements() {
+  const data = SETTINGS_STATE.entitlements;
+  if (!data) return;
+  const usage = data.usage || {};
+  const limits = data.limits || {};
+  const label = data.label || 'Free';
+  if (elements.tierLabel) elements.tierLabel.textContent = label;
+
+  const badgeNodes = [elements.tierBadge, elements.previewTierBadge].filter(Boolean);
+  badgeNodes.forEach((node) => {
+    const badge = data.badge;
+    if (!badge) {
+      node.hidden = true;
+      return;
+    }
+    node.src = badge.asset;
+    node.alt = label;
+    node.title = label;
+    node.hidden = false;
+  });
+
+  const used = Number(data.storage_usage_bytes || 0);
+  const cap = data.storage_limit_bytes;
+  const percent = cap ? Math.min(100, (used / cap) * 100) : 0;
+  if (elements.tierStorage) {
+    elements.tierStorage.textContent = cap == null
+      ? `${formatBytes(used)} used / Unlimited storage`
+      : `${formatBytes(used)} used / ${formatBytes(cap)} (${Math.max(0, 100 - percent).toFixed(1)}% remaining)`;
+  }
+  if (elements.tierStorageProgress) elements.tierStorageProgress.style.width = `${percent}%`;
+  const overLimit = Boolean(data.over_limit && Object.values(data.over_limit).some(Boolean)) || (cap != null && used > cap);
+  if (elements.tierWarning) {
+    elements.tierWarning.hidden = !overLimit;
+    elements.tierWarning.textContent = overLimit ? 'You are over a current limit. Delete existing data before adding more.' : '';
+  }
+
+  const usageByLimit = {
+    max_upload_files: limits.max_upload_files,
+    max_notes: limits.max_notes,
+    max_saved_courses: limits.max_saved_courses,
+    max_seat_tracks: limits.max_seat_tracks,
+    max_calendar_feeds: limits.max_calendar_feeds,
+  };
+  const usageByResource = {
+    max_upload_files: 'files',
+    max_notes: 'notes',
+    max_saved_courses: 'saved_courses',
+    max_seat_tracks: 'seat_tracks',
+    max_calendar_feeds: 'calendar_feeds',
+  };
+  elements.tierLimits.forEach((node) => {
+    const key = node.dataset.tierLimit;
+    const limit = usageByLimit[key];
+    node.textContent = limit == null ? 'Unlimited' : `${usage[usageByResource[key]] || 0} / ${limit}`;
+  });
 }
 
 function populateFields() {

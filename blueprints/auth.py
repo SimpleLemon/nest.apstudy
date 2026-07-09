@@ -45,6 +45,7 @@ from services.avatar_storage import delete_avatar_file, store_avatar_from_url
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
 from services import discord_bridge, notes_collaboration
+from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
 from services.user_profile import (
     is_early_member as _is_early_member,
     is_emory_school as _is_emory_school,
@@ -291,7 +292,7 @@ def _backfill_user_avatar(user_doc, *, dry_run=False):
             "avatar_url": avatar_url,
         }
 
-    picture_url, avatar_file_id, storage_result = _store_provider_avatar(
+    picture_url, avatar_file_id, storage_result, avatar_file_size_bytes = _store_provider_avatar(
         user_id,
         avatar_url,
         page_context="auth/backfill-avatars",
@@ -303,6 +304,7 @@ def _backfill_user_avatar(user_doc, *, dry_run=False):
             "picture_url": picture_url,
             "avatar_file_id": avatar_file_id,
             "avatar_source": "provider",
+            "avatar_file_size_bytes": avatar_file_size_bytes,
             "provider": provider,
         },
     )
@@ -613,6 +615,7 @@ def _public_profile_payload(user_doc):
     user_id = user_doc.get("$id") or user_doc.get("id")
     name = user_doc.get("name") or "APStudy User"
     username = user_doc.get("username")
+    tier = normalize_tier(user_doc.get("tier"))
     return {
         "id": user_id,
         "name": name,
@@ -628,6 +631,9 @@ def _public_profile_payload(user_doc):
         "member_since": _format_member_since(user_doc.get("created_at")),
         "is_emory_school": _is_emory_school(user_doc.get("school")),
         "is_early_member": _is_early_member(user_doc.get("created_at")),
+        "tier": tier,
+        "tier_label": TIER_LABELS[tier],
+        "tier_badge": TIER_BADGES.get(tier),
     }
 
 
@@ -710,11 +716,11 @@ def _store_provider_avatar(user_id, source_url, *, page_context="auth"):
     """Copy a provider avatar into storage; keep the source URL when copy fails."""
     clean_url = _clean_avatar_url(source_url)
     if not clean_url:
-        return None, None, "missing_source_url"
+        return None, None, "missing_source_url", 0
 
     stored_avatar = store_avatar_from_url(user_id, clean_url)
     if stored_avatar:
-        return stored_avatar["view_url"], stored_avatar["file_id"], "stored"
+        return stored_avatar["view_url"], stored_avatar["file_id"], "stored", stored_avatar.get("size_bytes", 0)
 
     logger.warning(
         "Provider avatar storage copy failed; keeping provider URL: user_id=%s page_context=%s source=%s",
@@ -722,7 +728,7 @@ def _store_provider_avatar(user_id, source_url, *, page_context="auth"):
         page_context,
         _sanitize_avatar_log_url(clean_url),
     )
-    return clean_url, None, "provider_url_fallback"
+    return clean_url, None, "provider_url_fallback", 0
 
 
 def _provider_avatar_url(provider_profile, remote_user, provider=None):
@@ -922,9 +928,10 @@ def _complete_appwrite_login(
     if not user_doc:
         created_at = format_datetime(datetime.utcnow())
         avatar_file_id = None
+        avatar_file_size_bytes = 0
         storage_result = "none"
         if picture_url:
-            picture_url, avatar_file_id, storage_result = _store_provider_avatar(
+            picture_url, avatar_file_id, storage_result, avatar_file_size_bytes = _store_provider_avatar(
                 appwrite_user_id,
                 picture_url,
                 page_context=page_context,
@@ -935,6 +942,8 @@ def _complete_appwrite_login(
             "name": name or remote_user.get("name"),
             "picture_url": picture_url,
             "avatar_file_id": avatar_file_id,
+            "avatar_file_size_bytes": avatar_file_size_bytes,
+            "tier": "free",
             "banner_color": "#fecae1",
             "avatar_source": "provider" if picture_url else None,
             "school": None,
@@ -983,7 +992,7 @@ def _complete_appwrite_login(
         if name:
             updates["name"] = name
         if picture_url and _avatar_can_use_provider(user_doc):
-            stored_picture_url, stored_file_id, storage_result = _store_provider_avatar(
+            stored_picture_url, stored_file_id, storage_result, stored_file_size_bytes = _store_provider_avatar(
                 appwrite_user_id,
                 picture_url,
                 page_context=page_context,
@@ -991,6 +1000,7 @@ def _complete_appwrite_login(
             previous_file_id = user_doc.get("avatar_file_id")
             updates["picture_url"] = stored_picture_url
             updates["avatar_source"] = "provider"
+            updates["avatar_file_size_bytes"] = stored_file_size_bytes
             if stored_file_id:
                 updates["avatar_file_id"] = stored_file_id
                 if previous_file_id and previous_file_id != stored_file_id:
@@ -1409,6 +1419,7 @@ def _render_public_profile(user_doc):
         viewer = {
             "email": current_user.email,
             "picture": current_user.picture_url,
+            "tier": normalize_tier(getattr(current_user, "tier", None)),
         }
         try:
             from appwrite_client import COLLECTIONS

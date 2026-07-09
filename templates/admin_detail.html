@@ -20,112 +20,202 @@
 <body class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     {% include "_admin_sidebar.html" %}
     <main class="admin-shell">
-        <header class="admin-header">
+        {% set display_name = user.name or user.username or "User" %}
+        <header class="admin-header admin-page-header admin-user-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <h1 class="admin-title">{{ user.name or "User" }}</h1>
-                <p class="admin-subtitle">Appwrite ID: {{ user.id }}</p>
+                <p class="admin-eyebrow">User record</p>
+                <h1 class="admin-title">{{ display_name }}</h1>
+                <p class="admin-subtitle">A concise account view with the user’s profile, activity, and stored workspace data.</p>
             </div>
+            <a class="admin-button admin-button--ghost" href="{{ return_to }}">
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                Back to users
+            </a>
         </header>
 
-        <section class="admin-profile-overview" aria-label="User profile overview">
-            <div class="admin-profile-preview">
-                <div class="profile-tile" style="--profile-banner-color: {{ profile.banner_color or '#fecae1' }};">
-                    <div class="profile-tile-banner"></div>
-                    <div class="profile-tile-body">
-                        <div class="profile-tile-avatar-frame">
-                            <img
-                                class="profile-tile-avatar"
-                                src="{{ (profile.picture_url or '')|avatar_url(150) }}"
-                                srcset="{{ (profile.picture_url or '')|avatar_url(150) }} 1x, {{ (profile.picture_url or '')|avatar_url(300) }} 2x"
-                                sizes="(max-width: 720px) 112px, 150px"
-                                alt="{{ profile.name }} avatar"
-                                width="150"
-                                height="150"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </div>
-                        <div class="profile-tile-heading">
-                            <h3>{{ profile.name }}</h3>
-                            <p>{{ profile.handle or profile.id }}</p>
-                        </div>
-                        <div class="profile-tile-details">
-                            <div class="{{ 'profile-tile-detail-emory' if profile.is_emory_school else '' }}">
-                                <span>School</span>
-                                <strong>{{ profile.school or 'Not set' }}</strong>
-                            </div>
-                            <div>
-                                <span>Major</span>
-                                <strong>{{ profile.major or 'Not set' }}</strong>
-                            </div>
-                            <div>
-                                <span>Graduation</span>
-                                <strong>{{ profile.graduation_year or profile.class_year or 'Not set' }}</strong>
-                            </div>
-                            <div>
-                                <span>Education</span>
-                                <strong>{{ profile.education_level or 'Not set' }}</strong>
-                            </div>
-                            <div class="{{ 'profile-tile-detail-early-member' if profile.is_early_member else '' }}">
-                                <span>Member Since</span>
-                                <strong>{{ profile.member_since or 'Not set' }}</strong>
-                            </div>
-                        </div>
-                    </div>
+        <section class="admin-user-hero" aria-label="User identity and account status">
+            <div class="admin-user-hero__identity">
+                <img
+                    class="admin-user-hero__avatar"
+                    src="{{ (profile.picture_url or '')|avatar_url(160) }}"
+                    srcset="{{ (profile.picture_url or '')|avatar_url(160) }} 1x, {{ (profile.picture_url or '')|avatar_url(320) }} 2x"
+                    sizes="80px"
+                    alt=""
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
+                />
+                <div class="admin-user-hero__identity-copy">
+                    <p class="admin-user-hero__label">Account holder</p>
+                    <h2>{{ display_name }}</h2>
+                    <p>{{ user.email or 'No email on record' }}</p>
+                    <span>{{ profile.handle or user.username or user.id }}</span>
                 </div>
             </div>
-            <div class="admin-card admin-profile-admin-card">
-                <h2 class="admin-title admin-title--small">Admin Profile</h2>
-                <div class="admin-grid">
-                    <div class="admin-field">
-                        <span class="admin-field-label">User ID</span>
-                        <span class="admin-field-value">{{ user.id }}</span>
+            <div class="admin-user-hero__status" aria-label="Account status">
+                {% if user.tier_badge %}
+                    <span class="admin-tier-badge-wrap">
+                        <img class="tier-badge" src="{{ user.tier_badge.asset }}" alt="{{ user.tier_label }}" title="{{ user.tier_label }}" width="32" height="32" loading="lazy" decoding="async" />
+                        <span>{{ user.tier_label }}</span>
+                    </span>
+                {% else %}
+                    <span class="admin-badge">Free</span>
+                {% endif %}
+                {% if user.onboarding_complete %}
+                    <span class="admin-badge admin-badge--success">Onboarding complete</span>
+                {% else %}
+                    <span class="admin-badge admin-badge--warning">Onboarding · step {{ user.onboarding_step }}</span>
+                {% endif %}
+                <span class="admin-badge">{{ user.oauth_provider | capitalize }} sign-in</span>
+                {% if user.discord_linked %}
+                    <span class="admin-badge admin-badge--discord">Discord linked</span>
+                {% endif %}
+                {% if user.emory_student %}
+                    <span class="admin-badge admin-badge--tertiary">Emory student</span>
+                {% endif %}
+            </div>
+            <dl class="admin-user-hero__facts">
+                <div>
+                    <dt>Account ID</dt>
+                    <dd><code>{{ user.id }}</code></dd>
+                </div>
+                <div>
+                    <dt>Joined</dt>
+                    <dd data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</dd>
+                </div>
+                <div>
+                    <dt>Last opened website</dt>
+                    <dd data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login or "Not opened yet" }}</dd>
+                </div>
+            </dl>
+        </section>
+
+        <section class="admin-user-summary-grid" aria-label="User profile summary">
+            <article class="admin-card admin-user-summary-card admin-tier-summary-card">
+                <div class="admin-tier-summary-head">
+                    <div>
+                        <h2 class="admin-title admin-title--small">Tier &amp; limits</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Apply a tier and review the user’s current usage.</p>
                     </div>
+                    <form class="admin-tier-quick-form" method="post" action="{{ url_for('admin.update_user_tier', user_id=user.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="section" value="{{ section }}" />
+                        <label class="sr-only" for="admin-detail-tier">User tier</label>
+                        <select id="admin-detail-tier" name="tier" class="admin-tier-quick-select">
+                            {% for tier_key, tier_label in {'free': 'Free', 'grade_a': 'Grade A', 'grade_aa': 'Grade AA', 'developer': 'Developer'}.items() %}
+                                <option value="{{ tier_key }}" {% if user.tier == tier_key %}selected{% endif %}>{{ tier_label }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="admin-button admin-button--compact" type="submit">Apply</button>
+                    </form>
+                </div>
+                {% if tier_entitlements %}
+                    {% set limits = tier_entitlements.limits %}
+                    {% set usage = tier_entitlements.usage %}
+                    <div class="admin-tier-usage-grid">
+                        <span>Storage <strong>{{ ((usage.storage_bytes or 0) / (1024 ** 3))|round(2) }} GB{% if limits.storage_bytes %} / {{ (limits.storage_bytes / (1024 ** 3))|round(0)|int }} GB{% else %} / Unlimited{% endif %}</strong></span>
+                        <span>Files <strong>{{ usage.files }}</strong></span>
+                        <span>Notes <strong>{{ usage.notes }}{% if limits.max_notes %} / {{ limits.max_notes }}{% endif %}</strong></span>
+                        <span>Courses <strong>{{ usage.saved_courses }}{% if limits.max_saved_courses %} / {{ limits.max_saved_courses }}{% endif %}</strong></span>
+                        <span>Tracks <strong>{{ usage.seat_tracks }}{% if limits.max_seat_tracks %} / {{ limits.max_seat_tracks }}{% endif %}</strong></span>
+                        <span>Feeds <strong>{{ usage.calendar_feeds }}{% if limits.max_calendar_feeds %} / {{ limits.max_calendar_feeds }}{% endif %}</strong></span>
+                    </div>
+                {% else %}
+                    <p class="admin-empty-state">Tier usage is temporarily unavailable.</p>
+                {% endif %}
+            </article>
+            <article class="admin-card admin-user-summary-card">
+                <h2 class="admin-title admin-title--small">Account &amp; access</h2>
+                <div class="admin-user-summary-card__fields">
                     <div class="admin-field">
                         <span class="admin-field-label">Username</span>
-                        <span class="admin-field-value">{{ user.username or "--" }}</span>
+                        <span class="admin-field-value">{{ user.username or 'Not set' }}</span>
                     </div>
                     <div class="admin-field">
                         <span class="admin-field-label">Email</span>
-                        <span class="admin-field-value">{{ user.email or "--" }}</span>
-                    </div>
-                    <div class="admin-field">
-                        <span class="admin-field-label">Created</span>
-                        <span class="admin-field-value" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
-                    </div>
-                    <div class="admin-field">
-                        <span class="admin-field-label">Last Opened Website</span>
-                        <span class="admin-field-value" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login or "--" }}</span>
+                        <span class="admin-field-value">{{ user.email or 'Not set' }}</span>
                     </div>
                     <div class="admin-field">
                         <span class="admin-field-label">Onboarding</span>
                         <span class="admin-field-value">{{ "Complete" if user.onboarding_complete else "Step " ~ user.onboarding_step }}</span>
                     </div>
                     <div class="admin-field">
-                        <span class="admin-field-label">Emory Student</span>
+                        <span class="admin-field-label">Discord connection</span>
+                        <span class="admin-field-value">{{ "Linked" if user.discord_linked else "Not linked" }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Emory student</span>
                         <span class="admin-field-value">{{ "Yes" if user.emory_student else "No" }}</span>
                     </div>
                 </div>
-            </div>
+            </article>
+            <article class="admin-card admin-user-summary-card">
+                <h2 class="admin-title admin-title--small">Learning profile</h2>
+                <div class="admin-user-summary-card__fields">
+                    <div class="admin-field">
+                        <span class="admin-field-label">School</span>
+                        <span class="admin-field-value">{{ profile.school or 'Not set' }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Major</span>
+                        <span class="admin-field-value">{{ profile.major or 'Not set' }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Graduation</span>
+                        <span class="admin-field-value">{{ profile.graduation_year or profile.class_year or 'Not set' }}</span>
+                    </div>
+                    <div class="admin-field">
+                        <span class="admin-field-label">Education level</span>
+                        <span class="admin-field-value">{{ profile.education_level or 'Not set' }}</span>
+                    </div>
+                </div>
+            </article>
         </section>
 
-        <nav class="admin-tabs">
-            <a class="admin-tab {% if section == 'overview' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='overview') }}">Overview</a>
-            <a class="admin-tab {% if section == 'settings' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='settings') }}">Settings</a>
-            <a class="admin-tab {% if section == 'files' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='files') }}">Files</a>
-            <a class="admin-tab {% if section == 'notes' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='notes') }}">Notes</a>
-            <a class="admin-tab {% if section == 'calendars' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='calendars') }}">Calendars</a>
-            <a class="admin-tab {% if section == 'courses' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='courses') }}">Courses</a>
-            <a class="admin-tab {% if section == 'seat_tracks' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='seat_tracks') }}">Seat Tracks</a>
-            <a class="admin-tab {% if section == 'chat' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='chat') }}">Chat History</a>
+        <nav class="admin-record-nav" aria-label="User data sections">
+            <div class="admin-record-nav__group">
+                <span class="admin-record-nav__label">Account</span>
+                <div class="admin-record-nav__links">
+                    <a class="admin-record-nav__link {% if section == 'overview' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='overview', return_to=return_to) }}" {% if section == 'overview' %}aria-current="page"{% endif %}>Overview</a>
+                    <a class="admin-record-nav__link {% if section == 'settings' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='settings', return_to=return_to) }}" {% if section == 'settings' %}aria-current="page"{% endif %}>Settings</a>
+                </div>
+            </div>
+            <div class="admin-record-nav__group">
+                <span class="admin-record-nav__label">Workspace</span>
+                <div class="admin-record-nav__links">
+                    <a class="admin-record-nav__link {% if section == 'files' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='files', return_to=return_to) }}" {% if section == 'files' %}aria-current="page"{% endif %}>Files</a>
+                    <a class="admin-record-nav__link {% if section == 'notes' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='notes', return_to=return_to) }}" {% if section == 'notes' %}aria-current="page"{% endif %}>Notes</a>
+                    <a class="admin-record-nav__link {% if section == 'calendars' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='calendars', return_to=return_to) }}" {% if section == 'calendars' %}aria-current="page"{% endif %}>Calendars</a>
+                </div>
+            </div>
+            <div class="admin-record-nav__group">
+                <span class="admin-record-nav__label">Learning</span>
+                <div class="admin-record-nav__links">
+                    <a class="admin-record-nav__link {% if section == 'courses' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='courses', return_to=return_to) }}" {% if section == 'courses' %}aria-current="page"{% endif %}>Courses</a>
+                    <a class="admin-record-nav__link {% if section == 'seat_tracks' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='seat_tracks', return_to=return_to) }}" {% if section == 'seat_tracks' %}aria-current="page"{% endif %}>Seat tracks</a>
+                </div>
+            </div>
+            <div class="admin-record-nav__group">
+                <span class="admin-record-nav__label">Community</span>
+                <div class="admin-record-nav__links">
+                    <a class="admin-record-nav__link {% if section == 'chat' %}is-active{% endif %}" href="{{ url_for('admin.admin_detail', user_id=user.id, section='chat', return_to=return_to) }}" {% if section == 'chat' %}aria-current="page"{% endif %}>Chat history</a>
+                </div>
+            </div>
         </nav>
 
         {% if section == 'overview' %}
             {% from "partials/admin_statistic_cards.html" import statistic_card_row %}
             <section class="admin-section">
                 <div class="admin-card admin-quick-stats-card">
-                    <h2 class="admin-title">Quick Stats</h2>
+                    <div class="admin-section-heading">
+                        <div>
+                            <p class="admin-eyebrow">Stored data</p>
+                            <h2 class="admin-title admin-title--small">Workspace at a glance</h2>
+                            <p class="admin-subtitle admin-subtitle--compact">A count of the data attached to this account across Nest.</p>
+                        </div>
+                    </div>
                     {% set quick_stat_cells = [
                         {
                             'title': 'Files',
@@ -180,10 +270,17 @@
                 </div>
 
                 <div class="admin-card">
-                    <h2 class="admin-title">Onboarding Controls</h2>
+                    <div class="admin-section-heading">
+                        <div>
+                            <p class="admin-eyebrow">Account setup</p>
+                            <h2 class="admin-title admin-title--small">Onboarding controls</h2>
+                            <p class="admin-subtitle admin-subtitle--compact">Correct the setup state when an account needs manual support.</p>
+                        </div>
+                    </div>
                     <form class="admin-form" method="post" action="{{ url_for('admin.update_onboarding', user_id=user.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="overview" />
+                        <input type="hidden" name="return_to" value="{{ return_to }}" />
                         <label class="admin-inline">
                             <input type="checkbox" name="onboarding_complete" {% if user.onboarding_complete %}checked{% endif %} />
                             Onboarding complete
@@ -198,7 +295,13 @@
 
                 {% if account_data %}
                     <div class="admin-card">
-                        <h2 class="admin-title">Appwrite Account</h2>
+                        <div class="admin-section-heading">
+                            <div>
+                                <p class="admin-eyebrow">Identity provider</p>
+                                <h2 class="admin-title admin-title--small">Appwrite Account</h2>
+                                <p class="admin-subtitle admin-subtitle--compact">Readable provider metadata for this user account.</p>
+                            </div>
+                        </div>
                         {% if account_summary_rows %}
                             <div class="admin-grid">
                                 {% for row in account_summary_rows %}
@@ -211,18 +314,19 @@
                         {% else %}
                             <p>No account metadata found.</p>
                         {% endif %}
-                        <details class="admin-section">
-                            <summary>Raw Appwrite payload</summary>
+                        <details class="admin-raw-details admin-section">
+                            <summary>Technical details · Raw Appwrite payload</summary>
                             <pre class="admin-code-block">{{ account_data | tojson(indent=2) }}</pre>
                         </details>
                     </div>
                 {% endif %}
 
                 <div class="admin-card admin-danger-zone">
-                    <h2 class="admin-title">Danger Zone</h2>
+                    <h2 class="admin-title admin-title--small">Danger zone</h2>
                     <p class="admin-subtitle">Deleting an account removes the Appwrite user and all related data.</p>
                     <form class="admin-form" method="post" action="{{ url_for('admin.delete_user', user_id=user.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="return_to" value="{{ return_to }}" />
                         <label>
                             Type DELETE to confirm
                             <input type="text" name="confirm" placeholder="DELETE" required />
@@ -237,7 +341,13 @@
             {% set settings = section_data.settings %}
             <section class="admin-section">
                 <div class="admin-card">
-                    <h2 class="admin-title">User Settings</h2>
+                    <div class="admin-section-heading">
+                        <div>
+                            <p class="admin-eyebrow">Preferences</p>
+                            <h2 class="admin-title admin-title--small">User settings</h2>
+                            <p class="admin-subtitle admin-subtitle--compact">Simple values are shown directly; structured values stay collapsed until needed.</p>
+                        </div>
+                    </div>
                     {% if settings %}
                         <table class="admin-table">
                             <thead>
@@ -251,10 +361,31 @@
                                     <tr>
                                         <td data-label="Key">{{ key }}</td>
                                         <td data-label="Value">
-                                            {% if value is string %}
+                                            {% set normalized_key = key | lower %}
+                                            {% if 'token' in normalized_key or 'secret' in normalized_key or 'password' in normalized_key %}
+                                                <span class="admin-sensitive-value">Sensitive value hidden</span>
+                                                <details class="admin-raw-details admin-raw-details--inline">
+                                                    <summary>View sensitive value</summary>
+                                                    <pre class="admin-code-block">{{ value | tojson(indent=2) }}</pre>
+                                                </details>
+                                            {% elif value is string %}
                                                 {{ value }}
+                                            {% elif value is none %}
+                                                --
+                                            {% elif value is mapping %}
+                                                <span class="admin-structured-value">{{ value | length }} fields</span>
+                                                <details class="admin-raw-details admin-raw-details--inline">
+                                                    <summary>View structured value</summary>
+                                                    <pre class="admin-code-block">{{ value | tojson(indent=2) }}</pre>
+                                                </details>
+                                            {% elif value is sequence %}
+                                                <span class="admin-structured-value">{{ value | length }} items</span>
+                                                <details class="admin-raw-details admin-raw-details--inline">
+                                                    <summary>View structured value</summary>
+                                                    <pre class="admin-code-block">{{ value | tojson(indent=2) }}</pre>
+                                                </details>
                                             {% else %}
-                                                {{ value | tojson }}
+                                                {{ value }}
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -271,6 +402,7 @@
                     <form class="admin-form" method="post" action="{{ url_for('admin.reset_ics_token', user_id=user.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="settings" />
+                        <input type="hidden" name="return_to" value="{{ return_to }}" />
                         <button class="admin-button" type="submit">Reset ICS token</button>
                     </form>
                 </div>
@@ -281,6 +413,14 @@
             {% set folders = section_data.folders %}
             {% set files = section_data.files %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Workspace</p>
+                        <h2 class="admin-title admin-title--small">Files &amp; folders</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Review shared storage, permissions, and the folders this account owns.</p>
+                    </div>
+                    <span class="admin-section-count">{{ (folders | length) + (files | length) }} records</span>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Folders</h2>
                     {% if folders %}
@@ -306,14 +446,15 @@
                                             <form method="post" action="{{ url_for('admin.delete_shared_folder', user_id=user.id, folder_id=folder_id) }}">
                                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                 <input type="hidden" name="section" value="files" />
+                                                <input type="hidden" name="return_to" value="{{ return_to }}" />
                                                 <button class="admin-button admin-button--danger" type="submit">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">
-                                            <details>
-                                                <summary>Raw folder data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ folder.get('name') or 'Untitled folder' }}</summary>
                                                 <pre class="admin-code-block">{{ folder | tojson }}</pre>
                                             </details>
                                         </td>
@@ -355,6 +496,7 @@
                                                 <form method="post" action="{{ url_for('admin.delete_shared_file', user_id=user.id, file_id=file_id) }}">
                                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                                     <input type="hidden" name="section" value="files" />
+                                                    <input type="hidden" name="return_to" value="{{ return_to }}" />
                                                     <button class="admin-button admin-button--danger" type="submit">Delete</button>
                                                 </form>
                                             </div>
@@ -362,8 +504,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <details>
-                                                <summary>Raw file data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ file.get('original_filename') or 'Unnamed file' }}</summary>
                                                 <pre class="admin-code-block">{{ file | tojson }}</pre>
                                             </details>
                                         </td>
@@ -382,6 +524,14 @@
             {% set notes = section_data.notes %}
             {% set note_folders = section_data.note_folders %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Workspace</p>
+                        <h2 class="admin-title admin-title--small">Notes</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Inspect note organization and content without exposing raw records by default.</p>
+                    </div>
+                    <span class="admin-section-count">{{ notes | length }} notes</span>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Note Folders</h2>
                     {% if note_folders %}
@@ -402,8 +552,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <details>
-                                                <summary>Raw folder data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ folder.get('name') or 'Untitled note folder' }}</summary>
                                                 <pre class="admin-code-block">{{ folder | tojson }}</pre>
                                             </details>
                                         </td>
@@ -439,8 +589,8 @@
                                     <span class="admin-field-label">Content</span>
                                     <div class="admin-note-content">{{ note.get('content') or '' }}</div>
                                 </div>
-                                <details class="admin-section">
-                                    <summary>Raw note data</summary>
+                                <details class="admin-raw-details admin-section">
+                                    <summary>Technical details · {{ note.get('title') or 'Untitled note' }}</summary>
                                     <pre class="admin-code-block">{{ note | tojson }}</pre>
                                 </details>
                             </div>
@@ -454,6 +604,13 @@
 
         {% if section == 'calendars' %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Workspace</p>
+                        <h2 class="admin-title admin-title--small">Calendars</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Review sync feeds, calendar preferences, cached events, and user overrides.</p>
+                    </div>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Calendar Feeds</h2>
                     {% set feeds = section_data.calendar_feeds %}
@@ -475,8 +632,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <details>
-                                                <summary>Raw feed data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ feed.get('calendar_name') or 'Calendar feed' }}</summary>
                                                 <pre class="admin-code-block">{{ feed | tojson }}</pre>
                                             </details>
                                         </td>
@@ -512,8 +669,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <details>
-                                                <summary>Raw cache data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ row.get('event_title') or 'Cached event' }}</summary>
                                                 <pre class="admin-code-block">{{ row | tojson }}</pre>
                                             </details>
                                         </td>
@@ -549,8 +706,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <details>
-                                                <summary>Raw preference data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ pref.get('calendar_name') or 'Calendar preference' }}</summary>
                                                 <pre class="admin-code-block">{{ pref | tojson }}</pre>
                                             </details>
                                         </td>
@@ -584,8 +741,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <details>
-                                                <summary>Raw source data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ source.get('source_id') or 'Calendar source' }}</summary>
                                                 <pre class="admin-code-block">{{ source | tojson }}</pre>
                                             </details>
                                         </td>
@@ -621,8 +778,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <details>
-                                                <summary>Raw event data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ event.get('title') or 'User event' }}</summary>
                                                 <pre class="admin-code-block">{{ event | tojson }}</pre>
                                             </details>
                                         </td>
@@ -656,8 +813,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <details>
-                                                <summary>Raw override data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ override.get('event_ref') or 'Event override' }}</summary>
                                                 <pre class="admin-code-block">{{ override | tojson }}</pre>
                                             </details>
                                         </td>
@@ -675,6 +832,14 @@
         {% if section == 'courses' %}
             {% set courses = section_data.courses %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Learning</p>
+                        <h2 class="admin-title admin-title--small">Saved courses</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Courses this user has saved for their academic workspace.</p>
+                    </div>
+                    <span class="admin-section-count">{{ courses | length }} courses</span>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Courses</h2>
                     {% if courses %}
@@ -701,8 +866,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <details>
-                                                <summary>Raw course data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ course.get('course_name') or course.get('course_code') or 'Saved course' }}</summary>
                                                 <pre class="admin-code-block">{{ course | tojson }}</pre>
                                             </details>
                                         </td>
@@ -720,11 +885,20 @@
         {% if section == 'seat_tracks' %}
             {% set tracks = section_data.seat_tracks %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Learning</p>
+                        <h2 class="admin-title admin-title--small">Seat tracks</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Manage the user’s course-seat notifications and their current state.</p>
+                    </div>
+                    <span class="admin-section-count">{{ tracks | length }} tracks</span>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Seat Tracks</h2>
                     <form class="admin-form" method="post" action="{{ url_for('admin.disable_seat_tracks', user_id=user.id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="section" value="seat_tracks" />
+                        <input type="hidden" name="return_to" value="{{ return_to }}" />
                         <button class="admin-button" type="submit">Disable all seat tracks</button>
                     </form>
                     {% if tracks %}
@@ -749,8 +923,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="5">
-                                            <details>
-                                                <summary>Raw seat track data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ track.get('course_code') or track.get('course_title') or 'Seat track' }}</summary>
                                                 <pre class="admin-code-block">{{ track | tojson }}</pre>
                                             </details>
                                         </td>
@@ -770,6 +944,14 @@
             {% set dm_threads = section_data.dm_threads %}
             {% set blocks = section_data.blocks %}
             <section class="admin-section">
+                <div class="admin-content-intro">
+                    <div>
+                        <p class="admin-eyebrow">Community</p>
+                        <h2 class="admin-title admin-title--small">Chat history</h2>
+                        <p class="admin-subtitle admin-subtitle--compact">Review message, direct-message, and block history for moderation support.</p>
+                    </div>
+                    <span class="admin-section-count">{{ messages | length }} messages</span>
+                </div>
                 <div class="admin-card">
                     <h2 class="admin-title">Chat Messages</h2>
                     <p class="admin-subtitle">Includes messages deleted by the user so abuse and spam reports can be audited.</p>
@@ -811,8 +993,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6">
-                                            <details>
-                                                <summary>Raw message data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ message.get('created_at') or 'Chat message' }}</summary>
                                                 <pre class="admin-code-block">{{ message | tojson }}</pre>
                                             </details>
                                         </td>
@@ -847,8 +1029,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <details>
-                                                <summary>Raw thread data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ thread.get('$id') or thread.get('id') or 'Direct message thread' }}</summary>
                                                 <pre class="admin-code-block">{{ thread | tojson }}</pre>
                                             </details>
                                         </td>
@@ -881,8 +1063,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <details>
-                                                <summary>Raw block data</summary>
+                                            <details class="admin-raw-details">
+                                                <summary>Technical details · {{ block.get('blocker_id') or 'User' }} → {{ block.get('blocked_id') or 'user' }}</summary>
                                                 <pre class="admin-code-block">{{ block | tojson }}</pre>
                                             </details>
                                         </td>

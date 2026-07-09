@@ -219,6 +219,15 @@ body {
 .navbar-avatar:hover {
   border-color: var(--accent-color);
 }
+
+.navbar-avatar--grade-a,
+.navbar-avatar--grade-aa {
+  box-shadow: 0 0 0 2px color-mix(in srgb, #e4b93f 72%, transparent), 0 0 9px color-mix(in srgb, #e4b93f 52%, transparent);
+}
+
+.navbar-avatar--developer {
+  box-shadow: 0 0 0 2px color-mix(in srgb, #4ea4ff 78%, transparent), 0 0 10px color-mix(in srgb, #4ea4ff 58%, transparent);
+}
 .navbar-avatar img {
   width: 100%;
   height: 100%;

@@ -35,6 +35,13 @@ from appwrite_helpers import (
 )
 from services.discord_audit import emit_creation_event, format_actor
 from services.appwrite_storage import appwrite_upload_error
+from services.entitlements import (
+    EntitlementError,
+    EntitlementLimitError,
+    check_limit,
+    check_storage,
+    request_entitlements,
+)
 
 
 file_share_bp = Blueprint("file_share", __name__)
@@ -552,7 +559,7 @@ def _build_public_folder_tree(root_folder, share_code):
 
 @file_share_bp.errorhandler(RequestEntityTooLarge)
 def handle_file_too_large(_error):
-    return jsonify({"error": "File exceeds the 50 MB limit."}), 413
+    return jsonify({"error": "The upload exceeds the current file-size or request limit.", "code": "file_too_large"}), 413
 
 
 @file_share_bp.route("/files")
@@ -566,6 +573,15 @@ def file_share_page():
     except AppwriteException:
         logger.exception("Failed to load file share settings")
         user_settings = None
+    try:
+        entitlements = request_entitlements(current_user)
+    except EntitlementError:
+        logger.exception("Failed to load file tier limits")
+        entitlements = {"limits": {}}
+    plan_file_size = entitlements["limits"].get("max_file_size_bytes")
+    plan_upload_files = entitlements["limits"].get("max_upload_files")
+    effective_file_size = min(MAX_FILE_SIZE, plan_file_size) if plan_file_size is not None else MAX_FILE_SIZE
+    effective_upload_files = min(MAX_UPLOAD_FILES, plan_upload_files) if plan_upload_files is not None else MAX_UPLOAD_FILES
     return render_template(
         "files.html",
         user={
@@ -574,8 +590,9 @@ def file_share_page():
             "picture": current_user.picture_url,
             "emory_student": current_user.emory_student,
         },
-        max_file_size=MAX_FILE_SIZE,
-        max_upload_files=MAX_UPLOAD_FILES,
+        max_file_size=effective_file_size,
+        max_file_size_label=_human_readable_size(effective_file_size),
+        max_upload_files=effective_upload_files,
         allowed_expiry_options=ALLOWED_EXPIRY_OPTIONS,
         default_expiry_days=DEFAULT_EXPIRY_DAYS,
         theme_preference=user_settings.get("interface_theme") if user_settings else None,
@@ -590,6 +607,19 @@ def upload_file():
         return jsonify({"error": "At least one file is required."}), 400
 
     user_id = str(current_user.id)
+    try:
+        entitlements = request_entitlements(current_user)
+        plan_upload_files = entitlements["limits"].get("max_upload_files")
+        plan_file_size = entitlements["limits"].get("max_file_size_bytes")
+        effective_upload_files = min(MAX_UPLOAD_FILES, plan_upload_files) if plan_upload_files is not None else MAX_UPLOAD_FILES
+        effective_file_size = min(MAX_FILE_SIZE, plan_file_size) if plan_file_size is not None else MAX_FILE_SIZE
+        if plan_upload_files is not None and len(files) > plan_upload_files:
+            raise EntitlementLimitError("files per upload", 0, len(files), plan_upload_files)
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 403
+    except EntitlementError:
+        logger.exception("Failed to calculate file upload limits")
+        return jsonify({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}), 503
     folder_id = _normalize_folder_id(request.form.get("folderId"))
     _assert_folder_target(user_id, folder_id)
 
@@ -598,11 +628,12 @@ def upload_file():
     expiries = request.form.getlist("expiryDays")
 
     total_provided = len(files)
-    to_process = files[:MAX_UPLOAD_FILES]
+    to_process = files[:effective_upload_files]
     skipped = total_provided - len(to_process)
 
     created = []
     errors = []
+    reserved_storage_bytes = 0
 
     for idx, uploaded_file in enumerate(to_process):
         if not uploaded_file or not uploaded_file.filename:
@@ -626,11 +657,26 @@ def upload_file():
         display_filename = custom_filename.strip() or uploaded_file.filename
         uploaded_data = uploaded_file.read()
         file_size_bytes = len(uploaded_data)
-        if file_size_bytes > MAX_FILE_SIZE:
-            errors.append({"index": idx, "error": f"{uploaded_file.filename} exceeds the 50 MB limit."})
+        if plan_file_size is not None and file_size_bytes > plan_file_size:
+            quota_error = EntitlementLimitError("file size bytes", 0, file_size_bytes, plan_file_size)
+            errors.append({"index": idx, **quota_error.payload()})
+            continue
+        if file_size_bytes > effective_file_size:
+            errors.append({
+                "index": idx,
+                "error": f"{uploaded_file.filename} exceeds the current file-size limit.",
+                "code": "file_too_large",
+            })
             continue
         if file_size_bytes == 0:
             errors.append({"index": idx, "error": f"{uploaded_file.filename} is empty."})
+            continue
+
+        try:
+            check_storage(entitlements, reserved_storage_bytes + file_size_bytes)
+            reserved_storage_bytes += file_size_bytes
+        except EntitlementLimitError as exc:
+            errors.append({"index": idx, **exc.payload()})
             continue
 
         file_id = str(uuid.uuid4())
@@ -649,6 +695,7 @@ def upload_file():
             )
         except AppwriteException as exc:
             logger.exception("Failed to upload file to Appwrite Storage")
+            reserved_storage_bytes -= file_size_bytes
             errors.append({"index": idx, "error": _appwrite_upload_error(exc)})
             continue
 
@@ -681,6 +728,7 @@ def upload_file():
             )
         except AppwriteException:
             logger.exception("Failed to save shared file row")
+            reserved_storage_bytes -= file_size_bytes
             try:
                 _storage().delete_file(FILE_SHARE_BUCKET_ID, storage_file_id)
             except AppwriteException:
@@ -710,7 +758,7 @@ def upload_file():
     if skipped:
         response["skipped"] = skipped
         response.setdefault("errors", []).append(
-            {"error": f"Only {MAX_UPLOAD_FILES} files are accepted; {skipped} file(s) were ignored."}
+            {"error": f"Only {effective_upload_files} files are accepted; {skipped} file(s) were ignored."}
         )
     if errors:
         response.setdefault("errors", []).extend(errors)

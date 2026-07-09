@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Tiers - APStudy Nest</title>
+    <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
+    <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    {% include "_font_assets.html" %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+</head>
+<body class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
+    {% include "_admin_sidebar.html" %}
+    <main class="admin-shell">
+        <header class="admin-header admin-page-header">
+            <div>
+                {% include "_admin_breadcrumbs.html" %}
+                <p class="admin-eyebrow">Access management</p>
+                <h1 class="admin-title">Tiers &amp; limits</h1>
+                <p class="admin-subtitle">Configure role defaults and apply a tier to users from Auth.</p>
+            </div>
+            <span class="admin-page-header__context"><span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>Entitlements</span>
+        </header>
+
+        {% if status == 'tiers-updated' %}<div class="admin-alert admin-alert--success">Tier definitions updated.</div>{% endif %}
+        {% if error == 'invalid-tier-config' %}<div class="admin-alert admin-alert--error">Enter valid non-negative limits or enable Unlimited.</div>{% endif %}
+
+        <form class="admin-tier-config-grid" method="post" action="{{ url_for('admin.save_admin_tiers') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            {% for tier in tier_keys %}
+                {% set definition = tier_definitions[tier] %}
+                <section class="admin-card admin-tier-config-card admin-tier-config-card--{{ tier }}" aria-labelledby="tier-title-{{ tier }}">
+                    <div class="admin-tier-config-head">
+                        <div>
+                            <p class="admin-eyebrow">Role {{ loop.index }}</p>
+                            <h2 id="tier-title-{{ tier }}" class="admin-title admin-title--small">{{ tier_labels[tier] }}</h2>
+                        </div>
+                        {% if tier_badges[tier] %}<img class="tier-badge" src="{{ tier_badges[tier].asset }}" alt="{{ tier_labels[tier] }}" title="{{ tier_labels[tier] }}" width="40" height="40" />{% endif %}
+                    </div>
+                    <div class="admin-tier-fields">
+                        {% set storage_unlimited = definition.storage_bytes is none %}
+                        <label class="admin-tier-field"><span>Storage (GB)</span><input name="{{ tier }}__storage_gb" type="number" min="0" step="0.01" value="{% if not storage_unlimited %}{{ (definition.storage_bytes / (1024 ** 3))|round(2) }}{% endif %}" {% if storage_unlimited %}disabled{% endif %} /><span class="admin-tier-unlimited"><input name="{{ tier }}__storage_gb__unlimited" type="checkbox" {% if storage_unlimited %}checked{% endif %} onchange="this.closest('label').querySelector('input[type=number]').disabled=this.checked" /> Unlimited</span></label>
+                        {% set file_unlimited = definition.max_file_size_bytes is none %}
+                        <label class="admin-tier-field"><span>Max file size (MB)</span><input name="{{ tier }}__max_file_size_mb" type="number" min="0" step="1" value="{% if not file_unlimited %}{{ (definition.max_file_size_bytes / (1024 ** 2))|round(0)|int }}{% endif %}" {% if file_unlimited %}disabled{% endif %} /><span class="admin-tier-unlimited"><input name="{{ tier }}__max_file_size_mb__unlimited" type="checkbox" {% if file_unlimited %}checked{% endif %} onchange="this.closest('label').querySelector('input[type=number]').disabled=this.checked" /> Unlimited</span></label>
+                        {% for key, label in [('max_upload_files', 'Files per upload'), ('max_saved_courses', 'Saved courses'), ('max_seat_tracks', 'Seat tracks'), ('max_calendar_feeds', 'Calendar feeds'), ('max_notes', 'Notes')] %}
+                            {% set unlimited = definition[key] is none %}
+                            <label class="admin-tier-field"><span>{{ label }}</span><input name="{{ tier }}__{{ key }}" type="number" min="0" step="1" value="{% if not unlimited %}{{ definition[key] }}{% endif %}" {% if unlimited %}disabled{% endif %} /><span class="admin-tier-unlimited"><input name="{{ tier }}__{{ key }}__unlimited" type="checkbox" {% if unlimited %}checked{% endif %} onchange="this.closest('label').querySelector('input[type=number]').disabled=this.checked" /> Unlimited</span></label>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+            <div class="admin-tier-config-actions"><button class="admin-button" type="submit"><span class="material-symbols-outlined" aria-hidden="true">save</span>Save tier definitions</button></div>
+        </form>
+    </main>
+    <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
+</body>
+</html>

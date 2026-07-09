@@ -63,8 +63,8 @@
                     </tr>
                     <tr>
                         <td colspan="7">
-                            <details>
-                                <summary>Raw request data</summary>
+                            <details class="admin-raw-details">
+                                <summary>Technical details · {{ item.get('label') or item.get('request_type') or 'Request' }}</summary>
                                 <pre class="admin-code-block">{{ item | tojson }}</pre>
                             </details>
                         </td>

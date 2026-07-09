@@ -63,17 +63,17 @@ def database_path(path=None):
     if path:
         return resolve_env_path(path) or path
 
+    if has_app_context():
+        configured = resolve_env_path(current_app.config.get("DATABASE_PATH"))
+        if configured:
+            return configured
+
     configured = resolve_env_path(os.environ.get("DATABASE_PATH") or os.environ.get("NEST_DATABASE_PATH"))
     if configured:
         return configured
 
     if os.environ.get(LOCAL_INSTANCE_ONLY) == "1" and os.environ.get("FLASK_ENV") != "production":
         return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
-
-    if has_app_context():
-        configured = resolve_env_path(current_app.config.get("DATABASE_PATH"))
-        if configured:
-            return configured
 
     if os.environ.get("FLASK_ENV") == "production":
         return PRODUCTION_DATABASE_PATH

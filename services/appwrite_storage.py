@@ -18,7 +18,7 @@ def appwrite_upload_error(exc, *, fallback="Unable to upload file.", image=False
         )
     if "extension" in lowered or "mime" in lowered:
         return "This image type is not allowed." if image else "This file type is not allowed."
-    if "bucket" in lowered and "not found" in lowered:
+    if "bucket" in lowered and ("not found" in lowered or "could not be found" in lowered):
         return "File storage is not configured. Contact support."
     if message:
         return message

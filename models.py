@@ -26,6 +26,8 @@ class User(UserMixin):
         self.banner_color = data.get("banner_color") or "#fecae1"
         self.avatar_file_id = data.get("avatar_file_id")
         self.avatar_source = data.get("avatar_source")
+        self.avatar_file_size_bytes = int(data.get("avatar_file_size_bytes") or 0)
+        self.tier = data.get("tier") or "free"
         self.onboarding_complete = bool(data.get("onboarding_complete", False))
         self.onboarding_step = data.get("onboarding_step") or 1
         self.education_level = data.get("education_level")

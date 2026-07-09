@@ -35,6 +35,7 @@ from services.discord_audit import (
     emit_creation_event,
     format_actor,
 )
+from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, request_entitlements
 
 
 courses_bp = Blueprint("courses", __name__)
@@ -465,6 +466,15 @@ def add_saved_course():
             _ensure_course_colors(user_id, term_courses)
         return jsonify({"status": "ok", "course": _serialize_course(existing, section)})
 
+    try:
+        entitlements = request_entitlements(current_user)
+        check_limit(entitlements, "max_saved_courses", entitlements["usage"]["saved_courses"])
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 403
+    except EntitlementError:
+        logger.exception("Failed to verify saved-course limits")
+        return jsonify({"error": "Unable to verify your course limits right now.", "code": "tier_check_unavailable"}), 503
+
     now = format_datetime(datetime.utcnow())
     color_key = _choose_course_color(term_courses, section.get("term"))
     try:
@@ -663,6 +673,20 @@ def upsert_track():
 
     try:
         existing = _track_for_section(user_id, section)
+    except AppwriteException:
+        logger.exception("Failed to load existing course track")
+        return jsonify({"error": "Unable to update course tracking."}), 500
+    if enabled and (not existing or not existing.get("enabled", True)):
+        try:
+            entitlements = request_entitlements(current_user)
+            check_limit(entitlements, "max_seat_tracks", entitlements["usage"]["seat_tracks"])
+        except EntitlementLimitError as exc:
+            return jsonify(exc.payload()), 403
+        except EntitlementError:
+            logger.exception("Failed to verify seat-track limits")
+            return jsonify({"error": "Unable to verify your seat-track limits right now.", "code": "tier_check_unavailable"}), 503
+
+    try:
         if existing:
             track = update_row_safe(
                 COLLECTIONS["course_seat_tracks"],

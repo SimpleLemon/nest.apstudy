@@ -1,130 +1,200 @@
 {% set user_columns = [
+    ("identity", "User"),
+    ("status", "Account"),
+    ("tier", "Tier"),
+    ("profile", "Profile"),
+    ("activity", "Last opened"),
+    ("created", "Joined"),
     ("id", "User ID"),
-    ("name", "Display Name"),
-    ("email", "Email"),
-    ("username", "Username"),
-    ("onboarding", "Onboarding"),
-    ("oauth", "OAuth"),
-    ("created", "Created"),
-    ("last_login", "Last Opened Website"),
 ] %}
+{% set user_return_url = url_for('admin.admin_auth', tab='users', q=q, field=field, page=page, per_page=per_page) %}
 
 <div class="admin-auth-users" data-auth-users-section>
     {% if error %}
         <div class="admin-alert admin-alert--error">{{ error }}</div>
     {% endif %}
 
-    <section class="admin-card admin-auth-users-toolbar">
-        <form class="ui-search-field ui-search-field--admin" data-auth-users-search autocomplete="off">
-            <label class="ui-search-field__label ui-search-field__label--sr-only" for="admin-auth-users-search-input">Search users</label>
-            <div class="ui-search-field__control">
-                <input
-                    id="admin-auth-users-search-input"
-                    type="search"
-                    class="ui-search-field__input"
-                    name="q"
-                    value="{{ q }}"
-                    placeholder="Search by email, username, or Appwrite ID"
-                    aria-label="Search users"
-                    data-auth-users-search-input
-                />
-                <span class="ui-search-field__trigger" aria-hidden="true">{% include "partials/ui_search_icon.html" %}</span>
+    <section class="admin-card admin-directory-toolbar" aria-labelledby="admin-user-directory-title">
+        <div class="admin-directory-toolbar__heading">
+            <div>
+                <p class="admin-eyebrow">User management</p>
+                <h2 id="admin-user-directory-title" class="admin-title admin-title--small">User directory</h2>
+                <p class="admin-subtitle admin-subtitle--compact">Find a record, review account context, and open the full user workspace.</p>
             </div>
-        </form>
-        <div class="admin-auth-columns-wrap">
-            <button
-                class="admin-auth-columns-trigger"
-                type="button"
-                aria-label="Choose visible columns"
-                aria-expanded="false"
-                aria-haspopup="menu"
-                data-auth-columns-trigger
-            >
-                <span class="material-symbols-outlined" aria-hidden="true">view_column</span>
-                <span class="admin-auth-columns-count" data-auth-columns-count>{{ user_columns | length }}</span>
-            </button>
-            <div class="admin-auth-columns-menu" role="menu" hidden data-auth-columns-menu>
-                {% for key, label in user_columns %}
-                    <label class="admin-auth-columns-option" role="menuitemcheckbox">
-                        <input type="checkbox" value="{{ key }}" data-auth-column-toggle checked />
-                        <span>{{ label }}</span>
-                    </label>
-                {% endfor %}
+            <span class="admin-directory-count" aria-label="{{ total_users }} {{ 'user' if total_users == 1 else 'users' }} total">
+                <strong>{{ total_users }}</strong>
+                <span>{{ 'user' if total_users == 1 else 'users' }}</span>
+            </span>
+        </div>
+
+        <div class="admin-directory-toolbar__controls">
+            <form class="admin-directory-search" data-auth-users-search autocomplete="off">
+                <label class="sr-only" for="admin-auth-users-search-input">Search users</label>
+                <div class="admin-directory-search__input-wrap">
+                    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                    <input
+                        id="admin-auth-users-search-input"
+                        type="search"
+                        name="q"
+                        value="{{ q }}"
+                        placeholder="Search an exact email, username, or user ID"
+                        aria-describedby="admin-auth-users-search-help"
+                        data-auth-users-search-input
+                    />
+                </div>
+                <label class="admin-directory-search__field" for="admin-auth-users-search-field">
+                    <span class="sr-only">Search field</span>
+                    <select id="admin-auth-users-search-field" name="field" data-auth-users-search-field>
+                        <option value="" {% if not field %}selected{% endif %}>All identifiers</option>
+                        <option value="email" {% if field == 'email' %}selected{% endif %}>Email</option>
+                        <option value="username" {% if field == 'username' %}selected{% endif %}>Username</option>
+                        <option value="id" {% if field == 'id' %}selected{% endif %}>User ID</option>
+                    </select>
+                </label>
+                <button class="admin-button admin-button--compact" type="submit">
+                    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                    Search
+                </button>
+                {% if q %}
+                    <button class="admin-button admin-button--ghost admin-button--compact" type="button" data-auth-users-clear-search>Clear</button>
+                {% endif %}
+            </form>
+            <p id="admin-auth-users-search-help" class="admin-directory-search__help">Search uses exact matching across the selected identifier.</p>
+
+            <div class="admin-auth-columns-wrap">
+                <button
+                    class="admin-auth-columns-trigger"
+                    type="button"
+                    aria-label="Choose visible columns"
+                    aria-expanded="false"
+                    aria-controls="admin-auth-columns-menu"
+                    data-auth-columns-trigger
+                >
+                    <span class="material-symbols-outlined" aria-hidden="true">view_column</span>
+                    <span>Columns</span>
+                    <span class="admin-auth-columns-count" data-auth-columns-count>{{ user_columns | length }}</span>
+                </button>
+                <div id="admin-auth-columns-menu" class="admin-auth-columns-menu" role="group" aria-label="Visible user directory columns" hidden data-auth-columns-menu>
+                    {% for key, label in user_columns %}
+                        {% if key == 'identity' %}
+                            <span class="admin-auth-columns-option admin-auth-columns-option--locked">
+                                <span>{{ label }}</span>
+                                <small>Always shown</small>
+                            </span>
+                        {% else %}
+                            <label class="admin-auth-columns-option">
+                                <input type="checkbox" value="{{ key }}" data-auth-column-toggle checked />
+                                <span>{{ label }}</span>
+                            </label>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
+
+        {% if q %}
+            <div class="admin-directory-search-state" role="status">
+                <span class="material-symbols-outlined" aria-hidden="true">filter_alt</span>
+                <span>Showing exact matches for <strong>{{ q }}</strong>{% if field %} in {{ field | replace('_', ' ') }}{% endif %}.</span>
+            </div>
+        {% endif %}
     </section>
 
     {% if users %}
-        <table class="admin-table admin-table--directory" aria-label="User list" data-auth-users-table>
-            <thead>
-                <tr>
-                    {% for key, label in user_columns %}
-                        <th data-column="{{ key }}">{{ label }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                    {% set display_name = user.name or "--" %}
+        <div class="admin-directory-table-wrap">
+            <table class="admin-table admin-table--directory" aria-label="User list" data-auth-users-table>
+                <thead>
                     <tr>
-                        <td data-column="id" data-label="User ID">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.id }}">
-                                <a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=user.id) }}">{{ user.id }}</a>
-                            </span>
-                        </td>
-                        <td data-column="name" data-label="Display Name">
-                            <span class="admin-table__trunc{% if user.emory_student %} admin-table__name--emory{% endif %}" data-tooltip="{{ display_name }}">{{ display_name }}</span>
-                        </td>
-                        <td data-column="email" data-label="Email">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.email or '--' }}">{{ user.email or "--" }}</span>
-                        </td>
-                        <td data-column="username" data-label="Username">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.username or '--' }}">{{ user.username or "--" }}</span>
-                        </td>
-                        <td data-column="onboarding" data-label="Onboarding">
-                            {% if user.onboarding_complete %}
-                                <span class="admin-badge{% if user.discord_linked %} admin-badge--discord{% endif %}">Complete</span>
-                            {% else %}
-                                <span class="admin-badge admin-badge--muted">Step {{ user.onboarding_step }}</span>
-                            {% endif %}
-                        </td>
-                        <td data-column="oauth" data-label="OAuth">
-                            <span class="admin-oauth-icon" title="{{ user.oauth_provider | capitalize }}">
-                                {% if user.oauth_provider == "google" %}
-                                    <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
-                                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                                        <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.01 24.01 0 0 0 0 21.56l7.98-6.19z"/>
-                                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                                    </svg>
-                                {% elif user.oauth_provider == "discord" %}
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#5865F2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.006 14.006 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.196.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
-                                    </svg>
-                                {% elif user.oauth_provider == "github" %}
-                                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path fill="currentColor" d="M12 0.296c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387 0.6 0.113 0.82-0.258 0.82-0.577 0-0.285-0.01-1.04-0.015-2.04-3.338 0.724-4.042-1.61-4.042-1.61-0.546-1.387-1.333-1.756-1.333-1.756-1.09-0.745 0.082-0.729 0.082-0.729 1.205 0.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495 0.998 0.108-0.776 0.418-1.305 0.762-1.605-2.665-0.303-5.466-1.333-5.466-5.931 0-1.31 0.469-2.381 1.235-3.221-0.123-0.303-0.535-1.523 0.117-3.176 0 0 1.008-0.322 3.301 1.23a11.51 11.51 0 0 1 3.003-0.404c1.018 0.005 2.045 0.137 3.003 0.404 2.291-1.552 3.297-1.23 3.297-1.23 0.653 1.653 0.241 2.873 0.118 3.176 0.77 0.84 1.233 1.911 1.233 3.221 0 4.61-2.805 5.625-5.479 5.921 0.43 0.37 0.814 1.096 0.814 2.211 0 1.596-0.014 2.879-0.014 3.27 0 0.322 0.216 0.694 0.825 0.576C20.565 22.092 24 17.592 24 12.296c0-6.627-5.373-12-12-12z"/>
-                                    </svg>
-                                {% else %}
-                                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    </svg>
-                                {% endif %}
-                                <span class="sr-only">{{ user.oauth_provider | capitalize }}</span>
-                            </span>
-                        </td>
-                        <td data-column="created" data-label="Created">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.created_at or '--' }}" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
-                        </td>
-                        <td data-column="last_login" data-label="Last Opened Website">
-                            <span class="admin-table__trunc" data-tooltip="{{ user.last_login or '--' }}" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login or "--" }}</span>
-                        </td>
+                        {% for key, label in user_columns %}
+                            <th data-column="{{ key }}">{{ label }}</th>
+                        {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        {% set display_name = user.name or user.username or "Unnamed user" %}
+                        <tr class="admin-directory-row">
+                            <td data-column="identity" data-label="User">
+                                <a class="admin-directory-identity" href="{{ url_for('admin.admin_detail', user_id=user.id, return_to=user_return_url) }}">
+                                    <img
+                                        class="admin-directory-identity__avatar"
+                                        src="{{ (user.picture_url or '')|avatar_url(72) }}"
+                                        srcset="{{ (user.picture_url or '')|avatar_url(72) }} 1x, {{ (user.picture_url or '')|avatar_url(144) }} 2x"
+                                        sizes="36px"
+                                        alt=""
+                                        width="36"
+                                        height="36"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <span class="admin-directory-identity__copy">
+                                        <strong class="admin-directory-identity__name{% if user.emory_student %} admin-directory-identity__name--emory{% endif %}">{{ display_name }}</strong>
+                                        <span>{{ user.email or 'No email on record' }}</span>
+                                    </span>
+                                    <span class="material-symbols-outlined admin-directory-identity__open" aria-hidden="true">arrow_forward</span>
+                                </a>
+                            </td>
+                            <td data-column="status" data-label="Account">
+                                <div class="admin-directory-statuses">
+                                    {% if user.onboarding_complete %}
+                                        <span class="admin-badge admin-badge--success">Onboarded</span>
+                                    {% else %}
+                                        <span class="admin-badge admin-badge--warning">Setup · step {{ user.onboarding_step }}</span>
+                                    {% endif %}
+                                    <span class="admin-directory-provider">
+                                        <span class="material-symbols-outlined" aria-hidden="true">key</span>
+                                        {{ user.oauth_provider | capitalize }} sign-in
+                                    </span>
+                                    {% if user.discord_linked %}
+                                        <span class="admin-directory-status-note">Discord linked</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td data-column="tier" data-label="Tier">
+                                <form class="admin-tier-quick-form" method="post" action="{{ url_for('admin.update_user_tier', user_id=user.id) }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                    <input type="hidden" name="section" value="overview" />
+                                    <label class="sr-only" for="admin-user-tier-{{ user.id }}">Tier for {{ display_name }}</label>
+                                    <select id="admin-user-tier-{{ user.id }}" name="tier" class="admin-tier-quick-select" onchange="this.form.submit()">
+                                        {% for tier_key in ('free', 'grade_a', 'grade_aa', 'developer') %}
+                                            <option value="{{ tier_key }}" {% if user.tier == tier_key %}selected{% endif %}>{{ {'free': 'Free', 'grade_a': 'Grade A', 'grade_aa': 'Grade AA', 'developer': 'Developer'}[tier_key] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                                {% if user.tier_badge %}
+                                    <img class="tier-badge tier-badge--directory" src="{{ user.tier_badge.asset }}" alt="{{ user.tier_label }}" title="{{ user.tier_label }}" width="24" height="24" loading="lazy" decoding="async" />
+                                {% endif %}
+                            </td>
+                            <td data-column="profile" data-label="Profile">
+                                <div class="admin-directory-profile">
+                                    <strong>{{ user.school or ('Emory student' if user.emory_student else 'School not set') }}</strong>
+                                    <span>{{ user.major or user.education_level or 'Profile details not set' }}</span>
+                                </div>
+                            </td>
+                            <td data-column="activity" data-label="Last opened website">
+                                {% if user.last_login %}
+                                    <span class="admin-directory-date" data-tooltip="{{ user.last_login }}" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login }}</span>
+                                {% else %}
+                                    <span class="admin-directory-empty">Not opened yet</span>
+                                {% endif %}
+                            </td>
+                            <td data-column="created" data-label="Joined">
+                                <span class="admin-directory-date" data-tooltip="{{ user.created_at or '--' }}" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
+                            </td>
+                            <td data-column="id" data-label="User ID">
+                                <span class="admin-table__trunc admin-directory-id" data-tooltip="{{ user.id }}">{{ user.id }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <div class="admin-card admin-auth-users-empty">No users found.</div>
+        <div class="admin-card admin-auth-users-empty">
+            <span class="material-symbols-outlined" aria-hidden="true">person_search</span>
+            <strong>No matching users</strong>
+            <p>Try a different exact identifier or clear the search.</p>
+        </div>
     {% endif %}
 
     <footer class="admin-auth-users-pagination" data-auth-users-pagination>

@@ -13,6 +13,8 @@ Table: users
 - banner_color VARCHAR(7) DEFAULT '#fecae1' -> string(7) attribute: banner_color
 - avatar_file_id VARCHAR(64) -> string(64) attribute: avatar_file_id
 - avatar_source VARCHAR(16) -> string(16) attribute: avatar_source
+- avatar_file_size_bytes INTEGER NOT NULL DEFAULT 0 -> integer attribute: avatar_file_size_bytes
+- tier VARCHAR(16) NOT NULL DEFAULT 'free' -> string(16) attribute: tier
 - onboarding_complete BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: onboarding_complete
 - onboarding_step INTEGER NOT NULL DEFAULT 1 -> integer attribute: onboarding_step
 - education_level VARCHAR(32) -> string(32) attribute: education_level

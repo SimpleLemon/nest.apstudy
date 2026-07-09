@@ -18,6 +18,7 @@
     </div>
     <div class="admin-sidebar-drawer" id="admin-sidebar-drawer">
         <nav class="admin-sidebar-nav">
+            <p class="admin-sidebar-nav-label">Control center</p>
             <a class="admin-sidebar-item {% if active_admin_page == 'home' %}is-active{% endif %}" href="{{ url_for('admin.admin_index') }}">
                 <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">home</span>
                 <span>Home</span>
@@ -28,6 +29,10 @@
                 {% if pending_request_count %}
                     <span class="admin-sidebar-count">{{ pending_request_count }}</span>
                 {% endif %}
+            </a>
+            <a class="admin-sidebar-item {% if active_admin_page == 'tiers' %}is-active{% endif %}" href="{{ url_for('admin.admin_tiers') }}">
+                <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">workspace_premium</span>
+                <span>Tiers</span>
             </a>
             <a class="admin-sidebar-item {% if active_admin_page == 'analytics' %}is-active{% endif %}" href="{{ url_for('admin.admin_analytics') }}">
                 <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">monitoring</span>

@@ -10,6 +10,7 @@ from flask_login import UserMixin
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app import AUTH_SESSION_DURATION, create_app
+from appwrite_client import COLLECTIONS
 from extensions import csrf, login_manager
 import blueprints.admin as admin
 from tests.support.harness import reset_flask_login_manager
@@ -93,6 +94,43 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertTrue(self.app.config["SESSION_COOKIE_HTTPONLY"])
         self.assertEqual(self.app.config["SESSION_COOKIE_SAMESITE"], "Lax")
 
+    def test_admin_tier_configuration_requires_admin_and_accepts_valid_json(self):
+        with self.app.test_client() as client:
+            response = client.get("/admin/tiers")
+        self.assertIn(response.status_code, {302, 401, 403})
+
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin/tiers", [])
+            with patch.object(admin, "save_tier_definitions", side_effect=lambda value: value), \
+                    patch.object(admin, "_log_admin_action"):
+                response = client.post(
+                    "/admin/tiers",
+                    json={"free": {"max_notes": 3}},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["tier_definitions"]["free"]["max_notes"], 3)
+
+    def test_admin_can_assign_user_tier_with_audited_json_response(self):
+        updated_doc = {**self.user_doc, "tier": "grade_aa"}
+        with self.app.test_client() as client:
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin/tiers", [])
+            with patch.object(admin, "get_row_safe", return_value=self.user_doc), \
+                    patch.object(admin, "update_row_safe", return_value=updated_doc) as update_row, \
+                    patch.object(admin, "_log_admin_action"):
+                response = client.post(
+                    "/admin/user-1/tier",
+                    json={"tier": "grade_aa"},
+                    headers={"X-CSRFToken": token},
+                )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["tier"], "grade_aa")
+        update_row.assert_called_once_with(COLLECTIONS["users"], "user-1", {"tier": "grade_aa"})
+
     def test_app_factory_hardens_production_session_and_url_scheme(self):
         with patch.dict(os.environ, {
             "APSTUDY_ALLOW_INSECURE_HTTP": "0",
@@ -138,6 +176,17 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("May 25, 2026 1:00 AM", html)
         self.assertIn("@testuser", html)
 
+    def test_admin_detail_return_url_stays_within_user_directory(self):
+        with self.app.test_request_context():
+            self.assertEqual(
+                admin._admin_detail_return_url("/admin/auth?tab=users&q=testuser&page=2"),
+                "/admin/auth?tab=users&q=testuser&page=2",
+            )
+            self.assertEqual(
+                admin._admin_detail_return_url("https://example.com/admin/auth"),
+                "/admin/auth?tab=users",
+            )
+
     def test_admin_detail_overview_renders_human_readable_account_summary(self):
         account_doc = {
             "$id": "account-1",
@@ -171,6 +220,31 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("Yes", html)
         self.assertIn("beta, staff", html)
         self.assertIn("Raw Appwrite payload", html)
+
+    def test_admin_detail_settings_collapses_structured_and_sensitive_values(self):
+        settings_doc = {
+            "user_id": "user-1",
+            "ics_secret_token": "secret-token",
+            "layout": {"sidebar": "open", "density": "comfortable"},
+            "pinned_items": ["course-1", "course-2"],
+        }
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "get_row_safe", return_value=self.user_doc), \
+                    patch.object(admin, "first_row", return_value=settings_doc), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/user-1?section=settings")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Sensitive value hidden", html)
+        self.assertIn("View sensitive value", html)
+        self.assertIn("2 fields", html)
+        self.assertIn("2 items", html)
+        secret_index = html.index("secret-token")
+        details_index = html.rfind('<details class="admin-raw-details', 0, secret_index)
+        self.assertGreaterEqual(details_index, 0)
 
     def test_admin_requests_renders_csrf_tokens(self):
         requests_rows = [{
@@ -564,16 +638,19 @@ class AdminSecurityTestCase(unittest.TestCase):
 
         html = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("admin-auth-users-toolbar", html)
+        self.assertIn("admin-directory-toolbar", html)
+        self.assertIn("User directory", html)
         self.assertIn("data-auth-columns-trigger", html)
         self.assertIn('data-auth-users-search', html)
-        self.assertIn("Search by email, username, or Appwrite ID", html)
+        self.assertIn("Search an exact email, username, or user ID", html)
+        self.assertIn('data-auth-users-search-field', html)
+        self.assertIn('data-column="identity"', html)
         self.assertIn('data-column="id"', html)
         self.assertIn("user@example.com", html)
         self.assertIn("May 25, 2026", html)
         self.assertIn("May 25, 2026 1:00 AM", html)
-        self.assertIn(">OAuth<", html)
-        self.assertIn("admin-table__name--emory", html)
+        self.assertIn("Google sign-in", html)
+        self.assertIn("admin-directory-identity__name--emory", html)
         self.assertIn("Total: 1", html)
         self.assertNotIn(">Emory<", html)
 

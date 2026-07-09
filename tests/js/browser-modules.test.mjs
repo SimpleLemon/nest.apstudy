@@ -771,11 +771,13 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
     const combinedSource = `${source}\n${utilsSource}\n${renderersSource}\n${modalsSource}\n${workflowsSource}\n${eventsSource}`;
 
     assert.match(source, /const MAX_FILE_SIZE_BYTES = Number\(CONFIG\.maxFileSize\) \|\| \(50 \* 1024 \* 1024\)/);
+    assert.match(source, /const MAX_FILE_SIZE_LABEL = String\(CONFIG\.maxFileSizeLabel/);
     assert.match(source, /const MAX_UPLOAD_FILES = Number\(CONFIG\.maxUploadFiles\) \|\| 5/);
     assert.match(source, /allowedExpiryOptions/);
     assert.match(combinedSource, /parseUploadResponse/);
     assert.match(combinedSource, /uploadErrorMessage/);
     assert.match(combinedSource, /function notify\(message, type = "info", options = \{\}\)/);
+    assert.match(workflowsSource, /exceeds the \$\{maxFileSizeLabel\} limit/);
     assert.match(combinedSource, /file-share-upload-modal/);
     assert.match(combinedSource, /file-share-confirm-modal/);
     assert.match(combinedSource, /file-share-share-modal/);
@@ -827,6 +829,10 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(source, /const USERNAME_RESERVED = new Set\(\[/);
     assert.match(source, /window\.APSTUDY_THEME_PREFERENCE = interfaceTheme/);
     assert.match(source, /apstudy-sidebar-default-change/);
+    assert.match(source, /function renderEntitlements\(\)/);
+    assert.match(source, /data\.storage_limit_bytes/);
+    assert.match(template, /settings-tier-card/);
+    assert.match(template, /settings-preview-tier-badge/);
 });
 
 test("task app shell keeps data-layer wiring, destructive confirms, and mount contract", async () => {
@@ -1025,6 +1031,32 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
     assert.match(source, /event\.metaKey && !event\.ctrlKey/);
     assert.match(source, /window\.APStudyNavigation\?\.go\?\.\('\/settings#account'\)/);
     assert.match(source, /runLogoutFlow\(\)/);
+    assert.match(source, /navbar-avatar--grade-a/);
+    assert.match(source, /navbar-avatar--grade-aa/);
+    assert.match(source, /navbar-avatar--developer/);
+    assert.match(source, /dataset\.userTier/);
+});
+
+test("tier badge assets and admin controls stay wired to the supported roles", async () => {
+    const adminTemplate = await sourceFor("templates/admin_tiers.html");
+    const authUsersTemplate = await sourceFor("templates/partials/admin_auth_users.html");
+    const detailTemplate = await sourceFor("templates/admin_detail.html");
+    const entitlementService = await sourceFor("services/entitlements.py");
+    const globalStyles = await sourceFor("static/css/global.css");
+
+    for (const asset of [
+        "grade-a-egg.png",
+        "grade-aa-egg.png",
+        "developer-dinosaur-egg.png",
+    ]) {
+        assert.match(entitlementService, new RegExp(asset));
+    }
+    assert.match(adminTemplate, /admin-tier-config/);
+    assert.match(adminTemplate, /admin\.save_admin_tiers/);
+    assert.match(authUsersTemplate, /admin\.update_user_tier/);
+    assert.match(detailTemplate, /admin\.update_user_tier/);
+    assert.match(globalStyles, /\.tier-badge/);
+    assert.match(globalStyles, /background:\s*transparent/);
 });
 
 test("notes export keeps markdown/plain-text conversion and PDF fallback paths", async () => {

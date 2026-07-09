@@ -52,6 +52,7 @@ from services.calendar_urls import (
 )
 from services.user_cleanup import delete_user_data
 from services.universities import school_payload
+from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, entitlement_payload, request_entitlements
 
 settings_bp = Blueprint("settings", __name__)
 logger = logging.getLogger(__name__)
@@ -307,6 +308,7 @@ def _profile_doc_payload():
         "class_year": current_user.class_year,
         "created_at": format_datetime(current_user.created_at),
         "member_since": _format_member_since(current_user.created_at),
+        "tier": getattr(current_user, "tier", "free"),
     }
 
 
@@ -423,16 +425,41 @@ def _storage_summary(user_id):
         logger.exception("Failed to count user notes")
         notes = []
 
+    try:
+        note_media = list_rows_all(
+            COLLECTIONS["note_media"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to count note media storage")
+        note_media = []
+
+    try:
+        user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True) or {}
+    except AppwriteException:
+        logger.exception("Failed to count avatar storage")
+        user_doc = {}
+
     total = 0
     for file_row in files:
         try:
             total += int(file_row.get("file_size_bytes") or 0)
         except (TypeError, ValueError):
             continue
+    for media_row in note_media:
+        try:
+            total += int(media_row.get("file_size_bytes") or 0)
+        except (TypeError, ValueError):
+            continue
+    try:
+        total += int(user_doc.get("avatar_file_size_bytes") or 0)
+    except (TypeError, ValueError):
+        pass
     return {
         "storage_usage_bytes": total,
         "files_count": len(files),
         "notes_count": len(notes),
+        "note_media_count": len(note_media),
     }
 
 
@@ -784,6 +811,15 @@ def save_onboarding():
                 return jsonify({"error": "Course already added."}), 409
 
             try:
+                entitlements = request_entitlements(current_user)
+                check_limit(entitlements, "max_saved_courses", entitlements["usage"]["saved_courses"])
+            except EntitlementLimitError as exc:
+                return jsonify(exc.payload()), 403
+            except EntitlementError:
+                logger.exception("Failed to verify onboarding course limits")
+                return jsonify({"error": "Unable to verify your course limits right now.", "code": "tier_check_unavailable"}), 503
+
+            try:
                 course = create_row_safe(
                     COLLECTIONS["user_courses"],
                     row_id=ID.unique(),
@@ -950,6 +986,7 @@ def settings_page():
         "education_level": current_user.education_level,
         "class_year": current_user.class_year,
         "member_since": _format_member_since(current_user.created_at),
+        "tier": getattr(current_user, "tier", "free"),
     }, settings=user_settings, theme_preference=(user_settings.get("interface_theme") if user_settings and user_settings.get("interface_theme") else "obsidian-dark"))
 
 
@@ -960,6 +997,11 @@ def bootstrap_settings():
     user_settings = _load_user_settings(user_id)
     user_settings_payload = _settings_payload(user_settings)
     storage_summary = _storage_summary(user_id)
+    try:
+        tier_payload = entitlement_payload(user_id, getattr(current_user, "_data", None))
+    except EntitlementError:
+        logger.exception("Failed to load settings tier payload")
+        return jsonify({"error": "Unable to load account limits right now.", "code": "tier_check_unavailable"}), 503
     return jsonify({
         "profile": _profile_doc_payload(),
         "settings": user_settings_payload,
@@ -967,6 +1009,8 @@ def bootstrap_settings():
         "storage_usage_bytes": storage_summary.get("storage_usage_bytes", 0),
         "files_count": storage_summary.get("files_count", 0),
         "notes_count": storage_summary.get("notes_count", 0),
+        "note_media_count": storage_summary.get("note_media_count", 0),
+        "entitlements": tier_payload,
         "connected_services": [],
         "other_calendar_urls": _load_other_calendar_urls(user_settings),
         "member_since": _format_member_since(current_user.created_at),
@@ -1055,6 +1099,10 @@ def update_profile():
         "banner_color": banner_color,
         "avatar_file_id": avatar_file_id,
         "avatar_source": avatar_source,
+        "avatar_file_size_bytes": (
+            getattr(current_user, "avatar_file_size_bytes", 0)
+            if avatar_source == "upload" else 0
+        ),
         **school_updates,
         "major": major,
         "graduation_year": graduation_year,
@@ -1078,6 +1126,7 @@ def update_profile():
     current_user.banner_color = banner_color
     current_user.avatar_file_id = avatar_file_id
     current_user.avatar_source = avatar_source
+    current_user.avatar_file_size_bytes = updates["avatar_file_size_bytes"]
     current_user.school = school_updates.get("school")
     current_user.school_key = school_updates.get("school_key")
     current_user.school_source = school_updates.get("school_source")
@@ -1123,6 +1172,7 @@ def update_profile():
         "class_year": current_user.class_year,
         "created_at": format_datetime(current_user.created_at),
         "member_since": _format_member_since(current_user.created_at),
+        "tier": getattr(current_user, "tier", "free"),
     })
 
 
@@ -1146,6 +1196,20 @@ def upload_avatar():
         return jsonify({"error": "Avatar file is empty."}), 400
     if len(file_bytes) > MAX_AVATAR_BYTES:
         return jsonify({"error": "Avatar must be 10 MB or smaller."}), 400
+
+    try:
+        entitlements = request_entitlements(current_user)
+        storage_limit = entitlements["limits"].get("storage_bytes")
+        old_size = int(getattr(current_user, "avatar_file_size_bytes", 0) or 0) if current_user.avatar_source == "upload" else 0
+        if storage_limit is not None:
+            current_usage = int(entitlements["usage"].get("storage_bytes") or 0) - old_size
+            if current_usage + len(file_bytes) > storage_limit:
+                raise EntitlementLimitError("storage bytes", current_usage, current_usage + len(file_bytes), storage_limit)
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 403
+    except EntitlementError:
+        logger.exception("Failed to verify avatar storage limits")
+        return jsonify({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}), 503
 
     file_id = ID.unique()
     stored_filename = f"{current_user.id}-{file_id}.{extension}"
@@ -1180,6 +1244,7 @@ def upload_avatar():
                 "picture_url": picture_url,
                 "avatar_file_id": file_id,
                 "avatar_source": "upload",
+                "avatar_file_size_bytes": len(file_bytes),
             },
         )
     except AppwriteException:
@@ -1193,6 +1258,7 @@ def upload_avatar():
     current_user.picture_url = picture_url
     current_user.avatar_file_id = file_id
     current_user.avatar_source = "upload"
+    current_user.avatar_file_size_bytes = len(file_bytes)
 
     emit_creation_event(
         "Profile Avatar Uploaded",
@@ -1258,6 +1324,18 @@ def update_feed_url():
             other_ical_urls = _load_other_calendar_urls(existing)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+    try:
+        entitlements = request_entitlements(current_user)
+        feed_limit = entitlements["limits"].get("max_calendar_feeds")
+        feed_count = (1 if url else 0) + len(other_ical_urls)
+        if feed_limit is not None and feed_count > feed_limit:
+            raise EntitlementLimitError("calendar feeds", entitlements["usage"]["calendar_feeds"], feed_count, feed_limit)
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 403
+    except EntitlementError:
+        logger.exception("Failed to verify calendar feed limits")
+        return jsonify({"error": "Unable to verify your calendar limits right now.", "code": "tier_check_unavailable"}), 503
 
     user_id = str(current_user.id)
     try:
@@ -1723,6 +1801,15 @@ def add_course():
     )
     if existing:
         return jsonify({"error": "Course already in your list."}), 409
+
+    try:
+        entitlements = request_entitlements(current_user)
+        check_limit(entitlements, "max_saved_courses", entitlements["usage"]["saved_courses"])
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 403
+    except EntitlementError:
+        logger.exception("Failed to verify settings course limits")
+        return jsonify({"error": "Unable to verify your course limits right now.", "code": "tier_check_unavailable"}), 503
 
     try:
         course = create_row_safe(

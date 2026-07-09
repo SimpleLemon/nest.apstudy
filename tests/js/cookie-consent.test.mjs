@@ -191,7 +191,7 @@ test("public analytics controls form a compact bottom-left responsive stack", ()
 
 test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
     const authenticatedTemplates = [
-        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html",
+        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html",
         "calendar.html", "chat.html", "courses.html", "dashboard.html", "files.html", "notes.html",
         "onboarding.html", "settings.html", "task.html",
     ];

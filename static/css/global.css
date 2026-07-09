@@ -3022,3 +3022,13 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
 		}
 	}
 }
+.tier-badge {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  image-rendering: pixelated;
+  object-fit: contain;
+  vertical-align: middle;
+}

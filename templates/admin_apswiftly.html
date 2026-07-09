@@ -20,12 +20,17 @@
 <body class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     {% include "_admin_sidebar.html" %}
     <main class="admin-shell">
-        <header class="admin-header">
+        <header class="admin-header admin-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
+                <p class="admin-eyebrow">Service management</p>
                 <h1 class="admin-title">APSwiftly</h1>
-                <p class="admin-subtitle">Control the APSwiftly Discord bot hosted on this server.</p>
+                <p class="admin-subtitle">Check the bot’s service health and make controlled operational changes.</p>
             </div>
+            <span class="admin-page-header__context">
+                <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+                Bot operations
+            </span>
         </header>
 
         <section class="admin-card admin-apswiftly-status-card" aria-labelledby="apswiftly-status-title">

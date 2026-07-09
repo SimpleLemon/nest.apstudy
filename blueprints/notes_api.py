@@ -24,6 +24,7 @@ from services.chat_formatting import _is_public_host, fetch_link_preview, safe_u
 from services.database import db_connection
 from services import note_media, note_store, notes_collaboration
 from services.appwrite_storage import note_media_upload_failure
+from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, check_storage, request_entitlements
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -433,6 +434,16 @@ def create_note():
     content = payload.get("content") or ""
     folder_id = _normalize_owned_folder_id(payload.get("folder_id"))
 
+    if hasattr(current_user, "_data"):
+        try:
+            entitlements = request_entitlements(current_user)
+            check_limit(entitlements, "max_notes", entitlements["usage"]["notes"])
+        except EntitlementLimitError as exc:
+            return jsonify(exc.payload()), 403
+        except EntitlementError:
+            logger.exception("Failed to verify note limits")
+            return jsonify({"error": "Unable to verify your note limits right now.", "code": "tier_check_unavailable"}), 503
+
     try:
         created = note_store.create_note(
             current_user.id,
@@ -482,6 +493,12 @@ def _media_payload(note_id, media):
     }
 
 
+def _notes_json(payload, status=200):
+    response = jsonify(payload)
+    response.status_code = status
+    return response
+
+
 @notes_api_bp.route("/api/notes/<note_id>/media", methods=["POST"])
 @login_required
 def upload_note_media(note_id):
@@ -490,14 +507,25 @@ def upload_note_media(note_id):
     if not access["can_edit"]:
         abort(404)
     uploaded_file = request.files.get("file")
-    if not uploaded_file:
-        return jsonify({"error": "Choose an image to upload."}), 400
+    if uploaded_file is None:
+        return _notes_json({"error": "Choose an image to upload."}, 400)
     if not uploaded_file.filename:
         uploaded_file.filename = "clipboard-image.png"
+    if hasattr(current_user, "_data"):
+        try:
+            entitlements = request_entitlements(current_user)
+            preview = uploaded_file.read(note_media.MAX_NOTE_IMAGE_BYTES + 1)
+            uploaded_file.stream.seek(0)
+            check_storage(entitlements, len(preview))
+        except EntitlementLimitError as exc:
+            return _notes_json(exc.payload(), 403)
+        except EntitlementError:
+            logger.exception("Failed to verify note media limits")
+            return _notes_json({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}, 503)
     try:
         media = note_media.create_media(note_id, current_user.id, uploaded_file)
     except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
+        return _notes_json({"error": str(exc)}, 400)
     except AppwriteException as exc:
         status_code, error = note_media_upload_failure(exc)
         logger.exception(
@@ -505,11 +533,11 @@ def upload_note_media(note_id):
             getattr(exc, "code", None) or getattr(exc, "response_code", None),
             exc,
         )
-        return jsonify({"error": error}), status_code
+        return _notes_json({"error": error}, status_code)
     except Exception:
         logger.exception("Failed to upload note media")
-        return jsonify({"error": "Unable to store this image."}), 500
-    return jsonify(_media_payload(note_id, media)), 201
+        return _notes_json({"error": "Unable to store this image."}, 500)
+    return _notes_json(_media_payload(note_id, media), 201)
 
 
 @notes_api_bp.route("/api/notes/<note_id>/media/<media_id>", methods=["GET"])

@@ -32,6 +32,7 @@
             allowedExpiryOptions: {{ allowed_expiry_options|tojson }},
             defaultExpiryDays: {{ default_expiry_days }},
             maxFileSize: {{ max_file_size }},
+            maxFileSizeLabel: {{ max_file_size_label|tojson }},
             maxUploadFiles: {{ max_upload_files }}
         };
     </script>
@@ -56,7 +57,7 @@
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
 </head>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
-    <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"></global>
+    <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}" data-user-tier="{{ user_tier or '' }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
     <main class="workspace-page-shell">
@@ -89,7 +90,7 @@
                                 <span class="material-symbols-outlined" aria-hidden="true">upload_file</span>
                                 <span>
                                     <strong>File Upload</strong>
-                                    <small>Select or drop up to 5 files</small>
+                                <small>Select or drop up to {{ max_upload_files }} files</small>
                                 </span>
                             </button>
                         </div>
@@ -187,7 +188,7 @@
                 </div>
                 <div class="files-upload-copy">
                     <p class="files-upload-title">Choose a file or drag &amp; drop it here</p>
-                    <p class="files-upload-hint">Any file type, up to 50 MB · max {{ max_upload_files }} at once</p>
+                    <p class="files-upload-hint">Any file type, up to {{ max_file_size_label }} · max {{ max_upload_files }} at once</p>
                 </div>
                 <button id="file-share-pick" type="button" class="files-upload-browse">Browse File</button>
             </div>

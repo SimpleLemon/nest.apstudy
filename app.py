@@ -166,6 +166,9 @@ def create_app():
                 "sidebar_default": "expanded",
                 "avatar_src": avatar_url_for_size,
                 "can_access_admin": False,
+                "user_tier": None,
+                "user_tier_label": None,
+                "user_tier_badge": None,
                 "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
                 "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
             }
@@ -192,11 +195,17 @@ def create_app():
             sidebar_default = "expanded"
         user_id = str(getattr(current_user, "id", "") or "")
         from services.admin_access import user_can_access_admin
+        from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
+
+        user_tier = normalize_tier(getattr(current_user, "tier", None))
 
         return {
             "sidebar_default": sidebar_default,
             "avatar_src": avatar_url_for_size,
             "can_access_admin": user_can_access_admin(user_id),
+            "user_tier": user_tier,
+            "user_tier_label": TIER_LABELS[user_tier],
+            "user_tier_badge": TIER_BADGES.get(user_tier),
             "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
             "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
         }

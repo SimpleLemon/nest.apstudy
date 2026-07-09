@@ -20,12 +20,17 @@
 <body class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     {% include "_admin_sidebar.html" %}
     <main class="admin-shell admin-analytics-shell" data-admin-analytics data-default-range="{{ default_range }}">
-        <header class="admin-header admin-analytics-header">
+        <header class="admin-header admin-page-header admin-analytics-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
+                <p class="admin-eyebrow">Reporting</p>
                 <h1 class="admin-title">Analytics</h1>
                 <p class="admin-subtitle">Monitor users, activity, acquisition, and feature engagement in your local timezone.</p>
             </div>
+            <span class="admin-page-header__context">
+                <span class="material-symbols-outlined" aria-hidden="true">query_stats</span>
+                Reporting view
+            </span>
         </header>
 
         {% if error %}

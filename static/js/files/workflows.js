@@ -9,6 +9,7 @@
             allowedExpiry,
             defaultExpiry,
             maxFileSizeBytes,
+            maxFileSizeLabel,
             maxUploadFiles,
         } = constants;
         const {
@@ -121,7 +122,7 @@
                     return;
                 }
                 if (item.file.size > maxFileSizeBytes) {
-                    notify(`${item.file.name} exceeds the 50 MB limit.`, "error", { modalError: els.uploadError });
+                    notify(`${item.file.name} exceeds the ${maxFileSizeLabel} limit.`, "error", { modalError: els.uploadError });
                     return;
                 }
                 if (item.file.size === 0) {

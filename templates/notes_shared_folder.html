@@ -27,7 +27,7 @@
         data-authenticated="{{ 'true' if viewer_authenticated else 'false' }}"
         data-has-sidebar="{{ 'true' if viewer_authenticated else 'false' }}"
         data-login-url="{{ login_url }}"
-        {% if viewer_authenticated %}data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}"{% endif %}></global>
+        {% if viewer_authenticated %}data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}" data-user-tier="{{ user_tier or '' }}"{% endif %}></global>
     {% if viewer_authenticated %}
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include '_sidebar.html' %}

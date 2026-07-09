@@ -28,6 +28,7 @@
     const FilesRenderers = window.APStudyFilesRenderers || {};
     const { folderCardHtml, fileCardHtml, uploadItemHtml, shareExpiryOptionsHtml, fileMenuItems, folderMenuItems, renderEmptyState: renderEmptyStateFromUtils, setLoading: setLoadingFromUtils, toggleNewMenu: toggleNewMenuFromUtils, closeNewMenu: closeNewMenuFromUtils, openActionMenu: openActionMenuFromUtils, closeActionMenu: closeActionMenuFromUtils } = FilesRenderers;
     const MAX_FILE_SIZE_BYTES = Number(CONFIG.maxFileSize) || (50 * 1024 * 1024);
+    const MAX_FILE_SIZE_LABEL = String(CONFIG.maxFileSizeLabel || "50 MB");
     const MAX_UPLOAD_FILES = Number(CONFIG.maxUploadFiles) || 5;
     const ALLOWED_EXPIRY = Array.isArray(CONFIG.allowedExpiryOptions) && CONFIG.allowedExpiryOptions.length
         ? CONFIG.allowedExpiryOptions
@@ -89,6 +90,7 @@
                 allowedExpiry: ALLOWED_EXPIRY,
                 defaultExpiry: DEFAULT_EXPIRY,
                 maxFileSizeBytes: MAX_FILE_SIZE_BYTES,
+                maxFileSizeLabel: MAX_FILE_SIZE_LABEL,
                 maxUploadFiles: MAX_UPLOAD_FILES,
             },
             callbacks: {

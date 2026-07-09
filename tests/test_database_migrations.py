@@ -48,11 +48,24 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
         self.assertIn("discord_id", user_columns)
         self.assertIn("preview_text", note_columns)
         self.assertIn("004_notes_media", versions_before)
+        self.assertIn("tier", user_columns)
+        self.assertIn("avatar_file_size_bytes", user_columns)
         with database.db_connection(self.db_path) as connection:
             note_media_exists = connection.execute(
                 "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'note_media'"
             ).fetchone()
         self.assertIsNotNone(note_media_exists)
+
+        with database.db_connection(self.db_path) as connection:
+            connection.execute(
+                "INSERT INTO users (id, google_id, email, username, created_at) VALUES (?, ?, ?, ?, ?)",
+                ("new-user", "google-new", "new@example.com", "new-user", "2026-01-01Z"),
+            )
+            new_user = connection.execute(
+                "SELECT tier, avatar_file_size_bytes FROM users WHERE id = ?",
+                ("new-user",),
+            ).fetchone()
+        self.assertEqual(tuple(new_user), ("free", 0))
 
         database.init_db(path=self.db_path)
 

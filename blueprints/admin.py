@@ -57,6 +57,16 @@ from services.calendar_store import (
     list_calendar_rows_all,
 )
 from services.admin_analytics import RANGE_OPTIONS, analytics_payload, normalize_range
+from services.entitlements import (
+    TIER_BADGES,
+    TIER_KEYS,
+    TIER_LABELS,
+    EntitlementError,
+    entitlement_payload,
+    get_tier_definitions,
+    normalize_tier,
+    save_tier_definitions,
+)
 
 try:
     import psutil
@@ -118,6 +128,7 @@ def _admin_profile_payload(user_doc):
     user_id = _row_id(user_doc)
     name = user_doc.get("name") or "APStudy User"
     username = user_doc.get("username")
+    tier = normalize_tier(user_doc.get("tier"))
     return {
         "id": user_id,
         "name": name,
@@ -133,6 +144,9 @@ def _admin_profile_payload(user_doc):
         "member_since": _format_admin_date(user_doc.get("created_at")),
         "is_emory_school": _is_emory_school(user_doc.get("school")),
         "is_early_member": _is_early_member(user_doc.get("created_at")),
+        "tier": tier,
+        "tier_label": TIER_LABELS[tier],
+        "tier_badge": TIER_BADGES.get(tier),
     }
 
 
@@ -354,6 +368,9 @@ def _admin_event_title(action):
         "delete_shared_file": "Admin Deleted Shared File",
         "delete_shared_folder": "Admin Deleted Shared Folder",
         "delete_user": "Admin Deleted User",
+        "view_admin_tiers": "Admin Viewed Tiers",
+        "update_tier_definitions": "Admin Updated Tier Definitions",
+        "update_user_tier": "Admin Updated User Tier",
         "approve_admin_request": "Admin Approved Request",
         "deny_admin_request": "Admin Denied Request",
         "manual_course_tracking_run": "Admin Ran Course Tracking Diagnostics",
@@ -512,6 +529,7 @@ def _normalize_oauth_provider(user_doc):
 
 
 def _user_summary(user_doc):
+    tier = normalize_tier(user_doc.get("tier"))
     return {
         "id": _row_id(user_doc),
         "username": user_doc.get("username"),
@@ -533,6 +551,9 @@ def _user_summary(user_doc):
         "class_year": user_doc.get("class_year"),
         "picture_url": user_doc.get("picture_url"),
         "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
+        "tier": tier,
+        "tier_label": TIER_LABELS[tier],
+        "tier_badge": TIER_BADGES.get(tier),
     }
 
 
@@ -952,9 +973,23 @@ def _flash_admin_result(status=None, error=None):
             push_toast(message, type="success")
 
 
-def _redirect_detail(user_id, section, status=None, error=None):
+def _redirect_detail(user_id, section, status=None, error=None, return_to=None):
     _flash_admin_result(status=status, error=error)
-    return redirect(url_for("admin.admin_detail", user_id=user_id, section=section))
+    destination = {
+        "user_id": user_id,
+        "section": section,
+    }
+    if return_to:
+        destination["return_to"] = _admin_detail_return_url(return_to)
+    return redirect(url_for("admin.admin_detail", **destination))
+
+
+def _admin_detail_return_url(value):
+    fallback = url_for("admin.admin_auth", tab="users")
+    candidate = (value or "").strip()
+    if candidate == "/admin/auth" or candidate.startswith("/admin/auth?"):
+        return candidate
+    return fallback
 
 
 AUTH_TABS = ("users", "course-tracking", "channel-requests")
@@ -1140,6 +1175,69 @@ def admin_auth_section_users():
         metadata={"section": "users", "query": payload["q"], "field": payload["field"]},
     )
     return render_template("partials/admin_auth_users.html", **payload)
+
+
+@admin_bp.route("/admin/tiers")
+@admin_required
+def admin_tiers():
+    _log_admin_action("view_admin_tiers", "admin tiers")
+    return render_template(
+        "admin_tiers.html",
+        tier_definitions=get_tier_definitions(),
+        tier_keys=TIER_KEYS,
+        tier_labels=TIER_LABELS,
+        tier_badges=TIER_BADGES,
+        status=request.args.get("status"),
+        error=request.args.get("error"),
+        **_auth_page_context(active_admin_page="tiers", breadcrumbs=[
+            ("Admin", url_for("admin.admin_index")),
+            ("Tiers", None),
+        ]),
+    )
+
+
+@admin_bp.route("/admin/tiers", methods=["POST"])
+@admin_required
+def save_admin_tiers():
+    payload = request.get_json(silent=True)
+    if payload is None:
+        try:
+            payload = {}
+            for tier in TIER_KEYS:
+                payload[tier] = {}
+                form_keys = {
+                    "storage_bytes": (f"{tier}__storage_gb", 1024 ** 3),
+                    "max_file_size_bytes": (f"{tier}__max_file_size_mb", 1024 ** 2),
+                    "max_upload_files": (f"{tier}__max_upload_files", 1),
+                    "max_saved_courses": (f"{tier}__max_saved_courses", 1),
+                    "max_seat_tracks": (f"{tier}__max_seat_tracks", 1),
+                    "max_calendar_feeds": (f"{tier}__max_calendar_feeds", 1),
+                    "max_notes": (f"{tier}__max_notes", 1),
+                }
+                for key, (field, multiplier) in form_keys.items():
+                    unlimited = request.form.get(f"{field}__unlimited")
+                    raw_value = request.form.get(field)
+                    payload[tier][key] = None if unlimited else (
+                        int(float(raw_value) * multiplier) if raw_value not in (None, "") else raw_value
+                    )
+        except (TypeError, ValueError):
+            return redirect(url_for("admin.admin_tiers", error="invalid-tier-config"))
+    try:
+        definitions = save_tier_definitions(payload)
+    except (TypeError, ValueError) as exc:
+        if request.is_json:
+            return jsonify({"error": str(exc), "code": "invalid_tier_config"}), 400
+        return redirect(url_for("admin.admin_tiers", error="invalid-tier-config"))
+
+    _log_admin_action(
+        "update_tier_definitions",
+        "admin tiers",
+        metadata={"tiers": list(definitions.keys())},
+        color="green",
+    )
+    if request.is_json:
+        return jsonify({"status": "ok", "tier_definitions": definitions})
+    return redirect(url_for("admin.admin_tiers", status="tiers-updated"))
 
 
 @admin_bp.route("/admin/auth/sections/course-tracking")
@@ -1878,6 +1976,41 @@ def deny_admin_request(request_id):
     return _redirect_requests(notice="request-denied")
 
 
+@admin_bp.route("/admin/<user_id>/tier", methods=["POST"])
+@admin_required
+def update_user_tier(user_id):
+    payload = request.get_json(silent=True) or request.form
+    tier = normalize_tier(payload.get("tier"))
+    raw_tier = str(payload.get("tier") or "").strip().lower().replace("-", "_").replace(" ", "_")
+    if raw_tier not in TIER_KEYS:
+        if request.is_json:
+            return jsonify({"error": "Choose a valid tier.", "code": "invalid_tier"}), 400
+        return redirect(url_for("admin.admin_detail", user_id=user_id, error="invalid-tier"))
+
+    user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
+    if not user_doc:
+        abort(404)
+    try:
+        updated = update_row_safe(COLLECTIONS["users"], user_id, {"tier": tier})
+    except AppwriteException:
+        logger.exception("Failed to update tier for %s", user_id)
+        if request.is_json:
+            return jsonify({"error": "Unable to update user tier."}), 500
+        return redirect(url_for("admin.admin_detail", user_id=user_id, error="tier-update-failed"))
+
+    _log_admin_action(
+        "update_user_tier",
+        f"user:{user_id}",
+        target_user=user_doc,
+        metadata={"previous_tier": normalize_tier(user_doc.get("tier")), "tier": tier},
+        color="green",
+    )
+    if request.is_json:
+        return jsonify({"status": "ok", "tier": tier, "user": _user_summary(updated)})
+    section = request.form.get("section") or "overview"
+    return redirect(url_for("admin.admin_detail", user_id=user_id, section=section, status="tier-updated"))
+
+
 @admin_bp.route("/admin/<user_id>")
 @admin_required
 def admin_detail(user_id):
@@ -1905,6 +2038,11 @@ def admin_detail(user_id):
         }
 
     section_data = _load_section(section, user_id)
+    try:
+        tier_entitlements = entitlement_payload(user_id, user_doc)
+    except EntitlementError:
+        logger.exception("Failed to load tier entitlements for %s", user_id)
+        tier_entitlements = None
 
     _log_admin_action(
         "view_admin_detail",
@@ -1923,11 +2061,13 @@ def admin_detail(user_id):
         overview_counts=overview_counts,
         section=section,
         section_data=section_data,
+        tier_entitlements=tier_entitlements,
         status=request.args.get("status"),
         error=request.args.get("error"),
         theme_preference=_theme_preference(),
         pending_request_count=_pending_admin_request_count(),
         active_admin_page="auth",
+        return_to=_admin_detail_return_url(request.args.get("return_to")),
         breadcrumbs=[
             ("Admin", url_for("admin.admin_index")),
             ("Auth", url_for("admin.admin_auth")),
@@ -1956,6 +2096,7 @@ def admin_detail_export(user_id):
 @admin_required
 def update_onboarding(user_id):
     section = (request.form.get("section") or "overview").strip() or "overview"
+    return_to = request.form.get("return_to")
     onboarding_complete = bool(request.form.get("onboarding_complete"))
     step_raw = (request.form.get("onboarding_step") or "").strip()
     try:
@@ -1974,7 +2115,7 @@ def update_onboarding(user_id):
         )
     except AppwriteException:
         logger.exception("Failed to update onboarding for %s", user_id)
-        return _redirect_detail(user_id, section, error="Unable to update onboarding.")
+        return _redirect_detail(user_id, section, error="Unable to update onboarding.", return_to=return_to)
 
     _log_admin_action(
         "update_onboarding",
@@ -1986,13 +2127,14 @@ def update_onboarding(user_id):
         },
         color="green" if onboarding_complete else "gray",
     )
-    return _redirect_detail(user_id, section, status="onboarding-updated")
+    return _redirect_detail(user_id, section, status="onboarding-updated", return_to=return_to)
 
 
 @admin_bp.route("/admin/<user_id>/reset-ics-token", methods=["POST"])
 @admin_required
 def reset_ics_token(user_id):
     section = (request.form.get("section") or "settings").strip() or "settings"
+    return_to = request.form.get("return_to")
     token = secrets.token_urlsafe(32)
     now = format_datetime(datetime.utcnow())
 
@@ -2015,16 +2157,17 @@ def reset_ics_token(user_id):
             )
     except AppwriteException:
         logger.exception("Failed to reset ICS token for %s", user_id)
-        return _redirect_detail(user_id, section, error="Unable to reset token.")
+        return _redirect_detail(user_id, section, error="Unable to reset token.", return_to=return_to)
 
     _log_admin_action("reset_ics_token", f"user:{user_id}", target_user={"$id": user_id}, color="yellow")
-    return _redirect_detail(user_id, section, status="token-reset")
+    return _redirect_detail(user_id, section, status="token-reset", return_to=return_to)
 
 
 @admin_bp.route("/admin/<user_id>/seat-tracks/disable", methods=["POST"])
 @admin_required
 def disable_seat_tracks(user_id):
     section = (request.form.get("section") or "seat_tracks").strip() or "seat_tracks"
+    return_to = request.form.get("return_to")
     now = format_datetime(datetime.utcnow())
     updated = 0
 
@@ -2042,7 +2185,7 @@ def disable_seat_tracks(user_id):
             updated += 1
     except AppwriteException:
         logger.exception("Failed to disable seat tracks for %s", user_id)
-        return _redirect_detail(user_id, section, error="Unable to disable seat tracks.")
+        return _redirect_detail(user_id, section, error="Unable to disable seat tracks.", return_to=return_to)
 
     _log_admin_action(
         "disable_seat_tracks",
@@ -2051,13 +2194,14 @@ def disable_seat_tracks(user_id):
         metadata={"tracks_disabled": updated},
         color="yellow",
     )
-    return _redirect_detail(user_id, section, status=f"disabled-{updated}")
+    return _redirect_detail(user_id, section, status=f"disabled-{updated}", return_to=return_to)
 
 
 @admin_bp.route("/admin/<user_id>/files/<file_id>/delete", methods=["POST"])
 @admin_required
 def delete_shared_file(user_id, file_id):
     section = (request.form.get("section") or "files").strip() or "files"
+    return_to = request.form.get("return_to")
     shared_file = get_row_safe(COLLECTIONS["shared_files"], file_id, allow_missing=True)
     if not shared_file or shared_file.get("user_id") != user_id:
         abort(404)
@@ -2066,7 +2210,7 @@ def delete_shared_file(user_id, file_id):
         _delete_shared_file_row(shared_file)
     except AppwriteException:
         logger.exception("Failed to delete shared file %s", file_id)
-        return _redirect_detail(user_id, section, error="Unable to delete file.")
+        return _redirect_detail(user_id, section, error="Unable to delete file.", return_to=return_to)
 
     _log_admin_action(
         "delete_shared_file",
@@ -2075,13 +2219,14 @@ def delete_shared_file(user_id, file_id):
         metadata={"resource_type": "shared_file", "resource_id": file_id},
         color="yellow",
     )
-    return _redirect_detail(user_id, section, status="file-deleted")
+    return _redirect_detail(user_id, section, status="file-deleted", return_to=return_to)
 
 
 @admin_bp.route("/admin/<user_id>/folders/<folder_id>/delete", methods=["POST"])
 @admin_required
 def delete_shared_folder(user_id, folder_id):
     section = (request.form.get("section") or "files").strip() or "files"
+    return_to = request.form.get("return_to")
     folder = get_row_safe(COLLECTIONS["file_folders"], folder_id, allow_missing=True)
     if not folder or folder.get("user_id") != user_id:
         abort(404)
@@ -2099,7 +2244,7 @@ def delete_shared_folder(user_id, folder_id):
             delete_row_safe(COLLECTIONS["file_folders"], target_id)
     except AppwriteException:
         logger.exception("Failed to delete shared folder %s", folder_id)
-        return _redirect_detail(user_id, section, error="Unable to delete folder.")
+        return _redirect_detail(user_id, section, error="Unable to delete folder.", return_to=return_to)
 
     _log_admin_action(
         "delete_shared_folder",
@@ -2108,7 +2253,7 @@ def delete_shared_folder(user_id, folder_id):
         metadata={"resource_type": "file_folder", "resource_id": folder_id},
         color="yellow",
     )
-    return _redirect_detail(user_id, section, status="folder-deleted")
+    return _redirect_detail(user_id, section, status="folder-deleted", return_to=return_to)
 
 
 @admin_bp.route("/admin/users/<user_id>/files/<file_id>/download")
@@ -2154,9 +2299,10 @@ def download_shared_file(user_id, file_id):
 @admin_bp.route("/admin/<user_id>/delete", methods=["POST"])
 @admin_required
 def delete_user(user_id):
+    return_to = request.form.get("return_to")
     confirm = (request.form.get("confirm") or "").strip()
     if confirm != "DELETE":
-        return _redirect_detail(user_id, "overview", error="Type DELETE to confirm removal.")
+        return _redirect_detail(user_id, "overview", error="Type DELETE to confirm removal.", return_to=return_to)
 
     user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
     if not user_doc:
@@ -2168,13 +2314,13 @@ def delete_user(user_id):
     errors = result if isinstance(result, list) else []
     if errors:
         logger.error("Incomplete user data deletion for %s: %s", user_id, errors)
-        return _redirect_detail(user_id, "overview", error="Unable to delete all user data.")
+        return _redirect_detail(user_id, "overview", error="Unable to delete all user data.", return_to=return_to)
 
     try:
         Users(appwrite_client).delete(user_id)
     except Exception:
         logger.exception("Failed to delete Appwrite account for %s", user_id)
-        return _redirect_detail(user_id, "overview", error="Unable to delete Appwrite user.")
+        return _redirect_detail(user_id, "overview", error="Unable to delete Appwrite user.", return_to=return_to)
 
     _log_admin_action("delete_user", f"user:{user_id}", target_user=user_doc, color="red")
 
@@ -2186,4 +2332,4 @@ def delete_user(user_id):
                 logger.exception("Failed to delete avatar file %s", avatar_file_id)
 
     push_toast("User deleted.", type="success")
-    return redirect(url_for("admin.admin_auth", tab="users"))
+    return redirect(_admin_detail_return_url(return_to))

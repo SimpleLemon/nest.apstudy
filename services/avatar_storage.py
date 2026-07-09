@@ -174,4 +174,4 @@ def store_avatar_from_url(user_id, source_url, *, timeout=8, max_bytes=MAX_AVATA
         logger.warning("Avatar storage is not configured; cannot build view URL")
         return None
 
-    return {"file_id": file_id, "view_url": view_url}
+    return {"file_id": file_id, "view_url": view_url, "size_bytes": len(file_bytes)}
