@@ -7,6 +7,8 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
     window.__apstudyCsrfFetchInstalled = true;
     const nativeFetch = window.fetch.bind(window);
     const unsafeMethods = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+    const csrfFailureHeader = "X-APStudy-CSRF-Error";
+    let csrfRefreshPromise = null;
 
     function csrfToken() {
         const entry = document.cookie
@@ -16,7 +18,37 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
         return entry ? decodeURIComponent(entry.slice("csrf_token=".length)) : "";
     }
 
-    window.fetch = (input, init = {}) => {
+    function requestWithCsrfHeader(input, init = {}) {
+        const request = input instanceof Request ? input : null;
+        const headers = new Headers(request?.headers || undefined);
+        new Headers(init.headers || undefined).forEach((value, key) => headers.set(key, value));
+        const token = csrfToken();
+        if (token && !headers.has("X-CSRFToken")) headers.set("X-CSRFToken", token);
+        return new Request(request ? request.clone() : input, { ...init, headers });
+    }
+
+    async function refreshCsrfToken() {
+        if (!csrfRefreshPromise) {
+            csrfRefreshPromise = nativeFetch("/auth/csrf", {
+                credentials: "same-origin",
+                cache: "no-store",
+                headers: { Accept: "application/json" },
+            }).then((response) => {
+                if (!response.ok || !csrfToken()) {
+                    throw new Error("Unable to refresh CSRF token");
+                }
+            }).finally(() => {
+                csrfRefreshPromise = null;
+            });
+        }
+        return csrfRefreshPromise;
+    }
+
+    function isCsrfFailure(response) {
+        return response.status === 400 && response.headers.get(csrfFailureHeader) === "1";
+    }
+
+    window.fetch = async (input, init = {}) => {
         const request = input instanceof Request ? input : null;
         const method = String(init.method || request?.method || "GET").toUpperCase();
         const url = new URL(request?.url || String(input), window.location.href);
@@ -24,11 +56,16 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
             return nativeFetch(input, init);
         }
 
-        const headers = new Headers(request?.headers || undefined);
-        new Headers(init.headers || undefined).forEach((value, key) => headers.set(key, value));
+        const firstRequest = requestWithCsrfHeader(input, init);
+        const response = await nativeFetch(firstRequest.clone());
+        if (!isCsrfFailure(response)) return response;
+
+        await refreshCsrfToken();
+        const retryHeaders = new Headers(firstRequest.headers);
         const token = csrfToken();
-        if (token && !headers.has("X-CSRFToken")) headers.set("X-CSRFToken", token);
-        return nativeFetch(input, { ...init, headers });
+        if (token) retryHeaders.set("X-CSRFToken", token);
+        const retryRequest = new Request(firstRequest.clone(), { headers: retryHeaders });
+        return nativeFetch(retryRequest);
     };
 })();
 
@@ -698,6 +735,7 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
     }
 
     window.APStudySkeleton = {
+        block: skeletonBlock,
         table,
         cards,
         fieldSet,

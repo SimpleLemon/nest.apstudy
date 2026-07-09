@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 
 import app as app_module
 import blueprints.file_share as file_share
+import blueprints.notes_api as notes_api
 import requests
 from extensions import login_manager
 from services import feed_fetcher
@@ -129,6 +130,64 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
             )
         self.assertEqual(rejected.status_code, 400)
         self.assertEqual(accepted.status_code, 200)
+
+    def test_csrf_refresh_endpoint_marks_rejections_and_issues_a_usable_token(self):
+        client = self._authenticated_client()
+        with patch("blueprints.settings.update_row_safe", return_value={}):
+            rejected = client.post("/settings/api/discord/unlink", headers={"X-CSRFToken": "stale"})
+            refreshed = client.get("/auth/csrf")
+            token = client.get_cookie("csrf_token")
+            accepted = client.post(
+                "/settings/api/discord/unlink",
+                headers={"X-CSRFToken": token.value},
+            )
+
+        self.assertEqual(rejected.status_code, 400)
+        self.assertEqual(rejected.headers.get("X-APStudy-CSRF-Error"), "1")
+        self.assertEqual(refreshed.status_code, 200)
+        self.assertEqual(refreshed.headers.get("Cache-Control"), "no-store")
+        self.assertIsNotNone(token)
+        self.assertEqual(accepted.status_code, 200)
+
+    def test_notes_save_succeeds_after_csrf_refresh_without_replaying_rejection(self):
+        client = self._authenticated_client()
+        note = {
+            "$id": "note-1",
+            "user_id": self.user.id,
+            "title": "Old title",
+            "content": "[]",
+            "collaboration_enabled": False,
+            "created_at": "2026-07-01T00:00:00Z",
+            "updated_at": "2026-07-01T00:00:00Z",
+        }
+        updated_note = {**note, "content": '[{"type":"paragraph"}]', "updated_at": "2026-07-09T00:00:00Z"}
+        access = {"can_edit": True, "role": "owner"}
+
+        with patch.object(notes_api.note_store, "get_note", return_value=note), \
+                patch.object(notes_api.note_store, "resolve_note_access", return_value=access), \
+                patch.object(notes_api.note_store, "update_note", return_value=updated_note) as update_note, \
+                patch.object(notes_api.note_store, "get_safe_user", return_value=None), \
+                patch.object(notes_api, "_load_global_notes_page_setup", return_value={}), \
+                patch.object(notes_api.note_media, "sync_note_media"):
+            rejected = client.patch(
+                "/api/notes/note-1",
+                json={"content": updated_note["content"]},
+                headers={"X-CSRFToken": "stale"},
+            )
+            client.get("/auth/csrf")
+            token = client.get_cookie("csrf_token")
+            accepted = client.patch(
+                "/api/notes/note-1",
+                json={"content": updated_note["content"]},
+                headers={"X-CSRFToken": token.value},
+            )
+
+        self.assertEqual(rejected.status_code, 400)
+        self.assertEqual(rejected.headers.get("X-APStudy-CSRF-Error"), "1")
+        self.assertEqual(accepted.status_code, 200)
+        update_note.assert_called_once()
+        self.assertEqual(update_note.call_args.args[0], "note-1")
+        self.assertEqual(update_note.call_args.args[1]["content"], updated_note["content"])
 
     def test_logout_is_post_only_and_csrf_protected(self):
         client = self._authenticated_client()

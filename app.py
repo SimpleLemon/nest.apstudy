@@ -76,7 +76,7 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
     from flask_login import current_user
-    from flask_wtf.csrf import generate_csrf
+    from flask_wtf.csrf import CSRFError, generate_csrf
     from blueprints.auth import LOGIN_NEXT_SESSION_KEY, _is_safe_login_next_url
     from services.database import close_db, init_db
     init_db(app)
@@ -102,6 +102,14 @@ def create_app():
                 httponly=False,
                 samesite="Lax",
             )
+        return response
+
+    @app.errorhandler(CSRFError)
+    def handle_csrf_error(error):
+        """Let browser clients distinguish token expiry from ordinary 400s."""
+        response = app.make_response((error.description, 400))
+        response.headers["X-APStudy-CSRF-Error"] = "1"
+        response.headers["Cache-Control"] = "no-store"
         return response
 
     @login_manager.unauthorized_handler

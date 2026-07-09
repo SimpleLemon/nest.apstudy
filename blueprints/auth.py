@@ -20,6 +20,7 @@ from flask import (
     current_app
 )
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_wtf.csrf import generate_csrf
 
 from appwrite.client import Client
 from appwrite.exception import AppwriteException
@@ -1099,6 +1100,21 @@ def login():
     error = _login_error_text(session.pop(AUTH_ERROR_SESSION_KEY, None))
     response = make_response(render_template("login.html", error=error))
     response.headers["Content-Security-Policy"] = LOGIN_CSP
+    return response
+
+
+@auth_bp.route("/auth/csrf")
+def refresh_csrf_token():
+    """Issue a fresh CSRF token without forcing a long-open page to reload."""
+    response = jsonify({"ok": True})
+    response.headers["Cache-Control"] = "no-store"
+    response.set_cookie(
+        "csrf_token",
+        generate_csrf(),
+        secure=current_app.config["SESSION_COOKIE_SECURE"],
+        httponly=False,
+        samesite="Lax",
+    )
     return response
 
 
