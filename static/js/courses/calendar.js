@@ -42,6 +42,18 @@
       }
       syncTermControls();
 
+      if (state.loading || state.sectionsLoading) {
+        root.innerHTML = window.APStudySkeleton?.table
+          ? window.APStudySkeleton.table({
+            label: "Loading course schedule...",
+            rows: 5,
+            columns: 4,
+            className: "apstudy-skeleton-fill",
+          })
+          : `<div class="courses-state">${window.APStudyLoader.html("Loading course schedule...", { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
+        return;
+      }
+
       if (isCompactCoursesViewport()) {
         root.innerHTML = buildMobileCoursesAgenda();
         return;

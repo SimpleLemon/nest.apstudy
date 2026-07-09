@@ -226,6 +226,7 @@ function mountRegionComboboxes() {
 
 function initializeSettingsPage() {
   cacheElements();
+  renderSettingsSkeleton();
   bindNavigation();
   bindCopyButtons();
   bindToggleButtons();
@@ -241,6 +242,8 @@ function initializeSettingsPage() {
 }
 
 function cacheElements() {
+  elements.skeleton = document.getElementById('settings-skeleton');
+  elements.sectionsWrap = document.querySelector('.settings-sections');
   elements.tabs = Array.from(document.querySelectorAll('.settings-tab'));
   elements.sections = Array.from(document.querySelectorAll('.settings-section'));
   elements.copyButtons = Array.from(document.querySelectorAll('[data-copy-target]'));
@@ -304,6 +307,33 @@ function cacheElements() {
   elements.discordUnlink = document.getElementById('settings-discord-unlink');
   elements.discordRelink = document.getElementById('settings-discord-relink');
   elements.discordModalClosers = Array.from(document.querySelectorAll('[data-discord-modal-close]'));
+}
+
+function renderSettingsSkeleton() {
+  elements.sectionsWrap?.classList.add('is-loading');
+  elements.sectionsWrap?.setAttribute('aria-busy', 'true');
+  if (!elements.skeleton) {
+    return;
+  }
+  elements.skeleton.hidden = false;
+  elements.skeleton.innerHTML = window.APStudySkeleton?.fieldSet
+    ? window.APStudySkeleton.fieldSet({
+      label: 'Loading settings...',
+      sections: 4,
+      fields: 4,
+      className: 'apstudy-skeleton-fill',
+    })
+    : '<div role="status">Loading settings...</div>';
+}
+
+function clearSettingsSkeleton() {
+  elements.sectionsWrap?.classList.remove('is-loading');
+  elements.sectionsWrap?.setAttribute('aria-busy', 'false');
+  if (!elements.skeleton) {
+    return;
+  }
+  elements.skeleton.hidden = true;
+  elements.skeleton.innerHTML = '';
 }
 
 function bindNavigation() {
@@ -412,6 +442,8 @@ async function bootstrapSettingsPage() {
     console.error(error);
     showToast(error.message || 'Unable to load settings right now.', 'error');
     syncHashOnLoad();
+  } finally {
+    clearSettingsSkeleton();
   }
 }
 

@@ -247,6 +247,53 @@ pre,
 	}
 }
 
+.apstudy-skeleton {
+	width: 100%;
+	color: transparent;
+}
+
+.apstudy-skeleton .bg-muted,
+.apstudy-skeleton [data-slot="skeleton"] {
+	background: color-mix(in srgb, var(--color-outline-variant) 18%, var(--color-surface-container-high) 82%) !important;
+}
+
+.apstudy-skeleton .border,
+.apstudy-skeleton .border-b {
+	border-color: color-mix(in srgb, var(--color-outline-variant) 30%, transparent);
+}
+
+.apstudy-skeleton-table,
+.apstudy-skeleton-fieldset {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+.apstudy-skeleton-cards {
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+	gap: 1rem;
+}
+
+.apstudy-skeleton-fieldset .contents {
+	display: grid;
+	width: 100%;
+	gap: 1rem;
+}
+
+.apstudy-skeleton-fill .contents,
+.apstudy-skeleton-fill .contents > * {
+	width: 100%;
+	max-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.apstudy-skeleton .animate-pulse {
+		animation: none !important;
+	}
+}
+
 .ui-status {
 	display: inline-flex;
 	min-height: 26px;

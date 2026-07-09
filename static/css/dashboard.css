@@ -946,10 +946,6 @@
 .dashboard-loading {
     grid-column: 1 / -1;
     min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
     color: var(--color-on-surface-variant);
 }
 

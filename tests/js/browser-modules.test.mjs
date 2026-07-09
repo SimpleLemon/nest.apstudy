@@ -301,6 +301,8 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
     assert.match(calendarSource, /buildMobileCalendarAgendaHtml/);
     assert.match(calendarSource, /calendar-mobile-agenda/);
     assert.match(calendarSource, /compactCalendar \? buildMobileCalendarAgendaHtml\(\)/);
+    assert.match(calendarSource, /APStudySkeleton\?\.table/);
+    assert.match(calendarSource, /APStudySkeleton\?\.cards/);
 
     assert.match(coursesSource, /COMPACT_COURSES_QUERY = window\.matchMedia\("\(max-width: 640px\)"\)/);
     assert.match(coursesSource, /buildMobileCoursesAgenda/);
@@ -786,10 +788,15 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.doesNotMatch(template, /appwrite@|js\/core\/appwrite\.js/);
     assert.match(template, /\{% set settings_assets_version = 'settings-[^']+' %\}/);
     assert.match(template, /data-probe-appwrite-session="false"/);
+    assert.match(template, /id="settings-skeleton"/);
+    assert.match(template, /settings-sections[^"]*is-loading/);
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences'\]/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
     assert.match(source, /'nest-light'/);
     assert.match(source, /'nest-dark'/);
+    assert.match(source, /function renderSettingsSkeleton\(\)/);
+    assert.match(source, /APStudySkeleton\?\.fieldSet/);
+    assert.match(source, /function clearSettingsSkeleton\(\)/);
     assert.match(source, /interface_theme: interfaceTheme/);
     assert.match(source, /const SETTINGS_MAX_OTHER_CALENDARS = 10/);
     assert.match(source, /const USERNAME_RESERVED = new Set\(\[/);
@@ -875,6 +882,11 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.match(source, /window\.APStudyConfirm = \{ request \}/);
     assert.match(source, /id = "apstudy-confirm-root"/);
     assert.match(source, /window\.APStudyLoader = \{/);
+    assert.match(source, /window\.APStudySkeleton = \{/);
+    assert.match(source, /function table\(options = \{\}\)/);
+    assert.match(source, /function cards\(options = \{\}\)/);
+    assert.match(source, /function fieldSet\(options = \{\}\)/);
+    assert.match(source, /data-slot="skeleton"/);
     assert.match(source, /window\.APStudyDate = \{/);
     assert.match(source, /function clearClientState\(options = \{\}\)/);
     assert.match(source, /function markClientLoggedOut\(\)/);

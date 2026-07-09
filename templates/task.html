@@ -52,7 +52,28 @@
     <main class="workspace-page-shell workspace-page-shell--wide">
         <div id="task-root" data-complete-sound="{{ url_for('static', filename='audio/task-pop.mp3') }}" data-uncomplete-sound="{{ url_for('static', filename='audio/task-pop-down.mp3') }}">
             <h1 class="workspace-page-title">Tasks</h1>
-            <p role="status">Loading tasks...</p>
+            <div class="task-loading apstudy-skeleton apstudy-skeleton-fieldset apstudy-skeleton-fill" role="status" aria-live="polite" aria-busy="true">
+                <span class="sr-only">Loading tasks...</span>
+                <div class="contents" aria-hidden="true">
+                    <div class="apstudy-skeleton-fieldset-section rounded-md border p-4">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex flex-col gap-2">
+                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div>
+                                <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-48"></div>
+                            </div>
+                            <div data-slot="skeleton" class="bg-muted animate-pulse h-8 w-20 rounded-md"></div>
+                        </div>
+                        <div class="mt-4 grid gap-4 md:grid-cols-2">
+                            {% for _ in range(6) %}
+                                <div class="flex flex-col gap-2">
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-3 w-20"></div>
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-10 w-full"></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <global class="thefooter"></global>
     </main>

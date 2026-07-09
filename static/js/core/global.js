@@ -585,6 +585,126 @@ import("/static/js/core/cookie-consent.js").catch((error) => {
 })();
 
 (() => {
+    if (window.APStudySkeleton) return;
+
+    function escapeHtml(value) {
+        const div = document.createElement("div");
+        div.textContent = value == null ? "" : String(value);
+        return div.innerHTML;
+    }
+
+    function skeletonBlock(className) {
+        return `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${escapeHtml(className)}"></div>`;
+    }
+
+    function shell(label, className, bodyHtml) {
+        const statusLabel = escapeHtml(label || "Loading...");
+        return `
+            <div class="apstudy-skeleton ${escapeHtml(className || "")}" role="status" aria-live="polite" aria-busy="true">
+                <span class="sr-only">${statusLabel}</span>
+                <div class="contents" aria-hidden="true">${bodyHtml}</div>
+            </div>
+        `;
+    }
+
+    function table(options = {}) {
+        const rows = Math.max(1, Number(options.rows || 4));
+        const columns = Math.max(2, Number(options.columns || 4));
+        const className = options.className || "";
+        const headerCells = Array.from({ length: columns }, (_, index) => (
+            skeletonBlock(index % 2 === 0 ? "h-3 w-20" : "h-3 w-16")
+        )).join("");
+        const rowCells = Array.from({ length: columns }, (_, index) => {
+            if (index === 0) {
+                return `
+                    <div class="flex items-center gap-3">
+                        ${skeletonBlock("size-8 shrink-0 rounded-full")}
+                        ${skeletonBlock("h-4 flex-1")}
+                    </div>
+                `;
+            }
+            if (index === columns - 1) return skeletonBlock("h-6 w-16 rounded-full");
+            return skeletonBlock("h-4 w-full");
+        }).join("");
+        const bodyRows = Array.from({ length: rows }, () => `
+            <div class="grid items-center gap-4 border-b pb-3 last:border-0 last:pb-0" style="grid-template-columns: repeat(${columns}, minmax(0, 1fr)); opacity: 1; transform: none;">
+                ${rowCells}
+            </div>
+        `).join("");
+
+        return shell(options.label || "Loading table...", `apstudy-skeleton-table ${className}`, `
+            <div class="flex w-full max-w-2xl flex-col gap-4 rounded-md border p-4" style="opacity: 1; transform: none;">
+                <div class="flex items-center justify-between" style="opacity: 1; transform: none;">
+                    ${skeletonBlock("h-5 w-32")}
+                    ${skeletonBlock("h-8 w-20")}
+                </div>
+                <div class="grid gap-4 rounded-md bg-muted px-3 py-2" style="grid-template-columns: repeat(${columns}, minmax(0, 1fr)); opacity: 1; transform: none;">
+                    ${headerCells}
+                </div>
+                <div class="flex flex-col gap-3">${bodyRows}</div>
+            </div>
+        `);
+    }
+
+    function cards(options = {}) {
+        const count = Math.max(1, Number(options.count || 3));
+        const className = options.className || "";
+        const cardClassName = options.cardClassName || "";
+        const cardsHtml = Array.from({ length: count }, (_, index) => `
+            <div class="apstudy-skeleton-card rounded-md border p-4 ${escapeHtml(cardClassName)}" style="opacity: 1; transform: none;">
+                <div class="flex items-center gap-3">
+                    ${skeletonBlock(index % 2 === 0 ? "size-8 shrink-0 rounded-full" : "h-8 w-8 shrink-0")}
+                    <div class="flex flex-1 flex-col gap-2">
+                        ${skeletonBlock("h-4 w-32")}
+                        ${skeletonBlock("h-3 w-20")}
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-col gap-2">
+                    ${skeletonBlock("h-3 w-full")}
+                    ${skeletonBlock("h-3 w-3/4")}
+                    ${skeletonBlock("h-6 w-16 rounded-full")}
+                </div>
+            </div>
+        `).join("");
+
+        return shell(options.label || "Loading cards...", `apstudy-skeleton-cards ${className}`, cardsHtml);
+    }
+
+    function fieldSet(options = {}) {
+        const sections = Math.max(1, Number(options.sections || 2));
+        const fields = Math.max(1, Number(options.fields || 4));
+        const className = options.className || "";
+        const sectionHtml = Array.from({ length: sections }, () => `
+            <div class="apstudy-skeleton-fieldset-section rounded-md border p-4" style="opacity: 1; transform: none;">
+                <div class="flex items-center justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        ${skeletonBlock("h-5 w-32")}
+                        ${skeletonBlock("h-3 w-48")}
+                    </div>
+                    ${skeletonBlock("h-8 w-20")}
+                </div>
+                <div class="mt-4 grid gap-4 md:grid-cols-2">
+                    ${Array.from({ length: fields }, () => `
+                        <div class="flex flex-col gap-2">
+                            ${skeletonBlock("h-3 w-20")}
+                            ${skeletonBlock("h-10 w-full")}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `).join("");
+
+        return shell(options.label || "Loading form...", `apstudy-skeleton-fieldset ${className}`, sectionHtml);
+    }
+
+    window.APStudySkeleton = {
+        table,
+        cards,
+        fieldSet,
+    };
+})();
+
+(() => {
     const pad2 = (value) => String(value).padStart(2, "0");
 
     function toLocalInputValue(date) {

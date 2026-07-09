@@ -21,7 +21,6 @@
             dateToDayIndex,
             escapeHtml,
             formatHourLabel,
-            formatTimeOnly,
             getStartOfWeek,
             isTaskEvent,
             isToday,
@@ -128,6 +127,29 @@
             `;
         }
 
+        function formatCompactTime(date) {
+            const parts = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).formatToParts(date);
+            const hour = parts.find((part) => part.type === "hour")?.value || "";
+            const minute = parts.find((part) => part.type === "minute")?.value || "";
+            const dayPeriod = parts.find((part) => part.type === "dayPeriod")?.value || "";
+            const compactTime = minute && minute !== "00" ? `${hour}:${minute}` : hour;
+            return `${compactTime} ${dayPeriod}`.trim();
+        }
+
+        function formatCompactTimeRange(event) {
+            const start = event.startDate;
+            const end = event.endDate || event.startDate;
+            const sameDay = start.getFullYear() === end.getFullYear()
+                && start.getMonth() === end.getMonth()
+                && start.getDate() === end.getDate();
+            if (sameDay) {
+                return `${formatCompactTime(start)} – ${formatCompactTime(end)}`;
+            }
+            const startLabel = start.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+            const endLabel = end.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+            return `${startLabel}, ${formatCompactTime(start)} – ${endLabel}, ${formatCompactTime(end)}`;
+        }
+
         function getAllDayEventsForWeek(days, weekStart, weekEnd) {
             const seen = new Set();
             const candidates = [];
@@ -191,12 +213,13 @@
             const isTask = isTaskEvent(event);
             const taskClasses = isTask && event.completed ? " is-completed" : "";
             const priorityLabel = isTask && event.priority && event.priority !== "none" ? event.priority : "";
+            const showTimeRange = heightPx >= 44;
             return `
                 <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5${taskClasses}" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
                     <div class="h-full rounded-lg border overflow-hidden shadow-lg shadow-black/10" style="${badgeStyle}">
-                        <div class="h-full px-2 py-1.5 flex flex-col gap-0.5 text-left">
-                            <div class="text-xs font-semibold leading-tight line-clamp-2">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
-                            <div class="text-xs">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatTimeOnly(event.startDate))}</div>
+                        <div class="h-full px-2 py-1.5 flex flex-col ${showTimeRange ? "justify-start gap-0.5" : "justify-center"} text-left overflow-hidden">
+                            <div class="text-xs font-semibold leading-tight ${showTimeRange ? "line-clamp-1" : "line-clamp-2"}">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
+                            ${showTimeRange ? `<div class="text-[0.7rem] leading-tight">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatCompactTimeRange(event))}</div>` : ""}
                         </div>
                     </div>
                 </div>

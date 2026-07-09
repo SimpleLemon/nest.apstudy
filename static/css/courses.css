@@ -329,6 +329,13 @@ body.courses-body {
   padding: 20px;
 }
 
+.courses-state-skeleton {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  text-align: left;
+}
+
 .course-card {
   position: relative;
   width: 100%;

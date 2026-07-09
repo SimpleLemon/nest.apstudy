@@ -91,9 +91,17 @@
             if (!root) return;
             hideCalendarHoverCard();
             if (state.loadingDashboard) {
+                const skeletonHtml = window.APStudySkeleton?.table
+                    ? window.APStudySkeleton.table({
+                        label: "Loading calendar...",
+                        rows: 6,
+                        columns: 4,
+                        className: "apstudy-skeleton-fill calendar-loading-skeleton",
+                    })
+                    : window.APStudyLoader.html("Loading calendar...", { sizePx: 54, textToneClass: "text-on-surface" });
                 root.innerHTML = `
                     <div class="rounded-2xl border border-calendar-rule bg-surface-container shadow-2xl shadow-black/10 p-10 min-h-[420px] flex items-center justify-center">
-                        ${window.APStudyLoader.html("Loading calendar...", { sizePx: 54, textToneClass: "text-on-surface" })}
+                        ${skeletonHtml}
                     </div>
                 `;
                 return;

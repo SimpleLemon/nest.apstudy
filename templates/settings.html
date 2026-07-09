@@ -64,7 +64,8 @@
                 <a href="#data" class="settings-tab" data-tab="data">Data</a>
                 <a href="#preferences" class="settings-tab" data-tab="preferences">Preferences</a>
             </nav>
-            <div class="settings-sections space-y-8 md:space-y-10">
+            <div id="settings-skeleton" class="settings-bootstrap-skeleton"></div>
+            <div class="settings-sections space-y-8 md:space-y-10 is-loading" aria-busy="true">
                 <section id="account" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="account">
                     <div class="settings-account-layout">
                         <article class="settings-card settings-account-details-card">

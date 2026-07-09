@@ -96,9 +96,16 @@
             const root = document.getElementById("assignments-root");
             if (!root) return;
             if (state.loadingDashboard) {
+                const skeletonHtml = window.APStudySkeleton?.cards
+                    ? window.APStudySkeleton.cards({
+                        label: "Loading upcoming events...",
+                        count: 3,
+                        className: "md:col-span-2 lg:col-span-3",
+                    })
+                    : window.APStudyLoader.html("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" });
                 root.innerHTML = `
                     <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-10 text-center">
-                        ${window.APStudyLoader.html("Loading upcoming events...", { sizePx: 46, textToneClass: "text-on-surface" })}
+                        ${skeletonHtml}
                     </div>
                 `;
                 return;

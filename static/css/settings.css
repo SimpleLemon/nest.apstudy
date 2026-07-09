@@ -92,6 +92,18 @@
   margin-top: 2rem;
 }
 
+.settings-sections.is-loading {
+  display: none;
+}
+
+.settings-bootstrap-skeleton {
+  margin-top: 2rem;
+}
+
+.settings-bootstrap-skeleton[hidden] {
+  display: none !important;
+}
+
 .settings-section {
   display: flex;
   flex-direction: column;

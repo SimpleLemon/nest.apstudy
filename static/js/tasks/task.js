@@ -428,8 +428,15 @@ function TaskApp({ completeSound, uncompleteSound }) {
     const printTasks = printListRecord ? tasksByList.get(printListRecord.id) || [] : [];
 
     if (loading) {
-        const loaderHtml = window.APStudyLoader?.html
-            ? window.APStudyLoader.html("Loading tasks...", { sizePx: 54, textToneClass: "text-on-surface" })
+        const loaderHtml = window.APStudySkeleton?.fieldSet
+            ? window.APStudySkeleton.fieldSet({
+                label: "Loading tasks...",
+                sections: 1,
+                fields: 6,
+                className: "apstudy-skeleton-fill",
+            })
+            : window.APStudyLoader?.html
+                ? window.APStudyLoader.html("Loading tasks...", { sizePx: 54, textToneClass: "text-on-surface" })
             : '<span class="loader" style="width:54px; height:54px;" aria-hidden="true"></span><span>Loading tasks...</span>';
         return h("div", {
             className: "task-loading",

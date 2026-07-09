@@ -46,7 +46,10 @@
 
       if (state.loading) {
         summary.textContent = "Loading Emory Atlas...";
-        content.innerHTML = `<div class="courses-state">${window.APStudyLoader.html(["Loading courses", "..."].join(""), { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
+        const skeletonHtml = window.APStudySkeleton?.cards
+          ? window.APStudySkeleton.cards({ label: "Loading courses...", count: 4 })
+          : window.APStudyLoader.html(["Loading courses", "..."].join(""), { sizePx: 46, textToneClass: "text-on-surface" });
+        content.innerHTML = `<div class="courses-state courses-state-skeleton">${skeletonHtml}</div>`;
         return;
       }
       if (state.error) {
@@ -66,7 +69,10 @@
       }
       if (state.sectionsLoading) {
         summary.textContent = `Loading ${formatTermLabel(state.selectedTerm)}...`;
-        content.innerHTML = `<div class="courses-state">${window.APStudyLoader.html(`Loading sections for ${formatTermLabel(state.selectedTerm)}...`, { sizePx: 46, textToneClass: "text-on-surface" })}</div>`;
+        const skeletonHtml = window.APStudySkeleton?.cards
+          ? window.APStudySkeleton.cards({ label: `Loading sections for ${formatTermLabel(state.selectedTerm)}...`, count: 4 })
+          : window.APStudyLoader.html(`Loading sections for ${formatTermLabel(state.selectedTerm)}...`, { sizePx: 46, textToneClass: "text-on-surface" });
+        content.innerHTML = `<div class="courses-state courses-state-skeleton">${skeletonHtml}</div>`;
         return;
       }
 

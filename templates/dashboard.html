@@ -66,9 +66,23 @@
 
         <section class="dashboard-tiles-region" aria-label="Dashboard tiles">
             <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">
-                <div class="dashboard-loading">
-                    <span class="loader" aria-hidden="true"></span>
-                    <span>Loading your dashboard...</span>
+                <div class="dashboard-loading apstudy-skeleton apstudy-skeleton-cards" role="status" aria-live="polite" aria-busy="true">
+                    <span class="sr-only">Loading your dashboard...</span>
+                    <div class="contents" aria-hidden="true">
+                        {% for _ in range(4) %}
+                            <div class="apstudy-skeleton-card rounded-md border p-4">
+                                <div class="flex items-center justify-between">
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-5 w-32"></div>
+                                    <div data-slot="skeleton" class="bg-muted animate-pulse h-8 w-20 rounded-md"></div>
+                                </div>
+                                <div class="mt-4 flex flex-col gap-2">
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-full"></div>
+                                    <div data-slot="skeleton" class="bg-muted rounded-md animate-pulse h-4 w-3/4"></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </section>
