@@ -66,18 +66,23 @@
         });
 
         els.pick?.addEventListener("click", (event) => {
+            event.preventDefault();
             event.stopPropagation();
-            els.input?.click();
+            if (els.input) els.input.click();
         });
         els.input?.addEventListener("change", () => {
             addUploadFiles(Array.from(els.input?.files || []));
             if (els.input) els.input.value = "";
         });
-        els.dropzone?.addEventListener("click", () => els.input?.click());
+        els.dropzone?.addEventListener("click", (event) => {
+            event.preventDefault();
+            if (els.input) els.input.click();
+        });
         els.dropzone?.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                els.input?.click();
+                event.stopPropagation();
+                if (els.input) els.input.click();
             }
         });
         els.dropzone?.addEventListener("dragover", (event) => {

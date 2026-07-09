@@ -69,10 +69,18 @@ test("files workflows use upload response helpers and notify on failure", async 
     const workflowsSource = await readFile(path.join(repoRoot, "static/js/files/workflows.js"), "utf8");
     const indexSource = await readFile(path.join(repoRoot, "static/js/files/index.js"), "utf8");
     const modalsSource = await readFile(path.join(repoRoot, "static/js/files/modals.js"), "utf8");
+    const templateSource = await readFile(path.join(repoRoot, "templates/files.html"), "utf8");
+    const fileInputMatch = templateSource.match(/<input[^>]+id="file-share-input"[^>]*>/);
 
     assert.match(workflowsSource, /parseUploadResponse\(xhr\)/);
     assert.match(workflowsSource, /uploadErrorMessage\(xhr, payload\)/);
     assert.match(workflowsSource, /notify\(message, "error", \{ modalError: els\.uploadError \}\)/);
+    assert.match(indexSource, /callbacks:\s*\{[\s\S]*parseUploadResponse,[\s\S]*uploadErrorMessage,/);
     assert.match(indexSource, /function notify\(message, type = "info", options = \{\}\)/);
     assert.match(modalsSource, /notify\(error\.message \|\| "Unable to save\.", "error", \{ modalError: els\.folderError \}\)/);
+    assert.ok(fileInputMatch);
+    assert.match(fileInputMatch[0], /type="file"/);
+    assert.match(fileInputMatch[0], /multiple/);
+    assert.match(fileInputMatch[0], /class="files-visually-hidden"/);
+    assert.doesNotMatch(fileInputMatch[0], /\shidden(?:\s|=|>)/);
 });

@@ -112,7 +112,9 @@
                 showAlert,
                 showFormError,
                 notify,
+                parseUploadResponse,
                 uploadItemHtml,
+                uploadErrorMessage,
             },
         });
         window.APStudyFilesEvents.bindFilesEvents({
