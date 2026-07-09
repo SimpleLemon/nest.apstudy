@@ -1629,34 +1629,146 @@ body.settings-discord-modal-open {
 .settings-combobox-option[hidden] {
   display: none !important;
 }
+.settings-tier-card-body {
+    grid-template-columns: minmax(180px, 0.72fr) minmax(0, 1.55fr);
+    gap: 2.25rem;
+}
+
+.settings-tier-card-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.settings-tier-kicker {
+    color: var(--color-on-surface-variant, #49454f);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.settings-tier-card-intro h3 {
+    margin-top: 0.4rem;
+}
+
+.settings-tier-manage-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.1rem;
+    color: var(--color-primary);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.settings-tier-manage-link:hover,
+.settings-tier-manage-link:focus-visible {
+    color: var(--color-on-surface);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.settings-tier-manage-link .material-symbols-outlined {
+    font-size: 1rem;
+}
+
 .settings-tier-summary {
     display: grid;
-    gap: 12px;
-    padding: 16px;
-    border: 1px solid var(--color-outline-variant, #d2d0c8);
+    gap: 1rem;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant, #d2d0c8) 78%, transparent);
     border-radius: var(--radius-card);
-    background: color-mix(in srgb, var(--color-surface-container-low, #f7f6f3) 76%, transparent);
+    background: color-mix(in srgb, var(--color-surface-container-low, #f7f6f3) 78%, transparent);
 }
 
 .settings-tier-heading {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--color-on-surface, #1d1b20);
-    font-size: 18px;
+    justify-content: space-between;
+    gap: 0.75rem;
 }
 
-.settings-tier-summary > p {
-    margin: 0;
+.settings-tier-heading-label {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.settings-tier-heading-label > div {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.settings-tier-heading strong {
+    color: var(--color-on-surface, #1d1b20);
+    font-size: 1.05rem;
+    line-height: 1.25;
+}
+
+.settings-tier-status {
+    flex: 0 0 auto;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.settings-tier-status.is-warning {
+    border-color: color-mix(in srgb, var(--color-error) 32%, transparent);
+    background: color-mix(in srgb, var(--color-error) 10%, transparent);
+    color: var(--color-error);
+}
+
+.settings-tier-usage-block {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant, #d2d0c8) 48%, transparent);
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, var(--color-surface-container-high, #eceae5) 52%, transparent);
+}
+
+.settings-tier-usage-meta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
     color: var(--color-on-surface-variant, #49454f);
-    font-size: 13px;
+    font-size: 0.75rem;
+}
+
+.settings-tier-usage-meta > div {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.settings-tier-usage-meta strong {
+    color: var(--color-on-surface, #1d1b20);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.settings-tier-usage-meta > span {
+    flex: 0 0 auto;
+    font-weight: 700;
 }
 
 .settings-tier-progress {
-    height: 8px;
+    height: 0.42rem;
     overflow: hidden;
     border-radius: var(--radius-pill);
-    background: color-mix(in srgb, var(--color-outline-variant, #d2d0c8) 60%, transparent);
+    background: color-mix(in srgb, var(--color-outline-variant, #d2d0c8) 64%, transparent);
 }
 
 .settings-tier-progress span {
@@ -1665,30 +1777,76 @@ body.settings-discord-modal-open {
     height: 100%;
     border-radius: inherit;
     background: var(--color-primary, #0060aa);
-    transition: width 180ms ease;
+    transition: width 180ms ease, background-color 180ms ease;
+}
+
+.settings-tier-progress.is-over-limit span {
+    background: var(--color-error, #ba1a1a);
 }
 
 .settings-tier-warning {
+    margin: 0;
     color: var(--color-error, #ba1a1a) !important;
+    font-size: 0.78rem;
     font-weight: 700;
+    line-height: 1.45;
+}
+
+.settings-tier-details {
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant, #d2d0c8) 48%, transparent);
+}
+
+.settings-tier-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 0.9rem;
+    color: var(--color-on-surface);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+}
+
+.settings-tier-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.settings-tier-details summary:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 65%, transparent);
+    outline-offset: 4px;
+}
+
+.settings-tier-details summary .material-symbols-outlined {
+    font-size: 1.1rem;
+    transition: transform 160ms ease;
+}
+
+.settings-tier-details[open] summary .material-symbols-outlined {
+    transform: rotate(180deg);
 }
 
 .settings-tier-limits {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem 1rem;
+    padding-top: 0.85rem;
 }
 
 .settings-tier-limits span {
-    display: grid;
-    gap: 3px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
     color: var(--color-on-surface-variant, #49454f);
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .settings-tier-limits strong {
     color: var(--color-on-surface, #1d1b20);
-    font-size: 13px;
+    font-size: 0.78rem;
+    white-space: nowrap;
 }
 
 .settings-profile-preview-panel .tier-badge {
@@ -1696,6 +1854,11 @@ body.settings-discord-modal-open {
 }
 
 @media (max-width: 720px) {
+    .settings-tier-card-body {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
     .settings-tier-limits {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }

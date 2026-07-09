@@ -242,23 +242,55 @@
                 </section>
                 <section id="data" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="data">
                     <article class="settings-card settings-tier-card" aria-labelledby="settings-tier-title">
-                        <div class="settings-card-body">
-                            <div class="settings-card-summary">
+                        <div class="settings-card-body settings-tier-card-body">
+                            <div class="settings-card-summary settings-tier-card-intro">
+                                <span class="settings-tier-kicker">Account tier</span>
                                 <h3 id="settings-tier-title">Plan &amp; limits</h3>
-                                <p>These limits apply to your account. Existing data is kept if a limit changes.</p>
+                                <p>Keep an eye on the space and features available to your account.</p>
+                                <a class="settings-tier-manage-link" href="{{ url_for('file_share.file_share_page') }}">
+                                    Manage files
+                                    <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                                </a>
                             </div>
                             <div class="settings-tier-summary">
-                                <div class="settings-tier-heading"><img id="settings-tier-badge" class="tier-badge" alt="" title="" width="40" height="40" hidden /><strong data-tier-label>Free</strong></div>
-                                <p data-tier-storage>Storage usage is loading...</p>
-                                <div class="settings-tier-progress" aria-hidden="true"><span data-tier-storage-progress></span></div>
-                                <p class="settings-tier-warning" data-tier-warning hidden></p>
-                                <div class="settings-tier-limits" aria-label="Current limits">
-                                    <span>Files/upload <strong data-tier-limit="max_upload_files">--</strong></span>
-                                    <span>Notes <strong data-tier-limit="max_notes">--</strong></span>
-                                    <span>Courses <strong data-tier-limit="max_saved_courses">--</strong></span>
-                                    <span>Tracks <strong data-tier-limit="max_seat_tracks">--</strong></span>
-                                    <span>Feeds <strong data-tier-limit="max_calendar_feeds">--</strong></span>
+                                <div class="settings-tier-heading">
+                                    <div class="settings-tier-heading-label">
+                                        <img id="settings-tier-badge" class="tier-badge" alt="" title="" width="40" height="40" hidden />
+                                        <div>
+                                            <span class="settings-tier-kicker">Current tier</span>
+                                            <strong data-tier-label>Free</strong>
+                                        </div>
+                                    </div>
+                                    <span class="settings-tier-status" data-tier-status>Active</span>
                                 </div>
+                                <div class="settings-tier-usage-block">
+                                    <div class="settings-tier-usage-meta">
+                                        <div>
+                                            <span>Storage usage</span>
+                                            <strong data-tier-storage>Storage usage is loading...</strong>
+                                        </div>
+                                        <span data-tier-storage-percent>--</span>
+                                    </div>
+                                    <div class="settings-tier-progress" role="progressbar" aria-label="Storage usage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Storage usage is loading">
+                                        <span data-tier-storage-progress></span>
+                                    </div>
+                                </div>
+                                <p class="settings-tier-warning" data-tier-warning hidden></p>
+                                <details class="settings-tier-details">
+                                    <summary>
+                                        <span>View limit details</span>
+                                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="settings-tier-limits" aria-label="Current limits">
+                                        <span>Storage maximum <strong data-tier-limit="storage_bytes">--</strong></span>
+                                        <span>Max file size <strong data-tier-limit="max_file_size_bytes">--</strong></span>
+                                        <span>Files per upload <strong data-tier-limit="max_upload_files">--</strong></span>
+                                        <span>Notes <strong data-tier-limit="max_notes">--</strong></span>
+                                        <span>Courses <strong data-tier-limit="max_saved_courses">--</strong></span>
+                                        <span>Tracks <strong data-tier-limit="max_seat_tracks">--</strong></span>
+                                        <span>Calendar feeds <strong data-tier-limit="max_calendar_feeds">--</strong></span>
+                                    </div>
+                                </details>
                             </div>
                         </div>
                     </article>

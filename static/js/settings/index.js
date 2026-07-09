@@ -289,8 +289,11 @@ function cacheElements() {
   elements.storageDetails = Array.from(document.querySelectorAll('[data-storage-details]'));
   elements.tierLabel = document.querySelector('[data-tier-label]');
   elements.tierStorage = document.querySelector('[data-tier-storage]');
+  elements.tierStoragePercent = document.querySelector('[data-tier-storage-percent]');
   elements.tierStorageProgress = document.querySelector('[data-tier-storage-progress]');
+  elements.tierStorageProgressTrack = document.querySelector('.settings-tier-progress[role="progressbar"]');
   elements.tierWarning = document.querySelector('[data-tier-warning]');
+  elements.tierStatus = document.querySelector('[data-tier-status]');
   elements.tierLimits = Array.from(document.querySelectorAll('[data-tier-limit]'));
   elements.tierBadge = document.getElementById('settings-tier-badge');
   elements.previewTierBadge = document.getElementById('settings-preview-tier-badge');
@@ -475,20 +478,38 @@ function renderEntitlements() {
 
   const used = Number(data.storage_usage_bytes || 0);
   const cap = data.storage_limit_bytes;
-  const percent = cap ? Math.min(100, (used / cap) * 100) : 0;
+  const hasStorageCap = cap != null;
+  const rawPercent = !hasStorageCap ? null : cap === 0 ? (used > 0 ? Infinity : 0) : (used / cap) * 100;
+  const percent = rawPercent == null ? 0 : Math.min(100, rawPercent);
   if (elements.tierStorage) {
-    elements.tierStorage.textContent = cap == null
+    elements.tierStorage.textContent = !hasStorageCap
       ? `${formatBytes(used)} used / Unlimited storage`
       : `${formatBytes(used)} used / ${formatBytes(cap)} (${Math.max(0, 100 - percent).toFixed(1)}% remaining)`;
   }
+  if (elements.tierStoragePercent) {
+    elements.tierStoragePercent.textContent = !hasStorageCap
+      ? 'Unlimited'
+      : rawPercent > 100 ? 'Over limit' : `${rawPercent.toFixed(0)}% used`;
+  }
   if (elements.tierStorageProgress) elements.tierStorageProgress.style.width = `${percent}%`;
-  const overLimit = Boolean(data.over_limit && Object.values(data.over_limit).some(Boolean)) || (cap != null && used > cap);
+  const overLimit = Boolean(data.over_limit && Object.values(data.over_limit).some(Boolean)) || (hasStorageCap && used > cap);
+  if (elements.tierStorageProgressTrack) {
+    elements.tierStorageProgressTrack.setAttribute('aria-valuenow', String(Math.round(percent)));
+    elements.tierStorageProgressTrack.setAttribute('aria-valuetext', !hasStorageCap ? `${formatBytes(used)} used, unlimited storage` : rawPercent === Infinity ? 'Storage limit reached' : `${rawPercent.toFixed(1)} percent used`);
+    elements.tierStorageProgressTrack.classList.toggle('is-over-limit', overLimit);
+  }
+  if (elements.tierStatus) {
+    elements.tierStatus.textContent = overLimit ? 'Needs attention' : 'Active';
+    elements.tierStatus.classList.toggle('is-warning', overLimit);
+  }
   if (elements.tierWarning) {
     elements.tierWarning.hidden = !overLimit;
     elements.tierWarning.textContent = overLimit ? 'You are over a current limit. Delete existing data before adding more.' : '';
   }
 
   const usageByLimit = {
+    storage_bytes: limits.storage_bytes,
+    max_file_size_bytes: limits.max_file_size_bytes,
     max_upload_files: limits.max_upload_files,
     max_notes: limits.max_notes,
     max_saved_courses: limits.max_saved_courses,
@@ -505,6 +526,10 @@ function renderEntitlements() {
   elements.tierLimits.forEach((node) => {
     const key = node.dataset.tierLimit;
     const limit = usageByLimit[key];
+    if (key === 'storage_bytes' || key === 'max_file_size_bytes') {
+      node.textContent = limit == null ? 'Unlimited' : formatBytes(limit);
+      return;
+    }
     node.textContent = limit == null ? 'Unlimited' : `${usage[usageByResource[key]] || 0} / ${limit}`;
   });
 }
