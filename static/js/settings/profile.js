@@ -45,6 +45,7 @@
       showToast,
     } = callbacks;
     let schoolSuggestionTimer = null;
+    let avatarModalCloseTimer = null;
 
     function hasImageFiles(event) {
       const types = Array.from(event.dataTransfer?.types || []);
@@ -54,10 +55,16 @@
     function setAvatarUploadBusy(isBusy) {
       if (elements.avatarUpload) elements.avatarUpload.disabled = isBusy;
       if (elements.avatarUploadButton) elements.avatarUploadButton.disabled = isBusy;
+      if (elements.avatarFileButton) elements.avatarFileButton.disabled = isBusy;
       elements.avatarUploadDropzone?.classList.toggle('is-uploading', isBusy);
       if (elements.avatarUploadDropzone) {
         elements.avatarUploadDropzone.tabIndex = isBusy ? -1 : 0;
       }
+    }
+
+    function setAvatarUploadStatus(message) {
+      if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = message;
+      if (elements.avatarModalStatus) elements.avatarModalStatus.textContent = message;
     }
 
     function syncAvatarDropzonePreview(value) {
@@ -94,8 +101,39 @@
       void uploadAvatar(file);
     }
 
+    function openAvatarModal() {
+      if (!elements.avatarModal) {
+        elements.avatarUpload?.click();
+        return;
+      }
+      global.clearTimeout(avatarModalCloseTimer);
+      elements.avatarModal.hidden = false;
+      elements.avatarModal.classList.add('is-open');
+      document.body.classList.add('settings-avatar-modal-open');
+      requestAnimationFrame(() => {
+        elements.avatarUploadDropzone?.focus({ preventScroll: true });
+      });
+    }
+
+    function closeAvatarModal({ returnFocus = true } = {}) {
+      if (!elements.avatarModal) {
+        return;
+      }
+      global.clearTimeout(avatarModalCloseTimer);
+      elements.avatarModal.hidden = true;
+      elements.avatarModal.classList.remove('is-open');
+      document.body.classList.remove('settings-avatar-modal-open');
+      elements.avatarUploadDropzone?.classList.remove('is-active');
+      if (returnFocus) {
+        elements.avatarUploadButton?.focus({ preventScroll: true });
+      }
+    }
+
     function bindProfilePreviewControls() {
       elements.avatarUploadButton?.addEventListener('click', () => {
+        openAvatarModal();
+      });
+      elements.avatarFileButton?.addEventListener('click', () => {
         elements.avatarUpload?.click();
       });
       elements.avatarUpload?.addEventListener('change', () => {
@@ -130,6 +168,14 @@
         elements.avatarUploadDropzone.classList.remove('is-active');
         const file = event.dataTransfer?.files && event.dataTransfer.files[0];
         handleAvatarFile(file);
+      });
+      elements.avatarModalClosers?.forEach((node) => {
+        node.addEventListener('click', () => closeAvatarModal());
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && elements.avatarModal && !elements.avatarModal.hidden) {
+          closeAvatarModal();
+        }
       });
       elements.displayName?.addEventListener('input', renderProfilePreview);
       elements.displayName?.addEventListener('input', updateProfileDirtyState);
@@ -264,7 +310,7 @@
       const formData = new FormData();
       formData.append('avatar', file);
       setAvatarUploadBusy(true);
-      if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Uploading...';
+      setAvatarUploadStatus('Uploading...');
 
       try {
         const response = await fetchFormData(endpoints.avatarUpload, formData);
@@ -274,11 +320,12 @@
         };
         updateAvatarPreview(response.picture_url || '');
         updateNavbarAvatar(response.picture_url || '');
-        if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'Avatar uploaded.';
+        setAvatarUploadStatus('Avatar uploaded.');
         captureProfileBaseline();
         showToast('Avatar uploaded.', 'success');
+        avatarModalCloseTimer = global.setTimeout(() => closeAvatarModal(), 450);
       } catch (error) {
-        if (elements.avatarUploadStatus) elements.avatarUploadStatus.textContent = 'JPG, PNG, GIF, or WebP. Max 10 MB.';
+        setAvatarUploadStatus('JPG, PNG, GIF, or WebP. Max 10 MB.');
         showToast(error.message || 'Unable to upload avatar.', 'error');
       } finally {
         setAvatarUploadBusy(false);

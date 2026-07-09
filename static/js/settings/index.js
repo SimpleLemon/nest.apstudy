@@ -263,10 +263,14 @@ function cacheElements() {
   elements.shareProfile = document.getElementById('settings-share-profile');
   elements.avatarUpload = document.getElementById('settings-avatar-upload');
   elements.avatarUploadButton = document.getElementById('settings-avatar-upload-button');
+  elements.avatarFileButton = document.getElementById('settings-avatar-file-button');
   elements.avatarUploadDropzone = document.getElementById('settings-avatar-dropzone');
   elements.avatarDropzonePreview = document.getElementById('settings-avatar-dropzone-preview');
   elements.avatarDropzonePlaceholder = document.getElementById('settings-avatar-dropzone-placeholder');
   elements.avatarUploadStatus = document.getElementById('settings-avatar-upload-status');
+  elements.avatarModalStatus = document.getElementById('settings-avatar-modal-status');
+  elements.avatarModal = document.getElementById('settings-avatar-modal');
+  elements.avatarModalClosers = Array.from(document.querySelectorAll('[data-avatar-modal-close]'));
   elements.bannerColorPicker = document.getElementById('settings-banner-color-picker');
   elements.bannerSwatch = document.getElementById('settings-banner-swatch');
   elements.displayName = document.getElementById('settings-display-name');

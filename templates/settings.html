@@ -133,23 +133,10 @@
                                             </label>
                                             <div class="settings-field">
                                                 <span class="settings-field-label">Avatar</span>
-                                                <div class="settings-avatar-upload-card">
-                                                    <div id="settings-avatar-dropzone" class="settings-avatar-dropzone" role="button" tabindex="0" aria-label="Upload avatar by drag and drop or click">
-                                                        <img id="settings-avatar-dropzone-preview" class="settings-avatar-dropzone-preview" src="{{ (user.picture or '')|avatar_url(176) }}" alt="" width="176" height="176" loading="lazy" decoding="async" {% if not user.picture %}hidden{% endif %} />
-                                                        <div id="settings-avatar-dropzone-placeholder" class="settings-avatar-dropzone-placeholder" {% if user.picture %}hidden{% endif %}>
-                                                            <span class="settings-avatar-dropzone-icon" aria-hidden="true">
-                                                                <span class="material-symbols-outlined">account_circle</span>
-                                                            </span>
-                                                            <p>Drag and drop your image here</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="settings-avatar-upload-divider" aria-hidden="true">
-                                                        <span>OR</span>
-                                                    </div>
-                                                    <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary settings-avatar-upload-button">Upload a photo</button>
-                                                    <input id="settings-avatar-upload" name="avatar" class="settings-visually-hidden" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-label="Upload avatar" tabindex="-1" />
-                                                    <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
+                                                <div class="settings-avatar-upload-control">
+                                                    <button id="settings-avatar-upload-button" type="button" class="settings-button settings-button-secondary" aria-haspopup="dialog" aria-controls="settings-avatar-modal">Upload</button>
                                                 </div>
+                                                <span class="settings-help-text" id="settings-avatar-upload-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
                                             </div>
                                             <label class="settings-field">
                                                 <span class="settings-field-label">Banner Color</span>
@@ -433,6 +420,38 @@
             <global class="thefooter"></global>
         </div>
     </main>
+    <div id="settings-avatar-modal" class="settings-avatar-modal" role="dialog" aria-modal="true" aria-labelledby="settings-avatar-modal-title" hidden>
+        <div class="settings-avatar-modal-backdrop" data-avatar-modal-close></div>
+        <div class="settings-avatar-modal-panel" role="document">
+            <div class="settings-avatar-modal-head">
+                <div>
+                    <h2 id="settings-avatar-modal-title" class="settings-avatar-modal-title">Upload avatar</h2>
+                    <p class="settings-avatar-modal-subtitle">Choose a profile image for your account.</p>
+                </div>
+                <button type="button" class="settings-avatar-modal-close" data-avatar-modal-close aria-label="Close avatar upload">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </div>
+            <div class="settings-avatar-upload-card">
+                <div id="settings-avatar-dropzone" class="settings-avatar-dropzone" role="button" tabindex="0" aria-label="Upload avatar by drag and drop or click">
+                    <img id="settings-avatar-dropzone-preview" class="settings-avatar-dropzone-preview" src="{{ (user.picture or '')|avatar_url(176) }}" alt="" width="176" height="176" loading="lazy" decoding="async" {% if not user.picture %}hidden{% endif %} />
+                    <div id="settings-avatar-dropzone-placeholder" class="settings-avatar-dropzone-placeholder" {% if user.picture %}hidden{% endif %}>
+                        <span class="settings-avatar-dropzone-icon" aria-hidden="true">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </span>
+                        <p>Drag and drop your image here</p>
+                    </div>
+                </div>
+                <div class="settings-avatar-upload-divider" aria-hidden="true">
+                    <span>OR</span>
+                </div>
+                <button id="settings-avatar-file-button" type="button" class="settings-button settings-button-secondary settings-avatar-upload-button">Upload a photo</button>
+                <input id="settings-avatar-upload" name="avatar" class="settings-visually-hidden" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-label="Upload avatar" tabindex="-1" />
+                <span class="settings-help-text" id="settings-avatar-modal-status">JPG, PNG, GIF, or WebP. Max 10 MB.</span>
+            </div>
+            <button type="button" class="settings-avatar-modal-cancel" data-avatar-modal-close>Cancel</button>
+        </div>
+    </div>
     <div id="settings-discord-modal" class="settings-discord-modal" role="dialog" aria-modal="true" aria-labelledby="settings-discord-modal-title" hidden>
         <div class="settings-discord-modal-backdrop" data-discord-modal-close></div>
         <div class="settings-discord-modal-panel" role="document">

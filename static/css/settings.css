@@ -464,6 +464,11 @@
   border: 0;
 }
 
+.settings-avatar-upload-control {
+  display: flex;
+  align-items: center;
+}
+
 .settings-avatar-upload-card {
   display: flex;
   flex-direction: column;
@@ -1268,7 +1273,8 @@
   background: color-mix(in srgb, var(--color-success, #1f7a4d) 88%, #000000 12%);
 }
 
-/* ── Discord unlink modal ────────────────────────────────────────────────── */
+/* ── Settings modals ─────────────────────────────────────────────────────── */
+.settings-avatar-modal,
 .settings-discord-modal {
   position: fixed;
   inset: 0;
@@ -1279,10 +1285,12 @@
   padding: 1.5rem;
 }
 
+.settings-avatar-modal[hidden],
 .settings-discord-modal[hidden] {
   display: none;
 }
 
+.settings-avatar-modal-backdrop,
 .settings-discord-modal-backdrop {
   position: absolute;
   inset: 0;
@@ -1291,6 +1299,7 @@
   -webkit-backdrop-filter: blur(6px);
 }
 
+.settings-avatar-modal-panel,
 .settings-discord-modal-panel {
   position: relative;
   z-index: 1;
@@ -1305,6 +1314,20 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
+.settings-avatar-modal-panel {
+  width: min(460px, 100%);
+  max-height: min(720px, calc(100vh - 3rem));
+  overflow-y: auto;
+}
+
+.settings-avatar-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.settings-avatar-modal-title,
 .settings-discord-modal-title {
   margin: 0;
   font-size: 1.15rem;
@@ -1312,10 +1335,46 @@
   color: var(--color-on-surface);
 }
 
+.settings-avatar-modal-subtitle,
 .settings-discord-modal-subtitle {
   margin: 0;
   font-size: 0.9rem;
   color: var(--color-on-surface-variant, #c7c7cf);
+}
+
+.settings-avatar-modal-subtitle {
+  margin-top: 0.25rem;
+}
+
+.settings-avatar-modal-close {
+  appearance: none;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-surface-container-high) 78%, transparent);
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+}
+
+.settings-avatar-modal-close:hover {
+  color: var(--color-on-surface);
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+}
+
+.settings-avatar-modal-close .material-symbols-outlined {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.settings-avatar-modal .settings-avatar-upload-card {
+  max-width: none;
+  margin-top: 0.5rem;
+  border-color: color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
 }
 
 .settings-discord-modal-actions {
@@ -1331,6 +1390,7 @@
   cursor: pointer;
 }
 
+.settings-avatar-modal-cancel,
 .settings-discord-modal-cancel {
   appearance: none;
   border: 0;
@@ -1342,10 +1402,12 @@
   cursor: pointer;
 }
 
+.settings-avatar-modal-cancel:hover,
 .settings-discord-modal-cancel:hover {
   color: var(--color-on-surface);
 }
 
+body.settings-avatar-modal-open,
 body.settings-discord-modal-open {
   overflow: hidden;
 }
@@ -1485,4 +1547,3 @@ body.settings-discord-modal-open {
 .settings-combobox-option[hidden] {
   display: none !important;
 }
-
