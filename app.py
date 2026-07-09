@@ -16,6 +16,7 @@ if os.environ.get("APSTUDY_ALLOW_INSECURE_OAUTH") == "1" or os.environ.get("FLAS
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+AUTH_SESSION_DURATION = timedelta(days=400)
 
 
 def _session_secret_key():
@@ -57,6 +58,12 @@ def create_app():
     app.config["SESSION_COOKIE_SECURE"] = not allow_insecure_http
     app.config["SESSION_COOKIE_HTTPONLY"] = True
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+    app.config["AUTH_SESSION_DURATION"] = AUTH_SESSION_DURATION
+    app.config["PERMANENT_SESSION_LIFETIME"] = AUTH_SESSION_DURATION
+    app.config["REMEMBER_COOKIE_DURATION"] = AUTH_SESSION_DURATION
+    app.config["REMEMBER_COOKIE_SECURE"] = app.config["SESSION_COOKIE_SECURE"]
+    app.config["REMEMBER_COOKIE_HTTPONLY"] = True
+    app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
     app.config["PREFERRED_URL_SCHEME"] = "http" if allow_insecure_http else "https"
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)

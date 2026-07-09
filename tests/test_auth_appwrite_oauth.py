@@ -74,6 +74,32 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
     def test_login_renders_and_consumes_session_error_code(self):
         self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_CALLBACK)
 
+    def test_complete_appwrite_login_persists_browser_session(self):
+        def create_row(_collection, row_id=None, data=None, **_kwargs):
+            return {"$id": row_id, **(data or {})}
+
+        with self.app.test_request_context("/auth/session", method="POST"):
+            with patch.object(auth, "get_row_safe", return_value=None), \
+                    patch.object(auth, "_find_user_by_email", return_value=None), \
+                    patch.object(auth, "_fetch_provider_profile", return_value={}), \
+                    patch.object(auth, "store_avatar_from_url", return_value=None), \
+                    patch.object(auth, "create_row_safe", side_effect=create_row), \
+                    patch.object(auth, "sync_chat_presence_labels_for_user"), \
+                    patch.object(auth, "login_user") as login_user, \
+                    patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
+                    patch.object(auth, "emit_user_event"):
+                auth._complete_appwrite_login(
+                    {"$id": "user-1", "email": "student@example.com", "name": "Student"},
+                    provider="google",
+                    provider_access_token="provider-token",
+                )
+                session_permanent = session.permanent
+
+        self.assertTrue(session_permanent)
+        self.assertEqual(login_user.call_count, 1)
+        self.assertTrue(login_user.call_args.kwargs["remember"])
+        self.assertEqual(login_user.call_args.kwargs["duration"], auth.AUTH_SESSION_DURATION)
+
     def test_valid_provider_initiates_appwrite_oauth_token_flow(self):
         calls = []
 

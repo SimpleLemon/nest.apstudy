@@ -9,7 +9,7 @@ from flask import Flask
 from flask_login import UserMixin
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from app import create_app
+from app import AUTH_SESSION_DURATION, create_app
 from extensions import csrf, login_manager
 import blueprints.admin as admin
 from tests.support.harness import reset_flask_login_manager
@@ -105,6 +105,12 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertTrue(app.config["SESSION_COOKIE_SECURE"])
         self.assertTrue(app.config["SESSION_COOKIE_HTTPONLY"])
         self.assertEqual(app.config["SESSION_COOKIE_SAMESITE"], "Lax")
+        self.assertEqual(app.config["AUTH_SESSION_DURATION"], AUTH_SESSION_DURATION)
+        self.assertEqual(app.config["PERMANENT_SESSION_LIFETIME"], AUTH_SESSION_DURATION)
+        self.assertEqual(app.config["REMEMBER_COOKIE_DURATION"], AUTH_SESSION_DURATION)
+        self.assertTrue(app.config["REMEMBER_COOKIE_SECURE"])
+        self.assertTrue(app.config["REMEMBER_COOKIE_HTTPONLY"])
+        self.assertEqual(app.config["REMEMBER_COOKIE_SAMESITE"], "Lax")
         self.assertEqual(app.config["PREFERRED_URL_SCHEME"], "https")
         self.assertIsInstance(app.wsgi_app, ProxyFix)
 

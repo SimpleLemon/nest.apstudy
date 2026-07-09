@@ -93,6 +93,8 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
         self.user = SimpleNamespace(
             id="security-user",
             is_authenticated=True,
+            username="security-user",
+            name="Security User",
             discord_id=None,
             discord_username=None,
             discord_linked_at=None,
@@ -132,6 +134,29 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
         client = self._authenticated_client()
         self.assertEqual(client.get("/logout").status_code, 405)
         self.assertEqual(client.post("/logout").status_code, 400)
+
+    def test_logout_clears_persistent_remember_cookie(self):
+        client = self._authenticated_client()
+        client.set_cookie("remember_token", "remembered-user")
+        token = self._csrf_token(client)
+
+        with patch("blueprints.auth.emit_user_event"), \
+                patch("blueprints.auth.Users") as users_class:
+            response = client.post("/logout", headers={"X-CSRFToken": token})
+
+        self.assertEqual(response.status_code, 302)
+        users_class.return_value.delete_sessions.assert_called_once_with(self.user.id)
+        set_cookie_headers = response.headers.getlist("Set-Cookie")
+        remember_headers = [
+            header for header in set_cookie_headers
+            if header.startswith("remember_token=")
+        ]
+        self.assertTrue(remember_headers)
+        self.assertIn("Expires=Thu, 01 Jan 1970 00:00:00 GMT", remember_headers[-1])
+        self.assertIn("Max-Age=0", remember_headers[-1])
+        with client.session_transaction() as client_session:
+            self.assertNotIn("_user_id", client_session)
+            self.assertNotIn("user_id", client_session)
 
 
 class SecretAndShareTokenTests(unittest.TestCase):

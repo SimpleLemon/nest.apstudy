@@ -50,6 +50,7 @@ from services.user_profile import (
     normalize_banner_color as _normalize_banner_color,
     profile_handle as _profile_handle,
 )
+from app import AUTH_SESSION_DURATION
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -1016,7 +1017,12 @@ def _complete_appwrite_login(
         )
 
     sync_chat_presence_labels_for_user(user_doc.get("$id") or user_doc.get("id"), user_doc)
-    login_user(user_from_doc(user_doc))
+    session.permanent = True
+    login_user(
+        user_from_doc(user_doc),
+        remember=True,
+        duration=current_app.config.get("AUTH_SESSION_DURATION", AUTH_SESSION_DURATION),
+    )
     session["user_id"] = user_doc.get("$id") or user_doc.get("id")
     session["email"] = email or remote_email
     _set_oauth_session(provider, appwrite_user_id, email, name=name, picture_url=picture_url)
@@ -1493,6 +1499,8 @@ def logout():
     """Clear session and revoke Google token if possible."""
     credentials_data = session.get("credentials")
     user_id = session.get("oauth_user_id") or session.get("user_id")
+    if not user_id and current_user.is_authenticated:
+        user_id = str(current_user.id)
     if current_user.is_authenticated:
         emit_user_event(
             "User Logout",
@@ -1515,7 +1523,10 @@ def logout():
         except Exception:
             logger.exception("Failed to revoke Appwrite sessions for user")
     logout_user()
+    remember_clear = session.get("_remember") == "clear"
     session.clear()
+    if remember_clear:
+        session["_remember"] = "clear"
 
     if credentials_data and credentials_data.get("token"):
         http_requests.post(
