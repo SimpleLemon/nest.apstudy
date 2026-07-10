@@ -62,7 +62,7 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers["Content-Security-Policy"], LANDING_CSP)
         self.assertIn(b"Nest.APStudy", response.data)
-        self.assertIn(b"Log in", response.data)
+        self.assertIn(b"Start free", response.data)
         self.assertNotIn(b"Open Nest", response.data)
         self.assertIn(b"/apple-touch-icon.png", response.data)
         self.assertIn(b"feature-panel--dashboard", response.data)
@@ -80,7 +80,7 @@ class LoginCspTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertNotIn("Location", response.headers)
-        self.assertIn(b"Your Academic Command Center", response.data)
+        self.assertIn(b"Your semester", response.data)
         self.assertIn(b"Open Nest", response.data)
         self.assertNotIn(b"Log in", response.data)
 

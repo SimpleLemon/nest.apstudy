@@ -945,7 +945,7 @@ test("login template uses server-started Appwrite OAuth links", async () => {
     assert.doesNotMatch(source, /js\/appwrite\.js/);
 });
 
-test("landing page keeps local assets, tabs, consent-gated analytics, and reduced-motion handling", async () => {
+test("landing page keeps product proof visible and wires the new signup journey accessibly", async () => {
     const template = await sourceFor("templates/landing.html");
     const source = await sourceFor("static/js/landing.js");
     const styles = await sourceFor("static/css/landing.css");
@@ -955,10 +955,20 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(template, /js\/landing\.js/);
     assert.match(template, /images\/landing\/nest-interface-hero\.png/);
     assert.match(template, /apple-touch-icon\.png/);
-    assert.match(template, /landing_nav_cta_label = 'Open Nest' if landing_is_authenticated else 'Log in'/);
-    assert.match(template, /landing_hero_cta_label = 'Go to dashboard' if landing_is_authenticated else 'Start planning'/);
-    assert.match(template, /landing_final_cta_label = 'Continue in Nest' if landing_is_authenticated else 'Create my workspace'/);
-    assert.match(template, /class="workflow-sequence"/);
+    assert.match(template, /landing_nav_cta_label = 'Open Nest' if landing_is_authenticated else 'Start free'/);
+    assert.match(template, /landing_hero_cta_label = 'Go to dashboard' if landing_is_authenticated else 'Start free'/);
+    assert.match(template, /landing_final_cta_label = 'Continue in Nest' if landing_is_authenticated else 'Start free'/);
+    assert.match(template, /Your semester,/);
+    assert.match(template, /data-landing-rotator/);
+    assert.match(template, /data-landing-marquee/);
+    assert.match(template, /Students from these universities use Nest/);
+    assert.match(template, /Texas A&amp;M/);
+    assert.match(template, /UCLA/);
+    assert.match(template, /UC Berkeley/);
+    assert.match(template, /University of Arizona/);
+    assert.match(template, /Emory University/);
+    assert.equal((template.match(/class="university-mark /g) || []).length, 10);
+    assert.doesNotMatch(template, /not endorsed or sponsored by these institutions/);
     assert.match(template, /feature-panel--dashboard/);
     assert.match(template, /feature-panel--calendar/);
     assert.match(template, /feature-panel--tasks/);
@@ -972,11 +982,16 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(template, /landing-app-demo-tasks/);
     assert.match(template, /landing-app-demo-workspace/);
     assert.match(template, /course-planner-demo/);
-    assert.match(template, /A school day, in sequence/);
-    assert.match(template, /A closer look at Nest/);
-    assert.match(template, /Build the schedule before the semester builds it for you/);
-    assert.match(template, /Keep the work and the conversation together/);
-    assert.match(template, /Bring next week into focus/);
+    assert.match(template, /See your week\. Then get to work\./);
+    assert.match(template, /At Emory, course planning goes deeper\./);
+    assert.match(template, /Good to know before you start\./);
+    assert.match(template, /Ready for a better week\?/);
+    assert.doesNotMatch(template, /class="course-metadata"/);
+    assert.match(template, /data-landing-faq/);
+    assert.equal((template.match(/data-landing-faq-trigger/g) || []).length, 6);
+    assert.equal((template.match(/data-landing-faq-panel/g) || []).length, 6);
+    assert.match(template, /id="faq-trigger-1" aria-expanded="true"/);
+    assert.match(template, /id="faq-trigger-2" aria-expanded="false"/);
     assert.match(template, /Finish BIOL 141 lab draft/);
     assert.match(template, /School/);
     assert.match(template, /Completed/);
@@ -989,6 +1004,12 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(template, /Explore calendar/);
     assert.match(template, /Organize tasks/);
     assert.match(template, /Open workspace/);
+    assert.match(template, /data-landing-cta="nav"/);
+    assert.match(template, /data-landing-cta="hero"/);
+    assert.match(template, /data-landing-cta="final"/);
+    assert.doesNotMatch(template, /data-reveal/);
+    assert.doesNotMatch(template, /workflow-sequence/);
+    assert.doesNotMatch(template, /landing-connection-band/);
     assert.doesNotMatch(template, /landing-nav-login/);
     assert.doesNotMatch(template, /demo-navbar/);
     assert.doesNotMatch(template, /demo-sidebar/);
@@ -1003,10 +1024,21 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(demoStyles, /\.course-planner-demo/);
     assert.match(styles, /@media \(max-width: 980px\)/);
     assert.match(styles, /@media \(max-width: 760px\)/);
-    assert.doesNotMatch(styles, /\.landing-final-cta\s*\{[^}]*var\(--color-inverse-surface\)/);
-    assert.doesNotMatch(source, /window\.gtag|dataLayer|GA_ID/);
+    assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+    assert.match(styles, /html\[data-theme="nest-dark"\]/);
+    assert.match(styles, /--landing-page-bg: #f7f6f3/);
+    assert.match(styles, /--color-surface-container-low: #f7f6f3/);
+    assert.match(styles, /\.landing-marquee-track\[aria-hidden="true"\]/);
+    assert.doesNotMatch(styles, /landing-reveal-ready/);
+    assert.match(source, /typeof window\.gtag !== "function"/);
+    assert.match(source, /"landing_cta_click"/);
     assert.match(source, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
-    assert.match(source, /IntersectionObserver/);
+    assert.doesNotMatch(source, /IntersectionObserver/);
+    assert.match(source, /querySelector\("\[data-landing-rotator\]"\)/);
+    assert.match(source, /}, 2000\)/);
+    assert.match(source, /querySelector\("\[data-landing-faq\]"\)/);
+    assert.match(source, /data-landing-faq-trigger/);
+    assert.match(source, /event\.key === "ArrowDown"/);
     assert.match(source, /querySelector\("\[data-landing-tabs\]"\)/);
     assert.match(source, /data-landing-tab/);
     assert.match(source, /aria-selected/);
@@ -1017,6 +1049,33 @@ test("landing page keeps local assets, tabs, consent-gated analytics, and reduce
     assert.match(source, /querySelector\("\[data-dashboard-week-grid\]"\)/);
     assert.match(source, /Week of \$\{monthDay\(weekStart\)\} - \$\{monthDay\(weekEnd\)\}/);
     assert.match(source, /showcaseEvents\.map/);
+});
+
+test("onboarding presents five accessible stages without changing its saved step contract", async () => {
+    const template = await sourceFor("templates/onboarding.html");
+    const styles = await sourceFor("static/css/onboarding.css");
+
+    assert.match(template, /css\/onboarding\.css/);
+    assert.match(template, /data-onboarding-stepper/);
+    for (const stage of [1, 2, 3, 4, 5]) {
+        assert.match(template, new RegExp(`data-onboarding-stage="${stage}"`));
+        assert.match(template, new RegExp(`data-step="${stage}"`));
+    }
+    assert.match(template, /aria-current="step"/);
+    assert.match(template, /Step \{\{ step if step else 1 \}\} of 5/);
+    assert.match(template, /role="alert" aria-live="assertive" tabindex="-1"/);
+    assert.match(template, /const percent = Math\.round\(\(safeStep \/ 5\) \* 100\)/);
+    assert.match(template, /setProperty\('--onboarding-progress', String\(percent \/ 100\)\)/);
+    assert.match(template, /stepLabel\.textContent = `Step \$\{safeStep\} of 5`/);
+    assert.match(template, /activeHeading\.focus/);
+    assert.match(template, /wizardStatus\.focus/);
+    assert.match(template, /saveStep\(1,/);
+    assert.match(template, /saveStep\(2,/);
+    assert.match(template, /saveStep\(3,/);
+    assert.match(template, /saveStep\(4\)/);
+    assert.match(styles, /grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
+    assert.match(styles, /@media \(max-width: 680px\)/);
+    assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
 test("navbar keeps avatar sizing, command palette shortcut, and logout/account flows", async () => {

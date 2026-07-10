@@ -21,30 +21,51 @@
     {% include "_font_assets.html" %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/onboarding.css') }}">
 </head>
-<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
+<body class="onboarding-page bg-surface text-on-surface font-body min-h-screen flex flex-col" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav hidden" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}"></global>
-    <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-16">
-        <div class="max-w-4xl mx-auto w-full">
-            <section class="bg-surface-container/95 border border-outline-variant/20 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--color-primary)_14%,transparent),transparent_32%),radial-gradient(circle_at_bottom_left,color-mix(in_srgb,var(--color-tertiary)_8%,transparent),transparent_28%)] pointer-events-none"></div>
-                <div class="relative z-10 flex flex-col gap-6">
-                    <!-- Progress indicator -->
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-on-surface-variant">
-                            <span id="step-label">Step {{ step if step else 1 }}</span>
+    <main class="onboarding-main">
+        <div class="onboarding-wrap">
+            <section class="onboarding-shell" aria-labelledby="onboarding-page-title">
+                <div class="onboarding-content">
+                    <div class="onboarding-progress" aria-label="Onboarding progress">
+                        <div class="onboarding-progress-mobile">
+                            <span id="step-label">Step {{ step if step else 1 }} of 5</span>
+                            <div class="onboarding-progress-bar" aria-hidden="true">
+                                <div id="progress-bar" style="--onboarding-progress: 0.2;"></div>
+                            </div>
                         </div>
-                        <div class="h-2 rounded-full bg-surface-container-low overflow-hidden border border-outline-variant/10">
-                            <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-primary to-tertiary transition-all duration-300" style="width: 25%;"></div>
-                        </div>
+                        <ol class="onboarding-stepper" data-onboarding-stepper>
+                            <li data-onboarding-stage="1" aria-current="step">
+                                <span class="onboarding-step-icon"><span class="material-symbols-outlined" aria-hidden="true">person</span></span>
+                                <span class="onboarding-step-copy"><strong>Account</strong><small>Your Nest identity</small></span>
+                            </li>
+                            <li data-onboarding-stage="2">
+                                <span class="onboarding-step-icon"><span class="material-symbols-outlined" aria-hidden="true">school</span></span>
+                                <span class="onboarding-step-copy"><strong>Education</strong><small>Student profile</small></span>
+                            </li>
+                            <li data-onboarding-stage="3">
+                                <span class="onboarding-step-icon"><span class="material-symbols-outlined" aria-hidden="true">menu_book</span></span>
+                                <span class="onboarding-step-copy"><strong>Courses</strong><small>Optional at Emory</small></span>
+                            </li>
+                            <li data-onboarding-stage="4">
+                                <span class="onboarding-step-icon"><span class="material-symbols-outlined" aria-hidden="true">tune</span></span>
+                                <span class="onboarding-step-copy"><strong>Preferences</strong><small>Theme and calendar</small></span>
+                            </li>
+                            <li data-onboarding-stage="5">
+                                <span class="onboarding-step-icon"><span class="material-symbols-outlined" aria-hidden="true">check_circle</span></span>
+                                <span class="onboarding-step-copy"><strong>Review</strong><small>Ready to launch</small></span>
+                            </li>
+                        </ol>
                     </div>
                     <!-- Welcome header -->
-                    <div id="onboarding-welcome-header">
-                        <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">Onboarding</p>
-                        <h1 class="mt-2 text-3xl sm:text-4xl font-headline font-bold">Welcome, {{ first_name }}!</h1>
+                    <div id="onboarding-welcome-header" class="onboarding-welcome">
+                        <p>Set up Nest</p>
+                        <h1 id="onboarding-page-title">Welcome, {{ first_name }}!</h1>
                         <p class="mt-2 text-sm sm:text-base text-on-surface-variant max-w-2xl">Complete a quick setup so Nest.APStudy can personalize your experience and send you straight to the dashboard next time.</p>
                     </div>
-                    <div id="wizard-status" class="hidden rounded-2xl border border-error/25 bg-error-container/15 p-4 text-sm text-error"></div>
+                    <div id="wizard-status" class="hidden onboarding-status" role="alert" aria-live="assertive" tabindex="-1"></div>
                     <form id="onboarding-form" class="space-y-6">
                         <input type="hidden" id="active-step" value="{{ step if step else 1 }}" />
                         <input type="hidden" id="default-term" value="{{ default_term }}" />
@@ -396,6 +417,7 @@
         const form = document.getElementById('onboarding-form');
         const progressBar = document.getElementById('progress-bar');
         const stepLabel = document.getElementById('step-label');
+        const stepperStages = Array.from(document.querySelectorAll('[data-onboarding-stage]'));
         const welcomeHeader = document.getElementById('onboarding-welcome-header');
         const wizardStatus = document.getElementById('wizard-status');
         const displayNameInput = document.getElementById('onboarding-display-name');
@@ -437,10 +459,12 @@
         const confirmStepNumber = document.getElementById('confirm-step-number');
         const educationLevelGroup = document.getElementById('education-level-group');
         const emoryStudentGroup = document.getElementById('emory-student-group');
+        let onboardingInitialized = false;
         const formField = () => window.APStudyFormField;
         function showError(message) {
             wizardStatus.textContent = message;
             wizardStatus.classList.remove('hidden');
+            wizardStatus.focus({ preventScroll: true });
         }
         function clearError() {
             wizardStatus.classList.add('hidden');
@@ -847,10 +871,21 @@
         function updateProgress(step) {
             const flow = getVisibleFlow();
             const safeStep = flow.includes(step) ? step : flow[flow.length - 1];
-            const visibleIndex = Math.max(0, flow.indexOf(safeStep));
-            const percent = Math.round(((visibleIndex + 1) / flow.length) * 100);
-            progressBar.style.width = `${percent}%`;
-            stepLabel.textContent = `Step ${visibleIndex + 1} of ${flow.length}`;
+            const percent = Math.round((safeStep / 5) * 100);
+            progressBar.style.setProperty('--onboarding-progress', String(percent / 100));
+            stepLabel.textContent = `Step ${safeStep} of 5`;
+            stepperStages.forEach((stage) => {
+                const stageNumber = Number(stage.dataset.onboardingStage);
+                const skipped = stageNumber === 3 && !flow.includes(3);
+                const current = stageNumber === safeStep;
+                let state = 'upcoming';
+                if (skipped) state = 'skipped';
+                else if (stageNumber < safeStep) state = 'completed';
+                else if (current) state = 'current';
+                stage.dataset.state = state;
+                if (current) stage.setAttribute('aria-current', 'step');
+                else stage.removeAttribute('aria-current');
+            });
             updateStepLabels(flow);
         }
         function setStep(step) {
@@ -877,6 +912,11 @@
             updateProgress(safeStep);
             if (safeStep === 5) {
                 renderReview();
+            }
+            const activeHeading = steps.find((panel) => Number(panel.dataset.step) === safeStep)?.querySelector('h2');
+            if (activeHeading) {
+                activeHeading.tabIndex = -1;
+                if (onboardingInitialized) activeHeading.focus({ preventScroll: false });
             }
         }
         function validateClassYear() {
@@ -1463,6 +1503,7 @@
             updateAddCourseButtonState();
             loadTerms();
             setStep(onboardingState.step);
+            onboardingInitialized = true;
             clearDirty();
         }
         initializeOnboarding();

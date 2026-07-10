@@ -4,8 +4,8 @@
     --landing-max-width: 1180px;
     --landing-radius: 8px;
     --landing-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
-    --landing-spring: cubic-bezier(0.2, 0.9, 0.22, 1.18);
-    --landing-spring-soft: cubic-bezier(0.16, 1, 0.3, 1);
+    --landing-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --landing-ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
     --landing-motion-fast: 180ms;
     --landing-motion-medium: 360ms;
 }
@@ -49,7 +49,7 @@ body.landing-page a {
     font-weight: 700;
     padding: 10px 14px;
     text-decoration: none;
-    transition: transform var(--landing-motion-fast) var(--landing-spring-soft);
+    transition: transform var(--landing-motion-fast) var(--landing-ease-out-soft);
 }
 
 .landing-skip-link:focus {
@@ -131,7 +131,7 @@ body.landing-page a {
     height: 44px;
     justify-content: center;
     width: 44px;
-    transition: background-color var(--landing-motion-fast) ease, border-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-fast) ease;
+    transition: background-color var(--landing-motion-fast) ease, border-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-ease-out), box-shadow var(--landing-motion-fast) ease;
 }
 
 .landing-nav-toggle:hover,
@@ -166,7 +166,7 @@ body.landing-page a {
     font-weight: 700;
     min-height: 44px;
     padding: 0 14px;
-    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-fast) ease;
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-ease-out), box-shadow var(--landing-motion-fast) ease;
 }
 
 .landing-nav-menu a:hover,
@@ -320,7 +320,7 @@ body.landing-page a {
     stroke-dashoffset: 1;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: stroke-dashoffset 920ms var(--landing-spring-soft);
+    transition: stroke-dashoffset 920ms var(--landing-ease-out-soft);
 }
 
 .landing-sketch.is-drawn path {
@@ -365,7 +365,7 @@ body.landing-page a {
     min-height: 48px;
     padding: 0 18px;
     text-decoration: none;
-    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-medium) var(--landing-spring-soft);
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-ease-out), box-shadow var(--landing-motion-medium) var(--landing-ease-out-soft);
 }
 
 .landing-primary-action {
@@ -486,7 +486,7 @@ body.landing-page a {
     border-radius: var(--landing-radius);
     min-height: 230px;
     padding: 22px;
-    transition: border-color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring), box-shadow var(--landing-motion-medium) var(--landing-spring-soft);
+    transition: border-color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-ease-out), box-shadow var(--landing-motion-medium) var(--landing-ease-out-soft);
 }
 
 .workflow-step:hover,
@@ -555,7 +555,7 @@ body.landing-page a {
     justify-content: center;
     min-height: 48px;
     padding: 0 12px;
-    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, box-shadow var(--landing-motion-medium) var(--landing-spring-soft), transform var(--landing-motion-medium) var(--landing-spring);
+    transition: background-color var(--landing-motion-fast) ease, color var(--landing-motion-fast) ease, box-shadow var(--landing-motion-medium) var(--landing-ease-out-soft), transform var(--landing-motion-medium) var(--landing-ease-out);
 }
 
 .feature-tab:hover {
@@ -600,7 +600,7 @@ body.landing-page a {
 }
 
 .feature-panel.is-active {
-    animation: landingPanelIn 360ms var(--landing-spring-soft) both;
+    animation: landingPanelIn 360ms var(--landing-ease-out-soft) both;
 }
 
 .feature-copy {
@@ -621,7 +621,7 @@ body.landing-page a {
     margin-top: 12px;
     min-height: 44px;
     text-decoration: none;
-    transition: color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-spring);
+    transition: color var(--landing-motion-fast) ease, transform var(--landing-motion-medium) var(--landing-ease-out);
 }
 
 .feature-copy a:hover,
@@ -1752,7 +1752,7 @@ body.landing-page a {
     background: var(--color-surface-container-low);
     border: 1px solid var(--demo-border);
     border-radius: var(--radius-control);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -1785,10 +1785,10 @@ body.landing-page a {
     color: var(--color-primary);
     display: inline-flex;
     flex: 0 0 auto;
-    font-size: 16px;
-    height: 26px;
+    font-size: 13px;
+    height: 20px;
     justify-content: center;
-    width: 26px;
+    width: 20px;
 }
 
 .demo-dashboard-list {
@@ -3041,7 +3041,7 @@ body.landing-page a {
     }
 }
 
-@keyframes landingMenuSpring {
+@keyframes landingMenuIn {
     0% {
         opacity: 0;
         transform: translateY(-8px) scale(0.985);
@@ -3113,7 +3113,7 @@ body.landing-page a {
     }
 
     .landing-nav-menu.is-open {
-        animation: landingMenuSpring 260ms var(--landing-spring-soft) both;
+        animation: landingMenuIn 260ms var(--landing-ease-out-soft) both;
         display: flex;
     }
 

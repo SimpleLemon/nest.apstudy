@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Nest.APStudy brings your academic calendar, tasks, courses, notes, files, and chat into one command center." />
-    <title>Nest.APStudy - Academic Command Center</title>
+    <meta name="description" content="Bring your college calendar, tasks, courses, notes, files, and chat into one focused workspace with Nest.APStudy." />
+    <title>Nest.APStudy - Your Semester, in One Place</title>
     <script>
         (function () {
             var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,11 +25,11 @@
     <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Nest.APStudy">
-    <meta property="og:description" content="Your academic command center for calendars, tasks, courses, notes, files, and chat.">
+    <meta property="og:description" content="Your semester, in one place. Plan the week and keep college work connected with Nest.APStudy.">
     <meta property="og:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nest.APStudy">
-    <meta name="twitter:description" content="Your academic command center for calendars, tasks, courses, notes, files, and chat.">
+    <meta name="twitter:description" content="Your semester, in one place. Plan the week and keep college work connected with Nest.APStudy.">
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
@@ -38,9 +38,10 @@
 <body class="landing-page" data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L">
     {% set landing_is_authenticated = landing_user_authenticated if landing_user_authenticated is defined else current_user.is_authenticated %}
     {% set landing_cta_href = '/dashboard' if landing_is_authenticated else url_for('auth.login') %}
-    {% set landing_nav_cta_label = 'Open Nest' if landing_is_authenticated else 'Log in' %}
-    {% set landing_hero_cta_label = 'Go to dashboard' if landing_is_authenticated else 'Start planning' %}
-    {% set landing_final_cta_label = 'Continue in Nest' if landing_is_authenticated else 'Create my workspace' %}
+    {% set landing_nav_cta_label = 'Open Nest' if landing_is_authenticated else 'Start free' %}
+    {% set landing_hero_cta_label = 'Go to dashboard' if landing_is_authenticated else 'Start free' %}
+    {% set landing_final_cta_label = 'Continue in Nest' if landing_is_authenticated else 'Start free' %}
+    {% set landing_cta_destination = 'dashboard' if landing_is_authenticated else 'login' %}
 
     <header class="landing-nav" data-landing-nav>
         <a class="landing-brand" href="/" aria-label="Nest.APStudy home">
@@ -49,53 +50,70 @@
         </a>
         <button class="landing-nav-toggle" type="button" aria-label="Open navigation" aria-controls="landing-nav-menu" aria-expanded="false" data-landing-nav-toggle><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
         <nav id="landing-nav-menu" class="landing-nav-menu" aria-label="Landing navigation" data-landing-nav-menu>
-            <span class="landing-nav-links"><a href="#workflow">Workflow</a><a href="#features">Features</a><a href="#courses">Courses</a><a href="#security">Trust</a></span>
-            <a class="landing-nav-cta" href="{{ landing_cta_href }}">{{ landing_nav_cta_label }}</a>
+            <span class="landing-nav-links"><a href="#features">Features</a><a href="#courses">Emory courses</a><a href="#faq">FAQ</a></span>
+            <a class="landing-nav-cta" href="{{ landing_cta_href }}" data-landing-cta="nav" data-landing-destination="{{ landing_cta_destination }}">{{ landing_nav_cta_label }}</a>
         </nav>
     </header>
 
     <main id="main-content">
         <section class="landing-hero" aria-labelledby="landing-title">
-            <img class="landing-hero-image" src="{{ url_for('static', filename='images/landing/nest-interface-hero.png') }}" alt="Nest.APStudy interface preview with calendar, tasks, courses, notes, files, and chat panels" width="1672" height="941" fetchpriority="high">
+            <img class="landing-hero-image" src="{{ url_for('static', filename='images/landing/nest-interface-hero.png') }}" alt="Nest.APStudy interface preview with calendar, tasks, courses, notes, files, and chat panels" width="1800" height="1013" fetchpriority="high">
             <div class="landing-hero-scrim" aria-hidden="true"></div>
-            <div class="landing-hero-content" data-reveal>
-                <p class="landing-eyebrow">Your Academic Command Center</p>
-                <h1 id="landing-title">Nest.APStudy</h1>
-                <p class="landing-hero-copy">Plan the week, track the work, and keep course context close without scattering your school day across a dozen tabs.</p>
+            <div class="landing-hero-content">
+                <h1 id="landing-title">Your semester,<br>in one place.</h1>
+                <p class="landing-hero-copy">See your week clearly, keep classwork together, and know what to do next.</p>
+                <div class="landing-outcomes" data-landing-rotator tabindex="0" aria-label="Use Nest to plan the week, compare courses, capture notes, and finish the work.">
+                    <span class="landing-outcomes-prefix" aria-hidden="true">Use Nest to</span>
+                    <span class="landing-outcomes-window" aria-hidden="true">
+                        <span class="landing-outcomes-track" data-landing-rotator-track>
+                            <span>plan the week.</span>
+                            <span>compare courses.</span>
+                            <span>capture notes.</span>
+                            <span>finish the work.</span>
+                        </span>
+                    </span>
+                </div>
                 <div class="landing-hero-actions">
-                    <a class="landing-primary-action" href="{{ landing_cta_href }}"><span>{{ landing_hero_cta_label }}</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
-                    <a class="landing-secondary-action" href="#features">Explore features</a>
+                    <a class="landing-primary-action" href="{{ landing_cta_href }}" data-landing-cta="hero" data-landing-destination="{{ landing_cta_destination }}"><span>{{ landing_hero_cta_label }}</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+                    <a class="landing-secondary-action" href="#features">See Nest in action <span class="material-symbols-outlined" aria-hidden="true">south</span></a>
                 </div>
             </div>
-            <p class="landing-hero-proof" aria-label="Calendar, tasks, notes, and files in one workspace"><span>Calendar</span><span>Tasks</span><span>Notes</span><span>Files</span></p>
         </section>
 
-        <section id="workflow" class="landing-section landing-section--standard landing-workflow" aria-labelledby="workflow-title">
-            <header class="landing-heading landing-heading--left" data-reveal>
-                <p class="landing-eyebrow">The daily loop</p>
-                <h2 id="workflow-title">A school day, in sequence</h2>
-                <p>Start with what matters now, make room for what comes next, and keep the work attached to the plan.</p>
-            </header>
-            <ol class="workflow-sequence" aria-label="Nest workflow">
-                <li data-reveal><span>01</span><div><strong>Dashboard</strong><p>See the day before it starts competing for attention.</p></div></li>
-                <li data-reveal><span>02</span><div><strong>Schedule</strong><p>Turn due dates and commitments into time you can actually see.</p></div></li>
-                <li data-reveal><span>03</span><div><strong>Courses</strong><p>Compare sections and shape the semester before registration.</p></div></li>
-                <li data-reveal><span>04</span><div><strong>Workspace</strong><p>Keep notes, files, and conversations beside the work they support.</p></div></li>
-            </ol>
+        <section class="landing-universities" aria-labelledby="universities-title" data-landing-marquee>
+            <div class="landing-universities-intro">
+                <h2 id="universities-title">Students from these universities use Nest</h2>
+            </div>
+            <div class="landing-marquee" tabindex="0" aria-label="Student universities">
+                <ul class="landing-marquee-track" data-landing-marquee-track>
+                    <li><span class="university-mark university-mark--tamu" aria-hidden="true">A&amp;M</span><span>Texas A&amp;M</span></li>
+                    <li><span class="university-mark university-mark--ucla" aria-hidden="true">UCLA</span><span>UCLA</span></li>
+                    <li><span class="university-mark university-mark--berkeley" aria-hidden="true">Cal</span><span>UC Berkeley</span></li>
+                    <li><span class="university-mark university-mark--arizona" aria-hidden="true">A</span><span>University of Arizona</span></li>
+                    <li><span class="university-mark university-mark--emory" aria-hidden="true">E</span><span>Emory University</span></li>
+                </ul>
+                <ul class="landing-marquee-track" aria-hidden="true">
+                    <li><span class="university-mark university-mark--tamu">A&amp;M</span><span>Texas A&amp;M</span></li>
+                    <li><span class="university-mark university-mark--ucla">UCLA</span><span>UCLA</span></li>
+                    <li><span class="university-mark university-mark--berkeley">Cal</span><span>UC Berkeley</span></li>
+                    <li><span class="university-mark university-mark--arizona">A</span><span>University of Arizona</span></li>
+                    <li><span class="university-mark university-mark--emory">E</span><span>Emory University</span></li>
+                </ul>
+            </div>
         </section>
 
         <section id="features" class="landing-showcase-band" aria-labelledby="showcase-title">
             <div class="landing-showcase-inner ui-section ui-section--wide">
-                <header class="landing-heading landing-heading--center" data-reveal><p class="landing-eyebrow">Inside the workspace</p><h2 id="showcase-title">A closer look at Nest</h2><p>Each view is designed around a different decision, not poured into the same card template.</p></header>
-                <div class="feature-tabs" role="tablist" aria-label="Nest feature showcase" data-landing-tabs data-reveal>
+                <header class="landing-heading landing-heading--left"><h2 id="showcase-title">See your week. Then get to work.</h2><p>Switch between the dashboard, calendar, tasks, and workspace below. Everything stays connected.</p></header>
+                <div class="feature-tabs" role="tablist" aria-label="Nest feature showcase" data-landing-tabs>
                     <button id="tab-command" class="feature-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-command" data-landing-tab="command"><span class="material-symbols-outlined" aria-hidden="true">grid_view</span>Dashboard</button>
                     <button id="tab-calendar" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-calendar" data-landing-tab="calendar" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>Calendar</button>
                     <button id="tab-tasks" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-tasks" data-landing-tab="tasks" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">checklist</span>Tasks</button>
                     <button id="tab-workspace" class="feature-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-workspace" data-landing-tab="workspace" tabindex="-1"><span class="material-symbols-outlined" aria-hidden="true">folder_open</span>Workspace</button>
                 </div>
-                <div class="feature-panels" data-reveal>
+                <div class="feature-panels">
                     <article id="panel-command" class="feature-panel feature-panel--dashboard is-active" role="tabpanel" aria-labelledby="tab-command" data-landing-panel="command">
-                        <div class="feature-copy"><p class="landing-eyebrow">Start here</p><h3>The day, weighted by what needs attention.</h3><p>Calendar, tasks, and course context share one overview while the most urgent work stays visually dominant.</p><a href="/dashboard">View dashboard <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
+                        <div class="feature-copy"><p class="feature-label">Dashboard</p><h3>Start with what needs your attention.</h3><p>See today's classes, deadlines, files, and course context in one useful overview.</p><a href="/dashboard">View dashboard <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
                         <div class="product-mockup landing-app-demo landing-app-demo-dashboard" aria-hidden="true">
                         <div class="demo-dashboard-tiles">
                             <article class="demo-dashboard-card">
@@ -180,7 +198,7 @@
                     </div>
                     </article>
                     <article id="panel-calendar" class="feature-panel feature-panel--calendar" role="tabpanel" aria-labelledby="tab-calendar" data-landing-panel="calendar" hidden>
-                        <div class="feature-copy"><p class="landing-eyebrow">Make time visible</p><h3>A calendar that reads like the week you will live.</h3><p>Classes, focused work, and personal commitments keep their place without turning the view into a wall of labels.</p><a href="/calendar">Explore calendar <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
+                        <div class="feature-copy"><p class="feature-label">Calendar</p><h3>See the week before it gets away from you.</h3><p>Classes, focused work, and personal commitments keep their place without becoming a wall of labels.</p><a href="/calendar">Explore calendar <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
                         <div class="product-mockup landing-app-demo landing-app-demo-calendar" aria-hidden="true">
                         <header class="demo-page-head demo-calendar-head">
                             <div><h4 data-landing-calendar-title>Week of Jun 7 - Jun 13</h4><p>Weekly view with course and personal calendars</p></div>
@@ -224,7 +242,7 @@
                     </div>
                     </article>
                     <article id="panel-tasks" class="feature-panel feature-panel--tasks" role="tabpanel" aria-labelledby="tab-tasks" data-landing-panel="tasks" hidden>
-                        <div class="feature-copy"><p class="landing-eyebrow">Choose the next move</p><h3>Tasks organized by consequence, not decoration.</h3><p>Deadlines and lists provide structure while completed work stays present without competing for attention.</p><a href="/tasks">Organize tasks <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
+                        <div class="feature-copy"><p class="feature-label">Tasks</p><h3>Turn every deadline into a clear next action.</h3><p>Priorities and lists keep the work moving while completed tasks stay out of your way.</p><a href="/tasks">Organize tasks <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
                         <div class="product-mockup landing-app-demo landing-app-demo-tasks" aria-hidden="true">
                         <div class="demo-task-app">
                             <aside class="demo-task-rail">
@@ -282,7 +300,7 @@
                     </div>
                     </article>
                     <article id="panel-workspace" class="feature-panel feature-panel--workspace" role="tabpanel" aria-labelledby="tab-workspace" data-landing-panel="workspace" hidden>
-                        <div class="feature-copy"><p class="landing-eyebrow">Context stays close</p><h3>The work and the conversation share an address.</h3><p>Notes lead the composition; files and chat support them without becoming another grid of identical cards.</p><a href="/notes">Open workspace <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
+                        <div class="feature-copy"><p class="feature-label">Workspace</p><h3>Keep class materials beside the work they support.</h3><p>Notes, files, and conversations stay close, so finding a reference never becomes a separate project.</p><a href="/notes">Open workspace <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></div>
                         <div class="product-mockup landing-app-demo landing-app-demo-workspace" aria-hidden="true">
                         <section class="demo-workspace-grid">
                             <article class="demo-notes-surface">
@@ -311,8 +329,8 @@
         </section>
 
         <section id="courses" class="landing-section landing-section--wide landing-courses" aria-labelledby="courses-title">
-            <div class="landing-split-copy" data-reveal><p class="landing-eyebrow">Emory</p><h2 id="courses-title">Build the schedule before the semester builds it for you</h2><p>Search by title, professor, term, day, or time. Then compare the sections that matter without losing the shape of your week.</p><dl class="course-metadata"><div><dt>Course</dt><dd>BIOL 141</dd></div><div><dt>Credits</dt><dd>3</dd></div><div><dt>Sections</dt><dd>7</dd></div></dl></div>
-            <div class="course-visual course-planner-demo" data-reveal aria-hidden="true">
+            <div class="landing-split-copy"><p class="landing-section-context">Emory course explorer</p><h2 id="courses-title">At Emory, course planning goes deeper.</h2><p>Nest's core workspace is built for college students everywhere. Emory students can also search local course data, compare sections, and understand the shape of a semester before registration.</p></div>
+            <div class="course-visual course-planner-demo" aria-hidden="true">
                 <section class="course-detail-hero">
                     <span class="course-detail-kicker">Fall 2026 - BIOL 141</span>
                     <h3>Foundations of Modern Biol I</h3>
@@ -337,14 +355,88 @@
             </div>
         </section>
 
-        <section id="security" class="landing-connection-band" aria-labelledby="capabilities-title">
-            <div class="landing-connection ui-section ui-section--standard">
-                <article class="connection-primary" data-reveal><p class="landing-eyebrow">One working context</p><h2 id="capabilities-title">Keep the work and the conversation together</h2><p>Write the note, attach the file, and pick up the discussion without rebuilding the course context in another tab.</p><div class="connection-links"><a href="/notes">Notes</a><a href="/files">Files</a></div></article>
-                <aside class="connection-support" data-reveal><section><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span><div><strong>Chat with context</strong><p>Community channels and direct messages stay one step away.</p></div></section><section><span class="material-symbols-outlined" aria-hidden="true">lock</span><div><strong>Share deliberately</strong><p>Authenticated access and controlled links protect the work.</p></div></section></aside>
+        <section id="faq" class="landing-faq landing-section landing-section--standard" aria-labelledby="faq-title">
+            <div class="landing-faq-heading">
+                <h2 id="faq-title">Good to know before you start.</h2>
+                <p>Clear answers about who Nest is for, what it connects, and how to begin.</p>
+            </div>
+            <div class="landing-faq-list" data-landing-faq>
+                <article class="landing-faq-item is-open">
+                    <h3>
+                        <button type="button" id="faq-trigger-1" aria-expanded="true" aria-controls="faq-panel-1" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">01</span>
+                            <span>Is Nest.APStudy free?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1" data-landing-faq-panel>
+                        <div><p>Yes. Nest is free to use. You can create a workspace through the existing Google, GitHub, or Discord sign-in options.</p></div>
+                    </div>
+                </article>
+                <article class="landing-faq-item">
+                    <h3>
+                        <button type="button" id="faq-trigger-2" aria-expanded="false" aria-controls="faq-panel-2" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">02</span>
+                            <span>Who can use Nest?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2" data-landing-faq-panel hidden>
+                        <div><p>Nest is built for college students at any university. The calendar, tasks, notes, files, and chat workspace is not limited to Emory students or tied to a university partnership.</p></div>
+                    </div>
+                </article>
+                <article class="landing-faq-item">
+                    <h3>
+                        <button type="button" id="faq-trigger-3" aria-expanded="false" aria-controls="faq-panel-3" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">03</span>
+                            <span>What is different for Emory students?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3" data-landing-faq-panel hidden>
+                        <div><p>Emory students receive access to local course-planning data, including course search and representative section details. The rest of the Nest workspace is available to students at other colleges.</p></div>
+                    </div>
+                </article>
+                <article class="landing-faq-item">
+                    <h3>
+                        <button type="button" id="faq-trigger-4" aria-expanded="false" aria-controls="faq-panel-4" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">04</span>
+                            <span>How do I create an account?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4" data-landing-faq-panel hidden>
+                        <div><p>Choose “Start free,” continue with Google, GitHub, or Discord, and complete the short onboarding flow. Your first sign-in creates your Nest workspace.</p></div>
+                    </div>
+                </article>
+                <article class="landing-faq-item">
+                    <h3>
+                        <button type="button" id="faq-trigger-5" aria-expanded="false" aria-controls="faq-panel-5" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">05</span>
+                            <span>What data does Nest store and how is it protected?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5" data-landing-faq-panel hidden>
+                        <div><p>Nest stores the account and workspace data needed to provide its features. Authentication and file storage use Appwrite, while other user data is stored in Nest's VPS-hosted databases. See the <a href="/privacy-policy">Privacy Policy</a> for the current details and choices.</p></div>
+                    </div>
+                </article>
+                <article class="landing-faq-item">
+                    <h3>
+                        <button type="button" id="faq-trigger-6" aria-expanded="false" aria-controls="faq-panel-6" data-landing-faq-trigger>
+                            <span class="landing-faq-number" aria-hidden="true">06</span>
+                            <span>Which calendars and integrations work with Nest?</span>
+                            <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
+                        </button>
+                    </h3>
+                    <div id="faq-panel-6" role="region" aria-labelledby="faq-trigger-6" data-landing-faq-panel hidden>
+                        <div><p>You can add a Canvas calendar feed and other compatible HTTP, HTTPS, or webcal iCalendar feed URLs during onboarding or later in Settings.</p></div>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <section class="landing-final-cta" aria-labelledby="final-cta-title" data-reveal><p class="landing-eyebrow">The next week is already coming</p><h2 id="final-cta-title">Bring next week into focus</h2><a class="landing-primary-action" href="{{ landing_cta_href }}"><span>{{ landing_final_cta_label }}</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></section>
+        <section class="landing-final-cta" aria-labelledby="final-cta-title"><div><h2 id="final-cta-title">Ready for a better week?</h2><p>Bring your calendar, courses, tasks, notes, and files into one focused place.</p></div><a class="landing-primary-action" href="{{ landing_cta_href }}" data-landing-cta="final" data-landing-destination="{{ landing_cta_destination }}"><span>{{ landing_final_cta_label }}</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></section>
     </main>
 
     <global class="thefooter landing-footer"></global>

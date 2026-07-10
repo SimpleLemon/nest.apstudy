@@ -12,14 +12,20 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyLandingTheme);
 })();
 (() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.documentElement.classList.add("landing-reveal-ready");
     const nav = document.querySelector("[data-landing-nav]");
     const navToggle = document.querySelector("[data-landing-nav-toggle]");
     const navMenu = document.querySelector("[data-landing-nav-menu]");
     const hero = document.querySelector(".landing-hero");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (navToggle && navMenu) {
+        const closeMenu = ({ restoreFocus = false } = {}) => {
+            navMenu.classList.remove("is-open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "Open navigation");
+            if (restoreFocus) navToggle.focus({ preventScroll: true });
+        };
+
         navToggle.addEventListener("click", () => {
             const open = navMenu.classList.toggle("is-open");
             navToggle.setAttribute("aria-expanded", String(open));
@@ -28,9 +34,13 @@
 
         navMenu.addEventListener("click", (event) => {
             if (!(event.target instanceof HTMLAnchorElement)) return;
-            navMenu.classList.remove("is-open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.setAttribute("aria-label", "Open navigation");
+            closeMenu();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && navMenu.classList.contains("is-open")) {
+                closeMenu({ restoreFocus: true });
+            }
         });
     }
 
@@ -44,31 +54,82 @@
 
     syncNav();
     window.addEventListener("scroll", syncNav, { passive: true });
+})();
 
-    const revealItems = document.querySelectorAll("[data-reveal]");
-    const sketchItems = document.querySelectorAll("[data-sketch]");
-    if (!reducedMotion && "IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-            });
-        }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
-        revealItems.forEach((item) => observer.observe(item));
+(() => {
+    const root = document.querySelector("[data-landing-rotator]");
+    const track = root?.querySelector("[data-landing-rotator-track]");
+    if (!root || !track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        const sketchObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add("is-drawn");
-                sketchObserver.unobserve(entry.target);
+    const outcomes = Array.from(track.children);
+    if (outcomes.length < 2) return;
+
+    let index = 0;
+    let timer = null;
+    const stop = () => {
+        if (timer !== null) window.clearInterval(timer);
+        timer = null;
+    };
+    const start = () => {
+        if (timer !== null || document.hidden) return;
+        timer = window.setInterval(() => {
+            index = (index + 1) % outcomes.length;
+            track.style.setProperty("--landing-rotator-index", String(index));
+        }, 2000);
+    };
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    root.addEventListener("focusin", stop);
+    root.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+    start();
+})();
+
+(() => {
+    const root = document.querySelector("[data-landing-faq]");
+    if (!root) return;
+
+    const triggers = Array.from(root.querySelectorAll("[data-landing-faq-trigger]"));
+    const setOpen = (trigger, open) => {
+        const panelId = trigger.getAttribute("aria-controls");
+        const panel = panelId ? document.getElementById(panelId) : null;
+        const item = trigger.closest(".landing-faq-item");
+        if (!panel || !item) return;
+        trigger.setAttribute("aria-expanded", String(open));
+        panel.hidden = !open;
+        item.classList.toggle("is-open", open);
+    };
+
+    triggers.forEach((trigger, triggerIndex) => {
+        trigger.addEventListener("click", () => {
+            const willOpen = trigger.getAttribute("aria-expanded") !== "true";
+            triggers.forEach((candidate) => setOpen(candidate, candidate === trigger && willOpen));
+        });
+
+        trigger.addEventListener("keydown", (event) => {
+            let nextIndex = triggerIndex;
+            if (event.key === "ArrowDown") nextIndex = (triggerIndex + 1) % triggers.length;
+            else if (event.key === "ArrowUp") nextIndex = (triggerIndex - 1 + triggers.length) % triggers.length;
+            else if (event.key === "Home") nextIndex = 0;
+            else if (event.key === "End") nextIndex = triggers.length - 1;
+            else return;
+            event.preventDefault();
+            triggers[nextIndex].focus({ preventScroll: true });
+        });
+    });
+})();
+
+(() => {
+    document.querySelectorAll("[data-landing-cta]").forEach((link) => {
+        link.addEventListener("click", () => {
+            if (typeof window.gtag !== "function") return;
+            window.gtag("event", "landing_cta_click", {
+                placement: link.dataset.landingCta || "unknown",
+                destination: link.dataset.landingDestination || "unknown",
             });
-        }, { threshold: 0.36, rootMargin: "0px 0px -10% 0px" });
-        sketchItems.forEach((item) => sketchObserver.observe(item));
-    } else {
-        revealItems.forEach((item) => item.classList.add("is-visible"));
-        sketchItems.forEach((item) => item.classList.add("is-drawn"));
-    }
+        });
+    });
 })();
 
 (() => {

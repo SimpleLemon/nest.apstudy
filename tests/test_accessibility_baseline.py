@@ -119,14 +119,39 @@ class AccessibilityBaselineTests(unittest.TestCase):
     def test_landing_has_distinct_ctas_and_accessible_preview_contract(self):
         template = (TEMPLATES / "landing.html").read_text()
         for label in (
-            "Log in", "Open Nest", "Start planning", "Go to dashboard",
+            "Start free", "Open Nest", "Go to dashboard",
             "View dashboard", "Explore calendar", "Organize tasks", "Open workspace",
-            "Create my workspace", "Continue in Nest",
+            "Continue in Nest", "See Nest in action",
         ):
             self.assertIn(label, template)
         self.assertEqual(4, len(re.findall(r'class="product-mockup landing-app-demo [^"]+" aria-hidden="true"', template)))
-        self.assertIn('class="workflow-sequence"', template)
+        self.assertIn('data-landing-rotator', template)
+        self.assertIn('data-landing-marquee', template)
+        self.assertIn('data-landing-faq', template)
+        self.assertIn("prefersDark ? 'nest-dark' : 'parchment-light'", template)
+        self.assertEqual(10, template.count('class="university-mark '))
+        self.assertNotIn('not endorsed or sponsored by these institutions', template)
+        self.assertNotIn('class="course-metadata"', template)
+        self.assertNotIn('class="workflow-sequence"', template)
         self.assertNotIn('class="capability-grid"', template)
+
+    def test_landing_light_and_dark_text_tokens_meet_contrast(self):
+        source = (ROOT / "static/css/landing.css").read_text()
+        root_block = re.search(r":root\s*\{([^}]+)\}", source, re.DOTALL).group(1)
+        dark_block = re.search(r'html\[data-theme="nest-dark"\]\s*\{([^}]+)\}', source, re.DOTALL).group(1)
+        light = dict(re.findall(r"(--[\w-]+):\s*(#[0-9a-fA-F]{6})", root_block))
+        dark = {**light, **dict(re.findall(r"(--[\w-]+):\s*(#[0-9a-fA-F]{6})", dark_block))}
+
+        for theme_name, tokens in (("light", light), ("dark", dark)):
+            for background, foreground in (
+                ("--landing-page-bg", "--landing-ink"),
+                ("--landing-page-bg", "--landing-muted"),
+                ("--landing-surface", "--landing-ink"),
+            ):
+                ratio = _contrast_ratio(tokens[background], tokens[foreground])
+                self.assertGreaterEqual(ratio, 4.5, f"landing {theme_name}: {foreground} on {background} = {ratio:.2f}:1")
+
+        self.assertGreaterEqual(_contrast_ratio(light["--landing-gold-bright"], light["--landing-navy-deep"]), 4.5)
 
     def test_semantic_theme_pairs_meet_normal_text_contrast(self):
         source = (ROOT / "static/css/themes.css").read_text()
