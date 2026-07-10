@@ -33,8 +33,8 @@
 }
 
 .admin-tier-config-head .tier-badge {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
 }
 
 .admin-tier-fields {
@@ -126,10 +126,10 @@
 }
 
 .tier-badge {
-    display: inline-block;
+    display: block;
     flex: 0 0 auto;
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     image-rendering: pixelated;
     object-fit: contain;
     vertical-align: middle;
@@ -137,6 +137,8 @@
 
 .tier-badge--directory {
     margin-left: 6px;
+    width: 34px;
+    height: 34px;
 }
 
 @media (max-width: 860px) {

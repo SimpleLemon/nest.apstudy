@@ -48,8 +48,12 @@
                         </div>
                         <div class="profile-tile-heading">
                             <h1>{{ profile.name }}</h1>
-                            {% if profile.tier_badge %}<img class="tier-badge" src="{{ profile.tier_badge.asset }}" alt="{{ profile.tier_label }}" title="{{ profile.tier_label }}" width="32" height="32" loading="lazy" decoding="async" />{% endif %}
                             <p>{{ profile.handle or profile.id }}</p>
+                            {% if profile.tier_badge %}
+                            <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ profile.tier_label }}" data-tooltip="{{ profile.tier_label }}">
+                                <img class="tier-badge" src="{{ profile.tier_badge.asset }}" alt="" width="40" height="40" loading="lazy" decoding="async" />
+                            </span>
+                            {% endif %}
                         </div>
                         <div class="profile-tile-details">
                             <div class="{{ 'profile-tile-detail-emory' if profile.is_emory_school else '' }}">

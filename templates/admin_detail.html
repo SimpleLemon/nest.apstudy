@@ -57,7 +57,9 @@
             <div class="admin-user-hero__status" aria-label="Account status">
                 {% if user.tier_badge %}
                     <span class="admin-tier-badge-wrap">
-                        <img class="tier-badge" src="{{ user.tier_badge.asset }}" alt="{{ user.tier_label }}" title="{{ user.tier_label }}" width="32" height="32" loading="lazy" decoding="async" />
+                        <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ user.tier_label }}" data-tooltip="{{ user.tier_label }}">
+                            <img class="tier-badge" src="{{ user.tier_badge.asset }}" alt="" width="40" height="40" loading="lazy" decoding="async" />
+                        </span>
                         <span>{{ user.tier_label }}</span>
                     </span>
                 {% else %}

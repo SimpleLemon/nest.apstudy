@@ -1764,6 +1764,11 @@
     const graduation = user?.graduation_year || user?.class_year || "";
     const memberSince = user?.member_since || "";
     const bannerColor = normalizeHexColor(user?.banner_color);
+    const tierBadge = user?.tier_badge?.asset && user?.tier_label
+      ? `<span class="tier-badge-trigger" tabindex="0" role="img" aria-label="${escapeHtml(user.tier_label)}" data-tooltip="${escapeHtml(user.tier_label)}">
+          <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="38" height="38" loading="lazy" decoding="async">
+        </span>`
+      : "";
     const blockLabel = options.blocked ? "Unblock" : "Block";
     const blockAction = options.showBlock
       ? `<button type="button" data-block-user="${escapeHtml(user.id)}" data-blocked="${options.blocked ? "true" : "false"}">${blockLabel}</button>`
@@ -1779,6 +1784,7 @@
             <div class="profile-tile-heading">
               <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
               <p>${escapeHtml(handle)}</p>
+              ${tierBadge}
               <p class="chat-presence-line chat-profile-presence">
                 <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
                 <span>${presenceStatusLabel(status)}</span>

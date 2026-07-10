@@ -295,6 +295,8 @@ function cacheElements() {
   elements.tierWarning = document.querySelector('[data-tier-warning]');
   elements.tierStatus = document.querySelector('[data-tier-status]');
   elements.tierLimits = Array.from(document.querySelectorAll('[data-tier-limit]'));
+  elements.tierBadgeTrigger = document.getElementById('settings-tier-badge-trigger');
+  elements.previewTierBadgeTrigger = document.getElementById('settings-preview-tier-badge-trigger');
   elements.tierBadge = document.getElementById('settings-tier-badge');
   elements.previewTierBadge = document.getElementById('settings-preview-tier-badge');
   elements.connectedServices = document.getElementById('settings-connected-services');
@@ -463,17 +465,25 @@ function renderEntitlements() {
   const label = data.label || 'Free';
   if (elements.tierLabel) elements.tierLabel.textContent = label;
 
-  const badgeNodes = [elements.tierBadge, elements.previewTierBadge].filter(Boolean);
-  badgeNodes.forEach((node) => {
+  const badgeNodes = [
+    { image: elements.tierBadge, trigger: elements.tierBadgeTrigger },
+    { image: elements.previewTierBadge, trigger: elements.previewTierBadgeTrigger },
+  ].filter(({ image }) => image);
+  badgeNodes.forEach(({ image, trigger }) => {
     const badge = data.badge;
     if (!badge) {
-      node.hidden = true;
+      image.hidden = true;
+      if (trigger) trigger.hidden = true;
       return;
     }
-    node.src = badge.asset;
-    node.alt = label;
-    node.title = label;
-    node.hidden = false;
+    image.src = badge.asset;
+    image.alt = '';
+    image.hidden = false;
+    if (trigger) {
+      trigger.dataset.tooltip = label;
+      trigger.setAttribute('aria-label', label);
+      trigger.hidden = false;
+    }
   });
 
   const used = Number(data.storage_usage_bytes || 0);

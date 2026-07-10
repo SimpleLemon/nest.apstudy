@@ -43,6 +43,7 @@ from services.discord_bridge import (
 )
 from services.discord_audit import DiscordAuditEvent, emit_audit_event, format_actor
 from services.chat_presence import sync_chat_presence_labels_for_user, university_presence_label
+from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
 from services.universities import normalize_school_key, school_payload, search_universities
 
 
@@ -641,6 +642,7 @@ def _public_user(row):
     user_id = _row_id(row)
     name = row.get("name") or row.get("username") or "Nest User"
     username = row.get("username") or ""
+    tier = normalize_tier(row.get("tier"))
     return {
         "id": user_id,
         "name": name,
@@ -656,6 +658,9 @@ def _public_user(row):
         "member_since": _format_member_since(row.get("created_at")),
         "is_emory_school": _is_emory_school(row.get("school")),
         "is_early_member": _is_early_member(row.get("created_at")),
+        "tier": tier,
+        "tier_label": TIER_LABELS[tier],
+        "tier_badge": TIER_BADGES.get(tier),
         "profile_url": f"/u/{username}" if username else f"/user/{user_id}",
     }
 
@@ -673,6 +678,7 @@ def _current_user_payload():
         "class_year": current_user.class_year,
         "education_level": current_user.education_level,
         "created_at": current_user.created_at,
+        "tier": current_user.tier,
     })
 
 

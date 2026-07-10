@@ -930,6 +930,17 @@
   font-size: 12px;
 }
 
+.chat-profile-card .profile-tile-heading .tier-badge-trigger {
+  margin-top: 8px;
+  min-width: 38px;
+  min-height: 38px;
+}
+
+.chat-profile-card .profile-tile-heading .tier-badge {
+  width: 38px;
+  height: 38px;
+}
+
 .chat-profile-card .profile-tile-details {
   display: grid;
   grid-template-columns: 1fr;

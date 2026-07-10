@@ -162,7 +162,9 @@
                                     </select>
                                 </form>
                                 {% if user.tier_badge %}
-                                    <img class="tier-badge tier-badge--directory" src="{{ user.tier_badge.asset }}" alt="{{ user.tier_label }}" title="{{ user.tier_label }}" width="24" height="24" loading="lazy" decoding="async" />
+                                    <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ user.tier_label }}" data-tooltip="{{ user.tier_label }}">
+                                        <img class="tier-badge tier-badge--directory" src="{{ user.tier_badge.asset }}" alt="" width="34" height="34" loading="lazy" decoding="async" />
+                                    </span>
                                 {% endif %}
                             </td>
                             <td data-column="profile" data-label="Profile">

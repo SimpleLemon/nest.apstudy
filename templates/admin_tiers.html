@@ -41,7 +41,11 @@
                             <p class="admin-eyebrow">Role {{ loop.index }}</p>
                             <h2 id="tier-title-{{ tier }}" class="admin-title admin-title--small">{{ tier_labels[tier] }}</h2>
                         </div>
-                        {% if tier_badges[tier] %}<img class="tier-badge" src="{{ tier_badges[tier].asset }}" alt="{{ tier_labels[tier] }}" title="{{ tier_labels[tier] }}" width="40" height="40" />{% endif %}
+                        {% if tier_badges[tier] %}
+                            <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ tier_labels[tier] }}" data-tooltip="{{ tier_labels[tier] }}">
+                                <img class="tier-badge" src="{{ tier_badges[tier].asset }}" alt="" width="44" height="44" />
+                            </span>
+                        {% endif %}
                     </div>
                     <div class="admin-tier-fields">
                         {% set storage_unlimited = definition.storage_bytes is none %}
