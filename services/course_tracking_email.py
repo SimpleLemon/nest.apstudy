@@ -19,13 +19,15 @@ def build_nest_courses_detail_url(base_url, section_id):
     return f"{base}/courses?section={encoded}#section={encoded}"
 
 
-def build_open_seat_subject(course_code, seats_available):
+def build_open_seat_subject(course_code, seats_available, waitlist_available=None):
     code = str(course_code or "Tracked class").strip() or "Tracked class"
     seats = _coerce_seats(seats_available)
     if seats == 1:
         seat_text = "1 Open Seat"
     elif seats is not None and seats > 1:
         seat_text = f"{seats} Open Seats"
+    elif waitlist_available:
+        seat_text = "Waitlist Availability"
     else:
         seat_text = "Open Seats"
     return f"🎉 {code} has {seat_text}"
@@ -43,6 +45,9 @@ def build_open_seat_html(section, *, base_url, atlas_url=None, nest_details_url=
     campus = _text(section.get("campus") or section.get("campus_description"), "N/A")
     status = _text(section.get("enrollment_status"), "Unknown")
     seats = _format_seats(section.get("seats_available"))
+    waitlist_total = _coerce_seats(section.get("waitlist_total"))
+    waitlist_capacity = _coerce_seats(section.get("waitlist_capacity"))
+    waitlist = "Unknown" if waitlist_total is None or waitlist_capacity is None else f"{waitlist_total} of {waitlist_capacity} filled"
     term = _format_term(section.get("term"))
     credits = _text(section.get("credit_hours"), "N/A")
 
@@ -63,6 +68,7 @@ def build_open_seat_html(section, *, base_url, atlas_url=None, nest_details_url=
         ("Campus", campus),
         ("Status", status),
         ("Seats available", seats),
+        ("Waitlist", waitlist),
         ("Term", term),
         ("Credits", credits),
     ]
@@ -94,7 +100,7 @@ def build_open_seat_html(section, *, base_url, atlas_url=None, nest_details_url=
           </tr>
           <tr>
             <td style="padding:8px 40px 24px;font-size:16px;line-height:160%;color:{NAVY};">
-              <p style="margin:0 0 16px;">A section you&rsquo;re tracking may have an open seat. Register soon on Emory Atlas before it fills.</p>
+              <p style="margin:0 0 16px;">A section you&rsquo;re tracking has new seat or waitlist availability. Check Emory Atlas soon before it fills.</p>
             </td>
           </tr>
           <tr>

@@ -35,7 +35,7 @@ from services.discord_audit import (
     emit_creation_event,
     format_actor,
 )
-from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, request_entitlements
+from services.entitlements import EntitlementError, EntitlementLimitError, TRACK_INTERVALS_KEY, check_limit, request_entitlements
 
 
 courses_bp = Blueprint("courses", __name__)
@@ -363,6 +363,11 @@ def _serialize_track(track):
         "last_seats_available": track.get("last_seats_available"),
         "last_checked_at": track.get("last_checked_at"),
         "last_notified_at": track.get("last_notified_at"),
+        "interval_minutes": int(track.get("interval_minutes") or 30),
+        "next_check_at": track.get("next_check_at"),
+        "last_waitlist_total": track.get("last_waitlist_total"),
+        "last_waitlist_capacity": track.get("last_waitlist_capacity"),
+        "cooldown_until_closed": bool(track.get("cooldown_until_closed", False)),
     }
 
 
@@ -608,6 +613,15 @@ def list_tracks():
         return jsonify({"error": "Unable to load course tracking."}), 500
 
     serialized = [_serialize_track(track) for track in tracks]
+    try:
+        entitlements = request_entitlements(current_user)
+        allowed_intervals = entitlements["limits"].get(TRACK_INTERVALS_KEY) or [30]
+        tier = {"key": entitlements["key"], "label": entitlements["label"]}
+        limit = entitlements["limits"].get("max_seat_tracks")
+        usage = entitlements["usage"].get("seat_tracks", 0)
+    except EntitlementError:
+        logger.exception("Failed to load course tracking entitlements")
+        allowed_intervals, tier, limit, usage = [30], {"key": "free", "label": "Free"}, None, len([row for row in serialized if row["enabled"]])
     return jsonify({
         "count": len(serialized),
         "tracks": serialized,
@@ -616,6 +630,10 @@ def list_tracks():
             for track in serialized
             if track.get("section_id")
         },
+        "allowed_intervals_minutes": allowed_intervals,
+        "tier": tier,
+        "usage": usage,
+        "limit": limit,
     })
 
 
@@ -676,10 +694,26 @@ def upsert_track():
     except AppwriteException:
         logger.exception("Failed to load existing course track")
         return jsonify({"error": "Unable to update course tracking."}), 500
-    if enabled and (not existing or not existing.get("enabled", True)):
+    entitlements = None
+    if enabled or "interval_minutes" in payload:
         try:
             entitlements = request_entitlements(current_user)
-            check_limit(entitlements, "max_seat_tracks", entitlements["usage"]["seat_tracks"])
+            allowed_intervals = entitlements["limits"].get(TRACK_INTERVALS_KEY) or [30]
+            has_explicit_interval = payload.get("interval_minutes") not in (None, "")
+            requested_interval = int(payload.get("interval_minutes") or (existing or {}).get("interval_minutes") or min(allowed_intervals))
+            if not has_explicit_interval and requested_interval not in allowed_intervals:
+                requested_interval = min(allowed_intervals)
+            if requested_interval not in allowed_intervals:
+                return jsonify({
+                    "error": f"Your {entitlements['label']} tier supports {', '.join(str(value) for value in allowed_intervals)} minute checks.",
+                    "code": "tier_interval",
+                    "allowed_intervals_minutes": allowed_intervals,
+                }), 403
+            data["interval_minutes"] = requested_interval
+            if enabled:
+                data["next_check_at"] = now
+            if enabled and (not existing or not existing.get("enabled", True)):
+                check_limit(entitlements, "max_seat_tracks", entitlements["usage"]["seat_tracks"])
         except EntitlementLimitError as exc:
             return jsonify(exc.payload()), 403
         except EntitlementError:
@@ -729,6 +763,26 @@ def upsert_track():
         "last_updated_at": last_updated_at,
         "live_stale": live_stale,
     })
+
+
+@courses_bp.route("/tracks/<track_id>", methods=["DELETE"])
+@login_required
+def delete_track(track_id):
+    forbidden = _require_emory_student()
+    if forbidden:
+        return forbidden
+    try:
+        track = get_row_safe(COLLECTIONS["course_seat_tracks"], track_id)
+    except AppwriteException:
+        track = None
+    if not track or str(track.get("user_id")) != _current_user_id():
+        return jsonify({"error": "Tracked course not found."}), 404
+    try:
+        delete_row_safe(COLLECTIONS["course_seat_tracks"], track_id)
+    except AppwriteException:
+        logger.exception("Failed to remove course track")
+        return jsonify({"error": "Unable to remove course tracking."}), 500
+    return jsonify({"status": "ok"})
 
 
 @courses_bp.route("/section-status", methods=["POST"])

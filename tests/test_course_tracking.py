@@ -138,7 +138,7 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(summary["notifications_sent"], 2)
         update_topic.assert_called_once_with(1)
 
-    def test_unchanged_closed_result_skips_appwrite_writes(self):
+    def test_unchanged_closed_result_schedules_next_check(self):
         tracks = [self._track("track-1", "user-1"), self._track("track-2", "user-2")]
         section = self._closed_section()
 
@@ -154,7 +154,8 @@ class CourseTrackingTests(unittest.TestCase):
         self.assertEqual(notified, 0)
         fetch_status.assert_called_once_with("Fall_2026", "CS", "170", crn="1234")
         send_email.assert_not_called()
-        update_row.assert_not_called()
+        self.assertEqual(update_row.call_count, 2)
+        self.assertTrue(all(call.args[2]["next_check_at"] == "2026-05-29T00:30:00Z" for call in update_row.call_args_list))
 
         completed_events = [
             call for call in emit_event.call_args_list
@@ -162,12 +163,12 @@ class CourseTrackingTests(unittest.TestCase):
         ]
         self.assertEqual(len(completed_events), 0)
         summary = course_tracking.get_last_course_tracking_poll()
-        self.assertEqual(summary["row_updates"], 0)
-        self.assertEqual(summary["changed_rows_written"], 0)
+        self.assertEqual(summary["row_updates"], 2)
+        self.assertEqual(summary["changed_rows_written"], 2)
         self.assertEqual(summary["unchanged_rows_skipped"], 2)
         self.assertEqual(summary["notifications_sent"], 0)
 
-    def test_unchanged_open_result_sends_no_reminder_and_writes_nothing(self):
+    def test_unchanged_open_result_sends_no_reminder_and_schedules_next_check(self):
         tracks = [{
             **self._track("track-1", "user-1"),
             "last_status": "Open",
@@ -186,7 +187,8 @@ class CourseTrackingTests(unittest.TestCase):
 
         self.assertEqual(notified, 0)
         send_email.assert_not_called()
-        update_row.assert_not_called()
+        update_row.assert_called_once()
+        self.assertEqual(update_row.call_args.args[2]["next_check_at"], "2026-05-29T00:30:00Z")
         completed_events = [
             call for call in emit_event.call_args_list
             if call.args[0] == "Automated Course Track Poll Completed"
@@ -414,6 +416,21 @@ class CourseTrackingTests(unittest.TestCase):
 
 
 class CourseTrackingEmailTests(unittest.TestCase):
+    def _track(self, row_id, user_id):
+        return {
+            "$id": row_id, "user_id": user_id, "section_id": "Fall_2026-CS-170-1234-1",
+            "term": "Fall_2026", "subject": "CS", "catalog": "170", "crn": "1234",
+            "course_code": "CS 170", "course_title": "Intro CS", "enabled": True,
+            "last_status": "Closed", "last_seats_available": 0,
+        }
+
+    def _closed_section(self):
+        return {
+            "id": "Fall_2026-CS-170-1234-1", "term": "Fall_2026", "subject": "CS",
+            "catalog_number": "170", "crn": "1234", "course_code": "CS 170",
+            "course_title": "Intro CS", "section_number": "1", "instructor": "Ada Lovelace",
+            "enrollment_status": "Closed", "seats_available": 0,
+        }
     def _sample_section(self):
         return {
             "id": "Spring_2026|JPN|101|1234|1",
@@ -488,6 +505,55 @@ class CourseTrackingEmailTests(unittest.TestCase):
         self.assertIn("🎉 JPN 101 has 2 Open Seats", kwargs["subject"])
         self.assertIn("apstudy-logo-email.jpg", kwargs["content"])
         self.assertIn("#section=Spring_2026%7CJPN%7C101%7C1234%7C1", kwargs["content"])
+
+
+    def test_waitlist_opening_notifies_and_enters_three_hour_cooldown(self):
+        track = {**self._track("track-1", "user-1"), "last_waitlist_total": 6, "last_waitlist_capacity": 6, "interval_minutes": 15}
+        section = {**self._closed_section(), "waitlist_total": 5, "waitlist_capacity": 6}
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=[track]), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking, "_send_open_email") as send_email, \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event"), \
+                patch.object(course_tracking, "update_course_tracks_channel_topic"), \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 1)
+        send_email.assert_called_once()
+        updates = update_row.call_args.args[2]
+        self.assertTrue(updates["cooldown_until_closed"])
+        self.assertEqual(updates["next_check_at"], "2026-05-29T03:00:00Z")
+
+    def test_future_tracker_is_not_polled(self):
+        track = {**self._track("track-1", "user-1"), "next_check_at": "2026-05-29T00:15:00Z"}
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=[track]), \
+                patch.object(course_tracking, "fetch_live_section_status") as fetch_status, \
+                patch.object(course_tracking, "emit_course_track_event"), \
+                patch.object(course_tracking, "update_course_tracks_channel_topic"), \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            notified = course_tracking.check_course_seat_tracks()
+
+        self.assertEqual(notified, 0)
+        fetch_status.assert_not_called()
+        self.assertEqual(course_tracking.get_last_course_tracking_poll()["reason"], "no_due_tracks")
+
+    def test_cooldown_restores_preferred_interval_after_availability_closes(self):
+        track = {**self._track("track-1", "user-1"), "cooldown_until_closed": True, "interval_minutes": 15}
+        with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
+                patch.object(course_tracking, "list_rows_all", return_value=[track]), \
+                patch.object(course_tracking, "fetch_live_section_status", return_value={"section": self._closed_section()}), \
+                patch.object(course_tracking, "update_row_safe") as update_row, \
+                patch.object(course_tracking, "emit_course_track_event"), \
+                patch.object(course_tracking, "update_course_tracks_channel_topic"), \
+                patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
+            course_tracking.check_course_seat_tracks()
+
+        updates = update_row.call_args.args[2]
+        self.assertFalse(updates["cooldown_until_closed"])
+        self.assertEqual(updates["next_check_at"], "2026-05-29T00:15:00Z")
 
 
 if __name__ == "__main__":

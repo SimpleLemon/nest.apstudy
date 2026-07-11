@@ -781,8 +781,8 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("Course Tracking", html)
         self.assertIn("CHEM 150", html)
         self.assertIn('id="admin-tracking-refresh"', html)
-        self.assertIn("5m (default)", html)
-        self.assertIn("60m", html)
+        self.assertIn("5m (fixed)", html)
+        self.assertIn("Individual trackers run when their tier interval is due.", html)
         self.assertIn("Spring tracking", html)
         self.assertIn("Open Spring", html)
         self.assertNotIn("University Channel Requests", html)
@@ -1039,10 +1039,10 @@ class AdminSecurityTestCase(unittest.TestCase):
             with patch.object(admin, "set_course_tracking_refresh_minutes") as set_refresh, \
                     patch.object(admin, "update_course_tracking_refresh_interval", return_value=True) as update_refresh, \
                     patch.object(admin, "_log_admin_action") as log_action:
-                missing_token = client.post("/admin/course-tracking/refresh-interval", json={"minutes": 10})
+                missing_token = client.post("/admin/course-tracking/refresh-interval", json={"minutes": 5})
                 response = client.post(
                     "/admin/course-tracking/refresh-interval",
-                    json={"minutes": 10},
+                    json={"minutes": 5},
                     headers={"X-CSRFToken": token},
                 )
                 invalid = client.post(
@@ -1053,14 +1053,14 @@ class AdminSecurityTestCase(unittest.TestCase):
 
         self.assertEqual(missing_token.status_code, 400)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json()["refresh_interval_minutes"], 10)
+        self.assertEqual(response.get_json()["refresh_interval_minutes"], 5)
         self.assertTrue(response.get_json()["scheduler_updated"])
         self.assertEqual(invalid.status_code, 400)
-        set_refresh.assert_called_once_with(10)
-        update_refresh.assert_called_once_with(10)
+        set_refresh.assert_called_once_with(5)
+        update_refresh.assert_called_once_with(5)
         log_action.assert_called_once()
         self.assertEqual(log_action.call_args.args[0], "course_tracking_refresh_interval")
-        self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_minutes"], 10)
+        self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_minutes"], 5)
 
     def test_spring_course_tracking_toggle_requires_csrf_and_logs(self):
         with self.app.test_client() as client:

@@ -36,6 +36,10 @@ const state = {
   currentSectionsRequest: 0,
   savedCoursesBySection: new Map(),
   tracksBySection: new Map(),
+  allowedTrackIntervals: [30],
+  trackingTier: { key: "free", label: "Free" },
+  trackingUsage: 0,
+  trackingLimit: null,
   removedSelectedSections: new Map(),
   activeCourseView: "search",
   searchQuery: "",
@@ -114,6 +118,7 @@ const { wireControls } = window.APStudyCoursesControls.create({
   loadSectionsForTerm,
   openDetail,
   removeCourse,
+  removeTrack,
   renderCalendar,
   renderPanel,
   resetWeekScroll,
@@ -276,6 +281,10 @@ function applySavedCourse(course) {
 
 async function loadTracks() {
   const payload = await fetchJson("/api/courses/tracks");
+  state.allowedTrackIntervals = payload.allowed_intervals_minutes || [30];
+  state.trackingTier = payload.tier || { key: "free", label: "Free" };
+  state.trackingUsage = Number(payload.usage || 0);
+  state.trackingLimit = payload.limit ?? null;
   state.tracksBySection = new Map();
   for (const track of payload.tracks || []) {
     if (track.section_id) {
@@ -541,8 +550,9 @@ async function removeCourse(courseId, sectionId) {
   }
 }
 
-async function setTrack(sectionId, enabled) {
+async function setTrack(sectionId, enabled, intervalMinutes = null) {
   if (!sectionId) return;
+  const wasEnabled = Boolean(state.tracksBySection.get(String(sectionId))?.enabled);
   state.trackingIds.add(sectionId);
   renderPanel();
   try {
@@ -551,16 +561,36 @@ async function setTrack(sectionId, enabled) {
       body: JSON.stringify({
         section_id: sectionId,
         enabled,
+        ...(intervalMinutes ? { interval_minutes: Number(intervalMinutes) } : {}),
       }),
     });
     if (payload.section) rememberSection(payload.section);
     if (payload.track?.section_id) {
       state.tracksBySection.set(String(payload.track.section_id), payload.track);
     }
-    showToast(enabled ? "Tracking enabled." : "Tracking disabled.");
+    if (enabled !== wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage + (enabled ? 1 : -1));
+    showToast(intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
   } catch (error) {
     console.error(error);
     showToast(error.message || "Unable to update tracking.", true);
+  } finally {
+    state.trackingIds.delete(sectionId);
+    render();
+  }
+}
+
+async function removeTrack(trackId, sectionId) {
+  if (!trackId || !sectionId) return;
+  state.trackingIds.add(sectionId);
+  renderPanel();
+  try {
+    const wasEnabled = Boolean(state.tracksBySection.get(String(sectionId))?.enabled);
+    await fetchJson(`/api/courses/tracks/${encodeURIComponent(trackId)}`, { method: "DELETE" });
+    state.tracksBySection.delete(String(sectionId));
+    if (wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage - 1);
+    showToast("Tracker removed.");
+  } catch (error) {
+    showToast(error.message || "Unable to remove tracker.", true);
   } finally {
     state.trackingIds.delete(sectionId);
     render();

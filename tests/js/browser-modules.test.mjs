@@ -759,7 +759,11 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(source, /buildSectionSearchBlob\(normalized\)/);
     assert.match(combinedSource, /state\.activeCourseView === "selected"/);
     assert.match(combinedSource, /state\.activeCourseView === "tracked"/);
-    assert.match(combinedSource, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
+    assert.doesNotMatch(combinedSource, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
+    assert.match(source, /allowedTrackIntervals: \[30\]/);
+    assert.match(combinedSource, /data-track-interval-section-id/);
+    assert.match(combinedSource, /data-remove-track-id/);
+    assert.match(combinedSource, /checking every 3 hours until it closes/);
     assert.match(source, /removedSelectedSections: new Map\(\)/);
     assert.match(source, /state\.removedSelectedSections\.set\(String\(sectionId\), \{ \.\.\.removedSection, id: String\(sectionId\) \}\)/);
     assert.match(combinedSource, /return sections\.sort\(compareCourseSections\)/);

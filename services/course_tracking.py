@@ -2,7 +2,7 @@ import hashlib
 import logging
 import os
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -31,7 +31,15 @@ def _now_utc():
 def _section_open_for_notification(section):
     status = str(section.get("enrollment_status") or "").strip().lower()
     seats_available = section.get("seats_available")
-    return _open_from_values(status, seats_available)
+    return _open_from_values(status, seats_available) or _waitlist_available(
+        section.get("waitlist_total"), section.get("waitlist_capacity")
+    )
+
+
+def _waitlist_available(total, capacity):
+    total = _normalize_seats(total)
+    capacity = _normalize_seats(capacity)
+    return total is not None and capacity is not None and capacity > total
 
 
 def _open_from_values(status, seats_available):
@@ -62,11 +70,39 @@ def _track_result_changed(track, section):
     new_status = _normalize_status(section.get("enrollment_status"))
     old_seats = _normalize_seats(track.get("last_seats_available"))
     new_seats = _normalize_seats(section.get("seats_available"))
-    return old_status != new_status or old_seats != new_seats
+    return (
+        old_status != new_status
+        or old_seats != new_seats
+        or _normalize_seats(track.get("last_waitlist_total")) != _normalize_seats(section.get("waitlist_total"))
+        or _normalize_seats(track.get("last_waitlist_capacity")) != _normalize_seats(section.get("waitlist_capacity"))
+    )
 
 
 def _track_was_open(track):
-    return _open_from_values(track.get("last_status"), track.get("last_seats_available"))
+    return _open_from_values(track.get("last_status"), track.get("last_seats_available")) or _waitlist_available(
+        track.get("last_waitlist_total"), track.get("last_waitlist_capacity")
+    )
+
+
+def _parse_datetime(value):
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return parsed.replace(tzinfo=timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
+    except (TypeError, ValueError):
+        return None
+
+
+def _track_due(track, now):
+    next_check = _parse_datetime(track.get("next_check_at"))
+    if next_check:
+        return next_check <= now
+    last_checked = _parse_datetime(track.get("last_checked_at"))
+    if not last_checked:
+        return True
+    minutes = 180 if track.get("cooldown_until_closed") else int(track.get("interval_minutes") or 30)
+    return last_checked + timedelta(minutes=minutes) <= now
 
 
 def _send_open_email(track, section):
@@ -74,7 +110,11 @@ def _send_open_email(track, section):
     base_url = os.environ.get("APP_BASE_URL", "https://nest.apstudy.org").rstrip("/")
     course_code = section.get("course_code") or track.get("course_code") or "Tracked class"
     section_id = section.get("id") or track.get("section_id") or ""
-    subject = build_open_seat_subject(course_code, section.get("seats_available"))
+    subject = build_open_seat_subject(
+        course_code,
+        section.get("seats_available"),
+        _waitlist_available(section.get("waitlist_total"), section.get("waitlist_capacity")),
+    )
     content = build_open_seat_html(
         section,
         base_url=base_url,
@@ -240,10 +280,13 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
         ]
 
     now = _now_utc()
+    enabled_count = len(tracks)
+    if poll_source == "automated":
+        tracks = [track for track in tracks if _track_due(track, now)]
     notified_count = 0
     if not tracks:
         logger.info("Course tracking skipped: no enabled course seat tracks.")
-        metadata = {"reason": "no_enabled_tracks", "enabled_track_count": 0, "track_count": 0, **filter_metadata}
+        metadata = {"reason": "no_due_tracks" if enabled_count else "no_enabled_tracks", "enabled_track_count": enabled_count, "track_count": 0, **filter_metadata}
         emitted = _emit_poll_event(
             "Automated Course Track Poll Skipped",
             metadata=metadata,
@@ -259,7 +302,7 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
 
     poll_metadata = {
         **filter_metadata,
-        "enabled_track_count": len(tracks),
+        "enabled_track_count": enabled_count,
         "track_count": len(tracks),
         "section_group_count": len(grouped_tracks),
         "atlas_checks_attempted": 0,
@@ -273,6 +316,8 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
         "unchanged_rows_skipped": 0,
         "failed_rows_skipped": 0,
         "notifications_sent": 0,
+        "due_track_count": len(tracks),
+        "cooldown_track_count": len([track for track in tracks if track.get("cooldown_until_closed")]),
     }
 
     for grouped in grouped_tracks.values():
@@ -324,6 +369,8 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
         section = result.get("section") or {}
         updates["last_status"] = section.get("enrollment_status")
         updates["last_seats_available"] = section.get("seats_available")
+        updates["last_waitlist_total"] = section.get("waitlist_total")
+        updates["last_waitlist_capacity"] = section.get("waitlist_capacity")
 
         emit_course_track_event(
             "Automated Course Track Checked",
@@ -337,20 +384,18 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
             row_id = track.get("$id") or track.get("id")
             if not row_id:
                 continue
-            if not _track_result_changed(track, section):
-                poll_metadata["unchanged_rows_skipped"] += 1
-                continue
             track_updates = dict(updates)
             should_notify = _section_open_for_notification(section) and not _track_was_open(track)
             if should_notify:
                 try:
                     _send_open_email(track, section)
                     track_updates["last_notified_at"] = format_datetime(now)
+                    track_updates["cooldown_until_closed"] = True
                     notified_count += 1
                     poll_metadata["email_notifications"] += 1
                     poll_metadata["notifications_sent"] += 1
                     emit_course_track_event(
-                        "Tracked Course Seat Opened",
+                        "Tracked Course Availability Opened",
                         actor="System",
                         target=section.get("course_code") or track.get("course_code") or row_id,
                         metadata={
@@ -369,6 +414,16 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
                     poll_metadata["email_failures"] += 1
                     logger.exception("Failed to send course opening email for track %s", row_id)
                     continue
+
+            available = _section_open_for_notification(section)
+            cooldown = bool(track_updates.get("cooldown_until_closed", track.get("cooldown_until_closed")))
+            if cooldown and not available:
+                cooldown = False
+                track_updates["cooldown_until_closed"] = False
+            effective_minutes = 180 if cooldown else int(track.get("interval_minutes") or 30)
+            track_updates["next_check_at"] = format_datetime(now + timedelta(minutes=effective_minutes))
+            if not _track_result_changed(track, section):
+                poll_metadata["unchanged_rows_skipped"] += 1
 
             try:
                 update_row_safe(table_id, row_id, track_updates)

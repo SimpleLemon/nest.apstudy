@@ -29,6 +29,7 @@ LIMIT_KEYS = (
     "max_calendar_feeds",
     "max_notes",
 )
+TRACK_INTERVALS_KEY = "seat_track_intervals_minutes"
 UNLIMITED = None
 GIB = 1024 ** 3
 MIB = 1024 ** 2
@@ -43,6 +44,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 1,
         "max_calendar_feeds": 2,
         "max_notes": 10,
+        TRACK_INTERVALS_KEY: [30],
     },
     "grade_a": {
         "label": TIER_LABELS["grade_a"],
@@ -53,6 +55,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 5,
         "max_calendar_feeds": 5,
         "max_notes": 50,
+        TRACK_INTERVALS_KEY: [15, 30],
     },
     "grade_aa": {
         "label": TIER_LABELS["grade_aa"],
@@ -63,10 +66,12 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 25,
         "max_calendar_feeds": 10,
         "max_notes": 250,
+        TRACK_INTERVALS_KEY: [5, 15, 30],
     },
     "developer": {
         "label": TIER_LABELS["developer"],
         **{key: UNLIMITED for key in LIMIT_KEYS},
+        TRACK_INTERVALS_KEY: [5, 15, 30],
     },
 }
 
@@ -144,6 +149,16 @@ def normalize_definitions(raw):
         values = {"label": defaults["label"]}
         for key in LIMIT_KEYS:
             values[key] = normalize_limit(candidate[key]) if key in candidate else defaults[key]
+        raw_intervals = candidate.get(TRACK_INTERVALS_KEY, defaults[TRACK_INTERVALS_KEY])
+        if not isinstance(raw_intervals, (list, tuple)):
+            raise ValueError("Seat track intervals must be a list of minutes.")
+        try:
+            intervals = sorted({int(item) for item in raw_intervals})
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Seat track intervals must contain minutes.") from exc
+        if not intervals or any(item not in (5, 15, 30) for item in intervals):
+            raise ValueError("Seat track intervals must contain 5, 15, or 30 minutes.")
+        values[TRACK_INTERVALS_KEY] = intervals
         normalized[tier] = values
     return normalized
 

@@ -19,13 +19,11 @@
                 </button>
             </div>
             <label class="admin-select-field" for="admin-tracking-refresh">
-                <span>Refresh interval</span>
-                <select id="admin-tracking-refresh">
-                    <option value="5" {% if course_tracking_refresh_minutes == 5 %}selected{% endif %}>5m (default)</option>
-                    <option value="10" {% if course_tracking_refresh_minutes == 10 %}selected{% endif %}>10m</option>
-                    <option value="30" {% if course_tracking_refresh_minutes == 30 %}selected{% endif %}>30m</option>
-                    <option value="60" {% if course_tracking_refresh_minutes == 60 %}selected{% endif %}>60m</option>
+                <span>Scheduler tick</span>
+                <select id="admin-tracking-refresh" disabled aria-describedby="admin-tracking-refresh-help">
+                    <option value="5" selected>5m (fixed)</option>
                 </select>
+                <small id="admin-tracking-refresh-help">Individual trackers run when their tier interval is due.</small>
             </label>
             <button id="admin-test-chem-150" class="admin-button" type="button">
                 <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>

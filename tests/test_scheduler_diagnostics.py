@@ -102,7 +102,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
             },
         )
         course_tracking_job = next(job for job in status["jobs"] if job["id"] == "check_course_seat_tracks")
-        self.assertIn("30 min", course_tracking_job["name"])
+        self.assertIn("5 min", course_tracking_job["name"])
         quote_job = scheduler._scheduler.get_job("fetch_daily_quote")
         self.assertEqual(quote_job.kwargs["trigger"].__class__.__name__, "CronTrigger")
         self.assertEqual(quote_job.kwargs["max_instances"], 1)
@@ -110,7 +110,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         metadata = emit_event.call_args.kwargs["metadata"]
         self.assertTrue(metadata["scheduler_lock_acquired"])
         self.assertEqual(metadata["scheduler_process_id"], os.getpid())
-        self.assertEqual(metadata["course_tracking_refresh_interval_minutes"], 30)
+        self.assertEqual(metadata["course_tracking_refresh_interval_minutes"], 5)
         self.assertTrue(metadata["discord_gateway_enabled"])
         self.assertEqual(metadata["discord_chat_reconcile_seconds"], 300)
         self.assertIn("check_course_seat_tracks", metadata["job_ids"])
@@ -288,11 +288,11 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
         )
 
         with patch.object(scheduler, "_scheduler", fake_scheduler):
-            updated = scheduler.update_course_tracking_refresh_interval(30)
+            updated = scheduler.update_course_tracking_refresh_interval(5)
 
         self.assertTrue(updated)
         job = fake_scheduler.get_job("check_course_seat_tracks")
-        self.assertEqual(job.name, "Check tracked Emory course seats every 30 min")
+        self.assertEqual(job.name, "Check tracked Emory course seats every 5 min")
         self.assertIsNotNone(job.kwargs["trigger"])
 
     def test_feed_refresh_does_not_write_user_settings_heartbeat(self):

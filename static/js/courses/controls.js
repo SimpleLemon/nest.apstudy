@@ -7,6 +7,7 @@
     loadSectionsForTerm,
     openDetail,
     removeCourse,
+    removeTrack,
     renderCalendar,
     renderPanel,
     resetWeekScroll,
@@ -250,6 +251,14 @@
           return;
         }
 
+        const removeTrackButton = event.target.closest("[data-remove-track-id]");
+        if (removeTrackButton) {
+          event.preventDefault();
+          event.stopPropagation();
+          void removeTrack(removeTrackButton.dataset.removeTrackId, removeTrackButton.dataset.sectionId);
+          return;
+        }
+
         const eventBlock = event.target.closest(".courses-event[data-section-id], .courses-mobile-event[data-section-id]");
         if (eventBlock) {
           openDetail(eventBlock.dataset.sectionId);
@@ -260,6 +269,13 @@
         if (card) {
           openDetail(card.dataset.sectionId);
         }
+      });
+
+      document.getElementById("courses-panel-content")?.addEventListener("change", (event) => {
+        const select = event.target.closest("[data-track-interval-section-id]");
+        if (!select) return;
+        event.stopPropagation();
+        void setTrack(select.dataset.trackIntervalSectionId, true, select.value);
       });
 
       window.addEventListener("keydown", (event) => {

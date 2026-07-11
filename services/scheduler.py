@@ -533,7 +533,7 @@ def init_scheduler(app):
         default_interval = int(
             os.environ.get("FEED_REFRESH_INTERVAL_MINUTES", "15")
         )
-        course_tracking_interval = get_course_tracking_refresh_minutes()
+        course_tracking_interval = 5
         _scheduler = BackgroundScheduler(daemon=True)
 
         _scheduler.add_job(

@@ -53,6 +53,7 @@
                             {% set unlimited = definition[key] is none %}
                             <label class="admin-tier-field"><span>{{ label }}</span><input name="{{ tier }}__{{ key }}" type="number" min="0" step="1" value="{% if not unlimited %}{{ definition[key] }}{% endif %}" {% if unlimited %}disabled{% endif %} /><span class="admin-tier-unlimited"><input name="{{ tier }}__{{ key }}__unlimited" type="checkbox" {% if unlimited %}checked{% endif %} onchange="this.closest('label').querySelector('input[type=number]').disabled=this.checked" /> Unlimited</span></label>
                         {% endfor %}
+                        <label class="admin-tier-field"><span>Seat check intervals (minutes)</span><input name="{{ tier }}__seat_track_intervals_minutes" type="text" inputmode="numeric" value="{{ definition.seat_track_intervals_minutes|join(', ') }}" aria-describedby="tier-interval-help-{{ tier }}" /><small id="tier-interval-help-{{ tier }}">Comma-separated: 5, 15, 30</small></label>
                     </div>
                 </section>
             {% endfor %}

@@ -11,7 +11,7 @@ from appwrite_helpers import create_row_safe, first_row, format_datetime, update
 
 SPRING_COURSE_TRACKING_OPEN_KEY = "spring_course_tracking_open"
 COURSE_TRACKING_REFRESH_INTERVAL_KEY = "course_tracking_refresh_interval"
-COURSE_TRACKING_REFRESH_INTERVAL_CHOICES = (5, 10, 30, 60)
+COURSE_TRACKING_REFRESH_INTERVAL_CHOICES = (5,)
 
 
 def _now():

@@ -591,6 +591,10 @@ body.courses-body {
   line-height: 1;
 }
 
+.course-card-tracked.is-paused {
+  color: var(--color-on-surface-variant);
+}
+
 .courses-detail {
   display: grid;
   gap: 16px;
@@ -923,6 +927,66 @@ body.courses-body {
   border-radius: var(--radius-control);
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
   background: var(--color-surface-container-low);
+  flex-wrap: wrap;
+}
+
+.track-settings {
+  flex-basis: 100%;
+  display: grid;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+}
+
+.track-settings label {
+  display: grid;
+  gap: 6px;
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.track-settings select {
+  min-height: 40px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  padding: 0 10px;
+  color: var(--color-on-surface);
+}
+
+.track-tier-note,
+.track-cooldown {
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+}
+
+.track-cooldown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+}
+
+.track-cooldown .material-symbols-outlined { font-size: 18px; }
+
+.track-timing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.track-timing div { display: grid; gap: 2px; }
+.track-timing dt { color: var(--color-on-surface-variant); font-size: 12px; }
+.track-timing dd { margin: 0; color: var(--color-on-surface); font-size: 12px; font-weight: 700; }
+
+.track-remove {
+  justify-self: start;
+  min-height: 36px;
+  color: var(--color-error);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .track-control-text {

@@ -177,6 +177,7 @@
       const addedCourse = state.savedCoursesBySection.get(id);
       const isAdded = Boolean(addedCourse);
       const isTracked = Boolean(state.tracksBySection.get(id)?.enabled);
+      const track = state.tracksBySection.get(id);
       const colorClass = isAdded ? getCourseColor(addedCourse).key : "";
       const status = section.enrollment_status || "Unknown";
       const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
@@ -203,7 +204,7 @@
               <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
               <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
             </div>
-            ${isAdded && isTracked ? `<span class="course-card-tracked material-symbols-outlined" aria-label="Seat tracking enabled" title="Seat tracking enabled">notifications_active</span>` : ""}
+            ${track ? `<span class="course-card-tracked ${isTracked ? "" : "is-paused"} material-symbols-outlined" aria-label="Tracking ${isTracked ? "active" : "paused"}" title="Tracking ${isTracked ? "active" : "paused"}">${isTracked ? "notifications_active" : "notifications_paused"}</span>` : ""}
           </div>
         </article>
       `;
@@ -228,6 +229,10 @@
             ? `Updated ${formatDateTime(section.live_updated_at)}`
             : "Showing local catalog data.";
       const description = section.course_description || section.description || "Description unavailable.";
+      const selectedInterval = Number(track?.interval_minutes || state.allowedTrackIntervals[0] || 30);
+      const waitlistTotal = section.waitlist_total !== null && section.waitlist_total !== undefined && Number.isFinite(Number(section.waitlist_total)) ? Number(section.waitlist_total) : null;
+      const waitlistCapacity = section.waitlist_capacity !== null && section.waitlist_capacity !== undefined && Number.isFinite(Number(section.waitlist_capacity)) ? Number(section.waitlist_capacity) : null;
+      const waitlistText = waitlistTotal === null || waitlistCapacity === null ? "Unavailable" : `${waitlistTotal} of ${waitlistCapacity} filled`;
 
       return `
         <article class="courses-detail">
@@ -248,10 +253,29 @@
           ${canTrack || track ? `
             <section class="track-control">
               <div class="track-control-text">
-                <strong>Track Class</strong>
-                <span>${trackEnabled ? "Email notifications are on for this section." : "Email me when a seat opens."}</span>
+                <strong>Track availability</strong>
+                <span>${trackEnabled ? "Email alerts are on for class seats and waitlist openings." : "Email me when a class seat or waitlist place opens."}</span>
               </div>
               <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="Track class" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!canTrack && !trackEnabled) ? "disabled" : ""}></button>
+              ${track ? `
+                <div class="track-settings">
+                  <label>Check interval
+                    <select data-track-interval-section-id="${escapeHtml(sectionId)}" ${tracking || !trackEnabled ? "disabled" : ""}>
+                      ${[5, 15, 30].map((minutes) => {
+                        const allowed = state.allowedTrackIntervals.includes(minutes);
+                        return `<option value="${minutes}" ${minutes === selectedInterval ? "selected" : ""} ${allowed ? "" : "disabled"}>${minutes} min${allowed ? "" : " · higher tier"}</option>`;
+                      }).join("")}
+                    </select>
+                  </label>
+                  <span class="track-tier-note">${escapeHtml(state.trackingTier.label)} · ${state.trackingUsage}${state.trackingLimit === null ? "" : ` of ${state.trackingLimit}`} active</span>
+                  ${track.cooldown_until_closed ? `<span class="track-cooldown"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>Availability found; checking every 3 hours until it closes.</span>` : ""}
+                  <dl class="track-timing">
+                    <div><dt>Last checked</dt><dd>${escapeHtml(track.last_checked_at ? formatDateTime(track.last_checked_at) : "Pending")}</dd></div>
+                    <div><dt>Next check</dt><dd>${escapeHtml(track.next_check_at ? formatDateTime(track.next_check_at) : "Soon")}</dd></div>
+                  </dl>
+                  <button type="button" class="track-remove" data-remove-track-id="${escapeHtml(track.id)}" data-section-id="${escapeHtml(sectionId)}" ${tracking ? "disabled" : ""}>Remove tracker</button>
+                </div>
+              ` : ""}
             </section>
           ` : ""}
           <div class="courses-detail-actions">
@@ -278,6 +302,7 @@
             ${detailRow("Location", section.location || "TBA")}
             ${detailRow("Campus", formatCampus(section))}
             ${detailRow("Seats", formatSeats(section))}
+            ${detailRow("Waitlist", waitlistText)}
             ${detailRow("Credits", section.credit_hours || "N/A")}
             ${detailRow("Grading Mode", section.grading_mode || "N/A")}
             ${detailRow("Instruction Method", section.instruction_method || "N/A")}

@@ -15,6 +15,9 @@ class EntitlementServiceTestCase(unittest.TestCase):
         self.assertEqual(definitions["free"]["max_file_size_bytes"], 25 * 1024 ** 2)
         self.assertEqual(definitions["grade_a"]["max_notes"], 50)
         self.assertEqual(definitions["grade_aa"]["max_seat_tracks"], 25)
+        self.assertEqual(definitions["free"]["seat_track_intervals_minutes"], [30])
+        self.assertEqual(definitions["grade_a"]["seat_track_intervals_minutes"], [15, 30])
+        self.assertEqual(definitions["grade_aa"]["seat_track_intervals_minutes"], [5, 15, 30])
         self.assertIsNone(definitions["developer"]["storage_bytes"])
 
     def test_configuration_validation_normalizes_unlimited_and_rejects_unknown_tiers(self):
@@ -28,6 +31,8 @@ class EntitlementServiceTestCase(unittest.TestCase):
         self.assertEqual(normalized["grade_a"]["max_notes"], 50)
         with self.assertRaises(ValueError):
             entitlements.save_tier_definitions({"free": {}, "gold": {}})
+        with self.assertRaises(ValueError):
+            entitlements.normalize_definitions({"free": {"seat_track_intervals_minutes": [10]}})
 
     def test_usage_aggregates_files_note_media_and_avatar_bytes(self):
         rows = {

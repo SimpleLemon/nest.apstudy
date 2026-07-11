@@ -67,6 +67,11 @@ Table: course_seat_tracks
 - course_title VARCHAR(255) -> string(255) attribute: course_title
 - last_status VARCHAR(64) -> string(64) attribute: last_status
 - last_seats_available INTEGER -> integer attribute: last_seats_available
+- interval_minutes INTEGER NOT NULL DEFAULT 30 -> integer attribute: interval_minutes
+- next_check_at DATETIME -> datetime attribute: next_check_at
+- last_waitlist_total INTEGER -> integer attribute: last_waitlist_total
+- last_waitlist_capacity INTEGER -> integer attribute: last_waitlist_capacity
+- cooldown_until_closed BOOLEAN NOT NULL DEFAULT 0 -> boolean attribute: cooldown_until_closed
 - enabled BOOLEAN NOT NULL DEFAULT 1 -> boolean attribute: enabled
 - last_checked_at DATETIME -> datetime attribute: last_checked_at
 - last_notified_at DATETIME -> datetime attribute: last_notified_at

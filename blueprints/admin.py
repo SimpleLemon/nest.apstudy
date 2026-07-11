@@ -1230,6 +1230,11 @@ def save_admin_tiers():
                     payload[tier][key] = None if unlimited else (
                         int(float(raw_value) * multiplier) if raw_value not in (None, "") else raw_value
                     )
+                payload[tier]["seat_track_intervals_minutes"] = [
+                    int(value.strip())
+                    for value in request.form.get(f"{tier}__seat_track_intervals_minutes", "").split(",")
+                    if value.strip()
+                ]
         except (TypeError, ValueError):
             return redirect(url_for("admin.admin_tiers", error="invalid-tier-config"))
     try:
@@ -1700,7 +1705,7 @@ def admin_course_tracking_refresh_interval():
         minutes = int(payload.get("minutes"))
     except (TypeError, ValueError):
         return jsonify({"error": "Invalid refresh interval."}), 400
-    if minutes not in {5, 10, 30, 60}:
+    if minutes != 5:
         return jsonify({"error": "Invalid refresh interval."}), 400
 
     try:
