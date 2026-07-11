@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Admin Analytics - APStudy Nest</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -23,14 +23,8 @@
         <header class="admin-header admin-page-header admin-analytics-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">Reporting</p>
                 <h1 class="admin-title">Analytics</h1>
-                <p class="admin-subtitle">Monitor users, activity, acquisition, and feature engagement in your local timezone.</p>
             </div>
-            <span class="admin-page-header__context">
-                <span class="material-symbols-outlined" aria-hidden="true">query_stats</span>
-                Reporting view
-            </span>
         </header>
 
         {% if error %}

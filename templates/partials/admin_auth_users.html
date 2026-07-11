@@ -1,13 +1,13 @@
 {% set user_columns = [
     ("identity", "User"),
     ("status", "Account"),
-    ("tier", "Tier"),
+    ("tier", "Account type"),
     ("profile", "Profile"),
     ("activity", "Last opened"),
     ("created", "Joined"),
     ("id", "User ID"),
 ] %}
-{% set user_return_url = url_for('admin.admin_auth', tab='users', q=q, field=field, page=page, per_page=per_page) %}
+{% set user_return_url = url_for('admin.admin_auth', tab='users', q=q, field=field, sort=sort, order=order, page=page, per_page=per_page) %}
 
 <div class="admin-auth-users" data-auth-users-section>
     {% if error %}
@@ -16,11 +16,7 @@
 
     <section class="admin-card admin-directory-toolbar" aria-labelledby="admin-user-directory-title">
         <div class="admin-directory-toolbar__heading">
-            <div>
-                <p class="admin-eyebrow">User management</p>
-                <h2 id="admin-user-directory-title" class="admin-title admin-title--small">User directory</h2>
-                <p class="admin-subtitle admin-subtitle--compact">Find a record, review account context, and open the full user workspace.</p>
-            </div>
+            <h2 id="admin-user-directory-title" class="admin-title admin-title--small">User directory</h2>
             <span class="admin-directory-count" aria-label="{{ total_users }} {{ 'user' if total_users == 1 else 'users' }} total">
                 <strong>{{ total_users }}</strong>
                 <span>{{ 'user' if total_users == 1 else 'users' }}</span>
@@ -37,7 +33,7 @@
                         type="search"
                         name="q"
                         value="{{ q }}"
-                        placeholder="Search an exact email, username, or user ID"
+                        placeholder="Search name, username, email, or ID"
                         aria-describedby="admin-auth-users-search-help"
                         data-auth-users-search-input
                     />
@@ -46,20 +42,20 @@
                     <span class="sr-only">Search field</span>
                     <select id="admin-auth-users-search-field" name="field" data-auth-users-search-field>
                         <option value="" {% if not field %}selected{% endif %}>All identifiers</option>
+                        <option value="name" {% if field == 'name' %}selected{% endif %}>Name</option>
                         <option value="email" {% if field == 'email' %}selected{% endif %}>Email</option>
                         <option value="username" {% if field == 'username' %}selected{% endif %}>Username</option>
                         <option value="id" {% if field == 'id' %}selected{% endif %}>User ID</option>
                     </select>
                 </label>
-                <button class="admin-button admin-button--compact" type="submit">
+                <button class="admin-button admin-button--compact admin-directory-search__submit" type="submit" aria-label="Search users" title="Search users">
                     <span class="material-symbols-outlined" aria-hidden="true">search</span>
-                    Search
                 </button>
                 {% if q %}
                     <button class="admin-button admin-button--ghost admin-button--compact" type="button" data-auth-users-clear-search>Clear</button>
                 {% endif %}
             </form>
-            <p id="admin-auth-users-search-help" class="admin-directory-search__help">Search uses exact matching across the selected identifier.</p>
+            <p id="admin-auth-users-search-help" class="sr-only">Partial, case-insensitive search across the selected field.</p>
 
             <div class="admin-auth-columns-wrap">
                 <button
@@ -95,7 +91,7 @@
         {% if q %}
             <div class="admin-directory-search-state" role="status">
                 <span class="material-symbols-outlined" aria-hidden="true">filter_alt</span>
-                <span>Showing exact matches for <strong>{{ q }}</strong>{% if field %} in {{ field | replace('_', ' ') }}{% endif %}.</span>
+                <span>Matches for <strong>{{ q }}</strong>{% if field %} in {{ field | replace('_', ' ') }}{% endif %}.</span>
             </div>
         {% endif %}
     </section>
@@ -106,7 +102,16 @@
                 <thead>
                     <tr>
                         {% for key, label in user_columns %}
-                            <th data-column="{{ key }}">{{ label }}</th>
+                            <th data-column="{{ key }}"{% if key in ('identity', 'tier', 'profile', 'activity', 'created') %} aria-sort="{{ 'ascending' if sort == key and order == 'asc' else 'descending' if sort == key else 'none' }}"{% endif %}>
+                                {% if key in ('identity', 'tier', 'profile', 'activity', 'created') %}
+                                    <button class="admin-directory-sort{% if sort == key %} is-active{% endif %}" type="button" data-auth-users-sort="{{ key }}" data-auth-users-sort-order="{{ 'desc' if sort == key and order == 'asc' else 'asc' }}">
+                                        <span>{{ label }}</span>
+                                        <span class="material-symbols-outlined" aria-hidden="true">{{ 'arrow_downward' if sort == key and order == 'desc' else 'arrow_upward' if sort == key else 'unfold_more' }}</span>
+                                    </button>
+                                {% else %}
+                                    {{ label }}
+                                {% endif %}
+                            </th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -150,7 +155,7 @@
                                     {% endif %}
                                 </div>
                             </td>
-                            <td data-column="tier" data-label="Tier">
+                            <td data-column="tier" data-label="Account type">
                                 <form class="admin-tier-quick-form" method="post" action="{{ url_for('admin.update_user_tier', user_id=user.id) }}">
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                     <input type="hidden" name="section" value="overview" />
@@ -195,7 +200,7 @@
         <div class="admin-card admin-auth-users-empty">
             <span class="material-symbols-outlined" aria-hidden="true">person_search</span>
             <strong>No matching users</strong>
-            <p>Try a different exact identifier or clear the search.</p>
+            <p>Try another name, username, email, or ID fragment.</p>
         </div>
     {% endif %}
 

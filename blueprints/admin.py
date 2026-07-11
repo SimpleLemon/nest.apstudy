@@ -557,43 +557,47 @@ def _user_summary(user_doc):
     }
 
 
-def _search_users(query, field):
-    query = (query or "").strip()
-    if not query:
-        return []
+def _search_users(users, query, field):
+    """Return case-insensitive partial matches from the admin user directory."""
+    needle = (query or "").strip().casefold()
+    if not needle:
+        return list(users)
 
-    if field == "id":
-        doc = get_row_safe(COLLECTIONS["users"], query, allow_missing=True)
-        return [doc] if doc else []
+    searchable_fields = {
+        "name": ("name",),
+        "email": ("email",),
+        "username": ("username",),
+        "id": ("$id", "id"),
+    }
+    keys = searchable_fields.get(field, ("name", "username", "email", "$id", "id"))
+    return [
+        user for user in users
+        if any(needle in str(user.get(key) or "").casefold() for key in keys)
+    ]
 
-    if field in {"email", "username"}:
-        return list_rows_all(
-            COLLECTIONS["users"],
-            [Query.equal(field, [query]), Query.order_desc("created_at")],
-        )
 
-    results = []
-    seen_ids = set()
+AUTH_USER_SORTS = {"identity", "tier", "profile", "activity", "created"}
 
-    doc = get_row_safe(COLLECTIONS["users"], query, allow_missing=True)
-    if doc:
-        row_id = _row_id(doc)
-        if row_id and row_id not in seen_ids:
-            seen_ids.add(row_id)
-            results.append(doc)
 
-    for key in ("email", "username"):
-        rows = list_rows_all(
-            COLLECTIONS["users"],
-            [Query.equal(key, [query]), Query.order_desc("created_at")],
-        )
-        for row in rows:
-            row_id = _row_id(row)
-            if row_id and row_id not in seen_ids:
-                seen_ids.add(row_id)
-                results.append(row)
+def _sort_auth_users(users, sort_key, sort_order):
+    reverse = sort_order == "desc"
 
-    return results
+    def normalized(value):
+        return str(value or "").strip().casefold()
+
+    def sort_value(user):
+        if sort_key == "identity":
+            return (normalized(user.get("name") or user.get("username")), normalized(user.get("email")))
+        if sort_key == "tier":
+            tier = normalize_tier(user.get("tier"))
+            return (normalized(TIER_LABELS[tier]), normalized(user.get("name") or user.get("username")))
+        if sort_key == "profile":
+            return (normalized(user.get("school")), normalized(user.get("major") or user.get("education_level")))
+        if sort_key == "activity":
+            return normalized(user.get("last_login"))
+        return normalized(user.get("created_at"))
+
+    return sorted(users, key=sort_value, reverse=reverse)
 
 
 def _count_rows(table_id, queries):
@@ -1018,6 +1022,12 @@ def _auth_page_context(**extra):
 def _load_auth_users_section():
     query = (request.args.get("q") or "").strip()
     field = (request.args.get("field") or "").strip()
+    sort_key = (request.args.get("sort") or "created").strip().lower()
+    if sort_key not in AUTH_USER_SORTS:
+        sort_key = "created"
+    sort_order = (request.args.get("order") or "desc").strip().lower()
+    if sort_order not in {"asc", "desc"}:
+        sort_order = "desc"
     try:
         page = max(1, int(request.args.get("page") or 1))
     except (TypeError, ValueError):
@@ -1034,29 +1044,27 @@ def _load_auth_users_section():
     users = []
     total_pages = 1
     try:
-        if query:
-            matched = _search_users(query, field)
-            total_users = len(matched)
-            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
-            if page > total_pages:
-                page = total_pages
-            start = (page - 1) * per_page
-            users = matched[start:start + per_page]
-        else:
+        if not query and sort_key == "created" and sort_order == "desc":
             offset = (page - 1) * per_page
             response = list_rows_safe(
                 COLLECTIONS["users"],
-                [
-                    Query.order_desc("created_at"),
-                    Query.limit(per_page),
-                    Query.offset(offset),
-                ],
+                [Query.order_desc("created_at"), Query.limit(per_page), Query.offset(offset)],
             )
             users = response.get("rows", [])
             total_users = int(response.get("total") or 0)
             total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
             if page > total_pages and total_users:
                 page = total_pages
+        else:
+            all_users = list_rows_all(COLLECTIONS["users"], [Query.order_desc("created_at")])
+            matched = _search_users(all_users, query, field)
+            matched = _sort_auth_users(matched, sort_key, sort_order)
+            total_users = len(matched)
+            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
+            if page > total_pages:
+                page = total_pages
+            start = (page - 1) * per_page
+            users = matched[start:start + per_page]
     except AppwriteException:
         logger.exception("Failed to load admin user list")
         users = []
@@ -1068,6 +1076,8 @@ def _load_auth_users_section():
         "users": [_user_summary(user) for user in users],
         "q": query,
         "field": field,
+        "sort": sort_key,
+        "order": sort_order,
         "page": page,
         "per_page": per_page,
         "total_users": total_users,

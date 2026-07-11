@@ -2,6 +2,7 @@
   const csrfToken = document.getElementById("admin-apswiftly-csrf-token")?.value || "";
   const actionButtons = Array.from(document.querySelectorAll("[data-apswiftly-action]"));
   const statusEndpoint = "/admin/apswiftly/status";
+  const log = document.querySelector("[data-apswiftly-log]");
   const refreshMs = 15000;
   let requestPending = false;
 
@@ -9,6 +10,18 @@
     if (window.APStudyToast) {
       window.APStudyToast.show({ message, type: isError ? "error" : "success" });
     }
+  }
+
+  function appendLog(message, isError = false) {
+    if (!log) return;
+    const line = document.createElement("span");
+    if (isError) line.classList.add("is-error");
+    const timestamp = document.createElement("time");
+    timestamp.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    line.append(timestamp, document.createTextNode(message));
+    log.append(line);
+    while (log.children.length > 6) log.firstElementChild?.remove();
+    log.scrollTop = log.scrollHeight;
   }
 
   function setText(role, text) {
@@ -137,6 +150,7 @@
 
       requestPending = true;
       syncButtons();
+      appendLog(` $ ${action}`);
       try {
         const body = {};
         if (button.dataset.apswiftlyConfirmValue) {
@@ -144,6 +158,7 @@
         }
         const payload = await postJson(`/admin/apswiftly/${encodeURIComponent(action)}`, body);
         setNotice(payload.message || "APSwiftly command completed.");
+        appendLog(` ✓ ${payload.message || "Command completed."}`);
         const inputId = button.dataset.apswiftlyConfirmInput;
         if (inputId) {
           const input = document.getElementById(inputId);
@@ -155,6 +170,7 @@
       } catch (error) {
         console.error("[Admin APSwiftly] Action failed", action, error);
         setNotice(error.message || "Unable to run APSwiftly command.", true);
+        appendLog(` ! ${error.message || "Command failed."}`, true);
       } finally {
         requestPending = false;
         syncButtons();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Admin - {{ user.name or user.id }}</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -24,9 +24,7 @@
         <header class="admin-header admin-page-header admin-user-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">User record</p>
                 <h1 class="admin-title">{{ display_name }}</h1>
-                <p class="admin-subtitle">A concise account view with the user’s profile, activity, and stored workspace data.</p>
             </div>
             <a class="admin-button admin-button--ghost" href="{{ return_to }}">
                 <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>

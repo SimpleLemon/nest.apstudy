@@ -20,6 +20,8 @@
   let usersQuery = {
     q: "",
     field: "",
+    sort: "created",
+    order: "desc",
     page: 1,
     per_page: window.adminAuthUsersPrefs?.readStoredPerPage?.() || 10,
   };
@@ -80,6 +82,8 @@
     if (tab === "users") {
       if (usersQuery.q) url.searchParams.set("q", usersQuery.q);
       if (usersQuery.field) url.searchParams.set("field", usersQuery.field);
+      url.searchParams.set("sort", usersQuery.sort || "created");
+      url.searchParams.set("order", usersQuery.order || "desc");
       url.searchParams.set("page", String(usersQuery.page || 1));
       url.searchParams.set("per_page", String(usersQuery.per_page || 10));
     }
@@ -105,6 +109,8 @@
       }
       url.searchParams.set("page", String(usersQuery.page || 1));
       url.searchParams.set("per_page", String(usersQuery.per_page || 10));
+      url.searchParams.set("sort", usersQuery.sort || "created");
+      url.searchParams.set("order", usersQuery.order || "desc");
       url.searchParams.delete("status");
     } else if (tab === "channel-requests") {
       url.searchParams.set("status", channelStatus);
@@ -112,12 +118,16 @@
       url.searchParams.delete("field");
       url.searchParams.delete("page");
       url.searchParams.delete("per_page");
+      url.searchParams.delete("sort");
+      url.searchParams.delete("order");
     } else {
       url.searchParams.delete("status");
       url.searchParams.delete("q");
       url.searchParams.delete("field");
       url.searchParams.delete("page");
       url.searchParams.delete("per_page");
+      url.searchParams.delete("sort");
+      url.searchParams.delete("order");
     }
     window.history.replaceState({}, "", url);
   }
@@ -198,6 +208,8 @@
     usersQuery = {
       q: url.searchParams.get("q") || "",
       field: url.searchParams.get("field") || "",
+      sort: url.searchParams.get("sort") || "created",
+      order: url.searchParams.get("order") === "asc" ? "asc" : "desc",
       page: Number.isFinite(page) && page > 0 ? page : 1,
       per_page: allowed.has(perPageRaw) ? perPageRaw : storedPerPage,
     };
@@ -222,12 +234,16 @@
     if (typeof detail.per_page === "number") {
       usersQuery.per_page = detail.per_page;
     }
+    if (typeof detail.sort === "string") {
+      usersQuery.sort = detail.sort;
+      usersQuery.order = detail.order === "desc" ? "desc" : "asc";
+    }
 
     if (typeof detail.pageDelta === "number") {
       usersQuery.page = Math.max(1, (usersQuery.page || 1) + detail.pageDelta);
     } else if (typeof detail.page === "number" && detail.page > 0) {
       usersQuery.page = detail.page;
-    } else if (detail.q !== undefined || detail.field !== undefined || detail.per_page !== undefined) {
+    } else if (detail.q !== undefined || detail.field !== undefined || detail.per_page !== undefined || detail.sort !== undefined) {
       usersQuery.page = 1;
     }
 

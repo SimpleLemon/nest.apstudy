@@ -642,8 +642,10 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("User directory", html)
         self.assertIn("data-auth-columns-trigger", html)
         self.assertIn('data-auth-users-search', html)
-        self.assertIn("Search an exact email, username, or user ID", html)
+        self.assertIn("Search name, username, email, or ID", html)
         self.assertIn('data-auth-users-search-field', html)
+        self.assertIn('data-auth-users-sort="identity"', html)
+        self.assertIn('data-auth-users-sort="tier"', html)
         self.assertIn('data-column="identity"', html)
         self.assertIn('data-column="id"', html)
         self.assertIn("user@example.com", html)
@@ -653,6 +655,41 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn("admin-directory-identity__name--emory", html)
         self.assertIn("Total: 1", html)
         self.assertNotIn(">Emory<", html)
+
+    def test_admin_auth_user_search_supports_partial_case_insensitive_matches(self):
+        users = [
+            {**self.user_doc, "$id": "user-ada", "name": "Ada Lovelace", "username": "ada.codes", "email": "ada@example.com"},
+            {**self.user_doc, "$id": "user-grace", "name": "Grace Hopper", "username": "ghopper", "email": "grace@example.com"},
+        ]
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_all", return_value=users), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users?q=LOVE&field=name")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Ada Lovelace", html)
+        self.assertNotIn("Grace Hopper", html)
+        self.assertIn("Matches for", html)
+
+    def test_admin_auth_users_can_sort_by_identity(self):
+        users = [
+            {**self.user_doc, "$id": "user-z", "name": "Zed User", "email": "zed@example.com"},
+            {**self.user_doc, "$id": "user-a", "name": "Ada User", "email": "ada@example.com"},
+        ]
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "list_rows_all", return_value=users), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/auth/sections/users?sort=identity&order=asc")
+
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertLess(html.index("Ada User"), html.index("Zed User"))
+        self.assertIn('aria-sort="ascending"', html)
 
     def test_admin_auth_users_section_pagination_footer(self):
         with self.app.test_client() as client:

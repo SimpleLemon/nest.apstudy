@@ -1,9 +1,9 @@
 (() => {
-  const COLUMN_STORAGE_KEY = "nest-admin-auth-user-columns-v2";
+  const COLUMN_STORAGE_KEY = "nest-admin-auth-user-columns-v3";
   const PER_PAGE_STORAGE_KEY = "nest-admin-auth-users-per-page";
   const ALLOWED_PER_PAGE = new Set([5, 10, 25, 50, 100]);
-  const DEFAULT_COLUMNS = ["identity", "status", "profile", "activity", "created"];
-  const AVAILABLE_COLUMNS = ["identity", "status", "profile", "activity", "created", "id"];
+  const DEFAULT_COLUMNS = ["identity", "tier", "profile", "activity", "created"];
+  const AVAILABLE_COLUMNS = ["identity", "status", "tier", "profile", "activity", "created", "id"];
 
   function readStoredColumns() {
     try {
@@ -166,6 +166,15 @@
     });
 
     section.addEventListener("click", (event) => {
+      const sortButton = event.target.closest("[data-auth-users-sort]");
+      if (sortButton) {
+        dispatchUsersQueryChange({
+          sort: sortButton.dataset.authUsersSort,
+          order: sortButton.dataset.authUsersSortOrder || "asc",
+          page: 1,
+        });
+        return;
+      }
       const pageButton = event.target.closest("[data-auth-users-page]");
       if (!pageButton || pageButton.disabled) return;
       const direction = pageButton.dataset.authUsersPage;

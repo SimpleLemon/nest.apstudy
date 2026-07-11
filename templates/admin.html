@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Admin Home - APStudy Nest</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -23,14 +23,8 @@
         <header class="admin-header admin-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">Operations</p>
                 <h1 class="admin-title">System overview</h1>
-                <p class="admin-subtitle">Monitor service health, storage capacity, and the controls that keep Nest running.</p>
             </div>
-            <span class="admin-page-header__context">
-                <span class="material-symbols-outlined" aria-hidden="true">monitor_heart</span>
-                Live operations
-            </span>
         </header>
 
         {% if error %}
@@ -53,7 +47,6 @@
             <div class="admin-system-header">
                 <div class="admin-system-heading">
                     <h2 id="system-monitor-title" class="admin-title admin-title--small">System Monitor</h2>
-                    <p class="admin-subtitle admin-subtitle--compact">Live server health updates every 15 seconds.</p>
                     <div class="admin-system-meta">
                         <div class="admin-field">
                             <span class="admin-field-label">OS</span>
@@ -139,7 +132,6 @@
             <div class="admin-system-header">
                 <div class="admin-system-heading">
                     <h2 id="scheduler-controls-title" class="admin-title admin-title--small">System Controls</h2>
-                    <p class="admin-subtitle admin-subtitle--compact">Pause or resume the scheduler, or pull the latest Nest repository changes.</p>
                 </div>
             </div>
             <div id="admin-system-notice" class="admin-inline-notice admin-system-notice" role="status" hidden></div>

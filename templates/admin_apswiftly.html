@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Admin APSwiftly - APStudy Nest</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -23,87 +23,40 @@
         <header class="admin-header admin-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">Service management</p>
                 <h1 class="admin-title">APSwiftly</h1>
-                <p class="admin-subtitle">Check the bot’s service health and make controlled operational changes.</p>
             </div>
-            <span class="admin-page-header__context">
-                <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
-                Bot operations
-            </span>
         </header>
 
-        <section class="admin-card admin-apswiftly-status-card" aria-labelledby="apswiftly-status-title">
-            <div class="admin-section-heading">
-                <div>
-                    <h2 id="apswiftly-status-title" class="admin-title admin-title--small">Bot Status</h2>
-                    <p class="admin-subtitle admin-subtitle--compact">Systemd service state and control API reachability.</p>
-                </div>
+        <section class="admin-apswiftly-console" aria-labelledby="apswiftly-console-title">
+            <div class="admin-apswiftly-console__bar">
+                <div class="admin-apswiftly-console__lights" aria-hidden="true"><span></span><span></span><span></span></div>
+                <h2 id="apswiftly-console-title">apswiftly://operations</h2>
+                <span class="admin-apswiftly-console__live"><span aria-hidden="true"></span>LIVE</span>
             </div>
-            {% from "partials/admin_statistic_cards.html" import statistic_card_row %}
-            {% set apswiftly_cells = [
-                {
-                    'title': 'Service',
-                    'value': apswiftly_status.service_state_display or 'Unknown',
-                    'value_tag': 'strong',
-                    'value_attrs': 'data-apswiftly-role="service-state"',
-                },
-                {
-                    'title': 'Control API',
-                    'value': 'Reachable' if apswiftly_status.api_reachable else 'Unreachable',
-                    'value_tag': 'strong',
-                    'value_attrs': 'data-apswiftly-role="api-state"',
-                },
-                {
-                    'title': 'Last Checked',
-                    'value': apswiftly_status.checked_at_display or '—',
-                    'value_tag': 'strong',
-                    'value_attrs': 'data-apswiftly-role="checked-at" data-apswiftly-checked-at="' ~ (apswiftly_status.checked_at or '') ~ '"',
-                },
-            ] %}
-            {{ statistic_card_row(apswiftly_cells, {
-                'variant': 'chips',
-                'columns': 3,
-                'row_class': 'admin-apswiftly-meta',
-            }) }}
-        </section>
-
-        <section class="admin-card admin-apswiftly-controls-card" aria-labelledby="apswiftly-controls-title">
-            <div class="admin-section-heading">
-                <div>
-                    <h2 id="apswiftly-controls-title" class="admin-title admin-title--small">Bot Controls</h2>
-                    <p class="admin-subtitle admin-subtitle--compact">Hot-reload commands, refresh slash registrations, or cycle the bot process.</p>
+            <div class="admin-apswiftly-console__body">
+                <div class="admin-apswiftly-status" aria-label="Bot status">
+                    <div><span class="admin-apswiftly-prompt">$</span><span>systemctl status apswiftly</span></div>
+                    <dl>
+                        <div><dt>service</dt><dd data-apswiftly-role="service-state">{{ apswiftly_status.service_state_display or 'Unknown' }}</dd></div>
+                        <div><dt>control_api</dt><dd data-apswiftly-role="api-state">{{ 'Reachable' if apswiftly_status.api_reachable else 'Unreachable' }}</dd></div>
+                        <div><dt>checked</dt><dd data-apswiftly-role="checked-at" data-apswiftly-checked-at="{{ apswiftly_status.checked_at or '' }}">{{ apswiftly_status.checked_at_display or '—' }}</dd></div>
+                    </dl>
                 </div>
-            </div>
-            <input type="hidden" id="admin-apswiftly-csrf-token" name="csrf_token" value="{{ csrf_token() }}" />
-            <div class="admin-apswiftly-actions">
-                <button class="admin-button admin-control-tile" type="button" data-apswiftly-action="reload">
-                    <span class="material-symbols-outlined" aria-hidden="true">sync</span>
-                    Hot-Reload Commands
-                </button>
-                <button class="admin-button admin-control-tile" type="button" data-apswiftly-action="refresh-slash">
-                    <span class="material-symbols-outlined" aria-hidden="true">bolt</span>
-                    Refresh Slash Commands
-                </button>
-                <div class="admin-apswiftly-danger-group">
-                    <label class="admin-apswiftly-confirm-label" for="apswiftly-shutdown-confirm">
-                        Type <strong>SHUTDOWN</strong> to confirm graceful shutdown
-                        <input id="apswiftly-shutdown-confirm" class="admin-form-input" type="text" name="shutdown_confirm" placeholder="SHUTDOWN" autocomplete="off" />
-                    </label>
-                    <button class="admin-button admin-button--danger admin-control-tile" type="button" data-apswiftly-action="shutdown" data-apswiftly-confirm-input="apswiftly-shutdown-confirm" data-apswiftly-confirm-value="SHUTDOWN">
-                        <span class="material-symbols-outlined" aria-hidden="true">power_settings_new</span>
-                        Graceful Shutdown
-                    </button>
+                <div class="admin-apswiftly-log" aria-live="polite" data-apswiftly-log>
+                    <span><time>ready</time> Control channel initialized.</span>
                 </div>
-                <div class="admin-apswiftly-danger-group">
-                    <label class="admin-apswiftly-confirm-label" for="apswiftly-restart-confirm">
-                        Type <strong>RESTART</strong> to confirm service restart
-                        <input id="apswiftly-restart-confirm" class="admin-form-input" type="text" name="restart_confirm" placeholder="RESTART" autocomplete="off" />
-                    </label>
-                    <button class="admin-button admin-button--danger admin-control-tile" type="button" data-apswiftly-action="restart" data-apswiftly-confirm-input="apswiftly-restart-confirm" data-apswiftly-confirm-value="RESTART">
-                        <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
-                        Service Restart
-                    </button>
+                <input type="hidden" id="admin-apswiftly-csrf-token" name="csrf_token" value="{{ csrf_token() }}" />
+                <div class="admin-apswiftly-actions" aria-label="Bot controls">
+                    <button class="admin-apswiftly-command" type="button" data-apswiftly-action="reload"><span class="material-symbols-outlined" aria-hidden="true">sync</span><span><strong>Hot-reload</strong><small>commands</small></span></button>
+                    <button class="admin-apswiftly-command" type="button" data-apswiftly-action="refresh-slash"><span class="material-symbols-outlined" aria-hidden="true">bolt</span><span><strong>Refresh</strong><small>slash commands</small></span></button>
+                    <div class="admin-apswiftly-danger-group">
+                        <label for="apswiftly-shutdown-confirm">Shutdown confirmation</label>
+                        <div><input id="apswiftly-shutdown-confirm" type="text" name="shutdown_confirm" placeholder="type SHUTDOWN" autocomplete="off" /><button class="admin-apswiftly-command admin-apswiftly-command--danger" type="button" data-apswiftly-action="shutdown" data-apswiftly-confirm-input="apswiftly-shutdown-confirm" data-apswiftly-confirm-value="SHUTDOWN"><span class="material-symbols-outlined" aria-hidden="true">power_settings_new</span><span><strong>Shutdown</strong><small>graceful</small></span></button></div>
+                    </div>
+                    <div class="admin-apswiftly-danger-group">
+                        <label for="apswiftly-restart-confirm">Restart confirmation</label>
+                        <div><input id="apswiftly-restart-confirm" type="text" name="restart_confirm" placeholder="type RESTART" autocomplete="off" /><button class="admin-apswiftly-command admin-apswiftly-command--danger" type="button" data-apswiftly-action="restart" data-apswiftly-confirm-input="apswiftly-restart-confirm" data-apswiftly-confirm-value="RESTART"><span class="material-symbols-outlined" aria-hidden="true">restart_alt</span><span><strong>Restart</strong><small>service</small></span></button></div>
+                    </div>
                 </div>
             </div>
         </section>

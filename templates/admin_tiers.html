@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Admin Tiers - APStudy Nest</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -21,11 +21,8 @@
         <header class="admin-header admin-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">Access management</p>
                 <h1 class="admin-title">Tiers &amp; limits</h1>
-                <p class="admin-subtitle">Configure role defaults and apply a tier to users from Auth.</p>
             </div>
-            <span class="admin-page-header__context"><span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>Entitlements</span>
         </header>
 
         {% if status == 'tiers-updated' %}<div class="admin-alert admin-alert--success">Tier definitions updated.</div>{% endif %}

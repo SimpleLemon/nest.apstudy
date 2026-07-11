@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>Auth - APStudy Nest Admin</title>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
@@ -23,19 +23,13 @@
         <header class="admin-header admin-page-header">
             <div>
                 {% include "_admin_breadcrumbs.html" %}
-                <p class="admin-eyebrow">Access management</p>
                 <h1 class="admin-title">People &amp; permissions{% if pending_request_count %} <span class="admin-title-count">({{ pending_request_count }} pending)</span>{% endif %}</h1>
-                <p class="admin-subtitle">Review user records, course notifications, and pending community requests from one workspace.</p>
                 <nav class="admin-segmented" aria-label="Auth sections" id="admin-auth-tabs">
                     <button class="admin-segmented-btn{% if initial_tab == 'users' %} is-active{% endif %}" type="button" data-auth-tab="users">Users</button>
                     <button class="admin-segmented-btn{% if initial_tab == 'course-tracking' %} is-active{% endif %}" type="button" data-auth-tab="course-tracking">Course Tracking</button>
                     <button class="admin-segmented-btn{% if initial_tab == 'channel-requests' %} is-active{% endif %}" type="button" data-auth-tab="channel-requests">Channel Requests</button>
                 </nav>
             </div>
-            <span class="admin-page-header__context">
-                <span class="material-symbols-outlined" aria-hidden="true">shield_person</span>
-                Admin workspace
-            </span>
         </header>
 
         {% if error %}
