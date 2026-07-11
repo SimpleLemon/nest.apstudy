@@ -75,6 +75,46 @@
   letter-spacing: -0.02em;
 }
 
+.chat-members-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.chat-members-title > div {
+  min-width: 0;
+}
+
+.chat-members-title h2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-profile-back {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+}
+
+.chat-profile-back:hover,
+.chat-profile-back:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+}
+
+.chat-profile-back[hidden] {
+  display: none;
+}
+
 .chat-topbar-actions {
   display: inline-flex;
   align-items: center;
@@ -459,14 +499,36 @@
 .chat-inline-profile-popover {
   position: fixed;
   z-index: 40;
-  width: min(320px, calc(100vw - 16px));
-  max-height: min(70vh, 520px);
-  overflow: auto;
+  width: min(360px, calc(100vw - 16px));
+  max-height: calc(100dvh - 16px);
+  overflow: visible;
   border-radius: var(--radius-card);
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 65%, transparent);
   background: var(--color-surface-container);
-  box-shadow: 0 12px 32px color-mix(in srgb, var(--color-shadow) 24%, transparent);
-  padding: 10px;
+  box-shadow: 0 6px 8px color-mix(in srgb, var(--color-shadow) 24%, transparent);
+  padding: 8px;
+}
+
+.chat-inline-profile-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-control);
+  background: color-mix(in srgb, var(--color-surface-container-high) 90%, transparent);
+  color: var(--color-on-surface);
+  cursor: pointer;
+}
+
+.chat-inline-profile-close:hover,
+.chat-inline-profile-close:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface-container-high));
+  color: var(--color-primary);
 }
 
 .chat-inline-profile-popover .chat-profile-actions {
@@ -813,6 +875,7 @@
 }
 
 .chat-member-list {
+  flex: 1;
   min-height: 0;
   overflow-y: auto;
   padding: 12px;
@@ -820,39 +883,46 @@
 
 .chat-member {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 12px;
   align-items: center;
   width: 100%;
-  padding: 8px;
+  min-height: 62px;
+  padding: 10px;
   border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-on-surface);
   cursor: pointer;
   text-align: left;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
-.chat-member:hover {
+.chat-member:hover,
+.chat-member:focus-visible {
   background: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
-.chat-member img {
-  width: 36px;
-  height: 36px;
+.chat-member-avatar {
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-avatar);
   object-fit: cover;
 }
 
-.chat-member span {
+.chat-member-copy {
+  min-width: 0;
   display: block;
   color: var(--color-on-surface-variant);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .chat-member strong {
   display: block;
   min-width: 0;
   color: var(--color-on-surface);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -861,43 +931,95 @@
 .chat-member small {
   display: block;
   min-width: 0;
+  margin-top: 3px;
+  color: var(--color-on-surface-variant);
+  font-size: 13px;
+  line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.chat-member-tier {
+  z-index: 2;
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.chat-member-tier .tier-badge {
+  width: 28px;
+  height: 28px;
+}
+
+.chat-member-tier::after {
+  top: 50%;
+  right: calc(100% + 8px);
+  left: auto;
+  white-space: nowrap;
+  transform: translate(3px, -50%);
+}
+
+.chat-member-tier:hover::after,
+.chat-member-tier:focus-visible::after,
+.chat-member:focus-visible .chat-member-tier::after {
+  transform: translate(0, -50%);
+}
+
+.chat-member-tier::before {
+  top: 50%;
+  right: calc(100% - 4px);
+  left: auto;
+  border-top-color: transparent;
+  border-left-color: var(--color-surface-container-high, #30343d);
+  transform: translate(3px, -50%);
+}
+
+.chat-member-tier:hover::before,
+.chat-member-tier:focus-visible::before,
+.chat-member:focus-visible .chat-member-tier::before {
+  transform: translate(0, -50%);
+}
+
+.chat-member:focus-visible .chat-member-tier::before,
+.chat-member:focus-visible .chat-member-tier::after {
+  opacity: 1;
+}
+
 .chat-profile-panel {
-  border-top: 1px solid var(--color-outline-variant);
-  padding: 14px;
+  flex: 1;
   min-height: 0;
-  overflow-y: auto;
+  overflow: hidden;
+  padding: 12px;
 }
 
 .chat-profile-card {
+  min-height: 0;
   width: 100%;
 }
 
 .chat-profile-card .profile-tile {
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 76%, transparent);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-card);
   background: var(--color-surface-container-low);
-  box-shadow: 0 12px 28px color-mix(in srgb, #000 18%, transparent);
+  box-shadow: none;
 }
 
 .chat-profile-card .profile-tile-banner {
-  height: 74px;
+  height: 68px;
+  overflow: hidden;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
   background: var(--profile-banner-color, #fecae1);
 }
 
 .chat-profile-card .profile-tile-body {
-  padding: 0 14px 14px;
+  padding: 0 14px 12px;
 }
 
 .chat-profile-card .profile-tile-avatar-frame {
-  width: 76px;
-  height: 76px;
-  margin-top: -38px;
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
   border: 4px solid var(--color-surface-container-low);
   border-radius: var(--radius-avatar);
   background: var(--color-surface-container-high);
@@ -912,120 +1034,128 @@
 }
 
 .chat-profile-card .profile-tile-heading {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .chat-profile-card .profile-tile-heading h3 {
   margin: 0;
   color: var(--color-on-surface);
-  font-size: 18px;
+  font-size: 20px;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.15;
   letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.chat-profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin-top: 5px;
 }
 
 .chat-profile-card .profile-tile-heading p {
-  margin: 3px 0 0;
+  margin: 0;
   color: var(--color-on-surface-variant);
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 .chat-profile-card .profile-tile-heading .tier-badge-trigger {
-  margin-top: 8px;
-  min-width: 38px;
-  min-height: 38px;
+  margin-top: 6px;
+  min-width: 42px;
+  min-height: 42px;
 }
 
 .chat-profile-card .profile-tile-heading .tier-badge {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
 }
 
 .chat-profile-card .profile-tile-details {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-top: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+  margin: 10px 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 58%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 58%, transparent);
 }
 
 .chat-profile-card .profile-tile-details div {
-  position: relative;
-  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
-  border-radius: var(--radius-control);
-  background: color-mix(in srgb, var(--color-surface-container-high) 72%, transparent);
-  padding: 8px 10px;
+  min-width: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 42%, transparent);
 }
 
-.chat-profile-card .profile-tile-details span {
+.chat-profile-card .profile-tile-details .profile-tile-detail-wide {
+  grid-column: 1 / -1;
+}
+
+.chat-profile-card .profile-tile-details div:last-child {
+  border-bottom: 0;
+}
+
+.chat-profile-card .profile-tile-details dt {
   display: block;
+  margin: 0;
   color: var(--color-on-surface-variant);
-  font-size: var(--text-meta);
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-.chat-profile-card .profile-tile-details strong {
+.chat-profile-card .profile-tile-details dd {
   display: block;
-  margin-top: 3px;
+  margin: 2px 0 0;
   color: var(--color-on-surface);
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1.3;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
   overflow-wrap: anywhere;
 }
 
-.chat-profile-card .profile-tile-detail-emory {
-  background: #012169;
-  border-color: rgba(255, 184, 28, 0.44);
-}
-
-.chat-profile-card .profile-tile-detail-emory span {
-  color: rgba(255, 184, 28, 0.72);
-}
-
-.chat-profile-card .profile-tile-detail-emory strong {
+.chat-profile-card .profile-tile-detail-emory dd {
   color: #ffb81c;
 }
 
 .chat-profile-card .profile-tile-detail-early-member {
-  border-color: transparent;
-  background:
-    linear-gradient(#30333d, #30333d) padding-box,
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), #ffdf6b 18%, #b88724 48%, rgba(255, 255, 255, 0.12)) border-box;
+  border-bottom-color: color-mix(in srgb, #d4af37 42%, transparent);
 }
 
-.chat-profile-card .profile-tile-detail-early-member::after {
-  content: "";
-  position: absolute;
-  top: -1px;
-  right: 10px;
-  width: 42px;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, #fff4a8, #ffbf28);
-  transform: skewX(-28deg);
-  transform-origin: right center;
-}
-
-.chat-profile-presence {
-  margin-top: 6px !important;
+.chat-profile-card .profile-tile-detail-early-member dd {
+  color: color-mix(in srgb, #ffd666 82%, var(--color-on-surface));
 }
 
 .chat-profile-actions {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .chat-profile-actions button,
 .chat-profile-actions a {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
   border-radius: var(--radius-control);
-  background: var(--color-surface-container-high);
-  color: var(--color-on-surface);
-  padding: 8px 10px;
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface-container-high));
+  color: var(--color-primary);
+  padding: 9px 12px;
   font-size: 13px;
+  font-weight: 750;
   text-decoration: none;
+}
+
+.chat-profile-actions button:hover,
+.chat-profile-actions button:focus-visible,
+.chat-profile-actions a:hover,
+.chat-profile-actions a:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 22%, var(--color-surface-container-high));
 }
 
 .chat-dm-search {
@@ -1085,12 +1215,16 @@
 }
 
 .chat-members.is-dm-profile .chat-member-list,
-.chat-members.is-dm-profile .chat-members-head > div {
+.chat-members.is-profile-view .chat-member-list {
   display: none;
 }
 
-.chat-members.is-dm-profile .chat-profile-panel {
-  border-top: 0;
+.chat-members.is-dm-profile .chat-profile-panel,
+.chat-members.is-profile-view .chat-profile-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @media (min-width: 1101px) {
@@ -1240,5 +1374,54 @@
   .chat-preview img {
     width: 100%;
     max-height: 180px;
+  }
+
+  .chat-inline-profile-popover {
+    width: min(340px, calc(100vw - 12px));
+    padding: 6px;
+  }
+
+  .chat-profile-panel {
+    padding: 10px;
+  }
+}
+
+@media (max-height: 680px) {
+  .chat-profile-card .profile-tile-banner {
+    height: 56px;
+  }
+
+  .chat-profile-card .profile-tile-avatar-frame {
+    width: 64px;
+    height: 64px;
+    margin-top: -32px;
+  }
+
+  .chat-profile-card .profile-tile-heading h3 {
+    font-size: 18px;
+  }
+
+  .chat-profile-card .profile-tile-heading .tier-badge-trigger,
+  .chat-profile-card .profile-tile-heading .tier-badge {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .chat-profile-card .profile-tile-details div {
+    padding-block: 5px;
+  }
+
+  .chat-profile-actions {
+    margin-top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-member,
+  .chat-rail,
+  .chat-members {
+    transition: none;
   }
 }

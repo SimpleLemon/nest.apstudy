@@ -461,20 +461,29 @@ test("chat announcement unread banner auto-reads small ranges and marks read on 
   assert.match(script, /read_state/);
 });
 
-test("chat DM pane uses compact public profile card fields", async () => {
+test("chat profile views use readable compact fields and tier badges without internal scrolling", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");
+  const profileStyles = await sourceFor("static/css/user-profile.css");
+  const profileTemplate = await sourceFor("templates/user_profile.html");
 
   for (const marker of ["profile-tile", "profile-tile-banner", "profile-tile-details", "Member Since"]) {
     assert.match(script, new RegExp(marker));
   }
   assert.match(script, /profileDetail\("Education"/);
+  assert.match(script, /function tierBadgeMarkup/);
+  assert.match(script, /function memberTierBadgeMarkup/);
+  assert.match(script, /function showMemberProfile/);
   assert.match(script, /profile-tile-detail-emory/);
   assert.match(script, /profile-tile-detail-early-member/);
   assert.match(styles, /\.chat-profile-card \.profile-tile/);
-  assert.match(styles, /background: #012169/);
-  assert.match(styles, /linear-gradient\(135deg, rgba\(255, 255, 255, 0\.12\), #ffdf6b 18%, #b88724 48%/);
-  assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member::after/);
+  assert.match(styles, /\.chat-profile-panel\s*\{[\s\S]*overflow: hidden/);
+  assert.match(styles, /\.chat-inline-profile-popover\s*\{[\s\S]*overflow: visible/);
+  assert.match(styles, /\.chat-profile-card \.profile-tile-details dt/);
+  assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member dd/);
+  assert.match(profileStyles, /\.user-profile-card \.profile-tile\s*\{[\s\S]*aspect-ratio: auto/);
+  assert.match(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*width: 48px/);
+  assert.match(profileTemplate, /profile\.tier_badge/);
 });
 
 test("chat online users pane has desktop collapse controls", async () => {
@@ -487,6 +496,8 @@ test("chat online users pane has desktop collapse controls", async () => {
   assert.doesNotMatch(template, /data-collapse-members/);
   assert.match(script, /profileToggle/);
   assert.match(template, /data-restore-members/);
+  assert.match(template, /data-profile-back/);
+  assert.match(template, /chat-members-context/);
   assert.match(template, /Online/);
   assert.match(template, /Online users and profile/);
   assert.match(script, /setMembersCollapsed/);

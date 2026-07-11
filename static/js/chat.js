@@ -128,9 +128,11 @@
     sendButton: document.querySelector(".chat-send-button"),
     members: document.getElementById("chat-members"),
     memberList: document.getElementById("chat-member-list"),
+    membersContext: document.getElementById("chat-members-context"),
     membersCount: document.getElementById("chat-members-count"),
     membersRestoreCount: document.getElementById("chat-members-restore-count"),
     profilePanel: document.getElementById("chat-profile-panel"),
+    profileBack: document.querySelector("[data-profile-back]"),
     profileToggle: document.querySelector("[data-toggle-members]"),
     audio: document.getElementById("chat-audio"),
   };
@@ -1230,9 +1232,15 @@
     };
     const popover = document.createElement("div");
     popover.className = `chat-inline-profile-popover${limited ? " is-limited" : ""}`;
-    popover.innerHTML = profileMarkup(profileUser, { showBlock: false, status: "offline" });
+    popover.innerHTML = `
+      <button class="chat-inline-profile-close" type="button" data-close-inline-profile aria-label="Close profile">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      ${profileMarkup(profileUser, { showBlock: false, status: "offline" })}
+    `;
     positionInlineProfilePopover(anchor, popover);
     inlineProfilePopover = popover;
+    popover.querySelector("[data-close-inline-profile]")?.focus({ preventScroll: true });
   }
 
   function stickToBottom() {
@@ -1706,10 +1714,13 @@
 
   function renderMembers(users) {
     if (!els.members || !els.memberList || !els.profilePanel) return;
-    els.members.classList.remove("is-dm-profile");
+    els.members.classList.remove("is-dm-profile", "is-profile-view");
+    state.activeProfile = null;
     const onlineUsers = users || [];
+    if (els.membersContext) els.membersContext.textContent = "Online";
     els.membersCount.textContent = plural(onlineUsers.length, "user", "users");
     els.membersRestoreCount.textContent = String(onlineUsers.length);
+    if (els.profileBack) els.profileBack.hidden = true;
     els.profilePanel.hidden = true;
     els.profilePanel.innerHTML = "";
     if (!onlineUsers.length) {
@@ -1717,23 +1728,46 @@
       return;
     }
     els.memberList.innerHTML = onlineUsers.map((user) => `
-      <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
-        <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
-        <span>
+      <button class="chat-member" type="button" data-profile-id="${escapeHtml(user.id)}" aria-label="View ${escapeHtml(user.name || user.username || "Nest User")} profile${user.tier_label ? `, ${escapeHtml(user.tier_label)}` : ""}" ${GRAMMARLY_DISABLED_ATTRS}>
+        <img class="chat-member-avatar" ${avatarAttrs(user.picture_url, 84, "42px")} alt="">
+        <span class="chat-member-copy">
           <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
           <small>${escapeHtml(user.school || user.username || presenceStatusLabel(user.presence_status || "active"))}</small>
         </span>
+        ${memberTierBadgeMarkup(user)}
       </button>
     `).join("");
+  }
+
+  function showMemberProfile(user, options = {}) {
+    if (!user || !els.members || !els.profilePanel) return;
+    state.activeProfile = user;
+    els.members.classList.remove("is-dm-profile");
+    els.members.classList.add("is-profile-view");
+    if (els.membersContext) els.membersContext.textContent = "Profile";
+    els.membersCount.textContent = user.name || user.username || "Nest User";
+    if (els.profileBack) els.profileBack.hidden = false;
+    els.profilePanel.hidden = false;
+    els.profilePanel.innerHTML = profileMarkup(user, {
+      showBlock: false,
+      status: user.presence_status || (user.online ? "active" : "offline"),
+    });
+    if (!options.preserveFocus) {
+      els.profileBack?.focus({ preventScroll: true });
+    }
   }
 
   function renderDmProfile(thread) {
     if (!els.members || !els.memberList || !els.profilePanel) return;
     const other = thread?.other_user || {};
     const status = dmPresenceStatus(thread);
+    state.activeProfile = null;
+    els.members.classList.remove("is-profile-view");
     els.members.classList.add("is-dm-profile");
+    if (els.membersContext) els.membersContext.textContent = "Conversation";
     els.membersCount.textContent = "Profile";
     els.membersRestoreCount.textContent = status === "offline" ? "0" : "1";
+    if (els.profileBack) els.profileBack.hidden = true;
     els.memberList.innerHTML = "";
     els.profilePanel.hidden = false;
     els.profilePanel.innerHTML = profileMarkup(other, {
@@ -1752,10 +1786,25 @@
   function profileDetail(label, value, className = "") {
     return `
       <div class="${className}" ${GRAMMARLY_DISABLED_ATTRS}>
-        <span>${escapeHtml(label)}</span>
-        <strong>${escapeHtml(value || "Not set")}</strong>
+        <dt>${escapeHtml(label)}</dt>
+        <dd>${escapeHtml(value || "Not set")}</dd>
       </div>
     `;
+  }
+
+  function tierBadgeMarkup(user, size = 42, triggerClass = "") {
+    if (!user?.tier_badge?.asset || !user?.tier_label) return "";
+    const className = `tier-badge-trigger${triggerClass ? ` ${triggerClass}` : ""}`;
+    return `<span class="${className}" tabindex="0" role="img" aria-label="${escapeHtml(user.tier_label)}" data-tooltip="${escapeHtml(user.tier_label)}">
+      <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="${size}" height="${size}" loading="lazy" decoding="async">
+    </span>`;
+  }
+
+  function memberTierBadgeMarkup(user) {
+    if (!user?.tier_badge?.asset || !user?.tier_label) return "";
+    return `<span class="tier-badge-trigger chat-member-tier" aria-hidden="true" data-tooltip="${escapeHtml(user.tier_label)}">
+      <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="28" height="28" loading="lazy" decoding="async">
+    </span>`;
   }
 
   function profileMarkup(user, options = {}) {
@@ -1764,11 +1813,7 @@
     const graduation = user?.graduation_year || user?.class_year || "";
     const memberSince = user?.member_since || "";
     const bannerColor = normalizeHexColor(user?.banner_color);
-    const tierBadge = user?.tier_badge?.asset && user?.tier_label
-      ? `<span class="tier-badge-trigger" tabindex="0" role="img" aria-label="${escapeHtml(user.tier_label)}" data-tooltip="${escapeHtml(user.tier_label)}">
-          <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="38" height="38" loading="lazy" decoding="async">
-        </span>`
-      : "";
+    const tierBadge = tierBadgeMarkup(user);
     const blockLabel = options.blocked ? "Unblock" : "Block";
     const blockAction = options.showBlock
       ? `<button type="button" data-block-user="${escapeHtml(user.id)}" data-blocked="${options.blocked ? "true" : "false"}">${blockLabel}</button>`
@@ -1783,20 +1828,22 @@
             </div>
             <div class="profile-tile-heading">
               <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
-              <p>${escapeHtml(handle)}</p>
+              <div class="chat-profile-meta">
+                <p class="chat-profile-handle">${escapeHtml(handle)}</p>
+                <p class="chat-presence-line chat-profile-presence">
+                  <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
+                  <span>${presenceStatusLabel(status)}</span>
+                </p>
+              </div>
               ${tierBadge}
-              <p class="chat-presence-line chat-profile-presence">
-                <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
-                <span>${presenceStatusLabel(status)}</span>
-              </p>
             </div>
-            <div class="profile-tile-details">
-              ${profileDetail("School", user?.school, user?.is_emory_school ? "profile-tile-detail-emory" : "")}
-              ${profileDetail("Major", user?.major)}
+            <dl class="profile-tile-details">
+              ${profileDetail("School", user?.school, `profile-tile-detail-wide${user?.is_emory_school ? " profile-tile-detail-emory" : ""}`)}
+              ${profileDetail("Major", user?.major, "profile-tile-detail-wide")}
               ${profileDetail("Graduation", graduation)}
               ${profileDetail("Education", user?.education_level)}
-              ${profileDetail("Member Since", memberSince, user?.is_early_member ? "profile-tile-detail-early-member" : "")}
-            </div>
+              ${profileDetail("Member Since", memberSince, `profile-tile-detail-wide${user?.is_early_member ? " profile-tile-detail-early-member" : ""}`)}
+            </dl>
           </div>
         </div>
       </div>
@@ -1965,7 +2012,12 @@
     if (thread) {
       renderDmProfile(thread);
     } else if (channel && !channelIsPending(channel)) {
-      renderMembers(channel.online_users || channel.active_users || []);
+      const users = channel.online_users || channel.active_users || [];
+      const activeProfile = state.activeProfile?.id
+        ? users.find((user) => user.id === state.activeProfile.id)
+        : null;
+      if (activeProfile) showMemberProfile(activeProfile, { preserveFocus: true });
+      else renderMembers(users);
     }
     renderTypingIndicator();
   }
@@ -2667,12 +2719,13 @@
       const results = payload.results || [];
       els.dmResults.innerHTML = results.length
         ? results.map((user) => `
-          <button type="button" class="chat-member chat-dm-result" data-start-dm="${escapeHtml(user.id)}" ${GRAMMARLY_DISABLED_ATTRS}>
-            <img ${avatarAttrs(user.picture_url, 72, "36px")} alt="">
-            <span>
+          <button type="button" class="chat-member chat-dm-result" data-start-dm="${escapeHtml(user.id)}" aria-label="Start a direct message with ${escapeHtml(user.name || user.username || "Nest User")}${user.tier_label ? `, ${escapeHtml(user.tier_label)}` : ""}" ${GRAMMARLY_DISABLED_ATTRS}>
+            <img class="chat-member-avatar" ${avatarAttrs(user.picture_url, 84, "42px")} alt="">
+            <span class="chat-member-copy">
               <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
               <small>${escapeHtml([user.school, user.major].filter(Boolean).join(" · ") || user.username || "User")}</small>
             </span>
+            ${memberTierBadgeMarkup(user)}
           </button>
         `).join("")
         : `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>No users found.</div>`;
@@ -2819,12 +2872,18 @@
       const channel = activeChannel();
       const user = (channel?.online_users || channel?.active_users || []).find((candidate) => candidate.id === profileButton.dataset.profileId);
       if (user) {
-        els.profilePanel.hidden = false;
-        els.profilePanel.innerHTML = profileMarkup(user, {
-          showBlock: false,
-          status: user.presence_status || (user.online ? "active" : "offline"),
-        });
+        showMemberProfile(user);
       }
+    });
+    els.profileBack?.addEventListener("click", () => {
+      const profileId = state.activeProfile?.id;
+      state.activeProfile = null;
+      const channel = activeChannel();
+      renderMembers(channel?.online_users || channel?.active_users || []);
+      if (!profileId) return;
+      window.requestAnimationFrame(() => {
+        els.memberList?.querySelector(`[data-profile-id="${CSS.escape(profileId)}"]`)?.focus({ preventScroll: true });
+      });
     });
     els.profilePanel?.addEventListener("click", (event) => {
       const blockButton = event.target.closest("[data-block-user]");
@@ -2847,6 +2906,10 @@
       if (button) void startDm(button.dataset.startDm);
     });
     document.addEventListener("click", (event) => {
+      if (event.target.closest("[data-close-inline-profile]")) {
+        closeInlineProfilePopover();
+        return;
+      }
       const menu = document.getElementById("chat-room-context-menu");
       if (menu && !menu.hidden && !menu.contains(event.target)) closeRoomContextMenu();
       if (inlineProfilePopover && !event.target.closest(".chat-inline-profile-popover") && !event.target.closest(".chat-author-button")) {

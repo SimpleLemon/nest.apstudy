@@ -60,6 +60,16 @@ class TestChatFeature(unittest.TestCase):
         self.assertTrue(payload["picture_url"].startswith("data:image/svg+xml"))
         self.assertNotEqual(payload["picture_url"], APSTUDY_LOGO_URL)
 
+    def test_public_user_includes_tier_badge_metadata_for_every_chat_profile_surface(self):
+        payload = chat_api._public_user({
+            "$id": "user-2",
+            "name": "Grade A User",
+            "tier": "grade_a",
+        })
+
+        self.assertEqual(payload["tier_label"], "Grade A")
+        self.assertEqual(payload["tier_badge"]["asset"], "/static/images/tiers/grade-a-egg.png")
+
     def test_missing_message_avatar_serializes_neutral_default(self):
         row = {
             "$id": "message-1",

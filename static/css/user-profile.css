@@ -16,7 +16,8 @@ body {
 }
 
 body.user-profile-page {
-    --navbar-height: 64px;
+    --navbar-content-height: 64px;
+    --navbar-height: calc(var(--navbar-content-height) + env(safe-area-inset-top));
     --profile-page-shell-bg: var(--color-shell-bg, var(--color-surface-container-low, #181c22));
     --profile-page-shell-border: var(--color-shell-border, var(--color-outline-variant, #30363d));
     --profile-page-shell-text: var(--color-shell-text-primary, var(--color-on-surface, #dfe2eb));
@@ -43,7 +44,7 @@ body.user-profile-page > global.thenav {
     height: var(--navbar-height);
     justify-content: space-between;
     left: 0;
-    padding: 0 20px;
+    padding: env(safe-area-inset-top) 20px 0;
     position: fixed;
     right: 0;
     top: 0;
@@ -122,22 +123,53 @@ body.user-profile-page > global.thenav {
 }
 
 .user-profile-page .navbar-avatar {
-    border: 2px solid transparent;
+    --navbar-avatar-ring-color: transparent;
+    --navbar-avatar-glow-color: transparent;
+    border: 0;
     border-radius: var(--radius-avatar);
     height: 36px;
-    overflow: hidden;
+    overflow: visible;
+    padding: 2px;
     width: 36px;
 }
 
 .user-profile-page .navbar-avatar:hover {
-    border-color: var(--color-shell-accent, var(--color-primary, #58a6ff));
+    background: var(--profile-page-shell-hover);
+}
+
+.user-profile-page .navbar-avatar:focus-visible {
+    outline: 2px solid var(--color-shell-accent, var(--color-primary, #58a6ff));
+    outline-offset: 1px;
+}
+
+.user-profile-page .navbar-avatar--grade-a,
+.user-profile-page .navbar-avatar--grade-aa {
+    --navbar-avatar-ring-color: color-mix(in srgb, #e4b93f 72%, transparent);
+    --navbar-avatar-glow-color: color-mix(in srgb, #e4b93f 52%, transparent);
+}
+
+.user-profile-page .navbar-avatar--developer {
+    --navbar-avatar-ring-color: color-mix(in srgb, #4ea4ff 78%, transparent);
+    --navbar-avatar-glow-color: color-mix(in srgb, #4ea4ff 58%, transparent);
 }
 
 .user-profile-page .navbar-avatar img {
     display: block;
-    height: 100%;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: var(--radius-avatar);
     object-fit: cover;
-    width: 100%;
+    outline: 2px solid transparent;
+    outline-offset: 0;
+    box-shadow:
+        0 0 0 2px var(--navbar-avatar-ring-color),
+        0 0 9px var(--navbar-avatar-glow-color);
+}
+
+.user-profile-page .navbar-avatar:hover img {
+    outline-color: var(--color-shell-accent, var(--color-primary, #58a6ff));
 }
 
 .user-profile-page .profile-dropdown {
@@ -244,12 +276,26 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 }
 
 .user-profile-card .profile-tile {
+    aspect-ratio: auto;
+    min-height: 0;
+    overflow: visible;
     border-color: var(--color-outline-variant, #30363d);
-    box-shadow: 0 0 0 1px rgba(48, 54, 61, 0.35), 0 16px 32px rgba(1, 4, 9, 0.3);
+    box-shadow: 0 6px 8px rgba(1, 4, 9, 0.24);
 }
 
 .user-profile-card .profile-tile-banner {
     overflow: hidden;
+    border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+}
+
+.user-profile-card .tier-badge-trigger {
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.user-profile-card .tier-badge {
+    width: 48px;
+    height: 48px;
 }
 
 .profile-tile-banner-image {
@@ -303,7 +349,7 @@ body.user-profile-page > global.thenav + .user-profile-shell {
 
 @media (max-width: 640px) {
     .user-profile-page .navbar-container {
-        padding: 0 14px;
+        padding: env(safe-area-inset-top) max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left));
         gap: 8px;
     }
 
@@ -318,6 +364,10 @@ body.user-profile-page > global.thenav + .user-profile-shell {
         height: 48px;
         min-width: 48px;
         min-height: 48px;
+    }
+
+    .user-profile-page .navbar-avatar {
+        padding: 8px;
     }
 
     .user-profile-page .profile-dropdown {

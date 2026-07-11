@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
     {% include '_appwrite_meta.html' %}
@@ -113,9 +113,14 @@
 
         <aside class="chat-members" id="chat-members" aria-label="Online users and profile">
             <div class="chat-members-head">
-                <div>
-                    <p>Online</p>
-                    <h2 id="chat-members-count">0 users</h2>
+                <div class="chat-members-title">
+                    <button class="chat-profile-back" type="button" data-profile-back aria-label="Back to online users" hidden>
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                    </button>
+                    <div>
+                        <p id="chat-members-context">Online</p>
+                        <h2 id="chat-members-count">0 users</h2>
+                    </div>
                 </div>
                 <button class="chat-icon-button chat-mobile-close" type="button" data-close-members aria-label="Close members">
                     <span class="material-symbols-outlined" aria-hidden="true">close</span>
