@@ -52,10 +52,6 @@
         lastFocusedElement: null,
         loading: false,
     };
-    const sortableInstances = [];
-    let folderDropListenersBound = false;
-    let pendingDropFolderId;
-
     const {
         apiJson,
         buildLoadingIndicatorHtml,
@@ -147,7 +143,6 @@
         els.page?.classList.toggle('is-loading', isLoading);
         if (!els.notesGrid) return;
         if (isLoading) {
-            destroyDragDrop();
             els.notesGrid.innerHTML = `
                 <div class="notes-loading-card">
                     ${buildLoadingIndicatorHtml(label, { sizePx: 52, textToneClass: 'text-on-surface' })}
@@ -384,15 +379,7 @@
         openModal(els.moveModal, els.moveDestination);
     }
 
-    function destroyDragDrop() {
-        while (sortableInstances.length) {
-            const instance = sortableInstances.pop();
-            instance?.destroy?.();
-        }
-    }
-
     function renderCurrentView() {
-        destroyDragDrop();
         const notesByFolder = notesByFolderMap();
         const currentFolder = folderById(state.currentFolderId);
         if (state.currentFolderId && !currentFolder) {
@@ -438,8 +425,6 @@
             if (els.notesEmptyState) els.notesEmptyState.style.display = 'none';
             visibleNotes.forEach((note) => els.notesGrid.appendChild(createNoteCard(note, { readOnly })));
         }
-
-        if (!readOnly) initDragDrop();
     }
 
     function render(data) {
@@ -595,80 +580,6 @@
             showAlert(error.message || 'Unable to delete folder.', 'error');
         } finally {
             setButtonBusy(button, false);
-        }
-    }
-
-    function initDragDrop() {
-        if (typeof Sortable === 'undefined') return;
-        destroyDragDrop();
-
-        if (els.notesGrid) {
-            sortableInstances.push(Sortable.create(els.notesGrid, {
-                group: { name: 'notes', pull: true, put: true },
-                animation: window.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
-                draggable: '.note-card',
-                ghostClass: 'note-card-ghost',
-                chosenClass: 'note-card-chosen',
-                dragClass: 'note-card-drag',
-                onStart: handleDragStart,
-                onEnd: handleDragEnd,
-            }));
-        }
-
-        if (folderDropListenersBound) return;
-        folderDropListenersBound = true;
-        els.foldersGrid?.addEventListener('dragover', (event) => {
-            const folderCard = event.target.closest('.folder-card');
-            if (!folderCard) return;
-            event.preventDefault();
-            folderCard.classList.add('folder-drop-target');
-        });
-        els.foldersGrid?.addEventListener('dragleave', (event) => {
-            const folderCard = event.target.closest('.folder-card');
-            if (!folderCard || folderCard.contains(event.relatedTarget)) return;
-            folderCard.classList.remove('folder-drop-target');
-        });
-        els.foldersGrid?.addEventListener('drop', (event) => {
-            const folderCard = event.target.closest('.folder-card');
-            if (!folderCard) return;
-            event.preventDefault();
-            folderCard.classList.remove('folder-drop-target');
-            pendingDropFolderId = folderCard.dataset.folderId || undefined;
-        });
-    }
-
-    function handleDragStart() {
-        pendingDropFolderId = undefined;
-        els.page?.classList.add('is-dragging-note');
-    }
-
-    async function handleDragEnd(evt) {
-        const item = evt.item;
-        els.page?.classList.remove('is-dragging-note');
-        document.querySelectorAll('.folder-drop-target').forEach((folderCard) => {
-            folderCard.classList.remove('folder-drop-target');
-        });
-        if (!item) return;
-        const noteId = item.dataset.noteId;
-        const droppedOnFolder = pendingDropFolderId !== undefined;
-        const newFolderId = droppedOnFolder ? pendingDropFolderId : state.currentFolderId;
-        pendingDropFolderId = undefined;
-        const note = state.notes.find((entry) => noteIdOf(entry) === noteId);
-        if (note) note.folder_id = newFolderId;
-        item.dataset.folderId = newFolderId || '';
-        updateCounts(notesByFolderMap());
-        try {
-            await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                    folder_id: newFolderId,
-                    order: evt.newDraggableIndex ?? evt.newIndex,
-                }),
-            });
-            if (droppedOnFolder) renderCurrentView();
-        } catch (error) {
-            showAlert(error.message || 'Unable to update note position.', 'error');
-            await loadAndRender();
         }
     }
 

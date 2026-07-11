@@ -284,6 +284,29 @@ test("mobile shell uses a hamburger drawer without breaking desktop sidebar pers
     }
 });
 
+test("mobile dashboard keeps controls compact, visible, and touch friendly", async () => {
+    const layoutStyles = await sourceFor("static/css/layout.css");
+    const dashboardStyles = await sourceFor("static/css/dashboard.css");
+    const profileStyles = await sourceFor("static/css/user-profile.css");
+    const dashboardTemplate = await sourceFor("templates/dashboard.html");
+    const dashboardSource = await sourceFor("static/js/dashboard/index.js");
+
+    assert.match(layoutStyles, /\.navbar-avatar img\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/s);
+    assert.match(profileStyles, /\.user-profile-page \.navbar-avatar img\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/s);
+    assert.match(layoutStyles, /--navbar-height:\s*calc\(var\(--navbar-content-height\) \+ env\(safe-area-inset-top\)\)/);
+    assert.match(dashboardTemplate, /viewport-fit=cover/);
+    assert.match(dashboardTemplate, /aria-label="Edit dashboard layout"/);
+    assert.match(dashboardTemplate, /class="dashboard-action-label">Edit layout/);
+    assert.match(dashboardSource, /Finish editing dashboard layout/);
+    assert.match(dashboardSource, /icon\.textContent = state\.editMode \? "done" : "dashboard_customize"/);
+    assert.doesNotMatch(dashboardStyles, /\.dashboard-tile-link span:last-child/);
+    assert.ok(dashboardStyles.includes("grid-auto-rows: auto;"));
+    assert.ok(dashboardStyles.includes(".dashboard-day {\n        min-height: 44px;"));
+    assert.ok(dashboardStyles.includes(".dashboard-header-link .dashboard-action-label"));
+    assert.ok(dashboardStyles.includes("@media (pointer: coarse)"));
+    assert.ok(dashboardStyles.includes("@media (max-width: 359px)"));
+});
+
 test("calendar and courses switch dense schedules to compact mobile agenda renderers", async () => {
     const calendarSource = [
         await sourceFor("static/js/calendar/index.js"),
@@ -398,8 +421,9 @@ test("notes list guards destructive actions and supports safe card menus", async
     assert.match(listSource, /const placeBelow = spaceBelow >= spaceAbove/);
     assert.match(listSource, /handleCardMenuViewportScroll/);
     assert.match(listSource, /\['ArrowDown', 'ArrowUp', 'Home', 'End'\]/);
-    assert.equal((listSource.match(/onStart: handleDragStart/g) || []).length, 1);
-    assert.doesNotMatch(listSource, /addEventListener\('drop',[\s\S]{0,500}initDragDrop\(\)/);
+    assert.doesNotMatch(listSource, /Sortable|initDragDrop|handleDrag(Start|End)|folder-drop-target/);
+    assert.doesNotMatch(template, /sortablejs/);
+    assert.doesNotMatch(styles, /folder-drop-target|note-card-(ghost|chosen|drag)/);
     assert.doesNotMatch(cardsSource, /more_horiz/);
     assert.equal((cardsSource.match(/more_vert/g) || []).length, 2);
     assert.match(cardsSource, /openFolder\(folderId\)/);
@@ -617,7 +641,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
     assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-2/);
-    assert.match(editorTemplate, /notes-editor-bundle-14/);
+    assert.match(editorTemplate, /notes-editor-bundle-15/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -667,7 +691,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.doesNotMatch(`${listSource}\n${cardsSource}`, /\/notes\/editor\/\$\{/);
     assert.match(cardsSource, /global\.location\.href = `\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
     assert.match(listSource, /state\.viewMode === 'shared' \? '\/api\/notes\/shared' : '\/api\/notes'/);
-    assert.match(listSource, /if \(!readOnly\) initDragDrop\(\)/);
+    assert.doesNotMatch(listSource, /initDragDrop|Sortable/);
     assert.match(cardsSource, /folder\.is_shared \|\| readOnly \? 'folder_shared' : 'folder'/);
     assert.match(notesTemplate, /data-notes-view="shared"[\s\S]*?>Shared with Me</);
     assert.doesNotMatch(notesTemplate, /id="btn-share-folder"/);

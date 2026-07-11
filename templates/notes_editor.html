@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="robots" content="noindex,nofollow" />
     <script>
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
@@ -36,7 +36,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-2">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-14">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-15">
     <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
@@ -46,30 +46,23 @@
     {% endif %}
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     {% if page_state == 'ready' %}
-    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-14"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-15"></script>
     {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}" data-navigation-retention="discard" data-analytics-mode="{{ 'authenticated' if viewer_authenticated and access.role == 'owner' else 'public-choice' }}" data-analytics-measurement-id="G-0NT330ZX5L">
+<body class="notes-editor-body{% if not viewer_authenticated %} notes-no-sidebar{% endif %}{% if page_state != 'ready' %} notes-access-body{% endif %} bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-note-read-only="{{ 'false' if access.can_edit else 'true' }}" data-navigation-retention="discard" data-analytics-mode="{{ 'authenticated' if viewer_authenticated and access.role == 'owner' else 'public-choice' }}" data-analytics-measurement-id="G-0NT330ZX5L">
     {% if viewer_authenticated %}
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
     {% endif %}
     <main class="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-8 pt-6 pb-10 flex flex-col gap-12 relative z-10">
         {% if page_state != 'ready' %}
-        <section class="notes-share-gate" aria-labelledby="notes-share-gate-title">
-            <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if page_state == 'login_required' else 'description' }}</span>
-            <h1 id="notes-share-gate-title">{{ 'Log in to view this note' if page_state == 'login_required' else 'Note unavailable' }}</h1>
-            <p>{{ 'This note is shared with specific Nest users. Log in to check your access.' if page_state == 'login_required' else 'The note may have been removed, unshared, or the link may be incorrect.' }}</p>
-            <div class="notes-share-gate-actions">
-                {% if page_state == 'login_required' %}
-                <a class="btn-primary" href="{{ login_url }}">Login</a>
-                {% endif %}
-                <a class="btn-secondary" href="{{ back_url }}">{{ back_label }}</a>
-            </div>
-        </section>
+        {% from '_notes_access_gate.html' import notes_access_gate with context %}
+        {% call notes_access_gate(page_state, 'note', 'notes-share-gate-title', login_url, back_url, back_label) %}
+            <h1 id="notes-share-gate-title">{{ 'Sign in to open this note.' if page_state == 'login_required' else 'This note isn’t available.' }}</h1>
+        {% endcall %}
         {% else %}
         <div id="editor-page" class="notes-editor-page">
             <!-- Top bar -->

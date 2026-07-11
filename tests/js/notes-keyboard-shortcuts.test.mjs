@@ -85,6 +85,18 @@ test('visibleTopLevelBlocks skips blocks hidden by collapsed headings', async ()
     assert.deepEqual(visibleTopLevelBlocks(blocks).map((block) => block.id), ['h1', 'h2', 'visible']);
 });
 
+test('isSelectAllShortcut maps Command+A on Apple platforms and Ctrl+A elsewhere', async () => {
+    const { isSelectAllShortcut } = await importSelectAllHelpers();
+    const mac = { platform: 'MacIntel', maxTouchPoints: 0 };
+    const windows = { platform: 'Win32' };
+
+    assert.equal(isSelectAllShortcut({ key: 'a', metaKey: true, ctrlKey: false }, mac), true);
+    assert.equal(isSelectAllShortcut({ key: 'a', metaKey: false, ctrlKey: true }, mac), false);
+    assert.equal(isSelectAllShortcut({ key: 'a', metaKey: false, ctrlKey: true }, windows), true);
+    assert.equal(isSelectAllShortcut({ key: 'a', metaKey: true, ctrlKey: false }, windows), false);
+    assert.equal(isSelectAllShortcut({ key: 'a', metaKey: true, ctrlKey: false, shiftKey: true }, mac), false);
+});
+
 test('shouldSelectAllBlocks advances when the current block text is fully selected', async () => {
     const { shouldSelectAllBlocks } = await importSelectAllHelpers();
     const blockNoteEditor = {
@@ -125,6 +137,8 @@ test('select-all shortcut module wires Mod-a with editor-body focus guard', asyn
     );
     assert.match(source, /export function createSelectAllShortcuts\(getBlockNoteEditor\)/);
     assert.match(source, /'Mod-a'/);
+    assert.match(source, /handleDOMEvents/);
+    assert.match(source, /isSelectAllShortcut\(event\)/);
     assert.match(source, /isEditorBodyFocused\(\)/);
     assert.match(source, /shouldSelectAllBlocks\(blockNoteEditor\)/);
     assert.match(source, /selectAllVisibleBlocks\(blockNoteEditor\)/);

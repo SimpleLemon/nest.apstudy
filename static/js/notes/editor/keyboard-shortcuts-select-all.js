@@ -1,5 +1,25 @@
 import { hiddenBlocksForCollapsedHeadings } from './heading-collapse.js';
 
+function isApplePlatform(navigatorRef) {
+    const platform = navigatorRef?.userAgentData?.platform
+        || navigatorRef?.platform
+        || navigatorRef?.userAgent
+        || '';
+    return /Mac|iPhone|iPad|iPod/i.test(platform)
+        || (platform === 'MacIntel' && Number(navigatorRef?.maxTouchPoints) > 1);
+}
+
+export function isSelectAllShortcut(event, navigatorRef = globalThis.navigator) {
+    if (!event || event.altKey || event.shiftKey) return false;
+    const key = String(event.key || '').toLowerCase();
+    if (key !== 'a' && event.code !== 'KeyA') return false;
+
+    if (isApplePlatform(navigatorRef)) {
+        return event.metaKey && !event.ctrlKey;
+    }
+    return event.ctrlKey && !event.metaKey;
+}
+
 export function isEditorBodyFocused() {
     const active = document.activeElement;
     if (!active) return false;

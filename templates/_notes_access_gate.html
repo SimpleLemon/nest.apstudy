@@ -1,0 +1,52 @@
+{% macro notes_access_gate(page_state, resource_kind, title_id, login_url, back_url, back_label) %}
+{% set is_login_gate = page_state == 'login_required' %}
+{% set is_folder_gate = resource_kind == 'folder' %}
+<section class="notes-access-gate" aria-labelledby="{{ title_id }}">
+    <div class="notes-access-gate__inner">
+        <a class="notes-access-gate__brand" href="{{ url_for('auth.index') }}" aria-label="Nest.APStudy home">
+            <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="34" height="34" decoding="async" />
+            <span>Nest.APStudy</span>
+        </a>
+
+        <div class="notes-access-gate__copy">
+            <div class="notes-access-gate__status">
+                <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if is_login_gate else ('folder_off' if is_folder_gate else 'draft') }}</span>
+                <span>{{ 'Private Nest workspace' if is_login_gate else 'Link unavailable' }}</span>
+            </div>
+            {{ caller() }}
+            <p>
+                {% if is_login_gate %}
+                    It was shared with specific Nest members. Sign in with the account that received access to continue.
+                {% else %}
+                    The link may be incorrect, or the owner may have moved, deleted, or stopped sharing this {{ resource_kind }}.
+                {% endif %}
+            </p>
+            <div class="notes-access-gate__actions">
+                {% if is_login_gate %}
+                <a class="notes-access-gate__primary" href="{{ login_url }}">
+                    <span>Continue to sign in</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </a>
+                {% endif %}
+                <a class="notes-access-gate__secondary" href="{{ back_url }}">
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                    <span>Back to {{ back_label }}</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="notes-access-gate__visual" aria-hidden="true">
+            <div class="notes-access-gate__sheet">
+                <span class="notes-access-gate__sheet-label">{{ 'SHARED FOLDER' if is_folder_gate else 'SHARED NOTE' }}</span>
+                <span class="notes-access-gate__sheet-title"></span>
+                <span class="notes-access-gate__sheet-line notes-access-gate__sheet-line--long"></span>
+                <span class="notes-access-gate__sheet-line"></span>
+                <span class="notes-access-gate__sheet-line notes-access-gate__sheet-line--short"></span>
+                <span class="notes-access-gate__seal">
+                    <span class="material-symbols-outlined">{{ 'lock' if is_login_gate else 'link_off' }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endmacro %}
