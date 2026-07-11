@@ -844,6 +844,9 @@ def _is_safe_login_next_url(next_url):
         return False
     if next_url.startswith("//"):
         return False
+    path = next_url.split("?", 1)[0]
+    if path == "/api" or "/api/" in path:
+        return False
     return True
 
 

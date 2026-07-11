@@ -26,7 +26,7 @@ const SETTINGS_STATE = {
   profileSaving: false,
 };
 
-const SETTINGS_SECTION_IDS = ['account', 'data', 'preferences'];
+const SETTINGS_SECTION_IDS = ['account', 'data', 'preferences', 'notifications'];
 const SETTINGS_INTERFACE_THEMES = [
   'obsidian-dark',
   'parchment-light',

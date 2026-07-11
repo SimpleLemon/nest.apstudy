@@ -95,6 +95,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
             {
                 "refresh_all_feeds",
                 "check_course_seat_tracks",
+                "check_notification_reminders",
                 "fetch_daily_quote",
                 "cleanup_note_media",
                 "reconcile_discord_chat",

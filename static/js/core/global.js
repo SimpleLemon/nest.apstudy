@@ -828,6 +828,12 @@ async function ensureAppwriteSession() {
 }
 
 async function runLogoutFlow() {
+    window.APStudyPresenceHeartbeat?.stop?.();
+    try {
+        await window.APStudyNotifications?.disableCurrent?.();
+    } catch (error) {
+        console.warn('Unable to revoke this browser notification subscription during logout.', error);
+    }
     if (window.account && typeof account.deleteSession === "function") {
         try {
             await account.deleteSession("current");
@@ -922,6 +928,7 @@ function initializePresenceHeartbeat() {
     const chatRoomScopeKey = "chat-room";
     const extraScopes = new Map();
     let intervalId = null;
+    let stopped = false;
     let tabId = "";
     try {
         tabId = sessionStorage.getItem(tabKey) || "";
@@ -956,6 +963,7 @@ function initializePresenceHeartbeat() {
     }
 
     function postHeartbeat(scope, keepalive) {
+        if (stopped) return Promise.resolve();
         const body = JSON.stringify({ ...scope, tab_id: tabId });
         return fetch("/api/presence/heartbeat", {
             method: "POST",
@@ -967,6 +975,7 @@ function initializePresenceHeartbeat() {
     }
 
     function sendHeartbeat({ keepalive = false } = {}) {
+        if (stopped) return Promise.resolve([]);
         return Promise.all(pageScopes().map((scope) => postHeartbeat(scope, keepalive)));
     }
 
@@ -979,6 +988,12 @@ function initializePresenceHeartbeat() {
         if (!intervalId) return;
         window.clearInterval(intervalId);
         intervalId = null;
+    }
+
+    function stopHeartbeat() {
+        stopped = true;
+        stopTimer();
+        extraScopes.clear();
     }
 
     function pauseHeartbeat() {
@@ -1020,6 +1035,7 @@ function initializePresenceHeartbeat() {
         clearChatRoom: () => setChatRoom(null),
         pause: pauseHeartbeat,
         resume: resumeHeartbeat,
+        stop: stopHeartbeat,
         tabId,
         siteHeartbeatMs,
         chatHeartbeatMs,

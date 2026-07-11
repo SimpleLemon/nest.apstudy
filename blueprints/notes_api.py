@@ -1126,7 +1126,14 @@ def transfer_folder_ownership(folder_id):
 @notes_api_bp.route("/api/notifications", methods=["GET"])
 @login_required
 def list_user_notifications():
-    return jsonify(notes_collaboration.list_notifications(current_user.id, request.args.get("limit", 50)))
+    from services import notifications
+    return jsonify(notifications.list_feed(
+        current_user.id,
+        category=request.args.get("category"),
+        unread=request.args.get("unread") == "1",
+        limit=request.args.get("limit", 50),
+        before=request.args.get("before"),
+    ))
 
 
 @notes_api_bp.route("/api/notifications/read", methods=["POST"])
@@ -1136,7 +1143,13 @@ def mark_user_notifications_read():
     notification_ids = payload.get("ids")
     if notification_ids is not None and not isinstance(notification_ids, list):
         return jsonify({"error": "ids must be a list."}), 400
-    return jsonify(notes_collaboration.mark_notifications_read(current_user.id, notification_ids))
+    from services import notifications
+    return jsonify({"unread_count": notifications.mutate_feed(
+        current_user.id,
+        notification_ids,
+        read=payload.get("read", True),
+        category=payload.get("category"),
+    )})
 
 
 @notes_api_bp.route("/api/internal/notes/<note_id>/collaboration-document", methods=["GET"])

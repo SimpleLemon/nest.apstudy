@@ -41,6 +41,10 @@ BOOLEAN_COLUMNS = {
     "notes": {"is_pinned", "is_archived", "collaboration_enabled"},
     "chat_channels": {"read_only", "approved"},
     "user_notifications": {"is_read"},
+    "notification_preferences": {
+        "push_enabled", "calendar_enabled", "course_push_enabled", "course_email_enabled",
+        "dm_enabled", "mention_enabled", "message_preview_enabled", "prompt_dismissed",
+    },
 }
 
 

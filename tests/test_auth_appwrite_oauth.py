@@ -74,6 +74,19 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
     def test_login_renders_and_consumes_session_error_code(self):
         self.assert_login_error_is_rendered_and_consumed(auth.AUTH_ERROR_OAUTH_CALLBACK)
 
+    def test_login_next_rejects_api_endpoints(self):
+        self.assertTrue(auth._is_safe_login_next_url("/dashboard"))
+        self.assertFalse(auth._is_safe_login_next_url("/api/presence/heartbeat"))
+        self.assertFalse(auth._is_safe_login_next_url("/settings/api/profile"))
+
+    def test_redirect_after_login_falls_back_from_api_next_destination(self):
+        with self.app.test_request_context("/auth/session", method="POST"):
+            session[auth.LOGIN_NEXT_SESSION_KEY] = "/api/presence/heartbeat"
+            with patch.object(auth, "url_for", return_value="/dashboard"):
+                redirect_target = auth._redirect_after_login({"onboarding_complete": True})
+
+        self.assertEqual(redirect_target, "/dashboard")
+
     def test_complete_appwrite_login_persists_browser_session(self):
         def create_row(_collection, row_id=None, data=None, **_kwargs):
             return {"$id": row_id, **(data or {})}

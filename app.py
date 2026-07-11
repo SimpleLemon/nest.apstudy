@@ -3,7 +3,7 @@ import os
 import secrets
 from datetime import datetime, timedelta, timezone
 
-from flask import Flask, g, jsonify, redirect, render_template, request, session, url_for
+from flask import Flask, g, jsonify, redirect, render_template, request, send_from_directory, session, url_for
 from dotenv import load_dotenv
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -70,6 +70,17 @@ def create_app():
     os.makedirs(app.instance_path, exist_ok=True)
     os.makedirs(nest_instance_dir(), exist_ok=True)
 
+    @app.get("/service-worker.js")
+    def service_worker():
+        response = send_from_directory(app.static_folder, "service-worker.js")
+        response.headers["Cache-Control"] = "no-cache"
+        response.headers["Service-Worker-Allowed"] = "/"
+        return response
+
+    @app.get("/manifest.json")
+    def web_manifest():
+        return send_from_directory(app.static_folder, "manifest.json", mimetype="application/manifest+json")
+
     # Initialize extensions
     from extensions import csrf, login_manager
     csrf.init_app(app)
@@ -114,6 +125,11 @@ def create_app():
 
     @login_manager.unauthorized_handler
     def handle_unauthorized():
+        if "/api/" in request.path or request.path == "/api":
+            response = jsonify({"error": "Authentication required."})
+            response.headers["Cache-Control"] = "no-store"
+            return response, 401
+
         next_url = request.full_path
         if _is_safe_login_next_url(next_url):
             session[LOGIN_NEXT_SESSION_KEY] = next_url

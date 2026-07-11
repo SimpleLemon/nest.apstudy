@@ -20,6 +20,7 @@ from blueprints.admin import admin_bp
 from blueprints.webhooks import webhooks_bp
 from blueprints.legal import legal_bp
 from blueprints.debug_api import debug_api_bp
+from blueprints.notifications_api import notifications_bp
 
 
 def register_blueprints(app):
@@ -39,3 +40,4 @@ def register_blueprints(app):
     app.register_blueprint(webhooks_bp)
     app.register_blueprint(legal_bp)
     app.register_blueprint(debug_api_bp)
+    app.register_blueprint(notifications_bp)

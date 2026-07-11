@@ -822,6 +822,7 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
         await sourceFor("static/js/settings/profile.js"),
         await sourceFor("static/js/settings/preferences.js"),
         await sourceFor("static/js/settings/account.js"),
+        await sourceFor("static/js/settings/notifications.js"),
       ].join("\n");
 
     for (const endpoint of [
@@ -842,7 +843,7 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(template, /data-probe-appwrite-session="false"/);
     assert.match(template, /id="settings-skeleton"/);
     assert.match(template, /settings-sections[^"]*is-loading/);
-    assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences'\]/);
+    assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences', 'notifications'\]/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
     assert.match(source, /'nest-light'/);
     assert.match(source, /'nest-dark'/);
@@ -958,6 +959,11 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.doesNotMatch(source, /account\.get\(/);
     assert.doesNotMatch(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
     assert.match(source, /account\.deleteSession\("current"\)/);
+    const stopHeartbeatIndex = source.indexOf('window.APStudyPresenceHeartbeat?.stop?.();');
+    const deleteSessionIndex = source.indexOf('account.deleteSession("current")');
+    assert.ok(stopHeartbeatIndex >= 0, "logout stops presence heartbeats");
+    assert.ok(stopHeartbeatIndex < deleteSessionIndex, "logout stops heartbeats before revoking the session");
+    assert.match(source, /stop: stopHeartbeat/);
     assert.match(source, /clearClientState\(\{ includeCookies: false \}\)/);
     assert.match(source, /document\.querySelectorAll\("\[data-logout\]"\)/);
 });

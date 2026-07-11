@@ -285,6 +285,7 @@
             localStorage.removeItem("calendarEventsCache");
             closeModal();
             window.loadCalendarData && window.loadCalendarData();
+            if (currentMode !== "edit" && currentMode !== "override") window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'calendar' } }));
         } catch (_) {
             showError("Save failed.");
         } finally {

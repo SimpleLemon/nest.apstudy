@@ -17,6 +17,7 @@ from services.course_tracking_email import (
     build_open_seat_subject,
 )
 from services.discord_audit import emit_course_track_event, update_course_tracks_channel_topic
+from services import notifications
 
 
 logger = logging.getLogger(__name__)
@@ -387,12 +388,33 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
             track_updates = dict(updates)
             should_notify = _section_open_for_notification(section) and not _track_was_open(track)
             if should_notify:
-                try:
-                    _send_open_email(track, section)
+                prefs = notifications.preferences(track.get("user_id"))
+                delivered = False
+                if prefs["course_email_enabled"]:
+                    try:
+                        _send_open_email(track, section)
+                        poll_metadata["email_notifications"] += 1
+                        delivered = True
+                    except Exception:
+                        poll_metadata["email_failures"] += 1
+                        logger.exception("Failed to send course opening email for track %s", row_id)
+                if prefs["course_push_enabled"]:
+                    code = section.get("course_code") or track.get("course_code") or "Tracked course"
+                    seats = section.get("seats_available")
+                    body = f"{seats} seat{'s' if seats != 1 else ''} available." if seats is not None else "Enrollment is now available."
+                    try:
+                        _, push_result = notifications.notify(
+                            track.get("user_id"), "courses", f"{code} has an opening", body,
+                            build_nest_courses_detail_url(os.environ.get("APP_BASE_URL", "https://nest.apstudy.org"), section.get("id") or track.get("section_id")), source_ref=row_id,
+                            dedupe_key=f"course-open:{row_id}:{section.get('enrollment_status')}:{seats}", tag=f"course:{row_id}",
+                        )
+                        delivered = delivered or push_result["accepted"] > 0
+                    except Exception:
+                        logger.exception("Failed to send course opening push for track %s", row_id)
+                if delivered:
                     track_updates["last_notified_at"] = format_datetime(now)
                     track_updates["cooldown_until_closed"] = True
                     notified_count += 1
-                    poll_metadata["email_notifications"] += 1
                     poll_metadata["notifications_sent"] += 1
                     emit_course_track_event(
                         "Tracked Course Availability Opened",
@@ -410,9 +432,8 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
                         },
                         color="green",
                     )
-                except Exception:
-                    poll_metadata["email_failures"] += 1
-                    logger.exception("Failed to send course opening email for track %s", row_id)
+                else:
+                    # Preserve the previous transition so a later poll can retry delivery.
                     continue
 
             available = _section_open_for_notification(section)

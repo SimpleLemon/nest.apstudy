@@ -31,6 +31,7 @@
     <script src="{{ url_for('static', filename='js/settings/profile.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/preferences.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/account.js', v=settings_assets_version) }}" defer></script>
+    <script src="{{ url_for('static', filename='js/settings/notifications.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/index.js', v=settings_assets_version) }}" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="description" content="Settings for your APStudy account, data, and preferences." />
@@ -63,6 +64,7 @@
                 <a href="#account" class="settings-tab is-active" data-tab="account">Account</a>
                 <a href="#data" class="settings-tab" data-tab="data">Data</a>
                 <a href="#preferences" class="settings-tab" data-tab="preferences">Preferences</a>
+                <a href="#notifications" class="settings-tab" data-tab="notifications">Notifications</a>
             </nav>
             <div id="settings-skeleton" class="settings-bootstrap-skeleton">
                 <div class="settings-page-skeleton apstudy-skeleton" role="status" aria-live="polite" aria-busy="true">
@@ -496,6 +498,54 @@
                         <div class="settings-card-footer">
                             <button id="settings-save-region" type="button" class="settings-button settings-button-primary">Save</button>
                         </div>
+                    </article>
+                </section>
+                <section id="notifications" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="notifications">
+                    <article class="settings-card notification-status-card">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary">
+                                <h3>Browser notifications</h3>
+                                <p>Receive reminders and important updates even when Nest is closed.</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <div class="notification-permission-row">
+                                    <span id="notification-permission-status" class="notification-status">Checking browser…</span>
+                                    <button id="notification-enable" type="button" class="settings-button settings-button-primary">Enable notifications</button>
+                                </div>
+                                <p id="notification-recovery" class="settings-help-text" hidden></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="settings-card">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary"><h3>What you receive</h3><p>Preferences sync across your devices.</p></div>
+                            <div class="settings-card-content settings-toggle-stack">
+                                <button type="button" class="settings-toggle" data-push-toggle="calendar_enabled"><span><strong>Calendar & tasks</strong><small>Upcoming visible events and incomplete deadlines.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                <button type="button" class="settings-toggle" data-push-toggle="course_push_enabled"><span><strong>Tracked courses</strong><small>Alert when a tracked section opens.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                <button type="button" class="settings-toggle" data-push-toggle="course_email_enabled"><span><strong>Course email</strong><small>Keep course-opening email alerts enabled independently.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                <button type="button" class="settings-toggle" data-push-toggle="dm_enabled"><span><strong>Direct messages</strong><small>Show the sender and message text.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                <button type="button" class="settings-toggle" data-push-toggle="mention_enabled"><span><strong>@mentions</strong><small>Messages that mention you directly.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="settings-card">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary"><h3>Calendar timing</h3><p>Select every reminder you want for eligible items.</p></div>
+                            <div class="settings-card-content settings-field-grid settings-field-grid-vertical">
+                                <fieldset class="notification-leads"><legend class="settings-field-label">Remind me before</legend>
+                                    <label><input type="checkbox" value="5"> 5 minutes</label><label><input type="checkbox" value="10"> 10 minutes</label><label><input type="checkbox" value="30"> 30 minutes</label><label><input type="checkbox" value="60"> 1 hour</label><label><input type="checkbox" value="1440"> 1 day</label><label><input type="checkbox" value="10080"> 1 week</label>
+                                </fieldset>
+                                <label class="settings-field"><span class="settings-field-label">All-day items</span><span class="settings-help-text">Notify at this time on the previous evening.</span><input id="notification-all-day-time" type="time" value="18:00"></label>
+                            </div>
+                        </div>
+                        <div class="settings-card-footer"><button id="notification-save" type="button" class="settings-button settings-button-primary">Save preferences</button></div>
+                    </article>
+                    <article class="settings-card">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary"><h3>Devices</h3><p>Every browser must grant permission separately.</p></div>
+                            <div class="settings-card-content"><div id="notification-devices" class="notification-device-list"></div></div>
+                        </div>
+                        <div class="settings-card-footer"><button id="notification-test" type="button" class="settings-button settings-button-secondary">Send test notification</button></div>
                     </article>
                 </section>
             </div>

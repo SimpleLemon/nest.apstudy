@@ -570,6 +570,7 @@ async function setTrack(sectionId, enabled, intervalMinutes = null) {
     }
     if (enabled !== wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage + (enabled ? 1 : -1));
     showToast(intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
+    if (enabled && !wasEnabled) window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'course-tracking' } }));
   } catch (error) {
     console.error(error);
     showToast(error.message || "Unable to update tracking.", true);

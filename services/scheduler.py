@@ -301,6 +301,15 @@ def _check_course_seat_tracks(app):
             )
 
 
+def _check_notification_reminders(app):
+    with app.app_context():
+        try:
+            from services.notifications import check_calendar_reminders
+            check_calendar_reminders()
+        except Exception:
+            logger.exception("Calendar notification reminder check failed")
+
+
 def _schedule_daily_quote_retry(app, quote_date, next_attempt):
     if _scheduler is None or not _scheduler.running:
         logger.warning("Daily quote retry skipped because scheduler is not running.")
@@ -476,6 +485,11 @@ def _cleanup_note_media(app):
                 logger.info("Deleted %s abandoned note media upload(s).", deleted)
         except Exception:
             logger.exception("Note media cleanup failed")
+        try:
+            from services.notifications import cleanup_expired
+            cleanup_expired()
+        except Exception:
+            logger.exception("Notification retention cleanup failed")
 
 
 def init_scheduler(app):
@@ -552,6 +566,16 @@ def init_scheduler(app):
             name=f"Check tracked Emory course seats every {course_tracking_interval} min",
             replace_existing=True,
             max_instances=1,
+        )
+
+        _scheduler.add_job(
+            func=lambda: _check_notification_reminders(app),
+            trigger=IntervalTrigger(minutes=1),
+            id="check_notification_reminders",
+            name="Check calendar and task notification reminders every minute",
+            replace_existing=True,
+            max_instances=1,
+            coalesce=True,
         )
 
         _scheduler.add_job(

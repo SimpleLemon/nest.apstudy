@@ -43,6 +43,7 @@ from services.discord_bridge import (
 )
 from services.discord_audit import DiscordAuditEvent, emit_audit_event, format_actor
 from services.chat_presence import sync_chat_presence_labels_for_user, university_presence_label
+from services import notifications
 from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
 from services.universities import normalize_school_key, school_payload, search_universities
 
@@ -2532,6 +2533,19 @@ def send_channel_message(channel_id):
                 actor_id=_current_user_id(),
                 channel=channel,
             )
+            mentioned = {match.lower() for match in re.findall(r"(?<![\w@])@([A-Za-z0-9._-]{2,64})", content)}
+            for username in mentioned:
+                try:
+                    recipient = first_row(COLLECTIONS["users"], [Query.equal("username", [username])])
+                    recipient_id = _row_id(recipient)
+                    if recipient_id and recipient_id != _current_user_id():
+                        notifications.notify(
+                            recipient_id, "chat_mention", f"{current_user.name or current_user.username} mentioned you",
+                            content, f"/chat?channel={channel_id}&message={_row_id(row)}", source_ref=_row_id(row),
+                            dedupe_key=f"mention:{_row_id(row)}:{recipient_id}", tag=f"mention:{channel_id}", actor_user_id=_current_user_id(),
+                        )
+                except Exception:
+                    logger.exception("Failed to dispatch channel mention notification")
     except AppwriteException:
         logger.exception("Failed to finalize channel message")
         return jsonify({"error": "Unable to save message."}), 500
@@ -2738,6 +2752,16 @@ def dm_thread_messages(thread_id):
             actor_id=_current_user_id(),
             readable_user_ids=_thread_participant_ids(thread),
         )
+        recipient_id = str(other.get("id") or other.get("$id") or "")
+        if recipient_id:
+            try:
+                notifications.notify(
+                    recipient_id, "chat_dm", current_user.name or current_user.username or "New direct message",
+                    content, f"/chat?thread={thread_id}&message={_row_id(row)}", source_ref=_row_id(row),
+                    dedupe_key=f"chat:{_row_id(row)}", tag=f"dm:{thread_id}", actor_user_id=_current_user_id(),
+                )
+            except Exception:
+                logger.exception("Failed to dispatch DM notification")
     except AppwriteException:
         logger.exception("Failed to save DM")
         return jsonify({"error": "Unable to send message."}), 500

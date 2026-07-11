@@ -194,6 +194,20 @@ class ApplicationSecurityIntegrationTests(unittest.TestCase):
         self.assertEqual(client.get("/logout").status_code, 405)
         self.assertEqual(client.post("/logout").status_code, 400)
 
+    def test_unauthenticated_api_requests_return_json_without_login_redirect(self):
+        client = self.app.test_client()
+
+        response = client.post(
+            "/api/presence/heartbeat",
+            json={"scope_type": "site", "scope_id": "global", "tab_id": "tab-1"},
+        )
+
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.get_json(), {"error": "Authentication required."})
+        self.assertEqual(response.headers.get("Cache-Control"), "no-store")
+        with client.session_transaction() as client_session:
+            self.assertNotIn("login_next_url", client_session)
+
     def test_logout_clears_persistent_remember_cookie(self):
         client = self._authenticated_client()
         client.set_cookie("remember_token", "remembered-user")

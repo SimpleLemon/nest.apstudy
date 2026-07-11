@@ -180,6 +180,7 @@ function renderNavbar() {
       ${NAVBAR_ICONS.search}
       <span class="navbar-search-tooltip" role="tooltip">${commandShortcut}</span>
     </button>
+    <div id="navbar-notifications-host" class="navbar-notifications-host"></div>
     <div class="navbar-avatar-wrapper">
       <button type="button" class="navbar-avatar ${tierClass}" id="navbar-avatar-btn" aria-label="Profile menu${tierLabel ? ` · ${tierLabel}` : ''}" title="${tierLabel}" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
         <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
@@ -213,6 +214,20 @@ function renderNavbar() {
   `;
 
   navPlaceholder.innerHTML = navbarHTML;
+
+  if (authenticated && !document.querySelector('script[data-nest-notifications]')) {
+    const script = document.createElement('script');
+    script.src = '/static/js/core/notifications.js';
+    script.defer = true;
+    script.dataset.nestNotifications = 'true';
+    document.head.appendChild(script);
+  }
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = '/manifest.json';
+    document.head.appendChild(manifest);
+  }
 
   // Setup navbar interactions
   setupNavbarInteractions(userEmail, authenticated);
