@@ -1004,13 +1004,17 @@
 }
 
 @media (max-width: 1024px) {
+    .dashboard-main {
+        --workspace-page-gap: 24px;
+    }
+
     .dashboard-header {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
+        flex-direction: row;
     }
 
     .dashboard-tiles {
-        --dashboard-tile-height: clamp(340px, 72vw, 420px);
+        --dashboard-tile-height: clamp(320px, 45vw, 380px);
         grid-template-columns: minmax(0, 1fr);
     }
 
@@ -1026,8 +1030,92 @@
     }
 }
 
+@media (pointer: coarse) {
+    .dashboard-header-link,
+    .dashboard-empty-link,
+    .dashboard-config-option,
+    .dashboard-add-menu-item {
+        min-height: 44px;
+    }
+
+    .dashboard-tile-link,
+    .dashboard-icon-button,
+    .dashboard-checklist-hide {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        padding: 0;
+    }
+
+    .dashboard-day {
+        min-height: 44px;
+    }
+
+    .dashboard-tile-edit-controls {
+        left: 8px;
+        top: 8px;
+        gap: 4px;
+    }
+
+    .dashboard-tile-remove,
+    .dashboard-tile-move-up,
+    .dashboard-tile-move-down,
+    .dashboard-tile-config-toggle,
+    .dashboard-resize-grip {
+        width: 44px;
+        height: 44px;
+    }
+
+    .dashboard-config-menu {
+        left: 8px;
+        top: 60px;
+    }
+
+    .dashboard-editing-layout .dashboard-tile-inner {
+        opacity: 0.42;
+    }
+
+    .dashboard-list-item {
+        min-height: 48px;
+    }
+}
+
 @media (max-width: 640px) {
-    .dashboard-checklist-items,
+    .dashboard-main {
+        --workspace-page-gap: 18px;
+    }
+
+    .dashboard-header {
+        gap: 12px;
+    }
+
+    .dashboard-header-actions {
+        width: auto;
+        flex: 0 0 auto;
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    .dashboard-add-wrap {
+        width: auto;
+    }
+
+    .dashboard-header-link {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        flex: 0 0 44px;
+        padding: 0;
+    }
+
+    .dashboard-header-link .dashboard-action-label {
+        display: none;
+    }
+
+    .dashboard-checklist-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .dashboard-courses-list {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -1035,34 +1123,90 @@
     .dashboard-tile-head,
     .dashboard-checklist-head {
         align-items: flex-start;
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .dashboard-tile-head {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
-    .dashboard-tile-link span:last-child {
-        display: none;
+    .dashboard-tile-actions {
+        margin-left: auto;
+    }
+
+    .dashboard-tile-link {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        flex: 0 0 44px;
+        padding: 0;
+    }
+
+    .dashboard-tile-link > .material-symbols-outlined:last-child {
+        display: block;
     }
 
     .dashboard-day {
-        min-height: 0;
+        min-height: 44px;
         padding: 4px;
     }
 
-    .dashboard-header-actions,
-    .dashboard-add-wrap,
-    .dashboard-header-link,
-    .dashboard-tile-link,
     .dashboard-empty-link {
-        width: 100%;
+        width: auto;
+        min-height: 44px;
     }
 
     .dashboard-add-menu {
-        left: 0;
+        left: auto;
         right: 0;
-        width: 100%;
+        width: min(240px, calc(100vw - 32px));
+    }
+
+    .dashboard-tiles {
+        --dashboard-tile-gap: 12px;
+        grid-auto-rows: auto;
+    }
+
+    .dashboard-loading .contents {
+        grid-auto-rows: auto;
+    }
+
+    .dashboard-tile,
+    .dashboard-tile[data-tile-size],
+    .dashboard-tile[data-tile-id="courses"],
+    .dashboard-skeleton-tile {
+        grid-row: auto;
+        height: auto;
+        min-height: 280px;
+    }
+
+    .dashboard-tile-inner {
+        height: auto;
+        min-height: 278px;
+    }
+
+    .dashboard-skeleton-tile-inner {
+        min-height: 278px;
+        padding: 14px;
+    }
+
+    .dashboard-list {
+        flex: 1 0 auto;
+    }
+
+    .dashboard-calendar[data-calendar-view="month"] {
+        min-height: 282px;
+        flex-basis: 282px;
+    }
+
+    .dashboard-calendar {
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+    }
+
+    .dashboard-calendar-weekdays,
+    .dashboard-calendar-grid {
+        min-width: 310px;
     }
 
     .dashboard-tile[data-tile-id="tasks"] .dashboard-config-menu {
@@ -1073,23 +1217,60 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .dashboard-header-link,
-    .dashboard-tile-link,
-    .dashboard-empty-link,
     .dashboard-icon-button,
     .dashboard-config-option,
     .dashboard-checklist-hide {
-        min-height: 48px;
+        min-height: 44px;
     }
 
     .dashboard-icon-button,
     .dashboard-checklist-hide {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .dashboard-tile-edit-controls {
+        left: 50%;
+        top: 8px;
+        gap: 4px;
+        transform: translateX(-50%);
+    }
+
+    .dashboard-tile-remove,
+    .dashboard-tile-move-up,
+    .dashboard-tile-move-down,
+    .dashboard-tile-config-toggle {
+        width: 44px;
+        height: 44px;
+    }
+
+    .dashboard-config-menu {
+        left: 8px;
+        top: 60px;
+        width: min(300px, calc(100% - 16px));
+    }
+
+    .dashboard-resize-grip {
+        width: 44px;
+        height: 44px;
+    }
+
+    .dashboard-editing-layout .dashboard-tile-inner {
+        opacity: 0.42;
+    }
+
+    .dashboard-list-item {
+        min-height: 48px;
     }
 
     .dashboard-checklist,
     .dashboard-tile-inner {
         padding: 14px;
+    }
+}
+
+@media (max-width: 359px) {
+    .dashboard-checklist-items {
+        grid-template-columns: minmax(0, 1fr);
     }
 }

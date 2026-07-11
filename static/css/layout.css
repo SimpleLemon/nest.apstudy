@@ -4,7 +4,8 @@
    Layout Architecture - Navbar + Sidebar
    ============================================ */
 :root {
-  --navbar-height: 50px;
+  --navbar-content-height: 50px;
+  --navbar-height: calc(var(--navbar-content-height) + env(safe-area-inset-top));
   --sidebar-expanded: 208px;
   --sidebar-collapsed: 60px;
   --bg-navbar: var(--color-shell-bg);
@@ -76,7 +77,11 @@ html {
 @media (max-width: 720px) {
   .workspace-page-shell {
     --workspace-page-padding-x: 16px;
-    --workspace-page-gap: 32px;
+    --workspace-page-padding-top: 16px;
+    --workspace-page-padding-bottom: max(24px, env(safe-area-inset-bottom));
+    --workspace-page-gap: 24px;
+    padding-left: max(var(--workspace-page-padding-x), env(safe-area-inset-left));
+    padding-right: max(var(--workspace-page-padding-x), env(safe-area-inset-right));
   }
 }
 
@@ -114,7 +119,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: env(safe-area-inset-top) 20px 0;
   gap: 20px;
   flex-wrap: nowrap;
 }
@@ -200,6 +205,8 @@ body {
   height: 36px;
 }
 .navbar-avatar {
+  --navbar-avatar-ring-color: transparent;
+  --navbar-avatar-glow-color: transparent;
   width: 36px;
   height: 36px;
   min-width: 36px;
@@ -207,35 +214,53 @@ body {
   border-radius: var(--radius-avatar);
   flex-shrink: 0;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: border-color 0.2s ease;
-  overflow: hidden;
+  border: 0;
+  transition: background-color 0.15s ease;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 2px;
   background: transparent;
 }
 .navbar-avatar:hover {
-  border-color: var(--accent-color);
+  background: var(--color-shell-dropdown-hover-bg);
+}
+
+.navbar-avatar:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
 }
 
 .navbar-avatar--grade-a,
 .navbar-avatar--grade-aa {
-  box-shadow: 0 0 0 2px color-mix(in srgb, #e4b93f 72%, transparent), 0 0 9px color-mix(in srgb, #e4b93f 52%, transparent);
+  --navbar-avatar-ring-color: color-mix(in srgb, #e4b93f 72%, transparent);
+  --navbar-avatar-glow-color: color-mix(in srgb, #e4b93f 52%, transparent);
 }
 
 .navbar-avatar--developer {
-  box-shadow: 0 0 0 2px color-mix(in srgb, #4ea4ff 78%, transparent), 0 0 10px color-mix(in srgb, #4ea4ff 58%, transparent);
+  --navbar-avatar-ring-color: color-mix(in srgb, #4ea4ff 78%, transparent);
+  --navbar-avatar-glow-color: color-mix(in srgb, #4ea4ff 58%, transparent);
 }
 .navbar-avatar img {
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: var(--radius-avatar);
   object-fit: cover;
   object-position: center;
   display: block;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 2px var(--navbar-avatar-ring-color),
+    0 0 9px var(--navbar-avatar-glow-color);
+  transition: outline-color 0.15s ease;
+}
+
+.navbar-avatar:hover img {
+  outline-color: var(--accent-color);
 }
 /* ============================================
   SIDEBAR - Fixed below navbar on left
@@ -800,7 +825,7 @@ body.with-sidebar > footer {
     grid-row: 3;
   }
   .navbar-container {
-    padding: 0 max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left));
+    padding: env(safe-area-inset-top) max(12px, env(safe-area-inset-right)) 0 max(12px, env(safe-area-inset-left));
     gap: 10px;
   }
   .navbar-menu-button {
@@ -809,15 +834,15 @@ body.with-sidebar > footer {
   .navbar-button,
   .navbar-avatar,
   .navbar-avatar-wrapper {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    min-height: 48px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: var(--radius-control);
   }
   .navbar-avatar {
     border-radius: var(--radius-pill);
-    padding: 4px;
+    padding: 6px;
   }
   .navbar-left,
   .navbar-right {

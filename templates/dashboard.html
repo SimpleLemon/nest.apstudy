@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Your APStudy Nest morning brief." />
     <title>Dashboard - APStudy Nest</title>
     <script>
@@ -47,15 +47,15 @@
             </div>
             <div class="dashboard-header-actions">
                 <div class="dashboard-add-wrap">
-                    <button id="dashboard-add-tile" class="dashboard-header-link dashboard-add-toggle" type="button" aria-expanded="false" aria-haspopup="menu" hidden>
+                    <button id="dashboard-add-tile" class="dashboard-header-link dashboard-add-toggle" type="button" aria-label="Add dashboard tile" title="Add tile" aria-expanded="false" aria-haspopup="menu" hidden>
                         <span class="material-symbols-outlined" aria-hidden="true">add</span>
-                        <span>Add tile</span>
+                        <span class="dashboard-action-label">Add tile</span>
                     </button>
                     <div id="dashboard-add-menu" class="dashboard-add-menu" role="menu" hidden></div>
                 </div>
-                <button id="dashboard-edit-layout" class="dashboard-header-link dashboard-edit-toggle" type="button" aria-pressed="false">
+                <button id="dashboard-edit-layout" class="dashboard-header-link dashboard-edit-toggle" type="button" aria-label="Edit dashboard layout" title="Edit layout" aria-pressed="false">
                     <span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>
-                    <span>Edit</span>
+                    <span class="dashboard-action-label">Edit layout</span>
                 </button>
             </div>
         </header>

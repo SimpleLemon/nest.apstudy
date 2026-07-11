@@ -157,7 +157,12 @@
         document.body.classList.toggle("dashboard-editing-layout", state.editMode);
         if (els.editToggle) {
             els.editToggle.setAttribute("aria-pressed", state.editMode ? "true" : "false");
-            const label = els.editToggle.querySelector("span:last-child");
+            const actionLabel = state.editMode ? "Finish editing dashboard layout" : "Edit dashboard layout";
+            els.editToggle.setAttribute("aria-label", actionLabel);
+            els.editToggle.title = state.editMode ? "Done" : "Edit layout";
+            const icon = els.editToggle.querySelector(".material-symbols-outlined");
+            if (icon) icon.textContent = state.editMode ? "done" : "dashboard_customize";
+            const label = els.editToggle.querySelector(".dashboard-action-label");
             if (label) label.textContent = state.editMode ? "Done" : "Edit layout";
         }
         els.tiles?.querySelectorAll(".dashboard-tile-inner").forEach((inner) => {

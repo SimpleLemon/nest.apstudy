@@ -443,6 +443,26 @@ global.thefooter {
 	max-width: 100%;
 }
 
+global.thefooter footer a {
+	display: inline-flex;
+	min-height: 44px;
+	align-items: center;
+}
+
+@media (max-width: 640px) {
+	global.thefooter footer {
+		padding-top: 32px;
+		padding-bottom: max(32px, env(safe-area-inset-bottom));
+	}
+
+	global.thefooter footer > div {
+		gap: 12px;
+		padding-left: max(16px, env(safe-area-inset-left));
+		padding-right: max(16px, env(safe-area-inset-right));
+		text-align: center;
+	}
+}
+
 body.apstudy-confirm-open {
 	overflow: hidden;
 }

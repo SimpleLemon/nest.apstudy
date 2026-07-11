@@ -200,3 +200,19 @@
 .admin-page .breadcrumb-ellipsis-menu button:focus-visible {
     background: color-mix(in srgb, var(--admin-accent) 10%, transparent);
 }
+
+@media (pointer: coarse) {
+    .breadcrumb-link,
+    .breadcrumb-trigger {
+        min-height: 44px;
+    }
+
+    .breadcrumb-ellipsis {
+        width: 44px;
+        height: 44px;
+    }
+
+    .breadcrumb-ellipsis-menu button {
+        min-height: 44px;
+    }
+}
