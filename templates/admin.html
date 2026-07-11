@@ -160,7 +160,6 @@
             const notice = document.getElementById("admin-system-notice");
             const schedulerButtons = Array.from(document.querySelectorAll("[data-scheduler-action]"));
             const gitPullButton = document.querySelector('[data-system-action="git-pull"]');
-            const refreshMs = 15000;
             const controlDelayMs = 2000;
             let schedulerRequestPending = false;
             let gitPullRequestPending = false;
@@ -228,10 +227,15 @@
                 syncSchedulerButtons(schedulerEnabled);
             };
 
+            const isPageActive = () => document.visibilityState === "visible";
+
             const fetchStatus = () => {
+                if (!isPageActive()) return;
                 fetch(endpoint, { credentials: "same-origin" })
                     .then((response) => (response.ok ? response.json() : null))
-                    .then(update)
+                    .then((data) => {
+                        if (isPageActive()) update(data);
+                    })
                     .catch(() => {});
             };
 
@@ -317,7 +321,7 @@
 
             fetchStatus();
             syncGitPullButton();
-            setInterval(fetchStatus, refreshMs);
+            window.AdminSystem.startVisiblePolling({ onTick: fetchStatus, intervalMs: 1000 });
         })();
     </script>
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>

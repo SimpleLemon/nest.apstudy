@@ -13,10 +13,54 @@ function loadAdminSystem() {
   const window = {
     fetch: async () => ({ ok: true }),
     setTimeout,
+    setInterval,
+    clearInterval,
   };
   vm.runInNewContext(helperSource, { window, Date, Number, Promise, Object });
   return window.AdminSystem;
 }
+
+test("visible polling ticks once per second and pauses while hidden", () => {
+  const adminSystem = loadAdminSystem();
+  const listeners = new Map();
+  const documentImpl = {
+    visibilityState: "visible",
+    addEventListener: (event, handler) => listeners.set(event, handler),
+    removeEventListener: (event) => listeners.delete(event),
+  };
+  const events = [];
+  let nextIntervalId = 1;
+  const intervals = new Map();
+  const stopPolling = adminSystem.startVisiblePolling({
+    onTick: () => events.push("tick"),
+    documentImpl,
+    intervalMs: 1000,
+    setIntervalImpl: (callback, milliseconds) => {
+      const id = nextIntervalId++;
+      intervals.set(id, { callback, milliseconds });
+      return id;
+    },
+    clearIntervalImpl: (id) => intervals.delete(id),
+  });
+
+  assert.equal(events.length, 0);
+  assert.deepEqual([...intervals.values()].map(({ milliseconds }) => milliseconds), [1000]);
+  [...intervals.values()][0].callback();
+  assert.deepEqual(events, ["tick"]);
+
+  documentImpl.visibilityState = "hidden";
+  listeners.get("visibilitychange")();
+  assert.equal(intervals.size, 0);
+
+  documentImpl.visibilityState = "visible";
+  listeners.get("visibilitychange")();
+  assert.deepEqual(events, ["tick", "tick"]);
+  assert.deepEqual([...intervals.values()].map(({ milliseconds }) => milliseconds), [1000]);
+
+  stopPolling();
+  assert.equal(intervals.size, 0);
+  assert.equal(listeners.size, 0);
+});
 
 test("restart readiness waits for the backend delay before probing", async () => {
   const adminSystem = loadAdminSystem();
@@ -89,4 +133,10 @@ test("git pull handler reloads only for pulls that schedule a restart", () => {
   assert.match(templateSource, /window\.location\.reload\(\)/);
   assert.match(templateSource, /Git pull completed\. Output was written to the browser console\./);
   assert.match(templateSource, /finally \{[\s\S]*gitPullRequestPending = false/);
+});
+
+test("system status polling is wired to visible-page one-second refreshes", () => {
+  assert.match(templateSource, /const isPageActive = \(\) => document\.visibilityState === "visible";/);
+  assert.match(templateSource, /if \(!isPageActive\(\)\) return;/);
+  assert.match(templateSource, /window\.AdminSystem\.startVisiblePolling\(\{ onTick: fetchStatus, intervalMs: 1000 \}\)/);
 });

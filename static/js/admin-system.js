@@ -35,5 +35,41 @@
     throw new Error("Nest did not become available in time. Refresh this page manually.");
   }
 
-  global.AdminSystem = Object.freeze({ waitForRestart });
+  function startVisiblePolling({
+    onTick,
+    intervalMs = 1000,
+    documentImpl = global.document,
+    setIntervalImpl = global.setInterval.bind(global),
+    clearIntervalImpl = global.clearInterval.bind(global),
+  }) {
+    let intervalId = null;
+    const isVisible = () => documentImpl.visibilityState === "visible";
+    const stop = () => {
+      if (intervalId === null) return;
+      clearIntervalImpl(intervalId);
+      intervalId = null;
+    };
+    const start = () => {
+      if (intervalId !== null || !isVisible()) return;
+      intervalId = setIntervalImpl(onTick, intervalMs);
+    };
+    const handleVisibilityChange = () => {
+      if (!isVisible()) {
+        stop();
+        return;
+      }
+      onTick();
+      start();
+    };
+
+    documentImpl.addEventListener("visibilitychange", handleVisibilityChange);
+    start();
+
+    return () => {
+      stop();
+      documentImpl.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }
+
+  global.AdminSystem = Object.freeze({ waitForRestart, startVisiblePolling });
 })(window);
