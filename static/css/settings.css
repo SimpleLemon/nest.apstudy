@@ -1587,8 +1587,24 @@ body.settings-discord-modal-open {
   outline: none;
 }
 
-.settings-combobox-search:focus-visible {
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-primary) 22%, transparent);
+/* The search field sits inside .settings-field, so keep the parent field
+   sizing from turning this compact menu control into a full-size form input. */
+.settings-combobox .settings-combobox-search {
+  min-height: 2rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Contain focus within the menu; the global focus ring otherwise creates a
+   detached white/blue band below the search field. */
+html body .settings-combobox .settings-combobox-search:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 72%, var(--color-outline-variant)) !important;
+  outline-offset: -2px !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-primary) 34%, transparent) !important;
 }
 
 .settings-combobox-list {
@@ -1694,6 +1710,56 @@ body.settings-discord-modal-open {
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.settings-tier-heading-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+}
+
+.settings-tier-export {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-control);
+    font-size: 0.78rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.2rem);
+    transition: opacity 180ms ease, transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.settings-tier-export .material-symbols-outlined {
+    font-size: 1rem;
+}
+
+.settings-tier-card:hover .settings-tier-export,
+.settings-tier-card:focus-within .settings-tier-export,
+.settings-tier-export:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+    .settings-tier-export {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .settings-tier-export {
+        transition: none;
+    }
 }
 
 .settings-tier-heading-label {
@@ -1869,6 +1935,9 @@ body.settings-discord-modal-open {
 }
 .notification-permission-row, .notification-device { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .notification-status { font-weight: 700; }
+.notification-action-status { margin: .8rem 0 0; padding: .7rem .8rem; border-radius: var(--radius-control); background: color-mix(in srgb, var(--color-info) 12%, transparent); color: var(--color-on-surface); font-size: .82rem; line-height: 1.45; }
+.notification-action-status[data-type="success"] { background: color-mix(in srgb, var(--color-success) 13%, transparent); color: var(--color-success); }
+.notification-action-status[data-type="error"] { background: color-mix(in srgb, var(--color-error) 13%, transparent); color: var(--color-error); }
 .notification-leads { display: flex; flex-wrap: wrap; gap: .75rem 1rem; padding: 0; border: 0; }
 .notification-leads legend { width: 100%; margin-bottom: .25rem; }
 .notification-leads label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; }
@@ -1877,17 +1946,3 @@ body.settings-discord-modal-open {
 .notification-device span { display: flex; flex-direction: column; gap: .2rem; }
 .notification-device small { color: var(--color-on-surface-variant); }
 @media (max-width: 640px) { .notification-permission-row, .notification-device { align-items: stretch; flex-direction: column; } }
-.notification-center-toolbar { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; }
-.notification-center-toolbar [role="tablist"] { display: flex; flex-wrap: wrap; gap: .35rem; }
-.notification-center-toolbar [role="tab"] { min-height: 40px; padding: 0 .8rem; border: 0; border-radius: var(--radius-pill); background: var(--color-surface-container); color: var(--color-on-surface); cursor: pointer; }
-.notification-center-toolbar [aria-selected="true"] { background: var(--color-primary); color: var(--color-on-primary); }
-.notification-center-feed { display: grid; gap: .5rem; }
-.notification-center-item { display: flex; align-items: center; justify-content: space-between; border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent); border-radius: var(--radius-card); background: var(--color-surface-container); }
-.notification-center-item.is-unread { background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface-container)); }
-.notification-center-item > a { display: flex; flex: 1; gap: .9rem; padding: 1rem; color: inherit; text-decoration: none; }
-.notification-center-item > a > span:last-child { display: flex; flex-direction: column; gap: .25rem; }
-.notification-center-item small, .notification-center-item time { color: var(--color-on-surface-variant); }
-.notification-center-item time { font-size: .75rem; }
-.notification-center-item > div { display: flex; padding-right: .75rem; }
-.notification-center-item > div button { min-width: 44px; min-height: 44px; border: 0; background: transparent; color: var(--color-on-surface-variant); cursor: pointer; }
-@media (max-width: 720px) { .notification-center-toolbar { flex-direction: column; } }

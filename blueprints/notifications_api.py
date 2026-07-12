@@ -1,6 +1,4 @@
-import os
-
-from flask import Blueprint, jsonify, render_template, request
+from flask import Blueprint, jsonify, redirect, request, url_for
 from flask_login import current_user, login_required
 
 from services import notifications
@@ -10,13 +8,19 @@ notifications_bp = Blueprint("notifications", __name__)
 @notifications_bp.get("/notifications")
 @login_required
 def center_page():
-    return render_template("notifications.html", user=current_user)
+    return redirect(f"{url_for('dashboard.dashboard')}?notifications=open")
 
 
 @notifications_bp.get("/api/notifications/preferences")
 @login_required
 def get_preferences():
-    return jsonify({"preferences": notifications.preferences(current_user.id), "devices": notifications.list_subscriptions(current_user.id), "vapid_public_key": os.environ.get("VAPID_PUBLIC_KEY", "")})
+    push_config = notifications.push_configuration()
+    return jsonify({
+        "preferences": notifications.preferences(current_user.id),
+        "devices": notifications.list_subscriptions(current_user.id),
+        "push_configured": push_config["configured"],
+        "vapid_public_key": push_config["public_key"],
+    })
 
 
 @notifications_bp.patch("/api/notifications/preferences")
@@ -61,28 +65,78 @@ def unsubscribe_current():
 @notifications_bp.post("/api/notifications/test")
 @login_required
 def test_notification():
-    notification_id, result = notifications.notify(current_user.id, "test", "Nest notifications are working", "This browser can receive notifications even when Nest is closed.", "/settings#notifications", dedupe_key=None)
+    notification_id, result = notifications.notify(current_user.id, "test", "Nest notifications are working", "This browser can receive notifications even when Nest is closed.", "/settings#notifications", dedupe_key=None, force_push=True)
     return jsonify({"notification_id": notification_id, **result}), 200 if result["accepted"] else 503
 
 
 @notifications_bp.get("/api/notifications")
 @login_required
 def feed():
-    return jsonify(notifications.list_feed(current_user.id, category=request.args.get("category"), unread=request.args.get("unread") == "1", limit=request.args.get("limit", 50), before=request.args.get("before")))
+    return jsonify(notifications.list_feed(
+        current_user.id,
+        category=request.args.get("category"),
+        unread=request.args.get("unread") == "1",
+        status=request.args.get("status"),
+        search=request.args.get("search"),
+        limit=request.args.get("limit", 50),
+        before=request.args.get("before"),
+    ))
+
+
+@notifications_bp.post("/api/notifications/sync")
+@login_required
+def sync_foreground():
+    payload = request.get_json(silent=True) or {}
+    active = bool(payload.get("active"))
+    device_class = str(payload.get("device_class") or "")
+    try:
+        is_active = notifications.touch_web_presence(
+            current_user.id,
+            payload.get("tab_id"),
+            active=active,
+            device_class=device_class,
+        )
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+    if not is_active:
+        return jsonify({"ok": True, "active": False})
+    result = notifications.list_feed(current_user.id, limit=50)
+    prefs = notifications.preferences(current_user.id)
+    for item in result["notifications"]:
+        item["foreground_enabled"] = notifications.category_delivery_enabled(item.get("category"), prefs)
+    result["pending_foreground_ids"] = notifications.pending_foreground_ids(current_user.id)
+    result["active"] = True
+    return jsonify(result)
+
+
+@notifications_bp.post("/api/notifications/foreground-ack")
+@login_required
+def acknowledge_foreground():
+    payload = request.get_json(silent=True) or {}
+    ids = payload.get("ids")
+    if not isinstance(ids, list):
+        return jsonify({"error": "ids must be a list."}), 400
+    return jsonify({"acknowledged": notifications.acknowledge_foreground(current_user.id, ids)})
 
 
 @notifications_bp.post("/api/notifications/read")
 @login_required
 def read():
     payload = request.get_json(silent=True) or {}
-    return jsonify({"unread_count": notifications.mutate_feed(current_user.id, payload.get("ids"), read=payload.get("read", True), category=payload.get("category"))})
+    ids = payload.get("ids")
+    if ids is not None and not isinstance(ids, list):
+        return jsonify({"error": "ids must be a list."}), 400
+    return jsonify({"unread_count": notifications.mutate_feed(current_user.id, ids[:100] if ids is not None else None, read=payload.get("read", True), category=payload.get("category"))})
 
 
 @notifications_bp.delete("/api/notifications")
 @login_required
 def delete():
     payload = request.get_json(silent=True) or {}
-    return jsonify({"unread_count": notifications.mutate_feed(current_user.id, payload.get("ids"), delete=True, category=payload.get("category"))})
+    ids = payload.get("ids")
+    if ids is not None and not isinstance(ids, list):
+        return jsonify({"error": "ids must be a list."}), 400
+    return jsonify({"unread_count": notifications.mutate_feed(current_user.id, ids[:100] if ids is not None else None, delete=True, category=payload.get("category"))})
 
 
 @notifications_bp.get("/api/notifications/unread-count")

@@ -42,7 +42,7 @@ test("chat uses local presence APIs for online and typing state", async () => {
   const global = await sourceFor("static/js/core/global.js");
   const template = await sourceFor("templates/chat.html");
 
-  assert.match(template, /appwrite@25\.0\.0/);
+  assert.doesNotMatch(template, /appwrite@25\.0\.0|js\/core\/appwrite\.js/);
   assert.doesNotMatch(appwrite, /Appwrite\.Presences/);
   assert.doesNotMatch(appwrite, /Appwrite\.Realtime/);
   assert.doesNotMatch(appwrite, /window\.presences/);
@@ -482,7 +482,7 @@ test("chat profile views use readable compact fields and tier badges without int
   assert.match(styles, /\.chat-profile-card \.profile-tile-details dt/);
   assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member dd/);
   assert.match(profileStyles, /\.user-profile-card \.profile-tile\s*\{[\s\S]*aspect-ratio: auto/);
-  assert.match(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*width: 48px/);
+  assert.match(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*width: 44px;[\s\S]*transform: scale\(1\.5\)/);
   assert.match(profileTemplate, /profile\.tier_badge/);
 });
 

@@ -970,6 +970,98 @@ html body :is(
 	border-color: var(--color-outline, #79786e) !important;
 }
 
+/* Shared selection controls. Low-specificity selectors let feature-specific switches
+   and editor controls keep their purpose-built appearance. */
+:where(input[type="checkbox"], input[type="radio"]):not([data-native-control]) {
+	--selection-control-size: 1.15rem;
+	width: var(--selection-control-size);
+	height: var(--selection-control-size);
+	min-width: var(--selection-control-size);
+	margin: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	display: inline-grid;
+	place-content: center;
+	border: 1.5px solid var(--color-outline, #79786e);
+	background: var(--color-surface-container-lowest, #fff);
+	color: var(--color-on-primary, #fff);
+	vertical-align: -0.16em;
+	cursor: pointer;
+	transition: border-color 160ms ease-out, background-color 160ms ease-out, box-shadow 160ms ease-out, opacity 160ms ease-out;
+}
+
+:where(input[type="checkbox"]):not([data-native-control]) {
+	border-radius: var(--radius-control);
+}
+
+:where(input[type="radio"]):not([data-native-control]) {
+	border-radius: var(--radius-pill);
+}
+
+:where(input[type="checkbox"]):not([data-native-control])::before {
+	content: "";
+	width: 0.52rem;
+	height: 0.3rem;
+	border-left: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: translateY(-0.05rem) rotate(-45deg) scale(0);
+	transform-origin: center;
+	transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:where(input[type="radio"]):not([data-native-control])::before {
+	content: "";
+	width: 0.48rem;
+	height: 0.48rem;
+	border-radius: var(--radius-pill);
+	background: currentColor;
+	transform: scale(0);
+	transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:where(input[type="checkbox"], input[type="radio"]):not([data-native-control]):hover:not(:disabled) {
+	border-color: var(--color-primary, #0060aa);
+	background: color-mix(in srgb, var(--color-primary, #0060aa) 9%, var(--color-surface-container-lowest, #fff));
+}
+
+:where(input[type="checkbox"], input[type="radio"]):not([data-native-control]):checked,
+:where(input[type="checkbox"]):not([data-native-control]):indeterminate {
+	border-color: var(--color-primary, #0060aa);
+	background: var(--color-primary, #0060aa);
+}
+
+:where(input[type="checkbox"], input[type="radio"]):not([data-native-control]):checked::before {
+	transform: translateY(-0.05rem) rotate(-45deg) scale(1);
+}
+
+:where(input[type="radio"]):not([data-native-control]):checked::before {
+	transform: scale(1);
+}
+
+:where(input[type="checkbox"]):not([data-native-control]):indeterminate::before {
+	content: "";
+	width: 0.55rem;
+	height: 2px;
+	border: 0;
+	background: currentColor;
+	transform: none;
+}
+
+:where(input[type="checkbox"], input[type="radio"]):not([data-native-control]):disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+:where(input[type="date"], input[type="time"], input[type="datetime-local"])::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	opacity: 0.72;
+}
+
+:where(input[type="date"], input[type="time"], input[type="datetime-local"]):disabled::-webkit-calendar-picker-indicator {
+	cursor: not-allowed;
+	opacity: 0.38;
+}
+
 html body :is(
 	input[type="text"], input[type="email"], input[type="password"], input[type="search"],
 	input[type="url"], input[type="tel"], input[type="number"], input[type="date"],
@@ -3061,7 +3153,7 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
   width: fit-content;
   min-width: 40px;
   min-height: 40px;
-  cursor: help;
+  cursor: pointer;
   outline: none;
 }
 
@@ -3108,17 +3200,21 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
 .tier-badge-trigger:hover::before,
 .tier-badge-trigger:hover::after,
 .tier-badge-trigger:focus-visible::before,
-.tier-badge-trigger:focus-visible::after {
+.tier-badge-trigger:focus-visible::after,
+.tier-badge-trigger.is-tooltip-open::before,
+.tier-badge-trigger.is-tooltip-open::after {
   opacity: 1;
 }
 
 .tier-badge-trigger:hover::before,
-.tier-badge-trigger:focus-visible::before {
+.tier-badge-trigger:focus-visible::before,
+.tier-badge-trigger.is-tooltip-open::before {
   transform: translate(-50%, 0);
 }
 
 .tier-badge-trigger:hover::after,
-.tier-badge-trigger:focus-visible::after {
+.tier-badge-trigger:focus-visible::after,
+.tier-badge-trigger.is-tooltip-open::after {
   transform: translate(-50%, calc(-100% - 6px));
 }
 

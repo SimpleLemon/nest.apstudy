@@ -153,6 +153,21 @@ class AccessibilityBaselineTests(unittest.TestCase):
 
         self.assertGreaterEqual(_contrast_ratio(light["--landing-gold-bright"], light["--landing-navy-deep"]), 4.5)
 
+    def test_login_uses_theme_surfaces_and_text_tokens(self):
+        source = (ROOT / "static/css/login.css").read_text()
+        for declaration in (
+            "background: var(--color-background)",
+            "color: var(--color-on-surface)",
+            "background: var(--login-card-bg)",
+            "color: var(--color-on-surface-variant)",
+            "background: var(--color-error-container)",
+            "color: var(--color-on-error-container)",
+        ):
+            self.assertIn(declaration, source)
+
+        self.assertNotRegex(source, r"html,\s*body\s*\{[^}]*background:\s*#[0-9a-fA-F]{3,8}")
+        self.assertNotRegex(source, r"\.login-card\s*\{[^}]*background:\s*(?:#|rgba?\()")
+
     def test_semantic_theme_pairs_meet_normal_text_contrast(self):
         source = (ROOT / "static/css/themes.css").read_text()
         root_values = dict(re.findall(r"(--[\w-]+):\s*(#[0-9a-fA-F]{6})", source.split('[data-theme="obsidian-dark"]', 1)[0]))

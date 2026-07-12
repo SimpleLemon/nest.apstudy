@@ -1,6 +1,17 @@
 (function notificationShell(global) {
-  const state = { unread: 0 };
+  const FOREGROUND_SYNC_MS = 8000;
+  const state = {
+    foregroundReady: false,
+    knownIds: new Set(),
+    syncTimer: null,
+    syncing: false,
+    tabId: '',
+    tray: null,
+    unread: 0,
+  };
+
   const csrf = () => document.cookie.match(/(?:^|; )csrf_token=([^;]*)/)?.[1] || '';
+
   async function api(url, options = {}) {
     const headers = { ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...(options.headers || {}) };
     if (options.method && options.method !== 'GET') headers['X-CSRFToken'] = decodeURIComponent(csrf());
@@ -9,24 +20,65 @@
     if (!response.ok) throw new Error(payload.error || 'Notification request failed.');
     return payload;
   }
+
   function base64Key(value) {
     const padding = '='.repeat((4 - value.length % 4) % 4);
     return Uint8Array.from(atob((value + padding).replace(/-/g, '+').replace(/_/g, '/')), (char) => char.charCodeAt(0));
   }
+
+  function support() {
+    if (!global.isSecureContext) return { supported: false, reason: 'secure-context' };
+    if (!('Notification' in global)) return { supported: false, reason: 'notifications' };
+    if (!('serviceWorker' in navigator)) return { supported: false, reason: 'service-worker' };
+    if (!('PushManager' in global)) return { supported: false, reason: 'push-manager' };
+    return { supported: true, reason: '' };
+  }
+
+  function mappedError(error) {
+    const name = String(error?.name || '');
+    if (name === 'NotAllowedError') return new Error('Notifications are blocked. Allow them for nest.apstudy.org in your browser’s site settings, then try again.');
+    if (name === 'AbortError') return new Error('The browser could not reach its push service. In Brave, enable push messaging in Privacy and security, then try again.');
+    if (name === 'InvalidStateError') return new Error('The saved browser subscription is no longer valid. Reload the page and enable notifications again.');
+    if (name === 'SecurityError') return new Error('Background notifications require a secure HTTPS connection.');
+    return error instanceof Error ? error : new Error('This browser could not enable background notifications.');
+  }
+
+  async function withTimeout(promise, milliseconds, message) {
+    let timeoutId;
+    const timeout = new Promise((_, reject) => { timeoutId = setTimeout(() => reject(new Error(message)), milliseconds); });
+    try { return await Promise.race([promise, timeout]); } finally { clearTimeout(timeoutId); }
+  }
+
   async function registration() {
-    if (!('serviceWorker' in navigator)) throw new Error('This browser does not support background notifications.');
-    return navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
+    if (!support().supported) throw new Error('This browser does not support background notifications.');
+    await navigator.serviceWorker.register('/service-worker.js', { scope: '/', updateViaCache: 'none' });
+    return withTimeout(navigator.serviceWorker.ready, 12000, 'The notification service did not start. Reload the page and try again.');
   }
+
   async function enable(deviceName) {
-    if (!('Notification' in global)) throw new Error('This browser does not support notifications.');
-    const permission = await Notification.requestPermission();
-    if (permission !== 'granted') throw new Error('Notifications are blocked in browser settings.');
-    const config = await api('/api/notifications/preferences');
-    if (!config.vapid_public_key) throw new Error('Push notifications are not configured on this server.');
-    const reg = await registration();
-    const subscription = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: base64Key(config.vapid_public_key) });
-    return api('/api/notifications/subscriptions', { method: 'POST', body: JSON.stringify({ subscription: subscription.toJSON(), device_name: deviceName || navigator.platform || 'This browser' }) });
+    if (!support().supported) throw new Error('This browser does not support background notifications.');
+    try {
+      const config = await api('/api/notifications/preferences');
+      if (!config.push_configured || !config.vapid_public_key) throw new Error('Background notifications are temporarily unavailable. Please try again later.');
+      const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission();
+      if (permission !== 'granted') throw new DOMException('Permission denied', 'NotAllowedError');
+      const reg = await registration();
+      let subscription = await reg.pushManager.getSubscription();
+      if (!subscription) {
+        subscription = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: base64Key(config.vapid_public_key) });
+      }
+      return await api('/api/notifications/subscriptions', {
+        method: 'POST',
+        body: JSON.stringify({
+          subscription: subscription.toJSON(),
+          device_name: deviceName || navigator.userAgentData?.platform || navigator.platform || 'This browser',
+        }),
+      });
+    } catch (error) {
+      throw mappedError(error);
+    }
   }
+
   async function disableCurrent() {
     const reg = await navigator.serviceWorker?.getRegistration('/');
     const subscription = await reg?.pushManager.getSubscription();
@@ -34,16 +86,54 @@
     await api('/api/notifications/subscriptions/current/delete', { method: 'POST', body: JSON.stringify({ endpoint: subscription.endpoint }) });
     await subscription.unsubscribe();
   }
+
+  function setUnreadCount(value) {
+    state.unread = Math.max(0, Number(value) || 0);
+    const host = document.getElementById('navbar-notifications-host');
+    const badge = host?.querySelector('.notification-badge');
+    if (badge) {
+      badge.textContent = state.unread > 99 ? '99+' : String(state.unread);
+      badge.hidden = state.unread === 0;
+    }
+    state.tray?.setUnreadCount(state.unread);
+    if (navigator.setAppBadge) {
+      const badgeUpdate = state.unread
+        ? navigator.setAppBadge(state.unread)
+        : navigator.clearAppBadge ? navigator.clearAppBadge() : navigator.setAppBadge(0);
+      Promise.resolve(badgeUpdate).catch(() => {});
+    }
+  }
+
+  function showError(error) {
+    global.APStudyToast?.show?.({
+      title: 'Could not update notifications',
+      message: error?.message || 'Try again in a moment.',
+      type: 'error',
+    });
+  }
+
+  function mountTray(host) {
+    if (!global.APStudyNotificationTray) {
+      if (document.querySelector('script[data-nest-notification-tray]')) return;
+      const script = document.createElement('script');
+      script.src = '/static/js/core/notification-tray.js';
+      script.dataset.nestNotificationTray = 'true';
+      script.addEventListener('load', () => mountTray(host), { once: true });
+      document.head.appendChild(script);
+      return;
+    }
+    state.tray = global.APStudyNotificationTray.mount(host, { api, setUnreadCount, showError });
+    state.tray?.setUnreadCount(state.unread);
+  }
+
   function renderBell() {
     const host = document.getElementById('navbar-notifications-host');
     if (!host) return;
-    host.innerHTML = `<button class="navbar-button notification-bell" aria-label="Notifications" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">notifications</span><span class="notification-badge" hidden></span></button><div class="notification-popover" hidden><div class="notification-popover-head"><strong>Notifications</strong><button type="button" data-read-all>Mark all read</button></div><div class="notification-popover-list" role="feed"></div><a href="/notifications" class="notification-view-all">View all notifications</a></div>`;
-    const button = host.querySelector('.notification-bell');
-    const popover = host.querySelector('.notification-popover');
-    button.addEventListener('click', async () => { const opening = popover.hidden; popover.hidden = !opening; button.setAttribute('aria-expanded', String(opening)); if (opening) await loadRecent(host); });
-    host.querySelector('[data-read-all]').addEventListener('click', async () => { await api('/api/notifications/read', { method: 'POST', body: JSON.stringify({ read: true }) }); await loadRecent(host); });
+    mountTray(host);
     void refreshCount(host);
+    startForegroundDelivery();
   }
+
   async function showIntentPrompt() {
     if (!('Notification' in global) || Notification.permission !== 'default' || document.querySelector('.notification-intent-prompt')) return;
     try {
@@ -55,21 +145,172 @@
       prompt.setAttribute('aria-label', 'Enable notifications');
       prompt.innerHTML = '<strong>Stay ahead of what matters</strong><p>Let Nest alert you about deadlines, course openings, and messages—even when this tab is closed.</p><div><button type="button" data-not-now>Not now</button><button type="button" data-enable>Enable notifications</button></div>';
       document.body.appendChild(prompt);
-      prompt.querySelector('[data-enable]').addEventListener('click', async () => { try { await enable(); prompt.remove(); } catch (error) { global.alert(error.message); } });
-      prompt.querySelector('[data-not-now]').addEventListener('click', async () => { await api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify({ prompt_dismissed: true }) }); prompt.remove(); });
+      prompt.querySelector('[data-enable]').addEventListener('click', async () => {
+        const button = prompt.querySelector('[data-enable]');
+        button.disabled = true;
+        try {
+          await enable();
+          prompt.remove();
+          global.APStudyToast?.show?.({ message: 'Notifications enabled.', type: 'success' });
+        } catch (error) {
+          global.APStudyToast?.show?.({ title: 'Could not enable notifications', message: error.message, type: 'error' });
+          button.disabled = false;
+        }
+      });
+      prompt.querySelector('[data-not-now]').addEventListener('click', async () => {
+        await api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify({ prompt_dismissed: true }) });
+        prompt.remove();
+      });
     } catch (_) {}
   }
-  async function refreshCount(host = document.getElementById('navbar-notifications-host')) {
-    if (!host) return;
-    try { const data = await api('/api/notifications/unread-count'); state.unread = data.unread_count; const badge = host.querySelector('.notification-badge'); badge.textContent = state.unread > 99 ? '99+' : String(state.unread); badge.hidden = !state.unread; if (navigator.setAppBadge) state.unread ? navigator.setAppBadge(state.unread) : navigator.clearAppBadge(); } catch (_) {}
+
+  async function refreshCount() {
+    try {
+      const data = await api('/api/notifications/unread-count');
+      setUnreadCount(data.unread_count);
+    } catch (_) {}
   }
-  async function loadRecent(host) {
-    const list = host.querySelector('.notification-popover-list');
-    list.innerHTML = '<p class="notification-empty">Loading…</p>';
-    try { const data = await api('/api/notifications?limit=6'); list.innerHTML = data.notifications.length ? data.notifications.map((item) => `<a href="${item.target_url || '/notifications'}" class="notification-row ${item.is_read ? '' : 'is-unread'}" data-id="${item.id}"><strong>${escape(item.title || item.notification_type)}</strong><span>${escape(item.body || item.message)}</span></a>`).join('') : '<p class="notification-empty">You’re all caught up.</p>'; await refreshCount(host); } catch (error) { list.innerHTML = `<p class="notification-empty">${escape(error.message)}</p>`; }
+
+  function isLaptopOrTablet() {
+    if (navigator.userAgentData?.mobile === true) return false;
+    if (/Mobi|Android.*Mobile|iPhone|iPod/i.test(navigator.userAgent || '')) return false;
+    return Boolean(global.matchMedia?.('(min-width: 600px), (pointer: fine)')?.matches);
   }
-  function escape(value) { const node = document.createElement('span'); node.textContent = String(value || ''); return node.innerHTML; }
-  global.APStudyNotifications = { api, enable, disableCurrent, registration, refreshCount };
+
+  function isForegroundActive() {
+    return isLaptopOrTablet() && document.visibilityState === 'visible' && (document.hasFocus?.() ?? true);
+  }
+
+  function foregroundTabId() {
+    if (state.tabId) return state.tabId;
+    const key = 'apstudy-notification-tab-id';
+    try {
+      const existing = sessionStorage.getItem(key);
+      if (existing) {
+        state.tabId = existing;
+        return state.tabId;
+      }
+      const created = (global.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
+      sessionStorage.setItem(key, created);
+      state.tabId = created;
+    } catch (_) {
+      state.tabId = (global.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
+    }
+    return state.tabId;
+  }
+
+  function remember(items) {
+    items.forEach((item) => state.knownIds.add(String(item.id)));
+    while (state.knownIds.size > 250) state.knownIds.delete(state.knownIds.values().next().value);
+  }
+
+  async function markToastOpened(item) {
+    try {
+      const data = await api('/api/notifications/read', { method: 'POST', body: JSON.stringify({ ids: [item.id], read: true }) });
+      setUnreadCount(data.unread_count);
+      await state.tray?.refresh();
+    } catch (error) {
+      showError(error);
+    } finally {
+      if (item.target_url) global.location.assign(item.target_url);
+    }
+  }
+
+  function showInApp(item) {
+    const action = item.target_url
+      ? { label: 'Open', onClick: () => { void markToastOpened(item); return true; } }
+      : { label: 'Mark read', onClick: () => { void markToastOpened(item); } };
+    global.APStudyToast?.show?.({
+      title: item.title || item.notification_type || 'New notification',
+      message: item.body || item.message || 'Open notifications to view the update.',
+      type: 'info',
+      duration: 7000,
+      action,
+    });
+  }
+
+  async function showForegroundItems(items) {
+    if (!items.length) return;
+    if (state.tray?.isOpen()) {
+      await state.tray.refresh();
+      return;
+    }
+    items.slice(0, 2).reverse().forEach(showInApp);
+    if (items.length > 2) {
+      global.APStudyToast?.show?.({
+        title: `${items.length - 2} more updates`,
+        message: 'They’re ready in your notification tray.',
+        type: 'info',
+        duration: 7000,
+        action: { label: 'View', onClick: () => { state.tray?.open(); } },
+      });
+    }
+  }
+
+  async function syncForeground({ inactive = false, keepalive = false } = {}) {
+    if (!isLaptopOrTablet()) return;
+    const active = !inactive && isForegroundActive();
+    if (!active && !inactive) return;
+    if (state.syncing && !inactive) return;
+    if (inactive) state.foregroundReady = false;
+    else state.syncing = true;
+    try {
+      const data = await api('/api/notifications/sync', {
+        method: 'POST',
+        body: JSON.stringify({
+          active,
+          device_class: isLaptopOrTablet() ? 'desktop_tablet' : 'mobile',
+          tab_id: foregroundTabId(),
+        }),
+        keepalive,
+      });
+      if (!active || !data.active) return;
+      const items = Array.isArray(data.notifications) ? data.notifications : [];
+      const pendingIds = Array.isArray(data.pending_foreground_ids) ? data.pending_foreground_ids.map(String) : [];
+      const pending = new Set(pendingIds);
+      const visibleIds = new Set(items.map((item) => String(item.id)));
+      const acknowledgedPendingIds = pendingIds.filter((id) => visibleIds.has(id));
+      const fresh = items.filter((item) => (
+        !item.is_read
+        && item.foreground_enabled !== false
+        && !state.knownIds.has(String(item.id))
+        && (state.foregroundReady || pending.has(String(item.id)))
+      ));
+      remember(items);
+      state.foregroundReady = true;
+      setUnreadCount(data.unread_count);
+      await showForegroundItems(fresh);
+      if (acknowledgedPendingIds.length) {
+        await api('/api/notifications/foreground-ack', { method: 'POST', body: JSON.stringify({ ids: acknowledgedPendingIds }) });
+      }
+    } catch (_) {
+      // Foreground sync is opportunistic; the feed and background push remain available.
+    } finally {
+      if (!inactive) state.syncing = false;
+    }
+  }
+
+  function startForegroundDelivery() {
+    if (state.syncTimer) return;
+    void syncForeground();
+    state.syncTimer = global.setInterval(syncForeground, FOREGROUND_SYNC_MS);
+    global.addEventListener('focus', () => { void syncForeground(); });
+    global.addEventListener('blur', () => { void syncForeground({ inactive: true, keepalive: true }); });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) void syncForeground({ inactive: true, keepalive: true });
+      else void syncForeground();
+    });
+    global.addEventListener('pagehide', () => { void syncForeground({ inactive: true, keepalive: true }); });
+  }
+
+  global.APStudyNotifications = {
+    api,
+    disableCurrent,
+    enable,
+    refreshCount,
+    registration,
+    support,
+  };
   global.addEventListener('apstudy:notification-intent', showIntentPrompt);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderBell); else renderBell();
 })(window);

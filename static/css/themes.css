@@ -39,6 +39,7 @@
    OBSIDIAN DARK (default dark)
    ============================ */
 [data-theme="obsidian-dark"] {
+    color-scheme: dark;
     --color-surface-container: #1c2026;
     --color-surface: #10141a;
     --color-surface-bright: #353940;
@@ -89,6 +90,7 @@
    warm off-white/cream tones for layering.
    ============================ */
 [data-theme="parchment-light"] {
+    color-scheme: light;
     --color-surface-container: #f0eeeb;
     --color-surface: #ffffff;
     --color-surface-bright: #ffffff;
@@ -133,6 +135,7 @@
    Default: Parchment Light. Dark override via media query.
    ============================ */
 [data-theme="system-match"] {
+    color-scheme: light;
     --color-surface-container: #f0eeeb;
     --color-surface: #ffffff;
     --color-surface-bright: #ffffff;
@@ -174,6 +177,7 @@
 }
 @media (prefers-color-scheme: dark) {
     [data-theme="system-match"] {
+        color-scheme: dark;
         --color-surface-container: #1c2026;
         --color-surface: #10141a;
         --color-surface-bright: #353940;
@@ -226,6 +230,7 @@
    Crisp white base, warm stone-gray containers.
    ============================ */
 [data-theme="nest-light"] {
+    color-scheme: light;
     --color-surface-container: #EAEAE4;
     --color-surface: #FFFFFF;
     --color-surface-bright: #FFFFFF;
@@ -269,6 +274,7 @@
     NEST DARK
    ============================ */
 [data-theme="nest-dark"] {
+    color-scheme: dark;
     --color-surface-container: #101730;
     --color-surface: #0a0f22;
     --color-surface-bright: #252c48;

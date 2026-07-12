@@ -310,6 +310,18 @@ def _check_notification_reminders(app):
             logger.exception("Calendar notification reminder check failed")
 
 
+def _flush_notification_foreground(app):
+    with app.app_context():
+        try:
+            from services.notifications import flush_foreground_queue
+
+            flushed = flush_foreground_queue()
+            if flushed:
+                logger.info("Released %s foreground notification fallback(s).", flushed)
+        except Exception:
+            logger.exception("Foreground notification fallback check failed")
+
+
 def _schedule_daily_quote_retry(app, quote_date, next_attempt):
     if _scheduler is None or not _scheduler.running:
         logger.warning("Daily quote retry skipped because scheduler is not running.")
@@ -573,6 +585,16 @@ def init_scheduler(app):
             trigger=IntervalTrigger(minutes=1),
             id="check_notification_reminders",
             name="Check calendar and task notification reminders every minute",
+            replace_existing=True,
+            max_instances=1,
+            coalesce=True,
+        )
+
+        _scheduler.add_job(
+            func=lambda: _flush_notification_foreground(app),
+            trigger=IntervalTrigger(seconds=10),
+            id="flush_notification_foreground",
+            name="Release unacknowledged foreground notifications",
             replace_existing=True,
             max_instances=1,
             coalesce=True,

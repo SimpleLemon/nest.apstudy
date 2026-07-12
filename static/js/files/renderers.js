@@ -18,7 +18,7 @@
         return `
             <article class="files-row files-folder-card ${selected ? "is-selected" : ""}" data-folder-id="${escapeHtml(folder.id)}" tabindex="0">
                 <label class="files-row-check" aria-label="Select ${escapeHtml(folder.name)}">
-                    <input type="checkbox" data-select-folder="${escapeHtml(folder.id)}" ${selected ? "checked" : ""}>
+                    <input type="checkbox" data-native-control data-select-folder="${escapeHtml(folder.id)}" ${selected ? "checked" : ""}>
                 </label>
                 <span class="files-row-icon files-row-icon-folder material-symbols-outlined" aria-hidden="true">folder</span>
                 <div class="files-row-main">
@@ -38,7 +38,7 @@
         return `
             <article class="files-row files-file-card ${selected ? "is-selected" : ""}" data-file-id="${escapeHtml(file.id)}">
                 <label class="files-row-check" aria-label="Select ${escapeHtml(file.filename)}">
-                    <input type="checkbox" data-select-file="${escapeHtml(file.id)}" ${selected ? "checked" : ""}>
+                    <input type="checkbox" data-native-control data-select-file="${escapeHtml(file.id)}" ${selected ? "checked" : ""}>
                 </label>
                 <span class="files-row-icon files-row-icon-file material-symbols-outlined" aria-hidden="true">${escapeHtml(fileIcon(file))}</span>
                 <div class="files-row-main">

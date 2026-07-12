@@ -844,6 +844,8 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(template, /id="settings-skeleton"/);
     assert.match(template, /settings-sections[^"]*is-loading/);
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences', 'notifications'\]/);
+    assert.doesNotMatch(source, /global\.alert|window\.alert/);
+    assert.match(source, /push_configured/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
     assert.match(source, /'nest-light'/);
     assert.match(source, /'nest-dark'/);
@@ -1128,6 +1130,58 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
     assert.match(source, /navbar-avatar--grade-aa/);
     assert.match(source, /navbar-avatar--developer/);
     assert.match(source, /dataset\.userTier/);
+});
+
+test("browser notifications preflight capabilities and never use native alert dialogs", async () => {
+    const source = await sourceFor("static/js/core/notifications.js");
+    const worker = await sourceFor("static/service-worker.js");
+    assert.match(source, /push_configured/);
+    assert.match(source, /PushManager/);
+    assert.match(source, /isSecureContext/);
+    assert.match(source, /serviceWorker\.ready/);
+    assert.match(source, /NotAllowedError/);
+    assert.match(source, /AbortError/);
+    assert.match(source, /APStudyToast/);
+    assert.match(source, /desktop_tablet/);
+    assert.match(source, /userAgentData\?\.mobile/);
+    assert.match(source, /acknowledgedPendingIds/);
+    assert.match(source, /\/api\/notifications\/sync/);
+    assert.match(source, /\/api\/notifications\/foreground-ack/);
+    assert.match(source, /pending_foreground_ids/);
+    assert.match(worker, /\/dashboard\?notifications=open/);
+    assert.doesNotMatch(source, /global\.alert|window\.alert/);
+    const settingsSource = await sourceFor("static/js/settings/notifications.js");
+    assert.match(settingsSource, /maxTouchPoints/);
+});
+
+test("shared selection controls avoid browser-default checkbox and radio rendering", async () => {
+    const source = await sourceFor("static/css/global.css");
+
+    assert.match(source, /:where\(input\[type="checkbox"\], input\[type="radio"\]\):not\(\[data-native-control\]\)/);
+    assert.match(source, /appearance:\s*none/);
+    assert.match(source, /:checked::before/);
+    assert.match(source, /:indeterminate::before/);
+    assert.match(source, /webkit-calendar-picker-indicator/);
+});
+
+test("navbar notification tray owns filtering, bulk actions, and read behavior", async () => {
+    const source = await sourceFor("static/js/core/notification-tray.js");
+    const blueprint = await sourceFor("blueprints/notifications_api.py");
+    const notesBlueprint = await sourceFor("blueprints/notes_api.py");
+    assert.match(source, /data-notification-open/);
+    assert.match(source, /data-notification-read/);
+    assert.match(source, /data-status="unread"/);
+    assert.match(source, /data-category/);
+    assert.match(source, /data-search/);
+    assert.match(source, /data-select-all/);
+    assert.match(source, /data-delete-selected/);
+    assert.match(source, /\/api\/notifications\/read/);
+    assert.match(source, /item\.target_url/);
+    assert.doesNotMatch(source, /target_url \|\| '#'/);
+    assert.match(source, /APStudyConfirm\?\.request/);
+    assert.match(blueprint, /redirect\(f"\{url_for\('dashboard\.dashboard'\)\}\?notifications=open"\)/);
+    assert.doesNotMatch(blueprint, /render_template\("notifications\.html"/);
+    assert.doesNotMatch(notesBlueprint, /@notes_api_bp\.route\("\/api\/notifications/);
 });
 
 test("tier badge assets and admin controls stay wired to the supported roles", async () => {

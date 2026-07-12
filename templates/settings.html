@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% set settings_assets_version = 'settings-combobox-20260705-1' %}
+{% set settings_assets_version = 'settings-combobox-20260711-1' %}
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
@@ -16,7 +16,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css', v=settings_assets_version) }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% include "_font_assets.html" %}
@@ -46,7 +47,6 @@
     <meta name="twitter:title" content="Nest University | APStudy">
     <meta name="twitter:description" content="Settings for your APStudy account, data, and preferences." />
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <style>
         .settings-theme-choice::after { display: none !important; }
     </style>
@@ -267,7 +267,13 @@
                                             <strong data-tier-label>Free</strong>
                                         </div>
                                     </div>
-                                    <span class="settings-tier-status" data-tier-status>Active</span>
+                                    <div class="settings-tier-heading-actions">
+                                        <button id="settings-export-data" type="button" class="settings-button settings-button-secondary settings-tier-export" aria-label="Export your account data">
+                                            <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                                            <span>Export data</span>
+                                        </button>
+                                        <span class="settings-tier-status" data-tier-status>Active</span>
+                                    </div>
                                 </div>
                                 <div class="settings-tier-usage-block">
                                     <div class="settings-tier-usage-meta">
@@ -353,9 +359,6 @@
                                 <span class="settings-field-label">Storage Used</span>
                                 <strong data-storage-used>0 B</strong>
                                 <p class="settings-storage-details" data-storage-details>0 notes, 0 files</p>
-                            </div>
-                            <div class="settings-card-content settings-action-stack">
-                                <button id="settings-export-data" type="button" class="settings-button settings-button-secondary">Export Data</button>
                             </div>
                         </div>
                     </article>
@@ -505,7 +508,7 @@
                         <div class="settings-card-body">
                             <div class="settings-card-summary">
                                 <h3>Browser notifications</h3>
-                                <p>Receive reminders and important updates even when Nest is closed.</p>
+                                <p>Receive reminders and important updates when Nest is not active. On laptops and tablets, updates stay in the app while you are using it.</p>
                             </div>
                             <div class="settings-card-content">
                                 <div class="notification-permission-row">
@@ -513,6 +516,7 @@
                                     <button id="notification-enable" type="button" class="settings-button settings-button-primary">Enable notifications</button>
                                 </div>
                                 <p id="notification-recovery" class="settings-help-text" hidden></p>
+                                <p id="notification-action-status" class="notification-action-status" role="status" aria-live="polite" hidden></p>
                             </div>
                         </div>
                     </article>

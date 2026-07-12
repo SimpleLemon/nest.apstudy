@@ -1046,6 +1046,7 @@ function initializeGlobalChrome() {
     ensureAppwriteSession();
     drainServerToasts();
     initializePresenceHeartbeat();
+    initializeTierBadgeTooltips();
 
     // Bind any links/buttons that request logout
     const logoutLinks = document.querySelectorAll("[data-logout]");
@@ -1074,6 +1075,45 @@ function initializeGlobalChrome() {
 </footer>
 `;
     }
+}
+
+function initializeTierBadgeTooltips() {
+    const interactiveBadges = () => [...document.querySelectorAll('.tier-badge-trigger:not([aria-hidden="true"])')];
+    const closeBadges = (except = null) => {
+        interactiveBadges().forEach((badge) => {
+            if (badge === except) return;
+            badge.classList.remove('is-tooltip-open');
+            badge.setAttribute('aria-expanded', 'false');
+        });
+    };
+
+    interactiveBadges().forEach((badge) => {
+        badge.setAttribute('role', 'button');
+        badge.setAttribute('aria-expanded', 'false');
+    });
+
+    document.addEventListener('click', (event) => {
+        const badge = event.target.closest('.tier-badge-trigger:not([aria-hidden="true"])');
+        if (!badge) {
+            closeBadges();
+            return;
+        }
+
+        const willOpen = !badge.classList.contains('is-tooltip-open');
+        closeBadges(badge);
+        badge.classList.toggle('is-tooltip-open', willOpen);
+        badge.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    document.addEventListener('keydown', (event) => {
+        const badge = event.target.closest?.('.tier-badge-trigger:not([aria-hidden="true"])');
+        if (badge && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            badge.click();
+        } else if (event.key === 'Escape') {
+            closeBadges();
+        }
+    });
 }
 
 if (document.readyState === "loading") {

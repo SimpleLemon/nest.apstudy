@@ -4,15 +4,10 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
     <script>window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";</script>
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@25.0.0/dist/iife/sdk.js"></script>
-    {% include '_appwrite_meta.html' %}
-    <script src="{{ url_for('static', filename='js/core/appwrite.js') }}"></script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
 <title>Onboarding - APStudy</title>
     <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy Logo">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -22,6 +17,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/onboarding.css') }}">
+    <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
 </head>
 <body class="onboarding-page bg-surface text-on-surface font-body min-h-screen flex flex-col" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav hidden" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}"></global>

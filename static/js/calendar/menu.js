@@ -56,7 +56,7 @@
                 return `
                     <div class="calendar-source-row">
                         <label class="calendar-source-label">
-                            <input type="checkbox" ${checked}
+                            <input type="checkbox" ${checked} data-native-control
                                 class="js-calendar-checkbox calendar-source-checkbox"
                                 data-calendar-name="${escapeHtml(cal)}"
                                 style="background-color:${data.color};">

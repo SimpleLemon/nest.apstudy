@@ -1,4 +1,4 @@
-const FALLBACK_URL = '/notifications';
+const FALLBACK_URL = '/dashboard?notifications=open';
 
 self.addEventListener('push', (event) => {
   let data = {};
