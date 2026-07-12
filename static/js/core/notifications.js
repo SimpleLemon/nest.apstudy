@@ -26,6 +26,13 @@
     return Uint8Array.from(atob((value + padding).replace(/-/g, '+').replace(/_/g, '/')), (char) => char.charCodeAt(0));
   }
 
+  function keysMatch(left, right) {
+    if (!left || !right || left.byteLength !== right.byteLength) return false;
+    const a = new Uint8Array(left);
+    const b = new Uint8Array(right);
+    return a.every((value, index) => value === b[index]);
+  }
+
   function support() {
     if (!global.isSecureContext) return { supported: false, reason: 'secure-context' };
     if (!('Notification' in global)) return { supported: false, reason: 'notifications' };
@@ -37,7 +44,7 @@
   function mappedError(error) {
     const name = String(error?.name || '');
     if (name === 'NotAllowedError') return new Error('Notifications are blocked. Allow them for nest.apstudy.org in your browser’s site settings, then try again.');
-    if (name === 'AbortError') return new Error('The browser could not reach its push service. In Brave, enable push messaging in Privacy and security, then try again.');
+    if (name === 'AbortError') return new Error('The browser could not reach its push service. In Brave, turn on push messaging in Privacy and security, fully restart Brave, then try again.');
     if (name === 'InvalidStateError') return new Error('The saved browser subscription is no longer valid. Reload the page and enable notifications again.');
     if (name === 'SecurityError') return new Error('Background notifications require a secure HTTPS connection.');
     return error instanceof Error ? error : new Error('This browser could not enable background notifications.');
@@ -52,10 +59,12 @@
   async function registration() {
     if (!support().supported) throw new Error('This browser does not support background notifications.');
     await navigator.serviceWorker.register('/service-worker.js', { scope: '/', updateViaCache: 'none' });
-    return withTimeout(navigator.serviceWorker.ready, 12000, 'The notification service did not start. Reload the page and try again.');
+    const ready = await withTimeout(navigator.serviceWorker.ready, 12000, 'The notification service did not start. Reload the page and try again.');
+    await withTimeout(ready.update(), 12000, 'The notification service could not be refreshed. Reload the page and try again.');
+    return ready;
   }
 
-  async function enable(deviceName) {
+  async function enable(deviceName, options = {}) {
     if (!support().supported) throw new Error('This browser does not support background notifications.');
     try {
       const config = await api('/api/notifications/preferences');
@@ -63,9 +72,23 @@
       const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission();
       if (permission !== 'granted') throw new DOMException('Permission denied', 'NotAllowedError');
       const reg = await registration();
+      const serverKey = base64Key(config.vapid_public_key);
       let subscription = await reg.pushManager.getSubscription();
+      let replacedEndpoint = '';
+      const keyChanged = subscription && !keysMatch(subscription.options?.applicationServerKey, serverKey);
+      if (subscription && (options.forceRefresh || keyChanged)) {
+        replacedEndpoint = subscription.endpoint;
+        await subscription.unsubscribe();
+        subscription = null;
+      }
       if (!subscription) {
-        subscription = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: base64Key(config.vapid_public_key) });
+        subscription = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: serverKey });
+      }
+      if (replacedEndpoint) {
+        await api('/api/notifications/subscriptions/current/delete', {
+          method: 'POST',
+          body: JSON.stringify({ endpoint: replacedEndpoint }),
+        });
       }
       return await api('/api/notifications/subscriptions', {
         method: 'POST',

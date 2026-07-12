@@ -7,6 +7,7 @@ from flask import Flask
 
 from services.database import init_db
 from services import notifications
+from blueprints import notifications_api
 
 
 def notification_app():
@@ -63,6 +64,29 @@ def test_delivery_removes_expired_subscription():
             with patch.object(notifications, "_send", return_value=201):
                 result = notifications.deliver("u1", notification_id, "test", "Test", "Body", "/dashboard?notifications=open")
             assert result == {"accepted": 1, "failed": 0}
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_test_notification_distinguishes_missing_and_failed_subscriptions():
+    app, path = notification_app()
+    app.register_blueprint(notifications_api.notifications_bp)
+    user = type("User", (), {"id": "u1", "is_authenticated": True})()
+    try:
+        with app.test_request_context("/api/notifications/test", method="POST"), \
+                patch.object(notifications_api, "current_user", user):
+            response, status = notifications_api.test_notification.__wrapped__()
+            assert status == 409
+            assert response.get_json()["code"] == "no_push_subscription"
+
+        with app.app_context():
+            notifications.upsert_subscription("u1", {"endpoint": "https://push.example/device", "keys": {"p256dh": "key", "auth": "auth"}}, "Laptop")
+        with app.test_request_context("/api/notifications/test", method="POST"), \
+                patch.object(notifications_api, "current_user", user), \
+                patch.object(notifications, "notify", return_value=("n1", {"accepted": 0, "failed": 1})):
+            response, status = notifications_api.test_notification.__wrapped__()
+            assert status == 502
+            assert response.get_json()["code"] == "push_delivery_failed"
     finally:
         Path(path).unlink(missing_ok=True)
 

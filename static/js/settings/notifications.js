@@ -19,6 +19,7 @@
     const permission = !('Notification' in global) ? 'unsupported' : Notification.permission;
     const status = document.getElementById('notification-permission-status');
     const enable = document.getElementById('notification-enable');
+    const test = document.getElementById('notification-test');
     const recovery = document.getElementById('notification-recovery');
     const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
     const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -28,6 +29,8 @@
     else if (permission === 'denied') { status.textContent = 'Blocked in browser'; enable.disabled = true; recovery.hidden = false; recovery.textContent = 'Allow notifications for nest.apstudy.org in your browser’s site settings, then reload this page.'; }
     else if (!capability.supported) { status.textContent = 'Not supported by this browser'; enable.disabled = true; recovery.hidden = false; recovery.textContent = 'Use a current version of Brave, Chrome, Edge, Firefox, or Safari. On iPhone and iPad, install Nest on the Home Screen first.'; }
     else { status.textContent = permission === 'granted' ? 'Enabled on this browser' : 'Not enabled on this browser'; enable.textContent = permission === 'granted' ? 'Repair subscription' : 'Enable notifications'; enable.disabled = false; recovery.hidden = true; }
+    test.disabled = !config.push_configured || config.devices.length === 0;
+    test.title = config.devices.length ? '' : 'Enable notifications on a browser before sending a test.';
     document.querySelectorAll('[data-push-toggle]').forEach((button) => selected(button, Boolean(config.preferences[button.dataset.pushToggle])));
     document.querySelectorAll('.notification-leads input').forEach((input) => { input.checked = config.preferences.calendar_lead_minutes.includes(Number(input.value)); });
     document.getElementById('notification-all-day-time').value = config.preferences.all_day_previous_time;
@@ -38,7 +41,7 @@
     const button = document.getElementById('notification-enable');
     button.disabled = true;
     setActionStatus('Connecting this browser…');
-    try { await global.APStudyNotifications.enable(); setActionStatus('This browser is ready for background notifications.', 'success'); toast('Notifications enabled.'); await load(); }
+    try { await global.APStudyNotifications.enable(undefined, { forceRefresh: Notification.permission === 'granted' }); setActionStatus('This browser is ready for background notifications.', 'success'); toast('Notifications enabled.'); await load(); }
     catch (error) { setActionStatus(error.message, 'error'); toast(error.message, 'error', 'Could not enable notifications'); await load(); }
     finally { if (button && config?.push_configured && Notification.permission !== 'denied') button.disabled = false; }
   }
@@ -49,7 +52,7 @@
     preferences.all_day_previous_time = document.getElementById('notification-all-day-time').value;
     try { config.preferences = (await global.APStudyNotifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message, 'error'); }
   }
-  async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { toast(error.message, 'error'); } }
+  async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message, 'error', 'Test notification failed'); } }
   function escape(value) { const node = document.createElement('span'); node.textContent = value || ''; return node.innerHTML; }
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('notification-enable')?.addEventListener('click', enable);

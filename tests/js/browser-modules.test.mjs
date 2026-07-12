@@ -1141,6 +1141,9 @@ test("browser notifications preflight capabilities and never use native alert di
     assert.match(source, /serviceWorker\.ready/);
     assert.match(source, /NotAllowedError/);
     assert.match(source, /AbortError/);
+    assert.match(source, /forceRefresh/);
+    assert.match(source, /applicationServerKey/);
+    assert.match(source, /ready\.update\(\)/);
     assert.match(source, /APStudyToast/);
     assert.match(source, /desktop_tablet/);
     assert.match(source, /userAgentData\?\.mobile/);
@@ -1152,6 +1155,7 @@ test("browser notifications preflight capabilities and never use native alert di
     assert.doesNotMatch(source, /global\.alert|window\.alert/);
     const settingsSource = await sourceFor("static/js/settings/notifications.js");
     assert.match(settingsSource, /maxTouchPoints/);
+    assert.match(settingsSource, /config\.devices\.length === 0/);
 });
 
 test("shared selection controls avoid browser-default checkbox and radio rendering", async () => {

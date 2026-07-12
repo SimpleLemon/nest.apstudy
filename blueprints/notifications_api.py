@@ -65,8 +65,20 @@ def unsubscribe_current():
 @notifications_bp.post("/api/notifications/test")
 @login_required
 def test_notification():
+    if not notifications.list_subscriptions(current_user.id):
+        return jsonify({
+            "error": "No browser is registered. Enable notifications on this browser before sending a test.",
+            "code": "no_push_subscription",
+        }), 409
     notification_id, result = notifications.notify(current_user.id, "test", "Nest notifications are working", "This browser can receive notifications even when Nest is closed.", "/settings#notifications", dedupe_key=None, force_push=True)
-    return jsonify({"notification_id": notification_id, **result}), 200 if result["accepted"] else 503
+    if not result["accepted"]:
+        return jsonify({
+            "error": "The registered browser rejected the test. Repair its subscription, then try again.",
+            "code": "push_delivery_failed",
+            "notification_id": notification_id,
+            **result,
+        }), 502
+    return jsonify({"notification_id": notification_id, **result})
 
 
 @notifications_bp.get("/api/notifications")
