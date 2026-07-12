@@ -815,6 +815,7 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
 
 test("settings page keeps account, theme, calendar, and destructive endpoints centralized", async () => {
     const template = await sourceFor("templates/settings.html");
+    const styles = await sourceFor("static/css/settings.css");
     const source = [
         await sourceFor("static/js/settings/index.js"),
         await sourceFor("static/js/settings/utils.js"),
@@ -844,6 +845,8 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(template, /id="settings-skeleton"/);
     assert.match(template, /settings-sections[^"]*is-loading/);
     assert.match(source, /const SETTINGS_SECTION_IDS = \['account', 'data', 'preferences', 'notifications'\]/);
+    assert.match(source, /section\.hidden = !isActive/);
+    assert.match(styles, /\.settings-section\[hidden\]\s*\{\s*display:\s*none/);
     assert.doesNotMatch(source, /global\.alert|window\.alert/);
     assert.match(source, /push_configured/);
     assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);

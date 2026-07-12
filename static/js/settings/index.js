@@ -774,7 +774,7 @@ function activateSection(sectionId, options = {}) {
   // Show/hide sections like tab panels instead of scrolling.
   elements.sections.forEach((section) => {
     const isActive = section.id === normalized;
-    section.classList.toggle('hidden', !isActive);
+    section.hidden = !isActive;
     section.setAttribute('aria-hidden', isActive ? 'false' : 'true');
   });
 }

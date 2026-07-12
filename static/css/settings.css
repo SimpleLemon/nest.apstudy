@@ -192,6 +192,11 @@
   gap: 1rem;
 }
 
+/* Keep the tab-panel state authoritative even though sections use flex layout. */
+.settings-section[hidden] {
+  display: none;
+}
+
 .settings-section-head h2 {
   margin: 0;
   font-size: 1.25rem;
