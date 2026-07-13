@@ -120,8 +120,10 @@
     }
 
     function syncUi(decision = readStoredDecision()) {
-        const { banner } = ui();
+        const { banner, dialog } = ui();
         if (banner) banner.hidden = Boolean(decision);
+        const closeButton = dialog?.querySelector("[data-apstudy-consent-close]");
+        if (closeButton) closeButton.hidden = !decision;
         document.querySelectorAll("[data-apstudy-consent-choice]").forEach((button) => {
             button.setAttribute("aria-pressed", String(button.dataset.apstudyConsentChoice === decision?.choice));
         });
@@ -129,7 +131,7 @@
 
     function closePreferences() {
         const { dialog } = ui();
-        if (!dialog || !preferencesOpen) return;
+        if (!dialog || !preferencesOpen || !readStoredDecision()) return;
         preferencesOpen = false;
         dialog.hidden = true;
         document.body.classList.remove("apstudy-consent-open");
@@ -197,7 +199,15 @@
                         <button type="button" data-apstudy-consent-choice="accepted">Accept analytics</button>
                     </div>
                 </section>
-                <button class="apstudy-consent-settings" type="button" data-apstudy-consent-settings aria-haspopup="dialog">Cookie settings</button>
+                <button class="apstudy-consent-settings" type="button" data-apstudy-consent-settings aria-haspopup="dialog" aria-label="Cookie settings" title="Cookie settings">
+                    <svg class="apstudy-consent-settings__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M20.75 12.3a8.75 8.75 0 1 1-9.05-9.05 3.35 3.35 0 0 0 4.05 4.05 3.35 3.35 0 0 0 4.05 4.05c.39.29.7.62.95.95Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
+                        <circle cx="8.5" cy="12" r="1" fill="currentColor" />
+                        <circle cx="12" cy="16" r="1" fill="currentColor" />
+                        <circle cx="12" cy="8.5" r="1" fill="currentColor" />
+                    </svg>
+                    <span class="apstudy-consent-settings__label">Cookie settings</span>
+                </button>
             </div>
             <div id="apstudy-consent-dialog" class="apstudy-consent-dialog" role="dialog" aria-modal="true" aria-labelledby="apstudy-consent-title" hidden>
                 <div class="apstudy-consent-dialog__panel">
@@ -245,6 +255,7 @@
             removeAnalyticsRuntime();
         } else {
             loadAnalytics();
+            if (!decision) openPreferences();
         }
     }
 
@@ -273,6 +284,11 @@
 
         const decision = readStoredDecision();
         syncUi(decision);
+        if (!decision) {
+            openPreferences();
+            loadAnalytics();
+            return;
+        }
         if (decision?.choice === REJECTED) {
             const hadAnalyticsRuntime = analyticsLoaded || Boolean(document.getElementById(ANALYTICS_SCRIPT_ID));
             removeAnalyticsRuntime();

@@ -904,9 +904,14 @@ html[data-theme="nest-dark"] .landing-page .apstudy-consent-actions button {
 
 .landing-page .apstudy-consent-settings {
     border-color: var(--landing-line) !important;
-    background: var(--landing-surface);
-    color: var(--landing-ink);
-    box-shadow: 0 4px 8px rgba(4, 11, 27, 0.12);
+    background: var(--landing-navy);
+    color: #ffffff;
+}
+
+html[data-theme="nest-dark"] .landing-page .apstudy-consent-settings {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    background: var(--landing-gold);
+    color: var(--landing-navy);
 }
 
 @keyframes landingHeroIn {

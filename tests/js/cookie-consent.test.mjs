@@ -182,11 +182,22 @@ test("accept and reject controls use the same action class and prominence", () =
     assert.match(source, /keepDialogFocus/);
 });
 
-test("public analytics controls form a compact bottom-left responsive stack", () => {
+test("public analytics controls form a clear bottom-right responsive stack", () => {
     assert.match(source, /class="apstudy-consent-stack"/);
-    assert.match(globalStyles, /\.apstudy-consent-stack\s*\{[^}]*left:\s*20px;[^}]*bottom:\s*20px;[^}]*width:\s*min\(420px,/s);
-    assert.match(globalStyles, /\.apstudy-consent-dialog__panel\s*\{[^}]*left:\s*20px;[^}]*bottom:\s*20px;[^}]*width:\s*min\(420px,/s);
+    assert.match(globalStyles, /\.apstudy-consent-stack\s*\{[^}]*right:\s*max\(20px,[^}]*bottom:\s*max\(20px,[^}]*width:\s*min\(420px,/s);
+    assert.match(globalStyles, /\.apstudy-consent-dialog__panel\s*\{[^}]*right:\s*max\(20px,[^}]*bottom:\s*20px;[^}]*width:\s*min\(460px,/s);
+    assert.match(globalStyles, /\.apstudy-consent-settings\s*\{[^}]*width:\s*58px;[^}]*height:\s*58px;[^}]*border-radius:\s*50%;/s);
     assert.match(globalStyles, /@media \(max-width:\s*767px\)/);
+});
+
+test("first visit opens a persistent consent dialog until a choice is made", () => {
+    const firstVisit = createHarness();
+
+    assert.equal(firstVisit.document.body.children.length, 1);
+    assert.match(source, /if \(!decision\) openPreferences\(\);/);
+    assert.match(source, /if \(!dialog \|\| !preferencesOpen \|\| !readStoredDecision\(\)\) return;/);
+    assert.match(source, /class="apstudy-consent-settings__icon"/);
+    assert.match(source, /aria-label="Cookie settings"/);
 });
 
 test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
