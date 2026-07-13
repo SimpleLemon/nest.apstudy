@@ -31,6 +31,14 @@ export function handlePageSetupToolbarClick(event, toolbar, popover, openPageSet
     );
 }
 
+export function claimElementBinding(element, bindingName) {
+    if (!element || !bindingName) return false;
+    const attribute = `data-${String(bindingName).replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`;
+    if (element.getAttribute?.(attribute) === 'true') return false;
+    element.setAttribute?.(attribute, 'true');
+    return true;
+}
+
 export function floatingPopoverPosition({
     triggerRect,
     popoverRect,

@@ -643,8 +643,9 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /background:\s*#ffffff !important/);
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
-    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-2/);
-    assert.match(editorTemplate, /notes-editor-bundle-15/);
+    assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-3/);
+    assert.match(editorTemplate, /notes-editor-bundle-16/);
+    assert.match(await sourceFor("static/js/notes/list/utils.js"), /notes-editor\.js\?v=notes-editor-bundle-16/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -671,8 +672,13 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /handlePageSetupToolbarClick\([\s\S]*?writingToolbar,[\s\S]*?pageSetupPopover/);
     assert.doesNotMatch(source, /pageSetupTrigger\?\.addEventListener\('click'/);
     assert.match(source, /activePageSetupTriggerRect = triggerRect \|\| usableTriggerRect\(trigger\)/);
+    assert.match(source, /Symbol\.for\('apstudy\.notes\.editor\.runtime'\)/);
+    assert.match(source, /claimElementBinding\(writingToolbar, 'notesEditorToolbarBound'\)/);
+    assert.match(source, /action === 'basic-style'[\s\S]*?button\.removeAttribute\('aria-pressed'\)/);
     assert.match(source, /editorPage\?\.addEventListener\('scroll', schedulePageSetupPopoverPosition/);
     assert.match(source, /window\.addEventListener\('resize', schedulePageSetupPopoverPosition\)/);
+    assert.match(editorTemplate, /id="notes-page-setup-popover"[^>]*role="dialog"[^>]*aria-describedby="notes-page-setup-description"/);
+    assert.match(styles, /\.notes-setup-margin-field\s*\{[^}]*display:\s*grid;/s);
     assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);
     assert.match(notesTemplate, /<global class="thefooter"><\/global>/);
     assert.doesNotMatch(styles, /STATIC TOOLBAR/);

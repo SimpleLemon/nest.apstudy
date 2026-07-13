@@ -1871,6 +1871,15 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   letter-spacing: 0;
 }
 
+.notes-page-setup-header p {
+  max-width: 34ch;
+  margin: 3px 0 0;
+  color: var(--notes-text-secondary);
+  font-size: 12px;
+  font-weight: 560;
+  line-height: 1.4;
+}
+
 .notes-page-setup-close {
   display: inline-flex;
   width: 32px !important;
@@ -2032,7 +2041,7 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
 }
 
 .notes-setup-margin-field {
-  display: none;
+  display: grid;
 }
 
 .notes-setup-margin-control {
@@ -2047,12 +2056,6 @@ body[data-note-read-only="true"] .blocknote-container .ProseMirror-selectednode 
   font-size: 12px;
   font-weight: 760;
   text-align: right;
-}
-
-@media (min-width: 768px) and (max-width: 1440px) {
-  .notes-setup-margin-field {
-    display: grid;
-  }
 }
 
 .notes-link-menu {

@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-2">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-15">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-16">
     <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
@@ -41,7 +41,7 @@
     {% endif %}
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     {% if page_state == 'ready' %}
-    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-15"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-16"></script>
     {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -358,9 +358,12 @@
                         </div>
                     </form>
                 </div>
-                <section id="notes-page-setup-popover" class="notes-page-setup-popover" aria-labelledby="notes-page-setup-title" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
+                <section id="notes-page-setup-popover" class="notes-page-setup-popover" role="dialog" aria-modal="false" aria-labelledby="notes-page-setup-title" aria-describedby="notes-page-setup-description" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                     <header class="notes-page-setup-header">
-                        <h2 id="notes-page-setup-title">Page setup</h2>
+                        <div>
+                            <h2 id="notes-page-setup-title">Page setup</h2>
+                            <p id="notes-page-setup-description">Customize how your note looks and prints.</p>
+                        </div>
                         <button type="button" class="notes-page-setup-close" data-page-setup-close aria-label="Close page setup">
                             <span class="material-symbols-outlined" aria-hidden="true">close</span>
                         </button>
@@ -371,12 +374,12 @@
                             <input id="notes-page-setup-scope" type="hidden" value="note" data-page-setup-scope />
                             <div class="notes-setup-select" data-page-setup-dropdown>
                                 <button type="button" class="notes-setup-select-trigger" data-page-setup-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
-                                    <span data-page-setup-selected-label>This Note Document</span>
+                                    <span data-page-setup-selected-label>This note</span>
                                     <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
                                 </button>
                                 <div class="notes-setup-select-menu" role="listbox" data-page-setup-options hidden>
-                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="note" aria-selected="true">This Note Document</button>
-                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="global" aria-selected="false">All Note Documents</button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="note" aria-selected="true">This note</button>
+                                    <button type="button" role="option" class="notes-setup-option" data-page-setup-scope-option="global" aria-selected="false">All notes</button>
                                 </div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPl
 import { createNoteCollaborationSession } from './editor/collaboration.js';
 import { bindReviewPanel } from './editor/review-panel.js';
 import { bindNotePrintController, printNote } from './editor/print.js';
-import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
+import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, claimElementBinding, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 import {
     clipboardHtmlImageSources,
     clipboardImageFiles,
@@ -535,8 +535,9 @@ function applyTextAlignment(textAlignment) {
     triggerDebouncedSave();
 }
 
-function closePageSetupPopover() {
+function closePageSetupPopover({ restoreFocus = false } = {}) {
     if (!pageSetupPopover) return;
+    const triggerToRestore = activePageSetupTrigger;
     if (pageSetupPositionRafId) {
         window.cancelAnimationFrame(pageSetupPositionRafId);
         pageSetupPositionRafId = null;
@@ -546,6 +547,9 @@ function closePageSetupPopover() {
     activePageSetupTrigger?.setAttribute('aria-expanded', 'false');
     activePageSetupTrigger = null;
     activePageSetupTriggerRect = null;
+    if (restoreFocus && triggerToRestore?.isConnected) {
+        triggerToRestore.focus({ preventScroll: true });
+    }
 }
 
 function usableTriggerRect(trigger) {
@@ -582,6 +586,10 @@ function openPageSetupPopover(trigger, triggerRect = null) {
     activePageSetupTrigger?.setAttribute('aria-expanded', 'true');
     updatePageSetupControls();
     positionPageSetupPopover(activePageSetupTrigger, activePageSetupTriggerRect);
+    window.requestAnimationFrame(() => {
+        if (pageSetupPopover.hidden) return;
+        pageSetupPopover.querySelector('[data-page-setup-dropdown-trigger]')?.focus({ preventScroll: true });
+    });
 }
 
 async function saveNotePageSetup() {
@@ -1602,7 +1610,11 @@ function updateToolbarState() {
             disabled = zoomIndex === ZOOM_LEVELS.length - 1;
         }
         button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
+        if (action === 'basic-style') {
+            button.setAttribute('aria-pressed', String(active));
+        } else {
+            button.removeAttribute('aria-pressed');
+        }
         button.disabled = disabled;
         button.setAttribute('aria-disabled', String(disabled));
     });
@@ -1762,6 +1774,10 @@ function updateEditorChrome({ immediate = false, structureChanged = false, conte
 
 function bindWritingToolbar() {
     if (!canEdit || !writingToolbar) return;
+    if (!claimElementBinding(writingToolbar, 'notesEditorToolbarBound')) {
+        toolbarOverflowController?.refresh();
+        return;
+    }
     writingToolbar.hidden = false;
     toolbarOverflowController?.disconnect();
     toolbarOverflowController = createToolbarOverflowController(writingToolbar);
@@ -1899,7 +1915,7 @@ function bindWritingToolbar() {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             if (activeToolbarMenu) closeToolbarMenus();
-            if (pageSetupPopover && !pageSetupPopover.hidden) closePageSetupPopover();
+            if (pageSetupPopover && !pageSetupPopover.hidden) closePageSetupPopover({ restoreFocus: true });
             if (urlBlockPopover) {
                 urlBlockResolve?.('');
                 removeUrlBlockPopover();
@@ -1945,7 +1961,7 @@ function bindWritingToolbar() {
         const closeButton = event.target.closest('[data-page-setup-close]');
         if (closeButton) {
             event.preventDefault();
-            closePageSetupPopover();
+            closePageSetupPopover({ restoreFocus: true });
             return;
         }
 
@@ -2611,21 +2627,27 @@ function releaseNoteEditorRuntime() {
     setNotePrintReady(false);
 }
 
-window.APStudyPageLifecycle?.register?.({
-    pause: releaseNoteEditorRuntime,
-    resume() {
-        // Browser Back can still place the editor in bfcache. Restore it from a
-        // fresh document after releasing the retained BlockNote heap.
-        window.location.reload();
-    },
-    dispose: releaseNoteEditorRuntime,
-});
+const NOTES_EDITOR_RUNTIME_KEY = Symbol.for('apstudy.notes.editor.runtime');
 
-saveRetry?.addEventListener('click', () => {
-    void saveNote();
-});
+if (!window[NOTES_EDITOR_RUNTIME_KEY]) {
+    window[NOTES_EDITOR_RUNTIME_KEY] = true;
 
-bindNotePrintControls();
-zoomIndex = loadStoredZoomIndex();
-applyEditorZoom();
-initEditorPage();
+    window.APStudyPageLifecycle?.register?.({
+        pause: releaseNoteEditorRuntime,
+        resume() {
+            // Browser Back can still place the editor in bfcache. Restore it from a
+            // fresh document after releasing the retained BlockNote heap.
+            window.location.reload();
+        },
+        dispose: releaseNoteEditorRuntime,
+    });
+
+    saveRetry?.addEventListener('click', () => {
+        void saveNote();
+    });
+
+    bindNotePrintControls();
+    zoomIndex = loadStoredZoomIndex();
+    applyEditorZoom();
+    initEditorPage();
+}

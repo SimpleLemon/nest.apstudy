@@ -85,6 +85,19 @@ test("delegated page setup click opens from a toolbar overflow item", async () =
     assert.equal(openedAt, triggerRect);
 });
 
+test("toolbar binding claims are idempotent across duplicate editor runtimes", async () => {
+    const { claimElementBinding } = await importBrowserModule("static/js/notes/editor/utils.js");
+    const attributes = new Map();
+    const toolbar = {
+        getAttribute: (name) => attributes.get(name) ?? null,
+        setAttribute: (name, value) => attributes.set(name, value),
+    };
+
+    assert.equal(claimElementBinding(toolbar, "notesEditorToolbarBound"), true);
+    assert.equal(claimElementBinding(toolbar, "notesEditorToolbarBound"), false);
+    assert.equal(attributes.get("data-notes-editor-toolbar-bound"), "true");
+});
+
 test("toolbar popovers stay beside their trigger and inside the editor boundary", async () => {
     const { floatingPopoverPosition } = await importBrowserModule("static/js/notes/editor/utils.js");
     const boundaryRect = { left: 100, right: 900 };
