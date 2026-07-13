@@ -6,6 +6,8 @@
 
 .dashboard-main {
     flex: 1 1 auto;
+    --workspace-page-padding-top: 16px;
+    --workspace-page-gap: 24px;
 }
 
 .dashboard-main > .thefooter {
@@ -16,7 +18,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 18px;
+    gap: 16px;
 }
 
 .dashboard-header-actions {
@@ -24,7 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
@@ -275,7 +277,7 @@
 }
 
 .dashboard-tiles {
-    --dashboard-tile-gap: clamp(14px, 1.5vw, 20px);
+    --dashboard-tile-gap: 16px;
     --dashboard-tile-height: clamp(320px, 24vw, 380px);
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -380,7 +382,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .dashboard-tile-title-row {
@@ -1082,7 +1084,7 @@
 
 @media (max-width: 640px) {
     .dashboard-main {
-        --workspace-page-gap: 18px;
+        --workspace-page-gap: 16px;
     }
 
     .dashboard-header {
