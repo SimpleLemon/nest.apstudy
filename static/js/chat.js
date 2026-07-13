@@ -1792,7 +1792,7 @@
     `;
   }
 
-  function tierBadgeMarkup(user, size = 42, triggerClass = "") {
+  function tierBadgeMarkup(user, size = 24, triggerClass = "") {
     if (!user?.tier_badge?.asset || !user?.tier_label) return "";
     const className = `tier-badge-trigger${triggerClass ? ` ${triggerClass}` : ""}`;
     return `<span class="${className}" tabindex="0" role="img" aria-label="${escapeHtml(user.tier_label)}" data-tooltip="${escapeHtml(user.tier_label)}">
@@ -1803,7 +1803,7 @@
   function memberTierBadgeMarkup(user) {
     if (!user?.tier_badge?.asset || !user?.tier_label) return "";
     return `<span class="tier-badge-trigger chat-member-tier" aria-hidden="true" data-tooltip="${escapeHtml(user.tier_label)}">
-      <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="28" height="28" loading="lazy" decoding="async">
+      <img class="tier-badge" src="${escapeHtml(user.tier_badge.asset)}" alt="" width="20" height="20" loading="lazy" decoding="async">
     </span>`;
   }
 

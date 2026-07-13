@@ -482,7 +482,8 @@ test("chat profile views use readable compact fields and tier badges without int
   assert.match(styles, /\.chat-profile-card \.profile-tile-details dt/);
   assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member dd/);
   assert.match(profileStyles, /\.user-profile-card \.profile-tile\s*\{[\s\S]*aspect-ratio: auto/);
-  assert.match(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*width: 44px;[\s\S]*transform: scale\(1\.5\)/);
+  assert.doesNotMatch(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*transform: scale\(1\.5\)/);
+  assert.match(styles, /\.chat-profile-card \.profile-tile-heading \.tier-badge-trigger\s*\{[\s\S]*margin-top: 4px/);
   assert.match(profileTemplate, /profile\.tier_badge/);
 });
 

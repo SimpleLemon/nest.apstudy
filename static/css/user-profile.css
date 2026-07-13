@@ -288,17 +288,6 @@ body.user-profile-page > global.thenav + .user-profile-shell {
     border-radius: var(--radius-panel) var(--radius-panel) 0 0;
 }
 
-.user-profile-card .tier-badge-trigger {
-    min-width: 44px;
-    min-height: 44px;
-}
-
-.user-profile-card .tier-badge {
-    width: 44px;
-    height: 44px;
-    transform: scale(1.5);
-}
-
 .profile-tile-banner-image {
     display: block;
     height: 100%;

@@ -942,13 +942,14 @@
 
 .chat-member-tier {
   z-index: 2;
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 20px;
+  min-height: 20px;
+  cursor: default;
 }
 
 .chat-member-tier .tier-badge {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
 }
 
 .chat-member-tier::after {
@@ -1064,14 +1065,7 @@
 }
 
 .chat-profile-card .profile-tile-heading .tier-badge-trigger {
-  margin-top: 6px;
-  min-width: 42px;
-  min-height: 42px;
-}
-
-.chat-profile-card .profile-tile-heading .tier-badge {
-  width: 42px;
-  height: 42px;
+  margin-top: 4px;
 }
 
 .chat-profile-card .profile-tile-details {
@@ -1399,14 +1393,6 @@
 
   .chat-profile-card .profile-tile-heading h3 {
     font-size: 18px;
-  }
-
-  .chat-profile-card .profile-tile-heading .tier-badge-trigger,
-  .chat-profile-card .profile-tile-heading .tier-badge {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
   }
 
   .chat-profile-card .profile-tile-details div {
