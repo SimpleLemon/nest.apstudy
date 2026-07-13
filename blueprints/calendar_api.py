@@ -63,6 +63,8 @@ CALENDAR_SHARE_DATE_SCOPES = {"all", "fixed", "rolling"}
 CALENDAR_SHARE_MIN_ROLLING_DAYS = 1
 CALENDAR_SHARE_MAX_ROLLING_DAYS = 366
 PREFERENCES_BATCH_LIMIT = 50
+TIMED_EVENT_REMINDERS = {-1, 0, 5, 10, 15, 30, 60, 120, 1440, 2880}
+ALL_DAY_EVENT_REMINDERS = {-1, -540, 900, 2340, 9540}
 
 
 def _canonical_feed_url(feed_url):
@@ -133,6 +135,28 @@ def _normalize_color(value):
         if all(ch in "0123456789abcdefABCDEF" for ch in hex_part):
             return f"#{hex_part.lower()}"
     raise ValueError("Color must be a valid #RRGGBB value.")
+
+
+def _default_reminder_minutes(is_all_day):
+    return -1 if is_all_day else 10
+
+
+def _normalize_reminder_minutes(value, is_all_day):
+    if value is None or value == "":
+        return _default_reminder_minutes(is_all_day)
+    try:
+        reminder_minutes = int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Choose a valid alert time.") from exc
+    allowed = ALL_DAY_EVENT_REMINDERS if is_all_day else TIMED_EVENT_REMINDERS
+    if reminder_minutes not in allowed:
+        raise ValueError("Choose a valid alert time.")
+    return reminder_minutes
+
+
+def _serialized_reminder_minutes(doc, is_all_day):
+    value = doc.get("reminder_minutes")
+    return _default_reminder_minutes(is_all_day) if value is None else int(value)
 
 
 def _calendar_preference_updates(payload):
@@ -245,6 +269,7 @@ def _serialize_event(doc, settings=None):
         "is_multi_day": is_multi_day,
         "span_days": span_days,
         "is_all_day": is_all_day,
+        "reminder_minutes": _default_reminder_minutes(is_all_day),
         "calendar_id": calendar_id,
         "original_calendar_id": calendar_id,
     }
@@ -268,6 +293,7 @@ def _serialize_user_event(doc):
         "start": _serialize_datetime(start, is_all_day),
         "end": _serialize_datetime(end, is_all_day),
         "is_all_day": is_all_day,
+        "reminder_minutes": _serialized_reminder_minutes(doc, is_all_day),
         "color": doc.get("color") or None,
         "calendar_id": calendar_id,
         "created_at": created_at.isoformat() if created_at else None,
@@ -596,6 +622,10 @@ def _apply_event_override(event, override):
         result["color"] = override.get("color") or None
     if override.get("is_all_day") is not None:
         result["is_all_day"] = is_all_day
+    if override.get("reminder_minutes") is not None:
+        result["reminder_minutes"] = int(override.get("reminder_minutes"))
+    elif override.get("is_all_day") is not None:
+        result["reminder_minutes"] = _default_reminder_minutes(is_all_day)
     if override.get("start"):
         result["start"] = _serialize_datetime(parse_datetime(override.get("start")), is_all_day)
     if override.get("end"):
@@ -1596,6 +1626,7 @@ def create_event():
     calendar_id = _normalize_calendar_id(data.get("calendar_id"))
     try:
         color = _normalize_color(data.get("color"))
+        reminder_minutes = _normalize_reminder_minutes(data.get("reminder_minutes"), all_day)
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
 
@@ -1625,6 +1656,7 @@ def create_event():
                 "is_all_day": all_day,
                 "color": color,
                 "calendar_id": calendar_id,
+                "reminder_minutes": reminder_minutes,
                 "created_at": format_datetime(datetime.utcnow()),
             },
         )
@@ -1703,6 +1735,12 @@ def update_event(event_id):
             updates["end"] = format_datetime(parsed)
     if all_day is not None:
         updates["is_all_day"] = bool(all_day)
+    if "reminder_minutes" in data or all_day is not None:
+        reminder_all_day = bool(all_day) if all_day is not None else bool(ev.get("is_all_day"))
+        try:
+            updates["reminder_minutes"] = _normalize_reminder_minutes(data.get("reminder_minutes"), reminder_all_day)
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
     if "color" in data:
         try:
             updates["color"] = _normalize_color(data.get("color"))
@@ -1776,6 +1814,7 @@ def upsert_event_override():
 
     try:
         color = _normalize_color(data.get("color"))
+        reminder_minutes = _normalize_reminder_minutes(data.get("reminder_minutes"), all_day)
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
 
@@ -1792,6 +1831,7 @@ def upsert_event_override():
                 "is_all_day": all_day,
                 "calendar_id": calendar_id,
                 "color": color,
+                "reminder_minutes": reminder_minutes,
                 "hidden": False,
             },
         )

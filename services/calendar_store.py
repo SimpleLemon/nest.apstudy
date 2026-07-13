@@ -36,7 +36,7 @@ TABLE_COLUMNS = {
     },
     "user_events": {
         "id", "user_id", "title", "description", "start", "end", "is_all_day",
-        "color", "calendar_id", "created_at", "updated_at",
+        "color", "calendar_id", "reminder_minutes", "created_at", "updated_at",
     },
     "user_calendar_sources": {
         "id", "user_id", "source_id", "kind", "default_name", "created_at",
@@ -44,7 +44,7 @@ TABLE_COLUMNS = {
     },
     "user_event_overrides": {
         "id", "user_id", "event_ref", "hidden", "title", "description", "start",
-        "end", "is_all_day", "calendar_id", "color", "created_at", "updated_at",
+        "end", "is_all_day", "calendar_id", "color", "reminder_minutes", "created_at", "updated_at",
     },
     "calendar_shares": {
         "id", "user_id", "share_code", "is_active", "include_all_calendars",
@@ -63,6 +63,8 @@ BOOLEAN_COLUMNS = {
 
 INTEGER_COLUMNS = {
     "calendar_feeds": {"last_fetch_http_code"},
+    "user_events": {"reminder_minutes"},
+    "user_event_overrides": {"reminder_minutes"},
     "calendar_shares": {"rolling_days"},
 }
 
@@ -125,6 +127,7 @@ SCHEMA_STATEMENTS = (
         is_all_day INTEGER NOT NULL DEFAULT 0,
         color TEXT,
         calendar_id TEXT,
+        reminder_minutes INTEGER,
         created_at TEXT NOT NULL,
         updated_at TEXT
     )
@@ -154,6 +157,7 @@ SCHEMA_STATEMENTS = (
         is_all_day INTEGER,
         calendar_id TEXT,
         color TEXT,
+        reminder_minutes INTEGER,
         created_at TEXT NOT NULL,
         updated_at TEXT,
         UNIQUE(user_id, event_ref)

@@ -1,10 +1,10 @@
 import {
     LIST_SORT_OPTIONS,
-    formatDeadline,
     formatRepeat,
     isRepeatingTaskCompleted,
     sortTasksForList,
 } from "./task-utils.js";
+import { formatTaskDeadline } from "./task-deadline.js";
 import { completedForDeleteSweep } from "./task-data.js";
 import * as React from "react";
 
@@ -24,7 +24,7 @@ export function PrintSheet({ list, tasks }) {
                     h("div", { className: "task-print-title" }, task.title),
                     h("div", { className: "task-print-meta" },
                         task.priority && task.priority !== "none" ? h("span", null, `Priority: ${task.priority}`) : null,
-                        task.deadline_at ? h("span", null, `Deadline: ${formatDeadline(task.deadline_at)}`) : null,
+                        task.deadline_at ? h("span", null, `Deadline: ${formatTaskDeadline(task)}`) : null,
                         task.recurrence ? h("span", null, formatRepeat(task.recurrence)) : null,
                         completed ? h("span", null, "Completed") : null
                     )

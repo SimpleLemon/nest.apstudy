@@ -41,6 +41,7 @@ class CalendarStoreTestCase(unittest.TestCase):
                 "start": "2026-05-20T14:00:00Z",
                 "end": "2026-05-20T15:00:00Z",
                 "is_all_day": False,
+                "reminder_minutes": 10,
                 "calendar_id": "local:default",
                 "created_at": "2026-05-18T00:00:00Z",
             },
@@ -49,10 +50,12 @@ class CalendarStoreTestCase(unittest.TestCase):
         self.assertEqual(created["id"], "event-1")
         self.assertEqual(created["$id"], "event-1")
         self.assertFalse(created["is_all_day"])
+        self.assertEqual(created["reminder_minutes"], 10)
         self.assertEqual(store.count_calendar_rows("user_events", [Query.equal("user_id", ["user-1"])]), 1)
 
-        updated = store.update_calendar_row("user_events", "event-1", {"is_all_day": True})
+        updated = store.update_calendar_row("user_events", "event-1", {"is_all_day": True, "reminder_minutes": -1})
         self.assertTrue(updated["is_all_day"])
+        self.assertEqual(updated["reminder_minutes"], -1)
 
         rows = store.list_calendar_rows_all(
             "user_events",

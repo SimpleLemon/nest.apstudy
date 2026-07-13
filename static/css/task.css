@@ -395,9 +395,12 @@
 }
 
 .task-details label,
+.task-detail-field,
 .task-detail-repeat-field,
 .task-add-details label,
 .task-repeat-grid label,
+.task-repeat-unit-field,
+.task-repeat-start-field,
 .task-repeat-grid legend {
     display: flex;
     min-width: 0;
@@ -452,19 +455,24 @@
 }
 
 .task-repeat-end-options {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 6px;
 }
 
 .task-repeat-end-option {
-    flex-direction: row !important;
+    display: inline-flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px !important;
     min-height: 38px;
     border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 35%, transparent);
     border-radius: var(--radius-control);
     background: var(--color-surface-container-lowest, #ffffff);
+    color: var(--color-on-surface-variant, #5f6368);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 750;
     padding: 6px 8px;
 }
 
@@ -473,17 +481,9 @@
     background: color-mix(in srgb, var(--color-primary, #3b82f6) 9%, var(--color-surface-container-lowest, #ffffff));
 }
 
-.task-repeat-end-option input[type="radio"] {
-    width: 15px;
-    height: 15px;
-    min-width: 15px;
-    margin: 0;
-    padding: 0;
-}
-
-.task-repeat-end-option input[type="date"] {
-    flex: 1;
-    min-width: 0;
+.task-repeat-end-option .material-symbols-outlined {
+    color: var(--color-primary, #3b82f6);
+    font-size: 18px;
 }
 
 .task-danger-button {
@@ -587,6 +587,319 @@
     color: var(--color-on-surface, #202124);
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
     animation: taskMenuIn 90ms ease-out both;
+}
+
+.task-add-popover:has(.task-deadline-panel) {
+    width: min(390px, calc(100vw - 16px));
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+}
+
+.task-custom-select,
+.task-date-picker {
+    position: relative;
+    min-width: 0;
+}
+
+.task-custom-select-trigger,
+.task-date-picker-trigger {
+    display: flex;
+    width: 100%;
+    min-height: 38px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 45%, transparent) !important;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-lowest, #ffffff);
+    color: var(--color-on-surface, #202124);
+    font: inherit;
+    font-size: 13px;
+    padding: 0 10px;
+    text-align: left;
+}
+
+.task-custom-select-trigger:hover,
+.task-custom-select-trigger:focus-visible,
+.task-date-picker-trigger:hover,
+.task-date-picker-trigger:focus-visible,
+.task-custom-select.is-open .task-custom-select-trigger,
+.task-date-picker.is-open .task-date-picker-trigger {
+    outline: none;
+    border-color: color-mix(in srgb, var(--color-primary, #3b82f6) 68%, transparent) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #3b82f6) 16%, transparent);
+}
+
+.task-custom-select-trigger .material-symbols-outlined,
+.task-date-picker-trigger .material-symbols-outlined {
+    flex: 0 0 auto;
+    color: var(--color-on-surface-variant, #5f6368);
+    font-size: 18px;
+}
+
+.task-custom-select-menu,
+.task-date-picker-menu {
+    position: absolute;
+    z-index: 8;
+    top: calc(100% + 5px);
+    left: 0;
+    width: max(100%, 190px);
+    max-height: min(280px, 45dvh);
+    overflow-y: auto;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant, #8f929c) 62%, transparent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface, #ffffff);
+    padding: 5px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.14);
+}
+
+.task-custom-select-menu button {
+    display: flex;
+    width: 100%;
+    min-height: 36px;
+    align-items: center;
+    gap: 8px;
+    border: 0 !important;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface, #202124);
+    font: inherit;
+    font-size: 13px;
+    padding: 7px 8px;
+    text-align: left;
+}
+
+.task-custom-select-menu button:hover,
+.task-custom-select-menu button:focus-visible,
+.task-custom-select-menu button.is-selected {
+    outline: none;
+    background: color-mix(in srgb, var(--color-primary, #3b82f6) 11%, var(--color-surface, #ffffff));
+}
+
+.task-custom-select-menu .material-symbols-outlined {
+    color: var(--color-primary, #3b82f6);
+    font-size: 18px;
+}
+
+.task-date-picker-menu {
+    width: min(318px, calc(100vw - 36px));
+    max-height: none;
+    overflow: visible;
+    padding: 8px;
+}
+
+.task-calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.task-calendar-header {
+    display: grid;
+    grid-template-columns: 34px 1fr 34px;
+    align-items: center;
+    gap: 6px;
+}
+
+.task-calendar-header strong {
+    color: var(--color-on-surface, #202124);
+    font-size: 14px;
+    text-align: center;
+}
+
+.task-calendar-header button,
+.task-calendar-today {
+    min-height: 34px;
+    border: 0 !important;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface-variant, #5f6368);
+}
+
+.task-calendar-header button:hover,
+.task-calendar-header button:focus-visible,
+.task-calendar-today:hover,
+.task-calendar-today:focus-visible {
+    outline: none;
+    background: var(--color-surface-container-high, #efede8);
+    color: var(--color-on-surface, #202124);
+}
+
+.task-calendar-weekdays,
+.task-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.task-calendar-weekdays span {
+    color: var(--color-on-surface-variant, #5f6368);
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 24px;
+    text-align: center;
+}
+
+.task-calendar-grid button {
+    display: inline-flex;
+    width: 100%;
+    aspect-ratio: 1;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 0 !important;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface, #202124);
+    font: inherit;
+    font-size: 12px;
+}
+
+.task-calendar-grid button.is-outside {
+    color: color-mix(in srgb, var(--color-on-surface-variant, #5f6368) 55%, transparent);
+}
+
+.task-calendar-grid button:hover,
+.task-calendar-grid button:focus-visible {
+    outline: none;
+    background: var(--color-surface-container-high, #efede8);
+}
+
+.task-calendar-grid button.is-today {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-primary, #3b82f6) 60%, transparent);
+}
+
+.task-calendar-grid button.is-selected {
+    background: var(--color-primary, #3b82f6);
+    color: var(--color-on-primary, #ffffff);
+    font-weight: 800;
+}
+
+.task-calendar-today {
+    align-self: flex-start;
+    padding: 0 9px;
+    color: var(--color-primary, #3b82f6);
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.task-deadline-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-deadline-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.task-deadline-heading > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.task-deadline-heading strong {
+    font-size: 14px;
+}
+
+.task-deadline-heading span,
+.task-deadline-alert-field > span,
+.task-deadline-time-field > span {
+    color: var(--color-on-surface-variant, #5f6368);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.task-deadline-time-toggle {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    gap: 5px;
+    border: 0 !important;
+    border-radius: var(--radius-control);
+    color: var(--color-primary, #3b82f6);
+    font-size: 12px;
+    font-weight: 750;
+    padding: 0 7px;
+    white-space: nowrap;
+}
+
+.task-deadline-time-toggle:hover,
+.task-deadline-time-toggle:focus-visible {
+    outline: none;
+    background: color-mix(in srgb, var(--color-primary, #3b82f6) 10%, transparent);
+}
+
+.task-deadline-time-toggle .material-symbols-outlined {
+    font-size: 17px;
+}
+
+.task-deadline-time-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 8px;
+}
+
+.task-deadline-time-field,
+.task-deadline-alert-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-deadline-time-field input {
+    width: 100%;
+}
+
+.task-deadline-period {
+    display: flex;
+    gap: 3px;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-high, #efede8);
+    padding: 3px;
+}
+
+.task-deadline-period button {
+    min-width: 46px;
+    min-height: 32px;
+    border: 0 !important;
+    border-radius: var(--radius-control);
+    color: var(--color-on-surface-variant, #5f6368);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.task-deadline-period button.is-selected {
+    background: var(--color-surface, #ffffff);
+    color: var(--color-on-surface, #202124);
+}
+
+.task-deadline-error {
+    margin: 0;
+    color: var(--color-error, #ba1a1a);
+    font-size: 12px;
+}
+
+.task-deadline-actions {
+    align-items: center;
+}
+
+.task-deadline-action-spacer {
+    flex: 1;
+}
+
+.task-deadline-clear {
+    color: var(--color-error, #ba1a1a);
+}
+
+.task-reminder-icon {
+    color: var(--color-primary, #3b82f6);
 }
 
 .task-add-popover-field,
@@ -1700,6 +2013,26 @@
         min-height: 48px;
         height: auto;
         font-size: 16px;
+    }
+
+    .task-custom-select-trigger,
+    .task-date-picker-trigger,
+    .task-deadline-time-field input {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .task-custom-select-menu button,
+    .task-calendar-grid button {
+        min-height: 44px;
+    }
+
+    .task-date-picker-menu {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: min(360px, calc(100vw - 24px));
+        transform: translate(-50%, -50%);
     }
 
     .task-modal {

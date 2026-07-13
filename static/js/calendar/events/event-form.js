@@ -44,6 +44,33 @@
         return ["#ef4444", "#f97316", "#eab308", "#84cc16", "#0ea5e9", "#d946ef", "#b08968"];
     }
 
+    function defaultReminderMinutes(isAllDay) {
+        return isAllDay ? -1 : 10;
+    }
+
+    function reminderOptions(isAllDay) {
+        return isAllDay
+            ? [
+                [-1, "None (default)"],
+                [-540, "On day of event (9 AM)"],
+                [900, "1 day before (9 AM)"],
+                [2340, "2 days before (9 AM)"],
+                [9540, "1 week before (9 AM)"],
+            ]
+            : [
+                [-1, "None"],
+                [0, "At time of event"],
+                [5, "5 minutes before"],
+                [10, "10 minutes before (default)"],
+                [15, "15 minutes before"],
+                [30, "30 minutes before"],
+                [60, "1 hour before"],
+                [120, "2 hours before"],
+                [1440, "1 day before"],
+                [2880, "2 days before"],
+            ];
+    }
+
     function ensureModal() {
         if (modal) return modal;
         modal = document.createElement("div");
@@ -91,6 +118,12 @@
         const calendarColor = getCalendarColor(calendarId);
         const colors = getStandardColors();
         const isInherited = !selectedColor;
+        const isAllDay = Boolean(data.is_all_day || data.all_day);
+        const availableReminders = reminderOptions(isAllDay);
+        const requestedReminder = Number(data.reminder_minutes ?? defaultReminderMinutes(isAllDay));
+        const reminderMinutes = availableReminders.some(([value]) => value === requestedReminder)
+            ? requestedReminder
+            : defaultReminderMinutes(isAllDay);
         const title = currentMode === "create" ? "New Event" : "Event";
         m.innerHTML = `
             <div class="calendar-event-backdrop" data-event-close tabindex="-1"></div>
@@ -132,10 +165,18 @@
                             </select>
                         </label>
                         <label class="calendar-event-check">
-                            <input name="all_day" type="checkbox" ${data.is_all_day || data.all_day ? "checked" : ""}>
+                            <input name="all_day" type="checkbox" ${isAllDay ? "checked" : ""}>
                             <span>All day</span>
                         </label>
                     </div>
+                    <label class="calendar-event-field">
+                        <span>Alert</span>
+                        <select name="reminder_minutes">
+                            ${availableReminders.map(([value, label]) => `
+                                <option value="${value}" ${value === reminderMinutes ? "selected" : ""}>${escapeHtml(label)}</option>
+                            `).join("")}
+                        </select>
+                    </label>
                     <div class="calendar-event-color-section">
                         <div class="calendar-event-color-head">
                             <span>Calendar Color</span>
@@ -196,10 +237,15 @@
     }
 
     function onModalChange(event) {
-        if (event.target?.name !== "calendar_id") return;
-        selectedCalendarId = event.target.value || getDefaultCalendarId();
+        if (event.target?.name !== "calendar_id" && event.target?.name !== "all_day") return;
         const form = ensureModal().querySelector("form");
-        renderModal(readFormData(form));
+        const data = readFormData(form);
+        if (event.target.name === "calendar_id") {
+            selectedCalendarId = event.target.value || getDefaultCalendarId();
+        } else {
+            data.reminder_minutes = defaultReminderMinutes(Boolean(event.target.checked));
+        }
+        renderModal(data);
     }
 
     function readFormData(form) {
@@ -212,6 +258,7 @@
             start: form.start?.value || "",
             end: form.end?.value || "",
             is_all_day: Boolean(form.all_day?.checked),
+            reminder_minutes: Number(form.reminder_minutes?.value ?? defaultReminderMinutes(Boolean(form.all_day?.checked))),
             calendar_id: form.calendar_id?.value || selectedCalendarId || getDefaultCalendarId(),
             color: selectedColor,
         };
@@ -227,6 +274,7 @@
             start_date: inputValueToIso(form.start.value),
             end_date: inputValueToIso(form.end.value),
             all_day: form.all_day.checked,
+            reminder_minutes: Number(form.reminder_minutes.value),
             calendar_id: form.calendar_id.value || getDefaultCalendarId(),
             color: selectedColor,
         };

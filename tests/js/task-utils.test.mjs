@@ -23,6 +23,7 @@ test("normalizes task and list defaults without mutating inputs", () => {
         completed_occurrences: [],
         priority: "none",
         starred: false,
+        reminder_minutes: -1,
     });
     assert.deepEqual(utils.normalizeList(list), {
         id: "list-1",

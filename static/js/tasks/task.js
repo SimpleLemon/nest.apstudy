@@ -41,6 +41,14 @@ import { createRoot } from "react-dom/client";
 
 const h = React.createElement;
 
+function promptForTaskNotifications(task, previousTask = null) {
+    const enabled = Boolean(task?.deadline_at) && Number(task?.reminder_minutes) !== -1;
+    const wasEnabled = Boolean(previousTask?.deadline_at) && Number(previousTask?.reminder_minutes) !== -1;
+    if (enabled && !wasEnabled) {
+        window.dispatchEvent(new CustomEvent("apstudy:notification-intent", { detail: { source: "tasks" } }));
+    }
+}
+
 function buildTaskLoadingHtml() {
     const block = (className) => window.APStudySkeleton?.block?.(className)
         || `<div data-slot="skeleton" class="bg-muted rounded-md animate-pulse ${className}"></div>`;
@@ -285,6 +293,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
         try {
             const task = await createTaskRecord(listId, draft);
             setTasksAndRef((current) => appendTask(current, task));
+            promptForTaskNotifications(task);
+            return task;
         } catch (err) {
             setError(err.message || "Unable to create task.");
             throw err;
@@ -293,9 +303,13 @@ function TaskApp({ completeSound, uncompleteSound }) {
 
     const updateTask = React.useCallback(async (taskId, updates) => {
         const previous = tasksRef.current;
+        const previousTask = previous.find((task) => task.id === taskId) || null;
         setTasksAndRef((current) => mergeById(current, taskId, updates, normalizeTask));
         try {
-            updateTaskInState(await updateTaskRecord(taskId, updates));
+            const updatedTask = await updateTaskRecord(taskId, updates);
+            updateTaskInState(updatedTask);
+            promptForTaskNotifications(updatedTask, previousTask);
+            return updatedTask;
         } catch (err) {
             setError(err.message || "Unable to update task.");
             setTasksAndRef(previous);

@@ -11,6 +11,7 @@ from blueprints.tasks_api import (
     TASK_CALENDAR_ID,
     _list_to_payload,
     _normalize_recurrence,
+    _normalize_task_reminder,
     _normalize_sort_mode,
     _task_preferences_for_user,
     _task_to_payload,
@@ -114,6 +115,52 @@ class TestTasksApiHelpers(unittest.TestCase):
         self.assertEqual(updates["priority"], "high")
         self.assertEqual(updates["deadline_time"], "09:00")
         self.assertEqual(json.loads(updates["recurrence_json"])["unit"], "week")
+        self.assertEqual(updates["reminder_minutes"], 10)
+
+    def test_date_only_deadline_preserves_null_time_and_alert(self):
+        updates = _task_updates_from_payload(
+            {
+                "title": "Submit reflection",
+                "deadline_at": "2026-05-18T04:00:00Z",
+                "deadline_time": None,
+                "timezone": "America/New_York",
+                "reminder_minutes": -540,
+            },
+            creating=True,
+        )
+
+        self.assertIsNone(updates["deadline_time"])
+        self.assertEqual(updates["reminder_minutes"], -540)
+
+    def test_task_alert_validation_uses_deadline_kind(self):
+        self.assertEqual(_normalize_task_reminder(10, False), 10)
+        self.assertEqual(_normalize_task_reminder(-540, True), -540)
+        with self.assertRaises(ValueError):
+            _normalize_task_reminder(10, True)
+
+    def test_clearing_deadline_also_disables_alert(self):
+        updates = _task_updates_from_payload(
+            {"deadline_at": None},
+            existing={"deadline_at": "2026-05-18T13:00:00Z", "deadline_time": "09:00", "reminder_minutes": 10},
+        )
+        self.assertIsNone(updates["deadline_at"])
+        self.assertIsNone(updates["deadline_time"])
+        self.assertEqual(updates["reminder_minutes"], -1)
+
+    def test_date_only_task_calendar_event_is_all_day(self):
+        events = build_task_calendar_events([{
+            "$id": "task-date",
+            "title": "Reading day",
+            "deadline_at": "2026-05-18T04:00:00Z",
+            "deadline_time": None,
+            "timezone": "America/New_York",
+            "reminder_minutes": -1,
+            "completed": False,
+        }], [], datetime(2026, 5, 18, tzinfo=timezone.utc), datetime(2026, 5, 20, tzinfo=timezone.utc))
+
+        self.assertEqual(len(events), 1)
+        self.assertTrue(events[0]["is_all_day"])
+        self.assertEqual(events[0]["reminder_minutes"], -1)
 
     def test_task_and_list_payloads_include_ui_preferences(self):
         task = _task_to_payload({

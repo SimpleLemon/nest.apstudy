@@ -53,6 +53,7 @@ test("builds task API payloads with normalized deadline and recurrence fields", 
     assert.equal(payload.list_id, "list-1");
     assert.equal(payload.priority, "none");
     assert.equal(payload.deadline_time, "14:30");
+    assert.equal(payload.reminder_minutes, 10);
     assert.equal(payload.timezone, "America/New_York");
     assert.deepEqual(payload.recurrence, { every: 1, unit: "week" });
     assert.match(payload.deadline_at, /^2026-05-20T/);
@@ -69,6 +70,7 @@ test("computes optimistic completed state for one-off and recurring tasks", () =
             completed_occurrences: [],
             priority: "none",
             starred: false,
+            reminder_minutes: -1,
         },
     });
 

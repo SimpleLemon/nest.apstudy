@@ -63,13 +63,21 @@ export async function destroyCompletedTasks(listId) {
 }
 
 export function buildTaskDraftPayload(listId, draft, timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC") {
+    const rawDeadline = draft.deadline_at || null;
+    const deadlineAt = rawDeadline && /(?:Z|[+-]\d{2}:\d{2})$/.test(rawDeadline)
+        ? rawDeadline
+        : localInputToIso(rawDeadline);
+    const deadlineTime = Object.prototype.hasOwnProperty.call(draft, "deadline_time")
+        ? draft.deadline_time
+        : rawDeadline ? rawDeadline.slice(11, 16) : null;
     return {
         list_id: listId,
         title: draft.title,
         priority: draft.priority || "none",
-        deadline_at: localInputToIso(draft.deadline_at),
-        deadline_time: draft.deadline_at ? draft.deadline_at.slice(11, 16) : null,
-        timezone,
+        deadline_at: deadlineAt,
+        deadline_time: deadlineTime,
+        reminder_minutes: deadlineAt ? Number(draft.reminder_minutes ?? (deadlineTime ? 10 : -1)) : -1,
+        timezone: draft.timezone || timezone,
         recurrence: draft.recurrence || null,
     };
 }

@@ -75,6 +75,7 @@ export function normalizeTask(task) {
         ...task,
         priority: task.priority || "none",
         starred: Boolean(task.starred),
+        reminder_minutes: Number(task.reminder_minutes ?? (task.deadline_time ? 10 : -1)),
         completed_occurrences: Array.isArray(task.completed_occurrences) ? task.completed_occurrences : [],
     };
 }

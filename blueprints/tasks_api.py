@@ -1,9 +1,8 @@
-import calendar
 import json
 import logging
 import uuid
 from collections import defaultdict
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import date, datetime, timezone
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from flask import Blueprint, abort, jsonify, request
@@ -22,6 +21,7 @@ from appwrite_helpers import (
     parse_datetime,
     update_row_safe,
 )
+from services.task_schedule import build_task_occurrences, next_task_occurrence_key
 
 
 tasks_api_bp = Blueprint("tasks_api", __name__)
@@ -36,7 +36,8 @@ TASK_CALENDAR_COLOR = "#0ea5e9"
 PRIORITIES = {"none", "low", "medium", "high"}
 RECURRENCE_UNITS = {"day", "week", "month", "year"}
 LIST_SORT_MODES = {"default", "date", "deadline", "title"}
-MAX_EXPANDED_OCCURRENCES = 1500
+TIMED_REMINDER_MINUTES = {-1, 0, 5, 10, 15, 30, 60, 120, 1440, 2880}
+DATE_ONLY_REMINDER_MINUTES = {-1, -540, 900, 2340, 9540}
 
 
 def _row_id(row):
@@ -118,6 +119,25 @@ def _normalize_deadline_time(value, deadline_dt=None, tz_name=None):
     if tz_name:
         local_dt = deadline_dt.astimezone(_zoneinfo_or_utc(tz_name))
     return f"{local_dt.hour:02d}:{local_dt.minute:02d}"
+
+
+def _default_task_reminder(is_date_only):
+    return -1 if is_date_only else 10
+
+
+def _normalize_task_reminder(value, is_date_only, *, strict=True):
+    allowed = DATE_ONLY_REMINDER_MINUTES if is_date_only else TIMED_REMINDER_MINUTES
+    try:
+        reminder = int(value)
+    except (TypeError, ValueError):
+        if strict:
+            raise ValueError("Choose a valid task alert.")
+        return _default_task_reminder(is_date_only)
+    if reminder not in allowed:
+        if strict:
+            raise ValueError("Choose a valid task alert.")
+        return _default_task_reminder(is_date_only)
+    return reminder
 
 
 def _zoneinfo_or_utc(tz_name):
@@ -209,6 +229,7 @@ def _task_to_payload(task, completions=None):
         "priority": _normalize_priority(task.get("priority")),
         "deadline_at": task.get("deadline_at"),
         "deadline_time": task.get("deadline_time"),
+        "reminder_minutes": int(task.get("reminder_minutes") if task.get("reminder_minutes") is not None else _default_task_reminder(not bool(task.get("deadline_time")))),
         "timezone": task.get("timezone") or "UTC",
         "recurrence": recurrence,
         "order": task.get("order") or 0,
@@ -332,12 +353,34 @@ def _task_updates_from_payload(payload, *, creating=False, existing=None):
     if creating or "timezone" in payload:
         updates["timezone"] = timezone_name
 
-    if creating or "deadline_time" in payload or "deadlineTime" in payload or "deadline_at" in updates:
-        updates["deadline_time"] = _normalize_deadline_time(
-            payload.get("deadline_time", payload.get("deadlineTime")),
-            deadline_dt,
-            timezone_name,
+    deadline_time_provided = "deadline_time" in payload or "deadlineTime" in payload
+    if creating or deadline_time_provided or "deadline_at" in updates:
+        raw_deadline_time = payload.get("deadline_time", payload.get("deadlineTime"))
+        updates["deadline_time"] = (
+            None
+            if deadline_time_provided and raw_deadline_time in (None, "")
+            else _normalize_deadline_time(raw_deadline_time, deadline_dt, timezone_name)
         )
+
+    reminder_provided = "reminder_minutes" in payload or "reminderMinutes" in payload
+    deadline_changed = "deadline_at" in updates or "deadline_time" in updates
+    if creating or reminder_provided or deadline_changed:
+        effective_deadline = updates.get("deadline_at", existing.get("deadline_at"))
+        effective_time = updates.get("deadline_time", existing.get("deadline_time"))
+        if not effective_deadline:
+            updates["reminder_minutes"] = -1
+        else:
+            is_date_only = not bool(effective_time)
+            reminder_value = (
+                payload.get("reminder_minutes", payload.get("reminderMinutes"))
+                if reminder_provided
+                else existing.get("reminder_minutes", _default_task_reminder(is_date_only))
+            )
+            updates["reminder_minutes"] = _normalize_task_reminder(
+                reminder_value,
+                is_date_only,
+                strict=reminder_provided,
+            )
 
     if creating or "recurrence" in payload or "repeat" in payload:
         recurrence_value = payload.get("recurrence", payload.get("repeat"))
@@ -707,141 +750,25 @@ def _completion_for_occurrence(user_id, task_id, occurrence_key):
     )
 
 
-def _add_months(source_date, months):
-    month_index = (source_date.month - 1) + months
-    year = source_date.year + month_index // 12
-    month = month_index % 12 + 1
-    day = min(source_date.day, calendar.monthrange(year, month)[1])
-    return date(year, month, day)
-
-
-def _advance_date(source_date, every, unit):
-    if unit == "day":
-        return source_date + timedelta(days=every)
-    if unit == "week":
-        return source_date + timedelta(weeks=every)
-    if unit == "month":
-        return _add_months(source_date, every)
-    return _add_months(source_date, every * 12)
-
-
-def _deadline_local_parts(task):
-    deadline_dt = _coerce_utc(parse_datetime(task.get("deadline_at")))
-    tz = _zoneinfo_or_utc(task.get("timezone") or "UTC")
-    deadline_time = _normalize_deadline_time(task.get("deadline_time"), deadline_dt, task.get("timezone"))
-    if not deadline_time:
-        return None, None, tz
-    hour, minute = [int(part) for part in deadline_time.split(":", 1)]
-    local_date = deadline_dt.astimezone(tz).date() if deadline_dt else None
-    return local_date, time(hour, minute), tz
-
-
-def _occurrence_start(task, occurrence_date):
-    _local_date, deadline_time, tz = _deadline_local_parts(task)
-    if not deadline_time:
-        return None
-    local_dt = datetime.combine(occurrence_date, deadline_time, tzinfo=tz)
-    return local_dt.astimezone(timezone.utc)
-
-
 def _next_occurrence_key(task, now=None):
-    recurrence = _task_recurrence(task)
-    if not recurrence:
-        return "single"
-    local_deadline_date, _deadline_time, tz = _deadline_local_parts(task)
-    start_date = _parse_date(recurrence.get("startDate")) or local_deadline_date or date.today()
-    end_date = _parse_date(recurrence.get("endDate")) if recurrence.get("endDate") else None
-    every = int(recurrence.get("every") or 1)
-    unit = recurrence.get("unit") or "day"
-    local_now = (now or _utcnow()).astimezone(tz).date()
-    current = start_date
-    guard = 0
-    while current < local_now and guard < MAX_EXPANDED_OCCURRENCES:
-        current = _advance_date(current, every, unit)
-        guard += 1
-    if end_date and current > end_date:
-        return None
-    return current.isoformat()
-
-
-def _event_overlaps_range(start_dt, end_dt, range_start, range_end):
-    if not range_start or not range_end:
-        return True
-    return start_dt < range_end and end_dt > range_start
-
-
-def _completions_by_task_for_rows(completions):
-    result = defaultdict(dict)
-    for row in completions:
-        result[row.get("task_id")][row.get("occurrence_key")] = row
-    return result
+    return next_task_occurrence_key(task, now)
 
 
 def build_task_calendar_events(tasks, completions=None, range_start=None, range_end=None):
-    completions_by_task = _completions_by_task_for_rows(completions or [])
-    events = []
-    for task in tasks:
-        task_id = _row_id(task)
-        if not task_id or not task.get("deadline_at"):
-            continue
-        recurrence = _task_recurrence(task)
-        if not recurrence:
-            start_dt = _coerce_utc(parse_datetime(task.get("deadline_at")))
-            if not start_dt:
-                continue
-            end_dt = start_dt + timedelta(minutes=30)
-            if not _event_overlaps_range(start_dt, end_dt, range_start, range_end):
-                continue
-            events.append(_task_event_payload(task, start_dt, end_dt, "single", bool(task.get("completed", False))))
-            continue
-
-        local_deadline_date, _deadline_time, tz = _deadline_local_parts(task)
-        start_date = _parse_date(recurrence.get("startDate")) or local_deadline_date
-        if not start_date:
-            continue
-        end_date = _parse_date(recurrence.get("endDate")) if recurrence.get("endDate") else None
-        every = int(recurrence.get("every") or 1)
-        unit = recurrence.get("unit") or "day"
-        if range_start:
-            range_local_start = range_start.astimezone(tz).date()
-        else:
-            range_local_start = date.today() - timedelta(days=30)
-        if range_end:
-            range_local_end = range_end.astimezone(tz).date()
-        else:
-            range_local_end = range_local_start + timedelta(days=365)
-
-        occurrence_date = start_date
-        guard = 0
-        while occurrence_date < range_local_start and guard < MAX_EXPANDED_OCCURRENCES:
-            occurrence_date = _advance_date(occurrence_date, every, unit)
-            guard += 1
-
-        while guard < MAX_EXPANDED_OCCURRENCES:
-            if end_date and occurrence_date > end_date:
-                break
-            if occurrence_date > range_local_end:
-                break
-            start_dt = _occurrence_start(task, occurrence_date)
-            if start_dt:
-                end_dt = start_dt + timedelta(minutes=30)
-                occurrence_key = occurrence_date.isoformat()
-                if _event_overlaps_range(start_dt, end_dt, range_start, range_end):
-                    events.append(
-                        _task_event_payload(
-                            task,
-                            start_dt,
-                            end_dt,
-                            occurrence_key,
-                            occurrence_key in completions_by_task.get(task_id, {}),
-                        )
-                    )
-            occurrence_date = _advance_date(occurrence_date, every, unit)
-            guard += 1
-    return sorted(events, key=lambda event: event.get("start") or "")
+    return [
+        _task_event_payload(
+            occurrence["task"],
+            occurrence["start"],
+            occurrence["end"],
+            occurrence["occurrence_key"],
+            occurrence["completed"],
+            occurrence["is_all_day"],
+        )
+        for occurrence in build_task_occurrences(tasks, completions, range_start, range_end)
+    ]
 
 
-def _task_event_payload(task, start_dt, end_dt, occurrence_key, completed):
+def _task_event_payload(task, start_dt, end_dt, occurrence_key, completed, is_all_day=False):
     task_id = _row_id(task)
     priority = _normalize_priority(task.get("priority"))
     title = task.get("title") or "Untitled Task"
@@ -866,7 +793,7 @@ def _task_event_payload(task, start_dt, end_dt, occurrence_key, completed):
         "course": TASK_CALENDAR_NAME,
         "is_multi_day": False,
         "span_days": 1,
-        "is_all_day": False,
+        "is_all_day": bool(is_all_day),
         "calendar_id": TASK_CALENDAR_ID,
         "original_calendar_id": TASK_CALENDAR_ID,
         "color": None,
@@ -874,6 +801,7 @@ def _task_event_payload(task, start_dt, end_dt, occurrence_key, completed):
         "occurrence_key": occurrence_key,
         "priority": priority,
         "completed": bool(completed),
+        "reminder_minutes": int(task.get("reminder_minutes") if task.get("reminder_minutes") is not None else _default_task_reminder(is_all_day)),
     }
 
 

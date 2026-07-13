@@ -19,16 +19,13 @@ export function AddTaskPopover({ popover, onClose, children }) {
         const onKeyDown = (event) => {
             if (event.key === "Escape") onClose();
         };
-        const onScroll = () => onClose();
         const onResize = () => onClose();
         document.addEventListener("pointerdown", onPointerDown);
         document.addEventListener("keydown", onKeyDown);
-        window.addEventListener("scroll", onScroll, true);
         window.addEventListener("resize", onResize);
         return () => {
             document.removeEventListener("pointerdown", onPointerDown);
             document.removeEventListener("keydown", onKeyDown);
-            window.removeEventListener("scroll", onScroll, true);
             window.removeEventListener("resize", onResize);
             if (popoverRef.current?.contains(document.activeElement)) {
                 previousFocusRef.current?.focus?.({ preventScroll: true });

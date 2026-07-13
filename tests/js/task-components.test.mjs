@@ -7,6 +7,9 @@ import { fileURLToPath } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const source = await readFile(path.join(repoRoot, "static/js/tasks/task-components.js"), "utf8");
 const entrySource = await readFile(path.join(repoRoot, "static/js/tasks/task-entry-components.js"), "utf8");
+const recurrenceSource = await readFile(path.join(repoRoot, "static/js/tasks/task-recurrence.js"), "utf8");
+const deadlineSource = await readFile(path.join(repoRoot, "static/js/tasks/task-deadline.js"), "utf8");
+const controlsSource = await readFile(path.join(repoRoot, "static/js/tasks/task-form-controls.js"), "utf8");
 
 test("task component module keeps the expected public component surface", () => {
     const expectedExports = [
@@ -34,7 +37,7 @@ test("task component module depends on shared task utilities instead of duplicat
     assert.match(source, /from "\.\/task-utils\.js"/);
     assert.match(source, /from "\.\/task-entry-components\.js"/);
     assert.match(entrySource, /from "\.\/task-utils\.js"/);
-    assert.match(entrySource, /\bformatDeadline\b/);
+    assert.match(entrySource, /\bformatTaskDeadline\b/);
     assert.match(entrySource, /\bformatRepeat\b/);
     assert.match(source, /\bsortedLists\b/);
     assert.match(source, /\bsplitTasksByCompletion\b/);
@@ -49,13 +52,23 @@ test("task component module exposes completed section and quick-add popover cont
 
 test("task repeat editor uses menu actions and end options instead of an inner toggle", () => {
     assert.doesNotMatch(entrySource, /function repeatToggle\b/);
-    assert.match(entrySource, /function RepeatMenuContent\b/);
-    assert.match(entrySource, /task-add-repeat-popover/);
-    assert.match(entrySource, /onCancel/);
-    assert.match(entrySource, /onDone/);
-    assert.match(entrySource, /"Cancel"/);
-    assert.match(entrySource, /"Done"/);
-    assert.match(entrySource, /"Never"/);
-    assert.match(entrySource, /"On"/);
-    assert.match(entrySource, /task-repeat-end-option/);
+    assert.match(recurrenceSource, /function RepeatMenuContent\b/);
+    assert.match(recurrenceSource, /task-add-repeat-popover/);
+    assert.match(recurrenceSource, /onCancel/);
+    assert.match(recurrenceSource, /onDone/);
+    assert.match(recurrenceSource, /"Cancel"/);
+    assert.match(recurrenceSource, /"Done"/);
+    assert.match(recurrenceSource, /"Never"/);
+    assert.match(recurrenceSource, /"On a date"/);
+    assert.match(recurrenceSource, /task-repeat-end-option/);
+});
+
+test("task forms use custom listboxes and calendars instead of browser pickers", () => {
+    const combined = `${entrySource}\n${recurrenceSource}\n${deadlineSource}`;
+    assert.doesNotMatch(combined, /h\("select"/);
+    assert.doesNotMatch(combined, /type: "(?:date|datetime-local|time|radio)"/);
+    assert.match(controlsSource, /role: "listbox"/);
+    assert.match(controlsSource, /role: "grid"/);
+    assert.match(controlsSource, /ArrowLeft/);
+    assert.match(controlsSource, /PageDown/);
 });

@@ -162,3 +162,104 @@ def test_calendar_reminder_is_claimed_once():
             assert send.call_count == 1
     finally:
         Path(path).unlink(missing_ok=True)
+
+
+def test_calendar_reminders_use_each_events_alert_setting():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO user_events (id,user_id,title,start,end,is_all_day,reminder_minutes,created_at) VALUES ('e1','u1','Quiz','2026-07-11T12:05:00Z','2026-07-11T13:00:00Z',0,5,'2026-01-01T00:00:00Z')")
+                conn.execute("INSERT INTO user_events (id,user_id,title,start,end,is_all_day,reminder_minutes,created_at) VALUES ('e2','u1','Silent exam','2026-07-11T12:05:00Z','2026-07-11T13:00:00Z',0,-1,'2026-01-01T00:00:00Z')")
+                conn.execute("INSERT INTO user_events (id,user_id,title,start,end,is_all_day,reminder_minutes,created_at) VALUES ('e3','u1','Holiday','2026-07-12T00:00:00Z','2026-07-13T00:00:00Z',1,-1,'2026-01-01T00:00:00Z')")
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 11, 12, 0, tzinfo=timezone.utc)) == 1
+            assert send.call_count == 1
+            assert send.call_args.args[2] == "Quiz"
+            assert send.call_args.args[3] == "Starts in 5 minutes."
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_task_reminder_uses_task_copy_and_deep_link():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO tasks (id,user_id,list_id,title,deadline_at,deadline_time,timezone,reminder_minutes,created_at) VALUES ('t1','u1','l1','Submit essay','2026-07-11T12:10:00Z','12:10','UTC',10,'2026-01-01T00:00:00Z')")
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 11, 12, 0, tzinfo=timezone.utc)) == 1
+            assert send.call_args.args[2] == "Submit essay"
+            assert send.call_args.args[3] == "Due in 10 minutes."
+            assert send.call_args.args[4] == "/tasks?task=t1"
+            assert send.call_args.kwargs["source_ref"] == "task:t1:single"
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_repeating_task_reminders_skip_completed_occurrences():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO tasks (id,user_id,list_id,title,deadline_at,deadline_time,timezone,recurrence_json,reminder_minutes,created_at) VALUES ('t1','u1','l1','Weekly review','2026-07-11T12:10:00Z','12:10','UTC',?,10,'2026-01-01T00:00:00Z')", ['{"every":1,"unit":"week","startDate":"2026-07-11","endDate":null}'])
+                conn.execute("INSERT INTO task_completions (id,user_id,task_id,occurrence_key,completed_at) VALUES ('c1','u1','t1','2026-07-18','2026-07-18T11:00:00Z')")
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 18, 12, 0, tzinfo=timezone.utc)) == 0
+            send.assert_not_called()
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_date_only_task_can_alert_at_nine_on_due_date():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO tasks (id,user_id,list_id,title,deadline_at,deadline_time,timezone,reminder_minutes,created_at) VALUES ('t1','u1','l1','Reading day','2026-07-12T00:00:00Z',NULL,'UTC',-540,'2026-01-01T00:00:00Z')")
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 12, 9, 0, tzinfo=timezone.utc)) == 1
+            assert send.call_args.args[3] == "Due today."
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_all_day_event_can_alert_at_nine_on_the_event_day():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO user_events (id,user_id,title,start,end,is_all_day,reminder_minutes,created_at) VALUES ('e1','u1','Move-in day','2026-07-12T00:00:00Z','2026-07-13T00:00:00Z',1,-540,'2026-01-01T00:00:00Z')")
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 12, 9, 0, tzinfo=timezone.utc)) == 1
+            assert send.call_args.args[3] == "Starts today."
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_imported_event_uses_its_per_user_alert_override():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            from services.database import db_connection
+            event_ref = notifications._feed_event_ref({"feed_url_hash": "feed-hash", "event_uid": "uid-1"})
+            with db_connection() as conn:
+                conn.execute("INSERT INTO user_settings (id,user_id,created_at,timezone) VALUES ('s1','u1','2026-01-01T00:00:00Z','UTC')")
+                conn.execute("INSERT INTO calendar_cache (id,user_id,feed_url_hash,event_uid,event_title,event_start,event_end,is_all_day) VALUES ('c1','u1','feed-hash','uid-1','Seminar','2026-07-11T12:30:00Z','2026-07-11T13:30:00Z',0)")
+                conn.execute("INSERT INTO user_event_overrides (id,user_id,event_ref,hidden,reminder_minutes,created_at) VALUES ('o1','u1',?,0,30,'2026-01-01T00:00:00Z')", [event_ref])
+            with patch.object(notifications, "notify", return_value=("n1", {"accepted": 1, "failed": 0})) as send:
+                assert notifications.check_calendar_reminders(datetime(2026, 7, 11, 12, 0, tzinfo=timezone.utc)) == 1
+            assert send.call_args.args[2] == "Seminar"
+            assert send.call_args.args[3] == "Starts in 30 minutes."
+    finally:
+        Path(path).unlink(missing_ok=True)

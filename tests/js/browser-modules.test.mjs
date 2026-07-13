@@ -139,6 +139,9 @@ test("calendar event form preserves escaping, API routes, and cache refresh beha
     assert.match(source, /fetch\("\/api\/calendar\/events"/);
     assert.match(source, /fetch\(`\/api\/calendar\/events\/\$\{encodeURIComponent\(currentEventId\)\}`/);
     assert.match(source, /fetch\("\/api\/calendar\/event-overrides"/);
+    assert.match(source, /name="reminder_minutes"/);
+    assert.match(source, /10 minutes before \(default\)/);
+    assert.match(source, /None \(default\)/);
     assert.match(source, /localStorage\.removeItem\("calendarEventsCache"\)/);
     assert.match(source, /window\.loadCalendarData && window\.loadCalendarData\(\)/);
 });

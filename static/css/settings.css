@@ -1943,9 +1943,6 @@ html body .settings-combobox .settings-combobox-search:focus-visible {
 .notification-action-status { margin: .8rem 0 0; padding: .7rem .8rem; border-radius: var(--radius-control); background: color-mix(in srgb, var(--color-info) 12%, transparent); color: var(--color-on-surface); font-size: .82rem; line-height: 1.45; }
 .notification-action-status[data-type="success"] { background: color-mix(in srgb, var(--color-success) 13%, transparent); color: var(--color-success); }
 .notification-action-status[data-type="error"] { background: color-mix(in srgb, var(--color-error) 13%, transparent); color: var(--color-error); }
-.notification-leads { display: flex; flex-wrap: wrap; gap: .75rem 1rem; padding: 0; border: 0; }
-.notification-leads legend { width: 100%; margin-bottom: .25rem; }
-.notification-leads label { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; }
 .notification-device-list { display: grid; gap: .75rem; }
 .notification-device { padding: .8rem 0; border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 45%, transparent); }
 .notification-device span { display: flex; flex-direction: column; gap: .2rem; }

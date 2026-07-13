@@ -1,5 +1,6 @@
 """Unified notification feed and standards-based Web Push delivery."""
 
+import hashlib
 import json
 import logging
 import os
@@ -10,6 +11,7 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from services.database import db_connection
+from services.task_schedule import build_task_occurrences
 
 logger = logging.getLogger(__name__)
 DEFAULT_PREFERENCES = {
@@ -396,10 +398,40 @@ def notify(user_id, category, title, body, target_url, **kwargs):
     return notification_id, deliver(user_id, notification_id, category, title, body, target_url, tag=kwargs.get("tag"), force_push=bool(kwargs.get("force_push"))) if notification_id else {"accepted": 0, "failed": 0}
 
 
+def _default_event_reminder(is_all_day):
+    return -1 if is_all_day else 10
+
+
+def _feed_event_ref(row):
+    feed_hash = str(row.get("feed_url_hash") or "")
+    event_uid = str(row.get("event_uid") or "")
+    if not feed_hash or not event_uid:
+        return None
+    uid_hash = hashlib.sha256(event_uid.encode("utf-8")).hexdigest()
+    return f"feed:{feed_hash}:{uid_hash}"
+
+
+def _reminder_label(start, now, zone, lead):
+    if lead < 0 or lead in {900, 2340, 9540}:
+        days = (start.astimezone(zone).date() - now.astimezone(zone).date()).days
+        if days == 0:
+            return "today"
+        if days == 1:
+            return "tomorrow"
+        return f"in {days} days"
+    return {
+        0: "now", 5: "in 5 minutes", 10: "in 10 minutes", 15: "in 15 minutes",
+        30: "in 30 minutes", 60: "in 1 hour", 120: "in 2 hours",
+        1440: "tomorrow", 2880: "in 2 days",
+    }.get(lead, "soon")
+
+
 def check_calendar_reminders(now=None):
     """Claim and deliver due reminders from local, imported, and task calendars."""
     now = now or datetime.now(timezone.utc)
-    window_end = (now + timedelta(days=8)).isoformat().replace("+00:00", "Z")
+    range_start = now - timedelta(days=1)
+    range_end = now + timedelta(days=8)
+    window_end = range_end.isoformat().replace("+00:00", "Z")
     sent = 0
     with db_connection() as conn:
         users = conn.execute("SELECT user_id,timezone FROM user_settings").fetchall()
@@ -410,10 +442,42 @@ def check_calendar_reminders(now=None):
                 continue
             try: zone = ZoneInfo(user["timezone"] or "UTC")
             except Exception: zone = timezone.utc
+            overrides = {
+                row["event_ref"]: dict(row)
+                for row in conn.execute("SELECT event_ref,hidden,title,start,is_all_day,reminder_minutes FROM user_event_overrides WHERE user_id=?", [user_id])
+            }
             rows = []
-            rows.extend(dict(row, kind="event", ref=f"local:{row['id']}") for row in conn.execute("SELECT id,title,start,is_all_day FROM user_events WHERE user_id=? AND start<=?", [user_id, window_end]))
-            rows.extend(dict(row, kind="event", ref=f"feed:{row['id']}") for row in conn.execute("SELECT id,event_title AS title,event_start AS start,is_all_day FROM calendar_cache WHERE user_id=? AND event_start<=?", [user_id, window_end]))
-            rows.extend(dict(row, kind="task", ref=f"task:{row['id']}", start=row["deadline_at"], is_all_day=not bool(row["deadline_time"])) for row in conn.execute("SELECT id,title,deadline_at,deadline_time FROM tasks WHERE user_id=? AND completed=0 AND deadline_at IS NOT NULL AND deadline_at<=?", [user_id, window_end]))
+            rows.extend(dict(row, kind="event", ref=f"local:{row['id']}") for row in conn.execute("SELECT id,title,start,is_all_day,reminder_minutes FROM user_events WHERE user_id=? AND start<=?", [user_id, window_end]))
+            for row in conn.execute("SELECT id,event_title AS title,event_start AS start,is_all_day,feed_url_hash,event_uid FROM calendar_cache WHERE user_id=? AND event_start<=?", [user_id, window_end]):
+                item = dict(row, kind="event", ref=f"feed:{row['id']}")
+                override = overrides.get(_feed_event_ref(item))
+                if override and bool(override["hidden"]):
+                    continue
+                if override:
+                    if override["title"] is not None:
+                        item["title"] = override["title"]
+                    if override["start"] is not None:
+                        item["start"] = override["start"]
+                    if override["is_all_day"] is not None:
+                        item["is_all_day"] = bool(override["is_all_day"])
+                reminder = override["reminder_minutes"] if override else None
+                item["reminder_minutes"] = _default_event_reminder(bool(item["is_all_day"])) if reminder is None else reminder
+                rows.append(item)
+            task_rows = [dict(row) for row in conn.execute("SELECT * FROM tasks WHERE user_id=? AND deadline_at IS NOT NULL", [user_id])]
+            task_completions = [dict(row) for row in conn.execute("SELECT * FROM task_completions WHERE user_id=?", [user_id])]
+            for occurrence in build_task_occurrences(task_rows, task_completions, range_start, range_end):
+                if occurrence["completed"]:
+                    continue
+                task = occurrence["task"]
+                rows.append({
+                    "kind": "task",
+                    "ref": f"task:{occurrence['task_id']}:{occurrence['occurrence_key']}",
+                    "task_id": occurrence["task_id"],
+                    "title": task.get("title"),
+                    "start": occurrence["start"].isoformat(),
+                    "is_all_day": occurrence["is_all_day"],
+                    "reminder_minutes": task.get("reminder_minutes"),
+                })
             for item in rows:
                 try:
                     raw = str(item["start"])
@@ -421,26 +485,34 @@ def check_calendar_reminders(now=None):
                     if start.tzinfo is None: start = start.replace(tzinfo=zone).astimezone(timezone.utc)
                 except (TypeError, ValueError):
                     continue
-                if item["is_all_day"]:
-                    hour, minute = (int(value) for value in prefs["all_day_previous_time"].split(":"))
-                    local_date = start.astimezone(zone).date()
-                    due = datetime.combine(local_date - timedelta(days=1), datetime.min.time(), zone).replace(hour=hour, minute=minute).astimezone(timezone.utc)
-                    leads = [-1]
-                else:
-                    due = None; leads = prefs["calendar_lead_minutes"]
-                for lead in leads:
-                    target = due if lead == -1 else start - timedelta(minutes=lead)
-                    if not (target <= now < target + timedelta(minutes=2)):
-                        continue
-                    claim_id = _id()
-                    try:
-                        conn.execute("INSERT INTO calendar_reminder_claims (id,user_id,event_ref,occurrence_start,lead_minutes,claimed_at) VALUES (?,?,?,?,?,?)", [claim_id, user_id, item["ref"], start.isoformat(), lead, _now()])
-                    except Exception:
-                        continue
-                    label = "tomorrow" if lead == -1 else ({5:"in 5 minutes",10:"in 10 minutes",30:"in 30 minutes",60:"in 1 hour",1440:"tomorrow",10080:"in 1 week"}.get(lead, "soon"))
-                    notification_id, result = notify(user_id, "calendar", str(item["title"] or "Upcoming item"), f"Starts {label}.", "/dashboard#calendar", source_ref=item["ref"], dedupe_key=f"calendar:{item['ref']}:{start.isoformat()}:{lead}", tag=f"calendar:{item['ref']}")
-                    conn.execute("UPDATE calendar_reminder_claims SET notification_id=? WHERE id=?", [notification_id, claim_id])
-                    sent += result["accepted"]
+                lead = item.get("reminder_minutes")
+                lead = _default_event_reminder(bool(item["is_all_day"])) if lead is None else int(lead)
+                if lead == -1:
+                    continue
+                target = start - timedelta(minutes=lead)
+                if not (target <= now < target + timedelta(minutes=2)):
+                    continue
+                claim_id = _id()
+                try:
+                    conn.execute("INSERT INTO calendar_reminder_claims (id,user_id,event_ref,occurrence_start,lead_minutes,claimed_at) VALUES (?,?,?,?,?,?)", [claim_id, user_id, item["ref"], start.isoformat(), lead, _now()])
+                except Exception:
+                    continue
+                label = _reminder_label(start, now, zone, lead)
+                is_task = item.get("kind") == "task"
+                target_url = f"/tasks?task={item['task_id']}" if is_task else "/dashboard#calendar"
+                body = f"Due {label}." if is_task else f"Starts {label}."
+                notification_id, result = notify(
+                    user_id,
+                    "calendar",
+                    str(item["title"] or ("Upcoming task" if is_task else "Upcoming item")),
+                    body,
+                    target_url,
+                    source_ref=item["ref"],
+                    dedupe_key=f"calendar:{item['ref']}:{start.isoformat()}:{lead}",
+                    tag=f"calendar:{item['ref']}",
+                )
+                conn.execute("UPDATE calendar_reminder_claims SET notification_id=? WHERE id=?", [notification_id, claim_id])
+                sent += result["accepted"]
     return sent
 
 

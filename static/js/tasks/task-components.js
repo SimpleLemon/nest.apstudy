@@ -121,7 +121,10 @@ export function ActionMenu({ menu, onClose }) {
         const onKeyDown = (event) => {
             if (event.key === "Escape") onClose();
         };
-        const onScroll = () => onClose();
+        const onScroll = (event) => {
+            if (menuRef.current?.contains(event.target)) return;
+            onClose();
+        };
         const onResize = () => onClose();
         document.addEventListener("pointerdown", onPointerDown);
         document.addEventListener("keydown", onKeyDown);

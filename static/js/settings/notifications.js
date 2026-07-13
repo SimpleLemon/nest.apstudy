@@ -32,8 +32,6 @@
     test.disabled = !config.push_configured || config.devices.length === 0;
     test.title = config.devices.length ? '' : 'Enable notifications on a browser before sending a test.';
     document.querySelectorAll('[data-push-toggle]').forEach((button) => selected(button, Boolean(config.preferences[button.dataset.pushToggle])));
-    document.querySelectorAll('.notification-leads input').forEach((input) => { input.checked = config.preferences.calendar_lead_minutes.includes(Number(input.value)); });
-    document.getElementById('notification-all-day-time').value = config.preferences.all_day_previous_time;
     const devices = document.getElementById('notification-devices');
     devices.innerHTML = config.devices.length ? config.devices.map((device) => `<div class="notification-device"><span><strong>${escape(device.device_name)}</strong><small>Last active ${new Date(device.last_seen_at || device.created_at).toLocaleDateString()}</small></span><button type="button" class="settings-button settings-button-secondary" data-revoke="${device.id}">Revoke</button></div>`).join('') : '<p class="settings-help-text">No browsers are registered yet.</p>';
   }
@@ -48,8 +46,6 @@
   async function save() {
     const preferences = {};
     document.querySelectorAll('[data-push-toggle]').forEach((button) => { preferences[button.dataset.pushToggle] = button.classList.contains('is-active'); });
-    preferences.calendar_lead_minutes = Array.from(document.querySelectorAll('.notification-leads input:checked')).map((input) => Number(input.value));
-    preferences.all_day_previous_time = document.getElementById('notification-all-day-time').value;
     try { config.preferences = (await global.APStudyNotifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message, 'error'); }
   }
   async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message, 'error', 'Test notification failed'); } }

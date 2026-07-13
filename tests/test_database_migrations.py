@@ -106,6 +106,14 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
                 "INSERT INTO chat_messages (id, external_id, content, created_at) VALUES (?, ?, ?, ?)",
                 ("message-1", "external-1", "Kept message", "2026-01-03Z"),
             )
+            connection.execute(
+                "INSERT INTO tasks (id, user_id, list_id, title, deadline_at, deadline_time, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                ("task-timed", "user-1", "list-1", "Timed", "2026-02-01T12:00:00Z", "12:00", "2026-01-03Z"),
+            )
+            connection.execute(
+                "INSERT INTO tasks (id, user_id, list_id, title, deadline_at, deadline_time, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                ("task-date", "user-1", "list-1", "Date only", "2026-02-02T00:00:00Z", None, "2026-01-03Z"),
+            )
             connection.commit()
 
         database.init_db(path=self.db_path)
@@ -126,6 +134,7 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
             versions = {
                 row[0] for row in connection.execute("SELECT version FROM schema_migrations")
             }
+            task_reminders = dict(connection.execute("SELECT id, reminder_minutes FROM tasks").fetchall())
 
         self.assertEqual(tuple(user), ("user-1", "google-1", "legacy@example.com", "Legacy User", "legacy", None))
         self.assertEqual(tuple(note[:4]), ("note-1", "user-1", "Kept note", legacy_content))
@@ -133,6 +142,7 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
         self.assertEqual(tuple(empty_note), ("note-empty", "", "Blank note"))
         self.assertEqual(tuple(message), ("message-1", "external-1", "Kept message"))
         self.assertEqual(versions, self._expected_versions())
+        self.assertEqual(task_reminders, {"task-timed": 10, "task-date": -1})
         self._assert_database_healthy()
 
     def test_current_unique_indexes_reject_duplicate_identity_course_and_external_ids(self):
