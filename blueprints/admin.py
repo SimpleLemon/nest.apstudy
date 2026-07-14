@@ -1218,6 +1218,7 @@ def save_admin_tiers():
                 form_keys = {
                     "storage_bytes": (f"{tier}__storage_gb", 1024 ** 3),
                     "max_file_size_bytes": (f"{tier}__max_file_size_mb", 1024 ** 2),
+                    "max_chat_attachment_size_bytes": (f"{tier}__max_chat_attachment_size_mb", 1024 ** 2),
                     "max_upload_files": (f"{tier}__max_upload_files", 1),
                     "max_saved_courses": (f"{tier}__max_saved_courses", 1),
                     "max_seat_tracks": (f"{tier}__max_seat_tracks", 1),

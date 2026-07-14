@@ -1,5 +1,6 @@
 import hashlib
 import html
+import io
 import json
 import logging
 import os
@@ -9,7 +10,7 @@ import threading
 import time
 from datetime import datetime, timedelta, timezone
 
-from flask import Blueprint, Response, jsonify, request, stream_with_context
+from flask import Blueprint, Response, jsonify, request, send_file, stream_with_context
 from flask_login import current_user, login_required
 
 from appwrite.exception import AppwriteException
@@ -33,6 +34,18 @@ from appwrite_helpers import (
 )
 from avatar_images import DEFAULT_AVATAR_URL
 from services.chat_formatting import extract_links, fetch_link_preview, render_markdown, url_hash
+from services.chat_attachments import (
+    AttachmentError,
+    MAX_ATTACHMENTS_PER_MESSAGE,
+    attachment_bytes,
+    attachments_for_messages,
+    bind_pending,
+    create_attachment,
+    delete_attachment,
+    delete_message_attachments,
+    get_attachment,
+    serialize_attachment,
+)
 from services.discord_bridge import (
     DiscordBridgeError,
     delete_webhook_message,
@@ -44,7 +57,8 @@ from services.discord_bridge import (
 from services.discord_audit import DiscordAuditEvent, emit_audit_event, format_actor
 from services.chat_presence import sync_chat_presence_labels_for_user, university_presence_label
 from services import notifications
-from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
+from services.entitlements import EntitlementLimitError, TIER_BADGES, TIER_LABELS, normalize_tier, request_entitlements
+from services.giphy import GiphyError, api_key as giphy_api_key, is_available as giphy_available, resolve_gif
 from services.universities import normalize_school_key, school_payload, search_universities
 
 
@@ -1102,6 +1116,9 @@ def _apply_discord_message_changes(existing, payload, message, *, partial=False,
     channel_id = payload.get("channel_id")
     row_id = _row_id(existing)
     changes = _discord_message_changes(existing, payload)
+    if existing.get("user_id"):
+        for field in ("content", "rendered_html", "link_preview_json", "author_name", "author_username", "author_avatar_url"):
+            changes.pop(field, None)
     if partial and not changes and message.get("edited_timestamp"):
         changes = {"updated_at": payload.get("updated_at")}
     if not changes:
@@ -1219,7 +1236,7 @@ def _load_users_by_id(user_ids):
     return users_by_id
 
 
-def _serialize_message(row, users_by_id=None):
+def _serialize_message(row, users_by_id=None, attachments_by_message=None):
     created = _message_timestamp(row)
     user_id = row.get("user_id")
     author_profile = None
@@ -1240,15 +1257,25 @@ def _serialize_message(row, users_by_id=None):
     )
     previews = []
     images = []
+    gif = None
     if row.get("link_preview_json"):
         try:
             media = json.loads(row.get("link_preview_json")) or []
         except (TypeError, json.JSONDecodeError):
             media = []
-        previews = [item for item in media if not isinstance(item, dict) or item.get("kind") != "discord_image"]
+        gif = next((item for item in media if isinstance(item, dict) and item.get("kind") == "giphy_gif"), None)
+        previews = [
+            item for item in media
+            if not isinstance(item, dict) or item.get("kind") not in {"discord_image", "giphy_gif"}
+        ]
         images = [item for item in media if isinstance(item, dict) and item.get("kind") == "discord_image"]
+    message_id = _row_id(row)
+    if attachments_by_message is None:
+        attachment_map = attachments_for_messages([message_id])
+    else:
+        attachment_map = attachments_by_message
     return {
-        "id": _row_id(row),
+        "id": message_id,
         "channel_id": row.get("channel_id"),
         "thread_id": row.get("thread_id"),
         "source": row.get("source") or "appwrite",
@@ -1260,6 +1287,8 @@ def _serialize_message(row, users_by_id=None):
         "rendered_html": row.get("rendered_html") or render_markdown(row.get("content") or ""),
         "previews": previews,
         "images": images,
+        "attachments": attachment_map.get(message_id, []),
+        "gif": gif,
         "created_at": format_datetime(created),
         "can_delete": bool(can_delete),
         "delete_expires_at": (
@@ -1273,7 +1302,28 @@ def _serialize_message(row, users_by_id=None):
 
 def _serialize_messages(rows):
     users_by_id = _load_users_by_id([row.get("user_id") for row in rows if row.get("user_id")])
-    return [_serialize_message(row, users_by_id) for row in rows]
+    attachment_map = attachments_for_messages([_row_id(row) for row in rows])
+    return [_serialize_message(row, users_by_id, attachment_map) for row in rows]
+
+
+def _message_media_payload():
+    payload = request.get_json(silent=True) or {}
+    content = str(payload.get("content") or "").strip()
+    attachment_ids = payload.get("attachment_ids") or []
+    if not isinstance(attachment_ids, list):
+        raise AttachmentError("Attachments must be provided as a list.")
+    attachment_ids = list(dict.fromkeys(str(value) for value in attachment_ids if value))
+    if len(attachment_ids) > MAX_ATTACHMENTS_PER_MESSAGE:
+        raise AttachmentError("A message can include at most five attachments.")
+    gif = None
+    gif_id = str(payload.get("gif_id") or "").strip()
+    if gif_id:
+        gif = resolve_gif(gif_id, payload.get("gif_query"))
+    if not content and not attachment_ids and not gif:
+        raise AttachmentError("Add a message, attachment, or GIF before sending.")
+    if len(content) > 2000:
+        raise AttachmentError("Message is too long.")
+    return content, attachment_ids, gif
 
 
 def _room_message_metadata(scope_type, scope_id):
@@ -1457,6 +1507,7 @@ def _soft_delete_discord_message(channel, discord_message_id, *, emit_event=Fals
                 "updated_at": deleted_at,
             },
         )
+        delete_message_attachments(_row_id(row))
         if emit_event:
             emit_chat_event(
                 "channel",
@@ -2272,6 +2323,7 @@ def bootstrap():
         channels.append(university["channel"])
     sync_chat_presence_labels_for_user(_current_user_id())
     dm_threads = _list_threads()
+    entitlements = request_entitlements(current_user)
     return jsonify({
         "user": _current_user_payload(),
         "settings": _settings_payload(),
@@ -2285,6 +2337,16 @@ def bootstrap():
             "school_key": getattr(current_user, "school_key", None),
         },
         "discord_invite_url": os.environ.get("DISCORD_INVITE_URL", ""),
+        "capabilities": {
+            "attachments": bool(os.environ.get("APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID")),
+            "max_attachment_size_bytes": entitlements["limits"].get("max_chat_attachment_size_bytes"),
+            "max_attachments_per_message": MAX_ATTACHMENTS_PER_MESSAGE,
+            "giphy": {
+                "available": giphy_available(),
+                "api_key": giphy_api_key() if giphy_available() else "",
+                "rating": "pg",
+            },
+        },
     })
 
 
@@ -2416,6 +2478,108 @@ def _list_threads():
     return payload
 
 
+def _attachment_scope_access(scope_type, scope_id):
+    if scope_type == "channel":
+        channel = get_row_safe(COLLECTIONS["chat_channels"], str(scope_id), allow_missing=True)
+        return bool(_can_access_channel(channel))
+    if scope_type == "thread":
+        return bool(_thread_for_user(str(scope_id)))
+    return False
+
+
+def _can_access_attachment(row):
+    if not row:
+        return False
+    if row.get("status") == "pending":
+        return str(row.get("user_id") or "") == _current_user_id()
+    return row.get("status") == "active" and _attachment_scope_access(row.get("scope_type"), row.get("scope_id"))
+
+
+@chat_api_bp.route("/api/chat/attachments", methods=["POST"])
+@login_required
+def upload_chat_attachment():
+    uploaded_file = request.files.get("file")
+    scope_type = str(request.form.get("scope_type") or "").strip()
+    scope_id = str(request.form.get("scope_id") or "").strip()
+    if not uploaded_file or not uploaded_file.filename:
+        return jsonify({"error": "Choose a file to attach."}), 400
+    if not _attachment_scope_access(scope_type, scope_id):
+        return jsonify({"error": "Conversation unavailable."}), 404
+    try:
+        row = create_attachment(
+            user_id=_current_user_id(),
+            scope_type=scope_type,
+            scope_id=scope_id,
+            uploaded_file=uploaded_file,
+            entitlements=request_entitlements(current_user),
+            original_size=request.form.get("original_size_bytes"),
+            upload_encoding=request.form.get("content_encoding") or "identity",
+        )
+    except EntitlementLimitError as exc:
+        return jsonify(exc.payload()), 413
+    except (AttachmentError, ValueError) as exc:
+        return jsonify({"error": str(exc), "code": "invalid_attachment"}), 400
+    except AppwriteException:
+        logger.exception("Failed to upload chat attachment")
+        return jsonify({"error": "Unable to upload this attachment right now."}), 503
+    return jsonify({"attachment": serialize_attachment(row)}), 201
+
+
+@chat_api_bp.route("/api/chat/attachments/<attachment_id>", methods=["DELETE"])
+@login_required
+def cancel_chat_attachment(attachment_id):
+    row = get_attachment(attachment_id)
+    if not row or row.get("status") != "pending":
+        return jsonify({"error": "Pending attachment not found."}), 404
+    if str(row.get("user_id") or "") != _current_user_id():
+        return jsonify({"error": "You cannot cancel this attachment."}), 403
+    delete_attachment(row)
+    return jsonify({"status": "ok"})
+
+
+@chat_api_bp.route("/api/chat/attachments/<attachment_id>/preview")
+@login_required
+def preview_chat_attachment(attachment_id):
+    row = get_attachment(attachment_id)
+    if not _can_access_attachment(row) or row.get("kind") not in {"image", "pdf"}:
+        return jsonify({"error": "Preview unavailable."}), 404
+    use_preview = row.get("kind") == "pdf"
+    data = attachment_bytes(row, preview=use_preview)
+    if not data:
+        return jsonify({"error": "Preview unavailable."}), 404
+    response = send_file(
+        io.BytesIO(data),
+        mimetype="image/webp" if use_preview else row.get("mime_type"),
+        as_attachment=False,
+        max_age=3600,
+        conditional=True,
+    )
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Content-Security-Policy"] = "default-src 'none'; sandbox"
+    return response
+
+
+@chat_api_bp.route("/api/chat/attachments/<attachment_id>/download")
+@login_required
+def download_chat_attachment(attachment_id):
+    row = get_attachment(attachment_id)
+    if not _can_access_attachment(row):
+        return jsonify({"error": "Attachment unavailable."}), 404
+    data = attachment_bytes(row)
+    if data is None:
+        return jsonify({"error": "Attachment unavailable."}), 404
+    response = send_file(
+        io.BytesIO(data),
+        mimetype=row.get("mime_type") or "application/octet-stream",
+        as_attachment=True,
+        download_name=row.get("original_filename") or "attachment",
+        max_age=0,
+    )
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Content-Security-Policy"] = "default-src 'none'; sandbox"
+    return response
+
+
 @chat_api_bp.route("/api/chat/channels/<channel_id>/messages")
 @login_required
 def channel_messages(channel_id):
@@ -2447,15 +2611,15 @@ def send_channel_message(channel_id):
         return jsonify({"error": "Channel unavailable."}), 404
     if channel.get("read_only"):
         return jsonify({"error": "This channel is read-only."}), 403
-    content = (request.get_json(silent=True) or {}).get("content") or ""
-    content = str(content).strip()
-    if not content:
-        return jsonify({"error": "Message cannot be empty."}), 400
-    if len(content) > 2000:
-        return jsonify({"error": "Message is too long."}), 400
+    try:
+        content, attachment_ids, gif = _message_media_payload()
+    except (AttachmentError, GiphyError) as exc:
+        return jsonify({"error": str(exc)}), 400
 
     now = format_datetime(_now())
     previews = _previews_for_content(content)
+    if gif:
+        previews.append(gif)
     base_payload = {
         "channel_id": channel_id,
         "user_id": _current_user_id(),
@@ -2470,11 +2634,40 @@ def send_channel_message(channel_id):
     }
 
     if channel.get("kind") == "discord":
+        bridge_files = []
+        bridge_links = []
+        for attachment_id in attachment_ids:
+            attachment = get_attachment(attachment_id)
+            if (
+                not attachment
+                or attachment.get("status") != "pending"
+                or str(attachment.get("user_id") or "") != _current_user_id()
+                or attachment.get("scope_type") != "channel"
+                or str(attachment.get("scope_id") or "") != str(channel_id)
+            ):
+                return jsonify({"error": "An attachment is unavailable or belongs to a different conversation."}), 400
+            if int(attachment.get("original_size_bytes") or 0) <= 10 * 1024 * 1024:
+                bridge_files.append({
+                    "filename": attachment.get("original_filename") or "attachment",
+                    "mime_type": attachment.get("mime_type") or "application/octet-stream",
+                    "data": attachment_bytes(attachment),
+                })
+            else:
+                bridge_links.append(
+                    f"{attachment.get('original_filename') or 'Attachment'}: "
+                    f"{request.url_root.rstrip('/')}/api/chat/attachments/{attachment_id}/download"
+                )
+        bridge_content = content
+        if gif:
+            bridge_content = "\n".join(value for value in (bridge_content, gif.get("url")) if value)
+        if bridge_links:
+            bridge_content = "\n".join(value for value in (bridge_content, *bridge_links) if value)
         try:
             discord_message, webhook = execute_chat_webhook(
-                content,
+                bridge_content,
                 current_user.name or current_user.username or "Nest User",
                 current_user.picture_url,
+                files=bridge_files,
             )
         except (DiscordBridgeError, Exception):
             logger.exception("Failed to send Discord webhook message")
@@ -2520,6 +2713,22 @@ def send_channel_message(channel_id):
         except AppwriteException:
             logger.exception("Failed to persist channel message")
             return jsonify({"error": "Unable to save message."}), 500
+    try:
+        if attachment_ids:
+            bind_pending(
+                attachment_ids,
+                user_id=_current_user_id(),
+                scope_type="channel",
+                scope_id=channel_id,
+                message_id=_row_id(row),
+            )
+    except (AttachmentError, AppwriteException) as exc:
+        logger.exception("Failed to bind channel message attachments")
+        try:
+            delete_row_safe(COLLECTIONS["chat_messages"], _row_id(row))
+        except AppwriteException:
+            logger.exception("Failed to roll back channel message")
+        return jsonify({"error": str(exc) or "Unable to attach files."}), 400
     try:
         if channel.get("kind") == "discord":
             _prune_discord_messages(channel_id)
@@ -2587,6 +2796,7 @@ def delete_message(message_id):
                 "updated_at": deleted_at,
             },
         )
+        delete_message_attachments(message_id)
         if row.get("channel_id"):
             channel = get_row_safe(COLLECTIONS["chat_channels"], row.get("channel_id"), allow_missing=True)
             emit_chat_event(
@@ -2717,13 +2927,14 @@ def dm_thread_messages(thread_id):
         return jsonify({"error": "Recipient unavailable."}), 404
     if _is_blocked_between(_current_user_id(), other["id"]):
         return jsonify({"error": "This conversation is blocked."}), 403
-    content = str((request.get_json(silent=True) or {}).get("content") or "").strip()
-    if not content:
-        return jsonify({"error": "Message cannot be empty."}), 400
-    if len(content) > 2000:
-        return jsonify({"error": "Message is too long."}), 400
+    try:
+        content, attachment_ids, gif = _message_media_payload()
+    except (AttachmentError, GiphyError) as exc:
+        return jsonify({"error": str(exc)}), 400
     now = format_datetime(_now())
     previews = _previews_for_content(content)
+    if gif:
+        previews.append(gif)
     try:
         row = create_row_safe(
             COLLECTIONS["chat_messages"],
@@ -2742,6 +2953,14 @@ def dm_thread_messages(thread_id):
                 "updated_at": now,
             },
         )
+        if attachment_ids:
+            bind_pending(
+                attachment_ids,
+                user_id=_current_user_id(),
+                scope_type="thread",
+                scope_id=thread_id,
+                message_id=_row_id(row),
+            )
         update_row_safe(COLLECTIONS["chat_dm_threads"], thread_id, {"last_message_at": now, "updated_at": now})
         emit_chat_event(
             "thread",
@@ -2757,13 +2976,19 @@ def dm_thread_messages(thread_id):
             try:
                 notifications.notify(
                     recipient_id, "chat_dm", current_user.name or current_user.username or "New direct message",
-                    content, f"/chat?thread={thread_id}&message={_row_id(row)}", source_ref=_row_id(row),
+                    content or ("Sent a GIF" if gif else "Sent an attachment"), f"/chat?thread={thread_id}&message={_row_id(row)}", source_ref=_row_id(row),
                     dedupe_key=f"chat:{_row_id(row)}", tag=f"dm:{thread_id}", actor_user_id=_current_user_id(),
                 )
             except Exception:
                 logger.exception("Failed to dispatch DM notification")
-    except AppwriteException:
+    except (AppwriteException, AttachmentError):
         logger.exception("Failed to save DM")
+        if 'row' in locals():
+            try:
+                delete_message_attachments(_row_id(row))
+                delete_row_safe(COLLECTIONS["chat_messages"], _row_id(row))
+            except AppwriteException:
+                logger.exception("Failed to roll back DM message")
         return jsonify({"error": "Unable to send message."}), 500
     return jsonify({"message": _serialize_message(row)}), 201
 

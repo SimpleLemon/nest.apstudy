@@ -1,6 +1,7 @@
 """Shared tier definitions, usage accounting, and quota enforcement."""
 
 import logging
+import os
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -23,6 +24,7 @@ TIER_LABELS = {
 LIMIT_KEYS = (
     "storage_bytes",
     "max_file_size_bytes",
+    "max_chat_attachment_size_bytes",
     "max_upload_files",
     "max_saved_courses",
     "max_seat_tracks",
@@ -39,6 +41,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "label": TIER_LABELS["free"],
         "storage_bytes": 1 * GIB,
         "max_file_size_bytes": 25 * MIB,
+        "max_chat_attachment_size_bytes": 10 * MIB,
         "max_upload_files": 2,
         "max_saved_courses": 5,
         "max_seat_tracks": 1,
@@ -50,6 +53,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "label": TIER_LABELS["grade_a"],
         "storage_bytes": 10 * GIB,
         "max_file_size_bytes": 50 * MIB,
+        "max_chat_attachment_size_bytes": 50 * MIB,
         "max_upload_files": 5,
         "max_saved_courses": 15,
         "max_seat_tracks": 5,
@@ -61,6 +65,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "label": TIER_LABELS["grade_aa"],
         "storage_bytes": 15 * GIB,
         "max_file_size_bytes": 100 * MIB,
+        "max_chat_attachment_size_bytes": 50 * MIB,
         "max_upload_files": 10,
         "max_saved_courses": 50,
         "max_seat_tracks": 25,
@@ -71,6 +76,7 @@ DEFAULT_TIER_DEFINITIONS = {
     "developer": {
         "label": TIER_LABELS["developer"],
         **{key: UNLIMITED for key in LIMIT_KEYS},
+        "max_chat_attachment_size_bytes": 50 * MIB,
         TRACK_INTERVALS_KEY: [5, 15, 30],
     },
 }
@@ -216,12 +222,22 @@ def usage_for_user(user_id, user_doc=None):
     normalized_id = str(user_id)
     files = _rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [normalized_id])])
     media = _rows(COLLECTIONS["note_media"], [Query.equal("user_id", [normalized_id])])
+    chat_attachments = (
+        _rows(COLLECTIONS["chat_attachments"], [Query.equal("user_id", [normalized_id])])
+        if os.environ.get("APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID")
+        else []
+    )
     notes = _rows(COLLECTIONS["notes"], [Query.equal("user_id", [normalized_id])])
     courses = _rows(COLLECTIONS["user_courses"], [Query.equal("user_id", [normalized_id])])
     tracks = _rows(COLLECTIONS["course_seat_tracks"], [Query.equal("user_id", [normalized_id])])
     user = user_doc or first_row(COLLECTIONS["users"], [Query.equal("id", [normalized_id])]) or {}
     storage_bytes = sum(int(row.get("file_size_bytes") or 0) for row in files)
     storage_bytes += sum(int(row.get("file_size_bytes") or 0) for row in media)
+    storage_bytes += sum(
+        int(row.get("stored_size_bytes") or 0) + int(row.get("preview_size_bytes") or 0)
+        for row in chat_attachments
+        if row.get("status") in {"pending", "active"}
+    )
     storage_bytes += int(user.get("avatar_file_size_bytes") or 0)
     return {
         "storage_bytes": storage_bytes,

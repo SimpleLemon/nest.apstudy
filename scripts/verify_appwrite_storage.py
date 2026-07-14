@@ -24,6 +24,7 @@ from appwrite.role import Role
 from appwrite.services.storage import Storage
 
 from appwrite_client import (
+    CHAT_ATTACHMENTS_BUCKET_ID,
     FILE_SHARE_BUCKET_ID,
     NOTES_MEDIA_BUCKET_ID,
     PROFILE_AVATAR_BUCKET_ID,
@@ -36,6 +37,7 @@ BUCKETS = (
     ("profile_avatars", PROFILE_AVATAR_BUCKET_ID),
     ("file_share_files", FILE_SHARE_BUCKET_ID),
     ("notes_media", NOTES_MEDIA_BUCKET_ID),
+    ("chat_attachments", CHAT_ATTACHMENTS_BUCKET_ID),
 )
 
 

@@ -1,4 +1,4 @@
-(function () {
+export function startChatRuntime(extensions = {}) {
   const root = document.querySelector(".chat-app");
   if (!root) return;
 
@@ -10,9 +10,9 @@
   const MESSAGE_GROUP_WINDOW_MS = 7 * 60 * 1000;
   const DISCORD_HISTORY_CHANNEL_IDS = new Set(["nest_announcements", "nest_chat"]);
   const CHAT_CACHE_DB_NAME = "apstudy-chat-cache";
-  const CHAT_CACHE_DB_VERSION = 1;
+  const CHAT_CACHE_DB_VERSION = 2;
   const CHAT_CACHE_STORE = "items";
-  const CHAT_CACHE_SCHEMA = "v1";
+  const CHAT_CACHE_SCHEMA = "v2";
   const CHAT_CACHE_MESSAGE_LIMIT = 50;
   const CHAT_PREFETCH_ROOM_LIMIT = 8;
   const REALTIME_FALLBACK_MS = 3000;
@@ -24,6 +24,7 @@
   const state = {
     user: root.dataset.currentUserId ? { id: root.dataset.currentUserId } : null,
     settings: { chat_sound_enabled: true },
+    capabilities: {},
     channels: [],
     threads: [],
     university: null,
@@ -51,11 +52,14 @@
     loadingMessages: false,
     roomReadState: null,
     announcementsBannerVisible: false,
-    membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
+    membersCollapsed: sessionStorage.getItem("apstudy-chat-members-collapsed") === null
+      ? window.innerWidth < 1440
+      : sessionStorage.getItem("apstudy-chat-members-collapsed") === "true",
     hydratedFromPersistentCache: false,
     persistentCacheReady: false,
     serverBootstrapped: false,
     prefetchingRooms: new Set(),
+    failedMessages: new Map(),
   };
 
   window.NestChat = state;
@@ -126,6 +130,7 @@
     composer: document.getElementById("chat-composer"),
     input: document.getElementById("chat-message-input"),
     sendButton: document.querySelector(".chat-send-button"),
+    newMessages: document.getElementById("chat-new-messages"),
     members: document.getElementById("chat-members"),
     memberList: document.getElementById("chat-member-list"),
     membersContext: document.getElementById("chat-members-context"),
@@ -136,6 +141,10 @@
     profileToggle: document.querySelector("[data-toggle-members]"),
     audio: document.getElementById("chat-audio"),
   };
+
+  extensions.attachments?.init?.({ state, els, setStatus: (...args) => setStatus(...args) });
+  extensions.mediaPicker?.init?.({ state, els, setStatus: (...args) => setStatus(...args) });
+  extensions.messageMedia?.init?.();
 
   function escapeHtml(value) {
     return String(value || "")
@@ -462,6 +471,9 @@
 
     state.user = payload.user || state.user;
     state.settings = { ...state.settings, ...(payload.settings || {}) };
+    state.capabilities = payload.capabilities || {};
+    extensions.attachments?.configure?.(state.capabilities);
+    extensions.mediaPicker?.configure?.(state.capabilities);
     state.channels = Array.isArray(payload.channels) ? payload.channels.map(staleChannelPresence) : [];
     state.threads = Array.isArray(payload.threads) ? payload.threads.map(staleThreadPresence) : [];
     state.university = payload.university || null;
@@ -1315,6 +1327,8 @@
     const contentHtml = `
       <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
       ${renderImages(message.images || [])}
+      ${extensions.messageMedia?.renderAttachments?.(message.attachments || []) || ""}
+      ${extensions.messageMedia?.renderGif?.(message.gif) || ""}
       ${renderPreviews(message.previews || [])}
     `;
     const isContinuation = el.classList.contains("chat-message-continuation");
@@ -1322,10 +1336,14 @@
     if (!content) return false;
     if (isContinuation) {
       content.innerHTML = contentHtml;
+      content.querySelector(".chat-message-body")?.insertAdjacentHTML("afterend", renderDeliveryState(message));
     } else {
       const head = content.querySelector(".chat-message-head");
       content.innerHTML = head ? head.outerHTML : "";
       content.insertAdjacentHTML("beforeend", contentHtml);
+      const nextHead = content.querySelector(".chat-message-head");
+      nextHead?.querySelector(".chat-delivery-state, .chat-message-retry")?.remove();
+      nextHead?.insertAdjacentHTML("beforeend", renderDeliveryState(message));
     }
     const deleteButton = renderDeleteButton(message);
     const existingDelete = el.querySelector(".chat-delete");
@@ -1383,6 +1401,7 @@
       scrollToBottom: wasNearBottom,
     });
     if (wasNearBottom && markRead) markRoomRead(room, cache);
+    if (!wasNearBottom && incoming.length && els.newMessages) els.newMessages.hidden = false;
     return messages;
   }
 
@@ -1610,11 +1629,24 @@
     }
     els.messages.innerHTML = `
       <div class="chat-message-stack" ${GRAMMARLY_DISABLED_ATTRS}>
-        ${groupMessages(messages).map(renderMessageGroup).join("")}
+        ${renderMessageGroupsWithDays(groupMessages(messages))}
       </div>
     `;
     updateAnnouncementsUnreadBanner(messages);
     updateHistoryBannerVisibility();
+  }
+
+  function renderMessageGroupsWithDays(groups) {
+    let previousDay = "";
+    return groups.map((group) => {
+      const date = parseMessageDate(group.messages?.[0]?.created_at);
+      const day = localDateKey(date);
+      const separator = day && day !== previousDay
+        ? `<div class="chat-day-separator" role="separator"><span>${escapeHtml(date.toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" }))}</span></div>`
+        : "";
+      previousDay = day;
+      return `${separator}${renderMessageGroup(group)}`;
+    }).join("");
   }
 
   function renderMessageGroup(group) {
@@ -1636,6 +1668,12 @@
     `;
   }
 
+  function renderDeliveryState(message) {
+    if (message.delivery_state === "sending") return `<span class="chat-delivery-state">Sending…</span>`;
+    if (message.delivery_state === "failed") return `<button class="chat-message-retry" type="button" data-retry-message="${escapeHtml(message.id)}">Not sent · Retry</button>`;
+    return "";
+  }
+
   function renderLeadMessage(message) {
     const deleteButton = message.can_delete
       ? renderDeleteButton(message)
@@ -1649,9 +1687,12 @@
           <div class="chat-message-head" ${GRAMMARLY_DISABLED_ATTRS}>
             <button type="button" class="chat-author-button" data-author-message-id="${escapeHtml(message.id)}" ${GRAMMARLY_DISABLED_ATTRS}>${escapeHtml(message.author_name || "Nest User")}</button>
             <span class="chat-message-time">${escapeHtml(formatMessageTimestamp(message.created_at))}</span>
+            ${renderDeliveryState(message)}
           </div>
           <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
           ${renderImages(message.images || [])}
+          ${extensions.messageMedia?.renderAttachments?.(message.attachments || []) || ""}
+          ${extensions.messageMedia?.renderGif?.(message.gif) || ""}
           ${renderPreviews(message.previews || [])}
         </div>
         ${deleteButton}
@@ -1665,7 +1706,10 @@
         <span class="chat-message-continuation-time">${escapeHtml(formatClockTime(parseMessageDate(message.created_at)))}</span>
         <div class="chat-message-content" ${GRAMMARLY_DISABLED_ATTRS}>
           <div class="chat-message-body" ${GRAMMARLY_DISABLED_ATTRS}>${message.rendered_html || escapeHtml(message.content || "")}</div>
+          ${renderDeliveryState(message)}
           ${renderImages(message.images || [])}
+          ${extensions.messageMedia?.renderAttachments?.(message.attachments || []) || ""}
+          ${extensions.messageMedia?.renderGif?.(message.gif) || ""}
           ${renderPreviews(message.previews || [])}
         </div>
         ${renderDeleteButton(message)}
@@ -2211,6 +2255,10 @@
     const previousRoom = state.activeRoom;
     saveActiveScroll();
     closeInlineProfilePopover();
+    if (previousRoom && roomKey(previousRoom) !== roomKey(room)) {
+      extensions.attachments?.resetForRoom?.();
+      extensions.mediaPicker?.clear?.();
+    }
     state.activeRoom = room;
     state.activeProfile = null;
     updateRoomLists();
@@ -2261,6 +2309,9 @@
     const payload = await fetchJson("/api/chat/bootstrap");
     state.user = payload.user || state.user;
     state.settings = { ...state.settings, ...(payload.settings || {}) };
+    state.capabilities = payload.capabilities || {};
+    extensions.attachments?.configure?.(state.capabilities);
+    extensions.mediaPicker?.configure?.(state.capabilities);
     state.channels = (payload.sections?.nest || []).map(staleChannelPresence);
     state.threads = (payload.sections?.direct_messages || []).map(staleThreadPresence);
     state.university = payload.university || null;
@@ -2631,7 +2682,13 @@
     const room = state.activeRoom;
     if (!room || !els.input) return;
     const content = els.input.value.trim();
-    if (!content) return;
+    const attachmentIds = extensions.attachments?.readyIds?.() || [];
+    const gifSelection = extensions.mediaPicker?.selection?.() || {};
+    if (!content && !attachmentIds.length && !gifSelection.gif_id) return;
+    if (extensions.attachments?.isBusy?.()) {
+      setStatus("Wait for attachments to finish uploading before sending.", "error");
+      return;
+    }
     if (state.messageSendInFlight) return;
     const channel = activeChannel();
     const thread = activeThread();
@@ -2641,14 +2698,33 @@
     state.messageSendInFlight = true;
     els.sendButton.disabled = true;
     clearTypingPresence(room);
+    const localId = `pending-${crypto.randomUUID()}`;
+    const payloadBody = { content, attachment_ids: attachmentIds, ...gifSelection };
+    const optimistic = {
+      id: localId,
+      user_id: state.user?.id,
+      author_name: state.user?.name || state.user?.username || "You",
+      author_username: state.user?.username || "",
+      author_avatar_url: state.user?.picture_url || state.user?.picture || "",
+      content: content || (gifSelection.gif_id ? "GIF" : "Attachment"),
+      rendered_html: escapeHtml(content || ""),
+      created_at: new Date().toISOString(),
+      delivery_state: "sending",
+      can_delete: false,
+      attachments: [],
+    };
+    applyIncomingMessages(room, [optimistic], { toBottom: true, markRead: false });
     try {
       const url = currentRoomUrl(room);
       const payload = await fetchJson(url, {
         method: "POST",
-        body: JSON.stringify({ content }),
+        body: JSON.stringify(payloadBody),
       });
+      removeMessageFromCaches(localId);
       els.input.value = "";
       autosizeComposer();
+      extensions.attachments?.clear?.();
+      extensions.mediaPicker?.clear?.(true);
       const cache = cacheFor(room);
       if (cache && payload.message) {
         applyIncomingMessages(room, [payload.message], { toBottom: true });
@@ -2656,10 +2732,43 @@
       refreshViewingPresence();
       schedulePersistentBootstrapSave();
     } catch (error) {
+      const cache = cacheFor(room);
+      const failed = cache?.messages?.find((message) => message.id === localId);
+      if (failed) {
+        failed.delivery_state = "failed";
+        state.failedMessages.set(localId, { room, payload: payloadBody });
+        patchMessageInDom(failed);
+        schedulePersistentRoomSave(room);
+      }
       setStatus(error.message || "Unable to send message.", "error");
     } finally {
       state.messageSendInFlight = false;
       const writable = channel ? channelIsWritable(channel) : !activeThread()?.blocked;
+      els.sendButton.disabled = !writable;
+    }
+  }
+
+  async function retryMessage(messageId) {
+    const failed = state.failedMessages.get(messageId);
+    if (!failed || state.messageSendInFlight) return;
+    const cache = cacheFor(failed.room);
+    const message = cache?.messages?.find((row) => row.id === messageId);
+    if (message) { message.delivery_state = "sending"; patchMessageInDom(message); }
+    state.messageSendInFlight = true;
+    els.sendButton.disabled = true;
+    try {
+      const response = await fetchJson(currentRoomUrl(failed.room), { method: "POST", body: JSON.stringify(failed.payload) });
+      state.failedMessages.delete(messageId);
+      removeMessageFromCaches(messageId);
+      if (response.message) applyIncomingMessages(failed.room, [response.message], { toBottom: true });
+      extensions.attachments?.clear?.();
+      extensions.mediaPicker?.clear?.(true);
+    } catch (error) {
+      if (message) { message.delivery_state = "failed"; patchMessageInDom(message); }
+      setStatus(error.message || "Unable to send message.", "error");
+    } finally {
+      state.messageSendInFlight = false;
+      const writable = activeChannel() ? channelIsWritable(activeChannel()) : !activeThread()?.blocked;
       els.sendButton.disabled = !writable;
     }
   }
@@ -2852,6 +2961,7 @@
         void loadMessages({ before: cache.oldestCursor, preserveScroll: true, quiet: true });
       }
       closeInlineProfilePopover();
+      if (isNearBottom() && els.newMessages) els.newMessages.hidden = true;
     });
     els.messages?.addEventListener("click", (event) => {
       const authorButton = event.target.closest("[data-author-message-id]");
@@ -2865,6 +2975,12 @@
       }
       const deleteButton = event.target.closest("[data-delete-message]");
       if (deleteButton) void deleteMessage(deleteButton.dataset.deleteMessage);
+      const retryButton = event.target.closest("[data-retry-message]");
+      if (retryButton) void retryMessage(retryButton.dataset.retryMessage);
+    });
+    els.newMessages?.addEventListener("click", () => {
+      els.messages?.scrollTo({ top: els.messages.scrollHeight, behavior: "smooth" });
+      els.newMessages.hidden = true;
     });
     els.memberList?.addEventListener("click", (event) => {
       const profileButton = event.target.closest("[data-profile-id]");
@@ -2958,6 +3074,7 @@
         closeRoomContextMenu();
         closeChatDrawers();
         closeInlineProfilePopover();
+        extensions.mediaPicker?.close?.();
       }
     });
     els.channelList?.addEventListener("scroll", closeRoomContextMenu);
@@ -3028,4 +3145,4 @@
   }
   startPresenceRefreshTimer();
   void startChat();
-})();
+}

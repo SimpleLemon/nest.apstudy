@@ -297,7 +297,7 @@ def ensure_chat_webhook():
     return webhook
 
 
-def execute_chat_webhook(content, username, avatar_url=None):
+def execute_chat_webhook(content, username, avatar_url=None, files=None):
     webhook = ensure_chat_webhook()
     payload = {
         "content": str(content or "")[:2000],
@@ -307,11 +307,18 @@ def execute_chat_webhook(content, username, avatar_url=None):
     if avatar_url:
         payload["avatar_url"] = avatar_url
 
+    request_kwargs = {"params": {"wait": "true"}, "timeout": 20 if files else 8}
+    if files:
+        request_kwargs["data"] = {"payload_json": json.dumps(payload)}
+        request_kwargs["files"] = {
+            f"files[{index}]": (item["filename"], item["data"], item["mime_type"])
+            for index, item in enumerate(files)
+        }
+    else:
+        request_kwargs["json"] = payload
     response = requests.post(
         f"{DISCORD_API_BASE}/webhooks/{webhook['id']}/{webhook['token']}",
-        params={"wait": "true"},
-        json=payload,
-        timeout=8,
+        **request_kwargs,
     )
     if response.status_code >= 400:
         raise DiscordBridgeError(f"Discord webhook returned {response.status_code}: {response.text[:200]}")

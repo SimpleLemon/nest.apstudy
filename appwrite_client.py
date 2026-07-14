@@ -229,6 +229,7 @@ ENDPOINT = _endpoint
 PROFILE_AVATAR_BUCKET_ID = os.environ.get("APPWRITE_PROFILE_AVATAR_BUCKET_ID", "profile_avatars")
 FILE_SHARE_BUCKET_ID = os.environ.get("APPWRITE_FILE_SHARE_BUCKET_ID", "file_share_files")
 NOTES_MEDIA_BUCKET_ID = os.environ.get("APPWRITE_NOTES_MEDIA_BUCKET_ID", "notes_media")
+CHAT_ATTACHMENTS_BUCKET_ID = os.environ.get("APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID", "chat_attachments")
 
 COLLECTIONS = {
 	"users": "users",
@@ -266,6 +267,7 @@ COLLECTIONS = {
 	"calendar_reminder_claims": "calendar_reminder_claims",
 	"chat_channels": "chat_channels",
 	"chat_messages": "chat_messages",
+	"chat_attachments": "chat_attachments",
 	"chat_dm_threads": "chat_dm_threads",
 	"chat_blocks": "chat_blocks",
 	"chat_presence": "chat_presence",

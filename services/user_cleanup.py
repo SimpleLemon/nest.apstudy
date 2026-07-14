@@ -78,6 +78,13 @@ def delete_user_data(user_id):
         errors.append("note_media")
 
     try:
+        from services.chat_attachments import delete_user_attachments
+        delete_user_attachments(user_id)
+    except AppwriteException:
+        logger.exception("Failed to delete chat attachments for user %s", user_id)
+        errors.append("chat_attachments")
+
+    try:
         delete_calendar_rows_by_user(user_id)
     except AppwriteException:
         logger.exception("Failed to delete calendar rows for user %s", user_id)

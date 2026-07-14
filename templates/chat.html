@@ -23,7 +23,7 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/chat/index.js') }}"></script>
 </head>
 <body class="chat-body bg-surface text-on-surface font-body antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}" data-user-tier="{{ user_tier or '' }}"></global>
@@ -98,14 +98,47 @@
                 <a id="chat-join-discord" href="#" target="_blank" rel="noopener noreferrer">Join Discord</a>
             </div>
             <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions text" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
+            <button id="chat-new-messages" class="chat-new-messages" type="button" hidden>
+                <span>New messages</span><span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
+            </button>
             <div id="chat-typing-indicator" class="chat-typing-indicator" role="status" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
 
             <form id="chat-composer" class="chat-composer" autocomplete="off">
+                <div id="chat-pending-files" class="chat-pending-files" aria-live="polite" hidden>
+                    <div id="chat-upload-list" class="chat-upload-list"></div>
+                    <div id="chat-gif-selection" class="chat-gif-selection"></div>
+                </div>
                 <textarea id="chat-message-input" rows="1" maxlength="2000" placeholder="Message #chat" aria-label="Message"></textarea>
-                <button class="chat-send-button" type="submit" aria-label="Send message">
-                    <span class="material-symbols-outlined" aria-hidden="true">send</span>
-                </button>
+                <div class="chat-composer-toolbar">
+                    <div class="chat-composer-tools">
+                        <input id="chat-file-input" type="file" multiple hidden accept=".jpg,.jpeg,.png,.webp,.gif,.pdf,.txt,.md,.markdown,.csv,.json,.docx,.xlsx,.pptx,.odt,.ods,.odp,.zip">
+                        <button id="chat-attach-button" class="chat-composer-tool" type="button" aria-label="Attach files" title="Attach files">
+                            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                        </button>
+                        <button id="chat-media-button" class="chat-composer-tool chat-media-button" type="button" aria-label="Add emoji or GIF" aria-haspopup="dialog" aria-controls="chat-media-picker" aria-expanded="false" title="Add emoji or GIF">
+                            <span class="material-symbols-outlined" aria-hidden="true">sentiment_satisfied</span>
+                        </button>
+                    </div>
+                    <button class="chat-send-button" type="submit" aria-label="Send message">
+                        <span class="material-symbols-outlined" aria-hidden="true">send</span>
+                    </button>
+                </div>
             </form>
+            <section id="chat-media-picker" class="chat-media-picker" role="dialog" aria-label="Emoji and GIF picker" hidden>
+                <div class="chat-picker-tabs" role="tablist" aria-label="Media type">
+                    <button id="chat-emoji-tab" type="button" role="tab" aria-selected="true" aria-controls="chat-emoji-panel">Emoji</button>
+                    <button id="chat-gif-tab" type="button" role="tab" aria-selected="false" aria-controls="chat-gif-panel">GIF</button>
+                </div>
+                <label class="chat-picker-search">
+                    <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                    <input id="chat-media-search" type="search" placeholder="Search emoji" autocomplete="off" aria-label="Search emoji">
+                </label>
+                <div id="chat-emoji-panel" class="chat-picker-panel" role="tabpanel" aria-labelledby="chat-emoji-tab"></div>
+                <div id="chat-gif-panel" class="chat-picker-panel" role="tabpanel" aria-labelledby="chat-gif-tab" hidden>
+                    <div id="chat-gif-results" class="chat-gif-results"></div>
+                    <p class="chat-giphy-attribution">Powered by GIPHY</p>
+                </div>
+            </section>
         </section>
 
         <aside class="chat-members" id="chat-members" aria-label="Online users and profile">
@@ -131,6 +164,19 @@
             <div id="chat-profile-panel" class="chat-profile-panel" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
         </aside>
     </main>
+    <dialog id="chat-download-warning" class="chat-download-warning" aria-labelledby="chat-download-warning-title">
+        <form method="dialog">
+            <button class="chat-dialog-close" value="cancel" aria-label="Close download warning"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+            <span class="material-symbols-outlined chat-dialog-shield" aria-hidden="true">shield</span>
+            <h2 id="chat-download-warning-title">Check this file before opening it</h2>
+            <p>Download files only from people you trust. Keep your device security tools up to date and scan unfamiliar files.</p>
+            <p><a id="chat-virus-total-link" href="#" target="_blank" rel="noopener noreferrer">Check this file hash on VirusTotal</a>. Nest never submits files automatically. Do not upload private material to VirusTotal's public service; standard submissions may be shared with analysis partners.</p>
+            <div class="chat-dialog-actions">
+                <button class="chat-dialog-secondary" value="cancel">Keep chatting</button>
+                <a id="chat-download-confirm" class="chat-dialog-primary" href="#" download>Download file</a>
+            </div>
+        </form>
+    </dialog>
     <audio id="chat-audio" preload="auto" src="{{ url_for('static', filename='audio/task-pop.mp3') }}"></audio>
 </body>
 </html>

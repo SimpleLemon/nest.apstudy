@@ -498,6 +498,13 @@ def _cleanup_note_media(app):
         except Exception:
             logger.exception("Note media cleanup failed")
         try:
+            from services.chat_attachments import cleanup_abandoned_attachments
+            deleted = cleanup_abandoned_attachments()
+            if deleted:
+                logger.info("Deleted %s abandoned chat attachment(s).", deleted)
+        except Exception:
+            logger.exception("Chat attachment cleanup failed")
+        try:
             from services.notifications import cleanup_expired
             cleanup_expired()
         except Exception:

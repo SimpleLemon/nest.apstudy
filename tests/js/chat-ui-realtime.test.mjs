@@ -7,7 +7,8 @@ import { fileURLToPath } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
 async function sourceFor(relativePath) {
-  return readFile(path.join(repoRoot, relativePath), "utf8");
+  const resolvedPath = relativePath === "static/js/chat.js" ? "static/js/chat/runtime.js" : relativePath;
+  return readFile(path.join(repoRoot, resolvedPath), "utf8");
 }
 
 function cssBlock(source, selector) {
@@ -18,7 +19,7 @@ function cssBlock(source, selector) {
 }
 
 test("chat uses realtime event signals instead of message polling", async () => {
-  const source = await sourceFor("static/js/chat.js");
+  const source = await sourceFor("static/js/chat/runtime.js");
 
   assert.doesNotMatch(source, /pollTimer/);
   assert.match(source, /pollActiveRoomMessages/);
@@ -93,7 +94,7 @@ test("chat persists user-scoped IndexedDB cache until logout", async () => {
 
   assert.match(template, /data-current-user-id="\{\{ user\.id or '' \}\}"/);
   assert.match(script, /const CHAT_CACHE_DB_NAME = "apstudy-chat-cache"/);
-  assert.match(script, /const CHAT_CACHE_SCHEMA = "v1"/);
+  assert.match(script, /const CHAT_CACHE_SCHEMA = "v2"/);
   assert.match(script, /function persistentCacheKey\(suffix\)/);
   assert.match(script, /\$\{CHAT_CACHE_SCHEMA\}:user:\$\{userId\}:\$\{suffix\}/);
   assert.match(script, /window\.indexedDB\.open\(CHAT_CACHE_DB_NAME, CHAT_CACHE_DB_VERSION\)/);

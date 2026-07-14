@@ -13,6 +13,8 @@ class EntitlementServiceTestCase(unittest.TestCase):
         self.assertEqual(entitlements.normalize_tier("Grade AA"), "grade_aa")
         self.assertEqual(definitions["free"]["storage_bytes"], 1024 ** 3)
         self.assertEqual(definitions["free"]["max_file_size_bytes"], 25 * 1024 ** 2)
+        self.assertEqual(definitions["free"]["max_chat_attachment_size_bytes"], 10 * 1024 ** 2)
+        self.assertEqual(definitions["grade_a"]["max_chat_attachment_size_bytes"], 50 * 1024 ** 2)
         self.assertEqual(definitions["grade_a"]["max_notes"], 50)
         self.assertEqual(definitions["grade_aa"]["max_seat_tracks"], 25)
         self.assertEqual(definitions["free"]["seat_track_intervals_minutes"], [30])
@@ -34,10 +36,15 @@ class EntitlementServiceTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             entitlements.normalize_definitions({"free": {"seat_track_intervals_minutes": [10]}})
 
-    def test_usage_aggregates_files_note_media_and_avatar_bytes(self):
+    def test_usage_aggregates_files_media_chat_attachments_and_avatar_bytes(self):
         rows = {
             COLLECTIONS["shared_files"]: [{"file_size_bytes": 100}],
             COLLECTIONS["note_media"]: [{"file_size_bytes": 200}, {"file_size_bytes": 300}],
+            COLLECTIONS["chat_attachments"]: [
+                {"stored_size_bytes": 50, "preview_size_bytes": 25, "status": "active"},
+                {"stored_size_bytes": 30, "preview_size_bytes": 5, "status": "pending"},
+                {"stored_size_bytes": 999, "preview_size_bytes": 999, "status": "cancelled"},
+            ],
             COLLECTIONS["notes"]: [{"id": "note-1"}, {"id": "note-2"}],
             COLLECTIONS["user_courses"]: [{"id": "course-1"}],
             COLLECTIONS["course_seat_tracks"]: [
@@ -54,7 +61,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
             )
 
         self.assertEqual(usage, {
-            "storage_bytes": 1000,
+            "storage_bytes": 1110,
             "files": 1,
             "notes": 2,
             "saved_courses": 1,

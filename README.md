@@ -56,6 +56,7 @@ The server uploads binary files to Appwrite Storage. Create these buckets in the
 | `APPWRITE_PROFILE_AVATAR_BUCKET_ID` | `profile_avatars` | Profile avatar uploads |
 | `APPWRITE_FILE_SHARE_BUCKET_ID` | `file_share_files` | File share uploads |
 | `APPWRITE_NOTES_MEDIA_BUCKET_ID` | `notes_media` | Inline images in notes |
+| `APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID` | `chat_attachments` | Private chat attachments and PDF previews |
 
 Mirror the working `profile_avatars` bucket settings (file security, max size, MIME allowlist). The server API key (`APPWRITE_API_KEY`) needs Storage create, read, and delete access on each bucket. Notes images are limited to 10 MiB (JPEG, PNG, GIF, WebP).
 
@@ -66,7 +67,9 @@ python scripts/verify_appwrite_storage.py
 python scripts/verify_appwrite_storage.py --probe-upload
 ```
 
-The probe uploads and deletes a 1x1 PNG in `notes_media` to confirm write access. Check server logs for `Failed to upload note media (code=...)` if uploads still return 500.
+The probe uploads and deletes a 1x1 PNG in `notes_media` to confirm write access. Chat attachments require file security and must not grant public read access; downloads are proxied through authenticated room-aware endpoints. Check server logs for upload errors if either feature returns 500.
+
+Create the private `chat_attachments` table/collection using the attributes represented in `migrations/009_chat_attachments.sql`, with indexes on `user_id`, `message_id`, scope, and status. See `CHAT_ATTACHMENTS.md` for the Appwrite rollout checklist. Set `GIPHY_API_KEY` to enable the GIF tab; without it, emoji and regular chat continue to work.
 
 ## Setup & Deployment
 

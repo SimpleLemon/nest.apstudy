@@ -37,7 +37,7 @@ if (false) {
     await import("../../static/js/calendar/views/month-view.js");
     await import("../../static/js/calendar/views/render-shell.js");
     await import("../../static/js/calendar/views/week-view.js");
-    await import("../../static/js/chat.js");
+    await import("../../static/js/chat/index.js");
     await import("../../static/js/core/breadcrumb.js");
     await import("../../static/js/core/appwrite.js");
     await import("../../static/js/core/command-palette.js");

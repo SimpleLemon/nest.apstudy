@@ -264,7 +264,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
         sources = (ROOT / "static/js/calendar/integrations/sources.js").read_text()
         share = (ROOT / "static/js/calendar/integrations/share.js").read_text()
         courses = (ROOT / "static/js/courses/panel.js").read_text()
-        chat = (ROOT / "static/js/chat.js").read_text()
+        chat = (ROOT / "static/js/chat/runtime.js").read_text()
         self.assertIn('role="dialog" aria-modal="true" aria-labelledby="courses-modal-title"', course_modal)
         self.assertIn('aria-label="Search courses"', course_modal)
         self.assertIn('aria-label="Filter by term"', course_modal)
