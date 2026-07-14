@@ -16,7 +16,7 @@ from services.task_schedule import build_task_occurrences
 logger = logging.getLogger(__name__)
 DEFAULT_PREFERENCES = {
     "push_enabled": False, "calendar_enabled": True, "course_push_enabled": True,
-    "course_email_enabled": True, "dm_enabled": True, "mention_enabled": True,
+    "course_email_enabled": False, "dm_enabled": True, "mention_enabled": True,
     "message_preview_enabled": True, "calendar_lead_minutes": [10, 1440],
     "all_day_previous_time": "18:00", "prompt_dismissed": False,
 }

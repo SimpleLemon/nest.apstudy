@@ -1,4 +1,5 @@
 import tempfile
+import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
@@ -8,6 +9,13 @@ from flask import Flask
 from services.database import init_db
 from services import notifications
 from blueprints import notifications_api
+
+
+class NotificationPreferenceDefaultTests(unittest.TestCase):
+    def test_email_defaults_off_and_normal_channels_default_on(self):
+        self.assertFalse(notifications.DEFAULT_PREFERENCES["course_email_enabled"])
+        for field in ("calendar_enabled", "course_push_enabled", "dm_enabled", "mention_enabled"):
+            self.assertTrue(notifications.DEFAULT_PREFERENCES[field])
 
 
 def notification_app():
@@ -22,6 +30,12 @@ def test_preferences_subscription_feed_and_mutations():
     app, path = notification_app()
     try:
         with app.app_context():
+            defaults = notifications.preferences("u1")
+            assert defaults["calendar_enabled"] is True
+            assert defaults["course_push_enabled"] is True
+            assert defaults["dm_enabled"] is True
+            assert defaults["mention_enabled"] is True
+            assert defaults["course_email_enabled"] is False
             prefs = notifications.update_preferences("u1", {"calendar_lead_minutes": [5, 60], "dm_enabled": False})
             assert prefs["calendar_lead_minutes"] == [5, 60]
             assert prefs["dm_enabled"] is False
@@ -43,6 +57,27 @@ def test_preferences_subscription_feed_and_mutations():
             assert notifications.list_feed("u1", status="unread")["notifications"] == []
             notifications.mutate_feed("u1", delete=True)
             assert notifications.list_feed("u1")["notifications"] == []
+    finally:
+        Path(path).unlink(missing_ok=True)
+
+
+def test_course_notification_and_email_channels_are_independent():
+    app, path = notification_app()
+    try:
+        with app.app_context():
+            email_only = notifications.update_preferences(
+                "u1",
+                {"course_push_enabled": False, "course_email_enabled": True},
+            )
+            assert email_only["course_push_enabled"] is False
+            assert email_only["course_email_enabled"] is True
+
+            neither = notifications.update_preferences(
+                "u1",
+                {"course_push_enabled": False, "course_email_enabled": False},
+            )
+            assert neither["course_push_enabled"] is False
+            assert neither["course_email_enabled"] is False
     finally:
         Path(path).unlink(missing_ok=True)
 

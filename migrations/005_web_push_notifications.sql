@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS notification_preferences (
     push_enabled INTEGER NOT NULL DEFAULT 0,
     calendar_enabled INTEGER NOT NULL DEFAULT 1,
     course_push_enabled INTEGER NOT NULL DEFAULT 1,
-    course_email_enabled INTEGER NOT NULL DEFAULT 1,
+    course_email_enabled INTEGER NOT NULL DEFAULT 0,
     dm_enabled INTEGER NOT NULL DEFAULT 1,
     mention_enabled INTEGER NOT NULL DEFAULT 1,
     message_preview_enabled INTEGER NOT NULL DEFAULT 1,

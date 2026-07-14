@@ -96,6 +96,7 @@ class CourseTrackingTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=tracks), \
                 patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}) as fetch_status, \
+                patch.object(course_tracking.notifications, "preferences", return_value={"course_email_enabled": True, "course_push_enabled": False}), \
                 patch.object(course_tracking, "_send_open_email") as send_email, \
                 patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
                 patch.object(course_tracking, "emit_course_track_event") as emit_event, \
@@ -235,6 +236,7 @@ class CourseTrackingTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=tracks), \
                 patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking.notifications, "preferences", return_value={"course_email_enabled": True, "course_push_enabled": False}), \
                 patch.object(course_tracking, "_send_open_email", side_effect=RuntimeError("email failed")) as send_email, \
                 patch.object(course_tracking, "update_row_safe") as update_row, \
                 patch.object(course_tracking, "emit_course_track_event") as emit_event, \
@@ -270,6 +272,7 @@ class CourseTrackingTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=tracks), \
                 patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}) as fetch_status, \
+                patch.object(course_tracking.notifications, "preferences", return_value={"course_email_enabled": True, "course_push_enabled": False}), \
                 patch.object(course_tracking, "_send_open_email"), \
                 patch.object(course_tracking, "update_row_safe", side_effect=lambda table, row_id, data: {"$id": row_id, **data}) as update_row, \
                 patch.object(course_tracking, "emit_course_track_event") as emit_event, \
@@ -376,6 +379,7 @@ class CourseTrackingTests(unittest.TestCase):
                     "fetch_live_section_status",
                     side_effect=[None, {"section": self._open_section()}],
                 ), \
+                patch.object(course_tracking.notifications, "preferences", return_value={"course_email_enabled": True, "course_push_enabled": False}), \
                 patch.object(course_tracking, "_send_open_email"), \
                 patch.object(course_tracking, "update_row_safe") as update_row, \
                 patch.object(course_tracking, "emit_course_track_event"), \
@@ -513,6 +517,7 @@ class CourseTrackingEmailTests(unittest.TestCase):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=[track]), \
                 patch.object(course_tracking, "fetch_live_section_status", return_value={"section": section}), \
+                patch.object(course_tracking.notifications, "preferences", return_value={"course_email_enabled": True, "course_push_enabled": False}), \
                 patch.object(course_tracking, "_send_open_email") as send_email, \
                 patch.object(course_tracking, "update_row_safe") as update_row, \
                 patch.object(course_tracking, "emit_course_track_event"), \

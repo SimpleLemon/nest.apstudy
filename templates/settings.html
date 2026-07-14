@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% set settings_assets_version = 'settings-tabs-20260712-1' %}
+{% set settings_assets_version = 'settings-notification-channels-20260713-1' %}
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
@@ -522,13 +522,51 @@
                     </article>
                     <article class="settings-card">
                         <div class="settings-card-body">
-                            <div class="settings-card-summary"><h3>What you receive</h3><p>Preferences sync across your devices.</p></div>
-                            <div class="settings-card-content settings-toggle-stack">
-                                <button type="button" class="settings-toggle" data-push-toggle="calendar_enabled"><span><strong>Calendar & tasks</strong><small>Upcoming visible events and incomplete deadlines.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
-                                <button type="button" class="settings-toggle" data-push-toggle="course_push_enabled"><span><strong>Tracked courses</strong><small>Alert when a tracked section opens.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
-                                <button type="button" class="settings-toggle" data-push-toggle="course_email_enabled"><span><strong>Course email</strong><small>Keep course-opening email alerts enabled independently.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
-                                <button type="button" class="settings-toggle" data-push-toggle="dm_enabled"><span><strong>Direct messages</strong><small>Show the sender and message text.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
-                                <button type="button" class="settings-toggle" data-push-toggle="mention_enabled"><span><strong>@mentions</strong><small>Messages that mention you directly.</small></span><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                            <div class="settings-card-summary"><h3>What you receive</h3><p>Choose how each update reaches you.</p></div>
+                            <div class="settings-card-content">
+                                <div class="notification-channel-grid" role="group" aria-label="Notification delivery preferences">
+                                    <div class="notification-channel-header" aria-hidden="true">
+                                        <span></span>
+                                        <span class="notification-channel-heading" data-notification-tooltip="Browser and in-app alerts">Notification</span>
+                                        <span class="notification-channel-heading" data-notification-tooltip="Messages sent to your account email">Email</span>
+                                    </div>
+                                    <div class="notification-channel-row">
+                                        <span class="notification-channel-copy"><strong>Calendar &amp; tasks</strong><small>Upcoming events and deadlines.</small></span>
+                                        <span class="notification-channel-control" data-normal-control>
+                                            <button type="button" class="notification-channel-toggle" data-push-toggle="calendar_enabled" aria-label="Calendar and task notifications" aria-pressed="false"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                        <span class="notification-channel-control is-unavailable" tabindex="0" aria-label="Email notifications are not available for calendar and tasks" data-notification-tooltip="Email isn’t available for calendar and tasks.">
+                                            <button type="button" class="notification-channel-toggle" aria-label="Calendar and task emails unavailable" aria-pressed="false" disabled tabindex="-1"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                    </div>
+                                    <div class="notification-channel-row">
+                                        <span class="notification-channel-copy"><strong>Tracked courses</strong><small>When a tracked section opens.</small></span>
+                                        <span class="notification-channel-control" data-normal-control>
+                                            <button type="button" class="notification-channel-toggle" data-push-toggle="course_push_enabled" aria-label="Tracked course notifications" aria-pressed="false"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                        <span class="notification-channel-control">
+                                            <button type="button" class="notification-channel-toggle" data-push-toggle="course_email_enabled" aria-label="Tracked course emails" aria-pressed="false"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                    </div>
+                                    <div class="notification-channel-row">
+                                        <span class="notification-channel-copy"><strong>Direct messages</strong><small>New private messages.</small></span>
+                                        <span class="notification-channel-control" data-normal-control>
+                                            <button type="button" class="notification-channel-toggle" data-push-toggle="dm_enabled" aria-label="Direct message notifications" aria-pressed="false"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                        <span class="notification-channel-control is-unavailable" tabindex="0" aria-label="Email notifications are not available for direct messages" data-notification-tooltip="Email isn’t available for direct messages.">
+                                            <button type="button" class="notification-channel-toggle" aria-label="Direct message emails unavailable" aria-pressed="false" disabled tabindex="-1"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                    </div>
+                                    <div class="notification-channel-row">
+                                        <span class="notification-channel-copy"><strong>@mentions</strong><small>Messages that mention you.</small></span>
+                                        <span class="notification-channel-control" data-normal-control>
+                                            <button type="button" class="notification-channel-toggle" data-push-toggle="mention_enabled" aria-label="Mention notifications" aria-pressed="false"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                        <span class="notification-channel-control is-unavailable" tabindex="0" aria-label="Email notifications are not available for mentions" data-notification-tooltip="Email isn’t available for mentions.">
+                                            <button type="button" class="notification-channel-toggle" aria-label="Mention emails unavailable" aria-pressed="false" disabled tabindex="-1"><span class="settings-toggle-pill" aria-hidden="true"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="settings-card-footer"><button id="notification-save" type="button" class="settings-button settings-button-primary">Save preferences</button></div>

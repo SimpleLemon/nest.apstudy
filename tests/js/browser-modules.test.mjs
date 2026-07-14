@@ -868,6 +868,12 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.doesNotMatch(source, /APStudySkeleton\?\.fieldSet/);
     assert.match(source, /function clearSettingsSkeleton\(\)/);
     assert.match(source, /interface_theme: interfaceTheme/);
+    assert.match(template, /class="notification-channel-grid"/);
+    assert.match(template, /data-push-toggle="course_push_enabled"/);
+    assert.match(template, /data-push-toggle="course_email_enabled"/);
+    assert.match(template, /Email isn’t available for calendar and tasks/);
+    assert.match(source, /button\.disabled = !hasNotificationDevice/);
+    assert.match(styles, /\.notification-channel-row:hover/);
     assert.match(source, /const SETTINGS_MAX_OTHER_CALENDARS = 10/);
     assert.match(source, /const USERNAME_RESERVED = new Set\(\[/);
     assert.match(source, /window\.APSTUDY_THEME_PREFERENCE = interfaceTheme/);

@@ -31,7 +31,22 @@
     else { status.textContent = permission === 'granted' ? 'Enabled on this browser' : 'Not enabled on this browser'; enable.textContent = permission === 'granted' ? 'Repair subscription' : 'Enable notifications'; enable.disabled = false; recovery.hidden = true; }
     test.disabled = !config.push_configured || config.devices.length === 0;
     test.title = config.devices.length ? '' : 'Enable notifications on a browser before sending a test.';
-    document.querySelectorAll('[data-push-toggle]').forEach((button) => selected(button, Boolean(config.preferences[button.dataset.pushToggle])));
+    const hasNotificationDevice = config.devices.length > 0;
+    document.querySelectorAll('[data-push-toggle]').forEach((button) => {
+      selected(button, Boolean(config.preferences[button.dataset.pushToggle]));
+      const normalControl = button.closest('[data-normal-control]');
+      if (!normalControl) return;
+      button.disabled = !hasNotificationDevice;
+      normalControl.classList.toggle('is-unavailable', !hasNotificationDevice);
+      normalControl.tabIndex = hasNotificationDevice ? -1 : 0;
+      if (hasNotificationDevice) {
+        normalControl.removeAttribute('aria-label');
+        normalControl.removeAttribute('data-notification-tooltip');
+      } else {
+        normalControl.setAttribute('aria-label', 'Notifications unavailable until a browser is enabled');
+        normalControl.dataset.notificationTooltip = 'Enable notifications on a browser to use this option.';
+      }
+    });
     const devices = document.getElementById('notification-devices');
     devices.innerHTML = config.devices.length ? config.devices.map((device) => `<div class="notification-device"><span><strong>${escape(device.device_name)}</strong><small>Last active ${new Date(device.last_seen_at || device.created_at).toLocaleDateString()}</small></span><button type="button" class="settings-button settings-button-secondary" data-revoke="${device.id}">Revoke</button></div>`).join('') : '<p class="settings-help-text">No browsers are registered yet.</p>';
   }
@@ -54,7 +69,9 @@
     document.getElementById('notification-enable')?.addEventListener('click', enable);
     document.getElementById('notification-save')?.addEventListener('click', save);
     document.getElementById('notification-test')?.addEventListener('click', test);
-    document.querySelectorAll('[data-push-toggle]').forEach((button) => button.addEventListener('click', () => selected(button, !button.classList.contains('is-active'))));
+    document.querySelectorAll('[data-push-toggle]').forEach((button) => button.addEventListener('click', () => {
+      if (!button.disabled) selected(button, !button.classList.contains('is-active'));
+    }));
     document.getElementById('notification-devices')?.addEventListener('click', async (event) => { const id = event.target.closest('[data-revoke]')?.dataset.revoke; if (!id) return; await global.APStudyNotifications.api(`/api/notifications/subscriptions/${encodeURIComponent(id)}`, { method: 'DELETE' }); await load(); });
     void load();
   });
