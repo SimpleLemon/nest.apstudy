@@ -86,6 +86,8 @@
                 </div>
             </header>
 
+            <div class="chat-conversation-body">
+                <div class="chat-conversation-pane">
             <div id="chat-status" class="chat-status" role="status" aria-live="polite" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
             <div id="chat-announcements-unread" class="chat-history-limited chat-announcements-unread" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden>
                 <span>Unread announcements</span>
@@ -119,16 +121,17 @@
                             <span class="material-symbols-outlined" aria-hidden="true">sentiment_satisfied</span>
                         </button>
                     </div>
-                    <button class="chat-send-button" type="submit" aria-label="Send message">
+                    <button class="chat-send-button" type="submit" aria-label="Send message" disabled>
                         <span class="material-symbols-outlined" aria-hidden="true">send</span>
                     </button>
                 </div>
             </form>
             <section id="chat-media-picker" class="chat-media-picker" role="dialog" aria-label="Emoji and GIF picker" hidden>
                 <div class="chat-picker-tabs" role="tablist" aria-label="Media type">
-                    <button id="chat-emoji-tab" type="button" role="tab" aria-selected="true" aria-controls="chat-emoji-panel">Emoji</button>
-                    <button id="chat-gif-tab" type="button" role="tab" aria-selected="false" aria-controls="chat-gif-panel">GIF</button>
+                    <button id="chat-emoji-tab" type="button" role="tab" aria-selected="true" aria-controls="chat-emoji-panel"><span aria-hidden="true">🙂</span>Emoji</button>
+                    <button id="chat-gif-tab" type="button" role="tab" aria-selected="false" aria-controls="chat-gif-panel"><span class="material-symbols-outlined" aria-hidden="true">gif_box</span>GIFs</button>
                 </div>
+                <nav id="chat-emoji-categories" class="chat-emoji-categories" aria-label="Emoji categories"></nav>
                 <label class="chat-picker-search">
                     <span class="material-symbols-outlined" aria-hidden="true">search</span>
                     <input id="chat-media-search" type="search" placeholder="Search emoji" autocomplete="off" aria-label="Search emoji">
@@ -139,9 +142,9 @@
                     <p class="chat-giphy-attribution">Powered by GIPHY</p>
                 </div>
             </section>
-        </section>
+                </div>
 
-        <aside class="chat-members" id="chat-members" aria-label="Online users and profile">
+                <aside class="chat-members" id="chat-members" aria-label="Online users and profile">
             <div class="chat-members-head">
                 <div class="chat-members-title">
                     <button class="chat-profile-back" type="button" data-profile-back aria-label="Back to online users" hidden>
@@ -162,7 +165,9 @@
             </button>
             <div id="chat-member-list" class="chat-member-list" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
             <div id="chat-profile-panel" class="chat-profile-panel" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false" hidden></div>
-        </aside>
+                </aside>
+            </div>
+        </section>
     </main>
     <dialog id="chat-download-warning" class="chat-download-warning" aria-labelledby="chat-download-warning-title">
         <form method="dialog">

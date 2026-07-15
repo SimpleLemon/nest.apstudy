@@ -142,8 +142,14 @@ export function startChatRuntime(extensions = {}) {
     audio: document.getElementById("chat-audio"),
   };
 
-  extensions.attachments?.init?.({ state, els, setStatus: (...args) => setStatus(...args) });
-  extensions.mediaPicker?.init?.({ state, els, setStatus: (...args) => setStatus(...args) });
+  const extensionContext = {
+    state,
+    els,
+    setStatus: (...args) => setStatus(...args),
+    onComposerChange: () => updateComposerSubmitState(),
+  };
+  extensions.attachments?.init?.(extensionContext);
+  extensions.mediaPicker?.init?.(extensionContext);
   extensions.messageMedia?.init?.();
 
   function escapeHtml(value) {
@@ -1549,13 +1555,32 @@ export function startChatRuntime(extensions = {}) {
     void loadInitialPresences();
   }
 
+  function composerIsWritable() {
+    const channel = activeChannel();
+    if (channel) return channelIsWritable(channel);
+    const thread = activeThread();
+    return Boolean(thread && !thread.blocked);
+  }
+
+  function updateComposerSubmitState() {
+    if (!els.sendButton) return;
+    const hasText = Boolean(els.input?.value.trim());
+    const hasAttachment = Boolean(extensions.attachments?.readyIds?.().length);
+    const hasGif = Boolean(extensions.mediaPicker?.hasSelection?.());
+    const attachmentsBusy = Boolean(extensions.attachments?.isBusy?.());
+    els.sendButton.disabled = !composerIsWritable()
+      || (!hasText && !hasAttachment && !hasGif)
+      || attachmentsBusy
+      || state.messageSendInFlight;
+  }
+
   function setComposer(enabled, placeholder) {
     if (!els.composer || !els.input || !els.sendButton) return;
     els.composer.hidden = false;
     els.input.disabled = !enabled;
-    els.sendButton.disabled = !enabled;
     els.input.placeholder = placeholder || "Message";
     autosizeComposer();
+    updateComposerSubmitState();
   }
 
   function renderHeader() {
@@ -1869,24 +1894,22 @@ export function startChatRuntime(extensions = {}) {
           <div class="profile-tile-body">
             <div class="profile-tile-avatar-frame">
               <img class="profile-tile-avatar" ${avatarAttrs(user?.picture_url, 150, "(max-width: 640px) 96px, 150px")} alt="${escapeHtml(user?.name || "Nest User")} avatar" width="150" height="150">
+              <span class="chat-presence-dot chat-presence-overlay is-${status}" role="img" aria-label="${escapeHtml(presenceStatusLabel(status))}" title="${escapeHtml(presenceStatusLabel(status))}"></span>
             </div>
             <div class="profile-tile-heading">
               <h3>${escapeHtml(user?.name || user?.username || "Nest User")}</h3>
               <div class="chat-profile-meta">
                 <p class="chat-profile-handle">${escapeHtml(handle)}</p>
-                <p class="chat-presence-line chat-profile-presence">
-                  <span class="chat-presence-dot is-${status}" aria-hidden="true"></span>
-                  <span>${presenceStatusLabel(status)}</span>
-                </p>
+                <span class="chat-profile-presence-label">${escapeHtml(presenceStatusLabel(status))}</span>
               </div>
               ${tierBadge}
             </div>
             <dl class="profile-tile-details">
-              ${profileDetail("School", user?.school, `profile-tile-detail-wide${user?.is_emory_school ? " profile-tile-detail-emory" : ""}`)}
-              ${profileDetail("Major", user?.major, "profile-tile-detail-wide")}
+              ${profileDetail("School", user?.school, user?.is_emory_school ? "profile-tile-detail-emory" : "")}
+              ${profileDetail("Major", user?.major)}
               ${profileDetail("Graduation", graduation)}
               ${profileDetail("Education", user?.education_level)}
-              ${profileDetail("Member Since", memberSince, `profile-tile-detail-wide${user?.is_early_member ? " profile-tile-detail-early-member" : ""}`)}
+              ${profileDetail("Member Since", memberSince, user?.is_early_member ? "profile-tile-detail-early-member" : "")}
             </dl>
           </div>
         </div>
@@ -2743,8 +2766,7 @@ export function startChatRuntime(extensions = {}) {
       setStatus(error.message || "Unable to send message.", "error");
     } finally {
       state.messageSendInFlight = false;
-      const writable = channel ? channelIsWritable(channel) : !activeThread()?.blocked;
-      els.sendButton.disabled = !writable;
+      updateComposerSubmitState();
     }
   }
 
@@ -2768,8 +2790,7 @@ export function startChatRuntime(extensions = {}) {
       setStatus(error.message || "Unable to send message.", "error");
     } finally {
       state.messageSendInFlight = false;
-      const writable = activeChannel() ? channelIsWritable(activeChannel()) : !activeThread()?.blocked;
-      els.sendButton.disabled = !writable;
+      updateComposerSubmitState();
     }
   }
 
@@ -2948,6 +2969,7 @@ export function startChatRuntime(extensions = {}) {
     els.input?.addEventListener("input", () => {
       autosizeComposer();
       scheduleTypingPresence();
+      updateComposerSubmitState();
     });
     els.messages?.addEventListener("scroll", () => {
       const cache = cacheFor(state.activeRoom);

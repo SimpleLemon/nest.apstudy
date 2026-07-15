@@ -131,15 +131,15 @@ def _optimize_image(data, extension):
             if image_format not in IMAGE_FORMATS or extension not in IMAGE_FORMATS[image_format][1]:
                 raise AttachmentError("The image contents do not match its filename.")
             width, height = image.size
-            has_metadata = bool(image.getexif()) or any(
-                key in image.info for key in ("icc_profile", "xmp", "XML:com.adobe.xmp")
-            )
             if width < 1 or height < 1 or width * height > MAX_IMAGE_PIXELS:
                 raise AttachmentError("Image dimensions are too large.")
             image.verify()
         if image_format == "GIF":
             return data, IMAGE_FORMATS[image_format][0], width, height, "identity"
         with Image.open(io.BytesIO(data)) as image:
+            has_metadata = bool(image.getexif()) or any(
+                key in image.info for key in ("icc_profile", "xmp", "XML:com.adobe.xmp")
+            )
             image = ImageOps.exif_transpose(image)
             image.thumbnail((MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION), Image.Resampling.LANCZOS)
             output = io.BytesIO()
@@ -154,7 +154,7 @@ def _optimize_image(data, extension):
             if len(optimized) >= len(data) and image.size == (width, height) and not has_metadata:
                 optimized = data
             return optimized, IMAGE_FORMATS[image_format][0], image.width, image.height, "identity"
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError) as exc:
+    except (UnidentifiedImageError, OSError, SyntaxError, ValueError, RuntimeError, Image.DecompressionBombError) as exc:
         raise AttachmentError("The uploaded file is not a valid supported image.") from exc
 
 

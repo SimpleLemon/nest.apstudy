@@ -21,6 +21,8 @@ test("chat attachments support progress, retry, cancellation, and browser gzip",
   assert.match(attachments, /xhr\.upload\.addEventListener\("progress"/);
   assert.match(attachments, /data-upload-retry/);
   assert.match(attachments, /method: "DELETE"/);
+  assert.match(attachments, /File attachments are temporarily unavailable/);
+  assert.doesNotMatch(attachments, /els\.attach\.disabled/);
 });
 
 test("media picker has emoji keyboard navigation and a separately disabled GIF mode", async () => {
@@ -31,6 +33,30 @@ test("media picker has emoji keyboard navigation and a separately disabled GIF m
   assert.match(picker, /capabilities\.giphy\?\.available/);
   assert.match(template, /Powered by GIPHY/);
   assert.match(picker, /analytics\?\.onsent/);
+  assert.match(picker, /chat-emoji-categories/);
+  assert.match(template, /id="chat-emoji-categories"/);
+  assert.match(template, /gif_box/);
+});
+
+test("emoji trigger rotates through five colored smile reactions on hover", async () => {
+  const picker = await source("static/js/chat/media-picker.js");
+  const styles = await source("static/css/chat.css");
+  assert.match(picker, /HOVER_SMILES = \["😀", "😄", "😊", "🤩", "🥳"\]/);
+  assert.match(picker, /addEventListener\("pointerenter", showHoverSmile\)/);
+  assert.match(picker, /addEventListener\("pointerleave", restoreHoverSmile\)/);
+  assert.match(styles, /@keyframes chat-smile-pop/);
+  assert.match(styles, /prefers-reduced-motion: reduce[\s\S]*\.chat-media-button \.chat-hover-smile/);
+});
+
+test("chat send stays disabled until the composer has sendable content", async () => {
+  const runtime = await source("static/js/chat/runtime.js");
+  const template = await source("templates/chat.html");
+  const styles = await source("static/css/chat.css");
+  assert.match(runtime, /function updateComposerSubmitState/);
+  assert.match(runtime, /!hasText && !hasAttachment && !hasGif/);
+  assert.match(runtime, /attachmentsBusy/);
+  assert.match(template, /class="chat-send-button"[^>]*disabled/);
+  assert.match(styles, /\.chat-send-button:disabled/);
 });
 
 test("every non-image card opens the advisory download warning", async () => {

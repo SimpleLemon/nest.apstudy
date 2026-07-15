@@ -2090,7 +2090,7 @@ html body .settings-combobox .settings-combobox-search:focus-visible {
 [data-notification-tooltip]::after {
     content: attr(data-notification-tooltip);
     position: absolute;
-    z-index: 40;
+    z-index: var(--z-tooltip);
     left: 50%;
     top: calc(100% + 0.55rem);
     width: max-content;

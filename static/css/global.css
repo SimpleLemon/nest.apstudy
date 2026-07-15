@@ -20,6 +20,14 @@
 	--surface-border: color-mix(in srgb, var(--color-outline-variant, #8f929c) 62%, transparent);
 	--surface-shadow-card: 0 12px 32px rgba(0, 0, 0, 0.12);
 	--surface-shadow-panel: 0 24px 64px rgba(0, 0, 0, 0.18);
+	/* Keep overlay ordering centralized so popups do not compete with page-specific layers. */
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-popover: 10050;
+	--z-modal-backdrop: 10060;
+	--z-modal: 10070;
+	--z-toast: 10080;
+	--z-tooltip: 10100;
 }
 
 *,
@@ -2752,7 +2760,7 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
 	position: absolute;
 	top: calc(100% + 8px);
 	left: 50%;
-	z-index: 10030;
+	z-index: var(--z-tooltip);
 	transform: translate(-50%, -2px);
 	display: inline-flex;
 	align-items: center;
@@ -3191,7 +3199,7 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
 
 .tier-badge-trigger {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-tooltip);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3211,7 +3219,7 @@ html body [aria-invalid="true"]:is(.grid, [role="group"], [id$="-group"]) > :is(
 .tier-badge-trigger::before,
 .tier-badge-trigger::after {
   position: absolute;
-  z-index: 10030;
+  z-index: var(--z-tooltip);
   pointer-events: none;
   opacity: 0;
   transition: opacity 140ms ease, transform 140ms ease;

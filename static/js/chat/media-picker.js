@@ -5,6 +5,13 @@ const EMOJI_GROUPS = {
   Study: ["📚", "📖", "📝", "✏️", "📌", "📎", "🧪", "🔬", "🧬", "📐", "📊", "🎓", "💡", "⏰"],
   Symbols: ["❤️", "🧡", "💛", "💚", "💙", "💜", "✨", "⭐", "🔥", "✅", "❌", "⚠️", "🎉", "🚀"],
 };
+const EMOJI_GROUP_ICONS = {
+  Recent: "schedule",
+  Faces: "sentiment_satisfied",
+  Gestures: "waving_hand",
+  Study: "school",
+  Symbols: "emoji_symbols",
+};
 const EMOJI_NAMES = {
   "😀": "grinning face happy", "😂": "tears joy laugh", "🥹": "holding back tears", "😊": "smile blush", "😍": "heart eyes",
   "🤔": "thinking", "😭": "crying", "🥳": "party", "👍": "thumbs up yes", "👎": "thumbs down no", "👏": "clap",
@@ -12,6 +19,7 @@ const EMOJI_NAMES = {
   "💡": "idea light", "❤️": "heart love", "🔥": "fire", "✅": "check done", "⚠️": "warning", "🎉": "celebrate", "🚀": "rocket",
 };
 const RECENT_KEY = "apstudy-chat-recent-emoji";
+const HOVER_SMILES = ["😀", "😄", "😊", "🤩", "🥳"];
 
 function escapeHtml(value) {
   return String(value || "").replace(/[&<>"']/g, (char) => ({
@@ -34,6 +42,27 @@ export function createMediaPicker() {
   let selectedGif = null;
   let activeTab = "emoji";
   let searchTimer;
+  let onComposerChange;
+  let lastHoverSmile = -1;
+
+  function showHoverSmile() {
+    const icon = els.button?.querySelector(".material-symbols-outlined, .chat-hover-smile");
+    if (!icon || icon.classList.contains("chat-hover-smile")) return;
+    let next = Math.floor(Math.random() * HOVER_SMILES.length);
+    if (next === lastHoverSmile) next = (next + 1) % HOVER_SMILES.length;
+    lastHoverSmile = next;
+    icon.classList.remove("material-symbols-outlined");
+    icon.classList.add("chat-hover-smile");
+    icon.textContent = HOVER_SMILES[next];
+  }
+
+  function restoreHoverSmile() {
+    const icon = els.button?.querySelector(".chat-hover-smile");
+    if (!icon) return;
+    icon.classList.remove("chat-hover-smile");
+    icon.classList.add("material-symbols-outlined");
+    icon.textContent = "sentiment_satisfied";
+  }
 
   function close() {
     if (!els.picker) return;
@@ -52,7 +81,7 @@ export function createMediaPicker() {
   function positionPicker() {
     if (els.picker?.hidden || !els.button) return;
     const anchor = els.button.getBoundingClientRect();
-    const width = Math.min(380, window.innerWidth - 24);
+    const width = Math.min(420, window.innerWidth - 24);
     els.picker.style.width = `${width}px`;
     els.picker.style.left = `${Math.max(12, Math.min(anchor.left, window.innerWidth - width - 12))}px`;
     els.picker.style.bottom = `${Math.max(12, window.innerHeight - anchor.top + 8)}px`;
@@ -72,10 +101,17 @@ export function createMediaPicker() {
   function renderEmoji(query = "") {
     const normalized = query.trim().toLowerCase();
     EMOJI_GROUPS.Recent = recentEmoji();
-    els.emoji.innerHTML = Object.entries(EMOJI_GROUPS).map(([group, values]) => {
-      const filtered = values.filter((emoji) => !normalized || `${emoji} ${EMOJI_NAMES[emoji] || ""}`.includes(normalized));
-      if (!filtered.length) return "";
-      return `<section class="chat-emoji-group"><h3>${group}</h3><div class="chat-emoji-grid">${filtered.map((emoji) => `<button type="button" data-emoji="${emoji}" aria-label="${escapeHtml(EMOJI_NAMES[emoji] || group)}">${emoji}</button>`).join("")}</div></section>`;
+    const visibleGroups = Object.entries(EMOJI_GROUPS).map(([group, values]) => ({
+      group,
+      values: values.filter((emoji) => !normalized || `${emoji} ${EMOJI_NAMES[emoji] || ""}`.includes(normalized)),
+    })).filter(({ values }) => values.length);
+    els.categories.innerHTML = Object.entries(EMOJI_GROUPS).map(([group, values]) => `
+      <button type="button" data-emoji-group="${group}" aria-label="${group}" title="${group}" ${values.length ? "" : "disabled"}>
+        <span class="material-symbols-outlined" aria-hidden="true">${EMOJI_GROUP_ICONS[group]}</span>
+      </button>
+    `).join("");
+    els.emoji.innerHTML = visibleGroups.map(({ group, values }) => {
+      return `<section class="chat-emoji-group" data-emoji-section="${group}"><h3>${group === "Recent" ? "Frequently used" : group}</h3><div class="chat-emoji-grid">${values.map((emoji) => `<button type="button" data-emoji="${emoji}" aria-label="${escapeHtml(EMOJI_NAMES[emoji] || group)}">${emoji}</button>`).join("")}</div></section>`;
     }).join("") || `<p class="chat-picker-empty">No emoji found.</p>`;
   }
 
@@ -122,6 +158,7 @@ export function createMediaPicker() {
       selectedGif = null;
       renderSelection();
       if (!document.getElementById("chat-upload-list")?.children.length) pending.hidden = true;
+      onComposerChange?.();
     });
   }
 
@@ -130,6 +167,7 @@ export function createMediaPicker() {
     const gif = tab === "gif";
     els.emojiTab.setAttribute("aria-selected", String(!gif));
     els.gifTab.setAttribute("aria-selected", String(gif));
+    els.categories.hidden = gif;
     els.emoji.hidden = gif;
     els.gif.hidden = !gif;
     els.search.placeholder = gif ? "Search GIFs" : "Search emoji";
@@ -139,20 +177,29 @@ export function createMediaPicker() {
   }
 
   return {
-    init() {
+    init(context = {}) {
+      onComposerChange = context.onComposerChange;
       els.button = document.getElementById("chat-media-button");
       els.picker = document.getElementById("chat-media-picker");
       els.search = document.getElementById("chat-media-search");
       els.emojiTab = document.getElementById("chat-emoji-tab");
       els.gifTab = document.getElementById("chat-gif-tab");
+      els.categories = document.getElementById("chat-emoji-categories");
       els.emoji = document.getElementById("chat-emoji-panel");
       els.gif = document.getElementById("chat-gif-panel");
       els.gifResults = document.getElementById("chat-gif-results");
       els.input = document.getElementById("chat-message-input");
       renderEmoji();
       els.button?.addEventListener("click", () => els.picker.hidden ? open() : close());
+      els.button?.addEventListener("pointerenter", showHoverSmile);
+      els.button?.addEventListener("pointerleave", restoreHoverSmile);
       els.emojiTab?.addEventListener("click", () => setTab("emoji"));
       els.gifTab?.addEventListener("click", () => setTab("gif"));
+      els.categories?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-emoji-group]");
+        if (!button || button.disabled) return;
+        els.emoji.querySelector(`[data-emoji-section="${button.dataset.emojiGroup}"]`)?.scrollIntoView({ block: "start" });
+      });
       els.search?.addEventListener("input", () => {
         clearTimeout(searchTimer);
         searchTimer = setTimeout(() => activeTab === "gif" ? void loadGifs(els.search.value) : renderEmoji(els.search.value), 180);
@@ -166,6 +213,7 @@ export function createMediaPicker() {
         if (!tile) return;
         selectedGif = { id: tile.dataset.gifId, title: tile.dataset.gifTitle, preview: tile.dataset.gifPreview, query: els.search.value, sent: tile.dataset.gifSent };
         renderSelection();
+        onComposerChange?.();
         close();
         els.input?.focus();
       });
@@ -174,7 +222,7 @@ export function createMediaPicker() {
         const index = buttons.indexOf(document.activeElement);
         if (index < 0 || !["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(event.key)) return;
         event.preventDefault();
-        const columns = activeTab === "emoji" ? 8 : 3;
+        const columns = activeTab === "emoji" ? 9 : 3;
         const delta = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns, ArrowUp: -columns }[event.key];
         buttons[Math.max(0, Math.min(buttons.length - 1, index + delta))]?.focus();
       });
@@ -190,7 +238,7 @@ export function createMediaPicker() {
     },
     selection() { return selectedGif ? { gif_id: selectedGif.id, gif_query: selectedGif.query } : {}; },
     hasSelection() { return Boolean(selectedGif); },
-    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close(); },
+    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close(); onComposerChange?.(); },
     close,
   };
 }

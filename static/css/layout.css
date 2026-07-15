@@ -185,7 +185,7 @@ body {
   position: absolute;
   top: calc(100% + 10px);
   right: -48px;
-  z-index: var(--z-popover, 50);
+  z-index: var(--z-popover);
   display: flex;
   width: min(470px, calc(100vw - 32px));
   max-height: min(680px, calc(100dvh - var(--navbar-height) - 24px));
@@ -1232,7 +1232,7 @@ a.notification-item-main {
   white-space: nowrap;
   pointer-events: none;
   display: none;
-  z-index: 10001;
+  z-index: var(--z-tooltip);
   box-shadow: 0 4px 12px var(--color-shell-shadow);
   border: 1px solid var(--border-color);
 }
@@ -1301,7 +1301,7 @@ body.with-sidebar > footer {
   box-shadow: 0 8px 16px var(--color-shell-shadow);
   min-width: 200px;
   display: none;
-  z-index: 10001;
+  z-index: var(--z-popover);
   overflow: hidden;
 }
 .profile-dropdown.visible {

@@ -462,7 +462,7 @@ test("chat announcement unread banner auto-reads small ranges and marks read on 
   assert.match(script, /read_state/);
 });
 
-test("chat profile views use readable compact fields and tier badges without internal scrolling", async () => {
+test("chat profile views mirror full profiles and keep presence on the avatar", async () => {
   const script = await sourceFor("static/js/chat.js");
   const styles = await sourceFor("static/css/chat.css");
   const profileStyles = await sourceFor("static/css/user-profile.css");
@@ -478,10 +478,14 @@ test("chat profile views use readable compact fields and tier badges without int
   assert.match(script, /profile-tile-detail-emory/);
   assert.match(script, /profile-tile-detail-early-member/);
   assert.match(styles, /\.chat-profile-card \.profile-tile/);
-  assert.match(styles, /\.chat-profile-panel\s*\{[\s\S]*overflow: hidden/);
+  assert.match(styles, /\.chat-profile-panel\s*\{[\s\S]*overflow-y: auto/);
   assert.match(styles, /\.chat-inline-profile-popover\s*\{[\s\S]*overflow: visible/);
   assert.match(styles, /\.chat-profile-card \.profile-tile-details dt/);
   assert.match(styles, /\.chat-profile-card \.profile-tile-detail-early-member dd/);
+  assert.match(script, /chat-presence-dot chat-presence-overlay is-\$\{status\}/);
+  assert.match(script, /chat-profile-presence-label/);
+  assert.doesNotMatch(script, /chat-presence-line chat-profile-presence/);
+  assert.match(styles, /\.chat-profile-card \.profile-tile-details div\s*\{[\s\S]*border-radius:/);
   assert.match(profileStyles, /\.user-profile-card \.profile-tile\s*\{[\s\S]*aspect-ratio: auto/);
   assert.doesNotMatch(profileStyles, /\.user-profile-card \.tier-badge\s*\{[\s\S]*transform: scale\(1\.5\)/);
   assert.match(styles, /\.chat-profile-card \.profile-tile-heading \.tier-badge-trigger\s*\{[\s\S]*margin-top: 4px/);
@@ -504,6 +508,9 @@ test("chat online users pane has desktop collapse controls", async () => {
   assert.match(template, /Online users and profile/);
   assert.match(script, /setMembersCollapsed/);
   assert.match(styles, /members-collapsed/);
+  assert.match(template, /chat-conversation-body[\s\S]*chat-conversation-pane[\s\S]*chat-members/);
+  assert.match(styles, /\.chat-conversation-body\s*\{[\s\S]*grid-template-columns:/);
+  assert.match(styles, /\.chat-members\.is-dm-profile \.chat-members-head\s*\{[\s\S]*display: none/);
 });
 
 test("chat DM header uses avatar status dot without online text and focuses composer", async () => {
@@ -513,6 +520,6 @@ test("chat DM header uses avatar status dot without online text and focuses comp
   assert.match(script, /chat-room-avatar-wrap/);
   assert.match(script, /els\.roomMeta\.textContent = ""/);
   assert.match(script, /els\.input\?\.focus\(\{ preventScroll: true \}\)/);
-  assert.match(styles, /\.chat-topbar\s*\{[\s\S]*height: 64px/);
+  assert.match(styles, /\.chat-rail-head,[\s\S]*\.chat-topbar\s*\{[\s\S]*height: 52px/);
   assert.match(styles, /#chat-room-symbol\.is-avatar\s*\{[\s\S]*overflow: visible/);
 });

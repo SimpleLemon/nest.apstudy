@@ -39,6 +39,16 @@ class ChatAttachmentValidationTests(unittest.TestCase):
         with Image.open(io.BytesIO(prepared["stored"])) as image:
             self.assertEqual(image.n_frames, 2)
 
+    def test_png_validation_reads_metadata_only_after_integrity_check(self):
+        output = io.BytesIO()
+        Image.new("RGB", (12, 8), "gold").save(output, format="PNG")
+
+        prepared = chat_attachments.inspect_and_prepare(output.getvalue(), "pasted-image.png")
+
+        self.assertEqual(prepared["mime_type"], "image/png")
+        self.assertEqual((prepared["width"], prepared["height"]), (12, 8))
+        self.assertTrue(prepared["stored"].startswith(b"\x89PNG"))
+
     def test_pdf_thumbnail_is_best_effort_and_broken_preview_falls_back(self):
         document = io.BytesIO()
         Image.new("RGB", (120, 160), "white").save(document, format="PDF")

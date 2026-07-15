@@ -159,7 +159,7 @@
 	white-space: nowrap;
 	pointer-events: none;
 	display: none;
-	z-index: 10001;
+	z-index: var(--z-tooltip);
 	border: 1px solid var(--color-shell-dropdown-border);
 	box-shadow: 0 8px 16px var(--color-shell-shadow);
 }
@@ -248,7 +248,7 @@ html.apstudy-sidebar-collapsed body.with-sidebar .navbar-with-sidebar {
 	box-shadow: 0 8px 16px var(--color-shell-shadow);
 	min-width: 200px;
 	display: none;
-	z-index: 10000;
+	z-index: var(--z-popover);
 	margin-top: 8px;
 }
 

@@ -35,6 +35,7 @@ export function createAttachmentManager() {
   const items = [];
   let state;
   let setStatus;
+  let onComposerChange;
   let capabilities = {};
   const els = {};
 
@@ -57,6 +58,7 @@ export function createAttachmentManager() {
       </article>
     `).join("");
     els.pending.hidden = items.length === 0 && !document.getElementById("chat-selected-gif");
+    onComposerChange?.();
   }
 
   function validate(file) {
@@ -150,12 +152,19 @@ export function createAttachmentManager() {
     init(context) {
       state = context.state;
       setStatus = context.setStatus;
+      onComposerChange = context.onComposerChange;
       els.pending = document.getElementById("chat-pending-files");
       els.list = document.getElementById("chat-upload-list");
       els.fileInput = document.getElementById("chat-file-input");
       els.attach = document.getElementById("chat-attach-button");
       els.composer = document.getElementById("chat-composer");
-      els.attach?.addEventListener("click", () => els.fileInput?.click());
+      els.attach?.addEventListener("click", () => {
+        if (!capabilities.attachments) {
+          setStatus?.("File attachments are temporarily unavailable. Try refreshing the page.", "error");
+          return;
+        }
+        els.fileInput?.click();
+      });
       els.fileInput?.addEventListener("change", () => {
         addFiles(els.fileInput.files);
         els.fileInput.value = "";
@@ -185,7 +194,11 @@ export function createAttachmentManager() {
     },
     configure(value) {
       capabilities = value || {};
-      if (els.attach) els.attach.disabled = !capabilities.attachments;
+      if (els.attach) {
+        els.attach.setAttribute("aria-disabled", String(!capabilities.attachments));
+        els.attach.title = capabilities.attachments ? "Attach files" : "File attachments are temporarily unavailable";
+      }
+      onComposerChange?.();
     },
     readyIds() {
       return items.filter((item) => item.status === "uploaded").map((item) => item.attachment.id);
