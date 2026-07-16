@@ -100,6 +100,10 @@
             };
             card.addEventListener('click', (event) => {
                 if (event.target.closest('.note-card-menu') || event.target.closest('.note-card-menu-btn')) return;
+                if (card.classList.contains('note-card-was-dragged')) {
+                    card.classList.remove('note-card-was-dragged');
+                    return;
+                }
                 openNote();
             });
             card.addEventListener('mouseenter', () => preloadEditorBundle?.(), { once: true });

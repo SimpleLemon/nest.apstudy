@@ -52,6 +52,13 @@
         lastFocusedElement: null,
         loading: false,
     };
+    const dragDrop = window.APStudyNotesListDragDrop?.createNotesListDragDrop?.({
+        notesGrid: els.notesGrid,
+        foldersGrid: els.foldersGrid,
+        page: els.page,
+        onStart: () => closeAllMenus(),
+        onEnd: handleNoteDragEnd,
+    });
     const {
         apiJson,
         buildLoadingIndicatorHtml,
@@ -143,6 +150,7 @@
         els.page?.classList.toggle('is-loading', isLoading);
         if (!els.notesGrid) return;
         if (isLoading) {
+            dragDrop?.destroy?.();
             els.notesGrid.innerHTML = `
                 <div class="notes-loading-card">
                     ${buildLoadingIndicatorHtml(label, { sizePx: 52, textToneClass: 'text-on-surface' })}
@@ -380,6 +388,7 @@
     }
 
     function renderCurrentView() {
+        dragDrop?.destroy?.();
         const notesByFolder = notesByFolderMap();
         const currentFolder = folderById(state.currentFolderId);
         if (state.currentFolderId && !currentFolder) {
@@ -425,6 +434,7 @@
             if (els.notesEmptyState) els.notesEmptyState.style.display = 'none';
             visibleNotes.forEach((note) => els.notesGrid.appendChild(createNoteCard(note, { readOnly })));
         }
+        if (!readOnly) dragDrop?.mount?.();
     }
 
     function render(data) {
@@ -583,6 +593,60 @@
         }
     }
 
+    async function handleNoteDragEnd(event, { droppedOnFolder = false, droppedFolderId = null } = {}) {
+        const item = event?.item;
+        const noteId = item?.dataset.noteId;
+        if (!noteId) return;
+
+        const note = state.notes.find((entry) => noteIdOf(entry) === noteId);
+        if (!note) return;
+
+        const destinationFolderId = droppedOnFolder
+            ? droppedFolderId
+            : (state.currentFolderId || null);
+        const orderStep = 1000;
+
+        try {
+            if (droppedOnFolder) {
+                const destinationNotes = state.notes.filter((entry) => (
+                    noteIdOf(entry) !== noteId && (entry.folder_id || null) === destinationFolderId
+                ));
+                const order = (Math.max(0, ...destinationNotes.map((entry) => Number(entry.order) || 0)) || 0) + orderStep;
+                await apiJson(`/api/notes/${encodeURIComponent(noteId)}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ folder_id: destinationFolderId, order }),
+                });
+                note.folder_id = destinationFolderId;
+                note.order = order;
+                renderCurrentView();
+                showAlert(destinationFolderId
+                    ? `Moved to ${folderById(destinationFolderId)?.name || 'folder'}.`
+                    : 'Moved to unfiled notes.');
+                return;
+            }
+
+            const orderedCards = [...els.notesGrid.querySelectorAll('.note-card')];
+            const orderUpdates = orderedCards.map((card, index) => {
+                const entry = state.notes.find((candidate) => noteIdOf(candidate) === card.dataset.noteId);
+                return entry ? { entry, order: (index + 1) * orderStep } : null;
+            }).filter(Boolean);
+            const changedUpdates = orderUpdates.filter(({ entry, order }) => Number(entry.order) !== order);
+            await Promise.all(changedUpdates.map(({ entry, order }) => apiJson(
+                `/api/notes/${encodeURIComponent(noteIdOf(entry))}`,
+                {
+                    method: 'PATCH',
+                    body: JSON.stringify({ order }),
+                },
+            )));
+            orderUpdates.forEach(({ entry, order }) => {
+                entry.order = order;
+            });
+        } catch (error) {
+            showAlert(error.message || 'Unable to update note position.', 'error');
+            await loadAndRender();
+        }
+    }
+
     function bindEvents() {
         els.newButton?.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -672,7 +736,10 @@
             }
             closeAllMenus({ restoreFocus: true });
         });
-        window.addEventListener('resize', closeAllMenus);
+        window.addEventListener('resize', () => {
+            closeAllMenus();
+            dragDrop?.sync?.();
+        });
         window.addEventListener('scroll', handleCardMenuViewportScroll, true);
         window.addEventListener('popstate', () => {
             state.viewMode = viewModeFromLocation();

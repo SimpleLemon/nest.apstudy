@@ -403,12 +403,14 @@ test("console discord batches browser console output for server logs", async () 
 test("notes list guards destructive actions and supports safe card menus", async () => {
     const listSource = await sourceFor("static/js/notes/list.js");
     const cardsSource = await sourceFor("static/js/notes/list/cards.js");
+    const dragSource = await sourceFor("static/js/notes/list/drag-drop.js");
     const template = await sourceFor("templates/notes.html");
     const styles = await sourceFor("static/css/notes.css");
     const source = [
         listSource,
         await sourceFor("static/js/notes/list/utils.js"),
         cardsSource,
+        dragSource,
     ].join("\n");
 
     assert.match(source, /function apiJson\(url, options = \{\}\)/);
@@ -424,9 +426,14 @@ test("notes list guards destructive actions and supports safe card menus", async
     assert.match(listSource, /const placeBelow = spaceBelow >= spaceAbove/);
     assert.match(listSource, /handleCardMenuViewportScroll/);
     assert.match(listSource, /\['ArrowDown', 'ArrowUp', 'Home', 'End'\]/);
-    assert.doesNotMatch(listSource, /Sortable|initDragDrop|handleDrag(Start|End)|folder-drop-target/);
-    assert.doesNotMatch(template, /sortablejs/);
-    assert.doesNotMatch(styles, /folder-drop-target|note-card-(ghost|chosen|drag)/);
+    assert.match(dragSource, /function canUseNoteDrag\(scope = global\)/);
+    assert.match(dragSource, /min-width: 600px/);
+    assert.match(dragSource, /delayOnTouchOnly: true/);
+    assert.match(dragSource, /touchStartThreshold: 8/);
+    assert.match(dragSource, /folder-card\.is-drop-target/);
+    assert.match(template, /sortablejs@1\.15\.0\/Sortable\.min\.js/);
+    assert.match(styles, /\.folder-card\.is-drop-target/);
+    assert.match(styles, /\.note-card-ghost/);
     assert.doesNotMatch(cardsSource, /more_horiz/);
     assert.equal((cardsSource.match(/more_vert/g) || []).length, 2);
     assert.match(cardsSource, /openFolder\(folderId\)/);
