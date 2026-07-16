@@ -7,9 +7,10 @@
     const desktopQuery = window.matchMedia("(min-width: 721px)");
 
     const syncTruncation = () => {
-      const cells = table.querySelectorAll(".admin-table__trunc");
+      const cells = table.querySelectorAll(".admin-directory-truncate");
       cells.forEach((cell) => {
-        const truncated = cell.scrollWidth > cell.clientWidth + 1;
+        const text = cell.querySelector(".admin-directory-truncate__text") || cell;
+        const truncated = text.scrollWidth > text.clientWidth + 1;
         cell.classList.toggle("is-truncated", truncated);
         if (!truncated) {
           cell.removeAttribute("aria-label");
@@ -35,7 +36,7 @@
         scheduleSync();
         return;
       }
-      table.querySelectorAll(".admin-table__trunc.is-truncated").forEach((cell) => {
+      table.querySelectorAll(".admin-directory-truncate.is-truncated").forEach((cell) => {
         cell.classList.remove("is-truncated");
         cell.removeAttribute("aria-label");
       });

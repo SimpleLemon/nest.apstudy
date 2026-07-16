@@ -4,6 +4,15 @@
   const ALLOWED_PER_PAGE = new Set([5, 10, 25, 50, 100]);
   const DEFAULT_COLUMNS = ["identity", "tier", "profile", "activity", "created"];
   const AVAILABLE_COLUMNS = ["identity", "status", "tier", "profile", "activity", "created", "id"];
+  const COLUMN_WEIGHTS = {
+    identity: 2.3,
+    status: 1.4,
+    tier: 1.1,
+    profile: 1.7,
+    activity: 1.05,
+    created: 0.9,
+    id: 1.45,
+  };
 
   function readStoredColumns() {
     try {
@@ -82,6 +91,23 @@
 
     root.querySelectorAll("[data-auth-column-toggle]").forEach((input) => {
       input.checked = visible.has(input.value);
+    });
+
+    const table = root.querySelector("[data-auth-users-table]");
+    if (!table) return;
+
+    const visibleKeys = AVAILABLE_COLUMNS.filter((key) => visible.has(key));
+    const totalWeight = visibleKeys.reduce((sum, key) => sum + (COLUMN_WEIGHTS[key] || 1), 0);
+    table.dataset.visibleColumns = visibleKeys.join(",");
+    table.style.setProperty("--admin-directory-visible-column-count", String(visibleKeys.length));
+
+    table.querySelectorAll("col[data-column]").forEach((column) => {
+      const key = column.dataset.column;
+      const isVisible = visible.has(key);
+      column.hidden = !isVisible;
+      column.style.width = isVisible
+        ? `${((COLUMN_WEIGHTS[key] || 1) / totalWeight) * 100}%`
+        : "0";
     });
   }
 

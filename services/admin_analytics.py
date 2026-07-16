@@ -144,6 +144,28 @@ def _range_window(range_key, tz, users, now=None):
     }
 
 
+def _previous_window(range_key, window):
+    """Return the immediately preceding window with the same bucket count."""
+    config = RANGE_OPTIONS.get(range_key) or {}
+    if range_key == "all":
+        return None
+    granularity = window["granularity"]
+    bucket_count = config.get("hours") if granularity == "hour" else config.get("days")
+    if not bucket_count:
+        return None
+    end_local = _add_bucket(window["start_local"], granularity, -1)
+    start_local = _add_bucket(end_local, granularity, -(bucket_count - 1))
+    return {
+        "range": range_key,
+        "granularity": granularity,
+        "start_local": start_local,
+        "end_local": end_local,
+        "start_utc": start_local.astimezone(timezone.utc),
+        "end_utc": _add_bucket(end_local, granularity).astimezone(timezone.utc),
+        "now_utc": window["now_utc"],
+    }
+
+
 def _bucket_series(window):
     buckets = []
     current = window["start_local"]
@@ -166,6 +188,107 @@ def _rows(table_id, *, path=None):
             return [dict(row) for row in conn.execute(f'SELECT * FROM "{table_id}"').fetchall()]
     except Exception:
         return []
+
+
+def record_authenticated_activity(user_id, *, at=None, path=None):
+    """Record signed-in product activity without creating one row per request."""
+    user_id = str(user_id or "").strip()
+    if not user_id:
+        return
+    seen_at = parse_utc(at) if at is not None else utcnow()
+    if seen_at is None:
+        seen_at = utcnow()
+    hour_start = _floor_hour(seen_at)
+    hour_key = iso_utc(hour_start)
+    row_id = f"{user_id}:hour:{hour_key}"
+    with database.db_connection(path) as conn:
+        conn.execute(
+            """
+            INSERT INTO user_activity_buckets (
+                id, user_id, bucket_granularity, bucket_start, last_seen_at
+            ) VALUES (?, ?, 'hour', ?, ?)
+            ON CONFLICT(user_id, bucket_granularity, bucket_start)
+            DO UPDATE SET last_seen_at = excluded.last_seen_at
+            """,
+            [row_id, user_id, hour_key, iso_utc(seen_at)],
+        )
+        conn.execute(
+            "INSERT OR IGNORE INTO daily_active_users (user_id, active_date) VALUES (?, ?)",
+            [user_id, seen_at.date().isoformat()],
+        )
+
+
+def _activity_rows(table_id, timestamp_column, start_utc, end_utc, *, filter_column=None, path=None):
+    try:
+        with database.db_connection(path) as conn:
+            columns = database.table_columns(conn, table_id)
+            range_column = filter_column or timestamp_column
+            if "user_id" not in columns or timestamp_column not in columns or range_column not in columns:
+                return []
+            return [
+                dict(row)
+                for row in conn.execute(
+                    f"""
+                    SELECT user_id, "{timestamp_column}"
+                    FROM "{table_id}"
+                    WHERE "{range_column}" >= ? AND "{range_column}" < ?
+                    """,
+                    [iso_utc(start_utc), iso_utc(end_utc)],
+                ).fetchall()
+            ]
+    except Exception:
+        return []
+
+
+def _activity_observations(users, start_utc, end_utc, *, path=None):
+    observations = []
+    for user in users:
+        user_id = str(user.get("id") or user.get("$id") or "").strip()
+        seen_at = parse_utc(user.get("last_login"))
+        if user_id and seen_at and start_utc <= seen_at < end_utc:
+            observations.append((user_id, seen_at))
+    for row in _activity_rows(
+        "user_activity_buckets",
+        "last_seen_at",
+        start_utc,
+        end_utc,
+        filter_column="bucket_start",
+        path=path,
+    ):
+        user_id = str(row.get("user_id") or "").strip()
+        seen_at = parse_utc(row.get("last_seen_at"))
+        if user_id and seen_at:
+            observations.append((user_id, seen_at))
+    for row in _activity_rows("analytics_events", "created_at", start_utc, end_utc, path=path):
+        user_id = str(row.get("user_id") or "").strip()
+        seen_at = parse_utc(row.get("created_at"))
+        if user_id and seen_at:
+            observations.append((user_id, seen_at))
+    return observations
+
+
+def _authenticated_activity_series(observations, buckets, window, tz):
+    users_by_bucket = {bucket["key"]: set() for bucket in buckets}
+    active_users = set()
+    for user_id, seen_at in observations:
+        if not (window["start_utc"] <= seen_at < window["end_utc"]):
+            continue
+        bucket_key = _bucket_key(seen_at.astimezone(tz), window["granularity"])
+        if bucket_key not in users_by_bucket:
+            continue
+        users_by_bucket[bucket_key].add(user_id)
+        active_users.add(user_id)
+    return (
+        [
+            {
+                "key": bucket["key"],
+                "label": bucket["label"],
+                "value": len(users_by_bucket[bucket["key"]]),
+            }
+            for bucket in buckets
+        ],
+        len(active_users),
+    )
 
 
 def _count_table(table_id, *, start_utc=None, end_utc=None, column="created_at", path=None):
@@ -374,8 +497,9 @@ def _comparison_delta(current, previous):
             "current": current,
             "previous": previous,
             "percentChange": None,
-            "direction": "neutral",
-            "available": False,
+            "direction": "up" if current > 0 else "neutral",
+            "available": True,
+            "label": "New" if current > 0 else "0.0%",
         }
     percent = round(((current - previous) / previous) * 100, 1)
     direction = "up" if percent > 0 else "down" if percent < 0 else "neutral"
@@ -647,12 +771,35 @@ def analytics_payload(range_key="30d", tz_name="UTC", *, include_ga=True, now=No
     users = _rows("users", path=path)
     window = _range_window(range_key, tz, users, now=now)
     buckets = _bucket_series(window)
+    previous_window = _previous_window(range_key, window)
+    previous_buckets = _bucket_series(previous_window) if previous_window else []
     all_time = range_key == "all"
     selected_users = _filter_created(users, window, all_time=all_time)
+    previous_users = _filter_created(users, previous_window) if previous_window else []
+    activity_start = previous_window["start_utc"] if previous_window else window["start_utc"]
+    activity_observations = _activity_observations(
+        users,
+        activity_start,
+        window["end_utc"],
+        path=path,
+    )
+    active_user_series, active_user_total = _authenticated_activity_series(
+        activity_observations,
+        buckets,
+        window,
+        tz,
+    )
+    previous_active_total = 0
+    if previous_window:
+        _, previous_active_total = _authenticated_activity_series(
+            activity_observations,
+            previous_buckets,
+            previous_window,
+            tz,
+        )
     ga4 = _ga4_payload(range_key, window, buckets, tz) if include_ga else {"configured": False, "status": "disabled"}
     ga4_ok = ga4.get("status") == "ok"
     empty_traffic_series = _empty_bucket_points(buckets)
-    active_user_series = ga4.get("series", {}).get("activeUsers", empty_traffic_series) if ga4_ok else empty_traffic_series
     page_view_series = ga4.get("series", {}).get("pageViews", empty_traffic_series) if ga4_ok else empty_traffic_series
     top_pages = ga4.get("topPages", []) if ga4_ok else []
     ga4_totals = ga4.get("totals", {}) if ga4_ok else {}
@@ -682,6 +829,15 @@ def analytics_payload(range_key="30d", tz_name="UTC", *, include_ga=True, now=No
         "files": _count_table("shared_files", start_utc=None if all_time else window["start_utc"], end_utc=None if all_time else window["end_utc"], path=path),
         "chat_messages": _count_table("chat_messages", start_utc=None if all_time else window["start_utc"], end_utc=None if all_time else window["end_utc"], path=path),
     }
+    comparison_metrics = dict(ga4_comparison.get("metrics", {})) if ga4_ok else {}
+    if previous_window:
+        signup_comparison = _comparison_delta(len(selected_users), len(previous_users))
+        comparison_metrics.update({
+            "totalUsers": signup_comparison,
+            "activeUsers": _comparison_delta(active_user_total, previous_active_total),
+            "oauth": signup_comparison,
+            "uniType": signup_comparison,
+        })
 
     return {
         "range": range_key,
@@ -693,8 +849,10 @@ def analytics_payload(range_key="30d", tz_name="UTC", *, include_ga=True, now=No
         "buckets": buckets,
         "cards": {
             "totalUsers": len(users),
-            "activeUsers": ga4_totals.get("activeUsers", 0),
+            "activeUsers": active_user_total,
             "pageViews": ga4_totals.get("screenPageViews", 0),
+            "oauth": len(selected_users),
+            "uniType": len(selected_users),
             "onboardingRate": round((onboarding_complete / onboarding_total) * 100, 1) if onboarding_total else 0,
         },
         "series": {
@@ -718,9 +876,12 @@ def analytics_payload(range_key="30d", tz_name="UTC", *, include_ga=True, now=No
             "featureUsage": [{"label": key.replace("_", " ").title(), "value": value} for key, value in engagement_counts.items()],
         },
         "comparison": {
-            "enabled": bool(ga4_comparison.get("enabled")) if ga4_ok else False,
-            "range": ga4_comparison.get("range", {"start": None, "end": None}) if ga4_ok else {"start": None, "end": None},
-            "metrics": ga4_comparison.get("metrics", {}) if ga4_ok else {},
+            "enabled": bool(previous_window),
+            "range": {
+                "start": iso_utc(previous_window["start_utc"]) if previous_window else None,
+                "end": iso_utc(previous_window["end_utc"]) if previous_window else None,
+            },
+            "metrics": comparison_metrics,
         },
         "gaDetails": {
             "countries": ga4_details.get("countries", []) if ga4_ok else [],

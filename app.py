@@ -142,14 +142,22 @@ def create_app():
 
         if not current_user.is_authenticated:
             return None
-        if request.method not in {"GET", "HEAD"}:
-            return None
-        if request.endpoint == "static" or request.path.startswith("/api/"):
-            return None
-        if not request.accept_mimetypes.accept_html:
+        if request.endpoint == "static":
             return None
 
         now = datetime.now(timezone.utc)
+        try:
+            from services.admin_analytics import record_authenticated_activity
+
+            record_authenticated_activity(str(current_user.id), at=now)
+        except Exception:
+            logger.exception("Failed to record authenticated activity")
+
+        if request.method not in {"GET", "HEAD"}:
+            return None
+        if request.path.startswith("/api/") or not request.accept_mimetypes.accept_html:
+            return None
+
         tracked_at = session.get("last_site_open_tracked_at")
         if tracked_at:
             try:

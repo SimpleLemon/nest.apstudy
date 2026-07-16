@@ -74,7 +74,15 @@ test("admin analytics charts use nice axes, hover details, and vertical category
   ]);
   assert.match(line, /admin-analytics-tooltip/);
   assert.match(line, /admin-analytics-grid-line/);
+  assert.match(line, /admin-analytics-hover-band/);
   assert.match(line, /role="listitem"/);
+  assert.doesNotMatch(line, /admin-analytics-area/);
+
+  const filledLine = window.AdminAnalytics.renderLineChart([
+    { label: "Jun 1", value: 14 },
+    { label: "Jun 2", value: 87 },
+  ], { fillArea: true });
+  assert.match(filledLine, /admin-analytics-area/);
 
   const bars = window.AdminAnalytics.renderVerticalBarChart([
     { label: "Google", value: 4 },
@@ -206,7 +214,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
     cards: { totalUsers: 8, activeUsers: 3, pageViews: 12, onboardingRate: 0 },
     series: {
       totalUsers: [],
-      activeUsers: [],
+      activeUsers: [{ label: "May 1", value: 1 }, { label: "May 2", value: 3 }],
       pageViews: [{ label: "May 1", value: 4 }, { label: "May 2", value: 12 }],
       oauth: [
         { key: "google", label: "Google", points: [{ label: "May 1", value: 1 }, { label: "May 2", value: 3 }] },
@@ -225,8 +233,11 @@ test("admin analytics main card switches to selected metric graph", async () => 
     comparison: {
       enabled: true,
       metrics: {
+        totalUsers: { available: true, percentChange: 14.3, direction: "up" },
         activeUsers: { available: true, percentChange: -20, direction: "down" },
         pageViews: { available: true, percentChange: 50, direction: "up" },
+        oauth: { available: true, percentChange: 25, direction: "up" },
+        uniType: { available: true, percentChange: 25, direction: "up" },
       },
     },
     gaDetails: {
@@ -241,15 +252,40 @@ test("admin analytics main card switches to selected metric graph", async () => 
   });
 
   assert.equal(nodes.source.textContent, "Source: Google Analytics");
-  assert.match(nodes.main.innerHTML, /admin-analytics-svg--secondary/);
+  assert.match(nodes.main.innerHTML, /admin-analytics-svg--primary/);
   assert.equal(cards.get("pageViews").textContent, "12");
   assert.match(deltas.get("activeUsers").innerHTML, /-20\.0%/);
   assert.match(deltas.get("pageViews").innerHTML, /\+50\.0%/);
-  assert.match(deltas.get("activeUsers").className, /bg-orange-400\/10/);
+  assert.match(deltas.get("activeUsers").className, /admin-stat-delta--down/);
+  assert.match(deltas.get("totalUsers").innerHTML, /\+14\.3%/);
+  assert.match(deltas.get("oauth").innerHTML, /\+25\.0%/);
+  assert.match(deltas.get("uniType").innerHTML, /\+25\.0%/);
   assert.equal(nodes.countryMap.innerHTML, "");
   assert.equal(nodes.countryList.innerHTML, "");
   assert.equal(nodes.pageList.innerHTML, "");
   assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "pageViews").attrs["aria-selected"], "true");
+
+  root.dataset.activeMetric = "activeUsers";
+  window.AdminAnalytics.renderDashboard(root, {
+    ...{
+      cards: { totalUsers: 8, activeUsers: 3, pageViews: 12, oauth: 2, uniType: 2 },
+      series: {
+        totalUsers: [],
+        activeUsers: [{ label: "May 1", value: 1 }, { label: "May 2", value: 3 }],
+        pageViews: [],
+        oauth: [],
+        uniType: [],
+      },
+      comparison: { enabled: true, metrics: {} },
+      sources: {
+        traffic: { label: "Google Analytics", status: "ok" },
+        featureUsage: { label: "Nest database", status: "ok" },
+      },
+    },
+  });
+  assert.equal(nodes.source.textContent, "Source: Nest database");
+  assert.match(nodes.main.innerHTML, /admin-analytics-svg--primary/);
+  assert.doesNotMatch(nodes.main.innerHTML, /admin-analytics-area/);
 });
 
 test("admin analytics GA detail panels render independently with cleaned page labels", async () => {

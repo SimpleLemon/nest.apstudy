@@ -99,6 +99,11 @@
     {% if users %}
         <div class="admin-directory-table-wrap">
             <table class="admin-table admin-table--directory" aria-label="User list" data-auth-users-table>
+                <colgroup>
+                    {% for key, label in user_columns %}
+                        <col data-column="{{ key }}" />
+                    {% endfor %}
+                </colgroup>
                 <thead>
                     <tr>
                         {% for key, label in user_columns %}
@@ -118,6 +123,7 @@
                 <tbody>
                     {% for user in users %}
                         {% set display_name = user.name or user.username or "Unnamed user" %}
+                        {% set profile_school = user.school or ('Emory student' if user.emory_student else '—') %}
                         <tr class="admin-directory-row">
                             <td data-column="identity" data-label="User">
                                 <a class="admin-directory-identity" href="{{ url_for('admin.admin_detail', user_id=user.id, return_to=user_return_url) }}">
@@ -133,8 +139,14 @@
                                         decoding="async"
                                     />
                                     <span class="admin-directory-identity__copy">
-                                        <strong class="admin-directory-identity__name{% if user.emory_student %} admin-directory-identity__name--emory{% endif %}">{{ display_name }}</strong>
-                                        <span>{{ user.email or 'No email on record' }}</span>
+                                        <strong class="admin-directory-identity__name{% if user.emory_student %} admin-directory-identity__name--emory{% endif %}">
+                                            <span class="admin-directory-truncate" data-tooltip="{{ display_name }}" title="{{ display_name }}">
+                                                <span class="admin-directory-truncate__text">{{ display_name }}</span>
+                                            </span>
+                                        </strong>
+                                        <span class="admin-directory-truncate" data-tooltip="{{ user.email or 'No email on record' }}" title="{{ user.email or 'No email on record' }}">
+                                            <span class="admin-directory-truncate__text">{{ user.email or 'No email on record' }}</span>
+                                        </span>
                                     </span>
                                     <span class="material-symbols-outlined admin-directory-identity__open" aria-hidden="true">arrow_forward</span>
                                 </a>
@@ -142,54 +154,66 @@
                             <td data-column="status" data-label="Account">
                                 <div class="admin-directory-statuses">
                                     {% if user.onboarding_complete %}
-                                        <span class="admin-badge admin-badge--success">Onboarded</span>
+                                        <span class="admin-badge admin-badge--success"><span class="admin-directory-truncate" data-tooltip="Onboarded" title="Onboarded"><span class="admin-directory-truncate__text">Onboarded</span></span></span>
                                     {% else %}
-                                        <span class="admin-badge admin-badge--warning">Setup · step {{ user.onboarding_step }}</span>
+                                        {% set setup_label = 'Setup · step ' ~ user.onboarding_step %}
+                                        <span class="admin-badge admin-badge--warning"><span class="admin-directory-truncate" data-tooltip="{{ setup_label }}" title="{{ setup_label }}"><span class="admin-directory-truncate__text">{{ setup_label }}</span></span></span>
                                     {% endif %}
                                     <span class="admin-directory-provider">
                                         <span class="material-symbols-outlined" aria-hidden="true">key</span>
-                                        {{ user.oauth_provider | capitalize }} sign-in
+                                        <span class="admin-directory-truncate" data-tooltip="{{ user.oauth_provider | capitalize }} sign-in" title="{{ user.oauth_provider | capitalize }} sign-in">
+                                            <span class="admin-directory-truncate__text">{{ user.oauth_provider | capitalize }} sign-in</span>
+                                        </span>
                                     </span>
                                     {% if user.discord_linked %}
-                                        <span class="admin-directory-status-note">Discord linked</span>
+                                        <span class="admin-directory-status-note admin-directory-truncate" data-tooltip="Discord linked" title="Discord linked"><span class="admin-directory-truncate__text">Discord linked</span></span>
                                     {% endif %}
                                 </div>
                             </td>
                             <td data-column="tier" data-label="Account type">
-                                <form class="admin-tier-quick-form" method="post" action="{{ url_for('admin.update_user_tier', user_id=user.id) }}">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                    <input type="hidden" name="section" value="overview" />
-                                    <label class="sr-only" for="admin-user-tier-{{ user.id }}">Tier for {{ display_name }}</label>
-                                    <select id="admin-user-tier-{{ user.id }}" name="tier" class="admin-tier-quick-select" onchange="this.form.submit()">
-                                        {% for tier_key in ('free', 'grade_a', 'grade_aa', 'developer') %}
-                                            <option value="{{ tier_key }}" {% if user.tier == tier_key %}selected{% endif %}>{{ {'free': 'Free', 'grade_a': 'Grade A', 'grade_aa': 'Grade AA', 'developer': 'Developer'}[tier_key] }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </form>
-                                {% if user.tier_badge %}
-                                    <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ user.tier_label }}" data-tooltip="{{ user.tier_label }}">
-                                        <img class="tier-badge tier-badge--directory" src="{{ user.tier_badge.asset }}" alt="" width="20" height="20" loading="lazy" decoding="async" />
-                                    </span>
-                                {% endif %}
+                                <div class="admin-directory-tier">
+                                    <form class="admin-tier-quick-form" method="post" action="{{ url_for('admin.update_user_tier', user_id=user.id) }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <input type="hidden" name="section" value="overview" />
+                                        <label class="sr-only" for="admin-user-tier-{{ user.id }}">Tier for {{ display_name }}</label>
+                                        <select id="admin-user-tier-{{ user.id }}" name="tier" class="admin-tier-quick-select" onchange="this.form.submit()">
+                                            {% for tier_key in ('free', 'grade_a', 'grade_aa', 'developer') %}
+                                                <option value="{{ tier_key }}" {% if user.tier == tier_key %}selected{% endif %}>{{ {'free': 'Free', 'grade_a': 'Grade A', 'grade_aa': 'Grade AA', 'developer': 'Developer'}[tier_key] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </form>
+                                    {% if user.tier_badge %}
+                                        <span class="tier-badge-trigger" tabindex="0" role="img" aria-label="{{ user.tier_label }}" data-tooltip="{{ user.tier_label }}">
+                                            <img class="tier-badge tier-badge--directory" src="{{ user.tier_badge.asset }}" alt="" width="20" height="20" loading="lazy" decoding="async" />
+                                        </span>
+                                    {% endif %}
+                                </div>
                             </td>
                             <td data-column="profile" data-label="Profile">
                                 <div class="admin-directory-profile">
-                                    <strong>{{ user.school or ('Emory student' if user.emory_student else 'School not set') }}</strong>
-                                    <span>{{ user.major or user.education_level or 'Profile details not set' }}</span>
+                                    <strong>
+                                        <span class="admin-directory-truncate" data-tooltip="{{ profile_school }}" title="{{ profile_school }}"><span class="admin-directory-truncate__text">{{ profile_school }}</span></span>
+                                    </strong>
+                                    {% set profile_detail = user.major or user.education_level or 'Profile details not set' %}
+                                    <span class="admin-directory-truncate" data-tooltip="{{ profile_detail }}" title="{{ profile_detail }}"><span class="admin-directory-truncate__text">{{ profile_detail }}</span></span>
                                 </div>
                             </td>
                             <td data-column="activity" data-label="Last opened website">
                                 {% if user.last_login %}
-                                    <span class="admin-directory-date" data-tooltip="{{ user.last_login }}" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login }}</span>
+                                    <span class="admin-directory-date admin-directory-truncate" data-tooltip="{{ user.last_login }}" title="{{ user.last_login }}">
+                                        <span class="admin-directory-truncate__text" data-admin-timestamp="{{ user.last_login_raw or '' }}">{{ user.last_login }}</span>
+                                    </span>
                                 {% else %}
-                                    <span class="admin-directory-empty">Not opened yet</span>
+                                    <span class="admin-directory-empty admin-directory-truncate" data-tooltip="Not opened yet" title="Not opened yet"><span class="admin-directory-truncate__text">Not opened yet</span></span>
                                 {% endif %}
                             </td>
                             <td data-column="created" data-label="Joined">
-                                <span class="admin-directory-date" data-tooltip="{{ user.created_at or '--' }}" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
+                                <span class="admin-directory-date admin-directory-truncate" data-tooltip="{{ user.created_at or '--' }}" title="{{ user.created_at or '--' }}">
+                                    <span class="admin-directory-truncate__text" data-admin-timestamp="{{ user.created_at_raw or '' }}" data-admin-timestamp-mode="date">{{ user.created_at or "--" }}</span>
+                                </span>
                             </td>
                             <td data-column="id" data-label="User ID">
-                                <span class="admin-table__trunc admin-directory-id" data-tooltip="{{ user.id }}">{{ user.id }}</span>
+                                <span class="admin-directory-truncate admin-directory-id" data-tooltip="{{ user.id }}" title="{{ user.id }}"><span class="admin-directory-truncate__text">{{ user.id }}</span></span>
                             </td>
                         </tr>
                     {% endfor %}

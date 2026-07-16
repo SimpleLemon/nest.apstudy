@@ -94,6 +94,9 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
         self.assertIn('data-analytics-metric="pageViews"', html)
         self.assertIn('data-analytics-delta="activeUsers"', html)
         self.assertIn('data-analytics-delta="pageViews"', html)
+        self.assertIn('data-analytics-delta="totalUsers"', html)
+        self.assertIn('data-analytics-delta="oauth"', html)
+        self.assertIn('data-analytics-delta="uniType"', html)
         self.assertIn('data-analytics-country-map', html)
         self.assertIn('data-analytics-detail-list="countries"', html)
         self.assertIn('data-analytics-detail-list="pages"', html)
@@ -207,12 +210,12 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["range"], "7d")
         self.assertEqual(payload["timezone"], "America/Phoenix")
         self.assertEqual(payload["cards"]["totalUsers"], 3)
-        self.assertEqual(payload["cards"]["activeUsers"], 0)
+        self.assertEqual(payload["cards"]["activeUsers"], 3)
         self.assertEqual(payload["cards"]["pageViews"], 0)
-        self.assertTrue(all(point["value"] == 0 for point in payload["series"]["activeUsers"]))
+        self.assertEqual(payload["series"]["activeUsers"][-1]["value"], 3)
         self.assertTrue(all(point["value"] == 0 for point in payload["series"]["pageViews"]))
         self.assertEqual(payload["engagement"]["topPages"], [])
-        self.assertFalse(payload["comparison"]["enabled"])
+        self.assertTrue(payload["comparison"]["enabled"])
         self.assertEqual(payload["gaDetails"]["countries"], [])
         self.assertEqual(payload["gaDetails"]["pages"], [])
         oauth = {row["key"]: row["value"] for row in payload["breakdowns"]["oauth"]}
@@ -250,9 +253,53 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["ga4"]["status"], "not_configured")
         self.assertEqual(payload["cards"]["activeUsers"], 0)
         self.assertEqual(payload["cards"]["pageViews"], 0)
-        self.assertFalse(payload["comparison"]["enabled"])
+        self.assertTrue(payload["comparison"]["enabled"])
+        self.assertIn("totalUsers", payload["comparison"]["metrics"])
+        self.assertIn("activeUsers", payload["comparison"]["metrics"])
+        self.assertIn("oauth", payload["comparison"]["metrics"])
+        self.assertIn("uniType", payload["comparison"]["metrics"])
         self.assertEqual(payload["gaDetails"]["countries"], [])
         self.assertEqual(payload["gaDetails"]["pages"], [])
+
+    def test_authenticated_activity_uses_hourly_records_and_browser_timezone(self):
+        with database.db_connection(self.db_path) as conn:
+            conn.execute(
+                """
+                INSERT INTO users (id, google_id, email, name, created_at)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                ["signed-in-1", "google-signed-in-1", "signed-in@example.com", "Signed In", "2026-05-01T12:00:00Z"],
+            )
+
+        admin_analytics.record_authenticated_activity(
+            "signed-in-1",
+            at=datetime(2026, 5, 3, 2, 10, tzinfo=timezone.utc),
+            path=self.db_path,
+        )
+        admin_analytics.record_authenticated_activity(
+            "signed-in-1",
+            at=datetime(2026, 5, 3, 2, 45, tzinfo=timezone.utc),
+            path=self.db_path,
+        )
+
+        with database.db_connection(self.db_path) as conn:
+            bucket_count = conn.execute("SELECT COUNT(*) FROM user_activity_buckets").fetchone()[0]
+            latest_seen = conn.execute("SELECT last_seen_at FROM user_activity_buckets").fetchone()[0]
+
+        payload = admin_analytics.analytics_payload(
+            range_key="7d",
+            tz_name="America/Phoenix",
+            include_ga=False,
+            now=datetime(2026, 5, 3, 15, 0, tzinfo=timezone.utc),
+            path=self.db_path,
+        )
+
+        self.assertEqual(bucket_count, 1)
+        self.assertEqual(latest_seen, "2026-05-03T02:45:00Z")
+        self.assertEqual(payload["cards"]["activeUsers"], 1)
+        may_second = next(point for point in payload["series"]["activeUsers"] if point["key"] == "2026-05-02")
+        self.assertEqual(may_second["value"], 1)
+        self.assertEqual(payload["sources"]["featureUsage"]["label"], "Nest database")
 
     def test_ga4_defaults_to_nest_property_and_filters_hostname(self):
         def fake_row(dimensions, metrics):
@@ -341,14 +388,14 @@ class AdminAnalyticsServiceTestCase(unittest.TestCase):
         self.assertEqual(payload["ga4"]["status"], "ok")
         self.assertEqual(payload["ga4"]["propertyId"], "446578226")
         self.assertEqual(payload["ga4"]["hostName"], "nest.apstudy.org")
-        self.assertEqual(payload["cards"]["activeUsers"], 7)
+        self.assertEqual(payload["cards"]["activeUsers"], 0)
         self.assertEqual(payload["cards"]["pageViews"], 42)
-        self.assertEqual(payload["series"]["activeUsers"][-1]["value"], 5)
+        self.assertEqual(payload["series"]["activeUsers"][-1]["value"], 0)
         self.assertEqual(payload["series"]["pageViews"][-1]["value"], 32)
         self.assertEqual(payload["engagement"]["topPages"][0], {"label": "/dashboard", "value": 30})
         self.assertTrue(payload["comparison"]["enabled"])
-        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["previous"], 10)
-        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["percentChange"], -30.0)
+        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["previous"], 0)
+        self.assertEqual(payload["comparison"]["metrics"]["activeUsers"]["label"], "0.0%")
         self.assertEqual(payload["comparison"]["metrics"]["pageViews"]["previous"], 60)
         self.assertEqual(payload["comparison"]["metrics"]["pageViews"]["percentChange"], -30.0)
         self.assertEqual(payload["gaDetails"]["countries"][0]["countryId"], "US")

@@ -12,15 +12,16 @@
       description: "Cumulative user growth from the first joined account.",
       type: "line",
       tone: "primary",
+      fillArea: true,
       seriesPath: ["series", "totalUsers"],
       value: (payload) => payload?.cards?.totalUsers,
     },
     activeUsers: {
       label: "Users Active",
       title: "Users Active",
-      description: "Distinct users who opened Nest in each bucket.",
+      description: "Distinct signed-in users who opened Nest in each bucket.",
       type: "line",
-      tone: "success",
+      tone: "primary",
       seriesPath: ["series", "activeUsers"],
       value: (payload) => payload?.cards?.activeUsers,
     },
@@ -29,7 +30,7 @@
       title: "Views",
       description: "Google Analytics page views across the selected range.",
       type: "line",
-      tone: "secondary",
+      tone: "primary",
       seriesPath: ["series", "pageViews"],
       value: (payload) => payload?.cards?.pageViews,
     },
@@ -40,7 +41,7 @@
       type: "multiLine",
       tone: "primary",
       seriesPath: ["series", "oauth"],
-      value: (payload) => sumMultiSeriesIncrease(payload?.series?.oauth),
+      value: (payload) => payload?.cards?.oauth ?? sumMultiSeriesIncrease(payload?.series?.oauth),
     },
     uniType: {
       label: "Uni Type",
@@ -49,7 +50,7 @@
       type: "multiLine",
       tone: "secondary",
       seriesPath: ["series", "uniType"],
-      value: (payload) => sumMultiSeriesIncrease(payload?.series?.uniType),
+      value: (payload) => payload?.cards?.uniType ?? sumMultiSeriesIncrease(payload?.series?.uniType),
     },
   };
 
@@ -124,13 +125,16 @@
 
   const TREND_UP_SVG = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="m22 7-7.38 7.335c-.997.991-1.496 1.487-2.115 1.487s-1.117-.496-2.115-1.488l-.24-.238c-.997-.992-1.497-1.489-2.116-1.489s-1.118.497-2.115 1.49L2 18" opacity=".5"/><path d="M22 12.546V7h-5.582"/></svg>';
   const TREND_DOWN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="m22 18-7.38-7.335c-.997-.991-1.496-1.487-2.115-1.487s-1.117.496-2.115 1.488l-.24.238c-.997.992-1.497 1.489-2.116 1.489s-1.118-.497-2.115-1.49L2 7" opacity=".5"/><path d="M22 12.454V18h-5.582"/></svg>';
+  const TREND_NEUTRAL_SVG = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path d="M5 12h14"/></svg>';
 
   function comparisonForMetric(payload, key) {
     return payload?.comparison?.metrics?.[key] || null;
   }
 
   function deltaLabel(comparison) {
-    if (!comparison?.available || comparison.percentChange == null) return "";
+    if (!comparison?.available) return "";
+    if (comparison.label) return String(comparison.label);
+    if (comparison.percentChange == null) return "";
     const number = Number(comparison.percentChange);
     if (!Number.isFinite(number)) return "";
     const prefix = number > 0 ? "+" : number < 0 ? "-" : "";
@@ -139,14 +143,13 @@
 
   function deltaBadgeClass(comparison) {
     const direction = comparison?.direction === "up" ? "up" : comparison?.direction === "down" ? "down" : "neutral";
-    const base = "admin-stat-delta h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 overflow-hidden text-muted-foreground";
-    if (direction === "up") return `${base} bg-teal-400/10`;
-    if (direction === "down") return `${base} bg-orange-400/10`;
-    return `${base} bg-muted/50`;
+    return `admin-stat-delta admin-stat-delta--${direction}`;
   }
 
   function deltaTrendSvg(comparison) {
-    return comparison?.direction === "down" ? TREND_DOWN_SVG : TREND_UP_SVG;
+    if (comparison?.direction === "down") return TREND_DOWN_SVG;
+    if (comparison?.direction === "up") return TREND_UP_SVG;
+    return TREND_NEUTRAL_SVG;
   }
 
   function deltaClass(comparison) {
@@ -156,7 +159,7 @@
   function deltaMarkup(comparison) {
     const label = deltaLabel(comparison);
     if (!label) return "";
-    return `<span data-slot="badge" data-variant="default" class="${deltaBadgeClass(comparison)}"><span class="flex items-center gap-1">${escapeHtml(label)}${deltaTrendSvg(comparison)}</span></span>`;
+    return `<span class="${deltaBadgeClass(comparison)}" title="Compared with the previous period" aria-label="${escapeHtml(label)} compared with the previous period"><span>${escapeHtml(label)}${deltaTrendSvg(comparison)}</span></span>`;
   }
 
   function escapeHtml(value) {
@@ -248,7 +251,7 @@
     })).filter((group) => group.points.length && (group.increase > 0 || group.points.some((point) => point.value > 0)));
     if (!groups.length) return chartEmpty();
 
-    const width = 760;
+    const width = 1200;
     const height = 300;
     const padLeft = 28;
     const padRight = 58;
@@ -313,6 +316,7 @@
             }, padTop + chartHeight);
             return `
               <g class="admin-analytics-hover-target" tabindex="0" role="listitem" aria-label="${escapeHtml(bucket.label)}: ${escapeHtml(summary)}">
+                <rect class="admin-analytics-hover-band" x="${hitX.toFixed(1)}" y="${padTop}" width="${hitWidth.toFixed(1)}" height="${chartHeight}" rx="4"></rect>
                 <rect class="admin-analytics-hit-area" x="${hitX.toFixed(1)}" y="${padTop}" width="${hitWidth.toFixed(1)}" height="${chartHeight}" rx="4"></rect>
                 <line class="admin-analytics-hover-line admin-analytics-series-hover-line" x1="${bucket.x.toFixed(1)}" y1="${padTop}" x2="${bucket.x.toFixed(1)}" y2="${height - padBottom}"></line>
                 ${plotted.map((group) => {
@@ -346,10 +350,10 @@
     `;
   }
 
-  function renderLineChart(points, { tone = "primary" } = {}) {
+  function renderLineChart(points, { tone = "primary", fillArea = false } = {}) {
     const series = normalizeSeries(points);
     if (!series.length) return chartEmpty();
-    const width = 760;
+    const width = 1200;
     const height = 300;
     const padLeft = 28;
     const padRight = 58;
@@ -378,13 +382,14 @@
           `;
         }).join("")}
         <line class="admin-analytics-axis" x1="${padLeft}" y1="${height - padBottom}" x2="${width - padRight}" y2="${height - padBottom}"></line>
-        <path class="admin-analytics-area" d="${area}"></path>
+        ${fillArea ? `<path class="admin-analytics-area" d="${area}"></path>` : ""}
         <path class="admin-analytics-line" d="${path}"></path>
         ${coords.map((point) => {
           const hitWidth = Math.max(36, step || 36);
           const hitX = clamp(point.x - hitWidth / 2, padLeft, width - padRight - hitWidth);
           return `
           <g class="admin-analytics-hover-target" tabindex="0" role="listitem" aria-label="${escapeHtml(point.label)}: ${formatNumber(point.value)}">
+            <rect class="admin-analytics-hover-band" x="${hitX.toFixed(1)}" y="${padTop}" width="${hitWidth.toFixed(1)}" height="${chartHeight}" rx="4"></rect>
             <rect class="admin-analytics-hit-area" x="${hitX.toFixed(1)}" y="${padTop}" width="${hitWidth.toFixed(1)}" height="${chartHeight}" rx="4"></rect>
             <line class="admin-analytics-hover-line" x1="${point.x.toFixed(1)}" y1="${padTop}" x2="${point.x.toFixed(1)}" y2="${height - padBottom}"></line>
             <circle class="admin-analytics-dot" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4"></circle>
@@ -536,9 +541,13 @@
       el.hidden = !label;
       if (label) {
         el.className = deltaBadgeClass(comparison);
-        el.innerHTML = `<span class="flex items-center gap-1">${escapeHtml(label)}${deltaTrendSvg(comparison)}</span>`;
+        el.title = "Compared with the previous period";
+        el.setAttribute?.("aria-label", `${label} compared with the previous period`);
+        el.innerHTML = `<span>${escapeHtml(label)}${deltaTrendSvg(comparison)}</span>`;
       } else {
         el.className = "admin-stat-delta";
+        el.removeAttribute?.("title");
+        el.removeAttribute?.("aria-label");
         el.innerHTML = "";
       }
     });
@@ -695,7 +704,7 @@
       ? renderMultiLineChart(data)
       : config.type === "bar"
         ? renderVerticalBarChart(data, { tone: config.tone })
-        : renderLineChart(data, { tone: config.tone });
+        : renderLineChart(data, { tone: config.tone, fillArea: config.fillArea });
   }
 
   function sourceTextForMetric(payload, metricKey) {
@@ -703,10 +712,10 @@
       ? payload.sources.traffic.label
       : "Google Analytics unavailable";
     const featureUsage = payload?.sources?.featureUsage?.label || "Nest database";
-    if (metricKey === "activeUsers" || metricKey === "pageViews") {
+    if (metricKey === "pageViews") {
       return `Source: ${traffic}`;
     }
-    return `Source: ${featureUsage}. Traffic: ${traffic}.`;
+    return `Source: ${featureUsage}`;
   }
 
   function renderDashboard(root, payload) {
