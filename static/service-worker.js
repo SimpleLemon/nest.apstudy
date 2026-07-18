@@ -6,8 +6,8 @@ self.addEventListener('push', (event) => {
   const title = String(data.title || 'Nest.APStudy');
   const options = {
     body: String(data.body || 'You have a new notification.'),
-    icon: 'https://resources.apstudy.org/images/AP-Resources-Logo.png',
-    badge: 'https://resources.apstudy.org/images/AP-Resources-Logo.png',
+    icon: '/static/images/brand/nest-logo-v1-192.png',
+    badge: '/static/images/brand/nest-logo-v1-192.png',
     tag: String(data.tag || data.id || 'nest-notification'),
     renotify: true,
     timestamp: Date.parse(data.timestamp || '') || Date.now(),

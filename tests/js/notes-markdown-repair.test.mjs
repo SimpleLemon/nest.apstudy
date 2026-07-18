@@ -105,7 +105,7 @@ test("notes markdown repair converts pasted heading markers without joining surr
 });
 
 test("notes markdown clipboard normalization preserves paragraphs and collapses excessive blanks", async () => {
-    const { clipboardTextLooksStructured, normalizeClipboardText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
+    const { clipboardTextLooksStructured, normalizeClipboardMarkdown, normalizeClipboardText } = await importBrowserModule("static/js/notes/editor/markdown-repair.js");
 
     assert.equal(
         normalizeClipboardText("First paragraph\r\n\r\nSecond paragraph"),
@@ -117,6 +117,15 @@ test("notes markdown clipboard normalization preserves paragraphs and collapses 
     );
     assert.equal(normalizeClipboardText("Line one\nLine two\nLine three"), "Line one\nLine two\nLine three");
     assert.equal(clipboardTextLooksStructured("Line one\nLine two\nLine three"), false);
+    assert.equal(
+        normalizeClipboardMarkdown("•\nAdvisor: Brigette Kinkade\n◦\nRecommend splitting seminar and writing\n•\nAlways reach out"),
+        "- Advisor: Brigette Kinkade\n  - Recommend splitting seminar and writing\n- Always reach out"
+    );
+    assert.equal(
+        normalizeClipboardMarkdown("•\nOnly two GERs can be satisfied with AP/IB credit:\n1.\nFirst Year Writing\n2.\nOne Language requirement"),
+        "- Only two GERs can be satisfied with AP/IB credit:\n  1. First Year Writing\n  2. One Language requirement"
+    );
+    assert.equal(normalizeClipboardMarkdown(">\nQuoted line"), "> Quoted line");
 });
 
 test("notes copied plain text does not add blank lines between editor blocks", async () => {

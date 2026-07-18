@@ -501,7 +501,7 @@ function renderEntitlements() {
       ? 'Unlimited'
       : rawPercent > 100 ? 'Over limit' : `${rawPercent.toFixed(0)}% used`;
   }
-  if (elements.tierStorageProgress) elements.tierStorageProgress.style.width = `${percent}%`;
+  if (elements.tierStorageProgress) elements.tierStorageProgress.style.transform = `scaleX(${percent / 100})`;
   const overLimit = Boolean(data.over_limit && Object.values(data.over_limit).some(Boolean)) || (hasStorageCap && used > cap);
   if (elements.tierStorageProgressTrack) {
     elements.tierStorageProgressTrack.setAttribute('aria-valuenow', String(Math.round(percent)));

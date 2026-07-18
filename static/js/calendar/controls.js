@@ -44,6 +44,16 @@
         } = formatters;
 
         function wireControls() {
+            const refreshThemeDependentColors = () => {
+                renderCalendarView();
+                renderAssignments();
+            };
+            document.addEventListener("apstudy-theme-change", refreshThemeDependentColors);
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                if (document.documentElement.dataset.theme === "system-match") {
+                    refreshThemeDependentColors();
+                }
+            });
             let lastCompactCalendar = isCompactCalendarViewport();
             window.addEventListener("resize", () => {
                 const nextCompactCalendar = isCompactCalendarViewport();
@@ -55,17 +65,17 @@
                 sessionStorage.removeItem("openCoursesPanelOnLoad");
                 setTimeout(() => {
                     if (!state.courses.modalOpen) {
-                        openCoursesModal();
+                        openCoursesModal(null);
                     }
                 }, 100);
             }
             if (!state.public.readOnly) {
-                document.addEventListener("profile-my-courses-click", () => {
+                document.addEventListener("profile-my-courses-click", (event) => {
                     if (state.courses.modalOpen) {
                         closeCoursesModal();
                         return;
                     }
-                    openCoursesModal();
+                    openCoursesModal(event.detail?.trigger || document.activeElement);
                 });
             }
             document.getElementById("calendar-view-week")?.addEventListener("click", () => {

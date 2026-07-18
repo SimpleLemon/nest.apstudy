@@ -18,28 +18,52 @@
     }
 
     function layoutTimedEvents(events) {
-        const items = events.map((event) => {
+        const items = events.map((event, originalIndex) => {
             const startMin = event.startDate.getHours() * 60 + event.startDate.getMinutes();
             const endDate = event.endDate || event.startDate;
             const durMin = Math.max(30, Math.ceil((endDate - event.startDate) / 60000));
             return {
                 ...event,
+                layoutOriginalIndex: originalIndex,
                 layoutStartMinutes: startMin,
                 layoutDurationMinutes: durMin,
                 layoutLane: 0,
                 layoutLaneCount: 1,
             };
-        }).sort((a, b) => a.layoutStartMinutes - b.layoutStartMinutes || a.layoutDurationMinutes - b.layoutDurationMinutes);
-        const laneEnds = [];
-        for (const item of items) {
-            let lane = 0;
-            while (lane < laneEnds.length && laneEnds[lane] > item.layoutStartMinutes) lane++;
-            if (lane === laneEnds.length) laneEnds.push(0);
-            laneEnds[lane] = item.layoutStartMinutes + item.layoutDurationMinutes;
-            item.layoutLane = lane;
+        }).sort((a, b) => (
+            a.layoutStartMinutes - b.layoutStartMinutes
+            || b.layoutDurationMinutes - a.layoutDurationMinutes
+            || a.layoutOriginalIndex - b.layoutOriginalIndex
+        ));
+
+        function assignGroupLanes(group) {
+            const laneEnds = [];
+            for (const item of group) {
+                let lane = laneEnds.findIndex((end) => end <= item.layoutStartMinutes);
+                if (lane < 0) {
+                    lane = laneEnds.length;
+                    laneEnds.push(0);
+                }
+                laneEnds[lane] = item.layoutStartMinutes + item.layoutDurationMinutes;
+                item.layoutLane = lane;
+            }
+            const laneCount = Math.max(1, laneEnds.length);
+            group.forEach((item) => { item.layoutLaneCount = laneCount; });
         }
-        const count = Math.max(1, laneEnds.length);
-        items.forEach((item) => { item.layoutLaneCount = count; });
+
+        let groupStart = 0;
+        let groupEnd = -Infinity;
+        for (let index = 0; index < items.length; index++) {
+            const item = items[index];
+            if (index > groupStart && item.layoutStartMinutes >= groupEnd) {
+                assignGroupLanes(items.slice(groupStart, index));
+                groupStart = index;
+                groupEnd = -Infinity;
+            }
+            groupEnd = Math.max(groupEnd, item.layoutStartMinutes + item.layoutDurationMinutes);
+        }
+        if (items.length) assignGroupLanes(items.slice(groupStart));
+
         return items;
     }
 
@@ -95,28 +119,44 @@
         return date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDate() === now.getDate();
     }
 
-    function getUrgencyLabel(startDate) {
-        const diffDays = Math.floor((startDate - new Date()) / (1000 * 60 * 60 * 24));
-        if (diffDays < 0) return "Past";
-        if (diffDays === 0) return "Today";
+    function localCalendarDayNumber(date) {
+        return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000);
+    }
+
+    function calendarDayDifference(date, referenceDate) {
+        return localCalendarDayNumber(date) - localCalendarDayNumber(referenceDate);
+    }
+
+    function futureUrgencyLabel(startDate, now) {
+        const diffDays = calendarDayDifference(startDate, now);
         if (diffDays === 1) return "Tomorrow";
         if (diffDays < 7) return `In ${diffDays} days`;
         return startDate.toLocaleDateString(undefined, { month: "short", day: "numeric" });
     }
 
-    function getUrgencyLabelAllDay(event) {
-        const now = new Date();
-        const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const eventStartDay = new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate());
-        const eventLastDay = new Date(event.endDate);
-        eventLastDay.setDate(eventLastDay.getDate() - 1);
-        const eventEndDayStart = new Date(eventLastDay.getFullYear(), eventLastDay.getMonth(), eventLastDay.getDate());
-        if (eventEndDayStart < todayStart) return "Past";
-        if (eventStartDay <= todayStart && eventEndDayStart >= todayStart) return "Today";
-        const diffDays = Math.floor((eventStartDay - todayStart) / (1000 * 60 * 60 * 24));
-        if (diffDays === 1) return "Tomorrow";
-        if (diffDays < 7) return `In ${diffDays} days`;
-        return event.startDate.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    function getUrgencyLabel(startDate, now = new Date(), endDate = null) {
+        const startDiff = calendarDayDifference(startDate, now);
+        if (startDiff === 0) return "Today";
+        if (startDiff > 0) return futureUrgencyLabel(startDate, now);
+        if (endDate && calendarDayDifference(endDate, now) >= 0) return "Today";
+        return "Past";
+    }
+
+    function getUrgencyLabelAllDay(event, now = new Date()) {
+        const startDate = event.startDate;
+        const validExclusiveEnd = event.endDate instanceof Date
+            && !Number.isNaN(event.endDate.getTime())
+            && event.endDate > startDate
+            ? event.endDate
+            : new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1);
+        const lastDay = new Date(
+            validExclusiveEnd.getFullYear(),
+            validExclusiveEnd.getMonth(),
+            validExclusiveEnd.getDate() - 1,
+        );
+        if (calendarDayDifference(lastDay, now) < 0) return "Past";
+        if (calendarDayDifference(startDate, now) <= 0) return "Today";
+        return futureUrgencyLabel(startDate, now);
     }
 
     function getAccent(type, startDate) {
@@ -168,14 +208,118 @@
         return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
-    function hexToRgb(hex) {
-        const normalized = String(hex || "").trim().replace(/^#/, "");
-        if (!/^[0-9a-fA-F]{6}$/.test(normalized)) return null;
+    function parseCssColor(value) {
+        const input = String(value || "").trim();
+        const shortHex = input.match(/^#([0-9a-fA-F]{3})$/);
+        if (shortHex) {
+            return {
+                r: parseInt(shortHex[1][0].repeat(2), 16),
+                g: parseInt(shortHex[1][1].repeat(2), 16),
+                b: parseInt(shortHex[1][2].repeat(2), 16),
+            };
+        }
+        const normalized = input.replace(/^#/, "");
+        if (/^[0-9a-fA-F]{6}$/.test(normalized)) {
+            return {
+                r: parseInt(normalized.slice(0, 2), 16),
+                g: parseInt(normalized.slice(2, 4), 16),
+                b: parseInt(normalized.slice(4, 6), 16),
+            };
+        }
+        const rgb = input.match(/^rgba?\(\s*(\d+(?:\.\d+)?)\s*[, ]\s*(\d+(?:\.\d+)?)\s*[, ]\s*(\d+(?:\.\d+)?)/i);
+        if (!rgb) return null;
         return {
-            r: parseInt(normalized.slice(0, 2), 16),
-            g: parseInt(normalized.slice(2, 4), 16),
-            b: parseInt(normalized.slice(4, 6), 16),
+            r: Math.max(0, Math.min(255, Number(rgb[1]))),
+            g: Math.max(0, Math.min(255, Number(rgb[2]))),
+            b: Math.max(0, Math.min(255, Number(rgb[3]))),
         };
+    }
+
+    function hexToRgb(hex) {
+        return parseCssColor(hex);
+    }
+
+    function relativeLuminance(color) {
+        const rgb = typeof color === "string" ? parseCssColor(color) : color;
+        if (!rgb) return 0;
+        const channel = (value) => {
+            const normalized = value / 255;
+            return normalized <= 0.04045
+                ? normalized / 12.92
+                : ((normalized + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * channel(rgb.r) + 0.7152 * channel(rgb.g) + 0.0722 * channel(rgb.b);
+    }
+
+    function contrastRatio(first, second) {
+        const firstLuminance = relativeLuminance(first);
+        const secondLuminance = relativeLuminance(second);
+        const lighter = Math.max(firstLuminance, secondLuminance);
+        const darker = Math.min(firstLuminance, secondLuminance);
+        return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    function mixColors(foreground, background, foregroundAmount) {
+        const front = parseCssColor(foreground) || parseCssColor("#6366f1");
+        const back = parseCssColor(background) || parseCssColor("#ffffff");
+        const amount = Math.max(0, Math.min(1, foregroundAmount));
+        return rgbToHex(
+            front.r * amount + back.r * (1 - amount),
+            front.g * amount + back.g * (1 - amount),
+            front.b * amount + back.b * (1 - amount),
+        );
+    }
+
+    function bestTextColor(background, preferred) {
+        const candidates = [preferred, "#000000", "#ffffff"].filter((color, index, all) => (
+            parseCssColor(color) && all.indexOf(color) === index
+        ));
+        const passing = candidates.find((color) => contrastRatio(color, background) >= 4.5);
+        if (passing) return rgbToHex(...Object.values(parseCssColor(passing)));
+        return candidates.sort((a, b) => contrastRatio(b, background) - contrastRatio(a, background))[0];
+    }
+
+    function accessibleAccent(accent, backgrounds, minimumRatio = 3) {
+        const validBackgrounds = backgrounds.filter((color) => parseCssColor(color));
+        const base = parseCssColor(accent) ? rgbToHex(...Object.values(parseCssColor(accent))) : "#6366f1";
+        const meetsContrast = (color) => validBackgrounds.every((background) => (
+            contrastRatio(color, background) >= minimumRatio
+        ));
+        if (meetsContrast(base)) return base;
+        for (let step = 1; step <= 20; step++) {
+            const amount = step / 20;
+            const darker = mixColors("#000000", base, amount);
+            const lighter = mixColors("#ffffff", base, amount);
+            if (meetsContrast(darker)) return darker;
+            if (meetsContrast(lighter)) return lighter;
+        }
+        return contrastRatio("#000000", validBackgrounds[0]) >= contrastRatio("#ffffff", validBackgrounds[0])
+            ? "#000000"
+            : "#ffffff";
+    }
+
+    function createAccessibleEventPalette(accent, surface, onSurface, { completed = false } = {}) {
+        const resolvedSurface = parseCssColor(surface) ? surface : "#f0eeeb";
+        const darkSurface = relativeLuminance(resolvedSurface) < 0.18;
+        const resolvedAccent = completed
+            ? darkSurface ? "#94a3b8" : "#64748b"
+            : accent;
+        const background = mixColors(resolvedAccent, resolvedSurface, darkSurface ? 0.28 : 0.14);
+        const text = bestTextColor(background, onSurface);
+        const indicator = accessibleAccent(resolvedAccent, [background, resolvedSurface], 3);
+        return {
+            background,
+            text,
+            border: indicator,
+            indicator,
+        };
+    }
+
+    function getCssColorVariable(name, fallback) {
+        const value = typeof getComputedStyle === "function"
+            ? getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+            : "";
+        return parseCssColor(value) ? value : fallback;
     }
 
     function hexToRgba(hex, alpha) {
@@ -202,6 +346,7 @@
         formatDateTime,
         formatTimedEventRange,
         formatAllDayRange,
+        calendarDayDifference,
         getStartOfWeek,
         isToday,
         getUrgencyLabel,
@@ -211,8 +356,14 @@
         isTaskEvent,
         getTaskPriorityColor,
         adjustHexLuminance,
+        contrastRatio,
+        createAccessibleEventPalette,
+        getCssColorVariable,
         hexToRgb,
         hexToRgba,
+        mixColors,
+        parseCssColor,
+        relativeLuminance,
         escapeHtml,
         formatMultilineText,
     };

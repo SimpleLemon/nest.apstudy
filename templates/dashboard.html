@@ -9,13 +9,12 @@
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
     </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% include "_diagnostics_assets.html" %}
     {% include '_sidebar_init.html' %}
-    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    <link rel="icon" href="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="/manifest.json">
     {% include "_font_assets.html" %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
@@ -29,6 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/utils.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/renderers.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/dashboard/layout-editor.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/daily-quote/data.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/daily-quote.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dashboard/index.js') }}" defer></script>
@@ -44,12 +44,12 @@
             </div>
             <div class="dashboard-header-actions">
                 <div class="dashboard-add-wrap">
-                    <button id="dashboard-add-tile" class="dashboard-header-link dashboard-add-toggle" type="button" aria-label="Add dashboard tile" title="Add tile" aria-expanded="false" aria-haspopup="menu" hidden>
+                    <button id="dashboard-add-tile" class="dashboard-header-link dashboard-add-toggle" type="button" aria-label="Open tile catalog" title="Add tile" aria-haspopup="dialog" hidden>
                         <span class="material-symbols-outlined" aria-hidden="true">add</span>
                         <span class="dashboard-action-label">Add tile</span>
                     </button>
-                    <div id="dashboard-add-menu" class="dashboard-add-menu" role="menu" hidden></div>
                 </div>
+                <button id="dashboard-cancel-layout" class="dashboard-header-link dashboard-cancel-layout" type="button" hidden>Cancel</button>
                 <button id="dashboard-edit-layout" class="dashboard-header-link dashboard-edit-toggle" type="button" aria-label="Edit dashboard layout" title="Edit layout" aria-pressed="false">
                     <span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span>
                     <span class="dashboard-action-label">Edit layout</span>
@@ -60,6 +60,19 @@
         <section id="dashboard-checklist" class="dashboard-checklist" aria-label="Academic setup checklist" hidden></section>
 
         <section id="dashboard-daily-quote" class="dashboard-daily-quote-slot" aria-live="polite"></section>
+
+        <section id="dashboard-layout-toolbar" class="dashboard-layout-toolbar" role="toolbar" aria-label="Selected tile controls" hidden>
+            <div class="dashboard-layout-selection">
+                <span class="material-symbols-outlined" aria-hidden="true">drag_indicator</span>
+                <strong id="dashboard-layout-selection-label">Dashboard tile</strong>
+            </div>
+            <div class="dashboard-layout-toolbar-actions">
+                <button id="dashboard-move-earlier" type="button"><span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span><span>Earlier</span></button>
+                <button id="dashboard-move-later" type="button"><span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span><span>Later</span></button>
+                <button id="dashboard-customize-tile" type="button"><span class="material-symbols-outlined" aria-hidden="true">tune</span><span>Customize</span></button>
+                <button id="dashboard-remove-tile" class="is-danger" type="button"><span class="material-symbols-outlined" aria-hidden="true">delete</span><span>Remove</span></button>
+            </div>
+        </section>
 
         <section class="dashboard-tiles-region" aria-label="Dashboard tiles">
             <div id="dashboard-tiles" class="dashboard-tiles" aria-live="polite">
@@ -100,5 +113,20 @@
         </section>
         <global class="thefooter"></global>
     </main>
+
+    <dialog id="dashboard-tile-drawer" class="dashboard-tile-drawer" aria-label="Dashboard tile catalog">
+        <div id="dashboard-tile-drawer-body" class="dashboard-tile-drawer-body"></div>
+    </dialog>
+    <dialog id="dashboard-discard-dialog" class="dashboard-discard-dialog" aria-labelledby="dashboard-discard-title">
+        <form method="dialog">
+            <h2 id="dashboard-discard-title">Discard dashboard changes?</h2>
+            <p>Your dashboard will return to the last saved layout.</p>
+            <div class="dashboard-dialog-actions">
+                <button id="dashboard-keep-editing" value="cancel">Keep editing</button>
+                <button id="dashboard-confirm-discard" class="is-danger" value="confirm">Discard changes</button>
+            </div>
+        </form>
+    </dialog>
+    <div id="dashboard-layout-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>

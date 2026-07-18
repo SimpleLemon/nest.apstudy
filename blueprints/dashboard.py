@@ -49,13 +49,22 @@ DASHBOARD_ALLOWED_TILE_SIZES = {
     "messages": ("standard", "tall", "wide"),
     "courses": ("standard", "wide"),
 }
-DASHBOARD_LAYOUT_VERSION = 3
+DASHBOARD_LAYOUT_VERSION = 4
 DASHBOARD_CALENDAR_VIEWS = ("month", "week", "upcoming")
 DASHBOARD_DEFAULT_CALENDAR_VIEW = "month"
-DASHBOARD_CALENDAR_UPCOMING_LIMIT = 6
-DASHBOARD_LIST_LIMIT = 4
-DASHBOARD_TASK_LIMIT = 5
-DASHBOARD_TASK_FILTER_SOURCE_LIMIT = 50
+DASHBOARD_CALENDAR_UPCOMING_LIMIT = 80
+DASHBOARD_LIST_LIMIT = 8
+DASHBOARD_TASK_LIMIT = 8
+DASHBOARD_TASK_FILTER_SOURCE_LIMIT = 100
+DASHBOARD_TILE_LIMIT = 12
+DASHBOARD_DUPLICATE_TILE_LIMIT = 4
+DASHBOARD_DUPLICATE_TILE_TYPES = {"calendar", "tasks"}
+DASHBOARD_ITEM_LIMITS = (3, 5, 8)
+DASHBOARD_DENSITIES = ("compact", "comfortable")
+DASHBOARD_CALENDAR_UPCOMING_DAYS = (7, 14, 30)
+DASHBOARD_TASK_DEADLINE_DAYS = (7, 30)
+DASHBOARD_TASK_PRIORITIES = ("high", "medium", "low", "none")
+DASHBOARD_TITLE_MAX_LENGTH = 60
 DASHBOARD_TASK_PRIORITY_RANK = {
     "high": 0,
     "medium": 1,
@@ -251,14 +260,66 @@ def _normalize_task_list_ids(raw_list_ids, available_list_ids=None):
     return normalized
 
 
-def _layout_tile_payload(tile_id, size=None, view=None, task_list_ids=None):
-    payload = {"id": tile_id, "size": _normalize_tile_size(tile_id, size)}
+def _legacy_instance_id(tile_id):
+    return f"legacy-{tile_id}"
+
+
+def _normalized_choice(value, allowed, default):
+    normalized = str(value or default).strip().lower()
+    return normalized if normalized in allowed else default
+
+
+def _normalized_item_limit(value):
+    try:
+        normalized = int(value)
+    except (TypeError, ValueError):
+        normalized = 5
+    return normalized if normalized in DASHBOARD_ITEM_LIMITS else 5
+
+
+def _layout_tile_payload(
+    tile_id,
+    size=None,
+    view=None,
+    task_list_ids=None,
+    *,
+    instance_id=None,
+    title=None,
+    density=None,
+    item_limit=None,
+    upcoming_days=None,
+    deadline_days=None,
+    include_overdue=None,
+    include_undated=None,
+    priorities=None,
+    starred_only=None,
+):
+    payload = {
+        "instance_id": str(instance_id or _legacy_instance_id(tile_id)).strip(),
+        "type": tile_id,
+        "size": _normalize_tile_size(tile_id, size),
+        "density": _normalized_choice(density, DASHBOARD_DENSITIES, "comfortable"),
+        "item_limit": _normalized_item_limit(item_limit),
+    }
+    normalized_title = str(title or "").strip()[:DASHBOARD_TITLE_MAX_LENGTH]
+    if normalized_title:
+        payload["title"] = normalized_title
     if tile_id == "calendar":
         payload["view"] = _normalize_calendar_view(view)
+        payload["upcoming_days"] = int(upcoming_days) if upcoming_days in DASHBOARD_CALENDAR_UPCOMING_DAYS else 7
     if tile_id == "tasks":
         list_ids = _normalize_task_list_ids(task_list_ids)
         if list_ids:
             payload["task_list_ids"] = list_ids
+        payload["deadline_days"] = int(deadline_days) if deadline_days in DASHBOARD_TASK_DEADLINE_DAYS else 30
+        payload["include_overdue"] = True if include_overdue is None else bool(include_overdue)
+        payload["include_undated"] = True if include_undated is None else bool(include_undated)
+        normalized_priorities = [
+            priority for priority in DASHBOARD_TASK_PRIORITIES
+            if priority in {str(item or "").strip().lower() for item in (priorities or DASHBOARD_TASK_PRIORITIES)}
+        ]
+        payload["priorities"] = normalized_priorities or list(DASHBOARD_TASK_PRIORITIES)
+        payload["starred_only"] = bool(starred_only)
     return payload
 
 
@@ -279,27 +340,49 @@ def _coerce_layout(raw_value):
         source_tiles = parsed
 
     tiles = []
-    seen = set()
+    seen_instances = set()
+    seen_legacy_types = set()
     for item in source_tiles:
         if isinstance(item, dict):
-            tile_id = str(item.get("id") or "").strip()
+            tile_id = str(item.get("type") or item.get("id") or "").strip()
+            instance_id = str(item.get("instance_id") or (item.get("id") if item.get("type") else "") or _legacy_instance_id(tile_id)).strip()
             size = item.get("size")
             view = item.get("view")
             task_list_ids = item.get("task_list_ids")
         else:
             tile_id = str(item or "").strip()
+            instance_id = _legacy_instance_id(tile_id)
             size = None
             view = None
             task_list_ids = None
-        if tile_id not in DASHBOARD_TILE_IDS or tile_id in seen:
+        if tile_id not in DASHBOARD_TILE_IDS or instance_id in seen_instances:
             continue
-        tiles.append(_layout_tile_payload(tile_id, size, view, task_list_ids))
-        seen.add(tile_id)
-    return {"version": version, "tiles": tiles}
+        if version < DASHBOARD_LAYOUT_VERSION and tile_id in seen_legacy_types:
+            continue
+        tiles.append(_layout_tile_payload(
+            tile_id,
+            size,
+            view,
+            task_list_ids,
+            instance_id=instance_id,
+            title=item.get("title") if isinstance(item, dict) else None,
+            density=item.get("density") if isinstance(item, dict) else None,
+            item_limit=item.get("item_limit") if isinstance(item, dict) else None,
+            upcoming_days=item.get("upcoming_days") if isinstance(item, dict) else None,
+            deadline_days=item.get("deadline_days") if isinstance(item, dict) else None,
+            include_overdue=item.get("include_overdue") if isinstance(item, dict) else None,
+            include_undated=item.get("include_undated") if isinstance(item, dict) else None,
+            priorities=item.get("priorities") if isinstance(item, dict) else None,
+            starred_only=item.get("starred_only") if isinstance(item, dict) else None,
+        ))
+        seen_instances.add(instance_id)
+        seen_legacy_types.add(tile_id)
+    quote_visible = parsed.get("daily_quote_visible") if isinstance(parsed, dict) else None
+    return {"version": version, "daily_quote_visible": quote_visible if isinstance(quote_visible, bool) else None, "tiles": tiles}
 
 
 def _coerce_layout_order(raw_value):
-    return [tile["id"] for tile in _coerce_layout(raw_value)["tiles"]]
+    return [tile["type"] for tile in _coerce_layout(raw_value)["tiles"]]
 
 
 def _ordered_tile_layout(saved_layout, available_tile_ids):
@@ -309,27 +392,44 @@ def _ordered_tile_layout(saved_layout, available_tile_ids):
     ordered = []
     seen = set()
     for item in saved_tiles:
-        tile_id = str(item.get("id") or "").strip() if isinstance(item, dict) else ""
-        if tile_id not in available or tile_id in seen:
+        tile_id = str(item.get("type") or item.get("id") or "").strip() if isinstance(item, dict) else ""
+        instance_id = str(item.get("instance_id") or _legacy_instance_id(tile_id)).strip() if isinstance(item, dict) else ""
+        if tile_id not in available or instance_id in seen:
             continue
-        ordered.append(_layout_tile_payload(tile_id, item.get("size"), item.get("view"), item.get("task_list_ids")))
-        seen.add(tile_id)
-    if version >= DASHBOARD_LAYOUT_VERSION:
+        ordered.append(_layout_tile_payload(
+            tile_id,
+            item.get("size"),
+            item.get("view"),
+            item.get("task_list_ids"),
+            instance_id=instance_id,
+            title=item.get("title"),
+            density=item.get("density"),
+            item_limit=item.get("item_limit"),
+            upcoming_days=item.get("upcoming_days"),
+            deadline_days=item.get("deadline_days"),
+            include_overdue=item.get("include_overdue"),
+            include_undated=item.get("include_undated"),
+            priorities=item.get("priorities"),
+            starred_only=item.get("starred_only"),
+        ))
+        seen.add(instance_id)
+    if version >= 3:
         return ordered
+    seen_types = {tile["type"] for tile in ordered}
     for tile_id in DEFAULT_DASHBOARD_TILE_ORDER:
-        if tile_id in available and tile_id not in seen:
+        if tile_id in available and tile_id not in seen_types:
             ordered.append(_layout_tile_payload(tile_id))
-            seen.add(tile_id)
+            seen_types.add(tile_id)
     for tile_id in available:
-        if tile_id not in seen:
+        if tile_id not in seen_types:
             ordered.append(_layout_tile_payload(tile_id))
-            seen.add(tile_id)
+            seen_types.add(tile_id)
     return ordered
 
 
 def _ordered_tiles(saved_order, available_tile_ids):
     if isinstance(saved_order, dict):
-        return [tile["id"] for tile in _ordered_tile_layout(saved_order, available_tile_ids)]
+        return [tile["type"] for tile in _ordered_tile_layout(saved_order, available_tile_ids)]
     available = [tile_id for tile_id in available_tile_ids if tile_id in DASHBOARD_TILE_IDS]
     ordered = []
     for item in saved_order:
@@ -422,7 +522,7 @@ def _load_calendar_summary(user_id, user_settings):
     week_start_date = today - timedelta(days=(today.weekday() + 1) % 7)
     week_start = datetime(week_start_date.year, week_start_date.month, week_start_date.day, tzinfo=timezone.utc)
     week_end = week_start + timedelta(days=7)
-    upcoming_end = today_start + timedelta(days=8)
+    upcoming_end = today_start + timedelta(days=31)
     month_start = datetime(today.year, today.month, 1, tzinfo=timezone.utc)
     if today.month == 12:
         month_end = datetime(today.year + 1, 1, 1, tzinfo=timezone.utc)
@@ -520,7 +620,7 @@ def _load_calendar_summary(user_id, user_settings):
             "month": today.isoformat()[:7],
             "week_start": week_start.date().isoformat(),
             "upcoming_start": today.isoformat(),
-            "upcoming_end": (today + timedelta(days=7)).isoformat(),
+            "upcoming_end": (today + timedelta(days=30)).isoformat(),
             "events": month_events[:80],
             "week_events": week_events[:40],
             "upcoming_events": upcoming_events[:DASHBOARD_CALENDAR_UPCOMING_LIMIT],
@@ -534,7 +634,7 @@ def _load_calendar_summary(user_id, user_settings):
             "month": today.isoformat()[:7],
             "week_start": week_start.date().isoformat(),
             "upcoming_start": today.isoformat(),
-            "upcoming_end": (today + timedelta(days=7)).isoformat(),
+            "upcoming_end": (today + timedelta(days=30)).isoformat(),
             "events": [],
             "week_events": [],
             "upcoming_events": [],
@@ -815,10 +915,8 @@ def _dashboard_summary_payload():
     user_id = str(current_user.id)
     user_settings = _load_user_settings()
     saved_layout = _coerce_layout(user_settings.get("dashboard_layout_json") if user_settings else "[]")
-    saved_task_tile = next((tile for tile in saved_layout.get("tiles", []) if tile.get("id") == "tasks"), {})
-
     calendar_summary = _load_calendar_summary(user_id, user_settings)
-    tasks_summary = _load_tasks_summary(user_id, saved_task_tile.get("task_list_ids"))
+    tasks_summary = _load_tasks_summary(user_id)
     files_summary = _load_recent_files(user_id)
     notes_summary = _load_recent_notes(user_id)
     messages_summary = _load_message_rooms(user_id)
@@ -840,9 +938,14 @@ def _dashboard_summary_payload():
     return {
         "user": _user_payload(),
         "generated_at": format_datetime(datetime.now(timezone.utc)),
-        "tile_layout_version": saved_layout.get("version", DASHBOARD_LAYOUT_VERSION),
+        "tile_layout_version": DASHBOARD_LAYOUT_VERSION,
         "tile_layout": tile_layout,
-        "tile_order": [tile["id"] for tile in tile_layout],
+        "tile_order": [tile["type"] for tile in tile_layout],
+        "dashboard_layout": {
+            "version": DASHBOARD_LAYOUT_VERSION,
+            "daily_quote_visible": saved_layout.get("daily_quote_visible"),
+            "tiles": tile_layout,
+        },
         "available_tiles": available_tiles,
         "checklist": checklist,
         "tiles": {
@@ -940,12 +1043,12 @@ def report_dashboard_quote_error():
 @dashboard_bp.route("/api/dashboard/layout", methods=["PATCH"])
 @login_required
 def update_dashboard_layout():
-    """Persist the user's visible dashboard tiles, preset sizes, and tile views."""
+    """Persist a validated v4 dashboard layout draft."""
     if not current_user.onboarding_complete:
         return jsonify({"error": "Onboarding is required."}), 403
 
     payload = request.get_json(silent=True) or {}
-    raw_layout = payload.get("tile_layout", payload.get("layout"))
+    raw_layout = payload.get("dashboard_layout", payload.get("tile_layout", payload.get("layout")))
     if raw_layout is None:
         raw_layout = payload.get("tiles")
     if raw_layout is None:
@@ -956,35 +1059,80 @@ def update_dashboard_layout():
     raw_tiles = raw_layout.get("tiles") if isinstance(raw_layout, dict) else raw_layout
     if not isinstance(raw_tiles, list):
         return jsonify({"error": "tile_layout tiles must be a list."}), 400
+    if len(raw_tiles) > DASHBOARD_TILE_LIMIT:
+        return jsonify({"error": f"Dashboard layouts support at most {DASHBOARD_TILE_LIMIT} tiles."}), 400
+
+    layout_version = _layout_version(raw_layout)
+    raw_quote_visible = raw_layout.get("daily_quote_visible") if isinstance(raw_layout, dict) else True
+    if raw_quote_visible is not None and not isinstance(raw_quote_visible, bool):
+        return jsonify({"error": "daily_quote_visible must be true or false."}), 400
+    daily_quote_visible = True if raw_quote_visible is None else raw_quote_visible
 
     user_id = str(current_user.id)
     owned_task_list_ids = None
     normalized_tiles = []
-    seen = set()
+    seen_instances = set()
+    type_counts = {}
     for item in raw_tiles:
         if isinstance(item, dict):
-            tile_id = str(item.get("id") or "").strip()
+            tile_id = str(item.get("type") or item.get("id") or "").strip()
+            instance_id = str(item.get("instance_id") or (item.get("id") if item.get("type") else "") or _legacy_instance_id(tile_id)).strip()
             raw_size = item.get("size")
             raw_view = item.get("view")
             raw_task_list_ids = item.get("task_list_ids")
         else:
             tile_id = str(item or "").strip()
+            instance_id = _legacy_instance_id(tile_id)
             raw_size = None
             raw_view = None
             raw_task_list_ids = None
+            item = {}
         if tile_id not in DASHBOARD_TILE_IDS:
             return jsonify({"error": f"Unknown dashboard tile: {tile_id or 'blank'}."}), 400
-        if tile_id in seen:
+        if not instance_id or len(instance_id) > 80 or not all(character.isalnum() or character in "-_:." for character in instance_id):
+            return jsonify({"error": f"Invalid dashboard tile instance: {instance_id or 'blank'}."}), 400
+        if instance_id in seen_instances:
+            return jsonify({"error": f"Duplicate dashboard tile instance: {instance_id}."}), 400
+        type_counts[tile_id] = type_counts.get(tile_id, 0) + 1
+        if type_counts[tile_id] > 1 and (layout_version < DASHBOARD_LAYOUT_VERSION or tile_id not in DASHBOARD_DUPLICATE_TILE_TYPES):
             return jsonify({"error": f"Duplicate dashboard tile: {tile_id}."}), 400
+        if type_counts[tile_id] > DASHBOARD_DUPLICATE_TILE_LIMIT:
+            return jsonify({"error": f"Dashboard supports at most {DASHBOARD_DUPLICATE_TILE_LIMIT} {tile_id} tiles."}), 400
         size = _validated_tile_size(tile_id, raw_size)
         if size is None:
             return jsonify({"error": f"Invalid size '{raw_size or 'blank'}' for dashboard tile: {tile_id}."}), 400
-        tile_payload = {"id": tile_id, "size": size}
+        raw_title = item.get("title")
+        if raw_title is not None and not isinstance(raw_title, str):
+            return jsonify({"error": "Dashboard tile titles must be text."}), 400
+        title = str(raw_title or "").strip()
+        if len(title) > DASHBOARD_TITLE_MAX_LENGTH:
+            return jsonify({"error": f"Dashboard tile titles must be {DASHBOARD_TITLE_MAX_LENGTH} characters or fewer."}), 400
+        try:
+            item_limit = int(item.get("item_limit", 5))
+        except (TypeError, ValueError):
+            item_limit = None
+        if item_limit not in DASHBOARD_ITEM_LIMITS:
+            return jsonify({"error": "Dashboard tile item_limit must be 3, 5, or 8."}), 400
+        density = str(item.get("density", "comfortable")).strip().lower()
+        if density not in DASHBOARD_DENSITIES:
+            return jsonify({"error": "Dashboard tile density must be compact or comfortable."}), 400
+        tile_payload = {
+            "instance_id": instance_id,
+            "type": tile_id,
+            "size": size,
+            "density": density,
+            "item_limit": item_limit,
+        }
+        if title:
+            tile_payload["title"] = title
         if tile_id == "calendar":
             view = _validated_calendar_view(raw_view)
             if view is None:
                 return jsonify({"error": f"Invalid calendar view '{raw_view or 'blank'}'."}), 400
-            tile_payload["view"] = view
+            upcoming_days = item.get("upcoming_days", 7)
+            if upcoming_days not in DASHBOARD_CALENDAR_UPCOMING_DAYS:
+                return jsonify({"error": "Calendar upcoming_days must be 7, 14, or 30."}), 400
+            tile_payload.update({"view": view, "upcoming_days": upcoming_days})
         if tile_id == "tasks" and raw_task_list_ids is not None:
             if not isinstance(raw_task_list_ids, list):
                 return jsonify({"error": "Task list filters must be a list."}), 400
@@ -1007,10 +1155,40 @@ def update_dashboard_layout():
                 if not task_list_ids:
                     return jsonify({"error": "Select at least one task list or choose All."}), 400
                 tile_payload["task_list_ids"] = task_list_ids
+        if tile_id == "tasks":
+            deadline_days = item.get("deadline_days", 30)
+            if deadline_days not in DASHBOARD_TASK_DEADLINE_DAYS:
+                return jsonify({"error": "Task deadline_days must be 7 or 30."}), 400
+            raw_priorities = item.get("priorities", list(DASHBOARD_TASK_PRIORITIES))
+            if not isinstance(raw_priorities, list):
+                return jsonify({"error": "Task priorities must be a list."}), 400
+            priorities = []
+            for raw_priority in raw_priorities:
+                priority = str(raw_priority or "").strip().lower()
+                if priority not in DASHBOARD_TASK_PRIORITIES:
+                    return jsonify({"error": f"Unknown task priority: {priority or 'blank'}."}), 400
+                if priority not in priorities:
+                    priorities.append(priority)
+            if not priorities:
+                return jsonify({"error": "Select at least one task priority."}), 400
+            for boolean_field in ("include_overdue", "include_undated", "starred_only"):
+                if boolean_field in item and not isinstance(item[boolean_field], bool):
+                    return jsonify({"error": f"{boolean_field} must be true or false."}), 400
+            tile_payload.update({
+                "deadline_days": deadline_days,
+                "include_overdue": item.get("include_overdue", True),
+                "include_undated": item.get("include_undated", True),
+                "priorities": priorities,
+                "starred_only": item.get("starred_only", False),
+            })
         normalized_tiles.append(tile_payload)
-        seen.add(tile_id)
+        seen_instances.add(instance_id)
 
-    normalized = {"version": DASHBOARD_LAYOUT_VERSION, "tiles": normalized_tiles}
+    normalized = {
+        "version": DASHBOARD_LAYOUT_VERSION,
+        "daily_quote_visible": daily_quote_visible,
+        "tiles": normalized_tiles,
+    }
 
     try:
         settings = _ensure_user_settings(user_id)
@@ -1029,8 +1207,9 @@ def update_dashboard_layout():
     saved_layout = _coerce_layout(settings.get("dashboard_layout_json"))
     return jsonify({
         "status": "ok",
+        "dashboard_layout": saved_layout,
         "tile_layout": saved_layout["tiles"],
-        "tile_order": [tile["id"] for tile in saved_layout["tiles"]],
+        "tile_order": [tile["type"] for tile in saved_layout["tiles"]],
     })
 
 

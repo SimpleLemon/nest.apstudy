@@ -3,15 +3,6 @@
  * <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
  */
 (function() {
-    var current = document.currentScript;
-    if (current && current.src && !window.__apstudyConsoleDiscordBootstrapped) {
-        window.__apstudyConsoleDiscordBootstrapped = true;
-        var discordSrc = current.src.replace(/theme-init\.js/, "console-discord.js");
-        document.write('<script src="' + discordSrc + '"><\/script>');
-    }
-})();
-
-(function() {
     var DARK_THEMES = ['obsidian-dark', 'nest-dark'];
     var VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
     var STORAGE_KEY = 'apstudy-theme';

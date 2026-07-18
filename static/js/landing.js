@@ -1,17 +1,4 @@
 (() => {
-    const resolveLandingTheme = () => (
-        window.matchMedia("(prefers-color-scheme: dark)").matches ? "nest-dark" : "parchment-light"
-    );
-
-    const applyLandingTheme = () => {
-        if (typeof window.APSTUDY_SET_THEME_PREFERENCE !== "function") return;
-        window.APSTUDY_SET_THEME_PREFERENCE(resolveLandingTheme(), { persist: false, silent: true });
-    };
-
-    applyLandingTheme();
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyLandingTheme);
-})();
-(() => {
     const nav = document.querySelector("[data-landing-nav]");
     const navToggle = document.querySelector("[data-landing-nav-toggle]");
     const navMenu = document.querySelector("[data-landing-nav-menu]");

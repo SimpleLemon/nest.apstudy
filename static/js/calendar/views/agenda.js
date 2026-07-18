@@ -8,6 +8,7 @@
             getCalendarEventColor,
             getCalendarEventLabel,
             getCalendarEventRef,
+            getEventBadgeColors,
             getEventElementAttributes,
             getEventsForDay,
             getVisibleEvents,
@@ -78,11 +79,11 @@
         function renderMobileAgendaEvent(event) {
             const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
             const calendarLabel = getCalendarEventLabel(event);
-            const calendarColor = getCalendarEventColor(event);
+            const indicatorColor = getEventBadgeColors(event).indicator;
             const completedClass = isTaskEvent(event) && event.completed ? " is-completed" : "";
             return `
                 <article ${getEventElementAttributes(event)} class="calendar-mobile-event calendar-event-shell${completedClass}">
-                    <span class="calendar-mobile-event-bar" style="background-color:${escapeHtml(calendarColor)}"></span>
+                    <span class="calendar-mobile-event-bar" style="background-color:${escapeHtml(indicatorColor)}"></span>
                     <div class="calendar-mobile-event-copy">
                         <h3>${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</h3>
                         <p>${escapeHtml(timeDisplay)}</p>
@@ -114,7 +115,9 @@
             }
             root.innerHTML = upcoming.map((event, index) => {
                 const eventRef = getUpcomingEventRef(event);
-                const urgency = event.isAllDay ? getUrgencyLabelAllDay(event) : getUrgencyLabel(event.startDate);
+                const urgency = event.isAllDay
+                    ? getUrgencyLabelAllDay(event)
+                    : getUrgencyLabel(event.startDate, new Date(), event.endDate);
                 const accent = getAccent(event.type, event.startDate);
                 const calendarColor = getCalendarEventColor(event);
                 const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);

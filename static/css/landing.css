@@ -46,7 +46,7 @@ html {
 }
 
 body.landing-page {
-    min-height: 100vh;
+    min-height: var(--app-viewport-height, 100vh);
     margin: 0;
     background: var(--landing-page-bg);
     color: var(--landing-ink);
@@ -65,7 +65,7 @@ body.landing-page {
 .landing-nav {
     position: fixed;
     inset: 0 0 auto;
-    z-index: 1000;
+    z-index: var(--z-sticky);
     display: grid;
     min-height: var(--landing-nav-height);
     grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
@@ -737,7 +737,7 @@ html[data-theme="nest-dark"] .landing-app-demo {
     display: grid;
     width: 100%;
     min-height: 78px;
-    grid-template-columns: 48px minmax(0, 1fr) 28px;
+    grid-template-columns: minmax(0, 1fr) 28px;
     align-items: center;
     gap: 16px;
     padding: 13px 4px;
@@ -759,12 +759,6 @@ html[data-theme="nest-dark"] .landing-app-demo {
     border-radius: var(--radius-control);
     outline: 3px solid color-mix(in srgb, var(--landing-accent) 34%, transparent);
     outline-offset: 3px;
-}
-
-.landing-faq-number {
-    color: var(--landing-accent);
-    font-family: var(--font-mono);
-    font-size: 14px;
 }
 
 .landing-faq-icon {
@@ -795,7 +789,7 @@ html[data-theme="nest-dark"] .landing-app-demo {
 [data-landing-faq-panel] p {
     max-width: 68ch;
     margin: 0;
-    padding: 0 48px 28px 68px;
+    padding: 0 48px 28px 4px;
     color: var(--landing-muted);
     font-size: 15px;
     line-height: 1.72;
@@ -1055,13 +1049,13 @@ html[data-theme="nest-dark"] .landing-page .apstudy-consent-settings {
     }
 
     .landing-faq-item button {
-        grid-template-columns: 34px minmax(0, 1fr) 24px;
+        grid-template-columns: minmax(0, 1fr) 24px;
         gap: 10px;
         font-size: 15px;
     }
 
     [data-landing-faq-panel] p {
-        padding: 0 20px 24px 44px;
+        padding: 0 20px 24px 4px;
     }
 
     .landing-final-cta {

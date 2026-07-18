@@ -5,17 +5,17 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const globalSource = await readFile(path.join(repoRoot, "static/js/core/global.js"), "utf8");
+const primitiveSource = await readFile(path.join(repoRoot, "static/js/core/ui-primitives.js"), "utf8");
 const globalStyles = await readFile(path.join(repoRoot, "static/css/global.css"), "utf8");
 
-test("global.js exposes APStudyFormField helpers", () => {
-    assert.match(globalSource, /window\.APStudyFormField\s*=/);
-    assert.match(globalSource, /\bmarkInvalid\b/);
-    assert.match(globalSource, /\bclearInvalid\b/);
-    assert.match(globalSource, /\bclearAll\b/);
-    assert.match(globalSource, /\bbindAutoClear\b/);
-    assert.match(globalSource, /setAttribute\("aria-invalid", "true"\)/);
-    assert.match(globalSource, /removeAttribute\("aria-invalid"\)/);
+test("ui-primitives.js exposes APStudyFormField helpers", () => {
+    assert.match(primitiveSource, /window\.APStudyFormField\s*=/);
+    assert.match(primitiveSource, /\bmarkInvalid\b/);
+    assert.match(primitiveSource, /\bclearInvalid\b/);
+    assert.match(primitiveSource, /\bclearAll\b/);
+    assert.match(primitiveSource, /\bbindAutoClear\b/);
+    assert.match(primitiveSource, /setAttribute\('aria-invalid', 'true'\)/);
+    assert.match(primitiveSource, /removeAttribute\('aria-invalid'\)/);
 });
 
 test("global.css styles invalid inputs and groups with theme error token", () => {

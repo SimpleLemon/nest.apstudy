@@ -113,7 +113,7 @@
                             <p class="calendar-info-subtitle">${escapeHtml(modalSubtitle)}</p>
                         </div>
                         <button type="button" class="js-share-close calendar-info-close" aria-label="Close calendar sharing">
-                            <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                            <span class="material-symbols-outlined calendar-info-close-icon" aria-hidden="true">close</span>
                         </button>
                     </div>
                     <form id="calendar-share-form">

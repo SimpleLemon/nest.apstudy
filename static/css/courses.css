@@ -14,7 +14,7 @@ body.courses-body {
   grid-row: 2;
   min-width: 0;
   min-height: 0;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(var(--app-viewport-height, 100vh) - var(--navbar-height));
   display: grid;
   grid-template-columns: minmax(320px, var(--courses-panel-width)) minmax(0, 1fr);
   background: var(--color-background);
@@ -1564,7 +1564,6 @@ body.courses-body {
     gap: 10px;
     min-height: 64px;
     border: 1px solid var(--course-color-border, color-mix(in srgb, var(--color-primary) 42%, transparent));
-    border-left: 5px solid var(--course-color, var(--color-primary));
     border-radius: var(--radius-card);
     background: var(--course-color-soft, color-mix(in srgb, var(--color-primary) 18%, var(--color-surface-container-low)));
     padding: 10px 10px 10px 12px;

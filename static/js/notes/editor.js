@@ -23,10 +23,8 @@ import {
 } from './editor/block-catalog.js';
 import { hiddenBlocksForCollapsedHeadings } from './editor/heading-collapse.js';
 import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts, createSelectAllShortcuts } from './editor/keyboard-shortcuts.js';
-import { clipboardTextLooksStructured, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
-import { createNoteCollaborationSession } from './editor/collaboration.js';
-import { bindReviewPanel } from './editor/review-panel.js';
-import { bindNotePrintController, printNote } from './editor/print.js';
+import { clipboardTextLooksStructured, normalizeClipboardMarkdown, normalizeClipboardText, normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './editor/markdown-repair.js';
+import { removeBlocksAndRestoreCursor } from './editor/block-operations.js';
 import { blockOwnContentIsEmpty, buildLoadingIndicatorHtml, claimElementBinding, documentHasText, floatingPopoverPosition, formatRelativeSavedTime, handlePageSetupToolbarClick, isBlankTitle, noteIdFromPath, parseSavedDate } from './editor/utils.js';
 import {
     clipboardHtmlImageSources,
@@ -115,7 +113,6 @@ let pageSetupSaveTimer = null;
 let pageSetupPositionRafId = null;
 let addBlockActiveIndex = 0;
 let defaultSideMarginPercent = null;
-let normalizingEditorDocument = false;
 let selectedBlockAnchorId = null;
 let urlBlockPopover = null;
 let urlBlockResolve = null;
@@ -123,7 +120,6 @@ let editorChromeThrottleTimer = null;
 let editorChromeRafId = null;
 let editorChromeSyncNeedsStructure = false;
 let editorChromeSyncSnapshot = null;
-let pastedContentNormalizationTimer = null;
 let lastSelectedBlockIds = new Set();
 let lastHeadingCollapseSignature = '';
 let latestDocumentSnapshot = null;
@@ -139,6 +135,8 @@ let activeCollaborationSession = null;
 let noteCollaborationEnabled = false;
 let activeCollaborativeTitleCleanup = null;
 let reviewPanelController = null;
+let reviewPanelModulePromise = null;
+let reviewPanelBootstrapCleanup = null;
 
 const titleInput = document.getElementById('note-title-input');
 const saveStatus = document.getElementById('save-status');
@@ -685,6 +683,7 @@ async function requestCurrentNotePrint() {
     closePageSetupPopover();
 
     try {
+        const { printNote } = await import('./editor/print.js');
         const documentSnapshot = currentDocumentSnapshot();
         const { hidden } = hiddenBlocksForCollapsedHeadings(documentSnapshot);
         const setup = effectivePageSetup();
@@ -707,12 +706,69 @@ async function requestCurrentNotePrint() {
 
 function bindNotePrintControls() {
     syncNotePrintControls();
-    bindNotePrintController({
-        documentRef: document,
-        windowRef: window,
-        isReady: () => notePrintReady,
-        requestPrint: () => { void requestCurrentNotePrint(); },
-    });
+    document.addEventListener('click', handleNotePrintClick, true);
+    document.addEventListener('keydown', handleNotePrintShortcut, true);
+}
+
+function handleNotePrintClick(event) {
+    const button = event.target.closest?.('[data-note-print]');
+    if (!button || !document.contains(button)) return;
+    event.preventDefault();
+    void requestCurrentNotePrint();
+}
+
+function handleNotePrintShortcut(event) {
+    const isPrintShortcut = !event.defaultPrevented
+        && (event.metaKey || event.ctrlKey)
+        && !event.altKey
+        && !event.shiftKey
+        && String(event.key || '').toLowerCase() === 'p';
+    if (!isPrintShortcut) return;
+    event.preventDefault();
+    if (notePrintReady) void requestCurrentNotePrint();
+}
+
+function bindLazyReviewPanel({ canReview, canManageReviews, canViewVersions }) {
+    reviewPanelBootstrapCleanup?.();
+    reviewPanelBootstrapCleanup = null;
+    if (!noteId || !reviewPanel) return;
+
+    const openPanel = async (mode) => {
+        reviewButton?.setAttribute('aria-busy', 'true');
+        historyButton?.setAttribute('aria-busy', 'true');
+        try {
+            reviewPanelModulePromise ||= import('./editor/review-panel.js');
+            const { bindReviewPanel } = await reviewPanelModulePromise;
+            if (editorPageDisposed) return;
+            if (!reviewPanelController) {
+                reviewPanelController = bindReviewPanel({
+                    noteId,
+                    canReview,
+                    canManageReviews,
+                    canViewVersions,
+                    panel: reviewPanel,
+                    reviewButton: null,
+                    historyButton: null,
+                    toast: window.APStudyToast,
+                });
+            }
+            await reviewPanelController?.open?.(mode);
+        } catch (error) {
+            console.error('Failed to load note review panel', error);
+            window.APStudyToast?.error?.('Could not load review tools.');
+        } finally {
+            reviewButton?.removeAttribute('aria-busy');
+            historyButton?.removeAttribute('aria-busy');
+        }
+    };
+    const openReview = () => { void openPanel('review'); };
+    const openHistory = () => { void openPanel('history'); };
+    reviewButton?.addEventListener('click', openReview);
+    historyButton?.addEventListener('click', openHistory);
+    reviewPanelBootstrapCleanup = () => {
+        reviewButton?.removeEventListener('click', openReview);
+        historyButton?.removeEventListener('click', openHistory);
+    };
 }
 
 function closeToolbarMenus() {
@@ -1321,10 +1377,7 @@ function deleteSelectedBlocks() {
     if (!editorInstance) return;
     const blocks = selectedBlocks();
     if (!blocks.length) return;
-    const reference = blocks[0];
-    const nextBlock = editorInstance.getNextBlock?.(reference) || editorInstance.getPrevBlock?.(reference) || currentDocumentSnapshot()[0];
-    editorInstance.removeBlocks?.(blocks);
-    if (nextBlock) editorInstance.setTextCursorPosition?.(nextBlock);
+    removeBlocksAndRestoreCursor(editorInstance, blocks);
     selectedBlockAnchorId = null;
     focusEditorBody();
     updateEditorChrome();
@@ -1352,17 +1405,24 @@ async function copySelectedBlocks({ cut = false } = {}) {
     if (!editorInstance) return;
     const blocks = selectedBlocks();
     if (!blocks.length) return;
-    const markdown = await editorInstance.blocksToMarkdownLossy?.(blocks) || blocks.map((block) => textFromInlineContent(block.content)).join('\n\n');
-    const plainText = normalizeCopiedPlainText(markdown);
-    const json = JSON.stringify(blocks);
+    const blockIds = blocks.map((block) => block.id).filter(Boolean);
+    const [markdown, html] = await Promise.all([
+        editorInstance.blocksToMarkdownLossy?.(blocks),
+        editorInstance.blocksToHTMLLossy?.(blocks),
+    ]);
+    const copiedMarkdown = markdown || blocks.map((block) => textFromInlineContent(block.content)).join('\n\n');
+    const plainText = normalizeCopiedPlainText(copiedMarkdown);
     try {
         if (window.ClipboardItem && navigator.clipboard?.write) {
+            const clipboardPayload = {
+                'text/plain': new Blob([plainText], { type: 'text/plain' }),
+                'text/html': new Blob([html || plainText], { type: 'text/html' }),
+            };
+            if (window.ClipboardItem.supports?.('text/markdown')) {
+                clipboardPayload['text/markdown'] = new Blob([copiedMarkdown], { type: 'text/markdown' });
+            }
             await navigator.clipboard.write([
-                new ClipboardItem({
-                    'text/plain': new Blob([plainText], { type: 'text/plain' }),
-                    'text/markdown': new Blob([markdown], { type: 'text/markdown' }),
-                    'application/x-nest-blocknote+json': new Blob([json], { type: 'application/x-nest-blocknote+json' }),
-                }),
+                new ClipboardItem(clipboardPayload),
             ]);
         } else {
             await navigator.clipboard?.writeText(plainText);
@@ -1374,7 +1434,7 @@ async function copySelectedBlocks({ cut = false } = {}) {
             console.warn('Unable to write selected note blocks to clipboard', clipboardError);
         }
     }
-    if (cut) deleteSelectedBlocks();
+    if (cut) removeBlocksAndRestoreCursor(editorInstance, blockIds);
 }
 
 function normalizeNativeEditorCopy(event) {
@@ -1948,12 +2008,6 @@ function bindWritingToolbar() {
         } else if ((event.key === 'Delete' || event.key === 'Backspace') && selectedBlocks().length > 1) {
             event.preventDefault();
             deleteSelectedBlocks();
-        } else if (mod && event.key.toLowerCase() === 'c' && selectedBlocks().length > 1) {
-            event.preventDefault();
-            void copySelectedBlocks();
-        } else if (mod && event.key.toLowerCase() === 'x' && selectedBlocks().length > 1) {
-            event.preventDefault();
-            void copySelectedBlocks({ cut: true });
         }
     });
 
@@ -2047,36 +2101,6 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
 });
 
-function normalizeEditorDocument({ save = true } = {}) {
-    if (!editorInstance || normalizingEditorDocument) return false;
-
-    const documentSnapshot = currentDocumentSnapshot();
-    const result = normalizeImportedMarkdownBlocks(documentSnapshot);
-    if (!result.changed) return false;
-
-    normalizingEditorDocument = true;
-    try {
-        editorInstance.replaceBlocks(documentSnapshot, result.blocks);
-    } finally {
-        normalizingEditorDocument = false;
-        invalidateDocumentSnapshot();
-    }
-
-    updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot: result.blocks });
-    if (save) triggerDebouncedSave();
-    return true;
-}
-
-function schedulePastedContentNormalization() {
-    if (pastedContentNormalizationTimer) {
-        clearTimeout(pastedContentNormalizationTimer);
-    }
-    pastedContentNormalizationTimer = window.setTimeout(() => {
-        pastedContentNormalizationTimer = null;
-        normalizeEditorDocument();
-    }, 0);
-}
-
 function handleNotesPaste({ event, editor, defaultPasteHandler }) {
     const clipboardData = event.clipboardData;
     const imageFiles = clipboardImageFiles(clipboardData);
@@ -2098,27 +2122,6 @@ function handleNotesPaste({ event, editor, defaultPasteHandler }) {
         return true;
     }
     const rawPlainText = clipboardData?.getData('text/plain') || '';
-    const blockJson = clipboardData?.getData('application/x-nest-blocknote+json') || '';
-    if (blockJson) {
-        try {
-            const blocks = JSON.parse(blockJson);
-            if (Array.isArray(blocks) && blocks.length) {
-                const current = editor.getTextCursorPosition?.()?.block;
-                if (current) {
-                    editor.insertBlocks?.(blocks.map((block) => {
-                        const next = { ...block };
-                        delete next.id;
-                        return next;
-                    }), current, 'after');
-                    schedulePastedContentNormalization();
-                    return true;
-                }
-            }
-        } catch (error) {
-            // Fall back to markdown/plain text paste.
-        }
-    }
-
     if (clipboardData?.getData('blocknote/html')) {
         return defaultPasteHandler({
             prioritizeMarkdownOverHTML: false,
@@ -2128,16 +2131,14 @@ function handleNotesPaste({ event, editor, defaultPasteHandler }) {
 
     const explicitMarkdown = clipboardData?.getData('text/markdown') || '';
     if (explicitMarkdown) {
-        editor.pasteMarkdown?.(normalizeClipboardText(explicitMarkdown));
-        schedulePastedContentNormalization();
+        void editor.pasteMarkdown?.(normalizeClipboardMarkdown(explicitMarkdown));
         return true;
     }
 
     const plainText = normalizeClipboardText(rawPlainText);
     const looksStructured = clipboardTextLooksStructured(plainText);
     if (looksStructured) {
-        editor.pasteText?.(plainText);
-        schedulePastedContentNormalization();
+        void editor.pasteMarkdown?.(normalizeClipboardMarkdown(plainText));
         return true;
     }
 
@@ -2413,11 +2414,6 @@ function NoteEditor({ initialContent, initialContentWasNormalized = false, colla
             onChange: () => {
                 invalidateDocumentSnapshot();
                 if (!canEdit) return;
-                if (normalizingEditorDocument) {
-                    const documentSnapshot = currentDocumentSnapshot();
-                    updateEditorChrome({ structureChanged: true, contentChanged: true, documentSnapshot });
-                    return;
-                }
                 updateEditorChrome({ contentChanged: true });
                 triggerDebouncedSave();
             },
@@ -2488,6 +2484,7 @@ async function initEditorPage() {
     if (noteCollaborationEnabled) {
         setSaveStatus('connecting');
         try {
+            const { createNoteCollaborationSession } = await import('./editor/collaboration.js');
             activeCollaborationSession = await createNoteCollaborationSession({
                 noteId,
                 access: note?.access || noteContext.access,
@@ -2502,15 +2499,10 @@ async function initEditorPage() {
             setSaveStatus('offline-readonly');
         }
     }
-    reviewPanelController = bindReviewPanel({
-        noteId,
+    bindLazyReviewPanel({
         canReview: note?.access?.can_review === true,
         canManageReviews: note?.access?.can_manage_reviews === true,
         canViewVersions: note?.access?.can_edit === true,
-        panel: reviewPanel,
-        reviewButton,
-        historyButton,
-        toast: window.APStudyToast,
     });
 
     let parsedContent = undefined;
@@ -2583,7 +2575,6 @@ async function initEditorPage() {
 function clearEditorTimersAndFrames() {
     if (saveDebounceTimer) window.clearTimeout(saveDebounceTimer);
     if (pageSetupSaveTimer) window.clearTimeout(pageSetupSaveTimer);
-    if (pastedContentNormalizationTimer) window.clearTimeout(pastedContentNormalizationTimer);
     if (editorChromeThrottleTimer) window.clearTimeout(editorChromeThrottleTimer);
     if (editorReadyTimer) window.clearTimeout(editorReadyTimer);
     if (editorInitialFocusTimer) window.clearTimeout(editorInitialFocusTimer);
@@ -2591,7 +2582,6 @@ function clearEditorTimersAndFrames() {
     if (editorChromeRafId) window.cancelAnimationFrame(editorChromeRafId);
     saveDebounceTimer = null;
     pageSetupSaveTimer = null;
-    pastedContentNormalizationTimer = null;
     editorChromeThrottleTimer = null;
     editorReadyTimer = null;
     editorInitialFocusTimer = null;
@@ -2616,8 +2606,12 @@ function releaseNoteEditorRuntime() {
     activeCollaborativeTitleCleanup = null;
     activeCollaborationSession?.destroy?.();
     activeCollaborationSession = null;
+    reviewPanelBootstrapCleanup?.();
+    reviewPanelBootstrapCleanup = null;
     reviewPanelController?.close?.();
     reviewPanelController = null;
+    document.removeEventListener('click', handleNotePrintClick, true);
+    document.removeEventListener('keydown', handleNotePrintShortcut, true);
     noteEditorReactRoot?.unmount();
     noteEditorReactRoot = null;
     editorInstance = null;

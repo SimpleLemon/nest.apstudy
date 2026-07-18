@@ -7,6 +7,32 @@
         formatSectionDateRange,
         formatSectionTypeLabel,
     }) {
+        const backgroundState = [];
+
+        function setCoursesModalBackgroundInert(inert) {
+            const overlay = document.getElementById("courses-modal-overlay");
+            if (inert) {
+                backgroundState.length = 0;
+                for (const element of Array.from(document.body.children)) {
+                    if (element === overlay || element.tagName === "SCRIPT") continue;
+                    backgroundState.push({
+                        element,
+                        inert: Boolean(element.inert),
+                        ariaHidden: element.getAttribute("aria-hidden"),
+                    });
+                    element.inert = true;
+                    element.setAttribute("aria-hidden", "true");
+                }
+                return;
+            }
+            for (const snapshot of backgroundState.splice(0)) {
+                if (!snapshot.element.isConnected) continue;
+                snapshot.element.inert = snapshot.inert;
+                if (snapshot.ariaHidden === null) snapshot.element.removeAttribute("aria-hidden");
+                else snapshot.element.setAttribute("aria-hidden", snapshot.ariaHidden);
+            }
+        }
+
         function captureCoursesModalViewState(overlay) {
             const scroller = overlay.querySelector("#courses-modal-scroll");
             const activeEl = document.activeElement;
@@ -15,20 +41,24 @@
             return {
                 scrollTop: scroller ? scroller.scrollTop : 0,
                 activeId,
+                activeFocusKey: activeInModal?.dataset.coursesFocusKey || null,
                 selectionStart: activeId === "courses-search-input" ? activeInModal.selectionStart : null,
                 selectionEnd: activeId === "courses-search-input" ? activeInModal.selectionEnd : null,
             };
         }
 
         function restoreCoursesModalViewState(overlay, snapshot) {
-            if (!snapshot) return;
+            if (!snapshot) return false;
             const scroller = overlay.querySelector("#courses-modal-scroll");
             if (scroller && Number.isFinite(snapshot.scrollTop)) {
                 scroller.scrollTop = snapshot.scrollTop;
             }
-            if (!snapshot.activeId) return;
-            const activeEl = overlay.querySelector(`#${snapshot.activeId}`);
-            if (!activeEl) return;
+            const activeEl = snapshot.activeId
+                ? overlay.querySelector(`#${snapshot.activeId}`)
+                : Array.from(overlay.querySelectorAll("[data-courses-focus-key]")).find((element) => (
+                    element.dataset.coursesFocusKey === snapshot.activeFocusKey
+                ));
+            if (!activeEl) return false;
             activeEl.focus({ preventScroll: true });
             if (
                 snapshot.activeId === "courses-search-input"
@@ -38,6 +68,29 @@
             ) {
                 activeEl.setSelectionRange(snapshot.selectionStart, snapshot.selectionEnd);
             }
+            return true;
+        }
+
+        function trapCoursesModalFocus(event) {
+            if (event.key !== "Tab" || !state.courses.modalOpen) return;
+            const panel = document.getElementById("courses-modal-panel");
+            if (!panel) return;
+            const focusable = Array.from(panel.querySelectorAll(
+                'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+            )).filter((element) => !element.hidden && element.getAttribute("aria-hidden") !== "true");
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (!panel.contains(document.activeElement)) {
+                event.preventDefault();
+                first.focus();
+            } else if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
         }
 
         function renderCoursesModal() {
@@ -45,7 +98,8 @@
             if (!overlay) {
                 overlay = document.createElement("div");
                 overlay.id = "courses-modal-overlay";
-                overlay.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-black/55 backdrop-blur-[1px] p-4";
+                overlay.className = "calendar-modal-overlay fixed inset-0 hidden items-center justify-center bg-black/55 backdrop-blur-[1px] p-4";
+                overlay.addEventListener("keydown", trapCoursesModalFocus);
                 document.body.appendChild(overlay);
             }
             if (!state.courses.modalOpen) {
@@ -104,7 +158,10 @@
                     </div>
                 </section>
             `;
-            restoreCoursesModalViewState(overlay, viewState);
+            const restoredFocus = restoreCoursesModalViewState(overlay, viewState);
+            if (!restoredFocus) {
+                overlay.querySelector("#courses-search-input")?.focus({ preventScroll: true });
+            }
             overlay.classList.add("transition-opacity", "duration-200");
             if (state.courses.animateOnOpen) {
                 overlay.classList.add("opacity-0", "pointer-events-none");
@@ -154,7 +211,7 @@
                                 <div class="text-lg font-semibold text-on-surface">${escapeHtml(section.course_code || "Unknown")} (${escapeHtml(sectionLabel)})</div>
                                 <div class="text-sm text-on-surface-variant">${escapeHtml(section.course_title || "Untitled Course")}</div>
                             </div>
-                            <button type="button" class="js-course-info-toggle h-8 w-8 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-section-id="${escapeHtml(sectionId)}" aria-label="Toggle section details">i</button>
+                            <button type="button" class="js-course-info-toggle h-8 w-8 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-section-id="${escapeHtml(sectionId)}" data-courses-focus-key="info:${escapeHtml(sectionId)}" aria-label="Toggle section details">i</button>
                         </div>
                         <div class="flex items-center gap-2 text-xs flex-wrap">
                             <span class="inline-flex rounded-full border border-outline-variant/35 px-2.5 py-1 font-medium text-on-surface-variant">${escapeHtml(formatTermLabel(section.term))}</span>
@@ -162,7 +219,7 @@
                             ${cancelledText}
                         </div>
                         <div class="text-sm text-on-surface-variant flex flex-wrap gap-x-4 gap-y-1">
-                            <div><span class="material-symbols-outlined text-[16px] align-[-3px] mr-1">schedule</span>${escapeHtml(section.schedule_display || "TBA")}</div>
+                            <div><span class="material-symbols-outlined text-[16px] align-[-3px] mr-1" aria-hidden="true">schedule</span>${escapeHtml(section.schedule_display || "TBA")}</div>
                         </div>
                         <div class="text-sm text-on-surface-variant">
                             Instructor: ${escapeHtml(section.instructor || "TBA")}
@@ -180,7 +237,7 @@
                         </div>
                         ` : ""}
                         <div class="flex justify-end">
-                            <button type="button" ${addDisabled} class="js-course-toggle min-w-[84px] h-9 rounded-full px-4 text-sm font-semibold transition-colors ${addButtonClasses} disabled:opacity-50 disabled:cursor-not-allowed" data-section-id="${escapeHtml(sectionId)}" title="${selected ? "Remove from simulated calendar" : "Add to simulated calendar"}">${addButtonText}</button>
+                            <button type="button" ${addDisabled} class="js-course-toggle min-w-[84px] h-9 rounded-full px-4 text-sm font-semibold transition-colors ${addButtonClasses} disabled:opacity-50 disabled:cursor-not-allowed" data-section-id="${escapeHtml(sectionId)}" data-courses-focus-key="toggle:${escapeHtml(sectionId)}" title="${selected ? "Remove from simulated calendar" : "Add to simulated calendar"}">${addButtonText}</button>
                         </div>
                     </article>
                 `;
@@ -188,7 +245,7 @@
             return `<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center">${cards}</div>`;
         }
 
-        return { renderCoursesModal };
+        return { renderCoursesModal, setCoursesModalBackgroundInert };
     }
 
     window.APStudyCalendarCourseModal = { createCourseModalRenderer };

@@ -79,35 +79,38 @@ test("chat uses local presence APIs for online and typing state", async () => {
 
 test("chat keeps a page lifetime room cache with delta loading", async () => {
   const source = await sourceFor("static/js/chat.js");
+  const cacheSource = await sourceFor("static/js/chat/cache.js");
 
   assert.match(source, /roomCache: new Map\(\)/);
   assert.match(source, /function cacheFor\(room\)/);
   assert.match(source, /latestCursor/);
-  assert.match(source, /after: cache\.latestCursor/);
+  assert.match(cacheSource, /after: cache\.latestCursor/);
   assert.match(source, /removeMessageFromCaches/);
 });
 
 test("chat persists user-scoped IndexedDB cache until logout", async () => {
   const script = await sourceFor("static/js/chat.js");
+  const cacheScript = await sourceFor("static/js/chat/cache.js");
   const template = await sourceFor("templates/chat.html");
   const globalScript = await sourceFor("static/js/core/global.js");
 
   assert.match(template, /data-current-user-id="\{\{ user\.id or '' \}\}"/);
-  assert.match(script, /const CHAT_CACHE_DB_NAME = "apstudy-chat-cache"/);
-  assert.match(script, /const CHAT_CACHE_SCHEMA = "v2"/);
+  assert.match(cacheScript, /const CHAT_CACHE_DB_NAME = "apstudy-chat-cache"/);
+  assert.match(cacheScript, /const CHAT_CACHE_SCHEMA = "v2"/);
   assert.match(script, /function persistentCacheKey\(suffix\)/);
   assert.match(script, /\$\{CHAT_CACHE_SCHEMA\}:user:\$\{userId\}:\$\{suffix\}/);
-  assert.match(script, /window\.indexedDB\.open\(CHAT_CACHE_DB_NAME, CHAT_CACHE_DB_VERSION\)/);
+  assert.match(cacheScript, /indexedDB\.open\(CHAT_CACHE_DB_NAME, CHAT_CACHE_DB_VERSION\)/);
   assert.match(globalScript, /indexedDB\.deleteDatabase\("apstudy-chat-cache"\)/);
 });
 
 test("chat hydrates cached rooms before silent refresh and limits persisted messages", async () => {
   const script = await sourceFor("static/js/chat.js");
+  const cacheScript = await sourceFor("static/js/chat/cache.js");
 
-  assert.match(script, /const CHAT_CACHE_MESSAGE_LIMIT = 50/);
-  assert.match(script, /\.slice\(-CHAT_CACHE_MESSAGE_LIMIT\)/);
-  assert.match(script, /function normalizeCachedMessage\(message\)/);
-  assert.match(script, /normalized\.can_delete = false/);
+  assert.match(cacheScript, /const CHAT_CACHE_MESSAGE_LIMIT = 50/);
+  assert.match(cacheScript, /\.slice\(-limit\)/);
+  assert.match(cacheScript, /function normalizeCachedMessage\(message/);
+  assert.match(cacheScript, /normalized\.can_delete = false/);
   assert.match(script, /function hydrateFromPersistentCache\(\)/);
   assert.match(script, /await hydrateRoomFromPersistentCache\(room\)/);
   assert.match(script, /await selectRoom\(room, \{ fromCacheHydration: true, quiet: true \}\)/);
@@ -257,12 +260,13 @@ test("chat direct messages render presence dots and profile-only side pane", asy
 
 test("chat groups close same-author messages and formats timestamps compactly", async () => {
   const source = await sourceFor("static/js/chat.js");
+  const presentation = await sourceFor("static/js/chat/presentation.js");
 
-  assert.match(source, /const MESSAGE_GROUP_WINDOW_MS = 7 \* 60 \* 1000/);
-  assert.match(source, /function groupMessages\(messages\)/);
-  assert.match(source, /function shouldGroupMessage\(previous, next\)/);
-  assert.match(source, /localDateKey\(previousDate\) !== localDateKey\(nextDate\)/);
-  assert.match(source, /Yesterday at \$\{time\}/);
+  assert.match(presentation, /const MESSAGE_GROUP_WINDOW_MS = 7 \* 60 \* 1000/);
+  assert.match(presentation, /function groupMessages\(messages\)/);
+  assert.match(presentation, /function shouldGroupMessage\(previous, next\)/);
+  assert.match(presentation, /localDateKey\(previousDate\) === localDateKey\(nextDate\)/);
+  assert.match(presentation, /Yesterday at \$\{time\}/);
   assert.match(source, /chat-message-continuation-time/);
 });
 

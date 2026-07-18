@@ -34,6 +34,7 @@ test("task rows and sections are memoized while sortable dependencies stay ID-ba
 });
 
 test("task component module depends on shared task utilities instead of duplicating rules", () => {
+    assert.match(source, /import Sortable from "sortablejs"/);
     assert.match(source, /from "\.\/task-utils\.js"/);
     assert.match(source, /from "\.\/task-entry-components\.js"/);
     assert.match(entrySource, /from "\.\/task-utils\.js"/);
@@ -41,6 +42,7 @@ test("task component module depends on shared task utilities instead of duplicat
     assert.match(entrySource, /\bformatRepeat\b/);
     assert.match(source, /\bsortedLists\b/);
     assert.match(source, /\bsplitTasksByCompletion\b/);
+    assert.doesNotMatch(source, /window\.Sortable/);
 });
 
 test("task component module exposes completed section and quick-add popover controls", () => {

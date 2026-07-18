@@ -1,19 +1,15 @@
+import { avatarAttrs, avatarUrl, escapeHtml, formatMessageTimestamp, groupMessages, localDateKey, parseMessageDate, plural } from "./presentation.js";
+import { CHAT_CACHE_SCHEMA, createPersistentChatCache, deltaLoadParams, mergeMessages, roomCachePayload, trimMessagesForPersistentCache, updateCacheCursors } from "./cache.js";
+
 export function startChatRuntime(extensions = {}) {
   const root = document.querySelector(".chat-app");
   if (!root) return;
 
-  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Crect%20width='96'%20height='96'%20rx='24'%20fill='%23e5e7eb'/%3E%3Ccircle%20cx='48'%20cy='35'%20r='17'%20fill='%239ca3af'/%3E%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E%3C/svg%3E";
   const PRESENCE_REFRESH_MS = 5000;
   const TYPING_PRESENCE_TTL_MS = 8000;
   const PRESENCE_TAB_ID_KEY = "apstudy-presence-tab-id";
   const ROOM_SCROLL_RESTORE_DELAY = 0;
-  const MESSAGE_GROUP_WINDOW_MS = 7 * 60 * 1000;
   const DISCORD_HISTORY_CHANNEL_IDS = new Set(["nest_announcements", "nest_chat"]);
-  const CHAT_CACHE_DB_NAME = "apstudy-chat-cache";
-  const CHAT_CACHE_DB_VERSION = 2;
-  const CHAT_CACHE_STORE = "items";
-  const CHAT_CACHE_SCHEMA = "v2";
-  const CHAT_CACHE_MESSAGE_LIMIT = 50;
   const CHAT_PREFETCH_ROOM_LIMIT = 8;
   const REALTIME_FALLBACK_MS = 3000;
   const REALTIME_HEARTBEAT_MS = 8000;
@@ -80,6 +76,7 @@ export function startChatRuntime(extensions = {}) {
   let roomPrefetchIdleId = null;
   const transientChatTimers = new Set();
   const transientChatFrames = new Set();
+  const persistentChatCache = createPersistentChatCache();
 
   function scheduleTransientTimeout(callback, delay = 0) {
     const timer = window.setTimeout(() => {
@@ -151,113 +148,6 @@ export function startChatRuntime(extensions = {}) {
   extensions.attachments?.init?.(extensionContext);
   extensions.mediaPicker?.init?.(extensionContext);
   extensions.messageMedia?.init?.();
-
-  function escapeHtml(value) {
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  function avatarUrl(url, size = 64) {
-    const candidate = url || DEFAULT_AVATAR;
-    if (typeof window.APSTUDY_AVATAR_URL_FOR_SIZE === "function") {
-      return window.APSTUDY_AVATAR_URL_FOR_SIZE(candidate, size);
-    }
-    return candidate;
-  }
-
-  function avatarAttrs(url, size = 64, sizes = `${size}px`) {
-    const resolved = avatarUrl(url, size);
-    const src = escapeHtml(resolved);
-    // Data URLs are resolution-independent and may contain spaces that break
-    // srcset tokenization, so emit them with src only.
-    if (/^data:/i.test(resolved)) {
-      return `src="${src}" sizes="${escapeHtml(sizes)}" loading="lazy" decoding="async"`;
-    }
-    const src2x = escapeHtml(avatarUrl(url, size * 2));
-    return `src="${src}" srcset="${src} 1x, ${src2x} 2x" sizes="${escapeHtml(sizes)}" loading="lazy" decoding="async"`;
-  }
-
-  function parseMessageDate(value) {
-    if (!value) return null;
-    const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? null : date;
-  }
-
-  function localDateKey(date) {
-    if (!date) return "";
-    return [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, "0"),
-      String(date.getDate()).padStart(2, "0"),
-    ].join("-");
-  }
-
-  function calendarDayDifference(date, now = new Date()) {
-    if (!date) return 0;
-    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    return Math.round((start - target) / 86400000);
-  }
-
-  function formatClockTime(date) {
-    if (!date) return "";
-    return new Intl.DateTimeFormat(undefined, {
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(date);
-  }
-
-  function formatMessageTimestamp(value, now = new Date()) {
-    const date = parseMessageDate(value);
-    if (!date) return "";
-    const time = formatClockTime(date);
-    const dayDifference = calendarDayDifference(date, now);
-    if (dayDifference === 0) return time;
-    if (dayDifference === 1) return `Yesterday at ${time}`;
-    return new Intl.DateTimeFormat(undefined, {
-      month: "numeric",
-      day: "numeric",
-      year: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(date);
-  }
-
-  function messageAuthorKey(message) {
-    return String(message?.user_id || message?.author_username || message?.author_name || "");
-  }
-
-  function shouldGroupMessage(previous, next) {
-    const previousDate = parseMessageDate(previous?.created_at);
-    const nextDate = parseMessageDate(next?.created_at);
-    if (!previousDate || !nextDate) return false;
-    if (messageAuthorKey(previous) !== messageAuthorKey(next)) return false;
-    if (localDateKey(previousDate) !== localDateKey(nextDate)) return false;
-    return nextDate - previousDate <= MESSAGE_GROUP_WINDOW_MS;
-  }
-
-  function groupMessages(messages) {
-    const groups = [];
-    for (const message of messages || []) {
-      const lastGroup = groups[groups.length - 1];
-      const previous = lastGroup?.messages[lastGroup.messages.length - 1];
-      if (previous && shouldGroupMessage(previous, message)) {
-        lastGroup.messages.push(message);
-      } else {
-        groups.push({ id: message.id, messages: [message] });
-      }
-    }
-    return groups;
-  }
-
-  function plural(value, singular, pluralLabel) {
-    const number = Number(value) || 0;
-    return `${number} ${number === 1 ? singular : pluralLabel}`;
-  }
 
   function roomKey(room) {
     if (!room || !room.id || !room.type) return "";
@@ -345,88 +235,6 @@ export function startChatRuntime(extensions = {}) {
     return userId ? `${CHAT_CACHE_SCHEMA}:user:${userId}:${suffix}` : "";
   }
 
-  function openChatCacheDb() {
-    if (!window.indexedDB) return Promise.resolve(null);
-    if (state.chatCacheDb) return Promise.resolve(state.chatCacheDb);
-    if (state.chatCacheDbPromise) return state.chatCacheDbPromise;
-    state.chatCacheDbPromise = new Promise((resolve) => {
-      const request = window.indexedDB.open(CHAT_CACHE_DB_NAME, CHAT_CACHE_DB_VERSION);
-      request.onupgradeneeded = () => {
-        const db = request.result;
-        if (!db.objectStoreNames.contains(CHAT_CACHE_STORE)) {
-          db.createObjectStore(CHAT_CACHE_STORE, { keyPath: "key" });
-        }
-      };
-      request.onsuccess = () => {
-        state.chatCacheDb = request.result;
-        resolve(state.chatCacheDb);
-      };
-      request.onerror = () => {
-        console.warn("Chat cache unavailable", request.error);
-        resolve(null);
-      };
-      request.onblocked = () => resolve(null);
-    });
-    return state.chatCacheDbPromise;
-  }
-
-  async function readPersistentCache(key) {
-    if (!key) return null;
-    const db = await openChatCacheDb();
-    if (!db) return null;
-    return new Promise((resolve) => {
-      const request = db.transaction(CHAT_CACHE_STORE, "readonly")
-        .objectStore(CHAT_CACHE_STORE)
-        .get(key);
-      request.onsuccess = () => resolve(request.result?.value || null);
-      request.onerror = () => resolve(null);
-    });
-  }
-
-  async function writePersistentCache(key, value) {
-    if (!key || !value) return;
-    const db = await openChatCacheDb();
-    if (!db) return;
-    await new Promise((resolve) => {
-      const request = db.transaction(CHAT_CACHE_STORE, "readwrite")
-        .objectStore(CHAT_CACHE_STORE)
-        .put({ key, value, updatedAt: Date.now() });
-      request.onsuccess = () => resolve();
-      request.onerror = () => {
-        console.warn("Failed to persist chat cache", request.error);
-        resolve();
-      };
-    });
-  }
-
-  function normalizeCachedMessage(message) {
-    if (!message) return null;
-    const normalized = { ...message };
-    const deleteExpiry = parseMessageDate(normalized.delete_expires_at);
-    if (deleteExpiry && deleteExpiry.getTime() <= Date.now()) {
-      normalized.can_delete = false;
-    }
-    return normalized;
-  }
-
-  function trimMessagesForPersistentCache(messages) {
-    return (messages || [])
-      .map(normalizeCachedMessage)
-      .filter((message) => message && message.id)
-      .sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")))
-      .slice(-CHAT_CACHE_MESSAGE_LIMIT);
-  }
-
-  function roomCachePayload(room, cache) {
-    return {
-      room,
-      messages: trimMessagesForPersistentCache(cache?.messages || []),
-      hasMore: Boolean(cache?.hasMore),
-      scrollTop: Number(cache?.scrollTop) || 0,
-      savedAt: Date.now(),
-    };
-  }
-
   function applyRoomCachePayload(payload) {
     if (!payload?.room) return false;
     const cache = cacheFor(payload.room);
@@ -443,20 +251,20 @@ export function startChatRuntime(extensions = {}) {
   async function persistRoomCache(room) {
     const cache = cacheFor(room);
     if (!cache?.loaded) return;
-    await writePersistentCache(
+    await persistentChatCache.write(
       persistentCacheKey(`room:${roomKey(room)}`),
       roomCachePayload(room, cache)
     );
   }
 
   async function hydrateRoomFromPersistentCache(room) {
-    const payload = await readPersistentCache(persistentCacheKey(`room:${roomKey(room)}`));
+    const payload = await persistentChatCache.read(persistentCacheKey(`room:${roomKey(room)}`));
     return applyRoomCachePayload(payload);
   }
 
   async function persistBootstrapCache() {
     if (!currentUserId()) return;
-    await writePersistentCache(persistentCacheKey("bootstrap"), {
+    await persistentChatCache.write(persistentCacheKey("bootstrap"), {
       user: state.user,
       settings: state.settings,
       channels: (state.channels || []).map(staleChannelPresence),
@@ -470,7 +278,7 @@ export function startChatRuntime(extensions = {}) {
   }
 
   async function hydrateFromPersistentCache() {
-    const payload = await readPersistentCache(persistentCacheKey("bootstrap"));
+    const payload = await persistentChatCache.read(persistentCacheKey("bootstrap"));
     state.persistentCacheReady = true;
     if (!payload) return false;
     if (state.serverBootstrapped) return false;
@@ -526,38 +334,6 @@ export function startChatRuntime(extensions = {}) {
       });
     }
     return state.roomCache.get(key);
-  }
-
-  function updateCacheCursors(cache) {
-    if (!cache || !cache.messages.length) {
-      cache.oldestCursor = null;
-      cache.latestCursor = null;
-      cache.latestMessageId = null;
-      return;
-    }
-    cache.messages.sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")));
-    cache.oldestCursor = cache.messages[0].created_at || null;
-    const latest = cache.messages[cache.messages.length - 1];
-    cache.latestCursor = latest.created_at || null;
-    cache.latestMessageId = latest.id || null;
-  }
-
-  function deltaLoadParams(cache) {
-    if (!cache?.latestCursor) return {};
-    const params = { after: cache.latestCursor };
-    if (cache.latestMessageId) params.after_message_id = cache.latestMessageId;
-    return params;
-  }
-
-  function mergeMessages(existing, incoming) {
-    const byId = new Map();
-    for (const message of existing || []) {
-      if (message && message.id) byId.set(message.id, message);
-    }
-    for (const message of incoming || []) {
-      if (message && message.id) byId.set(message.id, message);
-    }
-    return Array.from(byId.values()).sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")));
   }
 
   function saveActiveScroll() {
@@ -1688,7 +1464,7 @@ export function startChatRuntime(extensions = {}) {
     if (!message.can_delete) return "";
     return `
       <button class="chat-delete" type="button" data-delete-message="${escapeHtml(message.id)}" aria-label="Delete message" ${GRAMMARLY_DISABLED_ATTRS}>
-        <span class="material-symbols-outlined">delete</span>
+        <span class="material-symbols-outlined" aria-hidden="true">delete</span>
       </button>
     `;
   }

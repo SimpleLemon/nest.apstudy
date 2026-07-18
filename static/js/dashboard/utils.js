@@ -81,6 +81,14 @@
         week: "Week",
         upcoming: "Upcoming",
     };
+    const DUPLICATE_TILE_TYPES = ["calendar", "tasks"];
+    const ITEM_LIMITS = [3, 5, 8];
+    const DENSITIES = ["compact", "comfortable"];
+    const CALENDAR_UPCOMING_DAYS = [7, 14, 30];
+    const TASK_DEADLINE_DAYS = [7, 30];
+    const TASK_PRIORITIES = ["high", "medium", "low", "none"];
+    const MAX_TILES = 12;
+    const MAX_DUPLICATE_TILES = 4;
 
     function escapeHtml(value) {
         const div = document.createElement("div");
@@ -184,15 +192,44 @@
         }
     }
 
-    function tilePayload(tileId, size, view, taskListIds = null) {
+    function createInstanceId(tileType) {
+        const uuid = globalThis.crypto?.randomUUID?.();
+        return uuid || `${tileType}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    function normalizeChoice(value, allowed, fallback) {
+        const normalized = String(value ?? fallback).trim().toLowerCase();
+        return allowed.includes(normalized) ? normalized : fallback;
+    }
+
+    function normalizeNumberChoice(value, allowed, fallback) {
+        const normalized = Number(value);
+        return allowed.includes(normalized) ? normalized : fallback;
+    }
+
+    function tilePayload(tileType, size, view, taskListIds = null, options = {}) {
         const payload = {
-            id: tileId,
-            size: normalizeTileSize(tileId, size),
+            instance_id: String(options.instance_id || createInstanceId(tileType)),
+            type: tileType,
+            size: normalizeTileSize(tileType, size),
+            density: normalizeChoice(options.density, DENSITIES, "comfortable"),
+            item_limit: normalizeNumberChoice(options.item_limit, ITEM_LIMITS, 5),
         };
-        if (tileId === "calendar") payload.view = normalizeCalendarView(tileId, view);
-        if (tileId === "tasks") {
+        const title = String(options.title || "").trim().slice(0, 60);
+        if (title) payload.title = title;
+        if (tileType === "calendar") {
+            payload.view = normalizeCalendarView(tileType, view);
+            payload.upcoming_days = normalizeNumberChoice(options.upcoming_days, CALENDAR_UPCOMING_DAYS, 7);
+        }
+        if (tileType === "tasks") {
             const listIds = normalizeTaskListIds(taskListIds);
             if (listIds.length) payload.task_list_ids = listIds;
+            payload.deadline_days = normalizeNumberChoice(options.deadline_days, TASK_DEADLINE_DAYS, 30);
+            payload.include_overdue = options.include_overdue !== false;
+            payload.include_undated = options.include_undated !== false;
+            payload.priorities = TASK_PRIORITIES.filter((priority) => (options.priorities || TASK_PRIORITIES).includes(priority));
+            if (!payload.priorities.length) payload.priorities = TASK_PRIORITIES.slice();
+            payload.starred_only = options.starred_only === true;
         }
         return payload;
     }
@@ -215,31 +252,61 @@
         const available = Array.isArray(availableTiles)
             ? availableTiles.filter((tileId) => TILE_META[tileId])
             : Object.keys(TILE_META);
-        const isVersionThree = Number(preferredLayout?.version || 0) >= 3;
+        const version = Number(preferredLayout?.version || (Array.isArray(preferredLayout) ? 1 : 0));
+        const preservesHiddenTiles = version >= 3;
         const source = Array.isArray(preferredLayout)
             ? preferredLayout
             : Array.isArray(preferredLayout?.tiles)
                 ? preferredLayout.tiles
                 : [];
         const layout = [];
+        const seenInstances = new Set();
+        const seenLegacyTypes = new Set();
         for (const item of source) {
-            const tileId = typeof item === "string" ? item : item?.id;
-            if (!available.includes(tileId) || layout.some((tile) => tile.id === tileId)) continue;
+            const tileType = typeof item === "string" ? item : (item?.type || item?.id);
+            const instanceId = typeof item === "string"
+                ? `legacy-${tileType}`
+                : String(item?.instance_id || (item?.type ? item?.id : "") || `legacy-${tileType}`);
+            if (!available.includes(tileType) || seenInstances.has(instanceId)) continue;
+            if (version < 4 && seenLegacyTypes.has(tileType)) continue;
             layout.push(tilePayload(
-                tileId,
+                tileType,
                 typeof item === "string" ? null : item?.size,
                 typeof item === "string" ? null : item?.view,
                 typeof item === "string" ? null : item?.task_list_ids,
+                {
+                    ...(typeof item === "string" ? {} : item),
+                    instance_id: instanceId,
+                },
             ));
+            seenInstances.add(instanceId);
+            seenLegacyTypes.add(tileType);
         }
-        if (!isVersionThree) {
-            for (const tileId of Object.keys(TILE_META)) {
-                if (available.includes(tileId) && !layout.some((tile) => tile.id === tileId)) {
-                    layout.push(tilePayload(tileId));
+        if (!preservesHiddenTiles) {
+            for (const tileType of Object.keys(TILE_META)) {
+                if (available.includes(tileType) && !seenLegacyTypes.has(tileType)) {
+                    layout.push(tilePayload(tileType, null, null, null, { instance_id: `legacy-${tileType}` }));
                 }
             }
         }
-        return layout;
+        return layout.slice(0, MAX_TILES);
+    }
+
+    function normalizeDashboardLayout(preferredLayout, availableTiles, quoteFallback = true) {
+        const source = preferredLayout?.dashboard_layout || preferredLayout;
+        return {
+            version: 4,
+            daily_quote_visible: typeof source?.daily_quote_visible === "boolean" ? source.daily_quote_visible : Boolean(quoteFallback),
+            tiles: normalizeTileLayout(source, availableTiles),
+        };
+    }
+
+    function cloneLayout(layout) {
+        return JSON.parse(JSON.stringify(layout));
+    }
+
+    function layoutsEqual(first, second) {
+        return JSON.stringify(first) === JSON.stringify(second);
     }
 
     function nearestTileSize(tileId, deltaX, deltaY, startSize) {
@@ -263,9 +330,11 @@
     }
 
     function summaryLayoutSource(summary) {
+        if (summary?.dashboard_layout) return summary.dashboard_layout;
         if (Array.isArray(summary?.tile_layout)) {
             return {
-                version: Number(summary.tile_layout_version || 3),
+                version: Number(summary.tile_layout_version || 4),
+                daily_quote_visible: summary.daily_quote_visible,
                 tiles: summary.tile_layout,
             };
         }
@@ -304,6 +373,14 @@
         TILE_SIZE_LABELS,
         CALENDAR_VIEW_RULES,
         CALENDAR_VIEW_LABELS,
+        CALENDAR_UPCOMING_DAYS,
+        TASK_DEADLINE_DAYS,
+        TASK_PRIORITIES,
+        DUPLICATE_TILE_TYPES,
+        ITEM_LIMITS,
+        DENSITIES,
+        MAX_TILES,
+        MAX_DUPLICATE_TILES,
         escapeHtml,
         escapeAttr,
         fetchJson,
@@ -312,11 +389,15 @@
         formatBytes,
         normalizeTileOrder,
         normalizeTileLayout,
+        normalizeDashboardLayout,
         normalizeTileSize,
         normalizeCalendarView,
         normalizeTaskListIds,
         parseTaskListIds,
         tilePayload,
+        createInstanceId,
+        cloneLayout,
+        layoutsEqual,
         tileTitle,
         eventDateKey,
         groupEventsByDate,

@@ -203,7 +203,7 @@ function renderNavbar() {
 <div class="navbar-container" id="navbar-root">
   <div class="navbar-left">
     ${menuButton}
-    <img src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="APStudy" class="navbar-logo" width="32" height="32" decoding="async" />
+    <img src="/static/images/brand/nest-logo-v1-32.png" srcset="/static/images/brand/nest-logo-v1-32.png 1x, /static/images/brand/nest-logo-v1-64.png 2x" alt="APStudy" class="navbar-logo" width="32" height="32" decoding="async" />
     <a href="${authenticated ? '/dashboard' : '/'}" class="navbar-title">Nest.APStudy</a>
   </div>
 

@@ -4,7 +4,7 @@
 <section class="notes-access-gate" aria-labelledby="{{ title_id }}">
     <div class="notes-access-gate__inner">
         <a class="notes-access-gate__brand" href="{{ url_for('auth.index') }}" aria-label="Nest.APStudy home">
-            <img src="{{ url_for('static', filename='apple-touch-icon.png') }}" alt="" width="34" height="34" decoding="async" />
+            <img src="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }}" srcset="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }} 1x, {{ url_for('static', filename='images/brand/nest-logo-v1-64.png') }} 2x" alt="" width="34" height="34" decoding="async" />
             <span>Nest.APStudy</span>
         </a>
 
@@ -43,7 +43,7 @@
                 <span class="notes-access-gate__sheet-line"></span>
                 <span class="notes-access-gate__sheet-line notes-access-gate__sheet-line--short"></span>
                 <span class="notes-access-gate__seal">
-                    <span class="material-symbols-outlined">{{ 'lock' if is_login_gate else 'link_off' }}</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">{{ 'lock' if is_login_gate else 'link_off' }}</span>
                 </span>
             </div>
         </div>

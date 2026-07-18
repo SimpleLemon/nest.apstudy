@@ -409,12 +409,12 @@
 
         function showProgress(percent) {
             if (els.progressWrap) els.progressWrap.hidden = false;
-            if (els.progressBar) els.progressBar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+            if (els.progressBar) els.progressBar.style.transform = `scaleX(${Math.max(0, Math.min(100, percent)) / 100})`;
         }
 
         function resetProgress() {
             if (els.progressWrap) els.progressWrap.hidden = true;
-            if (els.progressBar) els.progressBar.style.width = "0%";
+            if (els.progressBar) els.progressBar.style.transform = "scaleX(0)";
         }
 
         return {

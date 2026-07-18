@@ -58,7 +58,7 @@
                             <p class="calendar-info-subtitle">${escapeHtml(label)}</p>
                         </div>
                         <button type="button" class="js-source-info-close calendar-info-close" aria-label="Close calendar info">
-                            <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                            <span class="material-symbols-outlined calendar-info-close-icon" aria-hidden="true">close</span>
                         </button>
                     </div>
                     <div class="calendar-info-body">
@@ -175,7 +175,7 @@
                                 <p class="calendar-info-subtitle">Create a local calendar or subscribe from a URL.</p>
                             </div>
                             <button type="button" class="js-source-create-close calendar-info-close" aria-label="Close add calendar">
-                                <span class="material-symbols-outlined calendar-info-close-icon">close</span>
+                                <span class="material-symbols-outlined calendar-info-close-icon" aria-hidden="true">close</span>
                             </button>
                         </div>
                         <div class="calendar-info-body">
@@ -302,13 +302,13 @@
                 b: parseInt(hex.slice(4, 6), 16),
             };
             const modal = document.createElement("div");
-            modal.className = "fixed inset-0 z-[80] bg-black/50 backdrop-blur-[2px] flex items-center justify-center p-4";
+            modal.className = "calendar-modal-overlay fixed inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center p-4";
             modal.innerHTML = `
                 <div class="w-full max-w-[480px] rounded-2xl border border-outline-variant/40 bg-surface p-5 shadow-2xl" role="dialog" aria-modal="true" aria-label="Custom calendar color">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-base font-semibold text-on-surface">Custom Color</h3>
                         <button type="button" class="js-rgb-close p-1 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" aria-label="Close color picker">
-                            <span class="material-symbols-outlined text-[18px]">close</span>
+                            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">close</span>
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr] gap-4">

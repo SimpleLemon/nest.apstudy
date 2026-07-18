@@ -7,12 +7,14 @@
     "scrape:atlas": "node atlasMainScraper.js",
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --minify",
     "build:notes": "vite build --config vite.notes.config.mjs",
-    "build": "npm run build:css && npm run build:notes",
+    "build:tasks": "vite build --config vite.tasks.config.mjs",
+    "build": "npm run build:css && npm run build:notes && npm run build:tasks",
     "collab:start": "node collaboration/server.mjs",
     "watch:css": "tailwindcss -c ./tailwind.config.cjs -i ./static/css/tailwind-input.css -o ./static/css/tailwind.css --watch",
     "test": "npm run test:js && npm run test:py",
     "test:js": "node --test tests/js/*.test.cjs tests/js/*.test.mjs",
     "test:py": ".venv/bin/python -m unittest",
+    "test:browser": "playwright test",
     "test:memory": "node scripts/profile_navigation_memory.mjs"
   },
   "repository": {
@@ -48,6 +50,7 @@
     "appwrite": "^25.0.0",
     "cmdk": "^1.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sortablejs": "1.15.0"
   }
 }

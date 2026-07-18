@@ -345,7 +345,7 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
 test("theme init normalizes theme aliases and persists pending settings safely", async () => {
     const source = await sourceFor("static/js/core/theme-init.js");
 
-    assert.match(source, /console-discord\.js/);
+    assert.doesNotMatch(source, /console-discord\.js|document\.write/);
     assert.match(source, /var DARK_THEMES = \['obsidian-dark', 'nest-dark'\]/);
     assert.match(source, /return 'obsidian-dark'/);
     assert.match(source, /return 'parchment-light'/);
@@ -405,7 +405,7 @@ test("notes list guards destructive actions and supports safe card menus", async
     const cardsSource = await sourceFor("static/js/notes/list/cards.js");
     const dragSource = await sourceFor("static/js/notes/list/drag-drop.js");
     const template = await sourceFor("templates/notes.html");
-    const styles = await sourceFor("static/css/notes.css");
+    const styles = `${await sourceFor("static/css/notes.css")}\n${await sourceFor("static/css/notes/editor.css")}`;
     const source = [
         listSource,
         await sourceFor("static/js/notes/list/utils.js"),
@@ -466,7 +466,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     const catalogSource = await sourceFor("static/js/notes/editor/block-catalog.js");
     const keyboardSource = await sourceFor("static/js/notes/editor/keyboard-shortcuts.js");
     const printSource = await sourceFor("static/js/notes/editor/print.js");
-    const styles = await sourceFor("static/css/notes.css");
+    const styles = `${await sourceFor("static/css/notes.css")}\n${await sourceFor("static/css/notes/editor.css")}`;
     const editorTemplate = await sourceFor("templates/notes_editor.html");
     const notesTemplate = await sourceFor("templates/notes.html");
 
@@ -502,7 +502,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /listItemHardBreakShortcuts/);
     assert.match(source, /from '\.\/toolbar\.js'/);
     assert.match(source, /from '\.\/editor\/block-catalog\.js'/);
-    assert.match(source, /from '\.\/editor\/print\.js'/);
+    assert.match(source, /await import\('\.\/editor\/print\.js'\)/);
     assert.match(toolbarSource, /const notesEditorSchema = BlockNoteSchema\.create/);
     assert.match(toolbarSource, /createReactBlockSpec/);
     assert.match(toolbarSource, /type: 'callout'/);
@@ -539,10 +539,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /function handleNotesPaste\(\{ event, editor, defaultPasteHandler \}\)/);
     assert.match(source, /pasteHandler: handleNotesPaste/);
     assert.match(source, /from '\.\/editor\/markdown-repair\.js'/);
-    assert.match(source, /normalizeClipboardText/);
+    assert.match(source, /normalizeClipboardMarkdown/);
     assert.match(source, /normalizeCopiedPlainText/);
     assert.match(source, /const looksStructured = clipboardTextLooksStructured\(plainText\)/);
-    assert.match(source, /if \(looksStructured\) \{\s*editor\.pasteText\?\.\(plainText\);/);
+    assert.match(source, /if \(looksStructured\) \{\s*void editor\.pasteMarkdown\?\.\(normalizeClipboardMarkdown\(plainText\)\);/);
     assert.match(source, /prioritizeMarkdownOverHTML: false/);
     assert.match(source, /plainTextAsMarkdown: false/);
     assert.doesNotMatch(source, /clipboardTextHasMarkdownSyntax/);
@@ -559,11 +559,11 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /const content = JSON\.stringify\(documentSnapshot\)/);
     assert.doesNotMatch(source, /const updatedNote = await response\.json\(\)/);
     assert.doesNotMatch(source, /if \(normalizeEditorDocument\(\)\) return;/);
-    assert.match(source, /schedulePastedContentNormalization\(\)/);
+    assert.doesNotMatch(source, /schedulePastedContentNormalization|replaceBlocks\(documentSnapshot/);
     assert.match(source, /let activePageSetupTrigger = null/);
     assert.match(source, /activePageSetupTrigger = trigger \|\| null/);
     assert.match(source, /activePageSetupTrigger\?\.contains\(event\.target\)/);
-    assert.match(source, /application\/x-nest-blocknote\+json/);
+    assert.doesNotMatch(source, /application\/x-nest-blocknote\+json/);
     assert.match(source, /notes\/tools\/link-preview/);
     assert.match(source, /function toggleHeadingCollapse/);
     assert.match(source, /function syncHeadingCollapseChrome/);
@@ -638,7 +638,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(printSource, /Symbol\.for\('apstudy\.notes\.active-print-promise'\)/);
     assert.match(printSource, /querySelectorAll\?\.\('\.notes-print-surface'\)/);
     assert.match(printSource, /PRINT_IMAGE_TIMEOUT_MS = 2000/);
-    assert.match(source, /bindNotePrintController\(\{/);
+    assert.match(source, /document\.addEventListener\('click', handleNotePrintClick, true\)/);
+    assert.match(source, /document\.addEventListener\('keydown', handleNotePrintShortcut, true\)/);
     assert.match(printSource, /isNotePrintShortcut\(event\)/);
     assert.match(source, /hiddenBlockIds: hidden\.keys\(\)/);
     assert.match(source, /APStudyToast\?\.error\?\.\('Could not prepare this note for printing\.'/);
@@ -651,8 +652,10 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /--notes-print-font-family/);
     assert.match(styles, /--notes-print-side-margin/);
     assert.match(editorTemplate, /css\/notes\.css'\) }}\?v=notes-print-3/);
-    assert.match(editorTemplate, /notes-editor-bundle-16/);
-    assert.match(await sourceFor("static/js/notes/list/utils.js"), /notes-editor\.js\?v=notes-editor-bundle-16/);
+    assert.match(editorTemplate, /notes-editor-bundle-17/);
+    assert.match(editorTemplate, /notes-editor-v17\.js/);
+    assert.doesNotMatch(editorTemplate, /notes-editor-v17\.js[^"']*\?v=/);
+    assert.match(await sourceFor("static/js/notes/list/utils.js"), /notes-editor-v17\.js/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
     assert.match(source, /action === 'copy-blocks'/);
@@ -699,7 +702,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     const sharingSource = await sourceFor("static/js/notes/sharing.js");
     const editorSource = await sourceFor("static/js/notes/editor.js");
     const editorTemplate = await sourceFor("templates/notes_editor.html");
-    const styles = await sourceFor("static/css/notes.css");
+    const styles = `${await sourceFor("static/css/notes.css")}\n${await sourceFor("static/css/notes/editor.css")}`;
     const notesTemplate = await sourceFor("templates/notes.html");
     const folderTemplate = await sourceFor("templates/notes_shared_folder.html");
     const navbarSource = await sourceFor("static/js/core/navbar.js");
@@ -910,7 +913,9 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
     assert.match(source, /buildListOrderUpdates\(orderedIds\)/);
     assert.match(source, /taskOrderUpdatesFromDocument\(\)/);
     assert.match(source, /taskReactRoot = createRoot\(mount\)/);
-    assert.match(source, /taskReactRoot\.render\(h\(TaskApp/);
+    assert.match(source, /taskReactRoot\.render\(h\(TaskInitializationBoundary/);
+    assert.match(source, /window\.APStudyTaskLoader\?\.ready\?\.\(\)/);
+    assert.match(source, /window\.APStudyTaskLoader\?\.fail\?\.\(error\)/);
     assert.match(source, /taskReactRoot\?\.unmount\(\)/);
     assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
     assert.match(source, /createTaskSounds\(\{ completeSound, uncompleteSound \}\)/);
@@ -946,19 +951,21 @@ test("calendar context menu keeps task, event, override, and keyboard flows wire
 
     assert.match(source, /const rootSelector = "#calendar-view-root"/);
     assert.match(source, /role", "menu"/);
-    assert.match(source, /data-event-ref], \[data-event-id]/);
-    assert.match(source, /window\.openCalendarEventForm && window\.openCalendarEventForm\(\{ mode: 'create'/);
-    assert.match(source, /const mode = isImportedEvent\(event\) \? 'override' : 'edit'/);
+    assert.match(source, /const eventSelector = "\[data-event-ref\], \[data-event-id\]"/);
+    assert.match(source, /window\.openCalendarEventForm\?\.\(\{ mode: "create"/);
+    assert.match(source, /mode: isImportedEvent\(event\) \? "override" : "edit"/);
     assert.match(source, /window\.APStudyConfirm\?\.request\?\.\(\{/);
-    assert.match(source, /fetch\('\/api\/calendar\/event-overrides\/hide'/);
-    assert.match(source, /fetch\(`\/api\/calendar\/events\/\$\{encodeURIComponent\(event\.id \|\| ctx\.eventId\)\}`/);
-    assert.match(source, /localStorage\.removeItem\('calendarEventsCache'\)/);
-    assert.match(source, /e\.key === 'ArrowDown'/);
+    assert.match(source, /fetch\("\/api\/calendar\/event-overrides\/hide"/);
+    assert.match(source, /fetch\(`\/api\/calendar\/events\/\$\{encodeURIComponent\(event\.id \|\| context\.eventId\)\}`/);
+    assert.match(source, /localStorage\.removeItem\("calendarEventsCache"\)/);
+    assert.match(source, /event\.key === "ArrowDown"/);
+    assert.match(source, /closeMenu\(\{ restoreFocus: true \}\)/);
 });
 
 test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader, date, and auth helpers", async () => {
     const chromeSource = await sourceFor("static/js/core/global-chrome.js");
     const source = await sourceFor("static/js/core/global.js");
+    const primitiveSource = await sourceFor("static/js/core/ui-primitives.js");
 
     assert.match(chromeSource, /window\.APStudyPageLifecycle = \{/);
     assert.match(chromeSource, /window\.APStudyNavigation = \{/);
@@ -969,15 +976,15 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.doesNotMatch(chromeSource, /window\.APStudyPendingMutations = \{/);
     assert.match(source, /window\.APStudyPendingMutations = \{/);
     assert.match(source, /new CustomEvent\("apstudy-pending-save-change"/);
-    assert.match(source, /window\.APStudyConfirm = \{ request \}/);
-    assert.match(source, /id = "apstudy-confirm-root"/);
-    assert.match(source, /window\.APStudyLoader = \{/);
-    assert.match(source, /window\.APStudySkeleton = \{/);
-    assert.match(source, /function table\(options = \{\}\)/);
-    assert.match(source, /function cards\(options = \{\}\)/);
-    assert.match(source, /function fieldSet\(options = \{\}\)/);
-    assert.match(source, /block: skeletonBlock/);
-    assert.match(source, /data-slot="skeleton"/);
+    assert.match(primitiveSource, /window\.APStudyConfirm = window\.APStudyConfirm \|\|/);
+    assert.match(primitiveSource, /id = 'apstudy-confirm-root'/);
+    assert.match(primitiveSource, /window\.APStudyLoader = window\.APStudyLoader \|\|/);
+    assert.match(primitiveSource, /window\.APStudySkeleton = window\.APStudySkeleton \|\|/);
+    assert.match(primitiveSource, /table\(options = \{\}\)/);
+    assert.match(primitiveSource, /cards\(options = \{\}\)/);
+    assert.match(primitiveSource, /fieldSet\(options = \{\}\)/);
+    assert.match(primitiveSource, /block: skeletonBlock/);
+    assert.match(primitiveSource, /data-slot="skeleton"/);
     assert.match(source, /window\.APStudyDate = \{/);
     assert.match(source, /function clearClientState\(options = \{\}\)/);
     assert.match(source, /function markClientLoggedOut\(\)/);
@@ -1114,6 +1121,7 @@ test("landing page keeps product proof visible and wires the new signup journey 
 
 test("onboarding presents five accessible stages without changing its saved step contract", async () => {
     const template = await sourceFor("templates/onboarding.html");
+    const onboardingSource = await sourceFor("static/js/onboarding/index.js");
     const styles = await sourceFor("static/css/onboarding.css");
 
     assert.match(template, /css\/onboarding\.css/);
@@ -1125,15 +1133,17 @@ test("onboarding presents five accessible stages without changing its saved step
     assert.match(template, /aria-current="step"/);
     assert.match(template, /Step \{\{ step if step else 1 \}\} of 5/);
     assert.match(template, /role="alert" aria-live="assertive" tabindex="-1"/);
-    assert.match(template, /const percent = Math\.round\(\(safeStep \/ 5\) \* 100\)/);
-    assert.match(template, /setProperty\('--onboarding-progress', String\(percent \/ 100\)\)/);
-    assert.match(template, /stepLabel\.textContent = `Step \$\{safeStep\} of 5`/);
-    assert.match(template, /activeHeading\.focus/);
-    assert.match(template, /wizardStatus\.focus/);
-    assert.match(template, /saveStep\(1,/);
-    assert.match(template, /saveStep\(2,/);
-    assert.match(template, /saveStep\(3,/);
-    assert.match(template, /saveStep\(4\)/);
+    assert.match(template, /js\/onboarding\/index\.js/);
+    assert.doesNotMatch(template, /<script type="module">/);
+    assert.match(onboardingSource, /const percent = Math\.round\(\(safeStep \/ 5\) \* 100\)/);
+    assert.match(onboardingSource, /setProperty\('--onboarding-progress', String\(percent \/ 100\)\)/);
+    assert.match(onboardingSource, /stepLabel\.textContent = `Step \$\{safeStep\} of 5`/);
+    assert.match(onboardingSource, /activeHeading\.focus/);
+    assert.match(onboardingSource, /wizardStatus\.focus/);
+    assert.match(onboardingSource, /saveStep\(1,/);
+    assert.match(onboardingSource, /saveStep\(2,/);
+    assert.match(onboardingSource, /saveStep\(3,/);
+    assert.match(onboardingSource, /saveStep\(4\)/);
     assert.match(styles, /grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
     assert.match(styles, /@media \(max-width: 680px\)/);
     assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);

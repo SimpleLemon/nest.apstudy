@@ -44,6 +44,7 @@ export function createMediaPicker() {
   let searchTimer;
   let onComposerChange;
   let lastHoverSmile = -1;
+  let returnFocusEl = null;
 
   function showHoverSmile() {
     const icon = els.button?.querySelector(".material-symbols-outlined, .chat-hover-smile");
@@ -64,14 +65,19 @@ export function createMediaPicker() {
     icon.textContent = "sentiment_satisfied";
   }
 
-  function close() {
+  function close({ restoreFocus = true, focusComposer = false } = {}) {
     if (!els.picker) return;
     els.picker.hidden = true;
     els.button?.setAttribute("aria-expanded", "false");
+    if (!restoreFocus) return;
+    const target = focusComposer ? els.input : returnFocusEl;
+    if (target?.isConnected) target.focus();
+    else if (els.button?.isConnected) els.button.focus();
   }
 
   function open() {
     if (!els.picker) return;
+    returnFocusEl = document.activeElement instanceof HTMLElement ? document.activeElement : els.button;
     els.picker.hidden = false;
     els.button?.setAttribute("aria-expanded", "true");
     positionPicker();
@@ -162,11 +168,18 @@ export function createMediaPicker() {
     });
   }
 
-  function setTab(tab) {
+  function isTabAvailable(tab) {
+    return tab !== "gif" || Boolean(capabilities.giphy?.available);
+  }
+
+  function setTab(tab, { focus = false } = {}) {
+    if (!isTabAvailable(tab)) return false;
     activeTab = tab;
     const gif = tab === "gif";
     els.emojiTab.setAttribute("aria-selected", String(!gif));
     els.gifTab.setAttribute("aria-selected", String(gif));
+    els.emojiTab.tabIndex = gif ? -1 : 0;
+    els.gifTab.tabIndex = gif ? 0 : -1;
     els.categories.hidden = gif;
     els.emoji.hidden = gif;
     els.gif.hidden = !gif;
@@ -174,6 +187,22 @@ export function createMediaPicker() {
     els.search.setAttribute("aria-label", gif ? "Search GIFs" : "Search emoji");
     els.search.value = "";
     if (gif) void loadGifs(); else renderEmoji();
+    if (focus) (gif ? els.gifTab : els.emojiTab).focus();
+    return true;
+  }
+
+  function handleTabKeydown(event) {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const tabs = [els.emojiTab, els.gifTab];
+    const currentIndex = Math.max(0, tabs.indexOf(document.activeElement));
+    let targetIndex;
+    if (event.key === "Home") targetIndex = 0;
+    else if (event.key === "End") targetIndex = tabs.length - 1;
+    else targetIndex = (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    const target = tabs[targetIndex];
+    if (target.getAttribute("aria-disabled") === "true") target.focus();
+    else setTab(target === els.gifTab ? "gif" : "emoji", { focus: true });
   }
 
   return {
@@ -190,11 +219,13 @@ export function createMediaPicker() {
       els.gifResults = document.getElementById("chat-gif-results");
       els.input = document.getElementById("chat-message-input");
       renderEmoji();
+      setTab("emoji");
       els.button?.addEventListener("click", () => els.picker.hidden ? open() : close());
       els.button?.addEventListener("pointerenter", showHoverSmile);
       els.button?.addEventListener("pointerleave", restoreHoverSmile);
       els.emojiTab?.addEventListener("click", () => setTab("emoji"));
       els.gifTab?.addEventListener("click", () => setTab("gif"));
+      els.emojiTab?.parentElement?.addEventListener("keydown", handleTabKeydown);
       els.categories?.addEventListener("click", (event) => {
         const button = event.target.closest("[data-emoji-group]");
         if (!button || button.disabled) return;
@@ -218,6 +249,11 @@ export function createMediaPicker() {
         els.input?.focus();
       });
       els.picker?.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          close();
+          return;
+        }
         const buttons = Array.from(els.picker.querySelectorAll(".chat-emoji-grid button, .chat-gif-tile"));
         const index = buttons.indexOf(document.activeElement);
         if (index < 0 || !["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(event.key)) return;
@@ -227,18 +263,21 @@ export function createMediaPicker() {
         buttons[Math.max(0, Math.min(buttons.length - 1, index + delta))]?.focus();
       });
       document.addEventListener("pointerdown", (event) => {
-        if (!els.picker?.hidden && !els.picker.contains(event.target) && !els.button.contains(event.target)) close();
+        if (!els.picker?.hidden && !els.picker.contains(event.target) && !els.button.contains(event.target)) close({ restoreFocus: false });
       });
       window.addEventListener("resize", positionPicker);
     },
     configure(value) {
       capabilities = value || {};
-      els.gifTab.disabled = !capabilities.giphy?.available;
-      els.gifTab.title = capabilities.giphy?.available ? "" : "GIF search is not configured";
+      const gifAvailable = Boolean(capabilities.giphy?.available);
+      els.gifTab.setAttribute("aria-disabled", String(!gifAvailable));
+      els.gifTab.title = gifAvailable ? "" : "GIF search is not configured";
+      document.getElementById("chat-gif-unavailable")?.toggleAttribute("hidden", gifAvailable);
+      if (!gifAvailable && activeTab === "gif") setTab("emoji");
     },
     selection() { return selectedGif ? { gif_id: selectedGif.id, gif_query: selectedGif.query } : {}; },
     hasSelection() { return Boolean(selectedGif); },
-    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close(); onComposerChange?.(); },
+    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close({ restoreFocus: false }); onComposerChange?.(); },
     close,
   };
 }

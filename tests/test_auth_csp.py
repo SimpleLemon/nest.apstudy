@@ -24,8 +24,8 @@ class LoginCspTestCase(unittest.TestCase):
 
         self.assertIn("'self'", directives["script-src"])
         self.assertIn("https://www.googletagmanager.com", directives["script-src"])
-        self.assertIn("https://fonts.googleapis.com", directives["style-src"])
-        self.assertIn("https://fonts.gstatic.com", directives["font-src"])
+        self.assertEqual(directives["style-src"], ["'self'"])
+        self.assertEqual(directives["font-src"], ["'self'"])
         self.assertIn("https://resources.apstudy.org", directives["img-src"])
         self.assertIn("https://www.google-analytics.com", directives["img-src"])
         self.assertIn("https://www.google-analytics.com", directives["connect-src"])
@@ -68,6 +68,8 @@ class LoginCspTestCase(unittest.TestCase):
         self.assertIn(b"feature-panel--dashboard", response.data)
         self.assertIn(b"landing-app-demo-dashboard", response.data)
         self.assertIn(b"static/images/landing/nest-interface-hero.png", response.data)
+        self.assertIn(b"js/landing-theme-init.js", response.data)
+        self.assertNotIn(b"<script>\n", response.data)
 
     def test_landing_route_does_not_redirect_authenticated_users(self):
         app = Flask(__name__, template_folder="../templates", static_folder="../static")

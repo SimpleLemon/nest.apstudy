@@ -25,17 +25,22 @@ test("chat attachments support progress, retry, cancellation, and browser gzip",
   assert.doesNotMatch(attachments, /els\.attach\.disabled/);
 });
 
-test("media picker has emoji keyboard navigation and a separately disabled GIF mode", async () => {
+test("media picker has emoji navigation and an accessible roving tab interface", async () => {
   const picker = await source("static/js/chat/media-picker.js");
   const template = await source("templates/chat.html");
   assert.match(picker, /ArrowRight/);
   assert.match(picker, /apstudy-chat-recent-emoji/);
   assert.match(picker, /capabilities\.giphy\?\.available/);
+  assert.match(picker, /handleTabKeydown/);
+  assert.match(picker, /aria-disabled/);
+  assert.match(picker, /returnFocusEl/);
   assert.match(template, /Powered by GIPHY/);
   assert.match(picker, /analytics\?\.onsent/);
   assert.match(picker, /chat-emoji-categories/);
   assert.match(template, /id="chat-emoji-categories"/);
   assert.match(template, /gif_box/);
+  assert.match(template, /id="chat-gif-tab"[^>]*tabindex="-1"/);
+  assert.match(template, /id="chat-gif-unavailable"/);
 });
 
 test("emoji trigger rotates through five colored smile reactions on hover", async () => {

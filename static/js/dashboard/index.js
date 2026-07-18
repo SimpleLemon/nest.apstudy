@@ -20,6 +20,7 @@
     const state = {
         summary: null,
         sortable: null,
+        editor: null,
         activePopoverLocked: false,
         editMode: false,
         resize: null,
@@ -30,17 +31,34 @@
         checklist: document.getElementById("dashboard-checklist"),
         editToggle: document.getElementById("dashboard-edit-layout"),
         addTile: document.getElementById("dashboard-add-tile"),
-        addMenu: document.getElementById("dashboard-add-menu"),
+        cancel: document.getElementById("dashboard-cancel-layout"),
+        quoteSlot: document.getElementById("dashboard-daily-quote"),
+        toolbar: document.getElementById("dashboard-layout-toolbar"),
+        toolbarLabel: document.getElementById("dashboard-layout-selection-label"),
+        toolbarMoveEarlier: document.getElementById("dashboard-move-earlier"),
+        toolbarMoveLater: document.getElementById("dashboard-move-later"),
+        toolbarCustomize: document.getElementById("dashboard-customize-tile"),
+        toolbarRemove: document.getElementById("dashboard-remove-tile"),
+        drawer: document.getElementById("dashboard-tile-drawer"),
+        drawerBody: document.getElementById("dashboard-tile-drawer-body"),
+        discardDialog: document.getElementById("dashboard-discard-dialog"),
+        discardKeep: document.getElementById("dashboard-keep-editing"),
+        discardConfirm: document.getElementById("dashboard-confirm-discard"),
+        announcer: document.getElementById("dashboard-layout-announcer"),
     };
+    function isLayoutEditing() {
+        return Boolean(state.editor?.isEditing?.());
+    }
     function tileOrderFromDom() {
         return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
             .map((tile) => tile.dataset.tileId)
             .filter(Boolean);
     }
     function tileLayoutFromDom() {
-        return Array.from(els.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
-            .map((tile) => tilePayload(tile.dataset.tileId, tile.dataset.tileSize, tile.dataset.calendarView, parseTaskListIds(tile.dataset.taskListIds)))
-            .filter((tile) => tile.id && TILE_META[tile.id]);
+        const layout = state.editor?.currentLayout?.();
+        if (!layout) return [];
+        const byId = new Map(layout.tiles.map((tile) => [tile.instance_id, tile]));
+        return tileOrderFromDom().map((instanceId) => byId.get(instanceId)).filter(Boolean);
     }
     function renderChecklist(checklist) {
         if (!els.checklist || !checklist || checklist.hidden) {
@@ -78,80 +96,41 @@
             if (els.checklist) els.checklist.hidden = true;
         }
     }
-    function renderTiles(summary) {
+    function renderTiles(summary, layoutOverride = null) {
         if (!els.tiles) return;
-        const layout = normalizeTileLayout(summaryLayoutSource(summary), summary.available_tiles);
-        summary.tile_layout_version = 3;
+        const layout = layoutOverride?.tiles || normalizeTileLayout(summaryLayoutSource(summary), summary.available_tiles);
+        summary.tile_layout_version = 4;
         summary.tile_layout = layout;
-        els.tiles.innerHTML = layout.map((tile) => renderTile(tile.id, tile.size, summary.tiles?.[tile.id] || {}, tile)).join("");
-        applyEditMode();
+        els.tiles.innerHTML = layout.map((tile) => renderTile(tile.type || tile.id, tile.size, summary.tiles?.[tile.type || tile.id] || {}, tile)).join("");
         bindTileControls();
         bindCalendarPopovers();
-        setupSortable();
-        updateAddTileMenu();
     }
     function bindTileControls() {
         if (!state.controlsBound) {
             bindPageControls();
             state.controlsBound = true;
         }
-        els.tiles?.querySelectorAll(".dashboard-tile-remove").forEach((button) => {
-            button.addEventListener("click", () => {
-                const tile = button.closest(".dashboard-tile");
-                removeTile(tile);
-            });
-        });
-        els.tiles?.querySelectorAll(".dashboard-tile-move-up, .dashboard-tile-move-down").forEach((button) => {
-            button.addEventListener("click", () => {
-                const tile = button.closest(".dashboard-tile");
-                moveTile(tile, button.classList.contains("dashboard-tile-move-up") ? -1 : 1);
-            });
-        });
-        els.tiles?.querySelectorAll(".dashboard-tile-config-toggle").forEach((button) => {
-            button.addEventListener("click", (event) => {
-                event.stopPropagation();
-                const tile = button.closest(".dashboard-tile");
-                toggleTileConfig(tile, button);
-            });
-        });
-        els.tiles?.querySelectorAll(".dashboard-config-option").forEach((button) => {
-            button.addEventListener("click", () => {
-                const tile = button.closest(".dashboard-tile");
-                applyTileOption(tile, button.dataset.configKind, button.dataset.value);
-            });
-        });
-        els.tiles?.querySelectorAll(".dashboard-resize-grip").forEach((grip) => {
-            grip.addEventListener("pointerdown", startResize);
-        });
+        state.editor?.bindTiles?.();
     }
     function bindPageControls() {
-        els.editToggle?.addEventListener("click", () => {
-            state.editMode = !state.editMode;
-            applyEditMode();
-            setupSortable();
-            updateAddTileMenu();
+        ensureEditor();
+    }
+    function ensureEditor() {
+        if (state.editor || !window.APStudyDashboardLayoutEditor) return state.editor;
+        state.editor = window.APStudyDashboardLayoutEditor.create({
+            elements: els,
+            getSummary: () => state.summary,
+            render: (layout) => renderTiles(state.summary, layout),
+            persist: async (layout) => {
+                const response = await fetchJson("/api/dashboard/layout", {
+                    method: "PATCH",
+                    body: JSON.stringify({ dashboard_layout: layout }),
+                });
+                return response.dashboard_layout;
+            },
+            showToast,
         });
-        els.addTile?.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const isOpen = els.addTile.getAttribute("aria-expanded") === "true";
-            setAddMenuOpen(!isOpen, { focusFirst: !isOpen });
-        });
-        els.addMenu?.addEventListener("click", (event) => {
-            const quoteButton = event.target.closest("[data-add-quote-tile]");
-            if (quoteButton) {
-                event.preventDefault();
-                event.stopPropagation();
-                window.APStudyDashboardDailyQuote?.show?.();
-                setAddMenuOpen(false);
-                updateAddTileMenu();
-                return;
-            }
-            const button = event.target.closest("[data-add-tile-id]");
-            if (!button) return;
-            event.preventDefault();
-            event.stopPropagation();
-            addTile(button.dataset.addTileId);
-        });
+        return state.editor;
     }
     function applyEditMode() {
         document.body.classList.toggle("dashboard-editing-layout", state.editMode);
@@ -426,19 +405,19 @@
     function bindCalendarPopoverTrigger(trigger, date, events) {
         if (!trigger || !date || !events.length) return;
         trigger.addEventListener("mouseenter", () => {
-            if (!state.editMode && !state.activePopoverLocked) showPopover(trigger, date, events);
+            if (!isLayoutEditing() && !state.activePopoverLocked) showPopover(trigger, date, events);
         });
         trigger.addEventListener("mouseleave", () => {
-            if (!state.editMode && !state.activePopoverLocked) hidePopover();
+            if (!isLayoutEditing() && !state.activePopoverLocked) hidePopover();
         });
         trigger.addEventListener("focus", () => {
-            if (!state.editMode && !state.activePopoverLocked) showPopover(trigger, date, events);
+            if (!isLayoutEditing() && !state.activePopoverLocked) showPopover(trigger, date, events);
         });
         trigger.addEventListener("blur", () => {
-            if (!state.editMode && !state.activePopoverLocked) hidePopover();
+            if (!isLayoutEditing() && !state.activePopoverLocked) hidePopover();
         });
         trigger.addEventListener("click", (event) => {
-            if (state.editMode) return;
+            if (isLayoutEditing()) return;
             event.stopPropagation();
             state.activePopoverLocked = true;
             showPopover(trigger, date, events);
@@ -525,7 +504,10 @@
             const summary = await fetchJson("/api/dashboard/summary");
             state.summary = summary;
             renderChecklist(summary.checklist);
-            renderTiles(summary);
+            const editor = ensureEditor();
+            const quoteFallback = !window.APStudyDashboardDailyQuote?.isHidden?.();
+            editor?.load(summary.dashboard_layout || summaryLayoutSource(summary), quoteFallback);
+            renderTiles(summary, editor?.currentLayout?.());
         } catch (error) {
             if (els.tiles) {
                 els.tiles.innerHTML = `
@@ -557,9 +539,9 @@
     });
     window.addEventListener?.("apstudy:dashboard-quote-visibility", updateAddTileMenu);
     window.APStudyPageLifecycle?.register?.({
-        pause: destroySortable,
-        resume: setupSortable,
-        dispose: destroySortable,
+        pause: () => state.editor?.pause?.(),
+        resume: () => state.editor?.resume?.(),
+        dispose: () => state.editor?.pause?.(),
     });
     document.addEventListener("DOMContentLoaded", loadDashboard);
     Object.assign(window.APStudyDashboardUtils, {

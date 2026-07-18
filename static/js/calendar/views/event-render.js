@@ -7,13 +7,16 @@
         const {
             getCalendarEventColor,
             getCalendarEventRef,
+            getEventCalendarLabel,
             getVisibleEvents,
         } = callbacks;
         const {
-            adjustHexLuminance,
+            createAccessibleEventPalette,
             escapeHtml,
+            formatAllDayRange,
+            formatTimedEventRange,
+            getCssColorVariable,
             getTaskPriorityColor,
-            hexToRgba,
             isTaskEvent,
         } = formatters;
 
@@ -22,7 +25,16 @@
             const eventRef = getCalendarEventRef(event) || dataId;
             const sourceType = event.source_type || event.source || (event.id ? "user" : "feed");
             const taskId = event.task_id ? ` data-task-id="${escapeHtml(event.task_id)}"` : "";
-            return `data-event-id="${escapeHtml(dataId)}" data-event-ref="${escapeHtml(eventRef)}" data-event-source="${escapeHtml(sourceType)}"${taskId} tabindex="0"`;
+            const title = event.title || "Untitled";
+            const timeLabel = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
+            const calendarLabel = getEventCalendarLabel(event) || "Calendar";
+            const actionLabel = state.public.readOnly
+                ? "View event"
+                : isTaskEvent(event) && event.task_id
+                    ? "Open task"
+                    : "Open event";
+            const accessibleLabel = `${title}, ${timeLabel}, ${calendarLabel}. ${actionLabel}. More actions available.`;
+            return `data-event-id="${escapeHtml(dataId)}" data-event-ref="${escapeHtml(eventRef)}" data-event-source="${escapeHtml(sourceType)}"${taskId} role="button" aria-label="${escapeHtml(accessibleLabel)}" aria-haspopup="menu" tabindex="0"`;
         }
 
         function getEventsForDay(date) {
@@ -47,30 +59,19 @@
         }
 
         function getEventBadgeColors(event) {
+            const surface = getCssColorVariable("--color-surface-container", "#f0eeeb");
+            const onSurface = getCssColorVariable("--color-on-surface", "#1f1f1e");
             if (isTaskEvent(event)) {
-                if (event.completed) {
-                    const muted = document.documentElement.classList.contains("dark") ? "#94a3b8" : "#64748b";
-                    return {
-                        background: hexToRgba(muted, document.documentElement.classList.contains("dark") ? 0.18 : 0.12),
-                        text: muted,
-                        border: hexToRgba(muted, 0.34),
-                    };
-                }
                 const priorityColor = getTaskPriorityColor(event.priority);
-                const isDarkTask = document.documentElement.classList.contains("dark");
-                return {
-                    background: hexToRgba(priorityColor, isDarkTask ? 0.24 : 0.13),
-                    text: adjustHexLuminance(priorityColor, isDarkTask ? 0.28 : -0.22),
-                    border: hexToRgba(priorityColor, isDarkTask ? 0.5 : 0.36),
-                };
+                return createAccessibleEventPalette(priorityColor, surface, onSurface, {
+                    completed: Boolean(event.completed),
+                });
             }
-            const color = getCalendarEventColor(event);
-            const isDark = document.documentElement.classList.contains("dark");
-            return {
-                background: hexToRgba(color, isDark ? 0.24 : 0.13),
-                text: adjustHexLuminance(color, isDark ? 0.34 : -0.30),
-                border: hexToRgba(color, isDark ? 0.48 : 0.34),
-            };
+            return createAccessibleEventPalette(
+                getCalendarEventColor(event),
+                surface,
+                onSurface,
+            );
         }
 
         return {

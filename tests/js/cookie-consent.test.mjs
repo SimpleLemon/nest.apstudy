@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const source = await readFile(path.join(repoRoot, "static/js/core/cookie-consent.js"), "utf8");
-const globalStyles = await readFile(path.join(repoRoot, "static/css/global.css"), "utf8");
+const globalStyles = `${await readFile(path.join(repoRoot, "static/css/global.css"), "utf8")}\n${await readFile(path.join(repoRoot, "static/css/core/feedback-overlays.css"), "utf8")}`;
 
 class FakeElement {
     constructor(tagName, document) {

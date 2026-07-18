@@ -14,7 +14,7 @@ export const COMMAND_PALETTE_PAGES = [
   {
     name: 'Calendar',
     route: '/calendar',
-    icon: 'calendar',
+    icon: 'calendar_month',
     keywords: ['schedule', 'events', 'week', 'month', 'classes'],
   },
   {
@@ -58,7 +58,7 @@ export const COMMAND_PALETTE_PAGES = [
 const HELP_ITEMS = [
   {
     name: 'Join Discord community',
-    icon: 'discord',
+    icon: 'forum',
     href: 'https://discord.com/invite/XaxgdsZ4Ht',
     keywords: ['community', 'discord', 'server', 'support'],
   },
@@ -392,7 +392,7 @@ function CommandPaletteApp() {
         { heading: 'MISC' },
         THEME_ITEMS.map((item) => h(CommandRow, {
           key: `theme-${item.theme}`,
-          icon: 'swap',
+          icon: 'swap_vert',
           label: item.name,
           value: item.name,
           keywords: item.keywords,

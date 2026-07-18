@@ -99,7 +99,7 @@
             return `${parts[0]} ${parts[1]}`;
         }
 
-        function openCoursesModal() {
+        function openCoursesModal(trigger = document.activeElement) {
             if (state.courses.modalOpen && !state.courses.isClosing) {
                 closeCoursesModal();
                 return;
@@ -107,12 +107,14 @@
             state.courses.modalOpen = true;
             state.courses.isClosing = false;
             state.courses.animateOnOpen = true;
+            state.courses.modalTriggerEl = trigger && typeof trigger.focus === "function" ? trigger : null;
             state.courses.searchInput = state.courses.searchQuery;
             state.courses.pinnedSectionIds = new Set(state.courses.selectedSectionIds);
             state.courses.showSelectedOnly = state.courses.pinnedSectionIds.size > 0;
             applyCourseFilters();
             document.body.classList.add("overflow-hidden");
             renderCoursesModal();
+            setCoursesModalBackgroundInert(true);
             if (!state.courses.indexLoaded && !state.courses.loading) {
                 void loadCoursesIndex();
             }
@@ -130,12 +132,16 @@
                 panel.classList.add("-translate-y-3", "opacity-0");
             }
             window.setTimeout(() => {
+                const trigger = state.courses.modalTriggerEl;
                 state.courses.pinnedSectionIds = new Set();
                 state.courses.showSelectedOnly = false;
                 state.courses.modalOpen = false;
                 state.courses.isClosing = false;
+                state.courses.modalTriggerEl = null;
                 document.body.classList.remove("overflow-hidden");
                 renderCoursesModal();
+                setCoursesModalBackgroundInert(false);
+                if (trigger?.isConnected) trigger.focus({ preventScroll: true });
             }, coursesModalAnimationMs);
         }
 
@@ -307,7 +313,7 @@
             return known[raw] || raw;
         }
 
-        const { renderCoursesModal } = window.APStudyCalendarCourseModal.createCourseModalRenderer({
+        const { renderCoursesModal, setCoursesModalBackgroundInert } = window.APStudyCalendarCourseModal.createCourseModalRenderer({
             state,
             escapeHtml,
             formatTermLabel,

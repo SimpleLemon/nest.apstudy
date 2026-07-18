@@ -5,11 +5,11 @@
 
 .onboarding-main {
     display: flex;
-    min-height: 100vh;
+    min-height: var(--app-viewport-height, 100vh);
     flex: 1;
     align-items: center;
     justify-content: center;
-    padding: clamp(32px, 7vw, 88px) clamp(14px, 4vw, 44px) 72px;
+    padding: clamp(32px, 7vw, 88px) max(clamp(14px, 4vw, 44px), env(safe-area-inset-right)) max(72px, env(safe-area-inset-bottom)) max(clamp(14px, 4vw, 44px), env(safe-area-inset-left));
 }
 
 .onboarding-wrap {
@@ -221,6 +221,34 @@
     border-radius: var(--radius-card);
 }
 
+.onboarding-page .theme-card-legend {
+    grid-column: 1 / -1;
+    margin-bottom: 2px;
+    color: var(--color-on-surface);
+}
+
+.onboarding-page .theme-card {
+    display: block;
+    min-width: 0;
+}
+
+.onboarding-page .theme-card.is-selected {
+    border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-outline-variant));
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface-container-low));
+}
+
+.onboarding-page .theme-card:has(.theme-card-input:focus-visible) {
+    outline: 3px solid color-mix(in srgb, var(--color-primary) 70%, transparent);
+    outline-offset: 3px;
+}
+
+@supports not selector(.theme-card:has(.theme-card-input:focus-visible)) {
+    .onboarding-page .theme-card:focus-within {
+        outline: 3px solid color-mix(in srgb, var(--color-primary) 70%, transparent);
+        outline-offset: 3px;
+    }
+}
+
 @keyframes onboardingStepIn {
     from {
         opacity: 0.72;
@@ -254,7 +282,7 @@
 @media (max-width: 680px) {
     .onboarding-main {
         align-items: flex-start;
-        padding: 18px 12px 48px;
+        padding: 18px max(12px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
     }
 
     .onboarding-shell {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Sortable from "sortablejs";
 import { AddTaskForm, TaskRow } from "./task-entry-components.js";
 
 import {
@@ -64,8 +65,8 @@ function railButton({ active, icon, label, count, onClick }) {
 
 function useSortable(ref, options, dependencies) {
     React.useEffect(() => {
-        if (!ref.current || typeof window.Sortable === "undefined") return undefined;
-        const sortable = window.Sortable.create(ref.current, options());
+        if (!ref.current) return undefined;
+        const sortable = Sortable.create(ref.current, options());
         return () => sortable.destroy();
     }, dependencies);
 }

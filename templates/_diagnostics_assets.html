@@ -1,0 +1,4 @@
+{% include "_shared_runtime_assets.html" %}
+{% if frontend_console_diagnostics_enabled|default(false) %}
+<script src="{{ url_for('static', filename='js/core/console-discord.js') }}" async></script>
+{% endif %}

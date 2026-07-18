@@ -92,10 +92,9 @@ body {
   display: grid;
   grid-template-columns: var(--sidebar-expanded) 1fr;
   grid-template-rows: var(--navbar-height) 1fr;
-  min-height: 100vh;
+  min-height: var(--app-viewport-height, 100vh);
   overflow-x: hidden;
   overflow-y: auto;
-  transition: grid-template-columns 0.2s ease-in-out;
 }
 @media (min-width: 1025px) {
   html.apstudy-sidebar-collapsed body {
@@ -804,7 +803,7 @@ a.notification-item-main {
   color: var(--text-secondary);
   cursor: pointer;
   border-radius: var(--radius-control);
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .navbar-menu-button {
   display: none;
@@ -919,7 +918,6 @@ a.notification-item-main {
   display: flex;
   flex-direction: column;
   overflow: visible;
-  transition: width 0.2s ease-in-out;
 }
 .sidebar-scroll {
   flex: 1;
@@ -965,7 +963,7 @@ a.notification-item-main {
   min-height: 29px;
   white-space: nowrap;
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
+  transition: color 0.16s ease, opacity 0.16s ease;
 }
 .sidebar-item {
   display: flex;
@@ -982,7 +980,7 @@ a.notification-item-main {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.16s ease, color 0.16s ease;
   position: relative;
   white-space: nowrap;
   width: auto;
@@ -1023,7 +1021,7 @@ a.notification-item-main {
   opacity: 1;
   visibility: visible;
   max-width: 140px;
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.16s ease, color 0.16s ease;
 }
 .sidebar-chat-badge {
   margin-left: auto;
@@ -1078,7 +1076,7 @@ a.notification-item-main {
     opacity: 0;
     visibility: hidden;
     max-width: 0;
-    transition: all 0.2s ease-in-out;
+    transition: opacity 0.16s ease, color 0.16s ease;
   }
 
   .sidebar-container.collapsed .sidebar-item,
@@ -1135,7 +1133,7 @@ a.notification-item-main {
   overflow: visible;
   border-radius: var(--radius-control);
   color: var(--sidebar-toggle-color);
-  transition: all 0.2s ease-in-out;
+  transition: color 0.16s ease, opacity 0.16s ease, transform 0.16s ease;
 }
 .sidebar-toggle-line {
   position: absolute;
@@ -1145,7 +1143,7 @@ a.notification-item-main {
   height: 15px;
   background: var(--sidebar-toggle-color);
   border-radius: var(--radius-pill);
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.16s ease, transform 0.16s ease;
   transform: translateY(-50%);
 }
 .sidebar-toggle-icon {
@@ -1165,7 +1163,7 @@ a.notification-item-main {
   opacity: 0;
   transform: translateY(-50%) scale(0.9);
   transform-origin: 7px 50%;
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.16s ease, transform 0.16s ease;
   pointer-events: none;
 }
 .sidebar-toggle-svg {
@@ -1186,6 +1184,18 @@ a.notification-item-main {
 .sidebar-toggle-handle:focus-visible .sidebar-toggle-icon {
   opacity: 1;
   transform: translateY(-50%) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-container,
+  .sidebar-section-label,
+  .sidebar-item,
+  .sidebar-item-label,
+  .sidebar-toggle-handle,
+  .sidebar-toggle-line,
+  .sidebar-toggle-icon,
+  .sidebar-toggle-tooltip {
+    transition: none !important;
+  }
 }
 .sidebar-toggle-tooltip {
   position: absolute;
@@ -1242,7 +1252,7 @@ a.notification-item-main {
 .sidebar-mobile-backdrop {
   position: fixed;
   inset: var(--navbar-height) 0 0;
-  z-index: 10040;
+  z-index: var(--z-backdrop);
   background: rgba(0, 0, 0, 0.46);
   backdrop-filter: blur(3px);
 }
@@ -1266,7 +1276,7 @@ main {
 body.with-sidebar {
   display: grid !important;
   flex-direction: initial;
-  min-height: 100vh;
+  min-height: var(--app-viewport-height, 100vh);
   overflow-x: hidden;
   overflow-y: auto;
   grid-template-columns: var(--sidebar-expanded) 1fr;
@@ -1386,8 +1396,9 @@ body.with-sidebar > footer {
     bottom: 0;
     width: min(320px, calc(100vw - 32px));
     max-width: calc(100vw - 32px);
-    height: calc(100dvh - var(--navbar-height));
-    z-index: 10050;
+    height: calc(var(--app-viewport-height, 100dvh) - var(--navbar-height));
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: var(--z-critical-overlay);
     transform: translateX(-105%);
     box-shadow: 18px 0 44px rgba(0, 0, 0, 0.26);
     transition: transform 180ms ease;

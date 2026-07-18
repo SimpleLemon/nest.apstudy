@@ -144,7 +144,7 @@
       }
       return `<article class="notification-tray-item ${item.is_read ? '' : 'is-unread'}" data-id="${escapeHtml(item.id)}">
         <label class="notification-item-select"><input type="checkbox" data-select-item aria-label="Select ${title}" ${state.selected.has(String(item.id)) ? 'checked' : ''}></label>
-        <span class="notification-item-icon is-${escapeHtml(item.category || 'default')}" aria-hidden="true"><span class="material-symbols-outlined">${escapeHtml(meta.icon)}</span></span>
+        <span class="notification-item-icon is-${escapeHtml(item.category || 'default')}" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">${escapeHtml(meta.icon)}</span></span>
         ${main}
         ${item.is_read ? '' : '<span class="notification-unread-dot" aria-label="Unread"></span>'}
       </article>`;

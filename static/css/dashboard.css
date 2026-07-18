@@ -282,7 +282,7 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-auto-rows: var(--dashboard-tile-height);
-    grid-auto-flow: dense;
+    grid-auto-flow: row;
     gap: var(--dashboard-tile-gap);
     align-items: stretch;
 }
@@ -297,7 +297,7 @@
     border-radius: var(--radius-control);
     background: var(--color-surface-container-low);
     color: var(--color-on-surface);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
     overflow: hidden;
     cursor: default;
     transition: box-shadow 140ms ease, border-color 140ms ease;
@@ -305,7 +305,7 @@
 
 .dashboard-editing-layout .dashboard-tile {
     cursor: grab;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .dashboard-tile:focus-visible {
@@ -867,7 +867,7 @@
 
 .dashboard-popover {
     position: fixed;
-    z-index: 10040;
+    z-index: var(--z-popover);
     width: min(280px, calc(100vw - 24px));
     border: 1px solid color-mix(in srgb, var(--color-outline-variant) 70%, transparent);
     border-radius: var(--radius-control);
@@ -1274,5 +1274,450 @@
 @media (max-width: 359px) {
     .dashboard-checklist-items {
         grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Dashboard layout editor */
+.dashboard-cancel-layout {
+    background: transparent;
+    color: var(--color-on-surface-variant);
+}
+
+.dashboard-cancel-layout[hidden],
+.dashboard-add-toggle[hidden] {
+    display: none;
+}
+
+.dashboard-layout-toolbar {
+    position: sticky;
+    top: calc(var(--navbar-height, 64px) + 8px);
+    z-index: 20;
+    display: flex;
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-high);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+    padding: 8px 12px;
+}
+
+.dashboard-layout-toolbar[hidden] {
+    display: none;
+}
+
+.dashboard-layout-selection,
+.dashboard-layout-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dashboard-layout-selection {
+    min-width: 0;
+    color: var(--color-on-surface);
+}
+
+.dashboard-layout-selection strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-layout-toolbar button,
+.dashboard-drawer-close,
+.dashboard-drawer-primary,
+.dashboard-drawer-secondary,
+.dashboard-dialog-actions button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 720;
+    padding: 0 12px;
+}
+
+.dashboard-layout-toolbar button:hover,
+.dashboard-layout-toolbar button:focus-visible,
+.dashboard-drawer-close:hover,
+.dashboard-drawer-close:focus-visible,
+.dashboard-drawer-primary:focus-visible,
+.dashboard-drawer-secondary:focus-visible,
+.dashboard-dialog-actions button:focus-visible {
+    background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface-container-high));
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 52%, transparent);
+    outline-offset: 2px;
+}
+
+.dashboard-layout-toolbar button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.dashboard-layout-toolbar .is-danger,
+.dashboard-dialog-actions .is-danger {
+    color: var(--color-error);
+}
+
+.dashboard-editing-layout .dashboard-tile-inner {
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.dashboard-editing-layout .dashboard-tile-edit-controls,
+.dashboard-editing-layout .dashboard-resize-grip,
+.dashboard-editing-layout .dashboard-egg-quote-remove {
+    display: none !important;
+}
+
+.dashboard-editing-layout .dashboard-egg-quote {
+    padding-inline: 0 !important;
+}
+
+.dashboard-editing-layout .dashboard-tile,
+.dashboard-daily-quote-slot.is-layout-selectable {
+    cursor: grab;
+}
+
+.dashboard-editing-layout .dashboard-tile:hover,
+.dashboard-editing-layout .dashboard-tile:focus-visible,
+.dashboard-editing-layout .dashboard-tile.is-selected,
+.dashboard-daily-quote-slot.is-layout-selectable:hover,
+.dashboard-daily-quote-slot.is-layout-selectable:focus-visible,
+.dashboard-daily-quote-slot.is-selected {
+    outline: 3px solid color-mix(in srgb, var(--color-primary) 62%, transparent);
+    outline-offset: 3px;
+}
+
+.dashboard-editing-layout .dashboard-tile.is-selected,
+.dashboard-daily-quote-slot.is-selected {
+    border-color: var(--color-primary);
+}
+
+.dashboard-tile[data-density="compact"] .dashboard-list {
+    gap: 4px;
+}
+
+.dashboard-tile[data-density="compact"] .dashboard-list-item {
+    min-height: 38px;
+    padding: 6px 8px;
+}
+
+.dashboard-tile-drawer,
+.dashboard-discard-dialog {
+    border: 0;
+    color: var(--color-on-surface);
+}
+
+.dashboard-tile-drawer {
+    width: min(440px, 100vw);
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0 0 0 auto;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+    background: var(--color-surface-container-high);
+    padding: 0;
+}
+
+.dashboard-tile-drawer::backdrop,
+.dashboard-discard-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.56);
+}
+
+.dashboard-tile-drawer-body {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px;
+}
+
+.dashboard-drawer-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.dashboard-drawer-head h2,
+.dashboard-discard-dialog h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.dashboard-drawer-head p,
+.dashboard-discard-dialog p {
+    margin: 4px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+}
+
+.dashboard-drawer-close {
+    width: 44px;
+    flex: 0 0 44px;
+    padding: 0;
+}
+
+.dashboard-catalog-list,
+.dashboard-tile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dashboard-catalog-item {
+    display: grid;
+    width: 100%;
+    min-height: 84px;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 68%, transparent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    cursor: pointer;
+    padding: 12px;
+    text-align: left;
+}
+
+.dashboard-catalog-item:hover,
+.dashboard-catalog-item:focus-visible {
+    border-color: color-mix(in srgb, var(--color-primary) 64%, transparent);
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+    outline-offset: 2px;
+}
+
+.dashboard-catalog-item:disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+
+.dashboard-catalog-icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    color: var(--color-primary);
+}
+
+.dashboard-catalog-item strong,
+.dashboard-catalog-item small {
+    display: block;
+}
+
+.dashboard-catalog-item small,
+.dashboard-catalog-limit {
+    margin-top: 4px;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.dashboard-catalog-action {
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 760;
+}
+
+.dashboard-catalog-limit {
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.dashboard-form-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 8px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-form-field > span,
+.dashboard-form-field legend {
+    color: var(--color-on-surface);
+    font-size: 13px;
+    font-weight: 760;
+}
+
+.dashboard-form-field small {
+    color: var(--color-on-surface-variant);
+    font-size: var(--text-meta);
+    font-weight: 600;
+}
+
+.dashboard-form-field > input {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    font: inherit;
+    padding: 0 12px;
+}
+
+.dashboard-choice-row,
+.dashboard-check-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.dashboard-choice,
+.dashboard-check-choice {
+    position: relative;
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dashboard-choice input,
+.dashboard-check-choice input {
+    position: absolute;
+    opacity: 0;
+}
+
+.dashboard-choice span,
+.dashboard-check-choice span {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 12px;
+}
+
+.dashboard-choice input:checked + span,
+.dashboard-check-choice input:checked + span {
+    border-color: color-mix(in srgb, var(--color-primary) 62%, transparent);
+    background: color-mix(in srgb, var(--color-primary) 16%, var(--color-surface-container-high));
+    color: var(--color-primary);
+}
+
+.dashboard-choice input:focus-visible + span,
+.dashboard-check-choice input:focus-visible + span,
+.dashboard-form-field > input:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+    outline-offset: 2px;
+}
+
+.dashboard-drawer-actions,
+.dashboard-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.dashboard-drawer-primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.dashboard-discard-dialog {
+    width: min(420px, calc(100vw - 32px));
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-high);
+    padding: 20px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-tiles {
+        grid-auto-rows: auto;
+    }
+
+    .dashboard-tile,
+    .dashboard-tile[data-tile-size],
+    .dashboard-tile[data-tile-id="courses"] {
+        grid-row: auto;
+        height: auto;
+        min-height: 0;
+    }
+
+    .dashboard-tile-inner {
+        height: auto;
+        min-height: 0;
+    }
+
+    .dashboard-desktop-size {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .dashboard-layout-toolbar {
+        position: fixed;
+        right: 8px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        left: 8px;
+        top: auto;
+        z-index: 30;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .dashboard-layout-toolbar-actions {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .dashboard-layout-toolbar button {
+        min-width: 0;
+        flex-direction: column;
+        gap: 2px;
+        padding: 4px;
+        font-size: var(--text-meta);
+    }
+
+    .dashboard-editing-layout .dashboard-main {
+        padding-bottom: 144px;
+    }
+
+    .dashboard-tile-drawer {
+        width: 100vw;
+        height: min(88dvh, 760px);
+        margin: auto 0 0;
+        border-radius: var(--radius-card) var(--radius-card) 0 0;
+    }
+
+    .dashboard-tile-drawer-body {
+        padding: 16px;
+    }
+
+    .dashboard-catalog-item {
+        grid-template-columns: 40px minmax(0, 1fr);
+    }
+
+    .dashboard-catalog-action {
+        grid-column: 2;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-tile-drawer,
+    .dashboard-layout-toolbar {
+        scroll-behavior: auto;
     }
 }

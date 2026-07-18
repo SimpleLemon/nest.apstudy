@@ -118,6 +118,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
 
     def test_landing_has_distinct_ctas_and_accessible_preview_contract(self):
         template = (TEMPLATES / "landing.html").read_text()
+        theme_init = (ROOT / "static/js/landing-theme-init.js").read_text()
         for label in (
             "Start free", "Open Nest", "Go to dashboard",
             "View dashboard", "Explore calendar", "Organize tasks", "Open workspace",
@@ -128,7 +129,8 @@ class AccessibilityBaselineTests(unittest.TestCase):
         self.assertIn('data-landing-rotator', template)
         self.assertIn('data-landing-marquee', template)
         self.assertIn('data-landing-faq', template)
-        self.assertIn("prefersDark ? 'nest-dark' : 'parchment-light'", template)
+        self.assertIn("js/landing-theme-init.js", template)
+        self.assertIn("colorScheme.matches ? 'nest-dark' : 'parchment-light'", theme_init)
         self.assertEqual(10, template.count('class="university-mark '))
         self.assertNotIn('not endorsed or sponsored by these institutions', template)
         self.assertNotIn('class="course-metadata"', template)
@@ -277,7 +279,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
         global_js = (ROOT / "static/js/core/global.js").read_text()
         navbar = (ROOT / "static/js/core/navbar.js").read_text()
         sidebar = (ROOT / "static/js/core/sidebar.js").read_text()
-        dashboard = (ROOT / "static/js/dashboard/renderers.js").read_text()
+        dashboard = (ROOT / "static/js/dashboard/layout-editor.js").read_text()
         notes = (ROOT / "static/js/notes/list/cards.js").read_text()
         tasks = (ROOT / "static/js/tasks/task-app-helpers.js").read_text()
         self.assertIn('["ArrowDown", "ArrowUp", "Home", "End"]', global_js)
@@ -285,7 +287,9 @@ class AccessibilityBaselineTests(unittest.TestCase):
         self.assertIn("avatarBtn?.focus", navbar)
         self.assertIn("sidebar.toggleAttribute('inert'", sidebar)
         self.assertIn("sidebar.setAttribute('aria-modal', 'true')", sidebar)
-        self.assertIn("dashboard-tile-move-up", dashboard)
+        self.assertIn("toolbarMoveEarlier", dashboard)
+        self.assertIn("toolbarMoveLater", dashboard)
+        self.assertIn("event.key !== \"Enter\" && event.key !== \" \"", dashboard)
         self.assertIn('data-action="share"', notes)
         self.assertNotIn('data-action="move-earlier"', notes)
         self.assertIn('label: "Move list earlier"', tasks)

@@ -255,6 +255,47 @@ function normalizeClipboardText(text) {
         .replace(/\n{3,}/g, '\n\n');
 }
 
+function normalizeClipboardMarkdown(text) {
+    const lines = normalizeClipboardText(text).split('\n');
+    const output = [];
+    const listStack = [];
+
+    for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index];
+        const trimmed = line.trim();
+        const marker = markerForText(trimmed);
+        const nextText = lines[index + 1]?.trim() || '';
+
+        if (trimmed === '>' && nextText) {
+            output.push(`> ${nextText}`);
+            listStack.length = 0;
+            index += 1;
+            continue;
+        }
+
+        if (marker && nextText && !markerForText(nextText) && !isPageBreakText(nextText)) {
+            const level = inferredNumberedLevel(marker, listStack);
+            const prefix = marker.type === 'numberedListItem' ? `${marker.number}.` : '-';
+            output.push(`${'  '.repeat(level)}${prefix} ${nextText}`);
+            listStack[level] = { type: marker.type, content: contentFromText(nextText) };
+            listStack.length = level + 1;
+            index += 1;
+            continue;
+        }
+
+        output.push(line);
+        const directMarker = directMarkdownMarker(trimmed);
+        if (directMarker && !['heading', 'quote'].includes(directMarker.type)) {
+            listStack[directMarker.level] = { type: directMarker.type, content: contentFromText(directMarker.text) };
+            listStack.length = directMarker.level + 1;
+        } else if (trimmed) {
+            listStack.length = 0;
+        }
+    }
+
+    return output.join('\n');
+}
+
 function normalizeCopiedPlainText(text) {
     if (typeof text !== 'string') return '';
     const output = [];
@@ -282,6 +323,7 @@ function normalizeCopiedPlainText(text) {
 
 export {
     clipboardTextLooksStructured,
+    normalizeClipboardMarkdown,
     normalizeClipboardText,
     normalizeCopiedPlainText,
     normalizeImportedMarkdownBlocks,

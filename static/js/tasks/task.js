@@ -561,18 +561,45 @@ function TaskApp({ completeSound, uncompleteSound }) {
     );
 }
 
+class TaskInitializationBoundary extends React.Component {
+    componentDidCatch(error) {
+        window.APStudyTaskLoader?.fail?.(error);
+        console.error("Unable to render the Tasks application.", error);
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
+function TaskAppMount(props) {
+    React.useEffect(() => {
+        window.APStudyTaskLoader?.ready?.();
+    }, []);
+    return h(TaskApp, props);
+}
+
 const mount = document.getElementById("task-root");
 let taskReactRoot = null;
 if (mount) {
-    taskReactRoot = createRoot(mount);
-    taskReactRoot.render(h(TaskApp, {
-        completeSound: mount.dataset.completeSound || "/static/audio/task-pop.mp3",
-        uncompleteSound: mount.dataset.uncompleteSound || "/static/audio/task-pop-down.mp3",
-    }));
-    window.APStudyPageLifecycle?.register?.({
-        dispose() {
-            taskReactRoot?.unmount();
-            taskReactRoot = null;
-        },
-    });
+    try {
+        taskReactRoot = createRoot(mount);
+        taskReactRoot.render(h(TaskInitializationBoundary, null,
+            h(TaskAppMount, {
+                completeSound: mount.dataset.completeSound || "/static/audio/task-pop.mp3",
+                uncompleteSound: mount.dataset.uncompleteSound || "/static/audio/task-pop-down.mp3",
+            })
+        ));
+        window.APStudyPageLifecycle?.register?.({
+            dispose() {
+                taskReactRoot?.unmount();
+                taskReactRoot = null;
+            },
+        });
+    } catch (error) {
+        window.APStudyTaskLoader?.fail?.(error);
+        console.error("Unable to initialize the Tasks application.", error);
+    }
+} else {
+    window.APStudyTaskLoader?.fail?.(new Error("Task mount was not found."));
 }

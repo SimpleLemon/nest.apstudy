@@ -8,7 +8,7 @@ DEFAULT_AVATAR_URL = (
     "%3Cpath%20d='M20%2082c4-18%2017-28%2028-28s24%2010%2028%2028'%20fill='%239ca3af'/%3E"
     "%3C/svg%3E"
 )
-APSTUDY_LOGO_URL = "https://resources.apstudy.org/images/AP-Resources-Logo.png"
+APSTUDY_LOGO_URL = "/static/images/brand/nest-logo-v1-32.png"
 
 
 def avatar_url_for_size(url, size=32):

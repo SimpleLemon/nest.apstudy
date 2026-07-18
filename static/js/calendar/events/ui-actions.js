@@ -45,7 +45,7 @@
                 </div>
                 <div class="calendar-context-body">
                     <button type="button" class="js-context-info calendar-context-action">
-                        <span class="material-symbols-outlined calendar-context-action-icon">info</span>
+                        <span class="material-symbols-outlined calendar-context-action-icon" aria-hidden="true">info</span>
                         <span>Get Info</span>
                     </button>
                     <div class="calendar-context-separator"></div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="calendar-context-separator"></div>
                     <button type="button" class="js-context-custom calendar-context-action">
-                        <span class="material-symbols-outlined calendar-context-action-icon">palette</span>
+                        <span class="material-symbols-outlined calendar-context-action-icon" aria-hidden="true">palette</span>
                         <span>Custom Color...</span>
                     </button>
                 </div>
@@ -116,7 +116,6 @@
             const sizeClass = options.compact ? "text-xs px-2 py-1" : "text-xs px-2 py-1";
             const badgeStyle = getEventBadgeStyle(event);
             const badgeColors = getEventBadgeColors(event);
-            const calendarColor = getCalendarEventColor(event);
             const isMonthTimedChip = Boolean(options.monthView) && !event.isAllDay;
             if (isMonthTimedChip) {
                 const taskLabel = isTaskEvent(event) && event.priority && event.priority !== "none" ? event.priority.slice(0, 1).toUpperCase() : "";
@@ -124,7 +123,7 @@
                 return `
                     <div ${getEventElementAttributes(event)} class="calendar-event-shell relative${completedClass}">
                         <div class="${sizeClass} rounded-md border bg-surface-container-high/50 truncate flex items-center gap-2" style="border-color: ${badgeColors.border};">
-                            <span class="inline-block h-4 w-1 rounded-full shrink-0" style="background-color: ${calendarColor};"></span>
+                            <span class="inline-block h-4 w-1 rounded-full shrink-0" style="background-color: ${badgeColors.indicator};"></span>
                             ${taskLabel ? `<span class="text-xs font-bold uppercase" style="color:${badgeColors.text};">${escapeHtml(taskLabel)}</span>` : ""}
                             <span class="truncate text-on-surface font-medium">${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</span>
                         </div>

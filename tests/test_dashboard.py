@@ -74,7 +74,7 @@ class TestDashboardSummary(unittest.TestCase):
 
         self.assertNotIn("courses", summary["tile_order"])
         self.assertEqual(summary["available_tiles"], ["calendar", "tasks", "files", "notes", "messages"])
-        self.assertEqual(summary["tile_layout_version"], 1)
+        self.assertEqual(summary["tile_layout_version"], 4)
         self.assertEqual(summary["checklist"]["completed"], 0)
         self.assertFalse(summary["checklist"]["hidden"])
 
@@ -91,10 +91,9 @@ class TestDashboardSummary(unittest.TestCase):
         )
 
         self.assertEqual(summary["tile_order"][:2], ["messages", "calendar"])
-        self.assertEqual(summary["tile_layout"][:2], [
-            {"id": "messages", "size": "standard"},
-            {"id": "calendar", "size": "standard", "view": "month"},
-        ])
+        self.assertEqual([tile["type"] for tile in summary["tile_layout"][:2]], ["messages", "calendar"])
+        self.assertEqual(summary["tile_layout"][0]["instance_id"], "legacy-messages")
+        self.assertEqual(summary["tile_layout"][1]["view"], "month")
         self.assertIn("courses", summary["tile_order"])
         self.assertTrue(summary["checklist"]["complete"])
 
@@ -111,10 +110,10 @@ class TestDashboardSummary(unittest.TestCase):
 
         summary = self._summary_with_patches(settings=settings)
 
-        self.assertEqual(summary["tile_layout"][:2], [
-            {"id": "tasks", "size": "standard"},
-            {"id": "calendar", "size": "wide", "view": "month"},
-        ])
+        self.assertEqual([tile["type"] for tile in summary["tile_layout"][:2]], ["tasks", "calendar"])
+        self.assertEqual(summary["tile_layout"][0]["size"], "standard")
+        self.assertEqual(summary["tile_layout"][1]["size"], "wide")
+        self.assertEqual(summary["tile_layout"][1]["view"], "month")
 
     def test_summary_v3_omitted_tiles_stay_hidden(self):
         settings = {
@@ -127,10 +126,11 @@ class TestDashboardSummary(unittest.TestCase):
         summary = self._summary_with_patches(settings=settings)
 
         self.assertEqual(summary["tile_order"], ["calendar"])
-        self.assertEqual(summary["tile_layout_version"], 3)
-        self.assertEqual(summary["tile_layout"], [
-            {"id": "calendar", "size": "tall", "view": "week"},
-        ])
+        self.assertEqual(summary["tile_layout_version"], 4)
+        self.assertEqual(len(summary["tile_layout"]), 1)
+        self.assertEqual(summary["tile_layout"][0]["type"], "calendar")
+        self.assertEqual(summary["tile_layout"][0]["size"], "tall")
+        self.assertEqual(summary["tile_layout"][0]["view"], "week")
 
     def test_summary_preserves_task_list_filters(self):
         settings = {
@@ -142,9 +142,10 @@ class TestDashboardSummary(unittest.TestCase):
 
         summary = self._summary_with_patches(settings=settings)
 
-        self.assertEqual(summary["tile_layout"], [
-            {"id": "tasks", "size": "wide", "task_list_ids": ["list-1", "list-2"]},
-        ])
+        self.assertEqual(len(summary["tile_layout"]), 1)
+        self.assertEqual(summary["tile_layout"][0]["type"], "tasks")
+        self.assertEqual(summary["tile_layout"][0]["size"], "wide")
+        self.assertEqual(summary["tile_layout"][0]["task_list_ids"], ["list-1", "list-2"])
 
     def test_hidden_checklist_requires_matching_signature(self):
         with self.app.test_request_context("/dashboard"):
@@ -215,6 +216,69 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
         self.assertEqual(status, 400)
         self.assertIn("Duplicate dashboard tile", response.get_json()["error"])
 
+    def test_layout_accepts_independently_configured_v4_task_tiles(self):
+        existing = {"$id": "settings-1", "user_id": "user-1"}
+        layout = {
+            "version": 4,
+            "daily_quote_visible": False,
+            "tiles": [
+                {
+                    "instance_id": "tasks-week",
+                    "type": "tasks",
+                    "size": "standard",
+                    "density": "comfortable",
+                    "item_limit": 3,
+                    "deadline_days": 7,
+                    "include_overdue": True,
+                    "include_undated": False,
+                    "priorities": ["high"],
+                    "starred_only": False,
+                },
+                {
+                    "instance_id": "tasks-starred",
+                    "type": "tasks",
+                    "title": "Starred work",
+                    "size": "wide",
+                    "density": "comfortable",
+                    "item_limit": 8,
+                    "deadline_days": 30,
+                    "include_overdue": True,
+                    "include_undated": True,
+                    "priorities": ["high", "medium", "low", "none"],
+                    "starred_only": True,
+                },
+            ],
+        }
+        saved_json = json.dumps(layout, separators=(",", ":"))
+
+        with self.app.test_request_context(
+            "/api/dashboard/layout",
+            method="PATCH",
+            json={"dashboard_layout": layout},
+        ):
+            with patch.object(dashboard_bp, "current_user", self.user), \
+                    patch.object(dashboard_bp, "_ensure_user_settings", return_value=existing), \
+                    patch.object(dashboard_bp, "update_row_safe", return_value={**existing, "dashboard_layout_json": saved_json}):
+                response = dashboard_bp.update_dashboard_layout.__wrapped__()
+
+        self.assertEqual(response.get_json()["dashboard_layout"], layout)
+
+    def test_layout_rejects_duplicate_singleton_tile_type(self):
+        layout = {
+            "version": 4,
+            "daily_quote_visible": True,
+            "tiles": [
+                {"instance_id": "files-a", "type": "files", "size": "standard", "density": "comfortable", "item_limit": 5},
+                {"instance_id": "files-b", "type": "files", "size": "standard", "density": "comfortable", "item_limit": 5},
+            ],
+        }
+        with self.app.test_request_context("/api/dashboard/layout", method="PATCH", json={"dashboard_layout": layout}):
+            with patch.object(dashboard_bp, "current_user", self.user):
+                response, status = dashboard_bp.update_dashboard_layout.__wrapped__()
+
+        self.assertEqual(status, 400)
+        self.assertIn("Duplicate dashboard tile", response.get_json()["error"])
+
     def test_layout_rejects_non_list_task_filters(self):
         with self.app.test_request_context(
             "/api/dashboard/layout",
@@ -242,7 +306,35 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
 
     def test_layout_saves_unique_valid_layout(self):
         existing = {"$id": "settings-1", "user_id": "user-1"}
-        saved_json = '{"version":3,"tiles":[{"id":"tasks","size":"standard","task_list_ids":["list-1"]},{"id":"calendar","size":"wide","view":"upcoming"}]}'
+        saved_layout = {
+            "version": 4,
+            "daily_quote_visible": True,
+            "tiles": [
+                {
+                    "instance_id": "legacy-tasks",
+                    "type": "tasks",
+                    "size": "standard",
+                    "density": "comfortable",
+                    "item_limit": 5,
+                    "task_list_ids": ["list-1"],
+                    "deadline_days": 30,
+                    "include_overdue": True,
+                    "include_undated": True,
+                    "priorities": ["high", "medium", "low", "none"],
+                    "starred_only": False,
+                },
+                {
+                    "instance_id": "legacy-calendar",
+                    "type": "calendar",
+                    "size": "wide",
+                    "density": "comfortable",
+                    "item_limit": 5,
+                    "view": "upcoming",
+                    "upcoming_days": 7,
+                },
+            ],
+        }
+        saved_json = json.dumps(saved_layout, separators=(",", ":"))
         updated = {**existing, "dashboard_layout_json": saved_json}
 
         with self.app.test_request_context(
@@ -265,10 +357,7 @@ class TestDashboardPreferenceRoutes(unittest.TestCase):
                 response = dashboard_bp.update_dashboard_layout.__wrapped__()
 
         self.assertEqual(response.get_json()["tile_order"], ["tasks", "calendar"])
-        self.assertEqual(response.get_json()["tile_layout"], [
-            {"id": "tasks", "size": "standard", "task_list_ids": ["list-1"]},
-            {"id": "calendar", "size": "wide", "view": "upcoming"},
-        ])
+        self.assertEqual(response.get_json()["tile_layout"], saved_layout["tiles"])
         self.assertEqual(update_row.call_args.args[2]["dashboard_layout_json"], saved_json)
 
     def test_checklist_hide_saves_current_signature(self):

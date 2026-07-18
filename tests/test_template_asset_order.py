@@ -70,7 +70,7 @@ class TemplateAssetOrderTests(unittest.TestCase):
                 self.assertLess(head.index(preconnect), head.index("https://fonts.googleapis.com/css"))
 
     def test_head_scripts_do_not_block_rendering_dependencies(self):
-        allowed_synchronous = {"theme-init.js", "sidebar-init.js"}
+        allowed_synchronous = {"theme-init.js", "landing-theme-init.js", "sidebar-init.js"}
         for template in _full_templates():
             with self.subTest(template=template.name):
                 head = template.read_text().split("</head>", 1)[0]

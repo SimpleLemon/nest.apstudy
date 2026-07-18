@@ -42,6 +42,7 @@
                 selectedSectionIds: new Set(),
                 pinnedSectionIds: new Set(),
                 modalOpen: false,
+                modalTriggerEl: null,
                 isClosing: false,
                 animateOnOpen: false,
                 showSelectedOnly: false,

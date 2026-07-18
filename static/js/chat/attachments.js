@@ -51,7 +51,7 @@ export function createAttachmentManager() {
         <span class="chat-upload-copy">
           <strong>${escapeHtml(item.file.name)}</strong>
           <small>${item.status === "uploading" ? `Uploading ${item.progress}%` : item.status === "error" ? escapeHtml(item.error) : `${formatBytes(item.file.size)} · Ready`}</small>
-          ${item.status === "uploading" ? `<span class="chat-upload-progress"><span style="width:${item.progress}%"></span></span>` : ""}
+          ${item.status === "uploading" ? `<span class="chat-upload-progress"><span style="--chat-upload-progress:${Math.max(0, Math.min(100, item.progress)) / 100}"></span></span>` : ""}
         </span>
         ${item.status === "error" ? `<button type="button" data-upload-retry="${item.localId}" aria-label="Retry ${escapeHtml(item.file.name)}"><span class="material-symbols-outlined" aria-hidden="true">refresh</span></button>` : ""}
         <button type="button" data-upload-remove="${item.localId}" aria-label="Remove ${escapeHtml(item.file.name)}"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>

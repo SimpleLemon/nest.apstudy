@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Bring your college calendar, tasks, courses, notes, files, and chat into one focused workspace with Nest.APStudy." />
     <title>Nest.APStudy - Your Semester, in One Place</title>
-    <script>
-        (function () {
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            window.APSTUDY_THEME_LOCKED = true;
-            window.APSTUDY_THEME_PREFERENCE = prefersDark ? 'nest-dark' : 'parchment-light';
-        })();
-    </script>
+    <script src="{{ url_for('static', filename='js/landing-theme-init.js') }}"></script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
-    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    {% include "_diagnostics_assets.html" %}
+    <link rel="icon" href="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="/manifest.json">
     {% include "_font_assets.html" %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
@@ -47,7 +40,7 @@
 
     <header class="landing-nav" data-landing-nav>
         <a class="landing-brand" href="/" aria-label="Nest.APStudy home">
-            <span class="landing-brand-mark" aria-hidden="true"><img class="landing-brand-logo" src="https://resources.apstudy.org/images/AP-Resources-Logo.png" alt="" width="32" height="32" decoding="async"></span>
+            <span class="landing-brand-mark" aria-hidden="true"><img class="landing-brand-logo" src="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }}" srcset="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }} 1x, {{ url_for('static', filename='images/brand/nest-logo-v1-64.png') }} 2x" alt="" width="32" height="32" decoding="async"></span>
             <span>Nest.APStudy</span>
         </a>
         <button class="landing-nav-toggle" type="button" aria-label="Open navigation" aria-controls="landing-nav-menu" aria-expanded="false" data-landing-nav-toggle><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
@@ -59,7 +52,22 @@
 
     <main id="main-content">
         <section class="landing-hero" aria-labelledby="landing-title">
-            <img class="landing-hero-image" src="{{ url_for('static', filename='images/landing/nest-interface-hero.png') }}" alt="Nest.APStudy interface preview with calendar, tasks, courses, notes, files, and chat panels" width="1800" height="1013" fetchpriority="high">
+            <picture>
+                <source
+                    type="image/webp"
+                    srcset="{{ url_for('static', filename='images/landing/nest-interface-hero-640.webp') }} 640w, {{ url_for('static', filename='images/landing/nest-interface-hero-960.webp') }} 960w, {{ url_for('static', filename='images/landing/nest-interface-hero-1400.webp') }} 1400w, {{ url_for('static', filename='images/landing/nest-interface-hero-1800.webp') }} 1800w"
+                    sizes="100vw">
+                <img
+                    class="landing-hero-image"
+                    src="{{ url_for('static', filename='images/landing/nest-interface-hero.png') }}"
+                    srcset="{{ url_for('static', filename='images/landing/nest-interface-hero-640.png') }} 640w, {{ url_for('static', filename='images/landing/nest-interface-hero-960.png') }} 960w, {{ url_for('static', filename='images/landing/nest-interface-hero-1400.png') }} 1400w, {{ url_for('static', filename='images/landing/nest-interface-hero.png') }} 1800w"
+                    sizes="100vw"
+                    alt="Nest.APStudy interface preview with calendar, tasks, courses, notes, files, and chat panels"
+                    width="1800"
+                    height="1013"
+                    decoding="async"
+                    fetchpriority="high">
+            </picture>
             <div class="landing-hero-scrim" aria-hidden="true"></div>
             <div class="landing-hero-content">
                 <h1 id="landing-title">Your semester,<br>in one place.</h1>
@@ -249,15 +257,15 @@
                         <div class="demo-task-app">
                             <aside class="demo-task-rail">
                                 <button type="button">
-                                    <span class="material-symbols-outlined">task_alt</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">task_alt</span>
                                     <b>5</b>
                                 </button>
                                 <button class="is-active" type="button">
-                                    <span class="material-symbols-outlined">school</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">school</span>
                                     <b>2</b>
                                 </button>
                                 <button type="button">
-                                    <span class="material-symbols-outlined">person</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">person</span>
                                     <b>3</b>
                                 </button>
                             </aside>
@@ -268,7 +276,7 @@
                                     </div>
                                 </header>
                                 <div class="demo-task-add">
-                                    <span class="material-symbols-outlined">add</span>
+                                    <span class="material-symbols-outlined" aria-hidden="true">add</span>
                                     <strong>Add task to School</strong>
                                 </div>
                                 <div class="demo-task-list-preview">
@@ -276,21 +284,21 @@
                                         <span class="demo-task-check"></span>
                                         <div>
                                             <strong>Finish BIOL 141 lab draft</strong>
-                                            <p><span class="material-symbols-outlined">schedule</span>Tomorrow, 11:59 PM</p>
+                                            <p><span class="material-symbols-outlined" aria-hidden="true">schedule</span>Tomorrow, 11:59 PM</p>
                                         </div>
-                                        <b class="is-high"><span class="material-symbols-outlined">flag</span>High</b>
+                                        <b class="is-high"><span class="material-symbols-outlined" aria-hidden="true">flag</span>High</b>
                                     </article>
                                     <article class="demo-task-row">
                                         <span class="demo-task-check"></span>
                                         <div>
                                             <strong>Review chapter notes</strong>
-                                            <p><span class="material-symbols-outlined">schedule</span>Friday, 4:00 PM</p>
+                                            <p><span class="material-symbols-outlined" aria-hidden="true">schedule</span>Friday, 4:00 PM</p>
                                         </div>
                                     </article>
                                 </div>
                                 <section class="demo-task-completed">
                                     <button type="button">
-                                        <span class="material-symbols-outlined">expand_more</span>
+                                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
                                         <strong>Completed</strong>
                                         <b>2</b>
                                     </button>
@@ -312,9 +320,9 @@
                             </article>
                             <article class="demo-files-surface">
                                 <header><h4>File manager</h4></header>
-                                <p><span class="material-symbols-outlined">folder</span><strong>Lab reports</strong><small>4 files</small></p>
-                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Study guide.pdf</strong></p>
-                                <p><span class="material-symbols-outlined">picture_as_pdf</span><strong>Course syllabus.pdf</strong></p>
+                                <p><span class="material-symbols-outlined" aria-hidden="true">folder</span><strong>Lab reports</strong><small>4 files</small></p>
+                                <p><span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span><strong>Study guide.pdf</strong></p>
+                                <p><span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span><strong>Course syllabus.pdf</strong></p>
                             </article>
                             <article class="demo-chat-surface">
                                 <header><h4>Chat</h4></header>
@@ -366,7 +374,6 @@
                 <article class="landing-faq-item is-open">
                     <h3>
                         <button type="button" id="faq-trigger-1" aria-expanded="true" aria-controls="faq-panel-1" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">01</span>
                             <span>Is Nest.APStudy free?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>
@@ -378,7 +385,6 @@
                 <article class="landing-faq-item">
                     <h3>
                         <button type="button" id="faq-trigger-2" aria-expanded="false" aria-controls="faq-panel-2" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">02</span>
                             <span>Who can use Nest?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>
@@ -390,7 +396,6 @@
                 <article class="landing-faq-item">
                     <h3>
                         <button type="button" id="faq-trigger-3" aria-expanded="false" aria-controls="faq-panel-3" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">03</span>
                             <span>What is different for Emory students?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>
@@ -402,7 +407,6 @@
                 <article class="landing-faq-item">
                     <h3>
                         <button type="button" id="faq-trigger-4" aria-expanded="false" aria-controls="faq-panel-4" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">04</span>
                             <span>How do I create an account?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>
@@ -414,7 +418,6 @@
                 <article class="landing-faq-item">
                     <h3>
                         <button type="button" id="faq-trigger-5" aria-expanded="false" aria-controls="faq-panel-5" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">05</span>
                             <span>What data does Nest store and how is it protected?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>
@@ -426,7 +429,6 @@
                 <article class="landing-faq-item">
                     <h3>
                         <button type="button" id="faq-trigger-6" aria-expanded="false" aria-controls="faq-panel-6" data-landing-faq-trigger>
-                            <span class="landing-faq-number" aria-hidden="true">06</span>
                             <span>Which calendars and integrations work with Nest?</span>
                             <span class="material-symbols-outlined landing-faq-icon" aria-hidden="true">add</span>
                         </button>

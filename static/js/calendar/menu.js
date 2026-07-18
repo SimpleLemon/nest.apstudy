@@ -50,7 +50,7 @@
                             class="js-calendar-more calendar-source-more"
                             data-calendar-name="${escapeHtml(cal)}"
                             aria-label="Calendar options">
-                            <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;">more_horiz</span>
+                            <span class="material-symbols-outlined calendar-source-more-icon" style="font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24;" aria-hidden="true">more_horiz</span>
                         </button>
                 `;
                 return `
@@ -90,7 +90,7 @@
                 <div class="calendar-source-section-head">
                     <span>Other</span>
                     ${state.public.readOnly ? "" : `<button type="button" class="js-calendar-add-source calendar-source-add" aria-label="Add other calendar">
-                        <span class="material-symbols-outlined calendar-source-add-icon">add</span>
+                        <span class="material-symbols-outlined calendar-source-add-icon" aria-hidden="true">add</span>
                     </button>`}
                 </div>
                 ${otherCalendars.length ? buildRows(otherCalendars) : '<div class="px-3 py-2 text-sm text-on-surface-variant">No other calendars</div>'}

@@ -6,6 +6,7 @@
     let currentEventRef = null;
     let selectedCalendarId = null;
     let selectedColor = null;
+    let openerEl = null;
 
     function escapeHtml(value) {
         return String(value ?? "")
@@ -86,11 +87,14 @@
     function closeModal() {
         const m = ensureModal();
         m.style.display = "none";
+        const focusTarget = openerEl;
         currentMode = "create";
         currentEventId = null;
         currentEventRef = null;
         selectedCalendarId = null;
         selectedColor = null;
+        openerEl = null;
+        if (focusTarget?.isConnected) focusTarget.focus?.({ preventScroll: true });
     }
 
     function isoLocalForInput(value) {
@@ -124,7 +128,10 @@
         const reminderMinutes = availableReminders.some(([value]) => value === requestedReminder)
             ? requestedReminder
             : defaultReminderMinutes(isAllDay);
-        const title = currentMode === "create" ? "New Event" : "Event";
+        const isView = currentMode === "view";
+        const readOnlyAttribute = isView ? " readonly" : "";
+        const disabledAttribute = isView ? " disabled" : "";
+        const title = currentMode === "create" ? "New Event" : isView ? "Event details" : "Event";
         m.innerHTML = `
             <div class="calendar-event-backdrop" data-event-close tabindex="-1"></div>
             <div class="calendar-event-dialog" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
@@ -132,31 +139,31 @@
                     <div class="calendar-event-header">
                         <h3 class="calendar-event-title">${escapeHtml(title)}</h3>
                         <button type="button" class="calendar-event-icon-button" data-event-close aria-label="Close event form">
-                            <span class="material-symbols-outlined">close</span>
+                            <span class="material-symbols-outlined" aria-hidden="true">close</span>
                         </button>
                     </div>
                     <label class="calendar-event-field">
                         <span>Title</span>
-                        <input name="title" required value="${escapeHtml(data.title || "")}" autocomplete="off">
+                        <input name="title" required value="${escapeHtml(data.title || "")}" autocomplete="off"${readOnlyAttribute}>
                     </label>
                     <label class="calendar-event-field">
                         <span>Description</span>
-                        <textarea name="description" rows="3">${escapeHtml(data.description || "")}</textarea>
+                        <textarea name="description" rows="3"${readOnlyAttribute}>${escapeHtml(data.description || "")}</textarea>
                     </label>
                     <div class="calendar-event-grid">
                         <label class="calendar-event-field">
                             <span>Start</span>
-                            <input name="start" type="datetime-local" value="${escapeHtml(isoLocalForInput(data.start || data.start_date || data.startDate))}">
+                            <input name="start" type="datetime-local" value="${escapeHtml(isoLocalForInput(data.start || data.start_date || data.startDate))}"${readOnlyAttribute}>
                         </label>
                         <label class="calendar-event-field">
                             <span>End</span>
-                            <input name="end" type="datetime-local" value="${escapeHtml(isoLocalForInput(data.end || data.end_date || data.endDate))}">
+                            <input name="end" type="datetime-local" value="${escapeHtml(isoLocalForInput(data.end || data.end_date || data.endDate))}"${readOnlyAttribute}>
                         </label>
                     </div>
                     <div class="calendar-event-grid">
                         <label class="calendar-event-field">
                             <span>Calendar</span>
-                            <select name="calendar_id">
+                            <select name="calendar_id"${disabledAttribute}>
                                 ${options.map((option) => `
                                     <option value="${escapeHtml(option.id)}" ${option.id === calendarId ? "selected" : ""}>
                                         ${escapeHtml(option.label)}
@@ -165,19 +172,19 @@
                             </select>
                         </label>
                         <label class="calendar-event-check">
-                            <input name="all_day" type="checkbox" ${isAllDay ? "checked" : ""}>
+                            <input name="all_day" type="checkbox" ${isAllDay ? "checked" : ""}${disabledAttribute}>
                             <span>All day</span>
                         </label>
                     </div>
                     <label class="calendar-event-field">
                         <span>Alert</span>
-                        <select name="reminder_minutes">
+                        <select name="reminder_minutes"${disabledAttribute}>
                             ${availableReminders.map(([value, label]) => `
                                 <option value="${value}" ${value === reminderMinutes ? "selected" : ""}>${escapeHtml(label)}</option>
                             `).join("")}
                         </select>
                     </label>
-                    <div class="calendar-event-color-section">
+                    ${isView ? "" : `<div class="calendar-event-color-section">
                         <div class="calendar-event-color-head">
                             <span>Calendar Color</span>
                         </div>
@@ -199,11 +206,11 @@
                                 </button>
                             `).join("")}
                         </div>
-                    </div>
+                    </div>`}
                     <p id="apstudy-event-error" class="calendar-event-error hidden" role="alert"></p>
                     <div class="calendar-event-footer">
-                        <button type="button" class="calendar-event-button calendar-event-button-secondary" data-event-close>Cancel</button>
-                        <button type="submit" class="calendar-event-button calendar-event-button-primary">Save</button>
+                        <button type="button" class="calendar-event-button ${isView ? "calendar-event-button-primary" : "calendar-event-button-secondary"}" data-event-close>${isView ? "Close" : "Cancel"}</button>
+                        ${isView ? "" : `<button type="submit" class="calendar-event-button calendar-event-button-primary">Save</button>`}
                     </div>
                 </form>
             </div>
@@ -214,7 +221,8 @@
         form?.querySelector("input[name='title']")?.focus();
     }
 
-    function openForm({ mode = "create", data = {} } = {}) {
+    function openForm({ mode = "create", data = {}, opener = null } = {}) {
+        openerEl = opener || document.activeElement;
         currentMode = mode;
         currentEventId = mode === "edit" ? data.id || null : null;
         currentEventRef = data.event_ref || null;
@@ -229,7 +237,7 @@
             return;
         }
         const colorButton = event.target.closest("[data-event-color]");
-        if (colorButton) {
+        if (colorButton && currentMode !== "view") {
             selectedColor = colorButton.getAttribute("data-event-color") || null;
             const form = ensureModal().querySelector("form");
             renderModal(readFormData(form));
@@ -237,6 +245,7 @@
     }
 
     function onModalChange(event) {
+        if (currentMode === "view") return;
         if (event.target?.name !== "calendar_id" && event.target?.name !== "all_day") return;
         const form = ensureModal().querySelector("form");
         const data = readFormData(form);

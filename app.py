@@ -66,6 +66,10 @@ def create_app():
     app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
     app.config["PREFERRED_URL_SCHEME"] = "http" if allow_insecure_http else "https"
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
+    app.config["FRONTEND_CONSOLE_DIAGNOSTICS_ENABLED"] = (
+        os.environ.get("FRONTEND_CONSOLE_DIAGNOSTICS_ENABLED", "").strip().lower()
+        in {"1", "true", "yes", "on"}
+    )
     os.makedirs(app.config["FILE_SHARE_UPLOAD_DIR"], exist_ok=True)
     os.makedirs(app.instance_path, exist_ok=True)
     os.makedirs(nest_instance_dir(), exist_ok=True)
@@ -105,6 +109,12 @@ def create_app():
 
     @app.after_request
     def provide_csrf_cookie(response):
+        if request.path.startswith("/static/images/brand/nest-logo-v1-"):
+            response.cache_control.no_cache = None
+            response.cache_control.no_store = None
+            response.cache_control.public = True
+            response.cache_control.max_age = 31536000
+            response.cache_control.immutable = True
         if request.method in {"GET", "HEAD"} and response.mimetype == "text/html":
             response.set_cookie(
                 "csrf_token",
@@ -193,6 +203,7 @@ def create_app():
                 "user_tier": None,
                 "user_tier_label": None,
                 "user_tier_badge": None,
+                "frontend_console_diagnostics_enabled": app.config["FRONTEND_CONSOLE_DIAGNOSTICS_ENABLED"],
                 "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
                 "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
             }
@@ -230,6 +241,7 @@ def create_app():
             "user_tier": user_tier,
             "user_tier_label": TIER_LABELS[user_tier],
             "user_tier_badge": TIER_BADGES.get(user_tier),
+            "frontend_console_diagnostics_enabled": app.config["FRONTEND_CONSOLE_DIAGNOSTICS_ENABLED"],
             "appwrite_endpoint": os.environ.get("APPWRITE_ENDPOINT", "https://nyc.cloud.appwrite.io/v1"),
             "appwrite_project_id": os.environ.get("APPWRITE_PROJECT_ID", "69f77663000c16abdff2"),
         }
@@ -240,7 +252,12 @@ def create_app():
 
     @app.route("/apple-touch-icon.png")
     def apple_touch_icon():
-        return app.send_static_file("apple-touch-icon.png")
+        return send_from_directory(
+            app.static_folder,
+            "images/brand/nest-logo-v1-180.png",
+            mimetype="image/png",
+            max_age=86400,
+        )
 
     @app.errorhandler(RequestEntityTooLarge)
     def handle_request_entity_too_large(_error):

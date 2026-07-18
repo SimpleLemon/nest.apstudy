@@ -55,8 +55,8 @@ const {
     getAccent,
     isTaskEvent,
     getTaskPriorityColor,
-    adjustHexLuminance,
-    hexToRgba,
+    createAccessibleEventPalette,
+    getCssColorVariable,
     escapeHtml,
     formatMultilineText,
 } = window.APStudyCalendarUtils;
@@ -224,13 +224,16 @@ const calendarEventRender = window.APStudyCalendarEventRender.createCalendarEven
     callbacks: {
         getCalendarEventColor: getEventCalendarColor,
         getCalendarEventRef,
+        getEventCalendarLabel,
         getVisibleEvents,
     },
     formatters: {
-        adjustHexLuminance,
+        createAccessibleEventPalette,
         escapeHtml,
+        formatAllDayRange,
+        formatTimedEventRange,
+        getCssColorVariable,
         getTaskPriorityColor,
-        hexToRgba,
         isTaskEvent,
     },
 });
@@ -270,6 +273,7 @@ const calendarAgenda = window.APStudyCalendarAgenda.createCalendarAgenda({
         getCalendarEventColor: getEventCalendarColor,
         getCalendarEventLabel: getEventCalendarLabel,
         getCalendarEventRef,
+        getEventBadgeColors,
         getEventElementAttributes,
         getEventsForDay,
         getVisibleEvents,

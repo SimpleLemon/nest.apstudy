@@ -3,14 +3,13 @@
 	position: fixed;
 	left: 0;
 	top: 0;
-	height: 100vh;
+	height: var(--app-viewport-height, 100vh);
 	width: 250px;
 	background: var(--color-shell-bg);
 	border-right: 1px solid var(--color-shell-border);
 	display: flex;
 	flex-direction: column;
-	z-index: 1000;
-	transition: width 0.3s ease;
+	z-index: var(--z-sticky);
 	overflow-x: hidden;
 }
 
@@ -69,7 +68,7 @@
 	text-decoration: none;
 	border-radius: var(--radius-control);
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: background-color 0.2s ease, color 0.2s ease;
 	position: relative;
 	white-space: nowrap;
 	border: none;
@@ -139,7 +138,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 36px;
-	transition: all 0.2s ease;
+	transition: background-color 0.2s ease, color 0.2s ease;
 	font-size: 18px;
 }
 
@@ -177,7 +176,6 @@ body.with-sidebar main,
 body.with-sidebar > .flex-1,
 body.with-sidebar main.flex-1 {
 	margin-left: 250px;
-	transition: margin-left 0.3s ease;
 	flex: 1;
 	width: calc(100% - 250px);
 }
@@ -194,7 +192,6 @@ html.apstudy-sidebar-collapsed body.with-sidebar main.flex-1 {
 
 body.with-sidebar header {
 	margin-left: 250px;
-	transition: margin-left 0.3s ease;
 }
 
 body.with-sidebar.sidebar-collapsed header,
@@ -205,7 +202,6 @@ html.apstudy-sidebar-collapsed body.with-sidebar header {
 /* Navbar with sidebar spacing */
 .navbar-with-sidebar {
 	margin-left: 250px;
-	transition: margin-left 0.3s ease;
 }
 
 body.with-sidebar.sidebar-collapsed .navbar-with-sidebar,

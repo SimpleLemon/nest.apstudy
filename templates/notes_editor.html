@@ -17,6 +17,7 @@
         }|tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% include "_diagnostics_assets.html" %}
     {% if viewer_authenticated %}
     {% include '_sidebar_init.html' %}
     {% endif %}
@@ -24,14 +25,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% include "_font_assets.html" %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}?v=notes-print-3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-16">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes/editor.css') }}?v=notes-editor-layout-1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/notes/dist/notes-editor.css') }}?v=notes-editor-bundle-17">
     <title>{{ 'Shared Note' if access.role == 'viewer' else 'Note Editor' }} - APStudy Nest</title>
 
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
@@ -41,7 +39,7 @@
     {% endif %}
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
     {% if page_state == 'ready' %}
-    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor.js') }}?v=notes-editor-bundle-16"></script>
+    <script type="module" src="{{ url_for('static', filename='js/notes/dist/notes-editor-v17.js') }}"></script>
     {% endif %}
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }

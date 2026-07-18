@@ -78,34 +78,31 @@ test("dashboard utility applies saved tile order while appending missing tiles",
 test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
     const utils = loadDashboardUtils(dashboardBundle);
 
-    assert.deepEqual(
-        plain(utils.normalizeTileLayout(["messages", "calendar"], ["calendar", "tasks", "messages"])),
-        [
-            { id: "messages", size: "standard" },
-            { id: "calendar", size: "standard", view: "month" },
-            { id: "tasks", size: "standard" },
-        ],
-    );
+    const legacy = plain(utils.normalizeTileLayout(["messages", "calendar"], ["calendar", "tasks", "messages"]));
+    assert.deepEqual(legacy.map(({ type, size }) => ({ type, size })), [
+        { type: "messages", size: "standard" },
+        { type: "calendar", size: "standard" },
+        { type: "tasks", size: "standard" },
+    ]);
+    assert.equal(legacy[1].view, "month");
+    assert.equal(legacy[1].instance_id, "legacy-calendar");
 
     assert.deepEqual(
         plain(utils.normalizeTileLayout(
             { version: 2, tiles: [{ id: "calendar", size: "wide" }, { id: "tasks", size: "compact" }] },
             ["calendar", "tasks"],
-        )),
-        [
-            { id: "calendar", size: "wide", view: "month" },
-            { id: "tasks", size: "standard" },
-        ],
+        )).map(({ type, size }) => ({ type, size })),
+        [{ type: "calendar", size: "wide" }, { type: "tasks", size: "standard" }],
     );
 
     assert.deepEqual(
         plain(utils.normalizeTileLayout(
             { version: 3, tiles: [{ id: "calendar", size: "tall", view: "week" }, { id: "tasks", size: "wide", task_list_ids: ["list-1", "list-1", "list-2"] }] },
             ["calendar", "tasks"],
-        )),
+        )).map(({ type, size, view, task_list_ids }) => ({ type, size, view, task_list_ids })),
         [
-            { id: "calendar", size: "tall", view: "week" },
-            { id: "tasks", size: "wide", task_list_ids: ["list-1", "list-2"] },
+            { type: "calendar", size: "tall", view: "week", task_list_ids: undefined },
+            { type: "tasks", size: "wide", view: undefined, task_list_ids: ["list-1", "list-2"] },
         ],
     );
 });
@@ -145,8 +142,46 @@ test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () =
         tile_order: ["calendar"],
     });
 
-    assert.deepEqual(
-        plain(utils.normalizeTileLayout(summaryLayout, ["calendar", "tasks"])),
-        [{ id: "calendar", size: "standard", view: "month" }],
-    );
+    const normalized = plain(utils.normalizeTileLayout(summaryLayout, ["calendar", "tasks"]));
+    assert.equal(normalized.length, 1);
+    assert.equal(normalized[0].type, "calendar");
+    assert.equal(normalized[0].view, "month");
+});
+
+test("dashboard v4 layouts preserve duplicate instances and per-tile settings", async () => {
+    const utils = loadDashboardUtils(dashboardBundle);
+    const layout = utils.normalizeDashboardLayout({
+        version: 4,
+        daily_quote_visible: false,
+        tiles: [
+            {
+                instance_id: "tasks-week",
+                type: "tasks",
+                title: "This week",
+                size: "standard",
+                item_limit: 3,
+                deadline_days: 7,
+                include_overdue: true,
+                include_undated: false,
+                priorities: ["high", "medium"],
+                starred_only: false,
+            },
+            {
+                instance_id: "tasks-starred",
+                type: "tasks",
+                size: "wide",
+                item_limit: 8,
+                deadline_days: 30,
+                priorities: ["high", "medium", "low", "none"],
+                starred_only: true,
+            },
+        ],
+    }, ["tasks"]);
+
+    assert.equal(layout.daily_quote_visible, false);
+    assert.deepEqual(plain(layout.tiles.map((tile) => tile.instance_id)), ["tasks-week", "tasks-starred"]);
+    assert.equal(layout.tiles[0].title, "This week");
+    assert.equal(layout.tiles[0].deadline_days, 7);
+    assert.equal(layout.tiles[1].starred_only, true);
+    assert.equal(utils.layoutsEqual(layout, utils.cloneLayout(layout)), true);
 });

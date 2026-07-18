@@ -266,7 +266,7 @@
     function flashCopyButton(button) {
       const previousHtml = button.innerHTML;
       button.classList.add('is-copied');
-      button.innerHTML = '<span class="material-symbols-outlined">check</span>';
+      button.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">check</span>';
       window.setTimeout(() => {
         button.classList.remove('is-copied');
         button.innerHTML = previousHtml;

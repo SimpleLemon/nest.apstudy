@@ -23,19 +23,9 @@ function sidebarSvgIcon(path) {
   return `<svg class="sidebar-toggle-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentcolor" fill-rule="evenodd" d="${path}" clip-rule="evenodd"></path></svg>`;
 }
 
-function ensureMaterialSymbolsFont() {
-  const href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0";
-  if (document.querySelector(`link[href="${href}"]`)) return;
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = href;
-  document.head.appendChild(link);
-}
-
 function initSidebar() {
   const sidebar = document.querySelector('.sidebar-container');
   if (!sidebar) return;
-  ensureMaterialSymbolsFont();
 
   document.body.classList.add('with-sidebar');
   const sidebarDefault = normalizeSidebarDefault(sidebar?.dataset?.sidebarDefault);

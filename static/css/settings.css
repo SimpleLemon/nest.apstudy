@@ -1369,7 +1369,7 @@
 .settings-discord-modal {
   position: fixed;
   inset: 0;
-  z-index: 1200;
+  z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1848,11 +1848,13 @@ html body .settings-combobox .settings-combobox-search:focus-visible {
 
 .settings-tier-progress span {
     display: block;
-    width: 0;
+    width: 100%;
     height: 100%;
     border-radius: inherit;
     background: var(--color-primary, #0060aa);
-    transition: width 180ms ease, background-color 180ms ease;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 180ms ease, background-color 180ms ease;
 }
 
 .settings-tier-progress.is-over-limit span {

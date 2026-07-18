@@ -9,20 +9,18 @@
         window.APSTUDY_THEME_PREFERENCE = "{{ theme_preference or '' }}";
     </script>
     <script src="{{ url_for('static', filename='js/core/theme-init.js') }}"></script>
+    {% include "_diagnostics_assets.html" %}
     {% include '_sidebar_init.html' %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% include "_font_assets.html" %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/themes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="icon" href="https://resources.apstudy.org/images/AP-Resources-Logo.png">
+    <link rel="icon" href="{{ url_for('static', filename='images/brand/nest-logo-v1-32.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
     <meta property="og:url" content="https://nest.apstudy.org/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="APStudy Nest">
