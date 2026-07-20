@@ -36,7 +36,7 @@
 
     function fileCardHtml(file, selected) {
         return `
-            <article class="files-row files-file-card ${selected ? "is-selected" : ""}" data-file-id="${escapeHtml(file.id)}">
+            <article class="files-row files-file-card ${selected ? "is-selected" : ""}" data-file-id="${escapeHtml(file.id)}" tabindex="-1">
                 <label class="files-row-check" aria-label="Select ${escapeHtml(file.filename)}">
                     <input type="checkbox" data-native-control data-select-file="${escapeHtml(file.id)}" ${selected ? "checked" : ""}>
                 </label>

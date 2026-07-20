@@ -1,6 +1,13 @@
 import * as React from 'https://esm.sh/react@18.3.1';
 import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1';
 import { Command } from 'https://esm.sh/cmdk@1.1.1?deps=react@18.3.1,react-dom@18.3.1';
+import {
+  COMMAND_SEARCH_DEBOUNCE_MS,
+  COMMAND_SEARCH_MIN_LENGTH,
+  emptyWorkspaceGroups,
+  fetchWorkspaceSearch,
+} from './command-palette-search.js';
+import { renderWorkspaceResults } from './command-palette-workspace.js';
 
 const h = React.createElement;
 
@@ -40,6 +47,12 @@ export const COMMAND_PALETTE_PAGES = [
     route: '/files',
     icon: 'files',
     keywords: ['uploads', 'documents', 'share', 'storage', 'downloads'],
+  },
+  {
+    name: 'Focus Mode',
+    route: '/focus',
+    icon: 'dark_mode',
+    keywords: ['timer', 'pomodoro', 'study', 'spotify', 'break'],
   },
   {
     name: 'Chat',
@@ -296,6 +309,11 @@ function setTheme(theme) {
 function CommandPaletteApp() {
   const [open, setOpen] = React.useState(currentOpen);
   const [search, setSearch] = React.useState('');
+  const [workspaceGroups, setWorkspaceGroups] = React.useState(emptyWorkspaceGroups);
+  const [coursesEnabled, setCoursesEnabled] = React.useState(false);
+  const [unavailableCategories, setUnavailableCategories] = React.useState([]);
+  const [searchStatus, setSearchStatus] = React.useState('idle');
+  const requestSequence = React.useRef(0);
 
   setOpenState = setOpen;
   currentOpen = open;
@@ -303,19 +321,73 @@ function CommandPaletteApp() {
   React.useEffect(() => {
     if (!open) {
       setSearch('');
+      setWorkspaceGroups(emptyWorkspaceGroups());
+      setUnavailableCategories([]);
+      setSearchStatus('idle');
     }
   }, [open]);
+
+  React.useEffect(() => {
+    const query = search.trim();
+    if (!open || query.length < COMMAND_SEARCH_MIN_LENGTH) {
+      requestSequence.current += 1;
+      setWorkspaceGroups(emptyWorkspaceGroups());
+      setUnavailableCategories([]);
+      setSearchStatus('idle');
+      return undefined;
+    }
+
+    const controller = new AbortController();
+    const sequence = requestSequence.current + 1;
+    requestSequence.current = sequence;
+    setWorkspaceGroups(emptyWorkspaceGroups());
+    setUnavailableCategories([]);
+    setSearchStatus('loading');
+    const timer = window.setTimeout(() => {
+      fetchWorkspaceSearch(query, { signal: controller.signal })
+        .then((payload) => {
+          if (requestSequence.current !== sequence) return;
+          setWorkspaceGroups(payload.groups);
+          setCoursesEnabled(payload.coursesEnabled);
+          setUnavailableCategories(payload.unavailableCategories);
+          setSearchStatus('ready');
+        })
+        .catch((error) => {
+          if (error?.name === 'AbortError' || requestSequence.current !== sequence) return;
+          setWorkspaceGroups(emptyWorkspaceGroups());
+          setUnavailableCategories([]);
+          setSearchStatus('error');
+        });
+    }, COMMAND_SEARCH_DEBOUNCE_MS);
+
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+  }, [open, search]);
 
   const close = React.useCallback(() => {
     currentOpen = false;
     setOpen(false);
   }, []);
 
+  const workspaceMode = search.trim().length >= COMMAND_SEARCH_MIN_LENGTH;
+  const matchingCommands = workspaceMode ? getMatchingCommands(search) : [];
+  const resultCount = Object.values(workspaceGroups).reduce((total, items) => total + items.length, 0);
+  const liveMessage = searchStatus === 'loading'
+    ? 'Searching your workspace.'
+    : searchStatus === 'ready'
+      ? `${resultCount} workspace result${resultCount === 1 ? '' : 's'} found.`
+      : searchStatus === 'error'
+        ? 'Workspace search is unavailable.'
+        : '';
+
   return h(
     Command.Dialog,
     {
       label: 'Command palette',
       loop: true,
+      shouldFilter: !workspaceMode,
       className: 'apstudy-command-palette',
       open,
       onOpenChange: (nextOpen) => {
@@ -331,82 +403,43 @@ function CommandPaletteApp() {
     h(
       'p',
       { className: 'apstudy-visually-hidden' },
-      'Search navigation, help links, and theme commands.',
+      'Search files, notes, events, messages, courses, and commands.',
     ),
     h(
       'div',
       { className: 'apstudy-command-palette-input-row' },
       h(Command.Input, {
-        'aria-label': 'Search commands',
+        'aria-label': 'Search anything in Nest',
         autoFocus: true,
-        placeholder: 'Search...',
+        placeholder: 'Search anything in Nest',
         value: search,
         onValueChange: setSearch,
       }),
     ),
+    h('p', { className: 'apstudy-visually-hidden', 'aria-live': 'polite' }, liveMessage),
     h(
       Command.List,
       { className: 'apstudy-command-palette-list' },
-      h(
-        Command.Empty,
-        { className: 'apstudy-command-palette-empty' },
-        h('strong', null, 'No results found.'),
-        h('span', null, "Try searching for 'settings' or 'theme'."),
-      ),
-      h(
-        Command.Group,
-        { heading: 'NAVIGATION' },
-        COMMAND_PALETTE_PAGES.map((item) => h(CommandRow, {
-          key: `navigation-${item.name}-${item.route}`,
-          icon: item.icon,
-          label: item.name,
-          value: item.name,
-          keywords: item.keywords,
-          onSelect: () => {
-            if (isCurrentRoute(item.route)) {
-              close();
-              return;
-            }
+      workspaceMode
+        ? renderWorkspaceResults({
+          groups: workspaceGroups,
+          coursesEnabled,
+          searchStatus,
+          unavailableCategories,
+          commandRows: matchingCommands.map((item) => item.render(close)),
+          onOpenResult: (result) => {
             close();
-            navigateTo(item.route);
+            navigateTo(result.href);
           },
-        })),
-      ),
-      h(
-        Command.Group,
-        { heading: 'HELP' },
-        HELP_ITEMS.map((item) => h(CommandRow, {
-          key: `help-${item.name}`,
-          icon: item.icon,
-          label: item.name,
-          value: item.name,
-          keywords: item.keywords,
-          onSelect: () => {
-            close();
-            openExternalLink(item.href);
-          },
-        })),
-      ),
-      h(
-        Command.Group,
-        { heading: 'MISC' },
-        THEME_ITEMS.map((item) => h(CommandRow, {
-          key: `theme-${item.theme}`,
-          icon: 'swap_vert',
-          label: item.name,
-          value: item.name,
-          keywords: item.keywords,
-          onSelect: () => {
-            close();
-            setTheme(item.theme);
-          },
-        })),
-      ),
+          renderIcon,
+        })
+        : renderDefaultCommands(close),
     ),
     h(
       'div',
       { className: 'apstudy-command-palette-footer' },
-      h('span', null, h('kbd', null, 'Enter'), ' to select'),
+      h('span', null, h('kbd', null, '↑↓'), ' navigate'),
+      h('span', null, h('kbd', null, 'Enter'), ' open'),
       h(
         'button',
         {
@@ -419,6 +452,79 @@ function CommandPaletteApp() {
       ),
     ),
   );
+}
+
+function renderDefaultCommands(close) {
+  return [
+    h(Command.Empty, { className: 'apstudy-command-palette-empty', key: 'empty' },
+      h('strong', null, 'No commands found.'),
+      h('span', null, "Try searching for 'settings' or 'theme'.")),
+    h(Command.Group, { heading: 'Navigation', key: 'navigation' },
+      COMMAND_PALETTE_PAGES.map((item) => renderPageCommand(item, close))),
+    h(Command.Group, { heading: 'Help', key: 'help' },
+      HELP_ITEMS.map((item) => renderHelpCommand(item, close))),
+    h(Command.Group, { heading: 'Appearance', key: 'appearance' },
+      THEME_ITEMS.map((item) => renderThemeCommand(item, close))),
+  ];
+}
+
+function commandMatches(item, query) {
+  const haystack = [item.name, ...(item.keywords || [])].join(' ').toLowerCase();
+  return query.trim().toLowerCase().split(/\s+/).every((token) => haystack.includes(token));
+}
+
+function getMatchingCommands(query) {
+  return [
+    ...COMMAND_PALETTE_PAGES.map((item) => ({ ...item, render: (close) => renderPageCommand(item, close) })),
+    ...HELP_ITEMS.map((item) => ({ ...item, render: (close) => renderHelpCommand(item, close) })),
+    ...THEME_ITEMS.map((item) => ({ ...item, render: (close) => renderThemeCommand(item, close) })),
+  ].filter((item) => commandMatches(item, query));
+}
+
+function renderPageCommand(item, close) {
+  return h(CommandRow, {
+    key: `navigation-${item.name}-${item.route}`,
+    icon: item.icon,
+    label: item.name,
+    value: item.name,
+    keywords: item.keywords,
+    onSelect: () => {
+      if (isCurrentRoute(item.route)) {
+        close();
+        return;
+      }
+      close();
+      navigateTo(item.route);
+    },
+  });
+}
+
+function renderHelpCommand(item, close) {
+  return h(CommandRow, {
+    key: `help-${item.name}`,
+    icon: item.icon,
+    label: item.name,
+    value: item.name,
+    keywords: item.keywords,
+    onSelect: () => {
+      close();
+      openExternalLink(item.href);
+    },
+  });
+}
+
+function renderThemeCommand(item, close) {
+  return h(CommandRow, {
+    key: `theme-${item.theme}`,
+    icon: 'swap_vert',
+    label: item.name,
+    value: item.name,
+    keywords: item.keywords,
+    onSelect: () => {
+      close();
+      setTheme(item.theme);
+    },
+  });
 }
 
 function CommandRow({ icon, label, value, keywords, onSelect }) {
@@ -439,15 +545,24 @@ function renderIcon(name) {
   const materialIcons = {
     dashboard: 'dashboard',
     calendar: 'calendar_today',
+    calendar_month: 'calendar_month',
+    calendar_today: 'calendar_today',
     notes: 'article',
+    article: 'article',
     task: 'check_circle',
     files: 'folder',
+    folder: 'folder',
+    description: 'description',
     school: 'school',
     settings: 'settings',
     discord: 'forum',
+    forum: 'forum',
     help: 'help',
     swap: 'swap_horiz',
+    swap_vert: 'swap_vert',
     message: 'chat_bubble',
+    chat_bubble: 'chat_bubble',
+    dark_mode: 'dark_mode',
   };
 
   return h(

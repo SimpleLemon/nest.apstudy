@@ -154,17 +154,29 @@
 
     function activateEventElement(eventEl) {
         const context = contextForTarget(eventEl);
-        if (!context.event) return;
+        activateEvent(context.event, context.anchorEl);
+    }
+
+    function activateEvent(calendarEvent, anchorEl = null) {
+        if (!calendarEvent) return false;
+        const context = {
+            event: calendarEvent,
+            eventId: calendarEvent.id || null,
+            eventRef: calendarEvent.event_ref || calendarEvent.id || null,
+            anchorEl,
+            readOnly: isReadOnlyCalendar(),
+        };
         if (context.readOnly || context.event.source === "simulated") {
             openView(context);
-            return;
+            return true;
         }
         const isTask = context.event.source_type === "task" || context.event.type === "task";
         if (isTask && context.event.task_id) {
             openTask(context);
-            return;
+            return true;
         }
         openEdit(context);
+        return true;
     }
 
     function openKeyboardContextMenu(eventEl) {
@@ -295,7 +307,11 @@
             localStorage.removeItem("calendarEventsCache");
             window.loadCalendarData?.();
         } catch (_) {
-            window.APStudyToast?.show?.("Unable to delete event", "error");
+            window.APStudyToast?.show?.({
+                title: "Couldn’t delete event",
+                message: "Try again in a moment.",
+                type: "error",
+            });
         }
     }
 
@@ -354,6 +370,7 @@
     }
 
     window.APStudyCalendarEventMenu = {
+        activateEvent,
         activateEventElement,
         closeMenu,
         getEventMenuItems,

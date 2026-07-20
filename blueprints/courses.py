@@ -36,6 +36,7 @@ from services.discord_audit import (
     format_actor,
 )
 from services.entitlements import EntitlementError, EntitlementLimitError, TRACK_INTERVALS_KEY, check_limit, request_entitlements
+from services.user_profile import is_emory_or_oxford_user
 
 
 courses_bp = Blueprint("courses", __name__)
@@ -69,22 +70,7 @@ def _current_user_id():
 
 
 def _is_emory_or_oxford_user():
-    school = str(getattr(current_user, "school", "") or "").strip().lower()
-    school_key = str(getattr(current_user, "school_key", "") or "").strip().lower()
-    return bool(getattr(current_user, "emory_student", False)) or school in {
-        "emory",
-        "emory university",
-        "emory university-oxford",
-        "emory university oxford",
-        "oxford college",
-        "oxford college of emory university",
-    } or school_key in {
-        "emory",
-        "emory-university",
-        "emory-university-oxford",
-        "oxford-college",
-        "oxford-college-of-emory-university",
-    }
+    return is_emory_or_oxford_user(current_user)
 
 
 def _require_emory_student():

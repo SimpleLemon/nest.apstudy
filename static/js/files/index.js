@@ -61,6 +61,9 @@
     let els = {};
     let modals = null;
     let workflows = null;
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialFolderId = initialParams.get("folder");
+    let pendingFileId = initialParams.get("file");
 
     document.addEventListener("DOMContentLoaded", () => {
         els = getElements();
@@ -148,7 +151,7 @@
                 toggleNewMenu: toggleNewMenuFromUtils,
             },
         });
-        void loadFolder(null);
+        void loadFolder(initialFolderId);
     });
 
     async function loadFolder(folderId) {
@@ -167,16 +170,39 @@
             state.files = Array.isArray(payload.files) ? payload.files : [];
             state.allFolders = Array.isArray(payload.allFolders) ? payload.allFolders : [];
             renderManager();
+            revealPendingFile();
         } catch (error) {
             console.error(error);
             state.folders = [];
             state.files = [];
             renderManager();
-            showAlert(error.message || "Unable to load files right now.", "error");
+            showAlert(error.message || "Refresh the page and try again.", "error", { title: "Couldn’t load files" });
         } finally {
             setLoading(false);
             renderEmptyState();
         }
+    }
+
+    function revealPendingFile() {
+        if (!pendingFileId || !els.filesRoot) return;
+        const selector = `[data-file-id="${cssEscape(pendingFileId)}"]`;
+        const row = els.filesRoot.querySelector(selector);
+        pendingFileId = null;
+        const url = new URL(window.location.href);
+        url.searchParams.delete("file");
+        url.searchParams.delete("folder");
+        window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+
+        if (!row) {
+            showAlert("That file is no longer available in this folder.", "error", { title: "File not found" });
+            return;
+        }
+        row.classList.add("is-search-target");
+        window.requestAnimationFrame(() => {
+            row.scrollIntoView({ behavior: "smooth", block: "center" });
+            row.focus({ preventScroll: true });
+        });
+        window.setTimeout(() => row.classList.remove("is-search-target"), 2400);
     }
 
     function renderManager() {
@@ -460,18 +486,24 @@
         return modals.closeModal(...args);
     }
 
-    function showAlert(message, type = "info") {
+    function showAlert(message, type = "info", options = {}) {
         if (!window.APStudyToast) return;
         const toastType =
             type === "error" ? "error" : type === "warning" ? "warning" : type === "info" ? "info" : "success";
-        window.APStudyToast.show({ message, type: toastType });
+        window.APStudyToast.show({
+            message,
+            title: options.title,
+            type: toastType,
+            action: options.action,
+            duration: options.duration,
+        });
     }
 
     function notify(message, type = "info", options = {}) {
         const { modalError, field } = options;
         if (modalError) showFormError(modalError, message, field);
         if (type === "error" || type === "warning") {
-            showAlert(message, type);
+            showAlert(message, type, options);
         }
     }
 

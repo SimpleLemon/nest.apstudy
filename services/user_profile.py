@@ -36,6 +36,26 @@ def is_emory_school(value):
     return normalized in {"emory", "emory university"}
 
 
+def is_emory_or_oxford_user(user):
+    """Return whether a user qualifies for Emory-only product surfaces."""
+    school = str(getattr(user, "school", "") or "").strip().lower()
+    school_key = str(getattr(user, "school_key", "") or "").strip().lower()
+    return bool(getattr(user, "emory_student", False)) or school in {
+        "emory",
+        "emory university",
+        "emory university-oxford",
+        "emory university oxford",
+        "oxford college",
+        "oxford college of emory university",
+    } or school_key in {
+        "emory",
+        "emory-university",
+        "emory-university-oxford",
+        "oxford-college",
+        "oxford-college-of-emory-university",
+    }
+
+
 def is_early_member(value):
     if not value:
         return False
