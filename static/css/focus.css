@@ -178,12 +178,19 @@
 .focus-setup {
     display: flex;
     width: min(100%, 620px);
+    flex-shrink: 0;
     min-height: clamp(460px, 62vh, 640px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
     padding: 48px 0 36px;
+}
+
+.focus-setup.focus-setup-options-open {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: 28px;
 }
 
 .focus-setup-intro {
@@ -310,18 +317,14 @@
 }
 
 .focus-options {
-    width: min(100%, 520px);
-    margin-top: 22px;
+    width: min(100%, 620px);
+    margin-top: 24px;
 }
 
 .focus-options > summary,
 .focus-history-region > summary {
-    width: max-content;
-    margin: 0 auto;
-    color: var(--color-on-surface-variant);
+    color: var(--color-on-surface);
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 650;
     list-style: none;
 }
 
@@ -330,21 +333,145 @@
     display: none;
 }
 
-.focus-options > summary::after {
-    content: " +";
+.focus-options > summary {
+    display: flex;
+    min-height: 62px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 72%, transparent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-low);
+    padding: 12px 14px 12px 16px;
+    font-size: 13px;
+    font-weight: 650;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        color 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.focus-options[open] > summary::after {
-    content: " −";
+.focus-options > summary:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 48%, var(--color-outline-variant));
+    background: var(--color-surface-container-high);
+}
+
+.focus-options[open] > summary {
+    border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-outline-variant));
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background: color-mix(in srgb, var(--color-primary) 7%, var(--color-surface-container-low));
+}
+
+.focus-options-summary-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+}
+
+.focus-options-summary-title {
+    color: var(--color-on-surface);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.focus-options-summary-hint {
+    overflow: hidden;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.focus-options-symbol {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 72%, transparent);
+    border-radius: var(--radius-control);
+    color: var(--color-on-surface);
+    font-size: 21px;
+    font-weight: 450;
+    line-height: 1;
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-options > summary:hover .focus-options-symbol,
+.focus-options[open] .focus-options-symbol {
+    border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-outline-variant));
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+.focus-options[open] .focus-options-symbol {
+    transform: rotate(45deg);
 }
 
 .focus-options-body {
+    display: block;
+    margin-top: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-top: 0;
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+    background: var(--color-surface-container-low);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-options[open] .focus-options-body {
+    margin-top: -1px;
+    border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-outline-variant));
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.focus-options-body-inner {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 22px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.focus-options-group {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    margin-top: 18px;
-    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
-    padding-top: 22px;
+}
+
+.focus-options-group-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.focus-options-group-heading h3 {
+    margin: 0;
+    color: var(--color-on-surface);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.focus-options-group-heading p {
+    margin: 4px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.4;
 }
 
 .focus-duration-row {
@@ -368,6 +495,12 @@
     font-weight: 650;
 }
 
+.focus-field > span small {
+    color: color-mix(in srgb, var(--color-on-surface-variant) 78%, transparent);
+    font-size: 12px;
+    font-weight: 500;
+}
+
 .focus-field input,
 .focus-field select {
     width: 100%;
@@ -379,6 +512,18 @@
     font: inherit;
     font-size: 14px;
     padding: 0 11px;
+    transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-field input:hover,
+.focus-field select:hover {
+    border-color: color-mix(in srgb, var(--color-outline-variant) 94%, var(--color-primary));
+}
+
+.focus-field input:focus-visible,
+.focus-field select:focus-visible {
+    border-color: var(--color-primary);
 }
 
 .focus-field input::placeholder {
@@ -403,13 +548,6 @@
     font-size: 12px;
 }
 
-.focus-suggestion-row .focus-choice::after {
-    content: " min";
-    color: var(--color-on-surface-variant);
-    font-size: 12px;
-    font-weight: 500;
-}
-
 .focus-recent-selections[hidden] {
     display: none;
 }
@@ -421,6 +559,14 @@
     cursor: pointer;
     font-size: 13px;
     line-height: 1.45;
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, var(--color-surface-container-high) 52%, transparent);
+    padding: 11px 12px;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-check-row:hover {
+    background: var(--color-surface-container-high);
 }
 
 .focus-check-row input {
@@ -564,6 +710,9 @@
     margin: 0 auto;
     border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
     padding-top: 26px;
+    position: relative;
+    z-index: 0;
+    flex-shrink: 0;
 }
 
 .focus-spotify-region,
@@ -764,8 +913,9 @@
         width: min(100%, 240px);
     }
 
-    .focus-options-body {
-        margin-inline: 4px;
+    .focus-options-body-inner {
+        gap: 20px;
+        padding: 18px 14px;
     }
 
     .focus-session {
@@ -789,8 +939,18 @@
     .focus-button,
     .focus-choice,
     .focus-progress-value,
-    .focus-history-region {
+    .focus-history-region,
+    .focus-options > summary,
+    .focus-options-symbol,
+    .focus-options-body,
+    .focus-field input,
+    .focus-field select,
+    .focus-check-row {
         transition-duration: 0.01ms;
+    }
+
+    .focus-options-body {
+        transform: none;
     }
 
     .focus-button:hover:not(:disabled),

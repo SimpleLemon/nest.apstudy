@@ -68,8 +68,8 @@ test("focus controls enter a distraction-free session and complete their API act
     </body></html>`);
 
     await page.evaluate(({ spotifyUrlValue, spotifyEmbedUrlValue }) => {
-        window.__focusTest = { calls: [], started: false, ended: false, phase: "focus", paused: false };
-        window.APStudyToast = { show() {} };
+        window.__focusTest = { calls: [], toasts: [], started: false, ended: false, phase: "focus", paused: false };
+        window.APStudyToast = { show(options) { window.__focusTest.toasts.push(options); } };
         window.APStudyConfirm = { request: async () => true };
         window.APStudyProfileStatus = { setFocusMode(active) { document.body.classList.toggle("focus-mode-active", active); } };
         window.APSTUDY_SET_MOBILE_SIDEBAR_OPEN = () => {};
@@ -145,7 +145,9 @@ test("focus controls enter a distraction-free session and complete their API act
     await page.locator("[data-focus-recent-list] button").click();
     await expect(page.locator("#focus-minutes")).toHaveValue("30");
     await page.getByRole("button", { name: "25" }).click();
-    await page.locator("[data-focus-break-suggestions] button").first().click();
+    const suggestions = page.locator("[data-focus-break-suggestions] button");
+    await expect(suggestions).toHaveCount(1);
+    await suggestions.click();
     await expect(page.locator("#focus-break-minutes")).toHaveValue("5");
 
     await page.locator("#focus-routine-name").fill("Reading");
@@ -169,20 +171,151 @@ test("focus controls enter a distraction-free session and complete their API act
 
     await page.getByRole("button", { name: "Pause" }).click();
     await expect(page.getByRole("button", { name: "Resume" })).toBeVisible();
+    await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.message)).toBe("Timer paused.");
     await page.getByRole("button", { name: "Resume" }).click();
     await expect(page.getByRole("button", { name: "Pause" })).toBeVisible();
     await page.getByRole("button", { name: "Complete phase" }).click();
     await expect(page.getByRole("button", { name: "Start break" })).toBeVisible();
+    await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.message)).toBe("Focus complete. Your break is ready.");
 
     await page.getByRole("button", { name: "End session" }).click();
     await expect(page.locator("[data-focus-setup]")).toBeVisible();
     await expect(page.locator("body")).not.toHaveClass(/focus-session-active/);
     await expect(page.locator(".sidebar-container")).not.toHaveAttribute("inert", "");
+    await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.message)).toBe("Session ended. Completed phases remain in your history.");
 
     const actions = await page.evaluate(() => window.__focusTest.calls
         .filter((call) => call.url.includes("/api/focus/sessions/session-1"))
         .map((call) => call.body.action));
     expect(actions).toEqual(["pause", "resume", "complete_phase", "exit"]);
+});
+
+test("timer expiry announces focus completion, break completion, and routine completion", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/static/js/focus/index.js`);
+    await page.setContent(`<!doctype html><html><head>
+        <link rel="stylesheet" href="/static/css/themes.css">
+        <link rel="stylesheet" href="/static/css/focus.css">
+    </head><body class="focus-body">
+        <main class="focus-main">
+            <section data-focus-loading></section>
+            <section data-focus-setup hidden>
+                <form data-focus-form>
+                    <input id="focus-minutes" name="focus_minutes" value="1">
+                    <button type="submit">Start focus</button>
+                    <p data-focus-form-status></p>
+                    <details class="focus-options"><summary>Session options</summary>
+                        <select id="focus-routine-select" name="routine_id"><option value="">Custom routine</option></select>
+                        <input id="focus-routine-name" name="name">
+                        <input id="focus-break-minutes" name="break_minutes" value="1">
+                        <input id="focus-long-break-minutes" name="long_break_minutes" value="1">
+                        <input id="focus-cycles" name="cycles" value="2">
+                        <input id="focus-spotify-url" name="spotify_url">
+                        <input id="focus-auto-start" name="auto_start_next" type="checkbox" checked>
+                        <div data-focus-break-suggestions></div>
+                        <div data-focus-recent-selections hidden><div data-focus-recent-list></div></div>
+                        <button type="button" data-focus-save-routine>Save routine</button>
+                        <button type="button" data-focus-delete-routine hidden>Delete routine</button>
+                    </details>
+                </form>
+            </section>
+            <section data-focus-session hidden>
+                <span data-focus-cycle-label></span><span data-focus-cycle-dots></span>
+                <div class="focus-timer-shell"><svg><circle data-focus-progress></circle></svg><time data-focus-time></time><span data-focus-phase-label></span></div>
+                <p data-focus-next-phase></p>
+                <button type="button" data-focus-toggle><span data-focus-toggle-label>Pause</span></button>
+                <button type="button" data-focus-complete-phase>Complete phase</button>
+                <button type="button" data-focus-end>End session</button>
+            </section>
+            <section class="focus-utility-rail" data-focus-utilities hidden>
+                <div class="focus-spotify-region"><p data-focus-spotify-label></p><a data-focus-open-spotify hidden>Open Spotify</a><div data-focus-spotify-empty></div><iframe data-focus-spotify-embed hidden></iframe></div>
+                <details class="focus-history-region"><summary>Recent sessions</summary><ol data-focus-history></ol><div data-focus-history-empty></div></details>
+            </section>
+            <div data-focus-announcer></div>
+        </main>
+    </body></html>`);
+
+    await page.evaluate(() => {
+        window.__expiryTest = { calls: [], toasts: [], started: false, ended: false, expired: false, phase: "focus", completedCycles: 0 };
+        window.APStudyToast = { show(options) { window.__expiryTest.toasts.push(options); } };
+        window.APStudyProfileStatus = { setFocusMode() {} };
+        window.fetch = async (input, options = {}) => {
+            const url = String(input);
+            const method = options.method || "GET";
+            const body = options.body ? JSON.parse(options.body) : {};
+            window.__expiryTest.calls.push({ url, method, body });
+            const ok = (payload) => ({ ok: true, json: async () => payload });
+            if (url === "/api/focus" && method === "GET") {
+                return ok({
+                    routines: [], history: [], recent_selections: [],
+                    active_session: window.__expiryTest.started && !window.__expiryTest.ended ? {
+                        id: "expiry-session", phase: window.__expiryTest.phase,
+                        state: "running", focus_seconds: 60, break_seconds: 60, long_break_seconds: 60,
+                        total_cycles: 2, completed_focus_cycles: window.__expiryTest.completedCycles,
+                        cycle_number: window.__expiryTest.completedCycles + 1,
+                        auto_start_next: true,
+                        remaining_seconds: window.__expiryTest.expired ? 0 : 60,
+                        phase_duration_seconds: 60,
+                    } : null,
+                });
+            }
+            if (url === "/api/focus/sessions" && method === "POST") {
+                window.__expiryTest.started = true;
+                window.__expiryTest.expired = false;
+                return ok({ session: {
+                    id: "expiry-session", phase: "focus", state: "running", focus_seconds: 60,
+                    break_seconds: 60, long_break_seconds: 60, total_cycles: 2, completed_focus_cycles: 0,
+                    cycle_number: 1, auto_start_next: true, remaining_seconds: 60, phase_duration_seconds: 60,
+                } });
+            }
+            if (url === "/api/focus/sessions/expiry-session" && method === "PATCH" && body.action === "advance") {
+                if (window.__expiryTest.phase === "focus") {
+                    if (window.__expiryTest.completedCycles >= 1) {
+                        window.__expiryTest.ended = true;
+                        return ok({ active: false });
+                    }
+                    window.__expiryTest.phase = "break";
+                    window.__expiryTest.completedCycles = 1;
+                } else {
+                    window.__expiryTest.phase = "focus";
+                }
+                window.__expiryTest.expired = false;
+                return ok({ active: true, session: {
+                    id: "expiry-session", phase: window.__expiryTest.phase, state: "running",
+                    focus_seconds: 60, break_seconds: 60, long_break_seconds: 60, total_cycles: 2,
+                    completed_focus_cycles: window.__expiryTest.completedCycles,
+                    cycle_number: window.__expiryTest.completedCycles + 1, auto_start_next: true,
+                    remaining_seconds: 60, phase_duration_seconds: 60,
+                } });
+            }
+            throw new Error(`Unexpected request: ${method} ${url}`);
+        };
+    });
+
+    await page.evaluate(() => import(`/static/js/focus/index.js?expiry=${Date.now()}`));
+    await expect(page.getByRole("button", { name: "Start focus", exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Start focus", exact: true }).click();
+    await expect(page.locator("[data-focus-phase-label]")).toHaveText("Focus session");
+
+    await page.evaluate(() => {
+        window.__expiryTest.expired = true;
+        document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await expect(page.locator("[data-focus-phase-label]")).toHaveText("Break");
+    await expect.poll(() => page.evaluate(() => window.__expiryTest.toasts.at(-1)?.message)).toBe("Focus complete. Break started.");
+
+    await page.evaluate(() => {
+        window.__expiryTest.expired = true;
+        document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await expect(page.locator("[data-focus-phase-label]")).toHaveText("Focus session");
+    await expect.poll(() => page.evaluate(() => window.__expiryTest.toasts.at(-1)?.message)).toBe("Break complete. Focus started.");
+
+    await page.evaluate(() => {
+        window.__expiryTest.expired = true;
+        document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await expect(page.locator("[data-focus-setup]")).toBeVisible();
+    await expect.poll(() => page.evaluate(() => window.__expiryTest.toasts.at(-1)?.message)).toBe("Focus routine complete.");
 });
 
 test("a running focus without Spotify removes all secondary content", async ({ page, baseURL }) => {

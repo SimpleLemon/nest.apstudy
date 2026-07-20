@@ -17,7 +17,25 @@ const state = {
 };
 
 function toast(message, type = 'success', title = '') {
-  window.APStudyToast?.show?.({ message, type, ...(title ? { title } : {}) });
+  window.APStudyToast?.show?.({ message, type, duration: 7000, ...(title ? { title } : {}) });
+}
+
+function announceSessionChange(message, title, type = 'info') {
+  view.announce(message);
+  toast(message, type, title);
+}
+
+function announcePhaseTransition(previousPhase, nextSession) {
+  if (!nextSession) {
+    announceSessionChange('Focus routine complete.', 'Routine complete', 'success');
+    return;
+  }
+  const focusEnded = previousPhase === 'focus';
+  const phaseName = focusEnded ? 'Focus' : 'Break';
+  const message = focusEnded
+    ? (nextSession.state === 'paused' ? 'Focus complete. Your break is ready.' : 'Focus complete. Break started.')
+    : (nextSession.state === 'paused' ? 'Break complete. Your next focus is ready.' : 'Break complete. Focus started.');
+  announceSessionChange(message, `${phaseName} complete`, nextSession.state === 'paused' ? 'info' : 'success');
 }
 
 function selectedRoutine() {
@@ -130,17 +148,14 @@ async function advancePhase() {
     const next = clockedSession(payload.session);
     if (!payload.active) {
       state.session = null;
-      view.announce('Focus routine complete.');
-      toast('Focus routine complete.', 'success');
+      announcePhaseTransition(previousPhase, null);
       await loadState({ preserveStatus: true });
       return;
     }
     state.session = next;
     view.renderSession(next);
     view.renderTick(next, remainingSeconds(next));
-    view.announce(previousPhase === 'focus'
-      ? (next.state === 'paused' ? 'Focus complete. Your break is ready.' : 'Focus complete. Break started.')
-      : (next.state === 'paused' ? 'Break complete. Your next focus is ready.' : 'Break complete. Focus started.'));
+    announcePhaseTransition(previousPhase, next);
     await refreshHistory();
     scheduleTick();
   } catch (error) {
@@ -176,6 +191,7 @@ async function refreshHistory() {
 
 async function updateSession(action) {
   if (!state.session || state.sessionActionInFlight) return;
+  const previousPhase = state.session.phase;
   state.sessionActionInFlight = true;
   const button = action === 'pause' || action === 'resume' ? elements.toggle : elements.completePhase;
   view.setSessionBusy(true, button);
@@ -184,11 +200,17 @@ async function updateSession(action) {
     state.session = payload.active ? clockedSession(payload.session) : null;
     if (!state.session) {
       await loadState({ preserveStatus: true });
+      if (action === 'complete_phase') announcePhaseTransition(previousPhase, null);
       return;
     }
     renderActiveSession();
-    view.announce(action === 'pause' ? 'Timer paused.' : action === 'resume' ? 'Timer resumed.' : 'Phase completed.');
-    if (action === 'complete_phase') await refreshHistory();
+    if (action === 'complete_phase') {
+      announcePhaseTransition(previousPhase, state.session);
+      await refreshHistory();
+    } else {
+      const message = action === 'pause' ? 'Timer paused.' : 'Timer resumed.';
+      announceSessionChange(message, action === 'pause' ? 'Timer paused' : 'Timer resumed');
+    }
   } catch (error) {
     toast(error.message, 'error', 'Couldn’t update the timer');
   } finally {
@@ -219,6 +241,7 @@ async function endSession() {
     focusSidebar(false);
     await loadState({ preserveStatus: true });
     view.setFormStatus('Session ended. Completed phases remain in your history.');
+    announceSessionChange('Session ended. Completed phases remain in your history.', 'Focus session ended');
   } catch (error) {
     toast(error.message, 'error', 'Couldn’t end Focus Mode');
   } finally {
@@ -248,7 +271,7 @@ async function startSession(event) {
     state.session = clockedSession(response.session);
     view.setFormStatus();
     renderCurrentMode();
-    view.announce('Focus Mode started. Nonurgent Nest notifications are muted.');
+    announceSessionChange('Focus Mode started. Nonurgent Nest notifications are muted.', 'Focus Mode started');
   } catch (error) {
     view.setFormStatus(error.message, 'error');
   } finally {
@@ -307,6 +330,7 @@ async function deleteRoutine() {
 
 function bindEvents() {
   elements.form.addEventListener('submit', startSession);
+  elements.options?.addEventListener('toggle', () => view.syncOptionsState());
   elements.focusMinutes.addEventListener('input', renderSuggestions);
   elements.routineSelect.addEventListener('change', () => {
     const routine = selectedRoutine();

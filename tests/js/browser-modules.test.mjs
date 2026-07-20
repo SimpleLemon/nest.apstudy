@@ -904,6 +904,11 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(template, /settings-page-skeleton/);
     assert.match(template, /settings-skeleton-account-layout/);
     assert.match(template, /settings-skeleton-data-grid/);
+    assert.match(template, /settings-theme-preview/);
+    assert.match(template, /<strong>System<\/strong><small>Match your device<\/small>/);
+    assert.doesNotMatch(template, /class="settings-theme-choice theme-[^"]+"[^>]*><\/button>/);
+    assert.doesNotMatch(template.slice(template.indexOf('id="preferences"'), template.indexOf('id="notifications"')), /data-toggle-field="(email_notifications|product_updates|task_sound_enabled|chat_sound_enabled)"/);
+    assert.match(template.slice(template.indexOf('id="notifications"')), /<h3>Updates &amp; sounds<\/h3>/);
     assert.doesNotMatch(source, /APStudySkeleton\?\.fieldSet/);
     assert.match(source, /function clearSettingsSkeleton\(\)/);
     assert.match(source, /interface_theme: interfaceTheme/);

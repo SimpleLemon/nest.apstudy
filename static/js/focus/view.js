@@ -38,6 +38,9 @@ export function createFocusView() {
     setup: document.querySelector('[data-focus-setup]'),
     session: document.querySelector('[data-focus-session]'),
     utilities: document.querySelector('[data-focus-utilities]'),
+    options: document.querySelector('[data-focus-options]') || document.querySelector('.focus-options'),
+    optionsSummary: document.querySelector('#focus-options-summary')
+      || document.querySelector('.focus-options > summary'),
     form: document.querySelector('[data-focus-form]'),
     formStatus: document.querySelector('[data-focus-form-status]'),
     suggestions: document.querySelector('[data-focus-break-suggestions]'),
@@ -83,11 +86,18 @@ export function createFocusView() {
     elements.setup.hidden = active;
     elements.session.hidden = !active;
     elements.utilities.hidden = false;
+    syncOptionsState();
     if (active) {
       historyFadeTimer = window.setTimeout(() => {
         if (document.body.classList.contains('focus-session-active')) elements.historyRegion.hidden = true;
       }, 200);
     }
+  }
+
+  function syncOptionsState() {
+    const open = Boolean(elements.options?.open);
+    elements.setup.classList.toggle('focus-setup-options-open', open);
+    elements.optionsSummary?.setAttribute('aria-expanded', String(open));
   }
 
   function setFormStatus(message = '', tone = '') {
@@ -238,6 +248,7 @@ export function createFocusView() {
   return {
     elements,
     showMode,
+    syncOptionsState,
     setFormStatus,
     setBusy,
     setSessionBusy,
