@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% set settings_assets_version = 'settings-notification-channels-20260713-1' %}
+{% set settings_assets_version = 'settings-theme-notifications-20260720-1' %}
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
@@ -45,9 +45,6 @@
     <meta name="twitter:title" content="Nest University | APStudy">
     <meta name="twitter:description" content="Settings for your APStudy account, data, and preferences." />
     <meta name="twitter:image" content="https://resources.apstudy.org/images/APResourcesBanner.png">
-    <style>
-        .settings-theme-choice::after { display: none !important; }
-    </style>
 </head>
 <body class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-settings-page="true" data-probe-appwrite-session="false" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}" data-user-tier="{{ user_tier or '' }}"></global>
@@ -384,11 +381,31 @@
                                     <label class="settings-field settings-field-column">
                                         <span class="settings-field-label">Theme</span>
                                         <div class="settings-theme-choices" role="group" aria-label="Theme choices">
-                                            <button type="button" class="settings-theme-choice theme-obsidian-dark" data-theme="obsidian-dark" data-theme-label="Obsidian Dark" title="Obsidian Dark" aria-pressed="false"></button>
-                                            <button type="button" class="settings-theme-choice theme-nest-dark" data-theme="nest-dark" data-theme-label="Nest (Dark)" title="Nest (Dark)" aria-pressed="false"></button>
-                                            <button type="button" class="settings-theme-choice theme-parchment-light" data-theme="parchment-light" data-theme-label="Parchment Light" title="Parchment Light" aria-pressed="false"></button>
-                                            <button type="button" class="settings-theme-choice theme-nest-light" data-theme="nest-light" data-theme-label="Nest (Light)" title="Nest (Light)" aria-pressed="false"></button>
-                                            <button type="button" class="settings-theme-choice theme-system" data-theme="system-match" data-theme-label="System" title="System" aria-pressed="false"></button>
+                                            <button type="button" class="settings-theme-choice theme-obsidian-dark" data-theme="obsidian-dark" aria-pressed="false">
+                                                <span class="settings-theme-preview" aria-hidden="true"><span class="settings-theme-preview-sidebar"></span><span class="settings-theme-preview-main"><span class="settings-theme-preview-bar"></span><span class="settings-theme-preview-lines"><i></i><i></i><i></i></span></span></span>
+                                                <span class="settings-theme-choice-copy"><strong>Obsidian Dark</strong><small>Cool dark workspace</small></span>
+                                                <span class="settings-theme-selection" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>
+                                            </button>
+                                            <button type="button" class="settings-theme-choice theme-nest-dark" data-theme="nest-dark" aria-pressed="false">
+                                                <span class="settings-theme-preview" aria-hidden="true"><span class="settings-theme-preview-sidebar"></span><span class="settings-theme-preview-main"><span class="settings-theme-preview-bar"></span><span class="settings-theme-preview-lines"><i></i><i></i><i></i></span></span></span>
+                                                <span class="settings-theme-choice-copy"><strong>Nest (Dark)</strong><small>Nest navy + gold</small></span>
+                                                <span class="settings-theme-selection" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>
+                                            </button>
+                                            <button type="button" class="settings-theme-choice theme-parchment-light" data-theme="parchment-light" aria-pressed="false">
+                                                <span class="settings-theme-preview" aria-hidden="true"><span class="settings-theme-preview-sidebar"></span><span class="settings-theme-preview-main"><span class="settings-theme-preview-bar"></span><span class="settings-theme-preview-lines"><i></i><i></i><i></i></span></span></span>
+                                                <span class="settings-theme-choice-copy"><strong>Parchment Light</strong><small>Warm light workspace</small></span>
+                                                <span class="settings-theme-selection" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>
+                                            </button>
+                                            <button type="button" class="settings-theme-choice theme-nest-light" data-theme="nest-light" aria-pressed="false">
+                                                <span class="settings-theme-preview" aria-hidden="true"><span class="settings-theme-preview-sidebar"></span><span class="settings-theme-preview-main"><span class="settings-theme-preview-bar"></span><span class="settings-theme-preview-lines"><i></i><i></i><i></i></span></span></span>
+                                                <span class="settings-theme-choice-copy"><strong>Nest (Light)</strong><small>Nest blue + gold</small></span>
+                                                <span class="settings-theme-selection" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>
+                                            </button>
+                                            <button type="button" class="settings-theme-choice theme-system" data-theme="system-match" aria-pressed="false">
+                                                <span class="settings-theme-preview" aria-hidden="true"><span class="settings-theme-preview-sidebar"></span><span class="settings-theme-preview-main"><span class="settings-theme-preview-bar"></span><span class="settings-theme-preview-lines"><i></i><i></i><i></i></span></span></span>
+                                                <span class="settings-theme-choice-copy"><strong>System</strong><small>Match your device</small></span>
+                                                <span class="settings-theme-selection" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">check</span></span>
+                                            </button>
                                         </div>
                                         <select id="settings-theme" name="interface_theme" class="sr-only" aria-hidden="true">
                                             <option value="obsidian-dark">Obsidian Dark</option>
@@ -410,47 +427,6 @@
                         </div>
                         <div class="settings-card-footer">
                             <button id="settings-save-appearance" type="button" class="settings-button settings-button-primary">Save</button>
-                        </div>
-                    </article>
-                    <article class="settings-card">
-                        <div class="settings-card-body">
-                            <div class="settings-card-summary">
-                                <h3>Notifications</h3>
-                                <p>Control the email and product updates you receive.</p>
-                            </div>
-                            <div class="settings-card-content settings-toggle-stack">
-                                <button type="button" class="settings-toggle" data-toggle-field="email_notifications" aria-pressed="true">
-                                    <span>
-                                        <strong>Email Notifications</strong>
-                                        <small>Get important account and assignment updates.</small>
-                                    </span>
-                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="settings-toggle" data-toggle-field="product_updates" aria-pressed="true">
-                                    <span>
-                                        <strong>Product Updates</strong>
-                                        <small>Receive release notes and feature announcements.</small>
-                                    </span>
-                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="settings-toggle" data-toggle-field="task_sound_enabled" aria-pressed="true">
-                                    <span>
-                                        <strong>Task Sounds</strong>
-                                        <small>Play a short sound when tasks are checked or unchecked.</small>
-                                    </span>
-                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="settings-toggle" data-toggle-field="chat_sound_enabled" aria-pressed="true">
-                                    <span>
-                                        <strong>Chat Sounds</strong>
-                                        <small>Play a short sound for new chat messages.</small>
-                                    </span>
-                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="settings-card-footer">
-                            <button id="settings-save-notifications" type="button" class="settings-button settings-button-primary">Save</button>
                         </div>
                     </article>
                     <article class="settings-card">
@@ -568,6 +544,47 @@
                             </div>
                         </div>
                         <div class="settings-card-footer"><button id="notification-save" type="button" class="settings-button settings-button-primary">Save preferences</button></div>
+                    </article>
+                    <article class="settings-card">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary">
+                                <h3>Updates &amp; sounds</h3>
+                                <p>Control account email, product announcements, and audio feedback.</p>
+                            </div>
+                            <div class="settings-card-content settings-toggle-stack">
+                                <button type="button" class="settings-toggle" data-toggle-field="email_notifications" aria-pressed="true">
+                                    <span>
+                                        <strong>Email Notifications</strong>
+                                        <small>Get important account and assignment updates.</small>
+                                    </span>
+                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="settings-toggle" data-toggle-field="product_updates" aria-pressed="true">
+                                    <span>
+                                        <strong>Product Updates</strong>
+                                        <small>Receive release notes and feature announcements.</small>
+                                    </span>
+                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="settings-toggle" data-toggle-field="task_sound_enabled" aria-pressed="true">
+                                    <span>
+                                        <strong>Task Sounds</strong>
+                                        <small>Play a short sound when tasks are checked or unchecked.</small>
+                                    </span>
+                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="settings-toggle" data-toggle-field="chat_sound_enabled" aria-pressed="true">
+                                    <span>
+                                        <strong>Chat Sounds</strong>
+                                        <small>Play a short sound for new chat messages.</small>
+                                    </span>
+                                    <span class="settings-toggle-pill" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="settings-card-footer">
+                            <button id="settings-save-notifications" type="button" class="settings-button settings-button-primary">Save updates &amp; sounds</button>
+                        </div>
                     </article>
                     <article class="settings-card">
                         <div class="settings-card-body">
