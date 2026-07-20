@@ -109,7 +109,7 @@
                 exit();
                 showToast("Dashboard layout saved.", "success");
             } catch (error) {
-                showToast(error.message || "Unable to save dashboard layout.");
+                showToast(error.message || "Try again in a moment.", "error", { title: "Couldn’t save dashboard layout" });
             } finally {
                 state.saving = false;
                 syncChrome();
@@ -193,6 +193,7 @@
                 } : null;
             }
             syncSelection();
+            syncToolbar();
             setupSortable();
         }
 
@@ -247,6 +248,7 @@
             const [tile] = state.draft.tiles.splice(index, 1);
             state.draft.tiles.splice(nextIndex, 0, tile);
             render(state.draft);
+            syncToolbar();
             announce(`${selectedLabel()} moved ${direction < 0 ? "earlier" : "later"}.`);
         }
 
@@ -285,6 +287,7 @@
             state.drawerMode = "catalog";
             state.drawerType = null;
             state.drawerInstanceId = null;
+            setDrawerSide("right");
             renderDrawer();
             elements.drawer?.showModal?.();
         }
@@ -295,8 +298,26 @@
             state.drawerMode = "edit";
             state.drawerType = tile.type;
             state.drawerInstanceId = tile.instance_id;
+            positionDrawerForTile(tile.instance_id);
             renderDrawer();
             elements.drawer?.showModal?.();
+        }
+
+        function setDrawerSide(side) {
+            if (!elements.drawer) return;
+            elements.drawer.dataset.side = side === "left" ? "left" : "right";
+        }
+
+        function positionDrawerForTile(instanceId) {
+            const tile = Array.from(elements.tiles?.querySelectorAll(".dashboard-tile[data-tile-id]") || [])
+                .find((candidate) => candidate.dataset.tileId === instanceId);
+            if (!tile) {
+                setDrawerSide("right");
+                return;
+            }
+            const rect = tile.getBoundingClientRect();
+            const center = rect.left + (rect.width / 2);
+            setDrawerSide(center >= window.innerWidth / 2 ? "left" : "right");
         }
 
         function closeDrawer() {
@@ -357,7 +378,7 @@
             return `
                 <form class="dashboard-tile-form" data-tile-form data-instance-id="${escapeAttr(tile.instance_id)}" data-tile-type="${tileType}">
                     <div class="dashboard-drawer-head">
-                        <div><h2>${existing ? "Customize tile" : `Add ${escapeHtml(TILE_META[tileType].title)}`}</h2><p>These settings apply only to this tile.</p></div>
+                        <div><h2>${existing ? "Customize tile" : `Add ${escapeHtml(TILE_META[tileType].title)}`}</h2><p>${existing ? "Changes preview instantly and remain in your draft." : "Configure this tile before adding it."}</p></div>
                         <button class="dashboard-drawer-close" type="button" data-drawer-close aria-label="Close tile settings"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
                     </div>
                     <label class="dashboard-form-field"><span>Custom title <small>Optional</small></span><input name="title" maxlength="60" value="${escapeAttr(title)}" placeholder="${escapeAttr(tileTitle(tileType, tile.view))}"></label>
@@ -374,7 +395,7 @@
                     ` : ""}
                     <fieldset class="dashboard-form-field"><legend>Items shown</legend><div class="dashboard-choice-row">${optionTags(ITEM_LIMITS, tile.item_limit, "item_limit", {3:"3 items",5:"5 items",8:"8 items"})}</div></fieldset>
                     ${!["calendar", "tasks"].includes(tileType) ? `<fieldset class="dashboard-form-field"><legend>Row density</legend><div class="dashboard-choice-row">${optionTags(DENSITIES, tile.density, "density", {compact:"Compact",comfortable:"Comfortable"})}</div></fieldset>` : ""}
-                    <div class="dashboard-drawer-actions"><button class="dashboard-drawer-secondary" type="button" data-drawer-back>${existing ? "Close" : "Back"}</button><button class="dashboard-drawer-primary" type="submit">${existing ? "Apply changes" : "Add tile"}</button></div>
+                    <div class="dashboard-drawer-actions"><button class="dashboard-drawer-secondary" type="button" data-drawer-back>${existing ? "Close" : "Back"}</button><button class="dashboard-drawer-primary" type="submit">${existing ? "Done" : "Add tile"}</button></div>
                 </form>
             `;
         }
@@ -389,13 +410,13 @@
                 : formHtml(state.drawerType, existing);
         }
 
-        function readForm(form) {
+        function readForm(form, { validate = true } = {}) {
             const data = new FormData(form);
             const tileType = form.dataset.tileType;
             const existing = state.draft.tiles.find((tile) => tile.instance_id === form.dataset.instanceId);
             const priorities = data.getAll("priorities");
             if (tileType === "tasks" && !priorities.length) {
-                showToast("Select at least one task priority.");
+                if (validate) showToast("Select at least one task priority.", "warning");
                 return null;
             }
             return tilePayload(
@@ -417,6 +438,17 @@
                     starred_only: data.has("starred_only"),
                 },
             );
+        }
+
+        function previewForm(form) {
+            if (state.drawerMode !== "edit") return;
+            const nextTile = readForm(form, { validate: false });
+            if (!nextTile) return;
+            const existingIndex = state.draft.tiles.findIndex((tile) => tile.instance_id === nextTile.instance_id);
+            if (existingIndex < 0) return;
+            state.draft.tiles[existingIndex] = nextTile;
+            render(state.draft);
+            syncToolbar();
         }
 
         function submitForm(form) {
@@ -516,6 +548,10 @@
             if (!event.target.matches("[data-tile-form]")) return;
             event.preventDefault();
             submitForm(event.target);
+        });
+        elements.drawer?.addEventListener("input", (event) => {
+            const form = event.target.closest?.("[data-tile-form]");
+            if (form) previewForm(form);
         });
         window.addEventListener("beforeunload", (event) => {
             if (!isDirty()) return;

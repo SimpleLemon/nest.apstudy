@@ -7,7 +7,6 @@
         const {
             getCalendarEventColor,
             getCalendarEventLabel,
-            getCalendarEventRef,
             getEventBadgeColors,
             getEventElementAttributes,
             getEventsForDay,
@@ -16,9 +15,7 @@
         const {
             escapeHtml,
             formatAllDayRange,
-            formatMultilineText,
             formatTimedEventRange,
-            getAccent,
             getStartOfWeek,
             getUrgencyLabel,
             getUrgencyLabelAllDay,
@@ -93,70 +90,86 @@
             `;
         }
 
-        function renderAssignments() {
-            const root = document.getElementById("assignments-root");
-            if (!root) return;
-            if (state.loadingDashboard) {
-                root.innerHTML = buildAssignmentsSkeletonHtml();
-                return;
-            }
+        function buildUpcomingAgendaHtml() {
             const now = new Date();
+            const rangeEnd = new Date(now);
+            rangeEnd.setDate(rangeEnd.getDate() + 30);
             const upcoming = getVisibleEvents()
                 .filter((e) => e.source !== "simulated")
                 .filter((e) => e.endDate >= now || e.startDate >= now)
-                .slice(0, 12);
+                .filter((e) => e.startDate <= rangeEnd)
+                .slice(0, 40);
             if (!upcoming.length) {
-                root.innerHTML = `
-                    <div class="md:col-span-2 lg:col-span-3 rounded-xl border border-outline-variant/20 bg-surface-container p-6 text-sm text-on-surface-variant">
-                        No upcoming events found yet. Your calendar is still available above.
+                return `
+                    <div class="calendar-upcoming-empty">
+                        <span class="material-symbols-outlined" aria-hidden="true">event_available</span>
+                        <div>
+                            <h2>Your next 30 days are clear</h2>
+                            <p>New events and deadlines will appear here as they are added.</p>
+                        </div>
                     </div>
                 `;
-                return;
             }
-            root.innerHTML = upcoming.map((event, index) => {
-                const eventRef = getUpcomingEventRef(event);
+
+            const grouped = new Map();
+            upcoming.forEach((event) => {
+                const day = new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate());
+                const key = day.toISOString();
+                if (!grouped.has(key)) grouped.set(key, { day, events: [] });
+                grouped.get(key).events.push(event);
+            });
+
+            return `
+                <div class="calendar-upcoming-agenda" aria-label="Events in the next 30 days">
+                    ${Array.from(grouped.values()).map(({ day, events }) => renderUpcomingDay(day, events)).join("")}
+                </div>
+            `;
+        }
+
+        function renderUpcomingDay(day, events) {
+            const today = isToday(day);
+            const yesterday = new Date(day);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const relativeLabel = today ? "Today" : isToday(yesterday) ? "Tomorrow" : day.toLocaleDateString(undefined, { weekday: "long" });
+            const dateLabel = day.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+            return `
+                <section class="calendar-upcoming-day${today ? " is-today" : ""}">
+                    <header class="calendar-upcoming-date">
+                        <span class="calendar-upcoming-weekday">${escapeHtml(relativeLabel)}</span>
+                        <span class="calendar-upcoming-date-label">${escapeHtml(dateLabel)}</span>
+                    </header>
+                    <div class="calendar-upcoming-events">
+                        ${events.map(renderUpcomingEvent).join("")}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderUpcomingEvent(event) {
                 const urgency = event.isAllDay
                     ? getUrgencyLabelAllDay(event)
                     : getUrgencyLabel(event.startDate, new Date(), event.endDate);
-                const accent = getAccent(event.type, event.startDate);
                 const calendarColor = getCalendarEventColor(event);
                 const timeDisplay = event.isAllDay ? formatAllDayRange(event) : formatTimedEventRange(event);
                 const calendarLabel = getCalendarEventLabel(event);
-                const description = String(event.description || "").trim();
-                const isExpanded = state.ui.expandedUpcomingRefs.has(eventRef);
-                const descriptionId = `upcoming-event-description-${index}`;
-                const canExpand = description.length > 140 || description.split(/\r\n|\r|\n/).length > 2;
-                const descriptionClampClass = canExpand && !isExpanded ? "line-clamp-3" : "";
-                const descriptionHtml = description
-                    ? `
-                        <div id="${descriptionId}" class="text-sm text-on-surface-variant leading-relaxed break-words ${descriptionClampClass}">
-                            ${formatMultilineText(description)}
-                        </div>
-                        ${canExpand ? `
-                            <button type="button" class="js-upcoming-toggle calendar-upcoming-toggle" data-event-ref="${escapeHtml(eventRef)}" aria-expanded="${isExpanded ? "true" : "false"}" aria-controls="${descriptionId}">
-                                ${isExpanded ? "Show less" : "Show more"}
-                            </button>
-                        ` : ""}
-                    `
-                    : "";
+                const description = String(event.description || "").trim().replace(/\s+/g, " ");
                 return `
-                    <article class="bg-surface-container hover:bg-surface-container-high transition-all duration-300 rounded-xl p-5 sm:p-6 relative overflow-hidden flex flex-col gap-4">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 ${accent.bar}"></div>
-                        <div class="flex flex-wrap items-start justify-between gap-3">
-                            <span class="text-xs uppercase tracking-[0.05em] font-bold px-2.5 py-1 rounded-md ${accent.tag}">${escapeHtml(urgency)}</span>
-                            <span class="text-sm text-on-surface-variant text-right">${escapeHtml(timeDisplay)}</span>
+                    <article ${getEventElementAttributes(event)} class="calendar-upcoming-event calendar-event-shell${isTaskEvent(event) && event.completed ? " is-completed" : ""}">
+                        <span class="calendar-upcoming-color" style="background-color:${escapeHtml(calendarColor)}" aria-hidden="true"></span>
+                        <div class="calendar-upcoming-time">${escapeHtml(timeDisplay)}</div>
+                        <div class="calendar-upcoming-copy">
+                            <h3>${isTaskEvent(event) && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</h3>
+                            <p><span>${escapeHtml(calendarLabel)}</span>${description ? `<span aria-hidden="true">·</span><span>${escapeHtml(description)}</span>` : ""}</p>
                         </div>
-                        <div class="space-y-2">
-                            <h3 class="text-lg font-headline font-semibold text-on-surface leading-snug">${escapeHtml(event.title || "Untitled")}</h3>
-                            <div class="flex items-center gap-2 text-sm text-on-surface-variant">
-                                <span class="h-2.5 w-2.5 rounded-full shrink-0" style="background-color:${calendarColor};"></span>
-                                <span class="truncate">${escapeHtml(calendarLabel)}</span>
-                            </div>
-                        </div>
-                        ${descriptionHtml}
+                        <span class="calendar-upcoming-urgency">${escapeHtml(urgency)}</span>
+                        <span class="material-symbols-outlined calendar-upcoming-arrow" aria-hidden="true">chevron_right</span>
                     </article>
                 `;
-            }).join("");
+        }
+
+        function renderAssignments() {
+            const root = document.getElementById("assignments-root");
+            if (root) root.innerHTML = buildUpcomingAgendaHtml();
         }
 
         function buildAssignmentsSkeletonHtml() {
@@ -184,12 +197,9 @@
             `;
         }
 
-        function getUpcomingEventRef(event) {
-            return getCalendarEventRef(event) || event.id || event.uid || `${event.title || "event"}|${event.startDate?.getTime?.() || ""}`;
-        }
-
         return {
             buildMobileCalendarAgendaHtml,
+            buildUpcomingAgendaHtml,
             renderAssignments,
         };
     }

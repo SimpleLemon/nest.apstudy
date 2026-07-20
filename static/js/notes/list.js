@@ -113,11 +113,17 @@
         button.classList.toggle('is-busy', busy);
     }
 
-    function showAlert(message, type = 'info') {
+    function showAlert(message, type = 'info', options = {}) {
         if (!window.APStudyToast) return;
         const toastType =
             type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info';
-        window.APStudyToast.show({ message, type: toastType });
+        window.APStudyToast.show({
+            message,
+            title: options.title,
+            type: toastType,
+            action: options.action,
+            duration: options.duration,
+        });
     }
 
     function clearAlert() {
@@ -169,10 +175,12 @@
             menu.style.removeProperty('left');
             menu.style.removeProperty('max-height');
             menu.style.removeProperty('visibility');
+            menu.style.removeProperty('--notes-menu-origin-x');
             delete menu.dataset.placement;
         });
         document.querySelectorAll('.note-card-menu-btn, .folder-card-menu-btn').forEach((button) => {
             button.setAttribute('aria-expanded', 'false');
+            button.classList.remove('is-menu-open');
         });
         if (restoreFocus) trigger?.focus({ preventScroll: true });
     }
@@ -195,6 +203,7 @@
         const renderedHeight = Math.min(naturalHeight, availableHeight);
         const maxLeft = Math.max(viewportMargin, viewportWidth - menuWidth - viewportMargin);
         const left = Math.min(Math.max(viewportMargin, triggerRect.right - menuWidth), maxLeft);
+        const originX = Math.min(Math.max(triggerRect.left + (triggerRect.width / 2) - left, 12), menuWidth - 12);
         const top = placeBelow
             ? triggerRect.bottom + menuGap
             : triggerRect.top - menuGap - renderedHeight;
@@ -202,6 +211,7 @@
         menu.style.left = `${Math.round(left)}px`;
         menu.style.top = `${Math.round(Math.max(viewportMargin, top))}px`;
         menu.style.maxHeight = `${Math.max(0, Math.floor(availableHeight))}px`;
+        menu.style.setProperty('--notes-menu-origin-x', `${Math.round(originX)}px`);
         menu.dataset.placement = placeBelow ? 'below' : 'above';
         menu.style.removeProperty('visibility');
     }
@@ -212,6 +222,7 @@
         if (isHidden) {
             positionCardMenu(button, menu);
             button.setAttribute('aria-expanded', 'true');
+            button.classList.add('is-menu-open');
             menu.querySelector('button')?.focus({ preventScroll: true });
         }
     }
@@ -451,7 +462,7 @@
             render(data);
         } catch (error) {
             render({ notes: [], folders: [] });
-            showAlert(error.message || 'Unable to load notes right now.', 'error');
+            showAlert(error.message || 'Refresh the page and try again.', 'error', { title: 'Couldn’t load notes' });
         } finally {
             setLoadingState(false);
         }
@@ -473,7 +484,7 @@
             }
             await loadAndRender({ clearAlert: false });
         } catch (error) {
-            showAlert(error.message || 'Unable to create note.', 'error');
+            showAlert(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t create note' });
         } finally {
             setButtonBusy(els.btnNewNote, false);
             setButtonBusy(els.notesEmptyNewNote, false);
@@ -561,7 +572,7 @@
             renderCurrentView();
             showAlert('Note deleted.');
         } catch (error) {
-            showAlert(error.message || 'Unable to delete note.', 'error');
+            showAlert(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t delete note' });
         } finally {
             setButtonBusy(button, false);
         }
@@ -587,7 +598,7 @@
             renderCurrentView();
             showAlert('Folder deleted.');
         } catch (error) {
-            showAlert(error.message || 'Unable to delete folder.', 'error');
+            showAlert(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t delete folder' });
         } finally {
             setButtonBusy(button, false);
         }
@@ -642,7 +653,7 @@
                 entry.order = order;
             });
         } catch (error) {
-            showAlert(error.message || 'Unable to update note position.', 'error');
+            showAlert(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t move note' });
             await loadAndRender();
         }
     }

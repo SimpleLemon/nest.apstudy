@@ -109,6 +109,13 @@
         }
 
         function getCurrentViewCountRange() {
+            if (state.view === "upcoming") {
+                const start = new Date();
+                start.setHours(0, 0, 0, 0);
+                const end = new Date(start);
+                end.setDate(end.getDate() + 31);
+                return { start, end };
+            }
             if (state.view === "month") {
                 const year = state.anchorDate.getFullYear();
                 const month = state.anchorDate.getMonth();

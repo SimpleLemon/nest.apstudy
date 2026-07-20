@@ -70,6 +70,8 @@
                 group: { name: 'notes', pull: true, put: true },
                 animation: global.APStudyAccessibility?.prefersReducedMotion?.() ? 0 : 150,
                 draggable: '.note-card',
+                filter: 'button, [role="menu"], [role="menuitem"], input, select, textarea, a',
+                preventOnFilter: false,
                 delay: 260,
                 delayOnTouchOnly: true,
                 touchStartThreshold: 8,

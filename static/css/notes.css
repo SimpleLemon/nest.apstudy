@@ -690,7 +690,21 @@ body.notes-editor-body.notes-access-body main {
 /* Note menu */
 .note-menu-hidden { display: none !important; }
 .note-card-menu,
-.folder-card-menu { position: fixed; top: 0; left: 0; width: max-content; max-width: calc(100vw - 16px); overflow-y: auto; overscroll-behavior: contain; background: var(--notes-elevated-bg); border: 1px solid var(--notes-border) !important; border-radius: var(--notes-radius-md); padding: 6px; min-width: 180px; z-index: var(--z-dropdown); box-shadow: var(--notes-shadow); }
+.folder-card-menu { position: fixed; top: 0; left: 0; width: max-content; max-width: calc(100vw - 16px); overflow-y: auto; overscroll-behavior: contain; background: var(--notes-elevated-bg); border: 1px solid var(--notes-border) !important; border-radius: var(--notes-radius-md); padding: 6px; min-width: 180px; z-index: var(--z-dropdown); box-shadow: var(--notes-shadow); transform-origin: var(--notes-menu-origin-x, calc(100% - 18px)) top; animation: notes-card-menu-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.note-card-menu[data-placement="above"],
+.folder-card-menu[data-placement="above"] { transform-origin: var(--notes-menu-origin-x, calc(100% - 18px)) bottom; animation-name: notes-card-menu-in-above; }
+@keyframes notes-card-menu-in {
+  from { opacity: 0; transform: translateY(-4px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes notes-card-menu-in-above {
+  from { opacity: 0; transform: translateY(4px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-card-menu,
+  .folder-card-menu { animation: none; }
+}
 .note-menu-item { display: flex; width: 100%; min-height: 38px; align-items: center; gap: 10px; border-radius: var(--radius-control); padding: 8px 10px; text-align: left; font-size: 13px; font-weight: 620; color: var(--color-on-surface); background: transparent; border: none; cursor: pointer; transition: background 0.12s ease, color 0.12s ease; }
 .note-menu-item .material-symbols-outlined { flex: 0 0 20px; color: var(--notes-muted); font-size: 19px; line-height: 1; }
 .note-menu-item:hover,
@@ -714,6 +728,7 @@ body.notes-editor-body.notes-access-body main {
 .folder-card-menu-btn { position: absolute; top: 8px; right: 6px; flex-shrink: 0; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-control); border: none; background: transparent; color: var(--notes-muted); cursor: pointer; opacity: 0.72; transition: background 0.12s ease, color 0.12s ease, opacity 0.12s ease; }
 .folder-card-menu-btn:hover,
 .folder-card-menu-btn:focus-visible,
+.folder-card-menu-btn.is-menu-open,
 .folder-card:hover .folder-card-menu-btn { opacity: 1; background: var(--notes-card-hover); color: var(--color-on-surface); outline: none; }
 
 /* Page layout */
@@ -772,7 +787,8 @@ body.notes-editor-body.notes-access-body main {
 .note-card:hover .note-card-menu-btn,
 .note-card-menu-btn:focus-visible { opacity: 1; }
 .note-card-menu-btn:hover,
-.note-card-menu-btn:focus-visible { outline: none; background: var(--notes-elevated-bg); color: var(--color-on-surface); }
+.note-card-menu-btn:focus-visible,
+.note-card-menu-btn.is-menu-open { outline: none; background: var(--notes-elevated-bg); color: var(--color-on-surface); opacity: 1; }
 
 /* Utility */
 .cursor-pointer { cursor: pointer; }

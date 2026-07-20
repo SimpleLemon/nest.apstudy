@@ -28,11 +28,11 @@
                 ? `<span class="note-card-owner">Shared by ${escapeHtml(note.owner.name || note.owner.username || 'Nest user')}</span>`
                 : '';
             const menuMarkup = readOnly ? '' : `
-                <button type="button" class="note-card-menu-btn" aria-label="Note options for ${escapeHtml(title)}" aria-haspopup="menu" aria-expanded="false">
+                <button type="button" class="note-card-menu-btn" aria-label="Note options for ${escapeHtml(title)}" aria-haspopup="menu" aria-expanded="false" aria-controls="note-menu-${escapeHtml(noteId)}">
                     <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>`;
             const menuPanelMarkup = readOnly ? '' : `
-                <div class="note-card-menu note-menu-hidden" role="menu">
+                <div id="note-menu-${escapeHtml(noteId)}" class="note-card-menu note-menu-hidden" role="menu" aria-label="Actions for ${escapeHtml(title)}">
                     <button type="button" class="note-menu-item" role="menuitem" data-action="open">
                         <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
                         <span>Open</span>
@@ -126,10 +126,10 @@
 
             const icon = folder.is_shared || readOnly ? 'folder_shared' : 'folder';
             const menuMarkup = readOnly ? '' : `
-                <button type="button" class="folder-card-menu-btn" aria-label="Folder options for ${escapeHtml(folderName)}" aria-haspopup="menu" aria-expanded="false">
+                <button type="button" class="folder-card-menu-btn" aria-label="Folder options for ${escapeHtml(folderName)}" aria-haspopup="menu" aria-expanded="false" aria-controls="folder-menu-${escapeHtml(folderId)}">
                     <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
                 </button>
-                <div class="folder-card-menu note-menu-hidden" role="menu">
+                <div id="folder-menu-${escapeHtml(folderId)}" class="folder-card-menu note-menu-hidden" role="menu" aria-label="Actions for ${escapeHtml(folderName)}">
                     <button type="button" class="note-menu-item" role="menuitem" data-action="rename">
                         <span class="material-symbols-outlined" aria-hidden="true">edit</span>
                         <span>Rename</span>

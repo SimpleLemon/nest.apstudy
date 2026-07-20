@@ -10,6 +10,7 @@
         } = constants;
         const {
             buildMobileCalendarAgendaHtml,
+            buildUpcomingAgendaHtml,
             buildMonthViewHtml,
             buildWeekViewHtml,
             getStartOfWeek,
@@ -36,7 +37,9 @@
             if (!title || !subtitle) return;
             const monthLabel = state.anchorDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
             if (state.public.readOnly) {
-                const periodLabel = state.view === "month"
+                const periodLabel = state.view === "upcoming"
+                    ? "Next 30 days"
+                    : state.view === "month"
                     ? monthLabel
                     : (() => {
                         const start = getStartOfWeek(state.anchorDate);
@@ -46,6 +49,11 @@
                     })();
                 title.textContent = state.public.title || "Shared Calendar";
                 subtitle.textContent = `${periodLabel} · ${state.public.rangeLabel || "Shared dates"}`;
+                return;
+            }
+            if (state.view === "upcoming") {
+                title.textContent = "Upcoming events";
+                subtitle.textContent = "Your next 30 days, organized by date";
                 return;
             }
             if (state.view === "month") {
@@ -67,20 +75,21 @@
         function updateViewToggleButtons() {
             const weekBtn = document.getElementById("calendar-view-week");
             const monthBtn = document.getElementById("calendar-view-month");
+            const upcomingBtn = document.getElementById("calendar-view-upcoming");
             if (!weekBtn || !monthBtn) return;
             const active = "inline-flex h-8 min-w-[84px] items-center justify-center rounded-md px-3 text-sm font-medium text-on-primary shadow-sm transition-colors";
             const inactive = "inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-transparent px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface";
             weekBtn.className = state.view === "week" ? active : inactive;
             monthBtn.className = state.view === "month" ? active : inactive;
+            if (upcomingBtn) upcomingBtn.className = state.view === "upcoming" ? active : inactive;
             weekBtn.setAttribute("aria-pressed", String(state.view === "week"));
             monthBtn.setAttribute("aria-pressed", String(state.view === "month"));
-            if (state.view === "week") {
-                weekBtn.style.background = "var(--color-primary)";
-                monthBtn.style.background = "";
-            } else {
-                monthBtn.style.background = "var(--color-primary)";
-                weekBtn.style.background = "";
-            }
+            upcomingBtn?.setAttribute("aria-pressed", String(state.view === "upcoming"));
+            [weekBtn, monthBtn, upcomingBtn].filter(Boolean).forEach((button) => {
+                button.style.background = button.getAttribute("aria-pressed") === "true" ? "var(--color-primary)" : "";
+            });
+            const periodControls = document.getElementById("calendar-period-controls");
+            if (periodControls) periodControls.hidden = state.view === "upcoming";
             if (state.view !== "week") {
                 state.ui.weeklyAutoScrollKey = null;
             }
@@ -90,12 +99,15 @@
             const root = document.getElementById("calendar-view-root");
             if (!root) return;
             hideCalendarHoverCard();
+            root.closest(".calendar-surface")?.classList.toggle("is-upcoming", state.view === "upcoming");
             if (state.loadingDashboard) {
                 root.innerHTML = buildCalendarSkeletonHtml();
                 return;
             }
             const compactCalendar = isCompactCalendarViewport();
-            root.innerHTML = compactCalendar ? buildMobileCalendarAgendaHtml() : (state.view === "month" ? buildMonthViewHtml() : buildWeekViewHtml());
+            root.innerHTML = state.view === "upcoming"
+                ? buildUpcomingAgendaHtml()
+                : compactCalendar ? buildMobileCalendarAgendaHtml() : (state.view === "month" ? buildMonthViewHtml() : buildWeekViewHtml());
             if (state.view === "week" && !compactCalendar) {
                 applyWeekAutoScroll();
             }

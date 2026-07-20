@@ -41,6 +41,8 @@ if (false) {
     await import("../../static/js/core/breadcrumb.js");
     await import("../../static/js/core/appwrite.js");
     await import("../../static/js/core/command-palette.js");
+    await import("../../static/js/core/command-palette-search.js");
+    await import("../../static/js/core/command-palette-workspace.js");
     await import("../../static/js/core/global.js");
     await import("../../static/js/core/navbar.js");
     await import("../../static/js/core/sidebar-init.js");
@@ -63,6 +65,10 @@ if (false) {
     await import("../../static/js/files/renderers.js");
     await import("../../static/js/files/utils.js");
     await import("../../static/js/files/workflows.js");
+    await import("../../static/js/focus/data.js");
+    await import("../../static/js/focus/index.js");
+    await import("../../static/js/focus/timer.js");
+    await import("../../static/js/focus/view.js");
     await import("../../static/js/landing.js");
     await import("../../static/js/notes/editor.js");
     await import("../../static/js/notes/editor/block-catalog.js");
@@ -113,7 +119,7 @@ function cssBlockStackAt(source, targetIndex) {
 test("command palette keeps primary navigation, theme actions, and global controls wired", async () => {
     const source = await sourceFor("static/js/core/command-palette.js");
 
-    for (const route of ["/calendar", "/courses", "/notes", "/tasks", "/files", "/chat", "/settings"]) {
+    for (const route of ["/calendar", "/courses", "/notes", "/tasks", "/files", "/focus", "/chat", "/settings"]) {
         assert.match(source, new RegExp(`route: ['"]${route}['"]`));
     }
 
@@ -218,6 +224,27 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
     assert.match(source, /role="status"/);
     assert.match(source, /aria-label="Preparing daily motivation"/);
     assert.match(source, /aria-label="Hide daily quote"/);
+});
+
+test("calendar deletion reports errors through the object-based toast API", async () => {
+    const source = await sourceFor("static/js/calendar/events/context-menu.js");
+
+    assert.match(source, /APStudyToast\?\.show\?\.\(\{\s*title: "Couldn’t delete event",\s*message: "Try again in a moment\.",\s*type: "error"/);
+    assert.doesNotMatch(source, /APStudyToast\?\.show\?\.\("Unable to delete event", "error"\)/);
+});
+
+test("dashboard tile customization previews live and keeps contextual controls synchronized", async () => {
+    const editorSource = await sourceFor("static/js/dashboard/layout-editor.js");
+    const dashboardStyles = await sourceFor("static/css/dashboard.css");
+
+    assert.match(editorSource, /function previewForm\(form\)/);
+    assert.match(editorSource, /addEventListener\("input"/);
+    assert.match(editorSource, /state\.draft\.tiles\[existingIndex\] = nextTile;\s*render\(state\.draft\);\s*syncToolbar\(\);/);
+    assert.match(editorSource, /function positionDrawerForTile\(instanceId\)/);
+    assert.match(editorSource, /setDrawerSide\(center >= window\.innerWidth \/ 2 \? "left" : "right"\)/);
+    assert.match(editorSource, /state\.draft\.tiles\.splice\(nextIndex, 0, tile\);\s*render\(state\.draft\);\s*syncToolbar\(\);/);
+    assert.match(dashboardStyles, /\.dashboard-tile-drawer\[data-side="left"\]/);
+    assert.match(dashboardStyles, /\.dashboard-tile-drawer\[data-side="right"\]/);
 });
 
 test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
@@ -642,7 +669,7 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /document\.addEventListener\('keydown', handleNotePrintShortcut, true\)/);
     assert.match(printSource, /isNotePrintShortcut\(event\)/);
     assert.match(source, /hiddenBlockIds: hidden\.keys\(\)/);
-    assert.match(source, /APStudyToast\?\.error\?\.\('Could not prepare this note for printing\.'/);
+    assert.match(source, /APStudyToast\?\.error\?\.\('Try again in a moment\.', \{ title: 'Couldn’t prepare note for printing' \}\)/);
     assert.match(styles, /@media print\s*\{/);
     assert.match(styles, /body\.notes-editor-body\.notes-print-prepared > \.notes-print-surface/);
     assert.match(styles, /body\.notes-editor-body > :not\(\.notes-print-surface\)/);

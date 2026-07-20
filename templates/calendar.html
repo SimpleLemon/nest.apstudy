@@ -59,10 +59,11 @@
 </p>
 </div>
 <div class="flex flex-col lg:flex-row gap-3 lg:items-center">
-<!-- Weekly/Monthly Toggle -->
-<div class="inline-flex h-10 items-center rounded-lg border border-outline-variant/20 bg-surface-container-low p-1" role="group" aria-label="Calendar view">
+<!-- Calendar view switcher -->
+<div class="calendar-view-switcher" role="group" aria-label="Calendar view">
 <button id="calendar-view-week" type="button" class="inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-on-primary shadow-sm transition-colors" aria-pressed="true">Weekly</button>
 <button id="calendar-view-month" type="button" class="inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-transparent px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface" aria-pressed="false">Monthly</button>
+<button id="calendar-view-upcoming" type="button" class="inline-flex h-8 min-w-[84px] items-center justify-center rounded-md bg-transparent px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface" aria-pressed="false">Upcoming</button>
 </div>
 <!-- Navigation Controls -->
 <div class="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-lg border border-outline-variant/10 flex-wrap">
@@ -77,6 +78,7 @@
 <button id="calendar-share" type="button" class="h-8 w-8 rounded-md bg-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" aria-label="Share calendar">
 <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
 </button>
+<div id="calendar-period-controls" class="calendar-period-controls">
 <div class="h-6 w-px bg-outline-variant/20"></div>
 <button id="calendar-prev" type="button" class="h-8 w-8 rounded-md bg-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" aria-label="Previous period">
 <span class="material-symbols-outlined text-[20px]" aria-hidden="true">chevron_left</span>
@@ -87,18 +89,10 @@
 </div>
 </div>
 </div>
-<div class="bg-surface-container-low p-4 sm:p-5 rounded-2xl border border-outline-variant/10">
+</div>
+<div class="calendar-surface bg-surface-container-low p-4 sm:p-5 rounded-2xl border border-outline-variant/10">
 <div id="calendar-view-root"></div>
 </div>
-</section>
-<section class="flex flex-col gap-6 w-full animate-fade-in-up" style="animation-delay: 100ms;">
-<div class="flex items-center justify-between border-b border-surface-container-low pb-4">
-<h2 class="text-xl font-headline font-bold text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" aria-hidden="true">event_upcoming</span>
-Upcoming Events
-</h2>
-</div>
-<div id="assignments-root" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 </section>
 <global class="thefooter"></global>
 </main>

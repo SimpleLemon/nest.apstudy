@@ -87,9 +87,18 @@ test("timed, all-day, task, and read-only events receive control semantics and u
     assert.match(readOnly.getEventElementAttributes(timedEvent), /View event/);
 });
 
-test("weekly, monthly, and mobile-agenda renderers preserve event control attributes", () => {
+test("weekly, monthly, mobile, and upcoming renderers preserve event control attributes", () => {
     const attributes = (event) => `role="button" aria-label="${escapeHtml(event.title)} accessible" data-event-ref="${event.event_ref}" tabindex="0"`;
     const visibleEvents = [timedEvent, allDayEvent];
+    const upcomingStart = new Date(Date.now() + 86400000);
+    const upcomingEvent = {
+        ...timedEvent,
+        id: "event-upcoming",
+        event_ref: "event:event-upcoming",
+        title: "Upcoming study session",
+        startDate: upcomingStart,
+        endDate: new Date(upcomingStart.getTime() + 3600000),
+    };
     const eventsForDay = (day) => visibleEvents.filter((event) => event.startDate.toDateString() === day.toDateString());
     const sharedFormatters = {
         dateToDayIndex(date, days) {
@@ -149,7 +158,7 @@ test("weekly, monthly, and mobile-agenda renderers preserve event control attrib
     assert.match(month, /aria-label="Office Hours &amp; &quot;Review&quot; accessible"/);
     assert.match(month, /aria-label="Registration Day accessible"/);
 
-    const agenda = window.APStudyCalendarAgenda.createCalendarAgenda({
+    const agendaRenderer = window.APStudyCalendarAgenda.createCalendarAgenda({
         state: { anchorDate: new Date(2026, 6, 20), view: "week", loadingDashboard: false, ui: { expandedUpcomingRefs: new Set() } },
         callbacks: {
             getCalendarEventColor: () => "#336699",
@@ -158,7 +167,7 @@ test("weekly, monthly, and mobile-agenda renderers preserve event control attrib
             getEventBadgeColors: () => ({ indicator: "#123456" }),
             getEventElementAttributes: attributes,
             getEventsForDay: eventsForDay,
-            getVisibleEvents: () => visibleEvents,
+            getVisibleEvents: () => [...visibleEvents, upcomingEvent],
         },
         formatters: {
             ...sharedFormatters,
@@ -170,9 +179,16 @@ test("weekly, monthly, and mobile-agenda renderers preserve event control attrib
             getUrgencyLabelAllDay: () => "Tomorrow",
             isTaskEvent: (event) => event.source_type === "task",
         },
-    }).buildMobileCalendarAgendaHtml();
+    });
+    const agenda = agendaRenderer.buildMobileCalendarAgendaHtml();
     assert.match(agenda, /<article role="button" aria-label="Office Hours &amp; &quot;Review&quot; accessible"/);
     assert.match(agenda, /<article role="button" aria-label="Registration Day accessible"/);
+
+    const upcoming = agendaRenderer.buildUpcomingAgendaHtml();
+    assert.match(upcoming, /calendar-upcoming-agenda/);
+    assert.match(upcoming, /calendar-upcoming-date/);
+    assert.match(upcoming, /<article role="button" aria-label="Upcoming study session accessible"/);
+    assert.match(upcoming, /Personal Calendar/);
 });
 
 test("event menus expose only valid actions for local, imported, simulated, task, and read-only events", () => {

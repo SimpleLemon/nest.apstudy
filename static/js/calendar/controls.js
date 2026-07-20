@@ -88,6 +88,12 @@
                 render();
                 void ensureEventsForRange(getBufferedRange(getCurrentRenderRange()));
             });
+            document.getElementById("calendar-view-upcoming")?.addEventListener("click", () => {
+                state.view = "upcoming";
+                state.anchorDate = new Date();
+                render();
+                void ensureEventsForRange(getBufferedRange(getCurrentRenderRange()));
+            });
             document.getElementById("calendar-prev")?.addEventListener("click", () => {
                 state.anchorDate = shiftAnchorDate(-1);
                 render();

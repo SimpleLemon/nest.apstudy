@@ -8,8 +8,8 @@ import vm from 'node:vm';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const source = readFileSync(path.join(root, 'static/js/notes/list/drag-drop.js'), 'utf8');
 
-function loadDragDrop() {
-    const context = { window: {}, setTimeout };
+function loadDragDrop(overrides = {}) {
+    const context = { window: {}, setTimeout, ...overrides };
     context.window = context;
     vm.runInNewContext(source, context);
     return context.APStudyNotesListDragDrop;
@@ -38,4 +38,32 @@ test('note dragging stays disabled on phone user agents even when emulated wide'
     };
 
     assert.equal(canUseNoteDrag(phone), false);
+});
+
+test('note menu controls are excluded from the card drag gesture', () => {
+    let sortableOptions = null;
+    const classList = { add() {}, remove() {}, toggle() {} };
+    const emptyGrid = {
+        addEventListener() {},
+        querySelectorAll() { return []; },
+    };
+    const notesGrid = {
+        ...emptyGrid,
+        querySelector() { return {}; },
+    };
+    const { createNotesListDragDrop } = loadDragDrop({
+        navigator: { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)' },
+        matchMedia: () => ({ matches: true, addEventListener() {} }),
+        APStudyAccessibility: { prefersReducedMotion: () => false },
+        Sortable: { create(_grid, options) { sortableOptions = options; return { destroy() {} }; } },
+    });
+    createNotesListDragDrop({
+        notesGrid,
+        foldersGrid: emptyGrid,
+        page: { classList },
+    }).mount();
+
+    assert.match(sortableOptions.filter, /button/);
+    assert.match(sortableOptions.filter, /\[role="menuitem"\]/);
+    assert.equal(sortableOptions.preventOnFilter, false);
 });

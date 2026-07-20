@@ -123,6 +123,7 @@ const calendarRenderShell = window.APStudyCalendarRenderShell.createCalendarRend
     },
     callbacks: {
         buildMobileCalendarAgendaHtml: () => buildMobileCalendarAgendaHtml(),
+        buildUpcomingAgendaHtml: () => buildUpcomingAgendaHtml(),
         buildMonthViewHtml: () => buildMonthViewHtml(),
         buildWeekViewHtml: () => buildWeekViewHtml(),
         getStartOfWeek,
@@ -293,6 +294,7 @@ const calendarAgenda = window.APStudyCalendarAgenda.createCalendarAgenda({
 });
 const {
     buildMobileCalendarAgendaHtml,
+    buildUpcomingAgendaHtml,
     renderAssignments,
 } = calendarAgenda;
 const calendarMonthView = window.APStudyCalendarMonthView.createCalendarMonthView({
