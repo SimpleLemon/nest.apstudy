@@ -39,9 +39,15 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   const navbar = await readFile(path.join(repoRoot, 'static/js/core/navbar.js'), 'utf8');
   assert.match(template, /data-focus-break-suggestions aria-live="polite"/);
   assert.match(template, /loading="lazy"/);
-  assert.match(template, /notifications_paused/);
+  assert.match(template, /<details class="focus-options">/);
+  assert.match(template, /Set a focus timer/);
+  assert.doesNotMatch(template, /left_panel_open|play_arrow|logout/);
+  assert.doesNotMatch(template, /data-focus-reopen-sidebar|data-focus-prepare-next/);
+  assert.match(template, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
   assert.match(controller, /phase changes|focusApi\.updateSession|scheduleTick/);
   assert.match(controller, /shellActive/);
+  assert.match(controller, /hideSidebarForFocus/);
+  assert.match(controller, /sessionActionInFlight/);
   assert.doesNotMatch(controller, /setInterval/);
   assert.match(notifications, /focus_mode_active/);
   assert.match(navbar, /focusSidebarWasCollapsed/);

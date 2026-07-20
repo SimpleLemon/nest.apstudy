@@ -31,6 +31,8 @@ function formatCompletedAt(value) {
 }
 
 export function createFocusView() {
+  let utilityFadeTimer = null;
+  let historyFadeTimer = null;
   const elements = {
     loading: document.querySelector('[data-focus-loading]'),
     setup: document.querySelector('[data-focus-setup]'),
@@ -58,28 +60,34 @@ export function createFocusView() {
     cycleDots: document.querySelector('[data-focus-cycle-dots]'),
     toggle: document.querySelector('[data-focus-toggle]'),
     toggleLabel: document.querySelector('[data-focus-toggle-label]'),
+    completePhase: document.querySelector('[data-focus-complete-phase]'),
+    end: document.querySelector('[data-focus-end]'),
     nextPhase: document.querySelector('[data-focus-next-phase]'),
-    sessionDetails: document.querySelector('[data-focus-session-details]'),
     history: document.querySelector('[data-focus-history]'),
+    historyRegion: document.querySelector('.focus-history-region'),
     historyEmpty: document.querySelector('[data-focus-history-empty]'),
     spotifyEmbed: document.querySelector('[data-focus-spotify-embed]'),
     spotifyEmpty: document.querySelector('[data-focus-spotify-empty]'),
     spotifyLabel: document.querySelector('[data-focus-spotify-label]'),
+    spotifyRegion: document.querySelector('.focus-spotify-region'),
     openSpotify: document.querySelector('[data-focus-open-spotify]'),
-    notificationState: document.querySelector('[data-focus-notification-state]'),
-    reopenSidebar: document.querySelector('[data-focus-reopen-sidebar]'),
-    exit: document.querySelector('[data-focus-exit]'),
     announcer: document.querySelector('[data-focus-announcer]'),
   };
 
   function showMode(active) {
+    window.clearTimeout(utilityFadeTimer);
+    window.clearTimeout(historyFadeTimer);
+    if (!active) elements.historyRegion.hidden = false;
+    document.body.classList.toggle('focus-session-active', active);
     elements.loading.hidden = true;
     elements.setup.hidden = active;
     elements.session.hidden = !active;
     elements.utilities.hidden = false;
-    elements.notificationState.hidden = !active;
-    elements.reopenSidebar.hidden = !active;
-    elements.exit.hidden = !active;
+    if (active) {
+      historyFadeTimer = window.setTimeout(() => {
+        if (document.body.classList.contains('focus-session-active')) elements.historyRegion.hidden = true;
+      }, 200);
+    }
   }
 
   function setFormStatus(message = '', tone = '') {
@@ -90,6 +98,14 @@ export function createFocusView() {
 
   function setBusy(busy) {
     elements.form.querySelectorAll('button').forEach((button) => { button.disabled = busy; });
+  }
+
+  function setSessionBusy(busy, activeButton = null) {
+    [elements.toggle, elements.completePhase, elements.end].forEach((button) => {
+      button.disabled = busy;
+      button.removeAttribute('aria-busy');
+    });
+    if (busy && activeButton) activeButton.setAttribute('aria-busy', 'true');
   }
 
   function renderRoutines(routines, selectedId = '') {
@@ -144,33 +160,12 @@ export function createFocusView() {
     }
   }
 
-  function renderDetails(session) {
-    const values = [
-      ['Routine', session.routine_name || 'Custom focus'],
-      ['Focus', `${Math.round(session.focus_seconds / 60)} min`],
-      ['Break', session.break_seconds ? `${Math.round(session.break_seconds / 60)} min` : 'None'],
-      ['Cycles', session.total_cycles],
-      ['Next phases', session.auto_start_next ? 'Start automatically' : 'Wait for me'],
-    ];
-    elements.sessionDetails.replaceChildren();
-    values.forEach(([label, value]) => {
-      const term = document.createElement('dt');
-      const detail = document.createElement('dd');
-      term.textContent = label;
-      detail.textContent = value;
-      elements.sessionDetails.append(term, detail);
-    });
-  }
-
   function renderSession(session) {
     text(elements.cycleLabel, `${session.phase === 'break' ? 'Break after focus' : 'Focus'} ${session.cycle_number} of ${session.total_cycles}`);
     text(elements.phaseLabel, phaseLabel(session));
     text(elements.toggleLabel, session.state === 'paused' ? (session.phase === 'break' ? 'Start break' : 'Resume') : 'Pause');
-    const icon = elements.toggle.querySelector('.material-symbols-outlined');
-    text(icon, session.state === 'paused' ? 'play_arrow' : 'pause');
     text(elements.nextPhase, nextPhaseLabel(session));
     renderCycles(session);
-    renderDetails(session);
   }
 
   function renderTick(session, remaining) {
@@ -186,10 +181,6 @@ export function createFocusView() {
     history.slice(0, 8).forEach((entry) => {
       const item = document.createElement('li');
       item.className = 'focus-history-item';
-      const icon = document.createElement('span');
-      icon.className = 'material-symbols-outlined';
-      icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = entry.phase === 'break' ? 'coffee' : 'adjust';
       const copy = document.createElement('span');
       copy.className = 'focus-history-copy';
       const title = document.createElement('strong');
@@ -200,7 +191,7 @@ export function createFocusView() {
       const time = document.createElement('time');
       time.dateTime = entry.completed_at;
       time.textContent = formatCompletedAt(entry.completed_at);
-      item.append(icon, copy, time);
+      item.append(copy, time);
       elements.history.appendChild(item);
     });
     elements.historyEmpty.hidden = history.length > 0;
@@ -209,21 +200,33 @@ export function createFocusView() {
   function renderSpotify(source) {
     const embedUrl = source?.spotify_embed_url || '';
     const spotifyUrl = source?.spotify_url || '';
+    const active = document.body.classList.contains('focus-session-active');
+    window.clearTimeout(utilityFadeTimer);
     if (embedUrl) {
       if (elements.spotifyEmbed.dataset.src !== embedUrl) {
         elements.spotifyEmbed.src = embedUrl;
         elements.spotifyEmbed.dataset.src = embedUrl;
       }
       elements.spotifyEmbed.hidden = false;
+      elements.spotifyRegion.hidden = false;
+      elements.utilities.hidden = false;
       elements.spotifyEmpty.hidden = true;
       elements.openSpotify.hidden = false;
       elements.openSpotify.href = spotifyUrl;
       text(elements.spotifyLabel, source.routine_name || source.name || 'Saved focus playlist');
     } else {
       elements.spotifyEmbed.hidden = true;
-      elements.spotifyEmpty.hidden = false;
+      elements.spotifyEmpty.hidden = active;
+      elements.spotifyRegion.hidden = active;
       elements.openSpotify.hidden = true;
       text(elements.spotifyLabel, 'Your routine can keep one playlist close.');
+      if (active) {
+        utilityFadeTimer = window.setTimeout(() => {
+          if (document.body.classList.contains('focus-session-active')) elements.utilities.hidden = true;
+        }, 200);
+      } else {
+        elements.utilities.hidden = false;
+      }
     }
   }
 
@@ -237,6 +240,7 @@ export function createFocusView() {
     showMode,
     setFormStatus,
     setBusy,
+    setSessionBusy,
     renderRoutines,
     fillRoutine,
     renderSuggestions,

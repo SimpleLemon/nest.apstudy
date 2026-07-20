@@ -11,6 +11,7 @@ const state = {
   session: null,
   timerId: null,
   advanceInFlight: false,
+  sessionActionInFlight: false,
   shellActive: false,
   disposed: false,
 };
@@ -23,16 +24,33 @@ function selectedRoutine() {
   return routineFromState(state, elements.routineSelect.value);
 }
 
+function hideSidebarForFocus() {
+  window.APSTUDY_SET_MOBILE_SIDEBAR_OPEN?.(false);
+  window.APSTUDY_SET_SIDEBAR_COLLAPSED?.(true, { persist: false });
+  const sidebar = document.querySelector('.sidebar-container');
+  if (sidebar) {
+    sidebar.setAttribute('aria-hidden', 'true');
+    sidebar.inert = true;
+  }
+}
+
 function focusSidebar(active) {
   if (active) {
-    if (state.shellActive) return;
-    state.shellActive = true;
-    window.APStudyProfileStatus?.setFocusMode?.(true);
-    window.APSTUDY_SET_SIDEBAR_COLLAPSED?.(true, { persist: false });
+    if (!state.shellActive) {
+      state.shellActive = true;
+      window.APStudyProfileStatus?.setFocusMode?.(true);
+    }
+    hideSidebarForFocus();
     return;
+  }
+  const sidebar = document.querySelector('.sidebar-container');
+  if (sidebar) {
+    sidebar.inert = false;
+    sidebar.removeAttribute('aria-hidden');
   }
   state.shellActive = false;
   window.APStudyProfileStatus?.setFocusMode?.(false);
+  window.APSTUDY_SET_MOBILE_SIDEBAR_OPEN?.(false);
 }
 
 function stopTimer() {
@@ -42,6 +60,10 @@ function stopTimer() {
 
 function renderSuggestions() {
   view.renderSuggestions(suggestedBreaks(elements.focusMinutes.value, state.recentSelections));
+  const duration = Number(elements.focusMinutes.value);
+  document.querySelectorAll('[data-focus-preset]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(Number(button.dataset.focus) === duration));
+  });
 }
 
 function renderSetup() {
@@ -98,8 +120,9 @@ function scheduleTick() {
 }
 
 async function advancePhase() {
-  if (!state.session || state.advanceInFlight) return;
+  if (!state.session || state.advanceInFlight || state.sessionActionInFlight) return;
   state.advanceInFlight = true;
+  view.setSessionBusy(true);
   stopTimer();
   try {
     const previousPhase = state.session.phase;
@@ -125,6 +148,7 @@ async function advancePhase() {
     state.timerId = window.setTimeout(advancePhase, 15000);
   } finally {
     state.advanceInFlight = false;
+    view.setSessionBusy(false);
   }
 }
 
@@ -151,9 +175,10 @@ async function refreshHistory() {
 }
 
 async function updateSession(action) {
-  if (!state.session) return;
-  const button = action === 'pause' || action === 'resume' ? elements.toggle : null;
-  if (button) button.disabled = true;
+  if (!state.session || state.sessionActionInFlight) return;
+  state.sessionActionInFlight = true;
+  const button = action === 'pause' || action === 'resume' ? elements.toggle : elements.completePhase;
+  view.setSessionBusy(true, button);
   try {
     const payload = await focusApi.updateSession(state.session.id, action);
     state.session = payload.active ? clockedSession(payload.session) : null;
@@ -167,7 +192,8 @@ async function updateSession(action) {
   } catch (error) {
     toast(error.message, 'error', 'Couldn’t update the timer');
   } finally {
-    if (button) button.disabled = false;
+    state.sessionActionInFlight = false;
+    view.setSessionBusy(false);
   }
 }
 
@@ -182,20 +208,22 @@ async function confirmEndSession() {
   });
 }
 
-async function endSession({ navigate = false } = {}) {
-  if (!state.session || !(await confirmEndSession())) return;
+async function endSession() {
+  if (!state.session || state.sessionActionInFlight) return;
+  state.sessionActionInFlight = true;
+  view.setSessionBusy(true, elements.end);
   try {
+    if (!(await confirmEndSession())) return;
     await focusApi.updateSession(state.session.id, 'exit');
     state.session = null;
     focusSidebar(false);
-    if (navigate) {
-      window.APStudyNavigation?.go?.('/dashboard') || window.location.assign('/dashboard');
-      return;
-    }
     await loadState({ preserveStatus: true });
     view.setFormStatus('Session ended. Completed phases remain in your history.');
   } catch (error) {
     toast(error.message, 'error', 'Couldn’t end Focus Mode');
+  } finally {
+    state.sessionActionInFlight = false;
+    view.setSessionBusy(false);
   }
 }
 
@@ -255,12 +283,14 @@ async function saveRoutine() {
 async function deleteRoutine() {
   const routine = selectedRoutine();
   if (!routine) return;
-  const accepted = await (window.APStudyConfirm?.request?.({
-    title: `Delete “${routine.name}”?`,
-    message: 'Completion history will stay intact.',
-    acceptLabel: 'Delete routine',
-    danger: true,
-  }) ?? Promise.resolve(false));
+  const accepted = window.APStudyConfirm?.request
+    ? await window.APStudyConfirm.request({
+      title: `Delete “${routine.name}”?`,
+      message: 'Completion history will stay intact.',
+      acceptLabel: 'Delete routine',
+      danger: true,
+    })
+    : window.confirm(`Delete “${routine.name}”?`);
   if (!accepted) return;
   try {
     await focusApi.deleteRoutine(routine.id);
@@ -306,16 +336,13 @@ function bindEvents() {
   elements.saveRoutine.addEventListener('click', saveRoutine);
   elements.deleteRoutine.addEventListener('click', deleteRoutine);
   elements.toggle.addEventListener('click', () => updateSession(state.session?.state === 'paused' ? 'resume' : 'pause'));
-  document.querySelector('[data-focus-complete-phase]').addEventListener('click', () => updateSession('complete_phase'));
-  document.querySelector('[data-focus-end]').addEventListener('click', () => endSession());
-  elements.exit.addEventListener('click', () => endSession({ navigate: true }));
-  document.querySelector('[data-focus-prepare-next]').addEventListener('click', () => endSession());
-  elements.reopenSidebar.addEventListener('click', () => {
-    window.APSTUDY_SET_SIDEBAR_COLLAPSED?.(false, { persist: false });
-    elements.reopenSidebar.hidden = true;
-  });
+  elements.completePhase.addEventListener('click', () => updateSession('complete_phase'));
+  elements.end.addEventListener('click', () => endSession());
   document.addEventListener('apstudy-sidebar-state-change', (event) => {
-    if (state.session) elements.reopenSidebar.hidden = event.detail?.collapsed === false;
+    if (state.session && event.detail?.collapsed === false) queueMicrotask(hideSidebarForFocus);
+  });
+  document.addEventListener('apstudy-mobile-sidebar-toggle', () => {
+    if (state.session) queueMicrotask(hideSidebarForFocus);
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stopTimer();
