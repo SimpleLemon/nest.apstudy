@@ -77,6 +77,8 @@
         modal = document.createElement("div");
         modal.className = "calendar-event-modal";
         modal.style.display = "none";
+        modal.hidden = true;
+        modal.setAttribute("aria-hidden", "true");
         document.body.appendChild(modal);
         modal.addEventListener("click", onModalClick);
         modal.addEventListener("change", onModalChange);
@@ -85,8 +87,13 @@
     }
 
     function closeModal() {
-        const m = ensureModal();
+        if (!modal) return;
+        const m = modal;
         m.style.display = "none";
+        m.hidden = true;
+        m.setAttribute("aria-hidden", "true");
+        m.remove();
+        modal = null;
         const focusTarget = openerEl;
         currentMode = "create";
         currentEventId = null;
@@ -215,6 +222,8 @@
                 </form>
             </div>
         `;
+        m.hidden = false;
+        m.removeAttribute("aria-hidden");
         m.style.display = "flex";
         const form = m.querySelector("form");
         clearFormErrors(form);

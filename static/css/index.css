@@ -16,7 +16,9 @@
 }
 
 .calendar-period-controls[hidden] {
-    display: none;
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .calendar-surface.is-upcoming {

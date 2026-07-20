@@ -150,6 +150,8 @@ test("calendar event form preserves escaping, API routes, and cache refresh beha
     assert.match(source, /None \(default\)/);
     assert.match(source, /localStorage\.removeItem\("calendarEventsCache"\)/);
     assert.match(source, /window\.loadCalendarData && window\.loadCalendarData\(\)/);
+    assert.match(source, /m\.remove\(\)/);
+    assert.match(source, /m\.hidden = true/);
 });
 
 test("calendar dashboard keeps cache, public-share, and event-form contracts wired", async () => {
