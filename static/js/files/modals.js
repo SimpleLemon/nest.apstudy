@@ -77,7 +77,7 @@
                 await loadFolder(state.currentFolderId);
                 showAlert(mode === "folder-create" ? "Folder created." : mode === "folder-rename" ? "Folder renamed." : "File renamed.");
             } catch (error) {
-                notify(error.message || "Unable to save.", "error", { modalError: els.folderError });
+                notify(error.message || "Try again in a moment.", "error", { modalError: els.folderError, title: "Couldn’t save changes" });
             } finally {
                 setButtonBusy(els.folderSave, false);
             }
@@ -135,7 +135,7 @@
                 await loadFolder(state.currentFolderId);
                 showAlert("Moved.");
             } catch (error) {
-                notify(error.message || "Unable to move item.", "error", { modalError: els.moveError });
+                notify(error.message || "Try again in a moment.", "error", { modalError: els.moveError, title: "Couldn’t move item" });
             } finally {
                 setButtonBusy(els.moveSave, false);
             }
@@ -170,7 +170,7 @@
                 await options.onConfirm?.();
                 closeModal(els.confirmModal);
             } catch (error) {
-                notify(error.message || "Unable to complete action.", "error", { modalError: els.confirmError });
+                notify(error.message || "Try again in a moment.", "error", { modalError: els.confirmError, title: "Couldn’t complete action" });
             } finally {
                 setButtonBusy(els.confirmSubmit, false);
             }

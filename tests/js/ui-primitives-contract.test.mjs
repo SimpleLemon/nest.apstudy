@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const primitives = fs.readFileSync(path.join(repoRoot, 'static/js/core/ui-primitives.js'), 'utf8');
+const feedbackOverlays = fs.readFileSync(path.join(repoRoot, 'static/css/core/feedback-overlays.css'), 'utf8');
 
 test('shared UI primitive module has substantive owned APIs', () => {
     for (const api of ['APStudyFormField', 'APStudyLoader', 'APStudySkeleton', 'APStudyToast', 'APStudyConfirm']) {
@@ -15,6 +16,28 @@ test('shared UI primitive module has substantive owned APIs', () => {
     assert.ok(primitives.length > 8_000, 'ui-primitives.js must not become an empty compatibility shim');
     const globalSource = fs.readFileSync(path.join(repoRoot, 'static/js/core/global.js'), 'utf8');
     assert.doesNotMatch(globalSource, /window\.APStudy(?:FormField|Loader|Skeleton|Toast|Confirm)\s*=/);
+});
+
+test('toast primitive normalizes content, timing, and accessibility states', () => {
+    assert.match(primitives, /if \(!primaryText\) return null/);
+    assert.match(primitives, /toast\.setAttribute\('aria-atomic', 'true'\)/);
+    assert.match(primitives, /toast\.append\(createToastIcon\(type\), copy, close\)/);
+    assert.match(primitives, /if \(hasAction\) return 10_000/);
+    assert.match(primitives, /return 7_000/);
+    assert.match(primitives, /return 4_000/);
+    assert.match(primitives, /remaining = Math\.max\(0, remaining - \(performance\.now\(\) - startedAt\)\)/);
+    assert.doesNotMatch(primitives, /host\.setAttribute\('aria-live'/);
+});
+
+test('toast presentation follows the shared spacing, target-size, and viewport contracts', () => {
+    assert.match(feedbackOverlays, /grid-template-columns:\s*32px minmax\(0, 1fr\) 32px/);
+    assert.match(feedbackOverlays, /\.apstudy-toast\s*\{[^}]*flex:\s*0 0 auto/s);
+    assert.match(feedbackOverlays, /\.apstudy-toast\.is-compact\s*\{[^}]*align-items:\s*center/s);
+    assert.match(feedbackOverlays, /\.apstudy-toast__action\s*\{[^}]*min-height:\s*44px/s);
+    assert.match(feedbackOverlays, /\.apstudy-toast__close::before\s*\{[^}]*inset:\s*-6px/s);
+    assert.match(feedbackOverlays, /max-height:\s*calc\(var\(--app-viewport-height/);
+    assert.match(feedbackOverlays, /env\(safe-area-inset-right/);
+    assert.match(feedbackOverlays, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.apstudy-toast__progress\.is-running\s*\{\s*display:\s*none/s);
 });
 
 test('every template using global.js receives primitives first through the shared asset partial', () => {

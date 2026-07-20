@@ -409,7 +409,7 @@ async function saveEditedCourse(sectionId) {
     showToast("Class updated.");
   } catch (error) {
     console.error(error);
-    showToast(error.message || "Unable to update class.", true);
+    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t update class" });
   } finally {
     state.editingSaving = false;
     state.savingIds.delete(sectionId);
@@ -507,7 +507,7 @@ async function addCourse(sectionId) {
     showToast("Class added.");
   } catch (error) {
     console.error(error);
-    showToast(error.message || "Unable to add class.", true);
+    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t add class" });
   } finally {
     state.savingIds.delete(sectionId);
     render();
@@ -543,7 +543,7 @@ async function removeCourse(courseId, sectionId) {
     });
   } catch (error) {
     console.error(error);
-    showToast(error.message || "Unable to remove class.", true);
+    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t remove class" });
   } finally {
     if (sectionId) state.savingIds.delete(sectionId);
     render();
@@ -573,7 +573,7 @@ async function setTrack(sectionId, enabled, intervalMinutes = null) {
     if (enabled && !wasEnabled) window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'course-tracking' } }));
   } catch (error) {
     console.error(error);
-    showToast(error.message || "Unable to update tracking.", true);
+    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t update tracking" });
   } finally {
     state.trackingIds.delete(sectionId);
     render();
@@ -591,7 +591,7 @@ async function removeTrack(trackId, sectionId) {
     if (wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage - 1);
     showToast("Tracker removed.");
   } catch (error) {
-    showToast(error.message || "Unable to remove tracker.", true);
+    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t remove tracker" });
   } finally {
     state.trackingIds.delete(sectionId);
     render();
@@ -714,7 +714,9 @@ function showToast(message, isError = false, options = {}) {
   if (!window.APStudyToast) return null;
   return window.APStudyToast.show({
     message,
+    title: options.title,
     type: isError ? "error" : "success",
     action: options.action,
+    duration: options.duration,
   });
 }

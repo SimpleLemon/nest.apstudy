@@ -697,7 +697,7 @@ async function requestCurrentNotePrint() {
         });
     } catch (error) {
         console.error('Failed to prepare note for printing', error);
-        window.APStudyToast?.error?.('Could not prepare this note for printing.');
+        window.APStudyToast?.error?.('Try again in a moment.', { title: 'Couldn’t prepare note for printing' });
     } finally {
         notePrintInProgress = false;
         syncNotePrintControls();
@@ -755,7 +755,7 @@ function bindLazyReviewPanel({ canReview, canManageReviews, canViewVersions }) {
             await reviewPanelController?.open?.(mode);
         } catch (error) {
             console.error('Failed to load note review panel', error);
-            window.APStudyToast?.error?.('Could not load review tools.');
+            window.APStudyToast?.error?.('Try again in a moment.', { title: 'Couldn’t load review tools' });
         } finally {
             reviewButton?.removeAttribute('aria-busy');
             historyButton?.removeAttribute('aria-busy');

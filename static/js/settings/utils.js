@@ -273,9 +273,15 @@
       }, 1200);
     }
 
-    function showToast(message, type) {
+    function showToast(message, type, options = {}) {
       if (window.APStudyToast) {
-        window.APStudyToast.show({ message, type: type === 'error' ? 'error' : 'success' });
+        window.APStudyToast.show({
+          message,
+          title: options.title,
+          type: type === 'warning' ? 'warning' : type === 'error' ? 'error' : type === 'info' ? 'info' : 'success',
+          action: options.action,
+          duration: options.duration,
+        });
       }
     }
 

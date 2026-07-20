@@ -5,9 +5,9 @@
     return document.getElementById("admin-csrf-token")?.value || root?.querySelector("#admin-csrf-token")?.value || "";
   }
 
-  function setNotice(message, isError = false) {
+  function setNotice(message, isError = false, title = '') {
     if (window.APStudyToast) {
-      window.APStudyToast.show({ message, type: isError ? "error" : "success" });
+      window.APStudyToast.show({ message, title, type: isError ? "error" : "success" });
     }
   }
 
@@ -76,7 +76,7 @@
           refreshSelect.value = String(previousMinutes);
           currentRefreshMinutes = previousMinutes;
           startRefreshTimer(scope, refreshSelect);
-          setNotice(error.message || "Unable to update refresh interval.", true);
+          setNotice(error.message || "Try again in a moment.", true, "Couldn’t update refresh interval");
         }
       });
     }
@@ -95,7 +95,7 @@
         setNotice(`CHEM 150 ping complete: ${checked} Atlas check(s), ${payload.notifications_sent || 0} notification(s). Check the console for details.`);
       } catch (error) {
         console.error("[Admin Course Tracking] CHEM 150 diagnostic failed", error);
-        setNotice(error.message || "CHEM 150 diagnostic failed.", true);
+        setNotice(error.message || "Try again in a moment.", true, "Couldn’t run CHEM 150 diagnostic");
       } finally {
         testChemButton.disabled = false;
       }
@@ -110,7 +110,7 @@
         requestSectionReload();
       } catch (error) {
         console.error("[Admin Course Tracking] Spring tracking toggle failed", error);
-        setNotice(error.message || "Unable to update Spring course tracking.", true);
+        setNotice(error.message || "Try again in a moment.", true, "Couldn’t update Spring tracking");
         springTrackingButton.disabled = false;
       }
     });
@@ -143,7 +143,7 @@
         requestSectionReload();
       } catch (error) {
         console.error("[Admin Course Tracking] Toggle failed", error);
-        setNotice(error.message || "Unable to update course tracking.", true);
+        setNotice(error.message || "Try again in a moment.", true, "Couldn’t update course tracking");
         button.disabled = false;
       }
     });

@@ -12,7 +12,7 @@
   async function load() {
     const api = global.APStudyNotifications?.api;
     if (!api) return setTimeout(load, 50);
-    try { config = await api('/api/notifications/preferences'); render(); } catch (error) { toast(error.message, 'error'); }
+    try { config = await api('/api/notifications/preferences'); render(); } catch (error) { toast(error.message || 'Refresh the page and try again.', 'error', 'Couldn’t load notification settings'); }
   }
   function render() {
     const capability = global.APStudyNotifications.support();
@@ -55,15 +55,15 @@
     button.disabled = true;
     setActionStatus('Connecting this browser…');
     try { await global.APStudyNotifications.enable(undefined, { forceRefresh: Notification.permission === 'granted' }); setActionStatus('This browser is ready for background notifications.', 'success'); toast('Notifications enabled.'); await load(); }
-    catch (error) { setActionStatus(error.message, 'error'); toast(error.message, 'error', 'Could not enable notifications'); await load(); }
+    catch (error) { setActionStatus(error.message, 'error'); toast(error.message || 'Check your browser settings and try again.', 'error', 'Couldn’t enable notifications'); await load(); }
     finally { if (button && config?.push_configured && Notification.permission !== 'denied') button.disabled = false; }
   }
   async function save() {
     const preferences = {};
     document.querySelectorAll('[data-push-toggle]').forEach((button) => { preferences[button.dataset.pushToggle] = button.classList.contains('is-active'); });
-    try { config.preferences = (await global.APStudyNotifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message, 'error'); }
+    try { config.preferences = (await global.APStudyNotifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t save notification preferences'); }
   }
-  async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message, 'error', 'Test notification failed'); } }
+  async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t send test notification'); } }
   function escape(value) { const node = document.createElement('span'); node.textContent = value || ''; return node.innerHTML; }
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('notification-enable')?.addEventListener('click', enable);

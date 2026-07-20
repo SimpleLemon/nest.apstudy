@@ -215,7 +215,7 @@
         renderOtherCalendarRows(savedOtherUrls);
         showToast('Calendar links saved.', 'success');
       } catch (error) {
-        showToast(error.message || 'Unable to save calendar links.', 'error');
+        showToast(error.message || 'Check the links and try again.', 'error', { title: 'Couldn’t save calendar links' });
       } finally {
         if (elements.saveCalendarLinks) {
           elements.saveCalendarLinks.disabled = false;

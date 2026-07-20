@@ -80,7 +80,7 @@
                 action: { label: "Undo", onClick: () => { void unhideChecklist(); } },
             });
         } catch (error) {
-            showToast(error.message || "Unable to hide checklist.");
+            showToast(error.message || "Try again in a moment.", "error", { title: "Couldn’t hide checklist" });
             if (els.checklist) els.checklist.hidden = false;
         }
     }
@@ -92,7 +92,7 @@
                 body: JSON.stringify({ hidden: false }),
             });
         } catch (error) {
-            showToast(error.message || "Unable to restore checklist.");
+            showToast(error.message || "Try again in a moment.", "error", { title: "Couldn’t restore checklist" });
             if (els.checklist) els.checklist.hidden = true;
         }
     }
@@ -399,7 +399,7 @@
                 body: JSON.stringify({ tile_layout: { version: 3, tiles: tile_layout } }),
             });
         } catch (error) {
-            showToast(error.message || "Unable to save dashboard layout.");
+            showToast(error.message || "Try again in a moment.", "error", { title: "Couldn’t save dashboard layout" });
         }
     }
     function bindCalendarPopoverTrigger(trigger, date, events) {
@@ -496,7 +496,13 @@
     }
     function showToast(message, type = "error", options = {}) {
         if (window.APStudyToast) {
-            window.APStudyToast.show({ message, type, action: options.action });
+            window.APStudyToast.show({
+                message,
+                title: options.title,
+                type,
+                action: options.action,
+                duration: options.duration,
+            });
         }
     }
     async function loadDashboard() {

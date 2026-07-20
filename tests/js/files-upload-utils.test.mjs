@@ -77,7 +77,7 @@ test("files workflows use upload response helpers and notify on failure", async 
     assert.match(workflowsSource, /notify\(message, "error", \{ modalError: els\.uploadError \}\)/);
     assert.match(indexSource, /callbacks:\s*\{[\s\S]*parseUploadResponse,[\s\S]*uploadErrorMessage,/);
     assert.match(indexSource, /function notify\(message, type = "info", options = \{\}\)/);
-    assert.match(modalsSource, /notify\(error\.message \|\| "Unable to save\.", "error", \{ modalError: els\.folderError \}\)/);
+    assert.match(modalsSource, /notify\(error\.message \|\| "Try again in a moment\.", "error", \{ modalError: els\.folderError, title: "Couldn’t save changes" \}\)/);
     assert.ok(fileInputMatch);
     assert.match(fileInputMatch[0], /type="file"/);
     assert.match(fileInputMatch[0], /multiple/);

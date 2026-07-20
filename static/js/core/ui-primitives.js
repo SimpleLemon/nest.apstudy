@@ -80,30 +80,78 @@
         host.className = 'apstudy-toast-host';
         host.setAttribute('role', 'region');
         host.setAttribute('aria-label', 'Notifications');
-        host.setAttribute('aria-live', 'polite');
         (document.body || document.documentElement).appendChild(host);
         return host;
     }
 
+    const toastIcons = {
+        info: '<circle cx="12" cy="12" r="9"></circle><path d="M12 10.75v5.5"></path><path d="M12 7.5h.01"></path>',
+        success: '<circle cx="12" cy="12" r="9"></circle><path d="m8.25 12.25 2.5 2.5 5-5.25"></path>',
+        warning: '<path d="M10.25 4.25 3.2 17a2 2 0 0 0 1.75 3h14.1A2 2 0 0 0 20.8 17L13.75 4.25a2 2 0 0 0-3.5 0Z"></path><path d="M12 9v4.5"></path><path d="M12 17h.01"></path>',
+        error: '<circle cx="12" cy="12" r="9"></circle><path d="m9 9 6 6"></path><path d="m15 9-6 6"></path>',
+    };
+
+    function toastText(value) {
+        if (value instanceof Error) return String(value.message || '').trim();
+        return value == null ? '' : String(value).trim();
+    }
+
+    function toastDuration(options, type, hasDetail, hasAction) {
+        if (options.duration != null && Number.isFinite(Number(options.duration))) {
+            return Math.max(0, Number(options.duration));
+        }
+        if (hasAction) return 10_000;
+        if (hasDetail || type === 'warning' || type === 'error') return 7_000;
+        return 4_000;
+    }
+
+    function createToastIcon(type) {
+        const icon = document.createElement('span');
+        icon.className = 'apstudy-toast__icon';
+        icon.setAttribute('aria-hidden', 'true');
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '1.9');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        svg.innerHTML = toastIcons[type];
+        icon.appendChild(svg);
+        return icon;
+    }
+
     function showToast(options = {}) {
         if (typeof options === 'string') options = { message: options };
+        if (!options || typeof options !== 'object') return null;
         const type = ['info', 'success', 'warning', 'error'].includes(options.type) ? options.type : 'info';
+        const titleText = toastText(options.title);
+        const messageText = toastText(options.message);
+        const primaryText = titleText || messageText;
+        const detailText = titleText && messageText ? messageText : '';
+        if (!primaryText) return null;
+        const hasAction = Boolean(options.action && (options.action.label || options.action.text));
+        const duration = toastDuration(options, type, Boolean(detailText), hasAction);
         const toast = document.createElement('div');
         toast.className = `apstudy-toast is-${type}`;
+        toast.classList.toggle('is-compact', !detailText && !hasAction);
+        toast.classList.toggle('has-detail', Boolean(detailText));
+        toast.classList.toggle('has-action', hasAction);
         toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+        toast.setAttribute('aria-atomic', 'true');
         const copy = document.createElement('div');
         copy.className = 'apstudy-toast__copy';
-        if (options.title) {
-            const title = document.createElement('p');
-            title.className = 'apstudy-toast__title';
-            title.textContent = String(options.title);
-            copy.appendChild(title);
+        const title = document.createElement('p');
+        title.className = 'apstudy-toast__title';
+        title.textContent = primaryText;
+        copy.appendChild(title);
+        if (detailText) {
+            const message = document.createElement('p');
+            message.className = 'apstudy-toast__message';
+            message.textContent = detailText;
+            copy.appendChild(message);
         }
-        const message = document.createElement('p');
-        message.className = 'apstudy-toast__message';
-        message.textContent = String(options.message || '');
-        copy.appendChild(message);
-        if (options.action && (options.action.label || options.action.text)) {
+        if (hasAction) {
             const action = document.createElement('button');
             action.type = 'button';
             action.className = 'apstudy-toast__action';
@@ -122,9 +170,19 @@
         close.className = 'apstudy-toast__close';
         close.setAttribute('aria-label', 'Dismiss notification');
         close.textContent = '×';
-        toast.append(copy, close);
+        const progress = duration > 0 ? document.createElement('span') : null;
+        if (progress) {
+            progress.className = 'apstudy-toast__progress';
+            progress.setAttribute('aria-hidden', 'true');
+            toast.style.setProperty('--toast-duration', `${duration}ms`);
+        }
+        toast.append(createToastIcon(type), copy, close);
+        if (progress) toast.appendChild(progress);
         let dismissed = false;
         let timer = null;
+        let remaining = duration;
+        let startedAt = 0;
+        const pauseReasons = new Set();
         const dismiss = () => {
             if (dismissed) return;
             dismissed = true;
@@ -133,21 +191,41 @@
             window.setTimeout(() => toast.remove(), 400);
         };
         close.addEventListener('click', dismiss);
-        const pause = () => {
-            if (timer) window.clearTimeout(timer);
+        const pauseTimer = () => {
+            if (!timer) return;
+            remaining = Math.max(0, remaining - (performance.now() - startedAt));
+            window.clearTimeout(timer);
             timer = null;
+            toast.classList.add('is-paused');
         };
-        const resume = () => {
-            if (!dismissed && duration > 0 && !timer) timer = window.setTimeout(dismiss, duration);
+        const resumeTimer = () => {
+            if (dismissed || duration <= 0 || timer || pauseReasons.size) return;
+            if (remaining <= 0) {
+                dismiss();
+                return;
+            }
+            toast.classList.remove('is-paused');
+            startedAt = performance.now();
+            timer = window.setTimeout(dismiss, remaining);
         };
-        toast.addEventListener('mouseenter', pause);
-        toast.addEventListener('mouseleave', resume);
-        toast.addEventListener('focusin', pause);
-        toast.addEventListener('focusout', resume);
+        const setPaused = (reason, paused) => {
+            if (paused) pauseReasons.add(reason);
+            else pauseReasons.delete(reason);
+            if (pauseReasons.size) pauseTimer();
+            else resumeTimer();
+        };
+        toast.addEventListener('mouseenter', () => setPaused('pointer', true));
+        toast.addEventListener('mouseleave', () => setPaused('pointer', false));
+        toast.addEventListener('focusin', () => setPaused('focus', true));
+        toast.addEventListener('focusout', (event) => {
+            if (!toast.contains(event.relatedTarget)) setPaused('focus', false);
+        });
         ensureToastHost().prepend(toast);
-        requestAnimationFrame(() => toast.classList.add('is-visible'));
-        const duration = Number.isFinite(Number(options.duration)) ? Number(options.duration) : 3000;
-        if (duration > 0) timer = window.setTimeout(dismiss, duration);
+        requestAnimationFrame(() => {
+            toast.classList.add('is-visible');
+            progress?.classList.add('is-running');
+        });
+        resumeTimer();
         return { dismiss };
     }
     window.APStudyToast = window.APStudyToast || {

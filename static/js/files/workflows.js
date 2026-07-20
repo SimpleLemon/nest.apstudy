@@ -242,7 +242,7 @@
                 updateSharedItem(context.type, updated);
                 showAlert(visibility === "public" ? "Public link enabled." : "Link disabled.");
             } catch (error) {
-                notify(error.message || "Unable to update sharing.", "error", { modalError: els.shareError });
+                notify(error.message || "Try again in a moment.", "error", { modalError: els.shareError, title: "Couldn’t update sharing" });
                 renderShareModal();
             } finally {
                 setShareBusy(false);
@@ -263,7 +263,7 @@
                 updateSharedItem("file", updated);
                 showAlert("Expiration updated.");
             } catch (error) {
-                notify(error.message || "Unable to update expiration.", "error", { modalError: els.shareError });
+                notify(error.message || "Try again in a moment.", "error", { modalError: els.shareError, title: "Couldn’t update expiration" });
                 renderShareModal();
             } finally {
                 setShareBusy(false);
@@ -314,7 +314,7 @@
                     showAlert(visibility === "public" ? "Folder link created." : "Folder made private.");
                 }
             } catch (error) {
-                showAlert(error.message || "Unable to update folder sharing.", "error");
+                showAlert(error.message || "Try again in a moment.", "error", { title: "Couldn’t update folder sharing" });
             }
         }
 
@@ -323,7 +323,7 @@
                 await copyText(url);
                 showAlert("Link copied.");
             } catch (error) {
-                showAlert("Unable to copy link.", "error");
+                showAlert("Check your browser permissions and try again.", "error", { title: "Couldn’t copy link" });
             }
         }
 
@@ -361,7 +361,7 @@
                 const blob = await response.blob();
                 downloadBlob(blob, filenameFromDisposition(response.headers.get("Content-Disposition")) || "file-share-selected.zip");
             } catch (error) {
-                showAlert(error.message || "Unable to download selected files.", "error");
+                showAlert(error.message || "Try again in a moment.", "error", { title: "Couldn’t download files" });
             } finally {
                 setButtonBusy(els.bulkDownload, false);
             }

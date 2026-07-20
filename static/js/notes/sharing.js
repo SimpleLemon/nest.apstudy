@@ -390,7 +390,11 @@
             document.body.classList.add('notes-modal-open');
             activeModal.querySelector('[data-share-search]')?.focus({ preventScroll: true });
         } catch (error) {
-            global.APStudyToast?.show?.({ message: error.message || 'Unable to load sharing.', type: 'error' });
+            global.APStudyToast?.show?.({
+                title: 'Couldn’t load sharing settings',
+                message: error.message || 'Try again in a moment.',
+                type: 'error',
+            });
         }
     }
 

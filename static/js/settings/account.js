@@ -28,7 +28,7 @@
         showToast('Password reset email sent.', 'success');
       } catch (error) {
         console.error(error);
-        showToast(error.message || 'Unable to start password recovery.', 'error');
+        showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t send reset email' });
       }
     }
 
@@ -50,7 +50,7 @@
           global.location.assign('/logout');
         }, 500);
       } catch (error) {
-        showToast(error.message || 'Unable to delete account.', 'error');
+        showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t delete account' });
       }
     }
 
@@ -60,7 +60,7 @@
         downloadJson(`apstudy-export-${Date.now()}.json`, data);
         showToast('Export started.', 'success');
       } catch (error) {
-        showToast(error.message || 'Unable to export data.', 'error');
+        showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t export your data' });
       }
     }
 

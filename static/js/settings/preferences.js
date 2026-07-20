@@ -113,7 +113,7 @@
         applySidebarDefault(response.sidebar_default || payload.sidebar_default);
         showToast('Preferences saved.', 'success');
       } catch (error) {
-        showToast(error.message || 'Unable to save preferences.', 'error');
+        showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t save preferences' });
       }
     }
 

@@ -6,9 +6,9 @@
   const refreshMs = 15000;
   let requestPending = false;
 
-  function setNotice(message, isError = false) {
+  function setNotice(message, isError = false, title = '') {
     if (window.APStudyToast) {
-      window.APStudyToast.show({ message, type: isError ? "error" : "success" });
+      window.APStudyToast.show({ message, title, type: isError ? "error" : "success" });
     }
   }
 
@@ -169,7 +169,7 @@
         await refreshStatus();
       } catch (error) {
         console.error("[Admin APSwiftly] Action failed", action, error);
-        setNotice(error.message || "Unable to run APSwiftly command.", true);
+        setNotice(error.message || "Try again in a moment.", true, "Couldn’t run APSwiftly command");
         appendLog(` ! ${error.message || "Command failed."}`, true);
       } finally {
         requestPending = false;

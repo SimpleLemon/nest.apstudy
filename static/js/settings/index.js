@@ -450,7 +450,7 @@ async function bootstrapSettingsPage() {
     syncHashOnLoad();
   } catch (error) {
     console.error(error);
-    showToast(error.message || 'Unable to load settings right now.', 'error');
+    showToast(error.message || 'Refresh the page and try again.', 'error', { title: 'Couldn’t load settings' });
     syncHashOnLoad();
   } finally {
     clearSettingsSkeleton();
@@ -715,7 +715,7 @@ async function handleDiscordUnlink() {
     closeDiscordModal();
     showToast('Discord account unlinked.', 'success');
   } catch (error) {
-    showToast(error.message || 'Unable to unlink Discord account.', 'error');
+    showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t unlink Discord' });
   }
 }
 
@@ -742,7 +742,7 @@ function notifyDiscordLinkResult() {
     return;
   }
   if (params.get('discord') === 'error') {
-    showToast('We could not link your Discord account. Please try again.', 'error');
+    showToast('Try connecting your Discord account again.', 'error', { title: 'Couldn’t link Discord' });
     params.delete('discord');
     const query = params.toString();
     const newUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;

@@ -288,7 +288,7 @@
         captureProfileBaseline();
         showToast('Profile saved.', 'success');
       } catch (error) {
-        showToast(error.message || 'Unable to save profile.', 'error');
+        showToast(error.message || 'Try again in a moment.', 'error', { title: 'Couldn’t save profile' });
       } finally {
         state.profileSaving = false;
       }
@@ -326,7 +326,7 @@
         avatarModalCloseTimer = global.setTimeout(() => closeAvatarModal(), 450);
       } catch (error) {
         setAvatarUploadStatus('JPG, PNG, GIF, or WebP. Max 10 MB.');
-        showToast(error.message || 'Unable to upload avatar.', 'error');
+        showToast(error.message || 'Check the image and try again.', 'error', { title: 'Couldn’t upload avatar' });
       } finally {
         setAvatarUploadBusy(false);
         if (elements.avatarUpload) {
