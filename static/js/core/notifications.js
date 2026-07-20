@@ -129,7 +129,7 @@
 
   function showError(error) {
     global.APStudyToast?.show?.({
-      title: 'Could not update notifications',
+      title: 'Couldn’t update notifications',
       message: error?.message || 'Try again in a moment.',
       type: 'error',
     });
@@ -176,7 +176,7 @@
           prompt.remove();
           global.APStudyToast?.show?.({ message: 'Notifications enabled.', type: 'success' });
         } catch (error) {
-          global.APStudyToast?.show?.({ title: 'Could not enable notifications', message: error.message, type: 'error' });
+          global.APStudyToast?.show?.({ title: 'Couldn’t enable notifications', message: error.message || 'Check your browser settings and try again.', type: 'error' });
           button.disabled = false;
         }
       });
@@ -287,6 +287,9 @@
         }),
         keepalive,
       });
+      if (typeof data.focus_mode_active === 'boolean') {
+        global.APStudyProfileStatus?.setFocusMode?.(data.focus_mode_active);
+      }
       if (!active || !data.active) return;
       const items = Array.isArray(data.notifications) ? data.notifications : [];
       const pendingIds = Array.isArray(data.pending_foreground_ids) ? data.pending_foreground_ids.map(String) : [];

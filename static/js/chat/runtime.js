@@ -794,6 +794,7 @@ export function startChatRuntime(extensions = {}) {
   function presenceStatusLabel(status) {
     if (status === "active") return "Online";
     if (status === "busy") return "Busy";
+    if (status === "focus") return "Focus mode";
     return "Offline";
   }
 
@@ -1744,7 +1745,7 @@ export function startChatRuntime(extensions = {}) {
   }
 
   function normalizeLocalPresenceStatus(value) {
-    return ["active", "busy", "offline"].includes(value) ? value : "offline";
+    return ["active", "busy", "focus", "offline"].includes(value) ? value : "offline";
   }
 
   function rememberPresenceUser(user) {

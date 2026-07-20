@@ -329,6 +329,17 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(statuses["user-3"], "busy")
         self.assertEqual(statuses["user-4"], "offline")
 
+    def test_focus_mode_presence_overrides_online_and_busy_states(self):
+        rows = [
+            {"user_id": "user-2", "scope_type": "chat", "last_seen_at": "2026-06-23T12:00:01Z"},
+            {"user_id": "user-3", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
+        ]
+        with patch.object(chat_api, "_fresh_presence_rows", return_value=rows), \
+                patch("services.focus_mode.active_focus_user_ids", return_value={"user-2", "user-3"}):
+            statuses = chat_api._presence_statuses_for_users(["user-2", "user-3"])
+
+        self.assertEqual(statuses, {"user-2": "focus", "user-3": "focus"})
+
     def test_presence_status_lookup_uses_scope_specific_freshness(self):
         chat_rows = [
             {"user_id": "user-2", "scope_type": "chat", "last_seen_at": "2026-06-23T12:00:01Z"},

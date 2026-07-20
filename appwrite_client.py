@@ -278,4 +278,7 @@ COLLECTIONS = {
 	"app_config": "chat_bridge_config",
 	"admin_requests": "admin_requests",
 	"dashboard_widgets": "dashboard_widgets",
+	"focus_routines": "focus_routines",
+	"focus_sessions": "focus_sessions",
+	"focus_session_events": "focus_session_events",
 }

@@ -1,3 +1,5 @@
+import sqlite3
+
 from flask import Blueprint, jsonify, redirect, request, url_for
 from flask_login import current_user, login_required
 
@@ -114,10 +116,22 @@ def sync_foreground():
         return jsonify({"ok": True, "active": False})
     result = notifications.list_feed(current_user.id, limit=50)
     prefs = notifications.preferences(current_user.id)
+    focus_active = False
+    try:
+        from services.focus_mode import is_focus_mode_active
+        focus_active = is_focus_mode_active(current_user.id)
+    except sqlite3.OperationalError:
+        focus_active = False
     for item in result["notifications"]:
-        item["foreground_enabled"] = notifications.category_delivery_enabled(item.get("category"), prefs)
+        urgent = notifications.is_urgent_during_focus(item.get("category"))
+        item["urgent"] = urgent
+        item["foreground_enabled"] = (
+            notifications.category_delivery_enabled(item.get("category"), prefs)
+            and (not focus_active or urgent)
+        )
     result["pending_foreground_ids"] = notifications.pending_foreground_ids(current_user.id)
     result["active"] = True
+    result["focus_mode_active"] = focus_active
     return jsonify(result)
 
 

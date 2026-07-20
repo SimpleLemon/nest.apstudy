@@ -6,6 +6,7 @@ import logging
 import os
 import re
 import secrets
+import sqlite3
 import threading
 import time
 from datetime import datetime, timedelta, timezone
@@ -273,6 +274,12 @@ def _presence_statuses_for_users(user_ids):
             scopes_by_user[user_id].add(row.get("scope_type"))
     for user_id, scopes in scopes_by_user.items():
         statuses[user_id] = _presence_status_from_scopes(scopes)
+    try:
+        from services.focus_mode import active_focus_user_ids
+        for user_id in active_focus_user_ids(ordered_ids):
+            statuses[user_id] = "focus"
+    except sqlite3.OperationalError:
+        pass
     return statuses
 
 
@@ -303,6 +310,13 @@ def _presence_online_users():
         latest = row.get("last_seen_at") or ""
         if latest > latest_by_user.get(user_id, ""):
             latest_by_user[user_id] = latest
+    try:
+        from services.focus_mode import active_focus_user_ids
+        focus_user_ids = active_focus_user_ids()
+        for user_id in focus_user_ids:
+            scopes_by_user.setdefault(user_id, {"site"})
+    except sqlite3.OperationalError:
+        focus_user_ids = set()
     users = []
     for user_id, scopes in scopes_by_user.items():
         try:
@@ -313,7 +327,7 @@ def _presence_online_users():
         public_user = _public_user(user)
         if not public_user:
             continue
-        public_user["presence_status"] = _presence_status_from_scopes(scopes)
+        public_user["presence_status"] = "focus" if user_id in focus_user_ids else _presence_status_from_scopes(scopes)
         public_user["online"] = public_user["presence_status"] != "offline"
         public_user["last_seen_at"] = latest_by_user.get(user_id)
         public_user["active_chat_scopes"] = sorted(chat_scopes_by_user.get(user_id, set()))
@@ -345,6 +359,9 @@ def _fresh_chat_room_presence(scope_type, scope_id):
             public_user["presence_status"] = "active"
             public_user["online"] = True
             users.append(public_user)
+    statuses = _presence_statuses_for_users([user["id"] for user in users])
+    for user in users:
+        user["presence_status"] = statuses.get(user["id"], "active")
     users.sort(key=lambda user: user.get("name") or "")
     return users
 

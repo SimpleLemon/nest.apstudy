@@ -343,6 +343,14 @@
     0 0 0 3px #facc15;
 }
 
+.chat-presence-dot.is-focus {
+  background: var(--color-tertiary);
+  border-color: var(--color-surface);
+  box-shadow:
+    0 0 0 2px var(--color-surface-container-low),
+    0 0 0 3px color-mix(in srgb, var(--color-tertiary) 82%, transparent);
+}
+
 .chat-presence-dot.is-offline {
   background: color-mix(in srgb, var(--color-on-surface-variant) 58%, var(--color-surface) 42%);
 }

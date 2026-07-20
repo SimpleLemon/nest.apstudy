@@ -139,6 +139,44 @@ function openCommandPalette() {
     });
 }
 
+let focusModeStatusActive = null;
+let focusSidebarWasCollapsed = null;
+
+function setFocusModeStatus(active) {
+  const enabled = active === true;
+  const status = document.getElementById('navbar-focus-status');
+  if (status) status.hidden = !enabled;
+  document.body?.classList.toggle('focus-mode-active', enabled);
+  if (enabled && focusModeStatusActive !== true) {
+    focusSidebarWasCollapsed = document.querySelector('.sidebar-container')?.classList.contains('collapsed') === true;
+    window.APSTUDY_SET_SIDEBAR_COLLAPSED?.(true, { persist: false });
+  } else if (!enabled && focusModeStatusActive === true && focusSidebarWasCollapsed !== null) {
+    window.APSTUDY_SET_SIDEBAR_COLLAPSED?.(focusSidebarWasCollapsed, { persist: false });
+    focusSidebarWasCollapsed = null;
+  }
+  if (focusModeStatusActive === enabled) return;
+  focusModeStatusActive = enabled;
+  window.dispatchEvent(new CustomEvent('apstudy:focus-state', { detail: { active: enabled } }));
+}
+
+window.APStudyProfileStatus = {
+  setFocusMode: setFocusModeStatus,
+};
+
+async function refreshFocusModeStatus() {
+  try {
+    const response = await fetch('/api/focus/status', {
+      headers: { Accept: 'application/json' },
+      credentials: 'same-origin',
+    });
+    if (!response.ok) return;
+    const payload = await response.json();
+    setFocusModeStatus(payload.active === true);
+  } catch (_error) {
+    // Profile status is supplemental; the Focus page remains authoritative.
+  }
+}
+
 function toggleCommandPalette() {
   ensureCommandPaletteModule()
     .then((palette) => {
@@ -181,6 +219,10 @@ function renderNavbar() {
       <span class="navbar-search-tooltip" role="tooltip">${commandShortcut}</span>
     </button>
     <div id="navbar-notifications-host" class="navbar-notifications-host"></div>
+    <span id="navbar-focus-status" class="navbar-focus-status" role="status" title="Focus mode is active" hidden>
+      ${materialIcon('dark_mode')}
+      <span>Focus mode</span>
+    </span>
     <div class="navbar-avatar-wrapper">
       <button type="button" class="navbar-avatar ${tierClass}" id="navbar-avatar-btn" aria-label="Profile menu${tierLabel ? ` · ${tierLabel}` : ''}" title="${tierLabel}" aria-haspopup="menu" aria-controls="profile-dropdown" aria-expanded="false">
         <img ${profileImageAttrs} sizes="48px" alt="Profile" width="48" height="48" decoding="async" />
@@ -231,6 +273,7 @@ function renderNavbar() {
 
   // Setup navbar interactions
   setupNavbarInteractions(userEmail, authenticated);
+  if (authenticated) void refreshFocusModeStatus();
 }
 
 function setupNavbarInteractions(userEmail, authenticated = true) {

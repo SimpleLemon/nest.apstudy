@@ -1,0 +1,862 @@
+.focus-body {
+    background: var(--color-background);
+}
+
+.focus-main {
+    --workspace-page-padding-top: 18px;
+    --workspace-page-gap: 28px;
+    width: min(100%, calc(var(--content-wide) + 64px));
+    min-height: calc(var(--app-viewport-height) - var(--navbar-height));
+    padding-bottom: 48px;
+}
+
+.focus-page-header,
+.focus-header-actions,
+.focus-setup-intro,
+.focus-duration-row,
+.focus-routine-actions,
+.focus-start-row,
+.focus-timer-actions,
+.focus-region-heading,
+.focus-cycle-status,
+.focus-check-row {
+    display: flex;
+    align-items: center;
+}
+
+.focus-page-header {
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.focus-page-header h1 {
+    margin: 0;
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: 18px;
+    letter-spacing: -0.015em;
+}
+
+.focus-page-header p {
+    margin: 4px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+}
+
+.focus-header-actions {
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.focus-notification-state {
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 650;
+    padding: 0 8px;
+}
+
+.focus-notification-state[hidden] {
+    display: none;
+}
+
+.focus-notification-state .material-symbols-outlined {
+    color: var(--color-tertiary);
+    font-size: 18px;
+}
+
+.focus-button,
+.focus-choice {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-control);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0 14px;
+    transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-button:hover:not(:disabled),
+.focus-choice:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.focus-button:focus-visible,
+.focus-choice:focus-visible,
+.focus-field input:focus-visible,
+.focus-field select:focus-visible,
+.focus-adjuster summary:focus-visible,
+.focus-check-row input:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.focus-button:disabled,
+.focus-choice:disabled {
+    cursor: wait;
+    opacity: 0.62;
+    transform: none;
+}
+
+.focus-button .material-symbols-outlined {
+    font-size: 19px;
+}
+
+.focus-button-primary {
+    background: var(--color-tertiary);
+    color: var(--color-on-tertiary);
+}
+
+.focus-button-primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-tertiary) 88%, var(--color-on-surface));
+}
+
+.focus-button-quiet,
+.focus-choice {
+    border-color: color-mix(in srgb, var(--color-outline-variant) 68%, transparent);
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+}
+
+.focus-button-quiet:hover:not(:disabled),
+.focus-choice:hover:not(:disabled),
+.focus-choice[aria-pressed="true"] {
+    border-color: color-mix(in srgb, var(--color-primary) 58%, var(--color-outline-variant));
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface-container-low));
+}
+
+.focus-button-danger {
+    background: transparent;
+    color: var(--color-error);
+}
+
+.focus-button-danger:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-error) 12%, transparent);
+}
+
+.focus-loading {
+    display: grid;
+    min-height: 480px;
+    place-items: center;
+    align-content: center;
+    gap: 24px;
+}
+
+.focus-loading[hidden] {
+    display: none;
+}
+
+.focus-loading-ring {
+    width: min(52vw, 300px);
+    aspect-ratio: 1;
+    border-radius: var(--radius-avatar);
+}
+
+.focus-loading-line {
+    width: 180px;
+    height: 16px;
+    border-radius: var(--radius-control);
+}
+
+.focus-setup {
+    width: min(100%, var(--content-standard));
+    margin: 24px auto 0;
+}
+
+.focus-setup[hidden],
+.focus-session[hidden],
+.focus-utility-rail[hidden] {
+    display: none;
+}
+
+.focus-setup-intro {
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.focus-intro-icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-avatar);
+    background: color-mix(in srgb, var(--color-tertiary) 16%, var(--color-surface-container-low));
+    color: var(--color-tertiary);
+    font-size: 25px;
+}
+
+.focus-setup-intro h2 {
+    margin: 0;
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: 24px;
+    letter-spacing: -0.025em;
+}
+
+.focus-setup-intro p {
+    margin: 6px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 14px;
+}
+
+.focus-routine-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-lowest);
+    overflow: hidden;
+}
+
+.focus-form-main,
+.focus-routine-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 28px;
+}
+
+.focus-routine-tools {
+    gap: 18px;
+    border-left: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
+    background: var(--color-surface-container-low);
+}
+
+.focus-fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.focus-fieldset legend {
+    margin-bottom: 12px;
+    color: var(--color-on-surface);
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.focus-fieldset legend span {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.focus-preset-row,
+.focus-suggestion-row,
+.focus-chip-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.focus-choice {
+    min-height: 38px;
+    padding: 0 13px;
+}
+
+.focus-duration-row {
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.focus-field {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.focus-field-compact {
+    flex: 0 0 112px;
+}
+
+.focus-field > span,
+.focus-recent-selections > span {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.focus-field input,
+.focus-field select {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 72%, transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+    font-size: 14px;
+    padding: 0 11px;
+}
+
+.focus-field input::placeholder {
+    color: color-mix(in srgb, var(--color-on-surface-variant) 86%, var(--color-surface));
+}
+
+.focus-field-help {
+    max-width: 68ch;
+    margin: -4px 0 12px;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.focus-suggestion-row:empty::before {
+    content: "Enter a focus duration to see optional breaks.";
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
+.focus-suggestion-row .focus-choice::after {
+    content: " suggested";
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.focus-recent-selections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.focus-recent-selections[hidden] {
+    display: none;
+}
+
+.focus-check-row {
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.focus-check-row input {
+    width: 18px;
+    height: 18px;
+    margin: 1px 0 0;
+    accent-color: var(--color-primary);
+}
+
+.focus-routine-actions {
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+.focus-start-row {
+    grid-column: 1 / -1;
+    min-height: 76px;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
+    padding: 16px 20px 16px 28px;
+}
+
+.focus-start-row p {
+    margin: 0;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+}
+
+.focus-start-row p[data-tone="error"] {
+    color: var(--color-error);
+}
+
+.focus-start-row p[data-tone="success"] {
+    color: var(--color-success);
+}
+
+.focus-session {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 48px;
+    align-items: start;
+    width: min(100%, 1180px);
+    margin: 4px auto 0;
+}
+
+.focus-session-stage {
+    display: flex;
+    min-height: 540px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.focus-cycle-status {
+    flex-direction: column;
+    gap: 10px;
+    color: var(--color-on-surface);
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.focus-cycle-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.focus-cycle-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: var(--radius-avatar);
+    background: color-mix(in srgb, var(--color-on-surface-variant) 42%, transparent);
+}
+
+.focus-cycle-dot.is-complete {
+    background: var(--color-success);
+}
+
+.focus-cycle-dot.is-current {
+    background: var(--color-tertiary);
+}
+
+.focus-timer-shell {
+    position: relative;
+    width: min(66vw, 380px);
+    aspect-ratio: 1;
+    margin: 10px 0 2px;
+}
+
+.focus-progress {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform: rotate(-90deg);
+}
+
+.focus-progress-track,
+.focus-progress-value {
+    fill: none;
+    stroke-width: 3;
+}
+
+.focus-progress-track {
+    stroke: color-mix(in srgb, var(--color-outline-variant) 60%, transparent);
+}
+
+.focus-progress-value {
+    stroke: var(--color-tertiary);
+    stroke-dasharray: 992.75;
+    stroke-dashoffset: calc(992.75 * (1 - var(--focus-progress, 0)));
+    stroke-linecap: round;
+    transition: stroke-dashoffset 500ms linear;
+}
+
+.focus-time-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.focus-time {
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: 76px;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1;
+}
+
+.focus-time-content > span {
+    color: var(--color-on-surface-variant);
+    font-size: 15px;
+}
+
+.focus-timer-actions {
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.focus-next-phase {
+    min-height: 20px;
+    margin: 16px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+}
+
+.focus-adjuster {
+    margin-top: 46px;
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 62%, transparent);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-low);
+    overflow: hidden;
+}
+
+.focus-adjuster summary {
+    display: flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--color-on-surface);
+    font-size: 14px;
+    font-weight: 700;
+    list-style: none;
+    padding: 0 16px;
+}
+
+.focus-adjuster summary::-webkit-details-marker {
+    display: none;
+}
+
+.focus-adjuster summary > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.focus-adjuster summary .material-symbols-outlined {
+    font-size: 19px;
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-adjuster[open] summary > .material-symbols-outlined {
+    transform: rotate(180deg);
+}
+
+.focus-adjuster-body {
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
+    padding: 16px;
+}
+
+.focus-adjuster-body dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 9px 14px;
+    margin: 0;
+    font-size: 12px;
+}
+
+.focus-adjuster-body dt {
+    color: var(--color-on-surface-variant);
+}
+
+.focus-adjuster-body dd {
+    margin: 0;
+    color: var(--color-on-surface);
+    text-align: right;
+}
+
+.focus-adjuster-body p {
+    margin: 16px 0;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.focus-utility-rail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
+}
+
+.focus-spotify-region,
+.focus-history-region {
+    min-width: 0;
+    padding: 24px 28px 0;
+}
+
+.focus-spotify-region {
+    border-right: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
+}
+
+.focus-region-heading {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.focus-region-heading h2 {
+    margin: 0;
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: 15px;
+    letter-spacing: -0.01em;
+}
+
+.focus-region-heading p,
+.focus-region-heading a {
+    margin: 5px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.focus-region-heading a {
+    color: var(--color-primary);
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.focus-spotify-empty,
+.focus-history-empty {
+    display: flex;
+    min-height: 124px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--color-on-surface-variant);
+    text-align: center;
+}
+
+.focus-spotify-empty[hidden],
+.focus-history-empty[hidden] {
+    display: none;
+}
+
+.focus-spotify-empty p,
+.focus-history-empty p {
+    max-width: 36ch;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.focus-spotify-embed {
+    display: block;
+    width: 100%;
+    height: 152px;
+    border: 0;
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-high);
+}
+
+.focus-spotify-embed[hidden] {
+    display: none;
+}
+
+.focus-history-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.focus-history-item {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 40%, transparent);
+}
+
+.focus-history-item:last-child {
+    border-bottom: 0;
+}
+
+.focus-history-item .material-symbols-outlined {
+    color: var(--color-on-surface-variant);
+    font-size: 19px;
+}
+
+.focus-history-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.focus-history-copy strong {
+    color: var(--color-on-surface);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.focus-history-copy span,
+.focus-history-item time {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
+@media (max-width: 1040px) {
+    .focus-session {
+        grid-template-columns: minmax(0, 1fr) 280px;
+        gap: 24px;
+    }
+
+    .focus-routine-form {
+        grid-template-columns: minmax(0, 1fr) 300px;
+    }
+}
+
+@media (max-width: 820px) {
+    .focus-main {
+        padding-inline: 20px;
+    }
+
+    .focus-page-header,
+    .focus-session {
+        align-items: stretch;
+    }
+
+    .focus-page-header,
+    .focus-session,
+    .focus-routine-form,
+    .focus-utility-rail {
+        grid-template-columns: 1fr;
+    }
+
+    .focus-page-header {
+        flex-direction: column;
+    }
+
+    .focus-header-actions {
+        justify-content: flex-start;
+    }
+
+    .focus-routine-tools {
+        border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 52%, transparent);
+        border-left: 0;
+    }
+
+    .focus-session-stage {
+        min-height: auto;
+    }
+
+    .focus-adjuster {
+        width: min(100%, 560px);
+        margin: 0 auto;
+    }
+
+    .focus-spotify-region {
+        border-right: 0;
+        border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
+        padding-bottom: 24px;
+    }
+}
+
+@media (max-width: 560px) {
+    .focus-main {
+        --workspace-page-gap: 20px;
+        padding-inline: 14px;
+        padding-bottom: max(32px, env(safe-area-inset-bottom));
+    }
+
+    .focus-page-header h1 {
+        font-size: 16px;
+    }
+
+    #focus-page-subtitle,
+    .focus-notification-state {
+        display: none;
+    }
+
+    .focus-header-actions {
+        width: 100%;
+    }
+
+    .focus-header-actions .focus-button {
+        flex: 1 1 auto;
+    }
+
+    .focus-setup {
+        margin-top: 4px;
+    }
+
+    .focus-setup-intro {
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .focus-setup-intro h2 {
+        font-size: 20px;
+    }
+
+    .focus-form-main,
+    .focus-routine-tools {
+        gap: 24px;
+        padding: 20px;
+    }
+
+    .focus-duration-row,
+    .focus-start-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .focus-field-compact {
+        flex-basis: auto;
+    }
+
+    .focus-start-row {
+        padding: 16px 20px 20px;
+    }
+
+    .focus-start-row .focus-button-primary {
+        width: 100%;
+    }
+
+    .focus-session {
+        gap: 20px;
+    }
+
+    .focus-session-stage {
+        padding-top: 8px;
+    }
+
+    .focus-timer-shell {
+        width: min(92vw, 340px);
+    }
+
+    .focus-time {
+        font-size: 60px;
+    }
+
+    .focus-timer-actions {
+        width: 100%;
+    }
+
+    .focus-timer-actions .focus-button-primary {
+        flex: 1 1 100%;
+    }
+
+    .focus-spotify-region,
+    .focus-history-region {
+        padding-inline: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .focus-button,
+    .focus-choice,
+    .focus-progress-value,
+    .focus-adjuster summary .material-symbols-outlined {
+        transition-duration: 0.01ms;
+    }
+
+    .focus-button:hover:not(:disabled),
+    .focus-choice:hover:not(:disabled) {
+        transform: none;
+    }
+}

@@ -25,6 +25,9 @@ _USER_OWNED_TABLES = (
     COLLECTIONS.get("chat_messages", "chat_messages"),
     COLLECTIONS.get("chat_presence", "chat_presence"),
     COLLECTIONS.get("chat_read_states", "chat_read_states"),
+    COLLECTIONS.get("focus_routines", "focus_routines"),
+    COLLECTIONS.get("focus_sessions", "focus_sessions"),
+    COLLECTIONS.get("focus_session_events", "focus_session_events"),
 )
 
 _RELATION_TABLES = (

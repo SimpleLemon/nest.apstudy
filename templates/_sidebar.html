@@ -56,6 +56,12 @@
 
       <div class="sidebar-section">
         <div class="sidebar-section-label">Other</div>
+        <a class="sidebar-item {% if sidebar_path == '/focus' %}active{% endif %}" href="/focus" aria-label="Focus Mode">
+          <span class="sidebar-item-icon">
+            <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">dark_mode</span>
+          </span>
+          <span class="sidebar-item-label">Focus Mode</span>
+        </a>
         <a class="sidebar-item {% if sidebar_path == '/chat' %}active{% endif %}" href="{{ url_for('dashboard.chat') }}" aria-label="Chat">
           <span class="sidebar-item-icon">
             <span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">chat_bubble</span>

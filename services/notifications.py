@@ -30,6 +30,7 @@ CATEGORY_PREFERENCE_FIELDS = {
     "chat_dm": "dm_enabled",
     "chat_mention": "mention_enabled",
 }
+URGENT_FOCUS_CATEGORIES = {"calendar", "courses", "chat_mention"}
 
 
 def _now():
@@ -244,6 +245,22 @@ def category_delivery_enabled(category, prefs):
     return not field or bool(prefs.get(field, True))
 
 
+def is_urgent_during_focus(category):
+    """Return whether a category should interrupt an active focus session."""
+    return str(category or "") in URGENT_FOCUS_CATEGORIES
+
+
+def focus_delivery_enabled(user_id, category):
+    if is_urgent_during_focus(category):
+        return True
+    try:
+        from services.focus_mode import is_focus_mode_active
+        return not is_focus_mode_active(user_id)
+    except sqlite3.OperationalError:
+        # Upgrade-safe while the Focus Mode migration is still being applied.
+        return True
+
+
 def touch_web_presence(user_id, tab_id, *, active, device_class):
     tab_id = "".join(character for character in str(tab_id or "") if character.isalnum() or character in "_-")[:64]
     if not tab_id:
@@ -372,6 +389,8 @@ def _send(subscription, payload):
 def deliver(user_id, notification_id, category, title, body, target_url, *, tag=None, force_push=False):
     prefs = preferences(user_id)
     if not category_delivery_enabled(category, prefs):
+        return {"accepted": 0, "failed": 0}
+    if not focus_delivery_enabled(user_id, category):
         return {"accepted": 0, "failed": 0}
     if not force_push and has_active_web_session(user_id):
         _queue_foreground_delivery(user_id, notification_id, category, title, body, target_url, tag)

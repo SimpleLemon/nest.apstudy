@@ -380,7 +380,7 @@ async function runLogoutFlow() {
     } catch (error) {
         console.error(error);
         window.APStudyToast?.show?.({
-            title: "Could not log out",
+            title: "Couldn’t log out",
             message: "Refresh the page and try again.",
             type: "error",
         });
@@ -455,6 +455,7 @@ function initializePresenceHeartbeat() {
     const extraScopes = new Map();
     let intervalId = null;
     let stopped = false;
+    let focusPaused = false;
     let tabId = "";
     try {
         tabId = sessionStorage.getItem(tabKey) || "";
@@ -528,8 +529,15 @@ function initializePresenceHeartbeat() {
     }
 
     function resumeHeartbeat() {
+        if (focusPaused) return;
         void sendHeartbeat();
         startTimer();
+    }
+
+    function setFocusPaused(active) {
+        focusPaused = active === true;
+        if (focusPaused) pauseHeartbeat();
+        else resumeHeartbeat();
     }
 
     function setChatRoom(roomId) {
@@ -543,8 +551,14 @@ function initializePresenceHeartbeat() {
         if (isChatPage() && previous !== scopeId) void sendHeartbeat();
     }
 
-    sendHeartbeat();
-    startTimer();
+    focusPaused = document.body.classList.contains("focus-mode-active");
+    if (!focusPaused) {
+        sendHeartbeat();
+        startTimer();
+    }
+    window.addEventListener("apstudy:focus-state", (event) => {
+        setFocusPaused(event.detail?.active === true);
+    });
     document.addEventListener("visibilitychange", () => sendHeartbeat({ keepalive: true }));
     if (window.APStudyPageLifecycle?.register) {
         window.APStudyPageLifecycle.register({

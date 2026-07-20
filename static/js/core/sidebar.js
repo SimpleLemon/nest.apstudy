@@ -166,12 +166,17 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     }
   }
 
-  function applySidebarCollapsedState(shouldCollapse) {
+  function applySidebarCollapsedState(shouldCollapse, options = {}) {
     sidebar.classList.toggle('collapsed', shouldCollapse);
     document.body.classList.toggle('sidebar-collapsed', shouldCollapse);
     syncSidebarCollapsedHtmlClass(shouldCollapse);
-    localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
+    if (options.persist !== false) {
+      localStorage.setItem('sidebar-collapsed', String(shouldCollapse));
+    }
     updateToggleHandleState();
+    document.dispatchEvent(new CustomEvent('apstudy-sidebar-state-change', {
+      detail: { collapsed: Boolean(shouldCollapse), persisted: options.persist !== false },
+    }));
   }
 
   // Load per-session state first. On a fresh login, localStorage is cleared,
@@ -189,7 +194,9 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     toggleHandle.addEventListener('click', (e) => {
       e.preventDefault();
       const shouldCollapse = !sidebar.classList.contains('collapsed');
-      applySidebarCollapsedState(shouldCollapse);
+      applySidebarCollapsedState(shouldCollapse, {
+        persist: !document.body.classList.contains('focus-mode-active'),
+      });
       if (tooltip) tooltip.classList.remove('visible');
     });
   }
@@ -357,6 +364,11 @@ function setupChatSummaryBadge() {
     resume: resumePolling,
     dispose: disposePolling,
   });
+  globalThis.addEventListener('apstudy:focus-state', (event) => {
+    if (event.detail?.active) pausePolling();
+    else resumePolling();
+  });
+  if (document.body.classList.contains('focus-mode-active')) pausePolling();
   schedule(2500);
 }
 
