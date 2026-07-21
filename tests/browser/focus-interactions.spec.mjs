@@ -56,6 +56,11 @@ test("focus controls enter a distraction-free session and complete their API act
             <section class="focus-utility-rail" data-focus-utilities hidden>
                 <div class="focus-spotify-region">
                     <p data-focus-spotify-label></p><a data-focus-open-spotify hidden>Open Spotify</a>
+                    <div class="focus-spotify-panel-form">
+                        <label class="focus-field" for="focus-spotify-panel-url"><span>Playlist link</span><input id="focus-spotify-panel-url" data-focus-spotify-panel-url></label>
+                        <button type="button" data-focus-spotify-panel-apply><span data-focus-spotify-panel-action>Add playlist</span></button>
+                    </div>
+                    <p data-focus-spotify-panel-status></p>
                     <div data-focus-spotify-empty></div>
                     <iframe class="focus-spotify-embed" data-focus-spotify-embed hidden></iframe>
                 </div>
@@ -139,6 +144,11 @@ test("focus controls enter a distraction-free session and complete their API act
     await page.evaluate(() => import(`/static/js/focus/index.js?test=${Date.now()}`));
     await expect(page.locator("[data-focus-setup]")).toBeVisible();
 
+    await page.locator("#focus-spotify-panel-url").fill(spotifyUrl);
+    await page.getByRole("button", { name: "Add playlist", exact: true }).click();
+    await expect(page.locator(".focus-spotify-embed")).toBeVisible();
+    await expect(page.locator("#focus-spotify-url")).toHaveValue(spotifyUrl);
+
     await page.getByRole("button", { name: "50" }).click();
     await expect(page.locator("#focus-minutes")).toHaveValue("50");
     await page.getByText("Session options").click();
@@ -168,6 +178,17 @@ test("focus controls enter a distraction-free session and complete their API act
     await expect(page.locator(".focus-spotify-embed")).toBeVisible();
     await expect(page.locator(".focus-spotify-embed")).toHaveCSS("height", "352px");
     await expect(page.locator(".focus-history-region")).toBeHidden();
+
+    const titleBeforeHidden = await page.title();
+    await page.evaluate(() => {
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+        document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await expect.poll(() => page.title(), { timeout: 3000 }).not.toBe(titleBeforeHidden);
+    await page.evaluate(() => {
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => false });
+        document.dispatchEvent(new Event("visibilitychange"));
+    });
 
     await page.getByRole("button", { name: "Pause" }).click();
     await expect(page.getByRole("button", { name: "Resume" })).toBeVisible();
@@ -318,11 +339,46 @@ test("timer expiry announces focus completion, break completion, and routine com
     await expect.poll(() => page.evaluate(() => window.__expiryTest.toasts.at(-1)?.message)).toBe("Focus routine complete.");
 });
 
-test("a running focus without Spotify removes all secondary content", async ({ page, baseURL }) => {
+test("a running focus without Spotify keeps a lightweight add-playlist panel", async ({ page, baseURL }) => {
     await page.goto(`${baseURL}/static/css/focus.css`);
     await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="/static/css/focus.css"></head>
         <body class="focus-body focus-session-active"><main><section class="focus-session">Timer</section>
-        <section class="focus-utility-rail" hidden></section></main></body></html>`);
+        <section class="focus-utility-rail"><div class="focus-spotify-region">
+            <div class="focus-spotify-panel-form"><label class="focus-field"><span>Playlist link</span><input></label><button type="button">Add playlist</button></div>
+            <div class="focus-spotify-empty"><span>headphones</span><p>Add a playlist here.</p></div>
+            <iframe class="focus-spotify-embed" hidden></iframe>
+        </div></section></main></body></html>`);
     await expect(page.locator(".focus-session")).toBeVisible();
-    await expect(page.locator(".focus-utility-rail")).toBeHidden();
+    await expect(page.locator(".focus-utility-rail")).toBeVisible();
+    await expect(page.locator(".focus-spotify-empty")).toBeVisible();
+    await expect(page.locator(".focus-spotify-embed")).toBeHidden();
+});
+
+test("focus settings and side player stay inside mobile, tablet, and laptop viewports", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/static/css/focus.css`);
+    await page.setContent(`<!doctype html><html><head>
+        <link rel="stylesheet" href="/static/css/themes.css">
+        <link rel="stylesheet" href="/static/css/global.css">
+        <link rel="stylesheet" href="/static/css/layout.css">
+        <link rel="stylesheet" href="/static/css/focus.css">
+    </head><body class="focus-body with-sidebar focus-session-active focus-has-settings-popover" data-spotify-layout="right-large">
+        <main class="workspace-page-shell focus-main">
+            <form class="focus-routine-form"></form>
+            <section class="focus-session"><div class="focus-session-stage"><div class="focus-timer-shell"></div></div></section>
+            <section class="focus-utility-rail"><div class="focus-spotify-region"><div class="focus-region-heading"><h2>Spotify</h2></div><iframe class="focus-spotify-embed"></iframe></div></section>
+            <details class="focus-options" open><summary>Settings</summary><div class="focus-options-popover"><span class="focus-help" tabindex="0" data-tooltip="Helpful explanation">?</span></div></details>
+        </main>
+    </body></html>`);
+
+    for (const viewport of [{ width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1280, height: 800 }]) {
+        await page.setViewportSize(viewport);
+        await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+        const popover = await page.locator(".focus-options-popover").boundingBox();
+        expect(popover).not.toBeNull();
+        expect(popover.x + popover.width).toBeLessThanOrEqual(viewport.width + 1);
+        expect(popover.x).toBeGreaterThanOrEqual(-1);
+    }
+
+    await page.locator(".focus-help").hover();
+    await expect.poll(() => page.evaluate(() => getComputedStyle(document.querySelector(".focus-help"), "::after").opacity)).toBe("1");
 });

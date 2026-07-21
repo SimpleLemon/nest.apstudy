@@ -1,4 +1,11 @@
-import { focusApi, formPayload, routineFromState, suggestedBreaks } from './data.js';
+import {
+  focusApi,
+  formPayload,
+  normalizeSpotifyPlaylist,
+  routineFromState,
+  spotifyEmbedUrl,
+  suggestedBreaks,
+} from './data.js';
 import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
 
@@ -17,7 +24,7 @@ const state = {
 };
 
 function toast(message, type = 'success', title = '') {
-  window.APStudyToast?.show?.({ message, type, duration: 7000, ...(title ? { title } : {}) });
+  window.APStudyToast?.show?.({ message, type, duration: 3500, ...(title ? { title } : {}) });
 }
 
 function announceSessionChange(message, title, type = 'info') {
@@ -132,7 +139,7 @@ async function loadState({ preserveStatus = false } = {}) {
 
 function scheduleTick() {
   stopTimer();
-  if (!state.session || state.session.state !== 'running' || document.hidden || state.disposed) return;
+  if (!state.session || state.session.state !== 'running' || state.disposed) return;
   const delay = 1000 - (Date.now() % 1000) + 20;
   state.timerId = window.setTimeout(tick, delay);
 }
@@ -147,6 +154,8 @@ async function advancePhase() {
     const payload = await focusApi.updateSession(state.session.id, 'advance');
     const next = clockedSession(payload.session);
     if (!payload.active) {
+      view.renderTick(state.session, 0);
+      await view.playEggOpening(previousPhase);
       state.session = null;
       announcePhaseTransition(previousPhase, null);
       await loadState({ preserveStatus: true });
@@ -154,6 +163,9 @@ async function advancePhase() {
     }
     state.session = next;
     view.renderSession(next);
+    view.renderTick(next, remainingSeconds(next));
+    await view.playEggOpening(previousPhase);
+    view.resetEgg();
     view.renderTick(next, remainingSeconds(next));
     announcePhaseTransition(previousPhase, next);
     await refreshHistory();
@@ -197,14 +209,22 @@ async function updateSession(action) {
   view.setSessionBusy(true, button);
   try {
     const payload = await focusApi.updateSession(state.session.id, action);
+    const previousSession = state.session;
     state.session = payload.active ? clockedSession(payload.session) : null;
     if (!state.session) {
+      if (action === 'complete_phase') {
+        view.renderTick(previousSession, 0);
+        await view.playEggOpening(previousPhase);
+      }
       await loadState({ preserveStatus: true });
       if (action === 'complete_phase') announcePhaseTransition(previousPhase, null);
       return;
     }
     renderActiveSession();
     if (action === 'complete_phase') {
+      await view.playEggOpening(previousPhase);
+      view.resetEgg();
+      renderActiveSession();
       announcePhaseTransition(previousPhase, state.session);
       await refreshHistory();
     } else {
@@ -255,7 +275,7 @@ function applySelection(selection) {
   elements.breakMinutes.value = selection.break_minutes || 0;
   elements.longBreakMinutes.value = selection.long_break_minutes || selection.break_minutes || 0;
   elements.cycles.value = selection.cycles || 1;
-  if (selection.spotify_url) elements.spotifyUrl.value = selection.spotify_url;
+  elements.spotifyUrl.value = selection.spotify_url || '';
   elements.routineSelect.value = '';
   elements.deleteRoutine.hidden = true;
   renderSuggestions();
@@ -271,12 +291,36 @@ async function startSession(event) {
     state.session = clockedSession(response.session);
     view.setFormStatus();
     renderCurrentMode();
+    void view.startCountdown();
     announceSessionChange('Focus Mode started. Nonurgent Nest notifications are muted.', 'Focus Mode started');
   } catch (error) {
     view.setFormStatus(error.message, 'error');
   } finally {
     view.setBusy(false);
   }
+}
+
+function applyLivePlaylist(sourceInput = elements.spotifyPanelUrl || elements.spotifyUrl) {
+  const value = String(sourceInput?.value || '').trim();
+  const normalized = normalizeSpotifyPlaylist(value);
+  if (value && !normalized) {
+    view.setSettingsStatus('Use a Spotify playlist link from open.spotify.com.', 'error');
+    view.setSpotifyPanelStatus('Use a Spotify playlist link from open.spotify.com.', 'error');
+    sourceInput?.focus();
+    return;
+  }
+  if (elements.spotifyUrl) elements.spotifyUrl.value = normalized;
+  if (elements.spotifyPanelUrl) elements.spotifyPanelUrl.value = normalized;
+  const nextPlaylist = {
+    ...(state.session || {}),
+    spotify_url: normalized,
+    spotify_embed_url: spotifyEmbedUrl(normalized),
+  };
+  if (state.session) state.session = nextPlaylist;
+  view.renderSpotify(nextPlaylist);
+  const message = normalized ? 'Playlist added to this session.' : 'Spotify removed from this session.';
+  view.setSettingsStatus(message, 'success');
+  view.setSpotifyPanelStatus(message, 'success');
 }
 
 async function saveRoutine() {
@@ -331,6 +375,21 @@ async function deleteRoutine() {
 function bindEvents() {
   elements.form.addEventListener('submit', startSession);
   elements.options?.addEventListener('toggle', () => view.syncOptionsState());
+  elements.sessionOptions?.addEventListener('click', () => {
+    if (!elements.options) return;
+    elements.options.open = true;
+    view.syncOptionsState();
+    window.setTimeout(() => elements.spotifyUrl?.focus(), 120);
+  });
+  elements.optionsClose?.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    view.closeOptions();
+  });
+  elements.optionsBackdrop?.addEventListener('click', () => view.closeOptions());
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && elements.options?.open) view.closeOptions();
+  });
   elements.focusMinutes.addEventListener('input', renderSuggestions);
   elements.routineSelect.addEventListener('change', () => {
     const routine = selectedRoutine();
@@ -352,6 +411,15 @@ function bindEvents() {
     elements.breakMinutes.value = button.dataset.breakSuggestion;
     if (!Number(elements.longBreakMinutes.value)) elements.longBreakMinutes.value = button.dataset.breakSuggestion;
   });
+  elements.spotifyVolume?.addEventListener('input', () => view.setSpotifyVolume(elements.spotifyVolume.value));
+  elements.spotifyLayout?.addEventListener('change', () => view.setSpotifyLayout(elements.spotifyLayout.value));
+  elements.applyPlaylist?.addEventListener('click', () => applyLivePlaylist(elements.spotifyUrl));
+  elements.spotifyPanelApply?.addEventListener('click', () => applyLivePlaylist(elements.spotifyPanelUrl));
+  elements.spotifyPanelUrl?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    applyLivePlaylist(elements.spotifyPanelUrl);
+  });
   elements.recentList.addEventListener('click', (event) => {
     const button = event.target.closest('[data-recent-selection]');
     if (!button) return;
@@ -369,7 +437,7 @@ function bindEvents() {
     if (state.session) queueMicrotask(hideSidebarForFocus);
   });
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopTimer();
+    if (document.hidden) tick();
     else void loadState({ preserveStatus: true });
   });
   window.addEventListener('online', () => {

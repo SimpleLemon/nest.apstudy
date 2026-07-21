@@ -73,6 +73,32 @@ export function formPayload(form) {
   };
 }
 
+export function spotifyEmbedUrl(value) {
+  const url = String(value || '').trim();
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:' || parsed.hostname !== 'open.spotify.com') return '';
+    const match = parsed.pathname.match(/^\/(?:embed\/)?playlist\/([A-Za-z0-9]+)\/?$/i);
+    return match ? `https://open.spotify.com/embed/playlist/${match[1]}?utm_source=generator&theme=0` : '';
+  } catch (_error) {
+    return '';
+  }
+}
+
+export function normalizeSpotifyPlaylist(value) {
+  const url = String(value || '').trim();
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:' || parsed.hostname !== 'open.spotify.com') return '';
+    const match = parsed.pathname.match(/^\/(?:embed\/)?playlist\/([A-Za-z0-9]+)\/?$/i);
+    return match ? `https://open.spotify.com/playlist/${match[1]}` : '';
+  } catch (_error) {
+    return '';
+  }
+}
+
 export function routineFromState(state, routineId) {
   return (state.routines || []).find((routine) => String(routine.id) === String(routineId)) || null;
 }
