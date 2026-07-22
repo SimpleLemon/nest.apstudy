@@ -57,6 +57,30 @@ def get_focus_status():
         return _error_response(error)
 
 
+@focus_bp.patch("/api/focus/player-preferences")
+@login_required
+def update_focus_player_preferences():
+    try:
+        preferences = focus_mode.save_player_preferences(
+            current_user.id, request.get_json(silent=True) or {}
+        )
+        return jsonify({"player_preferences": preferences})
+    except (ValueError, sqlite3.Error) as error:
+        return _error_response(error)
+
+
+@focus_bp.post("/api/focus/playlists/preview")
+@login_required
+def preview_focus_playlist():
+    try:
+        playlist = focus_mode.spotify_playlist(
+            (request.get_json(silent=True) or {}).get("spotify_url")
+        )
+        return jsonify({"playlist": playlist})
+    except ValueError as error:
+        return _error_response(error)
+
+
 @focus_bp.post("/api/focus/routines")
 @login_required
 def create_focus_routine():

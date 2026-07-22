@@ -8,17 +8,7 @@ import {
   progressRatio,
 } from './timer.js';
 import { createSpotifyPlayer } from './spotify-player.js';
-
-const LAYOUT_KEY = 'apstudy.focus.spotify.layout.v1';
-const LAYOUT_MAP = new Map([
-  ['below', 'below'],
-  ['bottom-compact', 'below'],
-  ['bottom-large', 'below'],
-  ['beside', 'beside'],
-  ['right-compact', 'beside'],
-  ['right-large', 'beside'],
-  ['floating', 'floating'],
-]);
+import { createSpotifyLayout } from './spotify-layout.js';
 
 function text(element, value) {
   if (element) element.textContent = value == null ? '' : String(value);
@@ -40,6 +30,43 @@ function choice(label, dataset = {}) {
   return button;
 }
 
+function playlistCard(playlist) {
+  const item = document.createElement('li');
+  item.className = 'focus-playlist-item';
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'focus-playlist-card';
+  button.dataset.spotifyPlaylist = playlist.spotify_url;
+  button.setAttribute('aria-label', `Open ${playlist.title || 'Spotify playlist'} by ${playlist.creator || 'Spotify'}`);
+  if (playlist.thumbnail_url) {
+    const image = document.createElement('img');
+    image.className = 'focus-playlist-artwork';
+    image.src = playlist.thumbnail_url;
+    image.alt = '';
+    image.loading = 'lazy';
+    button.appendChild(image);
+  } else {
+    const fallback = document.createElement('span');
+    fallback.className = 'focus-playlist-artwork focus-playlist-artwork-fallback';
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = 'queue_music';
+    fallback.appendChild(icon);
+    button.appendChild(fallback);
+  }
+  const copy = document.createElement('span');
+  copy.className = 'focus-playlist-card-copy';
+  const title = document.createElement('strong');
+  title.textContent = playlist.title || 'Spotify playlist';
+  const creator = document.createElement('span');
+  creator.textContent = playlist.creator || 'Spotify';
+  copy.append(title, creator);
+  button.appendChild(copy);
+  item.appendChild(button);
+  return item;
+}
+
 function formatCompletedAt(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
@@ -50,22 +77,6 @@ function formatCompletedAt(value) {
     : { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
 }
 
-function readPreference(key, fallback) {
-  try {
-    return window.localStorage.getItem(key) ?? fallback;
-  } catch (_error) {
-    return fallback;
-  }
-}
-
-function writePreference(key, value) {
-  try {
-    window.localStorage.setItem(key, String(value));
-  } catch (_error) {
-    // Browser preferences are optional; storage restrictions must not block the timer.
-  }
-}
-
 export function completionMessage(phase, randomValue = Math.random()) {
   const focusMessages = ['Focus complete.', 'One block done.', 'You made progress.'];
   const breakMessages = ['Break complete.', 'Ready when you are.', 'Back to focus.'];
@@ -74,9 +85,11 @@ export function completionMessage(phase, randomValue = Math.random()) {
   return messages[index];
 }
 
-export function createFocusView() {
+export function createFocusView({ savePlayerPreferences } = {}) {
   let countdownTimer = null;
   let eggOpenTimer = null;
+  let countdownResolve = null;
+  let eggOpenResolve = null;
   let lastSettingsTrigger = null;
   let playlistBusy = false;
   const elements = {
@@ -93,7 +106,7 @@ export function createFocusView() {
     inactiveSettings: document.querySelector('[data-focus-inactive-settings]'),
     form: document.querySelector('[data-focus-form]'),
     formStatus: document.querySelector('[data-focus-form-status]'),
-    settingsStatus: document.querySelector('[data-focus-settings-status]'),
+    settingsStatuses: [...document.querySelectorAll('[data-focus-settings-status]')],
     suggestions: document.querySelector('[data-focus-break-suggestions]'),
     suggestionBlock: document.querySelector('[data-focus-suggestion-block]'),
     recentSelections: document.querySelector('[data-focus-recent-selections]'),
@@ -109,7 +122,8 @@ export function createFocusView() {
     longBreakField: document.querySelector('[data-focus-long-break-field]'),
     autoStartRow: document.querySelector('[data-focus-auto-start-row]'),
     autoStart: document.getElementById('focus-auto-start'),
-    saveRoutine: document.querySelector('[data-focus-save-routine]'),
+    saveRoutines: [...document.querySelectorAll('[data-focus-save-routine]')],
+    saveRoutineLabels: [...document.querySelectorAll('[data-focus-save-routine-label]')],
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
     spotifyUrl: document.getElementById('focus-spotify-url'),
     playlistToggle: document.querySelector('[data-focus-playlist-toggle]'),
@@ -119,6 +133,8 @@ export function createFocusView() {
     playlistAction: document.querySelector('[data-focus-playlist-action]'),
     playlistRemove: document.querySelector('[data-focus-playlist-remove]'),
     playlistStatus: document.querySelector('[data-focus-playlist-status]'),
+    playlistData: document.querySelector('[data-focus-playlist-data]'),
+    playlistList: document.querySelector('[data-focus-playlist-list]'),
     time: document.querySelector('[data-focus-time]'),
     progress: document.querySelector('[data-focus-progress]'),
     phaseLabel: document.querySelector('[data-focus-phase-label]'),
@@ -135,14 +151,16 @@ export function createFocusView() {
     history: document.querySelector('[data-focus-history]'),
     historyRegion: document.querySelector('[data-focus-history-region]'),
     spotifyEmbed: document.querySelector('[data-focus-spotify-embed]'),
-    spotifyLabel: document.querySelector('[data-focus-spotify-label]'),
-    openSpotify: document.querySelector('[data-focus-open-spotify]'),
+    floatingControls: document.querySelector('[data-focus-floating-controls]'),
+    floatingHandle: document.querySelector('[data-focus-floating-handle]'),
+    floatingSize: document.querySelector('[data-focus-floating-size]'),
     countdown: document.querySelector('[data-focus-countdown]'),
     egg: document.querySelector('[data-focus-egg]'),
     eggResult: document.querySelector('[data-focus-egg-result]'),
     announcer: document.querySelector('[data-focus-announcer]'),
   };
   const spotifyPlayer = createSpotifyPlayer(elements.spotifyEmbed);
+  const spotifyLayout = createSpotifyLayout({ elements, savePreferences: savePlayerPreferences });
 
   function setSettingsContext(active, session = null) {
     if (elements.activeSummary) elements.activeSummary.hidden = !active;
@@ -197,9 +215,11 @@ export function createFocusView() {
   }
 
   function setSettingsStatus(message = '', tone = '') {
-    text(elements.settingsStatus, message);
-    if (tone) elements.settingsStatus?.setAttribute('data-tone', tone);
-    else elements.settingsStatus?.removeAttribute('data-tone');
+    elements.settingsStatuses.forEach((status) => {
+      text(status, message);
+      if (tone) status.setAttribute('data-tone', tone);
+      else status.removeAttribute('data-tone');
+    });
   }
 
   function setPlaylistStatus(message = '', tone = '') {
@@ -240,25 +260,24 @@ export function createFocusView() {
   function renderRoutines(routines, selectedId = '') {
     if (!elements.routineSelect) return;
     const current = String(selectedId || elements.routineSelect.value || '');
-    elements.routineSelect.replaceChildren(option('', 'Custom timer'));
+    elements.routineSelect.replaceChildren(option('', routines.length ? 'New setup' : 'Default'));
     routines.forEach((routine) => elements.routineSelect.appendChild(option(routine.id, routine.name)));
     elements.routineSelect.value = routines.some((routine) => String(routine.id) === current) ? current : '';
-    if (elements.routinePicker) elements.routinePicker.hidden = routines.length === 0;
     const hasSelection = Boolean(elements.routineSelect.value);
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !hasSelection;
-    text(elements.saveRoutine, hasSelection ? 'Update routine' : 'Save routine');
+    elements.saveRoutineLabels.forEach((label) => text(label, hasSelection ? 'Save changes' : 'Save setup'));
   }
 
   function fillRoutine(routine) {
     if (!elements.routineName) return;
-    elements.routineName.value = routine?.name || '';
+    elements.routineName.value = routine?.name || 'Default';
     elements.focusMinutes.value = routine?.focus_minutes ?? 25;
     elements.breakMinutes.value = routine?.break_minutes ?? 0;
     elements.longBreakMinutes.value = routine?.long_break_minutes ?? routine?.break_minutes ?? 0;
     elements.cycles.value = routine?.cycles ?? 1;
     elements.spotifyUrl.value = routine?.spotify_url || '';
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !routine;
-    text(elements.saveRoutine, routine ? 'Update routine' : 'Save routine');
+    elements.saveRoutineLabels.forEach((label) => text(label, routine ? 'Save changes' : 'Save setup'));
     syncRhythmVisibility();
   }
 
@@ -395,51 +414,65 @@ export function createFocusView() {
   function renderSpotify(source) {
     const spotifyUrl = source?.spotify_url || '';
     const embedUrl = source?.spotify_embed_url || spotifyEmbedUrl(spotifyUrl);
+    const playlists = Array.isArray(source?.playlists) ? source.playlists : (spotifyUrl ? [{
+      spotify_url: spotifyUrl,
+      spotify_embed_url: embedUrl,
+      title: 'Spotify playlist',
+      creator: 'Spotify',
+    }] : []);
     if (elements.spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
-    text(elements.playlistAction, embedUrl ? 'Update playlist' : 'Add playlist');
+    if (elements.playlistData) {
+      elements.playlistData.value = JSON.stringify(playlists.map((playlist) => playlist.spotify_url));
+    }
+    if (elements.playlistList) {
+      elements.playlistList.replaceChildren(...playlists
+        .filter((playlist) => playlist.spotify_url !== spotifyUrl)
+        .map(playlistCard));
+      elements.playlistList.hidden = playlists.length <= 1;
+    }
+    text(elements.playlistAction, 'Add playlist');
     if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
     if (embedUrl && elements.spotifyEmbed) {
       elements.spotifyEmbed.hidden = false;
       void spotifyPlayer.load(spotifyUrl, embedUrl);
-      if (elements.openSpotify) {
-        elements.openSpotify.hidden = false;
-        elements.openSpotify.href = spotifyUrl;
-      }
     } else {
       spotifyPlayer.clear();
-      if (elements.openSpotify) elements.openSpotify.hidden = true;
     }
     setPlaylistEditor(false);
     syncPlaylistControls();
   }
 
   function setSpotifyLayout(value, persist = true) {
-    const layout = LAYOUT_MAP.get(value) || 'below';
-    document.body.dataset.spotifyLayout = layout;
-    elements.layoutInputs.forEach((input) => { input.checked = input.value === layout; });
-    if (persist) writePreference(LAYOUT_KEY, layout);
-    return layout;
+    return spotifyLayout.setLayout(value, persist);
   }
 
-  function loadPreferences() {
-    setSpotifyLayout(readPreference(LAYOUT_KEY, 'beside'), false);
+  function applyPlayerPreferences(value) {
+    spotifyLayout.applyPreferences(value);
   }
 
   function startCountdown() {
     if (!elements.countdown || !elements.egg) return Promise.resolve();
     window.clearTimeout(countdownTimer);
     window.clearTimeout(eggOpenTimer);
+    countdownResolve?.();
+    eggOpenResolve?.();
+    countdownResolve = null;
+    eggOpenResolve = null;
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     const interval = reducedMotion ? 120 : 380;
     let number = 3;
     elements.egg.dataset.eggState = 'countdown';
+    elements.session?.setAttribute('data-countdown-active', 'true');
     elements.countdown.hidden = false;
     return new Promise((resolve) => {
+      countdownResolve = resolve;
       const showNumber = () => {
         if (number === 0) {
           elements.countdown.hidden = true;
           elements.countdown.textContent = '';
           elements.egg.dataset.eggState = 'closed';
+          elements.session?.removeAttribute('data-countdown-active');
+          countdownResolve = null;
           resolve();
           return;
         }
@@ -456,6 +489,8 @@ export function createFocusView() {
 
   function resetEgg() {
     window.clearTimeout(eggOpenTimer);
+    eggOpenResolve?.();
+    eggOpenResolve = null;
     if (!elements.egg) return;
     elements.egg.dataset.eggState = 'closed';
     elements.egg.dataset.crackLevel = '0';
@@ -469,6 +504,11 @@ export function createFocusView() {
     if (!elements.egg) return Promise.resolve();
     window.clearTimeout(countdownTimer);
     window.clearTimeout(eggOpenTimer);
+    countdownResolve?.();
+    eggOpenResolve?.();
+    countdownResolve = null;
+    eggOpenResolve = null;
+    elements.session?.removeAttribute('data-countdown-active');
     elements.egg.dataset.nestStage = '8';
     elements.egg.dataset.crackLevel = '3';
     elements.egg.dataset.eggState = 'opening';
@@ -478,7 +518,11 @@ export function createFocusView() {
       if (elements.egg) elements.egg.dataset.eggState = 'open';
     });
     return new Promise((resolve) => {
-      eggOpenTimer = window.setTimeout(resolve, 3000);
+      eggOpenResolve = resolve;
+      eggOpenTimer = window.setTimeout(() => {
+        eggOpenResolve = null;
+        resolve();
+      }, 3000);
     });
   }
 
@@ -486,8 +530,6 @@ export function createFocusView() {
     text(elements.announcer, '');
     window.setTimeout(() => text(elements.announcer, message), 20);
   }
-
-  loadPreferences();
 
   return {
     elements,
@@ -513,11 +555,22 @@ export function createFocusView() {
     setPlaylistEditor,
     syncPlaylistControls,
     setSpotifyLayout,
+    applyPlayerPreferences,
     startCountdown,
     playEggOpening,
     resetEgg,
     pauseSpotify: () => spotifyPlayer.pause(),
     resumeSpotify: () => spotifyPlayer.resume(),
+    dispose: () => {
+      window.clearTimeout(countdownTimer);
+      window.clearTimeout(eggOpenTimer);
+      countdownResolve?.();
+      eggOpenResolve?.();
+      countdownResolve = null;
+      eggOpenResolve = null;
+      spotifyLayout.dispose();
+      spotifyPlayer.dispose();
+    },
     announce,
   };
 }

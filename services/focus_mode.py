@@ -1,8 +1,11 @@
 """Account-synced Focus Mode routines, sessions, and completion history."""
 
+import json
 import re
 import uuid
 from datetime import datetime, timedelta, timezone
+
+import requests
 
 from services.database import db_connection
 
@@ -13,6 +16,9 @@ SPOTIFY_PLAYLIST_RE = re.compile(
     r"^https://open\.spotify\.com/(?:embed/)?playlist/([A-Za-z0-9]+)(?:[/?#].*)?$",
     re.IGNORECASE,
 )
+SPOTIFY_LAYOUTS = {"below", "beside", "floating"}
+SPOTIFY_FLOATING_SIZES = {"compact", "expanded"}
+SPOTIFY_METADATA_TIMEOUT = 5
 
 
 def _now():
@@ -66,6 +72,123 @@ def spotify_embed_url(value):
     return f"https://open.spotify.com/embed/playlist/{playlist_id}?utm_source=generator&theme=0"
 
 
+def _playlist_metadata(spotify_url):
+    """Return public playlist metadata without requiring a Spotify account connection."""
+    fallback = {"title": "Spotify playlist", "creator": "Spotify", "thumbnail_url": None}
+    try:
+        response = requests.get(
+            "https://open.spotify.com/oembed",
+            params={"url": spotify_url},
+            timeout=SPOTIFY_METADATA_TIMEOUT,
+        )
+        response.raise_for_status()
+        payload = response.json()
+        title = str(payload.get("title") or fallback["title"]).strip()[:160]
+        thumbnail_url = str(payload.get("thumbnail_url") or "").strip() or None
+
+        embed_response = requests.get(
+            spotify_embed_url(spotify_url),
+            headers={"User-Agent": "Mozilla/5.0"},
+            timeout=SPOTIFY_METADATA_TIMEOUT,
+        )
+        embed_response.raise_for_status()
+        match = re.search(r'"subtitle":"((?:\\.|[^"\\])*)"', embed_response.text)
+        creator = json.loads(f'"{match.group(1)}"') if match else fallback["creator"]
+        return {
+            "title": title or fallback["title"],
+            "creator": str(creator or fallback["creator"]).strip()[:120],
+            "thumbnail_url": thumbnail_url,
+        }
+    except (requests.RequestException, ValueError, TypeError, json.JSONDecodeError):
+        return fallback
+
+
+def _playlist_payload(row, *, active_url=None):
+    playlist = _row_dict(row)
+    playlist["spotify_embed_url"] = spotify_embed_url(playlist.get("spotify_url"))
+    playlist["active"] = playlist.get("spotify_url") == active_url
+    return playlist
+
+
+def spotify_playlist(value):
+    spotify_url = normalize_spotify_url(value)
+    if not spotify_url:
+        raise ValueError("Use a Spotify playlist link from open.spotify.com.")
+    return {
+        "id": spotify_url.rsplit("/", 1)[-1],
+        "spotify_url": spotify_url,
+        "spotify_embed_url": spotify_embed_url(spotify_url),
+        **_playlist_metadata(spotify_url),
+    }
+
+
+def _list_playlists(conn, owner_type, owner_id, *, active_url=None, legacy_url=None, user_id=None):
+    rows = conn.execute(
+        """SELECT * FROM focus_playlists WHERE owner_type=? AND owner_id=?
+           ORDER BY position,created_at""",
+        [owner_type, str(owner_id)],
+    ).fetchall()
+    if not rows and legacy_url:
+        metadata = _playlist_metadata(legacy_url)
+        conn.execute(
+            """INSERT OR IGNORE INTO focus_playlists
+               (id,user_id,owner_type,owner_id,spotify_url,title,creator,thumbnail_url,position,created_at)
+               VALUES (?,?,?,?,?,?,?,?,0,?)""",
+            [
+                _identifier(), str(user_id), owner_type, str(owner_id), legacy_url,
+                metadata["title"], metadata["creator"], metadata["thumbnail_url"], _iso(_now()),
+            ],
+        )
+        rows = conn.execute(
+            """SELECT * FROM focus_playlists WHERE owner_type=? AND owner_id=?
+               ORDER BY position,created_at""",
+            [owner_type, str(owner_id)],
+        ).fetchall()
+    return [_playlist_payload(row, active_url=active_url) for row in rows]
+
+
+def _replace_playlists(conn, user_id, owner_type, owner_id, spotify_urls):
+    if not isinstance(spotify_urls, (list, tuple)):
+        raise ValueError("Spotify playlists must be a list.")
+    if len(spotify_urls) > 12:
+        raise ValueError("Add up to 12 Spotify playlists.")
+    normalized = []
+    for value in spotify_urls or []:
+        url = normalize_spotify_url(value)
+        if url and url not in normalized:
+            normalized.append(url)
+    existing = {
+        row["spotify_url"]: row
+        for row in conn.execute(
+            "SELECT * FROM focus_playlists WHERE owner_type=? AND owner_id=?",
+            [owner_type, str(owner_id)],
+        ).fetchall()
+    }
+    conn.execute(
+        "DELETE FROM focus_playlists WHERE owner_type=? AND owner_id=?",
+        [owner_type, str(owner_id)],
+    )
+    for position, spotify_url in enumerate(normalized):
+        row = existing.get(spotify_url)
+        cached = row or conn.execute(
+            """SELECT title,creator,thumbnail_url FROM focus_playlists
+               WHERE user_id=? AND spotify_url=? ORDER BY created_at DESC LIMIT 1""",
+            [str(user_id), spotify_url],
+        ).fetchone()
+        metadata = _row_dict(cached) if cached else _playlist_metadata(spotify_url)
+        conn.execute(
+            """INSERT INTO focus_playlists
+               (id,user_id,owner_type,owner_id,spotify_url,title,creator,thumbnail_url,position,created_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            [
+                row["id"] if row else _identifier(), str(user_id), owner_type, str(owner_id), spotify_url,
+                metadata["title"], metadata["creator"], metadata.get("thumbnail_url"), position,
+                row["created_at"] if row else _iso(_now()),
+            ],
+        )
+    return normalized
+
+
 def _routine_payload(payload):
     name = str(payload.get("name") or "").strip()[:60]
     if not name:
@@ -99,11 +222,16 @@ def _row_dict(row):
     return dict(row) if row else None
 
 
-def _serialize_routine(row):
+def _serialize_routine(row, conn=None):
     if not row:
         return None
     routine = _row_dict(row)
     routine["spotify_embed_url"] = spotify_embed_url(routine.get("spotify_url"))
+    if conn:
+        routine["playlists"] = _list_playlists(
+            conn, "routine", routine["id"], active_url=routine.get("spotify_url"),
+            legacy_url=routine.get("spotify_url"), user_id=routine.get("user_id"),
+        )
     return routine
 
 
@@ -128,7 +256,7 @@ def _remaining_seconds(row, now=None):
     return max(0, int((ends_at - (now or _now())).total_seconds() + 0.999))
 
 
-def _serialize_session(row, now=None):
+def _serialize_session(row, now=None, conn=None):
     if not row:
         return None
     session = _row_dict(row)
@@ -140,6 +268,11 @@ def _serialize_session(row, now=None):
     )
     session["phase_duration_seconds"] = _phase_duration(row)
     session["spotify_embed_url"] = spotify_embed_url(session.get("spotify_url"))
+    if conn:
+        session["playlists"] = _list_playlists(
+            conn, "session", session["id"], active_url=session.get("spotify_url"),
+            legacy_url=session.get("spotify_url"), user_id=session.get("user_id"),
+        )
     return session
 
 
@@ -150,7 +283,7 @@ def list_routines(user_id):
                ORDER BY COALESCE(last_used_at, updated_at, created_at) DESC, name COLLATE NOCASE""",
             [str(user_id)],
         ).fetchall()
-    return [_serialize_routine(row) for row in rows]
+        return [_serialize_routine(row, conn=conn) for row in rows]
 
 
 def save_routine(user_id, payload, routine_id=None):
@@ -188,8 +321,13 @@ def save_routine(user_id, payload, routine_id=None):
                     values["spotify_url"], now, now,
                 ],
             )
+        requested_playlists = payload.get("spotify_playlists")
+        if requested_playlists is not None:
+            urls = _replace_playlists(conn, user_id, "routine", saved_id, requested_playlists)
+            active_url = values["spotify_url"] if values["spotify_url"] in urls else (urls[0] if urls else None)
+            conn.execute("UPDATE focus_routines SET spotify_url=? WHERE id=?", [active_url, saved_id])
         row = conn.execute("SELECT * FROM focus_routines WHERE id=?", [saved_id]).fetchone()
-    return _serialize_routine(row)
+        return _serialize_routine(row, conn=conn)
 
 
 def delete_routine(user_id, routine_id):
@@ -198,6 +336,11 @@ def delete_routine(user_id, routine_id):
             "DELETE FROM focus_routines WHERE id=? AND user_id=?",
             [str(routine_id), str(user_id)],
         )
+        if result.rowcount:
+            conn.execute(
+                "DELETE FROM focus_playlists WHERE owner_type='routine' AND owner_id=?",
+                [str(routine_id)],
+            )
     return result.rowcount > 0
 
 
@@ -275,7 +418,7 @@ def get_session(user_id, session_id, *, reconcile=True):
         ).fetchone()
         if row and reconcile:
             row = _reconcile(conn, row, now=now)
-    return _serialize_session(row, now=now)
+        return _serialize_session(row, now=now, conn=conn)
 
 
 def get_active_session(user_id, *, reconcile=True):
@@ -290,7 +433,7 @@ def get_active_session(user_id, *, reconcile=True):
             row = _reconcile(conn, row, now=now)
         if row and row["state"] not in ACTIVE_STATES:
             row = None
-    return _serialize_session(row, now=now)
+        return _serialize_session(row, now=now, conn=conn)
 
 
 def _session_values(user_id, payload):
@@ -321,6 +464,17 @@ def _session_values(user_id, payload):
     })
     values["routine_id"] = routine_id
     values["auto_start_next"] = bool(payload.get("auto_start_next"))
+    values["spotify_playlists"] = payload.get("spotify_playlists")
+    if values["spotify_playlists"] is None and routine_id:
+        with db_connection() as conn:
+            values["spotify_playlists"] = [
+                item["spotify_url"] for item in _list_playlists(
+                    conn, "routine", routine_id, active_url=values.get("spotify_url"),
+                    legacy_url=values.get("spotify_url"), user_id=user_id,
+                )
+            ]
+    if values["spotify_playlists"] is None:
+        values["spotify_playlists"] = [values["spotify_url"]] if values.get("spotify_url") else []
     return values
 
 
@@ -355,8 +509,13 @@ def start_session(user_id, payload):
                 "UPDATE focus_routines SET last_used_at=?,updated_at=? WHERE id=? AND user_id=?",
                 [_iso(now), _iso(now), values["routine_id"], user_id],
             )
+        urls = _replace_playlists(
+            conn, user_id, "session", session_id, values["spotify_playlists"]
+        )
+        if values["spotify_url"] not in urls and urls:
+            conn.execute("UPDATE focus_sessions SET spotify_url=? WHERE id=?", [urls[0], session_id])
         row = conn.execute("SELECT * FROM focus_sessions WHERE id=?", [session_id]).fetchone()
-    return _serialize_session(row, now=now)
+        return _serialize_session(row, now=now, conn=conn)
 
 
 def update_session(user_id, session_id, action, payload=None):
@@ -392,9 +551,35 @@ def update_session(user_id, session_id, action, payload=None):
             if row["state"] not in ACTIVE_STATES:
                 raise ValueError("This Focus Mode session is no longer active.")
             spotify_url = normalize_spotify_url(payload.get("spotify_url"))
+            existing_urls = [
+                item["spotify_url"] for item in _list_playlists(
+                    conn, "session", row["id"], active_url=row["spotify_url"],
+                    legacy_url=row["spotify_url"], user_id=user_id,
+                )
+            ]
+            if spotify_url and spotify_url not in existing_urls:
+                existing_urls.append(spotify_url)
+                _replace_playlists(conn, user_id, "session", row["id"], existing_urls)
+            elif not spotify_url:
+                _replace_playlists(conn, user_id, "session", row["id"], [])
             conn.execute(
                 "UPDATE focus_sessions SET spotify_url=?,updated_at=? WHERE id=?",
                 [spotify_url, _iso(now), row["id"]],
+            )
+        elif action == "remove_playlist":
+            if row["state"] not in ACTIVE_STATES:
+                raise ValueError("This Focus Mode session is no longer active.")
+            spotify_url = normalize_spotify_url(payload.get("spotify_url"))
+            playlists = _list_playlists(
+                conn, "session", row["id"], active_url=row["spotify_url"],
+                legacy_url=row["spotify_url"], user_id=user_id,
+            )
+            remaining = [item["spotify_url"] for item in playlists if item["spotify_url"] != spotify_url]
+            _replace_playlists(conn, user_id, "session", row["id"], remaining)
+            active_url = row["spotify_url"] if row["spotify_url"] in remaining else (remaining[0] if remaining else None)
+            conn.execute(
+                "UPDATE focus_sessions SET spotify_url=?,updated_at=? WHERE id=?",
+                [active_url, _iso(now), row["id"]],
             )
         elif action in {"advance", "complete_phase"}:
             if row["state"] == "paused":
@@ -418,7 +603,7 @@ def update_session(user_id, session_id, action, payload=None):
         else:
             raise ValueError("Unsupported Focus Mode action.")
         updated = conn.execute("SELECT * FROM focus_sessions WHERE id=?", [row["id"]]).fetchone()
-    return _serialize_session(updated, now=now)
+        return _serialize_session(updated, now=now, conn=conn)
 
 
 def list_history(user_id, limit=30):
@@ -456,12 +641,58 @@ def recent_selections(user_id, limit=6):
     ]
 
 
+def player_preferences(user_id):
+    with db_connection() as conn:
+        row = conn.execute(
+            "SELECT layout,floating_size,floating_x,floating_y FROM focus_player_preferences WHERE user_id=?",
+            [str(user_id)],
+        ).fetchone()
+    if not row:
+        return {"layout": "beside", "floating_size": "compact", "floating_x": 1.0, "floating_y": 1.0}
+    return {
+        "layout": row["layout"] if row["layout"] in SPOTIFY_LAYOUTS else "beside",
+        "floating_size": row["floating_size"] if row["floating_size"] in SPOTIFY_FLOATING_SIZES else "compact",
+        "floating_x": min(1.0, max(0.0, float(row["floating_x"]))),
+        "floating_y": min(1.0, max(0.0, float(row["floating_y"]))),
+    }
+
+
+def save_player_preferences(user_id, payload):
+    current = player_preferences(user_id)
+    layout = str(payload.get("layout", current["layout"])).strip().lower()
+    floating_size = str(payload.get("floating_size", current["floating_size"])).strip().lower()
+    if layout not in SPOTIFY_LAYOUTS:
+        raise ValueError("Player placement is not valid.")
+    if floating_size not in SPOTIFY_FLOATING_SIZES:
+        raise ValueError("Player size is not valid.")
+    try:
+        floating_x = float(payload.get("floating_x", current["floating_x"]))
+        floating_y = float(payload.get("floating_y", current["floating_y"]))
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Player position is not valid.") from exc
+    floating_x = min(1.0, max(0.0, floating_x))
+    floating_y = min(1.0, max(0.0, floating_y))
+    now = _iso(_now())
+    with db_connection() as conn:
+        conn.execute(
+            """INSERT INTO focus_player_preferences
+               (user_id,layout,floating_size,floating_x,floating_y,updated_at)
+               VALUES (?,?,?,?,?,?)
+               ON CONFLICT(user_id) DO UPDATE SET layout=excluded.layout,
+               floating_size=excluded.floating_size,floating_x=excluded.floating_x,
+               floating_y=excluded.floating_y,updated_at=excluded.updated_at""",
+            [str(user_id), layout, floating_size, floating_x, floating_y, now],
+        )
+    return player_preferences(user_id)
+
+
 def snapshot(user_id):
     return {
         "active_session": get_active_session(user_id),
         "routines": list_routines(user_id),
         "history": list_history(user_id),
         "recent_selections": recent_selections(user_id),
+        "player_preferences": player_preferences(user_id),
     }
 
 

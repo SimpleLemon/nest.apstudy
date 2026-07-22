@@ -18,8 +18,19 @@ class FocusModeTests(unittest.TestCase):
         init_db(self.app, self.path)
         self.context = self.app.app_context()
         self.context.push()
+        self.metadata_patch = patch.object(
+            focus_mode,
+            "_playlist_metadata",
+            side_effect=lambda url: {
+                "title": "Deep Focus" if url.endswith("abc123") else "Reading Flow",
+                "creator": "Nest listener" if url.endswith("abc123") else "Study Club",
+                "thumbnail_url": f"https://i.scdn.co/image/{url.rsplit('/', 1)[-1]}",
+            },
+        )
+        self.metadata_patch.start()
 
     def tearDown(self):
+        self.metadata_patch.stop()
         self.context.pop()
         Path(self.path).unlink(missing_ok=True)
 
@@ -135,6 +146,63 @@ class FocusModeTests(unittest.TestCase):
             focus_mode.update_session(
                 "u1", session["id"], "set_playlist", {"spotify_url": "https://example.com/list"}
             )
+
+    def test_multiple_playlists_persist_and_active_selection_switches(self):
+        first = "https://open.spotify.com/playlist/abc123"
+        second = "https://open.spotify.com/playlist/xyz789"
+        routine = focus_mode.save_routine("u1", {
+            "name": "Playlist set",
+            "focus_minutes": 25,
+            "break_minutes": 0,
+            "long_break_minutes": 0,
+            "cycles": 1,
+            "spotify_url": first,
+            "spotify_playlists": [first, second, first],
+        })
+        self.assertEqual([item["spotify_url"] for item in routine["playlists"]], [first, second])
+        self.assertEqual(routine["playlists"][0]["title"], "Deep Focus")
+        self.assertEqual(routine["playlists"][1]["creator"], "Study Club")
+
+        session = focus_mode.start_session("u1", {
+            "routine_id": routine["id"],
+            "name": routine["name"],
+            "focus_minutes": 25,
+            "break_minutes": 0,
+            "long_break_minutes": 0,
+            "cycles": 1,
+            "spotify_url": first,
+        })
+        self.assertEqual(len(session["playlists"]), 2)
+        switched = focus_mode.update_session(
+            "u1", session["id"], "set_playlist", {"spotify_url": second}
+        )
+        self.assertEqual(switched["spotify_url"], second)
+        self.assertTrue(next(item for item in switched["playlists"] if item["spotify_url"] == second)["active"])
+
+        removed = focus_mode.update_session(
+            "u1", session["id"], "remove_playlist", {"spotify_url": second}
+        )
+        self.assertEqual(removed["spotify_url"], first)
+        self.assertEqual(len(removed["playlists"]), 1)
+
+    def test_player_preferences_are_account_synced_and_bounded(self):
+        defaults = focus_mode.player_preferences("u1")
+        self.assertEqual(defaults["layout"], "beside")
+        saved = focus_mode.save_player_preferences("u1", {
+            "layout": "floating",
+            "floating_size": "expanded",
+            "floating_x": 1.5,
+            "floating_y": -0.25,
+        })
+        self.assertEqual(saved, {
+            "layout": "floating",
+            "floating_size": "expanded",
+            "floating_x": 1.0,
+            "floating_y": 0.0,
+        })
+        self.assertEqual(focus_mode.snapshot("u1")["player_preferences"], saved)
+        with self.assertRaisesRegex(ValueError, "placement"):
+            focus_mode.save_player_preferences("u1", {"layout": "diagonal"})
 
     def test_focus_suppresses_nonurgent_delivery_but_preserves_urgent_categories(self):
         notifications.upsert_subscription(

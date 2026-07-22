@@ -32,12 +32,24 @@ export const focusApi = {
     method: 'PATCH',
     body: JSON.stringify({ action: 'set_playlist', spotify_url: spotifyUrl }),
   }),
+  removePlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ action: 'remove_playlist', spotify_url: spotifyUrl }),
+  }),
+  previewPlaylist: (spotifyUrl) => request('/api/focus/playlists/preview', {
+    method: 'POST',
+    body: JSON.stringify({ spotify_url: spotifyUrl }),
+  }),
   saveRoutine: (payload, routineId = '') => request(
     routineId ? `/api/focus/routines/${encodeURIComponent(routineId)}` : '/api/focus/routines',
     { method: routineId ? 'PATCH' : 'POST', body: JSON.stringify(payload) },
   ),
   deleteRoutine: (routineId) => request(`/api/focus/routines/${encodeURIComponent(routineId)}`, {
     method: 'DELETE',
+  }),
+  savePlayerPreferences: (preferences) => request('/api/focus/player-preferences', {
+    method: 'PATCH',
+    body: JSON.stringify(preferences),
   }),
 };
 
@@ -74,6 +86,14 @@ export function formPayload(form) {
     cycles: Number(values.get('cycles') || 1),
     spotify_url: String(values.get('spotify_url') || '').trim(),
     auto_start_next: values.get('auto_start_next') === 'on',
+    spotify_playlists: (() => {
+      try {
+        const parsed = JSON.parse(String(values.get('spotify_playlists') || '[]'));
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_error) {
+        return [];
+      }
+    })(),
   };
 }
 

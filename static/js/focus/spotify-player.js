@@ -1,12 +1,14 @@
 const SDK_SRC = 'https://open.spotify.com/embed/iframe-api/v1';
-
-let apiPromise = null;
+const API_STATE_KEY = '__apstudySpotifyIframeApi';
 
 function loadSpotifyApi() {
-  if (apiPromise) return apiPromise;
-  apiPromise = new Promise((resolve) => {
+  if (window[API_STATE_KEY]?.api) return Promise.resolve(window[API_STATE_KEY].api);
+  if (window[API_STATE_KEY]?.promise) return window[API_STATE_KEY].promise;
+  const state = window[API_STATE_KEY] || {};
+  state.promise = new Promise((resolve) => {
     let settled = false;
     const finish = (api) => {
+      if (api) state.api = api;
       if (settled) return;
       settled = true;
       resolve(api || null);
@@ -27,7 +29,8 @@ function loadSpotifyApi() {
     }
     window.setTimeout(() => finish(null), 5000);
   });
-  return apiPromise;
+  window[API_STATE_KEY] = state;
+  return state.promise;
 }
 
 function fallbackEmbed(host, embedUrl) {
@@ -46,19 +49,23 @@ export function createSpotifyPlayer(host) {
   let currentUrl = '';
   let loadingUrl = '';
   let resumeWhenReady = false;
+  let generation = 0;
+  let disposed = false;
+
+  function destroyController() {
+    controller?.destroy?.();
+    controller = null;
+    host?.replaceChildren();
+  }
 
   async function load(spotifyUrl, embedUrl) {
-    if (!host || !spotifyUrl || spotifyUrl === currentUrl || spotifyUrl === loadingUrl) return;
+    if (!host || disposed || !spotifyUrl || spotifyUrl === currentUrl || spotifyUrl === loadingUrl) return;
+    const requestGeneration = ++generation;
     loadingUrl = spotifyUrl;
     host.hidden = false;
     const api = await loadSpotifyApi();
-    if (loadingUrl !== spotifyUrl) return;
-    if (controller) {
-      controller.loadEntity(spotifyUrl);
-      currentUrl = spotifyUrl;
-      loadingUrl = '';
-      return;
-    }
+    if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) return;
+    destroyController();
     if (!api?.createController) {
       fallbackEmbed(host, embedUrl);
       currentUrl = spotifyUrl;
@@ -69,7 +76,7 @@ export function createSpotifyPlayer(host) {
     mount.className = 'focus-spotify-controller';
     host.replaceChildren(mount);
     api.createController(mount, { url: spotifyUrl, width: '100%', height: 352 }, (nextController) => {
-      if (loadingUrl !== spotifyUrl) {
+      if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
         nextController.destroy?.();
         return;
       }
@@ -81,11 +88,10 @@ export function createSpotifyPlayer(host) {
   }
 
   function clear() {
-    controller?.destroy?.();
-    controller = null;
+    generation += 1;
+    destroyController();
     currentUrl = '';
     loadingUrl = '';
-    host?.replaceChildren();
     if (host) host.hidden = true;
   }
 
@@ -99,5 +105,11 @@ export function createSpotifyPlayer(host) {
     controller?.resume?.();
   }
 
-  return { clear, load, pause, resume, get currentUrl() { return currentUrl; } };
+  function dispose() {
+    disposed = true;
+    resumeWhenReady = false;
+    clear();
+  }
+
+  return { clear, dispose, load, pause, resume, get currentUrl() { return currentUrl; } };
 }

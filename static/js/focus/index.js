@@ -9,13 +9,16 @@ import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
 import { createCompletionEffects } from './completion.js';
 
-const view = createFocusView();
+const view = createFocusView({
+  savePlayerPreferences: (preferences) => focusApi.savePlayerPreferences(preferences),
+});
 const completionEffects = createCompletionEffects();
 const { elements } = view;
 const state = {
   routines: [],
   history: [],
   recentSelections: [],
+  playerPreferences: null,
   session: null,
   completedSession: null,
   spotifySource: null,
@@ -148,6 +151,8 @@ async function loadState({ preserveStatus = false } = {}) {
     state.routines = payload.routines || [];
     state.history = payload.history || [];
     state.recentSelections = payload.recent_selections || [];
+    state.playerPreferences = payload.player_preferences || state.playerPreferences;
+    if (state.playerPreferences) view.applyPlayerPreferences(state.playerPreferences);
     state.session = clockedSession(payload.active_session);
     if (state.session) state.completedSession = null;
     if (!preserveStatus) view.setFormStatus();
@@ -321,17 +326,19 @@ function applySelection(selection) {
   elements.breakMinutes.value = selection.break_minutes || 0;
   elements.longBreakMinutes.value = selection.long_break_minutes || selection.break_minutes || 0;
   elements.cycles.value = selection.cycles || 1;
-  elements.spotifyUrl.value = selection.spotify_url || '';
   elements.routineSelect.value = '';
   elements.deleteRoutine.hidden = true;
   renderSuggestions();
-  const spotifySelection = {
-    ...selection,
-    spotify_url: selection.spotify_url || '',
-    spotify_embed_url: spotifyEmbedUrl(selection.spotify_url || ''),
-  };
-  state.spotifySource = spotifySelection.spotify_url ? spotifySelection : null;
-  view.renderSpotify(spotifySelection);
+  if (Object.prototype.hasOwnProperty.call(selection, 'spotify_url')) {
+    elements.spotifyUrl.value = selection.spotify_url || '';
+    const spotifySelection = {
+      ...selection,
+      spotify_url: selection.spotify_url || '',
+      spotify_embed_url: spotifyEmbedUrl(selection.spotify_url || ''),
+    };
+    state.spotifySource = spotifySelection.spotify_url ? spotifySelection : null;
+    view.renderSpotify(spotifySelection);
+  }
 }
 
 async function startSession(event) {
@@ -371,17 +378,22 @@ async function applyPlaylist() {
       state.session = clockedSession(response.session);
       state.spotifySource = state.session;
       view.renderSpotify(state.session);
-      playlistToast('Playlist updated for this session.');
+      playlistToast('Playlist added to this session.');
       return;
     }
+    const current = state.spotifySource || selectedRoutine() || {};
+    const existing = Array.isArray(current.playlists) ? current.playlists : [];
+    const duplicate = existing.find((playlist) => playlist.spotify_url === normalized);
+    const playlist = duplicate || (await focusApi.previewPlaylist(normalized)).playlist;
     const nextPlaylist = {
-      ...(selectedRoutine() || {}),
+      ...current,
       spotify_url: normalized,
       spotify_embed_url: spotifyEmbedUrl(normalized),
+      playlists: duplicate ? existing : [...existing, playlist],
     };
     state.spotifySource = nextPlaylist;
     view.renderSpotify(nextPlaylist);
-    playlistToast('Playlist ready for this session.');
+    playlistToast(duplicate ? 'Playlist selected.' : 'Playlist added.');
   } catch (error) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
@@ -393,14 +405,52 @@ async function removePlaylist() {
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.setPlaylist(state.session.id, '');
+      const response = await focusApi.removePlaylist(state.session.id, state.session.spotify_url);
       state.session = clockedSession(response.session);
+      state.spotifySource = state.session.spotify_url ? state.session : null;
       view.renderSpotify(state.session);
     } else {
-      view.renderSpotify({ ...(selectedRoutine() || {}), spotify_url: '', spotify_embed_url: '' });
+      const current = state.spotifySource || selectedRoutine() || {};
+      const remaining = (current.playlists || [])
+        .filter((playlist) => playlist.spotify_url !== current.spotify_url);
+      const next = remaining[0] || null;
+      state.spotifySource = remaining.length ? {
+        ...current,
+        spotify_url: next.spotify_url,
+        spotify_embed_url: next.spotify_embed_url || spotifyEmbedUrl(next.spotify_url),
+        playlists: remaining,
+      } : null;
+      view.renderSpotify(state.spotifySource);
     }
-    state.spotifySource = null;
     playlistToast('Playlist removed.');
+  } catch (error) {
+    view.setPlaylistStatus(error.message, 'error');
+  } finally {
+    view.setPlaylistBusy(false);
+  }
+}
+
+async function selectPlaylist(spotifyUrl) {
+  const current = state.session || state.spotifySource || selectedRoutine();
+  if (!current || current.spotify_url === spotifyUrl) return;
+  view.setPlaylistBusy(true);
+  try {
+    if (state.session) {
+      const response = await focusApi.setPlaylist(state.session.id, spotifyUrl);
+      state.session = clockedSession(response.session);
+      state.spotifySource = state.session;
+      view.renderSpotify(state.session);
+    } else {
+      const playlist = (current.playlists || []).find((item) => item.spotify_url === spotifyUrl);
+      if (!playlist) return;
+      state.spotifySource = {
+        ...current,
+        spotify_url: spotifyUrl,
+        spotify_embed_url: playlist.spotify_embed_url || spotifyEmbedUrl(spotifyUrl),
+      };
+      view.renderSpotify(state.spotifySource);
+    }
+    playlistToast('Playlist selected.');
   } catch (error) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
@@ -415,7 +465,7 @@ async function saveRoutine() {
     elements.routineName.focus();
     return;
   }
-  elements.saveRoutine.disabled = true;
+  elements.saveRoutines.forEach((button) => { button.disabled = true; });
   try {
     const selectedId = elements.routineSelect.value;
     const response = await focusApi.saveRoutine(payload, selectedId);
@@ -425,11 +475,12 @@ async function saveRoutine() {
     view.renderRoutines(state.routines, response.routine.id);
     state.spotifySource = response.routine.spotify_url ? response.routine : null;
     view.renderSpotify(response.routine);
-    view.setSettingsStatus('Routine saved to your account.', 'success');
+    view.setSettingsStatus('Setup saved to your account.', 'success');
+    playlistToast('Focus setup saved.');
   } catch (error) {
     view.setSettingsStatus(error.message, 'error');
   } finally {
-    elements.saveRoutine.disabled = false;
+    elements.saveRoutines.forEach((button) => { button.disabled = false; });
   }
 }
 
@@ -514,6 +565,10 @@ function bindEvents() {
   });
   elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); });
   elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); });
+  elements.playlistList?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-spotify-playlist]');
+    if (button) void selectPlaylist(button.dataset.spotifyPlaylist);
+  });
   elements.spotifyUrl?.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter') return;
     event.preventDefault();
@@ -524,7 +579,7 @@ function bindEvents() {
     if (!button) return;
     applySelection(state.recentSelections[Number(button.dataset.recentSelection)]);
   });
-  elements.saveRoutine.addEventListener('click', saveRoutine);
+  elements.saveRoutines.forEach((button) => button.addEventListener('click', saveRoutine));
   elements.deleteRoutine.addEventListener('click', deleteRoutine);
   elements.toggle.addEventListener('click', () => updateSession(state.session?.state === 'paused' ? 'resume' : 'pause'));
   elements.completePhase.addEventListener('click', () => updateSession('complete_phase'));
@@ -549,7 +604,7 @@ function bindEvents() {
   window.APStudyPageLifecycle?.register?.({
     pause: stopTimer,
     resume: tick,
-    dispose: () => { state.disposed = true; stopTimer(); },
+    dispose: () => { state.disposed = true; stopTimer(); view.dispose(); },
   });
 }
 

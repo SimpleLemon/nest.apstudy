@@ -231,9 +231,35 @@
     white-space: nowrap;
 }
 
+.focus-save-bar {
+    display: grid;
+    width: min(100%, 520px);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 8px;
+    margin-top: 24px;
+}
+
 .focus-routine-picker {
-    width: min(100%, 340px);
-    margin-top: 28px;
+    width: 100%;
+    margin: 0;
+}
+
+.focus-save-button {
+    min-height: 46px;
+    white-space: nowrap;
+}
+
+.focus-save-feedback {
+    min-height: 18px;
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
+.focus-save-feedback:empty {
+    display: none;
 }
 
 .focus-form-main {
@@ -831,15 +857,22 @@
 }
 
 .focus-countdown {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
     display: grid;
-    width: 220px;
-    height: 218px;
     place-items: center;
     color: var(--color-primary);
     font-family: var(--font-body);
     font-size: 96px;
     font-weight: 750;
     line-height: 1;
+}
+
+.focus-session[data-countdown-active="true"] .focus-phase-label,
+.focus-session[data-countdown-active="true"] .focus-time,
+.focus-session[data-countdown-active="true"] .focus-egg {
+    visibility: hidden;
 }
 
 .focus-countdown[hidden] {
@@ -1136,8 +1169,8 @@
 }
 
 @keyframes focusCountdownNumber {
-    from { opacity: 0; transform: scale(0.72) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from { opacity: 0; transform: scale(0.72); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes focusBookLaunch {
@@ -1188,6 +1221,38 @@
 .focus-region-heading {
     align-items: flex-start;
     margin-bottom: 10px;
+}
+
+.focus-floating-controls {
+    display: none;
+    align-items: center;
+    gap: 4px;
+}
+
+.focus-floating-handle,
+.focus-floating-size {
+    display: inline-grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+}
+
+.focus-floating-handle:hover,
+.focus-floating-size:hover {
+    background: var(--color-surface-container-high);
+    color: var(--color-primary);
+}
+
+.focus-floating-handle:focus-visible,
+.focus-floating-size:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .focus-region-heading h2 {
@@ -1298,6 +1363,90 @@
     display: none;
 }
 
+.focus-playlist-list {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+    scrollbar-width: thin;
+}
+
+.focus-playlist-list[hidden] {
+    display: none;
+}
+
+.focus-playlist-item {
+    flex: 0 0 min(260px, calc(100vw - 56px));
+    min-width: 0;
+}
+
+.focus-playlist-card {
+    display: flex;
+    width: 100%;
+    min-height: 64px;
+    align-items: center;
+    gap: 11px;
+    padding: 6px;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container);
+    color: var(--color-on-surface);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 170ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 170ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-playlist-card:hover {
+    background: var(--color-surface-container-high);
+    transform: translateY(-1px);
+}
+
+.focus-playlist-card:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.focus-playlist-artwork {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    place-items: center;
+    border-radius: var(--radius-control);
+    object-fit: cover;
+}
+
+.focus-playlist-artwork-fallback {
+    background: var(--color-surface-container-highest);
+    color: var(--color-on-surface-variant);
+}
+
+.focus-playlist-card-copy {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+}
+
+.focus-playlist-card-copy strong,
+.focus-playlist-card-copy span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.focus-playlist-card-copy strong {
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.focus-playlist-card-copy span {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
 .focus-spotify-embed {
     display: block;
     width: 100%;
@@ -1394,13 +1543,13 @@
 }
 
 .focus-body[data-spotify-layout="beside"] .focus-main {
-    width: min(100%, 1180px);
+    width: min(100%, 1360px);
 }
 
 .focus-body[data-spotify-layout="beside"] .focus-routine-form {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(380px, 460px);
+    align-items: center;
     column-gap: clamp(28px, 4vw, 52px);
 }
 
@@ -1413,7 +1562,7 @@
 .focus-body[data-spotify-layout="beside"] .focus-soundtrack {
     grid-column: 2;
     width: 100%;
-    padding-top: 54px;
+    padding-top: 0;
     border-top: 0;
 }
 
@@ -1426,18 +1575,93 @@
     justify-content: flex-start;
 }
 
+.focus-body[data-spotify-layout="beside"] .focus-playlist-list {
+    flex-direction: column;
+    overflow-x: visible;
+}
+
+.focus-body[data-spotify-layout="beside"] .focus-playlist-item {
+    flex-basis: auto;
+}
+
 .focus-body[data-spotify-layout="beside"] .focus-spotify-embed {
+    height: 420px;
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack:has(.focus-spotify-embed:not([hidden])) {
+    position: fixed;
+    left: var(--focus-floating-left, calc(100vw - 380px));
+    top: var(--focus-floating-top, calc(100dvh - 250px));
+    right: auto;
+    bottom: auto;
+    z-index: var(--z-sticky);
+    width: min(360px, calc(100vw - 40px));
+    margin: 0;
+    padding: 12px;
+    border: 0;
+    border-radius: var(--radius-card);
+    background: var(--color-surface-container-low);
+    box-shadow: 0 6px 8px rgb(0 0 0 / 20%);
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-floating-controls {
+    display: flex;
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-floating-handle {
+    cursor: grab;
+    touch-action: none;
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack.is-dragging,
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack.is-dragging .focus-floating-handle {
+    cursor: grabbing;
+    user-select: none;
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-spotify-embed {
+    height: 152px;
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-playlist-item {
+    flex-basis: min(240px, calc(100vw - 64px));
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"][data-spotify-floating-size="expanded"] .focus-soundtrack:has(.focus-spotify-embed:not([hidden])) {
+    width: min(500px, calc(100vw - 40px));
+}
+
+.focus-body.focus-session-active[data-spotify-layout="floating"][data-spotify-floating-size="expanded"] .focus-spotify-embed {
     height: 352px;
 }
 
-.focus-body.focus-session-active[data-spotify-layout="floating"] .focus-spotify-embed:not([hidden]) {
-    position: fixed;
-    right: 20px;
-    bottom: max(20px, env(safe-area-inset-bottom));
-    z-index: var(--z-sticky);
-    width: min(300px, calc(100vw - 40px));
-    height: 152px;
-    box-shadow: 0 6px 8px rgb(0 0 0 / 20%);
+@media (min-width: 901px) {
+    .focus-body[data-spotify-layout="below"] .focus-soundtrack {
+        width: min(100%, 840px);
+    }
+
+    .focus-body[data-spotify-layout="below"] .focus-spotify-embed {
+        height: 352px;
+    }
+
+    .focus-body.focus-session-active[data-spotify-layout="beside"] .focus-routine-form,
+    .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-routine-form {
+        align-items: center;
+    }
+
+    .focus-body.focus-session-active .focus-session-stage {
+        min-height: 520px;
+    }
+}
+
+@media (min-width: 701px) and (min-height: 650px) {
+    .focus-body.focus-session-active .focus-main {
+        display: flex;
+        min-height: 100dvh;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
 
 @media (max-width: 900px) {
@@ -1461,15 +1685,36 @@
         flex-direction: row;
     }
 
+    .focus-body[data-spotify-layout="beside"] .focus-playlist-list {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .focus-body[data-spotify-layout="beside"] .focus-playlist-item {
+        flex-basis: min(260px, calc(100vw - 56px));
+    }
+
     .focus-body[data-spotify-layout="beside"] .focus-spotify-embed {
         height: 152px;
     }
 
-    .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-spotify-embed:not([hidden]) {
+    .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack:has(.focus-spotify-embed:not([hidden])) {
         position: static;
         width: 100%;
-        height: 152px;
+        margin: 0 auto;
+        padding: 18px 0 0;
+        border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
+        border-radius: 0;
+        background: transparent;
         box-shadow: none;
+    }
+
+    .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-floating-controls {
+        display: none;
+    }
+
+    .focus-body.focus-session-active[data-spotify-layout="floating"][data-spotify-floating-size="expanded"] .focus-spotify-embed {
+        height: 352px;
     }
 }
 
@@ -1525,6 +1770,16 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .focus-playlist-card {
+        transition: none;
+    }
+
+    .focus-playlist-card:hover {
+        transform: none;
+    }
+}
+
 @media (max-width: 520px) {
     .focus-main {
         padding-inline: 14px;
@@ -1540,8 +1795,18 @@
         align-self: flex-end;
     }
 
-    .focus-routine-picker {
+    .focus-save-bar {
+        width: 100%;
+        grid-template-columns: 1fr;
         margin-top: 22px;
+    }
+
+    .focus-save-button {
+        width: 100%;
+    }
+
+    .focus-save-feedback {
+        grid-column: 1;
     }
 
     .focus-form-main {
