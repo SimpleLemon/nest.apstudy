@@ -25,6 +25,42 @@
     <script type="module" src="{{ url_for('static', filename='js/focus/index.js') }}"></script>
 </head>
 <body class="focus-body bg-surface text-on-surface font-body min-h-screen antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
+    {% macro focus_egg(live=false) -%}
+        <div class="focus-egg{{ ' focus-egg-live' if live else ' focus-egg-preview' }}"{{ ' data-focus-egg data-egg-state="closed" data-crack-level="0" data-nest-stage="0" role="img" aria-label="An egg resting in a nest"'|safe if live else ' aria-hidden="true"'|safe }}>
+            <div class="focus-egg-aura" aria-hidden="true"></div>
+            <div class="focus-nest" aria-hidden="true">
+                <span class="focus-nest-branch focus-nest-branch-1"></span>
+                <span class="focus-nest-branch focus-nest-branch-2"></span>
+                <span class="focus-nest-branch focus-nest-branch-3"></span>
+                <span class="focus-nest-branch focus-nest-branch-4"></span>
+                <span class="focus-nest-branch focus-nest-branch-5"></span>
+                <span class="focus-nest-branch focus-nest-branch-6"></span>
+                <span class="focus-nest-branch focus-nest-branch-7"></span>
+                <span class="focus-nest-branch focus-nest-branch-8"></span>
+            </div>
+            <div class="focus-egg-figure" aria-hidden="true">
+                <div class="focus-egg-shell"></div>
+                {% if live %}
+                    <div class="focus-egg-half focus-egg-half-left"></div>
+                    <div class="focus-egg-half focus-egg-half-right"></div>
+                    <svg class="focus-egg-crack" viewBox="0 0 154 132" focusable="false">
+                        <path class="focus-egg-crack-one" d="M37 66 L62 57 L75 69 L90 52 L111 67"></path>
+                        <path class="focus-egg-crack-two" d="M75 68 L67 87 L80 98 L72 116"></path>
+                        <path class="focus-egg-crack-three" d="M90 66 L99 86 L89 101 L99 117"></path>
+                    </svg>
+                {% endif %}
+            </div>
+            {% if live %}
+                <div class="focus-egg-book" data-focus-egg-book>
+                    <div class="focus-book-spread">
+                        <div class="focus-book-page focus-book-page-left"></div>
+                        <div class="focus-book-page focus-book-page-right"></div>
+                        <strong class="focus-book-message" data-focus-egg-result>Focus complete.</strong>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {%- endmacro %}
     <global class="thenav" data-profile-picture="{{ (user.picture or '')|avatar_url(32) }}" data-user-email="{{ user.email }}" data-user-tier="{{ user_tier or '' }}"></global>
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
@@ -59,10 +95,19 @@
                 <div class="focus-form-main">
                     <fieldset class="focus-fieldset focus-time-fieldset">
                         <legend class="sr-only">Focus time</legend>
-                        <label class="focus-duration-control" for="focus-minutes">
-                            <input id="focus-minutes" name="focus_minutes" type="number" inputmode="numeric" min="1" max="240" value="25" required aria-describedby="focus-duration-unit" />
-                            <span id="focus-duration-unit">minutes</span>
-                        </label>
+                        <div class="focus-setup-timer-shell">
+                            <svg class="focus-progress focus-setup-progress" viewBox="0 0 360 360" aria-hidden="true">
+                                <circle class="focus-progress-track" cx="180" cy="180" r="158"></circle>
+                            </svg>
+                            <div class="focus-time-content focus-setup-time-content">
+                                <span class="focus-phase-label">Focus duration</span>
+                                <label class="focus-duration-control" for="focus-minutes">
+                                    <input id="focus-minutes" name="focus_minutes" type="number" inputmode="numeric" min="1" max="240" value="25" required aria-describedby="focus-duration-unit" />
+                                    <span id="focus-duration-unit">min</span>
+                                </label>
+                                {{ focus_egg() }}
+                            </div>
+                        </div>
                         <div class="focus-preset-row" aria-label="Focus timer presets">
                             <button type="button" class="focus-choice" data-focus-preset data-focus="25" data-break="5" data-cycles="1" aria-label="Set 25 minutes">25 min</button>
                             <button type="button" class="focus-choice" data-focus-preset data-focus="50" data-break="10" data-cycles="1" aria-label="Set 50 minutes">50 min</button>
@@ -146,12 +191,12 @@
                         <fieldset class="focus-layout-choices">
                             <legend class="sr-only">Spotify player placement</legend>
                             <label class="focus-layout-choice">
-                                <input type="radio" name="spotify_layout" value="below" checked />
+                                <input type="radio" name="spotify_layout" value="below" />
                                 <span class="focus-layout-preview focus-layout-preview-below" aria-hidden="true"><i></i><b></b></span>
                                 <strong>Below</strong>
                             </label>
                             <label class="focus-layout-choice">
-                                <input type="radio" name="spotify_layout" value="beside" />
+                                <input type="radio" name="spotify_layout" value="beside" checked />
                                 <span class="focus-layout-preview focus-layout-preview-beside" aria-hidden="true"><i></i><b></b></span>
                                 <strong>Beside</strong>
                             </label>
@@ -167,13 +212,16 @@
 
             <section class="focus-session" data-focus-session hidden aria-labelledby="focus-session-label">
                 <header class="focus-session-toolbar">
-                    <div class="focus-cycle-status">
+                    <button type="button" class="focus-button focus-button-secondary focus-exit-button" data-focus-end>
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                        <span data-focus-exit-label>Exit</span>
+                    </button>
+                    <div class="focus-cycle-status" data-focus-cycle-status>
                         <span id="focus-session-label" data-focus-cycle-label>Focus 1 of 1</span>
                         <span class="focus-cycle-dots" data-focus-cycle-dots aria-hidden="true"></span>
                     </div>
-                    <button type="button" class="focus-button focus-button-secondary focus-settings-trigger" data-focus-session-options aria-controls="focus-options-panel" aria-expanded="false">
+                    <button type="button" class="focus-icon-button focus-settings-trigger focus-session-settings-trigger" data-focus-session-options aria-controls="focus-options-panel" aria-expanded="false" aria-label="Session settings">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
-                        <span>Session settings</span>
                     </button>
                 </header>
 
@@ -187,42 +235,12 @@
                             <span class="focus-phase-label" data-focus-phase-label>Focus session</span>
                             <time class="focus-time" data-focus-time>25:00</time>
                             <div class="focus-countdown" data-focus-countdown hidden aria-live="assertive"></div>
-                            <div class="focus-egg" data-focus-egg data-egg-state="closed" data-crack-level="0" data-nest-stage="0" role="img" aria-label="An egg resting in a nest">
-                                <div class="focus-egg-aura" aria-hidden="true"></div>
-                                <div class="focus-nest" aria-hidden="true">
-                                    <span class="focus-nest-branch focus-nest-branch-1"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-2"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-3"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-4"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-5"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-6"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-7"></span>
-                                    <span class="focus-nest-branch focus-nest-branch-8"></span>
-                                </div>
-                                <div class="focus-egg-figure" aria-hidden="true">
-                                    <div class="focus-egg-shell"></div>
-                                    <div class="focus-egg-half focus-egg-half-left"></div>
-                                    <div class="focus-egg-half focus-egg-half-right"></div>
-                                    <svg class="focus-egg-crack" viewBox="0 0 154 132" focusable="false">
-                                        <path class="focus-egg-crack-one" d="M37 66 L62 57 L75 69 L90 52 L111 67"></path>
-                                        <path class="focus-egg-crack-two" d="M75 68 L67 87 L80 98 L72 116"></path>
-                                        <path class="focus-egg-crack-three" d="M90 66 L99 86 L89 101 L99 117"></path>
-                                    </svg>
-                                </div>
-                                <div class="focus-egg-book" data-focus-egg-book>
-                                    <div class="focus-book-spread">
-                                        <div class="focus-book-page focus-book-page-left"></div>
-                                        <div class="focus-book-page focus-book-page-right"></div>
-                                        <strong class="focus-book-message" data-focus-egg-result>Focus complete.</strong>
-                                    </div>
-                                </div>
-                            </div>
+                            {{ focus_egg(true) }}
                         </div>
                     </div>
                     <div class="focus-timer-actions">
                         <button type="button" class="focus-button focus-button-primary" data-focus-toggle><span data-focus-toggle-label>Pause</span></button>
                         <button type="button" class="focus-button focus-button-secondary" data-focus-complete-phase><span data-focus-complete-phase-label>Finish focus</span></button>
-                        <button type="button" class="focus-button focus-button-danger" data-focus-end>End session</button>
                     </div>
                     <p class="focus-next-phase" data-focus-next-phase></p>
                 </div>
@@ -230,31 +248,30 @@
 
             <section class="focus-soundtrack" data-focus-utilities hidden aria-labelledby="focus-soundtrack-title">
                 <header class="focus-region-heading">
-                    <div>
-                        <h2 id="focus-soundtrack-title">Soundtrack</h2>
-                        <p data-focus-spotify-label>Add an optional Spotify playlist.</p>
+                    <div class="focus-playlist-heading-copy">
+                        <h2 id="focus-soundtrack-title">Playlist</h2>
+                        <button type="button" class="focus-playlist-toggle" data-focus-playlist-toggle aria-expanded="false" aria-controls="focus-playlist-editor" aria-label="Add or change playlist">
+                            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                        </button>
                     </div>
                     <a data-focus-open-spotify href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" hidden>Open in Spotify</a>
                 </header>
-                <div class="focus-playlist-form">
+                <div class="focus-playlist-form" id="focus-playlist-editor" data-focus-playlist-editor hidden>
                     <label class="focus-field" for="focus-spotify-url">
-                        <span>Spotify playlist <small>optional</small></span>
+                        <span class="sr-only">Spotify playlist URL</span>
                         <input id="focus-spotify-url" name="spotify_url" type="url" inputmode="url" autocomplete="url" placeholder="https://open.spotify.com/playlist/…" aria-describedby="focus-playlist-status" />
                     </label>
                     <div class="focus-playlist-actions">
-                        <button type="button" class="focus-button focus-button-primary" data-focus-playlist-apply disabled><span data-focus-playlist-action>Add playlist</span></button>
-                        <button type="button" class="focus-button focus-button-danger" data-focus-playlist-remove hidden>Remove</button>
+                        <button type="button" class="focus-icon-button focus-playlist-apply" data-focus-playlist-apply disabled aria-label="Save playlist"><span class="material-symbols-outlined" aria-hidden="true">check</span><span class="sr-only" data-focus-playlist-action>Add playlist</span></button>
+                        <button type="button" class="focus-icon-button focus-playlist-remove" data-focus-playlist-remove hidden aria-label="Remove playlist"><span class="material-symbols-outlined" aria-hidden="true">delete</span></button>
                     </div>
                 </div>
                 <p class="focus-settings-status" id="focus-playlist-status" data-focus-playlist-status role="status" aria-live="polite"></p>
-                <iframe
+                <div
                     class="focus-spotify-embed"
                     data-focus-spotify-embed
                     title="Spotify playlist player"
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    hidden></iframe>
+                    hidden></div>
             </section>
         </form>
 

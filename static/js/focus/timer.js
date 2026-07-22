@@ -52,7 +52,7 @@ export function nextPhaseLabel(session) {
   if (!session) return '';
   if (session.phase === 'break') return 'Focus next';
   const completedAfterThis = Number(session.completed_focus_cycles || 0) + 1;
-  if (completedAfterThis >= Number(session.total_cycles || 1)) return 'Last focus phase';
+  if (completedAfterThis >= Number(session.total_cycles || 1)) return '';
   const longBreak = completedAfterThis % 4 === 0 && Number(session.long_break_seconds || 0) > 0;
   const seconds = longBreak ? session.long_break_seconds : session.break_seconds;
   return seconds ? `Break next · ${Math.round(Number(seconds) / 60)} min` : 'Next focus follows immediately';

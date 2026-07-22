@@ -7,6 +7,7 @@ import {
   phaseLabel,
   progressRatio,
 } from './timer.js';
+import { createSpotifyPlayer } from './spotify-player.js';
 
 const LAYOUT_KEY = 'apstudy.focus.spotify.layout.v1';
 const LAYOUT_MAP = new Map([
@@ -111,6 +112,8 @@ export function createFocusView() {
     saveRoutine: document.querySelector('[data-focus-save-routine]'),
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
     spotifyUrl: document.getElementById('focus-spotify-url'),
+    playlistToggle: document.querySelector('[data-focus-playlist-toggle]'),
+    playlistEditor: document.querySelector('[data-focus-playlist-editor]'),
     layoutInputs: [...document.querySelectorAll('input[name="spotify_layout"]')],
     playlistApply: document.querySelector('[data-focus-playlist-apply]'),
     playlistAction: document.querySelector('[data-focus-playlist-action]'),
@@ -120,12 +123,14 @@ export function createFocusView() {
     progress: document.querySelector('[data-focus-progress]'),
     phaseLabel: document.querySelector('[data-focus-phase-label]'),
     cycleLabel: document.querySelector('[data-focus-cycle-label]'),
+    cycleStatus: document.querySelector('[data-focus-cycle-status]'),
     cycleDots: document.querySelector('[data-focus-cycle-dots]'),
     toggle: document.querySelector('[data-focus-toggle]'),
     toggleLabel: document.querySelector('[data-focus-toggle-label]'),
     completePhase: document.querySelector('[data-focus-complete-phase]'),
     completePhaseLabel: document.querySelector('[data-focus-complete-phase-label]'),
     end: document.querySelector('[data-focus-end]'),
+    exitLabel: document.querySelector('[data-focus-exit-label]'),
     nextPhase: document.querySelector('[data-focus-next-phase]'),
     history: document.querySelector('[data-focus-history]'),
     historyRegion: document.querySelector('[data-focus-history-region]'),
@@ -137,6 +142,7 @@ export function createFocusView() {
     eggResult: document.querySelector('[data-focus-egg-result]'),
     announcer: document.querySelector('[data-focus-announcer]'),
   };
+  const spotifyPlayer = createSpotifyPlayer(elements.spotifyEmbed);
 
   function setSettingsContext(active, session = null) {
     if (elements.activeSummary) elements.activeSummary.hidden = !active;
@@ -291,9 +297,12 @@ export function createFocusView() {
   function renderCycles(session) {
     if (!elements.cycleDots) return;
     elements.cycleDots.replaceChildren();
+    const totalCycles = Number(session.total_cycles || 1);
+    if (elements.cycleStatus) elements.cycleStatus.hidden = totalCycles <= 1;
+    if (totalCycles <= 1) return;
     const completed = Number(session.completed_focus_cycles || 0);
     const current = Number(session.cycle_number || completed + 1);
-    for (let cycle = 1; cycle <= Number(session.total_cycles || 1); cycle += 1) {
+    for (let cycle = 1; cycle <= totalCycles; cycle += 1) {
       const dot = document.createElement('span');
       dot.className = 'focus-cycle-dot';
       if (cycle <= completed) dot.classList.add('is-complete');
@@ -303,12 +312,17 @@ export function createFocusView() {
   }
 
   function renderSession(session) {
+    const completed = session.state === 'completed';
     text(elements.cycleLabel, `${session.phase === 'break' ? 'Break after focus' : 'Focus'} ${session.cycle_number} of ${session.total_cycles}`);
-    text(elements.phaseLabel, phaseLabel(session));
+    text(elements.phaseLabel, completed ? `${session.phase === 'break' ? 'Break' : 'Focus'} complete` : phaseLabel(session));
     text(elements.toggleLabel, session.state === 'paused' ? (session.phase === 'break' ? 'Start break' : 'Resume') : 'Pause');
     text(elements.completePhaseLabel, session.phase === 'break' ? 'Finish break' : 'Finish focus');
-    text(elements.nextPhase, nextPhaseLabel(session));
+    text(elements.nextPhase, completed ? '' : nextPhaseLabel(session));
+    text(elements.exitLabel, completed ? 'Exit focus' : 'Exit');
     elements.session?.setAttribute('data-phase', session.phase);
+    elements.session?.setAttribute('data-session-state', session.state);
+    if (elements.toggle) elements.toggle.hidden = completed;
+    if (elements.completePhase) elements.completePhase.hidden = completed;
     elements.egg?.setAttribute('aria-label', session.phase === 'break'
       ? 'An egg resting in a nest during the break'
       : 'An egg resting in a nest during focus');
@@ -370,6 +384,14 @@ export function createFocusView() {
     return normalized;
   }
 
+  function setPlaylistEditor(open) {
+    if (!elements.playlistEditor || !elements.playlistToggle) return;
+    elements.playlistEditor.hidden = !open;
+    elements.playlistToggle.setAttribute('aria-expanded', String(open));
+    elements.playlistToggle.classList.toggle('is-open', open);
+    if (open) window.setTimeout(() => elements.spotifyUrl?.focus(), 0);
+  }
+
   function renderSpotify(source) {
     const spotifyUrl = source?.spotify_url || '';
     const embedUrl = source?.spotify_embed_url || spotifyEmbedUrl(spotifyUrl);
@@ -377,21 +399,17 @@ export function createFocusView() {
     text(elements.playlistAction, embedUrl ? 'Update playlist' : 'Add playlist');
     if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
     if (embedUrl && elements.spotifyEmbed) {
-      if (elements.spotifyEmbed.dataset.src !== embedUrl) {
-        elements.spotifyEmbed.src = embedUrl;
-        elements.spotifyEmbed.dataset.src = embedUrl;
-      }
       elements.spotifyEmbed.hidden = false;
+      void spotifyPlayer.load(spotifyUrl, embedUrl);
       if (elements.openSpotify) {
         elements.openSpotify.hidden = false;
         elements.openSpotify.href = spotifyUrl;
       }
-      text(elements.spotifyLabel, source?.routine_name || source?.name || 'Playlist ready for this session.');
     } else {
-      if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
+      spotifyPlayer.clear();
       if (elements.openSpotify) elements.openSpotify.hidden = true;
-      text(elements.spotifyLabel, 'Add an optional Spotify playlist.');
     }
+    setPlaylistEditor(false);
     syncPlaylistControls();
   }
 
@@ -404,7 +422,7 @@ export function createFocusView() {
   }
 
   function loadPreferences() {
-    setSpotifyLayout(readPreference(LAYOUT_KEY, 'below'), false);
+    setSpotifyLayout(readPreference(LAYOUT_KEY, 'beside'), false);
   }
 
   function startCountdown() {
@@ -492,11 +510,14 @@ export function createFocusView() {
     renderTick,
     renderHistory,
     renderSpotify,
+    setPlaylistEditor,
     syncPlaylistControls,
     setSpotifyLayout,
     startCountdown,
     playEggOpening,
     resetEgg,
+    pauseSpotify: () => spotifyPlayer.pause(),
+    resumeSpotify: () => spotifyPlayer.resume(),
     announce,
   };
 }

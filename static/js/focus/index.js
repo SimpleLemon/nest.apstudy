@@ -7,14 +7,18 @@ import {
 } from './data.js';
 import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
+import { createCompletionEffects } from './completion.js';
 
 const view = createFocusView();
+const completionEffects = createCompletionEffects();
 const { elements } = view;
 const state = {
   routines: [],
   history: [],
   recentSelections: [],
   session: null,
+  completedSession: null,
+  spotifySource: null,
   timerId: null,
   advanceInFlight: false,
   sessionActionInFlight: false,
@@ -22,8 +26,12 @@ const state = {
   disposed: false,
 };
 
-function toast(message, type = 'success', title = '') {
-  window.APStudyToast?.show?.({ message, type, duration: 3500, ...(title ? { title } : {}) });
+function toast(message, type = 'success', title = '', duration = 3500) {
+  window.APStudyToast?.show?.({ message, type, duration, ...(title ? { title } : {}) });
+}
+
+function playlistToast(message) {
+  toast(message, 'success', '', 1000);
 }
 
 function announceSessionChange(message, title, type = 'info') {
@@ -99,24 +107,38 @@ function renderSetup() {
 
 function renderActiveSession() {
   if (!state.session) return;
+  if (state.session.spotify_url) state.spotifySource = state.session;
   view.renderSession(state.session);
-  view.renderSpotify(state.session);
+  view.renderSpotify(state.spotifySource || state.session);
   tick();
 }
 
+function renderCompletedSession() {
+  if (!state.completedSession) return;
+  stopTimer();
+  view.renderSession(state.completedSession);
+  view.renderTick(state.completedSession, 0);
+  view.renderSpotify(state.spotifySource || state.completedSession);
+  document.title = 'Focus complete - Nest';
+}
+
 function renderCurrentMode() {
-  const active = Boolean(state.session && ['running', 'paused'].includes(state.session.state));
-  view.showMode(active, state.session);
+  const activeSession = state.session || state.completedSession;
+  const active = Boolean(activeSession);
+  view.showMode(active, activeSession);
   view.renderHistory(state.history);
-  if (active) {
+  if (state.session) {
     focusSidebar(true);
     renderActiveSession();
+  } else if (state.completedSession) {
+    focusSidebar(true);
+    renderCompletedSession();
   } else {
     stopTimer();
     document.title = 'Focus Mode - APStudy Nest';
     focusSidebar(false);
     renderSetup();
-    view.renderSpotify(selectedRoutine());
+    view.renderSpotify(state.spotifySource || selectedRoutine());
   }
 }
 
@@ -127,6 +149,7 @@ async function loadState({ preserveStatus = false } = {}) {
     state.history = payload.history || [];
     state.recentSelections = payload.recent_selections || [];
     state.session = clockedSession(payload.active_session);
+    if (state.session) state.completedSession = null;
     if (!preserveStatus) view.setFormStatus();
     renderCurrentMode();
   } catch (error) {
@@ -151,14 +174,19 @@ async function advancePhase() {
   stopTimer();
   try {
     const previousPhase = state.session.phase;
+    const previousSession = state.session;
     const payload = await focusApi.updateSession(state.session.id, 'advance');
     const next = clockedSession(payload.session);
+    view.pauseSpotify();
+    completionEffects.complete(previousPhase);
     if (!payload.active) {
       view.renderTick(state.session, 0);
       await view.playEggOpening(previousPhase);
       state.session = null;
+      state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
       announcePhaseTransition(previousPhase, null);
-      await loadState({ preserveStatus: true });
+      renderCurrentMode();
+      await refreshHistory();
       return;
     }
     state.session = next;
@@ -168,6 +196,7 @@ async function advancePhase() {
     view.resetEgg();
     view.renderTick(next, remainingSeconds(next));
     announcePhaseTransition(previousPhase, next);
+    if (next.phase === 'focus' && next.state === 'running') view.resumeSpotify();
     await refreshHistory();
     scheduleTick();
   } catch (error) {
@@ -208,6 +237,8 @@ async function updateSession(action) {
   state.sessionActionInFlight = true;
   const button = action === 'pause' || action === 'resume' ? elements.toggle : elements.completePhase;
   view.setSessionBusy(true, button);
+  if (action === 'pause') view.pauseSpotify();
+  if (action === 'resume') view.resumeSpotify();
   try {
     const payload = await focusApi.updateSession(state.session.id, action);
     const previousSession = state.session;
@@ -215,24 +246,32 @@ async function updateSession(action) {
     if (!state.session) {
       if (action === 'complete_phase') {
         view.renderTick(previousSession, 0);
+        view.pauseSpotify();
+        completionEffects.complete(previousPhase);
         await view.playEggOpening(previousPhase);
+        state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
+        renderCurrentMode();
+        await refreshHistory();
       }
-      await loadState({ preserveStatus: true });
       if (action === 'complete_phase') announcePhaseTransition(previousPhase, null);
       return;
     }
     renderActiveSession();
     if (action === 'complete_phase') {
+      view.pauseSpotify();
+      completionEffects.complete(previousPhase);
       await view.playEggOpening(previousPhase);
       view.resetEgg();
       renderActiveSession();
       announcePhaseTransition(previousPhase, state.session);
+      if (state.session.phase === 'focus' && state.session.state === 'running') view.resumeSpotify();
       await refreshHistory();
     } else {
       const message = action === 'pause' ? 'Timer paused.' : 'Timer resumed.';
       announceSessionChange(message, action === 'pause' ? 'Timer paused' : 'Timer resumed');
     }
   } catch (error) {
+    if (action === 'resume') view.pauseSpotify();
     toast(error.message, 'error', 'Couldn’t update the timer');
   } finally {
     state.sessionActionInFlight = false;
@@ -257,6 +296,7 @@ async function endSession() {
   view.setSessionBusy(true, elements.end);
   try {
     if (!(await confirmEndSession())) return;
+    view.pauseSpotify();
     await focusApi.updateSession(state.session.id, 'exit');
     state.session = null;
     focusSidebar(false);
@@ -271,6 +311,11 @@ async function endSession() {
   }
 }
 
+function exitCompletedSession() {
+  state.completedSession = null;
+  renderCurrentMode();
+}
+
 function applySelection(selection) {
   elements.focusMinutes.value = selection.focus_minutes;
   elements.breakMinutes.value = selection.break_minutes || 0;
@@ -280,26 +325,33 @@ function applySelection(selection) {
   elements.routineSelect.value = '';
   elements.deleteRoutine.hidden = true;
   renderSuggestions();
-  view.renderSpotify({
+  const spotifySelection = {
     ...selection,
     spotify_url: selection.spotify_url || '',
     spotify_embed_url: spotifyEmbedUrl(selection.spotify_url || ''),
-  });
+  };
+  state.spotifySource = spotifySelection.spotify_url ? spotifySelection : null;
+  view.renderSpotify(spotifySelection);
 }
 
 async function startSession(event) {
   event.preventDefault();
+  void completionEffects.prepare();
+  view.resumeSpotify();
   const payload = formPayload(elements.form);
   view.setBusy(true);
   view.setFormStatus('Starting your focus session…');
   try {
     const response = await focusApi.start(payload);
     state.session = clockedSession(response.session);
+    state.completedSession = null;
+    if (state.session.spotify_url) state.spotifySource = state.session;
     view.setFormStatus();
     renderCurrentMode();
     void view.startCountdown();
     announceSessionChange('Focus Mode started. Nonurgent Nest notifications are muted.', 'Focus Mode started');
   } catch (error) {
+    view.pauseSpotify();
     view.setFormStatus(error.message, 'error');
   } finally {
     view.setBusy(false);
@@ -317,8 +369,9 @@ async function applyPlaylist() {
     if (state.session) {
       const response = await focusApi.setPlaylist(state.session.id, normalized);
       state.session = clockedSession(response.session);
+      state.spotifySource = state.session;
       view.renderSpotify(state.session);
-      view.setPlaylistStatus('Playlist updated for this session.', 'success');
+      playlistToast('Playlist updated for this session.');
       return;
     }
     const nextPlaylist = {
@@ -326,8 +379,9 @@ async function applyPlaylist() {
       spotify_url: normalized,
       spotify_embed_url: spotifyEmbedUrl(normalized),
     };
+    state.spotifySource = nextPlaylist;
     view.renderSpotify(nextPlaylist);
-    view.setPlaylistStatus('Playlist ready for this session.', 'success');
+    playlistToast('Playlist ready for this session.');
   } catch (error) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
@@ -345,7 +399,8 @@ async function removePlaylist() {
     } else {
       view.renderSpotify({ ...(selectedRoutine() || {}), spotify_url: '', spotify_embed_url: '' });
     }
-    view.setPlaylistStatus('Playlist removed.', 'success');
+    state.spotifySource = null;
+    playlistToast('Playlist removed.');
   } catch (error) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
@@ -368,6 +423,7 @@ async function saveRoutine() {
     if (index >= 0) state.routines[index] = response.routine;
     else state.routines.unshift(response.routine);
     view.renderRoutines(state.routines, response.routine.id);
+    state.spotifySource = response.routine.spotify_url ? response.routine : null;
     view.renderSpotify(response.routine);
     view.setSettingsStatus('Routine saved to your account.', 'success');
   } catch (error) {
@@ -395,6 +451,7 @@ async function deleteRoutine() {
     view.renderRoutines(state.routines);
     view.fillRoutine(null);
     view.renderSpotify(null);
+    state.spotifySource = null;
     renderSuggestions();
     view.setSettingsStatus('Routine deleted.');
   } catch (error) {
@@ -425,6 +482,7 @@ function bindEvents() {
   });
   elements.routineSelect.addEventListener('change', () => {
     const routine = selectedRoutine();
+    state.spotifySource = routine?.spotify_url ? routine : null;
     view.fillRoutine(routine);
     view.renderSpotify(routine);
     view.setSettingsStatus();
@@ -449,6 +507,11 @@ function bindEvents() {
     if (input.checked) view.setSpotifyLayout(input.value);
   }));
   elements.spotifyUrl?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }));
+  elements.playlistToggle?.addEventListener('click', () => {
+    const open = elements.playlistToggle.getAttribute('aria-expanded') !== 'true';
+    view.setPlaylistEditor(open);
+    if (!open) view.setPlaylistStatus();
+  });
   elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); });
   elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); });
   elements.spotifyUrl?.addEventListener('keydown', (event) => {
@@ -465,7 +528,10 @@ function bindEvents() {
   elements.deleteRoutine.addEventListener('click', deleteRoutine);
   elements.toggle.addEventListener('click', () => updateSession(state.session?.state === 'paused' ? 'resume' : 'pause'));
   elements.completePhase.addEventListener('click', () => updateSession('complete_phase'));
-  elements.end.addEventListener('click', () => endSession());
+  elements.end.addEventListener('click', () => {
+    if (state.completedSession) exitCompletedSession();
+    else void endSession();
+  });
   document.addEventListener('apstudy-sidebar-state-change', (event) => {
     if (state.session && event.detail?.collapsed === false) queueMicrotask(hideSidebarForFocus);
   });
@@ -473,6 +539,7 @@ function bindEvents() {
     if (state.session) queueMicrotask(hideSidebarForFocus);
   });
   document.addEventListener('visibilitychange', () => {
+    if (state.completedSession) return;
     if (document.hidden) tick();
     else void loadState({ preserveStatus: true });
   });
