@@ -359,8 +359,9 @@ def start_session(user_id, payload):
     return _serialize_session(row, now=now)
 
 
-def update_session(user_id, session_id, action):
+def update_session(user_id, session_id, action, payload=None):
     user_id = str(user_id)
+    payload = payload or {}
     now = _now()
     with db_connection() as conn:
         row = conn.execute(
@@ -386,6 +387,14 @@ def update_session(user_id, session_id, action):
                 """UPDATE focus_sessions SET state='running',phase_started_at=?,phase_ends_at=?,
                    paused_remaining_seconds=NULL,updated_at=? WHERE id=?""",
                 [_iso(now), _iso(now + timedelta(seconds=remaining)), _iso(now), row["id"]],
+            )
+        elif action == "set_playlist":
+            if row["state"] not in ACTIVE_STATES:
+                raise ValueError("This Focus Mode session is no longer active.")
+            spotify_url = normalize_spotify_url(payload.get("spotify_url"))
+            conn.execute(
+                "UPDATE focus_sessions SET spotify_url=?,updated_at=? WHERE id=?",
+                [spotify_url, _iso(now), row["id"]],
             )
         elif action in {"advance", "complete_phase"}:
             if row["state"] == "paused":

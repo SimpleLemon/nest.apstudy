@@ -106,6 +106,36 @@ class FocusModeTests(unittest.TestCase):
                 "cycles": 2,
             })
 
+    def test_active_session_playlist_updates_persist_and_validate(self):
+        session = focus_mode.start_session("u1", {
+            "name": "Study",
+            "focus_minutes": 25,
+            "break_minutes": 5,
+            "long_break_minutes": 5,
+            "cycles": 1,
+        })
+        updated = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "set_playlist",
+            {"spotify_url": "https://open.spotify.com/playlist/abc123?si=demo"},
+        )
+        self.assertEqual(updated["spotify_url"], "https://open.spotify.com/playlist/abc123")
+        self.assertIn("/embed/playlist/abc123", updated["spotify_embed_url"])
+        self.assertEqual(
+            focus_mode.snapshot("u1")["active_session"]["spotify_url"],
+            "https://open.spotify.com/playlist/abc123",
+        )
+
+        removed = focus_mode.update_session(
+            "u1", session["id"], "set_playlist", {"spotify_url": ""}
+        )
+        self.assertIsNone(removed["spotify_url"])
+        with self.assertRaisesRegex(ValueError, "Spotify playlist"):
+            focus_mode.update_session(
+                "u1", session["id"], "set_playlist", {"spotify_url": "https://example.com/list"}
+            )
+
     def test_focus_suppresses_nonurgent_delivery_but_preserves_urgent_categories(self):
         notifications.upsert_subscription(
             "u1",

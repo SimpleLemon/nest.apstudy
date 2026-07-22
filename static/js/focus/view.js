@@ -1,9 +1,23 @@
-import { spotifyEmbedUrl } from './data.js';
-import { formatTimer, nextPhaseLabel, phaseLabel, progressRatio } from './timer.js';
+import { normalizeSpotifyPlaylist, spotifyEmbedUrl } from './data.js';
+import {
+  eggCrackLevel,
+  formatTimer,
+  nestStage,
+  nextPhaseLabel,
+  phaseLabel,
+  progressRatio,
+} from './timer.js';
 
-const LAYOUTS = new Set(['bottom-compact', 'bottom-large', 'right-compact', 'right-large', 'floating']);
-const VOLUME_KEY = 'apstudy.focus.spotify.volume.v1';
 const LAYOUT_KEY = 'apstudy.focus.spotify.layout.v1';
+const LAYOUT_MAP = new Map([
+  ['below', 'below'],
+  ['bottom-compact', 'below'],
+  ['bottom-large', 'below'],
+  ['beside', 'beside'],
+  ['right-compact', 'beside'],
+  ['right-large', 'beside'],
+  ['floating', 'floating'],
+]);
 
 function text(element, value) {
   if (element) element.textContent = value == null ? '' : String(value);
@@ -16,12 +30,11 @@ function option(value, label) {
   return node;
 }
 
-function choice(label, dataset = {}, title = '') {
+function choice(label, dataset = {}) {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'focus-choice';
   button.textContent = label;
-  if (title) button.title = title;
   Object.entries(dataset).forEach(([key, value]) => { button.dataset[key] = String(value); });
   return button;
 }
@@ -48,56 +61,61 @@ function writePreference(key, value) {
   try {
     window.localStorage.setItem(key, String(value));
   } catch (_error) {
-    // Preferences are an enhancement; private browsing should not block Focus Mode.
+    // Browser preferences are optional; storage restrictions must not block the timer.
   }
 }
 
-function completionMessage(phase) {
-  if (phase === 'break') return ['Break time!', 'Quick rest!'][Math.floor(Math.random() * 2)];
-  return Math.random() < 0.0005
-    ? "You're focused!"
-    : ['Complete!', 'You made it!'][Math.floor(Math.random() * 2)];
+export function completionMessage(phase, randomValue = Math.random()) {
+  const focusMessages = ['Focus complete.', 'One block done.', 'You made progress.'];
+  const breakMessages = ['Break complete.', 'Ready when you are.', 'Back to focus.'];
+  const messages = phase === 'break' ? breakMessages : focusMessages;
+  const index = Math.min(messages.length - 1, Math.floor(Math.max(0, randomValue) * messages.length));
+  return messages[index];
 }
 
 export function createFocusView() {
-  let historyFadeTimer = null;
   let countdownTimer = null;
   let eggOpenTimer = null;
+  let lastSettingsTrigger = null;
+  let playlistBusy = false;
   const elements = {
     loading: document.querySelector('[data-focus-loading]'),
     setup: document.querySelector('[data-focus-setup]'),
     session: document.querySelector('[data-focus-session]'),
     utilities: document.querySelector('[data-focus-utilities]'),
-    options: document.querySelector('[data-focus-options]') || document.querySelector('.focus-options'),
-    optionsSummary: document.querySelector('#focus-options-summary')
-      || document.querySelector('.focus-options > summary'),
+    options: document.querySelector('[data-focus-options]'),
+    optionsOpen: [...document.querySelectorAll('[data-focus-options-open], [data-focus-session-options]')],
     optionsClose: document.querySelector('[data-focus-options-close]'),
-    optionsBackdrop: document.querySelector('[data-focus-options-backdrop]'),
-    sessionOptions: document.querySelector('[data-focus-session-options]'),
+    optionsDescription: document.querySelector('[data-focus-options-description]'),
+    activeSummary: document.querySelector('[data-focus-active-summary]'),
+    activeSummaryCopy: document.querySelector('[data-focus-active-summary-copy]'),
+    inactiveSettings: document.querySelector('[data-focus-inactive-settings]'),
     form: document.querySelector('[data-focus-form]'),
     formStatus: document.querySelector('[data-focus-form-status]'),
+    settingsStatus: document.querySelector('[data-focus-settings-status]'),
     suggestions: document.querySelector('[data-focus-break-suggestions]'),
+    suggestionBlock: document.querySelector('[data-focus-suggestion-block]'),
     recentSelections: document.querySelector('[data-focus-recent-selections]'),
     recentList: document.querySelector('[data-focus-recent-list]'),
+    routinePicker: document.querySelector('[data-focus-routine-picker]'),
     routineSelect: document.getElementById('focus-routine-select'),
     routineName: document.getElementById('focus-routine-name'),
     focusMinutes: document.getElementById('focus-minutes'),
     breakMinutes: document.getElementById('focus-break-minutes'),
     longBreakMinutes: document.getElementById('focus-long-break-minutes'),
     cycles: document.getElementById('focus-cycles'),
-    spotifyUrl: document.getElementById('focus-spotify-url'),
-    spotifyPanelUrl: document.querySelector('[data-focus-spotify-panel-url]'),
-    spotifyVolume: document.getElementById('focus-volume'),
-    spotifyVolumeValue: document.querySelector('[data-focus-volume-value]'),
-    spotifyLayout: document.getElementById('focus-spotify-layout'),
-    applyPlaylist: document.querySelector('[data-focus-apply-playlist]'),
-    settingsStatus: document.querySelector('[data-focus-settings-status]'),
-    spotifyPanelApply: document.querySelector('[data-focus-spotify-panel-apply]'),
-    spotifyPanelAction: document.querySelector('[data-focus-spotify-panel-action]'),
-    spotifyPanelStatus: document.querySelector('[data-focus-spotify-panel-status]'),
+    breakField: document.querySelector('[data-focus-break-field]'),
+    longBreakField: document.querySelector('[data-focus-long-break-field]'),
+    autoStartRow: document.querySelector('[data-focus-auto-start-row]'),
     autoStart: document.getElementById('focus-auto-start'),
     saveRoutine: document.querySelector('[data-focus-save-routine]'),
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
+    spotifyUrl: document.getElementById('focus-spotify-url'),
+    layoutInputs: [...document.querySelectorAll('input[name="spotify_layout"]')],
+    playlistApply: document.querySelector('[data-focus-playlist-apply]'),
+    playlistAction: document.querySelector('[data-focus-playlist-action]'),
+    playlistRemove: document.querySelector('[data-focus-playlist-remove]'),
+    playlistStatus: document.querySelector('[data-focus-playlist-status]'),
     time: document.querySelector('[data-focus-time]'),
     progress: document.querySelector('[data-focus-progress]'),
     phaseLabel: document.querySelector('[data-focus-phase-label]'),
@@ -106,51 +124,64 @@ export function createFocusView() {
     toggle: document.querySelector('[data-focus-toggle]'),
     toggleLabel: document.querySelector('[data-focus-toggle-label]'),
     completePhase: document.querySelector('[data-focus-complete-phase]'),
+    completePhaseLabel: document.querySelector('[data-focus-complete-phase-label]'),
     end: document.querySelector('[data-focus-end]'),
     nextPhase: document.querySelector('[data-focus-next-phase]'),
     history: document.querySelector('[data-focus-history]'),
-    historyRegion: document.querySelector('.focus-history-region'),
-    historyEmpty: document.querySelector('[data-focus-history-empty]'),
+    historyRegion: document.querySelector('[data-focus-history-region]'),
     spotifyEmbed: document.querySelector('[data-focus-spotify-embed]'),
-    spotifyEmpty: document.querySelector('[data-focus-spotify-empty]'),
     spotifyLabel: document.querySelector('[data-focus-spotify-label]'),
-    spotifyRegion: document.querySelector('.focus-spotify-region'),
     openSpotify: document.querySelector('[data-focus-open-spotify]'),
     countdown: document.querySelector('[data-focus-countdown]'),
     egg: document.querySelector('[data-focus-egg]'),
     eggResult: document.querySelector('[data-focus-egg-result]'),
     announcer: document.querySelector('[data-focus-announcer]'),
   };
-  document.body.classList.toggle('focus-has-settings-popover', Boolean(elements.options?.querySelector('.focus-options-popover')));
 
-  function showMode(active) {
-    window.clearTimeout(historyFadeTimer);
-    if (elements.historyRegion) elements.historyRegion.hidden = false;
+  function setSettingsContext(active, session = null) {
+    if (elements.activeSummary) elements.activeSummary.hidden = !active;
+    if (elements.inactiveSettings) elements.inactiveSettings.hidden = active;
+    text(elements.optionsDescription, active
+      ? 'Review this session and place the Spotify player.'
+      : 'Adjust the rhythm and player placement.');
+    if (!active || !session) return;
+    const focusMinutes = Math.round(Number(session.focus_seconds || 0) / 60);
+    const breakMinutes = Math.round(Number(session.break_seconds || 0) / 60);
+    const cycles = Number(session.total_cycles || 1);
+    const parts = [`${focusMinutes} min focus`, `${cycles} ${cycles === 1 ? 'cycle' : 'cycles'}`];
+    if (cycles > 1) parts.splice(1, 0, `${breakMinutes} min break`);
+    text(elements.activeSummaryCopy, parts.join(' · '));
+  }
+
+  function showMode(active, session = null) {
     document.body.classList.toggle('focus-session-active', active);
     if (elements.loading) elements.loading.hidden = true;
     if (elements.setup) elements.setup.hidden = active;
     if (elements.session) elements.session.hidden = !active;
     if (elements.utilities) elements.utilities.hidden = false;
-    syncOptionsState();
-    if (active && elements.historyRegion) {
-      historyFadeTimer = window.setTimeout(() => {
-        if (document.body.classList.contains('focus-session-active')) elements.historyRegion.hidden = true;
-      }, 200);
-    }
+    setSettingsContext(active, session);
   }
 
   function syncOptionsState() {
     const open = Boolean(elements.options?.open);
     document.body.classList.toggle('focus-settings-open', open);
-    elements.setup?.classList.toggle('focus-setup-options-open', open);
-    elements.optionsSummary?.setAttribute('aria-expanded', String(open));
-    elements.sessionOptions?.setAttribute('aria-expanded', String(open));
+    elements.optionsOpen.forEach((trigger) => trigger.setAttribute('aria-expanded', String(open)));
+  }
+
+  function openOptions(trigger) {
+    if (!elements.options || elements.options.open) return;
+    lastSettingsTrigger = trigger || document.activeElement;
+    if (typeof elements.options.showModal === 'function') elements.options.showModal();
+    else elements.options.setAttribute('open', '');
+    syncOptionsState();
   }
 
   function closeOptions() {
-    if (!elements.options) return;
-    elements.options.open = false;
+    if (!elements.options?.open) return;
+    if (typeof elements.options.close === 'function') elements.options.close();
+    else elements.options.removeAttribute('open');
     syncOptionsState();
+    window.setTimeout(() => lastSettingsTrigger?.focus?.(), 0);
   }
 
   function setFormStatus(message = '', tone = '') {
@@ -165,14 +196,19 @@ export function createFocusView() {
     else elements.settingsStatus?.removeAttribute('data-tone');
   }
 
-  function setSpotifyPanelStatus(message = '', tone = '') {
-    text(elements.spotifyPanelStatus, message);
-    if (tone) elements.spotifyPanelStatus?.setAttribute('data-tone', tone);
-    else elements.spotifyPanelStatus?.removeAttribute('data-tone');
+  function setPlaylistStatus(message = '', tone = '') {
+    text(elements.playlistStatus, message);
+    if (tone) elements.playlistStatus?.setAttribute('data-tone', tone);
+    else elements.playlistStatus?.removeAttribute('data-tone');
   }
 
   function setBusy(busy) {
-    elements.form?.querySelectorAll('button').forEach((button) => { button.disabled = busy; });
+    const submit = elements.form?.querySelector('button[type="submit"]');
+    if (submit) {
+      submit.disabled = busy;
+      if (busy) submit.setAttribute('aria-busy', 'true');
+      else submit.removeAttribute('aria-busy');
+    }
   }
 
   function setSessionBusy(busy, activeButton = null) {
@@ -184,15 +220,27 @@ export function createFocusView() {
     if (busy && activeButton) activeButton.setAttribute('aria-busy', 'true');
   }
 
+  function setPlaylistBusy(busy) {
+    playlistBusy = busy;
+    [elements.playlistApply, elements.playlistRemove].forEach((button) => {
+      if (!button) return;
+      button.disabled = busy;
+      if (busy) button.setAttribute('aria-busy', 'true');
+      else button.removeAttribute('aria-busy');
+    });
+    if (!busy) syncPlaylistControls();
+  }
+
   function renderRoutines(routines, selectedId = '') {
     if (!elements.routineSelect) return;
     const current = String(selectedId || elements.routineSelect.value || '');
-    elements.routineSelect.replaceChildren(option('', 'Custom routine'));
-    routines.forEach((routine) => {
-      elements.routineSelect.appendChild(option(routine.id, routine.name));
-    });
+    elements.routineSelect.replaceChildren(option('', 'Custom timer'));
+    routines.forEach((routine) => elements.routineSelect.appendChild(option(routine.id, routine.name)));
     elements.routineSelect.value = routines.some((routine) => String(routine.id) === current) ? current : '';
-    if (elements.deleteRoutine) elements.deleteRoutine.hidden = !elements.routineSelect.value;
+    if (elements.routinePicker) elements.routinePicker.hidden = routines.length === 0;
+    const hasSelection = Boolean(elements.routineSelect.value);
+    if (elements.deleteRoutine) elements.deleteRoutine.hidden = !hasSelection;
+    text(elements.saveRoutine, hasSelection ? 'Update routine' : 'Save routine');
   }
 
   function fillRoutine(routine) {
@@ -204,18 +252,27 @@ export function createFocusView() {
     elements.cycles.value = routine?.cycles ?? 1;
     elements.spotifyUrl.value = routine?.spotify_url || '';
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !routine;
+    text(elements.saveRoutine, routine ? 'Update routine' : 'Save routine');
+    syncRhythmVisibility();
+  }
+
+  function syncRhythmVisibility() {
+    const cycles = Math.max(1, Number(elements.cycles?.value || 1));
+    if (elements.breakField) elements.breakField.hidden = cycles <= 1;
+    if (elements.longBreakField) elements.longBreakField.hidden = cycles < 4;
+    if (elements.autoStartRow) elements.autoStartRow.hidden = cycles <= 1;
+    if (elements.suggestionBlock) {
+      elements.suggestionBlock.hidden = cycles <= 1 || !elements.suggestions?.children.length;
+    }
   }
 
   function renderSuggestions(values) {
     if (!elements.suggestions) return;
     elements.suggestions.replaceChildren();
     values.forEach((minutes) => {
-      elements.suggestions.appendChild(choice(
-        `${minutes} min`,
-        { breakSuggestion: minutes },
-        `Use a ${minutes}-minute break suggestion for this focus block.`,
-      ));
+      elements.suggestions.appendChild(choice(`${minutes} min`, { breakSuggestion: minutes }));
     });
+    syncRhythmVisibility();
   }
 
   function renderRecent(selections) {
@@ -226,7 +283,6 @@ export function createFocusView() {
       elements.recentList.appendChild(choice(
         `${selection.focus_minutes}${breakLabel} min`,
         { recentSelection: index },
-        'Reuse this recent focus and break combination.',
       ));
     });
     if (elements.recentSelections) elements.recentSelections.hidden = selections.length === 0;
@@ -250,10 +306,14 @@ export function createFocusView() {
     text(elements.cycleLabel, `${session.phase === 'break' ? 'Break after focus' : 'Focus'} ${session.cycle_number} of ${session.total_cycles}`);
     text(elements.phaseLabel, phaseLabel(session));
     text(elements.toggleLabel, session.state === 'paused' ? (session.phase === 'break' ? 'Start break' : 'Resume') : 'Pause');
+    text(elements.completePhaseLabel, session.phase === 'break' ? 'Finish break' : 'Finish focus');
     text(elements.nextPhase, nextPhaseLabel(session));
     elements.session?.setAttribute('data-phase', session.phase);
-    if (elements.egg) elements.egg.setAttribute('aria-label', session.phase === 'break' ? 'Break egg' : 'Focus egg');
+    elements.egg?.setAttribute('aria-label', session.phase === 'break'
+      ? 'An egg resting in a nest during the break'
+      : 'An egg resting in a nest during focus');
     renderCycles(session);
+    setSettingsContext(true, session);
   }
 
   function renderEggProgress(session, remaining) {
@@ -261,18 +321,15 @@ export function createFocusView() {
     const state = elements.egg.dataset.eggState;
     if (state === 'opening' || state === 'open') return;
     const ratio = progressRatio(session, remaining);
-    const level = ratio >= 0.88 ? 4 : ratio >= 0.62 ? 3 : ratio >= 0.36 ? 2 : ratio >= 0.14 ? 1 : 0;
-    elements.egg.dataset.crackLevel = String(level);
+    elements.egg.dataset.nestStage = String(nestStage(ratio));
+    elements.egg.dataset.crackLevel = String(eggCrackLevel(ratio));
     elements.egg.style.setProperty('--focus-egg-progress', String(ratio));
   }
 
   function renderTick(session, remaining) {
     text(elements.time, formatTimer(remaining));
     const ratio = progressRatio(session, remaining);
-    if (elements.progress) {
-      elements.progress.style.setProperty('--focus-progress', String(ratio));
-      elements.progress.style.setProperty('--focus-progress-percent', `${ratio * 100}%`);
-    }
+    if (elements.progress) elements.progress.style.setProperty('--focus-progress', String(ratio));
     elements.time?.setAttribute('datetime', `PT${Math.max(0, remaining)}S`);
     renderEggProgress(session, remaining);
     document.title = `${formatTimer(remaining)} · ${session.phase === 'break' ? 'Break' : 'Focus'} - Nest`;
@@ -297,60 +354,57 @@ export function createFocusView() {
       item.append(copy, time);
       elements.history.appendChild(item);
     });
-    if (elements.historyEmpty) elements.historyEmpty.hidden = history.length > 0;
+    if (elements.historyRegion) {
+      elements.historyRegion.hidden = history.length === 0;
+      if (!history.length) elements.historyRegion.open = false;
+    }
+  }
+
+  function syncPlaylistControls({ clearStatus = false } = {}) {
+    const raw = String(elements.spotifyUrl?.value || '').trim();
+    const normalized = normalizeSpotifyPlaylist(raw);
+    const invalid = Boolean(raw && !normalized);
+    elements.spotifyUrl?.setAttribute('aria-invalid', String(invalid));
+    if (elements.playlistApply) elements.playlistApply.disabled = playlistBusy || !normalized;
+    if (clearStatus) setPlaylistStatus(invalid ? 'Use an open.spotify.com playlist URL.' : '', invalid ? 'error' : '');
+    return normalized;
   }
 
   function renderSpotify(source) {
-    if (!elements.spotifyRegion) return;
     const spotifyUrl = source?.spotify_url || '';
     const embedUrl = source?.spotify_embed_url || spotifyEmbedUrl(spotifyUrl);
-    const active = document.body.classList.contains('focus-session-active');
-    if (active && elements.spotifyUrl && spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
-    if (elements.spotifyPanelUrl) elements.spotifyPanelUrl.value = spotifyUrl;
-    text(elements.spotifyPanelAction, embedUrl ? 'Change playlist' : 'Add playlist');
-    if (elements.applyPlaylist) elements.applyPlaylist.hidden = !active;
+    if (elements.spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
+    text(elements.playlistAction, embedUrl ? 'Update playlist' : 'Add playlist');
+    if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
     if (embedUrl && elements.spotifyEmbed) {
       if (elements.spotifyEmbed.dataset.src !== embedUrl) {
         elements.spotifyEmbed.src = embedUrl;
         elements.spotifyEmbed.dataset.src = embedUrl;
       }
       elements.spotifyEmbed.hidden = false;
-      elements.spotifyRegion.hidden = false;
-      if (elements.utilities) elements.utilities.hidden = false;
-      if (elements.spotifyEmpty) elements.spotifyEmpty.hidden = true;
       if (elements.openSpotify) {
         elements.openSpotify.hidden = false;
         elements.openSpotify.href = spotifyUrl;
       }
-      text(elements.spotifyLabel, source?.routine_name || source?.name || 'Saved focus playlist');
+      text(elements.spotifyLabel, source?.routine_name || source?.name || 'Playlist ready for this session.');
     } else {
       if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
-      if (elements.spotifyEmpty) elements.spotifyEmpty.hidden = false;
-      elements.spotifyRegion.hidden = false;
       if (elements.openSpotify) elements.openSpotify.hidden = true;
-      text(elements.spotifyLabel, 'Your routine can keep one playlist close.');
-      if (elements.utilities) elements.utilities.hidden = false;
+      text(elements.spotifyLabel, 'Add an optional Spotify playlist.');
     }
-  }
-
-  function setSpotifyVolume(value, persist = true) {
-    const volume = Math.min(100, Math.max(0, Number(value) || 0));
-    if (elements.spotifyVolume) elements.spotifyVolume.value = String(volume);
-    text(elements.spotifyVolumeValue, `${volume}%`);
-    document.body.style.setProperty('--focus-spotify-volume', String(volume / 100));
-    if (persist) writePreference(VOLUME_KEY, volume);
+    syncPlaylistControls();
   }
 
   function setSpotifyLayout(value, persist = true) {
-    const layout = LAYOUTS.has(value) ? value : 'bottom-compact';
-    if (elements.spotifyLayout) elements.spotifyLayout.value = layout;
+    const layout = LAYOUT_MAP.get(value) || 'below';
     document.body.dataset.spotifyLayout = layout;
+    elements.layoutInputs.forEach((input) => { input.checked = input.value === layout; });
     if (persist) writePreference(LAYOUT_KEY, layout);
+    return layout;
   }
 
   function loadPreferences() {
-    setSpotifyVolume(readPreference(VOLUME_KEY, '100'), false);
-    setSpotifyLayout(readPreference(LAYOUT_KEY, 'bottom-compact'), false);
+    setSpotifyLayout(readPreference(LAYOUT_KEY, 'below'), false);
   }
 
   function startCountdown() {
@@ -387,24 +441,26 @@ export function createFocusView() {
     if (!elements.egg) return;
     elements.egg.dataset.eggState = 'closed';
     elements.egg.dataset.crackLevel = '0';
+    elements.egg.dataset.nestStage = '0';
     elements.egg.style.setProperty('--focus-egg-progress', '0');
-    elements.egg.setAttribute('aria-label', 'Focus egg');
-    text(elements.eggResult, 'Complete!');
+    elements.egg.setAttribute('aria-label', 'An egg resting in a nest');
+    text(elements.eggResult, 'Focus complete.');
   }
 
   function playEggOpening(phase) {
     if (!elements.egg) return Promise.resolve();
     window.clearTimeout(countdownTimer);
     window.clearTimeout(eggOpenTimer);
-    elements.egg.dataset.crackLevel = '4';
+    elements.egg.dataset.nestStage = '8';
+    elements.egg.dataset.crackLevel = '3';
     elements.egg.dataset.eggState = 'opening';
     text(elements.eggResult, completionMessage(phase));
-    elements.egg.setAttribute('aria-label', `${phase === 'break' ? 'Break' : 'Focus'} complete`);
+    elements.egg.setAttribute('aria-label', `${phase === 'break' ? 'Break' : 'Focus'} complete; an open book rises from the egg`);
     requestAnimationFrame(() => {
       if (elements.egg) elements.egg.dataset.eggState = 'open';
     });
     return new Promise((resolve) => {
-      eggOpenTimer = window.setTimeout(resolve, 1700);
+      eggOpenTimer = window.setTimeout(resolve, 3000);
     });
   }
 
@@ -419,21 +475,24 @@ export function createFocusView() {
     elements,
     showMode,
     syncOptionsState,
+    openOptions,
     closeOptions,
     setFormStatus,
     setSettingsStatus,
-    setSpotifyPanelStatus,
+    setPlaylistStatus,
     setBusy,
     setSessionBusy,
+    setPlaylistBusy,
     renderRoutines,
     fillRoutine,
+    syncRhythmVisibility,
     renderSuggestions,
     renderRecent,
     renderSession,
     renderTick,
     renderHistory,
     renderSpotify,
-    setSpotifyVolume,
+    syncPlaylistControls,
     setSpotifyLayout,
     startCountdown,
     playEggOpening,

@@ -107,7 +107,12 @@ def start_focus_session():
 def update_focus_session(session_id):
     payload = request.get_json(silent=True) or {}
     try:
-        session = focus_mode.update_session(current_user.id, session_id, payload.get("action"))
+        session = focus_mode.update_session(
+            current_user.id,
+            session_id,
+            payload.get("action"),
+            payload=payload,
+        )
         return jsonify({"session": session, "active": session["state"] in focus_mode.ACTIVE_STATES})
     except (ValueError, LookupError, sqlite3.Error) as error:
         return _error_response(error)

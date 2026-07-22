@@ -1,7 +1,6 @@
 import {
   focusApi,
   formPayload,
-  normalizeSpotifyPlaylist,
   routineFromState,
   spotifyEmbedUrl,
   suggestedBreaks,
@@ -46,7 +45,7 @@ function announcePhaseTransition(previousPhase, nextSession) {
 }
 
 function selectedRoutine() {
-  return routineFromState(state, elements.routineSelect.value);
+  return routineFromState(state, elements.routineSelect?.value);
 }
 
 function hideSidebarForFocus() {
@@ -95,6 +94,7 @@ function renderSetup() {
   view.renderRoutines(state.routines);
   view.renderRecent(state.recentSelections);
   renderSuggestions();
+  view.syncRhythmVisibility();
 }
 
 function renderActiveSession() {
@@ -106,7 +106,7 @@ function renderActiveSession() {
 
 function renderCurrentMode() {
   const active = Boolean(state.session && ['running', 'paused'].includes(state.session.state));
-  view.showMode(active);
+  view.showMode(active, state.session);
   view.renderHistory(state.history);
   if (active) {
     focusSidebar(true);
@@ -196,6 +196,7 @@ async function refreshHistory() {
     state.history = payload.history || [];
     state.recentSelections = payload.recent_selections || [];
     view.renderHistory(state.history);
+    view.renderRecent(state.recentSelections);
   } catch (_error) {
     // The next meaningful session action will refresh history again.
   }
@@ -279,6 +280,11 @@ function applySelection(selection) {
   elements.routineSelect.value = '';
   elements.deleteRoutine.hidden = true;
   renderSuggestions();
+  view.renderSpotify({
+    ...selection,
+    spotify_url: selection.spotify_url || '',
+    spotify_embed_url: spotifyEmbedUrl(selection.spotify_url || ''),
+  });
 }
 
 async function startSession(event) {
@@ -300,33 +306,57 @@ async function startSession(event) {
   }
 }
 
-function applyLivePlaylist(sourceInput = elements.spotifyPanelUrl || elements.spotifyUrl) {
-  const value = String(sourceInput?.value || '').trim();
-  const normalized = normalizeSpotifyPlaylist(value);
-  if (value && !normalized) {
-    view.setSettingsStatus('Use a Spotify playlist link from open.spotify.com.', 'error');
-    view.setSpotifyPanelStatus('Use a Spotify playlist link from open.spotify.com.', 'error');
-    sourceInput?.focus();
+async function applyPlaylist() {
+  const normalized = view.syncPlaylistControls({ clearStatus: true });
+  if (!normalized) {
+    elements.spotifyUrl?.focus();
     return;
   }
-  if (elements.spotifyUrl) elements.spotifyUrl.value = normalized;
-  if (elements.spotifyPanelUrl) elements.spotifyPanelUrl.value = normalized;
-  const nextPlaylist = {
-    ...(state.session || {}),
-    spotify_url: normalized,
-    spotify_embed_url: spotifyEmbedUrl(normalized),
-  };
-  if (state.session) state.session = nextPlaylist;
-  view.renderSpotify(nextPlaylist);
-  const message = normalized ? 'Playlist added to this session.' : 'Spotify removed from this session.';
-  view.setSettingsStatus(message, 'success');
-  view.setSpotifyPanelStatus(message, 'success');
+  view.setPlaylistBusy(true);
+  try {
+    if (state.session) {
+      const response = await focusApi.setPlaylist(state.session.id, normalized);
+      state.session = clockedSession(response.session);
+      view.renderSpotify(state.session);
+      view.setPlaylistStatus('Playlist updated for this session.', 'success');
+      return;
+    }
+    const nextPlaylist = {
+      ...(selectedRoutine() || {}),
+      spotify_url: normalized,
+      spotify_embed_url: spotifyEmbedUrl(normalized),
+    };
+    view.renderSpotify(nextPlaylist);
+    view.setPlaylistStatus('Playlist ready for this session.', 'success');
+  } catch (error) {
+    view.setPlaylistStatus(error.message, 'error');
+  } finally {
+    view.setPlaylistBusy(false);
+  }
+}
+
+async function removePlaylist() {
+  view.setPlaylistBusy(true);
+  try {
+    if (state.session) {
+      const response = await focusApi.setPlaylist(state.session.id, '');
+      state.session = clockedSession(response.session);
+      view.renderSpotify(state.session);
+    } else {
+      view.renderSpotify({ ...(selectedRoutine() || {}), spotify_url: '', spotify_embed_url: '' });
+    }
+    view.setPlaylistStatus('Playlist removed.', 'success');
+  } catch (error) {
+    view.setPlaylistStatus(error.message, 'error');
+  } finally {
+    view.setPlaylistBusy(false);
+  }
 }
 
 async function saveRoutine() {
   const payload = formPayload(elements.form);
   if (!elements.routineName.value.trim()) {
-    view.setFormStatus('Enter a routine name before saving.', 'error');
+    view.setSettingsStatus('Enter a routine name before saving.', 'error');
     elements.routineName.focus();
     return;
   }
@@ -339,9 +369,9 @@ async function saveRoutine() {
     else state.routines.unshift(response.routine);
     view.renderRoutines(state.routines, response.routine.id);
     view.renderSpotify(response.routine);
-    view.setFormStatus('Routine saved to your account.', 'success');
+    view.setSettingsStatus('Routine saved to your account.', 'success');
   } catch (error) {
-    view.setFormStatus(error.message, 'error');
+    view.setSettingsStatus(error.message, 'error');
   } finally {
     elements.saveRoutine.disabled = false;
   }
@@ -366,35 +396,39 @@ async function deleteRoutine() {
     view.fillRoutine(null);
     view.renderSpotify(null);
     renderSuggestions();
-    view.setFormStatus('Routine deleted.');
+    view.setSettingsStatus('Routine deleted.');
   } catch (error) {
-    view.setFormStatus(error.message, 'error');
+    view.setSettingsStatus(error.message, 'error');
   }
 }
 
 function bindEvents() {
   elements.form.addEventListener('submit', startSession);
-  elements.options?.addEventListener('toggle', () => view.syncOptionsState());
-  elements.sessionOptions?.addEventListener('click', () => {
-    if (!elements.options) return;
-    elements.options.open = true;
-    view.syncOptionsState();
-    window.setTimeout(() => elements.spotifyUrl?.focus(), 120);
-  });
+  elements.optionsOpen.forEach((button) => button.addEventListener('click', () => view.openOptions(button)));
   elements.optionsClose?.addEventListener('click', (event) => {
     event.preventDefault();
-    event.stopPropagation();
     view.closeOptions();
   });
-  elements.optionsBackdrop?.addEventListener('click', () => view.closeOptions());
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && elements.options?.open) view.closeOptions();
+  elements.options?.addEventListener('close', () => view.syncOptionsState());
+  elements.options?.addEventListener('cancel', () => window.setTimeout(() => view.syncOptionsState(), 0));
+  elements.options?.addEventListener('click', (event) => {
+    if (event.target !== elements.options) return;
+    const rect = elements.options.getBoundingClientRect();
+    const inside = event.clientX >= rect.left && event.clientX <= rect.right
+      && event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (!inside) view.closeOptions();
   });
   elements.focusMinutes.addEventListener('input', renderSuggestions);
+  elements.cycles.addEventListener('input', () => {
+    renderSuggestions();
+    view.syncRhythmVisibility();
+  });
   elements.routineSelect.addEventListener('change', () => {
     const routine = selectedRoutine();
     view.fillRoutine(routine);
     view.renderSpotify(routine);
+    view.setSettingsStatus();
+    view.setPlaylistStatus();
     renderSuggestions();
   });
   document.querySelectorAll('[data-focus-preset]').forEach((button) => {
@@ -405,22 +439,24 @@ function bindEvents() {
       cycles: Number(button.dataset.cycles),
     }));
   });
-  elements.suggestions.addEventListener('click', (event) => {
+  elements.suggestions?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-break-suggestion]');
     if (!button) return;
     elements.breakMinutes.value = button.dataset.breakSuggestion;
     if (!Number(elements.longBreakMinutes.value)) elements.longBreakMinutes.value = button.dataset.breakSuggestion;
   });
-  elements.spotifyVolume?.addEventListener('input', () => view.setSpotifyVolume(elements.spotifyVolume.value));
-  elements.spotifyLayout?.addEventListener('change', () => view.setSpotifyLayout(elements.spotifyLayout.value));
-  elements.applyPlaylist?.addEventListener('click', () => applyLivePlaylist(elements.spotifyUrl));
-  elements.spotifyPanelApply?.addEventListener('click', () => applyLivePlaylist(elements.spotifyPanelUrl));
-  elements.spotifyPanelUrl?.addEventListener('keydown', (event) => {
+  elements.layoutInputs.forEach((input) => input.addEventListener('change', () => {
+    if (input.checked) view.setSpotifyLayout(input.value);
+  }));
+  elements.spotifyUrl?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }));
+  elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); });
+  elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); });
+  elements.spotifyUrl?.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter') return;
     event.preventDefault();
-    applyLivePlaylist(elements.spotifyPanelUrl);
+    if (!elements.playlistApply.disabled) void applyPlaylist();
   });
-  elements.recentList.addEventListener('click', (event) => {
+  elements.recentList?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-recent-selection]');
     if (!button) return;
     applySelection(state.recentSelections[Number(button.dataset.recentSelection)]);

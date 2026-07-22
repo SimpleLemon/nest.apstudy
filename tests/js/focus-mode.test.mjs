@@ -36,6 +36,11 @@ test('focus timer formatting and progress use stable timestamp math', async () =
     phase: 'focus', completed_focus_cycles: 0, total_cycles: 4,
     break_seconds: 300, long_break_seconds: 900,
   }), 'Break next · 5 min');
+  assert.equal(timer.nestStage(0), 0);
+  assert.equal(timer.nestStage(0.5), 4);
+  assert.equal(timer.nestStage(0.92), 8);
+  assert.equal(timer.eggCrackLevel(0.69), 0);
+  assert.equal(timer.eggCrackLevel(0.94), 3);
 });
 
 test('focus page keeps resource-light and accessibility contracts wired', async () => {
@@ -47,25 +52,33 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   const navbar = await readFile(path.join(repoRoot, 'static/js/core/navbar.js'), 'utf8');
   assert.match(template, /data-focus-break-suggestions aria-live="polite"/);
   assert.match(template, /loading="lazy"/);
-  assert.match(template, /<details class="focus-options">/);
-  assert.match(template, /aria-label="Open focus settings"/);
-  assert.match(template, /<strong>Advanced settings<\/strong>/);
-  assert.match(template, /id="focus-volume"[^>]+value="100"/);
-  assert.match(template, /class="focus-help"[^>]+data-tooltip="How long you will work before the timer moves to a break\."/);
-  assert.match(template, /data-tooltip="Choose whether Spotify sits below the timer, beside it, or in a floating corner\."/);
+  assert.match(template, /<dialog class="focus-options-dialog"[^>]+data-focus-options/);
+  assert.match(template, />Session settings<\/span>/);
+  assert.match(template, /data-focus-active-summary/);
+  assert.match(template, /data-focus-inactive-settings/);
+  assert.doesNotMatch(template, /Advanced settings|focus-volume|focus-help|data-tooltip/);
+  assert.doesNotMatch(template, /<button\b[^>]*\btitle=/);
   assert.match(template, /data-focus-egg/);
   assert.match(template, /data-focus-egg-result/);
-  assert.match(template, /value="right-large"/);
-  assert.match(template, /Set a focus timer/);
+  assert.equal((template.match(/class="focus-nest-branch /g) || []).length, 8);
+  assert.match(template, /value="below"/);
+  assert.match(template, /value="beside"/);
+  assert.match(template, /value="floating"/);
+  assert.match(template, /<h1 id="focus-setup-title">Set a focus timer<\/h1>/);
+  assert.doesNotMatch(template, /id="focus-page-title"|id="focus-page-subtitle"/);
   assert.doesNotMatch(template, /left_panel_open|play_arrow|logout/);
   assert.doesNotMatch(template, /data-focus-reopen-sidebar|data-focus-prepare-next/);
   assert.match(template, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
-  assert.match(template, /data-focus-spotify-panel-url/);
-  assert.match(template, /data-focus-spotify-panel-apply/);
-  assert.match(styles, /\.focus-egg\[data-egg-state="open"\] \.focus-egg-half,[\s\S]*?\.focus-egg-crack\s*\{[\s\S]*?opacity: 0;/);
-  assert.match(styles, /\.focus-spotify-panel-form/);
+  assert.equal((template.match(/id="focus-spotify-url"/g) || []).length, 1);
+  assert.match(template, /data-focus-playlist-apply disabled/);
+  assert.match(template, /data-focus-playlist-remove hidden/);
+  assert.match(template, /data-focus-history-region hidden/);
+  assert.match(styles, /\.focus-options-dialog::backdrop/);
+  assert.match(styles, /\.focus-egg\[data-nest-stage="8"\] \.focus-nest-branch/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(controller, /phase changes|focusApi\.updateSession|scheduleTick/);
-  assert.match(controller, /applyLivePlaylist\(elements\.spotifyPanelUrl\)/);
+  assert.match(controller, /focusApi\.setPlaylist/);
+  assert.match(controller, /view\.openOptions/);
   assert.match(controller, /shellActive/);
   assert.match(controller, /hideSidebarForFocus/);
   assert.match(controller, /sessionActionInFlight/);
@@ -76,6 +89,7 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.match(notifications, /focus_mode_active/);
   assert.match(navbar, /focusSidebarWasCollapsed/);
   assert.match(service, /state IN \('running','paused'\)/);
-  assert.match(styles, /\.focus-help:hover::after,[\s\S]*?\.focus-help:focus::after/);
+  assert.match(service, /action == "set_playlist"/);
+  assert.doesNotMatch(styles, /focus-setup-options-open|focus-help/);
   assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?data-spotify-layout/);
 });

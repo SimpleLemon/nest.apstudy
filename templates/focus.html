@@ -29,14 +29,7 @@
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
 
-    <main class="workspace-page-shell focus-main" aria-labelledby="focus-page-title">
-        <header class="focus-page-header">
-            <div>
-                <h1 id="focus-page-title">Focus Mode</h1>
-                <p id="focus-page-subtitle">A quiet place to finish one thing.</p>
-            </div>
-        </header>
-
+    <main class="workspace-page-shell focus-main" aria-labelledby="focus-setup-title">
         <section class="focus-loading" data-focus-loading role="status" aria-live="polite" aria-busy="true">
             <span class="sr-only">Loading Focus Mode.</span>
             <div class="focus-loading-ring apstudy-skeleton" aria-hidden="true"></div>
@@ -45,243 +38,215 @@
 
         <form class="focus-routine-form" data-focus-form id="focus-routine-form" novalidate>
             <section class="focus-setup" data-focus-setup hidden aria-labelledby="focus-setup-title">
-                <div class="focus-setup-intro">
-                    <h2 id="focus-setup-title">Set a focus timer</h2>
-                    <p>Choose a length, then start.</p>
-                </div>
+                <header class="focus-setup-header">
+                    <div>
+                        <h1 id="focus-setup-title">Set a focus timer</h1>
+                        <p>Choose a length and begin.</p>
+                    </div>
+                    <button type="button" class="focus-button focus-button-secondary focus-settings-trigger" data-focus-options-open aria-controls="focus-options-panel" aria-expanded="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        <span>Session settings</span>
+                    </button>
+                </header>
+
+                <label class="focus-routine-picker focus-field" for="focus-routine-select" data-focus-routine-picker hidden>
+                    <span>Saved routine</span>
+                    <select id="focus-routine-select" name="routine_id">
+                        <option value="">Custom timer</option>
+                    </select>
+                </label>
 
                 <div class="focus-form-main">
                     <fieldset class="focus-fieldset focus-time-fieldset">
                         <legend class="sr-only">Focus time</legend>
                         <label class="focus-duration-control" for="focus-minutes">
-                            <input id="focus-minutes" name="focus_minutes" type="number" inputmode="numeric" min="1" max="240" value="25" required aria-describedby="focus-duration-unit focus-duration-help" />
+                            <input id="focus-minutes" name="focus_minutes" type="number" inputmode="numeric" min="1" max="240" value="25" required aria-describedby="focus-duration-unit" />
                             <span id="focus-duration-unit">minutes</span>
-                            <span class="focus-help" id="focus-duration-help" tabindex="0" aria-label="Focus length help" data-tooltip="How long you will work before the timer moves to a break." title="How long you will work before the timer moves to a break.">?</span>
                         </label>
                         <div class="focus-preset-row" aria-label="Focus timer presets">
-                            <button type="button" class="focus-choice" data-focus-preset data-focus="25" data-break="5" data-cycles="1" aria-label="Use a 25 minute focus preset" title="Use 25 minutes of focus followed by a 5 minute break.">25</button>
-                            <button type="button" class="focus-choice" data-focus-preset data-focus="50" data-break="10" data-cycles="1" aria-label="Use a 50 minute focus preset" title="Use 50 minutes of focus followed by a 10 minute break.">50</button>
-                            <button type="button" class="focus-choice" data-focus-preset data-focus="90" data-break="15" data-cycles="1" aria-label="Use a 90 minute focus preset" title="Use 90 minutes of focus followed by a 15 minute break.">90</button>
+                            <button type="button" class="focus-choice" data-focus-preset data-focus="25" data-break="5" data-cycles="1" aria-label="Set 25 minutes">25 min</button>
+                            <button type="button" class="focus-choice" data-focus-preset data-focus="50" data-break="10" data-cycles="1" aria-label="Set 50 minutes">50 min</button>
+                            <button type="button" class="focus-choice" data-focus-preset data-focus="90" data-break="15" data-cycles="1" aria-label="Set 90 minutes">90 min</button>
                         </div>
                     </fieldset>
                     <p data-focus-form-status role="status" aria-live="polite"></p>
-                    <button type="submit" class="focus-button focus-button-primary">
-                        Start focus
-                    </button>
+                    <button type="submit" class="focus-button focus-button-primary focus-start-button">Start focus</button>
+                </div>
+
+                <div class="focus-recent-selections" data-focus-recent-selections hidden>
+                    <span>Recent choices</span>
+                    <div class="focus-chip-row" data-focus-recent-list></div>
                 </div>
             </section>
 
-            <details class="focus-options">
-                <summary id="focus-options-summary" aria-controls="focus-options-panel" aria-expanded="false" aria-label="Open focus settings" title="Focus settings">
-                    <span class="material-symbols-outlined" aria-hidden="true">settings</span>
-                    <span class="sr-only">Session options</span>
-                </summary>
-                <div class="focus-options-backdrop" data-focus-options-backdrop aria-hidden="true"></div>
-                <div class="focus-options-popover" id="focus-options-panel" role="dialog" aria-labelledby="focus-options-title">
-                    <div class="focus-options-header">
-                        <div>
-                            <h2 id="focus-options-title">Focus settings</h2>
-                            <p>Change the timer rhythm and player before you settle in.</p>
-                        </div>
-                        <button type="button" class="focus-icon-button focus-options-close" data-focus-options-close aria-label="Close focus settings">
-                            <span class="material-symbols-outlined" aria-hidden="true">close</span>
-                        </button>
+            <dialog class="focus-options-dialog" id="focus-options-panel" data-focus-options aria-labelledby="focus-options-title">
+                <header class="focus-options-header">
+                    <div>
+                        <h2 id="focus-options-title">Session settings</h2>
+                        <p data-focus-options-description>Adjust the rhythm and player placement.</p>
                     </div>
+                    <button type="button" class="focus-icon-button" data-focus-options-close aria-label="Close session settings">
+                        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                </header>
 
-                    <div class="focus-options-scroll">
-                        <section class="focus-options-group focus-spotify-settings" aria-labelledby="focus-spotify-settings-heading">
-                            <div class="focus-options-group-heading">
-                                <div>
-                                    <h3 id="focus-spotify-settings-heading">Spotify player</h3>
-                                    <p>Choose a playlist and where the player appears. Playlist changes can be applied after start.</p>
-                                </div>
+                <div class="focus-options-scroll">
+                    <section class="focus-active-summary" data-focus-active-summary hidden aria-labelledby="focus-active-summary-title">
+                        <h3 id="focus-active-summary-title">Current session</h3>
+                        <p data-focus-active-summary-copy></p>
+                    </section>
+
+                    <div data-focus-inactive-settings>
+                        <section class="focus-options-group" aria-labelledby="focus-timing-heading">
+                            <h3 id="focus-timing-heading">Timer rhythm</h3>
+                            <div class="focus-duration-row">
+                                <label class="focus-field" for="focus-cycles">
+                                    <span>Cycles <small>focus blocks</small></span>
+                                    <input id="focus-cycles" name="cycles" type="number" inputmode="numeric" min="1" max="12" value="1" required />
+                                </label>
+                                <label class="focus-field" for="focus-break-minutes" data-focus-break-field hidden>
+                                    <span>Break <small>minutes</small></span>
+                                    <input id="focus-break-minutes" name="break_minutes" type="number" inputmode="numeric" min="0" max="60" value="0" />
+                                </label>
+                                <label class="focus-field" for="focus-long-break-minutes" data-focus-long-break-field hidden>
+                                    <span>Long break <small>minutes</small></span>
+                                    <input id="focus-long-break-minutes" name="long_break_minutes" type="number" inputmode="numeric" min="0" max="90" value="0" aria-describedby="focus-long-break-note" />
+                                    <small id="focus-long-break-note">Used after every fourth focus block.</small>
+                                </label>
                             </div>
-
-                            <label class="focus-field" for="focus-spotify-url">
-                                <span class="focus-label-with-help">Playlist link <small>optional</small><span class="focus-help" tabindex="0" aria-label="Playlist link help" data-tooltip="Paste a playlist link from open.spotify.com. Leave it blank to use no embedded player." title="Paste a playlist link from open.spotify.com. Leave it blank to use no embedded player.">?</span></span>
-                                <input id="focus-spotify-url" name="spotify_url" type="url" inputmode="url" autocomplete="url" placeholder="https://open.spotify.com/playlist/…" />
+                            <div class="focus-suggestion-block" data-focus-suggestion-block hidden>
+                                <span>Suggested break</span>
+                                <div class="focus-suggestion-row" data-focus-break-suggestions aria-live="polite"></div>
+                            </div>
+                            <label class="focus-check-row" for="focus-auto-start" data-focus-auto-start-row hidden>
+                                <input id="focus-auto-start" name="auto_start_next" type="checkbox" />
+                                <span>Automatically start breaks and the next focus</span>
                             </label>
-
-                            <div class="focus-settings-grid">
-                                <label class="focus-field focus-volume-field" for="focus-volume">
-                                    <span class="focus-label-with-output"><span class="focus-label-with-help">Volume <span class="focus-help" tabindex="0" aria-label="Volume help" data-tooltip="Sets the preferred volume value for the player control." title="Sets the preferred volume value for the player control.">?</span></span><output data-focus-volume-value for="focus-volume">100%</output></span>
-                                    <input id="focus-volume" name="spotify_volume" type="range" min="0" max="100" step="1" value="100" />
-                                </label>
-                                <label class="focus-field" for="focus-spotify-layout">
-                                    <span class="focus-label-with-help">Player layout <span class="focus-help" tabindex="0" aria-label="Player layout help" data-tooltip="Choose whether Spotify sits below the timer, beside it, or in a floating corner." title="Choose whether Spotify sits below the timer, beside it, or in a floating corner.">?</span></span>
-                                    <select id="focus-spotify-layout" name="spotify_layout">
-                                        <option value="bottom-compact">Below timer · compact</option>
-                                        <option value="bottom-large">Below timer · large</option>
-                                        <option value="right-compact">Right side · compact</option>
-                                        <option value="right-large">Right side · large</option>
-                                        <option value="floating">Floating corner · mini</option>
-                                    </select>
-                                </label>
-                            </div>
-                            <button type="button" class="focus-button focus-button-quiet focus-apply-playlist" data-focus-apply-playlist hidden title="Update the playlist in the active focus session.">Apply playlist</button>
-                            <p class="focus-settings-status" data-focus-settings-status role="status" aria-live="polite"></p>
                         </section>
 
-                        <details class="focus-advanced-settings">
-                            <summary>
-                                <span>
-                                    <strong>Advanced settings</strong>
-                                    <small>Breaks, cycles, routines, and auto-start</small>
-                                </span>
-                                <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
-                            </summary>
-                            <div class="focus-advanced-body">
-                                <section class="focus-options-group" aria-labelledby="focus-timing-heading">
-                                    <div class="focus-options-group-heading">
-                                        <div>
-                                    <h3 id="focus-timing-heading">Timer rhythm</h3>
-                                    <p>Decide how focus blocks and breaks should flow.</p>
-                                        </div>
-                                    </div>
-
-                                    <label class="focus-field" for="focus-routine-select">
-                                        <span class="focus-label-with-help">Saved routine <span class="focus-help" tabindex="0" aria-label="Saved routine help" data-tooltip="Load a saved combination of focus length, breaks, cycles, and playlist." title="Load a saved combination of focus length, breaks, cycles, and playlist.">?</span></span>
-                                        <select id="focus-routine-select" name="routine_id">
-                                            <option value="">Custom routine</option>
-                                        </select>
-                                    </label>
-
-                                    <div class="focus-duration-row">
-                                        <label class="focus-field" for="focus-cycles">
-                                            <span class="focus-label-with-help">Cycles <small>focus blocks</small><span class="focus-help" tabindex="0" aria-label="Cycles help" data-tooltip="How many focus blocks to run in this routine." title="How many focus blocks to run in this routine.">?</span></span>
-                                            <input id="focus-cycles" name="cycles" type="number" inputmode="numeric" min="1" max="12" value="1" required />
-                                        </label>
-                                        <label class="focus-field" for="focus-break-minutes">
-                                            <span class="focus-label-with-help">Break <small>minutes</small><span class="focus-help" tabindex="0" aria-label="Break length help" data-tooltip="The short rest between focus blocks. Use 0 to continue immediately." title="The short rest between focus blocks. Use 0 to continue immediately.">?</span></span>
-                                            <input id="focus-break-minutes" name="break_minutes" type="number" inputmode="numeric" min="0" max="60" value="0" />
-                                        </label>
-                                        <label class="focus-field" for="focus-long-break-minutes">
-                                            <span class="focus-label-with-help">Long break <small>minutes</small><span class="focus-help" tabindex="0" aria-label="Long break help" data-tooltip="The longer rest used after a completed group of four focus blocks." title="The longer rest used after a completed group of four focus blocks.">?</span></span>
-                                            <input id="focus-long-break-minutes" name="long_break_minutes" type="number" inputmode="numeric" min="0" max="90" value="0" />
-                                        </label>
-                                    </div>
-
-                                    <div class="focus-suggestion-block">
-                                        <span class="focus-label-with-help">Suggested breaks <span class="focus-help" tabindex="0" aria-label="Suggested breaks help" data-tooltip="Suggestions use your recent choices and the length of this focus block as a starting point." title="Suggestions use your recent choices and the length of this focus block as a starting point.">?</span></span>
-                                        <div class="focus-suggestion-row" data-focus-break-suggestions aria-live="polite"></div>
-                                    </div>
-
-                                    <label class="focus-check-row" for="focus-auto-start">
-                                        <input id="focus-auto-start" name="auto_start_next" type="checkbox" />
-                                        <span class="focus-label-with-help">Automatically start breaks and the next focus <span class="focus-help" tabindex="0" aria-label="Automatic start help" data-tooltip="Move into the next break or focus block without waiting for another click." title="Move into the next break or focus block without waiting for another click.">?</span></span>
-                                    </label>
-                                </section>
-
-                                <div class="focus-options-divider" aria-hidden="true"></div>
-
-                                <section class="focus-options-group" aria-labelledby="focus-routine-heading">
-                                    <div class="focus-options-group-heading">
-                                        <div>
-                                    <h3 id="focus-routine-heading">Keep this setup</h3>
-                                    <p>Save the rhythm and playlist for another study block.</p>
-                                        </div>
-                                    </div>
-
-                                    <label class="focus-field" for="focus-routine-name">
-                                        <span class="focus-label-with-help">Routine name <span class="focus-help" tabindex="0" aria-label="Routine name help" data-tooltip="Give this setup a name so you can load it again later." title="Give this setup a name so you can load it again later.">?</span></span>
-                                        <input id="focus-routine-name" name="name" type="text" maxlength="60" placeholder="Reading, problem set, writing…" />
-                                    </label>
-                                    <div class="focus-routine-actions">
-                                        <button type="button" class="focus-button focus-button-quiet" data-focus-save-routine title="Save the current timing and playlist as a reusable routine.">Save routine</button>
-                                        <button type="button" class="focus-button focus-button-danger" data-focus-delete-routine hidden title="Delete this saved routine. Completion history stays intact.">Delete routine</button>
-                                    </div>
-                                </section>
-
-                                <div class="focus-recent-selections" data-focus-recent-selections hidden>
-                                    <span class="focus-label-with-help">Recent choices <span class="focus-help" tabindex="0" aria-label="Recent choices help" data-tooltip="Reuse a recent focus and break combination with one click." title="Reuse a recent focus and break combination with one click.">?</span></span>
-                                    <div class="focus-chip-row" data-focus-recent-list></div>
-                                </div>
+                        <section class="focus-options-group focus-routine-editor" aria-labelledby="focus-routine-heading">
+                            <h3 id="focus-routine-heading">Save this setup</h3>
+                            <label class="focus-field" for="focus-routine-name">
+                                <span>Routine name</span>
+                                <input id="focus-routine-name" name="name" type="text" maxlength="60" placeholder="Reading, problem set, writing…" />
+                            </label>
+                            <div class="focus-routine-actions">
+                                <button type="button" class="focus-button focus-button-primary" data-focus-save-routine>Save routine</button>
+                                <button type="button" class="focus-button focus-button-danger" data-focus-delete-routine hidden>Delete routine</button>
                             </div>
-                        </details>
+                            <p class="focus-settings-status" data-focus-settings-status role="status" aria-live="polite"></p>
+                        </section>
                     </div>
-                </div>
-            </details>
-        </form>
 
-        <section class="focus-session" data-focus-session hidden aria-labelledby="focus-session-label">
-            <div class="focus-session-toolbar">
-                <span>Focus session</span>
-                <button type="button" class="focus-icon-button" data-focus-session-options aria-label="Open focus settings" title="Focus settings">
-                    <span class="material-symbols-outlined" aria-hidden="true">settings</span>
-                </button>
-            </div>
-            <div class="focus-session-stage">
-                <div class="focus-cycle-status">
-                    <span id="focus-session-label" data-focus-cycle-label>Focus 1 of 1</span>
-                    <span class="focus-cycle-dots" data-focus-cycle-dots aria-hidden="true"></span>
+                    <section class="focus-options-group focus-layout-settings" aria-labelledby="focus-layout-heading">
+                        <div>
+                            <h3 id="focus-layout-heading">Player placement</h3>
+                            <p>Used when a Spotify playlist is present.</p>
+                        </div>
+                        <fieldset class="focus-layout-choices">
+                            <legend class="sr-only">Spotify player placement</legend>
+                            <label class="focus-layout-choice">
+                                <input type="radio" name="spotify_layout" value="below" checked />
+                                <span class="focus-layout-preview focus-layout-preview-below" aria-hidden="true"><i></i><b></b></span>
+                                <strong>Below</strong>
+                            </label>
+                            <label class="focus-layout-choice">
+                                <input type="radio" name="spotify_layout" value="beside" />
+                                <span class="focus-layout-preview focus-layout-preview-beside" aria-hidden="true"><i></i><b></b></span>
+                                <strong>Beside</strong>
+                            </label>
+                            <label class="focus-layout-choice">
+                                <input type="radio" name="spotify_layout" value="floating" />
+                                <span class="focus-layout-preview focus-layout-preview-floating" aria-hidden="true"><i></i><b></b></span>
+                                <strong>Floating</strong>
+                            </label>
+                        </fieldset>
+                    </section>
                 </div>
-                <div class="focus-timer-shell">
-                    <svg class="focus-progress" viewBox="0 0 360 360" aria-hidden="true">
-                        <circle class="focus-progress-track" cx="180" cy="180" r="158"></circle>
-                        <circle class="focus-progress-value" data-focus-progress cx="180" cy="180" r="158"></circle>
-                    </svg>
-                    <div class="focus-time-content">
-                        <span class="focus-phase-label" data-focus-phase-label>Focus session</span>
-                        <time class="focus-time" data-focus-time>25:00</time>
-                        <div class="focus-countdown" data-focus-countdown hidden aria-live="assertive"></div>
-                        <div class="focus-egg" data-focus-egg data-egg-state="closed" data-crack-level="0" role="img" aria-label="Focus egg">
-                            <div class="focus-egg-aura" aria-hidden="true"></div>
-                            <div class="focus-egg-figure" aria-hidden="true">
-                                <div class="focus-egg-shell"></div>
-                                <div class="focus-egg-half focus-egg-half-left"></div>
-                                <div class="focus-egg-half focus-egg-half-right"></div>
-                                <svg class="focus-egg-crack" viewBox="0 0 220 140" focusable="false">
-                                    <path class="focus-egg-crack-one" d="M35 71 L73 58 L91 73 L112 47 L134 69 L162 52 L188 73"></path>
-                                    <path class="focus-egg-crack-two" d="M86 68 L75 92 L93 105 L83 126"></path>
-                                    <path class="focus-egg-crack-three" d="M134 68 L146 91 L130 108 L144 126"></path>
-                                </svg>
-                            </div>
-                            <div class="focus-egg-book" data-focus-egg-book aria-hidden="true">
-                                <div class="focus-book-spread">
-                                    <div class="focus-book-page focus-book-page-left"></div>
-                                    <div class="focus-book-page focus-book-page-right"></div>
-                                    <strong class="focus-book-message" data-focus-egg-result>Complete!</strong>
+            </dialog>
+
+            <section class="focus-session" data-focus-session hidden aria-labelledby="focus-session-label">
+                <header class="focus-session-toolbar">
+                    <div class="focus-cycle-status">
+                        <span id="focus-session-label" data-focus-cycle-label>Focus 1 of 1</span>
+                        <span class="focus-cycle-dots" data-focus-cycle-dots aria-hidden="true"></span>
+                    </div>
+                    <button type="button" class="focus-button focus-button-secondary focus-settings-trigger" data-focus-session-options aria-controls="focus-options-panel" aria-expanded="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        <span>Session settings</span>
+                    </button>
+                </header>
+
+                <div class="focus-session-stage">
+                    <div class="focus-timer-shell">
+                        <svg class="focus-progress" viewBox="0 0 360 360" aria-hidden="true">
+                            <circle class="focus-progress-track" cx="180" cy="180" r="158"></circle>
+                            <circle class="focus-progress-value" data-focus-progress cx="180" cy="180" r="158"></circle>
+                        </svg>
+                        <div class="focus-time-content">
+                            <span class="focus-phase-label" data-focus-phase-label>Focus session</span>
+                            <time class="focus-time" data-focus-time>25:00</time>
+                            <div class="focus-countdown" data-focus-countdown hidden aria-live="assertive"></div>
+                            <div class="focus-egg" data-focus-egg data-egg-state="closed" data-crack-level="0" data-nest-stage="0" role="img" aria-label="An egg resting in a nest">
+                                <div class="focus-egg-aura" aria-hidden="true"></div>
+                                <div class="focus-nest" aria-hidden="true">
+                                    <span class="focus-nest-branch focus-nest-branch-1"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-2"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-3"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-4"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-5"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-6"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-7"></span>
+                                    <span class="focus-nest-branch focus-nest-branch-8"></span>
+                                </div>
+                                <div class="focus-egg-figure" aria-hidden="true">
+                                    <div class="focus-egg-shell"></div>
+                                    <div class="focus-egg-half focus-egg-half-left"></div>
+                                    <div class="focus-egg-half focus-egg-half-right"></div>
+                                    <svg class="focus-egg-crack" viewBox="0 0 154 132" focusable="false">
+                                        <path class="focus-egg-crack-one" d="M37 66 L62 57 L75 69 L90 52 L111 67"></path>
+                                        <path class="focus-egg-crack-two" d="M75 68 L67 87 L80 98 L72 116"></path>
+                                        <path class="focus-egg-crack-three" d="M90 66 L99 86 L89 101 L99 117"></path>
+                                    </svg>
+                                </div>
+                                <div class="focus-egg-book" data-focus-egg-book>
+                                    <div class="focus-book-spread">
+                                        <div class="focus-book-page focus-book-page-left"></div>
+                                        <div class="focus-book-page focus-book-page-right"></div>
+                                        <strong class="focus-book-message" data-focus-egg-result>Focus complete.</strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="focus-timer-actions">
-                    <button type="button" class="focus-button focus-button-primary" data-focus-toggle>
-                        <span data-focus-toggle-label>Pause</span>
-                    </button>
-                    <button type="button" class="focus-button focus-button-quiet" data-focus-complete-phase>Complete phase</button>
-                    <button type="button" class="focus-button focus-button-quiet" data-focus-end>End session</button>
-                </div>
-                <p class="focus-next-phase" data-focus-next-phase></p>
-            </div>
-
-        </section>
-
-        <section class="focus-utility-rail" data-focus-utilities hidden aria-label="Music and completion history">
-            <div class="focus-spotify-region">
-                <div class="focus-region-heading">
-                    <div>
-                        <h2>Spotify</h2>
-                        <p data-focus-spotify-label>Your routine can keep one playlist close.</p>
+                    <div class="focus-timer-actions">
+                        <button type="button" class="focus-button focus-button-primary" data-focus-toggle><span data-focus-toggle-label>Pause</span></button>
+                        <button type="button" class="focus-button focus-button-secondary" data-focus-complete-phase><span data-focus-complete-phase-label>Finish focus</span></button>
+                        <button type="button" class="focus-button focus-button-danger" data-focus-end>End session</button>
                     </div>
-                    <a data-focus-open-spotify href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" hidden>Open Spotify</a>
+                    <p class="focus-next-phase" data-focus-next-phase></p>
                 </div>
-                <div class="focus-spotify-panel-form" data-focus-spotify-panel-form>
-                    <label class="focus-field" for="focus-spotify-panel-url">
-                        <span class="focus-label-with-help">Playlist link <small>optional</small><span class="focus-help" tabindex="0" aria-label="Spotify playlist help" data-tooltip="Paste an open.spotify.com playlist link here. The player loads only after you add one." title="Paste an open.spotify.com playlist link here. The player loads only after you add one.">?</span></span>
-                        <input id="focus-spotify-panel-url" data-focus-spotify-panel-url type="url" inputmode="url" autocomplete="url" placeholder="Paste a Spotify playlist link…" />
+            </section>
+
+            <section class="focus-soundtrack" data-focus-utilities hidden aria-labelledby="focus-soundtrack-title">
+                <header class="focus-region-heading">
+                    <div>
+                        <h2 id="focus-soundtrack-title">Soundtrack</h2>
+                        <p data-focus-spotify-label>Add an optional Spotify playlist.</p>
+                    </div>
+                    <a data-focus-open-spotify href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" hidden>Open in Spotify</a>
+                </header>
+                <div class="focus-playlist-form">
+                    <label class="focus-field" for="focus-spotify-url">
+                        <span>Spotify playlist <small>optional</small></span>
+                        <input id="focus-spotify-url" name="spotify_url" type="url" inputmode="url" autocomplete="url" placeholder="https://open.spotify.com/playlist/…" aria-describedby="focus-playlist-status" />
                     </label>
-                    <button type="button" class="focus-button focus-button-quiet" data-focus-spotify-panel-apply title="Add or replace the playlist for this focus session.">
-                        <span class="material-symbols-outlined" aria-hidden="true">add_link</span>
-                        <span data-focus-spotify-panel-action>Add playlist</span>
-                    </button>
+                    <div class="focus-playlist-actions">
+                        <button type="button" class="focus-button focus-button-primary" data-focus-playlist-apply disabled><span data-focus-playlist-action>Add playlist</span></button>
+                        <button type="button" class="focus-button focus-button-danger" data-focus-playlist-remove hidden>Remove</button>
+                    </div>
                 </div>
-                <p class="focus-settings-status" data-focus-spotify-panel-status role="status" aria-live="polite"></p>
-                <div class="focus-spotify-empty" data-focus-spotify-empty>
-                    <span class="material-symbols-outlined" aria-hidden="true">headphones</span>
-                    <p>Add a playlist here to keep a light, focused soundtrack below your timer.</p>
-                </div>
+                <p class="focus-settings-status" id="focus-playlist-status" data-focus-playlist-status role="status" aria-live="polite"></p>
                 <iframe
                     class="focus-spotify-embed"
                     data-focus-spotify-embed
@@ -290,21 +255,15 @@
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     referrerpolicy="strict-origin-when-cross-origin"
                     hidden></iframe>
-            </div>
+            </section>
+        </form>
 
-            <details class="focus-history-region">
-                <summary>Recent sessions</summary>
-                <div class="focus-history-body">
-                    <div class="focus-region-heading">
-                        <p>Completed focus and break phases sync across your account.</p>
-                    </div>
-                    <ol class="focus-history-list" data-focus-history></ol>
-                    <div class="focus-history-empty" data-focus-history-empty>
-                        <p>Your completed sessions will appear here.</p>
-                    </div>
-                </div>
-            </details>
-        </section>
+        <details class="focus-history-region" data-focus-history-region hidden>
+            <summary>Recent sessions</summary>
+            <div class="focus-history-body">
+                <ol class="focus-history-list" data-focus-history></ol>
+            </div>
+        </details>
 
         <div class="sr-only" data-focus-announcer aria-live="assertive" aria-atomic="true"></div>
     </main>

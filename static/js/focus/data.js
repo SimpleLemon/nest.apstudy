@@ -28,6 +28,10 @@ export const focusApi = {
     method: 'PATCH',
     body: JSON.stringify({ action }),
   }),
+  setPlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ action: 'set_playlist', spotify_url: spotifyUrl }),
+  }),
   saveRoutine: (payload, routineId = '') => request(
     routineId ? `/api/focus/routines/${encodeURIComponent(routineId)}` : '/api/focus/routines',
     { method: routineId ? 'PATCH' : 'POST', body: JSON.stringify(payload) },

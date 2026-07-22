@@ -28,6 +28,20 @@ export function progressRatio(session, remaining) {
   return Math.min(1, Math.max(0, 1 - remaining / duration));
 }
 
+export function nestStage(ratio) {
+  const progress = Math.min(1, Math.max(0, Number(ratio) || 0));
+  const thresholds = [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 0.92];
+  return thresholds.filter((threshold) => progress >= threshold).length;
+}
+
+export function eggCrackLevel(ratio) {
+  const progress = Math.min(1, Math.max(0, Number(ratio) || 0));
+  if (progress >= 0.94) return 3;
+  if (progress >= 0.84) return 2;
+  if (progress >= 0.7) return 1;
+  return 0;
+}
+
 export function phaseLabel(session) {
   if (!session) return '';
   if (session.phase === 'break') return session.state === 'paused' ? 'Break ready' : 'Break';
