@@ -11,8 +11,6 @@ import {
   phaseLabel,
   progressRatio,
 } from './timer.js';
-import { createSpotifyPlayer } from './spotify-player.js';
-import { createSpotifyLayout } from './spotify-layout.js';
 
 function text(element, value) {
   if (element) element.textContent = value == null ? '' : String(value);
@@ -46,6 +44,36 @@ function lineIcon(paths, className = 'focus-inline-icon') {
     svg.appendChild(path);
   });
   return svg;
+}
+
+function providerIcon(providerName) {
+  const mark = document.createElement('span');
+  const provider = providerName === 'spotify' ? 'spotify' : 'youtube';
+  mark.className = `focus-playlist-card-provider is-${provider}`;
+  mark.setAttribute('aria-hidden', 'true');
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('focusable', 'false');
+  if (provider === 'spotify') {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '12');
+    circle.setAttribute('cy', '12');
+    circle.setAttribute('r', '10');
+    svg.appendChild(circle);
+    ['M7 9.2c3.7-1 7.5-.7 10.6.9', 'M7.7 12.4c3-.8 6.4-.5 9 .7', 'M8.5 15.4c2.4-.6 5-.4 7.2.6'].forEach((value) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', value);
+      svg.appendChild(path);
+    });
+  } else {
+    ['M21 8.1a3 3 0 0 0-2.1-2.1C17 5.5 12 5.5 12 5.5S7 5.5 5.1 6A3 3 0 0 0 3 8.1 31 31 0 0 0 2.5 12 31 31 0 0 0 3 15.9 3 3 0 0 0 5.1 18c1.9.5 6.9.5 6.9.5s5 0 6.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-3.9 31 31 0 0 0-.5-3.9Z', 'm10 9 5 3-5 3V9Z'].forEach((value) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', value);
+      svg.appendChild(path);
+    });
+  }
+  mark.appendChild(svg);
+  return mark;
 }
 
 function playlistCard(playlist) {
@@ -86,23 +114,42 @@ function playlistCard(playlist) {
   const creator = document.createElement('span');
   creator.textContent = playlist.creator || 'Spotify';
   copy.append(title, creator);
-  const provider = document.createElement('span');
-  provider.className = 'focus-playlist-card-provider';
   const providerName = playlist.provider || playlistProvider(playlist.spotify_url);
-  provider.textContent = providerName === 'spotify' ? 'Spotify' : providerName === 'youtube_music' ? 'YT Music' : 'YouTube';
-  button.append(copy, provider);
+  button.append(copy, providerIcon(providerName));
   item.append(remove, button);
   return item;
 }
 
-function formatCompletedAt(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-  const today = new Date();
-  const sameDay = date.toDateString() === today.toDateString();
-  return new Intl.DateTimeFormat(undefined, sameDay
-    ? { hour: 'numeric', minute: '2-digit' }
-    : { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
+function playerPlaceholder(source) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'focus-player-placeholder';
+
+  if (source.thumbnail_url) {
+    const image = document.createElement('img');
+    image.className = 'focus-player-placeholder-artwork';
+    image.src = source.thumbnail_url;
+    image.alt = '';
+    image.loading = 'lazy';
+    wrapper.appendChild(image);
+  }
+
+  const copy = document.createElement('span');
+  copy.className = 'focus-player-placeholder-copy';
+  const title = document.createElement('strong');
+  title.textContent = source.title || 'Playlist ready';
+  const description = document.createElement('span');
+  description.textContent = source.creator
+    ? `${source.creator} · Player loads when focus starts.`
+    : 'Player loads when focus starts.';
+  copy.append(title, description);
+
+  const load = document.createElement('button');
+  load.type = 'button';
+  load.className = 'focus-button focus-button-secondary focus-player-load';
+  load.dataset.focusPlayerLoad = 'true';
+  load.textContent = 'Load player';
+  wrapper.append(copy, load);
+  return wrapper;
 }
 
 export function completionMessage(phase, randomValue = Math.random()) {
@@ -118,8 +165,19 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   let eggOpenTimer = null;
   let countdownResolve = null;
   let eggOpenResolve = null;
-  let lastSettingsTrigger = null;
   let playlistBusy = false;
+  let musicRuntime = null;
+  let musicRuntimePromise = null;
+  let deferredSpotifySource = null;
+  let playerLoadingTimer = null;
+  let playerAssistTimer = null;
+  let pendingPlayerPreferences = { layout: 'beside' };
+  let pendingHistory = [];
+  let historyModulePromise = null;
+  let settingsPanel = null;
+  let settingsPanelPromise = null;
+  let lazyStylesPromise = null;
+  let disposed = false;
   const elements = {
     loading: document.querySelector('[data-focus-loading]'),
     setup: document.querySelector('[data-focus-setup]'),
@@ -183,13 +241,103 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     floatingControls: document.querySelector('[data-focus-floating-controls]'),
     floatingHandle: document.querySelector('[data-focus-floating-handle]'),
     floatingSize: document.querySelector('[data-focus-floating-size]'),
+    panelResize: document.querySelector('[data-focus-panel-resize]'),
     countdown: document.querySelector('[data-focus-countdown]'),
     egg: document.querySelector('[data-focus-egg]'),
     eggResult: document.querySelector('[data-focus-egg-result]'),
     announcer: document.querySelector('[data-focus-announcer]'),
   };
-  const spotifyPlayer = createSpotifyPlayer(elements.spotifyEmbed);
-  const spotifyLayout = createSpotifyLayout({ elements, savePreferences: savePlayerPreferences });
+  const setupAnchor = document.createComment('focus-setup-mount');
+  const sessionAnchor = document.createComment('focus-session-mount');
+  elements.setup?.before(setupAnchor);
+  elements.session?.before(sessionAnchor);
+
+  function ensureLazyStyles() {
+    const existing = document.querySelector('link[data-focus-lazy-styles]');
+    if (existing?.dataset.loaded === 'true' || existing?.sheet) return Promise.resolve();
+    if (lazyStylesPromise) return lazyStylesPromise;
+    const link = existing || document.createElement('link');
+    if (!existing) {
+      link.rel = 'stylesheet';
+      link.href = '/static/css/focus-lazy.css';
+      link.dataset.focusLazyStyles = 'true';
+    }
+    lazyStylesPromise = new Promise((resolve) => {
+      link.addEventListener('load', () => {
+        link.dataset.loaded = 'true';
+        resolve();
+      }, { once: true });
+      link.addEventListener('error', resolve, { once: true });
+    });
+    if (!existing) document.head.appendChild(link);
+    return lazyStylesPromise;
+  }
+
+  async function ensureMusicRuntime() {
+    if (disposed) return null;
+    if (musicRuntime) return musicRuntime;
+    musicRuntimePromise ||= import('./music-runtime.js');
+    const { createMusicRuntime } = await musicRuntimePromise;
+    if (disposed) return null;
+    musicRuntime ||= createMusicRuntime({ elements, savePreferences: savePlayerPreferences });
+    musicRuntime.applyPreferences(pendingPlayerPreferences);
+    return musicRuntime;
+  }
+
+  function clearPlayerFeedback() {
+    window.clearTimeout(playerLoadingTimer);
+    window.clearTimeout(playerAssistTimer);
+    playerLoadingTimer = null;
+    playerAssistTimer = null;
+    elements.spotifyEmbed?.classList.remove('is-player-loading');
+    document.querySelector('[data-focus-player-assist]')?.remove();
+  }
+
+  function renderPlayerPlaceholder() {
+    if (!elements.spotifyEmbed || !deferredSpotifySource) return;
+    clearPlayerFeedback();
+    elements.spotifyEmbed.hidden = false;
+    elements.spotifyEmbed.dataset.playerState = 'deferred';
+    elements.spotifyEmbed.replaceChildren(playerPlaceholder(deferredSpotifySource));
+  }
+
+  async function activateSpotify({ autoplay = false } = {}) {
+    if (disposed || !deferredSpotifySource || !elements.spotifyEmbed) return false;
+    const source = deferredSpotifySource;
+    clearPlayerFeedback();
+    elements.spotifyEmbed.dataset.playerState = 'loading';
+    playerLoadingTimer = window.setTimeout(() => {
+      if (elements.spotifyEmbed?.dataset.playerState === 'loading') {
+        elements.spotifyEmbed.classList.add('is-player-loading');
+      }
+    }, 100);
+    try {
+      const runtime = await ensureMusicRuntime();
+      if (!runtime) return false;
+      const loaded = await runtime.activate(source, { autoplay });
+      if (source !== deferredSpotifySource) return false;
+      window.clearTimeout(playerLoadingTimer);
+      elements.spotifyEmbed.classList.remove('is-player-loading');
+      elements.spotifyEmbed.dataset.playerState = loaded ? 'ready' : 'deferred';
+      if (!loaded) renderPlayerPlaceholder();
+      if (loaded && autoplay) {
+        playerAssistTimer = window.setTimeout(() => {
+          if (!elements.spotifyEmbed || elements.spotifyEmbed.dataset.playerState !== 'ready') return;
+          const assist = document.createElement('p');
+          assist.className = 'focus-player-assist';
+          assist.dataset.focusPlayerAssist = 'true';
+          assist.textContent = 'If music does not start, press play in the player.';
+          elements.spotifyEmbed.insertAdjacentElement('afterend', assist);
+          window.setTimeout(() => assist.remove(), 6000);
+        }, 1000);
+      }
+      return loaded;
+    } catch (_error) {
+      if (source === deferredSpotifySource) renderPlayerPlaceholder();
+      setPlaylistStatus('The player could not load. Your timer is still running.', 'error');
+      return false;
+    }
+  }
 
   function setSettingsContext(active, session = null) {
     if (elements.activeSummary) elements.activeSummary.hidden = !active;
@@ -209,6 +357,13 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   function showMode(active, session = null) {
     document.body.classList.toggle('focus-session-active', active);
     if (elements.loading) elements.loading.hidden = true;
+    if (active) {
+      elements.setup?.remove();
+      if (elements.session && !elements.session.isConnected) sessionAnchor.after(elements.session);
+    } else {
+      elements.session?.remove();
+      if (elements.setup && !elements.setup.isConnected) setupAnchor.after(elements.setup);
+    }
     if (elements.setup) elements.setup.hidden = active;
     if (elements.session) elements.session.hidden = !active;
     if (elements.utilities) elements.utilities.hidden = false;
@@ -216,25 +371,40 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   }
 
   function syncOptionsState() {
+    if (settingsPanel) return settingsPanel.sync();
     const open = Boolean(elements.options?.open);
     document.body.classList.toggle('focus-settings-open', open);
     elements.optionsOpen.forEach((trigger) => trigger.setAttribute('aria-expanded', String(open)));
   }
 
-  function openOptions(trigger) {
-    if (!elements.options || elements.options.open) return;
-    lastSettingsTrigger = trigger || document.activeElement;
-    if (typeof elements.options.showModal === 'function') elements.options.showModal();
-    else elements.options.setAttribute('open', '');
-    syncOptionsState();
+  async function ensureSettingsPanel() {
+    if (disposed) return null;
+    if (settingsPanel) return settingsPanel;
+    void ensureLazyStyles();
+    settingsPanelPromise ||= import('./settings-panel.js');
+    const { createSettingsPanel } = await settingsPanelPromise;
+    if (disposed) return null;
+    settingsPanel ||= createSettingsPanel({
+      dialog: elements.options,
+      openButtons: elements.optionsOpen,
+      closeButton: elements.optionsClose,
+    });
+    return settingsPanel;
+  }
+
+  async function openOptions(trigger) {
+    const loadingTimer = window.setTimeout(() => trigger?.setAttribute('aria-busy', 'true'), 100);
+    try {
+      const panel = await ensureSettingsPanel();
+      panel?.open(trigger);
+    } finally {
+      window.clearTimeout(loadingTimer);
+      trigger?.removeAttribute('aria-busy');
+    }
   }
 
   function closeOptions() {
-    if (!elements.options?.open) return;
-    if (typeof elements.options.close === 'function') elements.options.close();
-    else elements.options.removeAttribute('open');
-    syncOptionsState();
-    window.setTimeout(() => lastSettingsTrigger?.focus?.(), 0);
+    settingsPanel?.close();
   }
 
   function setFormStatus(message = '', tone = '') {
@@ -404,29 +574,25 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     document.title = `${formatTimer(remaining)} · ${session.phase === 'break' ? 'Break' : 'Focus'}`;
   }
 
+  async function mountHistory() {
+    if (disposed || !elements.history || !elements.historyRegion?.open || !pendingHistory.length) return;
+    const loadingTimer = window.setTimeout(() => elements.historyRegion?.classList.add('is-lazy-loading'), 100);
+    await ensureLazyStyles();
+    historyModulePromise ||= import('./history-view.js');
+    const { renderHistory: renderHistoryList } = await historyModulePromise;
+    window.clearTimeout(loadingTimer);
+    elements.historyRegion?.classList.remove('is-lazy-loading');
+    if (!disposed) renderHistoryList(elements.history, pendingHistory);
+  }
+
   function renderHistory(history) {
-    if (!elements.history) return;
-    elements.history.replaceChildren();
-    history.slice(0, 8).forEach((entry) => {
-      const item = document.createElement('li');
-      item.className = 'focus-history-item';
-      const copy = document.createElement('span');
-      copy.className = 'focus-history-copy';
-      const title = document.createElement('strong');
-      title.textContent = `${Math.round(Number(entry.duration_seconds || 0) / 60)} min ${entry.phase}`;
-      const routine = document.createElement('span');
-      routine.textContent = entry.routine_name || `Cycle ${entry.cycle_number}`;
-      copy.append(title, routine);
-      const time = document.createElement('time');
-      time.dateTime = entry.completed_at;
-      time.textContent = formatCompletedAt(entry.completed_at);
-      item.append(copy, time);
-      elements.history.appendChild(item);
-    });
+    pendingHistory = history;
     if (elements.historyRegion) {
       elements.historyRegion.hidden = history.length === 0;
       if (!history.length) elements.historyRegion.open = false;
     }
+    if (!history.length) elements.history?.replaceChildren();
+    else if (elements.historyRegion?.open) void mountHistory();
   }
 
   function syncPlaylistControls({ clearStatus = false } = {}) {
@@ -458,36 +624,69 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       title: 'Playlist',
       creator: 'Music',
     }] : []);
+    const activePlaylist = playlists.find((playlist) => playlist.spotify_url === spotifyUrl) || {};
+    const preservePlayer = deferredSpotifySource?.spotify_url === spotifyUrl
+      && ['loading', 'ready'].includes(elements.spotifyEmbed?.dataset.playerState);
     if (elements.spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
     if (elements.playlistData) {
       elements.playlistData.value = JSON.stringify(playlists.map((playlist) => playlist.spotify_url));
     }
     if (elements.playlistList) {
-      elements.playlistList.replaceChildren(...playlists
+      const inactivePlaylists = playlists
         .filter((playlist) => playlist.spotify_url !== spotifyUrl)
-        .map(playlistCard));
+        .map(playlistCard);
+      elements.playlistList.replaceChildren(...inactivePlaylists);
       elements.playlistList.hidden = playlists.length <= 1;
+      document.dispatchEvent(new CustomEvent('focus:playlist-list-rendered', {
+        detail: { hasItems: inactivePlaylists.length > 0 },
+      }));
     }
     text(elements.playlistAction, 'Add playlist');
     if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
     if (embedUrl && elements.spotifyEmbed) {
+      void ensureLazyStyles();
+      void ensureMusicRuntime();
+      deferredSpotifySource = {
+        ...source,
+        ...activePlaylist,
+        spotify_url: spotifyUrl,
+        spotify_embed_url: embedUrl,
+        embed_url: embedUrl,
+      };
       elements.spotifyEmbed.hidden = false;
       elements.spotifyEmbed.dataset.playlistProvider = source?.playlist_provider || playlistProvider(spotifyUrl);
-      void spotifyPlayer.load(spotifyUrl, embedUrl);
+      if (!preservePlayer) {
+        musicRuntime?.clear();
+        renderPlayerPlaceholder();
+      }
     } else {
+      deferredSpotifySource = null;
       elements.spotifyEmbed?.removeAttribute('data-playlist-provider');
-      spotifyPlayer.clear();
+      elements.spotifyEmbed?.removeAttribute('data-player-state');
+      clearPlayerFeedback();
+      musicRuntime?.clear();
+      elements.spotifyEmbed?.replaceChildren();
+      if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
     }
     setPlaylistEditor(false);
     syncPlaylistControls();
   }
 
   function setSpotifyLayout(value, persist = true) {
-    return spotifyLayout.setLayout(value, persist);
+    pendingPlayerPreferences = { ...pendingPlayerPreferences, layout: value };
+    document.body.dataset.spotifyLayout = value;
+    elements.layoutInputs.forEach((input) => { input.checked = input.value === value; });
+    if (musicRuntime) return musicRuntime.setLayout(value, persist);
+    if (persist) return savePlayerPreferences?.(pendingPlayerPreferences);
+    return Promise.resolve(pendingPlayerPreferences);
   }
 
   function applyPlayerPreferences(value) {
-    spotifyLayout.applyPreferences(value);
+    pendingPlayerPreferences = { ...pendingPlayerPreferences, ...(value || {}) };
+    const layout = pendingPlayerPreferences.layout || 'beside';
+    document.body.dataset.spotifyLayout = layout;
+    elements.layoutInputs.forEach((input) => { input.checked = input.value === layout; });
+    musicRuntime?.applyPreferences(pendingPlayerPreferences);
   }
 
   function startCountdown() {
@@ -596,20 +795,36 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     syncPlaylistControls,
     setSpotifyLayout,
     applyPlayerPreferences,
+    activateSpotify,
+    mountHistory,
     startCountdown,
     playEggOpening,
     resetEgg,
-    pauseSpotify: () => spotifyPlayer.pause(),
-    resumeSpotify: () => spotifyPlayer.resume(),
+    pauseSpotify: () => musicRuntime?.pause(),
+    resumeSpotify: () => {
+      if (musicRuntime) musicRuntime.resume();
+      else void activateSpotify({ autoplay: true });
+    },
+    clearSpotify: () => {
+      clearPlayerFeedback();
+      musicRuntime?.clear();
+      if (deferredSpotifySource) renderPlayerPlaceholder();
+    },
     dispose: () => {
+      disposed = true;
       window.clearTimeout(countdownTimer);
       window.clearTimeout(eggOpenTimer);
       countdownResolve?.();
       eggOpenResolve?.();
       countdownResolve = null;
       eggOpenResolve = null;
-      spotifyLayout.dispose();
-      spotifyPlayer.dispose();
+      clearPlayerFeedback();
+      musicRuntime?.dispose();
+      musicRuntime = null;
+      musicRuntimePromise = null;
+      settingsPanel?.dispose();
+      settingsPanel = null;
+      settingsPanelPromise = null;
     },
     announce,
   };

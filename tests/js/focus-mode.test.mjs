@@ -56,7 +56,10 @@ test('focus timer formatting and progress use stable timestamp math', async () =
 test('focus page keeps resource-light and accessibility contracts wired', async () => {
   const template = await readFile(path.join(repoRoot, 'templates/focus.html'), 'utf8');
   const styles = await readFile(path.join(repoRoot, 'static/css/focus.css'), 'utf8');
+  const lazyStyles = await readFile(path.join(repoRoot, 'static/css/focus-lazy.css'), 'utf8');
   const controller = await readFile(path.join(repoRoot, 'static/js/focus/index.js'), 'utf8');
+  const view = await readFile(path.join(repoRoot, 'static/js/focus/view.js'), 'utf8');
+  const musicRuntime = await readFile(path.join(repoRoot, 'static/js/focus/music-runtime.js'), 'utf8');
   const spotifyPlayer = await readFile(path.join(repoRoot, 'static/js/focus/spotify-player.js'), 'utf8');
   const completion = await readFile(path.join(repoRoot, 'static/js/focus/completion.js'), 'utf8');
   const service = await readFile(path.join(repoRoot, 'services/focus_mode.py'), 'utf8');
@@ -86,15 +89,26 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.match(template, /data-focus-playlist-apply disabled/);
   assert.match(template, /data-focus-playlist-remove hidden/);
   assert.match(template, /data-focus-playlist-toggle/);
+  assert.match(template, /data-focus-panel-resize/);
   assert.match(template, />Music<\/h2>/);
   assert.match(template, /YouTube Music playlist/);
   assert.match(template, /data-focus-save-context/);
   assert.doesNotMatch(template, />bookmark_add<\/span>/);
   assert.match(template, /data-focus-exit-label/);
   assert.match(template, /data-focus-history-region hidden/);
+  assert.doesNotMatch(template, /css\/tailwind\.css/);
   assert.match(styles, /\.focus-options-dialog::backdrop/);
   assert.match(styles, /\.focus-egg\[data-nest-stage="8"\] \.focus-nest-branch/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(styles, /\.focus-panel-resize-handle/);
+  assert.match(styles, /data-spotify-custom-size/);
+  assert.match(lazyStyles, /focus-player-placeholder/);
+  assert.match(view, /import\('\.\/music-runtime\.js'\)/);
+  assert.match(view, /import\('\.\/history-view\.js'\)/);
+  assert.match(view, /import\('\.\/settings-panel\.js'\)/);
+  assert.match(musicRuntime, /import\('\.\/spotify-player\.js'\)/);
+  assert.doesNotMatch(controller, /^import .*completion\.js/m);
+  assert.doesNotMatch(controller, /^import .*playlist-gestures\.js/m);
   assert.match(controller, /phase changes|focusApi\.updateSession|scheduleTick/);
   assert.match(controller, /focusApi\.setPlaylist/);
   assert.match(controller, /restorePlaylist/);

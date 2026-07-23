@@ -77,9 +77,9 @@ function focusFixture() {
                 </section>
                 <section class="focus-soundtrack" data-focus-utilities hidden><div class="focus-region-heading"><div><h2>Music</h2></div><div class="focus-floating-controls" data-focus-floating-controls><button type="button" data-focus-floating-handle aria-label="Move playlist player">Move</button><button type="button" data-focus-floating-size aria-label="Expand playlist player"><svg class="focus-expand-icon"></svg><svg class="focus-collapse-icon"></svg></button></div></div>
                     <div class="focus-spotify-embed" data-focus-spotify-embed hidden></div><ul class="focus-playlist-list" data-focus-playlist-list></ul>
-                    <button type="button" class="focus-playlist-toggle" data-focus-playlist-toggle aria-expanded="false"><span class="focus-provider-mark is-spotify">S</span><svg class="focus-playlist-add-icon"></svg><span class="focus-provider-mark is-youtube">Y</span></button>
+                    <button type="button" class="focus-playlist-toggle" data-focus-playlist-toggle aria-expanded="false" aria-label="Add playlist"><span class="focus-provider-mark is-spotify"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M7 9.2c3.7-1 7.5-.7 10.6.9"></path></svg></span><svg class="focus-playlist-add-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg><span class="focus-provider-mark is-youtube"><svg viewBox="0 0 24 24"><path d="M21 8.1a3 3 0 0 0-2.1-2.1C17 5.5 12 5.5 12 5.5S7 5.5 5.1 6A3 3 0 0 0 3 8.1v7.8A3 3 0 0 0 5.1 18h13.8a3 3 0 0 0 2.1-2.1Z"></path><path d="m10 9 5 3-5 3V9Z"></path></svg></span></button>
                     <div class="focus-playlist-form" data-focus-playlist-editor hidden><label class="focus-field"><span>Playlist URL</span><input id="focus-spotify-url" name="spotify_url"></label><div class="focus-playlist-actions"><button type="button" class="focus-icon-button" data-focus-playlist-apply disabled><span data-focus-playlist-action>Add playlist</span></button><button type="button" class="focus-icon-button" data-focus-playlist-remove hidden>Remove</button></div></div>
-                    <input type="hidden" name="spotify_playlists" value="[]" data-focus-playlist-data><p data-focus-playlist-status></p></section>
+                    <input type="hidden" name="spotify_playlists" value="[]" data-focus-playlist-data><p data-focus-playlist-status></p><button type="button" class="focus-panel-resize-handle" data-focus-panel-resize aria-label="Resize music panel"><svg viewBox="0 0 24 24"><path d="M19 9 9 19M19 14l-5 5M19 4 4 19"></path></svg></button></section>
             </form>
             <details data-focus-history-region hidden><summary>Recent sessions</summary><ol data-focus-history></ol></details>
             <div data-focus-announcer></div>
@@ -109,7 +109,7 @@ async function installFocusApi(page) {
                 history: window.__focusTest.history,
                 recent_selections: window.__focusTest.recent,
                 active_session: window.__focusTest.session,
-                player_preferences: window.__focusTest.playerPreferences || { layout: "beside", floating_size: "compact", floating_x: 1, floating_y: 1 },
+                player_preferences: window.__focusTest.playerPreferences || { layout: "beside", floating_size: "compact", floating_x: 1, floating_y: 1, panel_width: 0, panel_height: 0 },
             });
             if (url === "/api/focus/player-preferences" && method === "PATCH") {
                 window.__focusTest.playerPreferences = body;
@@ -250,7 +250,9 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await expect(page.locator("[data-focus-playlist-apply]")).toBeEnabled();
     await page.locator("[data-focus-playlist-apply]").click();
     await expect(page.locator("[data-focus-spotify-embed]")).toBeVisible();
-    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Load player" })).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
+    await expect(page.locator('script[src="https://open.spotify.com/embed/iframe-api/v1"]')).toHaveCount(0);
     await expect(page.locator("[data-focus-playlist-action]")).toHaveText("Add playlist");
     await expect(page.locator("[data-focus-playlist-status]")).toHaveText("");
     await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.duration)).toBe(1000);
@@ -258,7 +260,7 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await expect(page.locator("#focus-minutes")).toHaveValue("50");
     await expect(page.locator("#focus-spotify-url")).toHaveValue(spotifyUrl);
     await expect(page.locator("[data-focus-spotify-embed]")).toBeVisible();
-    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Session settings" }).first().click();
     await page.locator("#focus-cycles").fill("2");
@@ -268,6 +270,7 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await expect(page.locator("[data-focus-session]")).toBeVisible();
     await expect(page.locator("body")).toHaveClass(/focus-session-active/);
     await expect(page.locator("[data-focus-countdown]")).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
     const countdownAlignment = await page.evaluate(() => {
         const shell = document.querySelector(".focus-timer-shell").getBoundingClientRect();
         const countdown = document.querySelector("[data-focus-countdown]").getBoundingClientRect();
@@ -294,6 +297,19 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await page.locator("[data-focus-playlist-list] .focus-playlist-card").click();
     await expect.poll(() => page.evaluate(() => window.__focusTest.session.spotify_url)).toBe(spotifyUrl);
     await expect(page.locator("[data-focus-playlist-list]")).toContainText("Reading Flow");
+    const addControlStyle = await page.locator("[data-focus-playlist-toggle]").evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+            borderColor: style.borderTopColor,
+            borderWidth: style.borderTopWidth,
+            color: style.color,
+            panelWidth: element.closest("[data-focus-utilities]").getBoundingClientRect().width,
+            width: element.getBoundingClientRect().width,
+        };
+    });
+    expect(addControlStyle.borderWidth).toBe("1px");
+    expect(addControlStyle.borderColor).toBe(addControlStyle.color);
+    expect(addControlStyle.width).toBeLessThan(addControlStyle.panelWidth);
 
     await page.getByRole("button", { name: "Session settings" }).click();
     await expect(page.locator("[data-focus-active-summary]")).toBeVisible();
@@ -308,6 +324,22 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await page.getByRole("button", { name: "Exit" }).click();
     await expect(page.locator("[data-focus-setup]")).toBeVisible();
     await expect(page.locator("[data-focus-history-region]")).toBeVisible();
+});
+
+test("playlist preview stays lightweight until the manual load action", async ({ page, baseURL }) => {
+    await installSpotifyEmbedFixture(page);
+    await page.goto(`${baseURL}/static/js/focus/index.js`);
+    await page.setContent(focusFixture());
+    await installFocusApi(page);
+    await page.evaluate(() => import(`/static/js/focus/index.js?manualPlayer=${Date.now()}`));
+
+    await page.locator("[data-focus-playlist-toggle]").click();
+    await page.locator("#focus-spotify-url").fill(spotifyUrl);
+    await page.locator("[data-focus-playlist-apply]").click();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
+    await page.getByRole("button", { name: "Load player" }).click();
+    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
+    await expect(page.locator("[data-focus-setup]")).toBeVisible();
 });
 
 test("floating player can resize, move, and account-sync its placement", async ({ page, baseURL }) => {
@@ -336,6 +368,14 @@ test("floating player can resize, move, and account-sync its placement", async (
     await expect.poll(() => page.evaluate(() => window.__focusTest.playerPreferences?.floating_size)).toBe("expanded");
     const moved = await player.boundingBox();
     expect(moved.x).toBeLessThan(expanded.x);
+    await page.getByRole("button", { name: /Resize music panel/ }).focus();
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(() => page.evaluate(() => window.__focusTest.playerPreferences?.panel_width)).toBeGreaterThan(0);
+    await expect.poll(() => page.evaluate(() => window.__focusTest.playerPreferences?.panel_height)).toBeGreaterThan(0);
+    const resized = await player.boundingBox();
+    expect(resized.width).toBeGreaterThan(expanded.width);
+    expect(resized.height).toBeGreaterThan(expanded.height);
 });
 
 test("playlist removal is explicit and never treats an empty Add click as removal", async ({ page, baseURL }) => {
@@ -420,22 +460,25 @@ test("a completed single timer stays in focus until the user exits and keeps its
     await page.locator("[data-focus-playlist-toggle]").click();
     await page.locator("#focus-spotify-url").fill(spotifyUrl);
     await page.locator("[data-focus-playlist-apply]").click();
-    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Load player" })).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
     await page.getByRole("button", { name: "Start focus" }).click();
+    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
     await expect(page.locator("[data-focus-cycle-status]")).toBeHidden();
     await page.getByRole("button", { name: "Finish focus" }).click();
 
     await expect(page.locator("[data-focus-session]")).toBeVisible();
     await expect(page.locator("[data-focus-setup]")).toBeHidden();
     await expect(page.locator("[data-focus-spotify-embed]")).toBeVisible();
-    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
-    await expect.poll(() => page.evaluate(() => window.__spotifyFixture.calls.at(-1))).toBe("pause");
+    await expect(page.getByRole("button", { name: "Load player" })).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.__spotifyFixture.calls.at(-1))).toBe("destroy");
     await expect(page.getByRole("button", { name: "Exit focus" })).toBeVisible();
     await expect(page.locator("[data-focus-toggle]")).toBeHidden();
     await page.getByRole("button", { name: "Exit focus" }).click();
     await expect(page.locator("[data-focus-setup]")).toBeVisible();
     await expect(page.locator("[data-focus-spotify-embed]")).toBeVisible();
-    await expect(page.locator("[data-spotify-fixture='player']")).toBeVisible();
+    await expect(page.locator("[data-spotify-fixture='player']")).toHaveCount(0);
 });
 
 test("settings drawer and all player placements stay inside mobile, tablet, and laptop viewports", async ({ page, baseURL }) => {

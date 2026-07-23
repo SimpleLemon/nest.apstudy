@@ -34,7 +34,7 @@ function loadSpotifyApi() {
 }
 
 function fallbackEmbed(host, embedUrl, provider = 'spotify') {
-  if (host.querySelector('iframe')) return;
+  if (host.querySelector('iframe')) return host.querySelector('iframe');
   const iframe = document.createElement('iframe');
   iframe.src = embedUrl;
   iframe.title = `${provider === 'spotify' ? 'Spotify' : 'YouTube'} playlist player`;
@@ -42,6 +42,7 @@ function fallbackEmbed(host, embedUrl, provider = 'spotify') {
   iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
   iframe.referrerPolicy = 'strict-origin-when-cross-origin';
   host.replaceChildren(iframe);
+  return iframe;
 }
 
 export function createSpotifyPlayer(host) {
@@ -51,6 +52,7 @@ export function createSpotifyPlayer(host) {
   let resumeWhenReady = false;
   let generation = 0;
   let disposed = false;
+  let loadPromise = null;
 
   function destroyController() {
     controller?.destroy?.();
@@ -59,7 +61,9 @@ export function createSpotifyPlayer(host) {
   }
 
   async function load(spotifyUrl, embedUrl) {
-    if (!host || disposed || !spotifyUrl || spotifyUrl === currentUrl || spotifyUrl === loadingUrl) return;
+    if (!host || disposed || !spotifyUrl) return false;
+    if (spotifyUrl === currentUrl) return true;
+    if (spotifyUrl === loadingUrl) return loadPromise;
     const requestGeneration = ++generation;
     loadingUrl = spotifyUrl;
     host.hidden = false;
@@ -69,37 +73,57 @@ export function createSpotifyPlayer(host) {
       fallbackEmbed(host, embedUrl, provider);
       currentUrl = spotifyUrl;
       loadingUrl = '';
-      return;
+      return true;
     }
-    const api = await loadSpotifyApi();
-    if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) return;
-    destroyController();
-    if (!api?.createController) {
-      fallbackEmbed(host, embedUrl, provider);
-      currentUrl = spotifyUrl;
-      loadingUrl = '';
-      return;
-    }
-    const mount = document.createElement('div');
-    mount.className = 'focus-spotify-controller';
-    host.replaceChildren(mount);
-    api.createController(mount, { url: spotifyUrl, width: '100%', height: 352 }, (nextController) => {
-      if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
-        nextController.destroy?.();
-        return;
+    loadPromise = (async () => {
+      const api = await loadSpotifyApi();
+      if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) return false;
+      destroyController();
+      if (!api?.createController) {
+        fallbackEmbed(host, embedUrl, provider);
+        currentUrl = spotifyUrl;
+        loadingUrl = '';
+        return true;
       }
-      controller = nextController;
-      currentUrl = spotifyUrl;
-      loadingUrl = '';
-      if (resumeWhenReady) controller.resume?.();
-    });
+      const mount = document.createElement('div');
+      mount.className = 'focus-spotify-controller';
+      host.replaceChildren(mount);
+      return new Promise((resolve) => {
+        const controllerTimeout = window.setTimeout(() => {
+          if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
+            resolve(false);
+            return;
+          }
+          fallbackEmbed(host, embedUrl, provider);
+          currentUrl = spotifyUrl;
+          loadingUrl = '';
+          resolve(true);
+        }, 5000);
+        api.createController(mount, { url: spotifyUrl, width: '100%', height: 352 }, (nextController) => {
+          window.clearTimeout(controllerTimeout);
+          if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
+            nextController.destroy?.();
+            resolve(false);
+            return;
+          }
+          controller = nextController;
+          currentUrl = spotifyUrl;
+          loadingUrl = '';
+          if (resumeWhenReady) controller.resume?.();
+          resolve(true);
+        });
+      });
+    })();
+    return loadPromise;
   }
 
   function clear() {
     generation += 1;
     destroyController();
+    resumeWhenReady = false;
     currentUrl = '';
     loadingUrl = '';
+    loadPromise = null;
     if (host) host.hidden = true;
   }
 

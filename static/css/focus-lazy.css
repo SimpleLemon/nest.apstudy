@@ -1,0 +1,163 @@
+.focus-player-placeholder {
+    display: grid;
+    min-height: 152px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid color-mix(in srgb, var(--color-on-surface-variant) 58%, transparent);
+    border-radius: inherit;
+    background: var(--color-surface-container-low);
+}
+
+.focus-player-placeholder-artwork {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-control);
+    object-fit: cover;
+}
+
+.focus-player-placeholder-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.focus-player-placeholder-copy strong {
+    overflow: hidden;
+    color: var(--color-on-surface);
+    font-size: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.focus-player-placeholder-copy span,
+.focus-player-assist {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
+.focus-spotify-embed.is-player-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.focus-spotify-embed.is-player-loading::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--color-on-surface) 9%, transparent) 45%, transparent 70%);
+    animation: focusPlayerSkeleton 1.1s linear infinite;
+    pointer-events: none;
+}
+
+.focus-player-assist {
+    margin: 7px 0 0;
+    text-align: center;
+}
+
+.focus-history-region {
+    margin-top: 22px;
+    padding-bottom: 8px;
+}
+
+.focus-session-active .focus-history-region {
+    display: none;
+}
+
+.focus-history-region > summary {
+    min-height: 44px;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 44px;
+    list-style: none;
+}
+
+.focus-history-region > summary::-webkit-details-marker {
+    display: none;
+}
+
+.focus-history-region > summary::after {
+    content: " +";
+    color: var(--color-on-surface-variant);
+}
+
+.focus-history-region[open] > summary::after {
+    content: " −";
+}
+
+.focus-history-region.is-lazy-loading .focus-history-body {
+    min-height: 48px;
+    border-radius: var(--radius-control);
+    background: var(--color-surface-container-low);
+}
+
+.focus-history-body {
+    margin-top: 4px;
+}
+
+.focus-history-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.focus-history-item {
+    display: grid;
+    min-height: 48px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-outline-variant) 40%, transparent);
+}
+
+.focus-history-item:last-child {
+    border-bottom: 0;
+}
+
+.focus-history-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.focus-history-copy strong {
+    color: var(--color-on-surface);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.focus-history-copy span,
+.focus-history-item time {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+}
+
+@keyframes focusPlayerSkeleton {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+@media (max-width: 560px) {
+    .focus-player-placeholder {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .focus-player-placeholder-artwork {
+        display: none;
+    }
+
+    .focus-player-load {
+        padding-inline: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .focus-spotify-embed.is-player-loading::after {
+        animation: none;
+    }
+}

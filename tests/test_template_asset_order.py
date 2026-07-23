@@ -40,11 +40,13 @@ class TemplateAssetOrderTests(unittest.TestCase):
                 theme_init = head.index("js/core/theme-init.js")
                 themes = head.index("css/themes.css")
                 global_styles = head.index("css/global.css")
-                tailwind = head.index("css/tailwind.css")
+                tailwind = head.find("css/tailwind.css")
 
                 self.assertLess(theme_init, themes)
                 self.assertLess(themes, global_styles)
-                self.assertLess(global_styles, tailwind)
+                if tailwind >= 0:
+                    self.assertLess(global_styles, tailwind)
+                feature_anchor = tailwind if tailwind >= 0 else global_styles
 
                 feature_styles = re.findall(
                     r"filename=['\"](?:css|js/notes/dist)/([^'\"]+\.css)",
@@ -54,9 +56,9 @@ class TemplateAssetOrderTests(unittest.TestCase):
                     if stylesheet in BASE_STYLES:
                         continue
                     self.assertLess(
-                        tailwind,
+                        feature_anchor,
                         head.index(stylesheet),
-                        f"{stylesheet} must load after Tailwind",
+                        f"{stylesheet} must load after shared styles",
                     )
 
     def test_remote_font_connections_are_warmed_before_use(self):

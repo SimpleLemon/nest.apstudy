@@ -12,6 +12,8 @@ function pointerCapture(item, pointerId, capture) {
 export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
   if (!list) return () => {};
   let gesture = null;
+  const eventController = new AbortController();
+  const listenerOptions = { signal: eventController.signal };
 
   const reset = (item) => {
     item?.classList.remove('is-swiping');
@@ -45,7 +47,7 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
       horizontal: false,
     };
     pointerCapture(item, event.pointerId, true);
-  });
+  }, listenerOptions);
 
   list.addEventListener('pointermove', (event) => {
     if (!gesture || gesture.pointerId !== event.pointerId) return;
@@ -58,10 +60,10 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
     gesture.item.classList.add('is-swiping');
     gesture.item.style.setProperty('--focus-playlist-swipe-x', `${gesture.offset}px`);
     event.preventDefault();
-  });
+  }, listenerOptions);
 
-  list.addEventListener('pointerup', finish);
-  list.addEventListener('pointercancel', finish);
+  list.addEventListener('pointerup', finish, listenerOptions);
+  list.addEventListener('pointercancel', finish, listenerOptions);
   list.addEventListener('click', (event) => {
     const remove = event.target.closest('[data-focus-playlist-remove]');
     if (remove) {
@@ -72,9 +74,10 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
     }
     const select = event.target.closest('[data-spotify-playlist]');
     if (select) onSelect?.(select.dataset.spotifyPlaylist);
-  });
+  }, listenerOptions);
 
   return () => {
+    eventController.abort();
     reset(gesture?.item);
     gesture = null;
   };

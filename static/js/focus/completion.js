@@ -71,5 +71,11 @@ export function createCompletionEffects() {
       : 'Nice work. Return to Nest when you’re ready.');
   }
 
-  return { complete, prepare };
+  function dispose() {
+    void audioContext?.close?.().catch(() => {});
+    audioContext = null;
+    notificationsEnabled = false;
+  }
+
+  return { complete, dispose, prepare };
 }

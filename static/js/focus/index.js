@@ -7,14 +7,47 @@ import {
 } from './data.js';
 import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
-import { createCompletionEffects } from './completion.js';
-import { bindPlaylistGestures } from './playlist-gestures.js';
 
 const view = createFocusView({
   savePlayerPreferences: (preferences) => focusApi.savePlayerPreferences(preferences),
 });
-const completionEffects = createCompletionEffects();
 const { elements } = view;
+let completionEffects = null;
+let completionEffectsPromise = null;
+let completionPreparePromise = null;
+let disposePlaylistGestures = null;
+let playlistGesturesPromise = null;
+
+async function ensureCompletionEffects() {
+  if (state.disposed) return null;
+  if (completionEffects) return completionEffects;
+  completionEffectsPromise ||= import('./completion.js');
+  const { createCompletionEffects } = await completionEffectsPromise;
+  if (state.disposed) return null;
+  completionEffects ||= createCompletionEffects();
+  return completionEffects;
+}
+
+async function prepareCompletionEffects() {
+  completionPreparePromise ||= ensureCompletionEffects().then((effects) => effects?.prepare());
+  return completionPreparePromise;
+}
+
+async function playCompletionEffects(phase) {
+  const effects = await ensureCompletionEffects();
+  effects?.complete(phase);
+}
+
+async function ensurePlaylistGestures() {
+  if (state.disposed || disposePlaylistGestures || !elements.playlistList?.children.length) return;
+  playlistGesturesPromise ||= import('./playlist-gestures.js');
+  const { bindPlaylistGestures } = await playlistGesturesPromise;
+  if (state.disposed || !elements.playlistList?.children.length || disposePlaylistGestures) return;
+  disposePlaylistGestures = bindPlaylistGestures(elements.playlistList, {
+    onRemove: (url) => { void removePlaylist(url); },
+    onSelect: (url) => { void selectPlaylist(url); },
+  });
+}
 const state = {
   routines: [],
   history: [],
@@ -190,11 +223,12 @@ async function advancePhase() {
     const payload = await focusApi.updateSession(state.session.id, 'advance');
     const next = clockedSession(payload.session);
     view.pauseSpotify();
-    completionEffects.complete(previousPhase);
+    void playCompletionEffects(previousPhase);
     if (!payload.active) {
       view.renderTick(state.session, 0);
       await view.playEggOpening(previousPhase);
       state.session = null;
+      view.clearSpotify();
       state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
       announcePhaseTransition(previousPhase, null);
       renderCurrentMode();
@@ -259,9 +293,10 @@ async function updateSession(action) {
       if (action === 'complete_phase') {
         view.renderTick(previousSession, 0);
         view.pauseSpotify();
-        completionEffects.complete(previousPhase);
+        void playCompletionEffects(previousPhase);
         await view.playEggOpening(previousPhase);
         state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
+        view.clearSpotify();
         renderCurrentMode();
         await refreshHistory();
       }
@@ -271,7 +306,7 @@ async function updateSession(action) {
     renderActiveSession();
     if (action === 'complete_phase') {
       view.pauseSpotify();
-      completionEffects.complete(previousPhase);
+      void playCompletionEffects(previousPhase);
       await view.playEggOpening(previousPhase);
       view.resetEgg();
       renderActiveSession();
@@ -311,6 +346,7 @@ async function endSession() {
     view.pauseSpotify();
     await focusApi.updateSession(state.session.id, 'exit');
     state.session = null;
+    view.clearSpotify();
     focusSidebar(false);
     await loadState({ preserveStatus: true });
     view.setFormStatus('Session ended. Completed phases remain in your history.');
@@ -348,8 +384,7 @@ function applySelection(selection) {
 
 async function startSession(event) {
   event.preventDefault();
-  void completionEffects.prepare();
-  view.resumeSpotify();
+  void prepareCompletionEffects();
   const payload = formPayload(elements.form);
   view.setBusy(true);
   view.setFormStatus('Starting your focus session…');
@@ -360,6 +395,7 @@ async function startSession(event) {
     if (state.session.spotify_url) state.spotifySource = state.session;
     view.setFormStatus();
     renderCurrentMode();
+    void view.activateSpotify({ autoplay: true });
     void view.startCountdown();
     announceSessionChange('Focus Mode started. Nonurgent Nest notifications are muted.', 'Focus Mode started');
   } catch (error) {
@@ -383,6 +419,7 @@ async function applyPlaylist() {
       state.session = clockedSession(response.session);
       state.spotifySource = state.session;
       view.renderSpotify(state.session);
+      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
       playlistToast('Playlist added to this session.');
       return;
     }
@@ -431,6 +468,7 @@ async function restorePlaylist(record) {
       state.session = clockedSession(response.session);
       state.spotifySource = state.session;
       view.renderSpotify(state.session);
+      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
     } else {
       const source = state.spotifySource || record.source;
       const playlists = [...(source?.playlists || [])];
@@ -493,6 +531,7 @@ async function selectPlaylist(spotifyUrl) {
       state.session = clockedSession(response.session);
       state.spotifySource = state.session;
       view.renderSpotify(state.session);
+      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
     } else {
       const playlist = (current.playlists || []).find((item) => item.spotify_url === spotifyUrl);
       if (!playlist) return;
@@ -620,30 +659,18 @@ async function deleteRoutine() {
 }
 
 function bindEvents() {
-  const disposePlaylistGestures = bindPlaylistGestures(elements.playlistList, {
-    onRemove: (url) => { void removePlaylist(url); },
-    onSelect: (url) => { void selectPlaylist(url); },
-  });
-  elements.form.addEventListener('submit', startSession);
-  elements.optionsOpen.forEach((button) => button.addEventListener('click', () => view.openOptions(button)));
-  elements.optionsClose?.addEventListener('click', (event) => {
-    event.preventDefault();
-    view.closeOptions();
-  });
-  elements.options?.addEventListener('close', () => view.syncOptionsState());
-  elements.options?.addEventListener('cancel', () => window.setTimeout(() => view.syncOptionsState(), 0));
-  elements.options?.addEventListener('click', (event) => {
-    if (event.target !== elements.options) return;
-    const rect = elements.options.getBoundingClientRect();
-    const inside = event.clientX >= rect.left && event.clientX <= rect.right
-      && event.clientY >= rect.top && event.clientY <= rect.bottom;
-    if (!inside) view.closeOptions();
-  });
-  elements.focusMinutes.addEventListener('input', renderSuggestions);
+  const eventController = new AbortController();
+  const listenerOptions = { signal: eventController.signal };
+  elements.form.addEventListener('submit', startSession, listenerOptions);
+  elements.form.querySelector('button[type="submit"]')?.addEventListener('pointerdown', () => {
+    void prepareCompletionEffects();
+  }, listenerOptions);
+  elements.optionsOpen.forEach((button) => button.addEventListener('click', () => view.openOptions(button), listenerOptions));
+  elements.focusMinutes.addEventListener('input', renderSuggestions, listenerOptions);
   elements.cycles.addEventListener('input', () => {
     renderSuggestions();
     view.syncRhythmVisibility();
-  });
+  }, listenerOptions);
   elements.routineSelect.addEventListener('change', () => {
     const routine = selectedRoutine();
     state.spotifySource = routine?.spotify_url ? routine : null;
@@ -652,71 +679,84 @@ function bindEvents() {
     view.setSettingsStatus();
     view.setPlaylistStatus();
     renderSuggestions();
-  });
+  }, listenerOptions);
   document.querySelectorAll('[data-focus-preset]').forEach((button) => {
     button.addEventListener('click', () => applySelection({
       focus_minutes: Number(button.dataset.focus),
       break_minutes: Number(button.dataset.break),
       long_break_minutes: Number(button.dataset.break),
       cycles: Number(button.dataset.cycles),
-    }));
+    }), listenerOptions);
   });
   elements.suggestions?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-break-suggestion]');
     if (!button) return;
     elements.breakMinutes.value = button.dataset.breakSuggestion;
     if (!Number(elements.longBreakMinutes.value)) elements.longBreakMinutes.value = button.dataset.breakSuggestion;
-  });
+  }, listenerOptions);
   elements.layoutInputs.forEach((input) => input.addEventListener('change', () => {
     if (input.checked) view.setSpotifyLayout(input.value);
-  }));
-  elements.spotifyUrl?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }));
+  }, listenerOptions));
+  elements.spotifyUrl?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }), listenerOptions);
   elements.playlistToggle?.addEventListener('click', () => {
     const open = elements.playlistToggle.getAttribute('aria-expanded') !== 'true';
     view.setPlaylistEditor(open);
     if (!open) view.setPlaylistStatus();
-  });
-  elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); });
-  elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); });
+  }, listenerOptions);
+  elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); }, listenerOptions);
+  elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); }, listenerOptions);
+  elements.spotifyEmbed?.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-focus-player-load]')) return;
+    void view.activateSpotify({ autoplay: false });
+  }, listenerOptions);
   elements.spotifyUrl?.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter') return;
     event.preventDefault();
     if (!elements.playlistApply.disabled) void applyPlaylist();
-  });
+  }, listenerOptions);
+  elements.historyRegion?.addEventListener('toggle', () => {
+    if (elements.historyRegion.open) void view.mountHistory();
+  }, listenerOptions);
   elements.recentList?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-recent-selection]');
     if (!button) return;
     applySelection(state.recentSelections[Number(button.dataset.recentSelection)]);
-  });
-  elements.saveRoutines.forEach((button) => button.addEventListener('click', saveRoutine));
-  elements.deleteRoutine.addEventListener('click', deleteRoutine);
-  elements.toggle.addEventListener('click', () => updateSession(state.session?.state === 'paused' ? 'resume' : 'pause'));
-  elements.completePhase.addEventListener('click', () => updateSession('complete_phase'));
+  }, listenerOptions);
+  elements.saveRoutines.forEach((button) => button.addEventListener('click', saveRoutine, listenerOptions));
+  elements.deleteRoutine.addEventListener('click', deleteRoutine, listenerOptions);
+  elements.toggle.addEventListener('click', () => updateSession(state.session?.state === 'paused' ? 'resume' : 'pause'), listenerOptions);
+  elements.completePhase.addEventListener('click', () => updateSession('complete_phase'), listenerOptions);
   elements.end.addEventListener('click', () => {
     if (state.completedSession) exitCompletedSession();
     else void endSession();
-  });
+  }, listenerOptions);
+  document.addEventListener('focus:playlist-list-rendered', (event) => {
+    if (event.detail?.hasItems) void ensurePlaylistGestures();
+  }, listenerOptions);
   document.addEventListener('apstudy-sidebar-state-change', (event) => {
     if (state.session && event.detail?.collapsed === false) queueMicrotask(hideSidebarForFocus);
-  });
+  }, listenerOptions);
   document.addEventListener('apstudy-mobile-sidebar-toggle', () => {
     if (state.session) queueMicrotask(hideSidebarForFocus);
-  });
+  }, listenerOptions);
   document.addEventListener('visibilitychange', () => {
     if (state.completedSession) return;
     if (document.hidden) tick();
     else void loadState({ preserveStatus: true });
-  });
+  }, listenerOptions);
   window.addEventListener('online', () => {
     if (state.session && remainingSeconds(state.session) <= 0) void advancePhase();
-  });
+  }, listenerOptions);
   window.APStudyPageLifecycle?.register?.({
     pause: stopTimer,
     resume: tick,
     dispose: () => {
       state.disposed = true;
       stopTimer();
-      disposePlaylistGestures();
+      eventController.abort();
+      disposePlaylistGestures?.();
+      disposePlaylistGestures = null;
+      completionEffects?.dispose?.();
       view.dispose();
     },
   });
