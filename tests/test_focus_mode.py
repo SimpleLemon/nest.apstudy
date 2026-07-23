@@ -228,8 +228,16 @@ class FocusModeTests(unittest.TestCase):
             "floating_size": "expanded",
             "floating_x": 1.0,
             "floating_y": 0.0,
+            "panel_width": 0,
+            "panel_height": 0,
         })
         self.assertEqual(focus_mode.snapshot("u1")["player_preferences"], saved)
+        resized = focus_mode.save_player_preferences("u1", {
+            "panel_width": 920,
+            "panel_height": 680,
+        })
+        self.assertEqual(resized["panel_width"], 920)
+        self.assertEqual(resized["panel_height"], 680)
         with self.assertRaisesRegex(ValueError, "placement"):
             focus_mode.save_player_preferences("u1", {"layout": "diagonal"})
 

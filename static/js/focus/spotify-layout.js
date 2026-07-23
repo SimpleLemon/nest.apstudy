@@ -23,20 +23,77 @@ function writePreference(key, value) {
 }
 
 export function createSpotifyLayout({ elements, savePreferences } = {}) {
-  let preferences = { layout: 'beside', floating_size: 'compact', floating_x: 1, floating_y: 1 };
+  let preferences = {
+    layout: 'beside', floating_size: 'compact', floating_x: 1, floating_y: 1, panel_width: 0, panel_height: 0,
+  };
   let dragState = null;
+  let resizeState = null;
 
   function normalized(value = {}) {
     const coordinate = (next, fallback) => {
       const number = Number(next);
       return Number.isFinite(number) ? Math.min(1, Math.max(0, number)) : fallback;
     };
+    const dimension = (next, fallback) => {
+      const number = Number(next);
+      return Number.isFinite(number) && number > 0 ? number : fallback;
+    };
     return {
       layout: LAYOUT_MAP.get(value.layout) || preferences.layout || 'beside',
       floating_size: value.floating_size === 'expanded' ? 'expanded' : 'compact',
       floating_x: coordinate(value.floating_x, preferences.floating_x),
       floating_y: coordinate(value.floating_y, preferences.floating_y),
+      panel_width: dimension(value.panel_width, preferences.panel_width),
+      panel_height: dimension(value.panel_height, preferences.panel_height),
     };
+  }
+
+  function dimensionBounds() {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const floating = preferences.layout === 'floating' && viewportWidth > 900;
+    const beside = preferences.layout === 'beside' && viewportWidth > 900;
+    if (floating) {
+      return {
+        minWidth: Math.min(280, viewportWidth - 40),
+        maxWidth: Math.max(280, viewportWidth - 40),
+        minHeight: Math.min(260, viewportHeight - 40),
+        maxHeight: Math.max(260, viewportHeight - 40),
+      };
+    }
+    if (beside) {
+      return {
+        minWidth: 340,
+        maxWidth: Math.max(340, Math.min(620, viewportWidth * 0.46)),
+        minHeight: 360,
+        maxHeight: Math.max(360, Math.min(900, viewportHeight - 40)),
+      };
+    }
+    return {
+      minWidth: Math.min(280, viewportWidth - 28),
+      maxWidth: Math.max(280, Math.min(960, viewportWidth - (viewportWidth <= 520 ? 28 : 40))),
+      minHeight: 320,
+      maxHeight: Math.max(320, Math.min(760, viewportHeight * 0.78)),
+    };
+  }
+
+  function applyDimensions(width = preferences.panel_width, height = preferences.panel_height) {
+    if (!elements.utilities) return;
+    const bounds = dimensionBounds();
+    const visibleWidth = width > 0 ? Math.min(bounds.maxWidth, Math.max(bounds.minWidth, width)) : 0;
+    const visibleHeight = height > 0 ? Math.min(bounds.maxHeight, Math.max(bounds.minHeight, height)) : 0;
+    const rootStyle = document.body.style;
+    document.body.dataset.spotifyCustomSize = String(Boolean(visibleWidth && visibleHeight));
+    if (visibleWidth) rootStyle.setProperty('--focus-player-width', `${Math.round(visibleWidth)}px`);
+    else rootStyle.removeProperty('--focus-player-width');
+    if (visibleHeight) rootStyle.setProperty('--focus-player-height', `${Math.round(visibleHeight)}px`);
+    else rootStyle.removeProperty('--focus-player-height');
+    elements.panelResize?.setAttribute(
+      'aria-label',
+      visibleWidth && visibleHeight
+        ? `Resize music panel. Current size ${Math.round(visibleWidth)} by ${Math.round(visibleHeight)} pixels`
+        : 'Resize music panel',
+    );
   }
 
   function persist() {
@@ -64,6 +121,11 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     elements.floatingSize?.setAttribute('aria-pressed', String(expanded));
     elements.floatingSize?.setAttribute('aria-label', expanded ? 'Make playlist player compact' : 'Expand playlist player');
     if (elements.floatingSize) elements.floatingSize.dataset.expanded = String(expanded);
+    if (shouldPersist) {
+      preferences.panel_width = 0;
+      preferences.panel_height = 0;
+      applyDimensions();
+    }
     requestAnimationFrame(position);
     if (shouldPersist) persist();
   }
@@ -72,6 +134,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     preferences.layout = LAYOUT_MAP.get(value) || 'below';
     document.body.dataset.spotifyLayout = preferences.layout;
     elements.layoutInputs.forEach((input) => { input.checked = input.value === preferences.layout; });
+    applyDimensions();
     requestAnimationFrame(position);
     if (shouldPersist) persist();
     return preferences.layout;
@@ -81,6 +144,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     preferences = normalized(value);
     setLayout(preferences.layout, false);
     setSize(preferences.floating_size, false);
+    applyDimensions();
   }
 
   function move(left, top) {
@@ -103,6 +167,21 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     preferences.floating_y = Math.min(1, Math.max(0, (rect.top - margin) / availableY));
     elements.utilities.classList.remove('is-dragging');
     dragState = null;
+    persist();
+  }
+
+  function resize(width, height) {
+    const bounds = dimensionBounds();
+    preferences.panel_width = Math.min(bounds.maxWidth, Math.max(bounds.minWidth, width));
+    preferences.panel_height = Math.min(bounds.maxHeight, Math.max(bounds.minHeight, height));
+    applyDimensions();
+    requestAnimationFrame(position);
+  }
+
+  function finishResize() {
+    if (!resizeState) return;
+    elements.utilities?.classList.remove('is-resizing');
+    resizeState = null;
     persist();
   }
 
@@ -135,7 +214,45 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     finishDrag();
     event.preventDefault();
   });
-  window.addEventListener('resize', position);
+  elements.panelResize?.addEventListener('pointerdown', (event) => {
+    if (!elements.utilities) return;
+    const rect = elements.utilities.getBoundingClientRect();
+    resizeState = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      width: rect.width,
+      height: rect.height,
+    };
+    elements.panelResize.setPointerCapture?.(event.pointerId);
+    elements.utilities.classList.add('is-resizing');
+    event.preventDefault();
+  });
+  elements.panelResize?.addEventListener('pointermove', (event) => {
+    if (!resizeState || resizeState.pointerId !== event.pointerId) return;
+    resize(
+      resizeState.width + event.clientX - resizeState.startX,
+      resizeState.height + event.clientY - resizeState.startY,
+    );
+  });
+  elements.panelResize?.addEventListener('pointerup', finishResize);
+  elements.panelResize?.addEventListener('pointercancel', finishResize);
+  elements.panelResize?.addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key) || !elements.utilities) return;
+    const rect = elements.utilities.getBoundingClientRect();
+    const delta = event.shiftKey ? 48 : 16;
+    resize(
+      rect.width + (event.key === 'ArrowLeft' ? -delta : event.key === 'ArrowRight' ? delta : 0),
+      rect.height + (event.key === 'ArrowUp' ? -delta : event.key === 'ArrowDown' ? delta : 0),
+    );
+    persist();
+    event.preventDefault();
+  });
+  const handleViewportResize = () => {
+    applyDimensions();
+    position();
+  };
+  window.addEventListener('resize', handleViewportResize);
   const resizeObserver = typeof ResizeObserver === 'function'
     ? new ResizeObserver(() => position())
     : null;
@@ -153,7 +270,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     applyPreferences,
     setLayout,
     dispose: () => {
-      window.removeEventListener('resize', position);
+      window.removeEventListener('resize', handleViewportResize);
       resizeObserver?.disconnect();
     },
   };

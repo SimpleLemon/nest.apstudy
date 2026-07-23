@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/focus.css') }}" />
     <script src="{{ url_for('static', filename='js/core/global-chrome.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/ui-primitives.js') }}" defer></script>
@@ -24,7 +23,7 @@
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script type="module" src="{{ url_for('static', filename='js/focus/index.js') }}"></script>
 </head>
-<body class="focus-body bg-surface text-on-surface font-body min-h-screen antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
+<body class="focus-body" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L">
     {% macro focus_egg(live=false) -%}
         <div class="focus-egg{{ ' focus-egg-live' if live else ' focus-egg-preview' }}"{{ ' data-focus-egg data-egg-state="closed" data-crack-level="0" data-nest-stage="0" role="img" aria-label="An egg resting in a nest"'|safe if live else ' aria-hidden="true"'|safe }}>
             <div class="focus-egg-aura" aria-hidden="true"></div>
@@ -280,6 +279,7 @@
                     class="focus-spotify-embed"
                     data-focus-spotify-embed
                     title="Playlist player"
+                    aria-live="polite"
                     hidden></div>
                 <ul class="focus-playlist-list" data-focus-playlist-list aria-label="Other playlists"></ul>
                 <button type="button" class="focus-playlist-toggle" data-focus-playlist-toggle aria-expanded="false" aria-controls="focus-playlist-editor" aria-label="Add a Spotify, YouTube, or YouTube Music playlist">
@@ -303,6 +303,9 @@
                 </div>
                 <input type="hidden" name="spotify_playlists" value="[]" data-focus-playlist-data />
                 <p class="focus-settings-status" id="focus-playlist-status" data-focus-playlist-status role="status" aria-live="polite"></p>
+                <button type="button" class="focus-panel-resize-handle" data-focus-panel-resize aria-label="Resize music panel">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 9 9 19M19 14l-5 5M19 4 4 19"></path></svg>
+                </button>
             </section>
         </form>
 

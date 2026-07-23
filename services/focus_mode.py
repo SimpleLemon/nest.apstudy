@@ -741,16 +741,26 @@ def recent_selections(user_id, limit=6):
 def player_preferences(user_id):
     with db_connection() as conn:
         row = conn.execute(
-            "SELECT layout,floating_size,floating_x,floating_y FROM focus_player_preferences WHERE user_id=?",
+            """SELECT layout,floating_size,floating_x,floating_y,panel_width,panel_height
+               FROM focus_player_preferences WHERE user_id=?""",
             [str(user_id)],
         ).fetchone()
     if not row:
-        return {"layout": "beside", "floating_size": "compact", "floating_x": 1.0, "floating_y": 1.0}
+        return {
+            "layout": "beside",
+            "floating_size": "compact",
+            "floating_x": 1.0,
+            "floating_y": 1.0,
+            "panel_width": 0,
+            "panel_height": 0,
+        }
     return {
         "layout": row["layout"] if row["layout"] in SPOTIFY_LAYOUTS else "beside",
         "floating_size": row["floating_size"] if row["floating_size"] in SPOTIFY_FLOATING_SIZES else "compact",
         "floating_x": min(1.0, max(0.0, float(row["floating_x"]))),
         "floating_y": min(1.0, max(0.0, float(row["floating_y"]))),
+        "panel_width": max(0, float(row["panel_width"])),
+        "panel_height": max(0, float(row["panel_height"])),
     }
 
 
@@ -765,20 +775,25 @@ def save_player_preferences(user_id, payload):
     try:
         floating_x = float(payload.get("floating_x", current["floating_x"]))
         floating_y = float(payload.get("floating_y", current["floating_y"]))
+        panel_width = float(payload.get("panel_width", current["panel_width"]))
+        panel_height = float(payload.get("panel_height", current["panel_height"]))
     except (TypeError, ValueError) as exc:
-        raise ValueError("Player position is not valid.") from exc
+        raise ValueError("Player position or size is not valid.") from exc
     floating_x = min(1.0, max(0.0, floating_x))
     floating_y = min(1.0, max(0.0, floating_y))
+    panel_width = 0 if panel_width <= 0 else min(2400, max(240, panel_width))
+    panel_height = 0 if panel_height <= 0 else min(1800, max(220, panel_height))
     now = _iso(_now())
     with db_connection() as conn:
         conn.execute(
             """INSERT INTO focus_player_preferences
-               (user_id,layout,floating_size,floating_x,floating_y,updated_at)
-               VALUES (?,?,?,?,?,?)
+               (user_id,layout,floating_size,floating_x,floating_y,panel_width,panel_height,updated_at)
+               VALUES (?,?,?,?,?,?,?,?)
                ON CONFLICT(user_id) DO UPDATE SET layout=excluded.layout,
                floating_size=excluded.floating_size,floating_x=excluded.floating_x,
-               floating_y=excluded.floating_y,updated_at=excluded.updated_at""",
-            [str(user_id), layout, floating_size, floating_x, floating_y, now],
+               floating_y=excluded.floating_y,panel_width=excluded.panel_width,
+               panel_height=excluded.panel_height,updated_at=excluded.updated_at""",
+            [str(user_id), layout, floating_size, floating_x, floating_y, panel_width, panel_height, now],
         )
     return player_preferences(user_id)
 
