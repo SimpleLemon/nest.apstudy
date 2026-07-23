@@ -195,7 +195,6 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     settingsStatuses: [...document.querySelectorAll('[data-focus-settings-status]')],
     suggestions: document.querySelector('[data-focus-break-suggestions]'),
     suggestionBlock: document.querySelector('[data-focus-suggestion-block]'),
-    recentSelections: document.querySelector('[data-focus-recent-selections]'),
     recentList: document.querySelector('[data-focus-recent-list]'),
     routinePicker: document.querySelector('[data-focus-routine-picker]'),
     routineSelect: document.getElementById('focus-routine-select'),
@@ -213,6 +212,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     saveRoutineContext: document.querySelector('[data-focus-save-context]'),
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
     spotifyUrl: document.getElementById('focus-spotify-url'),
+    activeSpotifyUrl: document.querySelector('[data-focus-active-playlist-url]'),
+    playlistComposer: document.querySelector('[data-focus-playlist-composer]'),
     playlistToggle: document.querySelector('[data-focus-playlist-toggle]'),
     playlistEditor: document.querySelector('[data-focus-playlist-editor]'),
     layoutInputs: [...document.querySelectorAll('input[name="spotify_layout"]')],
@@ -237,6 +238,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     nextPhase: document.querySelector('[data-focus-next-phase]'),
     history: document.querySelector('[data-focus-history]'),
     historyRegion: document.querySelector('[data-focus-history-region]'),
+    playerFrame: document.querySelector('[data-focus-player-frame]'),
     spotifyEmbed: document.querySelector('[data-focus-spotify-embed]'),
     floatingControls: document.querySelector('[data-focus-floating-controls]'),
     floatingHandle: document.querySelector('[data-focus-floating-handle]'),
@@ -478,7 +480,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     elements.breakMinutes.value = routine?.break_minutes ?? 0;
     elements.longBreakMinutes.value = routine?.long_break_minutes ?? routine?.break_minutes ?? 0;
     elements.cycles.value = routine?.cycles ?? 1;
-    elements.spotifyUrl.value = routine?.spotify_url || '';
+    if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = routine?.spotify_url || '';
+    if (elements.spotifyUrl) elements.spotifyUrl.value = '';
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !routine;
     elements.saveRoutineLabels.forEach((label) => text(label, routine ? 'Save changes' : 'Save setup'));
     text(elements.saveRoutineContext, routine
@@ -508,15 +511,28 @@ export function createFocusView({ savePlayerPreferences } = {}) {
 
   function renderRecent(selections) {
     if (!elements.recentList) return;
-    elements.recentList.replaceChildren();
-    selections.forEach((selection, index) => {
+    const recentChoices = selections.slice(0, 2).map((selection, index) => {
       const breakLabel = Number(selection.break_minutes) ? ` / ${selection.break_minutes}` : '';
-      elements.recentList.appendChild(choice(
+      return choice(
         `${selection.focus_minutes}${breakLabel} min`,
         { recentSelection: index },
-      ));
+      );
     });
-    if (elements.recentSelections) elements.recentSelections.hidden = selections.length === 0;
+    const standardChoices = [
+      { focus: 25, breakMinutes: 5 },
+      { focus: 50, breakMinutes: 10 },
+      { focus: 90, breakMinutes: 15 },
+    ].map(({ focus, breakMinutes }) => {
+      const button = choice(`${focus} min`, {
+        focusPreset: '',
+        focus,
+        break: breakMinutes,
+        cycles: 1,
+      });
+      button.setAttribute('aria-label', `Set ${focus} minutes`);
+      return button;
+    });
+    elements.recentList.replaceChildren(...recentChoices, ...standardChoices);
   }
 
   function renderCycles(session) {
@@ -600,16 +616,26 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     const normalized = normalizePlaylist(raw);
     const invalid = Boolean(raw && !normalized);
     elements.spotifyUrl?.setAttribute('aria-invalid', String(invalid));
-    if (elements.playlistApply) elements.playlistApply.disabled = playlistBusy || !normalized;
+    if (elements.playlistApply) {
+      elements.playlistApply.hidden = !normalized;
+      elements.playlistApply.disabled = playlistBusy || !normalized;
+    }
     if (clearStatus) setPlaylistStatus(invalid ? 'Use a Spotify, YouTube, or YouTube Music playlist URL.' : '', invalid ? 'error' : '');
     return normalized;
   }
 
-  function setPlaylistEditor(open) {
-    if (!elements.playlistEditor || !elements.playlistToggle) return;
+  function setPlaylistEditor(open, { force = false } = {}) {
+    if (!elements.playlistEditor || !elements.playlistToggle || !elements.playlistComposer) return;
+    if (!open && playlistBusy && !force) return;
+    if (elements.spotifyUrl) elements.spotifyUrl.value = '';
+    elements.spotifyUrl?.setAttribute('aria-invalid', 'false');
     elements.playlistEditor.hidden = !open;
     elements.playlistToggle.setAttribute('aria-expanded', String(open));
-    elements.playlistToggle.classList.toggle('is-open', open);
+    elements.playlistToggle.setAttribute('aria-hidden', String(open));
+    elements.playlistToggle.tabIndex = open ? -1 : 0;
+    elements.playlistComposer.classList.toggle('is-open', open);
+    if (!open) setPlaylistStatus();
+    syncPlaylistControls();
     if (open) window.setTimeout(() => elements.spotifyUrl?.focus(), 0);
   }
 
@@ -627,7 +653,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     const activePlaylist = playlists.find((playlist) => playlist.spotify_url === spotifyUrl) || {};
     const preservePlayer = deferredSpotifySource?.spotify_url === spotifyUrl
       && ['loading', 'ready'].includes(elements.spotifyEmbed?.dataset.playerState);
-    if (elements.spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
+    if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = spotifyUrl;
     if (elements.playlistData) {
       elements.playlistData.value = JSON.stringify(playlists.map((playlist) => playlist.spotify_url));
     }
@@ -642,7 +668,11 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       }));
     }
     text(elements.playlistAction, 'Add playlist');
-    if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
+    if (elements.playlistRemove) {
+      elements.playlistRemove.hidden = !embedUrl;
+      elements.playlistRemove.setAttribute('aria-label', `Remove ${activePlaylist.title || 'active playlist'}`);
+    }
+    elements.playerFrame?.classList.remove('is-actions-visible');
     if (embedUrl && elements.spotifyEmbed) {
       void ensureLazyStyles();
       void ensureMusicRuntime();
@@ -668,7 +698,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       elements.spotifyEmbed?.replaceChildren();
       if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
     }
-    setPlaylistEditor(false);
+    setPlaylistEditor(false, { force: true });
     syncPlaylistControls();
   }
 

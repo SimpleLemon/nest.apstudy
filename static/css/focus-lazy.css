@@ -67,7 +67,10 @@
 }
 
 .focus-history-region > summary {
+    display: flex;
     min-height: 44px;
+    align-items: center;
+    justify-content: center;
     color: var(--color-on-surface);
     cursor: pointer;
     font-size: 14px;

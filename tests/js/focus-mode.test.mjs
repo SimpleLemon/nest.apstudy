@@ -86,9 +86,11 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.doesNotMatch(template, /data-focus-reopen-sidebar|data-focus-prepare-next/);
   assert.match(spotifyPlayer, /autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture/);
   assert.equal((template.match(/id="focus-spotify-url"/g) || []).length, 1);
-  assert.match(template, /data-focus-playlist-apply disabled/);
+  assert.match(template, /data-focus-playlist-apply hidden disabled/);
   assert.match(template, /data-focus-playlist-remove hidden/);
   assert.match(template, /data-focus-playlist-toggle/);
+  assert.match(template, /data-focus-active-playlist-url/);
+  assert.match(template, /data-focus-player-frame/);
   assert.match(template, /data-focus-panel-resize/);
   assert.match(template, />Music<\/h2>/);
   assert.match(template, /YouTube Music playlist/);

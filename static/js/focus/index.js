@@ -371,7 +371,6 @@ function applySelection(selection) {
   elements.cycles.value = selection.cycles || 1;
   renderSuggestions();
   if (Object.prototype.hasOwnProperty.call(selection, 'spotify_url')) {
-    elements.spotifyUrl.value = selection.spotify_url || '';
     const spotifySelection = {
       ...selection,
       spotify_url: selection.spotify_url || '',
@@ -680,14 +679,20 @@ function bindEvents() {
     view.setPlaylistStatus();
     renderSuggestions();
   }, listenerOptions);
-  document.querySelectorAll('[data-focus-preset]').forEach((button) => {
-    button.addEventListener('click', () => applySelection({
-      focus_minutes: Number(button.dataset.focus),
-      break_minutes: Number(button.dataset.break),
-      long_break_minutes: Number(button.dataset.break),
-      cycles: Number(button.dataset.cycles),
-    }), listenerOptions);
-  });
+  elements.form.addEventListener('click', (event) => {
+    const preset = event.target.closest('[data-focus-preset]');
+    if (preset) {
+      applySelection({
+        focus_minutes: Number(preset.dataset.focus),
+        break_minutes: Number(preset.dataset.break),
+        long_break_minutes: Number(preset.dataset.break),
+        cycles: Number(preset.dataset.cycles),
+      });
+      return;
+    }
+    const recent = event.target.closest('[data-recent-selection]');
+    if (recent) applySelection(state.recentSelections[Number(recent.dataset.recentSelection)]);
+  }, listenerOptions);
   elements.suggestions?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-break-suggestion]');
     if (!button) return;
@@ -704,23 +709,42 @@ function bindEvents() {
     if (!open) view.setPlaylistStatus();
   }, listenerOptions);
   elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); }, listenerOptions);
-  elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); }, listenerOptions);
+  elements.playlistRemove?.addEventListener('click', (event) => {
+    const coarsePointer = window.matchMedia?.('(hover: none), (pointer: coarse)').matches;
+    if (event.detail > 0 && coarsePointer && !elements.playerFrame?.classList.contains('is-actions-visible')) {
+      elements.playerFrame?.classList.add('is-actions-visible');
+      return;
+    }
+    void removePlaylist();
+  }, listenerOptions);
   elements.spotifyEmbed?.addEventListener('click', (event) => {
     if (!event.target.closest('[data-focus-player-load]')) return;
     void view.activateSpotify({ autoplay: false });
   }, listenerOptions);
   elements.spotifyUrl?.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      view.setPlaylistEditor(false);
+      if (elements.playlistToggle?.getAttribute('aria-expanded') !== 'true') {
+        elements.playlistToggle.focus();
+      }
+      return;
+    }
     if (event.key !== 'Enter') return;
     event.preventDefault();
     if (!elements.playlistApply.disabled) void applyPlaylist();
   }, listenerOptions);
+  document.addEventListener('pointerdown', (event) => {
+    if (elements.playlistToggle?.getAttribute('aria-expanded') === 'true'
+        && !elements.playlistComposer?.contains(event.target)) {
+      view.setPlaylistEditor(false);
+    }
+    if (!elements.playerFrame?.contains(event.target)) {
+      elements.playerFrame?.classList.remove('is-actions-visible');
+    }
+  }, listenerOptions);
   elements.historyRegion?.addEventListener('toggle', () => {
     if (elements.historyRegion.open) void view.mountHistory();
-  }, listenerOptions);
-  elements.recentList?.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-recent-selection]');
-    if (!button) return;
-    applySelection(state.recentSelections[Number(button.dataset.recentSelection)]);
   }, listenerOptions);
   elements.saveRoutines.forEach((button) => button.addEventListener('click', saveRoutine, listenerOptions));
   elements.deleteRoutine.addEventListener('click', deleteRoutine, listenerOptions);
