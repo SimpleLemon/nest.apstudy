@@ -16,11 +16,15 @@ class EntitlementServiceTestCase(unittest.TestCase):
         self.assertEqual(definitions["free"]["max_chat_attachment_size_bytes"], 10 * 1024 ** 2)
         self.assertEqual(definitions["grade_a"]["max_chat_attachment_size_bytes"], 50 * 1024 ** 2)
         self.assertEqual(definitions["grade_a"]["max_notes"], 50)
+        self.assertEqual(definitions["free"]["max_focus_playlists"], 2)
+        self.assertEqual(definitions["grade_a"]["max_focus_playlists"], 3)
+        self.assertEqual(definitions["grade_aa"]["max_focus_playlists"], 6)
         self.assertEqual(definitions["grade_aa"]["max_seat_tracks"], 25)
         self.assertEqual(definitions["free"]["seat_track_intervals_minutes"], [30])
         self.assertEqual(definitions["grade_a"]["seat_track_intervals_minutes"], [15, 30])
         self.assertEqual(definitions["grade_aa"]["seat_track_intervals_minutes"], [5, 15, 30])
         self.assertIsNone(definitions["developer"]["storage_bytes"])
+        self.assertIsNone(definitions["developer"]["max_focus_playlists"])
 
     def test_configuration_validation_normalizes_unlimited_and_rejects_unknown_tiers(self):
         raw = {
@@ -54,7 +58,8 @@ class EntitlementServiceTestCase(unittest.TestCase):
         }
 
         with patch.object(entitlements, "_rows", side_effect=lambda table, queries: rows[table]), \
-                patch.object(entitlements, "_calendar_feed_count", return_value=2):
+                patch.object(entitlements, "_calendar_feed_count", return_value=2), \
+                patch.object(entitlements, "_focus_playlist_count", return_value=3):
             usage = entitlements.usage_for_user(
                 "user-1",
                 {"id": "user-1", "avatar_file_size_bytes": 400},
@@ -67,6 +72,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
             "saved_courses": 1,
             "seat_tracks": 1,
             "calendar_feeds": 2,
+            "focus_playlists": 3,
         })
 
     def test_lowered_limits_block_new_additions_and_unlimited_skips_checks(self):
@@ -89,6 +95,17 @@ class EntitlementServiceTestCase(unittest.TestCase):
         entitlements.check_limit(unlimited, "max_notes", 10 ** 20)
         entitlements.check_storage(unlimited, 10 ** 20)
 
+    def test_focus_playlist_limit_blocks_when_at_cap(self):
+        limited = {
+            "limits": {"max_focus_playlists": 2},
+            "usage": {"focus_playlists": 2},
+        }
+
+        with self.assertRaises(entitlements.EntitlementLimitError) as context:
+            entitlements.check_limit(limited, "max_focus_playlists", 2)
+        self.assertEqual(context.exception.resource, "focus_playlists")
+        self.assertEqual(context.exception.payload()["code"], "tier_limit")
+
     def test_user_tier_is_normalized_when_loading_payload(self):
         user = {"id": "user-1", "tier": "not-a-tier", "avatar_file_size_bytes": 0}
         definitions = entitlements.normalize_definitions(entitlements.DEFAULT_TIER_DEFINITIONS)
@@ -99,6 +116,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
             "saved_courses": 0,
             "seat_tracks": 0,
             "calendar_feeds": 0,
+            "focus_playlists": 0,
         }
         with patch.object(entitlements, "get_tier_definitions", return_value=definitions), \
                 patch.object(entitlements, "usage_for_user", return_value=usage):

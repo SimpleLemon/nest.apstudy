@@ -2,6 +2,7 @@
 
 import logging
 import os
+import sqlite3
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -9,6 +10,7 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import first_row, list_rows_all
 from services.app_config import get_config, set_config
+from services.database import db_connection
 
 
 logger = logging.getLogger(__name__)
@@ -30,6 +32,7 @@ LIMIT_KEYS = (
     "max_seat_tracks",
     "max_calendar_feeds",
     "max_notes",
+    "max_focus_playlists",
 )
 TRACK_INTERVALS_KEY = "seat_track_intervals_minutes"
 UNLIMITED = None
@@ -47,6 +50,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 1,
         "max_calendar_feeds": 2,
         "max_notes": 10,
+        "max_focus_playlists": 2,
         TRACK_INTERVALS_KEY: [30],
     },
     "grade_a": {
@@ -59,6 +63,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 5,
         "max_calendar_feeds": 5,
         "max_notes": 50,
+        "max_focus_playlists": 3,
         TRACK_INTERVALS_KEY: [15, 30],
     },
     "grade_aa": {
@@ -71,6 +76,7 @@ DEFAULT_TIER_DEFINITIONS = {
         "max_seat_tracks": 25,
         "max_calendar_feeds": 10,
         "max_notes": 250,
+        "max_focus_playlists": 6,
         TRACK_INTERVALS_KEY: [5, 15, 30],
     },
     "developer": {
@@ -218,6 +224,19 @@ def _calendar_feed_count(user_id):
     return count + len([item for item in other_urls if isinstance(item, str) and item.strip()])
 
 
+def _focus_playlist_count(user_id):
+    try:
+        with db_connection() as conn:
+            row = conn.execute(
+                "SELECT COUNT(*) AS count FROM focus_playlists WHERE owner_type='user' AND user_id=?",
+                (str(user_id),),
+            ).fetchone()
+    except sqlite3.OperationalError as exc:
+        logger.exception("Failed to read focus playlist usage for user %s", user_id)
+        raise EntitlementError("Unable to calculate current account limits.") from exc
+    return int(row["count"] if row else 0)
+
+
 def usage_for_user(user_id, user_doc=None):
     normalized_id = str(user_id)
     files = _rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [normalized_id])])
@@ -246,6 +265,7 @@ def usage_for_user(user_id, user_doc=None):
         "saved_courses": len(courses),
         "seat_tracks": len([row for row in tracks if row.get("enabled", True)]),
         "calendar_feeds": _calendar_feed_count(normalized_id),
+        "focus_playlists": _focus_playlist_count(normalized_id),
     }
 
 
@@ -262,6 +282,7 @@ def entitlements_for_user(user_id, user_doc=None, *, include_usage=True):
         "saved_courses": "max_saved_courses",
         "seat_tracks": "max_seat_tracks",
         "calendar_feeds": "max_calendar_feeds",
+        "focus_playlists": "max_focus_playlists",
     }
     return {
         **tier_metadata(tier, definitions),
@@ -279,7 +300,15 @@ def request_entitlements(user):
     if not hasattr(user, "_data"):
         return {
             **tier_metadata("developer"),
-            "usage": {"storage_bytes": 0, "files": 0, "notes": 0, "saved_courses": 0, "seat_tracks": 0, "calendar_feeds": 0},
+            "usage": {
+                "storage_bytes": 0,
+                "files": 0,
+                "notes": 0,
+                "saved_courses": 0,
+                "seat_tracks": 0,
+                "calendar_feeds": 0,
+                "focus_playlists": 0,
+            },
             "over_limit": {},
         }
     return entitlements_for_user(str(user.id), user._data)

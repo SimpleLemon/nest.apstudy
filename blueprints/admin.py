@@ -1224,6 +1224,7 @@ def save_admin_tiers():
                     "max_seat_tracks": (f"{tier}__max_seat_tracks", 1),
                     "max_calendar_feeds": (f"{tier}__max_calendar_feeds", 1),
                     "max_notes": (f"{tier}__max_notes", 1),
+                    "max_focus_playlists": (f"{tier}__max_focus_playlists", 1),
                 }
                 for key, (field, multiplier) in form_keys.items():
                     unlimited = request.form.get(f"{field}__unlimited")

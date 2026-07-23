@@ -121,6 +121,7 @@
                         <span>Courses <strong>{{ usage.saved_courses }}{% if limits.max_saved_courses %} / {{ limits.max_saved_courses }}{% endif %}</strong></span>
                         <span>Tracks <strong>{{ usage.seat_tracks }}{% if limits.max_seat_tracks %} / {{ limits.max_seat_tracks }}{% endif %}</strong></span>
                         <span>Feeds <strong>{{ usage.calendar_feeds }}{% if limits.max_calendar_feeds %} / {{ limits.max_calendar_feeds }}{% endif %}</strong></span>
+                        <span>Focus playlists <strong>{{ usage.focus_playlists }}{% if limits.max_focus_playlists %} / {{ limits.max_focus_playlists }}{% endif %}</strong></span>
                     </div>
                 {% else %}
                     <p class="admin-empty-state">Tier usage is temporarily unavailable.</p>
