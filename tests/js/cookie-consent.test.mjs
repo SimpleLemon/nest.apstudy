@@ -203,7 +203,7 @@ test("first visit opens a persistent consent dialog until a choice is made", () 
 test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
     const authenticatedTemplates = [
         "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html",
-        "calendar.html", "chat.html", "courses.html", "dashboard.html", "files.html", "focus.html", "notes.html",
+        "calendar.html", "chat.html", "courses.html", "dashboard.html", "derek_echo.html", "files.html", "focus.html", "notes.html",
         "onboarding.html", "settings.html", "task.html",
     ];
     const publicTemplates = [

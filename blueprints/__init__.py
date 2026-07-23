@@ -22,6 +22,7 @@ from blueprints.legal import legal_bp
 from blueprints.debug_api import debug_api_bp
 from blueprints.notifications_api import notifications_bp
 from blueprints.focus import focus_bp
+from blueprints.derek import derek_bp
 from blueprints.search_api import search_api_bp
 
 
@@ -44,4 +45,5 @@ def register_blueprints(app):
     app.register_blueprint(debug_api_bp)
     app.register_blueprint(notifications_bp)
     app.register_blueprint(focus_bp)
+    app.register_blueprint(derek_bp)
     app.register_blueprint(search_api_bp)
