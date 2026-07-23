@@ -8,6 +8,21 @@ from flask import Flask
 
 from services import focus_mode, notifications
 from services.database import db_connection, init_db
+from services.entitlements import EntitlementLimitError
+
+
+def _unlimited_entitlements(*_args, **_kwargs):
+    return {
+        "limits": {"max_focus_playlists": None},
+        "usage": {"focus_playlists": 0},
+    }
+
+
+def _limited_entitlements(limit, usage):
+    return {
+        "limits": {"max_focus_playlists": limit},
+        "usage": {"focus_playlists": usage},
+    }
 
 
 class FocusModeTests(unittest.TestCase):
@@ -28,8 +43,15 @@ class FocusModeTests(unittest.TestCase):
             },
         )
         self.metadata_patch.start()
+        self.entitlements_patch = patch.object(
+            focus_mode,
+            "entitlements_for_user",
+            side_effect=_unlimited_entitlements,
+        )
+        self.entitlements_patch.start()
 
     def tearDown(self):
+        self.entitlements_patch.stop()
         self.metadata_patch.stop()
         self.context.pop()
         Path(self.path).unlink(missing_ok=True)
@@ -163,14 +185,19 @@ class FocusModeTests(unittest.TestCase):
             "focus_minutes": 25,
             "cycles": 1,
             "spotify_url": youtube_music,
-            "spotify_playlists": [youtube_music, youtube],
         })
+        focus_mode.add_user_playlist("u1", youtube_music, entitlements=_unlimited_entitlements())
+        focus_mode.add_user_playlist("u1", youtube, entitlements=_unlimited_entitlements())
+        routine = focus_mode.list_routines("u1")[0]
         self.assertEqual(routine["playlist_provider"], "youtube_music")
         self.assertEqual([item["provider"] for item in routine["playlists"]], ["youtube_music", "youtube"])
 
     def test_multiple_playlists_persist_and_active_selection_switches(self):
         first = "https://open.spotify.com/playlist/abc123"
         second = "https://open.spotify.com/playlist/xyz789"
+        focus_mode.add_user_playlist("u1", first, entitlements=_unlimited_entitlements())
+        focus_mode.add_user_playlist("u1", second, entitlements=_unlimited_entitlements())
+        focus_mode.set_active_playlist("u1", first)
         routine = focus_mode.save_routine("u1", {
             "name": "Playlist set",
             "focus_minutes": 25,
@@ -178,7 +205,6 @@ class FocusModeTests(unittest.TestCase):
             "long_break_minutes": 0,
             "cycles": 1,
             "spotify_url": first,
-            "spotify_playlists": [first, second, first],
         })
         self.assertEqual([item["spotify_url"] for item in routine["playlists"]], [first, second])
         self.assertEqual(routine["playlists"][0]["title"], "Deep Focus")
@@ -260,6 +286,93 @@ class FocusModeTests(unittest.TestCase):
         self.assertEqual(muted, {"accepted": 0, "failed": 0})
         self.assertEqual(urgent, {"accepted": 1, "failed": 0})
         send.assert_called_once()
+
+    def test_user_playlist_crud_persists_in_snapshot(self):
+        first = "https://open.spotify.com/playlist/abc123"
+        second = "https://open.spotify.com/playlist/xyz789"
+        playlists = focus_mode.add_user_playlist("u1", first, entitlements=_unlimited_entitlements())
+        self.assertEqual(len(playlists), 1)
+        self.assertTrue(playlists[0]["active"])
+
+        focus_mode.add_user_playlist("u1", second, entitlements=_unlimited_entitlements())
+        focus_mode.set_active_playlist("u1", second)
+        source = focus_mode.user_playlist_source("u1")
+        self.assertEqual(source["spotify_url"], second)
+        self.assertEqual(len(source["playlists"]), 2)
+        self.assertTrue(next(item for item in source["playlists"] if item["spotify_url"] == second)["active"])
+
+        focus_mode.remove_user_playlist("u1", second)
+        remaining = focus_mode.list_user_playlists("u1")
+        self.assertEqual([item["spotify_url"] for item in remaining], [first])
+        self.assertTrue(remaining[0]["active"])
+
+        state = focus_mode.snapshot("u1", entitlements=_unlimited_entitlements())
+        self.assertEqual(state["active_playlist_url"], first)
+        self.assertEqual(len(state["playlists"]), 1)
+        self.assertEqual(state["playlist_entitlements"], {"limit": None, "usage": 1})
+
+    def test_user_playlist_tier_limit_enforced_on_add(self):
+        first = "https://open.spotify.com/playlist/abc123"
+        second = "https://open.spotify.com/playlist/xyz789"
+        third = "https://open.spotify.com/playlist/def456"
+        limited = _limited_entitlements(2, 0)
+        focus_mode.add_user_playlist("u1", first, entitlements=limited)
+        focus_mode.add_user_playlist("u1", second, entitlements=_limited_entitlements(2, 1))
+        with self.assertRaises(EntitlementLimitError) as context:
+            focus_mode.add_user_playlist("u1", third, entitlements=_limited_entitlements(2, 2))
+        self.assertEqual(context.exception.resource, "focus_playlists")
+        self.assertEqual(len(focus_mode.list_user_playlists("u1")), 2)
+
+    def test_session_playlist_actions_sync_user_library(self):
+        first = "https://open.spotify.com/playlist/abc123"
+        second = "https://open.spotify.com/playlist/xyz789"
+        session = focus_mode.start_session("u1", {
+            "name": "Study",
+            "focus_minutes": 25,
+            "break_minutes": 0,
+            "long_break_minutes": 0,
+            "cycles": 1,
+        })
+        updated = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "set_playlist",
+            {"spotify_url": first},
+            entitlements=_unlimited_entitlements(),
+        )
+        self.assertEqual(updated["spotify_url"], first)
+        self.assertEqual(len(focus_mode.list_user_playlists("u1")), 1)
+
+        switched = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "set_playlist",
+            {"spotify_url": second},
+            entitlements=_unlimited_entitlements(),
+        )
+        self.assertEqual(switched["spotify_url"], second)
+        self.assertEqual(len(focus_mode.list_user_playlists("u1")), 2)
+
+        removed = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "remove_playlist",
+            {"spotify_url": second},
+            entitlements=_unlimited_entitlements(),
+        )
+        self.assertEqual(removed["spotify_url"], first)
+        self.assertEqual(len(focus_mode.list_user_playlists("u1")), 1)
+
+        restored = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "restore_playlist",
+            {"spotify_url": second, "active_spotify_url": second},
+            entitlements=_unlimited_entitlements(),
+        )
+        self.assertEqual(restored["spotify_url"], second)
+        self.assertEqual(len(focus_mode.list_user_playlists("u1")), 2)
+        self.assertEqual(focus_mode.snapshot("u1", entitlements=_unlimited_entitlements())["active_playlist_url"], second)
 
 
 if __name__ == "__main__":
