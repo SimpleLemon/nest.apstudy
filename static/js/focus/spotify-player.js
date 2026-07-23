@@ -33,11 +33,11 @@ function loadSpotifyApi() {
   return state.promise;
 }
 
-function fallbackEmbed(host, embedUrl) {
+function fallbackEmbed(host, embedUrl, provider = 'spotify') {
   if (host.querySelector('iframe')) return;
   const iframe = document.createElement('iframe');
   iframe.src = embedUrl;
-  iframe.title = 'Spotify playlist player';
+  iframe.title = `${provider === 'spotify' ? 'Spotify' : 'YouTube'} playlist player`;
   iframe.loading = 'lazy';
   iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
   iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -63,11 +63,19 @@ export function createSpotifyPlayer(host) {
     const requestGeneration = ++generation;
     loadingUrl = spotifyUrl;
     host.hidden = false;
+    const provider = new URL(spotifyUrl).hostname === 'open.spotify.com' ? 'spotify' : 'youtube';
+    if (provider !== 'spotify') {
+      destroyController();
+      fallbackEmbed(host, embedUrl, provider);
+      currentUrl = spotifyUrl;
+      loadingUrl = '';
+      return;
+    }
     const api = await loadSpotifyApi();
     if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) return;
     destroyController();
     if (!api?.createController) {
-      fallbackEmbed(host, embedUrl);
+      fallbackEmbed(host, embedUrl, provider);
       currentUrl = spotifyUrl;
       loadingUrl = '';
       return;
@@ -98,11 +106,13 @@ export function createSpotifyPlayer(host) {
   function pause() {
     resumeWhenReady = false;
     controller?.pause?.();
+    host?.querySelector('iframe')?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
   }
 
   function resume() {
     resumeWhenReady = true;
     controller?.resume?.();
+    host?.querySelector('iframe')?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
   }
 
   function dispose() {

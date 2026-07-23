@@ -63,6 +63,17 @@
     font-size: 19px;
 }
 
+.focus-inline-icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 .focus-button-primary {
     min-height: 48px;
     background: var(--color-primary);
@@ -258,6 +269,14 @@
     font-size: 12px;
 }
 
+.focus-save-context {
+    grid-column: 1 / -1;
+    margin: 2px 0 0;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
 .focus-save-feedback:empty {
     display: none;
 }
@@ -285,15 +304,15 @@
 }
 
 .focus-duration-control {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 10px;
+    position: relative;
+    display: grid;
+    width: 100%;
+    place-items: center;
     cursor: text;
 }
 
 .focus-duration-control input {
-    width: 2.7ch;
+    width: 4ch;
     border: 0;
     border-bottom: 2px solid transparent;
     border-radius: 0;
@@ -305,7 +324,7 @@
     font-weight: 680;
     letter-spacing: -0.04em;
     line-height: 1;
-    text-align: right;
+    text-align: center;
     appearance: textfield;
 }
 
@@ -321,6 +340,9 @@
 }
 
 .focus-duration-control span {
+    position: absolute;
+    left: calc(50% + 47px);
+    bottom: 8px;
     color: var(--color-on-surface-variant);
     font-size: 15px;
     font-weight: 650;
@@ -1214,16 +1236,21 @@
 }
 
 .focus-soundtrack {
+    position: relative;
     padding-top: 18px;
     border-top: 1px solid color-mix(in srgb, var(--color-outline-variant) 54%, transparent);
 }
 
 .focus-region-heading {
-    align-items: flex-start;
-    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
 }
 
 .focus-floating-controls {
+    position: absolute;
+    top: 12px;
+    right: 0;
     display: none;
     align-items: center;
     gap: 4px;
@@ -1255,11 +1282,20 @@
     outline-offset: 2px;
 }
 
+.focus-collapse-icon,
+.focus-floating-size[data-expanded="true"] .focus-expand-icon {
+    display: none;
+}
+
+.focus-floating-size[data-expanded="true"] .focus-collapse-icon {
+    display: block;
+}
+
 .focus-region-heading h2 {
     margin: 0;
     color: var(--color-on-surface);
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 750;
     letter-spacing: -0.01em;
 }
@@ -1282,7 +1318,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .focus-playlist-actions {
@@ -1293,35 +1329,31 @@
 .focus-playlist-heading-copy {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 4px;
 }
 
 .focus-playlist-toggle {
-    display: inline-grid;
-    width: 34px;
-    height: 34px;
-    place-items: center;
-    margin-left: -7px;
-    padding: 0;
-    border: 0;
+    display: grid;
+    width: 100%;
+    min-height: 48px;
+    grid-template-columns: 32px 1fr 32px;
+    align-items: center;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 76%, var(--color-outline-variant));
     border-radius: var(--radius-avatar);
     background: transparent;
     color: var(--color-on-surface-variant);
     cursor: pointer;
     transition: background-color 170ms cubic-bezier(0.22, 1, 0.36, 1),
-        color 170ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 170ms cubic-bezier(0.22, 1, 0.36, 1);
+        color 170ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .focus-playlist-toggle:hover,
 .focus-playlist-toggle.is-open {
-    background: var(--color-surface-container-high);
+    background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface-container-low));
     color: var(--color-primary);
-}
-
-.focus-playlist-toggle.is-open {
-    transform: rotate(45deg);
 }
 
 .focus-playlist-toggle:focus-visible {
@@ -1329,8 +1361,60 @@
     outline-offset: 2px;
 }
 
-.focus-playlist-toggle .material-symbols-outlined {
-    font-size: 21px;
+.focus-playlist-add-icon {
+    width: 24px;
+    height: 24px;
+    justify-self: center;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: transform 170ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-playlist-toggle.is-open .focus-playlist-add-icon {
+    transform: rotate(45deg);
+}
+
+.focus-provider-mark {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border-radius: 50%;
+}
+
+.focus-provider-mark svg {
+    width: 24px;
+    height: 24px;
+}
+
+.focus-provider-mark.is-spotify {
+    color: #07130b;
+}
+
+.focus-provider-mark.is-spotify svg circle {
+    fill: #1ed760;
+    stroke: none;
+}
+
+.focus-provider-mark.is-spotify svg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+}
+
+.focus-provider-mark.is-youtube {
+    color: #ff0033;
+}
+
+.focus-provider-mark.is-youtube svg path:first-child {
+    fill: currentColor;
+}
+
+.focus-provider-mark.is-youtube svg path:last-child {
+    fill: #fff;
 }
 
 .focus-playlist-apply,
@@ -1365,10 +1449,11 @@
 
 .focus-playlist-list {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     margin: 0 0 10px;
     padding: 0;
-    overflow-x: auto;
+    overflow: visible;
     list-style: none;
     scrollbar-width: thin;
 }
@@ -1378,17 +1463,60 @@
 }
 
 .focus-playlist-item {
-    flex: 0 0 min(260px, calc(100vw - 56px));
+    position: relative;
+    flex: 0 0 auto;
     min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: color-mix(in srgb, var(--color-error) 76%, var(--color-surface-container));
+    transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-playlist-item.is-removing {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.focus-playlist-card-remove {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-surface-container-highest);
+    color: var(--color-error);
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.focus-playlist-item:hover .focus-playlist-card-remove,
+.focus-playlist-item:focus-within .focus-playlist-card-remove {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.focus-playlist-card-remove:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .focus-playlist-card {
     display: flex;
     width: 100%;
-    min-height: 64px;
+    min-height: 76px;
     align-items: center;
     gap: 11px;
-    padding: 6px;
+    padding: 8px 54px 8px 8px;
     border: 0;
     border-radius: var(--radius-control);
     background: var(--color-surface-container);
@@ -1411,9 +1539,9 @@
 
 .focus-playlist-artwork {
     display: grid;
-    width: 52px;
-    height: 52px;
-    flex: 0 0 52px;
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
     place-items: center;
     border-radius: var(--radius-control);
     object-fit: cover;
@@ -1422,6 +1550,11 @@
 .focus-playlist-artwork-fallback {
     background: var(--color-surface-container-highest);
     color: var(--color-on-surface-variant);
+}
+
+.focus-playlist-artwork-fallback .focus-inline-icon {
+    width: 24px;
+    height: 24px;
 }
 
 .focus-playlist-card-copy {
@@ -1435,6 +1568,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.focus-playlist-card-provider {
+    margin-left: auto;
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    font-weight: 650;
 }
 
 .focus-playlist-card-copy strong {
@@ -1454,6 +1594,13 @@
     border: 0;
     border-radius: var(--radius-card);
     background: var(--color-surface-container-high);
+}
+
+.focus-spotify-embed[data-playlist-provider="youtube"],
+.focus-spotify-embed[data-playlist-provider="youtube_music"] {
+    height: auto;
+    min-height: 220px;
+    aspect-ratio: 16 / 9;
 }
 
 .focus-spotify-embed iframe {
@@ -1588,6 +1735,11 @@
     height: 420px;
 }
 
+.focus-body[data-spotify-layout="beside"] .focus-spotify-embed[data-playlist-provider="youtube"],
+.focus-body[data-spotify-layout="beside"] .focus-spotify-embed[data-playlist-provider="youtube_music"] {
+    height: auto;
+}
+
 .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack:has(.focus-spotify-embed:not([hidden])) {
     position: fixed;
     left: var(--focus-floating-left, calc(100vw - 380px));
@@ -1644,6 +1796,11 @@
         height: 352px;
     }
 
+    .focus-body[data-spotify-layout="below"] .focus-spotify-embed[data-playlist-provider="youtube"],
+    .focus-body[data-spotify-layout="below"] .focus-spotify-embed[data-playlist-provider="youtube_music"] {
+        height: auto;
+    }
+
     .focus-body.focus-session-active[data-spotify-layout="beside"] .focus-routine-form,
     .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-routine-form {
         align-items: center;
@@ -1686,16 +1843,21 @@
     }
 
     .focus-body[data-spotify-layout="beside"] .focus-playlist-list {
-        flex-direction: row;
-        overflow-x: auto;
+        flex-direction: column;
+        overflow: visible;
     }
 
     .focus-body[data-spotify-layout="beside"] .focus-playlist-item {
-        flex-basis: min(260px, calc(100vw - 56px));
+        flex-basis: auto;
     }
 
     .focus-body[data-spotify-layout="beside"] .focus-spotify-embed {
         height: 152px;
+    }
+
+    .focus-body[data-spotify-layout="beside"] .focus-spotify-embed[data-playlist-provider="youtube"],
+    .focus-body[data-spotify-layout="beside"] .focus-spotify-embed[data-playlist-provider="youtube_music"] {
+        height: auto;
     }
 
     .focus-body.focus-session-active[data-spotify-layout="floating"] .focus-soundtrack:has(.focus-spotify-embed:not([hidden])) {
@@ -1744,6 +1906,11 @@
         font-size: 68px;
     }
 
+    .focus-duration-control span {
+        left: calc(50% + 55px);
+        bottom: 10px;
+    }
+
     .focus-session-stage {
         min-height: 480px;
     }
@@ -1771,7 +1938,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .focus-playlist-card {
+    .focus-playlist-card,
+    .focus-playlist-card-remove,
+    .focus-playlist-item,
+    .focus-playlist-add-icon {
         transition: none;
     }
 
@@ -1809,6 +1979,10 @@
         grid-column: 1;
     }
 
+    .focus-save-context {
+        grid-column: 1;
+    }
+
     .focus-form-main {
         padding-top: 30px;
     }
@@ -1818,6 +1992,8 @@
     }
 
     .focus-duration-control span {
+        left: calc(50% + 47px);
+        bottom: 8px;
         font-size: 13px;
     }
 
@@ -1874,6 +2050,34 @@
     .focus-options-header,
     .focus-options-scroll {
         padding-inline: 18px;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .focus-playlist-card {
+        position: relative;
+        z-index: 1;
+        touch-action: pan-y;
+        transform: translateX(var(--focus-playlist-swipe-x, 0));
+    }
+
+    .focus-playlist-card:hover {
+        transform: translateX(var(--focus-playlist-swipe-x, 0));
+    }
+
+    .focus-playlist-card-remove {
+        inset: 0 0 0 auto;
+        width: 88px;
+        height: 100%;
+        border-radius: 0;
+        background: transparent;
+        color: var(--color-on-error);
+        opacity: 1;
+        transform: none;
+    }
+
+    .focus-playlist-item:focus-within .focus-playlist-card-remove {
+        transform: none;
     }
 }
 

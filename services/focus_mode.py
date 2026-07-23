@@ -4,6 +4,7 @@ import json
 import re
 import uuid
 from datetime import datetime, timedelta, timezone
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import requests
 
@@ -16,6 +17,8 @@ SPOTIFY_PLAYLIST_RE = re.compile(
     r"^https://open\.spotify\.com/(?:embed/)?playlist/([A-Za-z0-9]+)(?:[/?#].*)?$",
     re.IGNORECASE,
 )
+YOUTUBE_PLAYLIST_HOSTS = {"youtube.com", "www.youtube.com", "m.youtube.com", "music.youtube.com"}
+YOUTUBE_PLAYLIST_ID_RE = re.compile(r"^[A-Za-z0-9_-]{10,}$")
 SPOTIFY_LAYOUTS = {"below", "beside", "floating"}
 SPOTIFY_FLOATING_SIZES = {"compact", "expanded"}
 SPOTIFY_METADATA_TIMEOUT = 5
@@ -54,28 +57,89 @@ def _bounded_integer(value, *, label, minimum, maximum):
     return number
 
 
-def normalize_spotify_url(value):
+def playlist_provider(value):
+    url = str(value or "").strip()
+    if SPOTIFY_PLAYLIST_RE.match(url):
+        return "spotify"
+    try:
+        parsed = urlparse(url)
+    except (TypeError, ValueError):
+        return None
+    host = parsed.hostname.lower() if parsed.hostname else ""
+    playlist_id = parse_qs(parsed.query).get("list", [""])[0]
+    if (
+        parsed.scheme == "https"
+        and host in YOUTUBE_PLAYLIST_HOSTS
+        and parsed.path.rstrip("/") == "/playlist"
+        and YOUTUBE_PLAYLIST_ID_RE.fullmatch(playlist_id)
+    ):
+        return "youtube_music" if host == "music.youtube.com" else "youtube"
+    return None
+
+
+def normalize_playlist_url(value):
     url = str(value or "").strip()
     if not url:
         return None
     match = SPOTIFY_PLAYLIST_RE.match(url)
-    if not match:
-        raise ValueError("Use a Spotify playlist link from open.spotify.com.")
-    return f"https://open.spotify.com/playlist/{match.group(1)}"
+    if match:
+        return f"https://open.spotify.com/playlist/{match.group(1)}"
+    provider = playlist_provider(url)
+    if provider in {"youtube", "youtube_music"}:
+        parsed = urlparse(url)
+        playlist_id = parse_qs(parsed.query)["list"][0]
+        host = "music.youtube.com" if provider == "youtube_music" else "www.youtube.com"
+        return f"https://{host}/playlist?{urlencode({'list': playlist_id})}"
+    raise ValueError("Use a Spotify, YouTube, or YouTube Music playlist link.")
+
+
+def normalize_spotify_url(value):
+    """Backward-compatible storage boundary for playlist URLs."""
+    return normalize_playlist_url(value)
+
+
+def playlist_embed_url(value):
+    normalized = normalize_playlist_url(value)
+    if not normalized:
+        return None
+    provider = playlist_provider(normalized)
+    if provider == "spotify":
+        playlist_id = normalized.rsplit("/", 1)[-1]
+        return f"https://open.spotify.com/embed/playlist/{playlist_id}?utm_source=generator&theme=0"
+    playlist_id = parse_qs(urlparse(normalized).query)["list"][0]
+    return f"https://www.youtube-nocookie.com/embed/videoseries?{urlencode({'list': playlist_id, 'enablejsapi': 1, 'playsinline': 1})}"
 
 
 def spotify_embed_url(value):
-    normalized = normalize_spotify_url(value)
-    if not normalized:
-        return None
-    playlist_id = normalized.rsplit("/", 1)[-1]
-    return f"https://open.spotify.com/embed/playlist/{playlist_id}?utm_source=generator&theme=0"
+    """Backward-compatible serialized field for the generalized playlist player."""
+    return playlist_embed_url(value)
 
 
 def _playlist_metadata(spotify_url):
-    """Return public playlist metadata without requiring a Spotify account connection."""
-    fallback = {"title": "Spotify playlist", "creator": "Spotify", "thumbnail_url": None}
+    """Return public playlist metadata without requiring a provider connection."""
+    provider = playlist_provider(spotify_url)
+    provider_label = {
+        "spotify": "Spotify",
+        "youtube": "YouTube",
+        "youtube_music": "YouTube Music",
+    }.get(provider, "Playlist")
+    fallback = {"title": f"{provider_label} playlist", "creator": provider_label, "thumbnail_url": None}
     try:
+        if provider in {"youtube", "youtube_music"}:
+            playlist_id = parse_qs(urlparse(spotify_url).query)["list"][0]
+            public_url = f"https://www.youtube.com/playlist?{urlencode({'list': playlist_id})}"
+            response = requests.get(
+                "https://www.youtube.com/oembed",
+                params={"url": public_url, "format": "json"},
+                timeout=SPOTIFY_METADATA_TIMEOUT,
+            )
+            response.raise_for_status()
+            payload = response.json()
+            return {
+                "title": str(payload.get("title") or fallback["title"]).strip()[:160],
+                "creator": str(payload.get("author_name") or fallback["creator"]).strip()[:120],
+                "thumbnail_url": str(payload.get("thumbnail_url") or "").strip() or None,
+            }
         response = requests.get(
             "https://open.spotify.com/oembed",
             params={"url": spotify_url},
@@ -87,7 +151,7 @@ def _playlist_metadata(spotify_url):
         thumbnail_url = str(payload.get("thumbnail_url") or "").strip() or None
 
         embed_response = requests.get(
-            spotify_embed_url(spotify_url),
+            playlist_embed_url(spotify_url),
             headers={"User-Agent": "Mozilla/5.0"},
             timeout=SPOTIFY_METADATA_TIMEOUT,
         )
@@ -105,21 +169,31 @@ def _playlist_metadata(spotify_url):
 
 def _playlist_payload(row, *, active_url=None):
     playlist = _row_dict(row)
-    playlist["spotify_embed_url"] = spotify_embed_url(playlist.get("spotify_url"))
+    playlist["provider"] = playlist_provider(playlist.get("spotify_url"))
+    playlist["url"] = playlist.get("spotify_url")
+    playlist["embed_url"] = playlist_embed_url(playlist.get("spotify_url"))
+    playlist["spotify_embed_url"] = playlist["embed_url"]
     playlist["active"] = playlist.get("spotify_url") == active_url
     return playlist
 
 
-def spotify_playlist(value):
-    spotify_url = normalize_spotify_url(value)
+def playlist(value):
+    spotify_url = normalize_playlist_url(value)
     if not spotify_url:
-        raise ValueError("Use a Spotify playlist link from open.spotify.com.")
+        raise ValueError("Use a Spotify, YouTube, or YouTube Music playlist link.")
     return {
         "id": spotify_url.rsplit("/", 1)[-1],
         "spotify_url": spotify_url,
-        "spotify_embed_url": spotify_embed_url(spotify_url),
+        "url": spotify_url,
+        "provider": playlist_provider(spotify_url),
+        "embed_url": playlist_embed_url(spotify_url),
+        "spotify_embed_url": playlist_embed_url(spotify_url),
         **_playlist_metadata(spotify_url),
     }
+
+
+def spotify_playlist(value):
+    return playlist(value)
 
 
 def _list_playlists(conn, owner_type, owner_id, *, active_url=None, legacy_url=None, user_id=None):
@@ -149,9 +223,9 @@ def _list_playlists(conn, owner_type, owner_id, *, active_url=None, legacy_url=N
 
 def _replace_playlists(conn, user_id, owner_type, owner_id, spotify_urls):
     if not isinstance(spotify_urls, (list, tuple)):
-        raise ValueError("Spotify playlists must be a list.")
+        raise ValueError("Playlists must be a list.")
     if len(spotify_urls) > 12:
-        raise ValueError("Add up to 12 Spotify playlists.")
+        raise ValueError("Add up to 12 playlists.")
     normalized = []
     for value in spotify_urls or []:
         url = normalize_spotify_url(value)
@@ -226,7 +300,9 @@ def _serialize_routine(row, conn=None):
     if not row:
         return None
     routine = _row_dict(row)
-    routine["spotify_embed_url"] = spotify_embed_url(routine.get("spotify_url"))
+    routine["playlist_provider"] = playlist_provider(routine.get("spotify_url"))
+    routine["spotify_embed_url"] = playlist_embed_url(routine.get("spotify_url"))
+    routine["embed_url"] = routine["spotify_embed_url"]
     if conn:
         routine["playlists"] = _list_playlists(
             conn, "routine", routine["id"], active_url=routine.get("spotify_url"),
@@ -267,7 +343,9 @@ def _serialize_session(row, now=None, conn=None):
         int(session.get("total_cycles") or 1),
     )
     session["phase_duration_seconds"] = _phase_duration(row)
-    session["spotify_embed_url"] = spotify_embed_url(session.get("spotify_url"))
+    session["playlist_provider"] = playlist_provider(session.get("spotify_url"))
+    session["spotify_embed_url"] = playlist_embed_url(session.get("spotify_url"))
+    session["embed_url"] = session["spotify_embed_url"]
     if conn:
         session["playlists"] = _list_playlists(
             conn, "session", session["id"], active_url=session.get("spotify_url"),
@@ -580,6 +658,25 @@ def update_session(user_id, session_id, action, payload=None):
             conn.execute(
                 "UPDATE focus_sessions SET spotify_url=?,updated_at=? WHERE id=?",
                 [active_url, _iso(now), row["id"]],
+            )
+        elif action == "restore_playlist":
+            if row["state"] not in ACTIVE_STATES:
+                raise ValueError("This Focus Mode session is no longer active.")
+            spotify_url = normalize_playlist_url(payload.get("spotify_url"))
+            active_url = normalize_playlist_url(payload.get("active_spotify_url"))
+            existing_urls = [
+                item["spotify_url"] for item in _list_playlists(
+                    conn, "session", row["id"], active_url=row["spotify_url"],
+                    legacy_url=row["spotify_url"], user_id=user_id,
+                )
+            ]
+            if spotify_url and spotify_url not in existing_urls:
+                existing_urls.append(spotify_url)
+            _replace_playlists(conn, user_id, "session", row["id"], existing_urls)
+            selected_url = active_url if active_url in existing_urls else (existing_urls[0] if existing_urls else None)
+            conn.execute(
+                "UPDATE focus_sessions SET spotify_url=?,updated_at=? WHERE id=?",
+                [selected_url, _iso(now), row["id"]],
             )
         elif action in {"advance", "complete_phase"}:
             if row["state"] == "paused":

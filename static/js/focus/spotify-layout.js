@@ -62,9 +62,8 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     document.body.dataset.spotifyFloatingSize = preferences.floating_size;
     const expanded = preferences.floating_size === 'expanded';
     elements.floatingSize?.setAttribute('aria-pressed', String(expanded));
-    elements.floatingSize?.setAttribute('aria-label', expanded ? 'Make Spotify player compact' : 'Expand Spotify player');
-    const icon = elements.floatingSize?.querySelector('.material-symbols-outlined');
-    if (icon) icon.textContent = expanded ? 'close_fullscreen' : 'open_in_full';
+    elements.floatingSize?.setAttribute('aria-label', expanded ? 'Make playlist player compact' : 'Expand playlist player');
+    if (elements.floatingSize) elements.floatingSize.dataset.expanded = String(expanded);
     requestAnimationFrame(position);
     if (shouldPersist) persist();
   }

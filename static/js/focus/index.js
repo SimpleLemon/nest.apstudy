@@ -1,13 +1,14 @@
 import {
   focusApi,
   formPayload,
+  playlistEmbedUrl,
   routineFromState,
-  spotifyEmbedUrl,
   suggestedBreaks,
 } from './data.js';
 import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
 import { createCompletionEffects } from './completion.js';
+import { bindPlaylistGestures } from './playlist-gestures.js';
 
 const view = createFocusView({
   savePlayerPreferences: (preferences) => focusApi.savePlayerPreferences(preferences),
@@ -29,12 +30,18 @@ const state = {
   disposed: false,
 };
 
-function toast(message, type = 'success', title = '', duration = 3500) {
-  window.APStudyToast?.show?.({ message, type, duration, ...(title ? { title } : {}) });
+function toast(message, type = 'success', title = '', duration = 3500, action = null) {
+  window.APStudyToast?.show?.({
+    message,
+    type,
+    duration,
+    ...(title ? { title } : {}),
+    ...(action ? { action } : {}),
+  });
 }
 
-function playlistToast(message) {
-  toast(message, 'success', '', 1000);
+function playlistToast(message, action = null) {
+  toast(message, 'success', '', action ? 10_000 : 1000, action);
 }
 
 function announceSessionChange(message, title, type = 'info') {
@@ -326,15 +333,13 @@ function applySelection(selection) {
   elements.breakMinutes.value = selection.break_minutes || 0;
   elements.longBreakMinutes.value = selection.long_break_minutes || selection.break_minutes || 0;
   elements.cycles.value = selection.cycles || 1;
-  elements.routineSelect.value = '';
-  elements.deleteRoutine.hidden = true;
   renderSuggestions();
   if (Object.prototype.hasOwnProperty.call(selection, 'spotify_url')) {
     elements.spotifyUrl.value = selection.spotify_url || '';
     const spotifySelection = {
       ...selection,
       spotify_url: selection.spotify_url || '',
-      spotify_embed_url: spotifyEmbedUrl(selection.spotify_url || ''),
+      spotify_embed_url: playlistEmbedUrl(selection.spotify_url || ''),
     };
     state.spotifySource = spotifySelection.spotify_url ? spotifySelection : null;
     view.renderSpotify(spotifySelection);
@@ -388,7 +393,7 @@ async function applyPlaylist() {
     const nextPlaylist = {
       ...current,
       spotify_url: normalized,
-      spotify_embed_url: spotifyEmbedUrl(normalized),
+      spotify_embed_url: playlistEmbedUrl(normalized),
       playlists: duplicate ? existing : [...existing, playlist],
     };
     state.spotifySource = nextPlaylist;
@@ -401,28 +406,76 @@ async function applyPlaylist() {
   }
 }
 
-async function removePlaylist() {
+function playlistByUrl(source, url) {
+  return (source?.playlists || []).find((playlist) => playlist.spotify_url === url) || null;
+}
+
+function localPlaylistSource(source, playlists, activeUrl) {
+  if (!playlists.length) return null;
+  const active = playlistByUrl({ playlists }, activeUrl) || playlists[0];
+  return {
+    ...source,
+    spotify_url: active.spotify_url,
+    spotify_embed_url: active.embed_url || active.spotify_embed_url || playlistEmbedUrl(active.spotify_url),
+    embed_url: active.embed_url || active.spotify_embed_url || playlistEmbedUrl(active.spotify_url),
+    playlist_provider: active.provider,
+    playlists,
+  };
+}
+
+async function restorePlaylist(record) {
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.removePlaylist(state.session.id, state.session.spotify_url);
+      const response = await focusApi.restorePlaylist(state.session.id, record.playlist.spotify_url, record.activeUrl);
+      state.session = clockedSession(response.session);
+      state.spotifySource = state.session;
+      view.renderSpotify(state.session);
+    } else {
+      const source = state.spotifySource || record.source;
+      const playlists = [...(source?.playlists || [])];
+      if (!playlistByUrl({ playlists }, record.playlist.spotify_url)) {
+        playlists.splice(Math.min(record.index, playlists.length), 0, record.playlist);
+      }
+      state.spotifySource = localPlaylistSource(source, playlists, record.activeUrl);
+      view.renderSpotify(state.spotifySource);
+    }
+    playlistToast('Playlist restored.');
+  } catch (error) {
+    view.setPlaylistStatus(error.message, 'error');
+  } finally {
+    view.setPlaylistBusy(false);
+  }
+}
+
+async function removePlaylist(playlistUrl = '') {
+  const source = state.session || state.spotifySource || selectedRoutine() || {};
+  const targetUrl = playlistUrl || source.spotify_url;
+  const playlists = Array.isArray(source.playlists) ? source.playlists : [];
+  const index = playlists.findIndex((playlist) => playlist.spotify_url === targetUrl);
+  const playlist = index >= 0 ? playlists[index] : {
+    spotify_url: targetUrl,
+    title: 'Playlist',
+    creator: 'Music',
+  };
+  if (!targetUrl) return;
+  const record = { playlist, index: Math.max(0, index), activeUrl: source.spotify_url, source };
+  view.setPlaylistBusy(true);
+  try {
+    if (state.session) {
+      const response = await focusApi.removePlaylist(state.session.id, targetUrl);
       state.session = clockedSession(response.session);
       state.spotifySource = state.session.spotify_url ? state.session : null;
       view.renderSpotify(state.session);
     } else {
-      const current = state.spotifySource || selectedRoutine() || {};
-      const remaining = (current.playlists || [])
-        .filter((playlist) => playlist.spotify_url !== current.spotify_url);
-      const next = remaining[0] || null;
-      state.spotifySource = remaining.length ? {
-        ...current,
-        spotify_url: next.spotify_url,
-        spotify_embed_url: next.spotify_embed_url || spotifyEmbedUrl(next.spotify_url),
-        playlists: remaining,
-      } : null;
+      const remaining = playlists.filter((item) => item.spotify_url !== targetUrl);
+      state.spotifySource = localPlaylistSource(source, remaining, source.spotify_url);
       view.renderSpotify(state.spotifySource);
     }
-    playlistToast('Playlist removed.');
+    playlistToast(`${playlist.title || 'Playlist'} removed.`, {
+      label: 'Undo',
+      onClick: () => { void restorePlaylist(record); },
+    });
   } catch (error) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
@@ -446,7 +499,8 @@ async function selectPlaylist(spotifyUrl) {
       state.spotifySource = {
         ...current,
         spotify_url: spotifyUrl,
-        spotify_embed_url: playlist.spotify_embed_url || spotifyEmbedUrl(spotifyUrl),
+        spotify_embed_url: playlist.embed_url || playlist.spotify_embed_url || playlistEmbedUrl(spotifyUrl),
+        embed_url: playlist.embed_url || playlist.spotify_embed_url || playlistEmbedUrl(spotifyUrl),
       };
       view.renderSpotify(state.spotifySource);
     }
@@ -455,6 +509,46 @@ async function selectPlaylist(spotifyUrl) {
     view.setPlaylistStatus(error.message, 'error');
   } finally {
     view.setPlaylistBusy(false);
+  }
+}
+
+function payloadFromRoutine(routine) {
+  return {
+    routine_id: routine.id,
+    name: routine.name,
+    focus_minutes: routine.focus_minutes,
+    break_minutes: routine.break_minutes || 0,
+    long_break_minutes: routine.long_break_minutes || routine.break_minutes || 0,
+    cycles: routine.cycles || 1,
+    spotify_url: routine.spotify_url || '',
+    spotify_playlists: (routine.playlists || []).map((playlist) => playlist.spotify_url),
+  };
+}
+
+async function undoRoutineSave(record) {
+  try {
+    if (record.previous) {
+      const response = await focusApi.saveRoutine(payloadFromRoutine(record.previous), record.saved.id);
+      const index = state.routines.findIndex((routine) => routine.id === record.saved.id);
+      if (index >= 0) state.routines[index] = response.routine;
+      view.renderRoutines(state.routines, response.routine.id);
+      view.fillRoutine(response.routine);
+      state.spotifySource = response.routine.spotify_url ? response.routine : null;
+      view.renderSpotify(response.routine);
+    } else {
+      await focusApi.deleteRoutine(record.saved.id);
+      state.routines = state.routines.filter((routine) => routine.id !== record.saved.id);
+      view.renderRoutines(state.routines);
+      view.fillRoutine(null);
+      state.spotifySource = null;
+      view.renderSpotify(null);
+      renderSuggestions();
+    }
+    view.setSettingsStatus('Saved setup restored.', 'success');
+    playlistToast('Focus setup restored.');
+  } catch (error) {
+    view.setSettingsStatus(error.message, 'error');
+    toast(error.message, 'error', 'Couldn’t undo the save');
   }
 }
 
@@ -468,6 +562,11 @@ async function saveRoutine() {
   elements.saveRoutines.forEach((button) => { button.disabled = true; });
   try {
     const selectedId = elements.routineSelect.value;
+    const previous = selectedId ? selectedRoutine() : null;
+    const previousSnapshot = previous ? {
+      ...previous,
+      playlists: (previous.playlists || []).map((playlist) => ({ ...playlist })),
+    } : null;
     const response = await focusApi.saveRoutine(payload, selectedId);
     const index = state.routines.findIndex((routine) => routine.id === response.routine.id);
     if (index >= 0) state.routines[index] = response.routine;
@@ -475,8 +574,18 @@ async function saveRoutine() {
     view.renderRoutines(state.routines, response.routine.id);
     state.spotifySource = response.routine.spotify_url ? response.routine : null;
     view.renderSpotify(response.routine);
-    view.setSettingsStatus('Setup saved to your account.', 'success');
-    playlistToast('Focus setup saved.');
+    const setupName = response.routine.name;
+    view.setSettingsStatus(
+      previousSnapshot ? `Changes saved to “${setupName}”.` : `“${setupName}” saved as a new setup.`,
+      'success',
+    );
+    toast(
+      previousSnapshot ? 'This focus setup was updated.' : 'A new focus setup was created.',
+      'success',
+      previousSnapshot ? `Changes saved to “${setupName}”` : `“${setupName}” saved`,
+      10_000,
+      { label: 'Undo', onClick: () => { void undoRoutineSave({ previous: previousSnapshot, saved: response.routine }); } },
+    );
   } catch (error) {
     view.setSettingsStatus(error.message, 'error');
   } finally {
@@ -511,6 +620,10 @@ async function deleteRoutine() {
 }
 
 function bindEvents() {
+  const disposePlaylistGestures = bindPlaylistGestures(elements.playlistList, {
+    onRemove: (url) => { void removePlaylist(url); },
+    onSelect: (url) => { void selectPlaylist(url); },
+  });
   elements.form.addEventListener('submit', startSession);
   elements.optionsOpen.forEach((button) => button.addEventListener('click', () => view.openOptions(button)));
   elements.optionsClose?.addEventListener('click', (event) => {
@@ -565,10 +678,6 @@ function bindEvents() {
   });
   elements.playlistApply?.addEventListener('click', () => { void applyPlaylist(); });
   elements.playlistRemove?.addEventListener('click', () => { void removePlaylist(); });
-  elements.playlistList?.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-spotify-playlist]');
-    if (button) void selectPlaylist(button.dataset.spotifyPlaylist);
-  });
   elements.spotifyUrl?.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter') return;
     event.preventDefault();
@@ -604,7 +713,12 @@ function bindEvents() {
   window.APStudyPageLifecycle?.register?.({
     pause: stopTimer,
     resume: tick,
-    dispose: () => { state.disposed = true; stopTimer(); view.dispose(); },
+    dispose: () => {
+      state.disposed = true;
+      stopTimer();
+      disposePlaylistGestures();
+      view.dispose();
+    },
   });
 }
 

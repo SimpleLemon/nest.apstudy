@@ -1,4 +1,8 @@
-import { normalizeSpotifyPlaylist, spotifyEmbedUrl } from './data.js';
+import {
+  normalizePlaylist,
+  playlistEmbedUrl,
+  playlistProvider,
+} from './data.js';
 import {
   eggCrackLevel,
   formatTimer,
@@ -30,9 +34,30 @@ function choice(label, dataset = {}) {
   return button;
 }
 
+function lineIcon(paths, className = 'focus-inline-icon') {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  svg.setAttribute('class', className);
+  paths.forEach((value) => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', value);
+    svg.appendChild(path);
+  });
+  return svg;
+}
+
 function playlistCard(playlist) {
   const item = document.createElement('li');
   item.className = 'focus-playlist-item';
+  item.dataset.focusPlaylistItem = playlist.spotify_url;
+  const remove = document.createElement('button');
+  remove.type = 'button';
+  remove.className = 'focus-playlist-card-remove';
+  remove.dataset.focusPlaylistRemove = playlist.spotify_url;
+  remove.setAttribute('aria-label', `Remove ${playlist.title || 'playlist'}`);
+  remove.appendChild(lineIcon(['M7 7l10 10M17 7 7 17']));
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'focus-playlist-card';
@@ -48,11 +73,10 @@ function playlistCard(playlist) {
   } else {
     const fallback = document.createElement('span');
     fallback.className = 'focus-playlist-artwork focus-playlist-artwork-fallback';
-    const icon = document.createElement('span');
-    icon.className = 'material-symbols-outlined';
-    icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = 'queue_music';
-    fallback.appendChild(icon);
+    fallback.appendChild(lineIcon([
+      'M9 17.5a2.5 2.5 0 1 1-2.5-2.5H9v2.5ZM9 15V6l9-2v9.5',
+      'M18 13.5a2.5 2.5 0 1 1-2.5-2.5H18v2.5Z',
+    ]));
     button.appendChild(fallback);
   }
   const copy = document.createElement('span');
@@ -62,8 +86,12 @@ function playlistCard(playlist) {
   const creator = document.createElement('span');
   creator.textContent = playlist.creator || 'Spotify';
   copy.append(title, creator);
-  button.appendChild(copy);
-  item.appendChild(button);
+  const provider = document.createElement('span');
+  provider.className = 'focus-playlist-card-provider';
+  const providerName = playlist.provider || playlistProvider(playlist.spotify_url);
+  provider.textContent = providerName === 'spotify' ? 'Spotify' : providerName === 'youtube_music' ? 'YT Music' : 'YouTube';
+  button.append(copy, provider);
+  item.append(remove, button);
   return item;
 }
 
@@ -124,6 +152,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     autoStart: document.getElementById('focus-auto-start'),
     saveRoutines: [...document.querySelectorAll('[data-focus-save-routine]')],
     saveRoutineLabels: [...document.querySelectorAll('[data-focus-save-routine-label]')],
+    saveRoutineContext: document.querySelector('[data-focus-save-context]'),
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
     spotifyUrl: document.getElementById('focus-spotify-url'),
     playlistToggle: document.querySelector('[data-focus-playlist-toggle]'),
@@ -264,8 +293,12 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     routines.forEach((routine) => elements.routineSelect.appendChild(option(routine.id, routine.name)));
     elements.routineSelect.value = routines.some((routine) => String(routine.id) === current) ? current : '';
     const hasSelection = Boolean(elements.routineSelect.value);
+    const selected = routines.find((routine) => String(routine.id) === elements.routineSelect.value) || null;
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !hasSelection;
     elements.saveRoutineLabels.forEach((label) => text(label, hasSelection ? 'Save changes' : 'Save setup'));
+    text(elements.saveRoutineContext, selected
+      ? `Changes will update “${selected.name}”.`
+      : 'Save as a new setup.');
   }
 
   function fillRoutine(routine) {
@@ -278,6 +311,9 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     elements.spotifyUrl.value = routine?.spotify_url || '';
     if (elements.deleteRoutine) elements.deleteRoutine.hidden = !routine;
     elements.saveRoutineLabels.forEach((label) => text(label, routine ? 'Save changes' : 'Save setup'));
+    text(elements.saveRoutineContext, routine
+      ? `Changes will update “${routine.name}”.`
+      : 'Save as a new setup.');
     syncRhythmVisibility();
   }
 
@@ -365,7 +401,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     if (elements.progress) elements.progress.style.setProperty('--focus-progress', String(ratio));
     elements.time?.setAttribute('datetime', `PT${Math.max(0, remaining)}S`);
     renderEggProgress(session, remaining);
-    document.title = `${formatTimer(remaining)} · ${session.phase === 'break' ? 'Break' : 'Focus'} - Nest`;
+    document.title = `${formatTimer(remaining)} · ${session.phase === 'break' ? 'Break' : 'Focus'}`;
   }
 
   function renderHistory(history) {
@@ -395,11 +431,11 @@ export function createFocusView({ savePlayerPreferences } = {}) {
 
   function syncPlaylistControls({ clearStatus = false } = {}) {
     const raw = String(elements.spotifyUrl?.value || '').trim();
-    const normalized = normalizeSpotifyPlaylist(raw);
+    const normalized = normalizePlaylist(raw);
     const invalid = Boolean(raw && !normalized);
     elements.spotifyUrl?.setAttribute('aria-invalid', String(invalid));
     if (elements.playlistApply) elements.playlistApply.disabled = playlistBusy || !normalized;
-    if (clearStatus) setPlaylistStatus(invalid ? 'Use an open.spotify.com playlist URL.' : '', invalid ? 'error' : '');
+    if (clearStatus) setPlaylistStatus(invalid ? 'Use a Spotify, YouTube, or YouTube Music playlist URL.' : '', invalid ? 'error' : '');
     return normalized;
   }
 
@@ -413,12 +449,14 @@ export function createFocusView({ savePlayerPreferences } = {}) {
 
   function renderSpotify(source) {
     const spotifyUrl = source?.spotify_url || '';
-    const embedUrl = source?.spotify_embed_url || spotifyEmbedUrl(spotifyUrl);
+    const embedUrl = source?.embed_url || source?.spotify_embed_url || playlistEmbedUrl(spotifyUrl);
     const playlists = Array.isArray(source?.playlists) ? source.playlists : (spotifyUrl ? [{
       spotify_url: spotifyUrl,
       spotify_embed_url: embedUrl,
-      title: 'Spotify playlist',
-      creator: 'Spotify',
+      embed_url: embedUrl,
+      provider: playlistProvider(spotifyUrl),
+      title: 'Playlist',
+      creator: 'Music',
     }] : []);
     if (elements.spotifyUrl) elements.spotifyUrl.value = spotifyUrl;
     if (elements.playlistData) {
@@ -434,8 +472,10 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     if (elements.playlistRemove) elements.playlistRemove.hidden = !embedUrl;
     if (embedUrl && elements.spotifyEmbed) {
       elements.spotifyEmbed.hidden = false;
+      elements.spotifyEmbed.dataset.playlistProvider = source?.playlist_provider || playlistProvider(spotifyUrl);
       void spotifyPlayer.load(spotifyUrl, embedUrl);
     } else {
+      elements.spotifyEmbed?.removeAttribute('data-playlist-provider');
       spotifyPlayer.clear();
     }
     setPlaylistEditor(false);

@@ -44,7 +44,7 @@ function focusFixture() {
                     <header class="focus-setup-header"><div><h1 id="focus-setup-title">Set a focus timer</h1><p>Choose a length and begin.</p></div>
                         <button type="button" class="focus-button focus-button-secondary" data-focus-options-open aria-expanded="false">Session settings</button></header>
                     <div class="focus-save-bar" data-focus-routine-picker><label class="focus-routine-picker focus-field"><span>Focus setup</span>
-                        <select id="focus-routine-select" name="routine_id"><option value="">Default</option></select></label><button type="button" class="focus-button focus-button-secondary focus-save-button" data-focus-save-routine><span data-focus-save-routine-label>Save setup</span></button><p data-focus-settings-status></p></div>
+                        <select id="focus-routine-select" name="routine_id"><option value="">Default</option></select></label><button type="button" class="focus-button focus-button-secondary focus-save-button" data-focus-save-routine><span data-focus-save-routine-label>Save setup</span></button><p class="focus-save-context" data-focus-save-context>Save as a new setup.</p><p data-focus-settings-status></p></div>
                     <div class="focus-form-main"><div class="focus-setup-timer-shell"><svg class="focus-progress focus-setup-progress" viewBox="0 0 360 360"><circle class="focus-progress-track" cx="180" cy="180" r="158"></circle></svg><div class="focus-time-content focus-setup-time-content"><span class="focus-phase-label">Focus duration</span><label class="focus-duration-control"><input id="focus-minutes" name="focus_minutes" value="25"><span>min</span></label>${egg()}</div></div>
                         <div class="focus-preset-row"><button type="button" class="focus-choice" data-focus-preset data-focus="25" data-break="5" data-cycles="1">25 min</button><button type="button" class="focus-choice" data-focus-preset data-focus="50" data-break="10" data-cycles="1">50 min</button></div>
                         <p data-focus-form-status></p><button type="submit" class="focus-button focus-button-primary">Start focus</button></div>
@@ -75,9 +75,11 @@ function focusFixture() {
                     <div class="focus-session-stage"><div class="focus-timer-shell"><svg class="focus-progress" viewBox="0 0 360 360"><circle class="focus-progress-track" cx="180" cy="180" r="158"></circle><circle class="focus-progress-value" data-focus-progress cx="180" cy="180" r="158"></circle></svg><div class="focus-time-content"><span class="focus-phase-label" data-focus-phase-label></span><time class="focus-time" data-focus-time></time><div class="focus-countdown" data-focus-countdown hidden></div>${egg(true)}</div></div>
                         <div class="focus-timer-actions"><button type="button" class="focus-button focus-button-primary" data-focus-toggle><span data-focus-toggle-label>Pause</span></button><button type="button" class="focus-button focus-button-secondary" data-focus-complete-phase><span data-focus-complete-phase-label>Finish focus</span></button></div><p class="focus-next-phase" data-focus-next-phase></p></div>
                 </section>
-                <section class="focus-soundtrack" data-focus-utilities hidden><div class="focus-region-heading"><div><h2>Playlist</h2><button type="button" data-focus-playlist-toggle aria-expanded="false">Add playlist</button></div><div class="focus-floating-controls" data-focus-floating-controls><button type="button" data-focus-floating-handle aria-label="Move Spotify player">Move</button><button type="button" data-focus-floating-size aria-label="Expand Spotify player"><span class="material-symbols-outlined">open_in_full</span></button></div></div>
-                    <div class="focus-playlist-form" data-focus-playlist-editor hidden><label class="focus-field"><span>Spotify playlist</span><input id="focus-spotify-url" name="spotify_url"></label><div class="focus-playlist-actions"><button type="button" class="focus-icon-button" data-focus-playlist-apply disabled><span data-focus-playlist-action>Add playlist</span></button><button type="button" class="focus-icon-button" data-focus-playlist-remove hidden>Remove</button></div></div>
-                    <input type="hidden" name="spotify_playlists" value="[]" data-focus-playlist-data><p data-focus-playlist-status></p><ul class="focus-playlist-list" data-focus-playlist-list></ul><div class="focus-spotify-embed" data-focus-spotify-embed hidden></div></section>
+                <section class="focus-soundtrack" data-focus-utilities hidden><div class="focus-region-heading"><div><h2>Music</h2></div><div class="focus-floating-controls" data-focus-floating-controls><button type="button" data-focus-floating-handle aria-label="Move playlist player">Move</button><button type="button" data-focus-floating-size aria-label="Expand playlist player"><svg class="focus-expand-icon"></svg><svg class="focus-collapse-icon"></svg></button></div></div>
+                    <div class="focus-spotify-embed" data-focus-spotify-embed hidden></div><ul class="focus-playlist-list" data-focus-playlist-list></ul>
+                    <button type="button" class="focus-playlist-toggle" data-focus-playlist-toggle aria-expanded="false"><span class="focus-provider-mark is-spotify">S</span><svg class="focus-playlist-add-icon"></svg><span class="focus-provider-mark is-youtube">Y</span></button>
+                    <div class="focus-playlist-form" data-focus-playlist-editor hidden><label class="focus-field"><span>Playlist URL</span><input id="focus-spotify-url" name="spotify_url"></label><div class="focus-playlist-actions"><button type="button" class="focus-icon-button" data-focus-playlist-apply disabled><span data-focus-playlist-action>Add playlist</span></button><button type="button" class="focus-icon-button" data-focus-playlist-remove hidden>Remove</button></div></div>
+                    <input type="hidden" name="spotify_playlists" value="[]" data-focus-playlist-data><p data-focus-playlist-status></p></section>
             </form>
             <details data-focus-history-region hidden><summary>Recent sessions</summary><ol data-focus-history></ol></details>
             <div data-focus-announcer></div>
@@ -218,6 +220,12 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await expect(page.locator("#focus-routine-name")).toHaveValue("Default");
     await expect(page.locator("[data-focus-history-region]")).toBeHidden();
     await expect(page.locator("[data-focus-playlist-apply]")).toBeDisabled();
+    const durationAlignment = await page.evaluate(() => {
+        const shell = document.querySelector(".focus-setup-timer-shell").getBoundingClientRect();
+        const input = document.querySelector("#focus-minutes").getBoundingClientRect();
+        return Math.abs((shell.left + shell.width / 2) - (input.left + input.width / 2));
+    });
+    expect(durationAlignment).toBeLessThanOrEqual(1);
 
     const before = await page.locator("[data-focus-setup]").boundingBox();
     await page.getByRole("button", { name: "Session settings" }).first().click();
@@ -232,7 +240,7 @@ test("focus setup stays stable, uses one playlist editor, and enters a clear act
     await page.getByRole("button", { name: "Save setup" }).click();
     await expect(page.locator("#focus-routine-select")).toHaveValue("routine-1");
     await expect(page.getByRole("button", { name: "Save changes" })).toBeVisible();
-    await expect(page.locator("[data-focus-settings-status]").first()).toHaveText("Setup saved to your account.");
+    await expect(page.locator("[data-focus-settings-status]").first()).toHaveText('“Default” saved as a new setup.');
 
     await page.locator("[data-focus-playlist-toggle]").click();
     await page.locator("#focus-spotify-url").fill("not-a-playlist");
@@ -319,10 +327,10 @@ test("floating player can resize, move, and account-sync its placement", async (
 
     const player = page.locator("[data-focus-utilities]");
     const compact = await player.boundingBox();
-    await page.getByRole("button", { name: "Expand Spotify player" }).click();
+    await page.getByRole("button", { name: "Expand playlist player" }).click();
     const expanded = await player.boundingBox();
     expect(expanded.width).toBeGreaterThan(compact.width);
-    await page.getByRole("button", { name: "Move Spotify player" }).focus();
+    await page.getByRole("button", { name: "Move playlist player" }).focus();
     await page.keyboard.press("ArrowLeft");
     await expect.poll(() => page.evaluate(() => window.__focusTest.playerPreferences?.layout)).toBe("floating");
     await expect.poll(() => page.evaluate(() => window.__focusTest.playerPreferences?.floating_size)).toBe("expanded");
@@ -347,6 +355,59 @@ test("playlist removal is explicit and never treats an empty Add click as remova
     await page.locator("[data-focus-playlist-remove]").click();
     await expect(page.locator("[data-focus-playlist-status]")).toHaveText("");
     await expect(page.locator("[data-focus-playlist-apply]")).toBeDisabled();
+});
+
+test("saving keeps the selected setup target and supports undo", async ({ page, baseURL }) => {
+    await installSpotifyEmbedFixture(page);
+    await page.goto(`${baseURL}/static/js/focus/index.js`);
+    await page.setContent(focusFixture());
+    await installFocusApi(page);
+    await page.evaluate(() => import(`/static/js/focus/index.js?routineUndo=${Date.now()}`));
+
+    await page.getByRole("button", { name: "Save setup" }).click();
+    await page.locator('[data-focus-preset][data-focus="50"]').click();
+    await expect(page.locator("#focus-routine-select")).toHaveValue("routine-1");
+    await page.getByRole("button", { name: "Save changes" }).first().click();
+    await expect(page.locator("[data-focus-settings-status]").first()).toHaveText('Changes saved to “Default”.');
+    await expect.poll(() => page.evaluate(() => window.__focusTest.calls.filter((call) => call.url === "/api/focus/routines" && call.method === "POST").length)).toBe(1);
+    await expect.poll(() => page.evaluate(() => window.__focusTest.calls.filter((call) => call.url === "/api/focus/routines/routine-1" && call.method === "PATCH").length)).toBe(1);
+    await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.action?.label)).toBe("Undo");
+
+    await page.evaluate(() => window.__focusTest.toasts.at(-1).action.onClick());
+    await expect(page.locator("#focus-minutes")).toHaveValue("25");
+    await expect.poll(() => page.evaluate(() => window.__focusTest.calls.filter((call) => call.url === "/api/focus/routines/routine-1" && call.method === "PATCH").length)).toBe(2);
+});
+
+test("non-active playlists remove on hover or touch swipe and can be undone", async ({ page, baseURL }) => {
+    await installSpotifyEmbedFixture(page);
+    await page.goto(`${baseURL}/static/js/focus/index.js`);
+    await page.setContent(focusFixture());
+    await installFocusApi(page);
+    await page.evaluate(() => import(`/static/js/focus/index.js?playlistGestures=${Date.now()}`));
+
+    for (const url of [spotifyUrl, replacementSpotifyUrl]) {
+        await page.locator("[data-focus-playlist-toggle]").click();
+        await page.locator("#focus-spotify-url").fill(url);
+        await page.locator("[data-focus-playlist-apply]").click();
+    }
+
+    const item = page.locator("[data-focus-playlist-item]");
+    await expect(item).toHaveCount(1);
+    await item.hover();
+    const remove = page.locator(".focus-playlist-card-remove");
+    await expect(remove).toBeVisible();
+    await remove.click();
+    await expect(item).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.__focusTest.toasts.at(-1)?.action?.label)).toBe("Undo");
+    await page.evaluate(() => window.__focusTest.toasts.at(-1).action.onClick());
+    await expect(item).toHaveCount(1);
+
+    const box = await item.boundingBox();
+    const pointer = { pointerId: 7, pointerType: "touch", isPrimary: true };
+    await item.dispatchEvent("pointerdown", { ...pointer, clientX: box.x + box.width - 12, clientY: box.y + box.height / 2 });
+    await item.dispatchEvent("pointermove", { ...pointer, clientX: box.x + 12, clientY: box.y + box.height / 2 });
+    await item.dispatchEvent("pointerup", { ...pointer, clientX: box.x + 12, clientY: box.y + box.height / 2 });
+    await expect(item).toHaveCount(0);
 });
 
 test("a completed single timer stays in focus until the user exits and keeps its playlist", async ({ page, baseURL }) => {

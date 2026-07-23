@@ -20,10 +20,20 @@ test('focus break suggestions are optional, evidence-based, and personalized', a
   assert.deepEqual(suggestedBreaks(50, [{ focus_minutes: 50, break_minutes: 8 }]), [8, 10]);
 });
 
-test('focus Spotify links normalize safely for setup and live sessions', async () => {
-  const { normalizeSpotifyPlaylist, spotifyEmbedUrl } = await importSource('static/js/focus/data.js');
+test('focus playlist links normalize safely for Spotify, YouTube, and YouTube Music', async () => {
+  const { normalizeSpotifyPlaylist, normalizePlaylist, playlistEmbedUrl, playlistProvider, spotifyEmbedUrl } = await importSource('static/js/focus/data.js');
   assert.equal(normalizeSpotifyPlaylist('https://open.spotify.com/playlist/abc123?si=demo'), 'https://open.spotify.com/playlist/abc123');
   assert.match(spotifyEmbedUrl('https://open.spotify.com/playlist/abc123'), /\/embed\/playlist\/abc123/);
+  assert.equal(
+    normalizePlaylist('https://youtuBE.com/watch?v=nope'),
+    '',
+  );
+  assert.equal(
+    normalizePlaylist('https://www.youtube.com/playlist?list=PL1234567890abc&feature=share'),
+    'https://www.youtube.com/playlist?list=PL1234567890abc',
+  );
+  assert.equal(playlistProvider('https://music.youtube.com/playlist?list=PLabcdefghijk'), 'youtube_music');
+  assert.match(playlistEmbedUrl('https://www.youtube.com/playlist?list=PL1234567890abc'), /youtube-nocookie\.com\/embed\/videoseries/);
   assert.equal(normalizeSpotifyPlaylist('https://example.com/playlist/abc123'), '');
 });
 
@@ -50,6 +60,7 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   const spotifyPlayer = await readFile(path.join(repoRoot, 'static/js/focus/spotify-player.js'), 'utf8');
   const completion = await readFile(path.join(repoRoot, 'static/js/focus/completion.js'), 'utf8');
   const service = await readFile(path.join(repoRoot, 'services/focus_mode.py'), 'utf8');
+  const blueprint = await readFile(path.join(repoRoot, 'blueprints/focus.py'), 'utf8');
   const notifications = await readFile(path.join(repoRoot, 'static/js/core/notifications.js'), 'utf8');
   const navbar = await readFile(path.join(repoRoot, 'static/js/core/navbar.js'), 'utf8');
   assert.match(template, /data-focus-break-suggestions aria-live="polite"/);
@@ -75,6 +86,10 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.match(template, /data-focus-playlist-apply disabled/);
   assert.match(template, /data-focus-playlist-remove hidden/);
   assert.match(template, /data-focus-playlist-toggle/);
+  assert.match(template, />Music<\/h2>/);
+  assert.match(template, /YouTube Music playlist/);
+  assert.match(template, /data-focus-save-context/);
+  assert.doesNotMatch(template, />bookmark_add<\/span>/);
   assert.match(template, /data-focus-exit-label/);
   assert.match(template, /data-focus-history-region hidden/);
   assert.match(styles, /\.focus-options-dialog::backdrop/);
@@ -82,6 +97,8 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(controller, /phase changes|focusApi\.updateSession|scheduleTick/);
   assert.match(controller, /focusApi\.setPlaylist/);
+  assert.match(controller, /restorePlaylist/);
+  assert.match(controller, /Changes saved to/);
   assert.match(controller, /view\.openOptions/);
   assert.match(controller, /shellActive/);
   assert.match(controller, /hideSidebarForFocus/);
@@ -100,6 +117,8 @@ test('focus page keeps resource-light and accessibility contracts wired', async 
   assert.match(navbar, /focusSidebarWasCollapsed/);
   assert.match(service, /state IN \('running','paused'\)/);
   assert.match(service, /action == "set_playlist"/);
+  assert.match(service, /action == "restore_playlist"/);
+  assert.match(blueprint, /private, no-store, no-transform/);
   assert.doesNotMatch(styles, /focus-setup-options-open|focus-help/);
   assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?data-spotify-layout/);
 });

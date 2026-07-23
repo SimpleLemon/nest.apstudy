@@ -106,7 +106,7 @@ class FocusModeTests(unittest.TestCase):
         self.assertEqual(stored["state"], "completed")
 
     def test_validation_rejects_invalid_spotify_and_breakless_cycles(self):
-        with self.assertRaisesRegex(ValueError, "Spotify playlist"):
+        with self.assertRaisesRegex(ValueError, "Spotify, YouTube"):
             focus_mode.normalize_spotify_url("https://example.com/playlist/abc")
         with self.assertRaisesRegex(ValueError, "Choose a break time"):
             focus_mode.start_session("u1", {
@@ -142,10 +142,31 @@ class FocusModeTests(unittest.TestCase):
             "u1", session["id"], "set_playlist", {"spotify_url": ""}
         )
         self.assertIsNone(removed["spotify_url"])
-        with self.assertRaisesRegex(ValueError, "Spotify playlist"):
+        with self.assertRaisesRegex(ValueError, "Spotify, YouTube"):
             focus_mode.update_session(
                 "u1", session["id"], "set_playlist", {"spotify_url": "https://example.com/list"}
             )
+
+    def test_youtube_and_youtube_music_playlists_normalize_and_embed_privately(self):
+        youtube = "https://www.youtube.com/playlist?list=PL1234567890abc&feature=share"
+        youtube_music = "https://music.youtube.com/playlist?list=PLabcdefghijk"
+        self.assertEqual(
+            focus_mode.normalize_playlist_url(youtube),
+            "https://www.youtube.com/playlist?list=PL1234567890abc",
+        )
+        self.assertEqual(focus_mode.playlist_provider(youtube), "youtube")
+        self.assertEqual(focus_mode.playlist_provider(youtube_music), "youtube_music")
+        self.assertIn("youtube-nocookie.com/embed/videoseries", focus_mode.playlist_embed_url(youtube))
+
+        routine = focus_mode.save_routine("u1", {
+            "name": "Video study",
+            "focus_minutes": 25,
+            "cycles": 1,
+            "spotify_url": youtube_music,
+            "spotify_playlists": [youtube_music, youtube],
+        })
+        self.assertEqual(routine["playlist_provider"], "youtube_music")
+        self.assertEqual([item["provider"] for item in routine["playlists"]], ["youtube_music", "youtube"])
 
     def test_multiple_playlists_persist_and_active_selection_switches(self):
         first = "https://open.spotify.com/playlist/abc123"
@@ -184,6 +205,14 @@ class FocusModeTests(unittest.TestCase):
         )
         self.assertEqual(removed["spotify_url"], first)
         self.assertEqual(len(removed["playlists"]), 1)
+        restored = focus_mode.update_session(
+            "u1",
+            session["id"],
+            "restore_playlist",
+            {"spotify_url": second, "active_spotify_url": second},
+        )
+        self.assertEqual(restored["spotify_url"], second)
+        self.assertEqual(len(restored["playlists"]), 2)
 
     def test_player_preferences_are_account_synced_and_bounded(self):
         defaults = focus_mode.player_preferences("u1")

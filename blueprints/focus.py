@@ -3,7 +3,7 @@
 import logging
 import sqlite3
 
-from flask import Blueprint, jsonify, render_template, request
+from flask import Blueprint, jsonify, make_response, render_template, request
 from flask_login import current_user, login_required
 
 from blueprints.dashboard import _load_user_settings, _theme_from_settings, _user_payload
@@ -32,11 +32,15 @@ def focus_page():
         from flask import redirect, url_for
         return redirect(url_for("settings.onboarding"))
     settings = _load_user_settings()
-    return render_template(
+    response = make_response(render_template(
         "focus.html",
         user=_user_payload(),
         theme_preference=_theme_from_settings(settings),
-    )
+    ))
+    # Cloudflare honors no-transform by leaving authenticated HTML untouched,
+    # which prevents its optional analytics beacon from being injected here.
+    response.headers["Cache-Control"] = "private, no-store, no-transform"
+    return response
 
 
 @focus_bp.get("/api/focus")
@@ -73,9 +77,8 @@ def update_focus_player_preferences():
 @login_required
 def preview_focus_playlist():
     try:
-        playlist = focus_mode.spotify_playlist(
-            (request.get_json(silent=True) or {}).get("spotify_url")
-        )
+        payload = request.get_json(silent=True) or {}
+        playlist = focus_mode.playlist(payload.get("playlist_url") or payload.get("spotify_url"))
         return jsonify({"playlist": playlist})
     except ValueError as error:
         return _error_response(error)

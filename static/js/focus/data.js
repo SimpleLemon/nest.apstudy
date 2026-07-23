@@ -36,6 +36,14 @@ export const focusApi = {
     method: 'PATCH',
     body: JSON.stringify({ action: 'remove_playlist', spotify_url: spotifyUrl }),
   }),
+  restorePlaylist: (sessionId, spotifyUrl, activeSpotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      action: 'restore_playlist',
+      spotify_url: spotifyUrl,
+      active_spotify_url: activeSpotifyUrl,
+    }),
+  }),
   previewPlaylist: (spotifyUrl) => request('/api/focus/playlists/preview', {
     method: 'POST',
     body: JSON.stringify({ spotify_url: spotifyUrl }),
@@ -97,30 +105,65 @@ export function formPayload(form) {
   };
 }
 
-export function spotifyEmbedUrl(value) {
+export function playlistProvider(value) {
   const url = String(value || '').trim();
   if (!url) return '';
   try {
     const parsed = new URL(url);
-    if (parsed.protocol !== 'https:' || parsed.hostname !== 'open.spotify.com') return '';
-    const match = parsed.pathname.match(/^\/(?:embed\/)?playlist\/([A-Za-z0-9]+)\/?$/i);
-    return match ? `https://open.spotify.com/embed/playlist/${match[1]}?utm_source=generator&theme=0` : '';
+    if (parsed.protocol !== 'https:') return '';
+    if (parsed.hostname === 'open.spotify.com' && /^\/(?:embed\/)?playlist\/[A-Za-z0-9]+\/?$/i.test(parsed.pathname)) {
+      return 'spotify';
+    }
+    const youtubeHosts = new Set(['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com']);
+    const playlistId = parsed.searchParams.get('list') || '';
+    if (youtubeHosts.has(parsed.hostname) && parsed.pathname.replace(/\/$/, '') === '/playlist' && /^[A-Za-z0-9_-]{10,}$/.test(playlistId)) {
+      return parsed.hostname === 'music.youtube.com' ? 'youtube_music' : 'youtube';
+    }
+    return '';
   } catch (_error) {
     return '';
   }
 }
 
-export function normalizeSpotifyPlaylist(value) {
+export function normalizePlaylist(value) {
   const url = String(value || '').trim();
   if (!url) return '';
   try {
     const parsed = new URL(url);
-    if (parsed.protocol !== 'https:' || parsed.hostname !== 'open.spotify.com') return '';
-    const match = parsed.pathname.match(/^\/(?:embed\/)?playlist\/([A-Za-z0-9]+)\/?$/i);
-    return match ? `https://open.spotify.com/playlist/${match[1]}` : '';
+    const provider = playlistProvider(url);
+    if (provider === 'spotify') {
+      const match = parsed.pathname.match(/^\/(?:embed\/)?playlist\/([A-Za-z0-9]+)\/?$/i);
+      return `https://open.spotify.com/playlist/${match[1]}`;
+    }
+    if (provider === 'youtube' || provider === 'youtube_music') {
+      const host = provider === 'youtube_music' ? 'music.youtube.com' : 'www.youtube.com';
+      return `https://${host}/playlist?list=${encodeURIComponent(parsed.searchParams.get('list'))}`;
+    }
+    return '';
   } catch (_error) {
     return '';
   }
+}
+
+export function playlistEmbedUrl(value) {
+  const normalized = normalizePlaylist(value);
+  const provider = playlistProvider(normalized);
+  if (!normalized || !provider) return '';
+  const parsed = new URL(normalized);
+  if (provider === 'spotify') {
+    const id = parsed.pathname.split('/').filter(Boolean).at(-1);
+    return `https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0`;
+  }
+  const id = parsed.searchParams.get('list');
+  return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(id)}&enablejsapi=1&playsinline=1`;
+}
+
+export function spotifyEmbedUrl(value) {
+  return playlistEmbedUrl(value);
+}
+
+export function normalizeSpotifyPlaylist(value) {
+  return normalizePlaylist(value);
 }
 
 export function routineFromState(state, routineId) {
