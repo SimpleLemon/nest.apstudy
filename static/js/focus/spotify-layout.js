@@ -1,5 +1,8 @@
 const LAYOUT_KEY = 'apstudy.focus.spotify.layout.v1';
 const PLAYER_PREFERENCES_KEY = 'apstudy.focus.spotify.preferences.v2';
+const COMPACT_PLAYER_HEIGHT = 152;
+const FULL_PLAYER_HEIGHT = 352;
+const VIDEO_PLAYER_MIN_HEIGHT = 220;
 const LAYOUT_MAP = new Map([
   ['below', 'below'], ['bottom-compact', 'below'], ['bottom-large', 'below'],
   ['beside', 'beside'], ['right-compact', 'beside'], ['right-large', 'beside'],
@@ -28,6 +31,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   };
   let dragState = null;
   let resizeState = null;
+  let keyboardResizeState = null;
 
   function normalized(value = {}) {
     const coordinate = (next, fallback) => {
@@ -64,9 +68,9 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     if (beside) {
       return {
         minWidth: 340,
-        maxWidth: Math.max(340, Math.min(620, viewportWidth * 0.46)),
-        minHeight: 360,
-        maxHeight: Math.max(360, Math.min(900, viewportHeight - 40)),
+        maxWidth: Math.max(340, Math.min(960, viewportWidth * 0.62)),
+        minHeight: 320,
+        maxHeight: Math.max(320, viewportHeight - 24),
       };
     }
     return {
@@ -77,11 +81,46 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     };
   }
 
-  function applyDimensions(width = preferences.panel_width, height = preferences.panel_height) {
+  function fullPlayerHeight() {
+    return preferences.layout === 'beside' && window.innerWidth > 900 ? 420 : FULL_PLAYER_HEIGHT;
+  }
+
+  function playerChromeHeight() {
+    const panel = elements.utilities?.getBoundingClientRect();
+    const frame = elements.playerFrame?.getBoundingClientRect();
+    if (panel?.height && frame?.height) return Math.max(0, panel.height - frame.height);
+    if (preferences.layout === 'floating' && window.innerWidth > 900) return 120;
+    if (preferences.layout === 'beside' && window.innerWidth > 900) return 130;
+    return 149;
+  }
+
+  // Spotify's compact and full embed heights are stable; intermediate heights can leave the embed in a broken layout.
+  // Snap only to those safe sizes when below the full embed; above full, grow continuously and hard-clamp at bounds.
+  function snapPlayerHeight(height, bounds) {
+    if (!height) return 0;
+    const chrome = playerChromeHeight();
+    const provider = elements.spotifyEmbed?.dataset.playlistProvider || 'spotify';
+    if (provider !== 'spotify') {
+      return Math.min(bounds.maxHeight, Math.max(height, chrome + VIDEO_PLAYER_MIN_HEIGHT));
+    }
+    const requestedFrameHeight = Math.max(0, height - chrome);
+    const full = fullPlayerHeight();
+    const midpoint = (COMPACT_PLAYER_HEIGHT + full) / 2;
+    const safeFrameHeight = requestedFrameHeight < full
+      ? (requestedFrameHeight <= midpoint ? COMPACT_PLAYER_HEIGHT : full)
+      : requestedFrameHeight;
+    // Clamp at maxHeight — never bounce from a too-large size back down to compact.
+    return Math.min(bounds.maxHeight, chrome + safeFrameHeight);
+  }
+
+  function applyDimensions(width = preferences.panel_width, height = preferences.panel_height, { snap = true } = {}) {
     if (!elements.utilities) return;
     const bounds = dimensionBounds();
     const visibleWidth = width > 0 ? Math.min(bounds.maxWidth, Math.max(bounds.minWidth, width)) : 0;
-    const visibleHeight = height > 0 ? Math.min(bounds.maxHeight, Math.max(bounds.minHeight, height)) : 0;
+    const boundedHeight = height > 0 ? Math.min(bounds.maxHeight, Math.max(bounds.minHeight, height)) : 0;
+    const visibleHeight = boundedHeight > 0 && snap ? snapPlayerHeight(boundedHeight, bounds) : boundedHeight;
+    if (height > 0 && visibleHeight > 0) preferences.panel_height = visibleHeight;
+    if (width > 0 && visibleWidth > 0) preferences.panel_width = visibleWidth;
     const rootStyle = document.body.style;
     document.body.dataset.spotifyCustomSize = String(Boolean(visibleWidth && visibleHeight));
     if (visibleWidth) rootStyle.setProperty('--focus-player-width', `${Math.round(visibleWidth)}px`);
@@ -115,6 +154,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   }
 
   function setSize(value, shouldPersist = true) {
+    keyboardResizeState = null;
     preferences.floating_size = value === 'expanded' ? 'expanded' : 'compact';
     document.body.dataset.spotifyFloatingSize = preferences.floating_size;
     const expanded = preferences.floating_size === 'expanded';
@@ -131,6 +171,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   }
 
   function setLayout(value, shouldPersist = true) {
+    keyboardResizeState = null;
     preferences.layout = LAYOUT_MAP.get(value) || 'below';
     document.body.dataset.spotifyLayout = preferences.layout;
     elements.layoutInputs.forEach((input) => { input.checked = input.value === preferences.layout; });
@@ -141,6 +182,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   }
 
   function applyPreferences(value) {
+    keyboardResizeState = null;
     preferences = normalized(value);
     setLayout(preferences.layout, false);
     setSize(preferences.floating_size, false);
@@ -170,11 +212,11 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     persist();
   }
 
-  function resize(width, height) {
+  function resize(width, height, { snap = true } = {}) {
     const bounds = dimensionBounds();
     preferences.panel_width = Math.min(bounds.maxWidth, Math.max(bounds.minWidth, width));
     preferences.panel_height = Math.min(bounds.maxHeight, Math.max(bounds.minHeight, height));
-    applyDimensions();
+    applyDimensions(preferences.panel_width, preferences.panel_height, { snap });
     requestAnimationFrame(position);
   }
 
@@ -182,6 +224,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     if (!resizeState) return;
     elements.utilities?.classList.remove('is-resizing');
     resizeState = null;
+    applyDimensions(preferences.panel_width, preferences.panel_height, { snap: true });
     persist();
   }
 
@@ -216,6 +259,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   });
   elements.panelResize?.addEventListener('pointerdown', (event) => {
     if (!elements.utilities) return;
+    keyboardResizeState = null;
     const rect = elements.utilities.getBoundingClientRect();
     resizeState = {
       pointerId: event.pointerId,
@@ -233,22 +277,34 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
     resize(
       resizeState.width + event.clientX - resizeState.startX,
       resizeState.height + event.clientY - resizeState.startY,
+      { snap: false },
     );
   });
   elements.panelResize?.addEventListener('pointerup', finishResize);
   elements.panelResize?.addEventListener('pointercancel', finishResize);
   elements.panelResize?.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key) || !elements.utilities) return;
+    const bounds = dimensionBounds();
     const rect = elements.utilities.getBoundingClientRect();
     const delta = event.shiftKey ? 48 : 16;
+    keyboardResizeState ||= { width: rect.width, height: rect.height };
+    keyboardResizeState.width = Math.min(
+      bounds.maxWidth,
+      Math.max(bounds.minWidth, keyboardResizeState.width + (event.key === 'ArrowLeft' ? -delta : event.key === 'ArrowRight' ? delta : 0)),
+    );
+    keyboardResizeState.height = Math.min(
+      bounds.maxHeight,
+      Math.max(bounds.minHeight, keyboardResizeState.height + (event.key === 'ArrowUp' ? -delta : event.key === 'ArrowDown' ? delta : 0)),
+    );
     resize(
-      rect.width + (event.key === 'ArrowLeft' ? -delta : event.key === 'ArrowRight' ? delta : 0),
-      rect.height + (event.key === 'ArrowUp' ? -delta : event.key === 'ArrowDown' ? delta : 0),
+      keyboardResizeState.width,
+      keyboardResizeState.height,
     );
     persist();
     event.preventDefault();
   });
   const handleViewportResize = () => {
+    keyboardResizeState = null;
     applyDimensions();
     position();
   };

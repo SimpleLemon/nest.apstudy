@@ -1,8 +1,11 @@
 import {
+  buildFocusTimeSuggestions,
+  focusTimeSelectionKey,
   normalizePlaylist,
   playlistEmbedUrl,
   playlistProvider,
 } from './data.js';
+import { createRoutinePicker } from './routine-picker.js';
 import {
   eggCrackLevel,
   formatTimer,
@@ -14,13 +17,6 @@ import {
 
 function text(element, value) {
   if (element) element.textContent = value == null ? '' : String(value);
-}
-
-function option(value, label) {
-  const node = document.createElement('option');
-  node.value = value;
-  node.textContent = label;
-  return node;
 }
 
 function choice(label, dataset = {}) {
@@ -46,13 +42,17 @@ function lineIcon(paths, className = 'focus-inline-icon') {
   return svg;
 }
 
-function providerIcon(providerName) {
-  const mark = document.createElement('span');
-  const provider = providerName === 'spotify' ? 'spotify' : 'youtube';
-  mark.className = `focus-playlist-card-provider is-${provider}`;
-  mark.setAttribute('aria-hidden', 'true');
+function providerName(value) {
+  if (value === 'spotify') return 'spotify';
+  if (value === 'youtube_music') return 'youtube_music';
+  return 'youtube';
+}
+
+function providerSvg(value) {
+  const provider = providerName(value);
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
   if (provider === 'spotify') {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -65,6 +65,15 @@ function providerIcon(providerName) {
       path.setAttribute('d', value);
       svg.appendChild(path);
     });
+  } else if (provider === 'youtube_music') {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '12');
+    circle.setAttribute('cy', '12');
+    circle.setAttribute('r', '10');
+    svg.appendChild(circle);
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'm10 8.5 6 3.5-6 3.5v-7Z');
+    svg.appendChild(path);
   } else {
     ['M21 8.1a3 3 0 0 0-2.1-2.1C17 5.5 12 5.5 12 5.5S7 5.5 5.1 6A3 3 0 0 0 3 8.1 31 31 0 0 0 2.5 12 31 31 0 0 0 3 15.9 3 3 0 0 0 5.1 18c1.9.5 6.9.5 6.9.5s5 0 6.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-3.9 31 31 0 0 0-.5-3.9Z', 'm10 9 5 3-5 3V9Z'].forEach((value) => {
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -72,7 +81,15 @@ function providerIcon(providerName) {
       svg.appendChild(path);
     });
   }
-  mark.appendChild(svg);
+  return svg;
+}
+
+function providerIcon(value) {
+  const mark = document.createElement('span');
+  const provider = providerName(value);
+  mark.className = `focus-playlist-card-provider is-${provider}`;
+  mark.setAttribute('aria-hidden', 'true');
+  mark.appendChild(providerSvg(provider));
   return mark;
 }
 
@@ -85,7 +102,7 @@ function playlistCard(playlist) {
   remove.className = 'focus-playlist-card-remove';
   remove.dataset.focusPlaylistRemove = playlist.spotify_url;
   remove.setAttribute('aria-label', `Remove ${playlist.title || 'playlist'}`);
-  remove.appendChild(lineIcon(['M7 7l10 10M17 7 7 17']));
+  remove.appendChild(lineIcon(['M4.5 7h15M9 7V4.5h6V7M7 7l.7 12h8.6L17 7M10 10.5v5M14 10.5v5']));
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'focus-playlist-card';
@@ -160,12 +177,13 @@ export function completionMessage(phase, randomValue = Math.random()) {
   return messages[index];
 }
 
-export function createFocusView({ savePlayerPreferences } = {}) {
+export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect, onRoutineCreate } = {}) {
   let countdownTimer = null;
   let eggOpenTimer = null;
   let countdownResolve = null;
   let eggOpenResolve = null;
   let playlistBusy = false;
+  let playlistEntitlements = null;
   let musicRuntime = null;
   let musicRuntimePromise = null;
   let deferredSpotifySource = null;
@@ -174,6 +192,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   let pendingPlayerPreferences = { layout: 'beside' };
   let pendingHistory = [];
   let historyModulePromise = null;
+  let historyPreparePromise = null;
+  let historyRendered = false;
   let settingsPanel = null;
   let settingsPanelPromise = null;
   let lazyStylesPromise = null;
@@ -186,18 +206,20 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     options: document.querySelector('[data-focus-options]'),
     optionsOpen: [...document.querySelectorAll('[data-focus-options-open], [data-focus-session-options]')],
     optionsClose: document.querySelector('[data-focus-options-close]'),
-    optionsDescription: document.querySelector('[data-focus-options-description]'),
     activeSummary: document.querySelector('[data-focus-active-summary]'),
     activeSummaryCopy: document.querySelector('[data-focus-active-summary-copy]'),
     inactiveSettings: document.querySelector('[data-focus-inactive-settings]'),
     form: document.querySelector('[data-focus-form]'),
-    formStatus: document.querySelector('[data-focus-form-status]'),
+    startButton: document.querySelector('[data-focus-form] button[type="submit"]'),
     settingsStatuses: [...document.querySelectorAll('[data-focus-settings-status]')],
     suggestions: document.querySelector('[data-focus-break-suggestions]'),
     suggestionBlock: document.querySelector('[data-focus-suggestion-block]'),
     recentList: document.querySelector('[data-focus-recent-list]'),
     routinePicker: document.querySelector('[data-focus-routine-picker]'),
+    routineCombobox: document.querySelector('[data-focus-routine-combobox]'),
     routineSelect: document.getElementById('focus-routine-select'),
+    routineCreatePanel: document.querySelector('[data-focus-routine-create]'),
+    routineExistingActions: document.querySelector('[data-focus-routine-existing-actions]'),
     routineName: document.getElementById('focus-routine-name'),
     focusMinutes: document.getElementById('focus-minutes'),
     breakMinutes: document.getElementById('focus-break-minutes'),
@@ -209,7 +231,6 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     autoStart: document.getElementById('focus-auto-start'),
     saveRoutines: [...document.querySelectorAll('[data-focus-save-routine]')],
     saveRoutineLabels: [...document.querySelectorAll('[data-focus-save-routine-label]')],
-    saveRoutineContext: document.querySelector('[data-focus-save-context]'),
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
     spotifyUrl: document.getElementById('focus-spotify-url'),
     activeSpotifyUrl: document.querySelector('[data-focus-active-playlist-url]'),
@@ -218,6 +239,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     playlistEditor: document.querySelector('[data-focus-playlist-editor]'),
     layoutInputs: [...document.querySelectorAll('input[name="spotify_layout"]')],
     playlistApply: document.querySelector('[data-focus-playlist-apply]'),
+    playlistSubmitLogo: document.querySelector('[data-focus-playlist-submit-logo]'),
     playlistAction: document.querySelector('[data-focus-playlist-action]'),
     playlistRemove: document.querySelector('[data-focus-playlist-remove]'),
     playlistStatus: document.querySelector('[data-focus-playlist-status]'),
@@ -336,7 +358,11 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       return loaded;
     } catch (_error) {
       if (source === deferredSpotifySource) renderPlayerPlaceholder();
-      setPlaylistStatus('The player could not load. Your timer is still running.', 'error');
+      notify?.({
+        message: 'The player could not load. Your timer is still running.',
+        title: 'Couldn’t load playlist player',
+        type: 'error',
+      });
       return false;
     }
   }
@@ -344,9 +370,6 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   function setSettingsContext(active, session = null) {
     if (elements.activeSummary) elements.activeSummary.hidden = !active;
     if (elements.inactiveSettings) elements.inactiveSettings.hidden = active;
-    text(elements.optionsDescription, active
-      ? 'Review this session and place the Spotify player.'
-      : 'Adjust the rhythm and player placement.');
     if (!active || !session) return;
     const focusMinutes = Math.round(Number(session.focus_seconds || 0) / 60);
     const breakMinutes = Math.round(Number(session.break_seconds || 0) / 60);
@@ -365,6 +388,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     } else {
       elements.session?.remove();
       if (elements.setup && !elements.setup.isConnected) setupAnchor.after(elements.setup);
+      setBusy(false);
     }
     if (elements.setup) elements.setup.hidden = active;
     if (elements.session) elements.session.hidden = !active;
@@ -409,12 +433,6 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     settingsPanel?.close();
   }
 
-  function setFormStatus(message = '', tone = '') {
-    text(elements.formStatus, message);
-    if (tone) elements.formStatus?.setAttribute('data-tone', tone);
-    else elements.formStatus?.removeAttribute('data-tone');
-  }
-
   function setSettingsStatus(message = '', tone = '') {
     elements.settingsStatuses.forEach((status) => {
       text(status, message);
@@ -430,7 +448,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
   }
 
   function setBusy(busy) {
-    const submit = elements.form?.querySelector('button[type="submit"]');
+    const submit = elements.startButton
+      || elements.form?.querySelector('button[type="submit"]');
     if (submit) {
       submit.disabled = busy;
       if (busy) submit.setAttribute('aria-busy', 'true');
@@ -458,22 +477,31 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     if (!busy) syncPlaylistControls();
   }
 
-  function renderRoutines(routines, selectedId = '') {
-    if (!elements.routineSelect) return;
-    const current = String(selectedId || elements.routineSelect.value || '');
-    elements.routineSelect.replaceChildren(option('', routines.length ? 'New setup' : 'Default'));
-    routines.forEach((routine) => elements.routineSelect.appendChild(option(routine.id, routine.name)));
-    elements.routineSelect.value = routines.some((routine) => String(routine.id) === current) ? current : '';
-    const hasSelection = Boolean(elements.routineSelect.value);
-    const selected = routines.find((routine) => String(routine.id) === elements.routineSelect.value) || null;
-    if (elements.deleteRoutine) elements.deleteRoutine.hidden = !hasSelection;
+  const routinePickerControl = createRoutinePicker({
+    root: elements.routineCombobox,
+    input: elements.routineSelect,
+    createPanel: elements.routineCreatePanel,
+    existingActions: elements.routineExistingActions,
+    nameInput: elements.routineName,
+    onSelect: (routineId) => onRoutineSelect?.(routineId),
+    onCreateNew: () => onRoutineCreate?.(),
+  });
+
+  function syncRoutineMode(routine) {
+    const hasSelection = Boolean(routine?.id);
+    const creating = routinePickerControl?.isCreateMode();
     elements.saveRoutineLabels.forEach((label) => text(label, hasSelection ? 'Save changes' : 'Save setup'));
-    text(elements.saveRoutineContext, selected
-      ? `Changes will update “${selected.name}”.`
-      : 'Save as a new setup.');
+    if (elements.routineCreatePanel) elements.routineCreatePanel.hidden = hasSelection || !creating;
+    if (elements.routineExistingActions) elements.routineExistingActions.hidden = !hasSelection;
   }
 
-  function fillRoutine(routine) {
+  function renderRoutines(routines, selectedId = '') {
+    routinePickerControl?.setRoutines(routines, selectedId);
+    const selected = routines.find((routine) => String(routine.id) === String(selectedId || elements.routineSelect?.value || '')) || null;
+    syncRoutineMode(selected);
+  }
+
+  function fillRoutine(routine, { updatePicker = true } = {}) {
     if (!elements.routineName) return;
     elements.routineName.value = routine?.name || 'Default';
     elements.focusMinutes.value = routine?.focus_minutes ?? 25;
@@ -482,11 +510,11 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     elements.cycles.value = routine?.cycles ?? 1;
     if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = routine?.spotify_url || '';
     if (elements.spotifyUrl) elements.spotifyUrl.value = '';
-    if (elements.deleteRoutine) elements.deleteRoutine.hidden = !routine;
-    elements.saveRoutineLabels.forEach((label) => text(label, routine ? 'Save changes' : 'Save setup'));
-    text(elements.saveRoutineContext, routine
-      ? `Changes will update “${routine.name}”.`
-      : 'Save as a new setup.');
+    if (updatePicker) {
+      if (routine?.id) routinePickerControl?.setValue(routine.id);
+      else routinePickerControl?.enterCreateMode({ notify: false });
+    }
+    syncRoutineMode(routine);
     syncRhythmVisibility();
   }
 
@@ -509,30 +537,52 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     syncRhythmVisibility();
   }
 
-  function renderRecent(selections) {
+  function renderRecent(selections = []) {
     if (!elements.recentList) return;
-    const recentChoices = selections.slice(0, 2).map((selection, index) => {
-      const breakLabel = Number(selection.break_minutes) ? ` / ${selection.break_minutes}` : '';
-      return choice(
-        `${selection.focus_minutes}${breakLabel} min`,
-        { recentSelection: index },
-      );
+    const items = buildFocusTimeSuggestions(selections);
+    const currentKey = focusTimeSelectionKey({
+      focus_minutes: Number(elements.focusMinutes?.value) || 0,
+      break_minutes: Number(elements.breakMinutes?.value) || 0,
+      cycles: Number(elements.cycles?.value) || 1,
     });
-    const standardChoices = [
-      { focus: 25, breakMinutes: 5 },
-      { focus: 50, breakMinutes: 10 },
-      { focus: 90, breakMinutes: 15 },
-    ].map(({ focus, breakMinutes }) => {
-      const button = choice(`${focus} min`, {
+    const buttons = items.map((selection) => {
+      const breakLabel = selection.break_minutes ? ` / ${selection.break_minutes}` : '';
+      const label = selection.fromRecent
+        ? `${selection.focus_minutes}${breakLabel} min`
+        : `${selection.focus_minutes} min`;
+      const button = choice(label, {
         focusPreset: '',
-        focus,
-        break: breakMinutes,
-        cycles: 1,
+        focus: selection.focus_minutes,
+        break: selection.break_minutes,
+        cycles: selection.cycles,
       });
-      button.setAttribute('aria-label', `Set ${focus} minutes`);
+      button.setAttribute(
+        'aria-label',
+        selection.break_minutes
+          ? `Set ${selection.focus_minutes} / ${selection.break_minutes} minutes`
+          : `Set ${selection.focus_minutes} minutes`,
+      );
+      button.setAttribute('aria-pressed', String(focusTimeSelectionKey(selection) === currentKey));
       return button;
     });
-    elements.recentList.replaceChildren(...recentChoices, ...standardChoices);
+    elements.recentList.replaceChildren(...buttons);
+  }
+
+  function syncTimeSuggestionPressed() {
+    if (!elements.recentList) return;
+    const currentKey = focusTimeSelectionKey({
+      focus_minutes: Number(elements.focusMinutes?.value) || 0,
+      break_minutes: Number(elements.breakMinutes?.value) || 0,
+      cycles: Number(elements.cycles?.value) || 1,
+    });
+    elements.recentList.querySelectorAll('[data-focus-preset]').forEach((button) => {
+      const key = focusTimeSelectionKey({
+        focus_minutes: Number(button.dataset.focus) || 0,
+        break_minutes: Number(button.dataset.break) || 0,
+        cycles: Number(button.dataset.cycles) || 1,
+      });
+      button.setAttribute('aria-pressed', String(key === currentKey));
+    });
   }
 
   function renderCycles(session) {
@@ -590,37 +640,74 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     document.title = `${formatTimer(remaining)} · ${session.phase === 'break' ? 'Break' : 'Focus'}`;
   }
 
+  function prepareHistory() {
+    if (disposed || !elements.history || !pendingHistory.length) return Promise.resolve();
+    if (historyPreparePromise) return historyPreparePromise;
+    historyPreparePromise = (async () => {
+      await ensureLazyStyles();
+      historyModulePromise ||= import('./history-view.js');
+      const { renderHistory: renderHistoryList } = await historyModulePromise;
+      if (!disposed && pendingHistory.length) {
+        renderHistoryList(elements.history, pendingHistory);
+        historyRendered = true;
+      }
+    })().finally(() => {
+      historyPreparePromise = null;
+    });
+    return historyPreparePromise;
+  }
+
   async function mountHistory() {
-    if (disposed || !elements.history || !elements.historyRegion?.open || !pendingHistory.length) return;
-    const loadingTimer = window.setTimeout(() => elements.historyRegion?.classList.add('is-lazy-loading'), 100);
-    await ensureLazyStyles();
-    historyModulePromise ||= import('./history-view.js');
-    const { renderHistory: renderHistoryList } = await historyModulePromise;
-    window.clearTimeout(loadingTimer);
+    if (disposed || !elements.history || !elements.historyRegion?.open || !pendingHistory.length || historyRendered) return;
+    elements.historyRegion.classList.add('is-lazy-loading');
+    await prepareHistory();
     elements.historyRegion?.classList.remove('is-lazy-loading');
-    if (!disposed) renderHistoryList(elements.history, pendingHistory);
   }
 
   function renderHistory(history) {
     pendingHistory = history;
+    historyRendered = false;
     if (elements.historyRegion) {
       elements.historyRegion.hidden = history.length === 0;
       if (!history.length) elements.historyRegion.open = false;
     }
     if (!history.length) elements.history?.replaceChildren();
-    else if (elements.historyRegion?.open) void mountHistory();
+    else void prepareHistory();
   }
 
-  function syncPlaylistControls({ clearStatus = false } = {}) {
+  function syncPlaylistControls({ clearStatus = false, entitlements = playlistEntitlements, playlists = [] } = {}) {
     const raw = String(elements.spotifyUrl?.value || '').trim();
     const normalized = normalizePlaylist(raw);
     const invalid = Boolean(raw && !normalized);
+    const list = Array.isArray(playlists) ? playlists : [];
+    const atLimit = entitlements?.limit != null && Number(entitlements.usage) >= Number(entitlements.limit);
+    const isNew = Boolean(normalized && !list.some((playlist) => playlist.spotify_url === normalized));
+    const blocked = atLimit && isNew;
     elements.spotifyUrl?.setAttribute('aria-invalid', String(invalid));
     if (elements.playlistApply) {
       elements.playlistApply.hidden = !normalized;
-      elements.playlistApply.disabled = playlistBusy || !normalized;
+      elements.playlistApply.disabled = playlistBusy || !normalized || blocked;
     }
-    if (clearStatus) setPlaylistStatus(invalid ? 'Use a Spotify, YouTube, or YouTube Music playlist URL.' : '', invalid ? 'error' : '');
+    if (elements.playlistToggle) {
+      elements.playlistToggle.disabled = atLimit;
+      if (atLimit) {
+        elements.playlistToggle.setAttribute(
+          'aria-label',
+          `Playlist limit reached (${entitlements.usage} of ${entitlements.limit})`,
+        );
+      } else {
+        elements.playlistToggle.setAttribute('aria-label', 'Add playlist');
+      }
+    }
+    if (elements.playlistSubmitLogo) {
+      elements.playlistSubmitLogo.replaceChildren();
+      if (normalized) elements.playlistSubmitLogo.appendChild(providerSvg(playlistProvider(normalized)));
+      elements.playlistSubmitLogo.dataset.provider = normalized ? playlistProvider(normalized) : '';
+    }
+    if (clearStatus) setPlaylistStatus();
+    if (blocked) {
+      setPlaylistStatus(`Your plan includes ${entitlements.limit} saved playlists.`, 'info');
+    }
     return normalized;
   }
 
@@ -639,7 +726,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     if (open) window.setTimeout(() => elements.spotifyUrl?.focus(), 0);
   }
 
-  function renderSpotify(source) {
+  function renderSpotify(source, entitlements = playlistEntitlements) {
+    playlistEntitlements = entitlements || playlistEntitlements;
     const spotifyUrl = source?.spotify_url || '';
     const embedUrl = source?.embed_url || source?.spotify_embed_url || playlistEmbedUrl(spotifyUrl);
     const playlists = Array.isArray(source?.playlists) ? source.playlists : (spotifyUrl ? [{
@@ -652,7 +740,8 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     }] : []);
     const activePlaylist = playlists.find((playlist) => playlist.spotify_url === spotifyUrl) || {};
     const preservePlayer = deferredSpotifySource?.spotify_url === spotifyUrl
-      && ['loading', 'ready'].includes(elements.spotifyEmbed?.dataset.playerState);
+      && ['loading', 'ready'].includes(elements.spotifyEmbed?.dataset.playerState)
+      && Boolean(elements.spotifyEmbed?.querySelector('iframe, .focus-spotify-controller'));
     if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = spotifyUrl;
     if (elements.playlistData) {
       elements.playlistData.value = JSON.stringify(playlists.map((playlist) => playlist.spotify_url));
@@ -687,7 +776,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       elements.spotifyEmbed.dataset.playlistProvider = source?.playlist_provider || playlistProvider(spotifyUrl);
       if (!preservePlayer) {
         musicRuntime?.clear();
-        renderPlayerPlaceholder();
+        void activateSpotify({ autoplay: false });
       }
     } else {
       deferredSpotifySource = null;
@@ -699,7 +788,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
       if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
     }
     setPlaylistEditor(false, { force: true });
-    syncPlaylistControls();
+    syncPlaylistControls({ entitlements: playlistEntitlements, playlists });
   }
 
   function setSpotifyLayout(value, persist = true) {
@@ -806,7 +895,6 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     syncOptionsState,
     openOptions,
     closeOptions,
-    setFormStatus,
     setSettingsStatus,
     setPlaylistStatus,
     setBusy,
@@ -817,6 +905,7 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     syncRhythmVisibility,
     renderSuggestions,
     renderRecent,
+    syncTimeSuggestionPressed,
     renderSession,
     renderTick,
     renderHistory,
@@ -837,8 +926,10 @@ export function createFocusView({ savePlayerPreferences } = {}) {
     },
     clearSpotify: () => {
       clearPlayerFeedback();
+      deferredSpotifySource = null;
+      elements.spotifyEmbed?.removeAttribute('data-player-state');
+      elements.spotifyEmbed?.removeAttribute('data-playlist-provider');
       musicRuntime?.clear();
-      if (deferredSpotifySource) renderPlayerPlaceholder();
     },
     dispose: () => {
       disposed = true;

@@ -38,11 +38,21 @@ function fallbackEmbed(host, embedUrl, provider = 'spotify') {
   const iframe = document.createElement('iframe');
   iframe.src = embedUrl;
   iframe.title = `${provider === 'spotify' ? 'Spotify' : 'YouTube'} playlist player`;
-  iframe.loading = 'lazy';
+  iframe.loading = 'eager';
   iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
   iframe.referrerPolicy = 'strict-origin-when-cross-origin';
   host.replaceChildren(iframe);
+  normalizeEmbedFrame(host);
   return iframe;
+}
+
+function normalizeEmbedFrame(host) {
+  const iframe = host?.querySelector('iframe');
+  if (!iframe) return;
+  // Spotify's embed may set allowfullscreen alongside allow="...fullscreen...",
+  // which triggers a console precedence warning. Keep allow and drop the legacy attr.
+  if (iframe.hasAttribute('allowfullscreen')) iframe.removeAttribute('allowfullscreen');
+  if (iframe.hasAttribute('allowFullscreen')) iframe.removeAttribute('allowFullscreen');
 }
 
 export function createSpotifyPlayer(host) {
@@ -109,6 +119,7 @@ export function createSpotifyPlayer(host) {
           controller = nextController;
           currentUrl = spotifyUrl;
           loadingUrl = '';
+          normalizeEmbedFrame(host);
           if (resumeWhenReady) controller.resume?.();
           resolve(true);
         });

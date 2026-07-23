@@ -64,7 +64,7 @@
     {% set sidebar_user_emory_student = user.emory_student %}
     {% include "_sidebar.html" %}
 
-    <main class="workspace-page-shell focus-main" aria-labelledby="focus-setup-title">
+    <main class="workspace-page-shell focus-main" aria-label="Focus Mode">
         <section class="focus-loading" data-focus-loading role="status" aria-live="polite" aria-busy="true">
             <span class="sr-only">Loading Focus Mode.</span>
             <div class="focus-loading-ring apstudy-skeleton" aria-hidden="true"></div>
@@ -73,14 +73,10 @@
 
         <form class="focus-routine-form" data-focus-form id="focus-routine-form" novalidate>
             <section class="focus-setup" data-focus-setup hidden aria-labelledby="focus-setup-title">
-                <header class="focus-setup-header">
-                    <div>
-                        <h1 id="focus-setup-title">Set a focus timer</h1>
-                        <p>Choose a length and begin.</p>
-                    </div>
-                    <button type="button" class="focus-button focus-button-secondary focus-settings-trigger" data-focus-options-open aria-controls="focus-options-panel" aria-expanded="false">
+                <header class="focus-setup-header focus-setup-header-actions">
+                    <h1 id="focus-setup-title" class="sr-only">Focus Mode</h1>
+                    <button type="button" class="focus-icon-button focus-settings-trigger" data-focus-options-open aria-controls="focus-options-panel" aria-expanded="false" aria-label="Focus Settings">
                         <span class="material-symbols-outlined" aria-hidden="true">tune</span>
-                        <span>Session settings</span>
                     </button>
                 </header>
 
@@ -102,7 +98,6 @@
                         </div>
                         <div class="focus-preset-row" data-focus-recent-list aria-label="Suggested focus times"></div>
                     </fieldset>
-                    <p data-focus-form-status role="status" aria-live="polite"></p>
                     <button type="submit" class="focus-button focus-button-primary focus-start-button">Start focus</button>
                 </div>
 
@@ -110,11 +105,8 @@
 
             <dialog class="focus-options-dialog" id="focus-options-panel" data-focus-options aria-labelledby="focus-options-title">
                 <header class="focus-options-header">
-                    <div>
-                        <h2 id="focus-options-title">Session settings</h2>
-                        <p data-focus-options-description>Adjust the rhythm and player placement.</p>
-                    </div>
-                    <button type="button" class="focus-icon-button" data-focus-options-close aria-label="Close session settings">
+                    <h2 id="focus-options-title">Focus Settings</h2>
+                    <button type="button" class="focus-icon-button" data-focus-options-close aria-label="Close Focus Settings">
                         <span class="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                 </header>
@@ -128,27 +120,44 @@
                     <div data-focus-inactive-settings>
                         <section class="focus-options-group focus-routine-editor" data-focus-routine-picker aria-labelledby="focus-routine-heading">
                             <h3 id="focus-routine-heading">Focus setup</h3>
-                            <label class="focus-routine-picker focus-field" for="focus-routine-select">
-                                <span>Saved setup</span>
-                                <select id="focus-routine-select" name="routine_id">
-                                    <option value="">Default</option>
-                                </select>
-                            </label>
-                            <label class="focus-field" for="focus-routine-name">
-                                <span>Routine name</span>
-                                <input id="focus-routine-name" name="name" type="text" maxlength="60" value="Default" placeholder="Reading, problem set, writing…" />
-                            </label>
-                            <div class="focus-routine-actions">
-                                <button type="button" class="focus-button focus-button-primary" data-focus-save-routine>
+                            <div class="focus-field focus-routine-setup-field">
+                                <span class="focus-field-label" id="focus-routine-setup-label">Saved setup</span>
+                                <div class="focus-combobox" data-focus-routine-combobox aria-labelledby="focus-routine-setup-label">
+                                    <input type="hidden" id="focus-routine-select" name="routine_id" value="" />
+                                    <button type="button" class="focus-combobox-trigger" data-focus-combobox-trigger role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="focus-routine-listbox">
+                                        <span data-focus-combobox-label class="focus-combobox-placeholder">Select setup</span>
+                                        <svg class="focus-combobox-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                                    </button>
+                                    <div id="focus-routine-listbox" class="focus-combobox-menu" data-focus-combobox-menu role="listbox" hidden>
+                                        <div class="focus-combobox-list" data-focus-combobox-list></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="focus-routine-create" data-focus-routine-create hidden>
+                                <label class="focus-field focus-routine-name-field" for="focus-routine-name">
+                                    <span>Setup name</span>
+                                    <div class="focus-routine-name-row">
+                                        <input id="focus-routine-name" name="name" type="text" maxlength="60" value="Default" placeholder="Reading, problem set, writing…" />
+                                        <button type="button" class="focus-button focus-button-primary focus-routine-save" data-focus-save-routine>
+                                            <svg class="focus-inline-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                                <path d="M6.75 4.75A1.75 1.75 0 0 1 8.5 3h7A1.75 1.75 0 0 1 17.25 4.75v15L12 16.4l-5.25 3.35v-15Z"></path>
+                                                <path d="M12 6.5v5M9.5 9h5"></path>
+                                            </svg>
+                                            <span data-focus-save-routine-label>Save setup</span>
+                                        </button>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="focus-routine-existing-actions" data-focus-routine-existing-actions hidden>
+                                <button type="button" class="focus-button focus-button-primary focus-routine-save" data-focus-save-routine>
                                     <svg class="focus-inline-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                         <path d="M6.75 4.75A1.75 1.75 0 0 1 8.5 3h7A1.75 1.75 0 0 1 17.25 4.75v15L12 16.4l-5.25 3.35v-15Z"></path>
                                         <path d="M12 6.5v5M9.5 9h5"></path>
                                     </svg>
-                                    <span data-focus-save-routine-label>Save setup</span>
+                                    <span data-focus-save-routine-label>Save changes</span>
                                 </button>
-                                <button type="button" class="focus-button focus-button-danger" data-focus-delete-routine hidden>Delete routine</button>
+                                <button type="button" class="focus-button focus-button-danger focus-routine-delete" data-focus-delete-routine>Delete setup</button>
                             </div>
-                            <p class="focus-save-context" data-focus-save-context>Save as a new setup.</p>
                             <p class="focus-settings-status" data-focus-settings-status role="status" aria-live="polite"></p>
                         </section>
 
@@ -214,16 +223,18 @@
                         <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
                         <span data-focus-exit-label>Exit</span>
                     </button>
-                    <div class="focus-cycle-status" data-focus-cycle-status>
-                        <span id="focus-session-label" data-focus-cycle-label>Focus 1 of 1</span>
-                        <span class="focus-cycle-dots" data-focus-cycle-dots aria-hidden="true"></span>
-                    </div>
-                    <button type="button" class="focus-icon-button focus-settings-trigger focus-session-settings-trigger" data-focus-session-options aria-controls="focus-options-panel" aria-expanded="false" aria-label="Session settings">
-                        <span class="material-symbols-outlined" aria-hidden="true">tune</span>
-                    </button>
                 </header>
 
                 <div class="focus-session-stage">
+                    <div class="focus-session-controls">
+                        <div class="focus-cycle-status" data-focus-cycle-status>
+                            <span id="focus-session-label" data-focus-cycle-label>Focus 1 of 1</span>
+                            <span class="focus-cycle-dots" data-focus-cycle-dots aria-hidden="true"></span>
+                        </div>
+                        <button type="button" class="focus-icon-button focus-settings-trigger focus-session-settings-trigger" data-focus-session-options aria-controls="focus-options-panel" aria-expanded="false" aria-label="Focus Settings">
+                            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+                        </button>
+                    </div>
                     <div class="focus-timer-shell">
                         <svg class="focus-progress" viewBox="0 0 360 360" aria-hidden="true">
                             <circle class="focus-progress-track" cx="180" cy="180" r="158"></circle>
@@ -280,21 +291,22 @@
                         <span class="focus-provider-mark is-spotify" aria-hidden="true">
                             <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="10"></circle><path d="M7 9.2c3.7-1 7.5-.7 10.6.9M7.7 12.4c3-.8 6.4-.5 9 .7M8.5 15.4c2.4-.6 5-.4 7.2.6"></path></svg>
                         </span>
+                        <svg class="focus-playlist-add-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path class="focus-playlist-add-vertical" d="M12 5v14"></path>
+                            <path d="M5 12h14"></path>
+                        </svg>
                         <span class="focus-provider-mark is-youtube" aria-hidden="true">
                             <svg viewBox="0 0 24 24" focusable="false"><path d="M21 8.1a3 3 0 0 0-2.1-2.1C17 5.5 12 5.5 12 5.5S7 5.5 5.1 6A3 3 0 0 0 3 8.1 31 31 0 0 0 2.5 12 31 31 0 0 0 3 15.9 3 3 0 0 0 5.1 18c1.9.5 6.9.5 6.9.5s5 0 6.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-3.9 31 31 0 0 0-.5-3.9Z"></path><path d="m10 9 5 3-5 3V9Z"></path></svg>
                         </span>
                     </button>
-                    <svg class="focus-playlist-add-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <path class="focus-playlist-add-vertical" d="M12 5v14"></path>
-                        <path d="M5 12h14"></path>
-                    </svg>
                     <div class="focus-playlist-editor" id="focus-playlist-editor" data-focus-playlist-editor hidden>
                         <label for="focus-spotify-url">
                             <span class="sr-only">Playlist URL</span>
                             <input id="focus-spotify-url" type="url" inputmode="url" autocomplete="url" placeholder="Paste a Spotify, YouTube, or YouTube Music playlist" aria-describedby="focus-playlist-status" />
                         </label>
                         <button type="button" class="focus-playlist-apply" data-focus-playlist-apply hidden disabled aria-label="Add playlist">
-                            <svg class="focus-inline-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.2 4L19 7"></path></svg>
+                            <span class="focus-playlist-submit-logo" data-focus-playlist-submit-logo data-provider="" aria-hidden="true"></span>
+                            <svg class="focus-inline-icon focus-playlist-submit-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.2 4L19 7"></path></svg>
                             <span class="sr-only" data-focus-playlist-action>Add playlist</span>
                         </button>
                     </div>

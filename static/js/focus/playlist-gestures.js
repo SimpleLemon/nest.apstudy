@@ -14,6 +14,7 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
   let gesture = null;
   const eventController = new AbortController();
   const listenerOptions = { signal: eventController.signal };
+  const sessionBlocksRemove = () => document.body.classList.contains('focus-session-active');
 
   const reset = (item) => {
     item?.classList.remove('is-swiping');
@@ -25,7 +26,7 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
     const { item, url, offset } = gesture;
     gesture = null;
     pointerCapture(item, event.pointerId, false);
-    if (offset <= -REMOVE_THRESHOLD) {
+    if (!sessionBlocksRemove() && offset <= -REMOVE_THRESHOLD) {
       item.classList.add('is-removing');
       window.setTimeout(() => onRemove?.(url), 160);
       return;
@@ -34,6 +35,7 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
   };
 
   list.addEventListener('pointerdown', (event) => {
+    if (sessionBlocksRemove()) return;
     if (event.pointerType === 'mouse' || event.target.closest('[data-focus-playlist-remove]')) return;
     const item = event.target.closest('[data-focus-playlist-item]');
     if (!item) return;
@@ -69,7 +71,7 @@ export function bindPlaylistGestures(list, { onRemove, onSelect } = {}) {
     if (remove) {
       event.preventDefault();
       event.stopPropagation();
-      onRemove?.(remove.dataset.focusPlaylistRemove);
+      if (!sessionBlocksRemove()) onRemove?.(remove.dataset.focusPlaylistRemove);
       return;
     }
     const select = event.target.closest('[data-spotify-playlist]');

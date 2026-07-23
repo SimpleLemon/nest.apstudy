@@ -14,7 +14,14 @@ export async function request(url, options = {}) {
     headers,
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error || 'Focus Mode could not save that change.');
+  if (!response.ok) {
+    const error = new Error(payload.error || 'Focus Mode could not save that change.');
+    if (payload.code) error.code = payload.code;
+    if (payload.resource) error.resource = payload.resource;
+    if (payload.limit != null) error.limit = payload.limit;
+    if (payload.current != null) error.current = payload.current;
+    throw error;
+  }
   return payload;
 }
 
@@ -32,9 +39,21 @@ export const focusApi = {
     method: 'PATCH',
     body: JSON.stringify({ action: 'set_playlist', spotify_url: spotifyUrl }),
   }),
-  removePlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+  removeSessionPlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
     method: 'PATCH',
     body: JSON.stringify({ action: 'remove_playlist', spotify_url: spotifyUrl }),
+  }),
+  addPlaylist: (spotifyUrl) => request('/api/focus/playlists', {
+    method: 'POST',
+    body: JSON.stringify({ spotify_url: spotifyUrl }),
+  }),
+  removePlaylist: (spotifyUrl) => request('/api/focus/playlists', {
+    method: 'DELETE',
+    body: JSON.stringify({ spotify_url: spotifyUrl }),
+  }),
+  setActivePlaylist: (spotifyUrl) => request('/api/focus/playlists/active', {
+    method: 'PATCH',
+    body: JSON.stringify({ spotify_url: spotifyUrl }),
   }),
   restorePlaylist: (sessionId, spotifyUrl, activeSpotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
     method: 'PATCH',
@@ -81,6 +100,49 @@ export function suggestedBreaks(focusMinutes, recentSelections = []) {
   const proportional = Math.min(10, Math.max(3, Math.round(focus / 5)));
   const familiar = focus <= 30 ? 5 : focus <= 60 ? 10 : 15;
   return uniqueMinutes([...recentMatches, ...evidenceBased, proportional, familiar]).slice(0, 4);
+}
+
+export const DEFAULT_FOCUS_TIME_SUGGESTIONS = [
+  { focus_minutes: 25, break_minutes: 5, cycles: 1 },
+  { focus_minutes: 50, break_minutes: 10, cycles: 1 },
+  { focus_minutes: 90, break_minutes: 15, cycles: 1 },
+];
+
+export function focusTimeSelectionKey(selection = {}) {
+  return [
+    Number(selection.focus_minutes) || 0,
+    Number(selection.break_minutes) || 0,
+    Number(selection.cycles) || 1,
+  ].join(':');
+}
+
+export function buildFocusTimeSuggestions(selections = [], defaults = DEFAULT_FOCUS_TIME_SUGGESTIONS) {
+  const recent = [];
+  const seen = new Set();
+  for (const selection of selections) {
+    if (recent.length >= 2) break;
+    const normalized = {
+      focus_minutes: Number(selection.focus_minutes) || 0,
+      break_minutes: Number(selection.break_minutes) || 0,
+      long_break_minutes: Number(selection.long_break_minutes) || Number(selection.break_minutes) || 0,
+      cycles: Number(selection.cycles) || 1,
+      spotify_url: selection.spotify_url,
+      fromRecent: true,
+    };
+    const key = focusTimeSelectionKey(normalized);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    recent.push(normalized);
+  }
+  if (!recent.length) {
+    return defaults.map((item) => ({ ...item, fromRecent: false }));
+  }
+  return [
+    ...recent,
+    ...defaults
+      .filter((item) => !seen.has(focusTimeSelectionKey(item)))
+      .map((item) => ({ ...item, fromRecent: false })),
+  ];
 }
 
 export function formPayload(form) {
