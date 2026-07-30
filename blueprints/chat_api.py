@@ -60,7 +60,16 @@ from services.chat_presence import sync_chat_presence_labels_for_user, universit
 from services import invites, notifications
 from services.entitlements import EntitlementLimitError, TIER_BADGES, TIER_LABELS, normalize_tier, request_entitlements
 from services.giphy import GiphyError, api_key as giphy_api_key, is_available as giphy_available, resolve_gif
+from services.row_utils import row_id as _row_id
+from services.time_utils import utcnow as _now
 from services.universities import normalize_school_key, school_payload, search_universities
+from services.user_profile import (
+    DEFAULT_BANNER_COLOR,
+    is_early_member as _is_early_member,
+    is_emory_school as _is_emory_school,
+    normalize_banner_color as _normalize_banner_color,
+    profile_handle as _profile_handle,
+)
 
 
 chat_api_bp = Blueprint("chat_api", __name__)
@@ -83,7 +92,6 @@ DISCORD_MESSAGE_LIMIT = 50
 MESSAGE_PAGE_SIZE = 50
 DELETE_WINDOW_SECONDS = 5 * 60
 DEFAULT_AVATAR = DEFAULT_AVATAR_URL
-DEFAULT_BANNER_COLOR = "#fecae1"
 DISCORD_IMAGE_EXTENSIONS = {".gif", ".jpeg", ".jpg", ".png", ".webp"}
 DISCORD_USER_MENTION_RE = re.compile(r"&lt;@!?(\d+)&gt;")
 DISCORD_ROLE_MENTION_RE = re.compile(r"&lt;@(?:&amp;|&)(\d+)&gt;")
@@ -124,14 +132,6 @@ WELCOME_DM_TEXT = (
     "Welcome to your Nest! If you have any questions, feedback, or run into any issues, "
     "please feel free to message me anytime :)"
 )
-
-
-def _now():
-    return datetime.now(timezone.utc)
-
-
-def _row_id(row):
-    return row.get("$id") or row.get("id")
 
 
 def _bounded_string(value, limit, *, empty_as_none=False):
@@ -630,42 +630,6 @@ def _format_member_since(value):
     if parsed:
         return parsed.strftime("%b %d, %Y")
     return str(value) if value else ""
-
-
-def _normalize_banner_color(value):
-    if not isinstance(value, str):
-        return DEFAULT_BANNER_COLOR
-    normalized = value.strip()
-    if not normalized.startswith("#"):
-        normalized = f"#{normalized}"
-    if len(normalized) != 7:
-        return DEFAULT_BANNER_COLOR
-    try:
-        int(normalized[1:], 16)
-    except ValueError:
-        return DEFAULT_BANNER_COLOR
-    return normalized.lower()
-
-
-def _profile_handle(name, user_id, username=None):
-    if username:
-        return f"@{username}"
-    base = "".join(char.lower() if char.isalnum() else "-" for char in (name or "")).strip("-")
-    base = "-".join(part for part in base.split("-") if part)
-    return f"@{base or user_id or 'apstudy-user'}"
-
-
-def _is_emory_school(value):
-    return str(value or "").strip().lower() in {"emory", "emory university"}
-
-
-def _is_early_member(value):
-    created_at = parse_datetime(value)
-    if not created_at:
-        return False
-    if created_at.tzinfo is not None:
-        created_at = created_at.replace(tzinfo=None)
-    return created_at < datetime(2026, 8, 20)
 
 
 def _public_user(row):

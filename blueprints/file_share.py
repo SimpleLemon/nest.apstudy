@@ -42,6 +42,8 @@ from services.entitlements import (
     check_storage,
     request_entitlements,
 )
+from services.row_utils import row_id as _row_id
+from services.time_utils import utcnow as _utcnow
 
 
 file_share_bp = Blueprint("file_share", __name__)
@@ -57,10 +59,6 @@ APPWRITE_STORAGE_BACKEND = "appwrite"
 ROOT_FOLDER_ID = "root"
 
 
-def _utcnow():
-    return datetime.now(timezone.utc)
-
-
 def _status_code(exc):
     status = getattr(exc, "code", None)
     if status is None:
@@ -73,10 +71,6 @@ def _status_code(exc):
 
 def _appwrite_upload_error(exc):
     return appwrite_upload_error(exc)
-
-
-def _row_id(row):
-    return row.get("$id") or row.get("id")
 
 
 def _folders_collection():
