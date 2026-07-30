@@ -6,6 +6,7 @@ import re
 import secrets
 import shutil
 import subprocess
+import threading
 from functools import wraps
 from datetime import datetime, timezone
 
@@ -85,6 +86,7 @@ SCHEDULER_COMMAND_TIMEOUT_SECONDS = 20
 SYSTEM_GIT_REPO_PATH = "/var/www/nest.apstudy.org"
 SYSTEM_GIT_COMMAND_TIMEOUT_SECONDS = 60
 SYSTEM_RESTART_DELAY_SECONDS = 2
+SYSTEM_RESTART_COMMAND_TIMEOUT_SECONDS = 20
 SYSTEM_STORAGE_LIMIT_GB = 150
 SCHEDULER_EXECUTABLE_FALLBACKS = {
     "git": ("/usr/bin/git", "/bin/git"),
@@ -180,7 +182,7 @@ def _read_os_pretty():
             if pretty:
                 return pretty
     except Exception:
-        pass
+        logger.debug("Failed to read freedesktop OS release metadata", exc_info=True)
     try:
         return platform.platform()
     except Exception:
@@ -205,32 +207,34 @@ def _system_status():
 
         status.update(scheduler_status())
     except Exception:
-        logger.exception("Failed to read scheduler status")
+        logger.exception("Failed to read scheduler status for admin system overview")
     if psutil is None:
         return status
+    metrics = {}
     try:
-        status["cpu_percent"] = round(psutil.cpu_percent(interval=0.1), 1)
+        metrics["cpu_percent"] = round(psutil.cpu_percent(interval=0.1), 1)
     except Exception:
-        pass
+        logger.debug("Failed to read CPU utilization", exc_info=True)
     try:
-        status["cpu_logical"] = psutil.cpu_count(logical=True)
-        status["cpu_physical"] = psutil.cpu_count(logical=False)
+        metrics["cpu_logical"] = psutil.cpu_count(logical=True)
+        metrics["cpu_physical"] = psutil.cpu_count(logical=False)
     except Exception:
-        pass
+        logger.debug("Failed to read CPU counts", exc_info=True)
     try:
         memory = psutil.virtual_memory()
-        status["mem_percent"] = round(memory.percent, 1)
-        status["mem_used_gb"] = round(memory.used / (1024**3), 1)
-        status["mem_total_gb"] = round(memory.total / (1024**3), 1)
+        metrics["mem_percent"] = round(memory.percent, 1)
+        metrics["mem_used_gb"] = round(memory.used / (1024**3), 1)
+        metrics["mem_total_gb"] = round(memory.total / (1024**3), 1)
     except Exception:
-        pass
+        logger.debug("Failed to read memory utilization", exc_info=True)
     try:
         disk = shutil.disk_usage("/")
         storage_used_gb = disk.used / (1024**3)
-        status["storage_used_gb"] = round(storage_used_gb, 1)
-        status["storage_percent"] = round((storage_used_gb / SYSTEM_STORAGE_LIMIT_GB) * 100, 1)
+        metrics["storage_used_gb"] = round(storage_used_gb, 1)
+        metrics["storage_percent"] = round((storage_used_gb / SYSTEM_STORAGE_LIMIT_GB) * 100, 1)
     except Exception:
-        pass
+        logger.debug("Failed to read disk utilization", exc_info=True)
+    status.update(metrics)
     return status
 
 
@@ -302,7 +306,7 @@ def _schedule_system_restart():
         "-c",
         f"sleep {SYSTEM_RESTART_DELAY_SECONDS}; exec {sudo_path} {systemctl_path} restart {SCHEDULER_SERVICE_NAME}",
     ]
-    return subprocess.Popen(
+    process = subprocess.Popen(
         command,
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,
@@ -310,6 +314,15 @@ def _schedule_system_restart():
         env=restart_env,
         start_new_session=True,
     )
+    if callable(getattr(process, "wait", None)):
+        def stop_hung_restart():
+            try:
+                process.wait(timeout=SYSTEM_RESTART_COMMAND_TIMEOUT_SECONDS)
+            except subprocess.TimeoutExpired:
+                process.kill()
+
+        threading.Thread(target=stop_hung_restart, daemon=True).start()
+    return process
 
 
 def _git_pull_already_up_to_date(completed):
@@ -1550,8 +1563,9 @@ def _course_tracking_diagnostics():
     from services.scheduler import scheduler_status
 
     enabled_count, enabled_error = _enabled_course_track_count()
+    scheduler_payload = scheduler_status()
     payload = {
-        **scheduler_status(),
+        **scheduler_payload,
         **discord_audit_status(),
         "enabled_track_count": enabled_count,
         "enabled_track_count_error": enabled_error,
@@ -1559,7 +1573,7 @@ def _course_tracking_diagnostics():
     }
     payload["course_tracking_job_registered"] = any(
         job.get("id") == "check_course_seat_tracks"
-        for job in payload.get("jobs", [])
+        for job in scheduler_payload.get("jobs", [])
     )
     return payload
 

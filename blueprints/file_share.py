@@ -446,7 +446,7 @@ def _send_shared_file(shared_file):
             },
         )
     except AppwriteException:
-        logger.exception("Failed to update download count")
+        logger.exception("Failed to update download count for shared file %s", _row_id(shared_file))
 
     return send_file(
         io.BytesIO(data),
@@ -727,12 +727,15 @@ def upload_file():
                 },
             )
         except AppwriteException:
-            logger.exception("Failed to save shared file row")
+            logger.exception("Failed to save shared file row for upload %s", display_filename)
             reserved_storage_bytes -= file_size_bytes
             try:
                 _storage().delete_file(FILE_SHARE_BUCKET_ID, storage_file_id)
             except AppwriteException:
-                logger.exception("Failed to clean up uploaded Appwrite file after row failure")
+                logger.exception(
+                    "Failed to clean up uploaded Appwrite file %s after row failure",
+                    storage_file_id,
+                )
             errors.append({"index": idx, "error": "Unable to save file."})
             continue
 
@@ -867,11 +870,11 @@ def update_folder(folder_id):
         if parent_folder_id == _row_id(folder) or _is_descendant_folder(folders_by_id, _row_id(folder), parent_folder_id):
             return jsonify({"error": "A folder cannot be moved inside itself."}), 400
         updates["parent_folder_id"] = parent_folder_id
-        if "order" not in payload:
-            updates["order"] = _sibling_order(user_id, parent_folder_id)
 
     if "order" in payload:
         updates["order"] = payload.get("order")
+    elif "parentFolderId" in payload:
+        updates["order"] = _sibling_order(str(current_user.id), updates["parent_folder_id"])
 
     if not updates:
         return jsonify({"error": "No updatable fields were provided."}), 400
@@ -996,13 +999,15 @@ def change_visibility(file_id):
     if visibility not in {"public", "private"}:
         return jsonify({"error": "Invalid visibility option."}), 400
 
-    updates = {"updated_at": format_datetime(_utcnow())}
-    if visibility == "public":
-        updates["is_public"] = True
-        updates["share_code"] = shared_file.get("share_code") or _generate_share_code()
-    else:
-        updates["is_public"] = False
-        updates["share_code"] = None
+    updates = {
+        "updated_at": format_datetime(_utcnow()),
+        "is_public": visibility == "public",
+        "share_code": (
+            shared_file.get("share_code") or _generate_share_code()
+            if visibility == "public"
+            else None
+        ),
+    }
 
     try:
         shared_file = update_row_safe(COLLECTIONS["shared_files"], _row_id(shared_file), updates)
