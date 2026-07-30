@@ -8,7 +8,7 @@ test("shared form, loader, skeleton, toast, and dialog primitives initialize ind
     await page.goto(`${baseURL}/ui-primitives-harness`, { waitUntil: "networkidle" });
 
     expect(await page.evaluate(() => Object.keys(window.APStudyUIPrimitives).sort())).toEqual([
-        "confirm", "escapeHtml", "form", "loader", "skeleton", "toast",
+        "confirm", "escapeHtml", "form", "loader", "skeleton", "toast", "undo",
     ]);
     expect(await page.evaluate(() => [
         window.APStudyUIPrimitives.escapeHtml(`&<>"'`),
