@@ -250,7 +250,7 @@
                 <div ${getEventElementAttributes(event)} class="calendar-event-shell absolute px-0.5${taskClasses}" style="top:${topPx}px; left:${leftPct}%; width:calc(${widthPct}% - 0.25rem); height:${heightPx}px; z-index: 10;">
                     <div class="h-full rounded-lg border overflow-hidden shadow-lg shadow-black/10" style="${badgeStyle}">
                         <div class="h-full px-2 py-1.5 flex flex-col ${showTimeRange ? "justify-start gap-0.5" : "justify-center"} text-left overflow-hidden">
-                            <div class="text-xs font-semibold leading-tight ${showTimeRange ? "line-clamp-1" : "line-clamp-2"}">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
+                            <div class="text-xs font-semibold leading-tight line-clamp-1">${isTask && event.completed ? "✓ " : ""}${escapeHtml(event.title || "Untitled")}</div>
                             ${showTimeRange ? `<div class="text-[0.7rem] leading-tight">${priorityLabel ? `${escapeHtml(priorityLabel)} · ` : ""}${escapeHtml(formatCompactTimeRange(event))}</div>` : ""}
                         </div>
                     </div>

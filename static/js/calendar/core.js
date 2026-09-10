@@ -1,6 +1,7 @@
 (function () {
     function createCalendarCore({
         state,
+        authenticatedReadOnly = false,
         constants,
         callbacks,
     }) {
@@ -59,7 +60,7 @@
                     legacyNames: [fallbackLabel],
                 });
             }
-            if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0 && !calendars[simulatedCalendarName]) {
+            if ((!state.public.readOnly || authenticatedReadOnly) && state.courses.selectedSectionIds.size > 0 && !calendars[simulatedCalendarName]) {
                 addCalendar(simulatedCalendarName, {
                     label: simulatedCalendarName,
                     defaultName: simulatedCalendarName,
@@ -117,7 +118,7 @@
         function getEventsForCurrentContextLookup() {
             const range = getCurrentViewCountRange();
             const events = [...state.events];
-            if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0) {
+            if ((!state.public.readOnly || authenticatedReadOnly) && state.courses.selectedSectionIds.size > 0) {
                 events.push(...buildSimulatedMeetingEvents(range.start, range.end));
             }
             return events;

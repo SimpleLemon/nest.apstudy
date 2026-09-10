@@ -230,6 +230,52 @@ test("weekly, monthly, mobile, and upcoming renderers preserve event control att
     assert.match(upcoming, /Personal Calendar/);
 });
 
+test("short weekly events keep the first wrapped title line visible", () => {
+    const event = {
+        ...timedEvent,
+        id: "short-event",
+        event_ref: "event:short-event",
+        title: "First words should stay visible when this title wraps",
+        startDate: new Date(2026, 6, 20, 13, 30),
+        endDate: new Date(2026, 6, 20, 14),
+    };
+    const attributes = (item) => `data-event-id="${item.id}"`;
+    const week = window.APStudyCalendarWeekView.createCalendarWeekView({
+        state: { anchorDate: new Date(2026, 6, 20) },
+        constants: { allDayMinHeightPx: 44, hourHeightPx: 60, weekMinimumDayWidthPx: 100, weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
+        callbacks: {
+            getEventBadgeColors: () => ({ background: "#234", text: "#fff", border: "#8cf", indicator: "#8cf" }),
+            getEventBadgeStyle: () => "",
+            getEventElementAttributes: attributes,
+            getEventsForDay: (day) => day.toDateString() === event.startDate.toDateString() ? [event] : [],
+            getVisibleEvents: () => [event],
+        },
+        formatters: {
+            dateToDayIndex: () => 0,
+            escapeHtml,
+            formatHourLabel: (hour) => `${hour}:00`,
+            getStartOfWeek(date) {
+                const start = new Date(date);
+                start.setDate(start.getDate() - start.getDay());
+                start.setHours(0, 0, 0, 0);
+                return start;
+            },
+            isTaskEvent: () => false,
+            isToday: () => false,
+            layoutTimedEvents: (events) => events.map((item) => ({
+                ...item,
+                layoutStartMinutes: 810,
+                layoutDurationMinutes: 30,
+                layoutLane: 0,
+                layoutLaneCount: 1,
+            })),
+        },
+    }).buildWeekViewHtml();
+
+    assert.match(week, /data-event-id="short-event"[\s\S]*?line-clamp-1/);
+    assert.doesNotMatch(week, /data-event-id="short-event"[\s\S]*?line-clamp-2/);
+});
+
 test("event menus expose only valid actions for local, imported, simulated, task, and read-only events", () => {
     const getLabels = (event, readOnly = false) => window.APStudyCalendarEventMenu
         .getEventMenuItems({ event, readOnly })

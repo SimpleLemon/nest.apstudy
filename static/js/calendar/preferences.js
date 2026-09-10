@@ -3,6 +3,8 @@
         lifecycle = null,
         dataAdapter = null,
         state,
+        authenticatedReadOnly = false,
+        strictLoad = false,
         constants,
         getSavedCalendarInfo,
         renderCalendarMenu,
@@ -249,12 +251,12 @@
         }
 
         async function ensureCalendarPreferencesLoaded(force = false) {
-            if (state.public.readOnly || lifecycle?.isDisposed?.()) return;
+            if ((state.public.readOnly && !authenticatedReadOnly) || lifecycle?.isDisposed?.()) return;
             if (state.preferences.loading) return state.preferences.loading;
             if (state.preferences.loaded && !force) return;
 
             const now = Date.now();
-            if (!force && state.preferences.lastAttemptAt && now - state.preferences.lastAttemptAt < loadRetryCooldownMs) {
+            if (!strictLoad && !force && state.preferences.lastAttemptAt && now - state.preferences.lastAttemptAt < loadRetryCooldownMs) {
                 return;
             }
             state.preferences.lastAttemptAt = now;
@@ -266,8 +268,10 @@
                         ? await dataAdapter.loadPreferences({ signal: controller.signal })
                         : { response: await fetch("/api/calendar/preferences", { signal: controller.signal }) };
                     const res = result.response || result;
-                    if (!res.ok) return;
-                    const payload = result.payload || await res.json().catch(() => ({}));
+                    if (!res.ok) throw new Error("Unable to load calendar preferences");
+                    const payload = result.payload || await res.json();
+                    if (strictLoad && !Array.isArray(payload.preferences)) throw new Error("Invalid calendar preferences response");
+                    if (lifecycle?.isDisposed?.() || controller.signal.aborted) throw new Error("Calendar preference load cancelled");
                     const prefs = Array.isArray(payload.preferences) ? payload.preferences : [];
                     state.preferences.cache = Object.fromEntries(
                         prefs.filter((pref) => pref.calendar_name).map((pref) => [pref.calendar_name, pref])
@@ -275,6 +279,7 @@
                     state.preferences.loaded = true;
                     state.preferences.lastLoadedAt = Date.now();
                 } catch (err) {
+                    if (strictLoad) throw err;
                     console.warn("Failed to load calendar preferences:", err);
                 } finally {
                     lifecycle?.releaseAbortController?.(controller);
@@ -286,13 +291,13 @@
         }
 
         async function loadCalendarState(options = {}) {
-            if (state.public.readOnly || lifecycle?.isDisposed?.()) return;
-            const saved = localStorage.getItem("calendarState");
+            if ((state.public.readOnly && !authenticatedReadOnly) || lifecycle?.isDisposed?.()) return;
+            const saved = authenticatedReadOnly || strictLoad ? null : localStorage.getItem("calendarState");
             if (saved) {
                 applyStoredCalendarState(saved);
             }
             await ensureCalendarPreferencesLoaded(Boolean(options.force));
-            applyCachedCalendarPreferences(state.preferences.cache);
+            if (!lifecycle?.isDisposed?.()) applyCachedCalendarPreferences(state.preferences.cache);
         }
 
         return {

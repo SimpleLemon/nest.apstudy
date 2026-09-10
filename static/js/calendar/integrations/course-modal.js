@@ -134,7 +134,9 @@
                     ? escapeHtml(state.courses.error)
                     : isSelectedOnly
                         ? `${resultCount.toLocaleString()} pinned in this session · ${selectedCount.toLocaleString()} selected`
-                        : `${resultCount.toLocaleString()} sections · ${selectedCount.toLocaleString()} selected`;
+                        : state.courses.remoteResults && state.courses.hasMore
+                            ? `${resultCount.toLocaleString()} of ${state.courses.total.toLocaleString()} matching sections · Refine your search to see more · ${selectedCount.toLocaleString()} selected`
+                            : `${resultCount.toLocaleString()} sections · ${selectedCount.toLocaleString()} selected`;
             const content = state.courses.loading
                 ? `<div class="py-12">${window.APStudyLoader.html("Loading full course index...", { sizePx: 54, textToneClass: "text-on-surface" })}</div>`
                 : state.courses.error

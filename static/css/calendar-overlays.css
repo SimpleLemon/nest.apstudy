@@ -1771,3 +1771,15 @@
 		width: 100%;
 	}
 }
+
+
+.calendar-mirror-dialog { padding: 0; max-width: calc(100% - 32px); }
+.calendar-mirror-dialog .calendar-event-form { grid-template-columns: minmax(0, 1fr); }
+.calendar-mirror-dialog .calendar-event-header { flex-wrap: wrap; }
+.calendar-mirror-dialog button { min-width: 0; overflow-wrap: anywhere; }
+.calendar-mirror-dialog::backdrop { background: color-mix(in srgb, var(--color-on-surface) 45%, transparent); }
+.calendar-mirror-dialog p { margin: 0; overflow-wrap: anywhere; font-size: 14px; line-height: 1.5; }
+.calendar-mirror-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.calendar-mirror-dialog button { min-height: 44px; white-space: normal; }
+.calendar-mirror-confirm { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.calendar-mirror-dialog [data-delete-controls] { padding-top: 16px; border-top: 1px solid var(--color-outline-variant); }

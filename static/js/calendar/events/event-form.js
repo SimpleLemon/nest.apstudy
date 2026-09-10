@@ -1,4 +1,4 @@
-import { escapeHtml } from "../../core/ui-primitives-module.js?v=9c86ecb81c990de80a6ac1e903018413ee8cf0355279ce8295614463605110ea";
+import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
 
 // Event create/edit modal and API integration.
 (function () {
@@ -115,6 +115,10 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=9c86ecb81c990de
         return window.APStudyDate?.localInputToIso ? window.APStudyDate.localInputToIso(value) : null;
     }
 
+    function getAdapter() {
+        return window.APStudyCalendarDataAdapter || null;
+    }
+
     function renderModal(data = {}) {
         const m = ensureModal();
         const options = getCalendarOptions();
@@ -139,7 +143,7 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=9c86ecb81c990de
                     <div class="calendar-event-header">
                         <h3 class="calendar-event-title">${escapeHtml(title)}</h3>
                         <button type="button" class="calendar-event-icon-button" data-event-close aria-label="Close event form">
-                            <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
                         </button>
                     </div>
                     <label class="calendar-event-field">
@@ -316,27 +320,35 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=9c86ecb81c990de
         }
 
         try {
-            let res;
+            const adapter = getAdapter();
+            let result;
             if (currentMode === "override") {
-                res = await fetch("/api/calendar/event-overrides", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                });
+                result = adapter?.overrideEvent
+                    ? await adapter.overrideEvent({ payload })
+                    : { response: await fetch("/api/calendar/event-overrides", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                    }) };
             } else if (currentMode === "edit" && currentEventId) {
-                res = await fetch(`/api/calendar/events/${encodeURIComponent(currentEventId)}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                });
+                result = adapter?.updateEvent
+                    ? await adapter.updateEvent({ eventId: currentEventId, payload })
+                    : { response: await fetch(`/api/calendar/events/${encodeURIComponent(currentEventId)}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                    }) };
             } else {
-                res = await fetch("/api/calendar/events", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                });
+                result = adapter?.createEvent
+                    ? await adapter.createEvent({ payload })
+                    : { response: await fetch("/api/calendar/events", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                    }) };
             }
-            const json = await res.json().catch(() => ({}));
+            const res = result?.response || result;
+            const json = result?.payload || await res.json().catch(() => ({}));
             if (!res.ok) {
                 showError(json.error || "Save failed.");
                 return;
@@ -371,6 +383,7 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=9c86ecb81c990de
         window.APStudyFormField?.clearAll?.(form || ensureModal().querySelector("form"));
     }
 
+    window.closeCalendarEventForm = closeModal;
     window.openCalendarEventForm = function (opts) {
         openForm(opts);
     };

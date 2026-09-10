@@ -258,9 +258,7 @@
                 const termSelect = event.target.closest("#courses-term-select");
                 if (!termSelect) return;
                 state.courses.termFilter = termSelect.value || "";
-                applyCourseFilters();
-                writeCourseFiltersToUrl();
-                renderCoursesModal();
+                submitCoursesSearch();
             });
             listen(view, "keydown", (event) => {
                 if (event.key === "Escape" && state.courses.modalOpen) {

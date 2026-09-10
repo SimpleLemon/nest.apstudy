@@ -4,6 +4,10 @@
         lifecycle = null,
         dataAdapter = null,
         state,
+        strictLoad = false,
+        authenticatedReadOnly = false,
+        serverSelections = false,
+        remoteResults = false,
         constants,
         render,
         saveCalendarState,
@@ -21,12 +25,18 @@
         const storage = view.localStorage || localStorage;
         const scrollLockTarget = root?.classList ? root : root?.documentElement;
         const getActiveElement = () => doc.activeElement;
+        let courseLoadGeneration = 0;
+        let activeCourseController = null;
 
         function requestController() {
             return lifecycle?.trackAbortController?.() || new AbortController();
         }
 
         function initializeCourseSelectionsFromStorage() {
+            if (serverSelections) {
+                state.courses.selectedSectionIds = new Set();
+                return;
+            }
             const persistedSelections = loadSelectedCourseSectionIds();
             state.courses.selectedSectionIds = new Set(persistedSelections);
         }
@@ -74,7 +84,7 @@
 
         function clearSimulatedCourseSelections() {
             state.courses.selectedSectionIds = new Set();
-            saveSelectedCourseSectionIds();
+            if (!serverSelections) saveSelectedCourseSectionIds();
             removeSimulatedCalendarPreference();
         }
 
@@ -90,13 +100,13 @@
                 };
             }
             state.courses.selectedSectionIds = new Set(ids);
-            saveSelectedCourseSectionIds();
+            if (!serverSelections) saveSelectedCourseSectionIds();
             ensureSimulatedCalendarPreference();
         }
 
         async function hydrateSavedCourses() {
-            if (state.public.readOnly) return;
-            if (!isEmoryStudentSession()) {
+            if (state.public.readOnly && !authenticatedReadOnly) return;
+            if (!serverSelections && !isEmoryStudentSession()) {
                 clearSimulatedCourseSelections();
                 return;
             }
@@ -110,12 +120,17 @@
                     clearSimulatedCourseSelections();
                     return;
                 }
-                if (!response.ok) return;
+                if (!response.ok) {
+                    if (strictLoad) throw new Error("Unable to load saved courses");
+                    return;
+                }
                 const payload = result.payload || await response.json();
+                if (!payload || !Array.isArray(payload.courses)) throw new Error("Saved courses response is invalid");
                 const courses = Array.isArray(payload.courses) ? payload.courses : [];
                 applySavedCourses(courses);
             } catch (err) {
                 console.error("Failed to hydrate saved courses:", err);
+                if (strictLoad) throw err;
             } finally {
                 lifecycle?.releaseAbortController?.(controller);
             }
@@ -257,7 +272,7 @@
         async function submitCoursesSearch() {
             state.courses.searchQuery = (state.courses.searchInput || "").trim();
             state.courses.showSelectedOnly = false;
-            if (!state.courses.indexLoaded) {
+            if (!state.courses.indexLoaded || remoteResults) {
                 await loadCoursesIndex();
                 return;
             }
@@ -280,6 +295,7 @@
         }
 
         function saveSelectedCourseSectionIds() {
+            if (serverSelections) return;
             storage.setItem(
                 coursesSelectionStorageKey,
                 JSON.stringify(Array.from(state.courses.selectedSectionIds))
@@ -287,20 +303,23 @@
         }
 
         async function loadCoursesIndex() {
-            if (state.courses.loading) return;
-            if (state.courses.indexLoaded) {
+            if (state.courses.loading && !remoteResults) return;
+            if (state.courses.indexLoaded && !remoteResults) {
                 applyCourseFilters();
                 writeCourseFiltersToUrl();
                 renderCoursesModal();
                 return;
             }
+            const generation = ++courseLoadGeneration;
+            if (remoteResults) activeCourseController?.abort?.();
             state.courses.loading = true;
             state.courses.error = "";
             renderCoursesModal();
             const controller = requestController();
+            activeCourseController = controller;
             try {
                 const result = dataAdapter?.loadCourses
-                    ? await dataAdapter.loadCourses({ signal: controller.signal })
+                    ? await dataAdapter.loadCourses({ query: state.courses.searchQuery, term: state.courses.termFilter, limit: 50, offset: 0, signal: controller.signal })
                     : await (async () => {
                         const [termsRes, sectionsRes] = await Promise.all([
                             fetch("/api/atlas/terms", { signal: controller.signal }),
@@ -314,10 +333,15 @@
                         };
                     })();
                 const { termsResponse: termsRes, sectionsResponse: sectionsRes, termsPayload, sectionsPayload } = result;
+                if (generation !== courseLoadGeneration || lifecycle?.isDisposed?.()) return;
                 if (!termsRes.ok) throw new Error("Unable to load terms");
                 if (!sectionsRes.ok) throw new Error("Unable to load sections");
                 state.courses.terms = Array.isArray(termsPayload.terms) ? termsPayload.terms : [];
                 state.courses.sections = Array.isArray(sectionsPayload.sections) ? sectionsPayload.sections : [];
+                state.courses.remoteResults = remoteResults;
+                state.courses.total = Number.isSafeInteger(sectionsPayload.total) ? sectionsPayload.total : state.courses.sections.length;
+                state.courses.hasMore = sectionsPayload.has_more === true;
+                state.courses.offset = Number.isSafeInteger(sectionsPayload.offset) ? sectionsPayload.offset : 0;
                 state.courses.indexLoaded = true;
                 const validTerms = new Set(state.courses.terms);
                 if (state.courses.termFilter && !validTerms.has(state.courses.termFilter)) {
@@ -342,22 +366,28 @@
                     ].join(" ").toLowerCase();
                     state.courses.sectionsById[id] = { ...section, searchBlob };
                 }
-                state.courses.selectedSectionIds = new Set(
+                if (!remoteResults) state.courses.selectedSectionIds = new Set(
                     Array.from(state.courses.selectedSectionIds).filter((id) => Boolean(state.courses.sectionsById[id]))
                 );
                 ensureSimulatedCalendarPreference();
                 applyCourseFilters();
                 writeCourseFiltersToUrl();
-                saveSelectedCourseSectionIds();
-                saveCalendarState();
+                if (!serverSelections) {
+                    saveSelectedCourseSectionIds();
+                    saveCalendarState();
+                }
             } catch (err) {
+                if (generation !== courseLoadGeneration || controller.signal.aborted || lifecycle?.isDisposed?.()) return;
                 console.error(err);
                 state.courses.indexLoaded = false;
                 state.courses.error = err?.message || "Failed to load courses";
             } finally {
                 lifecycle?.releaseAbortController?.(controller);
-                state.courses.loading = false;
-                render();
+                if (activeCourseController === controller) activeCourseController = null;
+                if (generation === courseLoadGeneration) {
+                    state.courses.loading = false;
+                    render();
+                }
             }
         }
 

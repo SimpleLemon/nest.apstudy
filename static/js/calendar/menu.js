@@ -2,6 +2,7 @@
     function createCalendarMenu({
         root = document,
         state,
+        authenticatedReadOnly = false,
         constants,
         callbacks,
         escapeHtml,
@@ -163,7 +164,7 @@
         function getCountableEventsForCurrentView() {
             const range = getCurrentViewCountRange();
             const events = [...state.events];
-            if (!state.public.readOnly && state.courses.selectedSectionIds.size > 0) {
+            if ((!state.public.readOnly || authenticatedReadOnly) && state.courses.selectedSectionIds.size > 0) {
                 events.push(...buildSimulatedMeetingEvents(range.start, range.end));
             }
             return events.filter((event) => eventOverlapsCountRange(event, range));

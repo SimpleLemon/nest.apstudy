@@ -81,7 +81,7 @@ async function loadCoursesModule() {
     return { restore() {} };
 }
 
-function createCoursesRuntime({ emory = true, storage, dataAdapter } = {}) {
+function createCoursesRuntime({ emory = true, storage, dataAdapter, readOnly = false, courseOptions = {} } = {}) {
     const memory = storage || createMemoryStorage();
     const view = {
         localStorage: memory,
@@ -104,7 +104,7 @@ function createCoursesRuntime({ emory = true, storage, dataAdapter } = {}) {
         querySelector: () => null,
     };
     const state = {
-        public: { readOnly: false },
+        public: { readOnly },
         calendars: {},
         calendarColors: ["#0ea5e9", "#f97316"],
         courses: {
@@ -138,6 +138,7 @@ function createCoursesRuntime({ emory = true, storage, dataAdapter } = {}) {
         },
         dataAdapter,
         state,
+        ...courseOptions,
         constants: {
             coursesSelectionStorageKey: storageKey,
             coursesModalAnimationMs: 0,
@@ -268,6 +269,56 @@ test("non-Emory sessions skip saved-course fetch and hide Simulated Courses", as
         assert.equal(state.courses.selectedSectionIds.size, 0);
         assert.equal(state.calendars[simulatedCalendarName], undefined);
         assert.deepEqual(JSON.parse(memory.getItem(storageKey) || "[]"), []);
+    } finally {
+        runtime.restore();
+    }
+});
+
+test("authenticated read-only extension hydration uses only server selections", async () => {
+    const runtime = await loadCoursesModule();
+    try {
+        const memory = createMemoryStorage({ [storageKey]: JSON.stringify(["canvas-local-leak"]) });
+        const { courses, state } = createCoursesRuntime({
+            emory: false,
+            readOnly: true,
+            storage: memory,
+            courseOptions: { strictLoad: true, authenticatedReadOnly: true, serverSelections: true, remoteResults: true },
+            dataAdapter: { async loadSavedCourses() { return { response: jsonResponse({ courses: [savedSection] }), payload: { courses: [savedSection] } }; } },
+        });
+        courses.initializeCourseSelectionsFromStorage();
+        assert.equal(state.courses.selectedSectionIds.size, 0);
+        await courses.hydrateSavedCourses();
+        assert.deepEqual([...state.courses.selectedSectionIds], [savedSection.section_id]);
+        assert.equal(memory.getItem(storageKey), JSON.stringify(["canvas-local-leak"]));
+        assert.equal(courses.buildSimulatedMeetingEvents(new Date(2026, 0, 12), new Date(2026, 0, 12)).length, 1);
+    } finally {
+        runtime.restore();
+    }
+});
+
+test("remote course search ignores stale results and exposes truncation metadata", async () => {
+    const runtime = await loadCoursesModule();
+    try {
+        const pending = [];
+        const { courses, state } = createCoursesRuntime({
+            courseOptions: { remoteResults: true, serverSelections: true },
+            dataAdapter: { loadCourses(options) { return new Promise(resolve => pending.push({ options, resolve })); } },
+        });
+        state.courses.searchInput = "first";
+        const first = courses.submitCoursesSearch();
+        await Promise.resolve();
+        state.courses.searchInput = "second";
+        const second = courses.submitCoursesSearch();
+        await Promise.resolve();
+        assert.equal(pending.length, 2);
+        pending[1].resolve({ termsResponse: { ok: true }, sectionsResponse: { ok: true }, termsPayload: { terms: ["Fall_2026"] }, sectionsPayload: { sections: [{ ...savedSection, id: "second" }], total: 75, offset: 0, has_more: true } });
+        await second;
+        pending[0].resolve({ termsResponse: { ok: true }, sectionsResponse: { ok: true }, termsPayload: { terms: [] }, sectionsPayload: { sections: [{ ...savedSection, id: "first" }], total: 1, offset: 0, has_more: false } });
+        await first;
+        assert.deepEqual(state.courses.sections.map(section => section.id), ["second"]);
+        assert.equal(state.courses.total, 75);
+        assert.equal(state.courses.hasMore, true);
+        assert.equal(state.courses.searchQuery, "second");
     } finally {
         runtime.restore();
     }

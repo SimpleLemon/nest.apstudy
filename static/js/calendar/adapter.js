@@ -1,4 +1,4 @@
-import { getSafeCanvasSourceUrl } from "./capabilities.js?v=9c86ecb81c990de80a6ac1e903018413ee8cf0355279ce8295614463605110ea";
+import { getSafeCanvasSourceUrl } from "./capabilities.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
 
 function responseJson(response) {
     return response.json().catch(() => ({}));
@@ -22,6 +22,18 @@ export function createCalendarDataAdapter(overrides = {}) {
                 const response = await request(`${baseUrl}${params}`, { signal });
                 if (!response.ok) throw new Error("Unable to fetch calendar events");
                 return responseJson(response);
+            },
+            async loadMirrors({ eventRef, signal } = {}) {
+                const response = await request(`/api/extension/mirrors?event_ref=${encodeURIComponent(eventRef)}`, { signal });
+                const payload = await responseJson(response);
+                if (!response.ok) throw new Error("Unable to load Canvas copies");
+                return { response, payload };
+            },
+            async changeMirror({ payload: body, signal } = {}) {
+                const response = await request("/api/extension/mirrors", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal });
+                const payload = await responseJson(response);
+                if (!response.ok) throw new Error("Unable to save Canvas copy choice");
+                return { response, payload };
             },
             async loadPreferences({ signal } = {}) {
                 const response = await request("/api/calendar/preferences", { signal });

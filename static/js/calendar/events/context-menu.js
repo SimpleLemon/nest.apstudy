@@ -55,6 +55,10 @@
             || document.body?.dataset.calendarReadonly === "true";
     }
 
+    function getAdapter() {
+        return window.APStudyCalendarDataAdapter || null;
+    }
+
     function contextForTarget(target, { clientX = 0, clientY = 0 } = {}) {
         const eventEl = target.closest?.(eventSelector) || null;
         const dateAttrEl = target.closest?.("[data-date]") || null;
@@ -122,6 +126,9 @@
                 { label: "Create New Event", icon: "calendar_add_on", onClick: createNewFromContext },
                 { label: "Go to Today", icon: "today", onClick: goToToday },
             ];
+        if (!context.readOnly && window.APStudyCalendarMirrors?.personalRef(context.event)) {
+            items.push({ label: "Mirror to Canvas…", icon: "content_copy", onClick: ctx => window.APStudyCalendarMirrors.open({ event: ctx.event, opener: ctx.anchorEl }) });
+        }
         if (!items.length) return;
         showMenuAt(context.x, context.y, buildMenu(items));
     }
@@ -317,6 +324,7 @@
         const event = context.event;
         if (!event) return;
         const imported = isImportedEvent(event);
+        if (!imported && window.APStudyCalendarMirrors?.open({ event, opener: context.anchorEl, deletion: true })) return;
         const accepted = await (window.APStudyConfirm?.request?.({
             title: imported ? "Hide imported event?" : "Delete event?",
             message: imported
@@ -328,17 +336,22 @@
         if (!accepted) return;
         const hiddenElements = hideEventElements(event, context);
         const commit = async ({ reason } = {}) => {
+            const adapter = getAdapter();
             const response = imported
-                ? await fetch("/api/calendar/event-overrides/hide", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ event_ref: event.event_ref }),
-                    keepalive: reason === "pagehide",
-                })
-                : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || context.eventId)}`, {
-                    method: "DELETE",
-                    keepalive: reason === "pagehide",
-                });
+                ? adapter?.hideEvent
+                    ? await adapter.hideEvent({ eventRef: event.event_ref, keepalive: reason === "pagehide" })
+                    : await fetch("/api/calendar/event-overrides/hide", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ event_ref: event.event_ref }),
+                        keepalive: reason === "pagehide",
+                    })
+                : adapter?.deleteEvent
+                    ? await adapter.deleteEvent({ eventId: event.id || context.eventId, keepalive: reason === "pagehide" })
+                    : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || context.eventId)}`, {
+                        method: "DELETE",
+                        keepalive: reason === "pagehide",
+                    });
             if (!response.ok) throw new Error("delete failed");
             localStorage.removeItem("calendarEventsCache");
             window.loadCalendarData?.();

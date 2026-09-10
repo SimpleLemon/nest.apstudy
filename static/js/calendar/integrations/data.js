@@ -3,6 +3,8 @@
         lifecycle = null,
         dataAdapter = null,
         state,
+        strictLoad = false,
+        authenticatedReadOnly = false,
         constants,
         buildSimulatedMeetingEvents,
         ensureSimulatedCalendarPreference,
@@ -28,6 +30,11 @@
             return lifecycle?.trackAbortController?.() || new AbortController();
         }
 
+        function localDateInput(date) {
+            const pad = (v) => String(v).padStart(2, "0");
+            return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        }
+
         function parseEventDate(dateStr, isAllDay) {
             if (!dateStr) return new Date();
             if (isAllDay && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
@@ -39,10 +46,11 @@
                     0, 0, 0, 0
                 );
             }
-            return new Date(dateStr);
+            return window.APStudyDate?.toCalendarDate ? window.APStudyDate.toCalendarDate(dateStr) : new Date(dateStr);
         }
 
         function readEventsCache() {
+            if (window.APStudyDate?.toCalendarDate) return null;
             const raw = localStorage.getItem(eventsCacheKey);
             if (!raw) return null;
             try {
@@ -63,6 +71,7 @@
         }
 
         function writeEventsCache(payload, range) {
+            if (window.APStudyDate?.toCalendarDate) return;
             try {
                 localStorage.setItem(eventsCacheKey, JSON.stringify({
                     cached_at: Date.now(),
@@ -79,13 +88,13 @@
                 ? events
                         .filter((e) => e.start)
                         .map((e) => {
-                            const isAllDay = Boolean(e.is_all_day);
+                            const isAllDay = Boolean(e.is_all_day ?? e.all_day);
                             return {
                                 ...e,
                                 startDate: parseEventDate(e.start, isAllDay),
                                 endDate: e.end ? parseEventDate(e.end, isAllDay) : parseEventDate(e.start, isAllDay),
                                 isAllDay,
-                                isMultiDay: Boolean(e.is_multi_day),
+                                isMultiDay: Boolean(e.is_multi_day ?? e.multi_day),
                                 spanDays: e.span_days || 1,
                             };
                         })
@@ -150,7 +159,10 @@
             try {
                 if (dataAdapter?.loadRange) {
                     return await dataAdapter.loadRange({
-                        range,
+                        range: window.APStudyDate?.localInputToIso ? {
+                            start: new Date(window.APStudyDate.localInputToIso(localDateInput(range.start))),
+                            end: new Date(window.APStudyDate.localInputToIso(localDateInput(range.end))),
+                        } : range,
                         readOnly: state.public.readOnly,
                         shareCode: state.public.shareCode,
                         signal: controller.signal,
@@ -167,7 +179,7 @@
         async function applyEventsPayload(payload, options = {}) {
             if (lifecycle?.isDisposed?.()) return;
             const range = options.range || null;
-            state.calendarSources = Array.isArray(payload?.calendar_sources) ? payload.calendar_sources : [];
+            state.calendarSources = Array.isArray(payload?.calendar_sources) ? payload.calendar_sources : (payload?.sources || []);
             const newEvents = normalizeEventsList(payload?.events);
             const mergeRange = Boolean(options.mergeRange);
             state.events = mergeRange
@@ -189,9 +201,9 @@
             }
 
             initCalendarState();
-            if (!state.public.readOnly) {
+            if (!state.public.readOnly || authenticatedReadOnly) {
                 await loadCalendarState();
-                ensureSimulatedCalendarPreference();
+                if (!state.public.readOnly) ensureSimulatedCalendarPreference();
             }
             render();
             if (!state.public.readOnly && options.shouldHydrate) {
@@ -263,7 +275,7 @@
             state.loadingDashboard = true;
             render();
 
-            const cached = state.public.readOnly ? null : readEventsCache();
+            const cached = state.public.readOnly || strictLoad ? null : readEventsCache();
             const cachedRange = state.public.readOnly ? null : parseCachedRange(cached?.range);
             if (!state.public.readOnly && cached?.payload) {
                 state.loadingDashboard = false;
@@ -286,6 +298,7 @@
                 });
                 void maybeRefreshIfStale(payload, desiredRange);
             } catch (err) {
+                if (strictLoad) throw err;
                 if (!cached?.payload) {
                     state.feedConfigured = false;
                     state.events = [];
@@ -328,7 +341,7 @@
                 const cal = getEventCalendarKey(e);
                 return state.calendars[cal]?.visible !== false;
             });
-            if (state.public.readOnly || state.calendars[simulatedCalendarName]?.visible === false || state.courses.selectedSectionIds.size === 0) {
+            if ((state.public.readOnly && !authenticatedReadOnly) || state.calendars[simulatedCalendarName]?.visible === false || state.courses.selectedSectionIds.size === 0) {
                 return baseEvents;
             }
             const renderRange = getCurrentRenderRange();

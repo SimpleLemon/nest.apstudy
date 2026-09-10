@@ -1,3 +1,4 @@
+import "./events/mirrors.js";
 import "../core/ui-primitives-module.js";
 import "./utils.js";
 import "./state.js";
