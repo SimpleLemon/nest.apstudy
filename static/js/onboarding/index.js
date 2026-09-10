@@ -209,6 +209,8 @@ const COURSE_CARD_CLASSES = 'rounded-2xl border border-outline-variant/20 bg-sur
 const COURSE_SUGGESTION_CLASSES = 'block w-full appearance-none border-0 bg-transparent px-4 py-3 text-left text-sm text-on-surface transition-colors hover:bg-surface-container-high focus:bg-surface-container-high focus:outline-none';
 const REMOVE_CALENDAR_BUTTON_CLASSES = 'btn-remove-calendar inline-flex items-center justify-center rounded-lg h-10 w-10 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors';
 let courseSearchTimeout = null;
+let courseSearchRequestId = 0;
+let selectedCourseSection = null;
 let universitySearchTimeout = null;
 function applyTheme(theme, persist) {
     if (VALID_THEMES.indexOf(theme) === -1) theme = 'obsidian-dark';
@@ -242,25 +244,30 @@ function updateAddCourseButtonState() {
     if (!addCourseButton) {
         return;
     }
-    const ready = Boolean(courseCode.value.trim());
+    const ready = Boolean(selectedCourseSection?.id);
     addCourseButton.disabled = !ready;
     addCourseButton.classList.toggle('opacity-60', !ready);
     addCourseButton.classList.toggle('cursor-not-allowed', !ready);
+}
+function clearCourseSelection() {
+    selectedCourseSection = null;
+    courseCode.value = '';
+    courseName.value = '';
+    sectionNumber.value = '';
+    instructorName.value = '';
+    updateAddCourseButtonState();
 }
 function setActiveTerm(nextTerm) {
     if (!nextTerm) {
         return;
     }
     onboardingState.term = nextTerm;
+    courseSearchRequestId += 1;
     updateSegmentedButtons('#term-options button', nextTerm, 'term');
     courseSearch.value = '';
     courseSuggestions.classList.add('hidden');
     courseSuggestions.innerHTML = '';
-    courseCode.value = '';
-    courseName.value = '';
-    sectionNumber.value = '';
-    instructorName.value = '';
-    updateAddCourseButtonState();
+    clearCourseSelection();
 }
 function renderTermOptions(terms, selectedTerm) {
     if (!termOptions) {
@@ -641,6 +648,48 @@ function renderCourseList() {
     updateCourseContinueButton();
     renderReview();
 }
+function normalizeSavedCourse(course) {
+    const subject = String(course?.subject || '').trim();
+    const catalog = String(course?.catalog || course?.catalog_number || '').trim();
+    return {
+        id: course?.id || course?.$id || '',
+        section_id: course?.section_id || '',
+        course_code: course?.course_code || [subject, catalog].filter(Boolean).join(' '),
+        course_name: course?.course_name || course?.course_title || '',
+        section_number: course?.section_number || '',
+        instructor_name: course?.instructor_name || course?.instructor || '',
+        term: course?.term || onboardingState.term,
+    };
+}
+function upsertSavedCourse(course) {
+    const normalized = normalizeSavedCourse(course);
+    if (!normalized.id && !normalized.section_id) {
+        return;
+    }
+    const existingIndex = onboardingState.courses.findIndex((candidate) => (
+        (normalized.id && candidate.id === normalized.id)
+        || (normalized.section_id && candidate.section_id === normalized.section_id)
+    ));
+    if (existingIndex >= 0) {
+        onboardingState.courses.splice(existingIndex, 1, normalized);
+    } else {
+        onboardingState.courses.push(normalized);
+    }
+}
+async function loadSavedCourses() {
+    if (!shouldShowCoursesStep()) {
+        return;
+    }
+    try {
+        const data = await fetchJson(onboardingData.endpoints.savedCourses, { method: 'GET' });
+        onboardingState.courses = Array.isArray(data.courses)
+            ? data.courses.map(normalizeSavedCourse)
+            : [];
+        renderCourseList();
+    } catch (error) {
+        console.error('Unable to load saved courses for onboarding.', error);
+    }
+}
 function renderReview() {
     const educationLevel = getSelectedEducationLevel();
     reviewEducationLevel.textContent = educationLevel ? `Education level: ${educationLevel}` : 'Education level not set.';
@@ -703,118 +752,102 @@ function renderReview() {
     });
 }
 async function addCourseFromInputs() {
-    const courseCodeValue = courseCode.value.trim().toUpperCase();
-    const courseNameValue = courseName.value.trim();
-    const sectionNumberValue = sectionNumber.value.trim();
-    const instructorNameValue = instructorName.value.trim();
-    if (!courseCodeValue) {
+    const sectionId = String(selectedCourseSection?.id || '').trim();
+    if (!sectionId) {
         formField()?.markInvalid?.(courseCode);
-        showError('Enter a course code first.');
+        showError('Choose a course section from the search results first.');
         return;
     }
     formField()?.clearInvalid?.(courseCode);
     markDirty();
-    const saved = await saveStep(3, {
-        action: 'add_course',
-        course_code: courseCodeValue,
-        course_name: courseNameValue,
-        section_number: sectionNumberValue,
-        instructor_name: instructorNameValue,
-        term: onboardingState.term,
+    const saved = await fetchJson(onboardingData.endpoints.savedCourses, {
+        method: 'POST',
+        body: JSON.stringify({ section_id: sectionId }),
     });
-    onboardingState.courses.push({
-        id: saved.course.id,
-        course_code: saved.course.course_code,
-        course_name: saved.course.course_name,
-        section_number: saved.course.section_number,
-        instructor_name: saved.course.instructor_name,
-        term: saved.course.term,
-    });
-    courseCode.value = '';
-    courseName.value = '';
-    sectionNumber.value = '';
-    instructorName.value = '';
+    upsertSavedCourse(saved.course);
+    clearCourseSelection();
     clearDirty();
     renderCourseList();
-    updateAddCourseButtonState();
 }
 async function removeCourse(courseId, options = {}) {
-    const response = await fetch(onboardingData.endpoints.removeCourseTemplate.replace('/0', `/${courseId}`), {
+    const endpoint = onboardingData.endpoints.removeSavedCourseTemplate.replace(/\/0$/, `/${encodeURIComponent(courseId)}`);
+    return fetchJson(endpoint, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
         keepalive: options.keepalive === true,
     });
-    const data = await response.json();
-    if (!response.ok) {
-        throw new Error(data.error || 'Failed to remove course');
-    }
 }
 async function searchCourses(query) {
     const term = query.trim();
+    const requestId = courseSearchRequestId + 1;
+    courseSearchRequestId = requestId;
     if (term.length < 2) {
         courseSuggestions.classList.add('hidden');
         courseSuggestions.innerHTML = '';
         return;
     }
     try {
-        const data = await fetchJson(`${onboardingData.endpoints.courseSearch}?query=${encodeURIComponent(term)}&term=${encodeURIComponent(onboardingState.term)}`,
-            { method: 'GET', headers: { 'Content-Type': 'application/json' } });
-        courseSuggestions.innerHTML = '';
-        const results = data.results || (data.course_code ? [data] : []);
-        if (data.course_title) {
-            results.unshift(data);
-        }
-        if (!results.length) {
-            courseSuggestions.classList.add('hidden');
+        const params = new URLSearchParams({
+            term: onboardingState.term,
+            include_cancelled: '0',
+            q: term,
+            limit: '500',
+        });
+        const data = await fetchJson(`${onboardingData.endpoints.courseSections}?${params.toString()}`, { method: 'GET' });
+        if (requestId !== courseSearchRequestId) {
             return;
         }
-        const maxSuggestions = 8;
-        let renderedCount = 0;
-        for (const result of results.slice(0, 6)) {
-            if (renderedCount >= maxSuggestions) {
-                break;
-            }
-            const label = result.course_code || `${result.subject} ${result.catalog}`;
-            const details = result;
-            const courseTitle = details.course_title || details.course_name || result.course_title || result.title || 'Course title not available';
-            const sections = Array.isArray(details.sections) ? details.sections : [];
-            const sectionItems = sections.length ? sections.slice(0, 2) : [null];
-            sectionItems.forEach((section) => {
-                if (renderedCount >= maxSuggestions) {
-                    return;
-                }
-                const sectionNumberValue = section?.section_number || '';
-                const instructorValue = section?.instructor || 'Instructor TBA';
-                const timeValue = section?.schedule_display || section?.schedule?.display || 'Time TBA';
-                const subtitleParts = [
-                    sectionNumberValue ? `Section ${sectionNumberValue}` : '',
-                    instructorValue,
-                    timeValue,
-                ].filter(Boolean);
-                const subtitle = subtitleParts.join(' • ');
-                const item = document.createElement('button');
-                item.type = 'button';
-                item.className = COURSE_SUGGESTION_CLASSES;
-                item.innerHTML = `
-                    <div class="font-medium">${label}</div>
-                    <div class="text-xs text-on-surface-variant mt-1">${courseTitle}</div>
-                    <div class="text-xs text-on-surface-variant mt-1">${subtitle}</div>
-                `;
-                item.addEventListener('click', () => {
-                    courseCode.value = label;
-                    courseName.value = courseTitle;
-                    sectionNumber.value = sectionNumberValue;
-                    instructorName.value = section?.instructor || '';
-                    markDirty();
-                    courseSuggestions.classList.add('hidden');
-                    updateAddCourseButtonState();
-                });
-                courseSuggestions.appendChild(item);
-                renderedCount += 1;
+        courseSuggestions.innerHTML = '';
+        const sections = Array.isArray(data.sections) ? data.sections : [];
+        if (!sections.length) {
+            const empty = document.createElement('div');
+            empty.className = 'px-4 py-3 text-sm text-on-surface-variant';
+            empty.textContent = 'No matching course sections. Try a course code, title, instructor, or CRN.';
+            courseSuggestions.appendChild(empty);
+            courseSuggestions.classList.remove('hidden');
+            return;
+        }
+        for (const section of sections) {
+            const label = section.course_code || [section.subject, section.catalog_number || section.catalog].filter(Boolean).join(' ');
+            const courseTitle = section.course_title || section.course_name || 'Course title not available';
+            const sectionNumberValue = section.section_number || '';
+            const instructorValue = section.instructor || section.instructor_name || 'Instructor TBA';
+            const timeValue = section.schedule_display || section.schedule?.display || 'Time TBA';
+            const subtitle = [
+                sectionNumberValue ? `Section ${sectionNumberValue}` : '',
+                section.crn ? `CRN ${section.crn}` : '',
+                instructorValue,
+                timeValue,
+            ].filter(Boolean).join(' • ');
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = COURSE_SUGGESTION_CLASSES;
+            const title = document.createElement('div');
+            title.className = 'font-medium';
+            title.textContent = label;
+            const name = document.createElement('div');
+            name.className = 'text-xs text-on-surface-variant mt-1';
+            name.textContent = courseTitle;
+            const detail = document.createElement('div');
+            detail.className = 'text-xs text-on-surface-variant mt-1';
+            detail.textContent = subtitle;
+            item.append(title, name, detail);
+            item.addEventListener('click', () => {
+                selectedCourseSection = section;
+                courseCode.value = label;
+                courseName.value = courseTitle;
+                sectionNumber.value = sectionNumberValue;
+                instructorName.value = section.instructor || section.instructor_name || '';
+                markDirty();
+                courseSuggestions.classList.add('hidden');
+                updateAddCourseButtonState();
             });
+            courseSuggestions.appendChild(item);
         }
         courseSuggestions.classList.remove('hidden');
     } catch (error) {
+        if (requestId !== courseSearchRequestId) {
+            return;
+        }
         courseSuggestions.classList.add('hidden');
     }
 }
@@ -909,6 +942,9 @@ document.querySelectorAll('.btn-next').forEach((button) => {
                 };
                 const saved = await saveStep(2, payload);
                 const nextStep = Number(saved.next_step || (shouldShowCoursesStep() ? 3 : 4));
+                if (nextStep === 3) {
+                    await loadSavedCourses();
+                }
                 setStep(nextStep);
                 return;
             }
@@ -1020,6 +1056,9 @@ form.addEventListener('input', (event) => {
         return;
     }
     if (event.target === courseSearch) {
+        if (selectedCourseSection) {
+            clearCourseSelection();
+        }
         if (courseSearchTimeout) {
             window.clearTimeout(courseSearchTimeout);
         }
@@ -1174,6 +1213,9 @@ function initializeOnboarding() {
     renderCourseList();
     updateAddCourseButtonState();
     loadTerms();
+    if (shouldShowCoursesStep()) {
+        void loadSavedCourses();
+    }
     setStep(onboardingState.step);
     onboardingInitialized = true;
     clearDirty();

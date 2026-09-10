@@ -414,8 +414,9 @@
                 "terms": {{ url_for("atlas.list_terms") | tojson }},
                 "onboarding": {{ url_for("settings.onboarding") | tojson }},
                 "interfacePreferences": {{ url_for("settings.update_interface_preferences") | tojson }},
-                "removeCourseTemplate": {{ url_for('settings.remove_course', course_id=0) | tojson }},
-                "courseSearch": {{ url_for('atlas.search') | tojson }},
+                "courseSections": {{ url_for('atlas.list_sections') | tojson }},
+                "savedCourses": {{ url_for('courses.add_saved_course') | tojson }},
+                "removeSavedCourseTemplate": {{ url_for('courses.remove_saved_course', course_id=0) | tojson }},
                 "feedUrl": {{ url_for("settings.update_feed_url") | tojson }},
                 "dashboard": {{ url_for("dashboard.dashboard") | tojson }}
             }

@@ -1224,6 +1224,9 @@ test("onboarding presents five accessible stages without changing its saved step
     assert.match(template, /Step \{\{ step if step else 1 \}\} of 5/);
     assert.match(template, /role="alert" aria-live="assertive" tabindex="-1"/);
     assert.match(template, /js\/onboarding\/index\.js/);
+    assert.match(template, /"courseSections": \{\{ url_for\('atlas\.list_sections'\) \| tojson \}\}/);
+    assert.match(template, /"savedCourses": \{\{ url_for\('courses\.add_saved_course'\) \| tojson \}\}/);
+    assert.match(template, /"removeSavedCourseTemplate": \{\{ url_for\('courses\.remove_saved_course', course_id=0\) \| tojson \}\}/);
     assert.match(template, /button type="submit" form="onboarding-logout-form"/);
     assert.match(template, /<form id="onboarding-logout-form" method="post" action="\{\{ url_for\('auth\.logout'\) \}\}" hidden>/);
     assert.ok(template.indexOf('id="onboarding-logout-form"') > template.indexOf('</form>'));
@@ -1237,6 +1240,15 @@ test("onboarding presents five accessible stages without changing its saved step
     assert.match(onboardingSource, /saveStep\(2,/);
     assert.match(onboardingSource, /saveStep\(3,/);
     assert.match(onboardingSource, /saveStep\(4\)/);
+    assert.match(onboardingSource, /include_cancelled: '0'/);
+    assert.match(onboardingSource, /q: term/);
+    assert.match(onboardingSource, /limit: '500'/);
+    assert.match(onboardingSource, /onboardingData\.endpoints\.courseSections/);
+    assert.match(onboardingSource, /onboardingData\.endpoints\.savedCourses/);
+    assert.match(onboardingSource, /JSON\.stringify\(\{ section_id: sectionId \}\)/);
+    assert.doesNotMatch(onboardingSource, /results\.slice\(0, 6\)/);
+    assert.doesNotMatch(onboardingSource, /sections\.slice\(0, 2\)/);
+    assert.doesNotMatch(onboardingSource, /maxSuggestions/);
     assert.match(styles, /grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
     assert.match(styles, /@media \(max-width: 680px\)/);
     assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
