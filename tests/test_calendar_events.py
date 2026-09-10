@@ -112,6 +112,35 @@ class CalendarEventsRouteTestCase(unittest.TestCase):
         self.assertIsNone(response["refresh_error"])
         refresh_initial_feed_cache.assert_not_called()
 
+    def test_imported_event_override_allows_end_equal_to_start(self):
+        user = SimpleNamespace(id="user-1")
+        saved_override = {"id": "override-1"}
+
+        with self.app.test_request_context(
+            "/api/calendar/event-overrides",
+            method="POST",
+            json={
+                "event_ref": "feed:calendar-1:event-1",
+                "title": "Office hours",
+                "start_date": "2026-09-08T14:00:00",
+                "end_date": "2026-09-08T14:00:00",
+                "all_day": False,
+            },
+        ):
+            with patch.object(calendar_api, "current_user", user), patch.object(
+                calendar_api,
+                "_ensure_local_calendar_source",
+            ), patch.object(
+                calendar_api,
+                "_upsert_event_override",
+                return_value=saved_override,
+            ) as upsert_override:
+                response = calendar_api.upsert_event_override.__wrapped__()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"success": True, "override": saved_override})
+        upsert_override.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()

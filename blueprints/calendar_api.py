@@ -893,8 +893,8 @@ def upsert_event_override():
     end_dt = _parse_iso_like(end_raw)
     if not start_dt or not end_dt:
         return jsonify({"error": "start_date and end_date must be valid ISO datetimes"}), 400
-    if end_dt <= start_dt:
-        return jsonify({"error": "end_date must be after start_date"}), 400
+    if end_dt < start_dt:
+        return jsonify({"error": "end_date must be on or after start_date"}), 400
 
     try:
         color = _normalize_color(data.get("color"))
