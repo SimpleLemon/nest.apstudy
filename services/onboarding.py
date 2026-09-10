@@ -407,4 +407,10 @@ def save_onboarding_step_five(user, user_id, dependencies):
         },
         color="green",
     )
-    return jsonify({"status": "ok", "redirect_url": url_for("dashboard.dashboard")})
+    redirect_url = url_for("dashboard.dashboard")
+    login_session = dependencies.get("session")
+    if login_session is not None:
+        destination = login_session.pop(dependencies["login_next_session_key"], None)
+        if dependencies["is_safe_login_next_url"](destination):
+            redirect_url = destination
+    return jsonify({"status": "ok", "redirect_url": redirect_url})

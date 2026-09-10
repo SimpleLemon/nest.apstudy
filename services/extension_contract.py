@@ -5,10 +5,17 @@ from urllib.parse import urlsplit
 
 
 EXTENSION_CONTRACT_VERSION = 1
+EXTENSION_READ_CONSENT_VERSION = 1
+EXTENSION_WRITE_CONSENT_VERSION = 2
+SUPPORTED_CONSENT_VERSIONS = frozenset({
+    EXTENSION_READ_CONSENT_VERSION,
+    EXTENSION_WRITE_CONSENT_VERSION,
+})
 EXTENSION_CALENDAR_CAPABILITY = "calendar_integration"
 EXTENSION_SOURCE_REF_PREFIX = "src1:"
 EXTENSION_CALENDAR_ROLLOUT_ENV = "APSTUDY_EXTENSION_CALENDAR_ROLLOUT"
 EXTENSION_CALENDAR_READ_ONLY_ROLLOUT = "readonly-v1"
+EXTENSION_CALENDAR_WRITE_ROLLOUT = "writes-v2"
 # This is deliberately an exact-value mode, not a generic boolean parser.
 # The operator must opt into the complete read-only cohort as one reviewed
 # configuration value.  No environment value enables source mutation,
@@ -46,6 +53,9 @@ CONSENT_SCOPES = (
     "two_way_writeback",
     "mirroring",
     "shares_ics_inclusion",
+    "personal_events_write",
+    "planner_items_write",
+    "selected_item_mirroring",
 )
 CONSENT_SCOPE_SET = frozenset(CONSENT_SCOPES)
 
@@ -57,6 +67,11 @@ CURRENT_CONSENT_SCOPES = frozenset({
     "full_history_upload",
     "ongoing_read",
     "shares_ics_inclusion",
+})
+CURRENT_WRITE_CONSENT_SCOPES = frozenset({
+    "personal_events_write",
+    "planner_items_write",
+    "selected_item_mirroring",
 })
 
 
@@ -82,21 +97,24 @@ def extension_capabilities_for_rollout(value):
     separately authorized future work.
     """
     capabilities = dict(EXTENSION_CAPABILITIES)
-    if extension_read_only_rollout_enabled(value):
+    if extension_read_only_rollout_enabled(value) or value == EXTENSION_CALENDAR_WRITE_ROLLOUT:
         for capability in READ_ONLY_ROLLOUT_CAPABILITIES:
             capabilities[capability] = True
     for capability in DESTRUCTIVE_EXTENSION_CAPABILITIES:
         capabilities[capability] = False
+    if value == EXTENSION_CALENDAR_WRITE_ROLLOUT:
+        capabilities["calendar_mirroring"] = True
+        capabilities["calendar_two_way_writeback"] = True
     return capabilities
 
 
 def validate_version(value, *, default=None):
     if value is None and default is not None:
         value = default
-    if isinstance(value, bool) or not isinstance(value, int) or value != EXTENSION_CONTRACT_VERSION:
+    if isinstance(value, bool) or not isinstance(value, int) or value not in SUPPORTED_CONSENT_VERSIONS:
         raise ExtensionContractError(
             "unsupported_version",
-            f"Only consent contract version {EXTENSION_CONTRACT_VERSION} is supported.",
+            "Only consent contract versions 1 and 2 are supported.",
         )
     return value
 
@@ -137,13 +155,20 @@ def validate_account_key(value):
     return account_key
 
 
-def validate_grant_scopes(value):
+def validate_grant_scopes(value, *, version=EXTENSION_READ_CONSENT_VERSION):
     scopes = validate_scopes(value)
-    if set(scopes) != CURRENT_CONSENT_SCOPES:
+    if version == EXTENSION_READ_CONSENT_VERSION and set(scopes) != CURRENT_CONSENT_SCOPES:
         raise ExtensionContractError(
             "exact_scope_set_required",
             "A v1 grant must include exactly full_history_upload, ongoing_read, and shares_ics_inclusion.",
         )
+    if version == EXTENSION_WRITE_CONSENT_VERSION:
+        requested = set(scopes)
+        if not requested or not requested <= CURRENT_WRITE_CONSENT_SCOPES:
+            raise ExtensionContractError(
+                "write_scope_set_required",
+                "A v2 grant may only include personal_events_write, planner_items_write, and selected_item_mirroring.",
+            )
     return scopes
 
 

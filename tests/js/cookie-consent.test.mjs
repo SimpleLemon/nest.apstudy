@@ -242,7 +242,7 @@ test("full templates declare authenticated, public-choice, hybrid, or off analyt
         "file_share_folder.html",
         "notes_shared_folder.html",
     ];
-    const offTemplates = ["404.html", "login.html"];
+    const offTemplates = ["404.html", "login.html", "extension_connect.html"];
     const hybridTemplates = ["notes_editor.html"];
     const templateDirectory = path.join(repoRoot, "templates");
     const { readdir } = await import("node:fs/promises");

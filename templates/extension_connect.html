@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Canvas Connected - APStudy Nest</title>{% endblock %}
+
+{% block shared_styles_before_tailwind %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}">
+
+{% endblock %}
+
+{% block feature_styles %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock %}
+
+{% block description %}
+    <meta name="description" content="Complete the APStudy Nest connection for Canvas." />
+{% endblock %}
+
+{% block body_attrs %} data-analytics-mode="off" class="settings-body bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased"{% endblock %}
+
+{% block body_content %}
+    <main class="extension-connect-shell" aria-labelledby="extension-connect-title">
+        <section class="settings-card extension-connect-card">
+            <div class="settings-card-body settings-card-body-single">
+                <div class="settings-card-summary">
+                    {% if state == "invalid_return" %}
+                        <h1 id="extension-connect-title">Return link blocked</h1>
+                        <p>Nest only returns to the approved Emory Canvas calendar origin.</p>
+                    {% else %}
+                        <h1 id="extension-connect-title">You’re signed in to Nest</h1>
+                        <p>Signed in as {{ user.name or "your Nest account" }}. Return to Canvas to finish connecting.</p>
+                    {% endif %}
+                </div>
+                <div class="settings-card-content extension-connect-actions">
+                    <a class="settings-button settings-button-primary" href="{{ return_to }}" rel="noopener noreferrer">
+                        <span>Return to Canvas</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+                    </a>
+                    <a class="settings-button settings-button-secondary" href="{{ url_for('settings.settings_page') }}#data">Open settings</a>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

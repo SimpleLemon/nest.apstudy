@@ -61,7 +61,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
         return client
 
     def csrf(self, client):
-        return client.get("/api/extension/csrf").get_json()["csrfToken"]
+        return client.get("/api/extension/csrf").headers["X-CSRFToken"]
 
     def grant(self, client, scopes=None, *, account_key=ACCOUNT_1, capabilities=()):
         self.enable_capabilities(*capabilities)
@@ -87,7 +87,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
                 "account_key": account_key,
                 "source_id": source_id,
                 "origin": "https://canvas.example.edu",
-                "provider_user_id": "canvas-user-1",
+                "provider_user_id": "1",
                 "label": "Canvas",
                 "consent_version": 1,
             },
@@ -168,7 +168,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
             "/api/extension/calendar/sources",
             json={
                 "account_key": ACCOUNT_1, "source_id": "source-1",
-                "origin": "https://canvas.example.edu", "provider_user_id": "canvas-user-1",
+                "origin": "https://canvas.example.edu", "provider_user_id": "1",
                 "label": "Canvas", "consent_version": 1, "token": "never",
             },
             headers={"X-CSRFToken": token},
@@ -553,7 +553,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
 
         revoke = client.put(
             "/api/extension/consent",
-            json={"version": 1, "source_key": canonical_canvas_source_key(ACCOUNT_1), "account_key": ACCOUNT_1, "action": "revoke", "scopes": ["full_history_upload", "ongoing_read", "mirroring", "two_way_writeback"]},
+            json={"version": 1, "source_key": canonical_canvas_source_key(ACCOUNT_1), "account_key": ACCOUNT_1, "action": "revoke", "scopes": ["full_history_upload", "ongoing_read", "shares_ics_inclusion"]},
             headers={"X-CSRFToken": token},
         )
         self.assertEqual(revoke.status_code, 200)
@@ -589,7 +589,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
             json=link_body,
             headers={"X-CSRFToken": token},
         )
-        self.assertEqual(missing_mirroring_scope.get_json()["error"]["code"], "scope_required")
+        self.assertEqual(missing_mirroring_scope.get_json()["error"]["code"], "consent_required")
         consent = client.put(
             "/api/extension/consent",
             json={
@@ -609,7 +609,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
                 json=link_body,
                 headers={"X-CSRFToken": token},
             ).get_json()["error"]["code"],
-            "scope_required",
+            "consent_required",
         )
 
         writeback_body = {
@@ -634,7 +634,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
             json=writeback_body,
             headers={"X-CSRFToken": token},
         )
-        self.assertEqual(missing_writeback_scope.get_json()["error"]["code"], "scope_required")
+        self.assertEqual(missing_writeback_scope.get_json()["error"]["code"], "consent_required")
         consent = client.put(
             "/api/extension/consent",
             json={
@@ -654,9 +654,158 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
                 json=writeback_body,
                 headers={"X-CSRFToken": token},
             ).get_json()["error"]["code"],
-            "scope_required",
+            "consent_required",
         )
 
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ExtensionConnectionSettingsTests(unittest.TestCase):
+    setUp = ExtensionCalendarRouteTests.setUp
+    enable_capabilities = ExtensionCalendarRouteTests.enable_capabilities
+    client = ExtensionCalendarRouteTests.client
+    csrf = ExtensionCalendarRouteTests.csrf
+    grant = ExtensionCalendarRouteTests.grant
+    register_source = ExtensionCalendarRouteTests.register_source
+    def test_extension_preferences_accept_batches_and_preserve_single_updates(self):
+        from blueprints import extension_calendar_api as bridge
+        from flask import Flask
+        app = Flask(__name__)
+        for body, handler in [({"preferences": []}, bridge.calendar.update_calendar_preferences_batch),
+                              ({"calendar_name": "Personal"}, bridge.calendar.update_calendar_preferences)]:
+            with app.test_request_context("/preferences", method="POST", json=body):
+                with patch.object(bridge, "_call", return_value="handled") as call:
+                    self.assertEqual(bridge.preferences(), "handled")
+                    call.assert_called_once_with(handler)
+
+    def test_auxiliary_calendar_reads_are_extension_scoped_and_bounded(self):
+        self.enable_capabilities("calendar_read", "calendar_shares_ics")
+        owner = self.client("user-1")
+        self.grant(owner, capabilities=("calendar_read", "calendar_shares_ics"))
+        headers = {"X-Canvas-Account-Key": ACCOUNT_1}
+        section = {"id": "sec-1", "term": "Fall_2026", "course_code": "ARAB 101",
+                   "course_title": "العربية 中文 🧭", "instructor": "Professor",
+                   "date_range": {"start": "2026-08-20", "end": "2026-12-10"},
+                   "meetings": [{"day": "Mon", "start": "0900", "end": "0950", "location": "Hall"}],
+                   "private_ics_url": "https://example.test/private.ics"}
+        with patch("blueprints.extension_calendar_api.get_sections_index", return_value={"sections": [section], "total": 2}), \
+             patch("blueprints.extension_calendar_api.get_terms", return_value={"terms": ["Fall_2026"]}):
+            response = owner.get("/api/extension/calendar/courses?q=%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9&limit=50&offset=0", headers=headers)
+        self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
+        payload = response.get_json()
+        self.assertTrue(payload["has_more"])
+        self.assertEqual(payload["sections"][0]["course_title"], "العربية 中文 🧭")
+        self.assertNotIn("private_ics_url", payload["sections"][0])
+        self.assertNotEqual(owner.get("/api/extension/calendar/courses?limit=50").status_code, 200)
+        self.assertNotEqual(owner.get("/api/extension/calendar/courses?limit=101", headers=headers).status_code, 200)
+        self.assertNotEqual(owner.get("/api/extension/calendar/courses?q=" + "x" * 121, headers=headers).status_code, 200)
+
+        with patch("blueprints.extension_calendar_api.get_sections_by_ids", return_value={"sections": [section]}):
+            response = owner.get("/api/extension/calendar/course-sections?ids=sec-1", headers=headers)
+        self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
+        self.assertEqual(response.get_json()["sections"][0]["id"], "sec-1")
+        response = owner.get("/api/extension/calendar/course-sections?ids=" + ",".join(f"s-{i}" for i in range(101)), headers=headers)
+        self.assertNotEqual(response.status_code, 200)
+
+        with patch("blueprints.extension_calendar_api.course_routes.list_saved_courses",
+                   return_value=({"error": "Courses are only available to Emory students."}, 403)):
+            response = owner.get("/api/extension/calendar/saved-courses", headers=headers)
+        self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
+        self.assertEqual(response.get_json()["courses"], [])
+        self.assertFalse(response.get_json()["supported"])
+
+    def test_auxiliary_share_route_requires_share_capability_and_strips_ics_material(self):
+        owner = self.client("user-1")
+        self.enable_capabilities("calendar_read")
+        response = owner.get("/api/extension/calendar/shares", headers={"X-Canvas-Account-Key": ACCOUNT_1})
+        self.assertNotEqual(response.status_code, 200)
+        self.enable_capabilities("calendar_read", "calendar_shares_ics")
+        self.grant(owner, capabilities=("calendar_read", "calendar_shares_ics"))
+        safe = {"id": "share-1", "shareCode": "public-code", "shareUrl": "https://nest.apstudy.org/calendar/shared/public-code", "icsConfigured": True}
+        with patch("blueprints.extension_calendar_api.calendar.list_calendar_shares", return_value={"shares": [safe]}):
+            response = owner.get("/api/extension/calendar/shares", headers={"X-Canvas-Account-Key": ACCOUNT_1})
+        self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
+        self.assertEqual(response.get_json()["shares"], [safe])
+
+    def test_auxiliary_course_payload_is_bounded_by_serialized_utf8_size(self):
+        from blueprints.extension_calendar_api import EXTENSION_AUX_ITEMS_MAX_BYTES, _bounded_items
+        rows = [{"id": f"section-{index}", "course_title": "中文🧭" * 4000} for index in range(100)]
+        bounded = _bounded_items(rows)
+        self.assertLess(len(bounded), len(rows))
+        self.assertLessEqual(len(json.dumps(bounded, ensure_ascii=False, separators=(",", ":")).encode("utf-8")),
+                             EXTENSION_AUX_ITEMS_MAX_BYTES)
+
+    def test_connection_settings_are_owned_and_hide_private_bindings(self):
+        self.enable_capabilities("calendar_read", "calendar_upload", "calendar_shares_ics")
+        owner = self.client("user-1")
+        self.grant(owner, capabilities=("calendar_read", "calendar_upload", "calendar_shares_ics"))
+        self.register_source(owner)
+        response = owner.get("/api/extension/connection")
+        self.assertEqual(response.status_code, 200)
+        source = response.get_json()["sources"][0]
+        self.assertTrue(source["access"]["1"]["granted"])
+        self.assertFalse(source["access"]["2"]["granted"])
+        for key in ("account_key", "origin", "provider_user_id", "user_id"):
+            self.assertNotIn(key, source)
+        self.assertEqual(self.client("user-2").get("/api/extension/connection").get_json()["sources"], [])
+        self.assertEqual(self.client().get("/api/extension/connection").status_code, 401)
+        other = self.client("user-2")
+        response = other.put(f"/api/extension/connection/{source['source_ref']}/consent",
+                             json={"version": 1, "action": "revoke", "scopes": []},
+                             headers={"X-CSRFToken": self.csrf(other)})
+        self.assertEqual(response.status_code, 404)
+
+    def test_settings_revocation_is_server_backed(self):
+        self.enable_capabilities("calendar_read", "calendar_upload", "calendar_shares_ics")
+        owner = self.client("user-1")
+        self.grant(owner, capabilities=("calendar_read", "calendar_upload", "calendar_shares_ics"))
+        self.register_source(owner)
+        source = owner.get("/api/extension/connection").get_json()["sources"][0]
+        response = owner.put(f"/api/extension/connection/{source['source_ref']}/consent",
+                             json={"version": 1, "action": "revoke", "scopes": []},
+                             headers={"X-CSRFToken": self.csrf(owner)})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(owner.get("/api/extension/connection").get_json()["sources"][0]["access"]["1"]["granted"])
+
+
+class SharedBridgeContractTests(unittest.TestCase):
+    def test_conflict_fixture_uses_distinct_decision_and_canvas_revisions(self):
+        from pathlib import Path
+        fixture = json.loads((Path(__file__).parent / "fixtures/bridge-writeback-v2.json").read_text())
+        self.assertEqual(fixture["contractVersion"], 1)
+        view = fixture["conflict"]
+        self.assertNotEqual(view["expected_revision"], view["canvas_revision"])
+        self.assertIsInstance(view["canvasSnapshot"]["is_all_day"], bool)
+        intent = fixture["writebacks"][0]
+        self.assertEqual(intent["payload"]["event_ref"], intent["event_ref"])
+        self.assertEqual(intent["payload"]["operation"], intent["operation"])
+        self.assertIn("start_at", intent["payload"]["payload"])
+
+
+class ExtensionMirrorRefreshRouteTests(ExtensionConnectionSettingsTests):
+    def test_refresh_requires_auth_csrf_capabilities_consent_and_owned_source(self):
+        path='/api/extension/calendar/sources/source-1/mirrors/refresh'
+        self.assertIn(self.client().post(path,json={}).status_code, (400,401))
+        client=self.client('user-1')
+        caps=('calendar_read','calendar_upload','calendar_two_way_writeback','calendar_mirroring')
+        self.grant(client,capabilities=caps)
+        self.register_source(client)
+        self.assertEqual(client.post(path,json={}).status_code,400)
+        token=self.csrf(client)
+        response=client.post(path,json={},headers={'X-CSRFToken':token})
+        self.assertEqual(response.get_json()['error']['code'],'consent_required')
+        response=client.put('/api/extension/consent',json={'version':2,'account_key':ACCOUNT_1,
+            'source_key':canonical_canvas_source_key(ACCOUNT_1),'action':'grant',
+            'scopes':['personal_events_write','selected_item_mirroring']},headers={'X-CSRFToken':token})
+        self.assertEqual(response.status_code,200,response.get_data(as_text=True))
+        response=client.post(path,json={},headers={'X-CSRFToken':token})
+        self.assertEqual(response.status_code,200,response.get_data(as_text=True))
+        self.assertEqual(response.get_json()['eventLinks'],[])
+        foreign=self.client('user-2')
+        response=foreign.post(path,json={},headers={'X-CSRFToken':self.csrf(foreign)})
+        self.assertNotEqual(response.status_code,200)
+        self.enable_capabilities('calendar_read','calendar_upload')
+        response=client.post(path,json={},headers={'X-CSRFToken':token})
+        self.assertEqual(response.get_json()['error']['code'],'capability_disabled')

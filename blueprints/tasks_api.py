@@ -242,7 +242,7 @@ def _task_to_payload(task, completions=None):
 
 def _list_to_payload(row):
     list_id = _row_id(row)
-    return {
+    payload = {
         "$id": list_id,
         "id": list_id,
         "name": row.get("name") or "Untitled List",
@@ -254,6 +254,9 @@ def _list_to_payload(row):
         "created_at": row.get("created_at"),
         "updated_at": row.get("updated_at"),
     }
+    if row.get("source_key"):
+        payload["source_key"] = row["source_key"]
+    return payload
 
 
 def _load_user_task_payload(user_id):
@@ -479,7 +482,24 @@ def update_task_list(list_id):
 @tasks_api_bp.route("/api/task-lists/<list_id>", methods=["DELETE"])
 @login_required
 def delete_task_list(list_id):
-    _list_owner_or_404(list_id)
+    list_row = _list_owner_or_404(list_id)
+    payload = request.get_json(silent=True) or {}
+    if list_row.get("source_key") and payload.get("confirm") is not True:
+        task_count = len(list_rows_all(
+            TASKS_TABLE_ID,
+            [
+                Query.equal("user_id", [str(current_user.id)]),
+                Query.equal("list_id", [list_id]),
+            ],
+        ))
+        return jsonify({
+            "error": "This list is managed by an integration. Resend the request with confirm: true to delete it.",
+            "code": "integration_list_confirmation_required",
+            "warning": {
+                "list_name": list_row.get("name") or "Untitled List",
+                "task_count": task_count,
+            },
+        }), 409
     try:
         tasks = list_rows_all(
             TASKS_TABLE_ID,

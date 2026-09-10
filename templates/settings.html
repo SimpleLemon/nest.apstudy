@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {# base.html owns viewport-fit=cover, js/core/theme-init.js, _diagnostics_assets.html, and css/global.css before js/core/global.js. #}
 
-{% set settings_assets_version = 'settings-tier-invites-20260728-1' %}
+{% set settings_assets_version = 'settings-extension-20260909-2' %}
 
 {% block html_attrs %}lang="en"{% endblock %}
 
@@ -49,6 +49,7 @@
     <script src="{{ url_for('static', filename='js/settings/utils.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/combobox.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/calendar.js', v=settings_assets_version) }}" defer></script>
+    <script src="{{ url_for('static', filename='js/settings/extension.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/profile.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/preferences.js', v=settings_assets_version) }}" defer></script>
     <script src="{{ url_for('static', filename='js/settings/account.js', v=settings_assets_version) }}" defer></script>
@@ -341,6 +342,19 @@
                     </article>
                 </section>
                 <section id="data" class="settings-section scroll-mt-28 md:scroll-mt-32" data-section="data">
+                    <article class="settings-card" id="extension-connection">
+                        <div class="settings-card-body">
+                            <div class="settings-card-summary">
+                                <h3>Canvas extension</h3>
+                                <p>Manage accounts connected through APStudyCanvas. Calendar feed links are managed separately below.</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <p id="extension-connection-status" class="settings-help-text" role="status" aria-live="polite">Checking connected accounts…</p>
+                                <div id="extension-connection-accounts"></div>
+                                <button id="extension-connection-refresh" type="button" class="settings-button settings-button-secondary">Refresh connection</button>
+                            </div>
+                        </div>
+                    </article>
                     <article class="settings-card">
                         <div class="settings-card-body">
                             <div class="settings-card-summary">

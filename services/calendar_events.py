@@ -55,6 +55,8 @@ from services.task_calendar import (
 from services.time_utils import utcnow_iso
 from services.extension_contract import (
     CANVAS_LEGACY_SOURCE_KEY,
+    EXTENSION_READ_CONSENT_VERSION,
+    EXTENSION_WRITE_CONSENT_VERSION,
     EXTENSION_SOURCE_REF_PREFIX,
     ExtensionContractError,
     canonical_canvas_source_key,
@@ -90,8 +92,15 @@ CANVAS_READ_SCOPES = frozenset({"full_history_upload", "ongoing_read"})
 CANVAS_PROJECTION_SCOPES = frozenset({
     "full_history_upload", "ongoing_read", "shares_ics_inclusion",
 })
-CANVAS_WRITEBACK_SCOPE = "two_way_writeback"
-CANVAS_MIRROR_SCOPE = "mirroring"
+CANVAS_PERSONAL_EVENTS_WRITE_SCOPE = "personal_events_write"
+CANVAS_PLANNER_ITEMS_WRITE_SCOPE = "planner_items_write"
+CANVAS_SELECTED_MIRROR_SCOPE = "selected_item_mirroring"
+CANVAS_WRITEBACK_SCOPES = frozenset({
+    CANVAS_PERSONAL_EVENTS_WRITE_SCOPE,
+    CANVAS_PLANNER_ITEMS_WRITE_SCOPE,
+})
+CANVAS_WRITEBACK_SCOPE = CANVAS_PERSONAL_EVENTS_WRITE_SCOPE
+CANVAS_MIRROR_SCOPE = CANVAS_SELECTED_MIRROR_SCOPE
 CANVAS_SHARES_SCOPE = "shares_ics_inclusion"
 CANVAS_BATCH_ITEM_LIMIT = 100
 CANVAS_BATCH_BYTES_LIMIT = 512 * 1024
@@ -336,31 +345,49 @@ def _canvas_consent_from_connection(connection, user_id, account_key, required_s
     if version is not None:
         validate_version(version)
     canonical_key = canonical_canvas_source_key(account_key)
-    row = connection.execute(
+    params = [user_id, canonical_key, account_key]
+    version_clause = ""
+    if version is not None:
+        version_clause = " AND version = ?"
+        params.append(int(version))
+    rows = connection.execute(
         "SELECT * FROM calendar_integration_consents "
-        "WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-        [user_id, canonical_key, account_key],
-    ).fetchone()
+        f"WHERE nest_user_id = ? AND source_key = ? AND account_key = ?{version_clause} "
+        "ORDER BY version ASC",
+        params,
+    ).fetchall()
     # One-release compatibility for rows created by the old global-looking
     # source key.  The account predicate remains mandatory, and a canonical
     # row (including a revoked one) always wins so revocation cannot be
     # bypassed through the legacy fallback.
-    if row is None:
-        row = connection.execute(
+    if not rows:
+        legacy_params = [user_id, CANVAS_LEGACY_SOURCE_KEY, account_key]
+        if version is not None:
+            legacy_params.append(int(version))
+        rows = connection.execute(
             "SELECT * FROM calendar_integration_consents "
-            "WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-            [user_id, CANVAS_LEGACY_SOURCE_KEY, account_key],
-        ).fetchone()
+            f"WHERE nest_user_id = ? AND source_key = ? AND account_key = ?{version_clause} "
+            "ORDER BY version ASC",
+            legacy_params,
+        ).fetchall()
+    row = None
+    for candidate in rows:
+        if candidate["state"] != "active":
+            continue
+        try:
+            candidate_scopes = json.loads(candidate["scopes_json"] or "{}")
+        except (TypeError, json.JSONDecodeError) as exc:
+            raise ExtensionContractError("consent_unavailable", "Stored Canvas consent is invalid.") from exc
+        if not isinstance(candidate_scopes, dict):
+            raise ExtensionContractError("consent_unavailable", "Stored Canvas consent is invalid.")
+        if all(bool(candidate_scopes.get(scope)) for scope in required_scopes):
+            row = candidate
+            scopes = candidate_scopes
+            break
     if not row or row["state"] != "active":
         raise ExtensionContractError("consent_required", "Active Canvas consent is required.")
     if version is not None and int(row["version"]) != int(version):
         raise ExtensionContractError("consent_version_mismatch", "Consent version is no longer current.")
-    try:
-        scopes = json.loads(row["scopes_json"] or "{}")
-    except (TypeError, json.JSONDecodeError) as exc:
-        raise ExtensionContractError("consent_unavailable", "Stored Canvas consent is invalid.") from exc
-    if not isinstance(scopes, dict):
-        raise ExtensionContractError("consent_unavailable", "Stored Canvas consent is invalid.")
     missing = [scope for scope in required_scopes if not bool(scopes.get(scope))]
     if missing:
         raise ExtensionContractError(
@@ -439,6 +466,9 @@ def register_canvas_import_source(user_id, payload):
                 "source_id_conflict",
                 "This source_id belongs to another Canvas account.",
             )
+
+        if by_account and (by_account["origin"] != origin or by_account["provider_user_id"] != provider_user_id):
+            raise ExtensionContractError("source_account_mismatch", "An existing Canvas account cannot change its provider identity.")
 
         if by_account:
             connection.execute(
@@ -930,6 +960,8 @@ def create_canvas_event_link(user_id, source_id, payload=None, *, account_key=No
     if mirror_state not in CANVAS_MIRROR_STATES:
         raise ExtensionContractError("invalid_mirror_state", "mirror_state is not an approved Canvas mirror state.")
     identity = _canvas_event_link_identity(values)
+    from services.extension_write_validation import validate_personal_identity
+    validate_personal_identity(event_ref, identity)
     if not event_ref and not identity["canvas_item_id"]:
         raise ExtensionContractError("invalid_event_link", "event_ref or a Canvas item identity is required.")
     now = _canvas_now()
@@ -938,6 +970,14 @@ def create_canvas_event_link(user_id, source_id, payload=None, *, account_key=No
         connection.execute("BEGIN IMMEDIATE")
         source = _require_canvas_source(connection, user_id, source_id)
         account_key = _canvas_source_account(source, account_key)
+        source_id = source["source_id"]
+        from services.extension_bridge import personal_target
+        personal_target(connection, user_id, event_ref)
+        from services.extension_write_validation import personal_calendar
+        personal_calendar(source, identity["canvas_context_id"])
+        _canvas_source_consent(connection, source, version=2, scopes=(CANVAS_MIRROR_SCOPE,))
+        if identity["canvas_item_type"] not in {"calendar_event", "planner_note"}:
+            raise ExtensionContractError("personal_item_required", "Only personal Canvas events and planner notes can be linked.")
         existing = _canvas_event_link_lookup(connection, user_id, source_id, event_ref)
         if existing is None and identity["canvas_item_id"]:
             existing = connection.execute(
@@ -993,7 +1033,7 @@ def get_canvas_event_link(user_id, source_id, event_ref=None, *, link_id=None, i
     if link_id is not None:
         link_id = _canvas_id(link_id, field="link_id")
     with calendar_connection() as connection:
-        _require_canvas_source(connection, user_id, source_id, include_archived=True)
+        source_id = _require_canvas_source(connection, user_id, source_id, include_archived=True)["source_id"]
         row = _canvas_event_link_lookup(
             connection, user_id, source_id, event_ref, link_id=link_id, include_archived=include_archived
         )
@@ -1074,6 +1114,15 @@ def _canvas_writeback_request(payload, *, operation, event_ref, expected_revisio
     idempotency_key = _canvas_idempotency_key(idempotency_key, field="idempotency_key")
     target_account = validate_account_key(target_account)
     target_calendar = _canvas_optional_id(target_calendar, field="target_calendar")
+    from services.extension_write_validation import validate_fields, PERSONAL_CONTEXT
+    allowed = {"account_key", "operation", "event_ref", "eventRef", "expected_revision", "expectedRevision",
+               "idempotency_key", "idempotencyKey", "target_account", "targetAccount", "target_calendar",
+               "targetCalendar", "payload", "state"}
+    if set(values) - allowed:
+        raise ExtensionContractError("invalid_writeback_fields", "Writeback request contains unsupported fields.")
+    validate_fields(event_ref, operation, values.get("payload", {}))
+    if target_calendar is not None and not PERSONAL_CONTEXT.fullmatch(target_calendar):
+        raise ExtensionContractError("personal_item_required", "Choose a personal Canvas calendar.")
     _canvas_reject_credentials(values)
     payload_json = _canvas_json(values, field="payload", max_bytes=64 * 1024)
     return operation, event_ref, expected_revision, idempotency_key, target_account, target_calendar, payload_json
@@ -1102,7 +1151,16 @@ def create_canvas_writeback(user_id, source_id, payload=None, *, account_key=Non
         connection.execute("BEGIN IMMEDIATE")
         source = _require_canvas_source(connection, user_id, source_id)
         _canvas_source_account(source, account_key)
-        _canvas_source_consent(connection, source, scopes=(CANVAS_WRITEBACK_SCOPE,))
+        source_id = source["source_id"]
+        from services.extension_bridge import personal_target
+        _, scope, _ = personal_target(connection, user_id, event_ref)
+        from services.extension_write_validation import personal_calendar
+        personal_calendar(source, target_calendar)
+        _canvas_source_consent(connection, source, version=2, scopes=(scope,))
+        if target_account != account_key:
+            raise ExtensionContractError("source_account_mismatch", "Writeback target must match the source account.")
+        if operation == "create":
+            _canvas_source_consent(connection, source, version=2, scopes=(CANVAS_MIRROR_SCOPE,))
         if operation in {"update", "delete"} and expected_revision is None:
             raise ExtensionContractError("expected_revision_required", "update and delete require expected_revision.")
         if expected_revision is not None and event_ref:
@@ -1166,6 +1224,7 @@ def list_canvas_writebacks(user_id, source_id, *, account_key=None, event_ref=No
         source = _require_canvas_source(connection, user_id, source_id, include_archived=True)
         if account_key is not None:
             _canvas_source_account(source, account_key)
+        source_id = source["source_id"]
         clauses = ["user_id = ?", "source_id = ?"]
         params = [user_id, source_id]
         if account_key is not None:
@@ -1189,7 +1248,7 @@ def get_canvas_writeback_result(user_id, source_id, writeback_id, *, include_arc
     source_id = _canvas_id(source_id, field="source_id", pattern=CANVAS_RUN_ID_PATTERN)
     writeback_id = _canvas_id(writeback_id, field="writeback_id")
     with calendar_connection() as connection:
-        _require_canvas_source(connection, user_id, source_id, include_archived=True)
+        source_id = _require_canvas_source(connection, user_id, source_id, include_archived=True)["source_id"]
         row = connection.execute(
             "SELECT * FROM calendar_writebacks WHERE id = ? AND user_id = ? AND source_id = ?",
             [writeback_id, user_id, source_id],
@@ -1227,19 +1286,33 @@ def record_canvas_writeback_result(user_id, source_id, writeback_id, payload=Non
     source_id = _canvas_id(source_id, field="source_id", pattern=CANVAS_RUN_ID_PATTERN)
     with calendar_connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
-        _require_canvas_source(connection, user_id, source_id, include_archived=True)
+        source = _require_canvas_source(connection, user_id, source_id, include_archived=True)
+        source_id = source["source_id"]
         row = connection.execute(
             "SELECT * FROM calendar_writebacks WHERE id = ? AND user_id = ? AND source_id = ?",
             [writeback_id, user_id, source_id],
         ).fetchone()
         if not row:
             raise ExtensionContractError("writeback_not_found", "Canvas writeback was not found.")
+        scope = "personal_events_write" if row["event_ref"].startswith("user:") else "planner_items_write"
+        _canvas_source_consent(connection, source, version=2, scopes=(scope,))
         if expected_revision is not None and row["expected_revision"] != expected_revision:
             raise ExtensionContractError("revision_conflict", "The Canvas writeback revision is no longer current.")
         if row["state"] in {"applied", "unsupported", "forbidden", "conflict", "cancelled"}:
             if row["state"] == state and row["result_revision"] == result_revision and row["error_code"] == error_code:
                 return _canvas_writeback_payload(row, idempotent=True)
             raise ExtensionContractError("writeback_terminal", "The Canvas writeback already has a terminal result.")
+        from services.extension_bridge import personal_target
+        personal_target(connection, user_id, row["event_ref"])
+        if state == "applied":
+            from services.extension_mirrors import finish_delete
+            if not finish_delete(connection, user_id, row):
+                state, error_code = "conflict", "nest_changed_after_canvas_delete"
+                connection.execute("INSERT INTO extension_bridge_conflicts VALUES (?,?,?,?) ON CONFLICT(writeback_id) DO UPDATE SET canvas_revision=excluded.canvas_revision,snapshot_json=excluded.snapshot_json,updated_at=excluded.updated_at",
+                                   [writeback_id, "deleted", _canvas_json({"deleted": True}), _canvas_now()])
+        if state == "applied":
+            from services.extension_mirror_sync import acknowledge
+            acknowledge(connection, user_id, row, result_revision)
         now = _canvas_now()
         applied_at = now if state == "applied" else None
         cancelled_at = now if state == "cancelled" else None

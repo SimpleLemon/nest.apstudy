@@ -26,6 +26,7 @@ from blueprints.derek import derek_bp
 from blueprints.search_api import search_api_bp
 from blueprints.invites_api import invites_api_bp
 from blueprints.extension_api import extension_api_bp
+from blueprints.extension_calendar_api import extension_calendar_bp
 
 
 def register_blueprints(app):
@@ -51,3 +52,4 @@ def register_blueprints(app):
     app.register_blueprint(search_api_bp)
     app.register_blueprint(invites_api_bp)
     app.register_blueprint(extension_api_bp)
+    app.register_blueprint(extension_calendar_bp, url_prefix="/api/extension/calendar")

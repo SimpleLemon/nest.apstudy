@@ -886,6 +886,67 @@
   align-items: flex-start;
 }
 
+.extension-connect-shell {
+  width: min(100% - 2rem, 42rem);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 4rem 0;
+}
+
+.extension-connect-card {
+  width: 100%;
+}
+
+.extension-connect-card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.extension-connect-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.settings-bridge-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.settings-bridge-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-on-surface);
+}
+
+.settings-bridge-status .material-symbols-outlined {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.settings-bridge-scopes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.settings-bridge-scope {
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
+  color: var(--color-on-surface-variant);
+  background: color-mix(in srgb, var(--color-surface-container-high) 76%, transparent);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.2;
+}
+
 .settings-calendar-guide {
   border-radius: var(--radius-card);
   border: 1px solid color-mix(in srgb, var(--color-outline-variant) 56%, transparent);
@@ -2740,3 +2801,14 @@ html body .settings-combobox .settings-combobox-search:focus-visible {
         transition: none;
     }
 }
+
+/* Extension connection follows the existing grouped settings surface. */
+.extension-account { padding-block: 1rem; border-block-end: 1px solid var(--color-outline-variant); min-width: 0; }
+.extension-account h4, .extension-account p { margin: 0 0 .75rem; overflow-wrap: anywhere; }
+.extension-access { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-block: .75rem; }
+.extension-access label { display: flex; gap: .75rem; align-items: center; min-height: 44px; flex: 1 1 14rem; font-size: .875rem; }
+.extension-account button { min-height: 44px; white-space: normal; overflow-wrap: anywhere; }
+.extension-conflict { margin-block: 1rem; }
+.extension-conflict dl { margin: .75rem 0; font-size: .875rem; }
+.extension-conflict dd { margin: .25rem 0 .75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.extension-conflict-actions { display: flex; flex-wrap: wrap; gap: .75rem; }

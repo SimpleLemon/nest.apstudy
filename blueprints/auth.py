@@ -780,6 +780,8 @@ def _redirect_after_login(user_doc):
         if _is_safe_login_next_url(next_url):
             return next_url
         return url_for("dashboard.dashboard")
+    if _is_safe_login_next_url(next_url):
+        session[LOGIN_NEXT_SESSION_KEY] = next_url
     return url_for("settings.onboarding")
 
 

@@ -2,9 +2,10 @@
 
 import logging
 import uuid
+from urllib.parse import urlsplit
 
-from flask import Blueprint, current_app, jsonify, make_response, request
-from flask_login import current_user
+from flask import Blueprint, current_app, jsonify, make_response, redirect, render_template, request, session, url_for
+from flask_login import current_user, login_required
 from flask_wtf.csrf import generate_csrf
 
 from services.calendar_events import (
@@ -49,11 +50,20 @@ from services.extension_contract import (
     validate_source_key,
     validate_version,
 )
+from services.extension_todos import (
+    TodoServiceError,
+    complete_todo,
+    create_todo,
+    list_todos,
+)
 
 
 extension_api_bp = Blueprint("extension_api", __name__)
 logger = logging.getLogger(__name__)
 REQUEST_ID_HEADER = "X-Request-ID"
+CSRF_TOKEN_HEADER = "X-CSRFToken"
+DEFAULT_CANVAS_RETURN_URL = "https://canvas.emory.edu/"
+ALLOWED_CANVAS_RETURN_HOSTS = frozenset({"canvas.emory.edu"})
 
 
 def _request_id():
@@ -70,6 +80,29 @@ def _json_response(payload, status=200, *, request_id=None):
     response.headers["Cache-Control"] = "no-store"
     response.headers[REQUEST_ID_HEADER] = request_id or _request_id()
     return response
+
+
+def _safe_canvas_return_url(value, *, default=DEFAULT_CANVAS_RETURN_URL):
+    if value in (None, ""):
+        return default
+    candidate = str(value or "").strip()
+    try:
+        parsed = urlsplit(candidate)
+        hostname = (parsed.hostname or "").lower()
+        _ = parsed.port
+    except ValueError as exc:
+        raise ExtensionContractError("invalid_return_to", "return_to must be a safe Canvas URL.") from exc
+    if (
+        parsed.scheme.lower() != "https"
+        or parsed.username is not None
+        or parsed.password is not None
+        or hostname not in ALLOWED_CANVAS_RETURN_HOSTS
+        or (parsed.path or "/") != "/"
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise ExtensionContractError("invalid_return_to", "return_to must be a safe Canvas URL.")
+    return f"https://{hostname}/"
 
 
 def _phase2_response(name=None, value=None, status=200, *, request_id=None, **extra):
@@ -309,6 +342,7 @@ def extension_identity():
     return _json_response({
         "contractVersion": EXTENSION_CONTRACT_VERSION,
         "state": "authenticated",
+        "capabilities": _effective_extension_capabilities(),
         "profile": {
             "id": user_id,
             "displayName": display_name,
@@ -325,7 +359,8 @@ def extension_csrf():
         return unauthorized
 
     token = generate_csrf()
-    response = _phase2_response(csrfToken=token)
+    response = _phase2_response()
+    response.headers[CSRF_TOKEN_HEADER] = token
     response.set_cookie(
         "csrf_token",
         token,
@@ -333,6 +368,38 @@ def extension_csrf():
         httponly=False,
         samesite="Lax",
     )
+    return response
+
+
+@extension_api_bp.route("/extension/connect", methods=["GET"])
+@login_required
+def extension_connect():
+    try:
+        return_to = _safe_canvas_return_url(request.args.get("return_to"))
+    except ExtensionContractError as exc:
+        response = make_response(render_template(
+            "extension_connect.html",
+            state="invalid_return",
+            return_to=DEFAULT_CANVAS_RETURN_URL,
+            user=current_user,
+        ), 400)
+        response.headers["Cache-Control"] = "no-store"
+        response.headers[REQUEST_ID_HEADER] = _request_id()
+        return response
+
+    if not getattr(current_user, "onboarding_complete", False):
+        next_url = request.full_path if request.query_string else request.path
+        session["login_next_url"] = next_url
+        return redirect(url_for("settings.onboarding"))
+
+    response = make_response(render_template(
+        "extension_connect.html",
+        state="connected",
+        return_to=return_to,
+        user=current_user,
+    ))
+    response.headers["Cache-Control"] = "no-store"
+    response.headers[REQUEST_ID_HEADER] = _request_id()
     return response
 
 
@@ -355,7 +422,7 @@ def get_extension_consent():
             account_key,
             request.args.get("version"),
         )
-        record = get_consent(_user_id(), source_key, account_key)
+        record = get_consent(_user_id(), source_key, account_key, version=version)
         consent = record.to_payload() if record else empty_consent_payload(
             source_key, account_key, version
         )
@@ -551,9 +618,186 @@ def extension_response_contract(response):
 
 
 def _idempotency_from_header(payload):
-    if "idempotency_key" not in payload and request.headers.get("Idempotency-Key"):
-        payload["idempotency_key"] = request.headers["Idempotency-Key"]
+    header_key = request.headers.get("Idempotency-Key")
+    if not header_key:
+        return payload
+    for name in ("idempotency_key", "idempotencyKey"):
+        body_value = payload.get(name)
+        if isinstance(body_value, str) and body_value.strip() and body_value.strip() != header_key.strip():
+            raise ExtensionContractError(
+                "idempotency_key_conflict",
+                "The Idempotency-Key header and idempotency_key body field must match.",
+            )
+    if "idempotency_key" not in payload:
+        payload["idempotency_key"] = header_key
     return payload
+
+
+TODO_CREATE_FIELDS = {
+    "title", "description", "link", "url", "source_url", "due", "due_at", "deadline_at", "due_date",
+    "timezone", "time_zone", "priority", "canvas_account_key", "canvasAccountKey", "account_key",
+    "canvas_course_id", "canvasCourseId", "course_id", "canvas_course_label", "canvasCourseLabel",
+    "course_label", "type_label", "typeLabel", "type", "points_earned", "pointsEarned",
+    "points_possible", "pointsPossible", "source_identity", "source", "source_key", "sourceKey",
+    "source_item_key", "sourceItemKey", "canvas_source_item_key", "source_event_ref", "sourceEventRef",
+    "canvas_event_ref", "idempotency_key", "idempotencyKey",
+}
+TODO_QUERY_FIELDS = {
+    "limit", "offset", "page", "cursor", "start", "end", "from", "to", "start_date", "end_date",
+    "due_start", "due_end", "completed", "undated", "include_undated",
+}
+
+
+def _todo_query_alias(names, *, field):
+    values = [request.args[name] for name in names if request.args.get(name) not in (None, "")]
+    if not values:
+        return None
+    if any(value != values[0] for value in values[1:]):
+        raise ExtensionContractError("query_conflict", f"{field} query parameters must match.")
+    return values[0]
+
+
+def _todo_query_date(names, *, field):
+    value = _todo_query_alias(names, field=field)
+    if value is None:
+        return None
+    if len(value) != 10:
+        raise ExtensionContractError("invalid_date", f"{field} must be an ISO calendar date.")
+    try:
+        from datetime import date
+
+        date.fromisoformat(value)
+    except ValueError as exc:
+        raise ExtensionContractError("invalid_date", f"{field} must be an ISO calendar date.") from exc
+    return value
+
+
+def _todo_query_bool(value, *, field):
+    normalized = str(value).strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ExtensionContractError("invalid_filter", f"{field} must be true or false.")
+
+
+def _todo_list_query():
+    _query_only(TODO_QUERY_FIELDS)
+    raw_limit = request.args.get("limit", "100")
+    if not raw_limit.isdecimal() or not 1 <= int(raw_limit) <= 100:
+        raise ExtensionContractError("invalid_limit", "limit must be between 1 and 100.")
+    limit = int(raw_limit)
+
+    raw_offset = request.args.get("offset")
+    raw_page = request.args.get("page")
+    raw_cursor = request.args.get("cursor")
+    if raw_offset is not None and (not raw_offset.isdecimal()):
+        raise ExtensionContractError("invalid_offset", "offset must be a nonnegative integer.")
+    if raw_page is not None and (not raw_page.isdecimal() or int(raw_page) < 1):
+        raise ExtensionContractError("invalid_page", "page must be a positive integer.")
+    if raw_cursor is not None and (not raw_cursor.isdecimal()):
+        raise ExtensionContractError("invalid_cursor", "cursor must be a nonnegative integer.")
+    offsets = []
+    if raw_offset is not None:
+        offsets.append(int(raw_offset))
+    if raw_cursor is not None:
+        offsets.append(int(raw_cursor))
+    if raw_page is not None:
+        offsets.append((int(raw_page) - 1) * limit)
+    if offsets and any(value != offsets[0] for value in offsets[1:]):
+        raise ExtensionContractError("query_conflict", "page, offset, and cursor must identify the same page.")
+    offset = offsets[0] if offsets else 0
+
+    start_date = _todo_query_date(("start", "from", "start_date", "due_start"), field="start")
+    end_date = _todo_query_date(("end", "to", "end_date", "due_end"), field="end")
+    completed = None
+    if request.args.get("completed") is not None:
+        raw_completed = request.args["completed"].strip().lower()
+        if raw_completed not in {"", "all", "any"}:
+            completed = _todo_query_bool(raw_completed, field="completed")
+
+    raw_undated = request.args.get("undated")
+    if raw_undated is not None:
+        normalized_undated = raw_undated.strip().lower()
+        if normalized_undated in {"only", "exclude", "include"}:
+            undated = normalized_undated
+        elif normalized_undated in {"1", "true", "yes", "on", "0", "false", "no", "off"}:
+            undated = "include" if _todo_query_bool(raw_undated, field="undated") else "exclude"
+        else:
+            raise ExtensionContractError("invalid_filter", "undated must be include, exclude, or only.")
+    elif request.args.get("include_undated") is not None:
+        undated = "include" if _todo_query_bool(request.args["include_undated"], field="include_undated") else "exclude"
+    else:
+        undated = "exclude" if start_date is not None or end_date is not None else "include"
+    return {
+        "limit": limit,
+        "offset": offset,
+        "start_date": start_date,
+        "end_date": end_date,
+        "completed": completed,
+        "undated": undated,
+    }
+
+
+def _todo_error_response(exc):
+    if isinstance(exc, TodoServiceError):
+        return _error_response(exc.code, str(exc), exc.status, contract_version=EXTENSION_CONTRACT_VERSION)
+    if isinstance(exc, ExtensionContractError):
+        return _handle_extension_error(exc)
+    logger.exception("Extension todo operation failed")
+    return _error_response("todos_unavailable", "Unable to complete the todo operation.", 500, contract_version=EXTENSION_CONTRACT_VERSION)
+
+
+@extension_api_bp.route("/api/extension/todos", methods=["GET"])
+def list_extension_todos():
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        query = _todo_list_query()
+        result = list_todos(_user_id(), **query)
+        return _phase2_response(
+            "todos",
+            result["todos"],
+            list=result["list"],
+            pagination=result["pagination"],
+        )
+    except Exception as exc:
+        return _todo_error_response(exc)
+
+
+@extension_api_bp.route("/api/extension/todos", methods=["POST"])
+def create_extension_todo():
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        payload = _idempotency_from_header(_parse_bounded_json_object())
+        _validate_object_schema(payload, allowed=TODO_CREATE_FIELDS, required={"title"})
+        result, status = create_todo(_user_id(), payload)
+        return _phase2_response(
+            "todo",
+            result["todo"],
+            status,
+            list=result["list"],
+            idempotent=bool(result.get("idempotent")),
+        )
+    except Exception as exc:
+        return _todo_error_response(exc)
+
+
+@extension_api_bp.route("/api/extension/todos/<task_id>/completion", methods=["PATCH"])
+def complete_extension_todo(task_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        payload = _parse_bounded_json_object()
+        _validate_object_schema(payload, allowed={"completed"}, required={"completed"})
+        result = complete_todo(_user_id(), task_id, payload["completed"])
+        return _phase2_response("todo", result["todo"], list=result["list"])
+    except Exception as exc:
+        return _todo_error_response(exc)
 
 
 @extension_api_bp.route("/api/extension/calendars", methods=["GET"])
@@ -900,7 +1144,7 @@ def _require_mirroring_consent(source, payload=None):
     account_key = source_account_key if payload is None else payload.get("account_key", source_account_key)
     if account_key != source_account_key:
         raise ExtensionContractError("source_account_mismatch", "The Canvas account does not belong to this import source.")
-    return canvas_consent_status(_user_id(), account_key, required_scopes=("mirroring",))
+    return canvas_consent_status(_user_id(), account_key, required_scopes=("selected_item_mirroring",), version=2)
 
 
 @extension_api_bp.route("/api/extension/calendar/sources/<source_id>/event-links", methods=["GET"])
@@ -981,6 +1225,52 @@ WRITEBACK_FIELDS = {
     "account_key", "operation", "event_ref", "expected_revision", "idempotency_key", "target_account",
     "target_calendar", "payload", "state",
 }
+
+
+@extension_api_bp.route("/api/extension/calendar/sources/<source_id>/event-links/<link_id>/unlink", methods=["POST"])
+def unlink_extension_event(source_id, link_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        from services.extension_bridge import unlink_event
+        _validate_object_schema(_body_or_empty(), allowed=set())
+        return _phase2_response("eventLink", unlink_event(_user_id(), source_id, link_id))
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/calendar/sources/<source_id>/writebacks/<writeback_id>/conflict", methods=["GET", "POST"])
+def extension_conflict(source_id, writeback_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        from services.extension_bridge import inspect_conflict
+        _require_capabilities("calendar_two_way_writeback")
+        payload = None
+        if request.method == "POST":
+            payload = _parse_json_object()
+            _validate_object_schema(payload, allowed={"canvas_revision", "canvas_snapshot"}, required={"canvas_revision", "canvas_snapshot"})
+        return _phase2_response("conflict", inspect_conflict(_user_id(), source_id, writeback_id, payload))
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/calendar/sources/<source_id>/writebacks/<writeback_id>/resolve", methods=["POST"])
+def resolve_extension_conflict(source_id, writeback_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        from services.extension_bridge import resolve_conflict
+        _require_capabilities("calendar_two_way_writeback")
+        payload = _parse_json_object()
+        _validate_object_schema(payload, allowed={"choice", "expected_revision", "confirm_delete"}, required={"choice", "expected_revision"})
+        return _phase2_response("conflict", resolve_conflict(_user_id(), source_id, writeback_id, payload))
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
 WRITEBACK_RESULT_FIELDS = {
     "state", "status", "expected_revision", "expectedRevision", "result_revision", "resultRevision",
     "error_code", "error_message", "errorMessage", "retry_count", "next_retry_at", "nextRetryAt",
@@ -993,7 +1283,12 @@ def _require_writeback_consent(source, payload=None):
     account_key = source_account_key if payload is None else payload.get("account_key", source_account_key)
     if account_key != source_account_key:
         raise ExtensionContractError("source_account_mismatch", "The Canvas account does not belong to this import source.")
-    return canvas_consent_status(_user_id(), account_key, required_scopes=("two_way_writeback",))
+    consent = canvas_consent_status(_user_id(), account_key, version=2)
+    import json
+    scopes = json.loads(consent["scopes_json"])
+    if not any(scopes.get(key) for key in ("personal_events_write", "planner_items_write")):
+        raise ExtensionContractError("scope_required", "Personal event or planner write consent is required.")
+    return consent
 
 
 @extension_api_bp.route("/api/extension/calendar/sources/<source_id>/writebacks", methods=["GET"])
@@ -1071,5 +1366,84 @@ def record_extension_canvas_writeback_result(source_id, writeback_id):
             _user_id(), source_id, writeback_id, payload=payload
         )
         return _phase2_response("writebackResult", result)
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/connection", methods=["GET"])
+def extension_connection_settings():
+    """Settings summary; private account bindings stay on the server."""
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        sources = list_canvas_import_sources(_user_id())
+        for source in sources:
+            private = get_canvas_import_source_context(_user_id(), source["source_ref"])
+            account_key = private["account_key"]
+            source["access"] = {}
+            for version in (1, 2):
+                record = get_consent(_user_id(), "canvas:" + account_key, account_key, version=version)
+                source["access"][str(version)] = {
+                    "granted": bool(record and record.state == "active" and record.current),
+                    "scopes": list(record.granted_scopes) if record else [],
+                }
+            source["activity"] = [{key: item.get(key) for key in ("id", "event_ref", "state", "updated_at", "error_code")} for item in list_canvas_writebacks(_user_id(), source["source_ref"], account_key=account_key, limit=50)]
+        return _phase2_response("sources", sources, capabilities=_effective_extension_capabilities())
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/connection/<source_id>/consent", methods=["PUT"])
+def extension_connection_consent(source_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        payload = _parse_json_object()
+        _validate_object_schema(payload, allowed={"version", "action", "scopes"}, required={"version", "action", "scopes"})
+        private = get_canvas_import_source_context(_user_id(), source_id)
+        if private is None:
+            raise ExtensionContractError("source_not_found", "Canvas account was not found.")
+        account_key = private["account_key"]
+        record = put_consent(_user_id(), "canvas:" + account_key, account_key,
+                             version=payload["version"], action=payload["action"], scopes=payload["scopes"])
+        return _phase2_response("access", {"granted": record.state == "active" and record.current,
+                                           "scopes": list(record.granted_scopes)})
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/mirrors", methods=["GET", "POST"])
+def extension_item_mirrors():
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        from services.extension_mirrors import inspect_item, change_item
+        if request.method == "GET":
+            return _phase2_response("item", inspect_item(_user_id(), request.args.get("event_ref")), capabilities=_effective_extension_capabilities())
+        payload = _parse_json_object()
+        if payload.get("action") in {"mirror", "delete_both"}:
+            _require_capabilities("calendar_two_way_writeback", "calendar_mirroring")
+        return _phase2_response("result", change_item(_user_id(), payload))
+    except Exception as exc:
+        return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/calendar/sources/<source_id>/mirrors/refresh", methods=["POST"])
+def refresh_extension_mirrors(source_id):
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        from services.extension_mirror_sync import prepare, observe
+        _require_capabilities("calendar_two_way_writeback", "calendar_mirroring")
+        source = _source_or_error(_user_id(), source_id)
+        _require_writeback_consent(source)
+        payload = _parse_json_object()
+        if not payload:
+            return _phase2_response("eventLinks", prepare(_user_id(), source_id))
+        return _phase2_response("result", observe(_user_id(), source_id, payload))
     except Exception as exc:
         return _handle_extension_error(exc)

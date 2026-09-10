@@ -14,7 +14,7 @@ import logging
 import shutil
 from datetime import datetime
 
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, jsonify, redirect, session, url_for
 from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
@@ -87,6 +87,7 @@ from services.onboarding import (
     validate_trimmed_profile_text,
 )
 from services.settings_defaults import settings_defaults as _settings_defaults_service
+from blueprints.auth import LOGIN_NEXT_SESSION_KEY, _is_safe_login_next_url
 
 settings_bp = Blueprint("settings", __name__)
 logger = logging.getLogger(__name__)
@@ -634,6 +635,9 @@ def save_onboarding():
         "normalize_emory_student": _normalize_emory_student,
         "request_entitlements": request_entitlements,
         "school_payload": school_payload,
+        "is_safe_login_next_url": _is_safe_login_next_url,
+        "login_next_session_key": LOGIN_NEXT_SESSION_KEY,
+        "session": session,
         "sync_chat_presence_labels_for_user": sync_chat_presence_labels_for_user,
         "update_row_safe": update_row_safe,
         "url_for": url_for,

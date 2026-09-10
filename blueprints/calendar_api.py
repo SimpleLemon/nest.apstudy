@@ -862,6 +862,10 @@ def delete_event(event_id):
     if ev.get("user_id") != str(current_user.id):
         return jsonify({"error": "not found"}), 404
 
+    from services.extension_mirrors import has_mirror_work
+    if has_mirror_work(str(current_user.id), "user:" + event_id):
+        return jsonify({"error": "Choose whether to delete only Nest or both copies in Canvas copies.", "code": "mirror_delete_choice_required"}), 409
+
     try:
         delete_calendar_row(COLLECTIONS["user_events"], event_id)
     except AppwriteException:

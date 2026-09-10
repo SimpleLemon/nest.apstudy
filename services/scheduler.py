@@ -547,6 +547,13 @@ def _cleanup_note_media(app):
             cleanup_expired()
         except Exception:
             logger.exception("Notification retention cleanup failed")
+        try:
+            from services.extension_todos import prune_idempotency_receipts
+            pruned = prune_idempotency_receipts()
+            if pruned:
+                logger.info("Pruned %s expired task idempotency receipt(s).", pruned)
+        except Exception:
+            logger.exception("Task idempotency receipt cleanup failed")
 
 
 def init_scheduler(app):

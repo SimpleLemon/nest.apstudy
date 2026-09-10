@@ -55,7 +55,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
             "account_key": account,
             "source_id": source_id,
             "origin": "https://canvas.example.edu",
-            "provider_user_id": account,
+            "provider_user_id": "1" if account == ACCOUNT_1 else "2",
             "label": "Canvas",
         })
 
@@ -341,18 +341,27 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         self.assertEqual(events.get_canvas_import_routing("user-1", "source-1", "incomplete")["destination_calendar_id"], "cal-in")
         self.assertEqual(len(events.get_canvas_import_routing("user-1", "source-1")), 2)
 
-    def test_revocation_archives_and_cancels_owned_outputs(self):
+    def personal_source(self):
         self.source()
+        put_consent("user-1", canonical_canvas_source_key(ACCOUNT_1), ACCOUNT_1,
+                    action="grant", scopes=["personal_events_write", "selected_item_mirroring"],
+                    version=2, path=self.db_path)
+        with sqlite3.connect(self.db_path) as connection:
+            connection.execute("INSERT INTO user_events (id,user_id,title,start,end,created_at) VALUES (?,?,?,?,?,?)",
+                               ["one", "user-1", "Personal", "2026-08-12T10:00:00Z", "2026-08-12T11:00:00Z", "2026-08-12T00:00:00Z"])
+
+    def test_revocation_archives_and_cancels_owned_outputs(self):
+        self.personal_source()
         run = self.start_run()
         link = events.create_canvas_event_link("user-1", "source-1", {
-            "account_key": ACCOUNT_1, "event_ref": "event:one", "projection_event_id": "projection-1",
+            "account_key": ACCOUNT_1, "event_ref": "user:one", "projection_event_id": "projection-1", "canvas_item_type": "calendar_event", "canvas_item_id": "1", "canvas_context_id": "user_1", "canvas_calendar_id": "user_1",
         })
         # Internal Phase 2 cleanup coverage: public v1 consent intentionally
         # does not grant the future two-way writeback capability.
         with patch.object(events, "_canvas_source_consent", return_value=(None, 1)):
             writeback = events.create_canvas_writeback("user-1", "source-1", {
-                "account_key": ACCOUNT_1, "operation": "create", "idempotency_key": "wb-revoke",
-                "target_account": ACCOUNT_1, "payload": {"title": "new"},
+                "account_key": ACCOUNT_1, "operation": "create", "event_ref": "user:one", "idempotency_key": "wb-revoke",
+                "target_account": ACCOUNT_1, "payload": {"title": "new", "start_at": "2026-09-09T10:00:00Z"},
             })
         revoked = put_consent(
             "user-1", canonical_canvas_source_key(ACCOUNT_1), ACCOUNT_1, action="revoke",
@@ -364,11 +373,11 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         self.assertEqual(events.get_canvas_sync_run("user-1", "source-1", run["run_id"])["state"], "cancelled")
 
     def test_event_link_uniqueness_results_and_isolation(self):
-        self.source()
+        self.personal_source()
         self.source("user-2", "source-2", ACCOUNT_2)
         payload = {
-            "account_key": ACCOUNT_1, "event_ref": "event:one", "canvas_context_id": "course-1",
-            "canvas_calendar_id": "calendar-1", "canvas_item_type": "assignment", "canvas_item_id": "a1",
+            "account_key": ACCOUNT_1, "event_ref": "user:one", "canvas_context_id": "user_1",
+            "canvas_calendar_id": "user_1", "canvas_item_type": "calendar_event", "canvas_item_id": "1",
             "source_revision": "r1",
         }
         link = events.create_canvas_event_link("user-1", "source-1", payload)
@@ -376,23 +385,50 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ExtensionContractError, "already exists"):
             events.create_canvas_event_link("user-1", "source-1", {**payload, "projection_event_id": "other"})
         with self.assertRaisesRegex(ExtensionContractError, "source was not found"):
-            events.get_canvas_event_link("user-2", "source-1", "event:one")
+            events.get_canvas_event_link("user-2", "source-1", "user:one")
         with self.assertRaisesRegex(ExtensionContractError, "revision"):
-            events.record_canvas_event_link_result("user-1", "source-1", "event:one", state="applied", expected_revision="old", source_revision="r2")
-        result = events.record_canvas_event_link_result("user-1", "source-1", "event:one", state="applied", expected_revision="r1", source_revision="r2")
+            events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", expected_revision="old", source_revision="r2")
+        result = events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", expected_revision="r1", source_revision="r2")
         self.assertEqual(result["mirror_state"], "applied")
-        self.assertTrue(events.record_canvas_event_link_result("user-1", "source-1", "event:one", state="applied", source_revision="r2")["idempotent"])
+        self.assertTrue(events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", source_revision="r2")["idempotent"])
         self.assertEqual(events.get_canvas_event_link("user-1", "source-1", link["event_ref"])["source_revision"], "r2")
 
+    def test_conflict_choice_revalidates_and_queues_reviewed_nest_fields(self):
+        from services.extension_bridge import inspect_conflict, resolve_conflict
+        self.personal_source()
+        queued = events.create_canvas_writeback("user-1", "source-1", {
+            "account_key": ACCOUNT_1, "operation": "update", "event_ref": "user:one",
+            "expected_revision": "r1", "idempotency_key": "conflict-1", "target_account": ACCOUNT_1,
+            "payload": {"title": "Old queued title"},
+        })
+        events.record_canvas_writeback_result("user-1", "source-1", queued["id"],
+                                             {"state": "conflict", "expected_revision": "r1", "result_revision": "r2"})
+        reviewed = inspect_conflict("user-1", "source-1", queued["id"],
+                                    {"canvas_revision": "r2", "canvas_snapshot": {"title": "Canvas title"}})
+        with sqlite3.connect(self.db_path) as connection:
+            connection.execute("UPDATE user_events SET title='Latest Nest title' WHERE id='one'")
+        with self.assertRaisesRegex(ExtensionContractError, "Inspect the current"):
+            resolve_conflict("user-1", "source-1", queued["id"],
+                             {"choice": "keep_nest", "expected_revision": reviewed["expected_revision"]})
+        reviewed = inspect_conflict("user-1", "source-1", queued["id"])
+        resolved = resolve_conflict("user-1", "source-1", queued["id"],
+                                    {"choice": "keep_nest", "expected_revision": reviewed["expected_revision"]})
+        self.assertEqual(resolved["writeback"]["state"], "queued")
+        self.assertEqual(resolved["writeback"]["expected_revision"], "r2")
+        self.assertEqual(resolved["writeback"]["payload"]["payload"]["title"], "Latest Nest title")
+        self.assertEqual(resolved["writeback"]["payload"]["payload"]["start_at"], reviewed["nestSnapshot"]["start"])
+        with self.assertRaises(ExtensionContractError):
+            inspect_conflict("user-2", "source-1", queued["id"])
+
     def test_writeback_lifecycle_idempotency_conflict_and_result(self):
-        self.source()
+        self.personal_source()
         events.create_canvas_event_link("user-1", "source-1", {
-            "account_key": ACCOUNT_1, "event_ref": "event:one", "source_revision": "r1",
+            "account_key": ACCOUNT_1, "event_ref": "user:one", "source_revision": "r1", "canvas_item_type": "calendar_event", "canvas_item_id": "1", "canvas_context_id": "user_1", "canvas_calendar_id": "user_1",
         })
         payload = {
-            "account_key": ACCOUNT_1, "operation": "update", "event_ref": "event:one",
+            "account_key": ACCOUNT_1, "operation": "update", "event_ref": "user:one",
             "expected_revision": "r1", "idempotency_key": "wb-1", "target_account": ACCOUNT_1,
-            "target_calendar": "calendar-1", "payload": {"title": "Changed"},
+            "target_calendar": "user_1", "payload": {"title": "Changed"},
         }
         # Future-capability/internal coverage: the public v1 consent contract
         # must continue to reject two_way_writeback grants.
@@ -402,7 +438,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
             with self.assertRaisesRegex(ExtensionContractError, "idempotency"):
                 events.create_canvas_writeback("user-1", "source-1", {**payload, "payload": {"title": "Other"}})
         self.assertEqual(created["state"], "waiting_for_canvas_session")
-        self.assertEqual(len(events.list_canvas_writebacks("user-1", "source-1", event_ref="event:one")), 1)
+        self.assertEqual(len(events.list_canvas_writebacks("user-1", "source-1", event_ref="user:one")), 1)
         applied = events.record_canvas_writeback_result(
             "user-1", "source-1", created["id"],
             {"state": "applied", "expected_revision": "r1", "result_revision": "r2"},

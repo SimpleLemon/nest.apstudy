@@ -10,6 +10,9 @@ from services.extension_contract import (
     CANVAS_LEGACY_SOURCE_KEY,
     CONSENT_SCOPES,
     CURRENT_CONSENT_SCOPES,
+    CURRENT_WRITE_CONSENT_SCOPES,
+    EXTENSION_READ_CONSENT_VERSION,
+    EXTENSION_WRITE_CONSENT_VERSION,
     ExtensionContractError,
     canonical_canvas_source_key,
     extension_capability_enabled,
@@ -30,8 +33,9 @@ DEFERRED_STATE = "deferred_to_phase_2"
 NOT_APPLICABLE_STATE = "not_applicable"
 READ_CONSENT_SCOPES = frozenset({"full_history_upload", "ongoing_read"})
 CAPABILITY_SCOPE_MAP = {
-    "mirroring": "calendar_mirroring",
-    "two_way_writeback": "calendar_two_way_writeback",
+    "selected_item_mirroring": "calendar_mirroring",
+    "personal_events_write": "calendar_two_way_writeback",
+    "planner_items_write": "calendar_two_way_writeback",
 }
 
 
@@ -57,7 +61,12 @@ class ConsentRecord:
 
     @property
     def current(self):
-        return self.version == 1 and set(self.granted_scopes) == CURRENT_CONSENT_SCOPES
+        granted = set(self.granted_scopes)
+        if self.version == EXTENSION_READ_CONSENT_VERSION:
+            return granted == CURRENT_CONSENT_SCOPES
+        if self.version == EXTENSION_WRITE_CONSENT_VERSION:
+            return bool(granted) and granted <= CURRENT_WRITE_CONSENT_SCOPES
+        return False
 
     def to_payload(self):
         granted_scopes = list(self.granted_scopes)
@@ -166,19 +175,22 @@ def _validate_identity(user_id, source_key, account_key):
     return normalized_user_id, validate_source_key(source_key, account_key=account_key), account_key
 
 
-def get_consent(user_id, source_key, account_key, path=None):
+def get_consent(user_id, source_key, account_key, version=EXTENSION_READ_CONSENT_VERSION, path=None):
     normalized_user_id, source_key, account_key = _validate_identity(
         user_id, source_key, account_key
     )
+    version = validate_version(version)
     with db_connection(path) as connection:
         row = connection.execute(
-            f"SELECT * FROM {CONSENT_TABLE} WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-            [normalized_user_id, source_key, account_key],
+            f"""SELECT * FROM {CONSENT_TABLE}
+                WHERE nest_user_id = ? AND source_key = ? AND account_key = ? AND version = ?""",
+            [normalized_user_id, source_key, account_key, version],
         ).fetchone()
         if row is None and source_key == CANVAS_LEGACY_SOURCE_KEY:
             row = connection.execute(
-                f"SELECT * FROM {CONSENT_TABLE} WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-                [normalized_user_id, canonical_canvas_source_key(account_key), account_key],
+                f"""SELECT * FROM {CONSENT_TABLE}
+                    WHERE nest_user_id = ? AND source_key = ? AND account_key = ? AND version = ?""",
+                [normalized_user_id, canonical_canvas_source_key(account_key), account_key, version],
             ).fetchone()
     return _record_from_row(row)
 
@@ -190,7 +202,32 @@ def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, 
     validate_version(version)
     if action not in {"grant", "revoke"}:
         raise ExtensionContractError("invalid_action", "action must be 'grant' or 'revoke'.")
-    normalized_scopes = validate_grant_scopes(scopes) if action == "grant" else validate_scopes(scopes)
+    normalized_scopes = (
+        validate_grant_scopes(scopes, version=version)
+        if action == "grant"
+        else tuple(CURRENT_CONSENT_SCOPES if version == 1 else CURRENT_WRITE_CONSENT_SCOPES) if scopes == [] else validate_scopes(scopes)
+    )
+    if version == EXTENSION_READ_CONSENT_VERSION:
+        unsupported = set(normalized_scopes) - CURRENT_CONSENT_SCOPES
+        if unsupported:
+            raise ExtensionContractError(
+                "read_scope_set_required",
+                "A v1 revoke may only include read consent scopes.",
+            )
+    else:
+        unsupported = set(normalized_scopes) - CURRENT_WRITE_CONSENT_SCOPES
+        if unsupported:
+            raise ExtensionContractError(
+                "write_scope_set_required",
+                "A v2 consent may only include personal write and selected mirroring scopes.",
+            )
+        for scope in normalized_scopes:
+            capability = CAPABILITY_SCOPE_MAP.get(scope)
+            if action == "grant" and capability and not extension_capability_enabled(capability):
+                raise ExtensionContractError(
+                    "capability_disabled",
+                    f"The extension capability {capability} is not enabled.",
+                )
     now = utcnow_iso()
 
     with db_connection(path) as connection:
@@ -202,28 +239,36 @@ def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, 
         )
         source_key = stored_source_key
         row = connection.execute(
-            f"SELECT * FROM {CONSENT_TABLE} WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-            [normalized_user_id, stored_source_key, account_key],
+            f"""SELECT * FROM {CONSENT_TABLE}
+                WHERE nest_user_id = ? AND source_key = ? AND account_key = ? AND version = ?""",
+            [normalized_user_id, stored_source_key, account_key, version],
         ).fetchone()
         if row is None and action == "revoke" and requested_source_key == CANVAS_LEGACY_SOURCE_KEY:
             row = connection.execute(
-                f"SELECT * FROM {CONSENT_TABLE} WHERE nest_user_id = ? AND source_key = ? AND account_key = ?",
-                [normalized_user_id, canonical_canvas_source_key(account_key), account_key],
+                f"""SELECT * FROM {CONSENT_TABLE}
+                    WHERE nest_user_id = ? AND source_key = ? AND account_key = ? AND version = ?""",
+                [normalized_user_id, canonical_canvas_source_key(account_key), account_key, version],
             ).fetchone()
         if row is not None:
             source_key = row["source_key"]
         current = _record_from_row(row)
         current_scopes = dict(current.scopes) if current else {scope: False for scope in CONSENT_SCOPES}
         next_scopes = dict(current_scopes)
+        if version == 2 and action == "grant":
+            next_scopes = {scope: False for scope in CONSENT_SCOPES}
         desired_value = action == "grant"
         for scope in normalized_scopes:
             next_scopes[scope] = desired_value
         # Read-only disclosure covers both upload/read paths and automatic
         # share/ICS inclusion.  Couple the disclosure scope to the complete
         # read grant so a partial read grant can never project implicitly.
-        if next_scopes["full_history_upload"] and next_scopes["ongoing_read"]:
+        if (
+            version == EXTENSION_READ_CONSENT_VERSION
+            and next_scopes["full_history_upload"]
+            and next_scopes["ongoing_read"]
+        ):
             next_scopes["shares_ics_inclusion"] = True
-        else:
+        elif version == EXTENSION_READ_CONSENT_VERSION:
             next_scopes["shares_ics_inclusion"] = False
         next_state = ACTIVE_STATE if any(next_scopes.values()) else REVOKED_STATE
 
@@ -295,7 +340,7 @@ def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, 
             next_scopes.get("full_history_upload")
             and next_scopes.get("ongoing_read")
         )
-        if source_key in {CANVAS_LEGACY_SOURCE_KEY, canonical_canvas_source_key(account_key)} and (
+        if version == EXTENSION_READ_CONSENT_VERSION and source_key in {CANVAS_LEGACY_SOURCE_KEY, canonical_canvas_source_key(account_key)} and (
             (current_read_active and not next_read_active)
             or (next_state == REVOKED_STATE and (current is None or current.state != REVOKED_STATE))
         ):
@@ -320,7 +365,7 @@ def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, 
         )
 
 
-def empty_consent_payload(source_key, account_key, version=1):
+def empty_consent_payload(source_key, account_key, version=EXTENSION_READ_CONSENT_VERSION):
     validate_version(version)
     account_key = validate_account_key(account_key)
     source_key = validate_source_key(source_key, account_key=account_key)

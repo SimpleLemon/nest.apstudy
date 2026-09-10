@@ -82,7 +82,8 @@ class ExtensionApiTests(unittest.TestCase):
     def _csrf_token(self, client):
         response = client.get("/api/extension/csrf")
         self.assertEqual(response.status_code, 200)
-        token = response.get_json()["csrfToken"]
+        self.assertNotIn("csrfToken", response.get_json())
+        token = response.headers["X-CSRFToken"]
         self.assertEqual(client.get_cookie("csrf_token").value, token)
         self.assertEqual(response.headers["Cache-Control"], "no-store")
         return token
@@ -95,6 +96,7 @@ class ExtensionApiTests(unittest.TestCase):
         self.assertEqual(response.get_json(), {
             "contractVersion": 1,
             "state": "authenticated",
+            "capabilities": response.get_json()["capabilities"],
             "profile": {
                 "id": "user-1",
                 "displayName": "One Student",
@@ -106,12 +108,22 @@ class ExtensionApiTests(unittest.TestCase):
         self.assertNotIn("settings", response.get_json())
         self.assertTrue(response.headers.get("X-Request-ID"))
 
+    def test_identity_exposes_live_write_capability_gates(self):
+        client = self._client("user-1")
+        self.assertFalse(client.get("/api/extension/identity").get_json()["capabilities"]["calendar_two_way_writeback"])
+        self.enable_capabilities("calendar_two_way_writeback", "calendar_mirroring")
+        body = client.get("/api/extension/identity").get_json()
+        self.assertTrue(body["capabilities"]["calendar_two_way_writeback"])
+        self.assertTrue(body["capabilities"]["calendar_mirroring"])
+        self.enable_capabilities("calendar_read")
+        self.assertFalse(client.get("/api/extension/identity").get_json()["capabilities"]["calendar_two_way_writeback"])
+
     def test_identity_rejects_non_https_avatar_without_leaking_other_profile_data(self):
         response = self._client("user-2").get("/api/extension/identity")
 
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(response.get_json()["profile"]["avatarUrl"])
-        self.assertEqual(set(response.get_json()), {"contractVersion", "state", "profile"})
+        self.assertEqual(set(response.get_json()), {"contractVersion", "state", "profile", "capabilities"})
 
     def test_signed_out_identity_is_json_401_and_no_store(self):
         response = self._client().get("/api/extension/identity")
@@ -321,7 +333,8 @@ class ExtensionApiTests(unittest.TestCase):
             "scopes": ["full_history_upload", "ongoing_read", "shares_ics_inclusion"],
         }
         cases = [
-            ({**common, "version": 2}, "unsupported_version"),
+            ({**common, "version": 2}, "write_scope_set_required"),
+            ({**common, "version": 3}, "unsupported_version"),
             ({**common, "scopes": ["credentials"]}, "invalid_scope"),
             ({**common, "source_key": "Canvas Source"}, "invalid_source_key"),
             ({**common, "source_key": "canvas:" + "A" * 64}, "invalid_source_key"),
@@ -338,7 +351,7 @@ class ExtensionApiTests(unittest.TestCase):
             self.assertEqual(response.get_json()["error"]["code"], code)
 
         get_response = client.get(
-            f"/api/extension/consent?source_key={CANVAS_SOURCE_KEY_1}&account_key={CANVAS_ACCOUNT_1}&version=2"
+            f"/api/extension/consent?source_key={CANVAS_SOURCE_KEY_1}&account_key={CANVAS_ACCOUNT_1}&version=3"
         )
         self.assertEqual(get_response.status_code, 400)
         self.assertEqual(get_response.get_json()["error"]["code"], "unsupported_version")

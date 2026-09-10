@@ -94,7 +94,9 @@ class CalendarCanvasExportTestCase(unittest.TestCase):
             "sort_key": dashboard_summary.sort_key,
         }
 
-        summary = dashboard_summary.load_calendar_summary("user-1", {}, dependencies)
+        with patch.object(dashboard_summary, "datetime", wraps=datetime) as clock:
+            clock.now.return_value = datetime(2026, 8, 20, 12, tzinfo=timezone.utc)
+            summary = dashboard_summary.load_calendar_summary("user-1", {}, dependencies)
 
         self.assertEqual([event["id"] for event in summary["events"]], ["uid-active"])
         self.assertTrue(summary["setup_complete"])
