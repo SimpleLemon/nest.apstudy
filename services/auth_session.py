@@ -184,6 +184,7 @@ def _complete_appwrite_login(
             logger.exception("Failed to attribute new user signup to invite")
     else:
         updates = {"last_login": format_datetime(datetime.utcnow())}
+        previous_avatar_to_delete = None
         if name:
             updates["name"] = name
         if picture_url and avatar_can_use_provider(user_doc):
@@ -198,20 +199,15 @@ def _complete_appwrite_login(
                 page_context=page_context,
             )
             previous_file_id = user_doc.get("avatar_file_id")
-            updates["picture_url"] = stored_picture_url
-            updates["avatar_source"] = "provider"
-            updates["avatar_file_size_bytes"] = stored_file_size_bytes
-            avatar_file_id = None
-            if stored_file_id:
-                avatar_file_id = stored_file_id
+            # A failed provider refresh must not replace a working Nest avatar.
+            # Retire the old file only after the profile transaction commits.
+            if stored_picture_url and (storage_result == "stored" or not user_doc.get("picture_url")):
+                updates["picture_url"] = stored_picture_url
+                updates["avatar_source"] = "provider"
+                updates["avatar_file_size_bytes"] = stored_file_size_bytes
+                updates["avatar_file_id"] = stored_file_id
                 if previous_file_id and previous_file_id != stored_file_id:
-                    delete_avatar_file(previous_file_id)
-            elif previous_file_id and storage_result == "provider_url_fallback":
-                delete_avatar_file(previous_file_id)
-            if stored_file_id or (
-                previous_file_id and storage_result == "provider_url_fallback"
-            ):
-                updates["avatar_file_id"] = avatar_file_id
+                    previous_avatar_to_delete = previous_file_id
         if email:
             updates["email"] = email
         if provider and provider != "appwrite":
@@ -230,6 +226,11 @@ def _complete_appwrite_login(
             row_id,
             updates,
         )
+        if previous_avatar_to_delete:
+            try:
+                delete_avatar_file(previous_avatar_to_delete)
+            except Exception:
+                logger.exception("Failed to retire replaced profile avatar")
 
     sync_chat_presence_labels_for_user(
         user_doc.get("$id") or user_doc.get("id"),
