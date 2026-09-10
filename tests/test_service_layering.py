@@ -68,6 +68,57 @@ class ServiceLayeringTests(unittest.TestCase):
         self.assertEqual(response[1], 400)
         normalize_canvas.assert_called_once_with("not-used")
 
+    def test_onboarding_accepts_recognized_ics_without_blocking_on_network_probe(self):
+        user = SimpleNamespace(id="user-1", onboarding_complete=False)
+        settings = {
+            "$id": "settings-1",
+            "canvas_ical_url": "",
+            "other_ical_urls_json": "[]",
+        }
+        saved_settings = {**settings, "other_ical_urls_json": '["https://example.com/calendar.ics"]'}
+        entitlements = {
+            "limits": {"max_calendar_feeds": 2},
+            "usage": {"calendar_feeds": 0},
+        }
+
+        with self.app.test_request_context(
+            "/settings/api/feed-url",
+            method="POST",
+            json={
+                "canvas_ical_url": "",
+                "other_ical_urls": ["https://example.com/calendar.ics"],
+            },
+        ):
+            with patch.object(settings_bp, "current_user", user), patch.object(
+                settings_bp,
+                "first_row",
+                return_value=settings,
+            ), patch.object(
+                settings_bp,
+                "request_entitlements",
+                return_value=entitlements,
+            ), patch.object(
+                settings_bp,
+                "update_row_safe",
+                return_value=saved_settings,
+            ), patch.object(
+                settings_bp,
+                "emit_creation_event",
+            ), patch.object(
+                settings_bp.invites,
+                "record_activation",
+            ), patch(
+                "services.feed_fetcher.ensure_fetchable_calendar_url",
+            ) as ensure_fetchable, patch(
+                "services.feed_fetcher.fetch_and_cache_feeds",
+                return_value=0,
+            ):
+                response = settings_bp.update_feed_url.__wrapped__()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["other_ical_urls"], ["https://example.com/calendar.ics"])
+        ensure_fetchable.assert_not_called()
+
     def test_settings_route_uses_patchable_onboarding_handler(self):
         user = SimpleNamespace(id="user-1", onboarding_step=5)
         sentinel = object()

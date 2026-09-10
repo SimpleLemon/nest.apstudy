@@ -54,6 +54,7 @@ from services.calendar_events import (
 )
 from services.calendar_urls import (
     MAX_OTHER_CALENDAR_URLS,
+    classify_calendar_url as _classify_calendar_url,
     iter_valid_other_calendar_urls as _iter_valid_other_calendar_urls,
     load_other_calendar_urls as _load_other_calendar_urls,
     normalize_calendar_url as _normalize_calendar_url,
@@ -1084,6 +1085,12 @@ def update_feed_url():
             from services.feed_fetcher import ensure_fetchable_calendar_url
 
             for candidate in newly_added:
+                if not getattr(current_user, "onboarding_complete", False):
+                    verdict, message = _classify_calendar_url(candidate)
+                    if verdict == "reject":
+                        raise ValueError(message or "That calendar URL is not supported.")
+                    if verdict == "accept":
+                        continue
                 ensure_fetchable_calendar_url(candidate)
         except ValueError as e:
             return jsonify({"error": str(e)}), 400
