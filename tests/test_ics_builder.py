@@ -206,6 +206,88 @@ class TestIcsBuilder(unittest.TestCase):
         )
         reader.assert_called_once_with(isfile.call_args.args[0], "r", encoding="utf-8")
 
+    def test_inject_atlas_schedule_uses_saved_meeting_override(self):
+        user_course = {
+            "term": "2026-fall",
+            "subject": "CHEM",
+            "catalog": "150L",
+            "crn": "2993",
+            "course_overrides_json": json.dumps({
+                "meetings": [
+                    {"day": "Thu", "start": "1600", "end": "1715"},
+                    {"day": "Thu", "start": "1715", "end": "1920"},
+                ],
+            }),
+        }
+        course_data = {
+            "course_code": "CHEM 150L",
+            "course_title": "Structure and Properties Lab",
+            "date_range": {"end": "2026-12-09"},
+            "sections": [{
+                "crn": "2993",
+                "section_number": "5",
+                "schedule": {
+                    "meetings": [
+                        {"day": "Thu", "start": "1630", "end": "1745"},
+                        {"day": "Thu", "start": "1745", "end": "1950"},
+                    ],
+                },
+                "schedule_type": "LAB",
+            }],
+        }
+        calendar = icalendar.Calendar()
+
+        with patch.object(ics_builder, "list_rows_all", return_value=[user_course]), \
+                patch("os.path.isfile", return_value=True), patch(
+                    "builtins.open",
+                    mock_open(read_data=json.dumps(course_data)),
+                ):
+            ics_builder._inject_atlas_schedule(calendar, "42")
+
+        event = self._vevents(calendar)[0]
+        self.assertEqual(event["DTSTART"].dt, datetime(2026, 8, 26, 16))
+        self.assertEqual(event["DTEND"].dt, datetime(2026, 8, 26, 17, 15))
+
+    def test_inject_atlas_schedule_uses_section_number_when_crn_is_missing(self):
+        user_course = {
+            "term": "2026-fall",
+            "subject": "CHEM",
+            "catalog": "150L",
+            "crn": "",
+            "section_number": "3",
+        }
+        course_data = {
+            "course_code": "CHEM 150L",
+            "date_range": {"end": "2026-12-09"},
+            "sections": [
+                {
+                    "crn": "2986",
+                    "section_number": "3",
+                    "schedule": {"meetings": [{"day": "Wed", "start": "1600", "end": "1715"}]},
+                    "schedule_type": "LAB",
+                },
+                {
+                    "crn": "2993",
+                    "section_number": "5",
+                    "schedule": {"meetings": [{"day": "Thu", "start": "1630", "end": "1745"}]},
+                    "schedule_type": "LAB",
+                },
+            ],
+        }
+        calendar = icalendar.Calendar()
+
+        with patch.object(ics_builder, "list_rows_all", return_value=[user_course]), \
+                patch("os.path.isfile", return_value=True), patch(
+                    "builtins.open",
+                    mock_open(read_data=json.dumps(course_data)),
+                ):
+            ics_builder._inject_atlas_schedule(calendar, "42")
+
+        events = self._vevents(calendar)
+        self.assertEqual(len(events), 1)
+        self.assertEqual(str(events[0]["SUMMARY"]), "CHEM 150L LAB (Sec 3)")
+        self.assertEqual(events[0]["DTSTART"].dt, datetime(2026, 8, 26, 16))
+
     def test_inject_atlas_schedule_omits_until_for_invalid_semester_end(self):
         course_data = {
             "course_code": "CHEM 150",

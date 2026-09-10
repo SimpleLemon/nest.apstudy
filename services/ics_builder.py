@@ -11,9 +11,11 @@ The generated .ics is served at /api/calendar/feed.ics?token=USER_TOKEN
 by the calendar_api blueprint.
 """
 
-import icalendar
+import json
 from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
+
+import icalendar
 
 from appwrite.exception import AppwriteException
 from appwrite.query import Query
@@ -35,6 +37,19 @@ from services.calendar_events import (
 
 DEFAULT_ICS_TIMEZONE = "America/New_York"
 ATLAS_ZONE = ZoneInfo(DEFAULT_ICS_TIMEZONE)
+
+
+def _parse_course_overrides(value):
+    """Return saved course edits without allowing malformed data to break a feed."""
+    if isinstance(value, dict):
+        return value
+    if not isinstance(value, str) or not value.strip():
+        return {}
+    try:
+        parsed = json.loads(value)
+    except (TypeError, json.JSONDecodeError):
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
 
 
 def _user_settings(user_id):
@@ -317,14 +332,13 @@ def build_ics_for_user(user_id):
 def _inject_atlas_schedule(cal, user_id):
     """
     If the user has selected courses in "My Courses", inject their
-    Atlas meeting times as recurring weekly events.
+    Atlas meeting times or saved meeting overrides as recurring weekly events.
 
     This merges class schedules (from the Atlas scrape) with Canvas
     assignment due dates (from the iCal feed) into a single .ics file.
 
     Reads from user_courses table and atlas-data/ JSON files.
     """
-    import json
     import os
 
     _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -344,6 +358,10 @@ def _inject_atlas_schedule(cal, user_id):
     now = datetime.now(timezone.utc)
 
     for uc in user_courses:
+        course_overrides = _parse_course_overrides(uc.get("course_overrides_json"))
+        selected_crn = str(uc.get("crn") or "").strip()
+        selected_section_number = str(uc.get("section_number") or "").strip()
+
         # Read the course JSON file
         filepath = os.path.join(
             ATLAS_DATA_DIR,
@@ -360,11 +378,15 @@ def _inject_atlas_schedule(cal, user_id):
         except (json.JSONDecodeError, IOError):
             continue
 
-        course_code = course_data.get(
+        course_code = course_overrides.get("course_code") or course_data.get(
             "course_code",
             f"{uc.get('subject')} {uc.get('catalog')}",
         )
-        course_title = course_data.get("course_title", "")
+        course_title = (
+            course_overrides.get("course_title")
+            or course_overrides.get("course_name")
+            or course_data.get("course_title", "")
+        )
         date_range = course_data.get("date_range", {})
 
         # Determine semester date boundaries for RRULE UNTIL
@@ -381,14 +403,28 @@ def _inject_atlas_schedule(cal, user_id):
 
         for section in sections:
             # If user selected a specific CRN, only include that section
-            if uc.get("crn") and section.get("crn") != uc.get("crn"):
+            if selected_crn and str(section.get("crn") or "").strip() != selected_crn:
+                continue
+            if (
+                not selected_crn
+                and selected_section_number
+                and str(section.get("section_number") or "").strip() != selected_section_number
+            ):
                 continue
 
             schedule = section.get("schedule", {})
-            meetings = schedule.get("meetings", [])
-            schedule_type = section.get("schedule_type", "")
-            instructor = section.get("instructor", "")
-            section_num = section.get("section_number", "")
+            meetings = (
+                course_overrides["meetings"]
+                if "meetings" in course_overrides
+                else schedule.get("meetings", [])
+            )
+            schedule_type = course_overrides.get("schedule_type") or section.get("schedule_type", "")
+            instructor = (
+                course_overrides.get("instructor")
+                or course_overrides.get("instructor_name")
+                or section.get("instructor", "")
+            )
+            section_num = course_overrides.get("section_number") or section.get("section_number", "")
 
             if not meetings:
                 continue

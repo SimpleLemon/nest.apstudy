@@ -101,6 +101,23 @@ class SimulatedCoursesProjectorTests(unittest.TestCase):
             [datetime(2025, 10, 27, 14, tzinfo=timezone.utc), datetime(2025, 11, 3, 15, tzinfo=timezone.utc)],
         )
 
+    def test_saved_meeting_overrides_are_used_for_calendar_events(self):
+        self.rows = [self._row(course_overrides_json=json.dumps({
+            "meetings": [
+                {"day": "Mon", "start": "1600", "end": "1715"},
+                {"day": "Mon", "start": "1715", "end": "1920"},
+            ],
+        }))]
+        outcome = self._project(start=date(2025, 8, 25), end=date(2025, 8, 26))
+
+        self.assertEqual(
+            [(event.start, event.end) for event in outcome.events],
+            [
+                (datetime(2025, 8, 25, 20, tzinfo=timezone.utc), datetime(2025, 8, 25, 21, 15, tzinfo=timezone.utc)),
+                (datetime(2025, 8, 25, 21, 15, tzinfo=timezone.utc), datetime(2025, 8, 25, 23, 20, tzinfo=timezone.utc)),
+            ],
+        )
+
     def test_uid_identity_uses_wall_clock_times(self):
         self.rows = [self._row()]
         outcome = self._project(start=date(2025, 8, 25), end=date(2025, 8, 26))
