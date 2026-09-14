@@ -7,6 +7,9 @@ from services import database as _nest_database
 
 
 CALENDAR_TABLES = (
+    "external_calendar_resolutions",
+    "external_calendar_conflicts", "external_calendar_jobs", "external_calendar_events",
+    "external_calendar_exports", "external_calendars", "external_calendar_oauth", "external_calendar_connections",
     "calendar_cache",
     "calendar_feeds",
     "user_calendar_preferences",
@@ -47,7 +50,7 @@ TABLE_COLUMNS = {
     },
     "user_events": {
         "id", "user_id", "title", "description", "start", "end", "is_all_day",
-        "color", "calendar_id", "reminder_minutes", "created_at", "updated_at",
+        "color", "calendar_id", "reminder_minutes", "timezone", "location", "created_at", "updated_at",
     },
     "user_calendar_sources": {
         "id", "user_id", "source_id", "kind", "default_name", "created_at",

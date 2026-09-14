@@ -707,6 +707,11 @@ def create_event():
     start_raw = data.get("start_date") or data.get("start")
     end_raw = data.get("end_date") or data.get("end")
     all_day = bool(data.get("all_day", False))
+    from services.external_calendar_domain import native_metadata
+    try:
+        metadata = native_metadata(data)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
     calendar_id = _normalize_calendar_id(data.get("calendar_id"))
     try:
         color = _normalize_color(data.get("color"))
@@ -732,6 +737,7 @@ def create_event():
             COLLECTIONS["user_events"],
             row_id=ID.unique(),
             data={
+                **metadata,
                 "user_id": str(current_user.id),
                 "title": title,
                 "description": description,
@@ -804,7 +810,11 @@ def update_event(event_id):
     all_day = data.get("all_day")
     calendar_id = data.get("calendar_id")
 
-    updates = {"updated_at": format_datetime(datetime.utcnow())}
+    from services.external_calendar_domain import native_metadata
+    try:
+        updates = {"updated_at": format_datetime(datetime.utcnow()), **native_metadata(data)}
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
     if title is not None:
         updates["title"] = title
     if description is not None:

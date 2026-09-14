@@ -311,6 +311,8 @@ def _effective_extension_capabilities():
     effective = dict(configured) if isinstance(configured, dict) else dict(EXTENSION_CAPABILITIES)
     for capability in EXTENSION_CAPABILITIES:
         effective[capability] = extension_capability_enabled(capability)
+    from services.external_calendar_service import capabilities as provider_capabilities
+    effective.update({key: value for key, value in provider_capabilities().items() if key != 'providers'})
     return effective
 
 

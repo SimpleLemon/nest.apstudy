@@ -39,8 +39,8 @@
             for (const source of state.calendarSources) {
                 const sourceId = source.id || "";
                 addCalendar(sourceId, {
-                    label: source.display_name || source.default_name || sourceId,
-                    defaultName: source.default_name || source.display_name || sourceId,
+                    label: source.display_name || source.default_name || source.name || sourceId,
+                    defaultName: source.default_name || source.display_name || source.name || sourceId,
                     url: source.url || "",
                     color: source.color_hex || source.color || "",
                     kind: source.kind || "external",
@@ -80,9 +80,9 @@
 
         function getCalendarOptionsForEventForm() {
             const entries = Object.entries(state.calendars)
-                .filter(([name]) => name !== simulatedCalendarName)
+                .filter(([name, data]) => (state.nativeEditable !== false || name.startsWith("external:")) && name !== simulatedCalendarName && (!name.startsWith("external:") || data.editable === true))
                 .sort(([, a], [, b]) => getCalendarLabelFromData(a).localeCompare(getCalendarLabelFromData(b)));
-            if (!entries.some(([name]) => name === defaultLocalCalendarId)) {
+            if (state.nativeEditable !== false && !entries.some(([name]) => name === defaultLocalCalendarId)) {
                 entries.unshift([
                     defaultLocalCalendarId,
                     {
@@ -104,6 +104,7 @@
         }
 
         function getDefaultCalendarIdForEventForm() {
+            if (state.nativeEditable === false) return getCalendarOptionsForEventForm()[0]?.id || "";
             const localVisible = Object.entries(state.calendars).find(([name, data]) => isLocalCalendar(name) && data.visible !== false);
             if (localVisible) return localVisible[0];
             const localAny = Object.keys(state.calendars).find((name) => isLocalCalendar(name));

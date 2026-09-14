@@ -29,8 +29,14 @@ from blueprints.extension_api import extension_api_bp
 from blueprints.extension_calendar_api import extension_calendar_bp
 
 
+from blueprints.external_calendar_api import external_calendar_bp, external_calendar_extension_bp, external_calendar_oauth_bp
+
+
 def register_blueprints(app):
     """Register all blueprints on the Flask application instance."""
+    app.register_blueprint(external_calendar_bp, url_prefix="/api/calendar")
+    app.register_blueprint(external_calendar_extension_bp, url_prefix="/api/extension/calendar")
+    app.register_blueprint(external_calendar_oauth_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(atlas_bp, url_prefix="/api/atlas")

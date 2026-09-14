@@ -615,6 +615,9 @@ def init_scheduler(app):
         default_interval = int(configured.feed_refresh_interval_minutes_raw)
         course_tracking_interval = 5
         _scheduler = BackgroundScheduler(daemon=True)
+        from services.external_calendar_sync import tick as sync_external_calendars
+        _scheduler.add_job(func=lambda: sync_external_calendars(app), trigger=IntervalTrigger(minutes=1),
+                           id="external_calendar_sync", max_instances=1, coalesce=True, replace_existing=True)
 
         _scheduler.add_job(
             func=lambda: _refresh_all_feeds(app),

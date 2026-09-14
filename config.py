@@ -62,6 +62,7 @@ class EnvironmentConfig:
     calendar_ics_subscriptions_enabled_raw: str = "0"
     calendar_ics_subscriptions_owner_allowlist_raw: str = ""
     calendar_ics_uid_secret: str | None = field(default=None, repr=False)
+    calendar_provider_settings: dict = field(default_factory=dict, repr=False)
     giphy_api_key: str = field(default="", repr=False)
     admin_user_ids_raw: str | None = None
     admin_user_id_raw: str | None = None
@@ -177,6 +178,12 @@ def load_environment_config():
             get("CALENDAR_ICS_OWNER_ALLOWLIST", get("CALENDAR_ICS_ALLOWLIST", "")),
         ),
         calendar_ics_uid_secret=get("CALENDAR_ICS_UID_SECRET"),
+        calendar_provider_settings={name: get(name, "") for name in (
+            "CALENDAR_SYNC_ENABLED", "CALENDAR_GOOGLE_CLIENT_ID", "CALENDAR_GOOGLE_CLIENT_SECRET",
+            "CALENDAR_MICROSOFT_CLIENT_ID", "CALENDAR_MICROSOFT_CLIENT_SECRET",
+            "CALENDAR_TOKEN_KEYS", "CALENDAR_TOKEN_ACTIVE_KEY", "CALENDAR_OAUTH_BASE_URL",
+            "CALENDAR_SYNC_USER_ALLOWLIST", "CALENDAR_GOOGLE_ENABLED", "CALENDAR_MICROSOFT_ENABLED",
+        ) if get(name) is not None},
         giphy_api_key=get("GIPHY_API_KEY", ""),
         admin_user_ids_raw=get("ADMIN_USER_IDS"),
         admin_user_id_raw=get("ADMIN_USER_ID"),

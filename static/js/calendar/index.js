@@ -2,9 +2,9 @@
    Dashboard Calendar & Assignments
    ──────────────────────────────────────────────────────────────────────────── */
 /* ── Constants ─────────────────────────────────────────────────────────────── */
-import { createCalendarLifecycle } from "./lifecycle.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
-import { normalizeCalendarCapabilities } from "./capabilities.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
-import { createCalendarExtensionUi } from "./extension-ui.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+import { createCalendarLifecycle } from "./lifecycle.js?v=7e3e3ee30482c8c534bd8b5f6c9bec6885ade0f3e55fdd15db3757768a8aede1";
+import { normalizeCalendarCapabilities } from "./capabilities.js?v=7e3e3ee30482c8c534bd8b5f6c9bec6885ade0f3e55fdd15db3757768a8aede1";
+import { createCalendarExtensionUi } from "./extension-ui.js?v=7e3e3ee30482c8c534bd8b5f6c9bec6885ade0f3e55fdd15db3757768a8aede1";
 
 export function mountCalendar(root, dataAdapter, capabilities = {}) {
     if (!root || root.nodeType !== 1) return () => {};
@@ -24,6 +24,7 @@ export function mountCalendar(root, dataAdapter, capabilities = {}) {
             <nav aria-label="Calendar view"><button id="calendar-view-month" type="button">Month</button><button id="calendar-view-week" type="button">Week</button><button id="calendar-view-upcoming" type="button">Agenda</button></nav>
             <div id="calendar-period-controls"><button id="calendar-prev" type="button" aria-label="Previous period">Previous</button><button id="calendar-today" type="button">Today</button><button id="calendar-next" type="button" aria-label="Next period">Next</button></div>
             <button id="calendar-toggle-menu" type="button" aria-expanded="false">Calendars</button><button id="calendar-refresh" type="button">Refresh</button><button id="calendar-new-event" type="button">New event</button>
+            <a href="https://nest.apstudy.org/calendar/connections" target="_blank" rel="noopener noreferrer">Manage connections</a>
         </header><div id="calendar-menu" class="hidden"></div><div id="calendar-view-root" aria-live="polite"></div><div id="calendar-popover-root"></div>`;
     }
     const canvasPageReadOnly = body?.dataset.calendarReadonly === "true";
@@ -104,6 +105,7 @@ const state = window.APStudyCalendarState.createCalendarState({
     publicShareCode: PUBLIC_SHARE_CODE,
     readOnly: calendarCapabilities.readOnly,
 });
+state.nativeEditable = !extensionMount || capabilities.nestMutation === true;
 if (extensionMount) {
     state.public.title = "Calendar";
     state.public.rangeLabel = "Read-only";

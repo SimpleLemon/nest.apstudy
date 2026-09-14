@@ -1,4 +1,5 @@
-import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+/* global crypto */
+import { escapeHtml } from "../../core/ui-primitives-module.js?v=7e3e3ee30482c8c534bd8b5f6c9bec6885ade0f3e55fdd15db3757768a8aede1";
 
 // Event create/edit modal and API integration.
 (function () {
@@ -6,6 +7,10 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
     let currentMode = "create";
     let currentEventId = null;
     let currentEventRef = null;
+    let providerRevision = null;
+    let providerAttempt = null;
+    let providerAttemptBody = null;
+    let providerTimezone = null;
     let selectedCalendarId = null;
     let selectedColor = null;
     let openerEl = null;
@@ -224,6 +229,17 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
         m.style.display = "flex";
         const form = m.querySelector("form");
         clearFormErrors(form);
+        if (data.source_type === "external" || String(calendarId).startsWith("external:")) {
+            const label = document.createElement("label"); label.textContent = "Location";
+            const location = document.createElement("input"); location.name = "location"; location.value = data.location || ""; location.disabled = isView;
+            label.append(location); form.querySelector(".calendar-event-footer")?.before(label);
+            const select = form.querySelector('[name="calendar_id"]'); if (select && currentMode === "edit") select.disabled = true;
+        }
+
+        if (data.source_type === "external" && data.source_url) {
+            const link = document.createElement("a"); link.textContent = data.provider === "google" ? "Open in Google Calendar" : "Open in Outlook";
+            link.href = data.source_url; link.target = "_blank"; link.rel = "noopener noreferrer"; form.querySelector(".calendar-event-footer")?.prepend(link);
+        }
         form?.querySelector("input[name='title']")?.focus();
     }
 
@@ -232,6 +248,10 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
         currentMode = mode;
         currentEventId = mode === "edit" ? data.id || null : null;
         currentEventRef = data.event_ref || null;
+        providerRevision = data.revision || null;
+        providerTimezone = data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+        providerAttempt = crypto.randomUUID();
+        providerAttemptBody = null;
         selectedCalendarId = data.calendar_id || getDefaultCalendarId();
         selectedColor = data.color || null;
         renderModal(data);
@@ -276,6 +296,7 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
             reminder_minutes: Number(form.reminder_minutes?.value ?? defaultReminderMinutes(Boolean(form.all_day?.checked))),
             calendar_id: form.calendar_id?.value || selectedCalendarId || getDefaultCalendarId(),
             color: selectedColor,
+            timezone: providerTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
     }
 
@@ -292,7 +313,21 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
             reminder_minutes: Number(form.reminder_minutes.value),
             calendar_id: form.calendar_id.value || getDefaultCalendarId(),
             color: selectedColor,
+            timezone: providerTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
+        if (String(currentEventRef || payload.calendar_id).startsWith("external:")) {
+            payload.revision = providerRevision;
+            payload.idempotency_key = providerAttempt;
+            payload.timezone = providerTimezone;
+            if (form.location) payload.location = form.location.value;
+            payload.start = payload.all_day ? form.start.value.slice(0, 10) : payload.start_date;
+            payload.end = payload.all_day ? form.end.value.slice(0, 10) : payload.end_date;
+        }
+        if (payload.idempotency_key) {
+            const signature = JSON.stringify({ ...payload, idempotency_key: undefined });
+            if (providerAttemptBody && providerAttemptBody !== signature) providerAttempt = crypto.randomUUID();
+            providerAttemptBody = signature; payload.idempotency_key = providerAttempt;
+        }
         if (currentMode === "override") {
             payload.event_ref = currentEventRef;
         }

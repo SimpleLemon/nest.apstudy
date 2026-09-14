@@ -1,4 +1,5 @@
-import { getSafeCanvasSourceUrl } from "./capabilities.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+/* global crypto */
+import { getSafeCanvasSourceUrl } from "./capabilities.js?v=7e3e3ee30482c8c534bd8b5f6c9bec6885ade0f3e55fdd15db3757768a8aede1";
 
 function responseJson(response) {
     return response.json().catch(() => ({}));
@@ -65,7 +66,7 @@ export function createCalendarDataAdapter(overrides = {}) {
                 return { response, payload: await responseJson(response) };
             },
             async createEvent({ payload, signal } = {}) {
-                const response = await request("/api/calendar/events", {
+                const response = await request(String(payload?.calendar_id || "").startsWith("external:") ? "/api/calendar/external-events" : "/api/calendar/events", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
@@ -74,7 +75,7 @@ export function createCalendarDataAdapter(overrides = {}) {
                 return { response, payload: await responseJson(response) };
             },
             async updateEvent({ eventId, payload, signal } = {}) {
-                const response = await request(`/api/calendar/events/${encodeURIComponent(eventId)}`, {
+                const response = await request(String(eventId).startsWith("external:") ? `/api/calendar/external-events/${encodeURIComponent(eventId.slice(9))}` : `/api/calendar/events/${encodeURIComponent(eventId)}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
@@ -92,6 +93,12 @@ export function createCalendarDataAdapter(overrides = {}) {
                 return { response, payload: await responseJson(response) };
             },
             async deleteEvent({ eventId, signal } = {}) {
+                if (String(eventId).startsWith("external:")) {
+                    const event = runtimeWindow.getCalendarEventByRef?.(eventId);
+                    if (!event?.revision) throw new Error("Refresh this event before deleting it.");
+                    return request(`/api/calendar/external-events/${encodeURIComponent(eventId.slice(9))}`, { method: "DELETE", signal,
+                        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ revision: event.revision, idempotency_key: crypto.randomUUID() }) });
+                }
                 return request(`/api/calendar/events/${encodeURIComponent(eventId)}`, {
                     method: "DELETE",
                     signal,

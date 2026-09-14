@@ -2741,6 +2741,8 @@ def _serialize_user_event(doc):
         "editable": True,
         "title": doc.get("title"),
         "description": doc.get("description"),
+        "timezone": doc.get("timezone") or "UTC",
+        "location": doc.get("location") or "",
         "start": _serialize_datetime(start, is_all_day),
         "end": _serialize_datetime(end, is_all_day),
         "is_all_day": is_all_day,
@@ -4347,9 +4349,16 @@ def get_events_response(user_id, response_user_id, args, dependencies):
         + task_events
     )
 
+    from services.external_calendar_service import project as project_external
+    external_events, external_sources = project_external(user_id, range_start, range_end)
+    serialized += external_events
+    calendar_sources += external_sources
+    from services.external_calendar_service import capabilities as provider_capabilities
+
     return jsonify({
         "user_id": response_user_id,
         "count": len(serialized),
+        "capabilities": provider_capabilities(),
         "events": serialized,
         "feed_configured": bool(feed_urls),
         "calendar_sources": calendar_sources,

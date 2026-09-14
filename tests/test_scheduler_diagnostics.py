@@ -120,6 +120,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
                 "cleanup_note_media",
                 "reconcile_discord_chat",
                 "sync_discord_roles",
+                "external_calendar_sync",
             },
         )
         course_tracking_job = next(job for job in status["jobs"] if job["id"] == "check_course_seat_tracks")

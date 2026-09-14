@@ -88,6 +88,12 @@
             ] : [];
         }
 
+        if (event?.source_type === "external") {
+            const items = [{ label: "View Event", icon: "visibility", onClick: openView }];
+            if (event.editable === true) items.push({ label: "Edit Event", icon: "edit_calendar", onClick: openEdit }, { label: "Delete Event", icon: "delete", onClick: deleteEvent, danger: true });
+            if (event.source_url) items.push({ label: event.provider === "google" ? "Open in Google Calendar" : "Open in Outlook", icon: "open_in_new", onClick: () => window.open(event.source_url, "_blank", "noopener,noreferrer") });
+            return items;
+        }
         const isTask = event?.source_type === "task" || event?.type === "task";
         if (isTask) {
             return event?.task_id
@@ -102,6 +108,7 @@
             ];
         }
 
+        if (window.state?.nativeEditable === false) return [{ label: "View Event", icon: "visibility", onClick: openView }];
         if (isImportedEvent(event)) {
             return [
                 { label: "View / Edit Event", icon: "edit_calendar", onClick: openEdit },
@@ -273,6 +280,7 @@
         const event = context.event;
         const data = formDataForEvent(event);
         if (!data) return;
+        if ((event.source_type === "external" && event.editable !== true) || (event.source_type !== "external" && window.state?.nativeEditable === false)) return openView(context);
         window.openCalendarEventForm?.({
             mode: isImportedEvent(event) ? "override" : "edit",
             data,

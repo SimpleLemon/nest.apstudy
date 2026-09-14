@@ -76,7 +76,7 @@
                 localStorage.setItem(eventsCacheKey, JSON.stringify({
                     cached_at: Date.now(),
                     range: range ? { start: range.start.toISOString(), end: range.end.toISOString() } : null,
-                    payload,
+                    payload: { ...payload, events: (payload.events || []).filter(event => event.source_type !== "external"), sources: (payload.sources || []).filter(source => !String(source.id).startsWith("external:")), calendar_sources: (payload.calendar_sources || payload.sources || []).filter(source => !String(source.id).startsWith("external:")) },
                 }));
             } catch (err) {
                 console.warn("Failed to cache calendar events:", err);
