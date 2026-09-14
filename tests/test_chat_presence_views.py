@@ -1,8 +1,10 @@
 import inspect
+import sqlite3
 import unittest
 from unittest.mock import Mock, patch
 
 from flask import Flask
+from appwrite.exception import AppwriteException
 
 import blueprints.chat_api as chat_api
 from services import chat_presence_runtime, chat_presence_views
@@ -284,6 +286,42 @@ class TestChatPresenceViews(unittest.TestCase):
             },
         )
         create_row.assert_not_called()
+
+    def test_upsert_recovers_a_concurrent_insert_without_hiding_other_failures(self):
+        for cause, winner in (
+            (sqlite3.IntegrityError("UNIQUE constraint failed"), {"$id": "winner"}),
+            (sqlite3.IntegrityError("constraint failed"), None),
+            (sqlite3.OperationalError("database unavailable"), {"$id": "winner"}),
+        ):
+            with self.subTest(cause=type(cause).__name__, winner=winner):
+                error = AppwriteException(str(cause))
+                error.__cause__ = cause
+                first_row = Mock(side_effect=[None, winner])
+                update_row = Mock(return_value={"$id": "winner", "updated": True})
+                arguments = dict(
+                    current_user_id_fn=lambda: "user-1",
+                    presence_scope_allowed_fn=lambda *_args: True,
+                    now_fn=lambda: "now",
+                    format_datetime_fn=lambda value: value,
+                    presence_collection="chat_presence",
+                    query_cls=_QueryStub,
+                    first_row_fn=first_row,
+                    update_row_fn=update_row,
+                    create_row_fn=Mock(side_effect=error),
+                    id_unique_fn=lambda: "loser",
+                    row_id_fn=lambda row: row["$id"],
+                )
+                if isinstance(cause, sqlite3.IntegrityError) and winner:
+                    result = chat_presence_views.upsert_presence("site", "global", "tab", **arguments)
+                    self.assertEqual(result, {"$id": "winner", "updated": True})
+                    update_row.assert_called_once()
+                    self.assertEqual(update_row.call_args.args[1], "winner")
+                    self.assertEqual(first_row.call_args_list[0], first_row.call_args_list[1])
+                else:
+                    with self.assertRaises(AppwriteException) as raised:
+                        chat_presence_views.upsert_presence("site", "global", "tab", **arguments)
+                    self.assertIs(raised.exception, error)
+                    update_row.assert_not_called()
 
     def test_blueprint_online_adapter_uses_patchable_presence_row_callback(self):
         rows = [{

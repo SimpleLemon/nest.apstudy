@@ -3,6 +3,8 @@
 import re
 import sqlite3
 
+from appwrite.exception import AppwriteException
+
 
 def presence_online_users(
     *,
@@ -310,8 +312,20 @@ def upsert_presence(
     )
     if existing:
         return update_row_fn(presence_collection, row_id_fn(existing), payload)
-    return create_row_fn(
-        presence_collection,
-        row_id=id_unique_fn(),
-        data=payload,
-    )
+    try:
+        return create_row_fn(
+            presence_collection,
+            row_id=id_unique_fn(),
+            data=payload,
+        )
+    except AppwriteException as exc:
+        # Another heartbeat can insert this key after our initial lookup.
+        if not isinstance(exc.__cause__, sqlite3.IntegrityError):
+            raise
+        existing = first_row_fn(
+            presence_collection,
+            [query_cls.equal("presence_key", [presence_key])],
+        )
+        if not existing:
+            raise
+        return update_row_fn(presence_collection, row_id_fn(existing), payload)
