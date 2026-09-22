@@ -42,6 +42,10 @@
                 <span class="admin-sidebar-icon material-symbols-outlined" aria-hidden="true">smart_toy</span>
                 <span>APSwiftly</span>
             </a>
+            <a class="admin-sidebar-item {% if active_admin_page == 'themes' %}is-active{% endif %}" href="/admin/themes">
+                <svg class="admin-sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                <span>Community themes</span>
+            </a>
         </nav>
         {% if admin_viewer %}
             <div class="admin-sidebar-profile">

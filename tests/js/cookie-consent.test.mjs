@@ -229,12 +229,12 @@ test("consent initialization reuses an existing root and has one delegated bindi
 
 test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
     const authenticatedTemplates = [
-        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html",
+        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html", "admin_themes.html",
         "calendar.html", "calendar_connections.html", "chat.html", "courses.html", "dashboard.html", "derek_echo.html", "files.html", "focus.html", "notes.html",
         "onboarding.html", "settings.html", "task.html",
     ];
     const publicTemplates = [
-        "landing.html",
+        "landing.html", "community_themes.html",
         "legal_document.html",
         "user_profile.html",
         "calendar_share.html",

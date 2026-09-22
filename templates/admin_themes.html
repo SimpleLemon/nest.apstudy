@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}<title>Community themes · Nest Admin</title>{% endblock %}
+{% block head_early %}<meta name="csrf-token" content="{{ csrf_token_value }}">{% endblock %}
+{% block feature_styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='css/admin/responsive.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='css/community-themes.css') }}">{% endblock %}
+{% block body_attrs %} class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}
+{% block body_content %}
+{% include "_admin_sidebar.html" %}
+<main class="admin-shell theme-admin" id="theme-app" data-view="admin">
+    <header class="theme-header"><div>{% include "_admin_breadcrumbs.html" %}<h1>Community themes</h1><p>Review the exact revision before publishing. Updated themes keep their approved version until the next approval.</p></div><a class="theme-button" href="/themes">Open gallery</a></header>
+    <p id="theme-status" role="status" aria-live="polite"></p>
+    <div id="theme-counts" class="theme-counts" aria-label="Moderation totals"></div>
+    <form id="theme-search" class="theme-toolbar"><label>Status<select id="theme-filter"><option value="pending">Awaiting review</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="draft">Drafts</option><option value="unpublished">Unpublished</option><option value="reports">Open reports</option><option value="">All themes</option></select></label><label>Search<input id="theme-query" type="search" maxlength="80" placeholder="Theme or creator"></label><button class="theme-button" type="submit">Filter</button></form>
+    <section id="theme-content" aria-label="Moderation queue" aria-busy="true"><p>Loading moderation queue…</p></section><button id="theme-more" class="theme-button" type="button" hidden>Load more</button>
+    <section id="theme-review" aria-label="Theme review" tabindex="-1" hidden></section>
+</main>
+{% endblock %}
+{% block shared_head_scripts %}<script src="{{ url_for('static', filename='js/core/ui-primitives.js') }}" defer></script>{{ super() }}{% endblock %}
+{% block body_scripts %}<script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script><script src="{{ url_for('static', filename='js/community-themes/core.js') }}"></script><script type="module" src="{{ url_for('static', filename='js/community-themes/app.js') }}"></script>{% endblock %}

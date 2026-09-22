@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}<title>Community themes · Nest</title>{% endblock %}
+{% block head_early %}<meta name="csrf-token" content="{{ csrf_token_value }}">{% endblock %}
+{% block feature_styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/community-themes.css') }}">{% endblock %}
+{% block body_attrs %} data-analytics-mode="public-choice" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}
+{% block body_content %}
+<!-- Theme workspace inherits Nest's navy/parchment surfaces and semantic tokens. Visitors browse approved work; authors edit a private draft and explicitly submit. Preview shows illustrative Canvas content, never personal coursework. No seeded themes. -->
+<main class="theme-shell" id="theme-app" data-view="{{ theme_view }}" data-theme-id="{{ theme_id }}" data-signed-in="{{ 'true' if signed_in else 'false' }}">
+    <header class="theme-header"><div><a href="/dashboard" class="theme-back">Nest / APStudyCanvas</a><h1>{{ 'Create a theme' if theme_view == 'editor' else 'My themes' if theme_view == 'mine' else 'Community themes' }}</h1><p>Make Canvas feel like your own. Every public theme is reviewed by an admin.</p></div><nav class="theme-actions" aria-label="Theme navigation"><a href="/themes">Gallery</a><a href="/themes/mine">My themes</a><a class="theme-button theme-primary" href="/themes/new">Create theme</a></nav></header>
+    <p id="theme-status" role="status" aria-live="polite"></p>
+    {% if theme_view == 'gallery' %}<form id="theme-search" class="theme-toolbar"><label>Search<input id="theme-query" type="search" maxlength="80" placeholder="Theme or creator"></label><label>Category<select id="theme-tag"><option value="">All categories</option></select></label><button class="theme-button" type="submit">Search</button></form>{% endif %}
+    <section id="theme-content" aria-label="Themes" aria-busy="true"><p>Loading themes…</p></section>
+    <button id="theme-more" class="theme-button" type="button" hidden>Load more</button>
+    <noscript>Enable JavaScript to browse previews and edit themes.</noscript>
+</main>
+{% endblock %}
+{% block shared_head_scripts %}<script src="{{ url_for('static', filename='js/core/ui-primitives.js') }}" defer></script>{{ super() }}{% endblock %}
+{% block body_scripts %}<script src="{{ url_for('static', filename='js/community-themes/core.js') }}"></script><script type="module" src="{{ url_for('static', filename='js/community-themes/app.js') }}"></script>{% endblock %}

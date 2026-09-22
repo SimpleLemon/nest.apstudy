@@ -27,6 +27,20 @@ module.exports = [
             "no-implicit-globals": "warn",
         },
     },
+    {
+        files: ["static/js/community-themes/*.js"],
+        languageOptions: {
+            globals: Object.fromEntries([
+                "document", "window", "location", "navigator", "confirm",
+                "fetch", "AbortSignal", "URL", "URLSearchParams", "Blob",
+                "structuredClone", "setTimeout",
+            ].map(name => [name, "readonly"])),
+        },
+    },
+    {
+        files: ["static/js/community-themes/core.js"],
+        languageOptions: { globals: { module: "readonly" } },
+    },
     // Measured 2026-08-07: 3,283 existing warnings (3,160 no-undef and
     // 123 no-unused-vars). Keep that backlog visible while enforcing the
     // clean shared browser-shell subset below.
