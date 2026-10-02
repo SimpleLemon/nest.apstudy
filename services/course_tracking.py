@@ -289,13 +289,9 @@ def check_course_seat_tracks(*, term=None, subject=None, catalog=None, poll_sour
     if not tracks:
         logger.info("Course tracking skipped: no enabled course seat tracks.")
         metadata = {"reason": "no_due_tracks" if enabled_count else "no_enabled_tracks", "enabled_track_count": enabled_count, "track_count": 0, **filter_metadata}
-        emitted = _emit_poll_event(
-            "Automated Course Track Poll Skipped",
-            metadata=metadata,
-            color="gray",
-        )
+        # Idle polls are expected outside registration and between track intervals.
         update_course_tracks_channel_topic(0)
-        _record_last_poll("Automated Course Track Poll Skipped", metadata, discord_emit_returned=emitted)
+        _record_last_poll("Automated Course Track Poll Skipped", metadata, discord_emit_returned=False)
         return 0
 
     grouped_tracks = {}
