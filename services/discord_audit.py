@@ -54,8 +54,9 @@ def _utcnow_iso():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def _env_channel_id(channel):
-    configured = runtime_environment_config()
+def _env_channel_id(channel, configured=None):
+    if configured is None:
+        configured = runtime_environment_config()
     override = {
         "admin": configured.discord_audit_admin_channel_id,
         "course_tracks": configured.discord_audit_course_tracks_channel_id,
@@ -522,12 +523,16 @@ class DiscordAuditService:
         *,
         fallback_path=None,
         token_getter=_bot_token,
+        channel_id_getter=_env_channel_id,
+        console_enabled_getter=_console_log_enabled,
         request_func=requests.request,
         sleep_event_factory=threading.Event,
         max_queue_events=MAX_QUEUE_EVENTS,
     ):
         self.fallback_path = fallback_path
         self.token_getter = token_getter
+        self.channel_id_getter = channel_id_getter
+        self.console_enabled_getter = console_enabled_getter
         self.request_func = request_func
         self.max_queue_events = max_queue_events
         self.queue = deque()
@@ -571,9 +576,9 @@ class DiscordAuditService:
             return False
 
     def emit_console_content(self, content):
-        if not _console_log_enabled():
+        if not self.console_enabled_getter():
             return False
-        channel_id = _env_channel_id("console_logs")
+        channel_id = self.channel_id_getter("console_logs")
         if not channel_id:
             logger.warning("Discord console_logs channel is not configured for console output")
             return False
@@ -701,7 +706,7 @@ class DiscordAuditService:
         )
 
     def _send_queued(self, queued):
-        channel_id = queued.event.channel_id()
+        channel_id = self.channel_id_getter(queued.event.channel)
         if not channel_id:
             logger.warning(
                 "Discord audit channel ID missing for channel %s; persisting event to fallback",
@@ -777,7 +782,7 @@ class DiscordAuditService:
         self._enqueue(queued)
 
     def _already_posted(self, event):
-        channel_id = event.channel_id()
+        channel_id = self.channel_id_getter(event.channel)
         if not channel_id or not self.token_getter():
             return False
         try:
@@ -852,7 +857,12 @@ def init_discord_audit(app):
     fallback_path = configured.discord_audit_fallback_path
     if not fallback_path:
         fallback_path = os.path.join(app.instance_path, "discord_audit_fallback.jsonl")
-    _service = _service or DiscordAuditService(fallback_path=fallback_path)
+    _service = _service or DiscordAuditService(
+        fallback_path=fallback_path,
+        token_getter=lambda: (configured.discord_bot_token or "").strip(),
+        channel_id_getter=lambda channel: _env_channel_id(channel, configured),
+        console_enabled_getter=lambda: configured.discord_console_log_enabled_raw != "0",
+    )
     _service.start()
     init_discord_error_reporting(app)
     init_server_console_forwarding(app)

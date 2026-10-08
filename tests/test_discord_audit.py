@@ -237,7 +237,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         service = DiscordAuditService(token_getter=lambda: "token")
         with patch.object(discord_audit, "get_audit_service", return_value=service), \
                 patch.object(service, "emit_console_content", return_value=True) as emit_content, \
-                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token", "DISCORD_CONSOLE_LOG_ENABLED": "1"}, clear=False):
             discord_audit._browser_console_batches.clear()
             queued = discord_audit.queue_browser_console_lines(
                 actor="user-1",
@@ -271,7 +271,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             token_getter=lambda: "token",
             request_func=lambda *args, **kwargs: ResponseStub(200),
         )
-        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token", "DISCORD_CONSOLE_LOG_ENABLED": "1"}, clear=False):
             sent = service.emit_console_content("```text\n[error] hello\n```")
 
         self.assertTrue(sent)
@@ -284,7 +284,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             return ResponseStub(200)
 
         service = DiscordAuditService(token_getter=lambda: "token", request_func=request_func)
-        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+        with patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token", "DISCORD_CONSOLE_LOG_ENABLED": "1"}, clear=False):
             service.emit_console_content("hello")
 
         self.assertIn(discord_audit.DEFAULT_CHANNEL_IDS["console_logs"], captured["url"])
@@ -318,7 +318,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
         service = DiscordAuditService(token_getter=lambda: "token")
         with patch.object(discord_audit, "get_audit_service", return_value=service), \
                 patch.object(service, "emit_console_content", return_value=True) as emit_content, \
-                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+                patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token", "DISCORD_CONSOLE_LOG_ENABLED": "1", "DISCORD_SERVER_CONSOLE_LOG_ENABLED": "1"}, clear=False):
             discord_audit._browser_console_batches.clear()
             try:
                 queued = discord_audit.queue_server_console_lines(["Traceback line", "Error: boom"])
@@ -588,7 +588,7 @@ class DiscordAuditServiceTestCase(unittest.TestCase):
             ))
 
             with patch.object(discord_audit, "_service", service), \
-                    patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token"}, clear=False):
+                    patch.dict(os.environ, {"DISCORD_BOT_TOKEN": "token", "DISCORD_AUDIT_ENABLED": "1"}, clear=False):
                 status = discord_audit.discord_audit_status()
 
         self.assertTrue(status["audit_enabled"])
@@ -716,9 +716,6 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             "username": "student",
             "onboarding_complete": False,
         }
-        settings_doc = {"$id": "user-1", "user_id": "user-1"}
-        create_results = [user_doc, settings_doc]
-
         with self.app.test_request_context(
             "/auth/session",
             method="POST",
@@ -727,8 +724,9 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             with patch.object(auth, "_account_from_jwt", return_value={"$id": "user-1", "email": "student@example.com", "name": "Student"}), \
                     patch.object(auth, "get_row_safe", return_value=None), \
                     patch.object(auth, "_find_user_by_email", return_value=None), \
+                    patch.object(auth, "_provider_access_token_from_identities", return_value={}), \
                     patch.object(auth, "_fetch_provider_profile", return_value={}), \
-                    patch.object(auth, "create_row_safe", side_effect=lambda *args, **kwargs: create_results.pop(0)), \
+                    patch.object(auth, "persist_avatar_user", return_value=user_doc), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **kwargs: f"/{endpoint}"), \
@@ -790,6 +788,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
         with self.app.test_request_context("/api/courses/tracks", method="POST", json={"section_id": section["id"], "enabled": True}):
             with patch.object(courses, "current_user", user), \
                     patch.object(courses, "_require_emory_student", return_value=None), \
+                    patch.object(courses, "term_policy", return_value={"available": True, "can_enable": True, "polling_enabled": True}), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
                     patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z", False)), \
                     patch.object(courses, "is_section_trackable", return_value=True), \
@@ -803,7 +802,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
         emit_event.assert_called_once()
         self.assertEqual(emit_event.call_args.args[0], "Course Track Requested")
 
-    def test_spring_course_track_upsert_requires_admin_open_gate(self):
+    def test_closed_spring_course_track_upsert_is_rejected(self):
         section = {
             "id": "Spring_2026-CS-170-1234-1",
             "term": "Spring_2026",
@@ -822,12 +821,12 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             with patch.object(courses, "current_user", user), \
                     patch.object(courses, "_require_emory_student", return_value=None), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
-                    patch.object(courses, "spring_course_tracking_open", return_value=False), \
+                    patch.object(courses, "term_policy", return_value={"label": "Spring 2026", "available": True, "can_enable": False, "polling_enabled": False}), \
                     patch.object(courses, "_merge_live_section") as merge_live:
                 response, status = self._unwrap(courses.upsert_track)()
 
         self.assertEqual(status, 403)
-        self.assertIn("Spring course tracking", response.get_json()["error"])
+        self.assertEqual(response.get_json()["code"], "course_tracking_closed")
         merge_live.assert_not_called()
 
     def test_spring_course_track_upsert_works_when_admin_gate_open(self):
@@ -850,7 +849,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             with patch.object(courses, "current_user", user), \
                     patch.object(courses, "_require_emory_student", return_value=None), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
-                    patch.object(courses, "spring_course_tracking_open", return_value=True), \
+                    patch.object(courses, "term_policy", return_value={"available": True, "can_enable": True, "polling_enabled": True}), \
                     patch.object(courses, "_merge_live_section", return_value=(section, None, "2026-05-25T00:00:00Z", False)), \
                     patch.object(courses, "is_section_trackable", return_value=True), \
                     patch.object(courses, "_track_for_section", return_value=None), \
@@ -881,7 +880,7 @@ class DiscordAuditRouteInstrumentationTestCase(unittest.TestCase):
             with patch.object(courses, "current_user", user), \
                     patch.object(courses, "_require_emory_student", return_value=None), \
                     patch.object(courses, "_get_section_by_id", return_value=section), \
-                    patch.object(courses, "spring_course_tracking_open", return_value=False), \
+                    patch.object(courses, "term_policy", return_value={"label": "Spring 2026", "available": True, "can_enable": False, "polling_enabled": False}), \
                     patch.object(courses, "_track_for_section", return_value=existing), \
                     patch.object(courses, "update_row_safe", return_value=updated), \
                     patch.object(courses, "emit_course_track_event"):

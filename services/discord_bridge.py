@@ -10,7 +10,6 @@ from appwrite.query import Query
 
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import create_row_safe, first_row, format_datetime, update_row_safe
-from config import load_environment_config
 from services.discord_constants import DEFAULT_GUILD_ID, DISCORD_API_BASE
 from services.environment_config import runtime_environment_config
 from services.redaction import SECRET_TEXT_RE
@@ -19,10 +18,6 @@ from services.redaction import SECRET_TEXT_RE
 logger = logging.getLogger(__name__)
 WEBHOOK_CONFIG_KEY = "nest_chat_webhook"
 # Guild/role used for the Discord account-linking membership reward.
-_IMPORT_ENVIRONMENT_CONFIG = load_environment_config()
-LINK_GUILD_ID = _IMPORT_ENVIRONMENT_CONFIG.discord_link_guild_id
-LINK_ROLE_ID = _IMPORT_ENVIRONMENT_CONFIG.discord_link_role_id
-del _IMPORT_ENVIRONMENT_CONFIG
 GUILD_ROLES_CACHE_SECONDS = 10 * 60
 _guild_roles_cache = {}
 _user_cache = {}
@@ -117,11 +112,11 @@ def fetch_discord_user(user_id):
 
 
 def _link_guild_id(guild_id=None):
-    return str(guild_id or LINK_GUILD_ID or "").strip()
+    return str(guild_id or runtime_environment_config().discord_link_guild_id or "").strip()
 
 
 def _link_role_id(role_id=None):
-    return str(role_id or LINK_ROLE_ID or "").strip()
+    return str(role_id or runtime_environment_config().discord_link_role_id or "").strip()
 
 
 def add_guild_member_role(discord_user_id, guild_id=None, role_id=None):

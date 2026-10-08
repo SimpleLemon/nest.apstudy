@@ -1,5 +1,3 @@
-import sqlite3
-
 from flask import Blueprint, jsonify, redirect, request, url_for
 from flask_login import current_user, login_required
 
@@ -115,12 +113,7 @@ def sync_foreground():
     if not result["active"]:
         return jsonify(result)
     prefs = result.pop("preferences")
-    focus_active = False
-    try:
-        from services.focus_mode import is_focus_mode_active
-        focus_active = is_focus_mode_active(current_user.id)
-    except sqlite3.OperationalError:
-        focus_active = False
+    focus_active = notifications.notification_focus_active(current_user.id)
     for item in result["notifications"]:
         urgent = notifications.is_urgent_during_focus(item.get("category"))
         item["urgent"] = urgent

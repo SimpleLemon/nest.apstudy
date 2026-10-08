@@ -142,10 +142,12 @@ class ToastClientContractTests(unittest.TestCase):
     def test_embedded_payload_id_matches_drain_selector(self):
         template = (ROOT / "templates/_shared_runtime_assets.html").read_text()
         global_js = (ROOT / "static/js/core/global.js").read_text()
+        shell_chrome = (ROOT / "static/js/core/shell-chrome.js").read_text()
         self.assertIn('id="apstudy-server-toasts"', template)
-        self.assertIn('getElementById("apstudy-server-toasts")', global_js)
-        self.assertIn('cache: "no-store"', global_js)
-        self.assertIn("if (embedded !== null)", global_js)
+        self.assertIn("shellChrome.drainServerToasts()", global_js)
+        self.assertIn('getElementById("apstudy-server-toasts")', shell_chrome)
+        self.assertIn('cache: "no-store"', shell_chrome)
+        self.assertIn("if (embedded !== null)", shell_chrome)
 
     def test_toast_client_max_lifetime_is_unpauseable_and_hover_pauses_immediately(self):
         primitives = (ROOT / "static/js/core/ui-primitives.js").read_text()

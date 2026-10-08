@@ -84,12 +84,19 @@ def _preferences_from_row(row):
     return payload
 
 
+def _missing_table(exc, table):
+    """Allow only the known pre-migration SQLite missing-table condition."""
+    return str(exc) == f"no such table: {table}"
+
+
 def preferences(user_id):
     try:
         with db_connection() as conn:
             row = conn.execute("SELECT * FROM notification_preferences WHERE user_id = ?", [str(user_id)]).fetchone()
-    except sqlite3.OperationalError:
-        # Test/upgrade-safe fallback while an older database is awaiting migrations.
+    except sqlite3.OperationalError as exc:
+        # An older database may not have the notification migration yet.
+        if not _missing_table(exc, "notification_preferences"):
+            raise
         return dict(DEFAULT_PREFERENCES)
     return _preferences_from_row(row)
 
@@ -284,15 +291,21 @@ def is_urgent_during_focus(category):
     return str(category or "") in URGENT_FOCUS_CATEGORIES
 
 
+def notification_focus_active(user_id):
+    """Read focus state, allowing only an absent pre-migration session table."""
+    try:
+        from services.focus_mode import reconcile_focus_mode_status
+        return reconcile_focus_mode_status(user_id)
+    except sqlite3.OperationalError as exc:
+        if not _missing_table(exc, "focus_sessions"):
+            raise
+        return False
+
+
 def focus_delivery_enabled(user_id, category):
     if is_urgent_during_focus(category):
         return True
-    try:
-        from services.focus_mode import is_focus_mode_active
-        return not is_focus_mode_active(user_id)
-    except sqlite3.OperationalError:
-        # Upgrade-safe while the Focus Mode migration is still being applied.
-        return True
+    return not notification_focus_active(user_id)
 
 
 def _web_presence_values(user_id, tab_id, active, device_class):
@@ -358,7 +371,9 @@ def sync_foreground_state(user_id, tab_id, *, active, device_class, limit=50):
                 "SELECT * FROM notification_preferences WHERE user_id=?",
                 [user_id],
             ).fetchone()
-        except sqlite3.OperationalError:
+        except sqlite3.OperationalError as exc:
+            if not _missing_table(exc, "notification_preferences"):
+                raise
             preference_row = None
         pending = conn.execute(
             """SELECT notification_id FROM notification_foreground_queue
@@ -392,7 +407,9 @@ def has_active_web_session(user_id, *, now=None):
                    LIMIT 1""",
                 [str(user_id), cutoff],
             ).fetchone()
-    except sqlite3.OperationalError:
+    except sqlite3.OperationalError as exc:
+        if not _missing_table(exc, "notification_web_presence"):
+            raise
         return False
     return bool(row)
 
@@ -490,14 +507,18 @@ def _send(subscription, payload):
 
 
 def deliver(user_id, notification_id, category, title, body, target_url, *, tag=None, force_push=False):
-    prefs = preferences(user_id)
-    if not category_delivery_enabled(category, prefs):
-        return {"accepted": 0, "failed": 0}
-    if not focus_delivery_enabled(user_id, category):
-        return {"accepted": 0, "failed": 0}
-    if not force_push and has_active_web_session(user_id):
-        _queue_foreground_delivery(user_id, notification_id, category, title, body, target_url, tag)
-        return {"accepted": 1, "failed": 0}
+    try:
+        prefs = preferences(user_id)
+        if not category_delivery_enabled(category, prefs):
+            return {"accepted": 0, "failed": 0}
+        if not focus_delivery_enabled(user_id, category):
+            return {"accepted": 0, "failed": 0}
+        if not force_push and has_active_web_session(user_id):
+            _queue_foreground_delivery(user_id, notification_id, category, title, body, target_url, tag)
+            return {"accepted": 1, "failed": 0}
+    except sqlite3.OperationalError:
+        logger.exception("Notification delivery state unavailable; delivery deferred")
+        raise
     if not prefs["push_enabled"]:
         return {"accepted": 0, "failed": 0}
     with db_connection() as conn:
@@ -617,7 +638,12 @@ def check_calendar_reminders(now=None):
                 claim_id = _id()
                 try:
                     conn.execute("INSERT INTO calendar_reminder_claims (id,user_id,event_ref,occurrence_start,lead_minutes,claimed_at) VALUES (?,?,?,?,?,?)", [claim_id, user_id, item["ref"], start.isoformat(), lead, _now()])
+                except sqlite3.IntegrityError as exc:
+                    if getattr(exc, "sqlite_errorcode", None) != sqlite3.SQLITE_CONSTRAINT_UNIQUE:
+                        logger.exception("Calendar reminder claim failed")
+                    continue
                 except Exception:
+                    logger.exception("Calendar reminder claim failed")
                     continue
                 label = _reminder_label(start, now, zone, lead)
                 is_task = item.get("kind") == "task"

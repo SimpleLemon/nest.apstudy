@@ -25,7 +25,7 @@ class DiscordGatewayBridge:
     def start(self):
         if self.started:
             return True
-        configured = runtime_environment_config()
+        configured = runtime_environment_config(self.app)
         if configured.discord_gateway_enabled_raw == "0":
             logger.info("Discord Gateway listener disabled (DISCORD_GATEWAY_ENABLED=0).")
             return False
@@ -101,7 +101,7 @@ class DiscordGatewayBridge:
                 [str(message_id) for message_id in payload.message_ids],
             )
 
-        token = (runtime_environment_config().discord_bot_token or "").strip()
+        token = (runtime_environment_config(self.app).discord_bot_token or "").strip()
         await client.start(token, reconnect=True)
 
     async def _reconcile_once(self, reason):
@@ -185,8 +185,9 @@ def shutdown_discord_gateway():
 
 
 def discord_gateway_status():
+    configured = runtime_environment_config(_bridge.app if _bridge else None)
     return {
-        "enabled": runtime_environment_config().discord_gateway_enabled_raw != "0",
+        "enabled": configured.discord_gateway_enabled_raw != "0",
         "started": bool(_bridge and _bridge.started),
         "thread_alive": bool(_bridge and _bridge.thread and _bridge.thread.is_alive()),
     }

@@ -19,6 +19,7 @@ import os
 import json
 import logging
 import socket
+import stat
 import time
 from datetime import datetime, timedelta, timezone
 
@@ -105,6 +106,28 @@ def _release_scheduler_lock():
     _scheduler_lock_path = None
 
 
+def _open_scheduler_lock_file(lock_path):
+    """Open a shared lock pathname without following it or modifying its data."""
+    flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_CLOEXEC", 0)
+    flags |= getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+    descriptor = os.open(lock_path, flags, 0o600)
+    try:
+        opened = os.fstat(descriptor)
+        pathname = os.lstat(lock_path)
+        if not stat.S_ISREG(opened.st_mode) or not stat.S_ISREG(pathname.st_mode):
+            raise OSError("Scheduler lock must be a regular file, not a symlink.")
+        if (opened.st_dev, opened.st_ino) != (pathname.st_dev, pathname.st_ino):
+            raise OSError("Scheduler lock pathname changed while opening it.")
+        if opened.st_nlink != 1:
+            raise OSError("Scheduler lock must not have multiple hard links.")
+        if hasattr(os, "geteuid") and opened.st_uid != os.geteuid():
+            raise PermissionError("Scheduler lock must belong to the current service user.")
+        return os.fdopen(descriptor, "r+", encoding="utf-8")
+    except Exception:
+        os.close(descriptor)
+        raise
+
+
 def _acquire_scheduler_lock(environment_config=None):
     global _scheduler_lock_file, _scheduler_lock_acquired, _scheduler_lock_path
 
@@ -112,28 +135,31 @@ def _acquire_scheduler_lock(environment_config=None):
         return True
 
     lock_path = _configured_scheduler_lock_path(environment_config)
-    os.makedirs(os.path.dirname(lock_path) or ".", exist_ok=True)
-    lock_file = open(lock_path, "a+", encoding="utf-8")
+    lock_file = None
     try:
+        os.makedirs(os.path.dirname(lock_path) or ".", exist_ok=True)
+        lock_file = _open_scheduler_lock_file(lock_path)
         fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        lock_file.seek(0)
+        lock_file.truncate()
+        lock_file.write(f"pid={os.getpid()} host={socket.gethostname()}\n")
+        lock_file.flush()
     except BlockingIOError:
-        lock_file.close()
+        if lock_file is not None:
+            lock_file.close()
         _scheduler_lock_file = None
         _scheduler_lock_acquired = False
         _scheduler_lock_path = lock_path
         return False
     except OSError:
-        lock_file.close()
+        if lock_file is not None:
+            lock_file.close()
         _scheduler_lock_file = None
         _scheduler_lock_acquired = False
         _scheduler_lock_path = lock_path
         logger.exception("Failed to acquire scheduler lock: %s", lock_path)
         return False
 
-    lock_file.seek(0)
-    lock_file.truncate()
-    lock_file.write(f"pid={os.getpid()} host={socket.gethostname()}\n")
-    lock_file.flush()
     _scheduler_lock_file = lock_file
     _scheduler_lock_acquired = True
     _scheduler_lock_path = lock_path
@@ -321,6 +347,7 @@ def _refresh_all_feeds(app):
                     "  User %s: feed refresh failed (%s)",
                     user_id,
                     type(exc).__name__,
+                    exc_info=True,
                 )
 
 
@@ -528,6 +555,12 @@ def _sync_discord_chat(app):
 
 def _cleanup_note_media(app):
     with app.app_context():
+        from services.storage_backend import require_mutations_enabled
+        from services.storage_errors import StorageMutationPaused
+        try:
+            require_mutations_enabled()
+        except StorageMutationPaused:
+            return
         try:
             from services.note_media import cleanup_abandoned_media
             deleted = cleanup_abandoned_media()
@@ -542,6 +575,20 @@ def _cleanup_note_media(app):
                 logger.info("Deleted %s abandoned chat attachment(s).", deleted)
         except Exception:
             logger.exception("Chat attachment cleanup failed")
+        try:
+            from services.avatar_storage import cleanup_legacy_avatars
+            cleanup_legacy_avatars()
+        except StorageMutationPaused:
+            return
+        except Exception:
+            logger.exception("Avatar retirement cleanup failed")
+        try:
+            from services.account_deletion_completion import cleanup_pending_accounts
+            cleanup_pending_accounts()
+        except StorageMutationPaused:
+            return
+        except Exception:
+            logger.exception("Account deletion completion failed")
         try:
             from services.notifications import cleanup_expired
             cleanup_expired()
@@ -615,6 +662,9 @@ def init_scheduler(app):
         default_interval = int(configured.feed_refresh_interval_minutes_raw)
         course_tracking_interval = 5
         _scheduler = BackgroundScheduler(daemon=True)
+        from services.external_calendar_sync import tick as sync_external_calendars
+        _scheduler.add_job(func=lambda: sync_external_calendars(app), trigger=IntervalTrigger(minutes=1),
+                           id="external_calendar_sync", max_instances=1, coalesce=True, replace_existing=True)
 
         _scheduler.add_job(
             func=lambda: _refresh_all_feeds(app),

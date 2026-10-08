@@ -2,7 +2,7 @@ const FALLBACK_URL = '/dashboard?notifications=open';
 
 self.addEventListener('push', (event) => {
   let data = {};
-  try { data = event.data?.json() || {}; } catch (_) { data = {}; }
+  try { data = event.data?.json() || {}; } catch { data = {}; }
   const title = String(data.title || 'Nest.APStudy');
   const options = {
     body: String(data.body || 'You have a new notification.'),
@@ -22,9 +22,16 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   const url = safePath(event.notification.data?.url);
-  event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windows) => {
+  event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (windows) => {
     const existing = windows.find((client) => new URL(client.url).origin === self.location.origin);
-    if (existing) { existing.navigate(url); return existing.focus(); }
+    if (existing) {
+      try {
+        const destination = await existing.navigate(url);
+        if (destination) return await destination.focus();
+      } catch {
+        return clients.openWindow(url);
+      }
+    }
     return clients.openWindow(url);
   }));
 });
@@ -33,7 +40,7 @@ function safePath(value) {
   try {
     const url = new URL(String(value || FALLBACK_URL), self.location.origin);
     return url.origin === self.location.origin ? `${url.pathname}${url.search}${url.hash}` : FALLBACK_URL;
-  } catch (_) { return FALLBACK_URL; }
+  } catch { return FALLBACK_URL; }
 }
 
 function setBadge(count) {

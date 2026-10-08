@@ -96,6 +96,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
                 patch.dict(os.environ, {
                     "SCHEDULER_ENABLED": "1",
                     "DISCORD_GATEWAY_ENABLED": "1",
+                    "DISCORD_CHAT_SYNC_ENABLED": "1",
                     "DISCORD_CHAT_RECONCILE_SECONDS": "300",
                     "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
                 }, clear=False), \
@@ -120,6 +121,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
                 "cleanup_note_media",
                 "reconcile_discord_chat",
                 "sync_discord_roles",
+                "external_calendar_sync",
             },
         )
         course_tracking_job = next(job for job in status["jobs"] if job["id"] == "check_course_seat_tracks")
@@ -142,6 +144,7 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
                 patch.dict(os.environ, {
                     "SCHEDULER_ENABLED": "1",
                     "DISCORD_GATEWAY_ENABLED": "0",
+                    "DISCORD_CHAT_SYNC_ENABLED": "1",
                     "DISCORD_CHAT_SYNC_SECONDS": "5",
                     "SCHEDULER_LOCK_PATH": os.path.join(temp_dir, "scheduler.lock"),
                 }, clear=False), \
@@ -348,10 +351,15 @@ class SchedulerDiagnosticsTests(unittest.TestCase):
                     side_effect=[RuntimeError("metadata unavailable"), None, None],
                 ), \
                 patch.object(scheduler, "is_stale", return_value=True), \
-                patch("services.feed_fetcher.fetch_and_cache_feeds", return_value=0) as fetch_feeds:
+                patch("services.feed_fetcher.fetch_and_cache_feeds", return_value=0) as fetch_feeds, \
+                self.assertLogs(scheduler.logger, level="ERROR") as logs:
             scheduler._refresh_all_feeds(app)
 
         fetch_feeds.assert_called_once_with("user-2", ["https://two.example/feed.ics"])
+        error = next(record for record in logs.records if "feed refresh failed" in record.getMessage())
+        self.assertIs(error.exc_info[0], RuntimeError)
+        self.assertEqual(str(error.exc_info[1]), "metadata unavailable")
+        self.assertIsNotNone(error.exc_info[2])
 
     def test_role_sync_does_not_repeat_grant_after_ambiguous_failure(self):
         app = Flask(__name__)
