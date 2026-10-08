@@ -1,4 +1,8 @@
+import logging
 import os
+import platform
+from collections.abc import Callable
+from typing import Any
 import shutil
 import subprocess
 import threading
@@ -145,3 +149,69 @@ def scheduler_command_label(command):
     if isinstance(command, (list, tuple)):
         return " ".join(str(part) for part in command)
     return str(command or "")
+
+
+logger = logging.getLogger(__name__)
+
+def read_os_pretty() -> str:
+    try:
+        if hasattr(platform, "freedesktop_os_release"):
+            release = platform.freedesktop_os_release()
+            pretty = release.get("PRETTY_NAME")
+            if pretty:
+                return pretty
+    except Exception:
+        logger.debug("Failed to read freedesktop OS release metadata", exc_info=True)
+    try:
+        return platform.platform()
+    except Exception:
+        return "Unknown"
+
+
+def system_status(*, metrics_provider: Any, disk_usage: Callable, storage_limit_gb: int = SYSTEM_STORAGE_LIMIT_GB) -> dict[str, Any]:
+    status = {
+        "os_pretty": read_os_pretty(),
+        "cpu_percent": None,
+        "cpu_logical": None,
+        "cpu_physical": None,
+        "mem_percent": None,
+        "mem_used_gb": None,
+        "mem_total_gb": None,
+        "storage_percent": None,
+        "storage_used_gb": None,
+        "storage_total_gb": storage_limit_gb,
+    }
+    try:
+        from services.scheduler import scheduler_status
+
+        status.update(scheduler_status())
+    except Exception:
+        logger.exception("Failed to read scheduler status for admin system overview")
+    if metrics_provider is None:
+        return status
+    metrics = {}
+    try:
+        metrics["cpu_percent"] = round(metrics_provider.cpu_percent(interval=0.1), 1)
+    except Exception:
+        logger.debug("Failed to read CPU utilization", exc_info=True)
+    try:
+        metrics["cpu_logical"] = metrics_provider.cpu_count(logical=True)
+        metrics["cpu_physical"] = metrics_provider.cpu_count(logical=False)
+    except Exception:
+        logger.debug("Failed to read CPU counts", exc_info=True)
+    try:
+        memory = metrics_provider.virtual_memory()
+        metrics["mem_percent"] = round(memory.percent, 1)
+        metrics["mem_used_gb"] = round(memory.used / (1024**3), 1)
+        metrics["mem_total_gb"] = round(memory.total / (1024**3), 1)
+    except Exception:
+        logger.debug("Failed to read memory utilization", exc_info=True)
+    try:
+        disk = disk_usage("/")
+        storage_used_gb = disk.used / (1024**3)
+        metrics["storage_used_gb"] = round(storage_used_gb, 1)
+        metrics["storage_percent"] = round((storage_used_gb / storage_limit_gb) * 100, 1)
+    except Exception:
+        logger.debug("Failed to read disk utilization", exc_info=True)
+    status.update(metrics)
+    return status

@@ -129,6 +129,22 @@ class AdminAnalyticsRouteTestCase(unittest.TestCase):
         self.assertLess(html.index(">Auth<"), html.index(">Analytics<"))
         self.assertLess(html.index(">Analytics<"), html.index(">APSwiftly<"))
 
+    def test_storage_partial_failure_keeps_file_totals_and_marks_avatars_unavailable(self):
+        metrics = self._metrics()
+        metrics["file_storage"].update(avatar_count=None, error="Storage counts unavailable")
+        with self.app.test_client() as client:
+            self._login(client)
+            with patch.object(admin, "_admin_home_metrics", return_value=metrics), \
+                    patch.object(admin, "_theme_preference", return_value=None), \
+                    patch.object(admin, "_pending_admin_request_count", return_value=0):
+                response = client.get("/admin/analytics")
+        html = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("1.5 MB", html)
+        self.assertIn("7 shared files, avatar count unavailable", html)
+        self.assertIn("Storage counts unavailable", html)
+        self.assertNotIn("0 avatars tracked", html)
+
     def test_admin_analytics_data_normalizes_range_and_timezone(self):
         payload = {"range": "30d", "timezone": "UTC"}
         with self.app.test_client() as client:

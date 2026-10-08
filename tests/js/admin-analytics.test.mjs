@@ -1,75 +1,40 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import test from "node:test";
-import vm from "node:vm";
-import { fileURLToPath } from "node:url";
-
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-
-async function runBrowserScript(relativePath, extra = {}) {
-  const source = await readFile(path.join(repoRoot, relativePath), "utf8");
-  const sandbox = {
-    URL,
-    Intl,
-    Date,
-    Number,
-    Math,
-    String,
-    Array,
-    Set,
-    window: {
-      APStudyUIPrimitives: { escapeHtml: String },
-      location: { origin: "https://example.test" },
-      ...extra.window,
-    },
-    document: {
-      readyState: "complete",
-      querySelector: () => null,
-      querySelectorAll: () => [],
-      addEventListener: () => {},
-      ...extra.document,
-    },
-    ...extra.globals,
-  };
-  sandbox.window.window = sandbox.window;
-  sandbox.window.document = sandbox.document;
-  vm.runInNewContext(source, sandbox, { filename: relativePath });
-  return sandbox.window;
-}
+import { runAdminBrowserScript as runBrowserScript, runAdminBrowserModule } from "./helpers/admin-analytics.mjs";
 
 test("admin analytics helpers normalize range, timezone URLs, and series data", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-model.js", {
     window: {
       Intl,
     },
   });
 
-  assert.equal(window.AdminAnalytics.normalizeRange("bogus"), "30d");
-  assert.equal(window.AdminAnalytics.normalizeRange("7d"), "7d");
+  assert.equal(analytics.normalizeRange("bogus"), "30d");
+  assert.equal(analytics.normalizeRange("7d"), "7d");
   assert.equal(
-    window.AdminAnalytics.buildAnalyticsUrl("24h", "America/Phoenix"),
+    analytics.buildAnalyticsUrl("24h", "America/Phoenix"),
     "https://example.test/admin/analytics/data?range=24h&tz=America%2FPhoenix",
   );
-  assert.deepEqual(JSON.parse(JSON.stringify(window.AdminAnalytics.normalizeSeries([{ key: "a", label: "A", value: "2" }, { key: "b" }]))), [
+  assert.deepEqual(JSON.parse(JSON.stringify(analytics.normalizeSeries([{ key: "a", label: "A", value: "2" }, { key: "b" }]))), [
     { key: "a", label: "A", value: 2 },
     { key: "b", label: "b", value: 0 },
   ]);
 });
 
 test("admin analytics charts use nice axes, hover details, and vertical category bars", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-charts.js", {
     window: {
       Intl,
     },
   });
 
-  const axis = window.AdminAnalytics.niceAxis(87);
+  const model = await runAdminBrowserModule("static/js/admin-analytics-model.js");
+  const axis = model.niceAxis(87);
   assert.ok(axis.max > 87);
   assert.equal(String(axis.max).endsWith("0"), true);
   assert.equal(axis.ticks.length, 6);
 
-  const line = window.AdminAnalytics.renderLineChart([
+  const line = analytics.renderLineChart([
     { label: "Jun 1", value: 14 },
     { label: "Jun 2", value: 87 },
   ]);
@@ -79,13 +44,13 @@ test("admin analytics charts use nice axes, hover details, and vertical category
   assert.match(line, /role="listitem"/);
   assert.doesNotMatch(line, /admin-analytics-area/);
 
-  const filledLine = window.AdminAnalytics.renderLineChart([
+  const filledLine = analytics.renderLineChart([
     { label: "Jun 1", value: 14 },
     { label: "Jun 2", value: 87 },
   ], { fillArea: true });
   assert.match(filledLine, /admin-analytics-area/);
 
-  const bars = window.AdminAnalytics.renderVerticalBarChart([
+  const bars = analytics.renderVerticalBarChart([
     { label: "Google", value: 4 },
     { label: "Emory (Main/Oxford)", value: 2 },
   ]);
@@ -95,14 +60,14 @@ test("admin analytics charts use nice axes, hover details, and vertical category
 });
 
 test("admin analytics detail rows include compact layout, tooltips, and shortened country header", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-rows.js", {
     window: {
       Intl,
     },
   });
 
   const countryList = { innerHTML: "" };
-  window.AdminAnalytics.renderDetailRows(countryList, [
+  analytics.renderDetailRows(countryList, [
     { label: "United States", countryId: "US", value: 42 },
   ], { type: "countries" });
   assert.match(countryList.innerHTML, /admin-analytics-rank-row--compact/);
@@ -110,7 +75,7 @@ test("admin analytics detail rows include compact layout, tooltips, and shortene
   assert.match(countryList.innerHTML, /aria-label="Active users">Users</);
 
   const pageList = { innerHTML: "" };
-  window.AdminAnalytics.renderDetailRows(pageList, [
+  analytics.renderDetailRows(pageList, [
     { title: "Calendar", path: "/calendar", value: 21 },
   ], { type: "pages" });
   assert.match(pageList.innerHTML, /title="Calendar"/);
@@ -118,13 +83,13 @@ test("admin analytics detail rows include compact layout, tooltips, and shortene
 });
 
 test("admin analytics multi-line charts render dynamic series colors and interval growth", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-charts.js", {
     window: {
       Intl,
     },
   });
 
-  const chart = window.AdminAnalytics.renderMultiLineChart([
+  const chart = analytics.renderMultiLineChart([
     {
       key: "google",
       label: "Google",
@@ -145,7 +110,7 @@ test("admin analytics multi-line charts render dynamic series colors and interva
 });
 
 test("admin analytics main card switches to selected metric graph", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-dashboard.js", {
     window: {
       Intl,
     },
@@ -211,7 +176,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
     },
   };
 
-  window.AdminAnalytics.renderDashboard(root, {
+  analytics.renderDashboard(root, {
     cards: { totalUsers: 8, activeUsers: 3, pageViews: 12, onboardingRate: 0 },
     series: {
       totalUsers: [],
@@ -267,7 +232,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
   assert.equal(tabs.find((tab) => tab.dataset.analyticsMetric === "pageViews").attrs["aria-selected"], "true");
 
   root.dataset.activeMetric = "activeUsers";
-  window.AdminAnalytics.renderDashboard(root, {
+  analytics.renderDashboard(root, {
     ...{
       cards: { totalUsers: 8, activeUsers: 3, pageViews: 12, oauth: 2, uniType: 2 },
       series: {
@@ -290,7 +255,7 @@ test("admin analytics main card switches to selected metric graph", async () => 
 });
 
 test("admin analytics GA detail panels render independently with cleaned page labels", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-dashboard.js", {
     window: {
       Intl,
     },
@@ -327,8 +292,8 @@ test("admin analytics GA detail panels render independently with cleaned page la
     sources: { traffic: { label: "Google Analytics", status: "ok" } },
   };
 
-  window.AdminAnalytics.renderGaDetailPanel(countryPanel, payload, "countries");
-  window.AdminAnalytics.renderGaDetailPanel(pagePanel, payload, "pages");
+  analytics.renderGaDetailPanel(countryPanel, payload, "countries");
+  analytics.renderGaDetailPanel(pagePanel, payload, "pages");
 
   assert.match(countryPanel.countryMap.innerHTML, /admin-analytics-bars/);
   assert.match(countryPanel.countryList.innerHTML, /United States/);
@@ -342,7 +307,7 @@ test("admin analytics GA detail panels render independently with cleaned page la
 
 test("admin analytics GA details draw a Google GeoChart when available", async () => {
   const chartCalls = [];
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-dashboard.js", {
     window: {
       Intl,
       google: {
@@ -391,7 +356,7 @@ test("admin analytics GA details draw a Google GeoChart when available", async (
     },
   };
 
-  window.AdminAnalytics.renderGaDetails(root, {
+  analytics.renderGaDetails(root, {
     gaDetails: {
       countries: [{ countryId: "US", label: "United States", value: 7, comparison: { available: true, percentChange: 40, direction: "up" } }],
       pages: [{ title: "Dashboard | APStudy", path: "/dashboard", label: "Dashboard | APStudy", value: 12, comparison: { available: true, percentChange: -25, direction: "down" } }],
@@ -409,7 +374,8 @@ test("admin analytics GA details draw a Google GeoChart when available", async (
 test("admin analytics range dropdown opens, selects, and closes on outside click", async () => {
   const documentListeners = new Map();
   const windowListeners = new Map();
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  let focusedOption;
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-range.js", {
     document: {
       readyState: "complete",
       querySelector: () => null,
@@ -487,7 +453,7 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
       this.attrs[name] = value;
     },
     focus() {
-      window.document.activeElement = this;
+      focusedOption = this;
     },
   }));
   const dropdown = {
@@ -521,7 +487,7 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
   };
 
   const changes = [];
-  const controller = window.AdminAnalytics.initAnalyticsRangeDropdown(root, {
+  const controller = analytics.initAnalyticsRangeDropdown(root, {
     defaultRange: "30d",
     onChange: (range) => changes.push(range),
   });
@@ -533,6 +499,7 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
 
   controller.setOpen(true);
   assert.equal(controller.isOpen(), true);
+  assert.equal(focusedOption, options[0]);
   assert.equal(menu.hidden, false);
   assert.equal(trigger.attrs["aria-expanded"], "true");
   assert.equal(dropdown.classList.values.has("is-flipped"), true);
@@ -556,7 +523,7 @@ test("admin analytics range dropdown opens, selects, and closes on outside click
 });
 
 test("admin analytics range dropdown flips down when space below is sufficient", async () => {
-  const window = await runBrowserScript("static/js/admin-analytics.js", {
+  const analytics = await runAdminBrowserModule("static/js/admin-analytics-range.js", {
     document: {
       readyState: "complete",
       querySelector: () => null,
@@ -629,7 +596,7 @@ test("admin analytics range dropdown flips down when space below is sufficient",
       return selector === "[data-analytics-range]" ? options : [];
     },
   };
-  const controller = window.AdminAnalytics.initAnalyticsRangeDropdown({
+  const controller = analytics.initAnalyticsRangeDropdown({
     querySelector: () => dropdown,
   }, { defaultRange: "30d" });
 

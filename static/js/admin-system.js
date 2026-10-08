@@ -23,7 +23,7 @@
           credentials: "same-origin",
         });
         if (response.ok) return;
-      } catch (_error) {
+      } catch {
         // A connection failure is expected while the service is restarting.
       }
 

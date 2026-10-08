@@ -271,7 +271,7 @@
                 {
                     'title': 'File Storage',
                     'value': file_storage.formatted or '--',
-                    'detail': (file_storage.file_count or 0) ~ ' shared files, ' ~ (file_storage.avatar_count or 0) ~ ' avatars tracked',
+                    'detail': (file_storage.file_count or 0) ~ ' shared files, ' ~ ((file_storage.avatar_count ~ ' avatars tracked') if file_storage.avatar_count is not none else 'avatar count unavailable'),
                 },
             ] %}
             {{ statistic_card_row(system_cells, {
@@ -293,5 +293,5 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/admin-nav.js') }}" defer></script>
     <script src="https://www.gstatic.com/charts/loader.js" defer></script>
-    <script src="{{ url_for('static', filename='js/admin-analytics.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/admin-analytics.js') }}"></script>
 {% endblock %}

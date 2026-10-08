@@ -1,6 +1,7 @@
 import os
 import re
 import unittest
+import tempfile
 from contextlib import ExitStack
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
@@ -24,6 +25,9 @@ class TestUser(UserMixin):
 
 class APSwiftlyAdminTestCase(unittest.TestCase):
     def setUp(self):
+        admin_environment = patch.dict(os.environ, {"ADMIN_USER_IDS": "admin-1"})
+        admin_environment.start()
+        self.addCleanup(admin_environment.stop)
         previous_loader = login_manager._user_callback
         self.addCleanup(setattr, login_manager, "_user_callback", previous_loader)
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +36,12 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
             template_folder=os.path.join(root, "templates"),
             static_folder=os.path.join(root, "static"),
         )
+        temporary_database = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary_database.cleanup)
+        self.app.config["DATABASE_PATH"] = os.path.join(temporary_database.name, "nest.sqlite3")
+        from services.database import init_db
+
+        init_db(self.app)
         self.app.secret_key = "test"
         self.app.config["SERVER_NAME"] = "example.test"
         self.app.config["WTF_CSRF_CHECK_DEFAULT"] = False
@@ -49,7 +59,6 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
 
         self.app.register_blueprint(dashboard_bp)
         self.app.register_blueprint(admin.admin_bp)
-        os.environ["ADMIN_USER_IDS"] = "admin-1"
 
         @login_manager.user_loader
         def load_user(user_id):
@@ -76,9 +85,6 @@ class APSwiftlyAdminTestCase(unittest.TestCase):
             patch.object(admin, "apswiftly_status", return_value=self.status_payload),
             patch.object(admin, "_log_admin_action"),
         ]
-
-    def tearDown(self):
-        os.environ.pop("ADMIN_USER_IDS", None)
 
     def _login(self, client):
         with client.session_transaction() as session:

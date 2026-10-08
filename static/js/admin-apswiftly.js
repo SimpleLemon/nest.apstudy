@@ -81,24 +81,6 @@
     el.textContent = formatCheckedAt(iso);
   }
 
-  async function postJson(url, body) {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
-      body: JSON.stringify(body || {}),
-      credentials: "same-origin",
-    };
-    const response = await fetch(url, requestOptions);
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error(payload.message || payload.error || "Request failed.");
-    }
-    return payload;
-  }
-
   function syncButtons() {
     actionButtons.forEach((button) => {
       button.disabled = requestPending;
@@ -156,7 +138,7 @@
         if (button.dataset.apswiftlyConfirmValue) {
           body.confirm = button.dataset.apswiftlyConfirmValue;
         }
-        const payload = await postJson(`/admin/apswiftly/${encodeURIComponent(action)}`, body);
+        const payload = await window.APStudyHttp.postJson(`/admin/apswiftly/${encodeURIComponent(action)}`, body, csrfToken);
         setNotice(payload.message || "APSwiftly command completed.");
         appendLog(` ✓ ${payload.message || "Command completed."}`);
         const inputId = button.dataset.apswiftlyConfirmInput;

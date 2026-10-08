@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import unittest
+import tempfile
 from contextlib import ExitStack
 from unittest.mock import patch
 
@@ -14,6 +15,7 @@ from appwrite_client import COLLECTIONS
 from extensions import csrf, login_manager
 import blueprints.admin as admin
 from tests.support.harness import reset_flask_login_manager
+from tests.support.factory import isolated_factory_environment
 
 
 class TestUser(UserMixin):
@@ -25,6 +27,9 @@ class TestUser(UserMixin):
 
 class AdminSecurityTestCase(unittest.TestCase):
     def setUp(self):
+        admin_environment = patch.dict(os.environ, {"ADMIN_USER_IDS": "admin-1"})
+        admin_environment.start()
+        self.addCleanup(admin_environment.stop)
         previous_loader = login_manager._user_callback
         self.addCleanup(setattr, login_manager, "_user_callback", previous_loader)
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,6 +38,12 @@ class AdminSecurityTestCase(unittest.TestCase):
             template_folder=os.path.join(root, "templates"),
             static_folder=os.path.join(root, "static"),
         )
+        temporary_database = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary_database.cleanup)
+        self.app.config["DATABASE_PATH"] = os.path.join(temporary_database.name, "nest.sqlite3")
+        from services.database import init_db
+
+        init_db(self.app)
         self.app.secret_key = "test"
         self.app.config["SERVER_NAME"] = "example.test"
         self.app.config["WTF_CSRF_CHECK_DEFAULT"] = False
@@ -43,7 +54,6 @@ class AdminSecurityTestCase(unittest.TestCase):
         csrf.init_app(self.app)
         self.app.jinja_env.filters["avatar_url"] = lambda url, size=32: url
         self.app.register_blueprint(admin.admin_bp)
-        os.environ["ADMIN_USER_IDS"] = "admin-1"
 
         @login_manager.user_loader
         def load_user(user_id):
@@ -71,7 +81,6 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.settings_doc = {"user_id": "user-1", "ics_secret_token": "secret-token"}
 
     def tearDown(self):
-        os.environ.pop("ADMIN_USER_IDS", None)
         reset_flask_login_manager()
 
     def _login(self, client):
@@ -132,30 +141,28 @@ class AdminSecurityTestCase(unittest.TestCase):
         update_row.assert_called_once_with(COLLECTIONS["users"], "user-1", {"tier": "grade_aa"})
 
     def test_app_factory_hardens_production_session_and_url_scheme(self):
-        with patch.dict(os.environ, {
-            "APSTUDY_ALLOW_INSECURE_HTTP": "0",
-            "FLASK_DEBUG": "0",
-        }, clear=False), \
+        with isolated_factory_environment(FLASK_ENV="production"), \
                 patch("services.scheduler.init_scheduler"), \
                 patch("services.discord_audit.init_discord_audit"):
             app = create_app()
 
-        self.assertTrue(app.config["SESSION_COOKIE_SECURE"])
-        self.assertTrue(app.config["SESSION_COOKIE_HTTPONLY"])
-        self.assertEqual(app.config["SESSION_COOKIE_SAMESITE"], "Lax")
-        self.assertEqual(app.config["AUTH_SESSION_DURATION"], AUTH_SESSION_DURATION)
-        self.assertEqual(app.config["PERMANENT_SESSION_LIFETIME"], AUTH_SESSION_DURATION)
-        self.assertEqual(app.config["REMEMBER_COOKIE_DURATION"], AUTH_SESSION_DURATION)
-        self.assertTrue(app.config["REMEMBER_COOKIE_SECURE"])
-        self.assertTrue(app.config["REMEMBER_COOKIE_HTTPONLY"])
-        self.assertEqual(app.config["REMEMBER_COOKIE_SAMESITE"], "Lax")
-        self.assertEqual(app.config["PREFERRED_URL_SCHEME"], "https")
-        self.assertIsInstance(app.wsgi_app, ProxyFix)
+            self.assertTrue(app.config["SESSION_COOKIE_SECURE"])
+            self.assertTrue(app.config["SESSION_COOKIE_HTTPONLY"])
+            self.assertEqual(app.config["SESSION_COOKIE_SAMESITE"], "Lax")
+            self.assertEqual(app.config["AUTH_SESSION_DURATION"], AUTH_SESSION_DURATION)
+            self.assertEqual(app.config["PERMANENT_SESSION_LIFETIME"], AUTH_SESSION_DURATION)
+            self.assertEqual(app.config["REMEMBER_COOKIE_DURATION"], AUTH_SESSION_DURATION)
+            self.assertTrue(app.config["REMEMBER_COOKIE_SECURE"])
+            self.assertTrue(app.config["REMEMBER_COOKIE_HTTPONLY"])
+            self.assertEqual(app.config["REMEMBER_COOKIE_SAMESITE"], "Lax")
+            self.assertEqual(app.config["PREFERRED_URL_SCHEME"], "https")
+            self.assertIsInstance(app.wsgi_app, ProxyFix)
 
     def test_app_factory_initializes_discord_audit_before_scheduler(self):
         calls = []
 
-        with patch("services.discord_audit.init_discord_audit", side_effect=lambda app: calls.append("discord")), \
+        with isolated_factory_environment(), \
+                patch("services.discord_audit.init_discord_audit", side_effect=lambda app: calls.append("discord")), \
                 patch("services.scheduler.init_scheduler", side_effect=lambda app: calls.append("scheduler")):
             create_app()
 
@@ -604,13 +611,6 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(log_action.call_args.args[0], "scheduler_pause")
         self.assertEqual(log_action.call_args.kwargs["metadata"]["result"], "failed")
 
-    def test_normalize_oauth_provider(self):
-        self.assertEqual(admin._normalize_oauth_provider({"provider": "Google"}), "google")
-        self.assertEqual(admin._normalize_oauth_provider({"provider": "discord"}), "discord")
-        self.assertEqual(admin._normalize_oauth_provider({"provider": "github"}), "github")
-        self.assertEqual(admin._normalize_oauth_provider({"google_id": "legacy"}), "google")
-        self.assertEqual(admin._normalize_oauth_provider({}), "other")
-
     def test_admin_auth_renders_shell_without_section_data(self):
         with self.app.test_client() as client:
             self._login(client)
@@ -773,8 +773,7 @@ class AdminSecurityTestCase(unittest.TestCase):
         with self.app.test_client() as client:
             self._login(client)
             with patch.object(admin, "_course_tracking_groups", return_value=(groups, None)), \
-                    patch.object(admin, "get_course_tracking_refresh_minutes", return_value=5), \
-                    patch.object(admin, "spring_course_tracking_open", return_value=False):
+                    patch.object(admin, "get_course_tracking_refresh_minutes", return_value=5):
                 response = client.get("/admin/auth/sections/course-tracking")
 
         html = response.get_data(as_text=True)
@@ -784,8 +783,9 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertIn('id="admin-tracking-refresh"', html)
         self.assertIn("5m (fixed)", html)
         self.assertIn("Individual trackers run when their tier interval is due.", html)
-        self.assertIn("Spring tracking", html)
-        self.assertIn("Open Spring", html)
+        self.assertIn("Tracking by term", html)
+        self.assertIn("Upcoming", html)
+        self.assertIn("data-term-year", html)
         self.assertNotIn("University Channel Requests", html)
 
     def test_admin_requests_redirects_to_auth_tabs(self):
@@ -839,6 +839,7 @@ class AdminSecurityTestCase(unittest.TestCase):
             with patch.object(admin, "get_row_safe", return_value=self.user_doc), \
                     patch.object(admin, "Users") as users_cls, \
                     patch.object(admin, "_delete_user_rows"), \
+                    patch.object(admin, "complete_account_deletion", side_effect=lambda user_id, **options: options["delete_auth"](user_id)), \
                     patch.object(admin, "delete_row_safe"), \
                     patch.object(admin, "_storage_service"), \
                     patch.object(admin, "_theme_preference", return_value=None):
@@ -905,7 +906,8 @@ class AdminSecurityTestCase(unittest.TestCase):
             with patch("services.scheduler.scheduler_status", return_value=scheduler_payload), \
                     patch.object(admin, "discord_audit_status", return_value=audit_payload), \
                     patch("services.course_tracking.get_last_course_tracking_poll", return_value={"atlas_checks_attempted": 1}), \
-                    patch.object(admin, "list_rows_all", return_value=[{"$id": "track-1"}]):
+                    patch.object(admin, "list_rows_all", return_value=[{"$id": "track-1", "term": "Spring_2027"}]), \
+                    patch.object(admin, "term_policy", return_value={"polling_enabled": True}):
                 response = client.get("/admin/course-tracking-status")
 
         self.assertEqual(response.status_code, 200)
@@ -1063,7 +1065,23 @@ class AdminSecurityTestCase(unittest.TestCase):
         self.assertEqual(log_action.call_args.args[0], "course_tracking_refresh_interval")
         self.assertEqual(log_action.call_args.kwargs["metadata"]["refresh_interval_minutes"], 5)
 
-    def test_spring_course_tracking_toggle_requires_csrf_and_logs(self):
+    def test_term_settings_require_admin_csrf_and_audit_exact_term(self):
+        with self.app.test_client() as client:
+            self.assertIn(client.get("/admin/course-tracking/terms").status_code, {302, 401, 403})
+            self._login(client)
+            token = self._get_csrf_token(client, "/admin/tiers", [])
+            url = "/admin/course-tracking/terms/Spring_2027/toggle"
+            self.assertEqual(client.post(url, json={"state": "upcoming", "expected_revision": 0}).status_code, 400)
+            policy = {"term": "Spring_2027", "state": "upcoming", "revision": 1}
+            with patch("services.admin_tracking_terms.save_term_policy", return_value=(policy, {"revision": 0})) as save, \
+                    patch.object(admin, "_log_admin_action") as audit:
+                response = client.post(url, json={"state": "upcoming", "expected_revision": 0}, headers={"X-CSRFToken": token})
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(save.call_args.args[0], "Spring_2027")
+            self.assertEqual(save.call_args.args[2], "admin-1")
+            self.assertEqual(audit.call_args.args[:2], ("course_tracking_term_updated", "Spring_2027"))
+
+    def test_legacy_spring_toggle_requires_csrf_and_is_retired(self):
         with self.app.test_client() as client:
             self._login(client)
             token = self._get_csrf_token(
@@ -1074,26 +1092,22 @@ class AdminSecurityTestCase(unittest.TestCase):
                     patch.object(admin, "_course_tracking_groups", return_value=([], None)),
                     patch.object(admin, "_theme_preference", return_value=None),
                     patch.object(admin, "_pending_admin_request_count", return_value=0),
-                    patch.object(admin, "spring_course_tracking_open", return_value=False),
                 ],
             )
 
             missing_token = client.post("/admin/course-tracking/spring-toggle", json={"enabled": True})
             self.assertEqual(missing_token.status_code, 400)
 
-            with patch.object(admin, "set_spring_course_tracking_open") as set_open, \
-                    patch.object(admin, "_log_admin_action") as log_action:
+            with patch.object(admin, "_log_admin_action") as log_action:
                 response = client.post(
                     "/admin/course-tracking/spring-toggle",
                     json={"enabled": True},
                     headers={"X-CSRFToken": token},
                 )
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.get_json()["enabled"])
-        set_open.assert_called_once_with(True)
-        self.assertEqual(log_action.call_args.args[0], "spring_course_tracking_toggle")
-        self.assertTrue(log_action.call_args.kwargs["metadata"]["enabled"])
+        self.assertEqual(response.status_code, 410)
+        self.assertEqual(response.get_json()["code"], "term_required")
+        log_action.assert_not_called()
 
     def test_chem_150_diagnostic_is_non_mutating(self):
         with self.app.test_client() as client:

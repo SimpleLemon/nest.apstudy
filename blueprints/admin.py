@@ -2,7 +2,6 @@ import io
 import json
 import logging
 import os
-import platform
 import re
 import secrets
 import shutil
@@ -38,19 +37,29 @@ from services.redaction import SECRET_TEXT_RE
 from services.row_utils import row_id as _row_id
 from services.toasts import push_toast
 from services.user_cleanup import delete_user_data
+from services.account_deletion_completion import complete_account_deletion, pending_account_deletion
+from services.storage_backend import require_mutations_enabled
+from services.storage_objects import StorageError
 from services.user_profile import (
     is_early_member as _is_early_member,
     is_emory_school as _is_emory_school,
     normalize_banner_color as _normalize_banner_color,
     profile_handle as _profile_handle,
 )
+from services.admin_storage_usage import storage_usage_summary
+from services import admin_tracking_terms
+from services.admin_tracking_terms import TermPolicyConflict, TermPolicyError, enabling_error
+from services.course_tracking_terms import term_policy
+from services.admin_course_tracking import course_tracking_groups, serialize_admin_track as _serialize_admin_track
 from services.app_config import (
     get_course_tracking_refresh_minutes,
     set_course_tracking_refresh_minutes,
-    set_spring_course_tracking_open,
-    spring_course_tracking_open,
 )
 from services.admin_access import admin_user_ids
+from services.admin_user_directory import (
+    AUTH_USER_SORTS, load_user_directory,
+    user_summary as _user_summary,
+)
 from services.admin_user_sections import (
     load_calendars_section,
     load_chat_section,
@@ -62,6 +71,7 @@ from services.admin_user_sections import (
     load_settings_section,
 )
 from services.host_admin import (
+    system_status as host_system_status,
     SCHEDULER_COMMAND_TIMEOUT_SECONDS,
     SCHEDULER_ENV_PATH,
     SCHEDULER_EXECUTABLE_FALLBACKS,
@@ -133,13 +143,6 @@ def _format_admin_date(value):
     return str(value) if value else None
 
 
-def _format_admin_datetime(value):
-    parsed = parse_datetime(value)
-    if parsed:
-        return parsed.strftime("%B %-d, %Y %-I:%M %p")
-    return str(value) if value else None
-
-
 def _admin_profile_payload(user_doc):
     user_id = _row_id(user_doc)
     name = user_doc.get("name") or "APStudy User"
@@ -186,68 +189,8 @@ def _admin_ids():
     return admin_user_ids()
 
 
-def _read_os_pretty():
-    try:
-        if hasattr(platform, "freedesktop_os_release"):
-            release = platform.freedesktop_os_release()
-            pretty = release.get("PRETTY_NAME")
-            if pretty:
-                return pretty
-    except Exception:
-        logger.debug("Failed to read freedesktop OS release metadata", exc_info=True)
-    try:
-        return platform.platform()
-    except Exception:
-        return "Unknown"
-
-
 def _system_status():
-    status = {
-        "os_pretty": _read_os_pretty(),
-        "cpu_percent": None,
-        "cpu_logical": None,
-        "cpu_physical": None,
-        "mem_percent": None,
-        "mem_used_gb": None,
-        "mem_total_gb": None,
-        "storage_percent": None,
-        "storage_used_gb": None,
-        "storage_total_gb": SYSTEM_STORAGE_LIMIT_GB,
-    }
-    try:
-        from services.scheduler import scheduler_status
-
-        status.update(scheduler_status())
-    except Exception:
-        logger.exception("Failed to read scheduler status for admin system overview")
-    if psutil is None:
-        return status
-    metrics = {}
-    try:
-        metrics["cpu_percent"] = round(psutil.cpu_percent(interval=0.1), 1)
-    except Exception:
-        logger.debug("Failed to read CPU utilization", exc_info=True)
-    try:
-        metrics["cpu_logical"] = psutil.cpu_count(logical=True)
-        metrics["cpu_physical"] = psutil.cpu_count(logical=False)
-    except Exception:
-        logger.debug("Failed to read CPU counts", exc_info=True)
-    try:
-        memory = psutil.virtual_memory()
-        metrics["mem_percent"] = round(memory.percent, 1)
-        metrics["mem_used_gb"] = round(memory.used / (1024**3), 1)
-        metrics["mem_total_gb"] = round(memory.total / (1024**3), 1)
-    except Exception:
-        logger.debug("Failed to read memory utilization", exc_info=True)
-    try:
-        disk = shutil.disk_usage("/")
-        storage_used_gb = disk.used / (1024**3)
-        metrics["storage_used_gb"] = round(storage_used_gb, 1)
-        metrics["storage_percent"] = round((storage_used_gb / SYSTEM_STORAGE_LIMIT_GB) * 100, 1)
-    except Exception:
-        logger.debug("Failed to read disk utilization", exc_info=True)
-    status.update(metrics)
-    return status
+    return host_system_status(metrics_provider=psutil, disk_usage=shutil.disk_usage)
 
 
 def _sanitize_admin_error(error):
@@ -352,6 +295,7 @@ def _admin_event_title(action):
         "reset_ics_token": "Admin Reset ICS Token",
         "disable_seat_tracks": "Admin Disabled Seat Tracks",
         "delete_shared_file": "Admin Deleted Shared File",
+        "download_shared_file": "Admin Downloaded Shared File",
         "delete_shared_folder": "Admin Deleted Shared Folder",
         "delete_user": "Admin Deleted User",
         "view_admin_tiers": "Admin Viewed Tiers",
@@ -363,7 +307,7 @@ def _admin_event_title(action):
         "toggle_course_tracking": "Admin Updated Course Tracking",
         "test_chem_150_tracking": "Admin Tested CHEM 150 Tracking",
         "course_tracking_refresh_interval": "Admin Updated Course Tracking Refresh",
-        "spring_course_tracking_toggle": "Admin Updated Spring Course Tracking",
+        "course_tracking_term_updated": "Admin Updated Course Tracking Term",
         "scheduler_pause": "Admin Paused Scheduler",
         "scheduler_resume": "Admin Resumed Scheduler",
         "system_git_pull": "Admin Ran Git Pull",
@@ -505,87 +449,6 @@ def _account_summary_rows(account_data):
     return rows
 
 
-def _normalize_oauth_provider(user_doc):
-    provider = str((user_doc or {}).get("provider") or "").strip().lower()
-    if provider in {"google", "discord", "github"}:
-        return provider
-    if (user_doc or {}).get("google_id"):
-        return "google"
-    return "other"
-
-
-def _user_summary(user_doc):
-    tier = normalize_tier(user_doc.get("tier"))
-    return {
-        "id": _row_id(user_doc),
-        "username": user_doc.get("username"),
-        "name": user_doc.get("name"),
-        "email": user_doc.get("email"),
-        "created_at_raw": user_doc.get("created_at"),
-        "created_at": _format_admin_date(user_doc.get("created_at")),
-        "last_login_raw": user_doc.get("last_login"),
-        "last_login": _format_admin_datetime(user_doc.get("last_login")),
-        "onboarding_complete": bool(user_doc.get("onboarding_complete")),
-        "onboarding_step": user_doc.get("onboarding_step") or 1,
-        "discord_linked": bool(user_doc.get("discord_id")),
-        "oauth_provider": _normalize_oauth_provider(user_doc),
-        "emory_student": bool(user_doc.get("emory_student")),
-        "school": user_doc.get("school"),
-        "major": user_doc.get("major"),
-        "graduation_year": user_doc.get("graduation_year"),
-        "education_level": user_doc.get("education_level"),
-        "class_year": user_doc.get("class_year"),
-        "picture_url": user_doc.get("picture_url"),
-        "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
-        "tier": tier,
-        "tier_label": TIER_LABELS[tier],
-        "tier_badge": TIER_BADGES.get(tier),
-    }
-
-
-def _search_users(users, query, field):
-    """Return case-insensitive partial matches from the admin user directory."""
-    needle = (query or "").strip().casefold()
-    if not needle:
-        return list(users)
-
-    searchable_fields = {
-        "name": ("name",),
-        "email": ("email",),
-        "username": ("username",),
-        "id": ("$id", "id"),
-    }
-    keys = searchable_fields.get(field, ("name", "username", "email", "$id", "id"))
-    return [
-        user for user in users
-        if any(needle in str(user.get(key) or "").casefold() for key in keys)
-    ]
-
-
-AUTH_USER_SORTS = {"identity", "tier", "profile", "activity", "created"}
-
-
-def _sort_auth_users(users, sort_key, sort_order):
-    reverse = sort_order == "desc"
-
-    def normalized(value):
-        return str(value or "").strip().casefold()
-
-    def sort_value(user):
-        if sort_key == "identity":
-            return (normalized(user.get("name") or user.get("username")), normalized(user.get("email")))
-        if sort_key == "tier":
-            tier = normalize_tier(user.get("tier"))
-            return (normalized(TIER_LABELS[tier]), normalized(user.get("name") or user.get("username")))
-        if sort_key == "profile":
-            return (normalized(user.get("school")), normalized(user.get("major") or user.get("education_level")))
-        if sort_key == "activity":
-            return normalized(user.get("last_login"))
-        return normalized(user.get("created_at"))
-
-    return sorted(users, key=sort_value, reverse=reverse)
-
-
 def _count_rows(table_id, queries):
     try:
         response = list_rows_safe(
@@ -694,20 +557,13 @@ def _status_code(exc):
 
 
 def _delete_storage_file(shared_file):
-    storage_file_id = shared_file.get("storage_file_id")
-    if not storage_file_id:
-        return
-    bucket_id = shared_file.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID
-    try:
-        _storage_service().delete_file(bucket_id, storage_file_id)
-    except AppwriteException as exc:
-        if _status_code(exc) != 404:
-            logger.exception("Failed to delete storage file %s", storage_file_id)
+    from services.file_share_store import _delete_storage_file as delete_payload
+    return delete_payload(shared_file)
 
 
 def _delete_shared_file_row(shared_file):
-    _delete_storage_file(shared_file)
-    delete_row_safe(COLLECTIONS["shared_files"], _row_id(shared_file))
+    from services.file_share_store import _delete_file_record
+    return _delete_file_record(shared_file)
 
 
 def _collect_folder_tree_ids(user_id, root_folder_id):
@@ -1018,52 +874,12 @@ def _load_auth_users_section():
     if per_page not in ALLOWED_USERS_PER_PAGE:
         per_page = DEFAULT_USERS_PER_PAGE
 
-    error = None
-    total_users = 0
-    users = []
-    total_pages = 1
-    try:
-        if not query and sort_key == "created" and sort_order == "desc":
-            offset = (page - 1) * per_page
-            response = list_rows_safe(
-                COLLECTIONS["users"],
-                [Query.order_desc("created_at"), Query.limit(per_page), Query.offset(offset)],
-            )
-            users = response.get("rows", [])
-            total_users = int(response.get("total") or 0)
-            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
-            if page > total_pages and total_users:
-                page = total_pages
-        else:
-            all_users = list_rows_all(COLLECTIONS["users"], [Query.order_desc("created_at")])
-            matched = _search_users(all_users, query, field)
-            matched = _sort_auth_users(matched, sort_key, sort_order)
-            total_users = len(matched)
-            total_pages = max(1, (total_users + per_page - 1) // per_page) if total_users else 1
-            if page > total_pages:
-                page = total_pages
-            start = (page - 1) * per_page
-            users = matched[start:start + per_page]
-    except AppwriteException:
-        logger.exception("Failed to load admin user list")
-        users = []
-        total_users = 0
-        total_pages = 1
-        error = "Unable to load users right now."
-
-    return {
-        "users": [_user_summary(user) for user in users],
-        "q": query,
-        "field": field,
-        "sort": sort_key,
-        "order": sort_order,
-        "page": page,
-        "per_page": per_page,
-        "total_users": total_users,
-        "total_pages": total_pages,
-        "allowed_users_per_page": sorted(ALLOWED_USERS_PER_PAGE),
-        "error": error,
-    }
+    return load_user_directory(
+        table_id=COLLECTIONS["users"], query=query, field=field,
+        sort_key=sort_key, sort_order=sort_order, page=page, per_page=per_page,
+        allowed_per_page=ALLOWED_USERS_PER_PAGE,
+        list_rows_safe=list_rows_safe, list_rows_all=list_rows_all,
+    )
 
 
 def _load_auth_channel_requests_section():
@@ -1246,7 +1062,6 @@ def admin_auth_section_course_tracking():
         tracking_groups=tracking_groups,
         tracking_error=tracking_error,
         course_tracking_refresh_minutes=get_course_tracking_refresh_minutes(),
-        spring_tracking_open=spring_course_tracking_open(),
     )
 
 
@@ -1399,69 +1214,23 @@ def admin_system_git_pull():
 
 def _enabled_course_track_count():
     try:
-        return len(list_rows_all(
-            COLLECTIONS["course_seat_tracks"],
-            [Query.equal("enabled", [True])],
-        )), None
-    except AppwriteException as exc:
-        logger.exception("Failed to count enabled course seat tracks")
-        return None, _sanitize_admin_error(exc)
-
-
-def _format_bytes(value):
-    try:
-        size = int(value or 0)
-    except (TypeError, ValueError):
-        size = 0
-    units = ("B", "KB", "MB", "GB", "TB")
-    amount = float(size)
-    unit = units[0]
-    for unit in units:
-        if amount < 1024 or unit == units[-1]:
-            break
-        amount /= 1024
-    if unit == "B":
-        return f"{int(amount)} {unit}"
-    return f"{amount:.1f} {unit}"
+        tracks = list_rows_all(COLLECTIONS["course_seat_tracks"], [Query.equal("enabled", [True])])
+        policies = {track.get("term"): term_policy(track.get("term")) for track in tracks}
+        return sum(policies[track.get("term")]["polling_enabled"] for track in tracks), None
+    except Exception:
+        logger.exception("Failed to count active course seat tracks")
+        return 0, "Unable to count active trackers."
 
 
 def _storage_usage_summary():
-    try:
-        files = list_rows_all(COLLECTIONS["shared_files"])
-    except Exception as exc:
-        logger.exception("Failed to load file storage summary")
-        return {
-            "bytes": 0,
-            "formatted": "--",
-            "file_count": 0,
-            "avatar_count": 0,
-            "error": _sanitize_admin_error(exc),
-        }
-
-    total_bytes = 0
-    for file_row in files:
-        try:
-            total_bytes += int(file_row.get("file_size_bytes") or 0)
-        except (TypeError, ValueError):
-            continue
-
-    try:
-        users = list_rows_all(COLLECTIONS["users"])
-        avatar_count = sum(1 for user in users if user.get("avatar_file_id"))
-    except Exception:
-        logger.exception("Failed to count avatar storage rows")
-        avatar_count = 0
-    return {
-        "bytes": total_bytes,
-        "formatted": _format_bytes(total_bytes),
-        "file_count": len(files),
-        "avatar_count": avatar_count,
-        "error": None,
-    }
+    return storage_usage_summary(
+        collections=COLLECTIONS, list_rows_all=list_rows_all,
+        sanitize_error=_sanitize_admin_error,
+    )
 
 
 def _admin_home_metrics():
-    active_tracks = _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("enabled", [True])])
+    active_tracks, _ = _enabled_course_track_count()
     paused_tracks = _safe_count_rows(COLLECTIONS["course_seat_tracks"], [Query.equal("enabled", [False])])
     return {
         "total_users": _safe_count_rows(COLLECTIONS["users"], []),
@@ -1495,94 +1264,10 @@ def _course_tracking_diagnostics():
     return payload
 
 
-def _track_group_key(track):
-    return {
-        "term": track.get("term") or "",
-        "subject": str(track.get("subject") or "").upper(),
-        "catalog": str(track.get("catalog") or ""),
-        "crn": str(track.get("crn") or ""),
-    }
-
-
-def _track_group_id(key):
-    return "|".join([key["term"], key["subject"], key["catalog"], key["crn"]])
-
-
-def _serialize_admin_track(track):
-    return {
-        "id": _row_id(track),
-        "user_id": track.get("user_id"),
-        "term": track.get("term"),
-        "subject": track.get("subject"),
-        "catalog": track.get("catalog"),
-        "crn": track.get("crn"),
-        "section_id": track.get("section_id"),
-        "course_code": track.get("course_code"),
-        "course_title": track.get("course_title"),
-        "enabled": bool(track.get("enabled")),
-        "last_status": track.get("last_status"),
-        "last_seats_available": track.get("last_seats_available"),
-        "last_checked_at": track.get("last_checked_at"),
-        "last_notified_at": track.get("last_notified_at"),
-        "created_at": track.get("created_at"),
-        "updated_at": track.get("updated_at"),
-    }
-
-
 def _course_tracking_groups():
-    try:
-        tracks = list_rows_all(
-            COLLECTIONS["course_seat_tracks"],
-            [Query.order_desc("updated_at")],
-        )
-    except Exception:
-        logger.exception("Failed to load course tracking rows")
-        return [], "Unable to load course tracking."
-
-    grouped = {}
-    for track in tracks:
-        key = _track_group_key(track)
-        if not key["term"] or not key["subject"] or not key["catalog"]:
-            continue
-        group_id = _track_group_id(key)
-        group = grouped.setdefault(group_id, {
-            "id": group_id,
-            **key,
-            "course_code": track.get("course_code") or f"{key['subject']} {key['catalog']}".strip(),
-            "course_title": track.get("course_title") or "",
-            "tracks": [],
-        })
-        if not group.get("course_code") and track.get("course_code"):
-            group["course_code"] = track.get("course_code")
-        if not group.get("course_title") and track.get("course_title"):
-            group["course_title"] = track.get("course_title")
-        group["tracks"].append(_serialize_admin_track(track))
-
-    groups = []
-    for group in grouped.values():
-        tracks = group["tracks"]
-        enabled_tracks = [track for track in tracks if track.get("enabled")]
-        paused_tracks = [track for track in tracks if not track.get("enabled")]
-        users = sorted({track.get("user_id") for track in tracks if track.get("user_id")})
-        last_checked_values = [track.get("last_checked_at") for track in tracks if track.get("last_checked_at")]
-        last_updated_values = [track.get("updated_at") for track in tracks if track.get("updated_at")]
-        representative = tracks[0] if tracks else {}
-        group.update({
-            "track_count": len(tracks),
-            "active_count": len(enabled_tracks),
-            "paused_count": len(paused_tracks),
-            "user_count": len(users),
-            "users": users,
-            "last_checked_at": max(last_checked_values) if last_checked_values else None,
-            "last_updated_at": max(last_updated_values) if last_updated_values else None,
-            "last_status": representative.get("last_status"),
-            "last_seats_available": representative.get("last_seats_available"),
-            "enabled": bool(enabled_tracks),
-        })
-        groups.append(group)
-
-    groups.sort(key=lambda item: (item.get("term") or "", item.get("subject") or "", item.get("catalog") or "", item.get("crn") or ""))
-    return groups, None
+    return course_tracking_groups(
+        table_id=COLLECTIONS["course_seat_tracks"], list_rows_all=list_rows_all,
+    )
 
 
 def _toggle_track(track, enabled):
@@ -1640,6 +1325,9 @@ def admin_course_tracking_group_toggle():
                 Query.equal("crn", [crn]),
             ],
         )
+        gate = enabling_error(tracks, enabled)
+        if gate is not None:
+            return jsonify(gate[0]), gate[1]
         updated = [_toggle_track(track, enabled) for track in tracks]
     except AppwriteException as exc:
         logger.exception("Failed to update course tracking group")
@@ -1664,6 +1352,9 @@ def admin_course_tracking_track_toggle(track_id):
     if not track:
         abort(404)
 
+    gate = enabling_error([track], enabled)
+    if gate is not None:
+        return jsonify(gate[0]), gate[1]
     try:
         updated = _toggle_track(track, enabled)
     except AppwriteException as exc:
@@ -1870,24 +1561,39 @@ def admin_apswiftly_control(action):
     return jsonify({"status": "ok", "action": action, **(result if isinstance(result, dict) else {})})
 
 
+@admin_bp.route("/admin/course-tracking/terms")
+@admin_required
+def admin_course_tracking_terms():
+    try:
+        return jsonify({"terms": admin_tracking_terms.term_inventory()})
+    except Exception:
+        logger.exception("Unable to list tracking terms")
+        return jsonify({"error": "Unable to load term settings. Please retry."}), 503
+
+
+@admin_bp.route("/admin/course-tracking/terms/<term>/toggle", methods=["POST"])
+@admin_required
+def admin_course_tracking_term_save(term):
+    try:
+        policy, before = admin_tracking_terms.save_term_policy(
+            term, request.get_json(silent=True), current_user.id,
+        )
+    except TermPolicyConflict as exc:
+        return jsonify({"error": str(exc), "code": "term_policy_conflict", "policy": term_policy(term)}), 409
+    except TermPolicyError as exc:
+        return jsonify({"error": str(exc)}), 400
+    except Exception:
+        logger.exception("Unable to save tracking term")
+        return jsonify({"error": "Unable to save term settings. Please retry."}), 503
+    _log_admin_action("course_tracking_term_updated", term, metadata={"before": before, "after": policy})
+    return jsonify({"status": "ok", "policy": policy})
+
+
 @admin_bp.route("/admin/course-tracking/spring-toggle", methods=["POST"])
 @admin_required
 def admin_course_tracking_spring_toggle():
-    payload = request.get_json(silent=True) or request.form or {}
-    enabled = str(payload.get("enabled", "")).strip().lower() in {"1", "true", "yes", "on"}
-    try:
-        set_spring_course_tracking_open(enabled)
-    except Exception as exc:
-        logger.exception("Failed to update Spring course tracking gate")
-        return jsonify({"error": "Unable to update Spring course tracking.", "message": _sanitize_admin_error(exc)}), 500
-
-    _log_admin_action(
-        "spring_course_tracking_toggle",
-        "spring_course_tracking",
-        metadata={"enabled": enabled},
-        color="green" if enabled else "yellow",
-    )
-    return jsonify({"status": "ok", "enabled": enabled})
+    return jsonify({"error": "Choose a specific semester and year in Tracking by term.",
+                    "code": "term_required"}), 410
 
 
 @admin_bp.route("/admin/requests/<request_id>/approve", methods=["POST"])
@@ -2040,6 +1746,8 @@ def admin_detail(user_id):
             **_chat_count_summary(user_id),
         }
 
+    from services.extension_streaks import list_for_user
+    streak_records = list_for_user(user_id)
     section_data = _load_section(section, user_id)
     try:
         tier_entitlements = entitlement_payload(user_id, user_doc)
@@ -2056,6 +1764,7 @@ def admin_detail(user_id):
 
     return render_template(
         "admin_detail.html",
+        streak_records=streak_records,
         user=_user_summary(user_doc),
         profile=_admin_profile_payload(user_doc),
         user_doc=user_doc,
@@ -2302,7 +2011,7 @@ def delete_shared_file(user_id, file_id):
 
     try:
         _delete_shared_file_row(shared_file)
-    except AppwriteException:
+    except (AppwriteException, StorageError):
         logger.exception("Failed to delete shared file %s", file_id)
         return _redirect_detail(user_id, section, error="Unable to delete file.", return_to=return_to)
 
@@ -2326,17 +2035,9 @@ def delete_shared_folder(user_id, folder_id):
         abort(404)
 
     try:
-        folder_ids = _collect_folder_tree_ids(user_id, folder_id)
-        files = list_rows_all(
-            COLLECTIONS["shared_files"],
-            [Query.equal("user_id", [user_id])],
-        )
-        for shared_file in files:
-            if shared_file.get("folder_id") in folder_ids:
-                _delete_shared_file_row(shared_file)
-        for target_id in reversed(folder_ids):
-            delete_row_safe(COLLECTIONS["file_folders"], target_id)
-    except AppwriteException:
+        from services.file_share_store import _delete_folder_tree
+        _delete_folder_tree(folder_id, user_id)
+    except (AppwriteException, StorageError):
         logger.exception("Failed to delete shared folder %s", folder_id)
         return _redirect_detail(user_id, section, error="Unable to delete folder.", return_to=return_to)
 
@@ -2357,37 +2058,16 @@ def download_shared_file(user_id, file_id):
     if not shared_file or shared_file.get("user_id") != user_id:
         abort(404)
 
-    storage_file_id = shared_file.get("storage_file_id")
-    if not storage_file_id:
-        abort(404)
-
-    bucket_id = shared_file.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID
-    try:
-        data = _storage_service().get_file_download(bucket_id, storage_file_id)
-    except AppwriteException as exc:
-        if _status_code(exc) == 404:
-            abort(404)
-        logger.exception("Failed to download shared file %s", file_id)
-        abort(500)
-
-    try:
-        update_row_safe(
-            COLLECTIONS["shared_files"],
-            _row_id(shared_file),
-            {
-                "downloaded_count": int(shared_file.get("downloaded_count") or 0) + 1,
-                "updated_at": format_datetime(datetime.utcnow()),
-            },
+    from services.file_share_store import _send_shared_file
+    response = _send_shared_file(shared_file)
+    if response.status_code in {200, 206}:
+        _log_admin_action(
+            "download_shared_file",
+            f"user:{user_id} file:{file_id}",
+            target_user={"$id": user_id},
+            metadata={"resource_type": "shared_file", "resource_id": file_id, "target_user_id": user_id},
         )
-    except AppwriteException:
-        logger.exception("Failed to update download count for %s", file_id)
-
-    return send_file(
-        io.BytesIO(data),
-        as_attachment=True,
-        download_name=shared_file.get("original_filename") or "download",
-        mimetype=shared_file.get("mime_type") or "application/octet-stream",
-    )
+    return response
 
 
 @admin_bp.route("/admin/<user_id>/delete", methods=["POST"])
@@ -2400,30 +2080,55 @@ def delete_user(user_id):
 
     user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
     if not user_doc:
-        abort(404)
+        if not pending_account_deletion(user_id):
+            abort(404)
+        user_doc = {"$id": user_id}
+        local_deleted = True
+    else:
+        local_deleted = False
 
-    avatar_file_id = user_doc.get("avatar_file_id")
-
-    result = _delete_user_rows(user_id)
+    try:
+        require_mutations_enabled()
+        result = [] if local_deleted else _delete_user_rows(user_id)
+    except StorageError as exc:
+        logger.warning("Failed to delete user upload storage for %s (%s)", user_id, type(exc).__name__)
+        return _redirect_detail(user_id, "overview", error=str(exc), return_to=return_to)
     errors = result if isinstance(result, list) else []
     if errors:
         logger.error("Incomplete user data deletion for %s: %s", user_id, errors)
         return _redirect_detail(user_id, "overview", error="Unable to delete all user data.", return_to=return_to)
 
     try:
-        Users(appwrite_client).delete(user_id)
-    except Exception:
-        logger.exception("Failed to delete Appwrite account for %s", user_id)
-        return _redirect_detail(user_id, "overview", error="Unable to delete Appwrite user.", return_to=return_to)
+        complete_account_deletion(user_id, delete_auth=lambda account_id: Users(appwrite_client).delete(account_id))
+    except StorageError as exc:
+        logger.warning("Account deletion completion is pending for %s (%s)", user_id, type(exc).__name__)
+        return _redirect_detail(user_id, "overview", error=str(exc), return_to=return_to)
 
     _log_admin_action("delete_user", f"user:{user_id}", target_user=user_doc, color="red")
 
-    if avatar_file_id:
-        try:
-            _storage_service().delete_file(PROFILE_AVATAR_BUCKET_ID, avatar_file_id)
-        except AppwriteException as exc:
-            if _status_code(exc) != 404:
-                logger.exception("Failed to delete avatar file %s", avatar_file_id)
-
     push_toast("User deleted.", type="success")
     return redirect(_admin_detail_return_url(return_to))
+
+
+@admin_bp.route("/admin/<user_id>/streak/corrections", methods=["POST"])
+@admin_required
+def admin_streak_correction(user_id):
+    from services import extension_streaks as streaks
+    try:
+        account, zone = request.form.get("accountKey"), request.form.get("timeZone")
+        dates, reason = request.form.getlist("dates"), request.form.get("reason", "")
+        action = request.form.get("action")
+        if action not in {"forgive", "revoke"}:
+            raise streaks.StreakError("Invalid correction action.")
+        revision = int(request.form.get("revision", "-1"))
+        preview = request.form.get("preview") == "1"
+        result = streaks.correct(user_id, str(current_user.get_id()), account, zone, dates, reason,
+                                 revoke=action == "revoke", expected_revision=revision, preview=preview)
+        if preview:
+            return render_template("admin_streak_review.html", result=result, user_id=user_id,
+                                   account=account, zone=zone, dates=dates, reason=reason,
+                                   action=action, revision=revision)
+        _log_admin_action("streak_correction", f"user:{user_id}", metadata={"action": action, "dates": dates, "account_key": account})
+        return redirect(url_for("admin.admin_detail", user_id=user_id, status="streak-corrected"))
+    except (streaks.StreakError, ValueError) as exc:
+        return jsonify({"ok": False, "error": str(exc)}), getattr(exc, "status", 400)

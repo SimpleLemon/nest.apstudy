@@ -6,26 +6,9 @@ from datetime import datetime, timezone
 
 import requests
 
-from config import load_environment_config
+from services.environment_config import apswiftly_settings
 
 logger = logging.getLogger(__name__)
-
-_IMPORT_ENVIRONMENT_CONFIG = load_environment_config()
-APSWIFTLY_CONTROL_URL = (
-    _IMPORT_ENVIRONMENT_CONFIG.apswiftly_control_url_raw
-    or "http://127.0.0.1:3921"
-).rstrip("/")
-APSWIFTLY_CONTROL_TOKEN = (
-    _IMPORT_ENVIRONMENT_CONFIG.apswiftly_control_token_raw or ""
-).strip()
-APSWIFTLY_SERVICE_NAME = (
-    _IMPORT_ENVIRONMENT_CONFIG.apswiftly_service_name_raw or "apswiftly"
-).strip() or "apswiftly"
-APSWIFTLY_CONTROL_TIMEOUT_SECONDS = max(
-    1,
-    int(_IMPORT_ENVIRONMENT_CONFIG.apswiftly_control_timeout_seconds_raw or "15"),
-)
-del _IMPORT_ENVIRONMENT_CONFIG
 
 EXECUTABLE_FALLBACKS = {
     "sudo": ("/usr/bin/sudo", "/bin/sudo"),
@@ -49,10 +32,12 @@ def _resolve_executable(name):
     raise FileNotFoundError(f"Required command not found: {name}")
 
 
-def _control_headers():
+def _control_headers(settings=None):
+    if settings is None:
+        settings = apswiftly_settings()
     headers = {"Accept": "application/json"}
-    if APSWIFTLY_CONTROL_TOKEN:
-        headers["Authorization"] = f"Bearer {APSWIFTLY_CONTROL_TOKEN}"
+    if settings.control_token:
+        headers["Authorization"] = f"Bearer {settings.control_token}"
     return headers
 
 
@@ -109,13 +94,14 @@ def format_checked_at_display(value, *, now=None):
 
 
 def _service_state():
+    settings = apswiftly_settings()
     try:
         result = subprocess.run(
-            [_resolve_executable("systemctl"), "is-active", APSWIFTLY_SERVICE_NAME],
+            [_resolve_executable("systemctl"), "is-active", settings.service_name],
             check=False,
             capture_output=True,
             text=True,
-            timeout=APSWIFTLY_CONTROL_TIMEOUT_SECONDS,
+            timeout=settings.timeout_seconds,
         )
         state = (result.stdout or result.stderr or "").strip().lower()
         if state in {"active", "inactive", "failed", "activating", "deactivating"}:
@@ -127,13 +113,14 @@ def _service_state():
 
 
 def _api_status():
-    if not APSWIFTLY_CONTROL_TOKEN:
+    settings = apswiftly_settings()
+    if not settings.control_token:
         return False, None
     try:
         response = requests.get(
-            f"{APSWIFTLY_CONTROL_URL}/api/control/status",
-            headers=_control_headers(),
-            timeout=APSWIFTLY_CONTROL_TIMEOUT_SECONDS,
+            f"{settings.control_url}/api/control/status",
+            headers=_control_headers(settings),
+            timeout=settings.timeout_seconds,
         )
         if response.ok:
             payload = response.json() if response.content else {}
@@ -145,34 +132,36 @@ def _api_status():
 
 
 def apswiftly_status():
+    settings = apswiftly_settings()
     service_state = _service_state()
     api_reachable, api_payload = _api_status()
     checked_at = _checked_at()
     return {
-        "service_name": APSWIFTLY_SERVICE_NAME,
+        "service_name": settings.service_name,
         "service_state": service_state,
         "service_state_display": format_service_state_display(service_state),
         "service_active": service_state == "active",
         "api_reachable": api_reachable,
         "api_payload": api_payload,
-        "control_url": APSWIFTLY_CONTROL_URL,
+        "control_url": settings.control_url,
         "checked_at": checked_at,
         "checked_at_display": format_checked_at_display(checked_at),
     }
 
 
 def _post_control(path):
-    if not APSWIFTLY_CONTROL_TOKEN:
+    settings = apswiftly_settings()
+    if not settings.control_token:
         raise APSwiftlyControlError(
             "APSwiftly control token is not configured.",
             status_code=503,
         )
     try:
         response = requests.post(
-            f"{APSWIFTLY_CONTROL_URL}{path}",
-            headers=_control_headers(),
+            f"{settings.control_url}{path}",
+            headers=_control_headers(settings),
             json={},
-            timeout=APSWIFTLY_CONTROL_TIMEOUT_SECONDS,
+            timeout=settings.timeout_seconds,
         )
     except requests.RequestException as exc:
         raise APSwiftlyControlError(
@@ -214,11 +203,12 @@ def apswiftly_shutdown():
 
 
 def apswiftly_service_restart():
+    settings = apswiftly_settings()
     command = [
         _resolve_executable("sudo"),
         _resolve_executable("systemctl"),
         "restart",
-        APSWIFTLY_SERVICE_NAME,
+        settings.service_name,
     ]
     try:
         subprocess.run(
@@ -226,7 +216,7 @@ def apswiftly_service_restart():
             check=True,
             capture_output=True,
             text=True,
-            timeout=APSWIFTLY_CONTROL_TIMEOUT_SECONDS,
+            timeout=settings.timeout_seconds,
         )
     except subprocess.CalledProcessError as exc:
         message = (exc.stderr or exc.stdout or str(exc)).strip()
@@ -237,6 +227,6 @@ def apswiftly_service_restart():
         raise APSwiftlyControlError(str(exc), status_code=500) from exc
 
     return {
-        "message": f"Systemd service restart initiated for {APSWIFTLY_SERVICE_NAME}.",
-        "service": APSWIFTLY_SERVICE_NAME,
+        "message": f"Systemd service restart initiated for {settings.service_name}.",
+        "service": settings.service_name,
     }
