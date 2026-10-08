@@ -1,4 +1,6 @@
+import { validateCalendarFeedLinks } from '../calendar/feed-links.js';
 import { createThemeSelector } from './theme-selector.js';
+import { USERNAME_MAX_LENGTH, validateProfileText, validateUsername } from '../core/profile-policy.js';
 
 const onboardingData = JSON.parse(document.getElementById('onboarding-data').textContent);
 const onboardingState = {
@@ -100,18 +102,10 @@ function suggestUsername(value) {
     return base.slice(0, USERNAME_MAX_LENGTH);
 }
 
-function codePointLength(value) {
-    return Array.from(String(value || '').trim()).length;
-}
-
 function validateProfileTextField(field) {
-    const { input, counter, error, label, minimum, maximum } = field;
+    const { input, counter, error } = field;
     if (!input) return true;
-    const value = input.value.trim();
-    const length = codePointLength(value);
-    let message = '';
-    if (length < minimum) message = `${label} is required.`;
-    else if (length > maximum) message = `${label} must be ${maximum} characters or fewer.`;
+    const { error: message, length, maximum } = validateProfileText(field.key, input.value);
     const counterElement = document.getElementById(counter);
     const errorElement = document.getElementById(error);
     if (counterElement) counterElement.textContent = `${length} / ${maximum} characters`;
@@ -132,26 +126,10 @@ function validateAccountStep() {
         showError(displayNameInput.validationMessage);
         return false;
     }
-    const rawUsername = usernameInput?.value.trim() || '';
-    if (!rawUsername) {
+    const { value: normalizedUsername, error: usernameError } = validateUsername(usernameInput?.value);
+    if (usernameError) {
         formField()?.markInvalid?.(usernameInput);
-        showError('Username is required.');
-        return false;
-    }
-    const normalizedUsername = rawUsername.toLowerCase();
-    if (!USERNAME_PATTERN.test(normalizedUsername)) {
-        formField()?.markInvalid?.(usernameInput);
-        showError('Please only use numbers, letters, dashes -, or underscores _.');
-        return false;
-    }
-    if (normalizedUsername.length < USERNAME_MIN_LENGTH || normalizedUsername.length > USERNAME_MAX_LENGTH) {
-        formField()?.markInvalid?.(usernameInput);
-        showError('Username must be between 3 and 20 characters.');
-        return false;
-    }
-    if (USERNAME_RESERVED.has(normalizedUsername)) {
-        formField()?.markInvalid?.(usernameInput);
-        showError('That username is reserved.');
+        showError(usernameError);
         return false;
     }
     formField()?.clearInvalid?.([displayNameInput, usernameInput]);
@@ -174,35 +152,11 @@ const DARK_THEMES = ['obsidian-dark', 'nest-dark'];
 const VALID_THEMES = ['obsidian-dark', 'parchment-light', 'system-match', 'nest-light', 'nest-dark'];
 const STORAGE_KEY = 'apstudy-theme';
 const MAX_OTHER_CALENDARS = 10;
-const USERNAME_MIN_LENGTH = 3;
-const USERNAME_MAX_LENGTH = 20;
-const USERNAME_PATTERN = /^[a-zA-Z0-9_-]+$/;
-const USERNAME_RESERVED = new Set([
-    'account',
-    'admin',
-    'api',
-    'auth',
-    'calendar',
-    'dashboard',
-    'data',
-    'files',
-    'login',
-    'logout',
-    'notes',
-    'onboarding',
-    'preferences',
-    'profile',
-    'settings',
-    'signup',
-    'u',
-    'user',
-    'users',
-]);
 const EMORY_SCHOOL_NAME = 'Emory University';
 const PROFILE_TEXT_FIELDS = [
-    { input: displayNameInput, counter: 'onboarding-display-name-counter', error: 'onboarding-display-name-error', label: 'Display name', minimum: 1, maximum: 80 },
-    { input: universityInput, counter: 'onboarding-school-counter', error: 'onboarding-school-error', label: 'School', minimum: 0, maximum: 160 },
-    { input: majorInput, counter: 'onboarding-major-counter', error: 'onboarding-major-error', label: 'Major', minimum: 0, maximum: 120 },
+    { key: 'displayName', input: displayNameInput, counter: 'onboarding-display-name-counter', error: 'onboarding-display-name-error' },
+    { key: 'school', input: universityInput, counter: 'onboarding-school-counter', error: 'onboarding-school-error' },
+    { key: 'major', input: majorInput, counter: 'onboarding-major-counter', error: 'onboarding-major-error' },
 ];
 const SEGMENTED_OPTION_CLASSES = 'inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container/[0.65] px-4 py-3 text-sm font-medium text-on-surface transition duration-200 ease-out hover:border-outline-variant/50 hover:bg-surface-container-high/90 focus:outline-none focus:ring-1 focus:ring-primary/50 aria-pressed:border-primary/30 aria-pressed:bg-primary/15';
 const COURSE_CARD_CLASSES = 'rounded-2xl border border-outline-variant/20 bg-surface-container p-4';
@@ -304,7 +258,7 @@ async function loadTerms() {
             onboardingState.term = selected;
         }
         renderTermOptions(terms, onboardingState.term);
-    } catch (error) {
+    } catch {
         renderTermOptions([onboardingState.term].filter(Boolean), onboardingState.term);
     }
 }
@@ -323,38 +277,6 @@ function createOtherCalendarRow(value = '') {
     const input = row.querySelector('input[data-other-calendar-url]');
     formField()?.bindAutoClear?.(input);
     return row;
-}
-function normalizeCalendarUrlForDedup(url, options = {}) {
-    try {
-        const trimmed = String(url || '').trim();
-        if (!trimmed) {
-            return '';
-        }
-        const allowMissingScheme = options.allowMissingScheme === true;
-        const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed);
-        const normalizedInput = !hasScheme && allowMissingScheme
-            ? `https://${trimmed}`
-            : trimmed;
-        const parsed = new URL(normalizedInput);
-        let scheme = parsed.protocol.replace(':', '').toLowerCase();
-        if (scheme === 'webcal') {
-            scheme = 'https';
-        }
-        if (scheme !== 'http' && scheme !== 'https') {
-            return '';
-        }
-        const host = parsed.host.toLowerCase();
-        const path = parsed.pathname.replace(/\/+$/, '');
-        const query = parsed.search || '';
-        return `${scheme}://${host}${path}${query}`;
-    } catch (err) {
-        return '';
-    }
-}
-function collectOtherCalendarUrls() {
-    return Array.from(document.querySelectorAll('input[data-other-calendar-url]'))
-        .map(input => input.value.trim())
-        .filter(Boolean);
 }
 function saveStep(step, extra = {}) {
     clearError();
@@ -844,7 +766,7 @@ async function searchCourses(query) {
             courseSuggestions.appendChild(item);
         }
         courseSuggestions.classList.remove('hidden');
-    } catch (error) {
+    } catch {
         if (requestId !== courseSearchRequestId) {
             return;
         }
@@ -871,7 +793,7 @@ async function searchUniversities(query) {
             const label = [school.name, school.city, school.state].filter(Boolean).join(' - ');
             return `<option value="${escapeOptionAttribute(school.name)}" label="${escapeOptionAttribute(label)}"></option>`;
         }).join('');
-    } catch (error) {
+    } catch {
         universityOptions.innerHTML = '';
     }
 }
@@ -954,43 +876,25 @@ document.querySelectorAll('.btn-next').forEach((button) => {
                 return;
             }
             if (currentStep === 4) {
-                const feedUrl = document.getElementById('canvas-feed-url')?.value || '';
-                const otherCalendarUrls = collectOtherCalendarUrls();
-                if (otherCalendarUrls.length > MAX_OTHER_CALENDARS) {
-                    showError(`You can add up to ${MAX_OTHER_CALENDARS} optional calendar links.`);
-                    return;
-                }
-                const normalizedSeen = new Set();
-                const normalizedCanvas = normalizeCalendarUrlForDedup(feedUrl, { allowMissingScheme: true });
                 const otherCalendarInputs = Array.from(document.querySelectorAll('input[data-other-calendar-url]'));
-                for (const input of otherCalendarInputs) {
-                    const url = input.value.trim();
-                    if (!url) continue;
-                    const normalized = normalizeCalendarUrlForDedup(url);
-                    if (!normalized) {
-                        formField()?.markInvalid?.(input);
-                        showError('Each optional calendar link must be a valid http(s) or webcal URL.');
-                        return;
-                    }
-                    if (normalizedCanvas && normalized === normalizedCanvas) {
-                        formField()?.markInvalid?.(input);
-                        showError('Optional calendar links cannot duplicate the Nest Canvas calendar.');
-                        return;
-                    }
-                    if (normalizedSeen.has(normalized)) {
-                        formField()?.markInvalid?.(input);
-                        showError('Duplicate optional calendar links are not allowed.');
-                        return;
-                    }
-                    normalizedSeen.add(normalized);
+                let feedPayload;
+                try {
+                    feedPayload = validateCalendarFeedLinks(
+                        document.getElementById('canvas-feed-url')?.value || '',
+                        otherCalendarInputs.map(input => input.value),
+                        { maxOtherCalendars: MAX_OTHER_CALENDARS, canvasAllowMissingScheme: true },
+                    );
+                } catch (error) {
+                    if (Number.isInteger(error.inputIndex)) formField()?.markInvalid?.(otherCalendarInputs[error.inputIndex]);
+                    showError(error.code === 'canvas_duplicate'
+                        ? 'Optional calendar links cannot duplicate the Nest Canvas calendar.'
+                        : error.message);
+                    return;
                 }
                 formField()?.clearAll?.(form);
                 await fetchJson(onboardingData.endpoints.feedUrl, {
                     method: 'POST',
-                    body: JSON.stringify({
-                        canvas_ical_url: feedUrl,
-                        other_ical_urls: otherCalendarUrls,
-                    }),
+                    body: JSON.stringify(feedPayload),
                 });
                 await saveInterfaceTheme(currentTheme);
                 await saveStep(4);

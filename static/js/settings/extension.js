@@ -1,5 +1,5 @@
 /* Independent of the profile and ICS form hydration. */
-(function () {
+export function initializeExtensionSettings() {
   'use strict';
   const host = document.getElementById('extension-connection-accounts');
   const status = document.getElementById('extension-connection-status');
@@ -41,22 +41,47 @@
     });
     return node;
   }
-  async function request(path, body, method = 'GET') {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 12000);
-    try {
-      const response = await fetch(path, {
-        method, credentials: 'same-origin', cache: 'no-store', signal: controller.signal,
-        headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}) },
-        ...(body ? { body: JSON.stringify(body) } : {}),
-      });
-      const data = await response.json();
-      if (!response.ok || data.ok !== true) throw new Error(response.status === 401 ? 'Sign in to Nest again, then refresh connection.' : data.error?.message || 'Connection could not be updated. Refresh and try again.');
-      return data;
-    } catch (error) {
-      if (error.name === 'AbortError') throw new Error('Nest took too long to respond. Refresh connection to try again.');
-      throw error;
-    } finally { clearTimeout(timer); }
+  function request(path, body, method = 'GET') {
+    const execute = async () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 12000);
+      let response;
+      function responseError(message, cause) {
+        const error = new Error(message, cause ? { cause } : undefined);
+        if (response) {
+          error.status = response.status;
+          error.response = response;
+          error.url = response.url || path;
+        }
+        return error;
+      }
+      try {
+        response = await fetch(path, {
+          method, credentials: 'same-origin', cache: 'no-store', signal: controller.signal,
+          headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}) },
+          ...(body ? { body: JSON.stringify(body) } : {}),
+        });
+        let data;
+        try { data = await response.json(); }
+        catch (error) {
+          if (error.name === 'AbortError') throw error;
+          throw responseError(response.status === 401
+            ? 'Sign in to Nest again, then refresh connection.'
+            : 'Connection could not be updated. Refresh and try again.', error);
+        }
+        if (!response.ok || data?.ok !== true) throw responseError(response.status === 401
+          ? 'Sign in to Nest again, then refresh connection.'
+          : data?.error?.message || 'Connection could not be updated. Refresh and try again.');
+        return data;
+      } catch (error) {
+        if (error.name === 'AbortError') throw responseError('Nest took too long to respond. Refresh connection to try again.', error);
+        throw error;
+      } finally { clearTimeout(timer); }
+    };
+    const operation = execute();
+    return method !== 'GET' && window.APStudyPendingMutations?.track
+      ? window.APStudyPendingMutations.track(operation, 'settings-save')
+      : operation;
   }
   async function consent(source, version, scopes, action) {
     await request(`/api/extension/connection/${encodeURIComponent(source.source_ref)}/consent`, { version, scopes, action }, 'PUT');
@@ -151,4 +176,4 @@
   window.addEventListener('focus', () => { if (!busy) load(); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && !busy) load(); });
   load();
-}());
+}

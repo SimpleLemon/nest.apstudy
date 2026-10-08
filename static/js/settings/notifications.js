@@ -1,4 +1,5 @@
-(function notificationSettings(global) {
+export function initializeNotificationSettings() {
+  const global = window;
   const selected = (button, value) => { button.classList.toggle('is-active', value); button.setAttribute('aria-pressed', String(value)); };
   const toast = (message, type = 'success', title = '') => global.APStudyToast?.show?.({ message, title, type: type === 'error' ? 'error' : 'success' });
   const setActionStatus = (message = '', type = 'info') => {
@@ -8,14 +9,27 @@
     status.dataset.type = type;
     status.hidden = !message;
   };
+  const notifications = global.APStudyNotifications;
+  if (typeof notifications?.api !== 'function' || typeof notifications?.support !== 'function') {
+    const controls = ['notification-enable', 'notification-test', 'notification-save'].map((id) => document.getElementById(id));
+    controls.push(...document.querySelectorAll('[data-push-toggle]'));
+    controls.forEach((button) => { if (button) button.disabled = true; });
+    const status = document.getElementById('notification-permission-status');
+    if (status) status.textContent = 'Notification settings unavailable';
+    const recovery = document.getElementById('notification-recovery');
+    if (recovery) {
+      recovery.hidden = false;
+      recovery.textContent = 'Notification settings could not load. Refresh the page to try again.';
+    }
+    setActionStatus('Notification settings could not load. Refresh the page to try again.', 'error');
+    return;
+  }
   let config = null;
   async function load() {
-    const api = global.APStudyNotifications?.api;
-    if (!api) return setTimeout(load, 50);
-    try { config = await api('/api/notifications/preferences'); render(); } catch (error) { toast(error.message || 'Refresh the page and try again.', 'error', 'Couldn’t load notification settings'); }
+    try { config = await notifications.api('/api/notifications/preferences'); render(); } catch (error) { toast(error.message || 'Refresh the page and try again.', 'error', 'Couldn’t load notification settings'); }
   }
   function render() {
-    const capability = global.APStudyNotifications.support();
+    const capability = notifications.support();
     const permission = !('Notification' in global) ? 'unsupported' : Notification.permission;
     const status = document.getElementById('notification-permission-status');
     const enable = document.getElementById('notification-enable');
@@ -54,16 +68,16 @@
     const button = document.getElementById('notification-enable');
     button.disabled = true;
     setActionStatus('Connecting this browser…');
-    try { await global.APStudyNotifications.enable(undefined, { forceRefresh: Notification.permission === 'granted' }); setActionStatus('This browser is ready for background notifications.', 'success'); toast('Notifications enabled.'); await load(); }
+    try { await notifications.enable(undefined, { forceRefresh: Notification.permission === 'granted' }); setActionStatus('This browser is ready for background notifications.', 'success'); toast('Notifications enabled.'); await load(); }
     catch (error) { setActionStatus(error.message, 'error'); toast(error.message || 'Check your browser settings and try again.', 'error', 'Couldn’t enable notifications'); await load(); }
     finally { if (button && config?.push_configured && Notification.permission !== 'denied') button.disabled = false; }
   }
   async function save() {
     const preferences = {};
     document.querySelectorAll('[data-push-toggle]').forEach((button) => { preferences[button.dataset.pushToggle] = button.classList.contains('is-active'); });
-    try { config.preferences = (await global.APStudyNotifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t save notification preferences'); }
+    try { config.preferences = (await notifications.api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify(preferences) })).preferences; toast('Notification preferences saved.'); render(); } catch (error) { toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t save notification preferences'); }
   }
-  async function test() { try { const result = await global.APStudyNotifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t send test notification'); } }
+  async function test() { try { const result = await notifications.api('/api/notifications/test', { method: 'POST', body: '{}' }); toast(`Test accepted by ${result.accepted} device${result.accepted === 1 ? '' : 's'}.`); } catch (error) { setActionStatus(error.message, 'error'); toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t send test notification'); } }
   async function revokeDevice(id) {
     const index = config?.devices?.findIndex((device) => String(device.id) === String(id)) ?? -1;
     const device = index >= 0 ? config.devices[index] : null;
@@ -71,13 +85,13 @@
     config.devices.splice(index, 1);
     render();
     if (!global.APStudyUndo?.stage) {
-      await global.APStudyNotifications.api(`/api/notifications/subscriptions/${encodeURIComponent(id)}`, { method: 'DELETE' });
+      await notifications.api(`/api/notifications/subscriptions/${encodeURIComponent(id)}`, { method: 'DELETE' });
       await load();
       return;
     }
     global.APStudyUndo.stage({
       message: `${device.device_name || 'Browser'} revoked.`,
-      commit: ({ reason }) => global.APStudyNotifications.api(`/api/notifications/subscriptions/${encodeURIComponent(id)}`, {
+      commit: ({ reason }) => notifications.api(`/api/notifications/subscriptions/${encodeURIComponent(id)}`, {
         method: 'DELETE',
         keepalive: reason === 'pagehide',
       }),
@@ -90,17 +104,15 @@
     });
   }
   function escape(value) { const node = document.createElement('span'); node.textContent = value || ''; return node.innerHTML; }
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('notification-enable')?.addEventListener('click', enable);
-    document.getElementById('notification-save')?.addEventListener('click', save);
-    document.getElementById('notification-test')?.addEventListener('click', test);
-    document.querySelectorAll('[data-push-toggle]').forEach((button) => button.addEventListener('click', () => {
-      if (!button.disabled) selected(button, !button.classList.contains('is-active'));
-    }));
-    document.getElementById('notification-devices')?.addEventListener('click', (event) => {
-      const id = event.target.closest('[data-revoke]')?.dataset.revoke;
-      if (id) void revokeDevice(id).catch((error) => toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t revoke browser'));
-    });
-    void load();
+  document.getElementById('notification-enable')?.addEventListener('click', enable);
+  document.getElementById('notification-save')?.addEventListener('click', save);
+  document.getElementById('notification-test')?.addEventListener('click', test);
+  document.querySelectorAll('[data-push-toggle]').forEach((button) => button.addEventListener('click', () => {
+    if (!button.disabled) selected(button, !button.classList.contains('is-active'));
+  }));
+  document.getElementById('notification-devices')?.addEventListener('click', (event) => {
+    const id = event.target.closest('[data-revoke]')?.dataset.revoke;
+    if (id) void revokeDevice(id).catch((error) => toast(error.message || 'Try again in a moment.', 'error', 'Couldn’t revoke browser'));
   });
-})(window);
+  void load();
+}
