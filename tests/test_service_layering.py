@@ -14,11 +14,33 @@ from services import onboarding
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SERVICE_PATHS = (
-    REPO_ROOT / "services" / "calendar_events.py",
-    REPO_ROOT / "services" / "onboarding.py",
+SERVICE_ENTRY_POINTS = (
+    "services.calendar_events", "services.onboarding",
+    "services.calendar_personal_events", "services.calendar_preferences",
+    "services.calendar_read_operations", "services.saved_courses",
 )
-FORBIDDEN_SERVICE_IMPORTS = {"blueprints.settings", "blueprints.chat_api"}
+
+
+def service_implementation_paths():
+    """Follow local imports, including imports nested in runtime functions."""
+    pending = list(SERVICE_ENTRY_POINTS)
+    paths = set()
+    while pending:
+        module = pending.pop()
+        path = REPO_ROOT.joinpath(*module.split(".")).with_suffix(".py")
+        if path in paths or not path.is_file():
+            continue
+        paths.add(path)
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Import):
+                pending.extend(alias.name for alias in node.names if alias.name.startswith("services."))
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                if node.module == "services":
+                    pending.extend("services." + alias.name for alias in node.names)
+                elif node.module.startswith("services."):
+                    pending.append(node.module)
+    return paths
+
 
 
 class ServiceLayeringTests(unittest.TestCase):
@@ -27,28 +49,19 @@ class ServiceLayeringTests(unittest.TestCase):
         self.app.secret_key = "test"
 
     def test_calendar_and_onboarding_services_do_not_import_blueprints(self):
+        paths = service_implementation_paths()
+        for implementation in ("calendar_projection", "calendar_sources", "canvas_sources",
+                               "canvas_sync_ingestion", "canvas_sync_runs", "canvas_writeback"):
+            self.assertIn(REPO_ROOT / "services" / (implementation + ".py"), paths)
         violations = []
-        for path in SERVICE_PATHS:
+        for path in sorted(paths):
             tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
             for node in ast.walk(tree):
-                module = None
-                if isinstance(node, ast.ImportFrom):
-                    module = node.module
-                    if module == "blueprints":
-                        imported_names = {alias.name for alias in node.names}
-                        if imported_names & {"settings", "chat_api"}:
-                            module = "blueprints." + next(
-                                name for name in ("settings", "chat_api") if name in imported_names
-                            )
-                    if module in FORBIDDEN_SERVICE_IMPORTS:
+                modules = ([node.module] if isinstance(node, ast.ImportFrom)
+                           else [alias.name for alias in node.names] if isinstance(node, ast.Import) else [])
+                for module in modules:
+                    if module == "blueprints" or (module and module.startswith("blueprints.")):
                         violations.append(f"{path.relative_to(REPO_ROOT)}:{node.lineno}: {module}")
-                elif isinstance(node, ast.Import):
-                    for alias in node.names:
-                        if alias.name in FORBIDDEN_SERVICE_IMPORTS:
-                            violations.append(
-                                f"{path.relative_to(REPO_ROOT)}:{node.lineno}: {alias.name}"
-                            )
-
         self.assertEqual(violations, [])
 
     def test_settings_validation_binding_remains_patchable(self):

@@ -14,52 +14,28 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class EnvironmentOperationsConfigTests(unittest.TestCase):
-    def test_apswiftly_values_keep_import_time_normalization(self):
-        environment = os.environ.copy()
-        environment.update(
-            {
-                "APSWIFTLY_CONTROL_URL": "https://control.example///",
-                "APSWIFTLY_CONTROL_TOKEN": " token ",
-                "APSWIFTLY_SERVICE_NAME": "   ",
-                "APSWIFTLY_CONTROL_TIMEOUT_SECONDS": "0",
-            }
-        )
-        code = (
-            "import json; import services.apswiftly_control as control; "
-            "print(json.dumps([control.APSWIFTLY_CONTROL_URL, "
-            "control.APSWIFTLY_CONTROL_TOKEN, control.APSWIFTLY_SERVICE_NAME, "
-            "control.APSWIFTLY_CONTROL_TIMEOUT_SECONDS]))"
-        )
+    def test_apswiftly_values_keep_normalization_at_operation_time(self):
+        from services.environment_config import apswiftly_settings
+        with patch.dict(os.environ, {
+            "APSWIFTLY_CONTROL_URL": "https://control.example///",
+            "APSWIFTLY_CONTROL_TOKEN": " token ",
+            "APSWIFTLY_SERVICE_NAME": "   ",
+            "APSWIFTLY_CONTROL_TIMEOUT_SECONDS": "0",
+        }, clear=True):
+            settings = apswiftly_settings()
+        self.assertEqual(settings.control_url, "https://control.example")
+        self.assertEqual(settings.control_token, "token")
+        self.assertEqual(settings.service_name, "apswiftly")
+        self.assertEqual(settings.timeout_seconds, 1)
 
-        completed = subprocess.run(
-            [sys.executable, "-c", code],
-            cwd=REPO_ROOT,
-            env=environment,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-
-        self.assertEqual(
-            json.loads(completed.stdout),
-            ["https://control.example", "token", "apswiftly", 1],
-        )
-
-    def test_apswiftly_timeout_errors_still_happen_during_import(self):
+    def test_invalid_apswiftly_timeout_does_not_break_import(self):
         environment = os.environ.copy()
         environment["APSWIFTLY_CONTROL_TIMEOUT_SECONDS"] = "invalid"
-
         completed = subprocess.run(
             [sys.executable, "-c", "import services.apswiftly_control"],
-            cwd=REPO_ROOT,
-            env=environment,
-            capture_output=True,
-            text=True,
-            check=False,
+            cwd=REPO_ROOT, env=environment, capture_output=True, text=True,
         )
-
-        self.assertNotEqual(completed.returncode, 0)
-        self.assertIn("ValueError", completed.stderr)
+        self.assertEqual(completed.returncode, 0, completed.stderr)
 
     def test_backup_cli_keeps_invocation_time_values(self):
         with tempfile.TemporaryDirectory() as temp_dir:

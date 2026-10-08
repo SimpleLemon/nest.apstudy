@@ -48,7 +48,9 @@ class EnvironmentDiscordAuditConfigTests(unittest.TestCase):
             app.extensions[ENVIRONMENT_CONFIG_EXTENSION_KEY] = _configured(
                 discord_audit_enabled_raw="1",
                 discord_audit_fallback_path=None,
-                discord_bot_token=None,
+                discord_bot_token=" bound-token ",
+                discord_audit_chat_deletes_channel_id="bound-deletes",
+                discord_console_log_enabled_raw="0",
             )
             service = MagicMock()
             with patch.object(discord_audit, "_service", None), patch.object(
@@ -58,9 +60,17 @@ class EnvironmentDiscordAuditConfigTests(unittest.TestCase):
             ), patch.object(discord_audit, "init_server_console_forwarding"):
                 discord_audit.init_discord_audit(app)
 
-        service_class.assert_called_once_with(
-            fallback_path=os.path.join(temp_dir, "discord_audit_fallback.jsonl")
-        )
+        service_class.assert_called_once()
+        arguments = service_class.call_args.kwargs
+        self.assertEqual(arguments["fallback_path"], os.path.join(temp_dir, "discord_audit_fallback.jsonl"))
+        with patch.dict(os.environ, {
+            "DISCORD_BOT_TOKEN": "later-token",
+            "DISCORD_AUDIT_CHAT_DELETES_CHANNEL_ID": "later-deletes",
+            "DISCORD_CONSOLE_LOG_ENABLED": "1",
+        }, clear=False):
+            self.assertEqual(arguments["token_getter"](), "bound-token")
+            self.assertEqual(arguments["channel_id_getter"]("chat_deletes"), "bound-deletes")
+            self.assertFalse(arguments["console_enabled_getter"]())
         service.start.assert_called_once_with()
 
 

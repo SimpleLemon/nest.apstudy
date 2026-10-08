@@ -18,27 +18,12 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS, DATABASE_ID, tablesdb
 from services.database import database_path, init_db, insert_row_ignore
 from services.row_utils import row_id as _row_id
+from services.row_utils import row_to_dict as _row_to_dict
 
 
 logger = logging.getLogger("migrate_appwrite_to_sqlite")
 DEFAULT_LIMIT = 100
 TABLES = tuple(dict.fromkeys(COLLECTIONS.values()))
-
-
-def _row_to_dict(row):
-    if isinstance(row, dict):
-        return row
-    if hasattr(row, "to_dict"):
-        value = row.to_dict()
-    elif hasattr(row, "model_dump"):
-        value = row.model_dump(by_alias=True, mode="json")
-    else:
-        return row
-
-    data = value.pop("data", None)
-    if isinstance(data, dict):
-        value.update(data)
-    return value
 
 
 def _row_list_to_rows(response):

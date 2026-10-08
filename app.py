@@ -28,7 +28,7 @@ _configure_insecure_oauth_transport()
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-AUTH_SESSION_DURATION = timedelta(days=400)
+from services.auth_config import AUTH_SESSION_DURATION
 
 
 def _session_secret_key(environment_config: EnvironmentConfig | None = None):
@@ -47,6 +47,9 @@ def _session_secret_key(environment_config: EnvironmentConfig | None = None):
 def create_app():
     app = Flask(__name__)
     environment_config = load_environment_config()
+    from services.environment_config import validate_feature_environment
+
+    validate_feature_environment(environment_config)
     app.extensions[ENVIRONMENT_CONFIG_EXTENSION_KEY] = environment_config
     app.wsgi_app = ProxyFix(
         app.wsgi_app,
@@ -79,6 +82,8 @@ def create_app():
     app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
     app.config["PREFERRED_URL_SCHEME"] = "http" if allow_insecure_http else "https"
     app.config["APP_BASE_URL"] = environment_config.app_base_url
+    app.config.update(environment_config.upload_storage_settings)
+    app.config["NEST_CHAT_ATTACHMENTS_ENABLED"] = environment_config.chat_attachments_enabled
     app.config["CALENDAR_ICS_SUBSCRIPTIONS_ENABLED"] = (
         environment_config.calendar_ics_subscriptions_enabled_raw
     )
@@ -128,8 +133,10 @@ def create_app():
     from flask_wtf.csrf import CSRFError, generate_csrf
     with app.app_context():
         from blueprints.auth import LOGIN_NEXT_SESSION_KEY, _is_safe_login_next_url
-    from services.database import close_db, init_db
-    init_db(app)
+    from services.database import close_db
+    from services.database_initialization import initialize_application_database
+
+    initialize_application_database(app)
     app.teardown_appcontext(close_db)
 
     @app.before_request
@@ -302,6 +309,14 @@ def create_app():
             max_age=86400,
         )
 
+    from services.storage_errors import StorageError
+
+    @app.errorhandler(StorageError)
+    def handle_storage_error(error):
+        if error.status_code >= 500:
+            logger.warning("Upload storage operation failed: %s", error.code)
+        return jsonify({"error": str(error), "code": error.code}), error.status_code
+
     @app.errorhandler(RequestEntityTooLarge)
     def handle_request_entity_too_large(_error):
         if request.path.startswith("/api/"):
@@ -364,4 +379,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run("localhost", 5000, debug=True)
+    app.run("localhost", 5000)

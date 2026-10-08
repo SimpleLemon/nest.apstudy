@@ -5,6 +5,7 @@ Central registration point for all Flask blueprints.
 Called once from the application factory in app.py.
 """
 
+from blueprints.community_themes import community_themes_bp
 from blueprints.auth import auth_bp
 from blueprints.dashboard import dashboard_bp
 from blueprints.atlas_api import atlas_bp
@@ -15,7 +16,7 @@ from blueprints.file_share import file_share_bp
 from blueprints.notes_api import notes_api_bp
 from blueprints.tasks_api import tasks_api_bp
 from blueprints.chat_api import chat_api_bp
-from blueprints.settings import settings_bp
+from blueprints.settings import avatars_bp, settings_bp
 from blueprints.admin import admin_bp
 from blueprints.webhooks import webhooks_bp
 from blueprints.legal import legal_bp
@@ -29,8 +30,15 @@ from blueprints.extension_api import extension_api_bp
 from blueprints.extension_calendar_api import extension_calendar_bp
 
 
+from blueprints.external_calendar_api import external_calendar_bp, external_calendar_extension_bp, external_calendar_oauth_bp
+
+
 def register_blueprints(app):
     """Register all blueprints on the Flask application instance."""
+    app.register_blueprint(external_calendar_bp, url_prefix="/api/calendar")
+    app.register_blueprint(external_calendar_extension_bp, url_prefix="/api/extension/calendar")
+    app.register_blueprint(external_calendar_oauth_bp)
+    app.register_blueprint(community_themes_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(atlas_bp, url_prefix="/api/atlas")
@@ -42,6 +50,7 @@ def register_blueprints(app):
     app.register_blueprint(tasks_api_bp)
     app.register_blueprint(chat_api_bp)
     app.register_blueprint(settings_bp, url_prefix="/settings")
+    app.register_blueprint(avatars_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(webhooks_bp)
     app.register_blueprint(legal_bp)

@@ -1,19 +1,32 @@
 import json
-import logging
 import os
 import re
 import sqlite3
 import uuid
 from contextlib import contextmanager
+from os import PathLike
+from typing import Any, Iterator, Literal, Mapping, NotRequired, Sequence, TypedDict, overload
 
 from appwrite.exception import AppwriteException
-from flask import current_app, g, has_app_context
+from flask import Flask, current_app, g, has_app_context
 from config import (
     APSTUDY_FORCE_LOCAL_INSTANCE_DB_ENV,
     ENVIRONMENT_CONFIG_EXTENSION_KEY,
+    EnvironmentConfig,
     load_environment_config,
 )
 from services.time_utils import utcnow_iso
+
+
+DatabasePath = str | PathLike[str]
+RowMapping = dict[str, Any]
+Queries = Sequence[str | dict[str, Any]]
+
+
+class RowListResponse(TypedDict):
+    rows: list[RowMapping]
+    documents: NotRequired[list[RowMapping]]
+    total: NotRequired[int]
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,7 +68,7 @@ BOOLEAN_COLUMNS = {
 }
 
 
-def resolve_env_path(path_value):
+def resolve_env_path(path_value: object) -> str | None:
     if not path_value:
         return None
     expanded = os.path.expanduser(str(path_value).strip())
@@ -66,7 +79,7 @@ def resolve_env_path(path_value):
     return os.path.normpath(os.path.join(BASE_DIR, expanded))
 
 
-def _environment_config(environment_config=None):
+def _environment_config(environment_config: EnvironmentConfig | None = None) -> EnvironmentConfig:
     if environment_config is not None:
         return environment_config
     if has_app_context():
@@ -76,7 +89,9 @@ def _environment_config(environment_config=None):
     return load_environment_config()
 
 
-def database_path(path=None, *, environment_config=None):
+def database_path(
+    path: DatabasePath | None = None, *, environment_config: EnvironmentConfig | None = None,
+) -> DatabasePath:
     if path:
         return resolve_env_path(path) or path
 
@@ -104,7 +119,7 @@ def database_path(path=None, *, environment_config=None):
     return os.path.join(BASE_DIR, "instance", "nest.sqlite3")
 
 
-def nest_instance_dir(environment_config=None):
+def nest_instance_dir(environment_config: EnvironmentConfig | None = None) -> str:
     configured_environment = _environment_config(environment_config)
     configured = resolve_env_path(configured_environment.nest_instance_dir_override)
     if configured:
@@ -112,7 +127,7 @@ def nest_instance_dir(environment_config=None):
     return os.path.dirname(database_path(environment_config=configured_environment))
 
 
-def migrations_path():
+def migrations_path() -> str:
     return os.path.join(BASE_DIR, "migrations")
 
 
@@ -219,7 +234,7 @@ def _quote_identifier(identifier):
     return f'"{identifier}"'
 
 
-def connect(path=None):
+def connect(path: DatabasePath | None = None) -> sqlite3.Connection:
     db_path = database_path(path)
     if db_path != ":memory:":
         os.makedirs(os.path.dirname(os.path.abspath(db_path)), exist_ok=True)
@@ -231,7 +246,7 @@ def connect(path=None):
     return conn
 
 
-def get_db():
+def get_db() -> sqlite3.Connection:
     if not has_app_context():
         return connect()
     db = g.get("nest_db")
@@ -240,7 +255,7 @@ def get_db():
     return db
 
 
-def close_db(error=None):
+def close_db(error: BaseException | None = None) -> None:
     if not has_app_context():
         return
     db = g.pop("nest_db", None)
@@ -249,7 +264,7 @@ def close_db(error=None):
 
 
 @contextmanager
-def db_connection(path=None):
+def db_connection(path: DatabasePath | None = None) -> Iterator[sqlite3.Connection]:
     conn = connect(path)
     try:
         yield conn
@@ -261,12 +276,12 @@ def db_connection(path=None):
         conn.close()
 
 
-def init_db(app=None, path=None):
+def init_db(app: Flask | None = None, path: DatabasePath | None = None) -> set[str]:
     db_path = path
     if app is not None:
         db_path = path or app.config.get("DATABASE_PATH")
 
-    should_backfill_preview_text = False
+    applied_versions: set[str] = set()
 
     with db_connection(db_path) as conn:
         conn.execute(
@@ -279,7 +294,7 @@ def init_db(app=None, path=None):
         )
 
         if not os.path.isdir(migrations_path()):
-            return
+            return applied_versions
 
         for filename in _migration_filenames():
             version = filename[:-4]
@@ -291,18 +306,9 @@ def init_db(app=None, path=None):
                 continue
 
             _apply_migration(conn, filename)
-            if version == "001_notes_preview_text":
-                should_backfill_preview_text = True
+            applied_versions.add(version)
 
-    if should_backfill_preview_text:
-        try:
-            from services.note_store import backfill_preview_texts
-
-            backfill_preview_texts(path=db_path)
-        except Exception:
-            logging.getLogger(__name__).exception(
-                "Failed to backfill notes preview_text after migration"
-            )
+    return applied_versions
 
 
 def _table_exists(conn, table_id):
@@ -314,7 +320,7 @@ def _table_exists(conn, table_id):
     )
 
 
-def table_columns(conn, table_id):
+def table_columns(conn: sqlite3.Connection, table_id: str) -> set[str]:
     if not isinstance(table_id, str) or not IDENTIFIER_RE.match(table_id):
         raise ValueError(f"Unsupported table: {table_id!r}")
     if not _table_exists(conn, table_id):
@@ -357,7 +363,7 @@ def _normalize_value(table_id, column, value):
     return value
 
 
-def _row_to_dict(table_id, row):
+def _row_to_dict(table_id: str, row: sqlite3.Row) -> RowMapping:
     row_id = row["id"]
     data = dict(row)
     for column in BOOLEAN_COLUMNS.get(table_id, set()):
@@ -433,7 +439,10 @@ def _parse_queries(conn, table_id, queries):
     return where, params, order, limit, offset
 
 
-def list_rows(table_id, queries=None, path=None, *, include_total=True):
+def list_rows(
+    table_id: str, queries: Queries | None = None, path: DatabasePath | None = None, *,
+    include_total: bool = True,
+) -> RowListResponse:
     """List rows, optionally including the filtered total.
 
     ``include_total`` remains enabled by default for compatibility with legacy
@@ -473,21 +482,31 @@ def list_rows(table_id, queries=None, path=None, *, include_total=True):
         raise AppwriteException(str(exc)) from exc
 
     converted = [_row_to_dict(table_id, row) for row in rows]
-    response = {"rows": converted, "documents": converted}
+    response: RowListResponse = {"rows": converted, "documents": converted}
     if include_total:
         response["total"] = total
     return response
 
 
-def list_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT, path=None):
-    rows = []
+def validate_page_limit(limit: int) -> None:
+    """Reject page sizes that cannot make integer pagination progress."""
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+        raise ValueError("Pagination limit must be a positive integer.")
+
+
+def list_rows_all(
+    table_id: str, queries: Queries | None = None, limit: int = DEFAULT_LIMIT,
+    path: DatabasePath | None = None,
+) -> list[RowMapping]:
+    validate_page_limit(limit)
+    rows: list[RowMapping] = []
     offset = 0
     while True:
         query_list = list(queries or [])
         query_list.append(json.dumps({"method": "limit", "values": [limit]}))
         query_list.append(json.dumps({"method": "offset", "values": [offset]}))
         response = list_rows(table_id, query_list, path=path, include_total=False)
-        batch = response.get("rows", [])
+        batch = response["rows"]
         rows.extend(batch)
         if len(batch) < limit:
             break
@@ -495,7 +514,9 @@ def list_rows_all(table_id, queries=None, limit=DEFAULT_LIMIT, path=None):
     return rows
 
 
-def first_row(table_id, queries=None, path=None):
+def first_row(
+    table_id: str, queries: Queries | None = None, path: DatabasePath | None = None,
+) -> RowMapping | None:
     query_list = list(queries or [])
     query_list.append(json.dumps({"method": "limit", "values": [1]}))
     rows = list_rows(
@@ -503,11 +524,27 @@ def first_row(table_id, queries=None, path=None):
         query_list,
         path=path,
         include_total=False,
-    ).get("rows", [])
+    )["rows"]
     return rows[0] if rows else None
 
 
-def get_row(table_id, row_id, *, allow_missing=False, path=None):
+@overload
+def get_row(
+    table_id: str, row_id: object, *, allow_missing: Literal[False] = False,
+    path: DatabasePath | None = None,
+) -> RowMapping: ...
+
+
+@overload
+def get_row(
+    table_id: str, row_id: object, *, allow_missing: bool, path: DatabasePath | None = None,
+) -> RowMapping | None: ...
+
+
+def get_row(
+    table_id: str, row_id: object, *, allow_missing: bool = False,
+    path: DatabasePath | None = None,
+) -> RowMapping | None:
     try:
         with db_connection(path) as conn:
             table_columns(conn, table_id)
@@ -525,13 +562,13 @@ def get_row(table_id, row_id, *, allow_missing=False, path=None):
     raise AppwriteException("Row not found", 404)
 
 
-def _row_id(row_id=None):
+def _row_id(row_id: object = None) -> str:
     if row_id is None or str(row_id) in UNIQUE_SENTINELS:
         return uuid.uuid4().hex
     return str(row_id)
 
 
-def _clean_payload(conn, table_id, data):
+def _clean_payload(conn: sqlite3.Connection, table_id: str, data: Mapping[str, Any] | None) -> RowMapping:
     cleaned = {}
     for key, value in (data or {}).items():
         if not isinstance(key, str):
@@ -544,12 +581,47 @@ def _clean_payload(conn, table_id, data):
     return cleaned
 
 
-def create_row(table_id, row_id=None, data=None, path=None):
+def _prepare_chat_author_references(conn, table_id, payload):
+    if table_id != "chat_messages":
+        return
+    # Avatar retirement publishes its queue marker under this same writer.
+    # A request may still hold the author's previous profile snapshot.
+    conn.execute("BEGIN IMMEDIATE")
+    from services.avatar_references import reject_retiring_avatar_references
+    from services.storage_errors import StorageUnavailable
+
+    try:
+        reject_retiring_avatar_references(conn, payload)
+        return
+    except StorageUnavailable:
+        pass
+    author = conn.execute(
+        "SELECT picture_url FROM users WHERE id = ?", [str(payload.get("user_id") or "")]
+    ).fetchone()
+    fresh_url = author["picture_url"] if author else ""
+    for field in ("author_avatar_url", "author_picture_url"):
+        if field not in payload:
+            continue
+        try:
+            reject_retiring_avatar_references(conn, {field: payload[field]})
+        except StorageUnavailable:
+            try:
+                reject_retiring_avatar_references(conn, {field: fresh_url})
+                payload[field] = fresh_url or ""
+            except StorageUnavailable:
+                payload[field] = ""
+
+
+def create_row(
+    table_id: str, row_id: object = None, data: Mapping[str, Any] | None = None,
+    path: DatabasePath | None = None,
+) -> RowMapping:
     row_id = _row_id(row_id)
     try:
         with db_connection(path) as conn:
             table_columns(conn, table_id)
             payload = {"id": row_id, **_clean_payload(conn, table_id, data)}
+            _prepare_chat_author_references(conn, table_id, payload)
             columns = list(payload.keys())
             placeholders = ", ".join("?" for _ in columns)
             column_sql = ", ".join(_quote_identifier(column) for column in columns)
@@ -562,12 +634,16 @@ def create_row(table_id, row_id=None, data=None, path=None):
     return get_row(table_id, row_id, path=path)
 
 
-def insert_row_ignore(table_id, row_id=None, data=None, path=None):
+def insert_row_ignore(
+    table_id: str, row_id: object = None, data: Mapping[str, Any] | None = None,
+    path: DatabasePath | None = None,
+) -> bool:
     row_id = _row_id(row_id)
     try:
         with db_connection(path) as conn:
             table_columns(conn, table_id)
             payload = {"id": row_id, **_clean_payload(conn, table_id, data)}
+            _prepare_chat_author_references(conn, table_id, payload)
             columns = list(payload.keys())
             placeholders = ", ".join("?" for _ in columns)
             column_sql = ", ".join(_quote_identifier(column) for column in columns)
@@ -580,7 +656,10 @@ def insert_row_ignore(table_id, row_id=None, data=None, path=None):
         raise AppwriteException(str(exc)) from exc
 
 
-def upsert_row(table_id, row_id=None, data=None, path=None):
+def upsert_row(
+    table_id: str, row_id: object = None, data: Mapping[str, Any] | None = None,
+    path: DatabasePath | None = None,
+) -> RowMapping:
     row_id = _row_id(row_id)
     try:
         with db_connection(path) as conn:
@@ -607,7 +686,10 @@ def upsert_row(table_id, row_id=None, data=None, path=None):
     return get_row(table_id, row_id, path=path)
 
 
-def update_row(table_id, row_id, data=None, path=None):
+def update_row(
+    table_id: str, row_id: object, data: Mapping[str, Any] | None = None,
+    path: DatabasePath | None = None,
+) -> RowMapping:
     try:
         with db_connection(path) as conn:
             table_columns(conn, table_id)
@@ -629,7 +711,7 @@ def update_row(table_id, row_id, data=None, path=None):
     return get_row(table_id, row_id, path=path)
 
 
-def delete_row(table_id, row_id, path=None):
+def delete_row(table_id: str, row_id: object, path: DatabasePath | None = None) -> None:
     try:
         with db_connection(path) as conn:
             table_columns(conn, table_id)
@@ -641,11 +723,13 @@ def delete_row(table_id, row_id, path=None):
         raise AppwriteException(str(exc)) from exc
 
 
-def count_rows(table_id, queries=None, path=None):
+def count_rows(table_id: str, queries: Queries | None = None, path: DatabasePath | None = None) -> int:
     return list_rows(table_id, queries, path=path, include_total=True).get("total", 0)
 
 
-def delete_rows_by_user(table_ids, user_id, path=None):
+def delete_rows_by_user(
+    table_ids: Sequence[str], user_id: object, path: DatabasePath | None = None,
+) -> dict[str, int]:
     counts = {}
     try:
         with db_connection(path) as conn:

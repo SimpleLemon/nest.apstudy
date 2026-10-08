@@ -10,7 +10,7 @@ from flask import Flask
 
 from blueprints import chat_api
 from config import ENVIRONMENT_CONFIG_EXTENSION_KEY, EnvironmentConfig
-from services import discord_bridge, discord_gateway
+from services import discord_bridge, discord_gateway, chat_discord_sync
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -35,41 +35,23 @@ def _app(configured):
 
 
 class EnvironmentChatConsumerTests(unittest.TestCase):
-    def test_chat_numeric_errors_still_happen_during_import(self):
+    def test_invalid_chat_numeric_setting_does_not_break_import(self):
         environment = os.environ.copy()
         environment["CHAT_EVENTS_POLL_SECONDS"] = "not-a-number"
-
         completed = subprocess.run(
             [sys.executable, "-c", "import blueprints.chat_api"],
-            cwd=REPO_ROOT,
-            env=environment,
-            capture_output=True,
-            text=True,
-            check=False,
+            cwd=REPO_ROOT, env=environment, capture_output=True, text=True,
         )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
 
-        self.assertNotEqual(completed.returncode, 0)
-        self.assertIn("ValueError", completed.stderr)
-
-    def test_discord_link_ids_keep_import_time_defaults_and_explicit_empty_values(self):
-        environment = os.environ.copy()
-        environment["DISCORD_LINK_GUILD_ID"] = ""
-        environment["DISCORD_LINK_ROLE_ID"] = "custom-role"
-        code = (
-            "import json; import services.discord_bridge as bridge; "
-            "print(json.dumps([bridge.LINK_GUILD_ID, bridge.LINK_ROLE_ID]))"
-        )
-
-        completed = subprocess.run(
-            [sys.executable, "-c", code],
-            cwd=REPO_ROOT,
-            env=environment,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-
-        self.assertEqual(json.loads(completed.stdout), ["", "custom-role"])
+    def test_discord_link_ids_keep_defaults_and_explicit_empty_values(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(discord_bridge._link_guild_id(), "859910344393883710")
+            self.assertEqual(discord_bridge._link_role_id(), "1338596013371555953")
+        app = _app(_configured(discord_link_guild_id="", discord_link_role_id="custom-role"))
+        with app.app_context():
+            self.assertEqual(discord_bridge._link_guild_id(), "")
+            self.assertEqual(discord_bridge._link_role_id(), "custom-role")
 
     def test_ingest_secret_keeps_first_truthy_value_before_trimming(self):
         app = _app(
@@ -91,7 +73,7 @@ class EnvironmentChatConsumerTests(unittest.TestCase):
             )
         )
         with app.app_context(), patch.object(
-            chat_api, "_ensure_discord_channel", side_effect=lambda *args: args[0]
+            chat_discord_sync, "ensure_discord_channel", side_effect=lambda *args, **kwargs: args[0]
         ) as ensure_channel:
             channels = chat_api._default_channels()
 
@@ -103,14 +85,14 @@ class EnvironmentChatConsumerTests(unittest.TestCase):
         disabled_app = _app(
             _configured(discord_gateway_enabled_raw="0", discord_bot_token="token")
         )
-        with disabled_app.app_context():
+        with patch.dict(os.environ, {"DISCORD_GATEWAY_ENABLED": "1", "DISCORD_BOT_TOKEN": "changed-token"}):
             self.assertFalse(discord_gateway.DiscordGatewayBridge(disabled_app).start())
 
         enabled_app = _app(
             _configured(discord_gateway_enabled_raw="false", discord_bot_token=" token ")
         )
         bridge = discord_gateway.DiscordGatewayBridge(enabled_app)
-        with enabled_app.app_context(), patch.object(discord_gateway.threading, "Thread") as thread:
+        with patch.dict(os.environ, {"DISCORD_GATEWAY_ENABLED": "0"}), patch.object(discord_gateway.threading, "Thread") as thread:
             self.assertTrue(bridge.start())
         thread.return_value.start.assert_called_once_with()
 

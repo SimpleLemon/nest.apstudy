@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from services import database
+from services import database, database_initialization
 
 
 class DatabaseMigrationSafetyTestCase(unittest.TestCase):
@@ -25,7 +25,8 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
             self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
 
     def test_clean_database_initializes_and_reinitializes_without_schema_changes(self):
-        database.init_db(path=self.db_path)
+        applied = database.init_db(path=self.db_path)
+        self.assertEqual(applied, self._expected_versions())
 
         with database.db_connection(self.db_path) as connection:
             versions_before = dict(
@@ -67,7 +68,7 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
             ).fetchone()
         self.assertEqual(tuple(new_user), ("free", 0))
 
-        database.init_db(path=self.db_path)
+        self.assertEqual(database.init_db(path=self.db_path), set())
 
         with database.db_connection(self.db_path) as connection:
             versions_after = dict(
@@ -116,7 +117,7 @@ class DatabaseMigrationSafetyTestCase(unittest.TestCase):
             )
             connection.commit()
 
-        database.init_db(path=self.db_path)
+        database_initialization.initialize_application_database(path=self.db_path)
 
         with database.db_connection(self.db_path) as connection:
             user = connection.execute(

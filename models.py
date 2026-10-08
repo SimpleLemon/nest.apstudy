@@ -6,6 +6,7 @@ from appwrite.exception import AppwriteException
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import get_row_safe, parse_datetime
 from extensions import login_manager
+from services.avatar_storage import resolve_avatar_url
 
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,11 @@ class User(UserMixin):
         self.email = data.get("email")
         self.name = data.get("name")
         self.username = data.get("username")
-        self.picture_url = data.get("picture_url")
+        self.avatar_storage_backend = data.get("avatar_storage_backend") or "appwrite"
+        self.picture_url = resolve_avatar_url(
+            data.get("picture_url"), file_id=data.get("avatar_file_id"),
+            backend=self.avatar_storage_backend,
+        ) or None
         self.picture = self.picture_url
         self.banner_color = data.get("banner_color") or "#fecae1"
         self.avatar_file_id = data.get("avatar_file_id")
