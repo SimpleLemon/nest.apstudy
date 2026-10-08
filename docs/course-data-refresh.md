@@ -29,8 +29,8 @@ the source explicitly supplies an enrolled-student count.
 The RMP export covers all 2,153 Emory and 315 Oxford result positions. These
 contain 2,083 and 310 unique profiles respectively; repeated profile IDs were
 deduplicated after complete pagination. The refreshed cache covers 1,321 Atlas
-instructor identities: 571 matched summaries, 51 verified unrated profiles,
-684 unmatched names, and 15 uncertain matches. All current school identities
+instructor identities: 572 matched summaries, 51 verified unrated profiles,
+683 unmatched names, and 15 uncertain matches. All current school identities
 are verified. Generic `ONLIN@ONLINE` sections are assigned to an institution
 using their captured undergraduate academic career, separately from their
 physical meeting campus. Eleven obsolete unknown-school keys were retired
@@ -41,6 +41,9 @@ profile. Tracy McGill's Atlas instructor ID 3543 is explicitly mapped to Emory
 RMP profile 251830, whose full name is Tracy Morkin McGill. Her confirmed saved
 summary is 4.0 overall, 3.7 difficulty, and 183 ratings. This correction applies
 to both Fall 2026 and Spring 2027 without loosening automatic name matching.
+Megan F. Cole's Atlas instructor ID 4917 is explicitly mapped to Emory RMP
+profile 2007364, listed as Megan Cole without the middle initial. Her confirmed
+saved summary is 3.4 overall, 3.0 difficulty, and 103 ratings in both terms.
 Original profile capture timestamps are retained. Identity corrections are
 recorded separately in the report from the last complete directory refresh.
 

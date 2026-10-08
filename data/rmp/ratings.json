@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-08T00:54:22.266543+00:00",
+  "updated_at": "2026-10-08T01:26:36.570446+00:00",
   "source": "public-rmp-brave",
   "ratings": {
     "340:atlas:44133": {
@@ -2382,15 +2382,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2007364",
+      "overall_rating": 3.4,
+      "difficulty": 3,
+      "rating_count": 103,
+      "fetched_at": "2026-10-07T17:30:22.993Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:26:36.570446+00:00",
+      "override_label": "Verified October 7, 2026: Atlas instructor 4917 is Megan F. Cole, teaching Emory Biology. Her confirmed Emory RMP profile 2007364 uses the name Megan Cole without the middle initial.",
+      "cross_school_override": false
     },
     "340:atlas:32720": {
       "instructor_key": "340:atlas:32720",

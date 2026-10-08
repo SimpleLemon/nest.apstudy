@@ -1,8 +1,8 @@
 {
   "instructors": 1321,
   "counts": {
-    "unmatched": 684,
-    "matched": 571,
+    "unmatched": 683,
+    "matched": 572,
     "unrated": 51,
     "ambiguous": 15
   },
@@ -10987,6 +10987,13 @@
       "applied_at": "2026-10-08T00:54:22.266543+00:00",
       "fetched_at": "2026-10-07T17:30:23.023Z",
       "reason": "Verified October 7, 2026: Atlas instructor 3543 is Tracy McGill, teaching Emory Chemistry. Her confirmed Emory RMP profile 251830 uses the fuller name Tracy Morkin McGill."
+    },
+    {
+      "instructor_key": "340:atlas:4917",
+      "professor_id": "2007364",
+      "applied_at": "2026-10-08T01:26:36.570446+00:00",
+      "fetched_at": "2026-10-07T17:30:22.993Z",
+      "reason": "Verified October 7, 2026: Atlas instructor 4917 is Megan F. Cole, teaching Emory Biology. Her confirmed Emory RMP profile 2007364 uses the name Megan Cole without the middle initial."
     }
   ]
 }
