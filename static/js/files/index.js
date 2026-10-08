@@ -1,32 +1,42 @@
+import {
+    getElements,
+    normalizeFolderId,
+    hasFiles,
+    isInteractiveTarget,
+    formatCount,
+    formatExpiry,
+    expiryOptionForDate as expiryOptionForDateFromUtils,
+    showFormError,
+    clearFormError,
+    setButtonBusy,
+    apiJson,
+    flattenFolders as flattenFoldersFromUtils,
+    isDescendantFolder,
+    getFolderName as getFolderNameFromUtils,
+    copyText,
+    cssEscape,
+    escapeHtml,
+} from "./utils.js";
+import {
+    folderCardHtml,
+    fileCardHtml,
+    uploadItemHtml,
+    shareExpiryOptionsHtml,
+    fileMenuItems,
+    folderMenuItems,
+    renderEmptyState as renderEmptyStateFromUtils,
+    setLoading as setLoadingFromUtils,
+    toggleNewMenu as toggleNewMenuFromUtils,
+    closeNewMenu as closeNewMenuFromUtils,
+    openActionMenu as openActionMenuFromUtils,
+    closeActionMenu as closeActionMenuFromUtils,
+} from "./renderers.js";
+import { createFilesModals } from "./modals.js";
+import { bindFilesEvents } from "./events.js";
+import { createFilesWorkflows } from "./workflows.js";
+
 (() => {
     const CONFIG = window.FILE_SHARE_CONFIG || {};
-    const FilesUtils = window.APStudyFilesUtils || {};
-    const {
-        getElements,
-        normalizeFolderId,
-        hasFiles,
-        isInteractiveTarget,
-        formatCount,
-        formatExpiry,
-        expiryOptionForDate: expiryOptionForDateFromUtils,
-        firstUploadError,
-        parseUploadResponse,
-        uploadErrorMessage,
-        showFormError,
-        clearFormError,
-        setButtonBusy,
-        apiJson,
-        flattenFolders: flattenFoldersFromUtils,
-        isDescendantFolder,
-        getFolderName: getFolderNameFromUtils,
-        copyText,
-        downloadBlob,
-        filenameFromDisposition,
-        cssEscape,
-        escapeHtml,
-    } = FilesUtils;
-    const FilesRenderers = window.APStudyFilesRenderers || {};
-    const { folderCardHtml, fileCardHtml, uploadItemHtml, shareExpiryOptionsHtml, fileMenuItems, folderMenuItems, renderEmptyState: renderEmptyStateFromUtils, setLoading: setLoadingFromUtils, toggleNewMenu: toggleNewMenuFromUtils, closeNewMenu: closeNewMenuFromUtils, openActionMenu: openActionMenuFromUtils, closeActionMenu: closeActionMenuFromUtils } = FilesRenderers;
     const MAX_FILE_SIZE_BYTES = Number(CONFIG.maxFileSize) || (50 * 1024 * 1024);
     const MAX_FILE_SIZE_LABEL = String(CONFIG.maxFileSizeLabel || "50 MB");
     const MAX_UPLOAD_FILES = Number(CONFIG.maxUploadFiles) || 5;
@@ -74,7 +84,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
         els = getElements();
-        modals = window.APStudyFilesModals.createFilesModals({
+        modals = createFilesModals({
             state,
             els,
             callbacks: {
@@ -93,43 +103,55 @@
                 notify,
             },
         });
-        workflows = window.APStudyFilesWorkflows.createFilesWorkflows({
+        workflows = createFilesWorkflows({
             state,
             els,
-            constants: {
-                allowedExpiry: ALLOWED_EXPIRY,
-                defaultExpiry: DEFAULT_EXPIRY,
-                maxFileSizeBytes: MAX_FILE_SIZE_BYTES,
-                maxFileSizeLabel: MAX_FILE_SIZE_LABEL,
-                maxUploadFiles: MAX_UPLOAD_FILES,
+            upload: {
+                limits: {
+                    allowedExpiry: ALLOWED_EXPIRY,
+                    defaultExpiry: DEFAULT_EXPIRY,
+                    maxFileSizeBytes: MAX_FILE_SIZE_BYTES,
+                    maxFileSizeLabel: MAX_FILE_SIZE_LABEL,
+                    maxUploadFiles: MAX_UPLOAD_FILES,
+                },
+                folders: {
+                    getFolderName: getFolderNameFromUtils,
+                    loadFolder,
+                    normalizeFolderId,
+                },
+                view: {
+                    clearFormError,
+                    modalController: { close: closeModal, open: openModal },
+                    notify,
+                    setButtonBusy,
+                    showAlert,
+                    uploadItemHtml,
+                },
             },
-            callbacks: {
+            sharing: {
                 apiJson,
-                clearFormError,
-                closeModal: { close: closeModal, open: openModal },
-                copyText,
-                cssEscape,
-                downloadBlob,
-                expiryOptionForDate: expiryOptionForDateFromUtils,
-                filenameFromDisposition,
-                firstUploadError,
-                formatCount,
-                formatExpiry,
-                getFolderName: getFolderNameFromUtils,
-                loadFolder,
-                normalizeFolderId,
-                renderManager,
-                setButtonBusy,
-                shareExpiryOptionsHtml,
-                showAlert,
-                showFormError,
-                notify,
-                parseUploadResponse,
-                uploadItemHtml,
-                uploadErrorMessage,
+                expiry: {
+                    allowedExpiry: ALLOWED_EXPIRY,
+                    defaultExpiry: DEFAULT_EXPIRY,
+                    expiryOptionForDate: expiryOptionForDateFromUtils,
+                    formatExpiry,
+                    shareExpiryOptionsHtml,
+                },
+                manager: { loadFolder, renderManager },
+                view: {
+                    clearFormError,
+                    modalController: { close: closeModal, open: openModal },
+                    notify,
+                    showAlert,
+                },
+                links: { copyText },
             },
+            downloads: {
+                view: { setButtonBusy, showAlert },
+            },
+            selection: { cssEscape, formatCount },
         });
-        window.APStudyFilesEvents.bindFilesEvents({
+        bindFilesEvents({
             els,
             state,
             actions: {
@@ -382,6 +404,7 @@
             message: `${file.filename} will be deleted. You’ll have a short time to undo.`,
             submitLabel: "Delete",
             onConfirm: async () => {
+                const originFolderId = state.currentFolderId;
                 const fileIndex = state.files.findIndex((item) => item.id === file.id);
                 state.files = state.files.filter((item) => item.id !== file.id);
                 state.selectedFileIds.delete(file.id);
@@ -393,7 +416,9 @@
                         keepalive: reason === "pagehide",
                     }),
                     restore: () => {
-                        state.files = restoreAtIndex(state.files, file, fileIndex);
+                        if (state.currentFolderId === originFolderId) {
+                            state.files = restoreAtIndex(state.files, file, fileIndex);
+                        }
                         renderManager();
                     },
                     errorTitle: "Couldn’t delete file",
@@ -402,7 +427,9 @@
                     try {
                         await apiJson(`/api/files/my/${encodeURIComponent(file.id)}`, { method: "DELETE" });
                     } catch (error) {
-                        state.files = restoreAtIndex(state.files, file, fileIndex);
+                        if (state.currentFolderId === originFolderId) {
+                            state.files = restoreAtIndex(state.files, file, fileIndex);
+                        }
                         renderManager();
                         throw error;
                     }
@@ -419,6 +446,7 @@
             requiredText: folder.name,
             requiredLabel: "Type the folder name",
             onConfirm: async () => {
+                const originFolderId = state.currentFolderId;
                 const folderIndex = state.folders.findIndex((item) => item.id === folder.id);
                 const allFolderIndex = state.allFolders.findIndex((item) => item.id === folder.id);
                 const allFolder = state.allFolders[allFolderIndex] || folder;
@@ -433,7 +461,9 @@
                         keepalive: reason === "pagehide",
                     }),
                     restore: () => {
-                        state.folders = restoreAtIndex(state.folders, folder, folderIndex);
+                        if (state.currentFolderId === originFolderId) {
+                            state.folders = restoreAtIndex(state.folders, folder, folderIndex);
+                        }
                         state.allFolders = restoreAtIndex(state.allFolders, allFolder, allFolderIndex);
                         renderManager();
                     },
@@ -443,7 +473,9 @@
                     try {
                         await apiJson(`/api/files/folders/${encodeURIComponent(folder.id)}`, { method: "DELETE" });
                     } catch (error) {
-                        state.folders = restoreAtIndex(state.folders, folder, folderIndex);
+                        if (state.currentFolderId === originFolderId) {
+                            state.folders = restoreAtIndex(state.folders, folder, folderIndex);
+                        }
                         state.allFolders = restoreAtIndex(state.allFolders, allFolder, allFolderIndex);
                         renderManager();
                         throw error;
@@ -467,6 +499,7 @@
             requiredText: requiresText ? "DELETE" : "",
             requiredLabel: "Type DELETE",
             onConfirm: async () => {
+                const originFolderId = state.currentFolderId;
                 const fileIdSet = new Set(fileIds);
                 const folderIdSet = new Set(folderIds);
                 const removedFiles = state.files
@@ -505,14 +538,16 @@
                             await loadFolder(state.currentFolderId);
                             return;
                         }
-                        state.files = removedFiles.reduce(
-                            (items, record) => restoreAtIndex(items, record.item, record.index),
-                            state.files,
-                        );
-                        state.folders = removedFolders.reduce(
-                            (items, record) => restoreAtIndex(items, record.item, record.index),
-                            state.folders,
-                        );
+                        if (state.currentFolderId === originFolderId) {
+                            state.files = removedFiles.reduce(
+                                (items, record) => restoreAtIndex(items, record.item, record.index),
+                                state.files,
+                            );
+                            state.folders = removedFolders.reduce(
+                                (items, record) => restoreAtIndex(items, record.item, record.index),
+                                state.folders,
+                            );
+                        }
                         state.allFolders = removedAllFolders.reduce(
                             (items, record) => restoreAtIndex(items, record.item, record.index),
                             state.allFolders,
@@ -558,9 +593,6 @@
         return workflows.copyCurrentShareLink(...args);
     }
 
-    async function setFolderVisibility(...args) {
-        return workflows.setFolderVisibility(...args);
-    }
 
     function downloadFile(...args) {
         return workflows.downloadFile(...args);

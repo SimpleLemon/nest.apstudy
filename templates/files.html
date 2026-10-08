@@ -50,12 +50,7 @@
         };
     </script>
     <script src="{{ url_for('static', filename='js/core/breadcrumb.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/utils.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/renderers.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/modals.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/workflows.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/events.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/files/index.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/files/index.js') }}"></script>
 {% endblock %}
 
 {% block body_attrs %} class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}
