@@ -9,7 +9,7 @@ RMP. Live Atlas seat checks remain separate from catalog and rating freshness.
 On October 7, 2026, normal Brave access succeeded for both public sources.
 Direct Atlas requests still returned HTTP 202 with an AWS WAF challenge; direct
 RMP retrieval returned HTTP 403. No browser credentials or cookies were copied.
-The following verified snapshots are published locally:
+The following verified snapshots are deployed to production:
 
 | Term | Atlas ID | Courses | Sections | Coverage |
 | --- | --- | --- | --- | --- |
@@ -43,7 +43,9 @@ Spring 2026 remains available as `legacy/unverified`; it was not backfilled in
 this refresh. Automated live seat checks remain separate and were unavailable
 in the local visual preview. The real-data preview uses the saved verified
 snapshots and an isolated account; the synthetic fixture preview below remains
-available for behavior tests. These local changes have not been deployed.
+available for behavior tests. The verified catalogs, RMP cache, and compact
+ratings were deployed on October 7, 2026. The live Brave check confirmed 10px
+rating text in a 24px by 16px badge, within the original 16.8px schedule line.
 
 ## Atlas
 

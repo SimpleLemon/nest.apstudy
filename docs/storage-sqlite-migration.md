@@ -1,6 +1,6 @@
 # SQLite upload storage migration
 
-Updated October 2, 2026. Implementation and local verification are complete enough to review; production preparation, import, cutover, and recovery validation remain operator work. No production database, Appwrite object, permission, service, or configuration was changed during this implementation.
+Updated October 7, 2026. The additive storage implementation is deployed in Appwrite compatibility mode, with legacy reads enabled. A fresh pre-deployment backup completed, all three web workers use the prepared SQLite 3.53.4 runtime, and notes conversion passes. Storage import, cutover, source permission changes, and recovery validation remain operator work; the dated preparation evidence below records the earlier implementation and setup.
 
 Use [the operator runbook](storage-sqlite-runbook.md) for the ordered commands and stop conditions. Read the repository's local `VPS_CONTEXT.md` before production work and `COMMIT_PUSH.md` before committing or pushing.
 
