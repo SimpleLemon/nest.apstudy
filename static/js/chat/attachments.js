@@ -22,7 +22,7 @@ async function compressedUpload(file) {
     const stream = file.stream().pipeThrough(new CompressionStream("gzip"));
     const compressed = await new Response(stream).blob();
     return compressed.size < file.size ? { body: compressed, encoding: "gzip" } : { body: file, encoding: "identity" };
-  } catch (_) {
+  } catch {
     return { body: file, encoding: "identity" };
   }
 }
@@ -33,27 +33,35 @@ export function createAttachmentManager() {
   let setStatus;
   let onComposerChange;
   let capabilities = {};
+  let paused = false;
+  let disposed = false;
+  const listeners = [];
   const els = {};
+
+  function listen(target, name, callback) {
+    const handler = (event) => { if (!paused && !disposed) callback(event); };
+    target?.addEventListener(name, handler);
+    listeners.push(() => target?.removeEventListener(name, handler));
+  }
 
   function room() {
     return state?.activeRoom || null;
   }
 
   function render() {
-    if (!els.pending || !els.list) return;
+    if (paused || disposed || !els.list) return;
     els.list.innerHTML = items.map((item) => `
       <article class="chat-upload-chip ${item.status === "error" ? "is-error" : ""}" data-upload-id="${item.localId}">
         <span class="material-symbols-outlined" aria-hidden="true">${item.status === "uploaded" ? "draft" : item.status === "error" ? "error" : "upload"}</span>
         <span class="chat-upload-copy">
           <strong>${escapeHtml(item.file.name)}</strong>
-          <small>${item.status === "uploading" ? `Uploading ${item.progress}%` : item.status === "error" ? escapeHtml(item.error) : `${formatBytes(item.file.size)} · Ready`}</small>
+          <small>${item.status === "uploading" ? `Uploading ${item.progress}%` : item.status === "queued" ? "Waiting to upload" : item.status === "error" ? escapeHtml(item.error) : `${formatBytes(item.file.size)} · Ready`}</small>
           ${item.status === "uploading" ? `<span class="chat-upload-progress"><span style="--chat-upload-progress:${Math.max(0, Math.min(100, item.progress)) / 100}"></span></span>` : ""}
         </span>
         ${item.status === "error" ? `<button type="button" data-upload-retry="${item.localId}" aria-label="Retry ${escapeHtml(item.file.name)}"><span class="material-symbols-outlined" aria-hidden="true">refresh</span></button>` : ""}
         <button type="button" data-upload-remove="${item.localId}" aria-label="Remove ${escapeHtml(item.file.name)}"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
       </article>
     `).join("");
-    els.pending.hidden = items.length === 0 && !document.getElementById("chat-selected-gif");
     onComposerChange?.();
   }
 
@@ -67,31 +75,41 @@ export function createAttachmentManager() {
 
   async function upload(item) {
     const activeRoom = room();
-    if (!activeRoom) return;
+    if (paused || disposed || !activeRoom) return;
     item.status = "uploading";
     item.error = "";
     item.progress = 0;
+    item.uploadController?.abort();
+    const controller = new AbortController();
+    item.uploadController = controller;
+    const isCurrent = () => !paused && !disposed && !controller.signal.aborted && items.includes(item) && item.uploadController === controller;
     render();
     const prepared = await compressedUpload(item.file);
-    if (!items.includes(item)) return;
+    if (!isCurrent()) return;
     const form = new FormData();
     form.append("file", prepared.body, item.file.name);
     form.append("scope_type", activeRoom.type);
     form.append("scope_id", activeRoom.id);
     form.append("original_size_bytes", String(item.file.size));
     form.append("content_encoding", prepared.encoding);
-    const xhr = new XMLHttpRequest();
-    item.xhr = xhr;
-    xhr.open("POST", "/api/chat/attachments");
-    xhr.responseType = "json";
-    xhr.upload.addEventListener("progress", (event) => {
-      if (!event.lengthComputable) return;
-      item.progress = Math.max(1, Math.round((event.loaded / event.total) * 100));
-      render();
-    });
-    xhr.addEventListener("load", () => {
+    try {
+      const xhr = await window.APStudyHttp.uploadXhr("/api/chat/attachments", {
+        body: form,
+        responseType: "json",
+        signal: controller.signal,
+        pendingLabel: "chat-attachment-upload",
+        onProgress: (event) => {
+          if (!event.lengthComputable || !isCurrent()) return;
+          item.progress = Math.max(1, Math.round((event.loaded / event.total) * 100));
+          render();
+        },
+      });
+      if (!isCurrent()) return;
       const payload = xhr.response || {};
-      if (xhr.status < 200 || xhr.status >= 300 || !payload.attachment) {
+      if (xhr.status === 0) {
+        item.status = "error";
+        item.error = navigator.onLine ? "Upload failed. Try again." : "You are offline.";
+      } else if (xhr.status < 200 || xhr.status >= 300 || !payload.attachment) {
         item.status = "error";
         item.error = payload.error || "Upload failed. Try again.";
       } else {
@@ -99,24 +117,17 @@ export function createAttachmentManager() {
         item.attachment = payload.attachment;
         item.progress = 100;
       }
-      render();
-    });
-    xhr.addEventListener("error", () => {
+    } catch (error) {
+      if (!isCurrent()) return;
       item.status = "error";
-      item.error = navigator.onLine ? "Upload failed. Try again." : "You are offline.";
-      render();
-    });
-    xhr.addEventListener("abort", () => {
-      if (items.includes(item)) {
-        item.status = "error";
-        item.error = "Upload cancelled.";
-        render();
-      }
-    });
-    xhr.send(form);
+      item.error = error.name === "AbortError" ? "Upload cancelled." : error.message || "Upload failed. Try again.";
+    }
+    item.uploadController = null;
+    render();
   }
 
   function addFiles(fileList) {
+    if (paused || disposed) return;
     if (!capabilities.attachments) {
       setStatus?.("Attachments are not configured yet.", "error");
       return;
@@ -137,7 +148,7 @@ export function createAttachmentManager() {
     const index = items.findIndex((item) => item.localId === localId);
     if (index < 0) return;
     const [item] = items.splice(index, 1);
-    item.xhr?.abort();
+    item.uploadController?.abort();
     render();
     const commit = ({ reason } = {}) => {
       if (!item.attachment?.id) return Promise.resolve();
@@ -153,6 +164,7 @@ export function createAttachmentManager() {
         message: `${item.file.name} removed from this message.`,
         commit,
         restore: () => {
+          if (disposed) return;
           items.splice(Math.min(index, items.length), 0, item);
           if (!item.attachment && ["queued", "uploading"].includes(item.status)) {
             item.status = "queued";
@@ -169,28 +181,41 @@ export function createAttachmentManager() {
     await commit();
   }
 
+  function pause() {
+    if (paused || disposed) return;
+    paused = true;
+    for (const item of items) {
+      item.uploadController?.abort();
+      item.uploadController = null;
+      if (item.status === "uploading") {
+        item.status = "queued";
+        item.progress = 0;
+      }
+    }
+    els.composer?.classList.remove("is-dragging");
+  }
+
   return {
     init(context) {
       state = context.state;
       setStatus = context.setStatus;
       onComposerChange = context.onComposerChange;
-      els.pending = document.getElementById("chat-pending-files");
       els.list = document.getElementById("chat-upload-list");
       els.fileInput = document.getElementById("chat-file-input");
       els.attach = document.getElementById("chat-attach-button");
       els.composer = document.getElementById("chat-composer");
-      els.attach?.addEventListener("click", () => {
+      listen(els.attach, "click", () => {
         if (!capabilities.attachments) {
           setStatus?.("File attachments are temporarily unavailable. Try refreshing the page.", "error");
           return;
         }
         els.fileInput?.click();
       });
-      els.fileInput?.addEventListener("change", () => {
+      listen(els.fileInput, "change", () => {
         addFiles(els.fileInput.files);
         els.fileInput.value = "";
       });
-      els.list?.addEventListener("click", (event) => {
+      listen(els.list, "click", (event) => {
         const removeButton = event.target.closest("[data-upload-remove]");
         if (removeButton) void remove(removeButton.dataset.uploadRemove);
         const retryButton = event.target.closest("[data-upload-retry]");
@@ -199,16 +224,16 @@ export function createAttachmentManager() {
           if (item) void upload(item);
         }
       });
-      ["dragenter", "dragover"].forEach((name) => els.composer?.addEventListener(name, (event) => {
+      ["dragenter", "dragover"].forEach((name) => listen(els.composer, name, (event) => {
         event.preventDefault();
         els.composer.classList.add("is-dragging");
       }));
-      ["dragleave", "drop"].forEach((name) => els.composer?.addEventListener(name, (event) => {
+      ["dragleave", "drop"].forEach((name) => listen(els.composer, name, (event) => {
         event.preventDefault();
         els.composer.classList.remove("is-dragging");
         if (name === "drop") addFiles(event.dataTransfer?.files);
       }));
-      document.getElementById("chat-message-input")?.addEventListener("paste", (event) => {
+      listen(document.getElementById("chat-message-input"), "paste", (event) => {
         const files = Array.from(event.clipboardData?.files || []);
         if (files.length) addFiles(files);
       });
@@ -226,7 +251,20 @@ export function createAttachmentManager() {
     },
     hasContent() { return items.length > 0; },
     isBusy() { return items.some((item) => item.status !== "uploaded"); },
-    clear() { items.splice(0); render(); },
+    pause,
+    resume() {
+      if (disposed || !paused) return;
+      paused = false;
+      for (const item of items) if (item.status === "queued") void upload(item);
+      render();
+    },
+    dispose() {
+      if (disposed) return;
+      pause();
+      disposed = true;
+      listeners.splice(0).forEach((removeListener) => removeListener());
+    },
+    clear() { items.splice(0).forEach((item) => item.uploadController?.abort()); render(); },
     resetForRoom() { items.slice().forEach((item) => void remove(item.localId, { notify: false })); },
   };
 }

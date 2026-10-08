@@ -1,4 +1,5 @@
 import unittest
+from types import SimpleNamespace
 from unittest.mock import Mock
 
 from services import chat_read_state, chat_threads
@@ -19,7 +20,6 @@ class TestChatThreads(unittest.TestCase):
             list_rows_fn=list_rows,
             query_cls=_QueryStub,
             blocks_collection="chat_blocks",
-            appwrite_exception=RuntimeError,
         )
 
         self.assertEqual(blocked, {"user-2"})
@@ -89,6 +89,17 @@ class TestChatThreads(unittest.TestCase):
         self.assertEqual(payload["participant_key"], "user-1:user-2")
         self.assertEqual(payload["created_at"], "formatted:now")
 
+    def test_block_visibility_query_failure_is_not_an_empty_block_list(self):
+        failure = RuntimeError("block storage unavailable")
+        with self.assertRaises(RuntimeError) as result:
+            chat_threads.blocked_user_ids(
+                "user-1",
+                list_rows_fn=Mock(side_effect=failure),
+                query_cls=_QueryStub,
+                blocks_collection="chat_blocks",
+            )
+        self.assertIs(result.exception, failure)
+
     def test_thread_participant_authorization_and_self_dm_guard(self):
         thread = {"participant_a": "user-1", "participant_b": "user-2"}
         get_row = Mock(return_value=thread)
@@ -123,23 +134,29 @@ class TestChatThreads(unittest.TestCase):
                 get_or_create_thread_between_fn=Mock(),
             )
 
-    def test_onboarding_read_initialization_and_welcome_dm_use_callbacks(self):
+    def test_onboarding_read_initialization_and_welcome_dm_persist_current_messages(self):
         channels = [{"$id": "nest_chat", "kind": "discord"}]
         latest = {"$id": "message-1", "created_at": "2026-05-26T22:00:00Z"}
-        persist = Mock()
+        create_read = Mock()
+        dependencies = SimpleNamespace(
+            list_rows_fn=Mock(return_value={"rows": [latest]}),
+            first_row_fn=Mock(return_value=None),
+            create_row_fn=create_read,
+            update_row_fn=Mock(),
+            error_logger=Mock(),
+        )
         chat_read_state.initialize_new_user_discord_read_states(
             "new-user",
             default_channels_fn=Mock(),
             list_rows_all_fn=Mock(return_value=channels),
-            query_cls=_QueryStub,
-            channels_collection="chat_channels",
-            row_id_fn=lambda row: row["$id"],
-            latest_visible_message_fn=Mock(return_value=latest),
-            persist_read_state_fn=persist,
-            appwrite_exception=RuntimeError,
-            error_logger=Mock(),
+            dependencies=dependencies,
         )
-        persist.assert_called_once_with("new-user", "channel", "nest_chat", latest)
+        create_read.assert_called_once()
+        self.assertEqual(create_read.call_args.kwargs["data"], {
+            "user_id": "new-user", "scope_type": "channel", "scope_id": "nest_chat",
+            "read_key": "new-user:channel:nest_chat", "last_read_message_id": "message-1",
+            "last_read_at": "2026-05-26T22:00:00Z",
+        })
 
         existing = {"$id": "welcome-1"}
         first_row = Mock(return_value=existing)

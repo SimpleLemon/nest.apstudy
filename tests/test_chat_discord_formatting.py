@@ -25,10 +25,7 @@ class TestChatDiscordFormatting(unittest.TestCase):
         }
 
         previews = formatting.discord_previews(message)
-        images = formatting.discord_images(
-            message,
-            attachment_is_image_fn=formatting.discord_attachment_is_image,
-        )
+        images = formatting.discord_images(message)
 
         self.assertEqual(len(previews), 2)
         self.assertEqual([image["filename"] for image in images], [
@@ -59,6 +56,7 @@ class TestChatDiscordFormatting(unittest.TestCase):
         channel = {"discord_channel_id": "discord-channel"}
 
         row_id = formatting.discord_message_row_id(channel, "discord-message")
+        self.assertEqual(row_id, "discord_c717b7b49a52eb197e5ea545")
         self.assertEqual(row_id, formatting.discord_message_row_id(channel, "discord-message"))
         self.assertNotEqual(row_id, formatting.discord_message_row_id(channel, "other-message"))
         self.assertEqual(
@@ -78,6 +76,16 @@ class TestChatDiscordFormatting(unittest.TestCase):
         )
         self.assertEqual(formatting.discord_avatar({}, default_avatar="default"), "default")
 
+    def test_discord_row_identity_digest_explicitly_uses_nonsecurity_mode(self):
+        sha1 = formatting.hashlib.sha1
+        with patch.object(formatting.hashlib, "sha1", wraps=sha1) as digest:
+            result = formatting.discord_message_row_id(
+                {"discord_channel_id": "discord-channel"}, "discord-message",
+            )
+
+        self.assertEqual(result, "discord_c717b7b49a52eb197e5ea545")
+        digest.assert_called_once_with(b"discord-channel:discord-message", usedforsecurity=False)
+
     def test_discord_rendering_escapes_fallback_identity_and_custom_emoji(self):
         markdown_calls = []
 
@@ -89,11 +97,8 @@ class TestChatDiscordFormatting(unittest.TestCase):
             "<@123> <@&456> <:party:123456789012345678>",
             {"mentions": []},
             render_markdown_fn=render_markdown,
-            user_mentions_fn=lambda message: {},
-            role_mentions_fn=lambda: {"456": "Role & Name"},
-            user_mention_label_fn=lambda user_id, mentions: "User <One>",
-            mention_span_fn=formatting.mention_span,
-            emoji_img_fn=formatting.emoji_img,
+            fetch_user_fn=lambda user_id: {"global_name": "User <One>"},
+            fetch_roles_fn=lambda: [{"id": "456", "name": "Role & Name"}],
         )
 
         self.assertEqual(markdown_calls, ["<@123> <@&456> <:party:123456789012345678>"])
@@ -104,15 +109,11 @@ class TestChatDiscordFormatting(unittest.TestCase):
 
     def test_discord_message_payload_preserves_full_and_partial_shapes(self):
         callbacks = {
-            "row_id_fn": lambda channel: "channel-row",
-            "external_id_fn": lambda channel, message_id: f"external:{message_id}",
+            "default_avatar": "avatar-url",
             "format_datetime_fn": lambda value: f"formatted:{value}",
             "now_fn": lambda: "now",
-            "discord_avatar_fn": lambda author: "avatar-url",
             "render_discord_content_fn": lambda content, message: f"rendered:{content}",
             "media_json_fn": lambda previews, images: "media-json",
-            "previews_fn": lambda message: ["preview"],
-            "images_fn": lambda message: ["image"],
             "bounded_chat_message_value_fn": lambda key, value: value,
         }
         channel = {"$id": "channel-row", "discord_channel_id": "discord-channel"}
@@ -131,7 +132,7 @@ class TestChatDiscordFormatting(unittest.TestCase):
         self.assertEqual(payload, {
             "channel_id": "channel-row",
             "source": "discord",
-            "external_id": "external:discord-message",
+            "external_id": "discord:discord-channel:discord-message",
             "discord_message_id": "discord-message",
             "updated_at": "formatted:now",
             "author_name": "user",
@@ -153,7 +154,7 @@ class TestChatDiscordFormatting(unittest.TestCase):
         self.assertEqual(partial, {
             "channel_id": "channel-row",
             "source": "discord",
-            "external_id": "external:discord-message",
+            "external_id": "discord:discord-channel:discord-message",
             "discord_message_id": "discord-message",
             "updated_at": "formatted:now",
         })
@@ -169,27 +170,36 @@ class TestChatDiscordFormatting(unittest.TestCase):
         fetch_user.assert_called_once_with("123")
         fetch_roles.assert_called_once_with()
 
-    def test_blueprint_payload_adapter_keeps_nested_formatting_helpers_patchable(self):
+    def test_blueprint_payload_adapter_binds_only_runtime_policy(self):
         channel = {"$id": "channel-row", "discord_channel_id": "discord-channel"}
         message = {
             "id": "discord-message",
             "author": {},
             "content": "hello",
             "timestamp": "timestamp",
+            "embeds": [{"url": "https://example.test", "title": "Preview"}],
+            "attachments": [{"filename": "image.png", "url": "https://cdn.example/image.png"}],
         }
-        with patch.object(chat_api, "_row_id", return_value="channel-row"), \
-                patch.object(chat_api, "_discord_message_external_id", return_value="patched-external") as external_id, \
-                patch.object(chat_api, "_render_discord_content", return_value="patched-rendered") as render_content, \
-                patch.object(chat_api, "_discord_previews", return_value=[]) as previews, \
-                patch.object(chat_api, "_discord_images", return_value=[]) as images, \
+        with patch.object(chat_api, "_render_discord_content", return_value="patched-rendered") as render_content, \
                 patch.object(chat_api, "_now", return_value="now"), \
                 patch.object(chat_api, "format_datetime", return_value="formatted"), \
                 patch.object(chat_api, "_bounded_chat_message_value", side_effect=lambda key, value: value):
             payload = chat_api._discord_message_payload(channel, message)
 
-        self.assertEqual(payload["external_id"], "patched-external")
+        self.assertEqual(payload["channel_id"], "channel-row")
+        self.assertEqual(payload["external_id"], "discord:discord-channel:discord-message")
         self.assertEqual(payload["rendered_html"], "patched-rendered")
-        external_id.assert_called_once_with(channel, "discord-message")
+        self.assertEqual(payload["author_avatar_url"], chat_api.DEFAULT_AVATAR)
+        media = json.loads(payload["link_preview_json"])
+        self.assertEqual(media[0]["title"], "Preview")
+        self.assertEqual(media[1]["kind"], "discord_image")
         render_content.assert_called_once_with("hello", message)
-        previews.assert_called_once_with(message)
-        images.assert_called_once_with(message)
+
+    def test_blueprint_pure_helpers_are_the_service_entry_points(self):
+        for name in (
+            "discord_previews", "discord_images", "discord_attachment_is_image",
+            "discord_message_row_id", "discord_message_external_id",
+            "discord_mention_name", "discord_user_mentions", "mention_span", "emoji_img",
+        ):
+            with self.subTest(name=name):
+                self.assertIs(getattr(chat_api, f"_{name}"), getattr(formatting, name))

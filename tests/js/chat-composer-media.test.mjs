@@ -15,10 +15,9 @@ test("chat entry point keeps composer responsibilities in adjacent modules", asy
   assert.match(index, /runtime\.js/);
 });
 
-test("chat attachments support progress, retry, cancellation, and browser gzip", async () => {
+test("chat attachment view retains retry, removal, and browser gzip controls", async () => {
   const attachments = await source("static/js/chat/attachments.js");
   assert.match(attachments, /CompressionStream\("gzip"\)/);
-  assert.match(attachments, /xhr\.upload\.addEventListener\("progress"/);
   assert.match(attachments, /data-upload-retry/);
   assert.match(attachments, /method: "DELETE"/);
   assert.match(attachments, /File attachments are temporarily unavailable/);
@@ -43,12 +42,8 @@ test("media picker has emoji navigation and an accessible roving tab interface",
   assert.match(template, /id="chat-gif-unavailable"/);
 });
 
-test("emoji trigger rotates through five colored smile reactions on hover", async () => {
-  const picker = await source("static/js/chat/media-picker.js");
+test("emoji hover animation supports reduced motion", async () => {
   const styles = await source("static/css/chat.css");
-  assert.match(picker, /HOVER_SMILES = \["😀", "😄", "😊", "🤩", "🥳"\]/);
-  assert.match(picker, /addEventListener\("pointerenter", showHoverSmile\)/);
-  assert.match(picker, /addEventListener\("pointerleave", restoreHoverSmile\)/);
   assert.match(styles, /@keyframes chat-smile-pop/);
   assert.match(styles, /prefers-reduced-motion: reduce[\s\S]*\.chat-media-button \.chat-hover-smile/);
 });

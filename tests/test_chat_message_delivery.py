@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
+from appwrite.exception import AppwriteException
 from flask import Flask
 from flask_login import UserMixin
 
@@ -96,8 +97,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_can_access_channel", return_value=True), \
                     patch.object(chat_api, "_message_media_payload", return_value=("hello", [], None)) as media, \
                     patch.object(chat_api, "_previews_for_content", return_value=[]), \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="2026-07-01T00:00:00Z"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="2026-07-01T00:00:00Z"), \
                     patch.object(chat_api, "render_markdown", return_value="<p>hello</p>"), \
                     patch.object(chat_api, "create_row_safe", return_value=row) as create_row, \
                     patch.object(chat_api, "emit_chat_event") as emit_event, \
@@ -121,8 +122,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_can_access_channel", return_value=True), \
                     patch.object(chat_api, "_message_media_payload", return_value=("hello", [], None)), \
                     patch.object(chat_api, "_previews_for_content", return_value=[]), \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="now"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="now"), \
                     patch.object(chat_api, "render_markdown", return_value="rendered"), \
                     patch.object(chat_api, "execute_chat_webhook", side_effect=RuntimeError("discord down")) as webhook, \
                     patch.object(chat_api, "create_row_safe") as create_row:
@@ -143,8 +144,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_can_access_channel", return_value=True), \
                     patch.object(chat_api, "_message_media_payload", return_value=("hello", ["attachment-1"], None)), \
                     patch.object(chat_api, "_previews_for_content", return_value=[]), \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="now"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="now"), \
                     patch.object(chat_api, "render_markdown", return_value="rendered"), \
                     patch.object(chat_api, "create_row_safe", return_value=row), \
                     patch.object(chat_api, "bind_pending", side_effect=chat_api.AttachmentError("bind failed")), \
@@ -172,8 +173,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_current_user_id", return_value="user-1"), \
                     patch.object(chat_api, "get_row_safe", side_effect=[row, channel]), \
                     patch.object(chat_api, "delete_webhook_message") as webhook_delete, \
-                    patch.object(chat_api, "_now", side_effect=[datetime.now(timezone.utc), datetime.now(timezone.utc)]), \
-                    patch.object(chat_api, "format_datetime", return_value="deleted-at"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", side_effect=[datetime.now(timezone.utc), datetime.now(timezone.utc)]), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="deleted-at"), \
                     patch.object(chat_api, "update_row_safe") as update_row, \
                     patch.object(chat_api, "delete_message_attachments") as delete_attachments, \
                     patch.object(chat_api, "emit_chat_event") as emit_event, \
@@ -278,8 +279,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_is_blocked_between", return_value=False), \
                     patch.object(chat_api, "_message_media_payload", return_value=("hello", [], None)), \
                     patch.object(chat_api, "_previews_for_content", return_value=[]), \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="now"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="now"), \
                     patch.object(chat_api, "render_markdown", return_value="rendered"), \
                     patch.object(chat_api, "create_row_safe", return_value=row), \
                     patch.object(chat_api, "update_row_safe") as update_thread, \
@@ -298,6 +299,20 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
         notify.assert_called_once()
         activation.assert_called_once_with("user-1", "chat_message")
 
+    def test_dm_history_returns_unavailable_before_reading_messages_when_blocks_fail(self):
+        thread = {"$id": "thread-1", "participant_a": "user-1", "participant_b": "user-2"}
+        with self._client() as client, \
+                patch.object(chat_api, "_thread_for_user", return_value=thread), \
+                patch.object(chat_api, "list_rows_all", side_effect=AppwriteException("block lookup failed", 503)), \
+                patch.object(chat_api, "list_rows_safe") as read_messages, \
+                patch.object(chat_api, "_serialize_messages") as serialize_messages:
+            response = client.get("/api/chat/dm/threads/thread-1/messages")
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.get_json(), {"error": "Direct messages are temporarily unavailable."})
+        read_messages.assert_not_called()
+        serialize_messages.assert_not_called()
+
     def test_dm_send_rolls_back_message_and_attachments_when_binding_fails(self):
         thread = {"$id": "thread-1", "participant_a": "user-1", "participant_b": "user-2"}
         row = {"$id": "message-1", "thread_id": "thread-1", "user_id": "user-1"}
@@ -310,8 +325,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_is_blocked_between", return_value=False), \
                     patch.object(chat_api, "_message_media_payload", return_value=("hello", ["attachment-1"], None)), \
                     patch.object(chat_api, "_previews_for_content", return_value=[]), \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="now"), \
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="now"), \
                     patch.object(chat_api, "render_markdown", return_value="rendered"), \
                     patch.object(chat_api, "create_row_safe", return_value=row), \
                     patch.object(chat_api, "bind_pending", side_effect=chat_api.AttachmentError("bind failed")), \
@@ -440,8 +455,8 @@ class RegisteredChatDeliveryRouteTests(unittest.TestCase):
                     patch.object(chat_api, "_threads_for_current_user", return_value=[thread]), \
                     patch.object(chat_api, "_thread_participant_ids", return_value=["user-1", "user-2"]), \
                     patch.object(chat_api, "emit_chat_event") as emit_event, \
-                    patch.object(chat_api, "_now", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
-                    patch.object(chat_api, "format_datetime", return_value="now"):
+                    patch.object(chat_api.chat_message_delivery, "utcnow", return_value=datetime(2026, 7, 1, tzinfo=timezone.utc)), \
+                    patch.object(chat_api.chat_message_delivery, "format_datetime", return_value="now"):
                 created = client.post("/api/chat/blocks/user-2")
         self.assertEqual(created.status_code, 200)
         self.assertEqual(created.get_json(), {"status": "ok", "blocked": True})

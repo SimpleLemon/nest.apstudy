@@ -5,6 +5,8 @@ import html
 import json
 import re
 
+from services.row_utils import row_id
+
 
 DISCORD_IMAGE_EXTENSIONS = {".gif", ".jpeg", ".jpg", ".png", ".webp"}
 DISCORD_USER_MENTION_RE = re.compile(r"&lt;@!?(\d+)&gt;")
@@ -27,10 +29,10 @@ def discord_previews(message):
     return previews[:2]
 
 
-def discord_images(message, *, attachment_is_image_fn):
+def discord_images(message):
     images = []
     for attachment in message.get("attachments") or []:
-        if not attachment_is_image_fn(attachment):
+        if not discord_attachment_is_image(attachment):
             continue
         url = attachment.get("url") or attachment.get("proxy_url") or ""
         if not url:
@@ -86,7 +88,10 @@ def discord_message_row_id(channel, discord_message_id):
     discord_id = str(discord_message_id or "")
     if not discord_channel_id or not discord_id:
         return None
-    digest = hashlib.sha1(f"{discord_channel_id}:{discord_id}".encode("utf-8")).hexdigest()[:24]
+    # This stable persistence key maps external IDs; it is not a security digest.
+    digest = hashlib.sha1(
+        f"{discord_channel_id}:{discord_id}".encode("utf-8"), usedforsecurity=False,
+    ).hexdigest()[:24]
     return f"discord_{digest}"
 
 
@@ -116,12 +121,12 @@ def discord_mention_name(user):
     )
 
 
-def discord_user_mentions(message, *, mention_name_fn):
+def discord_user_mentions(message):
     mentions = {}
     for user in message.get("mentions") or []:
         user_id = str(user.get("id") or "")
         if user_id:
-            mentions[user_id] = mention_name_fn(user)
+            mentions[user_id] = discord_mention_name(user)
     return mentions
 
 
@@ -130,14 +135,13 @@ def discord_user_mention_label(
     mentions,
     *,
     fetch_user_fn,
-    mention_name_fn,
 ):
     label = mentions.get(user_id)
     if label:
         return label
     fetched = fetch_user_fn(user_id)
     if fetched:
-        return mention_name_fn(fetched)
+        return discord_mention_name(fetched)
     return "Discord User"
 
 
@@ -171,31 +175,25 @@ def render_discord_content(
     message,
     *,
     render_markdown_fn,
-    user_mentions_fn,
-    role_mentions_fn,
-    user_mention_label_fn,
-    mention_span_fn,
-    emoji_img_fn,
-    role_mention_re=DISCORD_ROLE_MENTION_RE,
-    user_mention_re=DISCORD_USER_MENTION_RE,
-    custom_emoji_re=DISCORD_CUSTOM_EMOJI_RE,
+    fetch_user_fn,
+    fetch_roles_fn,
 ):
     rendered = render_markdown_fn(content)
-    user_mentions = user_mentions_fn(message)
-    role_mentions = role_mentions_fn() if "&lt;@&" in rendered or "&lt;@&amp;" in rendered else {}
+    user_mentions = discord_user_mentions(message)
+    role_mentions = discord_role_mentions(fetch_roles_fn=fetch_roles_fn) if "&lt;@&" in rendered or "&lt;@&amp;" in rendered else {}
 
     def replace_user(match):
-        label = user_mention_label_fn(match.group(1), user_mentions)
-        return mention_span_fn(f"@{label}")
+        label = discord_user_mention_label(match.group(1), user_mentions, fetch_user_fn=fetch_user_fn)
+        return mention_span(f"@{label}")
 
     def replace_role(match):
         label = role_mentions.get(match.group(1), "Unknown Role")
-        return mention_span_fn(f"@{label}", "chat-mention chat-mention-role")
+        return mention_span(f"@{label}", "chat-mention chat-mention-role")
 
-    rendered = role_mention_re.sub(replace_role, rendered)
-    rendered = user_mention_re.sub(replace_user, rendered)
-    return custom_emoji_re.sub(
-        lambda match: emoji_img_fn(match.group(1), match.group(2), match.group(3)),
+    rendered = DISCORD_ROLE_MENTION_RE.sub(replace_role, rendered)
+    rendered = DISCORD_USER_MENTION_RE.sub(replace_user, rendered)
+    return DISCORD_CUSTOM_EMOJI_RE.sub(
+        lambda match: emoji_img(match.group(1), match.group(2), match.group(3)),
         rendered,
     )
 
@@ -205,22 +203,18 @@ def discord_message_payload(
     message,
     *,
     partial=False,
-    row_id_fn,
-    external_id_fn,
+    default_avatar,
     format_datetime_fn,
     now_fn,
-    discord_avatar_fn,
     render_discord_content_fn,
     media_json_fn,
-    previews_fn,
-    images_fn,
     bounded_chat_message_value_fn,
 ):
-    channel_id = row_id_fn(channel)
+    channel_id = row_id(channel)
     discord_id = str(message.get("id") or "")
     if not discord_id:
         return None
-    external_id = external_id_fn(channel, discord_id)
+    external_id = discord_message_external_id(channel, discord_id)
     author = message.get("author") or {}
     payload = {
         "channel_id": channel_id,
@@ -233,7 +227,7 @@ def discord_message_payload(
         payload.update({
             "author_name": author.get("global_name") or author.get("username") or "Discord User",
             "author_username": author.get("username") or "",
-            "author_avatar_url": discord_avatar_fn(author),
+            "author_avatar_url": discord_avatar(author, default_avatar=default_avatar),
         })
     if "content" in message or not partial:
         content = message.get("content") or ""
@@ -242,7 +236,7 @@ def discord_message_payload(
             "rendered_html": render_discord_content_fn(content, message),
         })
     if any(key in message for key in ("embeds", "attachments")) or not partial:
-        payload["link_preview_json"] = media_json_fn(previews_fn(message), images_fn(message))
+        payload["link_preview_json"] = media_json_fn(discord_previews(message), discord_images(message))
     if "webhook_id" in message or not partial:
         payload["discord_webhook_id"] = message.get("webhook_id")
     if "timestamp" in message or not partial:

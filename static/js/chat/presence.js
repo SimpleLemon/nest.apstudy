@@ -1,5 +1,6 @@
-export function createChatPresence(context) {
-  const { root, state, els, config, lifecycle, actions } = context;
+import { normalizeLocalPresenceStatus } from "./presentation.js";
+
+export function createChatPresence({ state, els, config, lifecycle, fetchJson, identity, onUpdate }) {
   const {
     PRESENCE_REFRESH_MS,
     TYPING_PRESENCE_TTL_MS,
@@ -16,72 +17,10 @@ export function createChatPresence(context) {
         state.tabId = state.tabId.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
         sessionStorage.setItem(PRESENCE_TAB_ID_KEY, state.tabId);
       }
-    } catch (_) {
+    } catch {
       state.tabId = state.tabId || Math.random().toString(36).slice(2, 12);
     }
     return state.tabId;
-  }
-
-  function registerKnownUser(user) {
-    if (!user?.id) return;
-    state.knownUsers.set(String(user.id), { ...(state.knownUsers.get(String(user.id)) || {}), ...user });
-  }
-
-  function registerKnownUsersFromState() {
-    registerKnownUser(state.user);
-    for (const channel of state.channels || []) {
-      for (const user of channel.online_users || []) registerKnownUser(user);
-      for (const user of channel.active_users || []) registerKnownUser(user);
-    }
-    for (const thread of state.threads || []) {
-      registerKnownUser(thread.other_user);
-    }
-  }
-
-  function staleChannelPresence(channel) {
-    return {
-      ...channel,
-      active_count: 0,
-      active_users: [],
-      online_count: 0,
-      online_users: [],
-    };
-  }
-
-  function staleThreadPresence(thread) {
-    const other = thread?.other_user ? { ...thread.other_user, online: false } : thread?.other_user;
-    return {
-      ...thread,
-      other_user: other,
-      active_count: 0,
-      presence_status: "offline",
-    };
-  }
-
-  function normalizeLocalPresenceStatus(value) {
-    return ["active", "busy", "focus", "offline"].includes(value) ? value : "offline";
-  }
-
-  function dmPresenceStatus(thread) {
-    if (thread?.presence_status) return normalizeLocalPresenceStatus(thread.presence_status);
-    if (thread?.other_user?.presence_status) return normalizeLocalPresenceStatus(thread.other_user.presence_status);
-    return thread?.other_user?.online ? "active" : "offline";
-  }
-
-  function presenceStatusLabel(status) {
-    if (status === "active") return "Online";
-    if (status === "busy") return "Busy";
-    if (status === "focus") return "Focus mode";
-    return "Offline";
-  }
-
-  function dmPresenceMarkup(status) {
-    const label = presenceStatusLabel(status);
-    return `
-      <small class="chat-presence-line">
-        <span>${label}</span>
-      </small>
-    `;
   }
 
   function rememberPresenceUser(user) {
@@ -95,7 +34,6 @@ export function createChatPresence(context) {
       typing_thread_ids: Array.isArray(user.typing_thread_ids) ? user.typing_thread_ids.map(String) : [],
     };
     state.presenceRecords.set(normalized.id, normalized);
-    registerKnownUser(normalized);
   }
 
   function updatePresenceStatus(userId, status) {
@@ -111,25 +49,12 @@ export function createChatPresence(context) {
     });
   }
 
-  function presenceStatusForUser(userId, fallback = "offline") {
-    const record = state.presenceRecords.get(String(userId || ""));
-    return normalizeLocalPresenceStatus(record?.presence_status || fallback);
-  }
-
-  function usersForPresenceScope(scopeType, scopeId) {
-    void scopeType;
-    const id = String(scopeId || "");
-    return Array.from(state.presenceRecords.values())
-      .filter((user) => (user.active_chat_scopes || []).includes(id))
-      .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
-  }
-
   function typingUsersForActiveRoom() {
     const room = state.activeRoom;
     if (!room?.id) return [];
     const field = room.type === "channel" ? "typing_channel_ids" : "typing_thread_ids";
     return Array.from(state.presenceRecords.values())
-      .filter((user) => user.id !== actions.currentUserId())
+      .filter((user) => user.id !== identity.currentUserId())
       .filter((user) => (user[field] || []).includes(String(room.id)))
       .map((user) => state.knownUsers.get(user.id) || user);
   }
@@ -159,65 +84,15 @@ export function createChatPresence(context) {
     els.typing.textContent = label;
   }
 
-  function renderPresenceDrivenUi() {
-    registerKnownUsersFromState();
-    for (const channel of state.channels) {
-      const users = (channel.online_users || channel.active_users || []).map((user) => {
-        const status = presenceStatusForUser(user.id, user.presence_status || (user.online ? "active" : "offline"));
-        return {
-          ...user,
-          presence_status: status,
-          online: status !== "offline",
-        };
-      }).filter((user) => user.online);
-      channel.online_users = users;
-      channel.online_count = users.length;
-      channel.active_users = users;
-      channel.active_count = users.length;
-      for (const user of users) registerKnownUser(user);
-    }
-    for (const thread of state.threads) {
-      const other = thread.other_user || {};
-      const status = presenceStatusForUser(other.id, other.presence_status || thread.presence_status);
-      thread.presence_status = status;
-      other.presence_status = status;
-      other.online = status !== "offline";
-      const scope = thread.presence_scope || { scope_type: "thread", scope_id: thread.id };
-      thread.active_count = usersForPresenceScope(scope.scope_type, scope.scope_id).length;
-    }
-    actions.updateRoomLists();
-    actions.renderHeader();
-    const channel = actions.activeChannel();
-    const thread = actions.activeThread();
-    if (thread) {
-      actions.renderDmProfile(thread);
-    } else if (channel && !actions.channelIsPending(channel)) {
-      const users = channel.online_users || channel.active_users || [];
-      const activeProfile = state.activeProfile?.id
-        ? users.find((user) => user.id === state.activeProfile.id)
-        : null;
-      if (activeProfile) actions.showMemberProfile(activeProfile, { preserveFocus: true });
-      else actions.renderMembers(users);
-    }
-    renderTypingIndicator();
-  }
-
-  function updateCurrentMembersFromPayload(payload) {
-    if (payload.thread && state.activeRoom?.type === "thread" && state.activeRoom.id === payload.thread.id) {
-      actions.renderDmProfile(payload.thread);
-    }
-    renderPresenceDrivenUi();
-  }
-
   async function loadInitialPresences() {
     try {
-      const payload = await context.fetchJson("/api/presence/online");
+      const payload = await fetchJson("/api/presence/online");
       state.presenceRecords.clear();
       for (const user of payload.users || []) rememberPresenceUser(user);
-      renderPresenceDrivenUi();
+      onUpdate();
     } catch (error) {
       console.warn("Unable to load presence", error);
-      renderPresenceDrivenUi();
+      onUpdate();
     }
   }
 
@@ -225,13 +100,13 @@ export function createChatPresence(context) {
     const ids = [];
     const add = (value) => {
       const id = String(value || "");
-      if (id && id !== actions.currentUserId() && !ids.includes(id)) ids.push(id);
+      if (id && id !== identity.currentUserId() && !ids.includes(id)) ids.push(id);
     };
     for (const thread of state.threads || []) {
       add(thread.other_user?.id);
     }
     add(state.activeProfile?.id);
-    const thread = actions.activeThread();
+    const thread = state.activeRoom?.type === "thread" ? state.threads.find((candidate) => candidate.id === state.activeRoom.id) : null;
     add(thread?.other_user?.id);
     return ids.slice(0, 200);
   }
@@ -240,7 +115,7 @@ export function createChatPresence(context) {
     const userIds = visiblePresenceUserIds();
     if (!userIds.length) return;
     try {
-      const payload = await context.fetchJson("/api/presence/statuses", {
+      const payload = await fetchJson("/api/presence/statuses", {
         method: "POST",
         body: JSON.stringify({ user_ids: userIds }),
       });
@@ -256,22 +131,15 @@ export function createChatPresence(context) {
     const room = state.activeRoom;
     if (!room?.id || !["channel", "thread"].includes(room.type)) return;
     try {
-      const payload = await context.fetchJson("/api/presence/room", {
+      const payload = await fetchJson("/api/presence/room", {
         method: "POST",
         body: JSON.stringify({ scope_type: room.type, scope_id: room.id }),
       });
-      if (!state.activeRoom || actions.roomKey(state.activeRoom) !== actions.roomKey(room)) return;
+      if (!state.activeRoom || identity.roomKey(state.activeRoom) !== identity.roomKey(room)) return;
       const typingField = room.type === "channel" ? "typing_channel_ids" : "typing_thread_ids";
       removePresenceScope("active_chat_scopes", room.id);
       removePresenceScope(typingField, room.id);
       const roomUsers = payload.online_users || payload.active_users || [];
-      const channel = room.type === "channel" ? state.channels.find((candidate) => candidate.id === room.id) : null;
-      if (channel) {
-        channel.online_users = roomUsers;
-        channel.online_count = roomUsers.length;
-        channel.active_users = roomUsers;
-        channel.active_count = roomUsers.length;
-      }
       for (const user of roomUsers) {
         const status = normalizeLocalPresenceStatus(user.presence_status || "active");
         rememberPresenceUser({
@@ -287,6 +155,7 @@ export function createChatPresence(context) {
           [typingField]: [String(room.id)],
         });
       }
+      return { room, users: roomUsers };
     } catch (error) {
       console.warn("Unable to refresh room presence", error);
     }
@@ -300,8 +169,8 @@ export function createChatPresence(context) {
 
   async function refreshTargetedPresences() {
     syncActiveRoomHeartbeat();
-    await Promise.all([refreshPresenceStatuses(), refreshActiveRoomPresence()]);
-    renderPresenceDrivenUi();
+    const [, update] = await Promise.all([refreshPresenceStatuses(), refreshActiveRoomPresence()]);
+    onUpdate(update);
   }
 
   function heartbeatPayload(kind, room = state.activeRoom) {
@@ -324,7 +193,7 @@ export function createChatPresence(context) {
     const payload = heartbeatPayload(kind, room);
     if (!payload) return null;
     try {
-      await context.fetchJson("/api/presence/heartbeat", {
+      await fetchJson("/api/presence/heartbeat", {
         method: "POST",
         body: JSON.stringify(payload),
       });
@@ -347,20 +216,20 @@ export function createChatPresence(context) {
   }
 
   function handleActiveRoomPresenceChange(previousRoom) {
-    if (previousRoom && actions.roomKey(previousRoom) !== actions.roomKey(state.activeRoom)) {
+    if (previousRoom && identity.roomKey(previousRoom) !== identity.roomKey(state.activeRoom)) {
       clearTypingPresence();
     }
     refreshViewingPresence();
   }
 
   function scheduleTypingPresence() {
-    const channel = actions.activeChannel();
-    const thread = actions.activeThread();
+    const channel = state.activeRoom?.type === "channel" ? state.channels.find((candidate) => candidate.id === state.activeRoom.id) : null;
+    const thread = state.activeRoom?.type === "thread" ? state.threads.find((candidate) => candidate.id === state.activeRoom.id) : null;
     if (!els.input || !els.input.value.trim()) {
       clearTypingPresence();
       return;
     }
-    if ((channel && !actions.channelIsWritable(channel)) || thread?.blocked) return;
+    if ((channel && (channel.read_only || channel.approved === false)) || thread?.blocked) return;
     window.clearTimeout(state.typingInputTimer);
     state.typingInputTimer = window.setTimeout(() => {
       void sendPresenceHeartbeat("typing");
@@ -383,21 +252,12 @@ export function createChatPresence(context) {
 
   return {
     clearTypingPresence,
-    dmPresenceMarkup,
-    dmPresenceStatus,
     handleActiveRoomPresenceChange,
     loadInitialPresences,
-    normalizeLocalPresenceStatus,
-    presenceStatusLabel,
     refreshViewingPresence,
-    registerKnownUser,
-    registerKnownUsersFromState,
-    renderPresenceDrivenUi,
+    renderTypingIndicator,
     scheduleTypingPresence,
-    staleChannelPresence,
-    staleThreadPresence,
     startPresenceRefreshTimer,
     stopPresenceRefreshTimer,
-    updateCurrentMembersFromPayload,
   };
 }

@@ -45,3 +45,93 @@ test("chat cache expires delete permission and maintains delta cursors", () => {
     after_message_id: "later",
   });
 });
+
+function persistentWriteFixture() {
+  const putRequest = {};
+  const transaction = { objectStore: () => ({ put: () => putRequest }) };
+  const database = { transaction: () => transaction };
+  const openRequest = { result: database };
+  const persistent = cache.createPersistentChatCache({ indexedDB: { open: () => openRequest } });
+  return { persistent, openRequest, putRequest, transaction, database };
+}
+
+test("persistent writes wait for the IndexedDB transaction commit after put success", async () => {
+  const fixture = persistentWriteFixture();
+  let settled = false;
+  const write = fixture.persistent.write("room", { messages: [] }).then(() => { settled = true; });
+  fixture.openRequest.onsuccess();
+  await Promise.resolve();
+  fixture.putRequest.onsuccess?.();
+  await Promise.resolve();
+  assert.equal(settled, false, "A successful request is not a committed transaction");
+  fixture.transaction.oncomplete();
+  await write;
+  assert.equal(settled, true);
+});
+
+test("a put followed by transaction abort finishes best-effort persistence once", async () => {
+  const fixture = persistentWriteFixture();
+  const warnings = [];
+  const previousWarn = console.warn;
+  console.warn = (...args) => warnings.push(args);
+  try {
+    const write = fixture.persistent.write("room", { messages: [] });
+    fixture.openRequest.onsuccess();
+    await Promise.resolve();
+    fixture.putRequest.onsuccess?.();
+    fixture.transaction.error = new Error("quota exceeded");
+    fixture.transaction.onerror();
+    fixture.transaction.onabort();
+    await write;
+    assert.equal(warnings.length, 1);
+    assert.equal(warnings[0][1], fixture.transaction.error);
+  } finally {
+    console.warn = previousWarn;
+  }
+});
+
+test("cache persistence tolerates synchronous transaction failure", async () => {
+  const fixture = persistentWriteFixture();
+  const previousWarn = console.warn;
+  const warnings = [];
+  console.warn = (...args) => warnings.push(args);
+  fixture.database.transaction = () => { throw new Error("database closed"); };
+  try {
+    const write = fixture.persistent.write("room", { messages: [] });
+    fixture.openRequest.onsuccess();
+    await write;
+    assert.equal(warnings.length, 1);
+  } finally {
+    console.warn = previousWarn;
+  }
+});
+
+test("unavailable IndexedDB remains optional for both cache reads and writes", async () => {
+  const warnings = [];
+  const previousWarn = console.warn;
+  console.warn = (...args) => warnings.push(args);
+  const persistent = cache.createPersistentChatCache({
+    indexedDB: { open() { throw new Error("storage denied"); } },
+  });
+  try {
+    assert.equal(await persistent.read("bootstrap"), null);
+    await persistent.write("room", { messages: [] });
+    assert.equal(warnings.length, 1);
+  } finally {
+    console.warn = previousWarn;
+  }
+});
+
+test("cache reads tolerate closed databases and transaction aborts", async () => {
+  const fixture = persistentWriteFixture();
+  fixture.database.transaction = () => { throw new Error("database closed"); };
+  const read = fixture.persistent.read("room");
+  fixture.openRequest.onsuccess();
+  assert.equal(await read, null);
+
+  fixture.database.transaction = () => ({
+    objectStore: () => ({ get: () => ({}) }),
+    set onabort(callback) { queueMicrotask(callback); },
+  });
+  assert.equal(await fixture.persistent.read("room"), null);
+});

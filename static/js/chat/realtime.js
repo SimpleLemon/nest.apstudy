@@ -1,15 +1,12 @@
 import { deltaLoadParams } from "./cache.js";
 
-export function createChatRealtime(context) {
-  const { state, config, lifecycle, actions } = context;
+export function createChatRealtime({ readState, state, config, lifecycle, fetchJson, bootstrap, feedback, identity, loading, presence, rooms, store, view }) {
   const {
     REALTIME_FALLBACK_MS,
-    REALTIME_HEARTBEAT_MS,
     REALTIME_RECONNECT_MS,
   } = config;
 
   let realtimeFallbackTimer = null;
-  let realtimeHeartbeatTimer = null;
   let realtimeReconnectTimer = null;
   let chatEventSource = null;
   let chatEventCursor = { since: null, after_id: null };
@@ -42,53 +39,54 @@ export function createChatRealtime(context) {
     return Boolean(
       room
       && state.activeRoom
-      && actions.roomKey(state.activeRoom) === actions.roomKey(room)
+      && identity.roomKey(state.activeRoom) === identity.roomKey(room)
     );
   }
 
   async function fetchMessageById(messageId) {
     if (!messageId) return null;
     try {
-      const payload = await context.fetchJson(`/api/chat/messages/${encodeURIComponent(messageId)}`);
+      const payload = await fetchJson(`/api/chat/messages/${encodeURIComponent(messageId)}`);
       return payload?.message || null;
-    } catch (_) {
+    } catch {
       return null;
     }
   }
 
-  async function ingestMessageUpdate(event) {
+  async function ingestMessageUpdate(event, isCurrent) {
     const room = state.activeRoom;
-    const cache = actions.cacheFor(room);
+    const cache = store.cacheFor(room);
     if (!room || !cache) return false;
     if (event.message_id) {
       const message = await fetchMessageById(event.message_id);
+      if (!isCurrent()) return false;
       if (message) {
-        cache.messages = actions.mergeMessages(cache.messages, [message]);
-        actions.updateCacheCursors(cache);
-        actions.schedulePersistentRoomSave(room);
+        const change = store.mergeRoomMessages(room, [message]);
         if (!isActiveRoom(room)) return false;
-        if (actions.patchMessageInDom(message)) {
-          actions.updateAnnouncementsUnreadBanner(cache.messages);
+        if (view.patchMessageInDom(message)) {
+          view.updateAnnouncementsUnreadBanner(change.messages);
           return true;
         }
       }
     }
     if (!isActiveRoom(room)) return false;
-    await actions.loadMessages({ force: true, quiet: true, preserveScroll: true, light: true });
+    await loading.loadMessages({ force: true, quiet: true, preserveScroll: true, light: true,
+      roomSelection: { isCurrent: () => isCurrent() && isActiveRoom(room) } });
     return false;
   }
 
-  async function ingestActiveRoomMessage(event) {
+  async function ingestActiveRoomMessage(event, isCurrent) {
     const room = state.activeRoom;
-    const cache = actions.cacheFor(room);
+    const cache = store.cacheFor(room);
     if (!room || !cache) return false;
 
     if (event.message_id && !cache.messages.some((message) => message.id === event.message_id)) {
       const message = await fetchMessageById(event.message_id);
+      if (!isCurrent()) return false;
       if (message) {
-        actions.applyIncomingMessages(room, [message]);
+        view.renderIncomingMessages(store.mergeRoomMessages(room, [message]));
         if (!isActiveRoom(room)) return false;
-        actions.playChatSound(event.actor_id);
+        feedback.playChatSound(event.actor_id);
         return true;
       }
     }
@@ -96,13 +94,14 @@ export function createChatRealtime(context) {
     if (!isActiveRoom(room)) return false;
 
     const delta = deltaLoadParams(cache);
+    const roomSelection = { isCurrent: () => isCurrent() && isActiveRoom(room) };
     const incoming = delta.after
-      ? await actions.loadMessages({ ...delta, quiet: true, force: true, light: true })
-      : await actions.loadMessages({ force: true, quiet: true });
+      ? await loading.loadMessages({ ...delta, quiet: true, force: true, light: true, roomSelection })
+      : await loading.loadMessages({ force: true, quiet: true, roomSelection });
     if (!incoming.length && event.message_id) {
-      await actions.loadMessages({ force: true, quiet: true });
+      await loading.loadMessages({ force: true, quiet: true, roomSelection });
     } else if (incoming.length) {
-      actions.playChatSound(event.actor_id);
+      feedback.playChatSound(event.actor_id);
       return true;
     }
     return isActiveRoom(room) && incoming.length > 0;
@@ -111,13 +110,13 @@ export function createChatRealtime(context) {
   function pollActiveRoomMessages() {
     if (state.realtimeReady) return;
     const room = state.activeRoom;
-    const cache = actions.cacheFor(room);
+    const cache = store.cacheFor(room);
     if (!room || !cache) return;
     const delta = deltaLoadParams(cache);
     if (delta.after) {
-      void actions.loadMessages({ ...delta, quiet: true, force: true, light: true });
+      void loading.loadMessages({ ...delta, quiet: true, force: true, light: true }).catch(() => {});
     } else {
-      void actions.loadMessages({ force: true, quiet: true });
+      void loading.loadMessages({ force: true, quiet: true }).catch(() => {});
     }
   }
 
@@ -130,7 +129,7 @@ export function createChatRealtime(context) {
         return;
       }
       pollActiveRoomMessages();
-      void actions.refreshChatSummary();
+      void readState.refreshChatSummary();
     }, REALTIME_FALLBACK_MS);
   }
 
@@ -138,18 +137,6 @@ export function createChatRealtime(context) {
     if (!realtimeFallbackTimer) return;
     window.clearInterval(realtimeFallbackTimer);
     realtimeFallbackTimer = null;
-  }
-
-  function startRealtimeHeartbeat() {
-    // EventSource owns message liveness while connected. Active-room polling
-    // is reserved for the fallback loop so the two paths cannot overlap.
-    void REALTIME_HEARTBEAT_MS;
-  }
-
-  function stopRealtimeHeartbeat() {
-    if (!realtimeHeartbeatTimer) return;
-    window.clearInterval(realtimeHeartbeatTimer);
-    realtimeHeartbeatTimer = null;
   }
 
   function resetRealtimeConnection() {
@@ -164,7 +151,6 @@ export function createChatRealtime(context) {
     }
     state.realtimeReady = false;
     state.realtimeConnecting = false;
-    stopRealtimeHeartbeat();
   }
 
   function buildChatEventsStreamUrl() {
@@ -192,7 +178,7 @@ export function createChatRealtime(context) {
   async function startRealtimeServices() {
     if (lifecycle.paused || lifecycle.disposed) return;
     initializeChatEventStream();
-    void actions.loadInitialPresences();
+    void presence.loadInitialPresences();
   }
 
   function initializeChatEventStream() {
@@ -207,6 +193,9 @@ export function createChatRealtime(context) {
     try {
       const source = new EventSource(buildChatEventsStreamUrl());
       chatEventSource = source;
+      const isCurrentConnection = () => generation === connectionGeneration
+        && source === chatEventSource && !lifecycle.paused && !lifecycle.disposed;
+      let reconciliation = Promise.resolve();
       source.onopen = () => {
         if (generation !== connectionGeneration || source !== chatEventSource || lifecycle.paused || lifecycle.disposed) {
           source.close();
@@ -221,7 +210,6 @@ export function createChatRealtime(context) {
           }
         };
         stopRealtimeFallback();
-        startRealtimeHeartbeat();
       };
       source.onmessage = (messageEvent) => {
         if (generation !== connectionGeneration || source !== chatEventSource || lifecycle.paused || lifecycle.disposed) return;
@@ -231,12 +219,22 @@ export function createChatRealtime(context) {
         } catch {
           return;
         }
-        const eventId = payload?.$id || payload?.id;
-        if (eventId && !rememberChatEventId(eventId)) return;
-        if (payload?.created_at) {
-          chatEventCursor = { since: payload.created_at, after_id: eventId || null };
-        }
-        void handleRealtimePayload({ payload });
+        // Checkpoint only contiguous successful events. A failed event closes
+        // this generation before later queued events can skip its replay.
+        reconciliation = reconciliation.then(async () => {
+          if (!isCurrentConnection()) return;
+          const eventId = payload?.$id || payload?.id;
+          if (eventId && seenChatEventIds.has(String(eventId))) return;
+          await handleRealtimePayload({ payload }, isCurrentConnection);
+          if (!isCurrentConnection()) return;
+          if (eventId) rememberChatEventId(eventId);
+          if (payload?.created_at) {
+            chatEventCursor = { since: payload.created_at, after_id: eventId || null };
+          }
+        }).catch((error) => {
+          console.warn("Unable to reconcile chat event", { eventId: payload?.$id || payload?.id, eventType: payload?.event_type }, error);
+          if (isCurrentConnection()) scheduleRealtimeReconnect();
+        });
       };
       source.onerror = () => {
         if (generation !== connectionGeneration || source !== chatEventSource || lifecycle.paused || lifecycle.disposed) return;
@@ -281,7 +279,7 @@ export function createChatRealtime(context) {
     return false;
   }
 
-  async function handleRealtimePayload(response) {
+  async function handleRealtimePayload(response, isCurrent = () => true) {
     const event = normalizeChatEvent(response);
     if (!eventIsRelevant(event)) return;
     const eventRoom = event.scope_type === "channel"
@@ -291,50 +289,55 @@ export function createChatRealtime(context) {
         : null;
 
     if (event.event_type === "message_deleted") {
-      actions.removeMessageFromCaches(event.message_id);
-      void actions.refreshChatSummary();
+      store.removeMessageFromCaches(event.message_id);
+      view.renderRemovedMessage(event.message_id);
+      void readState.refreshChatSummary();
       return;
     }
 
     if (event.event_type === "message_created") {
-      if (event.message_id && !rememberChatMessageId(event.message_id)) return;
-      if (eventRoom?.type === "thread" && !actions.threadExists(eventRoom.id)) {
-        const thread = await actions.fetchThread(eventRoom.id);
+      if (event.message_id && seenChatMessageIds.has(String(event.message_id))) return;
+      if (eventRoom?.type === "thread" && !rooms.threadExists(eventRoom.id)) {
+        const thread = await rooms.fetchThread(eventRoom.id);
+        if (!isCurrent()) return;
         if (!thread) {
-          await actions.bootstrap({ preserveActive: true });
+          await bootstrap.bootstrap({ preserveActive: true });
         }
       }
+      if (!isCurrent()) return;
       const active = state.activeRoom;
-      if (eventRoom && active && actions.roomKey(eventRoom) === actions.roomKey(active)) {
-        await ingestActiveRoomMessage(event);
+      if (eventRoom && active && identity.roomKey(eventRoom) === identity.roomKey(active)) {
+        await ingestActiveRoomMessage(event, isCurrent);
       } else if (eventRoom) {
-        actions.markRoomStale(eventRoom);
-        actions.scheduleUnreadSummaryRefresh();
-        actions.playChatSound(event.actor_id);
+        store.markRoomStale(eventRoom);
+        readState.scheduleUnreadSummaryRefresh();
+        feedback.playChatSound(event.actor_id);
       }
+      if (isCurrent() && event.message_id) rememberChatMessageId(event.message_id);
       return;
     }
 
     if (event.event_type === "message_updated") {
       const active = state.activeRoom;
-      if (eventRoom && active && actions.roomKey(eventRoom) === actions.roomKey(active)) {
-        await ingestMessageUpdate(event);
+      if (eventRoom && active && identity.roomKey(eventRoom) === identity.roomKey(active)) {
+        await ingestMessageUpdate(event, isCurrent);
       } else if (eventRoom) {
-        actions.markRoomStale(eventRoom);
+        store.markRoomStale(eventRoom);
       }
       return;
     }
 
     if (["thread_updated", "block_updated", "university_approved", "university_denied"].includes(event.event_type)) {
-      if (eventRoom) actions.markRoomStale(eventRoom);
+      if (eventRoom) store.markRoomStale(eventRoom);
       if (event.event_type === "thread_updated" && eventRoom?.type === "thread") {
-        const thread = await actions.fetchThread(eventRoom.id);
+        const thread = await rooms.fetchThread(eventRoom.id);
+        if (!isCurrent()) return;
         if (thread) {
-          void actions.refreshChatSummary();
+          void readState.refreshChatSummary();
           return;
         }
       }
-      await actions.bootstrap({ preserveActive: true });
+      await bootstrap.bootstrap({ preserveActive: true });
     }
   }
 
@@ -342,31 +345,31 @@ export function createChatRealtime(context) {
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
         const room = state.activeRoom;
-        const cache = actions.cacheFor(room);
+        const cache = store.cacheFor(room);
         if (cache?.loaded) {
           if (cache.latestCursor) {
             const delta = deltaLoadParams(cache);
-            void actions.loadMessages({ ...delta, quiet: true, force: true, light: true })
-              .finally(() => {
-                actions.markRoomRead(room, cache);
-                void actions.refreshChatSummary();
-              });
+            void loading.loadMessages({ ...delta, quiet: true, force: true, light: true })
+              .then(() => {
+                readState.markRoomRead(room, cache);
+                void readState.refreshChatSummary();
+              }).catch(() => {});
           } else if (cache.stale) {
-            void actions.loadMessages({ force: true, quiet: true })
-              .finally(() => {
-                actions.markRoomRead(room, cache);
-                void actions.refreshChatSummary();
-              });
+            void loading.loadMessages({ force: true, quiet: true })
+              .then(() => {
+                readState.markRoomRead(room, cache);
+                void readState.refreshChatSummary();
+              }).catch(() => {});
           } else {
-            actions.markRoomRead(room, cache);
-            void actions.refreshChatSummary();
+            readState.markRoomRead(room, cache);
+            void readState.refreshChatSummary();
           }
         } else {
-          void actions.refreshChatSummary();
+          void readState.refreshChatSummary();
         }
-        actions.refreshViewingPresence();
+        presence.refreshViewingPresence();
       } else {
-        actions.clearTypingPresence();
+        presence.clearTypingPresence();
       }
     });
   }
@@ -382,9 +385,7 @@ export function createChatRealtime(context) {
     handleRealtimePayload,
     resetRealtimeConnection,
     startRealtimeFallback,
-    startRealtimeHeartbeat,
     startRealtimeServices,
     stopRealtimeFallback,
-    stopRealtimeHeartbeat,
   };
 }

@@ -1,4 +1,5 @@
 import unittest
+from contextlib import ExitStack
 from datetime import datetime, timezone
 from functools import partial
 from types import SimpleNamespace
@@ -8,6 +9,7 @@ from flask import Flask
 
 import blueprints.chat_api as chat_api
 from services import chat_discord_sync, discord_chat
+from services.storage_errors import StorageUnavailable
 
 
 class QueryStub:
@@ -75,7 +77,19 @@ def _dependencies(**overrides):
     return SimpleNamespace(**values)
 
 
+def _owner_patch(stack, name, callback):
+    return stack.enter_context(patch.object(
+        chat_discord_sync, name,
+        side_effect=lambda *args, **kwargs: callback(*args, **{key: value for key, value in kwargs.items() if key != "dependencies"}),
+    ))
+
+
 class DiscordSyncServiceTests(unittest.TestCase):
+    def setUp(self):
+        patcher = patch.object(chat_discord_sync, "utcnow", return_value=datetime(2026, 5, 26, 22, 10, tzinfo=timezone.utc))
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_upsert_injects_payload_and_persistence_callbacks_for_create(self):
         channel = {"$id": "nest_chat", "discord_channel_id": "discord-channel"}
         message = {"id": "discord-message", "content": "hello"}
@@ -86,7 +100,7 @@ class DiscordSyncServiceTests(unittest.TestCase):
             "discord_message_id": "discord-message",
             "content": "hello",
         }
-        inserted_row = {"$id": "discord-row"}
+        inserted_row = {"$id": chat_discord_sync.discord_message_row_id(channel, "discord-message")}
         payload_fn = Mock(return_value=payload)
         find_fn = Mock(return_value=None)
         insert_fn = Mock(return_value=True)
@@ -99,30 +113,32 @@ class DiscordSyncServiceTests(unittest.TestCase):
             get_row_fn=get_fn,
             emit_chat_event_fn=emit_fn,
         )
+        with ExitStack() as stack:
+            _owner_patch(stack, "find_discord_message_row", dependencies.find_discord_message_row_fn)
 
-        row, created = chat_discord_sync.upsert_discord_message(
-            channel,
-            message,
-            emit_event=True,
-            dependencies=dependencies,
-        )
+            row, created = chat_discord_sync.upsert_discord_message(
+                channel,
+                message,
+                emit_event=True,
+                dependencies=dependencies,
+            )
 
-        self.assertTrue(created)
-        self.assertEqual(row, inserted_row)
-        payload_fn.assert_called_once_with(channel, message, partial=False)
-        insert_fn.assert_called_once_with(
-            "chat_messages",
-            row_id="discord-row",
-            data=payload,
-        )
-        emit_fn.assert_called_once_with(
-            "channel",
-            "nest_chat",
-            "message_created",
-            message_id="discord-row",
-            channel_id="nest_chat",
-            channel=channel,
-        )
+            self.assertTrue(created)
+            self.assertEqual(row, inserted_row)
+            payload_fn.assert_called_once_with(channel, message, partial=False)
+            insert_fn.assert_called_once_with(
+                "chat_messages",
+                row_id=inserted_row["$id"],
+                data=payload,
+            )
+            emit_fn.assert_called_once_with(
+                "channel",
+                "nest_chat",
+                "message_created",
+                message_id=inserted_row["$id"],
+                channel_id="nest_chat",
+                channel=channel,
+            )
 
     def test_partial_update_does_not_wipe_missing_message_fields(self):
         existing = {
@@ -195,25 +211,29 @@ class DiscordSyncServiceTests(unittest.TestCase):
             reconcile_discord_deletes_fn=reconcile,
             prune_discord_messages_fn=prune,
         )
+        with ExitStack() as stack:
+            _owner_patch(stack, "upsert_discord_message", dependencies.upsert_discord_message_fn)
+            _owner_patch(stack, "reconcile_discord_deletes", dependencies.reconcile_discord_deletes_fn)
+            _owner_patch(stack, "prune_discord_messages", dependencies.prune_discord_messages_fn)
 
-        result = chat_discord_sync.sync_discord_channel(
-            channel,
-            emit_events=False,
-            emit_delete_events=True,
-            dependencies=dependencies,
-        )
+            result = chat_discord_sync.sync_discord_channel(
+                channel,
+                emit_events=False,
+                emit_delete_events=True,
+                dependencies=dependencies,
+            )
 
-        self.assertEqual(result, (1, 1))
-        self.assertEqual(
-            steps,
-            [
-                ("fetch", "discord-channel", 50),
-                ("upsert", "message-1", False),
-                ("upsert", "message-2", False),
-                ("reconcile", True),
-                ("prune", "nest_chat"),
-            ],
-        )
+            self.assertEqual(result, (1, 1))
+            self.assertEqual(
+                steps,
+                [
+                    ("fetch", "discord-channel", 50),
+                    ("upsert", "message-1", False),
+                    ("upsert", "message-2", False),
+                    ("reconcile", True),
+                    ("prune", "nest_chat"),
+                ],
+            )
 
     def test_sync_channels_initializes_defaults_and_skips_unmapped_rows(self):
         valid_channel = {"$id": "nest_chat", "kind": "discord", "discord_channel_id": "channel"}
@@ -225,20 +245,23 @@ class DiscordSyncServiceTests(unittest.TestCase):
             can_sync_discord_channel_fn=lambda channel: bool(channel.get("discord_channel_id")),
             sync_discord_channel_fn=sync_channel,
         )
+        with ExitStack() as stack:
+            _owner_patch(stack, "default_channels", dependencies.default_channels_fn)
+            _owner_patch(stack, "sync_discord_channel", dependencies.sync_discord_channel_fn)
 
-        result = chat_discord_sync.sync_discord_channels(
-            emit_events=False,
-            emit_delete_events=True,
-            dependencies=dependencies,
-        )
+            result = chat_discord_sync.sync_discord_channels(
+                emit_events=False,
+                emit_delete_events=True,
+                dependencies=dependencies,
+            )
 
-        self.assertEqual(result, (1, 2))
-        self.assertEqual(steps, ["defaults"])
-        sync_channel.assert_called_once_with(
-            valid_channel,
-            emit_events=False,
-            emit_delete_events=True,
-        )
+            self.assertEqual(result, (1, 2))
+            self.assertEqual(steps, ["defaults"])
+            sync_channel.assert_called_once_with(
+                valid_channel,
+                emit_events=False,
+                emit_delete_events=True,
+            )
 
     def test_gateway_update_is_partial_and_prunes_after_ingest(self):
         channel = {"$id": "nest_chat", "kind": "discord", "discord_channel_id": "channel"}
@@ -252,22 +275,26 @@ class DiscordSyncServiceTests(unittest.TestCase):
             upsert_discord_message_fn=upsert,
             prune_discord_messages_fn=prune,
         )
+        with ExitStack() as stack:
+            _owner_patch(stack, "discord_channel_for_discord_id", dependencies.discord_channel_for_discord_id_fn)
+            _owner_patch(stack, "upsert_discord_message", dependencies.upsert_discord_message_fn)
+            _owner_patch(stack, "prune_discord_messages", dependencies.prune_discord_messages_fn)
 
-        result = chat_discord_sync.ingest_discord_gateway_message(
-            {"id": "message", "channel_id": "channel"},
-            event_type="update",
-            dependencies=dependencies,
-        )
+            result = chat_discord_sync.ingest_discord_gateway_message(
+                {"id": "message", "channel_id": "channel"},
+                event_type="update",
+                dependencies=dependencies,
+            )
 
-        self.assertEqual(result, (row, False))
-        resolve_channel.assert_called_once_with("channel")
-        upsert.assert_called_once_with(
-            channel,
-            {"id": "message", "channel_id": "channel"},
-            emit_event=True,
-            partial=True,
-        )
-        prune.assert_called_once_with("nest_chat")
+            self.assertEqual(result, (row, False))
+            resolve_channel.assert_called_once_with("channel")
+            upsert.assert_called_once_with(
+                channel,
+                {"id": "message", "channel_id": "channel"},
+                emit_event=True,
+                partial=True,
+            )
+            prune.assert_called_once_with("nest_chat")
 
     def test_reconcile_only_soft_deletes_recent_missing_discord_rows(self):
         channel = {"$id": "nest_chat", "discord_channel_id": "discord-channel"}
@@ -300,16 +327,74 @@ class DiscordSyncServiceTests(unittest.TestCase):
             list_rows_all_fn=Mock(return_value=rows),
             soft_delete_discord_message_fn=soft_delete,
         )
+        with ExitStack() as stack:
+            _owner_patch(stack, "soft_delete_discord_message", dependencies.soft_delete_discord_message_fn)
 
-        deleted = chat_discord_sync.reconcile_discord_deletes(
-            channel,
-            messages,
-            emit_events=True,
-            dependencies=dependencies,
+            deleted = chat_discord_sync.reconcile_discord_deletes(
+                channel,
+                messages,
+                emit_events=True,
+                dependencies=dependencies,
+            )
+
+            self.assertEqual(deleted, 1)
+            soft_delete.assert_called_once_with(channel, "missing", emit_event=True)
+
+    def test_reconcile_retries_storage_failure_without_hiding_message_or_repeating_cleanup(self):
+        channel = {"$id": "nest_chat", "discord_channel_id": "discord-channel"}
+        remote = [{"id": "present", "timestamp": "2026-05-26T22:00:00Z"}]
+        persisted = [{
+            "$id": "discord-row", "source": "discord", "discord_message_id": "missing",
+            "created_at": "2026-05-26T22:02:00Z",
+        }]
+
+        def update(_collection, _row_id, changes):
+            persisted[0] = {**persisted[0], **changes}
+            return persisted[0]
+
+        dependencies = _dependencies(
+            get_row_fn=Mock(side_effect=lambda *_args, **_kwargs: persisted[0]),
+            list_rows_all_fn=Mock(side_effect=lambda *_args: persisted),
+            update_row_fn=Mock(side_effect=update),
+            delete_message_attachments_fn=Mock(side_effect=[StorageUnavailable("cleanup failed"), None]),
+        )
+        dependencies.soft_delete_discord_message_fn = partial(
+            chat_discord_sync.soft_delete_discord_message, dependencies=dependencies,
         )
 
-        self.assertEqual(deleted, 1)
-        soft_delete.assert_called_once_with(channel, "missing", emit_event=True)
+        self.assertEqual(chat_discord_sync.reconcile_discord_deletes(
+            channel, remote, emit_events=True, dependencies=dependencies,
+        ), 0)
+        self.assertNotIn("deleted_at", persisted[0])
+        dependencies.update_row_fn.assert_not_called()
+        dependencies.emit_chat_event_fn.assert_not_called()
+
+        self.assertEqual(chat_discord_sync.reconcile_discord_deletes(
+            channel, remote, emit_events=True, dependencies=dependencies,
+        ), 1)
+        self.assertTrue(persisted[0]["deleted_at"])
+        self.assertEqual(chat_discord_sync.reconcile_discord_deletes(
+            channel, remote, emit_events=True, dependencies=dependencies,
+        ), 0)
+        self.assertEqual(dependencies.delete_message_attachments_fn.call_count, 2)
+        dependencies.update_row_fn.assert_called_once()
+        dependencies.emit_chat_event_fn.assert_called_once()
+
+    def test_paused_discord_deletion_does_not_hide_or_prune_messages(self):
+        dependencies = _dependencies()
+        app = Flask(__name__)
+        app.config["NEST_STORAGE_MUTATIONS_PAUSED"] = True
+        with app.app_context():
+            self.assertIsNone(chat_discord_sync.soft_delete_discord_message(
+                {"$id": "nest_chat"}, "discord-message", emit_event=True, dependencies=dependencies,
+            ))
+            chat_discord_sync.prune_discord_messages("nest_chat", dependencies=dependencies)
+        dependencies.get_row_fn.assert_not_called()
+        dependencies.list_rows_all_fn.assert_not_called()
+        dependencies.delete_message_attachments_fn.assert_not_called()
+        dependencies.update_row_fn.assert_not_called()
+        dependencies.delete_row_fn.assert_not_called()
+        dependencies.emit_chat_event_fn.assert_not_called()
 
     def test_prune_keeps_the_fifty_newest_rows(self):
         rows = [{"$id": f"row-{index}"} for index in range(52)]
@@ -328,6 +413,19 @@ class DiscordSyncServiceTests(unittest.TestCase):
                 unittest.mock.call("chat_messages", "row-51"),
             ],
         )
+        self.assertEqual(
+            dependencies.delete_message_attachments_fn.call_args_list,
+            [unittest.mock.call("row-50"), unittest.mock.call("row-51")],
+        )
+
+    def test_prune_preserves_message_when_attachment_cleanup_fails(self):
+        rows = [{"$id": f"row-{index}"} for index in range(52)]
+        dependencies = _dependencies(
+            list_rows_all_fn=Mock(return_value=rows),
+            delete_message_attachments_fn=Mock(side_effect=[StorageUnavailable("cleanup failed"), None]),
+        )
+        chat_discord_sync.prune_discord_messages("nest_chat", dependencies=dependencies)
+        dependencies.delete_row_fn.assert_called_once_with("chat_messages", "row-51")
 
     def test_background_registry_contract_calls_registered_handlers(self):
         previous = discord_chat._handlers.copy()
@@ -373,7 +471,7 @@ class DiscordSyncServiceTests(unittest.TestCase):
 
 class DiscordSyncAdapterTests(unittest.TestCase):
     def test_blueprint_sync_uses_patchable_default_channels_adapter(self):
-        with patch.object(chat_api, "_default_channels", return_value=[]) as defaults, \
+        with patch.object(chat_discord_sync, "default_channels", return_value=[]) as defaults, \
                 patch.object(chat_api, "list_rows_all", return_value=[]):
             result = chat_api.sync_discord_channels(
                 emit_events=False,
@@ -381,15 +479,15 @@ class DiscordSyncAdapterTests(unittest.TestCase):
             )
 
         self.assertEqual(result, (0, 0))
-        defaults.assert_called_once_with()
+        self.assertEqual(defaults.call_count, 1)
 
     def test_discord_registry_sync_uses_blueprint_default_channels_adapter(self):
-        with patch.object(chat_api, "_default_channels", return_value=[]) as defaults, \
+        with patch.object(chat_discord_sync, "default_channels", return_value=[]) as defaults, \
                 patch.object(chat_api, "list_rows_all", return_value=[]):
             result = discord_chat.sync_discord_channels(False, True)
 
         self.assertEqual(result, (0, 0))
-        defaults.assert_called_once_with()
+        self.assertEqual(defaults.call_count, 1)
 
     def test_gateway_ingest_resolves_unmapped_channel_after_default_fallback(self):
         channel = {
@@ -404,21 +502,24 @@ class DiscordSyncAdapterTests(unittest.TestCase):
         }
         row = {"$id": "message-row"}
 
-        with patch.object(chat_api, "_default_channels", return_value=[channel]) as defaults, \
+        with patch.object(chat_discord_sync, "default_channels", return_value=[channel]) as defaults, \
                 patch.object(chat_api, "first_row", side_effect=[None, channel]), \
-                patch.object(chat_api, "_upsert_discord_message", return_value=(row, True)) as upsert, \
-                patch.object(chat_api, "_prune_discord_messages") as prune:
+                patch.object(chat_discord_sync, "upsert_discord_message", return_value=(row, True)) as upsert, \
+                patch.object(chat_discord_sync, "prune_discord_messages") as prune:
             result = chat_api.ingest_discord_gateway_message(message)
 
         self.assertEqual(result, (row, True))
-        defaults.assert_called_once_with()
+        self.assertEqual(defaults.call_count, 1)
+        self.assertEqual(upsert.call_args.args, (channel, message))
+        self.assertIn("dependencies", upsert.call_args.kwargs)
         upsert.assert_called_once_with(
             channel,
             message,
             emit_event=True,
             partial=False,
+            dependencies=upsert.call_args.kwargs["dependencies"],
         )
-        prune.assert_called_once_with("nest_chat")
+        prune.assert_called_once_with("nest_chat", dependencies=prune.call_args.kwargs["dependencies"])
 
     def test_http_ingest_resolves_unmapped_channel_after_default_fallback(self):
         app = Flask(__name__)
@@ -444,16 +545,16 @@ class DiscordSyncAdapterTests(unittest.TestCase):
             "_discord_ingest_secret",
             return_value="ingest-secret",
         ), patch.object(
-            chat_api,
-            "_default_channels",
+            chat_discord_sync,
+            "default_channels",
             return_value=[channel],
         ) as defaults, patch.object(
             chat_api,
             "first_row",
             side_effect=[None, channel],
         ), patch.object(
-            chat_api,
-            "_upsert_discord_message",
+            chat_discord_sync,
+            "upsert_discord_message",
             return_value=(row, True),
         ) as upsert:
             response = chat_api.discord_message_ingest()
@@ -465,8 +566,10 @@ class DiscordSyncAdapterTests(unittest.TestCase):
             "message_id": "message-row",
             "channel_id": "nest_chat",
         })
-        defaults.assert_called_once_with()
-        upsert.assert_called_once_with(channel, message, emit_event=True)
+        self.assertEqual(defaults.call_count, 1)
+        self.assertEqual(upsert.call_args.args, (channel, message))
+        self.assertIn("dependencies", upsert.call_args.kwargs)
+        upsert.assert_called_once_with(channel, message, emit_event=True, partial=False, dependencies=upsert.call_args.kwargs["dependencies"])
 
     def test_blueprint_adapter_keeps_payload_patch_interception(self):
         channel = {"$id": "nest_chat", "discord_channel_id": "discord-channel"}

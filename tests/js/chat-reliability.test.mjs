@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createTestChatStore } from "./helpers/chat-modules.mjs";
 
 const dataUrl = (source) => `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`;
 const escapeHtmlSource = `
@@ -18,6 +19,9 @@ const realtimeSource = await readFile(new URL("../../static/js/chat/realtime.js"
 const presentationBridge = dataUrl(`
   ${escapeHtmlSource}
   export const avatarAttrs = () => "";
+  export const dmPresenceStatus = () => "offline";
+  export const dmPresenceMarkup = () => "";
+  export const normalizeLocalPresenceStatus = (status) => status || "offline";
   export const formatMessageTimestamp = () => "formatted-time";
   export const groupMessages = (messages) => (messages || []).map((message) => ({ id: message.id, messages: [message] }));
   export const localDateKey = () => "2026-08-09";
@@ -36,7 +40,7 @@ const { createChatRooms, createRoomSelectionCoordinator } = await import(
 const { createChatComposer } = await import(
   dataUrl(composerSource.replace("./presentation.js", presentationBridge))
 );
-const { dedupeIncomingMessages, messageBodyMarkup, messageTimestampMarkup } = await import(
+const { messageBodyMarkup, messageTimestampMarkup } = await import(
   dataUrl(messagesDomSource
     .replace("./cache.js", cacheBridge)
     .replace("./presentation.js", presentationBridge))
@@ -99,31 +103,52 @@ test("room switching replaces the old pane before the new room load settles", as
     roomUnread: new Map(),
     clearedReadRooms: new Set(),
   };
-  const actions = {
-    cacheFor: () => cache,
-    channelIsWritable: () => true,
-    closeInlineProfilePopover: () => {},
-    deltaLoadParams: () => ({}),
-    focusComposerSoon: () => {},
-    handleActiveRoomPresenceChange: () => {},
-    hydrateRoomFromPersistentCache: async () => {},
-    latestMessageForRead: () => null,
-    loadMessages: (options) => {
-      loadOptions = options;
-      return new Promise((resolve) => { resolveLoad = resolve; });
+  const contracts = {
+    readState: { markRoomRead: () => {}, unreadForRoom: () => ({ unread_count: 0, has_unread: false }) },
+    onRoomChange: () => {},
+    onRecordsChange: () => {},
+
+    store: {
+
+      cacheFor: () => cache,
+      hydrateRoomFromPersistentCache: async () => {},
     },
-    markRoomRead: () => {},
-    renderCachedRoom: () => false,
-    renderDmProfile: () => {},
-    renderMembers: () => {},
-    renderMessageLoader: () => { loaderCalls += 1; },
-    renderPresenceDrivenUi: () => {},
-    roomKey: (room) => `${room.type}:${room.id}`,
-    saveActiveScroll: () => {},
-    schedulePersistentBootstrapSave: () => {},
-    setComposer: () => {},
-    setHistoryBanner: () => {},
-    setStatus: () => {},
+    rooms: { channelIsWritable: () => true },
+    view: {
+      closeInlineProfilePopover: () => {},
+      focusComposerSoon: () => {},
+      renderMessageLoader: () => { loaderCalls += 1; },
+      saveActiveScroll: () => {},
+      setHistoryBanner: () => {},
+    },
+    messageCache: {
+      deltaLoadParams: () => ({}),
+    },
+
+    identity: {
+      latestMessageForRead: () => null,
+      roomKey: (room) => `${room.type}:${room.id}`,
+    },
+    loading: {
+      loadMessages: (options) => {
+        loadOptions = options;
+        return new Promise((resolve) => { resolveLoad = resolve; });
+      },
+      renderCachedRoom: () => false,
+    },
+    profiles: {
+      renderDmProfile: () => {},
+      renderMembers: () => {},
+    },
+    scheduler: {
+      schedulePersistentBootstrapSave: () => {},
+    },
+    composer: {
+      setComposer: () => {},
+    },
+    feedback: {
+      setStatus: () => {},
+    },
   };
   const rooms = createChatRooms({
     root: { dataset: {} },
@@ -131,7 +156,7 @@ test("room switching replaces the old pane before the new room load settles", as
     els,
     extensions: {},
     config: { ANNOUNCEMENTS_CHANNEL_ID: "announcements", GRAMMARLY_DISABLED_ATTRS: "" },
-    actions,
+    ...contracts,
     fetchJson: async () => ({}),
   });
 
@@ -153,6 +178,8 @@ test("room switching replaces the old pane before the new room load settles", as
 test("composer clears its in-flight state when optimistic rendering throws", async () => {
   const state = {
     activeRoom: { type: "channel", id: "general" },
+    channels: [{ id: "general", approved: true, read_only: false }],
+    threads: [],
     messageSendInFlight: false,
     user: { id: "user-1", name: "Test User" },
     failedMessages: new Map(),
@@ -165,26 +192,40 @@ test("composer clears its in-flight state when optimistic rendering throws", asy
   const channel = { id: "general", approved: true, read_only: false };
   const cache = { messages: [] };
   const statuses = [];
-  const actions = {
-    activeChannel: () => channel,
-    activeThread: () => null,
-    applyIncomingMessages: () => { throw new Error("optimistic render failed"); },
-    cacheFor: () => cache,
-    channelIsWritable: () => true,
-    clearTypingPresence: () => {},
-    currentRoomUrl: () => "/messages",
-    isNearBottom: () => true,
-    removeMessageFromCaches: () => {},
-    schedulePersistentBootstrapSave: () => {},
-    schedulePersistentRoomSave: () => {},
-    setStatus: (message) => statuses.push(message),
-    roomKey: (room) => `${room.type}:${room.id}`,
+  const contracts = {
+    rooms: {
+
+      activeChannel: () => channel,
+      activeThread: () => null,
+      channelIsWritable: () => true,
+    },
+    view: {
+      renderIncomingMessages: () => { throw new Error("optimistic render failed"); },
+      isNearBottom: () => true,
+      patchMessageInDom: () => {},
+    },
+    store: createTestChatStore(state, cache),
+    presence: {
+      clearTypingPresence: () => {},
+    },
+    loading: {
+      currentRoomUrl: () => "/messages",
+    },
+    scheduler: {
+      schedulePersistentBootstrapSave: () => {},
+    },
+    feedback: {
+      setStatus: (message) => statuses.push(message),
+    },
+    identity: {
+      roomKey: (room) => `${room.type}:${room.id}`,
+    },
   };
   const extensions = {
     attachments: { readyIds: () => [], isBusy: () => false, clear: () => {} },
     mediaPicker: { selection: () => ({}), hasSelection: () => false, clear: () => {} },
   };
-  const composer = createChatComposer({ state, els, extensions, actions, fetchJson: async () => ({}) });
+  const composer = createChatComposer({ state, els, extensions, ...contracts, fetchJson: async () => ({}) });
 
   await composer.sendActiveMessage({ preventDefault() {} });
 
@@ -206,14 +247,14 @@ test("continuation timestamps use the shared message timestamp formatter", () =>
 });
 
 test("delta insertion deduplicates repeated message IDs without replacing existing nodes", () => {
-  const incoming = dedupeIncomingMessages(
-    [{ id: "existing", content: "old" }],
-    [
-      { id: "new", content: "one" },
-      { id: "new", content: "duplicate" },
-      { id: "existing", content: "updated" },
-    ],
-  );
+  const state = { activeRoom: { type: "channel", id: "general" } };
+  const store = createTestChatStore(state);
+  store.mergeRoomMessages(state.activeRoom, [{ id: "existing", content: "old" }]);
+  const { incoming } = store.mergeRoomMessages(state.activeRoom, [
+    { id: "new", content: "one" },
+    { id: "new", content: "duplicate" },
+    { id: "existing", content: "updated" },
+  ]);
   assert.deepEqual(incoming.map((message) => message.id), ["new"]);
 });
 
@@ -241,22 +282,36 @@ test("old-room incoming messages update their cache without touching the active 
     els: { messages: pane, newMessages: null },
     extensions: {},
     config: { ANNOUNCEMENTS_CHANNEL_ID: "announcements", GRAMMARLY_DISABLED_ATTRS: "" },
-    actions: {
+    ...{
+      readState: { markRoomRead: () => {}, clearRoomUnread: () => {} },
+
+      store: {
+
       cacheFor: () => oldCache,
-      isNearBottom: () => true,
-      markRoomRead: () => {},
-      roomKey: (room) => `${room.type}:${room.id}`,
       schedulePersistentRoomSave: () => {},
-      updateCacheCursors: () => {},
-      clearRoomUnread: () => {},
+    },
+      view: {
+      isNearBottom: () => true,
+    },
+      rooms: { activeChannel: () => null },
+      identity: {
+      roomKey: (room) => `${room.type}:${room.id}`,
       latestMessageForRead: () => null,
-      activeChannel: () => null,
+    },
+      messageCache: {
+      updateCacheCursors: () => {},
+    },
+      scheduler: {
       scheduleTransientFrame: () => {},
+    },
+      feedback: {
       setStatus: () => {},
     },
+  },
   });
 
-  dom.applyIncomingMessages(oldRoom, [{ id: "old-message", content: "old" }]);
+  const store = createTestChatStore({ activeRoom: oldRoom }, oldCache);
+  dom.renderIncomingMessages(store.mergeRoomMessages(oldRoom, [{ id: "old-message", content: "old" }]));
 
   assert.equal(oldCache.messages.length, 1);
   assert.equal(paneWrites, 0);
@@ -312,20 +367,35 @@ test("healthy realtime avoids active-room polling and recovery leaves one fallba
     realtimeConnecting: false,
     realtimeUnsubscribe: null,
   };
-  const actions = {
-    applyIncomingMessages: () => { appliedMessages += 1; },
-    cacheFor: () => ({ messages: [] }),
-    loadMessages: async () => { pollCalls += 1; return []; },
-    loadInitialPresences: async () => {},
-    mergeMessages: (existing, incoming) => [...existing, ...incoming],
-    playChatSound: () => {},
-    refreshChatSummary: async () => {},
-    roomKey: (room) => `${room.type}:${room.id}`,
+  const contracts = {
+    readState: { refreshChatSummary: async () => {} },
+
+    view: {
+
+      renderIncomingMessages: () => { appliedMessages += 1; },
+    },
+    store: createTestChatStore(state),
+    loading: {
+      loadMessages: async () => { pollCalls += 1; return []; },
+    },
+    presence: {
+      loadInitialPresences: async () => {},
+    },
+    messageCache: {
+      mergeMessages: (existing, incoming) => [...existing, ...incoming],
+    },
+    feedback: {
+      playChatSound: () => {},
+    },
+    rooms: {  },
+    identity: {
+      roomKey: (room) => `${room.type}:${room.id}`,
+    },
   };
   const realtime = createChatRealtime({
     state,
-    actions,
-    config: { REALTIME_FALLBACK_MS: 3_000, REALTIME_HEARTBEAT_MS: 8_000, REALTIME_RECONNECT_MS: 1_500 },
+    ...contracts,
+    config: { REALTIME_FALLBACK_MS: 3_000, REALTIME_RECONNECT_MS: 1_500 },
     lifecycle: { paused: false, disposed: false },
     fetchJson: async (url) => {
       if (url.startsWith("/api/chat/messages/")) {
@@ -346,11 +416,18 @@ test("healthy realtime avoids active-room polling and recovery leaves one fallba
     firstSource.onerror();
     assert.equal(intervals.size, 1);
     assert.equal(timeouts.length, 1);
+    const fallbackTick = [...intervals][0];
+    globalThis.document.visibilityState = "hidden";
+    fallbackTick();
+    assert.equal(pollCalls, 0);
+    globalThis.document.visibilityState = "visible";
+    fallbackTick();
+    assert.equal(pollCalls, 1, "A disconnected visible room still refreshes messages");
     timeouts.shift()();
     const recoveredSource = sources[1];
     recoveredSource.onopen();
     assert.equal(intervals.size, 0);
-    assert.equal(pollCalls, 0);
+    assert.equal(pollCalls, 1);
 
     const event = {
       payload: {
@@ -388,23 +465,36 @@ test("realtime thread discovery cannot apply an old-room event after the user sw
     threads: [],
     university: null,
   };
-  const actions = {
-    applyIncomingMessages: () => { appliedMessages += 1; },
-    bootstrap: async () => {},
-    cacheFor: () => ({ messages: [] }),
-    fetchThread: () => threadPromise,
-    loadMessages: async () => [],
-    markRoomStale: (room) => staleRooms.push(`${room.type}:${room.id}`),
-    playChatSound: () => {},
-    refreshChatSummary: async () => {},
-    roomKey: (room) => `${room.type}:${room.id}`,
-    scheduleUnreadSummaryRefresh: () => {},
-    threadExists: () => false,
+  const contracts = {
+    readState: { refreshChatSummary: async () => {}, scheduleUnreadSummaryRefresh: () => {} },
+
+    view: {
+
+      renderIncomingMessages: () => { appliedMessages += 1; },
+    },
+    bootstrap: {
+      bootstrap: async () => {},
+    },
+    store: {
+      cacheFor: () => ({ messages: [] }),
+      markRoomStale: (room) => staleRooms.push(`${room.type}:${room.id}`),
+    },
+    rooms: { fetchThread: () => threadPromise,
+      threadExists: () => false },
+    loading: {
+      loadMessages: async () => [],
+    },
+    feedback: {
+      playChatSound: () => {},
+    },
+    identity: {
+      roomKey: (room) => `${room.type}:${room.id}`,
+    },
   };
   const realtime = createChatRealtime({
     state,
-    actions,
-    config: { REALTIME_FALLBACK_MS: 3_000, REALTIME_HEARTBEAT_MS: 8_000, REALTIME_RECONNECT_MS: 1_500 },
+    ...contracts,
+    config: { REALTIME_FALLBACK_MS: 3_000, REALTIME_RECONNECT_MS: 1_500 },
     lifecycle: { paused: false, disposed: false },
     fetchJson: async () => ({ message: { id: "message-old" } }),
   });

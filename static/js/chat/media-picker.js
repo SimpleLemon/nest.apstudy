@@ -24,7 +24,7 @@ const RECENT_KEY = "apstudy-chat-recent-emoji";
 const HOVER_SMILES = ["😀", "😄", "😊", "🤩", "🥳"];
 
 function recentEmoji() {
-  try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]").slice(0, 18); } catch (_) { return []; }
+  try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]").slice(0, 18); } catch { return []; }
 }
 
 function saveRecent(emoji) {
@@ -41,6 +41,24 @@ export function createMediaPicker() {
   let onComposerChange;
   let lastHoverSmile = -1;
   let returnFocusEl = null;
+  let paused = false;
+  let disposed = false;
+  let gifController = null;
+  const trackingControllers = new Set();
+  const listeners = [];
+
+  function listen(target, name, callback) {
+    const handler = (event) => { if (!paused && !disposed) callback(event); };
+    target?.addEventListener(name, handler);
+    listeners.push(() => target?.removeEventListener(name, handler));
+  }
+
+  function cancelGifWork() {
+    clearTimeout(searchTimer);
+    searchTimer = null;
+    gifController?.abort();
+    gifController = null;
+  }
 
   function showHoverSmile() {
     const icon = els.button?.querySelector(".material-symbols-outlined, .chat-hover-smile");
@@ -72,7 +90,7 @@ export function createMediaPicker() {
   }
 
   function open() {
-    if (!els.picker) return;
+    if (paused || disposed || !els.picker) return;
     returnFocusEl = document.activeElement instanceof HTMLElement ? document.activeElement : els.button;
     els.picker.hidden = false;
     els.button?.setAttribute("aria-expanded", "true");
@@ -118,11 +136,19 @@ export function createMediaPicker() {
   }
 
   function track(url) {
-    if (!url) return;
-    fetch(url, { mode: "no-cors", keepalive: true }).catch(() => {});
+    if (paused || disposed || !url) return;
+    const controller = new AbortController();
+    trackingControllers.add(controller);
+    fetch(url, { mode: "no-cors", keepalive: true, signal: controller.signal })
+      .catch(() => {}).finally(() => trackingControllers.delete(controller));
   }
 
   async function loadGifs(query = "") {
+    if (paused || disposed) return;
+    gifController?.abort();
+    const controller = new AbortController();
+    gifController = controller;
+    const isCurrent = () => !paused && !disposed && !controller.signal.aborted && gifController === controller;
     if (!capabilities.giphy?.available) {
       els.gifResults.innerHTML = `<p class="chat-picker-empty">GIF search is unavailable because it has not been configured.</p>`;
       return;
@@ -132,44 +158,41 @@ export function createMediaPicker() {
     const params = new URLSearchParams({ api_key: capabilities.giphy.api_key, rating: "pg", limit: "24" });
     if (query.trim()) params.set("q", query.trim());
     try {
-      const response = await fetch(`https://api.giphy.com/v1/gifs/${endpoint}?${params}`);
+      const response = await fetch(`https://api.giphy.com/v1/gifs/${endpoint}?${params}`, { signal: controller.signal });
+      if (!isCurrent()) return;
       if (!response.ok) throw new Error();
       const payload = await response.json();
+      if (!isCurrent()) return;
       els.gifResults.innerHTML = (payload.data || []).map((gif) => {
         const preview = gif.images?.fixed_width?.webp || gif.images?.fixed_width?.url;
         if (!preview) return "";
         return `<button type="button" class="chat-gif-tile" data-gif-id="${escapeHtml(gif.id)}" data-gif-title="${escapeHtml(gif.title || "GIF")}" data-gif-preview="${escapeHtml(preview)}" data-gif-sent="${escapeHtml(gif.analytics?.onsent?.url || "")}" aria-label="Choose ${escapeHtml(gif.title || "GIF")}"><img src="${escapeHtml(preview)}" alt="" loading="lazy" decoding="async"></button>`;
       }).join("") || `<p class="chat-picker-empty">No GIFs found.</p>`;
-    } catch (_) {
+    } catch {
+      if (!isCurrent()) return;
       els.gifResults.innerHTML = `<p class="chat-picker-empty">GIFs could not be loaded. Try again.</p>`;
+    } finally {
+      if (gifController === controller) gifController = null;
     }
   }
 
   function renderSelection() {
-    document.getElementById("chat-selected-gif")?.remove();
-    const pending = document.getElementById("chat-pending-files");
-    const selection = document.getElementById("chat-gif-selection");
-    if (!pending || !selection) return;
-    if (!selectedGif) {
-      if (!document.getElementById("chat-upload-list")?.children.length) pending.hidden = true;
-      return;
-    }
-    pending.hidden = false;
-    selection.insertAdjacentHTML("beforeend", `<article id="chat-selected-gif" class="chat-selected-gif"><img src="${escapeHtml(selectedGif.preview)}" alt="${escapeHtml(selectedGif.title)}"><span><strong>GIF</strong><small>${escapeHtml(selectedGif.title)}</small></span><button type="button" aria-label="Remove GIF"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></article>`);
-    selection.querySelector("#chat-selected-gif button")?.addEventListener("click", () => {
-      const removedGif = selectedGif;
-      selectedGif = null;
-      renderSelection();
-      if (!document.getElementById("chat-upload-list")?.children.length) pending.hidden = true;
-      onComposerChange?.();
-      window.APStudyUndo?.stage?.({
-        message: "GIF removed from this message.",
-        restore: () => {
-          selectedGif = removedGif;
-          renderSelection();
-          onComposerChange?.();
-        },
-      });
+    if (paused || disposed || !els.selection) return;
+    els.selection.innerHTML = selectedGif ? `<article id="chat-selected-gif" class="chat-selected-gif"><img src="${escapeHtml(selectedGif.preview)}" alt="${escapeHtml(selectedGif.title)}"><span><strong>GIF</strong><small>${escapeHtml(selectedGif.title)}</small></span><button type="button" aria-label="Remove GIF"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></article>` : "";
+    onComposerChange?.();
+  }
+
+  function removeSelection() {
+    const removedGif = selectedGif;
+    selectedGif = null;
+    renderSelection();
+    window.APStudyUndo?.stage?.({
+      message: "GIF removed from this message.",
+      restore: () => {
+        if (disposed) return;
+        selectedGif = removedGif;
+        renderSelection();
+      },
     });
   }
 
@@ -178,7 +201,8 @@ export function createMediaPicker() {
   }
 
   function setTab(tab, { focus = false } = {}) {
-    if (!isTabAvailable(tab)) return false;
+    if (paused || disposed || !isTabAvailable(tab)) return false;
+    cancelGifWork();
     activeTab = tab;
     const gif = tab === "gif";
     els.emojiTab.setAttribute("aria-selected", String(!gif));
@@ -210,6 +234,16 @@ export function createMediaPicker() {
     else setTab(target === els.gifTab ? "gif" : "emoji", { focus: true });
   }
 
+  function pause() {
+    if (paused || disposed) return;
+    paused = true;
+    cancelGifWork();
+    trackingControllers.forEach((controller) => controller.abort());
+    trackingControllers.clear();
+    close({ restoreFocus: false });
+    restoreHoverSmile();
+  }
+
   return {
     init(context = {}) {
       onComposerChange = context.onComposerChange;
@@ -223,37 +257,46 @@ export function createMediaPicker() {
       els.gif = document.getElementById("chat-gif-panel");
       els.gifResults = document.getElementById("chat-gif-results");
       els.input = document.getElementById("chat-message-input");
+      els.selection = document.getElementById("chat-gif-selection");
       renderEmoji();
       setTab("emoji");
-      els.button?.addEventListener("click", () => els.picker.hidden ? open() : close());
-      els.button?.addEventListener("pointerenter", showHoverSmile);
-      els.button?.addEventListener("pointerleave", restoreHoverSmile);
-      els.emojiTab?.addEventListener("click", () => setTab("emoji"));
-      els.gifTab?.addEventListener("click", () => setTab("gif"));
-      els.emojiTab?.parentElement?.addEventListener("keydown", handleTabKeydown);
-      els.categories?.addEventListener("click", (event) => {
+      listen(els.button, "click", () => els.picker.hidden ? open() : close());
+      listen(els.button, "pointerenter", showHoverSmile);
+      listen(els.button, "pointerleave", restoreHoverSmile);
+      listen(els.emojiTab, "click", () => setTab("emoji"));
+      listen(els.gifTab, "click", () => setTab("gif"));
+      listen(els.emojiTab?.parentElement, "keydown", handleTabKeydown);
+      listen(els.categories, "click", (event) => {
         const button = event.target.closest("[data-emoji-group]");
         if (!button || button.disabled) return;
         els.emoji.querySelector(`[data-emoji-section="${button.dataset.emojiGroup}"]`)?.scrollIntoView({ block: "start" });
       });
-      els.search?.addEventListener("input", () => {
+      listen(els.search, "input", () => {
+        gifController?.abort();
+        gifController = null;
         clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => activeTab === "gif" ? void loadGifs(els.search.value) : renderEmoji(els.search.value), 180);
+        searchTimer = setTimeout(() => {
+          searchTimer = null;
+          if (paused || disposed) return;
+          if (activeTab === "gif") void loadGifs(els.search.value); else renderEmoji(els.search.value);
+        }, 180);
       });
-      els.emoji?.addEventListener("click", (event) => {
+      listen(els.emoji, "click", (event) => {
         const button = event.target.closest("[data-emoji]");
         if (button) insertEmoji(button.dataset.emoji);
       });
-      els.gifResults?.addEventListener("click", (event) => {
+      listen(els.gifResults, "click", (event) => {
         const tile = event.target.closest("[data-gif-id]");
         if (!tile) return;
         selectedGif = { id: tile.dataset.gifId, title: tile.dataset.gifTitle, preview: tile.dataset.gifPreview, query: els.search.value, sent: tile.dataset.gifSent };
         renderSelection();
-        onComposerChange?.();
         close();
         els.input?.focus();
       });
-      els.picker?.addEventListener("keydown", (event) => {
+      listen(els.selection, "click", (event) => {
+        if (event.target.closest("#chat-selected-gif button")) removeSelection();
+      });
+      listen(els.picker, "keydown", (event) => {
         if (event.key === "Escape") {
           event.preventDefault();
           close();
@@ -267,10 +310,10 @@ export function createMediaPicker() {
         const delta = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns, ArrowUp: -columns }[event.key];
         buttons[Math.max(0, Math.min(buttons.length - 1, index + delta))]?.focus();
       });
-      document.addEventListener("pointerdown", (event) => {
+      listen(document, "pointerdown", (event) => {
         if (!els.picker?.hidden && !els.picker.contains(event.target) && !els.button.contains(event.target)) close({ restoreFocus: false });
       });
-      window.addEventListener("resize", positionPicker);
+      listen(window, "resize", positionPicker);
     },
     configure(value) {
       capabilities = value || {};
@@ -282,7 +325,20 @@ export function createMediaPicker() {
     },
     selection() { return selectedGif ? { gif_id: selectedGif.id, gif_query: selectedGif.query } : {}; },
     hasSelection() { return Boolean(selectedGif); },
-    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close({ restoreFocus: false }); onComposerChange?.(); },
+    clear(sent = false) { if (sent && selectedGif?.sent) track(selectedGif.sent); selectedGif = null; renderSelection(); close({ restoreFocus: false }); },
+    pause,
+    resume() {
+      if (disposed || !paused) return;
+      paused = false;
+      renderSelection();
+      if (activeTab === "gif") void loadGifs(els.search.value); else renderEmoji(els.search.value);
+    },
+    dispose() {
+      if (disposed) return;
+      pause();
+      disposed = true;
+      listeners.splice(0).forEach((removeListener) => removeListener());
+    },
     close,
   };
 }

@@ -1,8 +1,10 @@
 import inspect
+import sqlite3
 import unittest
 from unittest.mock import Mock, patch
 
 from flask import Flask
+from appwrite.exception import AppwriteException
 
 import blueprints.chat_api as chat_api
 from services import chat_presence_runtime, chat_presence_views
@@ -68,15 +70,11 @@ class TestChatPresenceViews(unittest.TestCase):
         }
 
         payload = chat_presence_views.presence_online_users(
-            fresh_presence_rows_by_scope_fn=Mock(return_value=rows),
+            rows=rows,
+            users_by_id=users,
             presence_online_limit=10,
-            get_row_fn=lambda _collection, user_id, allow_missing=True: users[user_id],
-            users_collection="users",
-            appwrite_exception=RuntimeError,
-            error_logger=Mock(),
             public_user_fn=lambda row: {"id": row["$id"], "name": row["name"]},
-            presence_status_from_scopes_fn=lambda scopes: "active" if "chat" in scopes else "busy",
-            focus_user_ids_fn=lambda: {"user-1", "focus-user"},
+            focus_user_ids= {"user-1", "focus-user"},
         )
 
         by_id = {user["id"]: user for user in payload}
@@ -108,14 +106,10 @@ class TestChatPresenceViews(unittest.TestCase):
         room_users = chat_presence_views.fresh_chat_room_presence(
             "chat",
             "room-1",
-            fresh_presence_rows_fn=fresh_rows,
-            presence_fresh_seconds_fn=lambda scope: {"chat": 30, "typing_channel": 10}[scope],
-            get_row_fn=resolve_user,
-            users_collection="users",
-            appwrite_exception=RuntimeError,
-            error_logger=Mock(),
+            rows=presence_rows,
+            users_by_id=users,
             public_user_fn=public_user,
-            presence_statuses_for_users_fn=statuses,
+            statuses={"user-2": "busy"},
         )
 
         self.assertEqual(room_users, [{
@@ -124,8 +118,6 @@ class TestChatPresenceViews(unittest.TestCase):
             "presence_status": "busy",
             "online": True,
         }])
-        statuses.assert_called_once_with(["user-2"])
-        fresh_rows.assert_called_once_with(["chat"], seconds=30, limit=1000)
 
         typing_rows = [
             {"user_id": "user-1", "scope_id": "room-1"},
@@ -137,15 +129,11 @@ class TestChatPresenceViews(unittest.TestCase):
         typing_users = chat_presence_views.fresh_typing_room_presence(
             "typing_channel",
             "room-1",
-            fresh_presence_rows_fn=Mock(return_value=typing_rows),
-            presence_fresh_seconds_fn=lambda scope: {"chat": 30, "typing_channel": 10}[scope],
-            current_user_id_fn=lambda: "user-1",
-            get_row_fn=resolve_user,
-            users_collection="users",
-            appwrite_exception=RuntimeError,
-            error_logger=Mock(),
+            rows=typing_rows,
+            users_by_id=users,
+            current_user_id= "user-1",
             public_user_fn=public_user,
-            presence_statuses_for_users_fn=typing_statuses,
+            statuses={"user-2": "active"},
         )
 
         self.assertEqual(
@@ -167,7 +155,6 @@ class TestChatPresenceViews(unittest.TestCase):
                 },
             ],
         )
-        typing_statuses.assert_called_once_with(["user-2", "user-3"])
 
     def test_access_projection_preserves_university_and_read_only_rules(self):
         school_key = lambda user: user.get("school_key") or ""
@@ -285,6 +272,42 @@ class TestChatPresenceViews(unittest.TestCase):
         )
         create_row.assert_not_called()
 
+    def test_upsert_recovers_a_concurrent_insert_without_hiding_other_failures(self):
+        for cause, winner in (
+            (sqlite3.IntegrityError("UNIQUE constraint failed"), {"$id": "winner"}),
+            (sqlite3.IntegrityError("constraint failed"), None),
+            (sqlite3.OperationalError("database unavailable"), {"$id": "winner"}),
+        ):
+            with self.subTest(cause=type(cause).__name__, winner=winner):
+                error = AppwriteException(str(cause))
+                error.__cause__ = cause
+                first_row = Mock(side_effect=[None, winner])
+                update_row = Mock(return_value={"$id": "winner", "updated": True})
+                arguments = dict(
+                    current_user_id_fn=lambda: "user-1",
+                    presence_scope_allowed_fn=lambda *_args: True,
+                    now_fn=lambda: "now",
+                    format_datetime_fn=lambda value: value,
+                    presence_collection="chat_presence",
+                    query_cls=_QueryStub,
+                    first_row_fn=first_row,
+                    update_row_fn=update_row,
+                    create_row_fn=Mock(side_effect=error),
+                    id_unique_fn=lambda: "loser",
+                    row_id_fn=lambda row: row["$id"],
+                )
+                if isinstance(cause, sqlite3.IntegrityError) and winner:
+                    result = chat_presence_views.upsert_presence("site", "global", "tab", **arguments)
+                    self.assertEqual(result, {"$id": "winner", "updated": True})
+                    update_row.assert_called_once()
+                    self.assertEqual(update_row.call_args.args[1], "winner")
+                    self.assertEqual(first_row.call_args_list[0], first_row.call_args_list[1])
+                else:
+                    with self.assertRaises(AppwriteException) as raised:
+                        chat_presence_views.upsert_presence("site", "global", "tab", **arguments)
+                    self.assertIs(raised.exception, error)
+                    update_row.assert_not_called()
+
     def test_blueprint_online_adapter_uses_patchable_presence_row_callback(self):
         rows = [{
             "user_id": "user-2",
@@ -303,7 +326,7 @@ class TestChatPresenceViews(unittest.TestCase):
         self.assertEqual(payload[0]["presence_status"], "busy")
         fresh_rows.assert_called_once_with(
             ["site", "chat", "typing_channel", "typing_thread"],
-            limit=chat_api.PRESENCE_ONLINE_LIMIT * 8,
+            limit=chat_api._chat_settings().online_limit * 8,
         )
 
     def test_chat_api_keeps_exact_route_map_and_presence_symbols(self):

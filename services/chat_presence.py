@@ -47,6 +47,7 @@ def _school_key_for_user_doc(user_doc):
 
 
 def _school_has_approved_channel(school_key):
+    """Return approval, or None when the channel lookup is unavailable."""
     if not school_key:
         return False
     try:
@@ -60,7 +61,7 @@ def _school_has_approved_channel(school_key):
         )
     except AppwriteException:
         logger.exception("Failed to check university chat approval for %s", school_key)
-        return False
+        return None
     return bool(channel)
 
 
@@ -83,28 +84,31 @@ def _current_appwrite_labels(user_id):
     return list(_account_to_dict(account).get("labels") or [])
 
 
-def sync_chat_presence_labels_for_user(user_id, user_doc=None):
-    """Sync only Nest chat presence labels, preserving unrelated Appwrite labels."""
+def sync_chat_presence_labels_for_user(user_id, user_doc=None) -> list[str] | None:
+    """Return synced labels, or None on failure without clearing unavailable eligibility."""
     user_id = str(user_id or "").strip()
     if not user_id:
-        return []
+        return None
     if user_doc is None:
         try:
             user_doc = get_row_safe(COLLECTIONS["users"], user_id, allow_missing=True)
         except Exception:
             logger.exception("Failed to load user row for presence label sync")
-            user_doc = None
+            return None
 
     school_key = _school_key_for_user_doc(user_doc)
     desired = set()
-    if _school_has_approved_channel(school_key):
+    approved = _school_has_approved_channel(school_key)
+    if approved is None:
+        return None
+    if approved:
         label = university_presence_label(school_key)
         if label:
             desired.add(label)
 
     current_labels = _current_appwrite_labels(user_id)
     if current_labels is None:
-        return []
+        return None
 
     preserved = [
         label
@@ -119,12 +123,12 @@ def sync_chat_presence_labels_for_user(user_id, user_doc=None):
         Users(appwrite_client).update_labels(user_id, next_labels)
     except Exception:
         logger.exception("Failed to update Appwrite user labels for %s", user_id)
-        return current_labels
+        return None
     return next_labels
 
 
-def sync_chat_presence_labels_for_school(school_key):
-    """Refresh university presence labels for everyone with a matching school key."""
+def sync_chat_presence_labels_for_school(school_key) -> int:
+    """Refresh matching users and return the number of successful synchronizations."""
     normalized = normalize_school_key(school_key)
     if not normalized:
         return 0
@@ -142,6 +146,6 @@ def sync_chat_presence_labels_for_school(school_key):
         user_id = _row_id(user_doc)
         if not user_id:
             continue
-        sync_chat_presence_labels_for_user(user_id, user_doc)
-        synced += 1
+        if sync_chat_presence_labels_for_user(user_id, user_doc) is not None:
+            synced += 1
     return synced

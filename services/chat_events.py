@@ -4,8 +4,6 @@ import logging
 
 from appwrite.exception import AppwriteException
 from appwrite.id import ID
-from appwrite.permission import Permission
-from appwrite.role import Role
 
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import create_row_safe, format_datetime, get_row_safe, update_row_safe
@@ -14,17 +12,6 @@ from services.universities import normalize_school_key
 
 
 logger = logging.getLogger(__name__)
-
-
-def _default_event_read_permissions(scope_type, *, channel=None, readable_user_ids=None):
-    if readable_user_ids is not None:
-        ids = [str(user_id) for user_id in readable_user_ids if user_id]
-        if ids:
-            return [
-                Permission.read(Role.user(user_id))
-                for user_id in sorted(set(ids))
-            ]
-    return [Permission.read(Role.users())]
 
 
 def emit_chat_event(
@@ -41,7 +28,6 @@ def emit_chat_event(
     now_fn=utcnow,
     id_fn=ID.unique,
     create_row_fn=create_row_safe,
-    event_read_permissions_fn=_default_event_read_permissions,
     notify_fn=None,
     error_logger=logger,
 ):
@@ -59,17 +45,11 @@ def emit_chat_event(
         "actor_id": str(actor_id) if actor_id else None,
         "created_at": now,
     }
-    permissions = event_read_permissions_fn(
-        scope_type,
-        channel=channel,
-        readable_user_ids=readable_user_ids,
-    )
     try:
         row = create_row_fn(
             COLLECTIONS["chat_events"],
             row_id=event_id,
             data=data,
-            permissions=permissions,
         )
     except AppwriteException:
         error_logger.exception("Failed to emit chat event to SQLite")

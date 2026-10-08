@@ -7,21 +7,21 @@ blueprint, which also keeps background onboarding imports lazy.
 """
 
 
+class ChatReadUnavailableError(RuntimeError):
+    """Block visibility could not be established for a DM request."""
+
+
 def blocked_user_ids(
     user_id,
     *,
     list_rows_fn,
     query_cls,
     blocks_collection,
-    appwrite_exception,
 ):
-    try:
-        rows = list_rows_fn(
-            blocks_collection,
-            [query_cls.equal("blocker_id", [user_id])],
-        )
-    except appwrite_exception:
-        return set()
+    rows = list_rows_fn(
+        blocks_collection,
+        [query_cls.equal("blocker_id", [user_id])],
+    )
     return {row.get("blocked_id") for row in rows if row.get("blocked_id")}
 
 

@@ -1,18 +1,12 @@
 import { escapeHtml } from "./presentation.js";
 
-export function createChatComposer(context) {
-  const {
-    state,
-    els,
-    extensions,
-    actions,
-    fetchJson,
-  } = context;
-
-  function composerIsWritable() {
-    const channel = actions.activeChannel();
-    if (channel) return actions.channelIsWritable(channel);
-    const thread = actions.activeThread();
+export function createChatComposer({ state, els, extensions, fetchJson, feedback, identity, loading, presence, rooms, scheduler, store, view }) {
+  function roomIsWritable(room) {
+    if (room?.type === "channel") {
+      return rooms.channelIsWritable(state.channels.find((channel) => channel.id === room.id));
+    }
+    if (room?.type !== "thread") return false;
+    const thread = state.threads.find((candidate) => candidate.id === room.id);
     return Boolean(thread && !thread.blocked);
   }
 
@@ -20,7 +14,7 @@ export function createChatComposer(context) {
     return Boolean(
       room
       && state.activeRoom
-      && actions.roomKey(state.activeRoom) === actions.roomKey(room)
+      && identity.roomKey(state.activeRoom) === identity.roomKey(room)
     );
   }
 
@@ -30,7 +24,7 @@ export function createChatComposer(context) {
     const hasAttachment = Boolean(extensions.attachments?.readyIds?.().length);
     const hasGif = Boolean(extensions.mediaPicker?.hasSelection?.());
     const attachmentsBusy = Boolean(extensions.attachments?.isBusy?.());
-    els.sendButton.disabled = !composerIsWritable()
+    els.sendButton.disabled = !roomIsWritable(state.activeRoom)
       || (!hasText && !hasAttachment && !hasGif)
       || attachmentsBusy
       || state.messageSendInFlight;
@@ -61,18 +55,15 @@ export function createChatComposer(context) {
     const gifSelection = extensions.mediaPicker?.selection?.() || {};
     if (!content && !attachmentIds.length && !gifSelection.gif_id) return;
     if (extensions.attachments?.isBusy?.()) {
-      actions.setStatus("Wait for attachments to finish uploading before sending.", "error");
+      feedback.setStatus("Wait for attachments to finish uploading before sending.", "error");
       return;
     }
     if (state.messageSendInFlight) return;
-    const channel = actions.activeChannel();
-    const thread = actions.activeThread();
-    if (channel && !actions.channelIsWritable(channel)) return;
-    if (thread?.blocked) return;
+    if (!roomIsWritable(room)) return;
 
     state.messageSendInFlight = true;
     els.sendButton.disabled = true;
-    actions.clearTypingPresence(room);
+    presence.clearTypingPresence(room);
     const localId = `pending-${crypto.randomUUID()}`;
     const payloadBody = { content, attachment_ids: attachmentIds, ...gifSelection };
     try {
@@ -89,35 +80,33 @@ export function createChatComposer(context) {
         can_delete: false,
         attachments: [],
       };
-      actions.applyIncomingMessages(room, [optimistic], { toBottom: true, markRead: false });
-      const url = actions.currentRoomUrl(room);
+      view.renderIncomingMessages(store.mergeRoomMessages(room, [optimistic]), { toBottom: true, markRead: false });
+      const url = loading.currentRoomUrl(room);
       const payload = await fetchJson(url, {
         method: "POST",
         body: JSON.stringify(payloadBody),
       });
-      actions.removeMessageFromCaches(localId);
+      store.removeMessageFromCaches(localId);
+      view.renderRemovedMessage(localId);
       if (isActiveRoom(room)) {
         els.input.value = "";
         autosizeComposer();
         extensions.attachments?.clear?.();
         extensions.mediaPicker?.clear?.(true);
       }
-      const cache = actions.cacheFor(room);
+      const cache = store.cacheFor(room);
       if (cache && payload.message) {
-        actions.applyIncomingMessages(room, [payload.message], { toBottom: true });
+        view.renderIncomingMessages(store.mergeRoomMessages(room, [payload.message]), { toBottom: true });
       }
-      if (isActiveRoom(room)) actions.refreshViewingPresence();
-      actions.schedulePersistentBootstrapSave();
+      if (isActiveRoom(room)) presence.refreshViewingPresence();
+      scheduler.schedulePersistentBootstrapSave();
     } catch (error) {
-      const cache = actions.cacheFor(room);
-      const failed = cache?.messages?.find((message) => message.id === localId);
+      const failed = store.updateMessageDelivery(room, localId, "failed")?.messages.find((message) => message.id === localId);
       if (failed) {
-        failed.delivery_state = "failed";
         state.failedMessages.set(localId, { room, payload: payloadBody });
-        if (isActiveRoom(room)) actions.patchMessageInDom(failed);
-        actions.schedulePersistentRoomSave(room);
+        if (isActiveRoom(room)) view.patchMessageInDom(failed);
       }
-      actions.setStatus(error.message || "Unable to send message.", "error");
+      feedback.setStatus(error.message || "Unable to send message.", "error");
     } finally {
       state.messageSendInFlight = false;
       updateComposerSubmitState();
@@ -127,23 +116,26 @@ export function createChatComposer(context) {
   async function retryMessage(messageId) {
     const failed = state.failedMessages.get(messageId);
     if (!failed || state.messageSendInFlight) return;
-    const cache = actions.cacheFor(failed.room);
-    const message = cache?.messages?.find((row) => row.id === messageId);
+    if (!roomIsWritable(failed.room)) {
+      feedback.setStatus("You can’t send messages to this conversation right now.", "error");
+      return;
+    }
+    const message = store.updateMessageDelivery(failed.room, messageId, "sending")?.messages.find((row) => row.id === messageId);
     if (message) {
-      message.delivery_state = "sending";
-      actions.patchMessageInDom(message);
+      view.patchMessageInDom(message);
     }
     state.messageSendInFlight = true;
     els.sendButton.disabled = true;
     try {
-      const response = await fetchJson(actions.currentRoomUrl(failed.room), {
+      const response = await fetchJson(loading.currentRoomUrl(failed.room), {
         method: "POST",
         body: JSON.stringify(failed.payload),
       });
       state.failedMessages.delete(messageId);
-      actions.removeMessageFromCaches(messageId);
+      store.removeMessageFromCaches(messageId);
+      view.renderRemovedMessage(messageId);
       if (response.message) {
-        actions.applyIncomingMessages(failed.room, [response.message], { toBottom: true });
+        view.renderIncomingMessages(store.mergeRoomMessages(failed.room, [response.message]), { toBottom: true });
       }
       if (isActiveRoom(failed.room)) {
         extensions.attachments?.clear?.();
@@ -151,10 +143,10 @@ export function createChatComposer(context) {
       }
     } catch (error) {
       if (message) {
-        message.delivery_state = "failed";
-        if (isActiveRoom(failed.room)) actions.patchMessageInDom(message);
+        const restored = store.updateMessageDelivery(failed.room, messageId, "failed")?.messages.find((row) => row.id === messageId);
+        if (restored && isActiveRoom(failed.room)) view.patchMessageInDom(restored);
       }
-      actions.setStatus(error.message || "Unable to send message.", "error");
+      feedback.setStatus(error.message || "Unable to send message.", "error");
     } finally {
       state.messageSendInFlight = false;
       updateComposerSubmitState();
@@ -164,9 +156,9 @@ export function createChatComposer(context) {
   function handleComposerKeydown(event) {
     if (event.key !== "Enter" || event.isComposing) return;
     if (event.shiftKey) {
-      actions.scheduleTransientTimeout(() => {
+      scheduler.scheduleTransientTimeout(() => {
         autosizeComposer();
-        actions.scheduleTypingPresence();
+        presence.scheduleTypingPresence();
       }, 0);
       return;
     }
@@ -184,7 +176,7 @@ export function createChatComposer(context) {
     els.input?.addEventListener("keydown", handleComposerKeydown);
     els.input?.addEventListener("input", () => {
       autosizeComposer();
-      actions.scheduleTypingPresence();
+      presence.scheduleTypingPresence();
       updateComposerSubmitState();
     });
   }

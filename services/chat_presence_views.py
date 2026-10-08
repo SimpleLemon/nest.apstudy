@@ -3,23 +3,19 @@
 import re
 import sqlite3
 
+from services.chat_presence_runtime import presence_status_from_scopes
+
+from appwrite.exception import AppwriteException
+
 
 def presence_online_users(
     *,
-    fresh_presence_rows_by_scope_fn,
+    rows,
+    users_by_id,
     presence_online_limit,
-    get_row_fn,
-    users_collection,
-    appwrite_exception,
-    error_logger,
     public_user_fn,
-    presence_status_from_scopes_fn,
-    focus_user_ids_fn,
+    focus_user_ids,
 ):
-    rows = fresh_presence_rows_by_scope_fn(
-        ["site", "chat", "typing_channel", "typing_thread"],
-        limit=presence_online_limit * 8,
-    )
     scopes_by_user = {}
     chat_scopes_by_user = {}
     typing_channels_by_user = {}
@@ -42,26 +38,18 @@ def presence_online_users(
         latest = row.get("last_seen_at") or ""
         if latest > latest_by_user.get(user_id, ""):
             latest_by_user[user_id] = latest
-    try:
-        focus_user_ids = focus_user_ids_fn()
-        for user_id in focus_user_ids:
-            scopes_by_user.setdefault(user_id, {"site"})
-    except sqlite3.OperationalError:
-        focus_user_ids = set()
+    for user_id in focus_user_ids:
+        scopes_by_user.setdefault(user_id, {"site"})
     users = []
     for user_id, scopes in scopes_by_user.items():
-        try:
-            user = get_row_fn(users_collection, user_id, allow_missing=True)
-        except appwrite_exception:
-            error_logger.exception("Failed to resolve online user %s", user_id)
-            continue
+        user = users_by_id.get(user_id)
         public_user = public_user_fn(user)
         if not public_user:
             continue
         public_user["presence_status"] = (
             "focus"
             if user_id in focus_user_ids
-            else presence_status_from_scopes_fn(scopes)
+            else presence_status_from_scopes(scopes)
         )
         public_user["online"] = public_user["presence_status"] != "offline"
         public_user["last_seen_at"] = latest_by_user.get(user_id)
@@ -77,20 +65,11 @@ def fresh_chat_room_presence(
     scope_type,
     scope_id,
     *,
-    fresh_presence_rows_fn,
-    presence_fresh_seconds_fn,
-    get_row_fn,
-    users_collection,
-    appwrite_exception,
-    error_logger,
+    rows,
+    users_by_id,
     public_user_fn,
-    presence_statuses_for_users_fn,
+    statuses,
 ):
-    rows = fresh_presence_rows_fn(
-        [scope_type],
-        seconds=presence_fresh_seconds_fn(scope_type),
-        limit=1000,
-    )
     users = []
     seen = set()
     for row in rows:
@@ -100,17 +79,12 @@ def fresh_chat_room_presence(
         if not user_id or user_id in seen:
             continue
         seen.add(user_id)
-        try:
-            user = get_row_fn(users_collection, user_id, allow_missing=True)
-        except appwrite_exception:
-            error_logger.exception("Failed to resolve room presence user %s", user_id)
-            continue
+        user = users_by_id.get(user_id)
         public_user = public_user_fn(user)
         if public_user:
             public_user["presence_status"] = "active"
             public_user["online"] = True
             users.append(public_user)
-    statuses = presence_statuses_for_users_fn([user["id"] for user in users])
     for user in users:
         user["presence_status"] = statuses.get(user["id"], "active")
     users.sort(key=lambda user: user.get("name") or "")
@@ -121,21 +95,12 @@ def fresh_typing_room_presence(
     scope_type,
     scope_id,
     *,
-    fresh_presence_rows_fn,
-    presence_fresh_seconds_fn,
-    current_user_id_fn,
-    get_row_fn,
-    users_collection,
-    appwrite_exception,
-    error_logger,
+    rows,
+    users_by_id,
+    current_user_id,
     public_user_fn,
-    presence_statuses_for_users_fn,
+    statuses,
 ):
-    rows = fresh_presence_rows_fn(
-        [scope_type],
-        seconds=presence_fresh_seconds_fn(scope_type),
-        limit=1000,
-    )
     users = []
     seen = set()
     typing_user_ids = []
@@ -143,15 +108,11 @@ def fresh_typing_room_presence(
         if str(row.get("scope_id") or "") != str(scope_id or ""):
             continue
         user_id = str(row.get("user_id") or "")
-        if not user_id or user_id in seen or user_id == current_user_id_fn():
+        if not user_id or user_id in seen or user_id == current_user_id:
             continue
         seen.add(user_id)
         typing_user_ids.append(user_id)
-        try:
-            user = get_row_fn(users_collection, user_id, allow_missing=True)
-        except appwrite_exception:
-            error_logger.exception("Failed to resolve typing presence user %s", user_id)
-            continue
+        user = users_by_id.get(user_id)
         public_user = public_user_fn(user)
         if public_user:
             if scope_type == "typing_channel":
@@ -159,7 +120,6 @@ def fresh_typing_room_presence(
             else:
                 public_user["typing_thread_ids"] = [str(scope_id)]
             users.append(public_user)
-    statuses = presence_statuses_for_users_fn(typing_user_ids)
     for user in users:
         user["presence_status"] = statuses.get(user["id"], "offline")
         user["online"] = user["presence_status"] != "offline"
@@ -191,20 +151,12 @@ def user_can_access_channel_presence(
 def online_users_for_channel(
     channel,
     *,
-    fresh_presence_rows_by_scope_fn,
+    rows,
+    users_by_id,
     presence_online_limit,
-    get_row_fn,
-    users_collection,
-    appwrite_exception,
-    error_logger,
     user_can_access_channel_presence_fn,
     public_user_fn,
-    presence_status_from_scopes_fn,
 ):
-    rows = fresh_presence_rows_by_scope_fn(
-        ["chat", "site"],
-        limit=presence_online_limit * 4,
-    )
     scopes_by_user = {}
     latest_by_user = {}
     for row in rows:
@@ -218,17 +170,13 @@ def online_users_for_channel(
 
     users = []
     for user_id, scopes in scopes_by_user.items():
-        try:
-            user = get_row_fn(users_collection, user_id, allow_missing=True)
-        except appwrite_exception:
-            error_logger.exception("Failed to resolve channel online user %s", user_id)
-            continue
+        user = users_by_id.get(user_id)
         if not user_can_access_channel_presence_fn(channel, user):
             continue
         public_user = public_user_fn(user)
         if not public_user:
             continue
-        public_user["presence_status"] = presence_status_from_scopes_fn(scopes)
+        public_user["presence_status"] = presence_status_from_scopes(scopes)
         public_user["online"] = public_user["presence_status"] != "offline"
         public_user["last_seen_at"] = latest_by_user.get(user_id)
         users.append(public_user)
@@ -310,8 +258,20 @@ def upsert_presence(
     )
     if existing:
         return update_row_fn(presence_collection, row_id_fn(existing), payload)
-    return create_row_fn(
-        presence_collection,
-        row_id=id_unique_fn(),
-        data=payload,
-    )
+    try:
+        return create_row_fn(
+            presence_collection,
+            row_id=id_unique_fn(),
+            data=payload,
+        )
+    except AppwriteException as exc:
+        # Another heartbeat can insert this key after our initial lookup.
+        if not isinstance(exc.__cause__, sqlite3.IntegrityError):
+            raise
+        existing = first_row_fn(
+            presence_collection,
+            [query_cls.equal("presence_key", [presence_key])],
+        )
+        if not existing:
+            raise
+        return update_row_fn(presence_collection, row_id_fn(existing), payload)

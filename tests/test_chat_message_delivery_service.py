@@ -1,12 +1,15 @@
 import unittest
+from dataclasses import fields
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from appwrite.exception import AppwriteException
+from flask import Flask
 
 from services.chat_attachments import AttachmentError
 from services import chat_message_delivery as delivery
+from services.storage_errors import StorageMutationPaused, StorageUnavailable
 
 
 class _QueryStub:
@@ -35,12 +38,13 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
                 return value
             return callback
 
-        self.deps = delivery.ChatMessageDeliveryDependencies(
+        self.deps = SimpleNamespace(
             collections={
                 "chat_messages": "messages",
                 "chat_channels": "channels",
                 "chat_dm_threads": "threads",
                 "chat_blocks": "blocks",
+                "users": "users",
             },
             appwrite_exception=AppwriteException,
             attachment_error=AttachmentError,
@@ -84,11 +88,33 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
             is_blocked_between_fn=Mock(return_value=False),
             threads_for_current_user_fn=Mock(return_value=[]),
             logger=Mock(),
-            attachment_download_url_fn=lambda attachment_id: f"https://example.test/download/{attachment_id}",
+            attachment_base_url="https://example.test/download",
             delete_window_seconds=5 * 60,
             message_timestamp_fn=lambda row: datetime.fromisoformat(row["created_at"]),
             audit_delete_fn=Mock(),
         )
+
+        owner_helpers = {
+            "COLLECTIONS": self.deps.collections,
+            "Query": _QueryStub,
+            "utcnow": lambda: self.deps.now_fn(),
+            "format_datetime": lambda value: self.deps.format_datetime_fn(value),
+            "render_markdown": lambda value: self.deps.render_markdown_fn(value),
+            "row_id": lambda value: self.deps.row_id_fn(value),
+            "discord_message_row_id": lambda *args: self.deps.discord_row_id_fn(*args),
+            "discord_message_external_id": lambda *args: self.deps.discord_external_id_fn(*args),
+            "previews_for_content": lambda content, **kwargs: self.deps.previews_for_content_fn(content),
+        }
+        for name, value in owner_helpers.items():
+            patcher = patch.object(delivery, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
+    def _dependencies(self, contract):
+        return contract(**{field.name: getattr(self.deps, field.name) for field in fields(contract)})
+
+    def _author(self):
+        return delivery.MessageAuthor("user-1", self.user.name, self.user.username, self.user.picture_url)
 
     def test_list_room_messages_preserves_before_cursor_has_more_semantics(self):
         rows = [{"$id": str(index)} for index in range(50)]
@@ -129,7 +155,7 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
             side_effect=lambda *args, **kwargs: self.calls.append(("invite", args, kwargs))
         )
 
-        result = delivery.send_channel_message(channel["$id"], channel, dependencies=self.deps)
+        result = delivery.send_channel_message(channel["$id"], channel, dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value))
 
         self.assertEqual(result, (row, True))
         self.assertEqual([name for name, *_ in self.calls], ["webhook", "insert", "prune", "event", "invite"])
@@ -148,10 +174,106 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
             delivery.send_channel_message(
                 "channel-1",
                 {"$id": "channel-1", "kind": "appwrite"},
-                dependencies=self.deps,
+                dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
             )
 
         self.deps.delete_row_fn.assert_called_once_with("messages", "message-1")
+
+    def test_channel_delivery_rejects_persisted_rows_without_ids_before_binding_or_events(self):
+        for row in (None, {}, {"$id": ""}):
+            with self.subTest(row=row):
+                self.deps.create_row_fn.return_value = row
+                with self.assertRaises(delivery.MessagePersistenceError):
+                    delivery.send_channel_message(
+                        "channel-1", {"kind": "appwrite"},
+                        author=self._author(), media=delivery.MessageMedia("hello", ["attachment-1"], None),
+                        dependencies=self._dependencies(delivery.ChannelDelivery),
+                    )
+        self.deps.bind_pending_fn.assert_not_called()
+        self.deps.emit_chat_event_fn.assert_not_called()
+        self.deps.notification_fn.assert_not_called()
+        self.deps.invite_activation_fn.assert_not_called()
+
+    def test_dm_delivery_rejects_persisted_rows_without_ids_before_binding_or_events(self):
+        for row in (None, {}, {"$id": ""}):
+            with self.subTest(row=row):
+                self.deps.create_row_fn.return_value = row
+                with self.assertRaises(delivery.DirectMessagePersistenceError):
+                    delivery.send_direct_message(
+                        "thread-1", {"participant_a": "user-1", "participant_b": "user-2"}, {"id": "user-2"},
+                        author=self._author(), media=delivery.MessageMedia("hello", ["attachment-1"], None),
+                        dependencies=self._dependencies(delivery.DirectDelivery),
+                    )
+        self.deps.bind_pending_fn.assert_not_called()
+        self.deps.update_row_fn.assert_not_called()
+        self.deps.emit_chat_event_fn.assert_not_called()
+        self.deps.notification_fn.assert_not_called()
+        self.deps.invite_activation_fn.assert_not_called()
+
+    def test_channel_binding_storage_failure_keeps_existing_discord_message(self):
+        row = {"$id": "discord:discord-1"}
+        failure = StorageUnavailable("binding unavailable")
+        self.deps.insert_row_ignore_fn.return_value = False
+        self.deps.find_discord_message_row_fn.return_value = row
+        self.deps.bind_pending_fn.side_effect = failure
+        self.deps.message_media_payload_fn.return_value = ("hello", ["attachment-1"], None)
+        self.deps.get_attachment_fn.return_value = {
+            "status": "pending", "user_id": "user-1", "scope_type": "channel",
+            "scope_id": "channel-1", "original_size_bytes": 1,
+        }
+
+        with self.assertRaises(StorageUnavailable) as result:
+            delivery.send_channel_message(
+                "channel-1", {"kind": "discord"}, dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
+            )
+
+        self.assertIs(result.exception, failure)
+        self.deps.delete_row_fn.assert_not_called()
+        self.deps.emit_chat_event_fn.assert_not_called()
+
+    def test_attachment_delivery_guards_pause_and_disable_before_side_effects(self):
+        self.deps.message_media_payload_fn.return_value = ("hello", ["attachment-1"], None)
+        app = Flask(__name__)
+        for configuration, error in (
+            ({"NEST_STORAGE_MUTATIONS_PAUSED": True}, StorageMutationPaused),
+            ({"NEST_CHAT_ATTACHMENTS_ENABLED": False}, AttachmentError),
+        ):
+            app.config["NEST_STORAGE_MUTATIONS_PAUSED"] = False
+            app.config["NEST_CHAT_ATTACHMENTS_ENABLED"] = True
+            app.config.update(configuration)
+            for scope in ("channel", "thread"):
+                with self.subTest(configuration=configuration, scope=scope), app.app_context():
+                    with self.assertRaises(error):
+                        if scope == "channel":
+                            delivery.send_channel_message(
+                                "channel-1", {"kind": "discord"}, dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
+                            )
+                        else:
+                            delivery.send_direct_message(
+                                "thread-1", {"$id": "thread-1"}, {"id": "user-2"},
+                                dependencies=self._dependencies(delivery.DirectDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
+                            )
+        self.deps.get_attachment_fn.assert_not_called()
+        self.deps.execute_chat_webhook_fn.assert_not_called()
+        self.deps.create_row_fn.assert_not_called()
+        self.deps.insert_row_ignore_fn.assert_not_called()
+        self.deps.bind_pending_fn.assert_not_called()
+
+    def test_attachment_delivery_rechecks_pause_immediately_before_webhook(self):
+        self.deps.message_media_payload_fn.return_value = ("hello", ["attachment-1"], None)
+        self.deps.get_attachment_fn.return_value = {
+            "status": "pending", "user_id": "user-1", "scope_type": "channel",
+            "scope_id": "channel-1", "original_size_bytes": 1,
+        }
+        app = Flask(__name__)
+        app.config["NEST_STORAGE_MUTATIONS_PAUSED"] = False
+        self.deps.attachment_bytes_fn.side_effect = lambda _row: (
+            app.config.update(NEST_STORAGE_MUTATIONS_PAUSED=True) or b"attachment"
+        )
+        with app.app_context(), self.assertRaises(StorageMutationPaused):
+            delivery.send_channel_message("channel-1", {"kind": "discord"}, dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value))
+        self.deps.execute_chat_webhook_fn.assert_not_called()
+        self.deps.insert_row_ignore_fn.assert_not_called()
 
     def test_channel_delivery_keeps_mention_notification_before_invite_activation(self):
         self.deps.message_media_payload_fn.return_value = ("hello @pat", [], None)
@@ -170,7 +292,7 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
         delivery.send_channel_message(
             "channel-1",
             {"$id": "channel-1", "kind": "appwrite"},
-            dependencies=self.deps,
+            dependencies=self._dependencies(delivery.ChannelDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
         )
 
         self.assertEqual([name for name, *_ in self.calls], ["event", "notification", "invite"])
@@ -184,7 +306,7 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
                 "thread-1",
                 {"$id": "thread-1", "participant_a": "user-1", "participant_b": "user-2"},
                 {"id": "user-2"},
-                dependencies=self.deps,
+                dependencies=self._dependencies(delivery.DirectDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
             )
         self.deps.message_media_payload_fn.assert_not_called()
 
@@ -199,10 +321,37 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
                 "thread-1",
                 {"$id": "thread-1", "participant_a": "user-1", "participant_b": "user-2"},
                 {"id": "user-2"},
-                dependencies=self.deps,
+                dependencies=self._dependencies(delivery.DirectDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
             )
         self.deps.delete_message_attachments_fn.assert_called_once_with("message-1")
         self.deps.delete_row_fn.assert_called_once_with("messages", "message-1")
+
+    def test_dm_rollback_retains_message_if_attachment_cleanup_fails(self):
+        self.deps.message_media_payload_fn.return_value = ("hello", ["attachment-1"], None)
+        self.deps.delete_message_attachments_fn.side_effect = StorageUnavailable("cleanup unavailable")
+        for after_binding in (False, True):
+            self.deps.bind_pending_fn.side_effect = None if after_binding else StorageUnavailable("bind unavailable")
+            self.deps.update_row_fn.side_effect = StorageUnavailable("thread update unavailable")
+            with self.subTest(after_binding=after_binding), self.assertRaises(StorageUnavailable):
+                delivery.send_direct_message(
+                    "thread-1", {"$id": "thread-1"}, {"id": "user-2"},
+                    dependencies=self._dependencies(delivery.DirectDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
+                )
+        self.assertEqual(self.deps.delete_message_attachments_fn.call_count, 2)
+        self.deps.delete_row_fn.assert_not_called()
+        self.deps.emit_chat_event_fn.assert_not_called()
+
+    def test_dm_rollback_removes_message_after_successful_attachment_cleanup(self):
+        self.deps.message_media_payload_fn.return_value = ("hello", ["attachment-1"], None)
+        self.deps.update_row_fn.side_effect = StorageUnavailable("thread update unavailable")
+        self.deps.delete_message_attachments_fn.side_effect = lambda *args: self.calls.append(("cleanup", args, {}))
+        self.deps.delete_row_fn.side_effect = lambda *args: self.calls.append(("delete", args, {}))
+        with self.assertRaises(StorageUnavailable):
+            delivery.send_direct_message(
+                "thread-1", {"$id": "thread-1"}, {"id": "user-2"},
+                dependencies=self._dependencies(delivery.DirectDelivery), author=self._author(), media=delivery.MessageMedia(*self.deps.message_media_payload_fn.return_value),
+            )
+        self.assertEqual([name for name, *_ in self.calls], ["cleanup", "delete"])
 
     def test_delete_delivery_calls_discord_before_local_update_and_event_audit(self):
         created = self.now - timedelta(minutes=1)
@@ -218,26 +367,70 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
         self.deps.get_row_fn = Mock(side_effect=[row, {"$id": "nest_chat"}])
         self.deps.now_fn = Mock(side_effect=[self.now, self.now])
         self.deps.delete_webhook_message_fn = Mock(side_effect=lambda *args: self.calls.append(("webhook", args, {})))
+        self.deps.delete_message_attachments_fn = Mock(side_effect=lambda *args: self.calls.append(("cleanup", args, {})))
         self.deps.update_row_fn = Mock(side_effect=lambda *args, **kwargs: self.calls.append(("update", args, kwargs)))
         self.deps.emit_chat_event_fn = Mock(side_effect=lambda *args, **kwargs: self.calls.append(("event", args, kwargs)))
         self.deps.audit_delete_fn = Mock(side_effect=lambda *args: self.calls.append(("audit", args, {})))
 
-        deleted_at = delivery.delete_chat_message("message-1", dependencies=self.deps)
+        deleted_at = delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
 
         self.assertEqual(deleted_at, self.now.isoformat())
-        self.assertEqual([name for name, *_ in self.calls], ["webhook", "update", "event", "audit"])
+        self.assertEqual([name for name, *_ in self.calls], ["webhook", "cleanup", "update", "event", "audit"])
+
+    def test_delete_storage_failure_preserves_visible_message(self):
+        self.deps.get_row_fn.return_value = {
+            "$id": "message-1", "user_id": "user-1",
+            "created_at": (self.now - timedelta(minutes=1)).isoformat(),
+        }
+        failure = StorageUnavailable("attachment cleanup unavailable")
+        self.deps.delete_message_attachments_fn.side_effect = failure
+        with self.assertRaises(StorageUnavailable) as result:
+            delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
+        self.assertIs(result.exception, failure)
+        self.deps.update_row_fn.assert_not_called()
+        self.deps.emit_chat_event_fn.assert_not_called()
+        self.deps.audit_delete_fn.assert_not_called()
+
+    def test_paused_message_delete_stops_before_discord_and_attachment_cleanup(self):
+        self.deps.get_row_fn.return_value = {
+            "$id": "message-1", "user_id": "user-1", "source": "discord",
+            "discord_message_id": "discord-1",
+            "created_at": (self.now - timedelta(minutes=1)).isoformat(),
+        }
+        app = Flask(__name__)
+        app.config["NEST_STORAGE_MUTATIONS_PAUSED"] = True
+        with app.app_context(), self.assertRaises(StorageMutationPaused):
+            delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
+        self.deps.delete_webhook_message_fn.assert_not_called()
+        self.deps.delete_message_attachments_fn.assert_not_called()
+        self.deps.update_row_fn.assert_not_called()
 
     def test_delete_delivery_preserves_owner_and_window_guards(self):
         recent = self.now - timedelta(minutes=1)
         row = {"$id": "message-1", "user_id": "other", "created_at": recent.isoformat()}
         self.deps.get_row_fn = Mock(return_value=row)
         with self.assertRaises(delivery.MessageOwnershipError):
-            delivery.delete_chat_message("message-1", dependencies=self.deps)
+            delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
 
         row["user_id"] = "user-1"
         row["created_at"] = (self.now - timedelta(minutes=6)).isoformat()
         with self.assertRaises(delivery.MessageExpiredError):
-            delivery.delete_chat_message("message-1", dependencies=self.deps)
+            delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
+
+    def test_delete_delivery_allows_accepted_retry_after_window(self):
+        row = {
+            "$id": "message-1", "user_id": "user-1",
+            "created_at": (self.now - timedelta(minutes=6)).isoformat(),
+            "delete_requested_at": (self.now - timedelta(minutes=2)).isoformat(),
+        }
+        self.deps.get_row_fn.return_value = row
+        deleted_at = delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
+        self.assertEqual(deleted_at, self.now.isoformat())
+        self.deps.delete_message_attachments_fn.assert_called_once_with("message-1")
+        self.assertEqual(self.deps.update_row_fn.call_args.args[2]["deleted_at"], self.now.isoformat())
+        row["user_id"] = "other"
+        with self.assertRaises(delivery.MessageOwnershipError):
+            delivery.delete_chat_message("message-1", dependencies=self._dependencies(delivery.MessageDeletion), user_id="user-1")
 
     def test_attachment_service_preserves_pending_ownership_and_pdf_preview_file(self):
         pending = {"$id": "attachment-1", "status": "pending", "user_id": "user-1"}
@@ -299,14 +492,14 @@ class ChatMessageDeliveryServiceTests(unittest.TestCase):
         self.deps.create_row_fn = Mock()
         self.deps.emit_chat_event_fn = Mock()
 
-        self.assertTrue(delivery.update_block("user-2", method="POST", dependencies=self.deps))
+        self.assertTrue(delivery.update_block("user-2", method="POST", dependencies=self._dependencies(delivery.BlockManagement), user_id="user-1"))
         self.deps.create_row_fn.assert_called_once()
         self.deps.emit_chat_event_fn.assert_called_once()
 
         self.deps.first_row_fn.return_value = {"$id": "block-1"}
         self.deps.delete_row_fn = Mock()
         self.deps.emit_chat_event_fn.reset_mock()
-        self.assertFalse(delivery.update_block("user-2", method="DELETE", dependencies=self.deps))
+        self.assertFalse(delivery.update_block("user-2", method="DELETE", dependencies=self._dependencies(delivery.BlockManagement), user_id="user-1"))
         self.deps.delete_row_fn.assert_called_once_with("blocks", "block-1")
         self.deps.emit_chat_event_fn.assert_called_once()
 

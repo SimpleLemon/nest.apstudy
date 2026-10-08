@@ -1,6 +1,7 @@
 import json
 import os
 import unittest
+from contextlib import ExitStack
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
@@ -9,6 +10,7 @@ from flask import Flask
 
 from extensions import login_manager
 import blueprints.chat_api as chat_api
+from services import chat_discord_sync
 from tests.support.harness import reset_flask_login_manager
 from avatar_images import APSTUDY_LOGO_URL
 import services.chat_presence as chat_presence
@@ -97,12 +99,14 @@ class TestChatFeature(unittest.TestCase):
         with self.app.test_request_context("/api/chat/messages/message-1", method="DELETE"):
             with patch.object(chat_api, "current_user", self.user), \
                     patch.object(chat_api, "get_row_safe", return_value=row), \
+                    patch.object(chat_api, "delete_message_attachments") as cleanup, \
                     patch.object(chat_api, "update_row_safe") as update_row, \
                     patch.object(chat_api, "emit_chat_event") as emit_event, \
                     patch.object(chat_api, "emit_audit_event") as emit_audit:
                 response = chat_api.delete_message.__wrapped__("message-1")
 
         self.assertEqual(response.status_code if hasattr(response, "status_code") else 200, 200)
+        cleanup.assert_called_once_with("message-1")
         update_row.assert_called_once()
         payload = update_row.call_args.args[2]
         self.assertEqual(payload["deleted_by"], "user-1")
@@ -167,48 +171,21 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(state["channel"]["university_status"], "pending")
         self.assertEqual(create_row.call_args.kwargs["data"]["label"], "[Uni Channel Approval]")
 
-    def test_list_messages_after_message_id_includes_same_timestamp(self):
-        shared_ts = "2026-05-23T20:00:00Z"
-        first = {
-            "$id": "message-a",
-            "channel_id": "nest_chat",
-            "user_id": "user-2",
-            "created_at": shared_ts,
-        }
-        second = {
-            "$id": "message-b",
-            "channel_id": "nest_chat",
-            "user_id": "user-2",
-            "created_at": shared_ts,
-        }
-        with patch.object(chat_api, "get_row_safe", return_value=first), \
-                patch.object(chat_api, "list_rows_safe", return_value={"rows": [first, second]}):
-            rows = chat_api._list_messages(
-                "channel",
-                "nest_chat",
-                after=shared_ts,
-                after_message_id="message-a",
+    def test_sqlite_thread_event_visibility_is_limited_to_current_participants(self):
+        with patch.object(chat_api, "create_row_safe", side_effect=lambda _collection, **kw: {"$id": "event-1", **kw["data"]}) as create_row:
+            event = chat_api.emit_chat_event(
+                "thread", "thread-1", "message_created", message_id="message-1",
+                readable_user_ids=["user-b", "user-a"],
             )
-
-        self.assertEqual([chat_api._row_id(row) for row in rows], ["message-b"])
-
-    def test_chat_event_permissions_are_limited_to_dm_participants(self):
-        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row:
-            chat_api.emit_chat_event(
-                "thread",
-                "thread-1",
-                "message_created",
-                message_id="message-1",
-                readable_user_ids=["user-b", "user-a", "user-a"],
-            )
-
-        create_row.assert_called_once()
-        self.assertEqual(create_row.call_args.kwargs["data"]["message_id"], "message-1")
-        self.assertEqual(
-            create_row.call_args.kwargs["permissions"],
-            ['read("user:user-a")', 'read("user:user-b")'],
-        )
-
+        self.assertNotIn("permissions", create_row.call_args.kwargs)
+        thread = {"$id": "thread-1", "participant_a": "user-a", "participant_b": "user-b"}
+        with patch.object(chat_api, "current_user", self.user), patch.object(chat_api, "get_row_safe", return_value=thread):
+            for viewer, allowed in (("user-a", True), ("user-b", True), ("outsider", False)):
+                with self.subTest(viewer=viewer), patch.object(chat_api, "_current_user_id", return_value=viewer):
+                    self.assertEqual(chat_api._event_visible_for_user(event), allowed)
+            thread["participant_b"] = "replacement"
+            with patch.object(chat_api, "_current_user_id", return_value="user-b"):
+                self.assertFalse(chat_api._event_visible_for_user(event))
     def test_emit_chat_event_writes_sqlite_and_notifies_waiters(self):
         with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row, \
                 patch.object(chat_api, "_notify_chat_event_waiters") as notify:
@@ -229,46 +206,26 @@ class TestChatFeature(unittest.TestCase):
             "message_created",
         )
 
-    def test_emit_chat_event_uses_university_label_permissions(self):
-        school_key = "emory-university"
-        label = university_presence_label(school_key)
-        channel = {
-            "$id": "uni_emory-university",
-            "kind": "university",
-            "school_key": school_key,
-            "approved": True,
-        }
-        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row:
-            chat_api.emit_chat_event(
-                "channel",
-                channel["$id"],
-                "message_created",
-                message_id="message-1",
-                channel_id=channel["$id"],
-                channel=channel,
-            )
-
-        expected = [f'read("label:{label}")']
-        self.assertEqual(create_row.call_args.kwargs["permissions"], expected)
-
-    def test_emit_chat_event_uses_users_permission_for_discord_channels(self):
-        channel = {
-            "$id": "nest_chat",
-            "kind": "discord",
-            "approved": True,
-        }
-        with patch.object(chat_api, "create_row_safe", return_value={"$id": "event-1"}) as create_row:
-            chat_api.emit_chat_event(
-                "channel",
-                channel["$id"],
-                "message_created",
-                message_id="message-1",
-                channel=channel,
-            )
-
-        expected = ['read("users")']
-        self.assertEqual(create_row.call_args.kwargs["permissions"], expected)
-
+    def test_sqlite_university_event_visibility_uses_current_school_access(self):
+        channel = {"$id": "uni_emory-university", "kind": "university",
+                   "school_key": "emory-university", "approved": True}
+        with patch.object(chat_api, "create_row_safe", side_effect=lambda _collection, **kw: {"$id": "event-1", **kw["data"]}) as create_row:
+            event = chat_api.emit_chat_event("channel", channel["$id"], "message_created", channel=channel)
+        self.assertNotIn("permissions", create_row.call_args.kwargs)
+        with patch.object(chat_api, "current_user", self.user), patch.object(chat_api, "get_row_safe", return_value=channel):
+            self.assertTrue(chat_api._event_visible_for_user(event))
+            self.user.school_key = "another-school"
+            self.user.school = "Another School"
+            self.assertFalse(chat_api._event_visible_for_user(event))
+    def test_sqlite_discord_event_still_requires_existing_visible_channel(self):
+        channel = {"$id": "nest_chat", "kind": "discord", "approved": True}
+        with patch.object(chat_api, "create_row_safe", side_effect=lambda _collection, **kw: {"$id": "event-1", **kw["data"]}) as create_row:
+            event = chat_api.emit_chat_event("channel", channel["$id"], "message_created", channel=channel)
+        self.assertNotIn("permissions", create_row.call_args.kwargs)
+        with patch.object(chat_api, "current_user", self.user), patch.object(chat_api, "get_row_safe", return_value=channel) as get_row:
+            self.assertTrue(chat_api._event_visible_for_user(event))
+            get_row.return_value = None
+            self.assertFalse(chat_api._event_visible_for_user(event))
     def test_event_visible_for_user_filters_channel_and_thread_access(self):
         with patch.object(chat_api, "current_user", self.user), \
                 patch.object(chat_api, "get_row_safe") as get_row, \
@@ -332,6 +289,7 @@ class TestChatFeature(unittest.TestCase):
             json={"scopes": scopes, "tab_id": "tab-1"},
         ):
             with patch.object(chat_api, "current_user", self.user), \
+                    patch.object(chat_api, "_presence_scope_allowed", return_value=True), \
                     patch.object(chat_api, "_upsert_presence", side_effect=rows) as upsert:
                 response = chat_api.presence_heartbeat.__wrapped__()
 
@@ -355,6 +313,157 @@ class TestChatFeature(unittest.TestCase):
         self.assertIn("JSON object", response.get_json()["error"])
         upsert.assert_not_called()
 
+    def _payload_client(self, stack):
+        self.app.config["LOGIN_DISABLED"] = True
+        self.app.register_blueprint(chat_api.chat_api_bp)
+        stack.enter_context(patch.object(chat_api, "current_user", self.user))
+        stack.enter_context(patch.object(chat_api, "get_row_safe", return_value={"$id": "room-1"}))
+        stack.enter_context(patch.object(chat_api, "_can_access_channel", return_value=True))
+        stack.enter_context(patch.object(chat_api, "_thread_for_user", return_value={"$id": "thread-1"}))
+        stack.enter_context(patch.object(chat_api, "_other_participant", return_value={"$id": "user-2"}))
+        stack.enter_context(patch.object(chat_api, "_is_blocked_between", return_value=False))
+        operations = [
+            stack.enter_context(patch.object(owner, name)) for owner, name in (
+                (chat_api, "_mark_read"), (chat_api, "_mark_unread"),
+                (chat_api, "_upsert_presence"), (chat_api, "_load_users_by_id"),
+                (chat_api, "_presence_statuses_for_users"), (chat_api, "resolve_gif"),
+                (chat_api, "emit_chat_event"),
+                (chat_api.chat_message_delivery, "create_direct_thread"),
+                (chat_api.chat_message_delivery, "send_channel_message"),
+                (chat_api.chat_message_delivery, "send_direct_message"),
+            )
+        ]
+        return stack.enter_context(self.app.test_client()), operations
+
+    def test_chat_json_routes_reject_non_object_bodies_before_operations(self):
+        routes = (
+            "/api/presence/heartbeat", "/api/presence/statuses", "/api/presence/room",
+            "/api/chat/read", "/api/chat/unread", "/api/chat/dm/threads",
+            "/api/chat/presence/users", "/api/chat/channels/room-1/messages",
+            "/api/chat/dm/threads/thread-1/messages",
+        )
+        with ExitStack() as stack:
+            client, operations = self._payload_client(stack)
+            for route in routes:
+                for payload in ([], ["value"], "value", 1, True, None):
+                    with self.subTest(route=route, payload=payload):
+                        response = client.post(route, data=json.dumps(payload), content_type="application/json")
+                        self.assertEqual(response.status_code, 400)
+                        self.assertIn("JSON object", response.get_json()["error"])
+                        for operation in operations:
+                            operation.assert_not_called()
+
+    def test_chat_json_routes_reject_malformed_fields_before_operations(self):
+        requests = [
+            ("/api/presence/statuses", {"user_ids": "user-2"}),
+            ("/api/presence/statuses", {"user_ids": [{}]}),
+            ("/api/presence/room", {"scope_type": "channel", "scope_id": []}),
+            ("/api/chat/presence/users", {"scope_type": "channel", "scope_id": "room-1", "user_ids": 1}),
+            ("/api/chat/presence/users", {"scope_type": "channel", "scope_id": "room-1", "user_ids": [{}]}),
+            ("/api/chat/dm/threads", {"user_id": {"id": "user-2"}}),
+        ]
+        for action in ("read", "unread"):
+            for field in ("scope_type", "scope_id", "message_id"):
+                requests.append((f"/api/chat/{action}", {
+                    **{"scope_type": "channel", "scope_id": "room-1", "message_id": "message-1"}, field: {},
+                }))
+        for route in ("/api/chat/channels/room-1/messages", "/api/chat/dm/threads/thread-1/messages"):
+            for fields in (
+                {"content": {"text": "hello"}}, {"content": []}, {"content": True},
+                {"attachment_ids": "attachment-1"}, {"attachment_ids": [{}]},
+                {"attachment_ids": False}, {"attachment_ids": [True]},
+                {"gif_id": []}, {"gif_query": {}},
+            ):
+                requests.append((route, {**{"content": "hello"}, **fields}))
+        with ExitStack() as stack:
+            client, operations = self._payload_client(stack)
+            for route, payload in requests:
+                with self.subTest(route=route, payload=payload):
+                    response = client.post(route, json=payload)
+                    self.assertEqual(response.status_code, 400)
+                    self.assertTrue(response.get_json()["error"])
+                    for operation in operations:
+                        operation.assert_not_called()
+
+    def test_presence_batch_rejects_all_invalid_shapes_before_writing(self):
+        first = {"scope_type": "chat", "scope_id": "global"}
+        invalid_batches = (
+            [], {}, [first, "chat"], [first, {"scope_type": "unsupported"}],
+            [first, {"scope_type": "chat", "scope_id": {}}], [first] * 9,
+        )
+        with ExitStack() as stack:
+            client, operations = self._payload_client(stack)
+            access = stack.enter_context(patch.object(chat_api, "_presence_scope_allowed", return_value=True))
+            for scopes in invalid_batches:
+                with self.subTest(scopes=scopes):
+                    response = client.post("/api/presence/heartbeat", json={"scopes": scopes})
+                    self.assertEqual(response.status_code, 400)
+                    access.assert_not_called()
+                    for operation in operations:
+                        operation.assert_not_called()
+
+    def test_presence_batch_checks_later_scope_access_before_writing(self):
+        with ExitStack() as stack:
+            client, operations = self._payload_client(stack)
+            access = stack.enter_context(patch.object(chat_api, "_presence_scope_allowed", side_effect=[True, False]))
+            response = client.post("/api/presence/heartbeat", json={"scopes": [
+                {"scope_type": "chat", "scope_id": "global"},
+                {"scope_type": "chat", "scope_id": "private-room"},
+            ]})
+            self.assertEqual(response.status_code, 404)
+            self.assertEqual(access.call_count, 2)
+            for operation in operations:
+                operation.assert_not_called()
+
+    def test_legacy_presence_route_retains_read_only_compatibility_response(self):
+        with ExitStack() as stack:
+            client, operations = self._payload_client(stack)
+            online = stack.enter_context(patch.object(chat_api, "_presence_online_users", return_value=[{"id": "user-2"}]))
+            for payload in ({"scope_type": "chat", "scope_id": "global"}, [], None):
+                response = client.post("/api/chat/presence", data=json.dumps(payload), content_type="application/json")
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.get_json(), {
+                    "status": "ok", "users": [{"id": "user-2"}], "dm_statuses": {},
+                })
+            self.assertEqual(online.call_count, 3)
+            for operation in operations:
+                operation.assert_not_called()
+
+    def test_discord_ingest_rejects_malformed_message_shapes_before_mapping(self):
+        self.app.register_blueprint(chat_api.chat_api_bp)
+        bad_messages = (
+            [], "message", None, {"content": []}, {"author": []},
+            {"author": {"global_name": {}}}, {"mentions": {}},
+            {"mentions": ["user"]}, {"mentions": [{"username": []}]},
+            {"embeds": [None]}, {"embeds": [{"title": {}}]},
+            {"embeds": [{"image": "image"}]}, {"embeds": [{"provider": []}]},
+            {"attachments": "attachment"}, {"attachments": [{"url": []}]},
+        )
+        with self.app.test_client() as client, \
+                patch.object(chat_api, "_valid_discord_ingest_request", return_value=True), \
+                patch.object(chat_api, "_discord_channel_for_discord_id") as channel, \
+                patch.object(chat_api, "_upsert_discord_message") as upsert:
+            for message in bad_messages:
+                with self.subTest(message=message):
+                    response = client.post("/api/chat/discord/messages", json={
+                        "discord_channel_id": "123", "message": message,
+                    })
+                    self.assertEqual(response.status_code, 400)
+                    self.assertTrue(response.get_json()["error"])
+                    channel.assert_not_called()
+                    upsert.assert_not_called()
+            for payload in ([], True, "message"):
+                response = client.post("/api/chat/discord/messages", json=payload)
+                self.assertEqual(response.status_code, 400)
+                channel.assert_not_called()
+                upsert.assert_not_called()
+
+    def test_message_media_normalizes_valid_text_and_deduplicates_scalar_ids(self):
+        with self.app.test_request_context(json={
+            "content": " hello ", "attachment_ids": ["attachment-1", "attachment-1", 42],
+        }):
+            self.assertEqual(chat_api._message_media_payload(), ("hello", ["attachment-1", "42"], None))
+
     def test_presence_status_precedence_uses_active_before_busy(self):
         rows = [
             {"user_id": "user-2", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
@@ -374,7 +483,7 @@ class TestChatFeature(unittest.TestCase):
             {"user_id": "user-3", "scope_type": "site", "last_seen_at": "2026-06-23T12:00:00Z"},
         ]
         with patch.object(chat_api, "_fresh_presence_rows", return_value=rows), \
-                patch("services.focus_mode.active_focus_user_ids", return_value={"user-2", "user-3"}):
+                patch("services.focus_mode.reconcile_active_focus_user_ids", return_value={"user-2", "user-3"}):
             statuses = chat_api._presence_statuses_for_users(["user-2", "user-3"])
 
         self.assertEqual(statuses, {"user-2": "focus", "user-3": "focus"})
@@ -392,8 +501,8 @@ class TestChatFeature(unittest.TestCase):
         self.assertEqual(statuses["user-2"], "active")
         self.assertEqual(statuses["user-3"], "busy")
         self.assertEqual(statuses["user-4"], "offline")
-        self.assertEqual(fresh_rows.call_args_list[0].kwargs["seconds"], chat_api.PRESENCE_CHAT_FRESH_SECONDS)
-        self.assertEqual(fresh_rows.call_args_list[1].kwargs["seconds"], chat_api.PRESENCE_SITE_FRESH_SECONDS)
+        self.assertEqual(fresh_rows.call_args_list[0].kwargs["seconds"], chat_api._chat_settings().chat_fresh_seconds)
+        self.assertEqual(fresh_rows.call_args_list[1].kwargs["seconds"], chat_api._chat_settings().site_fresh_seconds)
 
     def test_presence_scope_freshness_windows_are_specific(self):
         self.assertEqual(chat_api._presence_fresh_seconds("chat"), 30)
@@ -766,6 +875,7 @@ class TestChatFeature(unittest.TestCase):
             with patch.object(chat_api, "current_user", self.user), \
                     patch.object(chat_api, "get_row_safe", return_value=row), \
                     patch.object(chat_api, "delete_webhook_message", return_value=True) as delete_webhook, \
+                    patch.object(chat_api, "delete_message_attachments") as cleanup, \
                     patch.object(chat_api, "update_row_safe") as update_row, \
                     patch.object(chat_api, "emit_chat_event"), \
                     patch.object(chat_api, "emit_audit_event"):
@@ -773,6 +883,7 @@ class TestChatFeature(unittest.TestCase):
 
         self.assertEqual(response.status_code if hasattr(response, "status_code") else 200, 200)
         delete_webhook.assert_called_once_with("webhook-1", "discord-message-1")
+        cleanup.assert_called_once_with("message-1")
         update_row.assert_called_once()
 
     def test_delete_message_aborts_when_discord_delete_fails(self):
@@ -828,7 +939,7 @@ class TestChatFeature(unittest.TestCase):
             },
         ]
         with patch.object(chat_api, "list_rows_all", return_value=rows), \
-                patch.object(chat_api, "_soft_delete_discord_message", return_value=rows[0]) as soft_delete:
+                patch.object(chat_discord_sync, "soft_delete_discord_message", return_value=rows[0]) as soft_delete:
             deleted_count = chat_api._reconcile_discord_deletes(
                 channel,
                 discord_messages,
@@ -840,6 +951,7 @@ class TestChatFeature(unittest.TestCase):
             channel,
             "discord-message-1",
             emit_event=True,
+            dependencies=soft_delete.call_args.kwargs["dependencies"],
         )
 
     def test_reconcile_discord_deletes_skips_messages_older_than_fetch_window(self):
@@ -1081,13 +1193,18 @@ class TestChatFeature(unittest.TestCase):
 
         with patch.object(chat_api, "_default_channels"), \
                 patch.object(chat_api, "list_rows_all", return_value=channels), \
-                patch.object(chat_api, "_latest_visible_message", return_value=latest), \
-                patch.object(chat_api, "_persist_read_state") as persist_read:
+                patch.object(chat_api, "list_rows_safe", return_value={"rows": [latest]}), \
+                patch.object(chat_api, "first_row", return_value=None), \
+                patch.object(chat_api, "create_row_safe") as persist_read, \
+                patch.object(chat_api, "_read_state_dependencies", wraps=chat_api._read_state_dependencies) as make_dependencies:
             chat_api.initialize_new_user_discord_read_states("new-user")
 
+        make_dependencies.assert_called_once_with()
         self.assertEqual(persist_read.call_count, 2)
-        persist_read.assert_any_call("new-user", "channel", "nest_chat", latest)
-        persist_read.assert_any_call("new-user", "channel", "nest_announcements", latest)
+        payloads = [call.kwargs["data"] for call in persist_read.call_args_list]
+        self.assertEqual({payload["scope_id"] for payload in payloads}, {"nest_chat", "nest_announcements"})
+        self.assertTrue(all(payload["user_id"] == "new-user" for payload in payloads))
+        self.assertTrue(all(payload["last_read_message_id"] == "message-1" for payload in payloads))
 
     def test_create_welcome_dm_is_idempotent_and_emits_event(self):
         sender = {
@@ -1291,12 +1408,15 @@ class TestChatFeature(unittest.TestCase):
             "discord_message_id": "discord-message-1",
         }
 
-        with patch.object(chat_api, "first_row", return_value=row), \
+        with patch.object(chat_api, "get_row_safe", return_value=None), \
+                patch.object(chat_api, "first_row", return_value=row), \
+                patch.object(chat_api, "delete_message_attachments") as cleanup, \
                 patch.object(chat_api, "update_row_safe", return_value=row) as update_row, \
                 patch.object(chat_api, "emit_chat_event") as emit_event:
             result = chat_api._soft_delete_discord_message(channel, "discord-message-1", emit_event=True)
 
         self.assertEqual(result["$id"], "message-row")
+        cleanup.assert_called_once_with("message-row")
         payload = update_row.call_args.args[2]
         self.assertEqual(payload["deleted_by"], "discord")
         self.assertIn("deleted_at", payload)

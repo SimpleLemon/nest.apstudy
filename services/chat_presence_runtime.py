@@ -127,9 +127,9 @@ def presence_statuses_for_users(
     for user_id, scopes in scopes_by_user.items():
         statuses[user_id] = presence_status_from_scopes_fn(scopes)
     try:
-        from services.focus_mode import active_focus_user_ids
+        from services.focus_mode import reconcile_active_focus_user_ids
 
-        for user_id in active_focus_user_ids(ordered_ids):
+        for user_id in reconcile_active_focus_user_ids(ordered_ids):
             statuses[user_id] = "focus"
     except sqlite3.OperationalError:
         pass

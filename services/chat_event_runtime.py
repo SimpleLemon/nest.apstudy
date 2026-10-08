@@ -6,6 +6,10 @@ testable without moving the SSE listener lifecycle out of the blueprint.
 """
 
 
+from services.chat_contracts import ListRows
+from services.database import RowMapping
+
+
 def event_visible_for_user(
     event,
     *,
@@ -52,34 +56,89 @@ def serialize_chat_event(row, *, row_id_fn):
     }
 
 
+class ChatEventPage(list[RowMapping]):
+    """Visible events and the last examined cursor, including hidden rows."""
+
+    def __init__(self, rows=(), *, scan_cursor: tuple[str, str] | None = None):
+        super().__init__(rows)
+        self.scan_cursor = scan_cursor
+
+
 def list_chat_events_after(
-    since=None,
-    after_id=None,
+    since: str | None = None,
+    after_id: str | None = None,
     *,
-    limit,
+    limit: int,
+    max_limit: int,
+    scan_multiplier: int,
+    max_scan: int,
     query_cls,
-    list_rows_fn,
-    events_collection,
-    appwrite_exception,
+    list_rows_fn: ListRows,
+    events_collection: str,
+    appwrite_exception: type[Exception],
     error_logger,
     event_visible_for_user_fn,
     row_id_fn,
-):
-    queries = [query_cls.order_asc("created_at"), query_cls.order_asc("$id"), query_cls.limit(limit)]
-    if since:
-        queries.insert(0, query_cls.greater_than_equal("created_at", since))
-    try:
-        rows = list_rows_fn(events_collection, queries).get("rows", [])
-    except appwrite_exception:
-        error_logger.exception("Failed to list chat events")
-        return []
-
+) -> ChatEventPage:
+    limit = min(max(int(limit), 1), max_limit)
+    scan_budget = min(max(limit * scan_multiplier, limit), max_scan)
     visible = []
-    for row in rows:
-        row_id = row_id_fn(row)
-        if since and after_id and row.get("created_at") == since and row_id == after_id:
-            continue
-        if not event_visible_for_user_fn(row):
-            continue
-        visible.append(row)
-    return visible
+    seen_ids = set()
+    visibility_cache = {}
+    scanned = 0
+    scan_cursor = (since, after_id) if since and after_id else None
+    if since and after_id:
+        query_stages = [
+            [query_cls.equal("created_at", [since]), query_cls.greater_than("$id", after_id)],
+            [query_cls.greater_than("created_at", since)],
+        ]
+    elif since:
+        query_stages = [[query_cls.greater_than_equal("created_at", since)]]
+    else:
+        query_stages = [[]]
+
+    for constraints in query_stages:
+        offset = 0
+        while scanned < scan_budget and len(visible) < limit:
+            batch_limit = min(limit, scan_budget - scanned)
+            queries = [*constraints, query_cls.order_asc("created_at"), query_cls.order_asc("$id"), query_cls.limit(batch_limit)]
+            if offset:
+                queries.append(query_cls.offset(offset))
+            try:
+                rows = list_rows_fn(
+                    events_collection,
+                    queries,
+                )["rows"]
+            except appwrite_exception:
+                error_logger.exception("Failed to list chat events")
+                return ChatEventPage(visible, scan_cursor=scan_cursor)
+            if not rows:
+                break
+            scanned_before_batch = scanned
+            for row in rows:
+                row_id = row_id_fn(row)
+                if not row_id or row_id in seen_ids:
+                    continue
+                seen_ids.add(row_id)
+                scanned += 1
+                created_at = row.get("created_at") or ""
+                candidate_cursor = (created_at, row_id)
+                if scan_cursor is None or candidate_cursor > scan_cursor:
+                    scan_cursor = candidate_cursor
+                if since and created_at == since and after_id and row_id <= after_id:
+                    continue
+                scope_key = (row.get("scope_type"), row.get("scope_id"))
+                if all(scope_key):
+                    if scope_key not in visibility_cache:
+                        visibility_cache[scope_key] = event_visible_for_user_fn(row)
+                    row_visible = visibility_cache[scope_key]
+                else:
+                    row_visible = event_visible_for_user_fn(row)
+                if row_visible:
+                    visible.append(row)
+                    if len(visible) >= limit:
+                        break
+            if scanned == scanned_before_batch or len(rows) < batch_limit or len(visible) >= limit:
+                break
+            offset += len(rows)
+    return ChatEventPage(visible, scan_cursor=scan_cursor)

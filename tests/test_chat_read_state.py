@@ -1,5 +1,6 @@
 import unittest
-from unittest.mock import Mock
+from dataclasses import fields
+from unittest.mock import Mock, patch
 
 from flask import Flask
 
@@ -73,10 +74,20 @@ def _dependencies(**overrides):
         "unread_cap": 99,
     }
     values.update(overrides)
-    return chat_read_state.ChatReadStateDependencies(**values)
+    return chat_read_state.ChatReadStateDependencies(**{field.name: values[field.name] for field in fields(chat_read_state.ChatReadStateDependencies)})
 
 
 class TestChatReadState(unittest.TestCase):
+    def setUp(self):
+        for name, value in {
+            "Query": _QueryStub,
+            "utcnow": lambda: "now",
+            "format_datetime": lambda value: f"formatted:{value}",
+        }.items():
+            patcher = patch.object(chat_read_state, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
     def test_registered_chat_blueprint_keeps_read_routes_and_adapter_symbols(self):
         app = Flask(__name__)
         app.register_blueprint(chat_api.chat_api_bp)
@@ -188,13 +199,14 @@ class TestChatReadState(unittest.TestCase):
             persist_read_state_fn=persist,
         )
 
-        row = chat_read_state.mark_unread(
-            "channel",
-            "nest_chat",
-            message_id="target",
-            dependencies=dependencies,
-        )
-
+        with patch.object(chat_read_state, "previous_visible_message", return_value=previous), \
+                patch.object(chat_read_state, "persist_read_state", persist):
+            row = chat_read_state.mark_unread(
+                "channel",
+                "nest_chat",
+                message_id="target",
+                dependencies=dependencies,
+            )
         self.assertEqual(row["$id"], "read-state-1")
         persist.assert_called_once_with(
             "user-1",
@@ -202,6 +214,7 @@ class TestChatReadState(unittest.TestCase):
             "nest_chat",
             previous,
             fallback_to_now=False,
+            dependencies=dependencies,
         )
 
     def test_persist_read_state_keeps_message_timestamp_and_now_fallback(self):

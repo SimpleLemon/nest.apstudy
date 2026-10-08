@@ -1,3 +1,4 @@
+import os
 import json
 import tempfile
 import threading
@@ -18,6 +19,18 @@ from tests.support.harness import reset_flask_login_manager
 
 
 class _QueryStub:
+    @staticmethod
+    def equal(field, value):
+        return ("equal", field, value)
+
+    @staticmethod
+    def greater_than(field, value):
+        return ("greater_than", field, value)
+
+    @staticmethod
+    def offset(value):
+        return ("offset", value)
+
     @staticmethod
     def greater_than_equal(field, value):
         return ("greater_than_equal", field, value)
@@ -155,6 +168,7 @@ class TestChatEventRuntime(unittest.TestCase):
             timestamp,
             "event-a",
             limit=25,
+            max_limit=25, scan_multiplier=4, max_scan=1000,
             query_cls=_QueryStub,
             list_rows_fn=list_rows,
             events_collection="chat_events",
@@ -166,11 +180,12 @@ class TestChatEventRuntime(unittest.TestCase):
 
         self.assertEqual([row["$id"] for row in visible], ["event-b"])
         self.assertEqual(
-            list_rows.call_args.args,
+            list_rows.call_args_list[0].args,
             (
                 "chat_events",
                 [
-                    ("greater_than_equal", "created_at", timestamp),
+                    ("equal", "created_at", [timestamp]),
+                    ("greater_than", "$id", "event-a"),
                     ("order_asc", "created_at"),
                     ("order_asc", "$id"),
                     ("limit", 25),
@@ -184,6 +199,7 @@ class TestChatEventRuntime(unittest.TestCase):
 
         result = chat_event_runtime.list_chat_events_after(
             limit=10,
+            max_limit=10, scan_multiplier=4, max_scan=1000,
             query_cls=_QueryStub,
             list_rows_fn=list_rows,
             events_collection="chat_events",
@@ -432,8 +448,7 @@ class TestRegisteredChatEventStream(unittest.TestCase):
         client = self._authenticated_client()
         with patch.object(chat_api, "_list_chat_events_after", return_value=[]), \
                 patch.object(chat_api.time, "monotonic", side_effect=[100.0, 116.0]), \
-                patch.object(chat_api, "CHAT_EVENTS_KEEPALIVE_SECONDS", 15), \
-                patch.object(chat_api, "CHAT_EVENTS_POLL_SECONDS", 1):
+                patch.dict(os.environ, {"CHAT_EVENTS_KEEPALIVE_SECONDS": "15", "CHAT_EVENTS_POLL_SECONDS": "1"}):
             response = client.get("/api/chat/events/stream", buffered=False)
             chunk = next(response.response)
             self.assertEqual(chunk.decode() if isinstance(chunk, bytes) else chunk, ": keepalive\n\n")
@@ -471,8 +486,7 @@ class TestRegisteredChatEventStream(unittest.TestCase):
 
         client = self._authenticated_client()
         with patch.object(chat_api, "_list_chat_events_after", side_effect=list_events), \
-                patch.object(chat_api, "CHAT_EVENTS_KEEPALIVE_SECONDS", 300), \
-                patch.object(chat_api, "CHAT_EVENTS_POLL_SECONDS", 60):
+                patch.dict(os.environ, {"CHAT_EVENTS_KEEPALIVE_SECONDS": "300", "CHAT_EVENTS_POLL_SECONDS": "60"}):
             with patch.object(chat_api.threading, "Condition", SignalingCondition):
                 response = client.get("/api/chat/events/stream", buffered=False)
             result = {}

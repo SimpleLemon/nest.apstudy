@@ -31,7 +31,7 @@ export function localDateKey(date) {
   return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
 }
 
-export function calendarDayDifference(date, now = new Date()) {
+export function calendarDaysAgo(date, now = new Date()) {
   if (!date) return 0;
   const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -42,7 +42,7 @@ export function formatMessageTimestamp(value, now = new Date()) {
   const date = parseMessageDate(value);
   if (!date) return "";
   const time = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(date);
-  const dayDifference = calendarDayDifference(date, now);
+  const dayDifference = calendarDaysAgo(date, now);
   if (dayDifference === 0) return time;
   if (dayDifference === 1) return `Yesterday at ${time}`;
   return new Intl.DateTimeFormat(undefined, { month: "numeric", day: "numeric", year: "2-digit", hour: "numeric", minute: "2-digit" }).format(date);
@@ -75,4 +75,50 @@ export function groupMessages(messages) {
 export function plural(value, singular, pluralLabel) {
   const number = Number(value) || 0;
   return `${number} ${number === 1 ? singular : pluralLabel}`;
+}
+
+export function staleChannelPresence(channel) {
+  return {
+    ...channel,
+    active_count: 0,
+    active_users: [],
+    online_count: 0,
+    online_users: [],
+  };
+}
+
+export function staleThreadPresence(thread) {
+  const other = thread?.other_user ? { ...thread.other_user, online: false } : thread?.other_user;
+  return {
+    ...thread,
+    other_user: other,
+    active_count: 0,
+    presence_status: "offline",
+  };
+}
+
+export function normalizeLocalPresenceStatus(value) {
+  return ["active", "busy", "focus", "offline"].includes(value) ? value : "offline";
+}
+
+export function dmPresenceStatus(thread) {
+  if (thread?.presence_status) return normalizeLocalPresenceStatus(thread.presence_status);
+  if (thread?.other_user?.presence_status) return normalizeLocalPresenceStatus(thread.other_user.presence_status);
+  return thread?.other_user?.online ? "active" : "offline";
+}
+
+export function presenceStatusLabel(status) {
+  if (status === "active") return "Online";
+  if (status === "busy") return "Busy";
+  if (status === "focus") return "Focus mode";
+  return "Offline";
+}
+
+export function dmPresenceMarkup(status) {
+  const label = presenceStatusLabel(status);
+  return `
+    <small class="chat-presence-line">
+      <span>${label}</span>
+    </small>
+  `;
 }

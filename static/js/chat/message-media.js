@@ -6,6 +6,17 @@ function formatBytes(value) {
 }
 
 export function createMessageMedia() {
+  let paused = false;
+  let disposed = false;
+  let dialog;
+  const listeners = [];
+
+  function listen(target, name, callback) {
+    const handler = (event) => { if (!paused && !disposed) callback(event); };
+    target?.addEventListener(name, handler);
+    listeners.push(() => target?.removeEventListener(name, handler));
+  }
+
   function renderAttachments(attachments = []) {
     if (!attachments.length) return "";
     return `<div class="chat-attachments">${attachments.map((attachment) => {
@@ -30,10 +41,10 @@ export function createMessageMedia() {
   }
 
   function init() {
-    const dialog = document.getElementById("chat-download-warning");
+    dialog = document.getElementById("chat-download-warning");
     const confirm = document.getElementById("chat-download-confirm");
     const report = document.getElementById("chat-virus-total-link");
-    document.getElementById("chat-messages")?.addEventListener("click", (event) => {
+    listen(document.getElementById("chat-messages"), "click", (event) => {
       const button = event.target.closest("[data-chat-download]");
       if (!button) return;
       event.preventDefault();
@@ -42,8 +53,23 @@ export function createMessageMedia() {
       report.href = button.dataset.virusTotal || "https://www.virustotal.com/gui/home/search";
       dialog?.showModal();
     });
-    confirm?.addEventListener("click", () => dialog?.close());
+    listen(confirm, "click", () => dialog?.close());
   }
 
-  return { init, renderAttachments, renderGif };
+  function pause() {
+    if (paused || disposed) return;
+    paused = true;
+    dialog?.close();
+  }
+
+  return {
+    init, renderAttachments, renderGif, pause,
+    resume() { if (!disposed) paused = false; },
+    dispose() {
+      if (disposed) return;
+      pause();
+      disposed = true;
+      listeners.splice(0).forEach((removeListener) => removeListener());
+    },
+  };
 }

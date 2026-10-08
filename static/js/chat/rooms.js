@@ -1,4 +1,4 @@
-import { avatarAttrs, escapeHtml } from "./presentation.js";
+import { avatarAttrs, escapeHtml, dmPresenceMarkup, dmPresenceStatus, normalizeLocalPresenceStatus } from "./presentation.js";
 
 export function createRoomSelectionCoordinator() {
   let generation = 0;
@@ -35,200 +35,14 @@ export function createRoomSelectionCoordinator() {
     generation += 1;
   }
 
-  return { begin, cancel, isCurrent };
+  return { begin, cancel, isCurrent, get revision() { return generation; } };
 }
 
-export function createChatRooms(context) {
-  const { root, state, els, extensions, config, actions } = context;
+export function createChatRooms({ root, state, els, extensions, config, fetchJson, composer, feedback, identity, loading, messageCache, readState, onRoomChange, onRecordsChange, profiles, scheduler, store, view }) {
   const { ANNOUNCEMENTS_CHANNEL_ID, GRAMMARLY_DISABLED_ATTRS } = config;
-  let unreadSummaryRefreshTimer = null;
   const roomSelection = createRoomSelectionCoordinator();
-
-  function unreadKey(type, id) {
-    return actions.roomKey({ type, id });
-  }
-
-  function normalizeUnreadRoom(room = {}) {
-    const type = room.type === "channel" ? "channel" : room.type === "thread" ? "thread" : "";
-    const id = String(room.id || "");
-    if (!type || !id) return null;
-    const count = Math.max(0, Number(room.unread_count || 0));
-    return {
-      type,
-      id,
-      unread_count: Math.min(count, 99),
-      has_unread: room.has_unread === true || count > 0,
-    };
-  }
-
-  function applyChatSummary(payload = {}) {
-    const nextUnread = new Map();
-    for (const room of payload.rooms || []) {
-      const unread = normalizeUnreadRoom(room);
-      if (!unread) continue;
-      const key = unreadKey(unread.type, unread.id);
-      if (state.clearedReadRooms.has(key) && unread.has_unread) {
-        continue;
-      }
-      if (!unread.has_unread) {
-        state.clearedReadRooms.delete(key);
-      }
-      nextUnread.set(key, unread);
-    }
-    for (const key of state.clearedReadRooms) {
-      if (nextUnread.has(key)) continue;
-      const [type, id] = key.split(":");
-      if (!type || !id) continue;
-      nextUnread.set(key, {
-        type,
-        id,
-        unread_count: 0,
-        has_unread: false,
-      });
-    }
-    state.roomUnread = nextUnread;
-    updateRoomLists();
-    const reconciledPayload = chatSummaryPayloadFromUnreadMap(payload);
-    window.dispatchEvent(new CustomEvent("apstudy-chat-summary", { detail: reconciledPayload }));
-    return reconciledPayload;
-  }
-
-  function chatSummaryPayloadFromUnreadMap(payload = {}) {
-    const rooms = Array.from(state.roomUnread.values()).map((room) => ({
-      type: room.type,
-      id: room.id,
-      unread_count: Math.max(0, Number(room.unread_count || 0)),
-      has_unread: room.has_unread === true && Number(room.unread_count || 0) > 0,
-    }));
-    const totalUnread = rooms.reduce((total, room) => total + Number(room.unread_count || 0), 0);
-    return {
-      ...payload,
-      rooms,
-      total_unread: Math.min(totalUnread, 99),
-      unread_capped: totalUnread >= 99 || rooms.some((room) => Number(room.unread_count || 0) >= 99),
-      has_unread: totalUnread > 0,
-    };
-  }
-
-  async function refreshChatSummary() {
-    if (state.chatSummaryLoading || document.visibilityState === "hidden") return null;
-    state.chatSummaryLoading = true;
-    const startReadSeq = state.localReadSeq;
-    try {
-      const payload = await context.fetchJson("/api/chat/summary", {
-        headers: { Accept: "application/json" },
-      });
-      if (state.localReadSeq !== startReadSeq) {
-        return null;
-      }
-      return applyChatSummary(payload);
-    } catch (_) {
-      return null;
-    } finally {
-      state.chatSummaryLoading = false;
-    }
-  }
-
-  function unreadForRoom(type, id) {
-    return state.roomUnread.get(unreadKey(type, id)) || { unread_count: 0, has_unread: false };
-  }
-
-  function setRoomUnread(room, unread = {}) {
-    const key = actions.roomKey(room);
-    if (!key) return;
-    const count = Math.max(0, Number(unread.unread_count || 0));
-    state.roomUnread.set(key, {
-      type: room.type,
-      id: room.id,
-      unread_count: Math.min(count, 99),
-      has_unread: unread.has_unread === true || count > 0,
-    });
-    updateRoomLists();
-  }
-
-  function clearRoomUnread(room) {
-    const key = actions.roomKey(room);
-    if (!key) return;
-    state.localReadSeq += 1;
-    state.clearedReadRooms.add(key);
-    state.roomUnread.set(key, {
-      type: room.type,
-      id: room.id,
-      unread_count: 0,
-      has_unread: false,
-    });
-    updateRoomLists();
-  }
-
-  function shouldAutoMarkRoomRead(room, cache = actions.cacheFor(room)) {
-    if (room?.type === "channel" && room.id === ANNOUNCEMENTS_CHANNEL_ID) {
-      return actions.unreadAnnouncementMessages(cache?.messages, state.roomReadState).length === 0;
-    }
-    return true;
-  }
-
-  function markRoomRead(room, cache = actions.cacheFor(room), { force = false } = {}) {
-    if (!room?.type || !room?.id) return;
-    if (!force && document.visibilityState === "hidden") return;
-    if (!force && !shouldAutoMarkRoomRead(room, cache)) return;
-    if (force) {
-      clearRoomUnread(room);
-      cancelUnreadSummaryRefresh();
-      state.localReadSeq += 1;
-    }
-    const latest = actions.latestMessageForRead(cache);
-    const body = {
-      scope_type: room.type === "channel" ? "channel" : "thread",
-      scope_id: room.id,
-    };
-    if (!force && latest?.id) body.message_id = latest.id;
-    return context.fetchJson("/api/chat/read", {
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-      .then((payload) => {
-        if (!force) clearRoomUnread(room);
-        if (
-          force
-          && room.type === "channel"
-          && room.id === ANNOUNCEMENTS_CHANNEL_ID
-          && state.activeRoom?.type === "channel"
-          && state.activeRoom.id === ANNOUNCEMENTS_CHANNEL_ID
-        ) {
-          const readState = payload?.read_state || {};
-          state.roomReadState = {
-            last_read_at: readState.last_read_at || latest?.created_at || state.roomReadState?.last_read_at || null,
-            last_read_message_id: readState.last_read_message_id || latest?.id || state.roomReadState?.last_read_message_id || null,
-          };
-          state.announcementsBannerVisible = false;
-          if (els.announcementsUnread) els.announcementsUnread.hidden = true;
-        }
-        state.localReadSeq += 1;
-        window.dispatchEvent(new CustomEvent("apstudy-chat-read-state-change", { detail: { room } }));
-        return refreshChatSummary();
-      })
-      .catch(() => {
-        if (force) {
-          state.localReadSeq += 1;
-          return refreshChatSummary();
-        }
-        return null;
-      });
-  }
-
-  function scheduleUnreadSummaryRefresh() {
-    if (unreadSummaryRefreshTimer) return;
-    unreadSummaryRefreshTimer = window.setTimeout(() => {
-      unreadSummaryRefreshTimer = null;
-      void refreshChatSummary();
-    }, 400);
-  }
-
-  function cancelUnreadSummaryRefresh() {
-    if (!unreadSummaryRefreshTimer) return;
-    window.clearTimeout(unreadSummaryRefreshTimer);
-    unreadSummaryRefreshTimer = null;
-  }
+  let dmQueryRevision = 0;
+  const blockRevisions = new Map();
 
   function activeChannel() {
     if (state.activeRoom?.type !== "channel") return null;
@@ -275,7 +89,7 @@ export function createChatRooms(context) {
   }
 
   function unreadBadgeMarkup(type, id) {
-    const unread = unreadForRoom(type, id);
+    const unread = readState.unreadForRoom(type, id);
     if (!unread.has_unread || Number(unread.unread_count || 0) <= 0) return "";
     const count = Number(unread.unread_count || 0);
     const label = count >= 99 ? "99+" : String(count);
@@ -284,7 +98,7 @@ export function createChatRooms(context) {
   }
 
   function roomButton({ type, id, active, leading, title, meta, className = "" }) {
-    const unread = unreadForRoom(type, id);
+    const unread = readState.unreadForRoom(type, id);
     const hasUnread = unread.has_unread && Number(unread.unread_count || 0) > 0;
     const button = document.createElement("button");
     button.type = "button";
@@ -330,7 +144,7 @@ export function createChatRooms(context) {
       const room = { ...state.contextMenuRoom };
       closeRoomContextMenu();
       if (actionButton.dataset.chatRoomAction === "read") {
-        void markRoomRead(room, actions.cacheFor(room), { force: true });
+        void readState.markRoomRead(room, store.cacheFor(room), { force: true });
       }
     });
     return menu;
@@ -399,7 +213,7 @@ export function createChatRooms(context) {
     }
     for (const thread of state.threads) {
       const other = thread.other_user || {};
-      const status = actions.dmPresenceStatus(thread);
+      const status = dmPresenceStatus(thread);
       const active = state.activeRoom?.type === "thread" && state.activeRoom.id === thread.id;
       const leading = `
         <span class="chat-avatar-wrap">
@@ -413,7 +227,7 @@ export function createChatRooms(context) {
         active,
         leading,
         title: other.name || other.username || "Nest User",
-        meta: actions.dmPresenceMarkup(status),
+        meta: dmPresenceMarkup(status),
         className: "chat-dm-button",
       }));
     }
@@ -436,19 +250,19 @@ export function createChatRooms(context) {
         : channelIsPending(channel)
           ? "Waiting for admin approval"
           : `${channel.online_count ?? channel.active_count ?? 0} online`;
-      actions.setHistoryBanner(channelIsPending(channel) ? null : channel);
+      view.setHistoryBanner(channelIsPending(channel) ? null : channel);
       const placeholder = channelIsPending(channel)
         ? "Waiting for admin approval"
         : channel.read_only
           ? "Read-only channel"
           : `Message #${channelLabel(channel)}`;
-      actions.setComposer(channelIsWritable(channel), placeholder);
+      composer.setComposer(channelIsWritable(channel), placeholder);
       return;
     }
     if (thread) {
       const other = thread.other_user || {};
       els.roomSymbol.classList.add("is-avatar");
-      const status = actions.dmPresenceStatus(thread);
+      const status = dmPresenceStatus(thread);
       els.roomSymbol.innerHTML = `
         <span class="chat-room-avatar-wrap">
           <img ${avatarAttrs(other.picture_url, 48, "48px")} alt="">
@@ -457,16 +271,61 @@ export function createChatRooms(context) {
       `;
       els.roomName.textContent = other.name || other.username || "Nest User";
       els.roomMeta.textContent = "";
-      actions.setHistoryBanner(null);
-      actions.setComposer(!thread.blocked, thread.blocked ? "This conversation is blocked" : `Message ${other.name || other.username || ""}`.trim());
+      view.setHistoryBanner(null);
+      composer.setComposer(!thread.blocked, thread.blocked ? "This conversation is blocked" : `Message ${other.name || other.username || ""}`.trim());
       return;
     }
     els.roomSymbol.classList.remove("is-avatar");
     els.roomSymbol.textContent = "#";
     els.roomName.textContent = "Chat";
     els.roomMeta.textContent = "Loading...";
-    actions.setHistoryBanner(null);
+    view.setHistoryBanner(null);
     if (els.composer) els.composer.hidden = true;
+  }
+
+  function registerKnownUser(user) {
+    if (!user?.id) return;
+    state.knownUsers ||= new Map();
+    state.knownUsers.set(String(user.id), { ...(state.knownUsers.get(String(user.id)) || {}), ...user });
+  }
+
+  function registerKnownUsersFromState() {
+    registerKnownUser(state.user);
+    for (const channel of state.channels || []) {
+      for (const user of channel.online_users || []) registerKnownUser(user);
+      for (const user of channel.active_users || []) registerKnownUser(user);
+    }
+    for (const thread of state.threads || []) registerKnownUser(thread.other_user);
+  }
+
+  function applyPresenceRecords(records, update = {}) {
+    registerKnownUsersFromState();
+    for (const user of records.values()) registerKnownUser(user);
+    if (update.room?.type === "channel" && identity.roomKey(update.room) === identity.roomKey(state.activeRoom)) {
+      const channel = state.channels.find((candidate) => candidate.id === update.room.id);
+      if (channel) channel.online_users = update.users;
+    }
+    const statusFor = (id, fallback) => normalizeLocalPresenceStatus(records.get(String(id || ""))?.presence_status || fallback);
+    for (const channel of state.channels) {
+      const users = (channel.online_users || channel.active_users || []).map((user) => {
+        const status = statusFor(user.id, user.presence_status || (user.online ? "active" : "offline"));
+        return { ...user, presence_status: status, online: status !== "offline" };
+      }).filter((user) => user.online);
+      channel.online_users = users;
+      channel.online_count = users.length;
+      channel.active_users = users;
+      channel.active_count = users.length;
+      for (const user of users) registerKnownUser(user);
+    }
+    for (const thread of state.threads) {
+      const other = thread.other_user || {};
+      const status = statusFor(other.id, other.presence_status || thread.presence_status);
+      thread.presence_status = status;
+      other.presence_status = status;
+      other.online = status !== "offline";
+      const scope = thread.presence_scope || { scope_type: "thread", scope_id: thread.id };
+      thread.active_count = Array.from(records.values()).filter((user) => (user.active_chat_scopes || []).includes(String(scope.scope_id))).length;
+    }
   }
 
   function updateChannel(payload) {
@@ -478,7 +337,7 @@ export function createChatRooms(context) {
 
   function updateThread(payload) {
     if (!payload?.id) return;
-    actions.registerKnownUser(payload.other_user);
+    registerKnownUser(payload.other_user);
     const index = state.threads.findIndex((thread) => thread.id === payload.id);
     if (index >= 0) state.threads[index] = { ...state.threads[index], ...payload };
     else state.threads.unshift(payload);
@@ -488,16 +347,16 @@ export function createChatRooms(context) {
   async function fetchThread(threadId) {
     if (!threadId) return null;
     try {
-      const payload = await context.fetchJson(`/api/chat/dm/threads/${encodeURIComponent(threadId)}`);
+      const payload = await fetchJson(`/api/chat/dm/threads/${encodeURIComponent(threadId)}`);
       if (payload.thread) {
         updateThread(payload.thread);
         updateRoomLists();
-        actions.renderPresenceDrivenUi();
-        actions.schedulePersistentBootstrapSave();
+        onRecordsChange();
+        scheduler.schedulePersistentBootstrapSave();
         return payload.thread;
       }
     } catch (error) {
-      actions.setStatus(error.message || "Unable to load direct message.", "error");
+      feedback.setStatus(error.message || "Unable to load direct message.", "error");
     }
     return null;
   }
@@ -505,69 +364,76 @@ export function createChatRooms(context) {
   async function selectRoom(room, options = {}) {
     const previousRoom = state.activeRoom;
     const selection = roomSelection.begin(room);
-    actions.saveActiveScroll();
-    actions.closeInlineProfilePopover();
-    if (previousRoom && actions.roomKey(previousRoom) !== actions.roomKey(room)) {
+    view.saveActiveScroll();
+    view.closeInlineProfilePopover();
+    if (previousRoom && identity.roomKey(previousRoom) !== identity.roomKey(room)) {
       extensions.attachments?.resetForRoom?.();
       extensions.mediaPicker?.clear?.();
     }
     state.activeRoom = room;
     state.activeProfile = null;
-    actions.renderMessageLoader?.();
+    view.renderMessageLoader?.();
     updateRoomLists();
     renderHeader();
-    if (!options.suppressFocus) actions.focusComposerSoon();
-    actions.setStatus(null);
-    actions.handleActiveRoomPresenceChange(previousRoom);
+    if (!options.suppressFocus) view.focusComposerSoon();
+    feedback.setStatus(null);
+    onRoomChange(previousRoom);
 
     if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
 
     const channel = activeChannel();
     const thread = activeThread();
     if (channelIsPending(channel)) {
-      actions.renderApprovalNotice(channel);
-      actions.schedulePersistentBootstrapSave();
+      view.renderApprovalNotice(channel);
+      scheduler.schedulePersistentBootstrapSave();
       return;
     }
-    if (thread) actions.renderDmProfile(thread);
-    else actions.renderMembers(channel?.online_users || channel?.active_users || []);
+    if (thread) profiles.renderDmProfile(thread);
+    else profiles.renderMembers(channel?.online_users || channel?.active_users || []);
 
-    const cache = actions.cacheFor(room);
-    if (!cache.loaded) await actions.hydrateRoomFromPersistentCache(room);
-    if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
-    if (actions.renderCachedRoom(room)) {
-      if (!cache.stale || actions.latestMessageForRead(cache)) markRoomRead(room, cache);
-      if (cache.latestCursor) {
-        const delta = actions.deltaLoadParams(cache);
-        await actions.loadMessages({ ...delta, quiet: true, force: true, light: true, roomSelection: selection });
-        if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
-        markRoomRead(room);
-      } else if (cache.stale) {
-        await actions.loadMessages({ force: true, quiet: true, roomSelection: selection });
-        if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
-        markRoomRead(room);
-      }
-    } else {
-      await actions.loadMessages({ force: true, roomSelection: selection });
+    try {
+      const cache = store.cacheFor(room);
+      if (!cache.loaded) await store.hydrateRoomFromPersistentCache(room);
       if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
-      markRoomRead(room);
+      if (loading.renderCachedRoom(room)) {
+        if (!cache.stale || identity.latestMessageForRead(cache)) readState.markRoomRead(room, cache);
+        if (cache.latestCursor) {
+          const delta = messageCache.deltaLoadParams(cache);
+          await loading.loadMessages({ ...delta, quiet: true, force: true, light: true, roomSelection: selection });
+          if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
+          readState.markRoomRead(room);
+        } else if (cache.stale) {
+          await loading.loadMessages({ force: true, quiet: true, roomSelection: selection });
+          if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
+          readState.markRoomRead(room);
+        }
+      } else {
+        await loading.loadMessages({ force: true, roomSelection: selection });
+        if (!roomSelection.isCurrent(selection, state.activeRoom)) return;
+        readState.markRoomRead(room);
+      }
+      onRecordsChange();
+      scheduler.schedulePersistentBootstrapSave();
+    } catch (error) {
+      if (error?.name !== "AbortError" && roomSelection.isCurrent(selection, state.activeRoom)) {
+        feedback.setStatus(error.message || "Unable to load messages.", "error");
+      }
     }
-    actions.renderPresenceDrivenUi();
-    actions.schedulePersistentBootstrapSave();
   }
 
   function cancelRoomSelection() {
     roomSelection.cancel();
   }
 
-  async function searchPeople() {
+  async function searchPeople(revision) {
     const query = els.dmSearchInput.value.trim();
     if (query.length < 2) {
       els.dmResults.innerHTML = "";
       return;
     }
     try {
-      const payload = await context.fetchJson(`/api/chat/dm/search?q=${encodeURIComponent(query)}`);
+      const payload = await fetchJson(`/api/chat/dm/search?q=${encodeURIComponent(query)}`);
+      if (revision !== dmQueryRevision) return;
       const results = payload.results || [];
       els.dmResults.innerHTML = results.length
         ? results.map((user) => `
@@ -577,47 +443,67 @@ export function createChatRooms(context) {
               <strong>${escapeHtml(user.name || user.username || "Nest User")}</strong>
               <small>${escapeHtml([user.school, user.major].filter(Boolean).join(" · ") || user.username || "User")}</small>
             </span>
-            ${actions.memberTierBadgeMarkup(user)}
+            ${profiles.memberTierBadgeMarkup(user)}
           </button>
         `).join("")
         : `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>No users found.</div>`;
     } catch (error) {
+      if (revision !== dmQueryRevision) return;
       els.dmResults.innerHTML = `<div class="chat-empty chat-empty-compact" ${GRAMMARLY_DISABLED_ATTRS}>${escapeHtml(error.message)}</div>`;
     }
   }
 
   async function startDm(userId) {
     try {
-      const payload = await context.fetchJson("/api/chat/dm/threads", {
+      const payload = await fetchJson("/api/chat/dm/threads", {
         method: "POST",
         body: JSON.stringify({ user_id: userId }),
       });
       updateThread(payload.thread);
-      if (payload.thread?.id) setRoomUnread({ type: "thread", id: payload.thread.id }, { unread_count: 0, has_unread: false });
+      if (payload.thread?.id) readState.setRoomUnread({ type: "thread", id: payload.thread.id }, { unread_count: 0, has_unread: false });
       renderThreads();
       els.dmSearch.hidden = true;
+      dmQueryRevision += 1;
+      window.clearTimeout(state.searchTimer);
       els.dmSearchInput.value = "";
       els.dmResults.innerHTML = "";
       await selectRoom({ type: "thread", id: payload.thread.id });
-      actions.schedulePersistentBootstrapSave();
+      scheduler.schedulePersistentBootstrapSave();
     } catch (error) {
-      actions.setStatus(error.message || "Unable to start direct message.", "error");
+      feedback.setStatus(error.message || "Unable to start direct message.", "error");
     }
   }
 
   async function toggleBlock(userId, currentlyBlocked) {
+    const targetUserId = String(userId || "");
+    if (!targetUserId) return;
+    const revision = (blockRevisions.get(targetUserId) || 0) + 1;
+    blockRevisions.set(targetUserId, revision);
+    const targetThreadIds = new Set(state.threads
+      .filter((thread) => String(thread.other_user?.id || "") === targetUserId)
+      .map((thread) => thread.id));
+    const selectedRoomKey = identity.roomKey(state.activeRoom);
+    const selectionRevision = roomSelection.revision;
+    const isCurrentRequest = () => blockRevisions.get(targetUserId) === revision;
+    const isCurrentSelection = () => identity.roomKey(state.activeRoom) === selectedRoomKey
+      && roomSelection.revision === selectionRevision;
     try {
-      const payload = await context.fetchJson(`/api/chat/blocks/${encodeURIComponent(userId)}`, {
+      const payload = await fetchJson(`/api/chat/blocks/${encodeURIComponent(targetUserId)}`, {
         method: currentlyBlocked ? "DELETE" : "POST",
       });
-      const thread = activeThread();
-      if (thread) {
-        thread.blocked = Boolean(payload.blocked);
-        renderHeader();
-        actions.renderDmProfile(thread);
-        actions.schedulePersistentBootstrapSave();
+      if (!isCurrentRequest()) return;
+      for (const thread of state.threads) {
+        if (targetThreadIds.has(thread.id) && String(thread.other_user?.id || "") === targetUserId) {
+          thread.blocked = Boolean(payload.blocked);
+        }
       }
-      if (currentlyBlocked && payload.blocked === false) {
+      const thread = activeThread();
+      if (thread && targetThreadIds.has(thread.id) && String(thread.other_user?.id || "") === targetUserId) {
+        renderHeader();
+        profiles.renderDmProfile(thread);
+      }
+      scheduler.schedulePersistentBootstrapSave();
+      if (currentlyBlocked && payload.blocked === false && isCurrentSelection()) {
         window.APStudyToast?.show?.({
           message: "User unblocked.",
           type: "info",
@@ -626,7 +512,8 @@ export function createChatRooms(context) {
         });
       }
     } catch (error) {
-      actions.setStatus(error.message || "Unable to update block.", "error");
+      if (!isCurrentRequest() || !isCurrentSelection()) return;
+      feedback.setStatus(error.message || "Unable to update block.", "error");
     }
   }
 
@@ -639,7 +526,7 @@ export function createChatRooms(context) {
     const label = state.membersCollapsed ? "Show user profile" : "Hide user profile";
     els.profileToggle?.setAttribute("aria-label", label);
     els.profileToggle?.setAttribute("title", label);
-    if (state.persistentCacheReady || state.serverBootstrapped) actions.schedulePersistentBootstrapSave();
+    if (state.persistentCacheReady || state.serverBootstrapped) scheduler.schedulePersistentBootstrapSave();
   }
 
   function bindDmEvents() {
@@ -648,8 +535,14 @@ export function createChatRooms(context) {
       if (!els.dmSearch.hidden) els.dmSearchInput.focus();
     });
     els.dmSearchInput?.addEventListener("input", () => {
+      const revision = ++dmQueryRevision;
       window.clearTimeout(state.searchTimer);
-      state.searchTimer = window.setTimeout(searchPeople, 180);
+      if (els.dmSearchInput.value.trim().length < 2) {
+        els.dmResults.innerHTML = "";
+        state.searchTimer = null;
+        return;
+      }
+      state.searchTimer = window.setTimeout(() => { void searchPeople(revision); }, 180);
     });
     els.dmResults?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-start-dm]");
@@ -699,7 +592,7 @@ export function createChatRooms(context) {
       if (event.key === "Escape") {
         closeRoomContextMenu();
         closeChatDrawers();
-        actions.closeInlineProfilePopover();
+        view.closeInlineProfilePopover();
         extensions.mediaPicker?.close?.();
       }
     });
@@ -707,31 +600,28 @@ export function createChatRooms(context) {
     els.dmList?.addEventListener("scroll", closeRoomContextMenu);
     window.addEventListener("resize", () => {
       closeRoomContextMenu();
-      actions.closeInlineProfilePopover();
+      view.closeInlineProfilePopover();
       if (window.innerWidth > 1100) closeChatDrawers();
     });
   }
 
   return {
+    get selectionRevision() { return roomSelection.revision; },
+    applyPresenceRecords,
+    registerKnownUsersFromState,
     activeChannel,
     activeThread,
     bindDmEvents,
     bindShellEvents,
-    cancelUnreadSummaryRefresh,
     channelIsPending,
     channelIsWritable,
     cancelRoomSelection,
-    clearRoomUnread,
     closeRoomContextMenu,
     fetchThread,
-    markRoomRead,
-    refreshChatSummary,
     renderHeader,
     renderThreads,
-    scheduleUnreadSummaryRefresh,
     selectRoom,
     setMembersCollapsed,
-    setRoomUnread,
     threadExists,
     toggleBlock,
     updateChannel,
