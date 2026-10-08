@@ -9,6 +9,8 @@ from flask import session
 from models import user_from_doc
 from extensions import login_manager
 from tests import test_extension_calendar_routes as routes
+from services import avatar_storage
+from services.storage_errors import StorageUnavailable
 
 
 class ProfilePersistenceTests(unittest.TestCase):
@@ -27,14 +29,18 @@ class ProfilePersistenceTests(unittest.TestCase):
             stack.enter_context(patch.object(auth, "_redirect_for_user_doc", return_value="/dashboard"))
             stack.enter_context(patch.object(auth.notes_collaboration, "claim_pending_invitations"))
             stack.enter_context(patch.object(auth.invites, "attribute_signup"))
-            stored = stack.enter_context(patch.object(auth, "_store_provider_avatar", return_value=stored_avatar or ("https://nest.apstudy.org/avatar/one", "avatar-1", "stored", 128)))
-            deleted = stack.enter_context(patch.object(auth, "delete_avatar_file"))
+            view_url, file_id, _, byte_count = stored_avatar or ("https://nest.apstudy.org/avatar/one", "avatar-1", "stored", 128)
+            prepared = {"view_url": view_url, "file_id": file_id, "size_bytes": byte_count,
+                        "backend": "appwrite", "payload": b"fixture", "mime_type": "image/png", "filename": "avatar.png"} if file_id else None
+            stored = stack.enter_context(patch.object(auth, "prepare_avatar_from_url", return_value=prepared))
+            stack.enter_context(patch.object(avatar_storage, "_upload_legacy"))
+            deleted = stack.enter_context(patch.object(avatar_storage, "delete_legacy_avatar"))
             if fail_write:
-                stack.enter_context(patch.object(auth, "update_row_safe", side_effect=sqlite3.OperationalError("database is locked")))
-                with self.assertRaises(sqlite3.OperationalError):
+                stack.enter_context(patch.object(avatar_storage, "_write_user", side_effect=sqlite3.OperationalError("database is locked")))
+                with self.assertRaises(StorageUnavailable):
                     auth._complete_appwrite_login({"$id": "profile-user", "name": "Provider Name", "email": "fixture@example.test", "picture_url": "https://provider.example/avatar"}, provider="google", provider_access_token="fixture-provider")
                 self.assertNotIn("_user_id", session)
-                deleted.assert_not_called()
+                deleted.assert_called_once_with("avatar-2", rollback=True)
                 return None
             result = auth._complete_appwrite_login({"$id": "profile-user", "name": "Provider Name", "email": "fixture@example.test", "picture_url": "https://provider.example/avatar"}, provider="google", provider_access_token="fixture-provider")
             self.assertEqual(session["_user_id"], "profile-user")
@@ -52,6 +58,10 @@ class ProfilePersistenceTests(unittest.TestCase):
         self.assertEqual(row["name"], "Provider Name")
         self.assertEqual(row["email"], "fixture@example.test")
         self.assertEqual(row["picture_url"], "https://nest.apstudy.org/avatar/one")
+        with sqlite3.connect(self.fixture.db_path) as connection:
+            settings = connection.execute("SELECT user_id, ics_secret_token FROM user_settings WHERE user_id = ?", ["profile-user"]).fetchone()
+            self.assertEqual(settings[0], "profile-user")
+            self.assertTrue(settings[1])
         with self.app.app_context():
             login_manager._user_callback = lambda uid: user_from_doc(auth.get_row_safe(auth.COLLECTIONS["users"], uid))
             response = self.fixture.client("profile-user").get("/api/extension/identity")

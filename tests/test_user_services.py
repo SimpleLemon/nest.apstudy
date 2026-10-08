@@ -38,12 +38,14 @@ class TestUserCleanup:
     @patch("services.user_cleanup.delete_row_safe")
     @patch("services.user_cleanup.list_rows_all", return_value=[])
     @patch("services.user_cleanup.delete_calendar_rows_by_user")
-    def test_delete_user_data_returns_empty_on_success(self, _calendar, _list_rows, _delete_row):
+    @patch("services.user_cleanup.delete_user_storage")
+    def test_delete_user_data_returns_empty_on_success(self, _storage, _calendar, _list_rows, _delete_row):
         assert delete_user_data("user-1") == []
 
     @patch("services.user_cleanup.delete_row_safe")
     @patch("services.user_cleanup.list_rows_all", return_value=[])
     @patch("services.user_cleanup.delete_calendar_rows_by_user", side_effect=AppwriteException("calendar failed"))
-    def test_delete_user_data_records_calendar_failure(self, _calendar, _list_rows, _delete_row):
+    @patch("services.user_cleanup.delete_user_storage")
+    def test_delete_user_data_records_calendar_failure(self, _storage, _calendar, _list_rows, _delete_row):
         errors = delete_user_data("user-1")
         assert "calendar" in errors

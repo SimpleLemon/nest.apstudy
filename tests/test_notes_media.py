@@ -11,8 +11,6 @@ from flask import Flask
 from werkzeug.datastructures import FileStorage
 
 from appwrite.exception import AppwriteException
-from appwrite.permission import Permission
-from appwrite.role import Role
 
 import blueprints.notes_api as notes_api
 from services import database, note_media
@@ -25,94 +23,72 @@ def image_bytes(image_format="PNG", size=(32, 24)):
 
 
 class NoteMediaServiceTests(unittest.TestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.db_path = Path(directory.name) / "notes.sqlite3"
+        self.app = Flask(__name__)
+        self.app.config.update(
+            DATABASE_PATH=str(self.db_path),
+            NEST_STORAGE_BACKEND="appwrite",
+            NEST_STORAGE_MUTATIONS_PAUSED=False,
+        )
+        context = self.app.app_context()
+        context.push()
+        self.addCleanup(context.pop)
+        database.init_db(app=self.app)
+        with database.db_connection(self.db_path) as conn:
+            conn.execute(
+                "INSERT INTO users (id, google_id, email, name, username, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                ("user-1", "google-1", "user@example.com", "User", "user", "2026-01-01T00:00:00Z"),
+            )
+            conn.execute(
+                "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
+                ("note-1", "user-1", "Note", "[]", "2026-01-01T00:00:00Z"),
+            )
+
+    def upload(self):
+        return FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
+
     def test_image_inspection_accepts_supported_content_and_ignores_claimed_mime(self):
         details = note_media.inspect_image(image_bytes("PNG", (40, 30)))
         self.assertEqual(details["mime_type"], "image/png")
         self.assertEqual((details["width"], details["height"]), (40, 30))
-
         with self.assertRaisesRegex(ValueError, "valid supported image"):
             note_media.inspect_image(b"<svg><script>alert(1)</script></svg>")
 
     def test_create_media_rolls_back_storage_when_metadata_fails(self):
         storage = Mock()
-        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
         with patch.object(note_media, "storage_service", return_value=storage), patch.object(
-            note_media, "create_row_safe", side_effect=RuntimeError("database down")
+            note_media, "_insert_media", side_effect=RuntimeError("database down")
         ):
             with self.assertRaisesRegex(RuntimeError, "database down"):
-                note_media.create_media("note-1", "user-1", upload)
+                note_media.create_media("note-1", "user-1", self.upload())
         storage.create_file.assert_called_once()
         storage.delete_file.assert_called_once()
 
-    def test_create_media_passes_read_permissions_to_storage(self):
+    def test_legacy_upload_does_not_grant_direct_public_reads(self):
         storage = Mock()
-        upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
-        with patch.object(note_media, "storage_service", return_value=storage), patch.object(
-            note_media, "create_row_safe", return_value={"id": "media-1"}
-        ):
-            note_media.create_media("note-1", "user-1", upload)
-        storage.create_file.assert_called_once()
-        self.assertEqual(
-            storage.create_file.call_args.kwargs.get("permissions"),
-            [Permission.read(Role.any())],
-        )
+        with patch.object(note_media, "storage_service", return_value=storage):
+            note_media.create_media("note-1", "user-1", self.upload())
+        self.assertEqual(storage.create_file.call_args.kwargs["permissions"], [])
 
     def test_create_media_persists_metadata_in_sqlite(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        self.addCleanup(temp_dir.cleanup)
-        db_path = Path(temp_dir.name) / "nest-test.sqlite3"
-        app = Flask(__name__)
-        app.config["DATABASE_PATH"] = str(db_path)
-        with app.app_context():
-            database.init_db(app=app)
-            with database.db_connection(db_path) as conn:
-                conn.execute(
-                    "INSERT INTO users (id, google_id, email, name, username, created_at) "
-                    "VALUES (?, ?, ?, ?, ?, ?)",
-                    ("user-1", "google-1", "user@example.com", "User", "user", "2026-01-01T00:00:00Z"),
-                )
-                conn.execute(
-                    "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
-                    ("note-1", "user-1", "Note", "[]", "2026-01-01T00:00:00Z"),
-                )
-            storage = Mock()
-            upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
-            with patch.object(note_media, "storage_service", return_value=storage):
-                media = note_media.create_media("note-1", "user-1", upload)
-            with database.db_connection(db_path) as conn:
-                count = conn.execute(
-                    "SELECT COUNT(*) FROM note_media WHERE id = ? AND note_id = ?",
-                    (media["id"], "note-1"),
-                ).fetchone()[0]
-        self.assertEqual(count, 1)
+        with patch.object(note_media, "storage_service", return_value=Mock()):
+            media = note_media.create_media("note-1", "user-1", self.upload())
+        with database.db_connection(self.db_path) as conn:
+            row = conn.execute("SELECT * FROM note_media WHERE id = ?", [media["id"]]).fetchone()
+        self.assertEqual(row["note_id"], "note-1")
+        self.assertEqual(row["storage_backend"], "appwrite")
 
     def test_create_media_storage_failure_does_not_insert_row(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        self.addCleanup(temp_dir.cleanup)
-        db_path = Path(temp_dir.name) / "nest-test.sqlite3"
-        app = Flask(__name__)
-        app.config["DATABASE_PATH"] = str(db_path)
-        with app.app_context():
-            database.init_db(app=app)
-            with database.db_connection(db_path) as conn:
-                conn.execute(
-                    "INSERT INTO users (id, google_id, email, name, username, created_at) "
-                    "VALUES (?, ?, ?, ?, ?, ?)",
-                    ("user-1", "google-1", "user@example.com", "User", "user", "2026-01-01T00:00:00Z"),
-                )
-                conn.execute(
-                    "INSERT INTO notes (id, user_id, title, content, created_at) VALUES (?, ?, ?, ?, ?)",
-                    ("note-1", "user-1", "Note", "[]", "2026-01-01T00:00:00Z"),
-                )
-            storage = Mock()
-            storage.create_file.side_effect = AppwriteException("bucket not found", 404)
-            upload = FileStorage(stream=io.BytesIO(image_bytes()), filename="note.png", content_type="image/png")
-            with patch.object(note_media, "storage_service", return_value=storage):
-                with self.assertRaises(AppwriteException):
-                    note_media.create_media("note-1", "user-1", upload)
-            with database.db_connection(db_path) as conn:
-                count = conn.execute("SELECT COUNT(*) FROM note_media").fetchone()[0]
-        self.assertEqual(count, 0)
+        storage = Mock()
+        storage.create_file.side_effect = AppwriteException("bucket not found", 404)
+        with patch.object(note_media, "storage_service", return_value=storage):
+            with self.assertRaises(AppwriteException):
+                note_media.create_media("note-1", "user-1", self.upload())
+        with database.db_connection(self.db_path) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM note_media").fetchone()[0], 0)
 
     def test_referenced_media_ids_walks_lists_tables_and_children(self):
         content = json.dumps([
@@ -126,19 +102,17 @@ class NoteMediaServiceTests(unittest.TestCase):
         self.assertEqual(note_media.referenced_media_ids(content), {"one", "two", "three"})
 
     def test_sync_activates_references_and_deletes_removed_active_media(self):
-        rows = [
-            {"id": "keep", "note_id": "note-1", "status": "pending"},
-            {"id": "remove", "note_id": "note-1", "status": "active", "storage_file_id": "stored"},
-            {"id": "pending", "note_id": "note-1", "status": "pending"},
-        ]
-        content = json.dumps([{"type": "paragraph", "content": [{"type": "inlineImage", "props": {"mediaId": "keep"}}]}])
-        with patch.object(note_media, "list_rows_all", return_value=rows), patch.object(
-            note_media, "update_row_safe"
-        ) as update, patch.object(note_media, "delete_media") as delete:
+        storage = Mock()
+        with patch.object(note_media, "storage_service", return_value=storage):
+            keep, remove, pending = [note_media.create_media("note-1", "user-1", self.upload()) for _ in range(3)]
+            with database.db_connection(self.db_path) as conn:
+                conn.execute("UPDATE note_media SET status='active' WHERE id=?", [remove["id"]])
+            content = json.dumps([{"type": "inlineImage", "props": {"mediaId": keep["id"]}}])
             note_media.sync_note_media("note-1", content)
-        update.assert_called_once()
-        self.assertEqual(update.call_args.args[:2], (note_media.NOTE_MEDIA_TABLE_ID, "keep"))
-        delete.assert_called_once_with(rows[1])
+        self.assertEqual(note_media.get_media(keep["id"])["status"], "active")
+        self.assertIsNone(note_media.get_media(remove["id"]))
+        self.assertEqual(note_media.get_media(pending["id"])["status"], "pending")
+        storage.delete_file.assert_called_once_with(remove["storage_bucket_id"], remove["storage_file_id"])
 
 
 class NoteMediaApiTests(unittest.TestCase):

@@ -20,26 +20,38 @@ def normalize_school_key(value):
 
 
 @lru_cache(maxsize=1)
-def load_universities():
-    try:
-        with open(DATA_PATH, "r", encoding="utf-8") as handle:
-            rows = json.load(handle)
-    except (OSError, json.JSONDecodeError):
-        return []
+def _load_university_rows(path):
+    with open(path, "r", encoding="utf-8") as handle:
+        rows = json.load(handle)
+    if not isinstance(rows, list):
+        raise ValueError("The university catalog must contain a list of schools.")
 
     cleaned = []
     for row in rows:
+        if not isinstance(row, dict):
+            continue
         name = str(row.get("name") or "").strip()
         if not name:
             continue
-        cleaned.append({
-            "id": str(row.get("id") or "").strip(),
-            "name": name,
-            "city": str(row.get("city") or "").strip(),
-            "state": str(row.get("state") or "").strip(),
-            "key": normalize_school_key(name),
-        })
-    return cleaned
+        cleaned.append((
+            str(row.get("id") or "").strip(),
+            name,
+            str(row.get("city") or "").strip(),
+            str(row.get("state") or "").strip(),
+            normalize_school_key(name),
+        ))
+    return tuple(cleaned)
+
+
+def load_universities():
+    try:
+        rows = _load_university_rows(os.path.abspath(DATA_PATH))
+    except (OSError, ValueError):
+        return []
+    return [
+        {"id": school_id, "name": name, "city": city, "state": state, "key": key}
+        for school_id, name, city, state, key in rows
+    ]
 
 
 def match_university(value):

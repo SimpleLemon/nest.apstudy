@@ -66,6 +66,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
                 {"APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": "chat-attachments"},
             ), \
                 patch.object(entitlements, "_rows", side_effect=lambda table, queries: rows[table]), \
+                patch.object(entitlements, "avatar_storage_usage_for_user", return_value=400), \
                 patch.object(entitlements, "_calendar_feed_count", return_value=2), \
                 patch.object(entitlements, "_focus_playlist_count", return_value=3):
             usage = entitlements.usage_for_user(
@@ -83,7 +84,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
             "focus_playlists": 3,
         })
 
-    def test_usage_uses_the_registered_snapshot_when_live_environment_disagrees(self):
+    def test_existing_chat_bytes_count_even_when_uploads_are_disabled(self):
         with patch.dict(
             os.environ,
             {"APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": ""},
@@ -112,13 +113,13 @@ class EntitlementServiceTestCase(unittest.TestCase):
             entitlements,
             "_rows",
             side_effect=lambda table, queries: rows[table],
-        ) as load_rows, patch.object(entitlements, "_calendar_feed_count", return_value=0), patch.object(
+        ) as load_rows, patch.object(entitlements, "avatar_storage_usage_for_user", return_value=0), patch.object(entitlements, "_calendar_feed_count", return_value=0), patch.object(
             entitlements, "_focus_playlist_count", return_value=0
         ):
             usage = entitlements.usage_for_user("user-1", {"id": "user-1"})
 
-        self.assertEqual(usage["storage_bytes"], 0)
-        self.assertNotIn(
+        self.assertEqual(usage["storage_bytes"], 75)
+        self.assertIn(
             COLLECTIONS["chat_attachments"],
             [call.args[0] for call in load_rows.call_args_list],
         )
@@ -143,7 +144,7 @@ class EntitlementServiceTestCase(unittest.TestCase):
             entitlements,
             "_rows",
             side_effect=lambda table, queries: rows[table],
-        ), patch.object(entitlements, "_calendar_feed_count", return_value=0), patch.object(
+        ), patch.object(entitlements, "avatar_storage_usage_for_user", return_value=0), patch.object(entitlements, "_calendar_feed_count", return_value=0), patch.object(
             entitlements, "_focus_playlist_count", return_value=0
         ):
             usage = entitlements.usage_for_user("user-1", {"id": "user-1"})

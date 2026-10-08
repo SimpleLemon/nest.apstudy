@@ -7,6 +7,8 @@ Handles Canvas iCal URL configuration, refresh intervals,
 """
 
 import json
+import hashlib
+import io
 import os
 import re
 import secrets
@@ -14,20 +16,16 @@ import logging
 import shutil
 from datetime import datetime
 
-from flask import Blueprint, render_template, request, jsonify, redirect, session, url_for
+from flask import Blueprint, render_template, request, jsonify, redirect, session, url_for, send_file
 from flask_login import login_required, current_user
 
 from appwrite.exception import AppwriteException
 from appwrite.id import ID
-from appwrite.input_file import InputFile
-from appwrite.permission import Permission
 from appwrite.query import Query
-from appwrite.role import Role
 from appwrite.services.account import Account
-from appwrite.services.storage import Storage
 from appwrite.services.users import Users
 from appwrite_client import client as appwrite_client
-from appwrite_client import COLLECTIONS, PROFILE_AVATAR_BUCKET_ID
+from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
     create_row_safe,
     delete_row_safe,
@@ -41,9 +39,16 @@ from services.atlas_client import DEFAULT_TERM
 from services.avatar_storage import (
     ALLOWED_AVATAR_MIME_TYPES,
     MAX_AVATAR_BYTES,
+    MIME_TYPE_EXTENSIONS,
+    avatar_profile_fields,
     build_avatar_view_url,
     delete_avatar_file,
+    persist_avatar_user,
+    prepare_avatar_upload,
+    read_avatar,
 )
+from services import storage_backend
+from services.storage_errors import StorageError, StorageMutationPaused, StorageValidationError
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_creation_event, emit_user_event, format_actor
 from services import discord_bridge, invites
@@ -60,6 +65,7 @@ from services.calendar_urls import (
     normalize_calendar_url as _normalize_calendar_url,
 )
 from services.user_cleanup import delete_user_data
+from services.account_deletion_completion import complete_account_deletion
 from services.user_profile import (
     DEFAULT_BANNER_COLOR,
     USERNAME_MAX_LENGTH,
@@ -67,7 +73,10 @@ from services.user_profile import (
     USERNAME_PATTERN,
 )
 from services.universities import school_payload
-from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, entitlement_payload, request_entitlements
+from services.entitlements import (
+    EntitlementError, EntitlementLimitError, avatar_storage_usage_for_user,
+    check_limit, entitlement_payload, request_entitlements,
+)
 from services.note_page_setup import (
     PAGE_SETUP_COLORS as NOTES_PAGE_SETUP_COLORS,
     PAGE_SETUP_FONT_TYPES as NOTES_PAGE_SETUP_FONT_TYPES,
@@ -87,14 +96,17 @@ from services.onboarding import (
     validate_trimmed_profile_text,
 )
 from services.settings_defaults import settings_defaults as _settings_defaults_service
+from services.calendar_constants import (
+    CANVAS_CALENDAR_HOST_PREFIX,
+    CANVAS_CALENDAR_HOST_SUFFIX,
+    CANVAS_CALENDAR_PATH_PREFIXES,
+)
 from blueprints.auth import LOGIN_NEXT_SESSION_KEY, _is_safe_login_next_url
 
 settings_bp = Blueprint("settings", __name__)
+avatars_bp = Blueprint("avatars", __name__)
 logger = logging.getLogger(__name__)
 
-CANVAS_CALENDAR_HOST_PREFIX = "canvas."
-CANVAS_CALENDAR_HOST_SUFFIX = ".edu"
-CANVAS_CALENDAR_PATH_PREFIXES = ("/feeds/calendar", "/feeds/calendars")
 ALLOWED_AVATAR_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp"}
 USERNAME_RESERVED = {
     "account",
@@ -435,6 +447,15 @@ def _storage_summary(user_id):
         logger.exception("Failed to count avatar storage")
         user_doc = {}
 
+    try:
+        chat_attachments = list_rows_all(
+            COLLECTIONS["chat_attachments"],
+            [Query.equal("user_id", [user_id])],
+        )
+    except AppwriteException:
+        logger.exception("Failed to count chat attachment storage")
+        chat_attachments = []
+
     total = 0
     for file_row in files:
         try:
@@ -447,9 +468,17 @@ def _storage_summary(user_id):
         except (TypeError, ValueError):
             continue
     try:
-        total += int(user_doc.get("avatar_file_size_bytes") or 0)
+        total += avatar_storage_usage_for_user(user_id, user_doc)
     except (TypeError, ValueError):
         pass
+    for attachment in chat_attachments:
+        if attachment.get("status") not in {"pending", "active"}:
+            continue
+        try:
+            total += int(attachment.get("stored_size_bytes") or 0)
+            total += int(attachment.get("preview_size_bytes") or 0)
+        except (TypeError, ValueError):
+            continue
     return {
         "storage_usage_bytes": total,
         "files_count": len(files),
@@ -463,17 +492,22 @@ def _storage_summary(user_id):
 def delete_account():
     user_id = str(current_user.id)
 
-    result = delete_user_data(user_id)
+    try:
+        storage_backend.require_mutations_enabled()
+        result = delete_user_data(user_id)
+    except StorageError as exc:
+        logger.warning("Account storage cleanup failed (%s)", type(exc).__name__)
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
     errors = result if isinstance(result, list) else []
     if errors:
         logger.error("Incomplete account data deletion for %s: %s", user_id, errors)
         return jsonify({"error": "Unable to delete all account data."}), 500
 
     try:
-        Users(appwrite_client).delete(user_id)
-    except Exception:
-        logger.exception("Failed to delete Appwrite auth account")
-        return jsonify({"error": "Unable to delete account."}), 500
+        complete_account_deletion(user_id, delete_auth=lambda account_id: Users(appwrite_client).delete(account_id))
+    except StorageError as exc:
+        logger.warning("Account deletion completion is pending (%s)", type(exc).__name__)
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
 
     return jsonify({"status": "ok"})
 
@@ -820,12 +854,14 @@ def update_profile():
         return jsonify({"error": "Graduation year must be a 4-digit year."}), 400
 
     old_avatar_file_id = current_user.avatar_file_id
-    avatar_file_id = old_avatar_file_id if avatar_source == "upload" else None
-    should_delete_uploaded_avatar = (
-        current_user.avatar_source == "upload"
-        and current_user.avatar_file_id
-        and (avatar_source != "upload" or picture_url != current_user.picture_url)
-    )
+    keeps_stored_avatar = bool(old_avatar_file_id and picture_url == current_user.picture_url)
+    avatar_file_id = old_avatar_file_id if keeps_stored_avatar else None
+    avatar_backend = getattr(current_user, "avatar_storage_backend", "appwrite") if keeps_stored_avatar else "appwrite"
+    if keeps_stored_avatar:
+        avatar_source = current_user.avatar_source
+    elif avatar_source == "upload":
+        avatar_source = "url" if picture_url else None
+    avatar_change = bool(old_avatar_file_id and old_avatar_file_id != avatar_file_id)
 
     updates = {
         "name": name,
@@ -834,9 +870,10 @@ def update_profile():
         "banner_color": banner_color,
         "avatar_file_id": avatar_file_id,
         "avatar_source": avatar_source,
+        "avatar_storage_backend": avatar_backend,
         "avatar_file_size_bytes": (
             getattr(current_user, "avatar_file_size_bytes", 0)
-            if avatar_source == "upload" else 0
+            if keeps_stored_avatar else 0
         ),
         **school_updates,
         "major": major,
@@ -846,11 +883,11 @@ def update_profile():
         updates["created_at"] = format_datetime(datetime.utcnow())
 
     try:
-        update_row_safe(
-            COLLECTIONS["users"],
-            str(current_user.id),
-            updates,
+        persist_avatar_user(
+            str(current_user.id), updates, avatar_change=avatar_change,
         )
+    except StorageError as exc:
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
     except AppwriteException:
         logger.exception("Failed to update profile")
         return jsonify({"error": "Unable to update profile."}), 500
@@ -861,6 +898,7 @@ def update_profile():
     current_user.banner_color = banner_color
     current_user.avatar_file_id = avatar_file_id
     current_user.avatar_source = avatar_source
+    current_user.avatar_storage_backend = avatar_backend
     current_user.avatar_file_size_bytes = updates["avatar_file_size_bytes"]
     current_user.school = school_updates.get("school")
     current_user.school_key = school_updates.get("school_key")
@@ -870,8 +908,6 @@ def update_profile():
     current_user.graduation_year = graduation_year
     if updates.get("created_at"):
         current_user.created_at = datetime.utcnow()
-    if should_delete_uploaded_avatar:
-        _delete_avatar_file(old_avatar_file_id)
     sync_chat_presence_labels_for_user(str(current_user.id))
 
     emit_creation_event(
@@ -911,109 +947,77 @@ def update_profile():
     })
 
 
+@avatars_bp.route("/api/avatars/<object_id>", methods=["GET"])
+def avatar_image(object_id):
+    """Public profile images have immutable IDs and seekable HTTP downloads."""
+    try:
+        data, mime_type, metadata = read_avatar(object_id)
+    except StorageError as exc:
+        if exc.status_code >= 500:
+            logger.exception("Failed to read profile avatar")
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
+    etag = metadata.get("sha256") if metadata else hashlib.sha256(data).hexdigest()
+    response = send_file(
+        io.BytesIO(data), mimetype=mime_type, as_attachment=False,
+        download_name=f"avatar.{MIME_TYPE_EXTENSIONS[mime_type]}",
+        conditional=True, etag=etag, max_age=86400,
+    )
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
 @settings_bp.route("/api/avatar-upload", methods=["POST"])
 @login_required
 def upload_avatar():
-    """Upload and persist a profile avatar in Appwrite Storage."""
+    """Save a validated avatar and its profile reference through the active backend."""
+    try:
+        storage_backend.require_mutations_enabled()
+    except StorageError as exc:
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
     uploaded_file = request.files.get("avatar")
     if not uploaded_file or not uploaded_file.filename:
         return jsonify({"error": "Choose an image to upload."}), 400
-
-    original_filename = uploaded_file.filename
-    extension = original_filename.rsplit(".", 1)[-1].lower() if "." in original_filename else ""
+    filename = uploaded_file.filename
+    extension = filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
     if extension not in ALLOWED_AVATAR_EXTENSIONS:
         return jsonify({"error": "Avatar must be a JPG, PNG, GIF, or WebP image."}), 400
     if uploaded_file.mimetype not in ALLOWED_AVATAR_MIME_TYPES:
         return jsonify({"error": "Avatar file type is not supported."}), 400
-
-    file_bytes = uploaded_file.read()
-    if not file_bytes:
-        return jsonify({"error": "Avatar file is empty."}), 400
-    if len(file_bytes) > MAX_AVATAR_BYTES:
-        return jsonify({"error": "Avatar must be 10 MB or smaller."}), 400
-
+    file_bytes = uploaded_file.read(MAX_AVATAR_BYTES + 1)
     try:
         entitlements = request_entitlements(current_user)
-        storage_limit = entitlements["limits"].get("storage_bytes")
-        old_size = int(getattr(current_user, "avatar_file_size_bytes", 0) or 0) if current_user.avatar_source == "upload" else 0
-        if storage_limit is not None:
-            current_usage = int(entitlements["usage"].get("storage_bytes") or 0) - old_size
-            if current_usage + len(file_bytes) > storage_limit:
-                raise EntitlementLimitError("storage bytes", current_usage, current_usage + len(file_bytes), storage_limit)
+        # The profile writer computes replacement credit from live references
+        # and original uploader attribution before checking the quota.
+        prepared = prepare_avatar_upload(str(current_user.id), file_bytes, filename=filename, mime_type=uploaded_file.mimetype)
+        updates = avatar_profile_fields(prepared, "upload")
+        persist_avatar_user(
+            str(current_user.id), updates, prepared=prepared, entitlements=entitlements,
+        )
     except EntitlementLimitError as exc:
         return jsonify(exc.payload()), 403
     except EntitlementError:
         logger.exception("Failed to verify avatar storage limits")
         return jsonify({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}), 503
-
-    file_id = ID.unique()
-    stored_filename = f"{current_user.id}-{file_id}.{extension}"
-    input_file = InputFile.from_bytes(
-        file_bytes,
-        stored_filename,
-        mime_type=uploaded_file.mimetype,
-    )
-
-    try:
-        Storage(appwrite_client).create_file(
-            PROFILE_AVATAR_BUCKET_ID,
-            file_id,
-            input_file,
-            permissions=[Permission.read(Role.any())],
-        )
-    except AppwriteException:
-        logger.exception("Failed to upload avatar")
-        return jsonify({"error": "Unable to upload avatar."}), 500
-
-    picture_url = _avatar_view_url(file_id)
-    if not picture_url:
-        _delete_avatar_file(file_id)
-        return jsonify({"error": "Avatar storage is not configured."}), 500
-
-    old_file_id = current_user.avatar_file_id if current_user.avatar_source == "upload" else None
-    try:
-        update_row_safe(
-            COLLECTIONS["users"],
-            str(current_user.id),
-            {
-                "picture_url": picture_url,
-                "avatar_file_id": file_id,
-                "avatar_source": "upload",
-                "avatar_file_size_bytes": len(file_bytes),
-            },
-        )
-    except AppwriteException:
-        _delete_avatar_file(file_id)
-        logger.exception("Failed to save avatar metadata")
+    except StorageError as exc:
+        return jsonify({"error": str(exc), "code": exc.code}), exc.status_code
+    except Exception:
+        logger.exception("Failed to save profile avatar")
         return jsonify({"error": "Unable to save avatar."}), 500
 
-    if old_file_id and old_file_id != file_id:
-        _delete_avatar_file(old_file_id)
-
-    current_user.picture_url = picture_url
-    current_user.avatar_file_id = file_id
+    current_user.picture_url = updates["picture_url"]
+    current_user.picture = current_user.picture_url
+    current_user.avatar_file_id = updates["avatar_file_id"]
     current_user.avatar_source = "upload"
+    current_user.avatar_storage_backend = updates["avatar_storage_backend"]
     current_user.avatar_file_size_bytes = len(file_bytes)
-
     emit_creation_event(
-        "Profile Avatar Uploaded",
-        actor=format_actor(current_user),
-        target=str(current_user.id),
-        metadata={
-            "page_context": "settings/avatar",
-            "resource_type": "profile_avatar",
-            "resource_id": file_id,
-            "mime_type": uploaded_file.mimetype,
-            "size_bytes": len(file_bytes),
-        },
+        "Profile Avatar Uploaded", actor=format_actor(current_user), target=str(current_user.id),
+        metadata={"page_context": "settings/avatar", "resource_type": "profile_avatar",
+                  "resource_id": prepared["file_id"], "mime_type": prepared["mime_type"], "size_bytes": len(file_bytes)},
         color="green",
     )
-    return jsonify({
-        "status": "ok",
-        "picture_url": picture_url,
-        "avatar_file_id": file_id,
-        "avatar_source": "upload",
-    })
+    return jsonify({"status": "ok", "picture_url": current_user.picture_url,
+                    "avatar_file_id": current_user.avatar_file_id, "avatar_source": "upload"})
 
 @settings_bp.route("/api/feed-url", methods=["POST"])
 @login_required

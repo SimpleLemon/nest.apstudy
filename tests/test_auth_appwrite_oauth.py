@@ -1,5 +1,6 @@
 import os
 import html
+import base64
 import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, call, patch
@@ -16,6 +17,7 @@ from avatar_images import avatar_url_for_size
 from extensions import login_manager
 from models import User
 from tests.support.harness import reset_flask_login_manager
+from tests.support.factory import isolated_factory_environment
 
 
 class AppwriteOauthRouteTestCase(unittest.TestCase):
@@ -29,6 +31,11 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         self.app.secret_key = "test"
         login_manager.init_app(self.app)
         self.app.register_blueprint(auth.auth_bp)
+        # Route tests inspect the persistence request; store integration tests
+        # separately exercise real transactions on disposable databases.
+        self.enterContext(patch.object(auth, "prepare_avatar_from_url", return_value=None))
+        self.enterContext(patch.object(auth, "persist_avatar_user", side_effect=lambda uid, data, **_kwargs: {"$id": uid, **data}))
+        self.enterContext(patch.object(auth.notes_collaboration, "claim_pending_invitations"))
 
     def tearDown(self):
         reset_flask_login_manager()
@@ -59,7 +66,9 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             with patch.object(auth, "get_row_safe", return_value=None), \
                     patch.object(auth, "_find_user_by_email", return_value=None), \
                     patch.object(auth, "_fetch_provider_profile", return_value=provider_profile or {}), \
-                    patch.object(auth, "store_avatar_from_url", return_value=None), \
+                    patch.object(auth, "prepare_avatar_from_url", return_value=None), \
+                    patch.object(auth, "_resolve_discord_link_identity", return_value={}), \
+                    patch.object(auth, "persist_avatar_user", side_effect=lambda uid, data, **_kwargs: create_row(auth.COLLECTIONS["users"], row_id=uid, data=data)), \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
@@ -97,7 +106,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             with patch.object(auth, "get_row_safe", return_value=None), \
                     patch.object(auth, "_find_user_by_email", return_value=None), \
                     patch.object(auth, "_fetch_provider_profile", return_value={}), \
-                    patch.object(auth, "store_avatar_from_url", return_value=None), \
+                    patch.object(auth, "prepare_avatar_from_url", return_value=None), \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user") as login_user, \
@@ -222,7 +231,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             return "https://appwrite.example/oauth"
 
         fake_account = SimpleNamespace(create_o_auth2_token=create_o_auth2_token)
-        with patch("services.scheduler.init_scheduler"), \
+        with isolated_factory_environment(), \
+                patch("services.scheduler.init_scheduler"), \
                 patch("services.discord_audit.init_discord_audit"), \
                 patch.object(auth, "Account", return_value=fake_account):
             app = create_app()
@@ -237,12 +247,12 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                 },
             )
 
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
-        self.assertEqual(len(calls), 1)
-        self.assertRegex(calls[0]["success"], r"^https://nest\.apstudy\.org/auth/appwrite/callback/")
-        self.assertRegex(calls[0]["failure"], r"^https://nest\.apstudy\.org/auth/appwrite/failure/")
-        self.assertNotIn("auth_error", calls[0]["failure"])
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
+            self.assertEqual(len(calls), 1)
+            self.assertRegex(calls[0]["success"], r"^https://nest\.apstudy\.org/auth/appwrite/callback/")
+            self.assertRegex(calls[0]["failure"], r"^https://nest\.apstudy\.org/auth/appwrite/failure/")
+            self.assertNotIn("auth_error", calls[0]["failure"])
 
     def test_app_factory_oauth_urls_allow_local_insecure_http(self):
         calls = []
@@ -252,10 +262,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
             return "https://appwrite.example/oauth"
 
         fake_account = SimpleNamespace(create_o_auth2_token=create_o_auth2_token)
-        with patch.dict(os.environ, {
-            "APSTUDY_ALLOW_INSECURE_HTTP": "1",
-            "FLASK_DEBUG": "0",
-        }, clear=False), \
+        with isolated_factory_environment(APSTUDY_ALLOW_INSECURE_HTTP="1"), \
                 patch("services.scheduler.init_scheduler"), \
                 patch("services.discord_audit.init_discord_audit"), \
                 patch.object(auth, "Account", return_value=fake_account):
@@ -266,12 +273,12 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                 base_url="http://localhost:8000",
             )
 
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
-        self.assertEqual(len(calls), 1)
-        self.assertRegex(calls[0]["success"], r"^http://localhost:8000/auth/appwrite/callback/")
-        self.assertRegex(calls[0]["failure"], r"^http://localhost:8000/auth/appwrite/failure/")
-        self.assertNotIn("auth_error", calls[0]["failure"])
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.headers["Location"], "https://appwrite.example/oauth")
+            self.assertEqual(len(calls), 1)
+            self.assertRegex(calls[0]["success"], r"^http://localhost:8000/auth/appwrite/callback/")
+            self.assertRegex(calls[0]["failure"], r"^http://localhost:8000/auth/appwrite/failure/")
+            self.assertNotIn("auth_error", calls[0]["failure"])
 
     def test_invalid_provider_is_rejected(self):
         with self.app.test_request_context("/auth/appwrite/not-real"):
@@ -502,10 +509,13 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                         "name": "Student Name",
                         "avatar_url": "https://lh3.googleusercontent.com/avatar=s96",
                     }), \
-                    patch.object(auth, "store_avatar_from_url", return_value={
+                    patch.object(auth, "prepare_avatar_from_url", return_value={
                         "file_id": "file-1",
                         "view_url": bucket_view_url,
+                        "size_bytes": 128,
+                        "backend": "appwrite",
                     }) as store_avatar, \
+                    patch.object(auth, "persist_avatar_user", side_effect=lambda uid, data, **_kwargs: create_row(auth.COLLECTIONS["users"], row_id=uid, data=data)), \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
@@ -538,7 +548,8 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                         "name": "Student Name",
                         "avatar_url": "https://lh3.googleusercontent.com/avatar=s96",
                     }), \
-                    patch.object(auth, "store_avatar_from_url", return_value=None), \
+                    patch.object(auth, "prepare_avatar_from_url", return_value=None), \
+                    patch.object(auth, "persist_avatar_user", side_effect=lambda uid, data, **_kwargs: create_row(auth.COLLECTIONS["users"], row_id=uid, data=data)), \
                     patch.object(auth, "create_row_safe", side_effect=create_row), \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
@@ -619,12 +630,13 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                         "name": "Student",
                         "avatar_url": "https://lh3.googleusercontent.com/new=s96",
                     }), \
-                    patch.object(auth, "store_avatar_from_url", return_value={
+                    patch.object(auth, "prepare_avatar_from_url", return_value={
                         "file_id": "file-2",
                         "view_url": bucket_view_url,
+                        "size_bytes": 256,
+                        "backend": "appwrite",
                     }), \
-                    patch.object(auth, "delete_avatar_file") as delete_avatar, \
-                    patch.object(auth, "update_row_safe", return_value={**existing, "picture_url": bucket_view_url}) as update_row, \
+                    patch.object(auth, "persist_avatar_user", return_value={**existing, "picture_url": bucket_view_url}) as persist_user, \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
@@ -635,11 +647,11 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                     provider_access_token="provider-token",
                 )
 
-        updates = update_row.call_args.args[2]
+        updates = persist_user.call_args.args[1]
         self.assertEqual(updates["picture_url"], bucket_view_url)
         self.assertEqual(updates["avatar_file_id"], "file-2")
         self.assertEqual(updates["avatar_source"], "provider")
-        delete_avatar.assert_called_once_with("old-file")
+        self.assertEqual(persist_user.call_args.kwargs["prepared"]["file_id"], "file-2")
 
     def test_complete_appwrite_login_preserves_uploaded_avatar(self):
         existing = {
@@ -656,7 +668,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                         "name": "Student",
                         "avatar_url": "provider-avatar",
                     }), \
-                    patch.object(auth, "update_row_safe", return_value=existing) as update_row, \
+                    patch.object(auth, "persist_avatar_user", return_value=existing) as persist_user, \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
@@ -667,7 +679,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                     provider_access_token="provider-token",
                 )
 
-        updates = update_row.call_args.args[2]
+        updates = persist_user.call_args.args[1]
         self.assertNotIn("picture_url", updates)
         self.assertNotIn("avatar_source", updates)
 
@@ -682,7 +694,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         with self.app.test_request_context("/auth/session", method="POST"):
             with patch.object(auth, "get_row_safe", return_value=existing), \
                     patch.object(auth, "_fetch_provider_profile", return_value={"name": "GitHub Alias"}), \
-                    patch.object(auth, "update_row_safe", return_value=existing) as update_row, \
+                    patch.object(auth, "persist_avatar_user", return_value=existing) as persist_user, \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
@@ -693,7 +705,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                     provider_access_token="github-token",
                 )
 
-        self.assertNotIn("name", update_row.call_args.args[2])
+        self.assertNotIn("name", persist_user.call_args.args[1])
 
     def test_complete_appwrite_login_initializes_blank_existing_name(self):
         existing = {
@@ -706,7 +718,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
         with self.app.test_request_context("/auth/session", method="POST"):
             with patch.object(auth, "get_row_safe", return_value=existing), \
                     patch.object(auth, "_fetch_provider_profile", return_value={"name": "GitHub Alias"}), \
-                    patch.object(auth, "update_row_safe", return_value=existing) as update_row, \
+                    patch.object(auth, "persist_avatar_user", return_value=existing) as persist_user, \
                     patch.object(auth, "sync_chat_presence_labels_for_user"), \
                     patch.object(auth, "login_user"), \
                     patch.object(auth, "url_for", side_effect=lambda endpoint, **_kwargs: f"/{endpoint}"), \
@@ -717,7 +729,7 @@ class AppwriteOauthRouteTestCase(unittest.TestCase):
                     provider_access_token="github-token",
                 )
 
-        self.assertEqual(update_row.call_args.args[2]["name"], "GitHub Alias")
+        self.assertEqual(persist_user.call_args.args[1]["name"], "GitHub Alias")
 
     def test_user_picture_alias_uses_picture_url(self):
         user = User({"$id": "user-1", "picture_url": "https://example.test/avatar.png"})
@@ -1244,12 +1256,16 @@ class AuthSessionErrorContractTestCase(unittest.TestCase):
         self.assertEqual(call_args.kwargs["email"], "student@example.com")
         self.assertEqual(call_args.kwargs["provider_access_token"], "google-token")
         self.assertEqual(call_args.kwargs["page_context"], "auth/session")
-        self.assertIn("dependencies", call_args.kwargs)
+        self.assertIsInstance(call_args.kwargs["profiles"], auth_session.LoginProfiles)
+        self.assertIsInstance(call_args.kwargs["providers"], auth_session.LoginProviders)
+        self.assertIsInstance(call_args.kwargs["completion"], auth_session.LoginCompletion)
         legacy_get_row.assert_not_called()
 
 
 class AvatarStorageServiceTestCase(unittest.TestCase):
-    def _fake_response(self, *, status_code=200, content_type="image/png", body=b"imgbytes", content_length=None):
+    def _fake_response(self, *, status_code=200, content_type="image/png", body=None, content_length=None):
+        if body is None:
+            body = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=")
         headers = {"Content-Type": content_type}
         if content_length is not None:
             headers["Content-Length"] = str(content_length)
@@ -1268,30 +1284,25 @@ class AvatarStorageServiceTestCase(unittest.TestCase):
 
         return _Resp()
 
-    def test_store_avatar_from_url_uploads_and_returns_view_url(self):
+    def test_store_avatar_from_url_persists_owned_profile_and_returns_view_url(self):
         from services import avatar_storage
 
-        created = {}
-
-        class _Storage:
-            def __init__(self, _client):
-                pass
-
-            def create_file(self, bucket_id, file_id, input_file, permissions=None):
-                created["bucket_id"] = bucket_id
-                created["file_id"] = file_id
-                created["permissions"] = permissions
-                return {"$id": file_id}
+        def persist(_user_id, row_data, **_kwargs):
+            return row_data
 
         with patch.object(avatar_storage, "require_public_http_url", side_effect=lambda url: url), \
                 patch.object(avatar_storage.http_requests, "get", return_value=self._fake_response()), \
-                patch.object(avatar_storage, "Storage", _Storage), \
-                patch.object(avatar_storage, "build_avatar_view_url", side_effect=lambda fid: f"https://appwrite.test/view/{fid}"):
+                patch.object(avatar_storage.storage_backend, "write_backend", return_value="appwrite"), \
+                patch.object(avatar_storage, "persist_avatar_user", side_effect=persist) as saved, \
+                patch.object(avatar_storage, "build_avatar_view_url", side_effect=lambda fid, **_kwargs: f"https://appwrite.test/view/{fid}"):
             result = avatar_storage.store_avatar_from_url("user-1", "https://provider.test/avatar.png")
 
         self.assertIsNotNone(result)
-        self.assertEqual(result["file_id"], created["file_id"])
-        self.assertEqual(result["view_url"], f"https://appwrite.test/view/{created['file_id']}")
+        prepared = saved.call_args.kwargs["prepared"]
+        self.assertEqual(prepared["user_id"], "user-1")
+        self.assertEqual(result["file_id"], prepared["file_id"])
+        self.assertEqual(result["view_url"], f"https://appwrite.test/view/{prepared['file_id']}")
+        self.assertEqual(saved.call_args.kwargs["provider_source_url"], "https://provider.test/avatar.png")
 
     def test_store_avatar_from_url_rejects_unsupported_content_type(self):
         from services import avatar_storage

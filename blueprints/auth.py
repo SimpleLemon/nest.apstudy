@@ -41,10 +41,17 @@ from appwrite_helpers import (
 )
 from models import User, user_from_doc
 from avatar_images import DEFAULT_AVATAR_URL
-from services.avatar_storage import delete_avatar_file, store_avatar_from_url
+from services.avatar_storage import (
+    avatar_profile_fields,
+    delete_avatar_file,
+    persist_avatar_user,
+    prepare_avatar_from_url,
+)
+from services import storage_backend
+from services.storage_objects import StorageMutationPaused
 from services.chat_presence import sync_chat_presence_labels_for_user
 from services.discord_audit import emit_server_log_event, emit_user_event, format_actor, format_user_target
-from services import auth_session, discord_bridge, invites, notes_collaboration, oauth_providers
+from services import auth_session, discord_bridge, invites, notes_collaboration, oauth_providers, user_profile
 from services.entitlements import TIER_BADGES, TIER_LABELS, normalize_tier
 from services.user_profile import (
     USERNAME_MAX_LENGTH,
@@ -55,7 +62,7 @@ from services.user_profile import (
     normalize_banner_color as _normalize_banner_color,
     profile_handle as _profile_handle,
 )
-from app import AUTH_SESSION_DURATION
+from services.auth_config import AUTH_SESSION_DURATION
 
 auth_bp = Blueprint("auth", __name__)
 logger = logging.getLogger(__name__)
@@ -282,6 +289,12 @@ def _backfill_user_avatar(user_doc, *, dry_run=False):
     if not _user_needs_avatar_backfill(user_doc):
         return {"user_id": user_id, "status": "skipped", "reason": "avatar_present"}
 
+    if not dry_run:
+        try:
+            storage_backend.require_mutations_enabled()
+        except StorageMutationPaused:
+            return {"user_id": user_id, "status": "skipped", "reason": "storage_mutations_paused"}
+
     provider = str(user_doc.get("provider") or "google").strip().lower()
     remote_user = _account_from_user_id(user_id)
     identity_token = _provider_access_token_from_identities(user_id, provider=provider)
@@ -302,22 +315,18 @@ def _backfill_user_avatar(user_doc, *, dry_run=False):
             "avatar_url": avatar_url,
         }
 
-    picture_url, avatar_file_id, storage_result, avatar_file_size_bytes = _store_provider_avatar(
-        user_id,
-        avatar_url,
-        page_context="auth/backfill-avatars",
-    )
-    update_row_safe(
-        COLLECTIONS["users"],
-        user_id,
-        {
-            "picture_url": picture_url,
-            "avatar_file_id": avatar_file_id,
-            "avatar_source": "provider",
-            "avatar_file_size_bytes": avatar_file_size_bytes,
-            "provider": provider,
-        },
-    )
+    prepared = prepare_avatar_from_url(user_id, avatar_url)
+    updates = {"picture_url": avatar_url, "avatar_file_id": None, "avatar_source": "provider",
+               "avatar_file_size_bytes": 0, "avatar_storage_backend": "appwrite", "provider": provider}
+    storage_result = "provider_url_fallback"
+    if prepared:
+        updates.update(avatar_profile_fields(prepared))
+        storage_result = "stored"
+    try:
+        saved = persist_avatar_user(user_id, updates, prepared=prepared, avatar_change=True, provider_source_url=avatar_url)
+    except StorageMutationPaused:
+        return {"user_id": user_id, "status": "skipped", "reason": "storage_mutations_paused"}
+    picture_url = saved.get("picture_url")
     return {
         "user_id": user_id,
         "status": "updated",
@@ -456,51 +465,18 @@ def _discord_identity_from_appwrite(*appwrite_user_ids):
     return {}
 
 
-def _resolve_discord_link_identity(
-    *,
-    provider_uid=None,
-    provider_access_token=None,
-    appwrite_user_ids=(),
-):
-    """Best-effort Discord identity resolution for link/login flows."""
-    provider_uid = str(provider_uid or "").strip()
-    profile = (
-        _fetch_provider_profile("discord", provider_access_token)
-        if provider_access_token
-        else {}
+def _resolve_discord_link_identity(*, provider_uid=None, provider_access_token=None, appwrite_user_ids=()):
+    return oauth_providers.resolve_discord_link_identity(
+        provider_uid=provider_uid,
+        provider_access_token=provider_access_token,
+        appwrite_user_ids=appwrite_user_ids,
+        fetch_profile=_fetch_provider_profile,
+        appwrite_identity=_discord_identity_from_appwrite,
     )
-    appwrite_identity = _discord_identity_from_appwrite(*appwrite_user_ids)
-
-    access_token = provider_access_token or appwrite_identity.get("access_token")
-    if access_token and not profile.get("id"):
-        profile = _fetch_provider_profile("discord", access_token) or profile
-
-    discord_id = (
-        provider_uid
-        or str(profile.get("id") or "").strip()
-        or str(appwrite_identity.get("id") or "").strip()
-    )
-    username = (
-        profile.get("username")
-        or profile.get("name")
-        or appwrite_identity.get("username")
-    )
-    return {
-        "id": discord_id or None,
-        "username": username,
-        "has_provider_uid": bool(provider_uid),
-        "has_access_token": bool(provider_access_token),
-        "has_appwrite_identity": bool(appwrite_identity.get("id")),
-    }
 
 
 def _discord_avatar_url(profile):
-    user_id = profile.get("id") or profile.get("$id")
-    avatar_hash = profile.get("avatar")
-    if not user_id or not avatar_hash:
-        return None
-    extension = "gif" if avatar_hash.startswith("a_") else "png"
-    return f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.{extension}?size=256"
+    return oauth_providers._discord_avatar_url(profile)
 
 
 def _fetch_provider_identity(provider, access_token):
@@ -508,69 +484,23 @@ def _fetch_provider_identity(provider, access_token):
 
 
 def _format_member_since(value):
-    if not value:
-        return None
-    if isinstance(value, datetime):
-        return value.strftime("%b %d, %Y")
-    text = value[:-1] + "+00:00" if isinstance(value, str) and value.endswith("Z") else value
-    try:
-        return datetime.fromisoformat(text).strftime("%b %d, %Y")
-    except (TypeError, ValueError):
-        return str(value)
+    return user_profile.format_member_since(value)
 
 
 def _normalize_username(value):
-    if not value:
-        return ""
-    normalized = str(value).strip().lower()
-    if not USERNAME_PATTERN.fullmatch(normalized):
-        return ""
-    if len(normalized) < USERNAME_MIN_LENGTH or len(normalized) > USERNAME_MAX_LENGTH:
-        return ""
-    return normalized
+    return user_profile.normalize_username(value)
 
 
 def _public_profile_payload(user_doc):
-    user_id = user_doc.get("$id") or user_doc.get("id")
-    name = user_doc.get("name") or "APStudy User"
-    username = user_doc.get("username")
-    tier = normalize_tier(user_doc.get("tier"))
-    return {
-        "id": user_id,
-        "name": name,
-        "username": username,
-        "handle": _profile_handle(name, user_id, username),
-        "picture_url": user_doc.get("picture_url"),
-        "banner_color": _normalize_banner_color(user_doc.get("banner_color")),
-        "school": user_doc.get("school"),
-        "major": user_doc.get("major"),
-        "graduation_year": user_doc.get("graduation_year"),
-        "education_level": user_doc.get("education_level"),
-        "class_year": user_doc.get("class_year"),
-        "member_since": _format_member_since(user_doc.get("created_at")),
-        "is_emory_school": _is_emory_school(user_doc.get("school")),
-        "is_early_member": _is_early_member(user_doc.get("created_at")),
-        "tier": tier,
-        "tier_label": TIER_LABELS[tier],
-        "tier_badge": TIER_BADGES.get(tier),
-    }
+    return user_profile.public_profile_payload(user_doc)
 
 
 def _fetch_provider_profile(provider, access_token):
-    identity = _fetch_provider_identity(provider, access_token)
-    return {
-        "id": identity.get("id"),
-        "name": identity.get("name"),
-        "username": identity.get("username"),
-        "avatar_url": identity.get("avatar_url"),
-    } if identity else {}
+    return oauth_providers.fetch_provider_profile(provider, access_token, fetch_identity=_fetch_provider_identity)
 
 
 def _clean_avatar_url(value):
-    text = str(value or "").strip()
-    if not text or text == DEFAULT_AVATAR_URL:
-        return None
-    return text
+    return user_profile.clean_avatar_url(value)
 
 
 def _provider_access_token_from_identities(appwrite_user_id, provider=None):
@@ -631,63 +561,12 @@ def _log_avatar_collection(
     )
 
 
-def _store_provider_avatar(user_id, source_url, *, page_context="auth"):
-    """Copy a provider avatar into storage; keep the source URL when copy fails."""
-    clean_url = _clean_avatar_url(source_url)
-    if not clean_url:
-        return None, None, "missing_source_url", 0
-
-    stored_avatar = store_avatar_from_url(user_id, clean_url)
-    if stored_avatar:
-        return stored_avatar["view_url"], stored_avatar["file_id"], "stored", stored_avatar.get("size_bytes", 0)
-
-    logger.warning(
-        "Provider avatar storage copy failed; keeping provider URL: user_id=%s page_context=%s source=%s",
-        user_id,
-        page_context,
-        _sanitize_avatar_log_url(clean_url),
-    )
-    return clean_url, None, "provider_url_fallback", 0
-
-
 def _provider_avatar_url(provider_profile, remote_user, provider=None):
-    remote_user = remote_user or {}
-    provider_key = str(provider or "").strip().lower()
-    prefs = remote_user.get("prefs") if isinstance(remote_user.get("prefs"), dict) else {}
-    if provider_key == "discord":
-        url = _clean_avatar_url(_discord_avatar_url(remote_user))
-        if url:
-            return url
-
-    candidates = (
-        (provider_profile or {}).get("avatar_url"),
-        remote_user.get("avatar_url"),
-        remote_user.get("photoUrl"),
-        remote_user.get("photo_url"),
-        remote_user.get("picture"),
-        remote_user.get("picture_url"),
-        None if provider_key == "discord" else remote_user.get("avatar"),
-        prefs.get("avatar_url"),
-        prefs.get("photoUrl"),
-        prefs.get("photo_url"),
-        prefs.get("picture"),
-        prefs.get("picture_url"),
-        None if provider_key == "discord" else prefs.get("avatar"),
-    )
-    for candidate in candidates:
-        url = _clean_avatar_url(candidate)
-        if url:
-            return url
-    return None
+    return oauth_providers.provider_avatar_url(provider_profile, remote_user, provider, discord_avatar_url=_discord_avatar_url, clean_url=_clean_avatar_url)
 
 
 def _avatar_can_use_provider(user_doc):
-    if not user_doc:
-        return True
-    avatar_source = str(user_doc.get("avatar_source") or "").strip().lower()
-    if avatar_source == "provider":
-        return True
-    return _clean_avatar_url(user_doc.get("picture_url")) is None
+    return user_profile.avatar_can_use_provider(user_doc)
 
 
 
@@ -797,40 +676,6 @@ def _complete_appwrite_login(
     provider_uid=None,
     page_context="auth/session",
 ):
-    # Provider display names initialize a new profile, but never override a
-    # non-empty name the person has already chosen in Nest.
-    remote_user = dict(remote_user or {})
-    preserve_existing_name = False
-
-    def has_custom_name(user_doc):
-        return isinstance(user_doc, dict) and bool(str(user_doc.get("name") or "").strip())
-
-    def get_user_document(*args, **kwargs):
-        nonlocal preserve_existing_name
-        user_doc = get_row_safe(*args, **kwargs)
-        if has_custom_name(user_doc):
-            preserve_existing_name = True
-            remote_user["name"] = None
-            remote_user["displayName"] = None
-        return user_doc
-
-    def find_user_document(*args, **kwargs):
-        nonlocal preserve_existing_name
-        user_doc = _find_user_by_email(*args, **kwargs)
-        if has_custom_name(user_doc):
-            preserve_existing_name = True
-            remote_user["name"] = None
-            remote_user["displayName"] = None
-        return user_doc
-
-    def fetch_provider_profile(provider_name, access_token):
-        profile = _fetch_provider_profile(provider_name, access_token) or {}
-        if not preserve_existing_name:
-            return profile
-        sanitized_profile = dict(profile)
-        sanitized_profile.pop("name", None)
-        return sanitized_profile
-
     return auth_session._complete_appwrite_login(
         remote_user,
         provider=provider,
@@ -838,45 +683,30 @@ def _complete_appwrite_login(
         provider_access_token=provider_access_token,
         provider_uid=provider_uid,
         page_context=page_context,
-        dependencies={
-            "collections": COLLECTIONS,
-            "get_row_safe": get_user_document,
-            "find_user_by_email": find_user_document,
-            "provider_access_token_from_identities": (
-                _provider_access_token_from_identities
-            ),
-            "fetch_provider_profile": fetch_provider_profile,
-            "provider_avatar_url": _provider_avatar_url,
-            "log_avatar_collection": _log_avatar_collection,
-            "resolve_discord_link_identity": _resolve_discord_link_identity,
-            "format_datetime": format_datetime,
-            "datetime": datetime,
-            "store_provider_avatar": _store_provider_avatar,
-            "create_row_safe": create_row_safe,
-            "secrets": secrets,
-            "invites": invites,
-            "request": request,
-            "invite_cookie": INVITE_COOKIE,
-            "logger": logger,
-            "avatar_can_use_provider": _avatar_can_use_provider,
-            "delete_avatar_file": delete_avatar_file,
-            "update_row_safe": update_row_safe,
-            "sync_chat_presence_labels_for_user": (
-                sync_chat_presence_labels_for_user
-            ),
-            "session": session,
-            "login_user": login_user,
-            "user_from_doc": user_from_doc,
-            "current_app": current_app,
-            "auth_session_duration": AUTH_SESSION_DURATION,
-            "set_oauth_session": _set_oauth_session,
-            "notes_collaboration": notes_collaboration,
-            "discord_bridge": discord_bridge,
-            "emit_user_event": emit_user_event,
-            "format_actor": format_actor,
-            "format_user_target": format_user_target,
-            "redirect_for_user_doc": _redirect_for_user_doc,
-        },
+        profiles=auth_session.LoginProfiles(
+            get_row=get_row_safe,
+            find_by_email=_find_user_by_email,
+            prepare_avatar=prepare_avatar_from_url,
+            persist=persist_avatar_user,
+            can_refresh_avatar=_avatar_can_use_provider,
+        ),
+        providers=auth_session.LoginProviders(
+            identity_token=_provider_access_token_from_identities,
+            fetch_profile=_fetch_provider_profile,
+            avatar_url=_provider_avatar_url,
+            log_avatar=_log_avatar_collection,
+            discord_identity=_resolve_discord_link_identity,
+        ),
+        completion=auth_session.LoginCompletion(
+            login=login_user,
+            set_oauth=_set_oauth_session,
+            sync_presence=sync_chat_presence_labels_for_user,
+            emit_event=emit_user_event,
+            redirect=_redirect_for_user_doc,
+            session_duration=AUTH_SESSION_DURATION,
+            invite_cookie=INVITE_COOKIE,
+        ),
+        now_fn=datetime.utcnow,
     )
 
 

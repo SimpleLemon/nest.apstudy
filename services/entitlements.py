@@ -1,5 +1,6 @@
 """Shared tier definitions, usage accounting, and quota enforcement."""
 
+import json
 import logging
 import sqlite3
 
@@ -10,7 +11,6 @@ from appwrite_client import COLLECTIONS
 from appwrite_helpers import first_row, list_rows_all
 from services.app_config import get_config, set_config
 from services.database import db_connection
-from services.environment_config import runtime_environment_config
 
 
 logger = logging.getLogger(__name__)
@@ -241,10 +241,8 @@ def usage_for_user(user_id, user_doc=None):
     normalized_id = str(user_id)
     files = _rows(COLLECTIONS["shared_files"], [Query.equal("user_id", [normalized_id])])
     media = _rows(COLLECTIONS["note_media"], [Query.equal("user_id", [normalized_id])])
-    chat_attachments = (
-        _rows(COLLECTIONS["chat_attachments"], [Query.equal("user_id", [normalized_id])])
-        if runtime_environment_config().appwrite_chat_attachments_enabled
-        else []
+    chat_attachments = _rows(
+        COLLECTIONS["chat_attachments"], [Query.equal("user_id", [normalized_id])]
     )
     notes = _rows(COLLECTIONS["notes"], [Query.equal("user_id", [normalized_id])])
     courses = _rows(COLLECTIONS["user_courses"], [Query.equal("user_id", [normalized_id])])
@@ -257,7 +255,7 @@ def usage_for_user(user_id, user_doc=None):
         for row in chat_attachments
         if row.get("status") in {"pending", "active"}
     )
-    storage_bytes += int(user.get("avatar_file_size_bytes") or 0)
+    storage_bytes += avatar_storage_usage_for_user(normalized_id, user)
     return {
         "storage_bytes": storage_bytes,
         "files": len(files),
@@ -332,6 +330,94 @@ def check_storage(entitlements, additional_bytes):
     requested = current + int(additional_bytes or 0)
     if requested > limit:
         raise EntitlementLimitError("storage bytes", current, requested, limit)
+
+
+def _avatar_storage_usage(conn, user_id, user=None):
+    """Bill each retained avatar to its uploader, independently of references."""
+    owned = conn.execute(
+        "SELECT COALESCE(SUM(size_bytes), 0) FROM storage_avatar_ownership WHERE user_id=?",
+        (str(user_id),),
+    ).fetchone()[0]
+    if user is None:
+        row = conn.execute(
+            "SELECT avatar_file_id, avatar_file_size_bytes FROM users WHERE id=?", (str(user_id),),
+        ).fetchone()
+        user = dict(row) if row else {}
+    current_id = user.get("avatar_file_id")
+    recorded = current_id and conn.execute(
+        "SELECT 1 FROM storage_avatar_ownership WHERE object_id=?", (str(current_id),),
+    ).fetchone()
+    # Existing profiles keep their current charge until attribution is seeded.
+    fallback = 0 if recorded else int(user.get("avatar_file_size_bytes") or 0)
+    return int(owned) + fallback
+
+
+def avatar_storage_usage_for_user(user_id, user):
+    try:
+        with db_connection() as conn:
+            return _avatar_storage_usage(conn, user_id, user)
+    except sqlite3.Error as exc:
+        raise EntitlementError("Unable to calculate current avatar storage.") from exc
+
+
+def storage_usage_transaction(conn, user_id):
+    """Count feature metadata without reading ciphertext, even if uploads stop."""
+    user_id = str(user_id)
+    usage = 0
+    for table in ("shared_files", "note_media"):
+        usage += int(conn.execute(
+            f"SELECT COALESCE(SUM(file_size_bytes), 0) FROM {table} WHERE user_id=?",
+            (user_id,),
+        ).fetchone()[0])
+    usage += int(conn.execute(
+        "SELECT COALESCE(SUM(stored_size_bytes + preview_size_bytes), 0) "
+        "FROM chat_attachments WHERE user_id=? AND status IN ('pending','active')",
+        (user_id,),
+    ).fetchone()[0])
+    return usage + _avatar_storage_usage(conn, user_id)
+
+
+def assert_account_storage_active(conn, user_id):
+    """A completed local deletion must not be undone by a racing OAuth signup."""
+    from services.storage_errors import StorageUnavailable
+    if conn.execute(
+        "SELECT 1 FROM storage_account_deletions WHERE user_id=?", (str(user_id),),
+    ).fetchone():
+        raise StorageUnavailable("This account is being deleted; uploads are unavailable.")
+
+
+def check_storage_transaction(conn, user_id, additional_bytes, *, replacing_bytes=0,
+                              entitlements=None, allow_new_user=False):
+    """Recheck current usage and tier while the caller holds its write lock.
+
+    The returned limits are authoritative for per-file and batch checks too.
+    Request-time entitlements cannot override an existing user's stored tier.
+    """
+    if not conn.in_transaction:
+        raise EntitlementError("Storage quota checks require a write transaction.")
+    assert_account_storage_active(conn, user_id)
+    user = conn.execute("SELECT tier FROM users WHERE id=?", (str(user_id),)).fetchone()
+    if user is None and not allow_new_user:
+        from services.storage_errors import StorageUnavailable
+        raise StorageUnavailable("This account is unavailable for uploads.")
+    tier = normalize_tier(user[0] if user else (entitlements or {}).get("key"))
+    config = conn.execute(
+        "SELECT config_value FROM chat_bridge_config WHERE config_key=?",
+        (TIER_CONFIG_KEY,),
+    ).fetchone()
+    try:
+        raw = json.loads(config[0]) if config and config[0] else DEFAULT_TIER_DEFINITIONS
+        definitions = normalize_definitions(raw)
+    except (ValueError, TypeError) as exc:
+        raise EntitlementError("Unable to validate current storage limits.") from exc
+    usage = storage_usage_transaction(conn, user_id)
+    replacing_bytes = int(replacing_bytes or 0)
+    additional_bytes = int(additional_bytes or 0)
+    if replacing_bytes < 0 or replacing_bytes > usage or additional_bytes < 0:
+        raise EntitlementError("Invalid storage replacement accounting.")
+    result = {**tier_metadata(tier, definitions), "usage": {"storage_bytes": usage}}
+    check_storage(result, additional_bytes - replacing_bytes)
+    return result
 
 
 def entitlement_payload(user_id, user_doc=None):

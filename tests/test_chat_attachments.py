@@ -17,7 +17,7 @@ class ChatAttachmentValidationTests(unittest.TestCase):
     def test_attachment_capability_uses_the_registered_environment_snapshot(self):
         with patch.dict(
             os.environ,
-            {"APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": ""},
+            {"NEST_CHAT_ATTACHMENTS_ENABLED": "0", "APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": ""},
             clear=True,
         ):
             configured = load_environment_config()
@@ -26,13 +26,18 @@ class ChatAttachmentValidationTests(unittest.TestCase):
         app.extensions[ENVIRONMENT_CONFIG_EXTENSION_KEY] = configured
         with patch.dict(
             os.environ,
-            {"APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": "configured-bucket"},
+            {"NEST_CHAT_ATTACHMENTS_ENABLED": "1", "APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": "configured-bucket"},
             clear=True,
         ), app.app_context(), patch.object(chat_attachments, "list_rows_all") as list_rows:
             self.assertFalse(chat_attachments._chat_attachments_enabled())
             self.assertFalse(chat_api._appwrite_chat_attachments_enabled())
             self.assertEqual(chat_attachments.attachments_for_messages(["message-1"]), {})
             list_rows.assert_not_called()
+
+    def test_chat_capability_is_independent_from_the_legacy_bucket(self):
+        with patch.dict(os.environ, {"APPWRITE_CHAT_ATTACHMENTS_BUCKET_ID": ""}, clear=True):
+            self.assertTrue(chat_attachments._chat_attachments_enabled())
+            self.assertTrue(chat_api._appwrite_chat_attachments_enabled())
 
     def test_chat_limits_are_independent_from_regular_file_limits(self):
         self.assertEqual(DEFAULT_TIER_DEFINITIONS["free"]["max_chat_attachment_size_bytes"], 10 * MIB)
@@ -45,10 +50,10 @@ class ChatAttachmentValidationTests(unittest.TestCase):
         prepared = chat_attachments.inspect_and_prepare(original, "notes.md")
         self.assertEqual(prepared["compression_encoding"], "gzip")
         self.assertLess(prepared["stored_size_bytes"], len(original))
-        row = {"storage_file_id": "file", "compression_encoding": "gzip"}
-        with patch.object(chat_attachments, "storage_service") as storage:
-            storage.return_value.get_file_download.return_value = prepared["stored"]
+        row = {"storage_file_id": "file", "storage_bucket_id": "legacy", "compression_encoding": "gzip"}
+        with patch.object(chat_attachments, "read_legacy_file", return_value=prepared["stored"]) as read:
             self.assertEqual(chat_attachments.attachment_bytes(row), original)
+        read.assert_called_once_with("legacy", "file", max_bytes=50 * MIB, expected_bytes=None)
 
     def test_animated_gif_is_preserved_without_flattening(self):
         first = Image.new("RGB", (8, 8), "red")

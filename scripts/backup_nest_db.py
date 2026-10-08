@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import os
 import shutil
 import sqlite3
 import sys
@@ -18,15 +17,15 @@ if str(ROOT_DIR) not in sys.path:
 
 from dotenv import load_dotenv
 
-load_dotenv(ROOT_DIR / ".env")
-
+from config import load_environment_config
 from services.discord_audit import DiscordAuditEvent, emit_backup_event, send_audit_event_sync
 from services.database import nest_instance_dir
+from services.storage_backend import storage_setting
+from scripts.storage_backup import verify_backup
 
 
-DEFAULT_INSTANCE_DIR = Path(nest_instance_dir())
-DEFAULT_BACKUP_DIR = Path(os.environ.get("NEST_BACKUP_DIR", "/var/backups/nest-db"))
-MAX_BACKUPS = int(os.environ.get("NEST_BACKUP_RETENTION", "7"))
+DEFAULT_BACKUP_DIR = Path("/var/backups/nest-db")
+MAX_BACKUPS = 7
 
 SQLITE_DATABASES = (
     ("nest.sqlite3", "nest.sqlite3"),
@@ -82,6 +81,7 @@ def _backup_database(source: Path, destination: Path) -> tuple[bool, str]:
         with closing(sqlite3.connect(f"file:{source}?mode=ro", uri=True)) as source_conn:
             source_conn.execute("PRAGMA busy_timeout = 5000")
             with closing(sqlite3.connect(destination)) as dest_conn:
+                destination.chmod(0o600)
                 source_conn.backup(dest_conn)
                 dest_conn.commit()
 
@@ -142,7 +142,8 @@ def _rotate_backups(backup_dir: Path, max_backups: int) -> list[str]:
     return messages
 
 
-def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify_discord: bool) -> int:
+def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify_discord: bool,
+               preserve_history: bool = False, storage_keyring: Path | None = None) -> int:
     if max_backups < 1:
         raise ValueError("max_backups must be at least 1")
 
@@ -155,8 +156,8 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
     skipped: list[str] = []
     backup_sizes: dict[str, int | None] = {}
 
-    backup_dir.mkdir(parents=True, exist_ok=True)
-    staging_subdir.mkdir(exist_ok=False)
+    backup_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+    staging_subdir.mkdir(mode=0o700, exist_ok=False)
 
     for source_name, dest_name in SQLITE_DATABASES:
         destination = staging_subdir / dest_name
@@ -172,11 +173,21 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
             skipped.append(source_name)
 
     apswiftly_source, apswiftly_dest = APSWIFTLY_DATA_DIR
-    ok, message = _backup_directory(
-        instance_dir / apswiftly_source,
-        staging_subdir / apswiftly_dest,
-        label="APSwiftly database (aoi.db)",
-    )
+    keyring = storage_keyring or storage_setting("NEST_UPLOAD_KEYRING_PATH")
+    key_path = Path(keyring).resolve() if keyring else None
+    apswiftly_path = instance_dir / apswiftly_source
+    keys_in_data = bool(key_path and (
+        key_path.is_relative_to(apswiftly_path.resolve())
+        or (key_path.exists() and any(path.samefile(key_path) for path in apswiftly_path.rglob("*") if path.is_file()))
+    ))
+    if keys_in_data or (key_path and key_path.is_relative_to(backup_dir.resolve())):
+        ok, message = False, "[ERROR] Upload keys must be stored separately from backed-up data directories"
+    else:
+        ok, message = _backup_directory(
+            instance_dir / apswiftly_source,
+            staging_subdir / apswiftly_dest,
+            label="APSwiftly database (aoi.db)",
+        )
     log_lines.append(message)
     print(message)
     if ok:
@@ -189,6 +200,15 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
 
     required_databases = {source_name for source_name, _ in SQLITE_DATABASES}
     required_complete = required_databases.issubset(backed_up)
+    if errors == 0 and required_complete:
+        try:
+            verification = verify_backup(staging_subdir, keyring_path=storage_keyring)
+            message = f"[SUCCESS] Restore verified ({verification['objects']} uploads, {verification['bytes']} bytes)"
+        except Exception:
+            errors += 1
+            message = "[ERROR] Restore verification failed; check the separately protected upload keyring and database integrity"
+        log_lines.append(message)
+        print(message)
     published = errors == 0 and required_complete
 
     if published:
@@ -207,7 +227,7 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
     log_lines.append(summary)
     print(summary)
 
-    rotate_lines = _rotate_backups(backup_dir, max_backups) if published else []
+    rotate_lines = _rotate_backups(backup_dir, max_backups) if published and not preserve_history else []
     for line in rotate_lines:
         log_lines.append(line)
         print(line)
@@ -262,11 +282,23 @@ def run_backup(*, instance_dir: Path, backup_dir: Path, max_backups: int, notify
 
 
 def main(argv: list[str] | None = None) -> int:
+    env_parser = argparse.ArgumentParser(add_help=False)
+    env_parser.add_argument("--env-file", type=Path, default=ROOT_DIR / ".env")
+    environment_args, _ = env_parser.parse_known_args(argv)
+    try:
+        load_dotenv(environment_args.env_file)
+    except OSError:
+        print("[ERROR] Backup environment file is unreadable; grant the backup account minimum read access", file=sys.stderr)
+        return 1
+    configured = load_environment_config()
     parser = argparse.ArgumentParser(description="Back up Nest SQLite databases and APSwiftly aoi.db data.")
-    parser.add_argument("--instance-dir", type=Path, default=DEFAULT_INSTANCE_DIR)
-    parser.add_argument("--backup-dir", type=Path, default=DEFAULT_BACKUP_DIR)
-    parser.add_argument("--max-backups", type=int, default=MAX_BACKUPS)
+    parser.add_argument("--env-file", type=Path, default=environment_args.env_file)
+    parser.add_argument("--instance-dir", type=Path, default=Path(nest_instance_dir()))
+    parser.add_argument("--backup-dir", type=Path, default=Path(configured.nest_backup_dir))
+    parser.add_argument("--max-backups", type=int, default=int(configured.nest_backup_retention_raw))
     parser.add_argument("--no-discord", action="store_true")
+    parser.add_argument("--preserve-history", action="store_true", help="Do not rotate existing sets during a migration diagnostic.")
+    parser.add_argument("--storage-keyring", type=Path, help="Separately protected keys for upload restore verification.")
     args = parser.parse_args(argv)
 
     return run_backup(
@@ -274,6 +306,8 @@ def main(argv: list[str] | None = None) -> int:
         backup_dir=args.backup_dir,
         max_backups=args.max_backups,
         notify_discord=not args.no_discord,
+        preserve_history=args.preserve_history,
+        storage_keyring=args.storage_keyring,
     )
 
 

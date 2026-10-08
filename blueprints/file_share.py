@@ -9,44 +9,45 @@ from flask import (
     render_template,
     request,
     send_file,
+    url_for,
 )
 from flask_login import current_user, login_required
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
 from appwrite.exception import AppwriteException
-from appwrite.input_file import InputFile
 from appwrite.query import Query
-from appwrite_client import COLLECTIONS, FILE_SHARE_BUCKET_ID
+from appwrite_client import COLLECTIONS
 from appwrite_helpers import (
-    create_row_safe,
-    delete_row_safe,
     first_row,
     format_datetime,
     get_row_safe,
     list_rows_all,
-    update_row_safe,
 )
 from services.discord_audit import emit_creation_event, format_actor
 from services.entitlements import (
     EntitlementError,
-    EntitlementLimitError,
-    check_storage,
     request_entitlements,
+)
+from services.file_share_uploads import upload_files
+from services.file_share_metadata import create_folder_record, update_file_record, update_folder_record
+from services.storage_backend import require_mutations_enabled
+from services.storage_objects import (
+    StorageError,
+    StorageNotFound,
 )
 from services.file_share_store import (
     ALLOWED_EXPIRY_OPTIONS,
-    APPWRITE_STORAGE_BACKEND,
     DEFAULT_EXPIRY_DAYS,
     MAX_FILE_SIZE,
     MAX_UPLOAD_FILES,
     ROOT_FOLDER_ID,
     SHARE_CODE_CHARS,
     SHARE_CODE_LENGTH,
-    _appwrite_upload_error,
     _assert_folder_target,
     _build_public_folder_tree,
     _collect_folder_tree_ids,
+    _delete_folder_tree,
     _delete_shared_file_row,
     _delete_storage_file,
     _file_owner_or_404,
@@ -77,12 +78,9 @@ from services.file_share_store import (
     _shared_file_payload,
     _sibling_order,
     _status_code,
-    _storage,
     _storage_download_bytes,
-    _storage_path,
     _zip_arcname,
     _zip_response as _zip_response_service,
-    upload_file_response,
 )
 from services.row_utils import row_id as _row_id
 from services.time_utils import utcnow as _utcnow
@@ -115,6 +113,12 @@ def _zip_response(folder_name, files):
 @file_share_bp.errorhandler(RequestEntityTooLarge)
 def handle_file_too_large(_error):
     return jsonify({"error": "The upload exceeds the current file-size or request limit.", "code": "file_too_large"}), 413
+
+
+@file_share_bp.errorhandler(StorageError)
+def handle_storage_error(error):
+    logger.warning("Shared-file storage request failed: %s", error.code)
+    return jsonify({"error": str(error), "code": error.code}), error.status_code
 
 
 @file_share_bp.route("/files")
@@ -154,49 +158,16 @@ def file_share_page():
     )
 
 
-def _upload_file_dependencies():
-    return {
-        "allowed_expiry_options": ALLOWED_EXPIRY_OPTIONS,
-        "appwrite_upload_error": _appwrite_upload_error,
-        "assert_folder_target": _assert_folder_target,
-        "bucket_id": FILE_SHARE_BUCKET_ID,
-        "check_storage": check_storage,
-        "create_row_safe": create_row_safe,
-        "default_expiry_days": DEFAULT_EXPIRY_DAYS,
-        "emit_creation_event": emit_creation_event,
-        "entitlement_error": EntitlementError,
-        "entitlement_limit_error": EntitlementLimitError,
-        "format_actor": format_actor,
-        "format_datetime": format_datetime,
-        "generate_share_code": _generate_share_code,
-        "input_file_from_bytes": InputFile.from_bytes,
-        "jsonify": jsonify,
-        "logger": logger,
-        "max_file_size": MAX_FILE_SIZE,
-        "max_upload_files": MAX_UPLOAD_FILES,
-        "normalize_folder_id": _normalize_folder_id,
-        "request_entitlements": request_entitlements,
-        "secure_filename": secure_filename,
-        "shared_file_payload": _shared_file_payload,
-        "storage": _storage,
-        "storage_backend": APPWRITE_STORAGE_BACKEND,
-        "storage_path": _storage_path,
-        "timedelta": timedelta,
-        "utcnow": _utcnow,
-        "uuid4": uuid.uuid4,
-    }
-
-
 @file_share_bp.route("/api/files/upload", methods=["POST"])
 @login_required
 def upload_file():
-    files = request.files.getlist("file")
-    return upload_file_response(
+    payload, status = upload_files(
         current_user,
-        files,
+        request.files.getlist("file"),
         request.form,
-        _upload_file_dependencies(),
+        share_base_url=url_for("file_share.public_share", share_code="", _external=True),
     )
+    return jsonify(payload), status
 
 
 @file_share_bp.route("/api/files/my")
@@ -239,27 +210,16 @@ def my_files():
 @file_share_bp.route("/api/files/folders", methods=["POST"])
 @login_required
 def create_folder():
+    require_mutations_enabled()
     payload = request.get_json(silent=True) or {}
     user_id = str(current_user.id)
     parent_folder_id = _normalize_folder_id(payload.get("parentFolderId"))
-    _assert_folder_target(user_id, parent_folder_id)
     name = (payload.get("name") or "New Folder").strip() or "New Folder"
     now = format_datetime(_utcnow())
 
     try:
-        created = create_row_safe(
-            _folders_collection(),
-            row_id=str(uuid.uuid4()),
-            data={
-                "user_id": user_id,
-                "name": name[:255],
-                "parent_folder_id": parent_folder_id,
-                "is_public": False,
-                "share_code": None,
-                "order": _sibling_order(user_id, parent_folder_id),
-                "created_at": now,
-                "updated_at": now,
-            },
+        created = create_folder_record(
+            user_id, name=name[:255], parent_folder_id=parent_folder_id, now=now,
         )
     except AppwriteException:
         logger.exception("Failed to create file folder")
@@ -283,6 +243,7 @@ def create_folder():
 @file_share_bp.route("/api/files/folders/<folder_id>", methods=["PATCH"])
 @login_required
 def update_folder(folder_id):
+    require_mutations_enabled()
     folder = _folder_owner_or_404(folder_id)
     payload = request.get_json(silent=True) or {}
     updates = {}
@@ -291,25 +252,18 @@ def update_folder(folder_id):
         updates["name"] = ((payload.get("name") or "").strip() or "Untitled Folder")[:255]
 
     if "parentFolderId" in payload:
-        user_id = str(current_user.id)
         parent_folder_id = _normalize_folder_id(payload.get("parentFolderId"))
-        _assert_folder_target(user_id, parent_folder_id)
-        folders_by_id = {_row_id(item): item for item in _list_all_user_folders(user_id)}
-        if parent_folder_id == _row_id(folder) or _is_descendant_folder(folders_by_id, _row_id(folder), parent_folder_id):
-            return jsonify({"error": "A folder cannot be moved inside itself."}), 400
         updates["parent_folder_id"] = parent_folder_id
 
     if "order" in payload:
         updates["order"] = payload.get("order")
-    elif "parentFolderId" in payload:
-        updates["order"] = _sibling_order(str(current_user.id), updates["parent_folder_id"])
 
     if not updates:
         return jsonify({"error": "No updatable fields were provided."}), 400
 
     updates["updated_at"] = format_datetime(_utcnow())
     try:
-        updated = update_row_safe(_folders_collection(), _row_id(folder), updates)
+        updated = update_folder_record(_row_id(folder), str(current_user.id), updates)
     except AppwriteException:
         logger.exception("Failed to update file folder")
         return jsonify({"error": "Unable to update folder."}), 500
@@ -320,6 +274,7 @@ def update_folder(folder_id):
 @file_share_bp.route("/api/files/folders/<folder_id>/visibility", methods=["POST"])
 @login_required
 def change_folder_visibility(folder_id):
+    require_mutations_enabled()
     folder = _folder_owner_or_404(folder_id)
     payload = request.get_json(silent=True) or request.form
     visibility = (payload.get("visibility") or "").strip().lower()
@@ -335,7 +290,7 @@ def change_folder_visibility(folder_id):
         updates["share_code"] = None
 
     try:
-        updated = update_row_safe(_folders_collection(), _row_id(folder), updates)
+        updated = update_folder_record(_row_id(folder), str(current_user.id), updates)
     except AppwriteException:
         logger.exception("Failed to update folder visibility")
         return jsonify({"error": "Unable to update visibility."}), 500
@@ -360,19 +315,10 @@ def download_folder_zip(folder_id):
 @file_share_bp.route("/api/files/folders/<folder_id>", methods=["DELETE"])
 @login_required
 def delete_folder(folder_id):
-    folder = _folder_owner_or_404(folder_id)
+    require_mutations_enabled()
     user_id = str(current_user.id)
     try:
-        folder_ids = _collect_folder_tree_ids(user_id, _row_id(folder))
-        files = [
-            shared_file
-            for shared_file in _list_all_user_files(user_id, include_expired=True)
-            if shared_file.get("folder_id") in folder_ids
-        ]
-        for shared_file in files:
-            _delete_shared_file_row(shared_file)
-        for descendant_id in reversed(folder_ids):
-            delete_row_safe(_folders_collection(), descendant_id)
+        _delete_folder_tree(folder_id, user_id)
     except AppwriteException:
         logger.exception("Failed to delete file folder")
         return jsonify({"error": "Unable to delete folder."}), 500
@@ -383,6 +329,7 @@ def delete_folder(folder_id):
 @file_share_bp.route("/api/files/my/<file_id>", methods=["PATCH"])
 @login_required
 def update_my_file(file_id):
+    require_mutations_enabled()
     shared_file = _file_owner_or_404(file_id)
     payload = request.get_json(silent=True) or {}
     updates = {}
@@ -393,7 +340,6 @@ def update_my_file(file_id):
 
     if "folderId" in payload:
         folder_id = _normalize_folder_id(payload.get("folderId"))
-        _assert_folder_target(str(current_user.id), folder_id)
         updates["folder_id"] = folder_id
 
     if "expiryDays" in payload:
@@ -410,7 +356,7 @@ def update_my_file(file_id):
 
     updates["updated_at"] = format_datetime(_utcnow())
     try:
-        updated = update_row_safe(COLLECTIONS["shared_files"], _row_id(shared_file), updates)
+        updated = update_file_record(_row_id(shared_file), str(current_user.id), updates)
     except AppwriteException:
         logger.exception("Failed to update shared file")
         return jsonify({"error": "Unable to update file."}), 500
@@ -421,6 +367,7 @@ def update_my_file(file_id):
 @file_share_bp.route("/api/files/my/<file_id>/visibility", methods=["POST"])
 @login_required
 def change_visibility(file_id):
+    require_mutations_enabled()
     shared_file = _file_owner_or_404(file_id)
     data = request.get_json(silent=True) or request.form
     visibility = (data.get("visibility") or "").strip().lower()
@@ -438,7 +385,7 @@ def change_visibility(file_id):
     }
 
     try:
-        shared_file = update_row_safe(COLLECTIONS["shared_files"], _row_id(shared_file), updates)
+        shared_file = update_file_record(_row_id(shared_file), str(current_user.id), updates)
     except AppwriteException:
         logger.exception("Failed to update file visibility")
         return jsonify({"error": "Unable to update visibility."}), 500
@@ -455,7 +402,7 @@ def download_my_file(file_id):
 
     try:
         return _send_shared_file(shared_file)
-    except FileNotFoundError:
+    except (FileNotFoundError, StorageNotFound):
         abort(404)
     except AppwriteException:
         logger.exception("Failed to download shared file")
@@ -507,6 +454,7 @@ def bulk_download_files():
 @file_share_bp.route("/api/files/my/<file_id>", methods=["DELETE"])
 @login_required
 def delete_my_file(file_id):
+    require_mutations_enabled()
     shared_file = _file_owner_or_404(file_id)
     try:
         _delete_shared_file_row(shared_file)
@@ -536,7 +484,7 @@ def public_share(share_code):
     if request.args.get("download"):
         try:
             return _send_shared_file(shared_file)
-        except FileNotFoundError:
+        except (FileNotFoundError, StorageNotFound):
             return _render_public_share_page(error_message="File not found or expired.")
         except AppwriteException:
             logger.exception("Failed to download public share")
@@ -604,7 +552,7 @@ def public_folder_file_download(share_code, file_id):
         abort(404)
     try:
         return _send_shared_file(shared_file)
-    except FileNotFoundError:
+    except (FileNotFoundError, StorageNotFound):
         abort(404)
     except AppwriteException:
         logger.exception("Failed to download public folder file")

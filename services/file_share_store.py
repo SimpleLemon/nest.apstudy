@@ -1,8 +1,12 @@
 """File-share persistence, folder, storage, and response helpers."""
 
+import hashlib
 import io
 import logging
+import re
 import secrets
+import tempfile
+import unicodedata
 import zipfile
 from datetime import timezone
 
@@ -16,7 +20,6 @@ from appwrite.services.storage import Storage
 
 from appwrite_client import COLLECTIONS, FILE_SHARE_BUCKET_ID, client as appwrite_client
 from appwrite_helpers import (
-    delete_row_safe,
     first_row,
     format_datetime,
     get_row_safe,
@@ -25,6 +28,19 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.appwrite_storage import appwrite_upload_error
+from services import database, storage_rows
+from services.storage_backend import require_legacy_reads, require_mutations_enabled
+from services.storage_legacy_transport import read_legacy_file
+from services.storage_legacy_cleanup import drain_legacy_deletions, enqueue_legacy_deletion
+from services.storage_objects import (
+    StorageIntegrityError,
+    StorageMutationPaused,
+    StorageNotFound,
+    StorageValidationError,
+    delete_object,
+    read_object,
+    write_transaction,
+)
 from services.row_utils import row_id as _row_id
 from services.time_utils import utcnow as _utcnow
 
@@ -38,6 +54,8 @@ ALLOWED_EXPIRY_OPTIONS = [1, 3, 7, 14, 30]
 SHARE_CODE_LENGTH = 24
 SHARE_CODE_CHARS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
 APPWRITE_STORAGE_BACKEND = "appwrite"
+SQLITE_STORAGE_BACKEND = "sqlite"
+SHARED_FILE_NAMESPACE = "shared_files"
 ROOT_FOLDER_ID = "root"
 
 
@@ -169,7 +187,7 @@ def _generate_share_code(
             return code
 
 
-def _shared_file_payload(shared_file):
+def _shared_file_payload(shared_file, *, share_base_url=None):
     share_code = shared_file.get("share_code")
     return {
         "id": _row_id(shared_file),
@@ -179,7 +197,7 @@ def _shared_file_payload(shared_file):
         "fileSizeBytes": shared_file.get("file_size_bytes"),
         "mimeType": shared_file.get("mime_type"),
         "isPublic": bool(shared_file.get("is_public")),
-        "shareUrl": _share_url(share_code) if shared_file.get("is_public") and share_code else None,
+        "shareUrl": (f"{share_base_url}{share_code}" if share_base_url is not None else _share_url(share_code)) if shared_file.get("is_public") and share_code else None,
         "expiresAt": _isoformat(shared_file.get("expires_at")),
         "createdAt": _isoformat(shared_file.get("created_at")),
         "updatedAt": _isoformat(shared_file.get("updated_at")),
@@ -387,8 +405,21 @@ def _storage_path(storage_file_id):
     return f"appwrite://{FILE_SHARE_BUCKET_ID}/{storage_file_id}"
 
 
+def _file_backend(shared_file):
+    backend = shared_file.get("storage_backend") or APPWRITE_STORAGE_BACKEND
+    if backend not in {APPWRITE_STORAGE_BACKEND, SQLITE_STORAGE_BACKEND}:
+        raise StorageIntegrityError("Unsupported shared-file storage backend.")
+    return backend
+
+
 def _delete_storage_file(shared_file):
+    require_mutations_enabled()
     storage_file_id = shared_file.get("storage_file_id")
+    if _file_backend(shared_file) == SQLITE_STORAGE_BACKEND:
+        if storage_file_id:
+            with write_transaction() as conn:
+                delete_object(conn, SHARED_FILE_NAMESPACE, storage_file_id)
+        return
     if not storage_file_id:
         return
     bucket_id = shared_file.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID
@@ -400,27 +431,187 @@ def _delete_storage_file(shared_file):
         raise
 
 
+def cleanup_legacy_files(*, account_user_id=None, object_ids=None, parent_id=None):
+    """Retry committed Appwrite deletions with no writer held during transport."""
+    return drain_legacy_deletions(
+        SHARED_FILE_NAMESPACE,
+        lambda bucket_id, object_id: _storage().delete_file(bucket_id, object_id),
+        account_user_id=account_user_id,
+        object_ids=object_ids,
+        parent_id=parent_id,
+    )
+
+
+def _finish_legacy_file_cleanup(rows, *, account_user_id):
+    object_ids = [
+        row["storage_file_id"] for row in rows
+        if _file_backend(row) == APPWRITE_STORAGE_BACKEND and row.get("storage_file_id")
+    ]
+    if not object_ids:
+        return
+    try:
+        cleanup_legacy_files(account_user_id=account_user_id, object_ids=object_ids)
+    except StorageMutationPaused:
+        # The local deletion already committed. Keep its durable remote intent
+        # until mutation pause is lifted, and report the actual local result.
+        logger.info("Shared-file legacy deletion deferred while storage mutations are paused.")
+
+
+def _delete_file_record(shared_file, *, conn=None, account_user_id=None, expires_before=None):
+    """Remove fresh metadata, local content, and legacy intent on one writer.
+
+    Recheck ownership and optional expiry after acquiring the writer. Imported
+    SQLite rows retain their Appwrite source copies during observation.
+    """
+    require_mutations_enabled()
+    if conn is not None:
+        return bool(_delete_file_metadata(
+            conn, shared_file, account_user_id=account_user_id, expires_before=expires_before,
+        ))
+    with write_transaction() as owned_conn:
+        deleted = _delete_file_metadata(
+            owned_conn, shared_file, account_user_id=account_user_id, expires_before=expires_before,
+        )
+    if deleted:
+        _finish_legacy_file_cleanup([deleted], account_user_id=deleted["user_id"])
+    return bool(deleted)
+
+
+def _delete_file_metadata(conn, shared_file, *, account_user_id=None, expires_before=None):
+    row_id = _row_id(shared_file)
+    current = storage_rows.get_row(conn, COLLECTIONS["shared_files"], row_id, allow_missing=True)
+    if not current:
+        return None
+    expected_user_id = account_user_id if account_user_id is not None else shared_file.get("user_id")
+    if expected_user_id is not None and str(current.get("user_id")) != str(expected_user_id):
+        raise StorageNotFound("Shared file was not found.")
+    if expires_before is not None:
+        cutoff = parse_datetime(expires_before)
+        if cutoff is None:
+            raise StorageValidationError("Shared-file expiry cutoff is invalid.")
+        expiry = parse_datetime(current.get("expires_at"))
+        if expiry is None:
+            return None
+        cutoff = cutoff if cutoff.tzinfo else cutoff.replace(tzinfo=timezone.utc)
+        expiry = expiry if expiry.tzinfo else expiry.replace(tzinfo=timezone.utc)
+        if expiry > cutoff:
+            return None
+    backend = _file_backend(current)
+    storage_file_id = current.get("storage_file_id")
+    if storage_file_id:
+        if backend == APPWRITE_STORAGE_BACKEND:
+            enqueue_legacy_deletion(
+                conn, SHARED_FILE_NAMESPACE,
+                current.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID,
+                storage_file_id,
+                account_user_id=current["user_id"],
+                parent_id=current.get("folder_id"),
+            )
+        # An unpromoted legacy row may also have a verified destination copy.
+        # Missing local objects are harmless to an explicit deletion.
+        delete_object(conn, SHARED_FILE_NAMESPACE, storage_file_id)
+    storage_rows.delete_row(conn, COLLECTIONS["shared_files"], row_id)
+    return current
+
+
+def _delete_folder_tree(folder_id, user_id):
+    """Commit a fresh owned subtree and all its payload removals atomically."""
+    require_mutations_enabled()
+    root_id = _normalize_folder_id(folder_id)
+    user_id = str(user_id)
+    deleted_files = []
+    with write_transaction() as conn:
+        folder = storage_rows.get_row(conn, _folders_collection(), root_id, allow_missing=True)
+        if not root_id or not folder or str(folder.get("user_id")) != user_id:
+            raise StorageNotFound("File folder was not found.")
+        folder_table = database._quote_identifier(_folders_collection())
+        folder_ids = [row["id"] for row in conn.execute(
+            f"WITH RECURSIVE tree(id) AS ("
+            f"SELECT id FROM {folder_table} WHERE id = ? AND user_id = ? "
+            f"UNION SELECT child.id FROM {folder_table} AS child "
+            "JOIN tree ON child.parent_folder_id = tree.id WHERE child.user_id = ?"
+            ") SELECT id FROM tree",
+            [root_id, user_id, user_id],
+        ).fetchall()]
+        folder_set = set(folder_ids)
+        file_table = database._quote_identifier(COLLECTIONS["shared_files"])
+        files = [
+            dict(row) for row in conn.execute(f"SELECT * FROM {file_table} WHERE user_id = ?", [user_id])
+            if row["folder_id"] in folder_set
+        ]
+        for shared_file in files:
+            deleted = _delete_file_metadata(conn, shared_file, account_user_id=user_id)
+            if deleted:
+                deleted_files.append(deleted)
+        deleted_folders = sum(
+            storage_rows.delete_row(conn, _folders_collection(), descendant_id)
+            for descendant_id in reversed(folder_ids)
+        )
+    _finish_legacy_file_cleanup(deleted_files, account_user_id=user_id)
+    return {"deletedFiles": len(deleted_files), "deletedFolders": deleted_folders}
+
+
 def _delete_shared_file_row(shared_file):
-    _delete_storage_file(shared_file)
-    delete_row_safe(COLLECTIONS["shared_files"], _row_id(shared_file))
+    return _delete_file_record(shared_file)
 
 
 def _storage_download_bytes(shared_file):
     storage_file_id = shared_file.get("storage_file_id")
     if not storage_file_id:
-        raise FileNotFoundError("Missing Appwrite storage file id")
-    bucket_id = shared_file.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID
+        raise StorageNotFound("Shared file content is unavailable.")
     try:
-        return _storage().get_file_download(bucket_id, storage_file_id)
-    except AppwriteException as exc:
-        if _status_code(exc) == 404:
-            raise FileNotFoundError(storage_file_id) from exc
-        raise
+        expected_size = int(shared_file.get("file_size_bytes") or 0)
+    except (TypeError, ValueError):
+        raise StorageIntegrityError("Shared file size is invalid.") from None
+    if not 0 <= expected_size <= MAX_FILE_SIZE:
+        raise StorageIntegrityError("Shared file exceeds its storage size limit.")
+    if _file_backend(shared_file) == SQLITE_STORAGE_BACKEND:
+        # A corrupt/missing SQLite row must never fall back to a remote copy.
+        data = read_object(SHARED_FILE_NAMESPACE, storage_file_id)
+    else:
+        require_legacy_reads()
+        bucket_id = shared_file.get("storage_bucket_id") or FILE_SHARE_BUCKET_ID
+        data = read_legacy_file(
+            bucket_id, storage_file_id, max_bytes=MAX_FILE_SIZE, expected_bytes=expected_size,
+        )
+    if not isinstance(data, bytes) or len(data) != expected_size:
+        raise StorageIntegrityError("Shared file content does not match its metadata.")
+    return data
+
+
+def _safe_download_name(filename):
+    name = str(filename or "file").replace("\\", "/").rsplit("/", 1)[-1]
+    name = "".join(character for character in name if unicodedata.category(character) not in {"Cc", "Cf"})
+    return name[:255].strip() or "file"
+
+
+def _safe_download_mime(mime_type):
+    value = str(mime_type or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9!#$&^_.+-]+/[a-z0-9!#$&^_.+-]+", value):
+        return "application/octet-stream"
+    if value in {"text/html", "application/xhtml+xml", "image/svg+xml"}:
+        return "application/octet-stream"
+    return value
 
 
 def _send_shared_file(shared_file):
     data = _storage_download_bytes(shared_file)
+    response = send_file(
+        io.BytesIO(data),
+        as_attachment=True,
+        download_name=_safe_download_name(shared_file.get("original_filename")),
+        mimetype=_safe_download_mime(shared_file.get("mime_type")),
+        conditional=True,
+        etag=hashlib.sha256(data).hexdigest(),
+        last_modified=parse_datetime(shared_file.get("created_at")),
+        max_age=0,
+    )
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Cache-Control"] = "private, max-age=0, must-revalidate"
+    if response.status_code not in {200, 206}:
+        return response
     try:
+        require_mutations_enabled()
         update_row_safe(
             COLLECTIONS["shared_files"],
             _row_id(shared_file),
@@ -429,15 +620,11 @@ def _send_shared_file(shared_file):
                 "updated_at": format_datetime(_utcnow()),
             },
         )
+    except StorageMutationPaused:
+        pass
     except AppwriteException:
         logger.exception("Failed to update download count for shared file %s", _row_id(shared_file))
-
-    return send_file(
-        io.BytesIO(data),
-        as_attachment=True,
-        download_name=shared_file.get("original_filename"),
-        mimetype=shared_file.get("mime_type") or "application/octet-stream",
-    )
+    return response
 
 
 def _zip_arcname(filename, used_names):
@@ -473,26 +660,32 @@ def _zip_response(
     send_file_fn = send_file_fn or send_file
     secure_filename_fn = secure_filename_fn or secure_filename
 
-    buffer = io.BytesIO()
+    buffer = tempfile.SpooledTemporaryFile(max_size=1024 * 1024, mode="w+b")
     used_names = set()
-    with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for shared_file in files:
-            if is_expired_fn(shared_file):
-                continue
-            try:
-                data = storage_download_bytes_fn(shared_file)
-            except FileNotFoundError:
-                log.info("Skipping missing file in folder zip: %s", row_id_fn(shared_file))
-                continue
-            archive.writestr(_zip_arcname(shared_file.get("original_filename"), used_names), data)
-    buffer.seek(0)
-    safe_name = secure_filename_fn(folder_name or "folder") or "folder"
-    return send_file_fn(
-        buffer,
-        as_attachment=True,
-        download_name=f"{safe_name}.zip",
-        mimetype="application/zip",
-    )
+    try:
+        with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            for shared_file in files:
+                if is_expired_fn(shared_file):
+                    continue
+                try:
+                    data = storage_download_bytes_fn(shared_file)
+                except (FileNotFoundError, StorageNotFound):
+                    log.info("Skipping missing file in folder zip: %s", row_id_fn(shared_file))
+                    continue
+                archive.writestr(_zip_arcname(shared_file.get("original_filename"), used_names), data)
+                del data
+        length = buffer.tell()
+        buffer.seek(0)
+        safe_name = secure_filename_fn(folder_name or "folder") or "folder"
+        response = send_file_fn(buffer, as_attachment=True, download_name=f"{safe_name}.zip", mimetype="application/zip")
+        response.content_length = length
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Cache-Control"] = "private, max-age=0, must-revalidate"
+        response.call_on_close(buffer.close)
+        return response
+    except BaseException:
+        buffer.close()
+        raise
 
 
 def _public_folder_by_code(share_code):
@@ -556,215 +749,3 @@ def _build_public_folder_tree(root_folder, share_code):
         }
 
     return build_node(root_folder), folder_ids
-
-
-def upload_file_response(user, files, form, dependencies):
-    jsonify_fn = dependencies["jsonify"]
-    if not files:
-        return jsonify_fn({"error": "At least one file is required."}), 400
-
-    user_id = str(user.id)
-    entitlement_limit_error = dependencies["entitlement_limit_error"]
-    entitlement_error = dependencies["entitlement_error"]
-    try:
-        entitlements = dependencies["request_entitlements"](user)
-        plan_upload_files = entitlements["limits"].get("max_upload_files")
-        plan_file_size = entitlements["limits"].get("max_file_size_bytes")
-        effective_upload_files = (
-            min(dependencies["max_upload_files"], plan_upload_files)
-            if plan_upload_files is not None
-            else dependencies["max_upload_files"]
-        )
-        effective_file_size = (
-            min(dependencies["max_file_size"], plan_file_size)
-            if plan_file_size is not None
-            else dependencies["max_file_size"]
-        )
-        if plan_upload_files is not None and len(files) > plan_upload_files:
-            raise entitlement_limit_error(
-                "files per upload",
-                0,
-                len(files),
-                plan_upload_files,
-            )
-    except entitlement_limit_error as exc:
-        return jsonify_fn(exc.payload()), 403
-    except entitlement_error:
-        dependencies["logger"].exception("Failed to calculate file upload limits")
-        return jsonify_fn({
-            "error": "Unable to verify your storage limits right now.",
-            "code": "tier_check_unavailable",
-        }), 503
-
-    folder_id = dependencies["normalize_folder_id"](form.get("folderId"))
-    dependencies["assert_folder_target"](user_id, folder_id)
-
-    filenames = form.getlist("filename")
-    visibilities = form.getlist("visibility")
-    expiries = form.getlist("expiryDays")
-
-    total_provided = len(files)
-    to_process = files[:effective_upload_files]
-    skipped = total_provided - len(to_process)
-
-    created = []
-    errors = []
-    reserved_storage_bytes = 0
-
-    for idx, uploaded_file in enumerate(to_process):
-        if not uploaded_file or not uploaded_file.filename:
-            errors.append({"index": idx, "error": "Missing file or filename."})
-            continue
-
-        custom_filename = (filenames[idx] if idx < len(filenames) else "") or ""
-        visibility = ((visibilities[idx] if idx < len(visibilities) else "private") or "private").strip().lower()
-        try:
-            expiry_days = (
-                int(expiries[idx])
-                if idx < len(expiries)
-                else dependencies["default_expiry_days"]
-            )
-        except (TypeError, ValueError):
-            expiry_days = dependencies["default_expiry_days"]
-
-        if visibility not in {"public", "private"}:
-            errors.append({"index": idx, "error": "Invalid visibility option."})
-            continue
-        if expiry_days not in dependencies["allowed_expiry_options"]:
-            errors.append({"index": idx, "error": "Invalid expiry selection."})
-            continue
-
-        display_filename = custom_filename.strip() or uploaded_file.filename
-        uploaded_data = uploaded_file.read()
-        file_size_bytes = len(uploaded_data)
-        if plan_file_size is not None and file_size_bytes > plan_file_size:
-            quota_error = entitlement_limit_error(
-                "file size bytes",
-                0,
-                file_size_bytes,
-                plan_file_size,
-            )
-            errors.append({"index": idx, **quota_error.payload()})
-            continue
-        if file_size_bytes > effective_file_size:
-            errors.append({
-                "index": idx,
-                "error": f"{uploaded_file.filename} exceeds the current file-size limit.",
-                "code": "file_too_large",
-            })
-            continue
-        if file_size_bytes == 0:
-            errors.append({"index": idx, "error": f"{uploaded_file.filename} is empty."})
-            continue
-
-        try:
-            dependencies["check_storage"](
-                entitlements,
-                reserved_storage_bytes + file_size_bytes,
-            )
-            reserved_storage_bytes += file_size_bytes
-        except entitlement_limit_error as exc:
-            errors.append({"index": idx, **exc.payload()})
-            continue
-
-        file_id = str(dependencies["uuid4"]())
-        storage_file_id = file_id
-        sanitized_name = dependencies["secure_filename"](display_filename) or "file"
-
-        try:
-            dependencies["storage"]().create_file(
-                dependencies["bucket_id"],
-                storage_file_id,
-                dependencies["input_file_from_bytes"](
-                    uploaded_data,
-                    filename=sanitized_name,
-                    mime_type=uploaded_file.mimetype or "application/octet-stream",
-                ),
-            )
-        except AppwriteException as exc:
-            dependencies["logger"].exception("Failed to upload file to Appwrite Storage")
-            reserved_storage_bytes -= file_size_bytes
-            errors.append({
-                "index": idx,
-                "error": dependencies["appwrite_upload_error"](exc),
-            })
-            continue
-
-        try:
-            is_public = visibility == "public"
-            share_code = dependencies["generate_share_code"]() if is_public else None
-            now = dependencies["utcnow"]()
-            expires_at = now + dependencies["timedelta"](days=expiry_days)
-            shared_file = dependencies["create_row_safe"](
-                COLLECTIONS["shared_files"],
-                row_id=file_id,
-                data={
-                    "user_id": user_id,
-                    "folder_id": folder_id,
-                    "original_filename": display_filename,
-                    "stored_path": dependencies["storage_path"](storage_file_id),
-                    "storage_backend": dependencies["storage_backend"],
-                    "storage_bucket_id": dependencies["bucket_id"],
-                    "storage_file_id": storage_file_id,
-                    "file_size_bytes": file_size_bytes,
-                    "mime_type": uploaded_file.mimetype,
-                    "share_code": share_code,
-                    "is_public": is_public,
-                    "expires_at": dependencies["format_datetime"](expires_at),
-                    "created_at": dependencies["format_datetime"](now),
-                    "updated_at": dependencies["format_datetime"](now),
-                    "downloaded_count": 0,
-                },
-            )
-        except AppwriteException:
-            dependencies["logger"].exception(
-                "Failed to save shared file row for upload %s",
-                display_filename,
-            )
-            reserved_storage_bytes -= file_size_bytes
-            try:
-                dependencies["storage"]().delete_file(
-                    dependencies["bucket_id"],
-                    storage_file_id,
-                )
-            except AppwriteException:
-                dependencies["logger"].exception(
-                    "Failed to clean up uploaded Appwrite file %s after row failure",
-                    storage_file_id,
-                )
-            errors.append({"index": idx, "error": "Unable to save file."})
-            continue
-
-        created.append(dependencies["shared_file_payload"](shared_file))
-        dependencies["emit_creation_event"](
-            "Shared File Created",
-            actor=dependencies["format_actor"](user),
-            target=display_filename,
-            metadata={
-                "page_context": "files/upload",
-                "resource_type": "shared_file",
-                "resource_id": shared_file.get("$id") or shared_file.get("id"),
-                "folder_id": folder_id,
-                "is_public": is_public,
-                "file_size_bytes": file_size_bytes,
-                "mime_type": uploaded_file.mimetype,
-                "expiry_days": expiry_days,
-            },
-            color="green",
-        )
-
-    response = {"files": created}
-    if skipped:
-        response["skipped"] = skipped
-        response.setdefault("errors", []).append({
-            "error": (
-                f"Only {effective_upload_files} files are accepted; "
-                f"{skipped} file(s) were ignored."
-            ),
-        })
-    if errors:
-        response.setdefault("errors", []).extend(errors)
-        if not created:
-            response["error"] = errors[0].get("error") or "Upload failed."
-
-    return jsonify_fn(response), 201 if created else 400

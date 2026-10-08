@@ -17,6 +17,12 @@ def avatar_url_for_size(url, size=32):
     if not raw_url:
         return DEFAULT_AVATAR_URL
 
+    from services.avatar_storage import resolve_avatar_url
+
+    raw_url = resolve_avatar_url(raw_url)
+    if urlsplit(raw_url).path.startswith("/api/avatars/"):
+        return raw_url
+
     try:
         normalized_size = int(size)
     except (TypeError, ValueError):

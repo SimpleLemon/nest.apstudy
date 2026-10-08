@@ -1,4 +1,105 @@
-"""Appwrite-backed OAuth login session completion."""
+"""Appwrite-backed profile persistence and authenticated session completion."""
+
+import logging
+import secrets
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from typing import Any, Callable, Iterable, Protocol
+
+from flask import current_app, request, session
+from appwrite_client import COLLECTIONS
+from appwrite_helpers import format_datetime
+from models import User, user_from_doc
+from services import discord_bridge, invites, notes_collaboration
+from services.avatar_storage import avatar_profile_fields
+from services.discord_audit import format_actor, format_user_target
+
+Row = dict[str, Any]
+logger = logging.getLogger(__name__)
+
+
+class GetUserRow(Protocol):
+    def __call__(self, collection: str, row_id: str, *, allow_missing: bool = False) -> Row | None: ...
+
+
+class PersistProfile(Protocol):
+    def __call__(self, user_id: str, data: Row, *, prepared: Row | None = None, create: bool = False, provider_source_url: str | None = None, initial_settings: Row | None = None) -> Row: ...
+
+
+class ProviderToken(Protocol):
+    def __call__(self, appwrite_user_id: str, provider: str | None = None) -> Row: ...
+
+
+class ProviderAvatar(Protocol):
+    def __call__(self, provider_profile: Row, remote_user: Row, provider: str | None = None) -> str | None: ...
+
+
+class LogAvatar(Protocol):
+    def __call__(self, *, user_id: str, provider: str, page_context: str, created_user: bool, has_provider_token: bool, provider_profile_avatar: str | None, remote_avatar_candidate: str | None, resolved_avatar_url: str | None, storage_result: str) -> None: ...
+
+
+class DiscordIdentity(Protocol):
+    def __call__(self, *, provider_uid: str | None = None, provider_access_token: str | None = None, appwrite_user_ids: Iterable[str] = ()) -> Row: ...
+
+
+class EstablishLogin(Protocol):
+    def __call__(self, user: User, remember: bool = False, duration: timedelta | None = None) -> bool: ...
+
+
+class SetOAuthSession(Protocol):
+    def __call__(self, provider: str, user_id: str, email: str, name: str | None = None, picture_url: str | None = None) -> None: ...
+
+
+class EmitLoginEvent(Protocol):
+    def __call__(self, title: str, *, actor: str, target: str, metadata: Row | None = None, color: str = "green") -> object: ...
+
+
+@dataclass(frozen=True)
+class LoginProfiles:
+    get_row: GetUserRow
+    find_by_email: Callable[[str], Row | None]
+    prepare_avatar: Callable[[str, str], Row | None]
+    persist: PersistProfile
+    can_refresh_avatar: Callable[[Row], bool]
+
+    def find(self, remote_id: str, email: str | None) -> Row | None:
+        row = self.get_row(COLLECTIONS["users"], remote_id, allow_missing=True)
+        return row or (self.find_by_email(email) if email else None)
+
+
+@dataclass(frozen=True)
+class LoginProviders:
+    identity_token: ProviderToken
+    fetch_profile: Callable[[str, str | None], Row]
+    avatar_url: ProviderAvatar
+    log_avatar: LogAvatar
+    discord_identity: DiscordIdentity
+
+
+@dataclass(frozen=True)
+class LoginCompletion:
+    login: EstablishLogin
+    set_oauth: SetOAuthSession
+    sync_presence: Callable[[str, Row], list[str] | None]
+    emit_event: EmitLoginEvent
+    redirect: Callable[[Row], str]
+    session_duration: timedelta
+    invite_cookie: str
+
+    def establish(self, user_doc: Row, *, email: str, provider: str, remote_id: str, name: str | None, picture_url: str | None) -> None:
+        session.permanent = True
+        self.login(user_from_doc(user_doc), remember=True, duration=current_app.config.get("AUTH_SESSION_DURATION", self.session_duration))
+        session["user_id"] = user_doc.get("$id") or user_doc.get("id")
+        session["email"] = email
+        self.set_oauth(provider, remote_id, email, name=name, picture_url=picture_url)
+
+    def audit(self, user_doc: Row, provider: str, page_context: str, *, created_user: bool, email: str) -> None:
+        user_id = user_doc.get("$id") or user_doc.get("id")
+        actor = format_actor(user_id=user_id, username=user_doc.get("username") or user_doc.get("name"))
+        metadata = {"page_context": page_context, "resource_type": "user", "resource_id": user_id, "provider": provider}
+        if created_user:
+            self.emit_event("New User Created", actor=actor, target=format_user_target(user_doc), metadata={**metadata, "email": email, "default_settings_created": True}, color="green")
+        self.emit_event("User Login", actor=actor, target=format_user_target(user_doc), metadata={**metadata, "created_user": created_user}, color="green")
 
 
 def _complete_appwrite_login(
@@ -9,47 +110,12 @@ def _complete_appwrite_login(
     provider_uid=None,
     page_context="auth/session",
     *,
-    dependencies,
+    profiles: LoginProfiles,
+    providers: LoginProviders,
+    completion: LoginCompletion,
+    now_fn: Callable[[], datetime] = datetime.utcnow,
 ):
-    """Complete an Appwrite login using route-provided compatibility bindings."""
-    collections = dependencies["collections"]
-    get_row_safe = dependencies["get_row_safe"]
-    find_user_by_email = dependencies["find_user_by_email"]
-    provider_access_token_from_identities = dependencies[
-        "provider_access_token_from_identities"
-    ]
-    fetch_provider_profile = dependencies["fetch_provider_profile"]
-    provider_avatar_url = dependencies["provider_avatar_url"]
-    log_avatar_collection = dependencies["log_avatar_collection"]
-    resolve_discord_link_identity = dependencies["resolve_discord_link_identity"]
-    format_datetime = dependencies["format_datetime"]
-    datetime = dependencies["datetime"]
-    store_provider_avatar = dependencies["store_provider_avatar"]
-    create_row_safe = dependencies["create_row_safe"]
-    secrets = dependencies["secrets"]
-    invites = dependencies["invites"]
-    request = dependencies["request"]
-    invite_cookie = dependencies["invite_cookie"]
-    logger = dependencies["logger"]
-    avatar_can_use_provider = dependencies["avatar_can_use_provider"]
-    delete_avatar_file = dependencies["delete_avatar_file"]
-    update_row_safe = dependencies["update_row_safe"]
-    sync_chat_presence_labels_for_user = dependencies[
-        "sync_chat_presence_labels_for_user"
-    ]
-    session = dependencies["session"]
-    login_user = dependencies["login_user"]
-    user_from_doc = dependencies["user_from_doc"]
-    current_app = dependencies["current_app"]
-    auth_session_duration = dependencies["auth_session_duration"]
-    set_oauth_session = dependencies["set_oauth_session"]
-    notes_collaboration = dependencies["notes_collaboration"]
-    discord_bridge = dependencies["discord_bridge"]
-    emit_user_event = dependencies["emit_user_event"]
-    format_actor = dependencies["format_actor"]
-    format_user_target = dependencies["format_user_target"]
-    redirect_for_user_doc = dependencies["redirect_for_user_doc"]
-
+    """Persist provider identity, then establish the local authenticated session."""
     remote_user = remote_user or {}
     remote_user_id = remote_user.get("$id") or remote_user.get("id")
     remote_email = remote_user.get("email") or ""
@@ -59,13 +125,11 @@ def _complete_appwrite_login(
         email = remote_email
 
     appwrite_user_id = str(remote_user_id)
-    user_doc = get_row_safe(collections["users"], appwrite_user_id, allow_missing=True)
-    if not user_doc and email:
-        user_doc = find_user_by_email(email)
+    user_doc = profiles.find(appwrite_user_id, email)
     created_user = False
 
     if not provider_access_token:
-        identity_token = provider_access_token_from_identities(
+        identity_token = providers.identity_token(
             appwrite_user_id,
             provider=provider,
         )
@@ -77,15 +141,15 @@ def _complete_appwrite_login(
         if identity_token.get("provider"):
             provider = identity_token["provider"]
 
-    provider_profile = fetch_provider_profile(provider, provider_access_token)
+    provider_profile = providers.fetch_profile(provider, provider_access_token)
     provider_name = provider_profile.get("name")
-    resolved_provider_avatar_url = provider_avatar_url(
+    resolved_provider_avatar_url = providers.avatar_url(
         provider_profile,
         remote_user,
         provider=provider,
     )
-    remote_avatar_candidate = provider_avatar_url({}, remote_user, provider=provider)
-    log_avatar_collection(
+    remote_avatar_candidate = providers.avatar_url({}, remote_user, provider=provider)
+    providers.log_avatar(
         user_id=appwrite_user_id,
         provider=provider,
         page_context=page_context,
@@ -100,7 +164,7 @@ def _complete_appwrite_login(
     discord_id_value = None
     discord_username_value = None
     if provider == "discord":
-        discord_identity = resolve_discord_link_identity(
+        discord_identity = providers.discord_identity(
             provider_uid=provider_uid,
             provider_access_token=provider_access_token,
             appwrite_user_ids=[appwrite_user_id],
@@ -108,22 +172,24 @@ def _complete_appwrite_login(
         discord_id_value = discord_identity.get("id")
         discord_username_value = discord_identity.get("username")
 
-    name = provider_name or remote_user.get("name") or remote_user.get("displayName")
+    # Provider names initialize profiles; a name chosen in Nest survives login.
+    preserve_name = bool(user_doc and str(user_doc.get("name") or "").strip())
+    name = None if preserve_name else (provider_name or remote_user.get("name") or remote_user.get("displayName"))
     picture_url = resolved_provider_avatar_url
 
     if not user_doc:
-        created_at = format_datetime(datetime.utcnow())
+        created_at = format_datetime(now_fn())
         avatar_file_id = None
         avatar_file_size_bytes = 0
         storage_result = "none"
+        prepared_avatar = None
         if picture_url:
-            picture_url, avatar_file_id, storage_result, avatar_file_size_bytes = (
-                store_provider_avatar(
-                    appwrite_user_id,
-                    picture_url,
-                    page_context=page_context,
-                )
-            )
+            prepared_avatar = profiles.prepare_avatar(appwrite_user_id, picture_url)
+            if prepared_avatar:
+                picture_url = prepared_avatar["view_url"]
+                avatar_file_id = prepared_avatar["file_id"]
+                avatar_file_size_bytes = prepared_avatar["size_bytes"]
+                storage_result = "stored"
         row_data = {
             "google_id": appwrite_user_id,
             "email": email,
@@ -131,6 +197,7 @@ def _complete_appwrite_login(
             "picture_url": picture_url,
             "avatar_file_id": avatar_file_id,
             "avatar_file_size_bytes": avatar_file_size_bytes,
+            "avatar_storage_backend": prepared_avatar["backend"] if prepared_avatar else "appwrite",
             "tier": "free",
             "banner_color": "#fecae1",
             "avatar_source": "provider" if picture_url else None,
@@ -148,57 +215,45 @@ def _complete_appwrite_login(
             row_data["discord_id"] = discord_id_value
             row_data["discord_username"] = discord_username_value
             row_data["discord_linked_at"] = created_at
-        user_doc = create_row_safe(
-            collections["users"],
-            row_id=appwrite_user_id,
-            data=row_data,
+        initial_settings = {
+            "user_id": appwrite_user_id,
+            "ics_secret_token": secrets.token_urlsafe(32),
+            "feed_refresh_minutes": 15,
+            "preferred_calendar_view": "week",
+            "interface_theme": "obsidian-dark",
+            "theme": "dark",
+            "sidebar_default": "expanded",
+            "email_notifications": True,
+            "product_updates": True,
+            "task_sound_enabled": True,
+            "chat_sound_enabled": True,
+            "language": "en",
+            "timezone": "",
+            "created_at": created_at,
+        }
+        user_doc = profiles.persist(
+            appwrite_user_id, row_data, prepared=prepared_avatar, create=True,
+            provider_source_url=resolved_provider_avatar_url, initial_settings=initial_settings,
         )
         created_user = True
-
-        create_row_safe(
-            collections["user_settings"],
-            row_id=appwrite_user_id,
-            data={
-                "user_id": appwrite_user_id,
-                "ics_secret_token": secrets.token_urlsafe(32),
-                "feed_refresh_minutes": 15,
-                "preferred_calendar_view": "week",
-                "interface_theme": "obsidian-dark",
-                "theme": "dark",
-                "sidebar_default": "expanded",
-                "email_notifications": True,
-                "product_updates": True,
-                "task_sound_enabled": True,
-                "chat_sound_enabled": True,
-                "language": "en",
-                "timezone": "",
-                "created_at": created_at,
-            },
-        )
         try:
             invites.attribute_signup(
-                request.cookies.get(invite_cookie),
+                request.cookies.get(completion.invite_cookie),
                 appwrite_user_id,
             )
         except Exception:
             logger.exception("Failed to attribute new user signup to invite")
     else:
-        updates = {"last_login": format_datetime(datetime.utcnow())}
-        previous_avatar_to_delete = None
+        updates = {"last_login": format_datetime(now_fn())}
+        prepared_avatar = None
         if name:
             updates["name"] = name
-        if picture_url and avatar_can_use_provider(user_doc):
-            (
-                stored_picture_url,
-                stored_file_id,
-                storage_result,
-                stored_file_size_bytes,
-            ) = store_provider_avatar(
-                appwrite_user_id,
-                picture_url,
-                page_context=page_context,
-            )
-            previous_file_id = user_doc.get("avatar_file_id")
+        if picture_url and profiles.can_refresh_avatar(user_doc):
+            prepared_avatar = profiles.prepare_avatar(appwrite_user_id, picture_url)
+            stored_picture_url = prepared_avatar["view_url"] if prepared_avatar else picture_url
+            stored_file_id = prepared_avatar["file_id"] if prepared_avatar else None
+            stored_file_size_bytes = prepared_avatar["size_bytes"] if prepared_avatar else 0
+            storage_result = "stored" if prepared_avatar else "provider_url_fallback"
             # A failed provider refresh must not replace a working Nest avatar.
             # Retire the old file only after the profile transaction commits.
             if stored_picture_url and (storage_result == "stored" or not user_doc.get("picture_url")):
@@ -206,8 +261,9 @@ def _complete_appwrite_login(
                 updates["avatar_source"] = "provider"
                 updates["avatar_file_size_bytes"] = stored_file_size_bytes
                 updates["avatar_file_id"] = stored_file_id
-                if previous_file_id and previous_file_id != stored_file_id:
-                    previous_avatar_to_delete = previous_file_id
+                updates["avatar_storage_backend"] = prepared_avatar["backend"] if prepared_avatar else "appwrite"
+                if prepared_avatar:
+                    updates.update(avatar_profile_fields(prepared_avatar))
         if email:
             updates["email"] = email
         if provider and provider != "appwrite":
@@ -216,44 +272,19 @@ def _complete_appwrite_login(
             updates["discord_id"] = discord_id_value
             updates["discord_username"] = discord_username_value
             if not user_doc.get("discord_id"):
-                updates["discord_linked_at"] = format_datetime(datetime.utcnow())
+                updates["discord_linked_at"] = format_datetime(now_fn())
 
         row_id = user_doc.get("$id") or user_doc.get("id")
         if not row_id:
             raise ValueError("User lookup failed.")
-        user_doc = update_row_safe(
-            collections["users"],
-            row_id,
-            updates,
-        )
-        if previous_avatar_to_delete:
-            try:
-                delete_avatar_file(previous_avatar_to_delete)
-            except Exception:
-                logger.exception("Failed to retire replaced profile avatar")
+        user_doc = profiles.persist(row_id, updates, prepared=prepared_avatar, provider_source_url=picture_url)
 
-    sync_chat_presence_labels_for_user(
+    completion.sync_presence(
         user_doc.get("$id") or user_doc.get("id"),
         user_doc,
     )
-    session.permanent = True
-    login_user(
-        user_from_doc(user_doc),
-        remember=True,
-        duration=current_app.config.get(
-            "AUTH_SESSION_DURATION",
-            auth_session_duration,
-        ),
-    )
-    session["user_id"] = user_doc.get("$id") or user_doc.get("id")
-    session["email"] = email or remote_email
-    set_oauth_session(
-        provider,
-        appwrite_user_id,
-        email,
-        name=name,
-        picture_url=picture_url,
-    )
+    completion.establish(user_doc, email=email or remote_email, provider=provider,
+                         remote_id=appwrite_user_id, name=name, picture_url=picture_url)
     if email or remote_email:
         try:
             notes_collaboration.claim_pending_invitations(
@@ -275,46 +306,12 @@ def _complete_appwrite_login(
                 discord_id_value,
             )
 
-    if created_user:
-        emit_user_event(
-            "New User Created",
-            actor=format_actor(
-                user_id=user_doc.get("$id") or user_doc.get("id"),
-                username=user_doc.get("username") or user_doc.get("name"),
-            ),
-            target=format_user_target(user_doc),
-            metadata={
-                "page_context": page_context,
-                "resource_type": "user",
-                "resource_id": user_doc.get("$id") or user_doc.get("id"),
-                "provider": provider,
-                "email": email or remote_email,
-                "default_settings_created": True,
-            },
-            color="green",
-        )
-
-    emit_user_event(
-        "User Login",
-        actor=format_actor(
-            user_id=user_doc.get("$id") or user_doc.get("id"),
-            username=user_doc.get("username") or user_doc.get("name"),
-        ),
-        target=format_user_target(user_doc),
-        metadata={
-            "page_context": page_context,
-            "resource_type": "user",
-            "resource_id": user_doc.get("$id") or user_doc.get("id"),
-            "provider": provider,
-            "created_user": created_user,
-        },
-        color="green",
-    )
+    completion.audit(user_doc, provider, page_context, created_user=created_user, email=email or remote_email)
 
     return {
         "created_user": created_user,
         "email": email or remote_email,
-        "redirect": redirect_for_user_doc(user_doc),
+        "redirect": completion.redirect(user_doc),
         "user_doc": user_doc,
         "user_id": session["user_id"],
     }

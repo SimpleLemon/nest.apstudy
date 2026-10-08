@@ -1,313 +1,218 @@
-"""Private, room-scoped storage and validation for chat attachments."""
+"""Private, conversation-scoped storage for chat attachment payloads."""
 
 from __future__ import annotations
 
-import gzip
 import hashlib
-import io
 import logging
-import posixpath
-import re
 import uuid
-import zipfile
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 
-from PIL import Image, ImageOps, UnidentifiedImageError
-from flask import current_app, has_app_context
 from appwrite.exception import AppwriteException
 from appwrite.input_file import InputFile
 from appwrite.query import Query
 from appwrite.services.storage import Storage
 
-from appwrite_client import CHAT_ATTACHMENTS_BUCKET_ID, COLLECTIONS, client as appwrite_client
-from appwrite_helpers import create_row_safe, delete_row_safe, get_row_safe, list_rows_all, update_row_safe
-from config import ENVIRONMENT_CONFIG_EXTENSION_KEY, load_environment_config
+from appwrite_client import COLLECTIONS, client as appwrite_client
+from appwrite_helpers import get_row_safe, list_rows_all
+from services import storage_objects
+from services.chat_attachment_store import (
+    NAMESPACE,
+    activate_attachments,
+    attachment_rows,
+    delete_attachment_record,
+    insert_attachment,
+    require_scope,
+)
+from services.chat_attachment_validation import (
+    AttachmentError,
+    DOCUMENT_MIMES,
+    IMAGE_FORMATS,
+    MAX_UPLOAD_BYTES,
+    bounded_gzip,
+    inspect_and_prepare,
+)
 from services.database import utcnow_iso
-from services.entitlements import EntitlementLimitError, check_storage
+from services.entitlements import EntitlementLimitError, check_storage, check_storage_transaction
+from services.environment_config import runtime_environment_config
+from services.storage_backend import (
+    chat_attachments_enabled,
+    require_legacy_reads,
+    require_mutations_enabled,
+    write_backend,
+)
+from services.storage_errors import StorageIntegrityError, StorageUnavailable
+from services.storage_legacy_cleanup import drain_legacy_deletions
+from services.storage_legacy_transport import read_legacy_file
+from services.storage_scanner import scan_upload
 
 
 logger = logging.getLogger(__name__)
 TABLE_ID = COLLECTIONS["chat_attachments"]
 MAX_ATTACHMENTS_PER_MESSAGE = 5
-MAX_IMAGE_PIXELS = 40_000_000
-MAX_IMAGE_DIMENSION = 2560
-MAX_ARCHIVE_ENTRIES = 2_000
-MAX_ARCHIVE_EXPANDED_BYTES = 250 * 1024 * 1024
-MAX_ARCHIVE_RATIO = 100
-
-IMAGE_FORMATS = {
-    "JPEG": ("image/jpeg", {".jpg", ".jpeg"}),
-    "PNG": ("image/png", {".png"}),
-    "WEBP": ("image/webp", {".webp"}),
-    "GIF": ("image/gif", {".gif"}),
-}
-DOCUMENT_MIMES = {
-    ".pdf": "application/pdf",
-    ".txt": "text/plain",
-    ".md": "text/markdown",
-    ".markdown": "text/markdown",
-    ".csv": "text/csv",
-    ".json": "application/json",
-    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-    ".odt": "application/vnd.oasis.opendocument.text",
-    ".ods": "application/vnd.oasis.opendocument.spreadsheet",
-    ".odp": "application/vnd.oasis.opendocument.presentation",
-    ".zip": "application/zip",
-}
-ZIP_CONTAINER_MARKERS = {
-    ".docx": "word/",
-    ".xlsx": "xl/",
-    ".pptx": "ppt/",
-}
-DENIED_ARCHIVE_EXTENSIONS = {
-    ".app", ".bat", ".bin", ".cmd", ".com", ".cpl", ".dll", ".dmg", ".exe",
-    ".hta", ".htm", ".html", ".iso", ".jar", ".js", ".jse", ".lnk", ".msi",
-    ".msp", ".ps1", ".py", ".rb", ".reg", ".scr", ".sh", ".svg", ".vbs",
-    ".xlsm", ".docm", ".pptm", ".xls", ".doc", ".ppt",
-}
-COMPRESSIBLE_EXTENSIONS = {".txt", ".md", ".markdown", ".csv", ".json"}
-SAFE_NAME_RE = re.compile(r"[^A-Za-z0-9._()\- ]+")
-
-
-class AttachmentError(ValueError):
-    pass
 
 
 def _chat_attachments_enabled():
-    if has_app_context():
-        configured = current_app.extensions.get(ENVIRONMENT_CONFIG_EXTENSION_KEY)
-        if configured is not None:
-            return configured.appwrite_chat_attachments_enabled
-    return load_environment_config().appwrite_chat_attachments_enabled
+    return chat_attachments_enabled()
 
 
 def storage_service():
+    """Legacy-only transport, retained until all references are promoted."""
     return Storage(appwrite_client)
 
 
-def _safe_filename(value):
-    name = Path(str(value or "attachment").replace("\\", "/")).name
-    name = SAFE_NAME_RE.sub("_", name).strip(" .")[:255]
-    return name or "attachment"
-
-
-def _inspect_archive(data, extension):
-    try:
-        with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            infos = archive.infolist()
-            if not infos or len(infos) > MAX_ARCHIVE_ENTRIES:
-                raise AttachmentError("This archive has too many entries or is empty.")
-            expanded = 0
-            names = []
-            for info in infos:
-                if info.flag_bits & 0x1:
-                    raise AttachmentError("Encrypted archives are not supported.")
-                normalized = posixpath.normpath(info.filename.replace("\\", "/"))
-                if normalized.startswith("../") or normalized.startswith("/") or normalized == "..":
-                    raise AttachmentError("This archive contains an unsafe path.")
-                nested_extension = Path(normalized).suffix.lower()
-                if nested_extension in DENIED_ARCHIVE_EXTENSIONS:
-                    raise AttachmentError("This archive contains an unsafe file type.")
-                expanded += int(info.file_size or 0)
-                compressed = max(1, int(info.compress_size or 0))
-                if info.file_size > 10 * 1024 * 1024 and info.file_size / compressed > MAX_ARCHIVE_RATIO:
-                    raise AttachmentError("This archive expands beyond the safe compression ratio.")
-                names.append(normalized)
-            if expanded > MAX_ARCHIVE_EXPANDED_BYTES:
-                raise AttachmentError("This archive expands beyond the safe size limit.")
-            marker = ZIP_CONTAINER_MARKERS.get(extension)
-            if marker and not any(name.startswith(marker) for name in names):
-                raise AttachmentError("The file contents do not match its Office format.")
-            if extension in {".odt", ".ods", ".odp"}:
-                expected = DOCUMENT_MIMES[extension]
-                try:
-                    mimetype = archive.read("mimetype").decode("ascii", "strict").strip()
-                except (KeyError, UnicodeDecodeError):
-                    raise AttachmentError("The file contents do not match its OpenDocument format.")
-                if mimetype != expected:
-                    raise AttachmentError("The file contents do not match its OpenDocument format.")
-    except (zipfile.BadZipFile, RuntimeError) as exc:
-        raise AttachmentError("The file is not a valid, readable archive.") from exc
-
-
-def _optimize_image(data, extension):
-    try:
-        with Image.open(io.BytesIO(data)) as image:
-            image_format = str(image.format or "").upper()
-            if image_format not in IMAGE_FORMATS or extension not in IMAGE_FORMATS[image_format][1]:
-                raise AttachmentError("The image contents do not match its filename.")
-            width, height = image.size
-            if width < 1 or height < 1 or width * height > MAX_IMAGE_PIXELS:
-                raise AttachmentError("Image dimensions are too large.")
-            image.verify()
-        if image_format == "GIF":
-            return data, IMAGE_FORMATS[image_format][0], width, height, "identity"
-        with Image.open(io.BytesIO(data)) as image:
-            has_metadata = bool(image.getexif()) or any(
-                key in image.info for key in ("icc_profile", "xmp", "XML:com.adobe.xmp")
-            )
-            image = ImageOps.exif_transpose(image)
-            image.thumbnail((MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION), Image.Resampling.LANCZOS)
-            output = io.BytesIO()
-            if image_format == "JPEG":
-                image = image.convert("RGB")
-                save_kwargs = {"optimize": True, "quality": 86, "progressive": True}
-            elif image_format == "WEBP":
-                save_kwargs = {"optimize": True, "quality": 86, "method": 5}
-            else:
-                save_kwargs = {"optimize": True}
-            image.save(output, format=image_format, **save_kwargs)
-            optimized = output.getvalue()
-            if len(optimized) >= len(data) and image.size == (width, height) and not has_metadata:
-                optimized = data
-            return optimized, IMAGE_FORMATS[image_format][0], image.width, image.height, "identity"
-    except (UnidentifiedImageError, OSError, SyntaxError, ValueError, RuntimeError, Image.DecompressionBombError) as exc:
-        raise AttachmentError("The uploaded file is not a valid supported image.") from exc
-
-
-def _pdf_thumbnail(data):
-    try:
-        import pypdfium2 as pdfium
-
-        document = pdfium.PdfDocument(data)
-        if len(document) < 1:
-            return None
-        page = document[0]
-        bitmap = page.render(scale=1.25)
-        image = bitmap.to_pil().convert("RGB")
-        image.thumbnail((720, 960), Image.Resampling.LANCZOS)
-        output = io.BytesIO()
-        image.save(output, format="WEBP", quality=72, method=4)
-        return output.getvalue(), image.width, image.height
-    except Exception:
-        logger.info("PDF preview generation failed; using generic file card", exc_info=True)
-        return None
-
-
-def inspect_and_prepare(data, filename):
-    if not data:
-        raise AttachmentError("The selected file is empty.")
-    safe_name = _safe_filename(filename)
-    extension = Path(safe_name).suffix.lower()
-    if extension in DENIED_ARCHIVE_EXTENSIONS or extension not in DOCUMENT_MIMES and not any(
-        extension in value[1] for value in IMAGE_FORMATS.values()
-    ):
-        raise AttachmentError("This file type is not allowed in chat.")
-    original_sha256 = hashlib.sha256(data).hexdigest()
-    preview = None
-    width = height = None
-    if any(extension in value[1] for value in IMAGE_FORMATS.values()):
-        stored, mime_type, width, height, encoding = _optimize_image(data, extension)
-        kind = "image"
-    else:
-        mime_type = DOCUMENT_MIMES[extension]
-        kind = "pdf" if extension == ".pdf" else "file"
-        if extension == ".pdf":
-            if not data.startswith(b"%PDF-"):
-                raise AttachmentError("The file is not a valid PDF.")
-            preview = _pdf_thumbnail(data)
-        elif extension in COMPRESSIBLE_EXTENSIONS:
-            try:
-                data.decode("utf-8")
-            except UnicodeDecodeError as exc:
-                raise AttachmentError("Text attachments must use UTF-8 encoding.") from exc
-        elif extension in ZIP_CONTAINER_MARKERS or extension in {".odt", ".ods", ".odp", ".zip"}:
-            _inspect_archive(data, extension)
-        compressed = gzip.compress(data, compresslevel=6, mtime=0) if extension in COMPRESSIBLE_EXTENSIONS else data
-        if len(compressed) < len(data):
-            stored, encoding = compressed, "gzip"
-        else:
-            stored, encoding = data, "identity"
-    return {
-        "filename": safe_name,
-        "mime_type": mime_type,
-        "kind": kind,
-        "original_size_bytes": len(data),
-        "stored": stored,
-        "stored_size_bytes": len(stored),
-        "compression_encoding": encoding,
-        "sha256": original_sha256,
-        "width": width,
-        "height": height,
-        "preview": preview,
-    }
+def _legacy_bucket():
+    return runtime_environment_config().appwrite_chat_attachments_bucket_id
 
 
 def _create_storage_file(data, filename, mime_type):
+    bucket = _legacy_bucket()
+    if not bucket:
+        raise StorageUnavailable("Legacy chat attachment storage is not configured.")
     file_id = str(uuid.uuid4())
     storage_service().create_file(
-        CHAT_ATTACHMENTS_BUCKET_ID,
-        file_id,
-        InputFile.from_bytes(data, filename=filename, mime_type=mime_type),
-        permissions=[],
+        bucket, file_id,
+        InputFile.from_bytes(data, filename=filename, mime_type=mime_type), permissions=[],
     )
     return file_id
 
 
-def create_attachment(*, user_id, scope_type, scope_id, uploaded_file, entitlements, original_size=None, upload_encoding="identity"):
-    limit = entitlements["limits"].get("max_chat_attachment_size_bytes")
-    declared_size = int(original_size or 0)
-    read_limit = (limit if limit is not None else 50 * 1024 * 1024) + 1
-    data = uploaded_file.read(read_limit)
-    if upload_encoding == "gzip":
-        try:
-            data = gzip.decompress(data)
-        except (gzip.BadGzipFile, OSError) as exc:
-            raise AttachmentError("The compressed upload could not be read.") from exc
-        if len(data) > read_limit - 1:
-            raise AttachmentError("The decompressed upload exceeds your chat limit.")
-    actual_size = len(data)
-    original_size = max(declared_size, actual_size)
-    if limit is not None and original_size > limit:
-        raise EntitlementLimitError("chat attachment size", 0, original_size, limit)
-    prepared = inspect_and_prepare(data, uploaded_file.filename)
-    check_storage(entitlements, prepared["stored_size_bytes"] + (len(prepared["preview"][0]) if prepared["preview"] else 0))
-    attachment_id = str(uuid.uuid4())
-    storage_file_id = preview_file_id = None
+def _attachment_limit(entitlements):
+    limit = (entitlements or {}).get("limits", {}).get("max_chat_attachment_size_bytes")
+    return min(MAX_UPLOAD_BYTES, int(limit)) if limit is not None else MAX_UPLOAD_BYTES
+
+
+def _read_upload(uploaded_file, entitlements, original_size, upload_encoding):
     try:
-        storage_file_id = _create_storage_file(
-            prepared["stored"], f"{attachment_id}.bin", "application/octet-stream"
-        )
-        if prepared["preview"]:
-            preview_file_id = _create_storage_file(
-                prepared["preview"][0], f"{attachment_id}-preview.webp", "image/webp"
-            )
-        now = utcnow_iso()
-        return create_row_safe(TABLE_ID, row_id=attachment_id, data={
-            "user_id": str(user_id),
-            "scope_type": scope_type,
-            "scope_id": str(scope_id),
-            "message_id": "",
-            "status": "pending",
-            "original_filename": prepared["filename"],
-            "mime_type": prepared["mime_type"],
-            "kind": prepared["kind"],
-            "original_size_bytes": int(original_size),
-            "stored_size_bytes": prepared["stored_size_bytes"],
-            "compression_encoding": prepared["compression_encoding"],
-            "sha256": prepared["sha256"],
-            "width": prepared["width"],
-            "height": prepared["height"],
-            "storage_bucket_id": CHAT_ATTACHMENTS_BUCKET_ID,
-            "storage_file_id": storage_file_id,
-            "preview_file_id": preview_file_id or "",
-            "preview_size_bytes": len(prepared["preview"][0]) if prepared["preview"] else 0,
-            "provider": "nest",
-            "provider_metadata_json": "{}",
-            "created_at": now,
-            "updated_at": now,
-        })
+        declared_size = int(original_size or 0)
+    except (TypeError, ValueError) as exc:
+        raise AttachmentError("The declared attachment size is invalid.") from exc
+    if declared_size < 0:
+        raise AttachmentError("The declared attachment size is invalid.")
+    if upload_encoding not in {"identity", "gzip"}:
+        raise AttachmentError("The upload encoding is not supported.")
+    limit = _attachment_limit(entitlements)
+    if declared_size > limit:
+        raise EntitlementLimitError("chat attachment size", 0, declared_size, limit)
+    data = uploaded_file.read(limit + 1)
+    if len(data) > limit:
+        raise EntitlementLimitError("chat attachment size", 0, len(data), limit)
+    if upload_encoding == "gzip":
+        data = bounded_gzip(data, limit)
+    original_size = max(declared_size, len(data))
+    if original_size > limit:
+        raise EntitlementLimitError("chat attachment size", 0, original_size, limit)
+    return data, original_size
+
+
+def _metadata(prepared, *, user_id, scope_type, scope_id, original_size, backend, file_id, preview_id):
+    now = utcnow_iso()
+    return {
+        "user_id": str(user_id),
+        "scope_type": scope_type,
+        "scope_id": str(scope_id),
+        "message_id": "",
+        "status": "pending",
+        "original_filename": prepared["filename"],
+        "mime_type": prepared["mime_type"],
+        "kind": prepared["kind"],
+        "original_size_bytes": original_size,
+        "stored_size_bytes": prepared["stored_size_bytes"],
+        "compression_encoding": prepared["compression_encoding"],
+        "sha256": prepared["sha256"],
+        "width": prepared["width"],
+        "height": prepared["height"],
+        "storage_backend": backend,
+        "storage_bucket_id": _legacy_bucket() if backend == "appwrite" else "",
+        "storage_file_id": file_id,
+        "preview_file_id": preview_id or "",
+        "preview_size_bytes": len(prepared["preview"][0]) if prepared["preview"] else 0,
+        "provider": "nest",
+        "provider_metadata_json": "{}",
+        "created_at": now,
+        "updated_at": now,
+    }
+
+
+def cleanup_legacy_attachments(*, account_user_id=None, object_ids=None, parent_id=None):
+    """Retry explicit legacy payload deletion after its metadata commit."""
+    return drain_legacy_deletions(
+        NAMESPACE,
+        lambda bucket, object_id: storage_service().delete_file(bucket, object_id),
+        account_user_id=account_user_id, object_ids=object_ids, parent_id=parent_id,
+    )
+
+
+def _finish_legacy_cleanup(**scope):
+    if cleanup_legacy_attachments(**scope)["pending"]:
+        raise StorageUnavailable("Legacy chat attachment deletion is pending. Please retry.")
+
+
+def create_attachment(*, user_id, scope_type, scope_id, uploaded_file, entitlements,
+                      original_size=None, upload_encoding="identity"):
+    require_mutations_enabled()
+    if not _chat_attachments_enabled():
+        raise AttachmentError("Chat attachments are disabled.")
+    data, original_size = _read_upload(uploaded_file, entitlements, original_size, upload_encoding)
+    backend = write_backend()
+    if backend == "sqlite":
+        # Scan before parsing the original image/PDF. The object service scans
+        # again before encrypting the stored representation.
+        scan_upload(data)
+    prepared = inspect_and_prepare(data, uploaded_file.filename)
+    total_bytes = prepared["stored_size_bytes"] + (len(prepared["preview"][0]) if prepared["preview"] else 0)
+    check_storage(entitlements, total_bytes)
+    attachment_id = str(uuid.uuid4())
+    file_id = str(uuid.uuid4())
+    preview_id = str(uuid.uuid4()) if prepared["preview"] else ""
+    objects = []
+    created_legacy_ids = []
+    if backend == "sqlite":
+        objects.append(storage_objects.prepare_object(
+            NAMESPACE, file_id, prepared["stored"], filename=prepared["filename"],
+            mime_type=prepared["mime_type"], scan_data=data,
+        ))
+        if preview_id:
+            objects.append(storage_objects.prepare_object(
+                NAMESPACE, preview_id, prepared["preview"][0],
+                filename=f"{attachment_id}-preview.webp", mime_type="image/webp",
+            ))
+    else:
+        try:
+            file_id = _create_storage_file(prepared["stored"], f"{attachment_id}.bin", "application/octet-stream")
+            created_legacy_ids.append(file_id)
+            if preview_id:
+                preview_id = _create_storage_file(prepared["preview"][0], f"{attachment_id}-preview.webp", "image/webp")
+                created_legacy_ids.append(preview_id)
+        except Exception:
+            _rollback_legacy(created_legacy_ids)
+            raise
+    metadata = _metadata(
+        prepared, user_id=user_id, scope_type=scope_type, scope_id=scope_id,
+        original_size=original_size, backend=backend, file_id=file_id, preview_id=preview_id,
+    )
+    try:
+        with storage_objects.write_transaction() as conn:
+            if not _chat_attachments_enabled():
+                raise AttachmentError("Chat attachments are disabled.")
+            require_scope(conn, user_id=user_id, scope_type=scope_type, scope_id=scope_id)
+            fresh = check_storage_transaction(conn, user_id, total_bytes, entitlements=entitlements)
+            current_limit = _attachment_limit(fresh)
+            if original_size > current_limit:
+                raise EntitlementLimitError("chat attachment size", 0, original_size, current_limit)
+            for item in objects:
+                storage_objects.put_object(conn, item)
+            return insert_attachment(conn, attachment_id, metadata)
     except Exception:
-        for file_id in (storage_file_id, preview_file_id):
-            if file_id:
-                try:
-                    storage_service().delete_file(CHAT_ATTACHMENTS_BUCKET_ID, file_id)
-                except AppwriteException:
-                    logger.exception("Failed to roll back chat attachment storage")
+        _rollback_legacy(created_legacy_ids)
         raise
+
+
+def _rollback_legacy(ids):
+    for object_id in ids:
+        try:
+            storage_service().delete_file(_legacy_bucket(), object_id)
+        except AppwriteException:
+            logger.exception("Failed to roll back legacy chat attachment storage")
 
 
 def get_attachment(attachment_id):
@@ -354,81 +259,104 @@ def bind_pending(attachment_ids, *, user_id, scope_type, scope_id, message_id):
     ids = list(dict.fromkeys(str(value) for value in attachment_ids if value))
     if len(ids) > MAX_ATTACHMENTS_PER_MESSAGE:
         raise AttachmentError("A message can include at most five attachments.")
-    rows = []
-    for attachment_id in ids:
-        row = get_attachment(attachment_id)
-        if not row or row.get("status") != "pending" or str(row.get("user_id")) != str(user_id):
-            raise AttachmentError("An attachment is unavailable or no longer pending.")
-        if row.get("scope_type") != scope_type or str(row.get("scope_id")) != str(scope_id):
-            raise AttachmentError("An attachment belongs to a different conversation.")
-        rows.append(row)
-    now = utcnow_iso()
-    activated = []
-    try:
-        for row in rows:
-            row_id = str(row.get("$id") or row.get("id"))
-            update_row_safe(TABLE_ID, row_id, {
-                "message_id": str(message_id), "status": "active", "updated_at": now,
-            })
-            activated.append(row_id)
-    except Exception:
-        for row_id in activated:
-            try:
-                update_row_safe(TABLE_ID, row_id, {"message_id": "", "status": "pending", "updated_at": utcnow_iso()})
-            except AppwriteException:
-                logger.exception("Failed to roll back partially bound chat attachment")
-        raise
-    return rows
+    if not ids:
+        return []
+    with storage_objects.write_transaction() as conn:
+        return activate_attachments(
+            conn, ids, user_id=user_id, scope_type=scope_type, scope_id=scope_id,
+            message_id=message_id, now=utcnow_iso(),
+        )
 
 
 def attachment_bytes(row, *, preview=False):
     file_id = row.get("preview_file_id") if preview else row.get("storage_file_id")
     if not file_id:
         return None
-    data = storage_service().get_file_download(row.get("storage_bucket_id") or CHAT_ATTACHMENTS_BUCKET_ID, file_id)
+    expected = row.get("preview_size_bytes") if preview else row.get("stored_size_bytes")
+    try:
+        expected = int(expected) if expected is not None else None
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise StorageIntegrityError("The chat attachment size is invalid.") from exc
+    if expected is not None and not 0 <= expected <= MAX_UPLOAD_BYTES:
+        raise StorageIntegrityError("The chat attachment size is invalid.")
+    backend = row.get("storage_backend") or "appwrite"
+    if backend == "sqlite":
+        data = storage_objects.read_object(NAMESPACE, str(file_id))
+    elif backend == "appwrite":
+        require_legacy_reads()
+        bucket = row.get("storage_bucket_id") or _legacy_bucket()
+        if not bucket:
+            raise StorageUnavailable("Legacy chat attachment storage is not configured.")
+        data = read_legacy_file(
+            bucket, str(file_id), max_bytes=MAX_UPLOAD_BYTES, expected_bytes=expected,
+        )
+    else:
+        raise StorageIntegrityError("The chat attachment storage backend is invalid.")
+    if not isinstance(data, bytes) or len(data) > MAX_UPLOAD_BYTES or (expected is not None and len(data) != expected):
+        raise StorageIntegrityError("The chat attachment size is invalid.")
     if not preview and row.get("compression_encoding") == "gzip":
-        return gzip.decompress(data)
+        try:
+            original_size = row.get("original_size_bytes")
+            declared = MAX_UPLOAD_BYTES if original_size is None else int(original_size)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise StorageIntegrityError("The chat attachment size is invalid.") from exc
+        if not 0 <= declared <= MAX_UPLOAD_BYTES:
+            raise StorageIntegrityError("The chat attachment size is invalid.")
+        try:
+            data = bounded_gzip(data, declared)
+        except AttachmentError as exc:
+            raise StorageIntegrityError("The compressed chat attachment is invalid.") from exc
+        if row.get("sha256") and hashlib.sha256(data).hexdigest() != row["sha256"]:
+            raise StorageIntegrityError("The restored chat attachment hash is invalid.")
+    elif not preview and row.get("compression_encoding") not in {None, "", "identity"}:
+        raise StorageIntegrityError("The chat attachment compression is invalid.")
     return data
 
 
-def delete_attachment(row):
+def delete_attachment(row, *, conn=None, account_user_id=None):
     if not row:
         return
-    bucket_id = row.get("storage_bucket_id") or CHAT_ATTACHMENTS_BUCKET_ID
-    for file_id in (row.get("storage_file_id"), row.get("preview_file_id")):
-        if not file_id:
-            continue
-        try:
-            storage_service().delete_file(bucket_id, file_id)
-        except AppwriteException as exc:
-            status = int(getattr(exc, "code", 0) or getattr(exc, "response_code", 0) or 0)
-            if status != 404:
-                logger.exception("Failed to delete chat attachment storage object")
-    delete_row_safe(TABLE_ID, str(row.get("$id") or row.get("id")))
+    require_mutations_enabled()
+    if conn is not None:
+        return delete_attachment_record(conn, row, account_user_id=account_user_id)
+    with storage_objects.write_transaction() as transaction:
+        deleted = delete_attachment_record(transaction, row, account_user_id=account_user_id)
+    if (row.get("storage_backend") or "appwrite") == "appwrite":
+        _finish_legacy_cleanup(
+            account_user_id=account_user_id,
+            object_ids=[object_id for object_id in (
+                row.get("storage_file_id"), row.get("preview_file_id"),
+            ) if object_id],
+        )
+    return deleted
 
 
 def delete_message_attachments(message_id):
-    if not _chat_attachments_enabled():
-        return
-    try:
-        rows = list_rows_all(TABLE_ID, [Query.equal("message_id", [str(message_id)])])
-    except AppwriteException:
-        logger.warning("Chat attachment metadata is unavailable during message cleanup")
-        return
-    for row in rows:
-        delete_attachment(row)
+    require_mutations_enabled()
+    with storage_objects.write_transaction() as conn:
+        conn.execute(
+            "UPDATE chat_messages SET delete_requested_at = "
+            "COALESCE(delete_requested_at, ?) WHERE id = ?",
+            [utcnow_iso(), str(message_id)],
+        )
+        for row in attachment_rows(conn, "message_id", message_id):
+            delete_attachment_record(conn, row)
+    # The parent scope survives removal of every attachment row, so retries
+    # still prevent hiding/pruning this message while its payload is remote.
+    _finish_legacy_cleanup(parent_id=str(message_id))
 
 
 def delete_user_attachments(user_id):
-    if not _chat_attachments_enabled():
-        return
-    for row in list_rows_all(TABLE_ID, [Query.equal("user_id", [str(user_id)])]):
-        delete_attachment(row)
+    require_mutations_enabled()
+    with storage_objects.write_transaction() as conn:
+        for row in attachment_rows(conn, "user_id", user_id):
+            delete_attachment_record(conn, row, account_user_id=str(user_id))
+    _finish_legacy_cleanup(account_user_id=str(user_id))
 
 
 def cleanup_abandoned_attachments(max_age_hours=24):
-    if not _chat_attachments_enabled():
-        return 0
+    require_mutations_enabled()
+    cleanup_legacy_attachments()
     cutoff = datetime.now(timezone.utc) - timedelta(hours=max_age_hours)
     rows = list_rows_all(TABLE_ID, [Query.equal("status", ["pending"])])
     deleted = 0
@@ -441,6 +369,8 @@ def cleanup_abandoned_attachments(max_age_hours=24):
         except ValueError:
             created = datetime.min.replace(tzinfo=timezone.utc)
         if created <= cutoff:
-            delete_attachment(row)
-            deleted += 1
+            try:
+                deleted += bool(delete_attachment(row, account_user_id=str(row["user_id"])))
+            except AttachmentError:
+                logger.info("Abandoned attachment changed before cleanup")
     return deleted

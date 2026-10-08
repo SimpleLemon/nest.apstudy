@@ -1,5 +1,6 @@
 import io
 import os
+import tempfile
 import unittest
 import zipfile
 from datetime import datetime, timedelta, timezone
@@ -10,6 +11,7 @@ from flask import Flask, Response
 
 from appwrite_helpers import format_datetime
 import blueprints.file_share as fs
+from services import database, file_share_uploads, storage_rows
 
 
 class FileShareTestCase(unittest.TestCase):
@@ -22,7 +24,25 @@ class FileShareTestCase(unittest.TestCase):
         )
         self.app.secret_key = "test"
         self.app.config["SERVER_NAME"] = "example.test"
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.app.config.update(
+            DATABASE_PATH=os.path.join(temporary.name, "nest.sqlite3"),
+            NEST_STORAGE_BACKEND="appwrite",
+            NEST_STORAGE_READ_LEGACY=True,
+            NEST_STORAGE_MUTATIONS_PAUSED=False,
+        )
         self.app.register_blueprint(fs.file_share_bp)
+        with self.app.app_context():
+            database.init_db()
+            database.create_row("users", "user-1", {
+                "google_id": "user-1", "email": "test@example.com", "name": "Test User", "tier": "developer",
+                "created_at": self.future(),
+            })
+            database.create_row("file_folders", "folder-1", {
+                "user_id": "user-1", "name": "Study Guides", "is_public": False,
+                "created_at": self.future(),
+            })
         self.user = SimpleNamespace(
             id="user-1",
             name="Test User",
@@ -93,14 +113,12 @@ class FileShareTestCase(unittest.TestCase):
         created_folder = self.folder_row("folder-1", name="Study Guides")
         with self.app.test_request_context("/api/files/folders", method="POST", json={"name": "Study Guides"}):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_sibling_order", return_value=1000), \
-                    patch.object(fs, "create_row_safe", return_value=created_folder) as create_row:
+                    patch.object(fs, "create_folder_record", return_value=created_folder) as create_row:
                 response, status = fs.create_folder.__wrapped__()
 
         self.assertEqual(status, 201)
         self.assertEqual(response.get_json()["name"], "Study Guides")
-        self.assertEqual(create_row.call_args.kwargs["data"]["parent_folder_id"], None)
+        self.assertEqual(create_row.call_args.kwargs["parent_folder_id"], None)
 
         folder = self.folder_row("folder-1")
         moved_folder = self.folder_row("folder-1", parent_folder_id="folder-2")
@@ -111,35 +129,28 @@ class FileShareTestCase(unittest.TestCase):
         ):
             with patch.object(fs, "current_user", self.user), \
                     patch.object(fs, "_folder_owner_or_404", return_value=folder), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_list_all_user_folders", return_value=[folder, self.folder_row("folder-2")]), \
-                    patch.object(fs, "_sibling_order", return_value=2000), \
-                    patch.object(fs, "update_row_safe", return_value=moved_folder) as update_row:
+                    patch.object(fs, "update_folder_record", return_value=moved_folder) as update_row:
                 response = fs.update_folder.__wrapped__("folder-1")
 
         self.assertEqual(response.get_json()["parentFolderId"], "folder-2")
         self.assertEqual(update_row.call_args.args[2]["parent_folder_id"], "folder-2")
 
-        file_inside = self.file_row("file-1", folder_id="folder-1")
         with self.app.test_request_context("/api/files/folders/folder-1", method="DELETE"):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_folder_owner_or_404", return_value=folder), \
-                    patch.object(fs, "_collect_folder_tree_ids", return_value=["folder-1", "child-1"]), \
-                    patch.object(fs, "_list_all_user_files", return_value=[file_inside]), \
-                    patch.object(fs, "_delete_shared_file_row") as delete_file, \
-                    patch.object(fs, "delete_row_safe") as delete_row:
+                    patch.object(fs, "_delete_folder_tree") as delete_tree:
                 response = fs.delete_folder.__wrapped__("folder-1")
 
         self.assertTrue(response.get_json()["ok"])
-        delete_file.assert_called_once_with(file_inside)
-        self.assertEqual([call.args[1] for call in delete_row.call_args_list], ["child-1", "folder-1"])
+        delete_tree.assert_called_once_with("folder-1", "user-1")
 
     def test_upload_writes_appwrite_storage_metadata(self):
         stored_rows = []
 
-        def create_row(_table, row_id, data, permissions=None):
+        real_insert = storage_rows.insert_row
+
+        def create_row(conn, table, row_id, data):
             stored_rows.append(data)
-            return {"$id": row_id, **data}
+            return real_insert(conn, table, row_id, data)
 
         storage = Mock()
         data = {
@@ -151,10 +162,9 @@ class FileShareTestCase(unittest.TestCase):
         }
         with self.app.test_request_context("/api/files/upload", method="POST", data=data):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_storage", return_value=storage), \
-                    patch.object(fs, "_generate_share_code", return_value="ABC1234"), \
-                    patch.object(fs, "create_row_safe", side_effect=create_row):
+                    patch.object(file_share_uploads, "_storage", return_value=storage), \
+                    patch.object(file_share_uploads, "_generate_share_code", return_value="ABC1234"), \
+                    patch.object(storage_rows, "insert_row", side_effect=create_row):
                 response, status = fs.upload_file.__wrapped__()
 
         payload = response.get_json()
@@ -163,7 +173,7 @@ class FileShareTestCase(unittest.TestCase):
         storage.create_file.assert_called_once()
         self.assertEqual(stored_rows[0]["folder_id"], "folder-1")
         self.assertEqual(stored_rows[0]["storage_backend"], "appwrite")
-        self.assertEqual(stored_rows[0]["storage_bucket_id"], fs.FILE_SHARE_BUCKET_ID)
+        self.assertEqual(stored_rows[0]["storage_bucket_id"], file_share_uploads.FILE_SHARE_BUCKET_ID)
         self.assertTrue(stored_rows[0]["stored_path"].startswith("appwrite://"))
 
     def test_public_upload_cleans_storage_when_share_code_generation_fails(self):
@@ -177,9 +187,8 @@ class FileShareTestCase(unittest.TestCase):
         }
         with self.app.test_request_context("/api/files/upload", method="POST", data=data):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_storage", return_value=storage), \
-                    patch.object(fs, "_generate_share_code", side_effect=AppwriteException("lookup failed")):
+                    patch.object(file_share_uploads, "_storage", return_value=storage), \
+                    patch.object(file_share_uploads, "_generate_share_code", side_effect=AppwriteException("lookup failed")):
                 response, status = fs.upload_file.__wrapped__()
 
         self.assertEqual(status, 400)
@@ -198,9 +207,7 @@ class FileShareTestCase(unittest.TestCase):
         }
         with self.app.test_request_context("/api/files/upload", method="POST", data=data):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_storage", return_value=storage), \
-                    patch.object(fs, "create_row_safe", side_effect=lambda _table, row_id, data, permissions=None: {"$id": row_id, **data}):
+                    patch.object(file_share_uploads, "_storage", return_value=storage):
                 response, status = fs.upload_file.__wrapped__()
 
         payload = response.get_json()
@@ -226,7 +233,7 @@ class FileShareTestCase(unittest.TestCase):
         with self.app.test_request_context("/api/files/my/file-1", method="PATCH", json={"expiryDays": "7"}):
             with patch.object(fs, "current_user", self.user), \
                     patch.object(fs, "_file_owner_or_404", return_value=row), \
-                    patch.object(fs, "update_row_safe", return_value=updated) as update_row:
+                    patch.object(fs, "update_file_record", return_value=updated) as update_row:
                 response = fs.update_my_file.__wrapped__("file-1")
 
         self.assertEqual(response.get_json()["id"], "file-1")
@@ -243,7 +250,7 @@ class FileShareTestCase(unittest.TestCase):
         with self.app.test_request_context("/api/files/my/file-1", method="PATCH", json={"expiryDays": "365"}):
             with patch.object(fs, "current_user", self.user), \
                     patch.object(fs, "_file_owner_or_404", return_value=row), \
-                    patch.object(fs, "update_row_safe") as update_row:
+                    patch.object(fs, "update_file_record") as update_row:
                 response, status = fs.update_my_file.__wrapped__("file-1")
 
         self.assertEqual(status, 400)
@@ -256,7 +263,7 @@ class FileShareTestCase(unittest.TestCase):
         with self.app.test_request_context("/api/files/my/file-1/visibility", method="POST", json={"visibility": "private"}):
             with patch.object(fs, "current_user", self.user), \
                     patch.object(fs, "_file_owner_or_404", return_value=row), \
-                    patch.object(fs, "update_row_safe", return_value=updated) as update_row:
+                    patch.object(fs, "update_file_record", return_value=updated) as update_row:
                 response, status = fs.change_visibility.__wrapped__("file-1")
 
         self.assertEqual(status, 200)
@@ -275,8 +282,9 @@ class FileShareTestCase(unittest.TestCase):
         row = self.folder_row("folder-1", is_public=True, share_code="ABC1234")
         updated = self.folder_row("folder-1", is_public=False, share_code=None)
         with self.app.test_request_context("/api/files/folders/folder-1/visibility", method="POST", json={"visibility": "private"}):
-            with patch.object(fs, "_folder_owner_or_404", return_value=row), \
-                    patch.object(fs, "update_row_safe", return_value=updated) as update_row:
+            with patch.object(fs, "current_user", self.user), \
+                    patch.object(fs, "_folder_owner_or_404", return_value=row), \
+                    patch.object(fs, "update_folder_record", return_value=updated) as update_row:
                 response = fs.change_folder_visibility.__wrapped__("folder-1")
 
         self.assertFalse(response.get_json()["isPublic"])
@@ -307,6 +315,7 @@ class FileShareTestCase(unittest.TestCase):
             self.assertEqual(sorted(archive.namelist()), ["same-2.txt", "same.txt"])
             self.assertEqual(archive.read("same.txt"), b"file-1")
             self.assertEqual(archive.read("same-2.txt"), b"file-2")
+        response.close()
 
     def test_zip_response_skips_expired_files(self):
         active = self.file_row("active", original_filename="active.txt")
@@ -319,6 +328,7 @@ class FileShareTestCase(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(response.get_data())) as archive:
             self.assertEqual(archive.namelist(), ["active.txt"])
         storage_download.assert_called_once_with(active)
+        response.close()
 
     def test_public_folder_route_renders_template(self):
         root = self.folder_row("folder-1", name="Shared Notes", is_public=True, share_code="ABC1234")
@@ -350,7 +360,7 @@ class FileShareTestCase(unittest.TestCase):
 
         exc = AppwriteException("File size is larger than maximum allowed size", 400, "general_file_too_large")
         self.assertEqual(
-            fs._appwrite_upload_error(exc),
+            file_share_uploads._appwrite_upload_error(exc),
             "File exceeds the storage bucket size limit.",
         )
 
@@ -372,8 +382,7 @@ class FileShareTestCase(unittest.TestCase):
         }
         with self.app.test_request_context("/api/files/upload", method="POST", data=data):
             with patch.object(fs, "current_user", self.user), \
-                    patch.object(fs, "_assert_folder_target"), \
-                    patch.object(fs, "_storage", return_value=storage):
+                    patch.object(file_share_uploads, "_storage", return_value=storage):
                 response, status = fs.upload_file.__wrapped__()
 
         payload = response.get_json()
