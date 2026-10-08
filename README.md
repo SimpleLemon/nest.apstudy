@@ -10,30 +10,18 @@
 
 <p align="center">
   <a href="https://nest.apstudy.org"><b>🌐 Nest.APStudy.org</b></a><br>
-  <sub>Combines local Emory course data with productivity tools all-in-one</sub>
+  <sub>Combines Emory course data with productivity tools all-in-one</sub>
 </p>
 
 ---
 
 ## Overview
 
-Nest.APStudy is a web platform for student course planning and productivity, combining local Emory course data with user accounts, dashboards, calendars, tasks, notes, chat, file sharing, and related admin tools. User data is stored in VPS-hosted SQLite databases, with Appwrite handling authentication and file storage.
+Nest.APStudy is your all-in-one productivity platform for student course planning that centralizes organization calendars, tasks, notes, chat, file sharing, and related tools. Your day organized with everything in an optimized dashboard.
 
-> **Note:** This project is under active development. Some features depend on external Appwrite, OAuth, Discord, or calendar-feed configuration that is intentionally not committed.
+> **Note:** This project is under active development and is not meant for personal deployment (though possible). Some features depend on external Appwrite, OAuth, Discord, or calendar-feed configuration that is intentionally not committed.
 
-## Repository Layout
-
-| Path | Description |
-|------|-------------|
-| `app.py` | Creates the Flask application with `app:create_app()` |
-| `blueprints/` | Flask route modules |
-| `templates/` | Jinja templates |
-| `static/css/` and `static/js/` | Frontend assets |
-| `Spring_2026/` and `Fall_2026/` | Local course data |
-| `services/` | Background and integration services |
-| `instance/` | SQLite databases (not committed — created on deploy) |
-
-## Requirements
+## Deployment Requirements
 
 - Python 3.11+
 - Node.js and npm (for Tailwind and JavaScript tests)

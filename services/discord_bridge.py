@@ -11,6 +11,7 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import create_row_safe, first_row, format_datetime, update_row_safe
 from services.discord_constants import DEFAULT_GUILD_ID, DISCORD_API_BASE
+from services.discord_member_lookup import DiscordMemberLookup
 from services.environment_config import runtime_environment_config
 from services.redaction import SECRET_TEXT_RE
 
@@ -21,6 +22,7 @@ WEBHOOK_CONFIG_KEY = "nest_chat_webhook"
 GUILD_ROLES_CACHE_SECONDS = 10 * 60
 _guild_roles_cache = {}
 _user_cache = {}
+_member_lookup = DiscordMemberLookup()
 
 
 class DiscordBridgeError(RuntimeError):
@@ -196,11 +198,7 @@ def member_has_role(discord_user_id, guild_id=None, role_id=None):
     if not discord_user_id or not guild_id or not role_id or not _bot_token():
         return None
     try:
-        response = requests.get(
-            f"{DISCORD_API_BASE}/guilds/{guild_id}/members/{discord_user_id}",
-            headers=_headers(),
-            timeout=8,
-        )
+        response = _member_lookup.get(guild_id, discord_user_id, headers=_headers())
     except (requests.RequestException, DiscordBridgeError):
         logger.exception("Failed to fetch Discord member %s", discord_user_id)
         return None
