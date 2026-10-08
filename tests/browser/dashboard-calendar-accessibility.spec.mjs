@@ -21,7 +21,7 @@ test("dashboard calendar popovers expose and clean up their accessible relations
             <dialog id="dashboard-discard-dialog"><button id="dashboard-keep-editing">Keep editing</button><button id="dashboard-confirm-discard">Discard</button></dialog>
             <div id="dashboard-layout-announcer"></div>
             <script>
-                localStorage.setItem('apstudy.dashboard.eggCrackQuote.visible.v1', 'false');
+                localStorage.setItem('apstudy.dashboard.eggCrackQuote.visible.v1', 'hidden');
                 window.APStudyHttp = { fetchJson: async () => ({
                     available_tiles: ["calendar"],
                     dashboard_layout: { version: 4, daily_quote_visible: false, tiles: [{ instance_id: "calendar-1", type: "calendar", size: "standard", view: "month", density: "comfortable", item_limit: 5 }] },
