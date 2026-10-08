@@ -29,15 +29,20 @@ the source explicitly supplies an enrolled-student count.
 The RMP export covers all 2,153 Emory and 315 Oxford result positions. These
 contain 2,083 and 310 unique profiles respectively; repeated profile IDs were
 deduplicated after complete pagination. The refreshed cache covers 1,321 Atlas
-instructor identities: 570 matched summaries, 51 verified unrated profiles,
-685 unmatched names, and 15 uncertain matches. All current school identities
+instructor identities: 571 matched summaries, 51 verified unrated profiles,
+684 unmatched names, and 15 uncertain matches. All current school identities
 are verified. Generic `ONLIN@ONLINE` sections are assigned to an institution
 using their captured undergraduate academic career, separately from their
 physical meeting campus. Eleven obsolete unknown-school keys were retired
 after their source identities resolved, leaving 1,321 active identities.
 Tom Smith's legacy unknown-career identity also has an explicit correction
 backed by the same Atlas instructor ID in Atlanta sections and his public RMP
-profile. Original profile capture timestamps are retained.
+profile. Tracy McGill's Atlas instructor ID 3543 is explicitly mapped to Emory
+RMP profile 251830, whose full name is Tracy Morkin McGill. Her confirmed saved
+summary is 4.0 overall, 3.7 difficulty, and 183 ratings. This correction applies
+to both Fall 2026 and Spring 2027 without loosening automatic name matching.
+Original profile capture timestamps are retained. Identity corrections are
+recorded separately in the report from the last complete directory refresh.
 
 Spring 2026 remains available as `legacy/unverified`; it was not backfilled in
 this refresh. Automated live seat checks remain separate and were unavailable

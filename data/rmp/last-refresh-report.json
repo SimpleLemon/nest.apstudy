@@ -1,8 +1,8 @@
 {
   "instructors": 1321,
   "counts": {
-    "unmatched": 685,
-    "matched": 570,
+    "unmatched": 684,
+    "matched": 571,
     "unrated": 51,
     "ambiguous": 15
   },
@@ -10979,5 +10979,14 @@
     "unknown:atlas:7869",
     "unknown:atlas:13193",
     "unknown:atlas:3714"
+  ],
+  "identity_corrections": [
+    {
+      "instructor_key": "340:atlas:3543",
+      "professor_id": "251830",
+      "applied_at": "2026-10-08T00:54:22.266543+00:00",
+      "fetched_at": "2026-10-07T17:30:23.023Z",
+      "reason": "Verified October 7, 2026: Atlas instructor 3543 is Tracy McGill, teaching Emory Chemistry. Her confirmed Emory RMP profile 251830 uses the fuller name Tracy Morkin McGill."
+    }
   ]
 }

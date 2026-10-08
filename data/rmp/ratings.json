@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-07T19:49:50.519731+00:00",
+  "updated_at": "2026-10-08T00:54:22.266543+00:00",
   "source": "public-rmp-brave",
   "ratings": {
     "340:atlas:44133": {
@@ -4117,15 +4117,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "251830",
+      "overall_rating": 4,
+      "difficulty": 3.7,
+      "rating_count": 183,
+      "fetched_at": "2026-10-07T17:30:23.023Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T00:54:22.266543+00:00",
+      "override_label": "Verified October 7, 2026: Atlas instructor 3543 is Tracy McGill, teaching Emory Chemistry. Her confirmed Emory RMP profile 251830 uses the fuller name Tracy Morkin McGill.",
+      "cross_school_override": false
     },
     "340:atlas:269": {
       "instructor_key": "340:atlas:269",
@@ -22988,8 +22990,8 @@
   "report": {
     "instructors": 1321,
     "counts": {
-      "unmatched": 685,
-      "matched": 570,
+      "unmatched": 684,
+      "matched": 571,
       "unrated": 51,
       "ambiguous": 15
     },
@@ -33966,6 +33968,15 @@
       "unknown:atlas:7869",
       "unknown:atlas:13193",
       "unknown:atlas:3714"
+    ],
+    "identity_corrections": [
+      {
+        "instructor_key": "340:atlas:3543",
+        "professor_id": "251830",
+        "applied_at": "2026-10-08T00:54:22.266543+00:00",
+        "fetched_at": "2026-10-07T17:30:23.023Z",
+        "reason": "Verified October 7, 2026: Atlas instructor 3543 is Tracy McGill, teaching Emory Chemistry. Her confirmed Emory RMP profile 251830 uses the fuller name Tracy Morkin McGill."
+      }
     ]
   }
 }
