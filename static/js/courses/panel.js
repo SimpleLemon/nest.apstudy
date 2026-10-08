@@ -373,7 +373,7 @@ function createCoursePanel({
             <span class="course-chip">${escapeHtml(section.schedule_type || "Type")}</span>
             <span class="course-chip">${escapeHtml(formatCampus(section))}</span>
           </div>
-          ${track ? `<span class="course-card-tracked ${trackingPolicy?.active ? "" : "is-paused"} material-symbols-outlined" aria-label="Tracking ${trackingPolicy?.status || "paused"}" title="Tracking ${trackingPolicy?.status || "paused"}">${trackingPolicy?.active ? "notifications_active" : "notifications_paused"}</span>` : ""}
+          ${isTracked ? `<span class="course-card-tracked ${trackingPolicy.active ? "" : "is-paused"} material-symbols-outlined" aria-label="Tracking ${trackingPolicy.status}" title="Tracking ${trackingPolicy.status}">${trackingPolicy.active ? "notifications_active" : "notifications_paused"}</span>` : ""}
         </div>
       </article>
     `;

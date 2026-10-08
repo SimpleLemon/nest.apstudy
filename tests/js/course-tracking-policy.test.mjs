@@ -27,7 +27,7 @@ test('a page left open crosses schedule boundaries without misleading status', (
   assert.equal(describe(policy, true, Date.parse('2027-01-01T11:59:00Z')).status, 'queued');
   assert.equal(describe(policy, true, Date.parse(policy.opens_at)).status, 'active');
   assert.equal(describe(policy, true, Date.parse(policy.closes_at)).canEnable, false);
-  assert.equal(describe(policy, false, Date.parse(policy.opens_at)).status, 'paused');
+  assert.equal(describe(policy, false, Date.parse(policy.opens_at)).status, 'off');
 });
 
 test('missing policy fails closed in the student control', () => {

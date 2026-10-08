@@ -8,7 +8,7 @@ function describe(policy, enabled, now = Date.now()) {
   const canEnable = state === 'open' || state === 'upcoming';
   const waitingForData = state === 'open' && policy?.catalog_available === false;
   const active = Boolean(enabled && state === 'open' && !waitingForData);
-  const status = !enabled ? 'paused' : active ? 'active' : state === 'upcoming' ? 'queued' : waitingForData ? 'waiting for course data' : state;
+  const status = !enabled ? 'off' : active ? 'active' : state === 'upcoming' ? 'queued' : waitingForData ? 'waiting for course data' : state;
   const description = state === 'closed'
     ? `${label} tracking has closed. No seat checks or alerts will run.`
     : state === 'unavailable'

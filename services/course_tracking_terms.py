@@ -95,7 +95,7 @@ def track_policy_fields(track, policy=None):
     enabled = bool(track.get("enabled"))
     state = policy["effective_state"]
     return {"term_policy": policy, "effective_enabled": enabled and policy["polling_enabled"],
-            "tracking_state": ("paused" if not enabled else
+            "tracking_state": ("off" if not enabled else
                                "active" if policy["polling_enabled"] else
                                "queued" if state == "upcoming" else
                                "waiting_for_data" if state == "open" else state)}

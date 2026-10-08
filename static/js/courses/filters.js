@@ -67,6 +67,7 @@ function createCourseFilters({
     }
     if (state.activeCourseView === "tracked") {
       return Array.from(state.tracksBySection.entries())
+        .filter(([, track]) => track.enabled)
         .map(([sectionId, track]) => resolvePanelSection(sectionId, track))
         .filter(Boolean)
         .sort(compareCourseSections);

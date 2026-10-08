@@ -181,3 +181,22 @@ test('default fallback derives catalog status but marks it unverified', () => {
   });
   assert.deepEqual(getFilteredSections(), []);
 });
+
+test('tracked view includes enabled trackers and drops courses turned off', () => {
+  const tracksBySection = new Map([
+    ['enabled', { id: 'enabled', term: 'Fall_2026', enabled: true }],
+    ['off', { id: 'off', term: 'Fall_2026', enabled: false }],
+  ]);
+  const state = {
+    activeCourseView: 'tracked', tracksBySection, selectedTerm: 'Fall_2026',
+    searchQuery: '', campusFilter: 'all', requirementFilter: 'all',
+    statusFilters: new Set(), dayFilters: new Set(), timeEnabled: false,
+  };
+  const { getFilteredSections } = loadFilters().createCourseFilters({
+    state, getSection: () => null, rememberSection: (track) => track,
+    utils: { buildSectionSearchBlob: () => '', compareCourseSections: () => 0 },
+  });
+  assert.deepEqual(Array.from(getFilteredSections(), (section) => section.id), ['enabled']);
+  tracksBySection.get('enabled').enabled = false;
+  assert.equal(getFilteredSections().length, 0);
+});

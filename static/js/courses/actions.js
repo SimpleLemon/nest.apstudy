@@ -108,7 +108,7 @@ function createCourseActions({
       }
       if (enabled !== wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage + (enabled ? 1 : -1));
       const queued = enabled && payload.track?.tracking_state === "queued";
-      showToast(queued ? "Tracker queued. Checks begin when this term opens." : intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
+      showToast(!enabled ? "Tracking turned off." : queued ? "Tracker queued. Checks begin when this term opens." : intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : "Tracking enabled.");
       if (enabled && !wasEnabled) window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'course-tracking' } }));
     } catch (error) {
       console.error(error);

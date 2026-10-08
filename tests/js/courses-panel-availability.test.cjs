@@ -454,3 +454,24 @@ function renderEmptyPanel({ candidates, availability, statusFilters = ['open'] }
   }).renderPanel();
   return { html: content.innerHTML, summary };
 }
+
+test('turning tracking off hides settings and the card badge while retaining the toggle', () => {
+  const section = { id: 's1', term: 'Spring_2027', course_code: 'BIO 201' };
+  const tracksBySection = new Map([['s1', { enabled: true, interval_minutes: 15 }]]);
+  const stateOverrides = {
+    tracksBySection,
+    trackingTermPolicies: { Spring_2027: { state: 'upcoming', effective_state: 'upcoming', available: true } },
+  };
+  const detail = () => renderCard({ section, stateOverrides: { ...stateOverrides, detailSectionId: 's1' } });
+  assert.match(detail(), /Check interval/);
+  assert.match(detail(), /Last checked/);
+  assert.match(renderCard({ section, stateOverrides }), /course-card-tracked/);
+  tracksBySection.get('s1').enabled = false;
+  assert.match(detail(), /Turn on availability tracking/);
+  assert.match(detail(), /aria-pressed="false"/);
+  assert.doesNotMatch(detail(), /track-settings|Check interval|Last checked|Next check|Paused|Status: queued/);
+  assert.doesNotMatch(renderCard({ section, stateOverrides }), /course-card-tracked|Tracking paused/);
+  tracksBySection.get('s1').enabled = true;
+  assert.match(detail(), /Check interval/);
+  assert.match(detail(), /value="15" selected/);
+});

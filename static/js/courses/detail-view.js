@@ -59,7 +59,7 @@ function createCourseDetailView({ state, getSection, formatCampus, formatRequire
             </div>
             <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="${trackEnabled ? "Turn off" : "Turn on"} availability tracking" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!trackEnabled && (section.is_cancelled || !trackingPolicy?.canEnable)) ? "disabled" : ""}></button>
           </div>
-          ${track ? `
+          ${trackEnabled ? `
             <div class="track-settings">
               <label class="track-interval">
                 <span>Every</span>
@@ -74,7 +74,7 @@ function createCourseDetailView({ state, getSection, formatCampus, formatRequire
               ${trackingPolicy?.active && track.cooldown_until_closed ? `<span class="track-cooldown"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>Availability found; checking every 3 hours until it closes.</span>` : ""}
               <dl class="track-timing">
                 <div><dt>Last checked</dt><dd>${escapeHtml(track.last_checked_at ? formatDateTime(track.last_checked_at) : "Pending")}</dd></div>
-                <div><dt>Next check</dt><dd>${escapeHtml(!trackEnabled ? "Paused by you" : trackingPolicy?.next || (track.next_check_at ? formatDateTime(track.next_check_at) : "Soon"))}</dd></div>
+                <div><dt>Next check</dt><dd>${escapeHtml(trackingPolicy?.next || (track.next_check_at ? formatDateTime(track.next_check_at) : "Soon"))}</dd></div>
               </dl>
             </div>
           ` : ""}

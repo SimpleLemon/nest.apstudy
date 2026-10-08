@@ -38,6 +38,16 @@ class TermPolicyTests(unittest.TestCase):
         self.assertFalse(spring['polling_enabled'])
         self.assertEqual(terms.track_policy_fields({'term': 'Spring_2027', 'enabled': True})['tracking_state'], 'queued')
 
+    def test_disabled_track_is_off_for_every_term_state(self):
+        for state in ('upcoming', 'open', 'closed', 'unavailable'):
+            with self.subTest(state=state):
+                fields = terms.track_policy_fields(
+                    {'term': 'Spring_2027', 'enabled': False},
+                    {'effective_state': state, 'polling_enabled': state == 'open'},
+                )
+                self.assertEqual(fields['tracking_state'], 'off')
+                self.assertFalse(fields['effective_enabled'])
+
     def test_boundaries_are_utc_and_closing_takes_precedence(self):
         policy = self.save(opens_at='2027-01-01T09:00:00-05:00', closes_at='2027-01-10T09:00:00-05:00')
         for value, state in [('2027-01-01T13:59:59+00:00', 'upcoming'), ('2027-01-01T14:00:00+00:00', 'open'), ('2027-01-10T14:00:00+00:00', 'closed')]:
