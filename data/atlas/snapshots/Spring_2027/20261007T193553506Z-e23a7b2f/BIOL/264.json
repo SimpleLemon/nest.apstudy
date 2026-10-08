@@ -1,0 +1,456 @@
+{
+  "course_code": "BIOL 264",
+  "course_title": "Genetics: A Human Perspective",
+  "subject": "BIOL",
+  "catalog_number": "264",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will build on historical foundations of genetics to critically explore the structure and function of genes and genomics using molecular biology tools through a human perspective using problem solving and reading of primary scientific literature.",
+  "course_notes": "(Students must also register for a BIOL 264-1 Discussion Section. This course will provide a fundamental understanding of human genetics and builds on the concepts of genetics developed in Biology 142. Topics include modern analysis of the human genome, epigenetics, and cancer. This course is designed to provide a deep understanding of modern genetics as well as to foster critical thinking and analytical skills through problem solving and analysis of the primary scientific literature. The main focus of the course will be on molecular genetics, but we will also cover fundamental principles of classical genetics and population genetics. Course topics will be explored with special emphasis on how modern genetic research is changing the face of both medicine and agriculture. There will be three in-class exams and a final project. Discussion section grades will be based on student participation. This course fulfills the Column A (or elective) requirement for the Biology major.) Prerequisites: Biology 142 + 142L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "126",
+      "academic_career": "UCOL",
+      "crn": "2306",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 65,
+      "seats_available": 65,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "127",
+      "academic_career": "UCOL",
+      "crn": "2307",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "128",
+      "academic_career": "UCOL",
+      "crn": "2308",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "129",
+      "academic_career": "UCOL",
+      "crn": "2309",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 21,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2-2:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1450"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "130",
+      "academic_career": "UCOL",
+      "crn": "2310",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "David Gorkin",
+      "instructors": [
+        {
+          "name": "David Gorkin",
+          "email": "david.gorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "26383"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 65,
+      "seats_available": 65,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "131",
+      "academic_career": "UCOL",
+      "crn": "2311",
+      "section_number": "6",
+      "schedule_type": "DIS",
+      "instructor": "David Gorkin",
+      "instructors": [
+        {
+          "name": "David Gorkin",
+          "email": "david.gorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "26383"
+        }
+      ],
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "132",
+      "academic_career": "UCOL",
+      "crn": "2312",
+      "section_number": "7",
+      "schedule_type": "DIS",
+      "instructor": "David Gorkin",
+      "instructors": [
+        {
+          "name": "David Gorkin",
+          "email": "david.gorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "26383"
+        }
+      ],
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "133",
+      "academic_career": "UCOL",
+      "crn": "2313",
+      "section_number": "8",
+      "schedule_type": "DIS",
+      "instructor": "David Gorkin",
+      "instructors": [
+        {
+          "name": "David Gorkin",
+          "email": "david.gorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "26383"
+        }
+      ],
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 21,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 11-11:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 6,
+    "other": 0,
+    "open": 8,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Gorkin",
+    "Skye Comstra"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.518Z"
+}

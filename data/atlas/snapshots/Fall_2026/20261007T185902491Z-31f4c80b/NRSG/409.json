@@ -1,0 +1,91 @@
+{
+  "course_code": "NRSG 409",
+  "course_title": "Reproductive Health & Gender Related Care: BSN",
+  "subject": "NRSG",
+  "catalog_number": "409",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course examines the reproductive health and nursing care of people with gender related needs, including perinatal families, and preventative care focusing on well-being, advocacy, and determinants of health as well as acute and chronic reproductive issues.",
+  "course_notes": "This section is for BSN traditional semester 3 students only.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3781",
+      "academic_career": "UNUR",
+      "crn": "4560",
+      "section_number": "100",
+      "schedule_type": "LEC",
+      "instructor": "Shannon Stevenson",
+      "instructors": [
+        {
+          "name": "Shannon Stevenson",
+          "email": "shannon.stevenson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28486"
+        }
+      ],
+      "location": "Nursing School - P01",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 170,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MT 10-11:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1120"
+          },
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1120"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shannon Stevenson"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.633Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "MUS 222",
+  "course_title": "Theory and Analysis IV",
+  "subject": "MUS",
+  "catalog_number": "222",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Continuation of Theory and Analysis III. Analysis of 20- and 21-century compositions and techniques. Exercises include short original compositions.",
+  "course_notes": "(Prerequisite: XXX) MUS 221",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "527",
+      "academic_career": "UCOL",
+      "crn": "2137",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Nathan Cobb",
+      "instructors": [
+        {
+          "name": "Nathan Cobb",
+          "email": "nathan.cobb@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43571"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nathan Cobb"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.753Z"
+}

@@ -1,0 +1,91 @@
+{
+  "course_code": "ACT 415",
+  "course_title": "Tax Strategy",
+  "subject": "ACT",
+  "catalog_number": "415",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the US federal income tax system, with an emphasis on the taxation of individuals. Topics include tax status, dependents, gross income, self-employment income, investment income, itemized deductions, alternative minimum tax, tax credits, penalties, planning to minimize taxes.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "299",
+      "academic_career": "UBUS",
+      "crn": "3628",
+      "section_number": "1124",
+      "schedule_type": "LEC",
+      "instructor": "Usha Rackliffe",
+      "instructors": [
+        {
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6513"
+        }
+      ],
+      "location": "Goizueta Business School 334",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Usha Rackliffe"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.623Z"
+}

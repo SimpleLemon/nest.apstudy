@@ -1,0 +1,93 @@
+{
+  "course_code": "IDS 390",
+  "course_title": "Interdisciplinary Research Design",
+  "subject": "IDS",
+  "catalog_number": "390",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Required of AMST and IDS majors spring semester of junior year, this course focuses intensively on the design and initiation of the senior research process. Students' projects are honed, refined, workshopped--bibliography, outline, budget, etc. Students are readied for required senior year research.",
+  "course_notes": "This course is designed to help IDS and American studies majors in the Institute for the Liberal Arts (ILA) to develop their senior thesis. During the course of the semester students will learn how to design a strong and compelling academic research project. Students will gather, read, and analyze academic sources related to their intellectual interests and use them to identify a research topic, develop a research question, think about relevant theories, and choose a research method to help answer their question. Students will design a well-organized plan of research, culminating in the submission of their thesis prospectus and the completion of a presentation at the ILA Spring Research Symposium. During the semester students will complete a variety of assignments to familiarize themselves with the research resources available on campus. They will also work on developing their research network, by meeting to discuss their ideas with faculty in the ILA and across campus. As a cohort, students will work together to build a strong community of researchers who support one another through the highs, plateaus, and lows of research.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "847",
+      "academic_career": "UCOL",
+      "crn": "1648",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Rose Deighton",
+      "instructors": [
+        {
+          "name": "Rose Deighton",
+          "email": "rose.deighton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "10852"
+        }
+      ],
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Rose Deighton"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.550Z"
+}

@@ -1,0 +1,92 @@
+{
+  "course_code": "ARTVIS 335",
+  "course_title": "Curatorial Projects",
+  "subject": "ARTVIS",
+  "catalog_number": "335",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class investigates contemporary curatorial practice through total immersion in art and exhibition history. Classes will be structured around the discussion of a compendium of contemporary art texts, show catalogs, reviews, and curatorial statements.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2363",
+      "academic_career": "UCOL",
+      "crn": "3135",
+      "section_number": "1",
+      "schedule_type": "ART",
+      "instructor": "Daniel Fuller",
+      "instructors": [
+        {
+          "name": "Daniel Fuller",
+          "email": "daniel.fuller@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32535"
+        }
+      ],
+      "location": "Visual Arts 145",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-4:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1630"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daniel Fuller"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.516Z"
+}

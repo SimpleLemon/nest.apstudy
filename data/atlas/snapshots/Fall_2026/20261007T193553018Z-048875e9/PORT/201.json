@@ -1,0 +1,97 @@
+{
+  "course_code": "PORT 201",
+  "course_title": "Intermediate Portuguese I",
+  "subject": "PORT",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The first half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Lusophone cultures and societies.",
+  "course_notes": "This course aims to further develop communication skills in Portuguese and expand knowledge of Lusophone cultural traditions. Specifically, we will focus on oral communication, written communication, listening skills and reading comprehension. To be adequately prepared for the course, students should have successfully completed Portuguese 101 and 102 (or their equivalent). Classes will be taught in Portuguese in order to expose the student to the target language. It is also a goal of the course to create a positive interaction among the students. Group work will be frequent, as well as the use of the students' different background and experience with the language. PARTICULARS: Evaluation is based on daily and active participation, homework, quizzes, compositions, exams, and Portuguese program activities. PREREQUISITES: Port 102, Port 110, or equivalent (including courses taken during a study abroad program).",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2283",
+      "academic_career": "UCOL",
+      "crn": "2209",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Marilia Ribeiro",
+      "instructors": [
+        {
+          "name": "Marilia Ribeiro",
+          "email": "marilia.ribeiro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24992"
+        }
+      ],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Marilia Ribeiro"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.100Z"
+}

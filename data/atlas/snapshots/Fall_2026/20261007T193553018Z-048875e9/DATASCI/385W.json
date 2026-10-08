@@ -1,0 +1,97 @@
+{
+  "course_code": "DATASCI 385W",
+  "course_title": "Special Topics in Data Science: Sex & Love in the Digital Age",
+  "subject": "DATASCI",
+  "catalog_number": "385W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special Topics Courses that focus on the process and products of writing. Topics vary from semester to semester.",
+  "course_notes": "(Same as AAS 385W 2, PHIL385W 2) Philosophy of Sex, Love, and Friendship in the Age of AI This course examines philosophical questions about sex, love, and friendship as they arise in the context of new technologies. We look at AI companions, dating apps, deepfakes, image-based sexual abuse, and sex robots. For each topic, we pair a philosophical text with a contemporary case - usually a lawsuit, a news investigation, or an empirical study. There are no exams. Your grade comes entirely from short in-class writing exercises, completed by hand without devices. I use a variety of exercise formats: four-sentence essays, textual analysis, counterexamples, argument evaluations, assigned positions, and reflections. The point is to get you writing and thinking about the material immediately, while it is fresh, rather than weeks later when you have forgotten what puzzled you. No prerequisites. The readings are challenging but the course assumes no background in philosophy.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4294",
+      "academic_career": "UCOL",
+      "crn": "4452",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Tolbert",
+      "instructors": [
+        {
+          "name": "Alexander Tolbert",
+          "email": "alexander.tolbert@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36052"
+        }
+      ],
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 37,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexander Tolbert"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.045Z"
+}

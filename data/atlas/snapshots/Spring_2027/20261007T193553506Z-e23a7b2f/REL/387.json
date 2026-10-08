@@ -1,0 +1,93 @@
+{
+  "course_code": "REL 387",
+  "course_title": "Literature & Religion: Religion and Fantasy",
+  "subject": "REL",
+  "catalog_number": "387",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Reading and interpretation of representative major literary works in the perspective of their religious meaning.",
+  "course_notes": "This course satisfies the Religion major requirement: - Theme. This course explores the intersections of religion and fantasy, as well as science, science fiction, magic, rationality, and the imagination. Topics may include masks and identities¿the nature of pretending and the suspension of disbelief, with special reference to ¿lifestyle fantasy¿ and cosplay. What does it mean to ¿identify with¿ a character in a story? Is there something inherently ¿moral¿ about reading fantasy or science fiction? Can fantasy be a spiritual practice? Miracles, invisible beings, super powers, magical objects, and life after death¿religion or fantasy? And what is the relation of our real lives to these miraculous possibilities? Readings will include J.R.R. Tolkien, Brian Attebery, Sylvia Townsend Warner, with a mixture of fiction and academic readings.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1782",
+      "academic_career": "UCOL",
+      "crn": "2285",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Eric Reinders",
+      "instructors": [
+        {
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2454"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Reinders"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.584Z"
+}

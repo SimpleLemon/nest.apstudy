@@ -1,0 +1,450 @@
+{
+  "course_code": "CHEM 150",
+  "course_title": "Structure and Properties",
+  "subject": "CHEM",
+  "catalog_number": "150",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will build a strong foundation in atomic and molecular structure. It starts with atomic structure and builds to ionic compounds and molecular structure, including stereochemistry and conformation. Students will interpret experimental data to explain structure, properties relationships.",
+  "course_notes": "This course is typically offered in fall and summer semesters. An off-sequence section may be offered in the spring but is not guaranteed.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3921",
+      "academic_career": "UCOL",
+      "crn": "2760",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David Lynn",
+      "instructors": [
+        {
+          "name": "David Lynn",
+          "email": "dlynn2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3022"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 99,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3922",
+      "academic_career": "UCOL",
+      "crn": "2881",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Richard Himes",
+      "instructors": [
+        {
+          "name": "Richard Himes",
+          "email": "richard.allen.himes@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25015"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 99,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3923",
+      "academic_career": "UCOL",
+      "crn": "2764",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Lili Wang",
+      "instructors": [
+        {
+          "name": "Lili Wang",
+          "email": "lili.wang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31599"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3924",
+      "academic_career": "UCOL",
+      "crn": "2765",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Tracy McGill",
+      "instructors": [
+        {
+          "name": "Tracy McGill",
+          "email": "tmorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3543"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 99,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3925",
+      "academic_career": "UCOL",
+      "crn": "2770",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Tracy McGill",
+      "instructors": [
+        {
+          "name": "Tracy McGill",
+          "email": "tmorkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3543"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 99,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3926",
+      "academic_career": "UCOL",
+      "crn": "2772",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Michael Heaven",
+      "instructors": [
+        {
+          "name": "Michael Heaven",
+          "email": "mheaven@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "269"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3927",
+      "academic_career": "UCOL",
+      "crn": "2774",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Letian Dou",
+      "instructors": [
+        {
+          "name": "Letian Dou",
+          "email": "letian.dou@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "41880"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 72,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 7,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Lynn",
+    "Letian Dou",
+    "Lili Wang",
+    "Michael Heaven",
+    "Richard Himes",
+    "Tracy McGill"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.508Z"
+}

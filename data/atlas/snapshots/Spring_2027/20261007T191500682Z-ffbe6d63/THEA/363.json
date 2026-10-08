@@ -1,0 +1,104 @@
+{
+  "course_code": "THEA 363",
+  "course_title": "Theater Workshop in Spanish",
+  "subject": "THEA",
+  "catalog_number": "363",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Taught in Spanish, cross-list between Spanish and Theater Studies. Students deepen their understanding of the Spanish language and Hispanic cultures through script analysis, memorization, character development, in-class exercises, writing assignments, physical and vocal embodiment and performance.",
+  "course_notes": "(Same as SPAN 330 1) The objective of this course is the development of linguistic and cultural understanding in the context of theatrical performance. The course is both critical and experiential. Through close readings of texts, script analysis, memorization, development of character, writing assignments, and theatrical performance, students will develop a deeper understanding of Spanish language and Hispanic cultures through the perspectives of both disciplines, Hispanism and Theater Studies. This critical/interpretive dimension will be enriched at all stages of the course by the experiential dimension: the physical and vocal embodiment/performance of the target language and texts. Course taught in Spanish. Texts: readings will be made available on Canvas. Particulars: Class exercises will involve physical and vocal warm-ups and improvisation; assignments, including writing essays and reading plays, will include individual activities as well as activities requiring outside class preparation with partners. Prerequisite: SPAN 212 Interested students must contact Prof. Elva Gonzalez at egonza3@emory.edu or Prof. Mary Lynn Owen at mowen3@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "787",
+      "academic_career": "UCOL",
+      "crn": "3644",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Maria Gonzalez",
+      "instructors": [
+        {
+          "name": "Maria Gonzalez",
+          "email": "egonza3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8094"
+        },
+        {
+          "name": "Mary Lynn Owen",
+          "email": "mowen3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1416"
+        }
+      ],
+      "location": "Schwartz Center TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Maria Gonzalez",
+    "Mary Lynn Owen"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.773Z"
+}

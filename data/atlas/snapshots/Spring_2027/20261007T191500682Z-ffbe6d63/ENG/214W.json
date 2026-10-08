@@ -1,0 +1,97 @@
+{
+  "course_code": "ENG 214W",
+  "course_title": "Global Literature In English",
+  "subject": "ENG",
+  "catalog_number": "214W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An exploration of Anglophone literatures from around the world. Regional focus and selection of texts will vary but may include works by Achebe, Cliff, Friel, Head, Lamming, Rushdie, Silko, Soyinka, Tan, and/or Walcott.",
+  "course_notes": "Topic: AfroAsian fiction and the speculative register This course examines literary and visual works through the speculative broadly across the works of Asian- and Afro-diaspora and its intersections. As a genre that expansively enfolds science fiction, utopian/dystopian fiction, magical realism, fantasy, and experimental fiction engaging alternative/spectral realities, we will reflect on how the speculative often interrogates existential questions of what it means to be human; the relationship of the mind/body, self/other, subject/object; project potential futures; or meditate on the past or present by taking an element to its logical extremes. Theoretical readings paired alongside the primary texts will critically frame our in-class inquiries across content, aesthetics, historical context, and subgenre.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "261",
+      "academic_career": "UCOL",
+      "crn": "2320",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ayoung Kim",
+      "instructors": [
+        {
+          "name": "Ayoung Kim",
+          "email": "ayoung.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32463"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ayoung Kim"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.721Z"
+}

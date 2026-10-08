@@ -1,0 +1,200 @@
+{
+  "course_code": "WGS 100W",
+  "course_title": "Gender Trouble",
+  "subject": "WGS",
+  "catalog_number": "100W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to gender, sex, and power in the contemporary world.",
+  "course_notes": "(In the contemporary moment, gender, \"gender ideology,\" and the right to change sex are under attack in the US, Europe, and Latin America. Gender is clearly troubling, and, as a result, gender is in trouble. Why has gender become such a hot-button issue? This interdisciplinary course will draw from feminist, sexuality studies, and transgender studies scholarship to introduce students from any field to the theories, the history, the science, and the politics of gender and bodily sex. We will weigh competing feminist theories asserting that gender roles developed from a capitalist political economy versus from the sexual desires of men. We will consider the politics of transgressing gender norms and those of demanding the right to change sex. We will analyze the cultural specificity of gender systems and the practical science of bodily sex. Throughout, we will demystify the fictions on which contemporary debates about gender and bodily sex are based.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3782",
+      "academic_career": "UCOL",
+      "crn": "2337",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shanya Cordis",
+      "instructors": [
+        {
+          "name": "Shanya Cordis",
+          "email": "shanya.dennen.cordis@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22652"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 36,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3783",
+      "academic_career": "UCOL",
+      "crn": "2338",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Naima Dams",
+      "instructors": [
+        {
+          "name": "Naima Dams",
+          "email": "naima.dams@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44043"
+        }
+      ],
+      "location": "Tarbutton Hall 120A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3784",
+      "academic_career": "UCOL",
+      "crn": "2339",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Sujung Kwon",
+      "instructors": [
+        {
+          "name": "Sujung Kwon",
+          "email": "sujung.kwon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43999"
+        }
+      ],
+      "location": "Candler Library 121",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 2,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Naima Dams",
+    "Shanya Cordis",
+    "Sujung Kwon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.112Z"
+}

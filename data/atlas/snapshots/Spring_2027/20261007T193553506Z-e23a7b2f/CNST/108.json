@@ -1,0 +1,104 @@
+{
+  "course_code": "CNST 108",
+  "course_title": "Art and Science of Flourishing",
+  "subject": "CNST",
+  "catalog_number": "108",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will explore scientific, philosophical, and artistic ideas about flourishing, while experimenting with contemplative practices that work directly with their mind, body, emotions, and relationships.",
+  "course_notes": "What is the purpose of your life? What is the purpose of your education? What does it mean to not just survive, but to thrive, or flourish? How can your undergraduate years become a greenhouse for flourishing for you ¿ where you gain insight and knowledge, but also learn to be even more creative, caring, resilient, engaged, happy, and part of a community to which you make significant contributions? Are there practices by which you can cultivate what it takes to live a flourishing life? This course aims to assist you in finding the answers to these questions for yourself, building a sustainable base for flourishing during your undergraduate years and beyond. You will explore scientific, philosophical, and artistic ideas about flourishing, while experimenting with contemplative practices that work directly with your mind, body, emotions, and relationships. Together, after exploring the foundations of flourishing, we will investigate the cultivation of flourishing according to a model with five dimensions (foundations, awareness, connection, wisdom and integration) understood in terms of 15 distinct themes or human qualities.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2633",
+      "academic_career": "UCOL",
+      "crn": "3579",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Robert Roeser",
+      "instructors": [
+        {
+          "name": "Robert Roeser",
+          "email": "robert.roeser@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43796"
+        },
+        {
+          "name": "Art Linton Jr.",
+          "email": "arthur.g.linton.jr@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31664"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Art Linton Jr.",
+    "Robert Roeser"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.526Z"
+}

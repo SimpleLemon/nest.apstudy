@@ -1,0 +1,93 @@
+{
+  "course_code": "AAS 305",
+  "course_title": "Jazz, Spirituality, & Religion",
+  "subject": "AAS",
+  "catalog_number": "305",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Considers common roots of spirituals, blues, and jazz, and surveys historical, cultural, social, and denominational factors that have shaped our perspective on the spiritual capacity of jazz. Focus is on the sacred works, biographies, and implicit theological positions of specific jazz masters.",
+  "course_notes": "(Same as MUS 305 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "543",
+      "academic_career": "UCOL",
+      "crn": "3676",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Dwight D Andrews",
+      "instructors": [
+        {
+          "name": "Dwight D Andrews",
+          "email": "dwightandrews@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "918"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 9,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Dwight D Andrews"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.685Z"
+}

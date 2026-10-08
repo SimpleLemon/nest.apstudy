@@ -1,0 +1,97 @@
+{
+  "course_code": "SPAN 111",
+  "course_title": "Intensive Spanish",
+  "subject": "SPAN",
+  "catalog_number": "111",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Accelerated beginning-level language course intended for students with previous education in Spanish who need additional review and practice before advancing to the intermediate level.",
+  "course_notes": "Spanish 111 is an accelerated beginning-level language course designed to advance students towards a higher level of proficiency in both communication in the Spanish language and cultural knowledge of Hispanic communities. The course is intended for students with previous education in Spanish who need additional review and practice before advancing to the intermediate level. The goals of this course include the following: 1. Further improving communicative ability through speaking, listening, reading and writing skills; 2. Developing a more complex understanding of the tools of communication: basic linguistic units (words, idioms, verb forms, sounds) and grammar (rules which permit you to combine the units meaningfully); 3. Facilitating advancement from a primarily receptive to a productive use of the language; 4. Expanding cultural awareness, familiarity with and understanding of Hispanic cultures. and understanding of the relationship of culture to language. Prerequisite: Official Spanish Placement into Span 111 is required to remain in the course. (Take the Spanish placement exam online at http://spanport.emory.edu/home/undergraduate/placement/index.html)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "772",
+      "academic_career": "UCOL",
+      "crn": "1665",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lisa Dillman",
+      "instructors": [
+        {
+          "name": "Lisa Dillman",
+          "email": "ldillma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1226"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lisa Dillman"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.771Z"
+}

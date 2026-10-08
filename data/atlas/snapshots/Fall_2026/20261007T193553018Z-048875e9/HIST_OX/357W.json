@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST_OX 357W",
+  "course_title": "The United States in the 1960's",
+  "subject": "HIST_OX",
+  "catalog_number": "357W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "An introduction to the main developments in American society, culture, and politics of the 1960s. Topics include the New Frontier, the Great Society, the Vietnam War, the Civil Rights Movement, student activism, the Counterculture, and rise of conservatism.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2503",
+      "academic_career": "UOXF",
+      "crn": "4112",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Susan Ashmore",
+      "instructors": [
+        {
+          "name": "Susan Ashmore",
+          "email": "sashmor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2955"
+        }
+      ],
+      "location": "Johnson Hall 102",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Susan Ashmore"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.123Z"
+}

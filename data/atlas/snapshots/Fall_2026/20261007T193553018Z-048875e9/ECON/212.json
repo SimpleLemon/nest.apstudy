@@ -1,0 +1,215 @@
+{
+  "course_code": "ECON 212",
+  "course_title": "Intermediate Macroeconomics",
+  "subject": "ECON",
+  "catalog_number": "212",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Determination of national income, employment, and the price level; business fluctuations; and international monetary issues.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "637",
+      "academic_career": "UCOL",
+      "crn": "2913",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Federico Mandelman",
+      "instructors": [
+        {
+          "name": "Federico Mandelman",
+          "email": "federico.samuel.mandelman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5916"
+        }
+      ],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 31,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 7-8:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1900",
+            "end": "2015"
+          },
+          {
+            "day": "Wed",
+            "start": "1900",
+            "end": "2015"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "638",
+      "academic_career": "UCOL",
+      "crn": "2914",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Kaiji Chen",
+      "instructors": [
+        {
+          "name": "Kaiji Chen",
+          "email": "kaiji.chen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4897"
+        }
+      ],
+      "location": "White Hall 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "639",
+      "academic_career": "UCOL",
+      "crn": "2915",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Vivian Yue",
+      "instructors": [
+        {
+          "name": "Vivian Yue",
+          "email": "vivian.yue@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6118"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Federico Mandelman",
+    "Kaiji Chen",
+    "Vivian Yue"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.048Z"
+}

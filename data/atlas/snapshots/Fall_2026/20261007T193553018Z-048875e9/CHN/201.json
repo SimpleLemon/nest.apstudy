@@ -1,0 +1,177 @@
+{
+  "course_code": "CHN 201",
+  "course_title": "Intermediate Chinese I",
+  "subject": "CHN",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to help students reach intermediate-level communicative skills, both in spoken and written Chinese, and to establish a solid base for more advanced language learning. For non-heritage speakers only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "577",
+      "academic_career": "UCOL",
+      "crn": "2103",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hong Li",
+      "instructors": [
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        },
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        }
+      ],
+      "location": "Woodruff Library 875",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "578",
+      "academic_career": "UCOL",
+      "crn": "2104",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hong Li",
+      "instructors": [
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        },
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        }
+      ],
+      "location": "Woodruff Library 875",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hong Li"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.035Z"
+}

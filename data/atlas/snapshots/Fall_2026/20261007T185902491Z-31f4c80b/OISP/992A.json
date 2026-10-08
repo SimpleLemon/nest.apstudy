@@ -1,0 +1,77 @@
+{
+  "course_code": "OISP 992A",
+  "course_title": "Academic Study Abroad Course",
+  "subject": "OISP",
+  "catalog_number": "992A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": "Requirement Designation to be Evaluated",
+  "requirements": [
+    "Requirement Designation to be Evaluated"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A placeholder course for students taking courses on an approved Emory study abroad program.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2730",
+      "academic_career": "UCOL",
+      "crn": "5072",
+      "section_number": "1",
+      "schedule_type": "ABR",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Requirement Designation to be Evaluated",
+      "requirements": [
+        "Requirement Designation to be Evaluated"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 947,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T18:59:02.567Z"
+}

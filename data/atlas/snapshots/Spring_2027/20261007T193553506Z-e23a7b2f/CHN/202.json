@@ -1,0 +1,178 @@
+{
+  "course_code": "CHN 202",
+  "course_title": "Intermediate Chinese II",
+  "subject": "CHN",
+  "catalog_number": "202",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides intermediate-level training in spoken and written Chinese in cultural context, based on language skills developed in CHN 201 . Attention is given to complex grammatical patterns, discourse characteristics, and discussions of cultural topics. For non-heritage speakers only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "177",
+      "academic_career": "UCOL",
+      "crn": "1757",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jie Yao",
+      "instructors": [
+        {
+          "name": "Jie Yao",
+          "email": "jie.yao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28497"
+        },
+        {
+          "name": "Jie Yao",
+          "email": "jie.yao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28497"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "178",
+      "academic_career": "UCOL",
+      "crn": "1758",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hong Li",
+      "instructors": [
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        },
+        {
+          "name": "Hong Li",
+          "email": "hli01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2101"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hong Li",
+    "Jie Yao"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.524Z"
+}

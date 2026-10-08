@@ -1,0 +1,216 @@
+{
+  "course_code": "AFS 270",
+  "course_title": "Topic Seminar: Foundation Development Studies",
+  "subject": "AFS",
+  "catalog_number": "270",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)",
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introductory course on African Studies. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as ANT 207 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3497",
+      "academic_career": "UCOL",
+      "crn": "3519",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Peter Little",
+      "instructors": [
+        {
+          "name": "Peter Little",
+          "email": "pdlittl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4308"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3498",
+      "academic_career": "UCOL",
+      "crn": "3961",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "Kareem Tinto",
+      "instructors": [
+        {
+          "name": "Kareem Tinto",
+          "email": "kareem.tinto@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44135"
+        },
+        {
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "6184"
+        }
+      ],
+      "location": "Callaway S501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3499",
+      "academic_career": "UCOL",
+      "crn": "4529",
+      "section_number": "4",
+      "schedule_type": "SEM",
+      "instructor": "Eric Mason",
+      "instructors": [
+        {
+          "name": "Eric Mason",
+          "email": "eric.mason@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47058"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ana Catarina Teixeira",
+    "Eric Mason",
+    "Kareem Tinto",
+    "Peter Little"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.021Z"
+}

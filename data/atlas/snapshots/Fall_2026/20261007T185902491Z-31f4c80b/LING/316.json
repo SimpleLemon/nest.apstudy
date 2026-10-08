@@ -1,0 +1,93 @@
+{
+  "course_code": "LING 316",
+  "course_title": "Language Acquisition",
+  "subject": "LING",
+  "catalog_number": "316",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Language acquisition in young children. Identifying speech sounds, determining meaning, and comprehending the rules of syntax.",
+  "course_notes": "(Same as PSYC 316 1) Language is an incredibly complex system of knowledge. Not only are there multiple levels of representation - sounds and words and phrases and meanings - but within a given level, even simple output forms can be derived from multiple interacting pieces of knowledge. Yet as speakers of any given language, we are often blissfully unaware of how much we need to know in order to be able to communicate with language. In this class, we survey the broad topic of language acquisition, focusing not only on children's developmental trajectory, but also on what knowledge of language is and how language acquisition relates to cognition in general. Topics include the biological basis of language, levels of linguistic knowledge and language and cognition. Becoming familiar with (learning how to read, understand, and synthesize) published research articles is one of the main aims of the course that you will work toward by closely analyzing a number of research papers and by writing a research paper. You will learn how to critically read papers, lead a discussion on a paper, and write summaries. Also, this course will provide hands-on experience in using and analyzing corpus from CHILDES database.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3573",
+      "academic_career": "UCOL",
+      "crn": "1531",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Yun Kim",
+      "instructors": [
+        {
+          "name": "Yun Kim",
+          "email": "yun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6718"
+        }
+      ],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Yun Kim"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.557Z"
+}

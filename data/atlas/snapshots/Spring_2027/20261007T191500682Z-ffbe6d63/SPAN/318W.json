@@ -1,0 +1,97 @@
+{
+  "course_code": "SPAN 318W",
+  "course_title": "Critical Writing in Hispanic Topics: Latin America:Race and Nation",
+  "subject": "SPAN",
+  "catalog_number": "318W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course combines advanced writing instruction with the study of diverse Hispanic cultural topics.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "785",
+      "academic_career": "UCOL",
+      "crn": "2010",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Laura Torres-Rodriguez",
+      "instructors": [
+        {
+          "name": "Laura Torres-Rodriguez",
+          "email": "laura.juliana.torres-rodriguez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36189"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Laura Torres-Rodriguez"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.772Z"
+}

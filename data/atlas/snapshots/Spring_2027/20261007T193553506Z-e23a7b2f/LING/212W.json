@@ -1,0 +1,97 @@
+{
+  "course_code": "LING 212W",
+  "course_title": "Structure of Human Language",
+  "subject": "LING",
+  "catalog_number": "212W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course investigates word formation (morphology) and sentence structure (syntax) in the world's languages.",
+  "course_notes": "What makes a word a word, as opposed to a phrase or sentence? What are the basic principles that determine how words, phrases and sentences are formed cross-linguistically? We will cover some well-known concepts in syntactic theory, including constituency, category, dependent clauses, argument structure, anaphora, wh-questions and other kinds of displacement, and see how they are analyzed in a generative grammar framework. We will periodically face the question 'How are words different from sentences?' and in the second part of the course we will examine this question in-depth by looking at some problematic cases in English and other languages. Students will develop the vocabulary and problem-solving techniques that linguists use for morphosyntactic analysis: recognizing patterns in linguistic data, testing hypotheses, applying diagnostic tools, and advancing arguments and counterarguments. Required Textbook(s): All assigned readings will be online. Prerequisite: Foundations of Linguistics (LING 201, LING_OX 201 or ANT 203), or equivalent course with permission of instructor.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2156",
+      "academic_career": "UCOL",
+      "crn": "1544",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Marjorie Pak",
+      "instructors": [
+        {
+          "name": "Marjorie Pak",
+          "email": "mgpak@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4521"
+        }
+      ],
+      "location": "Modern Language TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Marjorie Pak"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.563Z"
+}

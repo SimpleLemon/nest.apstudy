@@ -1,0 +1,91 @@
+{
+  "course_code": "ACT 312",
+  "course_title": "Financial Reporting of Operations",
+  "subject": "ACT",
+  "catalog_number": "312",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course examines the foundations of financial accounting and reporting. We will examine accounting issues from the point of view of the preparer of the financial statements as well as from the perspective of the auditor and users of financial statements. We will review the accounting cycle and cover US and international financial reporting standards for the reporting of cash, receivables, inventories, and long-lived tangible and intangible assets. We will take an analytical and critical approach to the preparation and use of financial reports, particularly to assessing the ¿quality of earnings¿ reported in the financial statements.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "217",
+      "academic_career": "UBUS",
+      "crn": "3558",
+      "section_number": "1152",
+      "schedule_type": "LEC",
+      "instructor": "Jan Barton",
+      "instructors": [
+        {
+          "name": "Jan Barton",
+          "email": "jbarton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2520"
+        }
+      ],
+      "location": "Goizueta Business School 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jan Barton"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.622Z"
+}

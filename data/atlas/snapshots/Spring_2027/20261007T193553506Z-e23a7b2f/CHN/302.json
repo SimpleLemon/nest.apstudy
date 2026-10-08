@@ -1,0 +1,97 @@
+{
+  "course_code": "CHN 302",
+  "course_title": "Adv Chinese II: Learn Tv/Newspaper",
+  "subject": "CHN",
+  "catalog_number": "302",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will continue to develop skills in Chinese by reading, discussing, and writing about topics in contemporary China. They will practice expressing their ideas in Chinese and will developan enriched understanding of traditions in Chinese culture and society. For non-heritage students only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1799",
+      "academic_career": "UCOL",
+      "crn": "1831",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jie Yao",
+      "instructors": [
+        {
+          "name": "Jie Yao",
+          "email": "jie.yao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28497"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jie Yao"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.524Z"
+}

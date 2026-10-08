@@ -1,0 +1,82 @@
+{
+  "course_code": "OXST_OX 100R",
+  "course_title": "Oxford Studies",
+  "subject": "OXST_OX",
+  "catalog_number": "100R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Oxford Studies 100R is a one-hour, elective, multidisciplinary course which, through attendance, participation, and written reflection, encourages thoughtful involvement in the cultural, intellectual, and artistic activities available in our community beyond the confines of the traditional classroom. It may be repeated for credit.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "71",
+      "academic_career": "UOXF",
+      "crn": "4239",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Cristina Tarazona",
+      "instructors": [
+        {
+          "name": "Cristina Tarazona",
+          "email": "cristina.tarazona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4227"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 220,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristina Tarazona"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.127Z"
+}

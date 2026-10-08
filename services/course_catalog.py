@@ -141,7 +141,7 @@ def _department_courses(subject):
         courses = _parse_course_cards(response.text)
     except requests.RequestException:
         logger.exception("Failed to fetch Emory catalog page for %s", subject)
-        courses = {}
+        return cached["courses"] if cached else {}
 
     with _cache_lock:
         _cache[path] = {"ts": now, "courses": courses}

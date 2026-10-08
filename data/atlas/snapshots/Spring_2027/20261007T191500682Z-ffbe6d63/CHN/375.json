@@ -1,0 +1,150 @@
+{
+  "course_code": "CHN 375",
+  "course_title": "Topics in Chinese Studies: Reading Dream of Red Chamber",
+  "subject": "CHN",
+  "catalog_number": "375",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Study of Chinese language, literature, thought or culture, alone or in conjunction with other literary or cultural trends. Topics to be announced in advance.",
+  "course_notes": "(Complete Topic: Reading The Dream of the Red Chamber) (The Dream of the Red Chamber or Honglou meng (also known by its alternative title The Story of the Stone) has been hailed as the greatest of traditional Chinese narratives since its publication in the eighteenth century. Despite its intimidating length (120 chapters, or 5 volumes in the Hawkes and Minford translation), this novel is at once a most seductive summation of premodern Chinese culture and one of its most compelling critiques. In this course, we will read the novel in its entirety and explore it from a variety of critical perspectives and thematic contexts, including fictionality, narrativity, and lyricism, religion and ethics, gender and sexuality, and material culture. All readings are in English.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1884",
+      "academic_career": "UCOL",
+      "crn": "1836",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Maria Franca Sibau",
+      "instructors": [
+        {
+          "name": "Maria Franca Sibau",
+          "email": "maria.sibau@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5473"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1885",
+      "academic_career": "UCOL",
+      "crn": "3618",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Pinyan Zhu",
+      "instructors": [
+        {
+          "name": "Pinyan Zhu",
+          "email": "pinyan.zhu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39123"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Maria Franca Sibau",
+    "Pinyan Zhu"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.706Z"
+}

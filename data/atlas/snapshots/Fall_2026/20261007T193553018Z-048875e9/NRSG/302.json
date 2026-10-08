@@ -1,0 +1,86 @@
+{
+  "course_code": "NRSG 302",
+  "course_title": "Health Assessment Across the Lifespan: BSN",
+  "subject": "NRSG",
+  "catalog_number": "302",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides beginning-level knowledge and psychomotor skills necessary for assessing a client's health status. Students will use the nursing process framework to elicit health histories and perform physical examinations across the lifespan.",
+  "course_notes": "This section is for BSN traditional semester 1 students only. This course contains a simulation component. Onsite simulation may be scheduled any day not in lecture except Sundays.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4730",
+      "academic_career": "UNUR",
+      "crn": "4640",
+      "section_number": "100",
+      "schedule_type": "LEC",
+      "instructor": "Kathy Forte",
+      "instructors": [
+        {
+          "name": "Kathy Forte",
+          "email": "kathy.forte@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1602"
+        }
+      ],
+      "location": "Nursing School - P01",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 170,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 8-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "800",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kathy Forte"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.148Z"
+}

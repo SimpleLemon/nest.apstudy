@@ -1,0 +1,97 @@
+{
+  "course_code": "ENVS 255W",
+  "course_title": "Environmental Communication",
+  "subject": "ENVS",
+  "catalog_number": "255W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Environmental issues that are often misunderstood can be communicated with effective writing and presentation methods. This class provides tools for addressing environmental misconceptions while also developing communication skills for a variety of personal, public, or academic situations.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4233",
+      "academic_career": "UCOL",
+      "crn": "1903",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Anthony Martin",
+      "instructors": [
+        {
+          "name": "Anthony Martin",
+          "email": "geoam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "839"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Anthony Martin"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.533Z"
+}

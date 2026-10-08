@@ -1,0 +1,86 @@
+{
+  "course_code": "CHEM_OX 151",
+  "course_title": "Introduction to Organic Structures and Stereochemistry",
+  "subject": "CHEM_OX",
+  "catalog_number": "151",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course bridges the gap between the AP/IB Chemistry curricula and Chemistry 202, and is targeted at students who have applied AP/IB credit to exempt Chem 150. The content focuses on the structure of organic compounds, stereochemistry and isomerism, and conformational fluxionality. Some review of critical content covered in both AP/IB Chemistry and Chemistry 150 is also provided, including electron configurations, orbitals, Lewis structures, VSEPR Theory, hybridization, and resonance.",
+  "course_notes": "Students with AP/IB Chemistry credit that plan to take CHEM_OX 202 in the spring may contact the instructor for permission to enroll This course is open first to students who are also enrolled in CHEM_OX 202 for Fall 2026. It is not intended for students who have previously completed CHEM_OX 202. If spots remain open, those planning to take CHEM_OX 202 the following semester may enroll.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4720",
+      "academic_career": "UOXF",
+      "crn": "4380",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Annette Neuman",
+      "instructors": [
+        {
+          "name": "Annette Neuman",
+          "email": "annette.neuman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7898"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Annette Neuman"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.117Z"
+}

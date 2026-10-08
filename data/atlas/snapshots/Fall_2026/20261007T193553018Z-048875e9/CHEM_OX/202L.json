@@ -1,0 +1,191 @@
+{
+  "course_code": "CHEM_OX 202L",
+  "course_title": "Principles of Reactivity Lab",
+  "subject": "CHEM_OX",
+  "catalog_number": "202L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Students will learn several methods for separating and identifying small molecule organic reactants and products. They will make qualitative determinations based on quantitative data and equilibria and acid-base properties. It is recommended that students who withdraw from the laboratory course withdraw from the co-requisite lecture course as well.",
+  "course_notes": "Must enroll in CHEM_OX 202. Wednesday, December 9, 2026, will serve as a designated class meeting day for Fall 2026 courses that are regularly scheduled to meet only on Mondays. If you have any questions, please contact the Oxford College Registrar's Office - oxregistrar@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3964",
+      "academic_career": "UOXF",
+      "crn": "4357",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Vivian Ezeh",
+      "instructors": [
+        {
+          "name": "Vivian Ezeh",
+          "email": "vivian.ezeh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39712"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3965",
+      "academic_career": "UOXF",
+      "crn": "4358",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Vivian Ezeh",
+      "instructors": [
+        {
+          "name": "Vivian Ezeh",
+          "email": "vivian.ezeh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39712"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3966",
+      "academic_career": "UOXF",
+      "crn": "4359",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Sean Mo",
+      "instructors": [
+        {
+          "name": "Sean Mo",
+          "email": "sean.mo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2824"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 3,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sean Mo",
+    "Vivian Ezeh"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.117Z"
+}

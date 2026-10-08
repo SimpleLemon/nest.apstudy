@@ -1,0 +1,88 @@
+{
+  "course_code": "MUS 252W",
+  "course_title": "Performing Arts and Devotion",
+  "subject": "MUS",
+  "catalog_number": "252W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+  "requirements": [
+    "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course investigates meaning and culture of the performing arts in religious contexts and spiritual communities, including Islam, Christianity and Hinduism, and less-widely practices like Javanese Kejawen, Central Asian indigenous animism, Haitian vodou ceremonies, and Inuit traditions.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2482",
+      "academic_career": "UCOL",
+      "crn": "2147",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities & Arts with C.Comm/Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities & Arts with C.Comm/Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:15:00.753Z"
+}

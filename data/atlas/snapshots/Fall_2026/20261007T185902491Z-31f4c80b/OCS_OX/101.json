@@ -1,0 +1,93 @@
+{
+  "course_code": "OCS_OX 101",
+  "course_title": "Introduction to Information Sciences",
+  "subject": "OCS_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "What forces shape the information you consume every day? The complex processes by which information is created, organized, and accessed are often concealed or obstructed. Information science as a discipline aims to uncover these systems and encourage critical thinking about their role in society. This course will help you interact more mindfully with the information you encounter, better understand the mechanisms that shape our perceptions, incorporate more knowledge sources into your work, and create avenues of access for everyone.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4875",
+      "academic_career": "UOXF",
+      "crn": "4277",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Molly Faust",
+      "instructors": [
+        {
+          "name": "Molly Faust",
+          "email": "molly.victoria.faust@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46067"
+        },
+        {
+          "name": "Qing Xu",
+          "email": "qing.xu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46807"
+        }
+      ],
+      "location": "Library Rm 230",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 28,
+      "seats_available": 3,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Molly Faust",
+    "Qing Xu"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.611Z"
+}

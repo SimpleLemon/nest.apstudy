@@ -1,0 +1,97 @@
+{
+  "course_code": "DANC_OX 220",
+  "course_title": "Ballet to Beyoncé",
+  "subject": "DANC_OX",
+  "catalog_number": "220",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course traces the development of Western concert dance from 19th century Romantic Ballet to the present. Emphasis will be placed on the development of American modern dance, post-modern dance, and current trends and dance artists.",
+  "course_notes": "Satisfies a requirement for the Emory Dance Program major/minor degree plan",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3078",
+      "academic_career": "UOXF",
+      "crn": "4206",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Alejandro Abarca",
+      "instructors": [
+        {
+          "name": "Alejandro Abarca",
+          "email": "alejandro.abarca@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7306"
+        }
+      ],
+      "location": "Library Rm 230",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alejandro Abarca"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.602Z"
+}

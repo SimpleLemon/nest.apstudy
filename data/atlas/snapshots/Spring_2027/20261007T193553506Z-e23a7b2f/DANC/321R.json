@@ -1,0 +1,97 @@
+{
+  "course_code": "DANC 321R",
+  "course_title": "Ballet Dance III (Intermediate)",
+  "subject": "DANC",
+  "catalog_number": "321R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course continues to reinforce and build upon the skills learned in Ballet II. More emphasis is placed on style and execution of movement at an intermediate level. Movement sequences become more intricate. A more extensive movement vocabulary is introduced. At least 2-3 semesters in Ballet II and consultation with the instructor are required before enrolling in this course. May be taken up to six times for credit.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "212",
+      "academic_career": "UCOL",
+      "crn": "1917",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Mara Mandradjieff",
+      "instructors": [
+        {
+          "name": "Mara Mandradjieff",
+          "email": "mara.p.mandradjieff@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5593"
+        }
+      ],
+      "location": "Schwartz Center 255",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 23,
+      "seats_available": 23,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mara Mandradjieff"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.530Z"
+}

@@ -1,0 +1,264 @@
+{
+  "course_code": "NBB 370",
+  "course_title": "Special Topics in NBB: Neurodiversity",
+  "subject": "NBB",
+  "catalog_number": "370",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Study of variable topics of special interest in neuroscience and behavioral biology. May be repeated for credit when topics vary.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3545",
+      "academic_career": "UCOL",
+      "crn": "1837",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "J. Alex Grizzell",
+      "instructors": [
+        {
+          "name": "J. Alex Grizzell",
+          "email": "j.alex.grizzell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31674"
+        }
+      ],
+      "location": "1462 Clifton Rd 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3546",
+      "academic_career": "UCOL",
+      "crn": "3984",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Anita Devineni",
+      "instructors": [
+        {
+          "name": "Anita Devineni",
+          "email": "anita.devineni@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "29552"
+        }
+      ],
+      "location": "1462 Clifton Rd 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3547",
+      "academic_career": "UCOL",
+      "crn": "4041",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Hillary R Rodman",
+      "instructors": [
+        {
+          "name": "Hillary R Rodman",
+          "email": "hrrodma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1805"
+        }
+      ],
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3548",
+      "academic_career": "UCOL",
+      "crn": "5829",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Alexa Iannitelli",
+      "instructors": [
+        {
+          "name": "Alexa Iannitelli",
+          "email": "alexa.iannitelli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18166"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexa Iannitelli",
+    "Anita Devineni",
+    "Hillary R Rodman",
+    "J. Alex Grizzell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.566Z"
+}

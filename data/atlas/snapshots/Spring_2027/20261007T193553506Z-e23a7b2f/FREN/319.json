@@ -1,0 +1,93 @@
+{
+  "course_code": "FREN 319",
+  "course_title": "Medical French",
+  "subject": "FREN",
+  "catalog_number": "319",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Read medical texts and use medical vocabulary in professional and everyday settings. Study healthcare systems and current issues in medicine in the French-speaking world and conduct research on current health challenges in Francophone countries. Preparation for the Diploma of French for Health exam.",
+  "course_notes": "FREN 319. Medical French (Prof. Eric Bulakites, Tuesdays and Thursdays 11:30am-12:45pm). Content: The goal of this course is to provide you with the fundamentals of medical French, to prepare you for reading medical texts, and to use medical language in everyday and professional situations. This course gives you the opportunity to discover not only medical terminology and its practical application, but also healthcare systems and current issues in medicine in the French-speaking world. By using a variety of media, materials, and assignments, and by asking you to conduct research and contribute to the course based on your own interests and medical knowledge, we aim to thoroughly prepare you to work in health care in a French-speaking country or region. You will also gain a holistic, global perspective on health care and learn how factors such as culture, language, and sociodemographic status impact health. For interested students, this course is also designed to be part of the preparation for the exam Diplôme de français de la santé (Diploma of French for Health) certifying our ability to work in French in a health care-based profession.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2626",
+      "academic_career": "UCOL",
+      "crn": "1510",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Eric Bulakites",
+      "instructors": [
+        {
+          "name": "Eric Bulakites",
+          "email": "eric.raymond.bulakites@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31391"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Bulakites"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.550Z"
+}

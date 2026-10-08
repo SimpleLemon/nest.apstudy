@@ -1,0 +1,156 @@
+{
+  "course_code": "THEA 100",
+  "course_title": "Introduction to the Theater",
+  "subject": "THEA",
+  "catalog_number": "100",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A theoretical and practical initiation to theater as a collaborative art. Includes script analysis as well as basic instruction in acting, improvisation, stage design, and play direction.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "789",
+      "academic_career": "UCOL",
+      "crn": "3002",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Héctor Alvarez",
+      "instructors": [
+        {
+          "name": "Héctor Alvarez",
+          "email": "hector.alvarez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39587"
+        }
+      ],
+      "location": "Schwartz Center 203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "790",
+      "academic_career": "UCOL",
+      "crn": "3144",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Pearson",
+      "instructors": [
+        {
+          "name": "Jessica Pearson",
+          "email": "jessica.pearson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46867"
+        }
+      ],
+      "location": "Schwartz Center 203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Héctor Alvarez",
+    "Jessica Pearson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.591Z"
+}

@@ -1,0 +1,201 @@
+{
+  "course_code": "NRSG 205",
+  "course_title": "Fundamentals of Microbiology with Lab",
+  "subject": "NRSG",
+  "catalog_number": "205",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course introduces students to core principles and concepts of microbiology. Topic areas include microorganisms (bacteria, fungi, protozoa, viruses), microbial taxonomy, technology used to study microorganisms, microbial life cycle/metabolism and host-microbe interaction. Laboratory experiences.",
+  "course_notes": "All nursing pre-reqs courses require department permission to enroll. For Emory SON permission you must email nrsgpermissioninquiries@emory.edu for registration approval and support.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2068",
+      "academic_career": "UNUR",
+      "crn": "3008",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2069",
+      "academic_career": "UNUR",
+      "crn": "2393",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2066",
+      "academic_career": "UNUR",
+      "crn": "3007",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8-9:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "800",
+            "end": "915"
+          },
+          {
+            "day": "Thu",
+            "start": "800",
+            "end": "915"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2067",
+      "academic_career": "UNUR",
+      "crn": "2391",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 4,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:15:00.779Z"
+}

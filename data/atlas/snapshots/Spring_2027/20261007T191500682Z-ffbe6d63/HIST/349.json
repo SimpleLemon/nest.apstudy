@@ -1,0 +1,93 @@
+{
+  "course_code": "HIST 349",
+  "course_title": "The New South",
+  "subject": "HIST",
+  "catalog_number": "349",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The agrarian South and the growth of an industrial ideal, segregation, dilemmas of political reform, race and politics, assaults upon segregation and its defenders, and modernization and change.",
+  "course_notes": "(Same as AMST 385 2)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "402",
+      "academic_career": "UCOL",
+      "crn": "2750",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jason Ward",
+      "instructors": [
+        {
+          "name": "Jason Ward",
+          "email": "jason.morgan.ward@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18074"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jason Ward"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.736Z"
+}

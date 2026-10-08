@@ -1,0 +1,86 @@
+{
+  "course_code": "BIOL 499R",
+  "course_title": "Undergraduate Research",
+  "subject": "BIOL",
+  "catalog_number": "499R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "For biology majors only. Permission required (see biology.emory.edu/research-opportunities). Must be taken for 4 credits/semester. Fulfills 4 elective credits (maximum) and upper-level lab requirement for Biology major only upon completion of two semesters.",
+  "course_notes": "A two-semester research experience for Biology majors. Students will need to find a research mentor to oversee their research project. Once a mentor is confirmed, students will need to apply for the course. (See the Biology Department website for additional information.) Approved students will receive a permission number from Dr. Gerardo and will need to add the course to their schedule before add/drop/swap ends for the semester. Prerequisites: Biology 142 + 142L and a declared Biology major. Successful completion of two semesters will provide students with four (4) hours of elective credit and will fulfill the upper-level lab requirement for the Biology major.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "830",
+      "academic_career": "UCOL",
+      "crn": "2087",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Nicole Marie Gerardo",
+      "instructors": [
+        {
+          "name": "Nicole Marie Gerardo",
+          "email": "ngerard@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4310"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nicole Marie Gerardo"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.703Z"
+}

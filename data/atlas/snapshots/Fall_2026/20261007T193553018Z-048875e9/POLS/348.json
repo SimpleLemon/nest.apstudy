@@ -1,0 +1,93 @@
+{
+  "course_code": "POLS 348",
+  "course_title": "Elections and Voting",
+  "subject": "POLS",
+  "catalog_number": "348",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Voter and candidate decision-making during primary and general elections, patterns of partisan support in the electorate, and factors affecting campaign strategy in American elections.",
+  "course_notes": "This course addresses electoral politics in the United States, with a strong focus on presidential and congressional elections. The topics covered include voting behavior, public opinion, realignments, theories of voting, and electoral participation. The course examines the current and recent elections in the United States from the perspective of what we have learned from past elections. The subject matter includes electoral techniques that are used in campaigns, such as polling, social media, and advertisements. Students are taught how to use AI to help explore these topics. There are two written papers and two presentations. There are no prerequisites.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1203",
+      "academic_career": "UCOL",
+      "crn": "2824",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Courtney Brown",
+      "instructors": [
+        {
+          "name": "Courtney Brown",
+          "email": "polscb@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "282"
+        }
+      ],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 32,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Courtney Brown"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.098Z"
+}

@@ -1,0 +1,142 @@
+{
+  "course_code": "THEA 130",
+  "course_title": "Stagecraft",
+  "subject": "THEA",
+  "catalog_number": "130",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A theoretical and practical introduction to technical theater.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "795",
+      "academic_career": "UCOL",
+      "crn": "3381",
+      "section_number": "LAB",
+      "schedule_type": "LAB",
+      "instructor": "Brent Glenn",
+      "instructors": [
+        {
+          "name": "Brent Glenn",
+          "email": "brent.glenn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5552"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "794",
+      "academic_career": "UCOL",
+      "crn": "3150",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Brent Glenn",
+      "instructors": [
+        {
+          "name": "Brent Glenn",
+          "email": "brent.glenn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5552"
+        }
+      ],
+      "location": "Rich Building 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brent Glenn"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.591Z"
+}

@@ -1,0 +1,129 @@
+{
+  "course_code": "NRSG 207",
+  "course_title": "Introduction to Clinical Nutrition",
+  "subject": "NRSG",
+  "catalog_number": "207",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces nutrition science knowledge that emphasizes 1) basic biochemical functions and interactions of macronutrients/micronutrients and effect on human physiology, and 2) how nutrition research is used to develop dietary recommendations for individuals and specific populations.",
+  "course_notes": "All nursing pre-reqs courses require department permission to enroll. For Emory SON permission you must email nrsgpermissioninquiries@emory.edu for registration approval and support.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2178",
+      "academic_career": "UNUR",
+      "crn": "2397",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 9:30-10:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "930",
+            "end": "1045"
+          },
+          {
+            "day": "Thu",
+            "start": "930",
+            "end": "1045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2179",
+      "academic_career": "UNUR",
+      "crn": "3011",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11a-12:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1100",
+            "end": "1215"
+          },
+          {
+            "day": "Thu",
+            "start": "1100",
+            "end": "1215"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:15:00.779Z"
+}

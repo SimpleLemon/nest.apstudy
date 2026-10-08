@@ -1,0 +1,102 @@
+{
+  "course_code": "HLTH 373",
+  "course_title": "Delivering Health",
+  "subject": "HLTH",
+  "catalog_number": "373",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course employs multiple perspectives, including organizational theory, business, and economics, to examine the structure, financing, and performance of the US health care system and its ability to deliver health. Mental health, long-term care, and public health sectors are explored in depth.",
+  "course_notes": "This course provides an overview of key parts of the health care delivery system and their ability to deliver health. We will focus on the role of insurance, the government-sponsored Medicare and Medicaid programs, and the hospital and mental health sectors. We will analyze the organization of and financing mechanisms for these sectors and the incentives faced by health care providers in terms of the volume and type of services they provide. We will also examine consumer access barriers, particularly those of disadvantaged groups, to seeing care. We will identify how each sector attempts to measure its impact on individual's health, whether these measures are meaningful and what they indicate about sector performance. Practical examples will be explored throughout the semester, such as how does the Medicaid program deliver mental health services to extremely vulnerable and marginalized populations. We will also have lectures provided by experts in the field, such as the Director of Georgia Families, Amerigroup Inc. and physician practice managers.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4216",
+      "academic_career": "UCOL",
+      "crn": "2629",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Victoria L Phillips",
+      "instructors": [
+        {
+          "name": "Victoria L Phillips",
+          "email": "victoria.phillips@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1611"
+        },
+        {
+          "name": "Janna Girotto",
+          "email": "janna.girotto@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "45238"
+        },
+        {
+          "name": "Doussou Toure",
+          "email": "doussou.toure@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "35363"
+        }
+      ],
+      "location": "Claudia Nance Rollins 1051",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 42,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-4:10p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1610"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Doussou Toure",
+    "Janna Girotto",
+    "Victoria L Phillips"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.548Z"
+}

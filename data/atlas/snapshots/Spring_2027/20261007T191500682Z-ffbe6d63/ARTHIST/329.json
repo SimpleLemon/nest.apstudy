@@ -1,0 +1,93 @@
+{
+  "course_code": "ARTHIST 329",
+  "course_title": "Topics: Art of Class Antiquity",
+  "subject": "ARTHIST",
+  "catalog_number": "329",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics could include ancient sanctuaries; early Greece: real and imagined and religious festivals; myth and art in ancient Greece; and Greek architecture. May be repeated for credit when topic changes, up to a maximum of twelve hours.",
+  "course_notes": "We live in an age of visual saturation. From museum galleries to social media feeds, from VR headsets and advertisements to AI-generated art and deepfakes, images shape how we understand the world and relate to one another. But what exactly is an image? What do images do to us, and what do we do with them? This course tackles these questions from multiple angles, drawing on art history, philosophy, medicine, neuroscience, artistic practice, and computer vision. Through these lenses, it examines how images persuade and deceive, heal and harm, preserve memory and distort it, cross cultural boundaries, and blur the line between the real and the fabricated. Grounded in art-historical methods, theory, and close observation, the course traces how different cultures, periods, and disciplines have understood what images are, training students to see the images around them with a critical eye. Classes combine lectures, seminar discussion, and visits to the Michael C. Carlos Museum and the High Museum of Art. This is also a LINC (Learning Through Inclusive Collaboration) course, linked with Alexander Escobar's Biology 190, Perception: Experiencing the World. LINC courses connect ways of knowing and doing across disciplines and build inclusive learning communities. Four classes meet jointly with Biology 190.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1879",
+      "academic_career": "UCOL",
+      "crn": "1985",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Giovanni Lovisetto",
+      "instructors": [
+        {
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39591"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Giovanni Lovisetto"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.694Z"
+}

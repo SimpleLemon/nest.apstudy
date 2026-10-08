@@ -1,0 +1,305 @@
+{
+  "course_code": "POLS 208",
+  "course_title": "Research Design and Methods",
+  "subject": "POLS",
+  "catalog_number": "208",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fundamental concepts and quantitative techniques of empirical political inquiry. Introduction to concepts of measurement, parametric, and non-parametric statistics. Basic bivariate and univariate statistics used in political science.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1196",
+      "academic_career": "UCOL",
+      "crn": "2657",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Matthew Baker",
+      "instructors": [
+        {
+          "name": "Matthew Baker",
+          "email": "matthew.e.baker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36180"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 90,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1197",
+      "academic_career": "UCOL",
+      "crn": "2658",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Sarmad Chaudhry",
+      "instructors": [
+        {
+          "name": "Sarmad Chaudhry",
+          "email": "sarmad.chaudhry@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40417"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1198",
+      "academic_career": "UCOL",
+      "crn": "2660",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Zachary Zhou",
+      "instructors": [
+        {
+          "name": "Zachary Zhou",
+          "email": "zihe.zhou@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40410"
+        }
+      ],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1199",
+      "academic_career": "UCOL",
+      "crn": "2661",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Sarmad Chaudhry",
+      "instructors": [
+        {
+          "name": "Sarmad Chaudhry",
+          "email": "sarmad.chaudhry@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40417"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 25,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1200",
+      "academic_career": "UCOL",
+      "crn": "6380",
+      "section_number": "5",
+      "schedule_type": "DIS",
+      "instructor": "Zachary Zhou",
+      "instructors": [
+        {
+          "name": "Zachary Zhou",
+          "email": "zihe.zhou@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40410"
+        }
+      ],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 4,
+    "other": 0,
+    "open": 4,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Matthew Baker",
+    "Sarmad Chaudhry",
+    "Zachary Zhou"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.574Z"
+}

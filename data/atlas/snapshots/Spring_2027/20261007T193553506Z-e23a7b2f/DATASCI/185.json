@@ -1,0 +1,88 @@
+{
+  "course_code": "DATASCI 185",
+  "course_title": "Applied Topics in Data Science: Sports Analytics",
+  "subject": "DATASCI",
+  "catalog_number": "185",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Topics course intended for early-career students. Topics allow students to explore the foundations, theory, and methods of data science, and examine the ways in which data driven solutions power industry, government, and the non-profit sector in an applied setting.",
+  "course_notes": "To successfully complete this course, students should have taken DATASCI 150 or DATASCI 185-1 (Fall 2026, equivalent to DATASCI 160) This course explores how data analytics can improve our understanding of sports and inform decisions, ranging from player performance and team strategy to business operations. Students will learn to frame analytical questions, evaluate sports metrics and evidence critically, distinguish correlation from causation, interpret predictions, and make decisions under uncertainty. The course also emphasizes identifying misleading analyses and communicating data-driven insights and recommendations effectively. No programming experience is required, though basic Excel skills are helpful. Students will apply these concepts through a group project analyzing a real-world sports topic.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2352",
+      "academic_career": "UCOL",
+      "crn": "3296",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Nate Silverblatt",
+      "instructors": [
+        {
+          "name": "Nate Silverblatt",
+          "email": "nate.silverblatt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30430"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nate Silverblatt"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.532Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "LAT 315",
+  "course_title": "Comedy",
+  "subject": "LAT",
+  "catalog_number": "315",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Reading of two or more plays of Plautus or Terence, with discussion of Roman comedy's predecessors and influence.",
+  "course_notes": "The course is intended to introduce students to the world of New Comedy as staged at Rome. We will read at least one play of Plautus (Captivi/ Prisoners of War) along with some comparative material in Latin and possibly other complete plays in translation. Questions of staging and performance will also inform our reading of the texts.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "885",
+      "academic_career": "UCOL",
+      "crn": "4930",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Niall W Slater",
+      "instructors": [
+        {
+          "name": "Niall W Slater",
+          "email": "nslater@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "824"
+        }
+      ],
+      "location": "Candler Library 222A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Niall W Slater"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.078Z"
+}

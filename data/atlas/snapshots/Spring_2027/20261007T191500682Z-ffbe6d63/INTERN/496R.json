@@ -1,0 +1,91 @@
+{
+  "course_code": "INTERN 496R",
+  "course_title": "Pathways XA Internship",
+  "subject": "INTERN",
+  "catalog_number": "496R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "0,1",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Enhances student learning & advances college-to-career preparedness for internships, research, or applied arts experiences. Satisfies the Exp. & App. (XA) GER for students who meet the duration requirements set by Pathways. May qualify for an unpaid internship or Curricular Practical Training.",
+  "course_notes": "(Permission Required Prior to Enrollment) The Advanced Practicum provides an opportunity to further explore career interests while applying knowledge and skills learned in the classroom to a professional setting.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1357",
+      "academic_career": "UCOL",
+      "crn": "1330",
+      "section_number": "1",
+      "schedule_type": "IND",
+      "instructor": "Edmund Goode",
+      "instructors": [
+        {
+          "name": "Edmund Goode",
+          "email": "edmund.goode@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17884"
+        },
+        {
+          "name": "Debarati Roy",
+          "email": "debarati.roy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39527"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0,1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 340,
+      "seats_available": 340,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Debarati Roy",
+    "Edmund Goode"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.742Z"
+}

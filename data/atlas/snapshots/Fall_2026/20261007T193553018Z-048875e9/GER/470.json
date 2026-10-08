@@ -1,0 +1,93 @@
+{
+  "course_code": "GER 470",
+  "course_title": "Topics in German Culture and Civilization",
+  "subject": "GER",
+  "catalog_number": "470",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An interdisciplinary course intended to provide a comprehensive, historically oriented overview of the formative elements, influences, and movements of German culture and civilization. Taught in German.",
+  "course_notes": "Addressing the growing need for environmental awareness in the humanities curriculum, this seminar introduces students to ecocriticism and environmental concerns in literature. We explore how writers have understood and written about their environments historically, and how these depictions of nature have come to influence contemporary literature and film about the non-human world. Specifically, we will examine various tropes in which humans have attempted to approach and understand nature. This course is structured according to thematic units on the Anthropocene (our current geologic era marked by human impact), the myth of pastoral nature, the \"trouble with wilderness,\" environmental damage and catastrophes, and animal studies. Using the tools of textual analysis, we will examine how culture and literature engage past and present political, environmental, and economic issues. Authors and directors include Judith Schalansky, Esther Kinsky, Marion Poschmann, Christian Petzold, Arnold Fanck, Franz Kafka, Adalbert Stifter, and Johann Wolfgang von Goethe, among others.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3392",
+      "academic_career": "UCOL",
+      "crn": "2623",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Caroline Schaumann",
+      "instructors": [
+        {
+          "name": "Caroline Schaumann",
+          "email": "cschaum@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3388"
+        }
+      ],
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 14,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Caroline Schaumann"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.062Z"
+}

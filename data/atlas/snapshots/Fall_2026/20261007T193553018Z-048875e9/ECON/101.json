@@ -1,0 +1,274 @@
+{
+  "course_code": "ECON 101",
+  "course_title": "Principles of Microeconomics",
+  "subject": "ECON",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the theory of markets, including consumer and producer choice and how they interact to determine prices and resource allocations. Applications include price controls, production, market structures, environmental economics, governmental regulation of the economy, labor and capital markets, and international exchange.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "625",
+      "academic_career": "UCOL",
+      "crn": "2671",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shomu Banerjee",
+      "instructors": [
+        {
+          "name": "Shomu Banerjee",
+          "email": "sbaner3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3699"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 150,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "626",
+      "academic_career": "UCOL",
+      "crn": "2672",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hugo M Mialon",
+      "instructors": [
+        {
+          "name": "Hugo M Mialon",
+          "email": "hmialon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3656"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 185,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "627",
+      "academic_career": "UCOL",
+      "crn": "2673",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Sam Wunderly",
+      "instructors": [
+        {
+          "name": "Sam Wunderly",
+          "email": "sam.wunderly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15396"
+        }
+      ],
+      "location": "White Hall 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 75,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "628",
+      "academic_career": "UCOL",
+      "crn": "6281",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Lucie Xu",
+      "instructors": [
+        {
+          "name": "Lucie Xu",
+          "email": "lucie.xu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28686"
+        }
+      ],
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 4,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hugo M Mialon",
+    "Lucie Xu",
+    "Sam Wunderly",
+    "Shomu Banerjee"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.047Z"
+}

@@ -1,0 +1,155 @@
+{
+  "course_code": "LACS 265W",
+  "course_title": "Visitor Meets Native",
+  "subject": "LACS",
+  "catalog_number": "265W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+  "requirements": [
+    "Continuing Comm.& Writing with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will bring together existing research to examine tourism as at one time an economic enterprise and also as a deeply significant cultural experience that has played an under-recognized part in shaping the cultural mores and lifestyles of both the island destinations and the home countries.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1428",
+      "academic_career": "UCOL",
+      "crn": "2653",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Robert Goddard",
+      "instructors": [
+        {
+          "name": "Robert Goddard",
+          "email": "robert.goddard@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2314"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1429",
+      "academic_career": "UCOL",
+      "crn": "2654",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Robert Goddard",
+      "instructors": [
+        {
+          "name": "Robert Goddard",
+          "email": "robert.goddard@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2314"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Comm.& Writing with Race & Ethnicity(*)",
+      "requirements": [
+        "Continuing Comm.& Writing with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Robert Goddard"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.562Z"
+}

@@ -1,0 +1,108 @@
+{
+  "course_code": "ARAB_OX 101",
+  "course_title": "Elementary Arabic I",
+  "subject": "ARAB_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Develops reading, speaking, listening, writing, and cultural skills in Arabic. Stresses communication skills in formal Arabic and some Egyptian dialect. Preparation for class is essential; class time is spent practicing rather than lecturing.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2447",
+      "academic_career": "UOXF",
+      "crn": "4186",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Nabil Ahmed",
+      "instructors": [
+        {
+          "name": "Nabil Ahmed",
+          "email": "nabil.ahmed@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44814"
+        },
+        {
+          "name": "Nabil Ahmed",
+          "email": "nabil.ahmed@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44814"
+        }
+      ],
+      "location": "Seney Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 11,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nabil Ahmed"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

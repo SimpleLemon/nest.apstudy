@@ -1,0 +1,97 @@
+{
+  "course_code": "AAS 353",
+  "course_title": "Sports in U.S. History",
+  "subject": "AAS",
+  "catalog_number": "353",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores the complex history of sports in the United States since the late nineteenth century. With a particular emphasis on race, gender, and politics, we examine pivotal moments, athletes, and social justice issues in sports that have impacted our nation¿s history.",
+  "course_notes": "(Same as HIST 353 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "404",
+      "academic_career": "UCOL",
+      "crn": "3564",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Carl Suddler",
+      "instructors": [
+        {
+          "name": "Carl Suddler",
+          "email": "carl.suddler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6659"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Carl Suddler"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.685Z"
+}

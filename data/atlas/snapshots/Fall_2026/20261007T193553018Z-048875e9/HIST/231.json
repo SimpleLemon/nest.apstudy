@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST 231",
+  "course_title": "Foundations of American Society to 1877",
+  "subject": "HIST",
+  "catalog_number": "231",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Considers the development of American society from tentative beginnings to Reconstruction. Special emphasis is given to certain critical periods including colonialism, the American Revolution, and the Civil War.",
+  "course_notes": "(Same as AMST 285 2) (How did the society we know as \"America\" emerge? Where did it come from? Why did it evolve in the way it did? What were the key elements of its development? Using readings in primary and secondary sources (including movies), and organized around both lectures and discussion, History 231 explores these issues from the originating years of American History through Reconstruction. Focusing on central strands of social, cultural, and political history, the course rests on two guiding assumptions: that an informed awareness of the present begins with a responsible and sophisticated understanding of the past; and that learning about early American history provides important insight into the American story as a whole.) (Grading is based on two take-home examinations and participation in weekly discussions.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "818",
+      "academic_career": "UCOL",
+      "crn": "2528",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jonathan Prude",
+      "instructors": [
+        {
+          "name": "Jonathan Prude",
+          "email": "histjp@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "204"
+        }
+      ],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jonathan Prude"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.065Z"
+}

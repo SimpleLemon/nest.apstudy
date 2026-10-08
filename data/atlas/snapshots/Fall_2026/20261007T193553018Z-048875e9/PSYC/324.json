@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 324",
+  "course_title": "Sleep & Dreaming, Brain & Mind",
+  "subject": "PSYC",
+  "catalog_number": "324",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Why and how do humans sleep and dream? This is a survey course presenting a biologically informed approach to sleep and dreaming under both typical and pathological conditions. Format will be primarily lecture, but some discussion and active exercises will also be used.",
+  "course_notes": "(Same as NBB 370 3) Why do humans sleep and dream? How does the brain control these and related states of consciousness? What are the implications of being a \"night owl\" versus a \"morning person\"? Is lucid dreaming a brain state and can you learn to do it? Do animals sleep differently and do they dream like we do? Do classic and more recent theories of dreaming make sense in terms of what we can measure? Does sleep really form memories and regulate our emotions? Does chronic sleep deprivation matter for mind and body? Can you perform complex actions in your sleep without knowing it? This is a survey course presenting a biologically informed approach to sleep and dreaming under both typical and pathological conditions. Format will be primarily lecture, but discussion and active exercises will also be used. Readings: Selections from academic and general audience books, scientific journals, and online sources. Assignment/ Exam Details: Several exams and quizzes throughout the semester; sleep log and dream journal projects; one short reflection paper. Class participation also counts.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4177",
+      "academic_career": "UCOL",
+      "crn": "2177",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hillary R Rodman",
+      "instructors": [
+        {
+          "name": "Hillary R Rodman",
+          "email": "hrrodma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1805"
+        }
+      ],
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hillary R Rodman"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.101Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "HIST 285",
+  "course_title": "Topics: Historical Analysis: Intro to Indigenous History",
+  "subject": "HIST",
+  "catalog_number": "285",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introductory course on the nature and methods of history. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AMST 285 3) This course examines the length and depth of Muscogee (Creek) relationships to place, governance, and society from deep time to the present, situating Muscogee history within the broader landscape of North American Indigenous nations while emphasizing the distinctiveness of Indigenous cultures, regions, and political traditions. Through immersive engagement with treaties, origin narratives, legal cases, speeches, oral histories, and material culture, students analyze how histories are constructed, where silences emerge, and why certain stories remain marginalized. The course moves beyond a narrative of loss to focus on what we know: enduring systems of kinship, land-based epistemologies, sovereignty, adaptation, and cultural continuity. Students critically examine complex historical moments, including removal, internal political divisions, enslavement, Civil War allegiances, allotment, and contemporary jurisdictional debates, while practicing nuanced, evidence-based interpretation. Drawing on Indigenous thinkers such as Vine Deloria Jr. and Daniel Wildcat, the course fosters a rigorous understanding of Indigenous perspectives and cultivates a sustained, place-based intellectual engagement with Indigenous pasts, presents, and futures.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3532",
+      "academic_career": "UCOL",
+      "crn": "2532",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Malinda Lowery",
+      "instructors": [
+        {
+          "name": "Malinda Lowery",
+          "email": "malinda.maynor.lowery@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28182"
+        }
+      ],
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Malinda Lowery"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.543Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "HIST 302",
+  "course_title": "History of Rome",
+  "subject": "HIST",
+  "catalog_number": "302",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "History of Rome and its civilization from earliest times to the accession of Constantine. Traces Rome's evolution from small town to world empire and the development of the arts and manners of the Greco-Roman world.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "400",
+      "academic_career": "UCOL",
+      "crn": "2747",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jinyu Liu",
+      "instructors": [
+        {
+          "name": "Jinyu Liu",
+          "email": "jinyu.liu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35421"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jinyu Liu"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.736Z"
+}

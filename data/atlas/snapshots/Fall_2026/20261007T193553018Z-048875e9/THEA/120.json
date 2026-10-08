@@ -1,0 +1,263 @@
+{
+  "course_code": "THEA 120",
+  "course_title": "Acting: Fundamentals",
+  "subject": "THEA",
+  "catalog_number": "120",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introductory course on the principles and practice of the actor's craft.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1371",
+      "academic_career": "UCOL",
+      "crn": "2547",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lisa Paulsen",
+      "instructors": [
+        {
+          "name": "Lisa Paulsen",
+          "email": "lisa.paulsen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3224"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1372",
+      "academic_career": "UCOL",
+      "crn": "2549",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Cecil Starks-Blutcher",
+      "instructors": [
+        {
+          "name": "Cecil Starks-Blutcher",
+          "email": "cecil.anthony.starks-blutcher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46954"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1373",
+      "academic_career": "UCOL",
+      "crn": "2551",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Bradley Atuba",
+      "instructors": [
+        {
+          "name": "Bradley Atuba",
+          "email": "bradley.atuba@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46930"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1374",
+      "academic_career": "UCOL",
+      "crn": "2553",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Bradley Atuba",
+      "instructors": [
+        {
+          "name": "Bradley Atuba",
+          "email": "bradley.atuba@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46930"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Bradley Atuba",
+    "Cecil Starks-Blutcher",
+    "Lisa Paulsen"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.110Z"
+}

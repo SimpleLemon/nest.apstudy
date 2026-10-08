@@ -1,0 +1,155 @@
+{
+  "course_code": "LING_OX 101W",
+  "course_title": "Language Diversity in the US",
+  "subject": "LING_OX",
+  "catalog_number": "101W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences with Cont.Comm/Race & Ethnicity(*)",
+  "requirements": [
+    "Social Sciences with Cont.Comm/Race & Ethnicity(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "An examination of the various languages and dialects used in American society and the impact that race, ethnicity, and other social variables play on that diversity.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4115",
+      "academic_career": "UOXF",
+      "crn": "4133",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jack Hardy",
+      "instructors": [
+        {
+          "name": "Jack Hardy",
+          "email": "jack.hardy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5224"
+        }
+      ],
+      "location": "Humanities Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Cont.Comm/Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Cont.Comm/Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4116",
+      "academic_career": "UOXF",
+      "crn": "4134",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Jack Hardy",
+      "instructors": [
+        {
+          "name": "Jack Hardy",
+          "email": "jack.hardy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5224"
+        }
+      ],
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Cont.Comm/Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Cont.Comm/Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jack Hardy"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.124Z"
+}

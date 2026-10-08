@@ -1,0 +1,88 @@
+{
+  "course_code": "SOC_OX 254",
+  "course_title": "People and Nature",
+  "subject": "SOC_OX",
+  "catalog_number": "254",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Select readings and seminar discussions on the social construction of \"nature\" and its intersections with human social relationships. This course will emphasize interdisciplinary understandings of people and nature and their overlaps.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4167",
+      "academic_career": "UOXF",
+      "crn": "4139",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Deric Shannon",
+      "instructors": [
+        {
+          "name": "Deric Shannon",
+          "email": "deric.shannon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5784"
+        }
+      ],
+      "location": "Seney Hall 208",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 11,
+      "seats_available": 3,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Deric Shannon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.616Z"
+}

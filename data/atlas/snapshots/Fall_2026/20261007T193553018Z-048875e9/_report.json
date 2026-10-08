@@ -1,0 +1,6770 @@
+{
+  "version": 1,
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "started_at": "2026-10-07T19:35:52.411Z",
+  "status": "complete",
+  "errors": [],
+  "source": {
+    "kind": "public-atlas-brave",
+    "captured_at": "2026-10-07T19:13:27.464Z"
+  },
+  "reconciliation": {
+    "added": [],
+    "removed": [],
+    "missing": [],
+    "unexpected": [],
+    "duplicates": []
+  },
+  "coverage": {
+    "scope": "undergraduate",
+    "metadata_discovered_at": "2026-10-07T19:35:52.408Z",
+    "metadata_source": "https://atlas.emory.edu/",
+    "verification": "career_subject_roster_identity",
+    "sections": 2675,
+    "careers": {
+      "UCOL": {
+        "label": "Emory College",
+        "sections": 1948,
+        "source_total": 1948,
+        "empty_roster_verified": false,
+        "subjects": {
+          "OISP": {
+            "sections": 6,
+            "source_total": 6,
+            "requests": 1
+          },
+          "ACT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS": {
+            "sections": 36,
+            "source_total": 36,
+            "requests": 1
+          },
+          "AAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS": {
+            "sections": 19,
+            "source_total": 19,
+            "requests": 1
+          },
+          "AFS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "AMST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANCMED": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "ANMED_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANT": {
+            "sections": 45,
+            "source_total": 45,
+            "requests": 1
+          },
+          "ANTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "APHI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AEPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB": {
+            "sections": 6,
+            "source_total": 6,
+            "requests": 1
+          },
+          "ARAB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ART_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTHIST": {
+            "sections": 25,
+            "source_total": 25,
+            "requests": 1
+          },
+          "ASTR_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAPS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCDB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOETH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL": {
+            "sections": 119,
+            "source_total": 119,
+            "requests": 1
+          },
+          "BIOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMID": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM": {
+            "sections": 66,
+            "source_total": 66,
+            "requests": 1
+          },
+          "CHEM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN": {
+            "sections": 20,
+            "source_total": 20,
+            "requests": 1
+          },
+          "CHP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL": {
+            "sections": 13,
+            "source_total": 13,
+            "requests": 1
+          },
+          "CL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CBSC": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "CPLT": {
+            "sections": 16,
+            "source_total": 16,
+            "requests": 1
+          },
+          "CS": {
+            "sections": 58,
+            "source_total": 58,
+            "requests": 1
+          },
+          "CS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW": {
+            "sections": 19,
+            "source_total": 19,
+            "requests": 1
+          },
+          "ENGCW_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CVP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC": {
+            "sections": 30,
+            "source_total": 30,
+            "requests": 1
+          },
+          "DANC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DASCI_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATASCI": {
+            "sections": 52,
+            "source_total": 52,
+            "requests": 1
+          },
+          "DS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSMS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DPT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DRPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS": {
+            "sections": 8,
+            "source_total": 8,
+            "requests": 1
+          },
+          "ECON": {
+            "sections": 72,
+            "source_total": 72,
+            "requests": 1
+          },
+          "ECON_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECS": {
+            "sections": 96,
+            "source_total": 96,
+            "requests": 1
+          },
+          "ENG": {
+            "sections": 37,
+            "source_total": 37,
+            "requests": 1
+          },
+          "ENG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGRD": {
+            "sections": 35,
+            "source_total": 35,
+            "requests": 1
+          },
+          "ESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ELSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS": {
+            "sections": 57,
+            "source_total": 57,
+            "requests": 1
+          },
+          "ENVS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM": {
+            "sections": 36,
+            "source_total": 36,
+            "requests": 1
+          },
+          "FILM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN": {
+            "sections": 19,
+            "source_total": 19,
+            "requests": 1
+          },
+          "FREN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GMB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GEOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER": {
+            "sections": 13,
+            "source_total": 13,
+            "requests": 1
+          },
+          "GER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GAH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRK": {
+            "sections": 7,
+            "source_total": 7,
+            "requests": 1
+          },
+          "PE": {
+            "sections": 32,
+            "source_total": 32,
+            "requests": 1
+          },
+          "HPM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HCO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HEBR": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "RLHB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HNDI": {
+            "sections": 5,
+            "source_total": 5,
+            "requests": 1
+          },
+          "HISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST": {
+            "sections": 55,
+            "source_total": 55,
+            "requests": 1
+          },
+          "HIST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HGC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH": {
+            "sections": 131,
+            "source_total": 131,
+            "requests": 1
+          },
+          "HLTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IMP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ILA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IBS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS": {
+            "sections": 16,
+            "source_total": 16,
+            "requests": 1
+          },
+          "IDS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTERN": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "ICIVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ITAL": {
+            "sections": 16,
+            "source_total": 16,
+            "requests": 1
+          },
+          "IT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPN": {
+            "sections": 13,
+            "source_total": 13,
+            "requests": 1
+          },
+          "JS": {
+            "sections": 15,
+            "source_total": 15,
+            "requests": 1
+          },
+          "JPE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPCT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "KRN": {
+            "sections": 16,
+            "source_total": 16,
+            "requests": 1
+          },
+          "LACS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "LAT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS": {
+            "sections": 11,
+            "source_total": 11,
+            "requests": 1
+          },
+          "LAW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING": {
+            "sections": 21,
+            "source_total": 21,
+            "requests": 1
+          },
+          "LING_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LMA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MARL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSCR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDIV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRPL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH": {
+            "sections": 75,
+            "source_total": 75,
+            "requests": 1
+          },
+          "MATH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MHA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MMG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS": {
+            "sections": 25,
+            "source_total": 25,
+            "requests": 1
+          },
+          "MBC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MLP_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M2M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS": {
+            "sections": 69,
+            "source_total": 69,
+            "requests": 1
+          },
+          "MUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NCSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB": {
+            "sections": 34,
+            "source_total": 34,
+            "requests": 1
+          },
+          "NT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLNT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NTRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCFT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OAM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OXST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PACE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PERS": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "RLPC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL": {
+            "sections": 46,
+            "source_total": 46,
+            "requests": 1
+          },
+          "PHIL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PAE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS": {
+            "sections": 85,
+            "source_total": 85,
+            "requests": 1
+          },
+          "PHYS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS": {
+            "sections": 45,
+            "source_total": 45,
+            "requests": 1
+          },
+          "POLS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PBEE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PORT": {
+            "sections": 11,
+            "source_total": 11,
+            "requests": 1
+          },
+          "PT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "P": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRECOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC": {
+            "sections": 73,
+            "source_total": 73,
+            "requests": 1
+          },
+          "PSYC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PUBH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INFO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RADT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL": {
+            "sections": 33,
+            "source_total": 33,
+            "requests": 1
+          },
+          "RP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ROTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RUSS": {
+            "sections": 5,
+            "source_total": 5,
+            "requests": 1
+          },
+          "REES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC": {
+            "sections": 40,
+            "source_total": 40,
+            "requests": 1
+          },
+          "SOC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN": {
+            "sections": 40,
+            "source_total": 40,
+            "requests": 1
+          },
+          "SPAN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SUST": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "ST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TATT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA": {
+            "sections": 34,
+            "source_total": 34,
+            "requests": 1
+          },
+          "THEA_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TBT": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "CPTR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "URP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VET": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VMR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTVIS": {
+            "sections": 21,
+            "source_total": 21,
+            "requests": 1
+          },
+          "RLAR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS": {
+            "sections": 24,
+            "source_total": 24,
+            "requests": 1
+          },
+          "WGS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "W": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "YDD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARCH": {
+            "sections": 3,
+            "source_total": 3,
+            "requests": 1
+          },
+          "RES": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "SIRE": {
+            "sections": 4,
+            "source_total": 4,
+            "requests": 1
+          }
+        }
+      },
+      "UOXF": {
+        "label": "Oxford College",
+        "sections": 370,
+        "source_total": 370,
+        "empty_roster_verified": false,
+        "subjects": {
+          "OISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "AAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "AFS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "AMST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "ANCMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANMED_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANTH_OX": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "APHI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AEPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "ART_OX": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "ARTHIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ASTR_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAPS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCDB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOETH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL_OX": {
+            "sections": 37,
+            "source_total": 37,
+            "requests": 1
+          },
+          "BMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMID": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM_OX": {
+            "sections": 37,
+            "source_total": 37,
+            "requests": 1
+          },
+          "CHN_OX": {
+            "sections": 3,
+            "source_total": 3,
+            "requests": 1
+          },
+          "CHN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "CO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CBSC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPLT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS_OX": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "CE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "CVP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "DASCI_OX": {
+            "sections": 18,
+            "source_total": 18,
+            "requests": 1
+          },
+          "DATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATASCI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSMS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSC_OX": {
+            "sections": 34,
+            "source_total": 34,
+            "requests": 1
+          },
+          "DM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DPT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DRPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON_OX": {
+            "sections": 16,
+            "source_total": 16,
+            "requests": 1
+          },
+          "EDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG_OX": {
+            "sections": 18,
+            "source_total": 18,
+            "requests": 1
+          },
+          "ENGRD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ELSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS_OX": {
+            "sections": 4,
+            "source_total": 4,
+            "requests": 1
+          },
+          "EPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM_OX": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "FIN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN_OX": {
+            "sections": 3,
+            "source_total": 3,
+            "requests": 1
+          },
+          "GMB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GEOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "GHD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GAH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRK": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HPM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HCO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HEBR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HNDI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST_OX": {
+            "sections": 5,
+            "source_total": 5,
+            "requests": 1
+          },
+          "HC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HGC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "IMP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ILA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IBS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "INTERN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ICIVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ITAL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPCT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "KRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "LAT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "LACS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTL_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "LING": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING_OX": {
+            "sections": 5,
+            "source_total": 5,
+            "requests": 1
+          },
+          "LMA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MARL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSCR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDIV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRPL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH_OX": {
+            "sections": 14,
+            "source_total": 14,
+            "requests": 1
+          },
+          "MC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MHA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MMG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "MESAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MBC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MLP_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M2M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS_OX": {
+            "sections": 7,
+            "source_total": 7,
+            "requests": 1
+          },
+          "NBB_OX": {
+            "sections": 2,
+            "source_total": 2,
+            "requests": 1
+          },
+          "NCSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLNT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG_OX": {
+            "sections": 3,
+            "source_total": 3,
+            "requests": 1
+          },
+          "NTRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCS_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "OCFT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OAM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTER_OX": {
+            "sections": 5,
+            "source_total": 5,
+            "requests": 1
+          },
+          "OXST_OX": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          },
+          "PACE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PERS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLPC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL_OX": {
+            "sections": 8,
+            "source_total": 8,
+            "requests": 1
+          },
+          "PE_OX": {
+            "sections": 22,
+            "source_total": 22,
+            "requests": 1
+          },
+          "PHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PAE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS_OX": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "POLS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS_OX": {
+            "sections": 9,
+            "source_total": 9,
+            "requests": 1
+          },
+          "PBEE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PORT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "P": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRECOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC_OX": {
+            "sections": 11,
+            "source_total": 11,
+            "requests": 1
+          },
+          "PUBH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INFO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RADT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL_OX": {
+            "sections": 6,
+            "source_total": 6,
+            "requests": 1
+          },
+          "REL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ROTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RUSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC_OX": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "SR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN_OX": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "SUST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TATT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA_OX": {
+            "sections": 7,
+            "source_total": 7,
+            "requests": 1
+          },
+          "RLTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TBT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "URP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VET": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VMR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTVIS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLAR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS_OX": {
+            "sections": 3,
+            "source_total": 3,
+            "requests": 1
+          },
+          "WR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "W": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "YDD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          }
+        }
+      },
+      "UAH": {
+        "label": "Undergraduate Allied Health",
+        "sections": 45,
+        "source_total": 45,
+        "empty_roster_verified": false,
+        "subjects": {
+          "OISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANCMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANMED_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "APHI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AEPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ART_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTHIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ASTR_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAPS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCDB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOETH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMID": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CBSC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPLT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CVP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DASCI_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATASCI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSMS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DPT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DRPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGRD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ELSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GMB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GEOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GAH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRK": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HPM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HCO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HEBR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HNDI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HGC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IMP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ILA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IBS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTERN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ICIVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ITAL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPCT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "KRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LMA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MARL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSCR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDIV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRPL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MI": {
+            "sections": 34,
+            "source_total": 34,
+            "requests": 1
+          },
+          "MDPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MHA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MMG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MBC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MLP_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M2M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NCSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLNT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NTRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCFT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OAM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OXST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PACE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PERS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLPC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PAE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PBEE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PORT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "P": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRECOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PUBH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INFO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RADT": {
+            "sections": 10,
+            "source_total": 10,
+            "requests": 1
+          },
+          "RLR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ROTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RUSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SUST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TATT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TBT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "URP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VET": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VMR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTVIS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLAR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "W": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "YDD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RES": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          }
+        }
+      },
+      "UBUS": {
+        "label": "Undergraduate Business",
+        "sections": 278,
+        "source_total": 278,
+        "empty_roster_verified": false,
+        "subjects": {
+          "OISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT": {
+            "sections": 26,
+            "source_total": 26,
+            "requests": 1
+          },
+          "ACT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANCMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANMED_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "APHI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AEPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ART_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTHIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ASTR_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAPS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCDB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOETH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMID": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS": {
+            "sections": 84,
+            "source_total": 84,
+            "requests": 1
+          },
+          "CB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CBSC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPLT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CVP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DASCI_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATASCI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSMS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DPT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DRPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGRD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ELSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN": {
+            "sections": 46,
+            "source_total": 46,
+            "requests": 1
+          },
+          "FREN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GMB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GEOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GAH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRK": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HPM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HCO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HEBR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HNDI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HGC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IMP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM": {
+            "sections": 28,
+            "source_total": 28,
+            "requests": 1
+          },
+          "ILA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IBS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTERN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ICIVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ITAL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPCT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "KRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LMA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT": {
+            "sections": 31,
+            "source_total": 31,
+            "requests": 1
+          },
+          "MARL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSCR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDIV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRPL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MHA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MMG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MBC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MLP_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M2M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NCSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLNT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NTRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCFT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OAM": {
+            "sections": 56,
+            "source_total": 56,
+            "requests": 1
+          },
+          "INTER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OXST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PACE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PERS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLPC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PAE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PBEE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PORT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "P": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRECOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PUBH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INFO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RADT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ROTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RUSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SUST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TATT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TBT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "URP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VET": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VMR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTVIS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLAR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "W": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "YDD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RES": {
+            "sections": 7,
+            "source_total": 7,
+            "requests": 1
+          }
+        }
+      },
+      "UNUR": {
+        "label": "Undergraduate Nursing",
+        "sections": 34,
+        "source_total": 34,
+        "empty_roster_verified": false,
+        "subjects": {
+          "OISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ACT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AFS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AMST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANCMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANMED_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ANTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "APHI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "AEPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARAB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ART_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTHIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ASTR_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAPS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BAHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCDB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOETH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMED": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BIOS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BMID": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BSHE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "BUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHEM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CHP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CBSC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPLT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGCW_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CVP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DANC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DASCI_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DATASCI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSMS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DSC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DPT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "DRPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECON_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ECS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENGRD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TESL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ELSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ENVS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EPI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "EV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FILM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FIN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "FREN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GMB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GEOL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GHCS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GAH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRAD_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "GRK": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HPM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HCO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HEBR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HNDI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HISP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HIST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HGC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "HLTH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IMP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ILA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IBS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IDS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTERN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ICIVS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ISOM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ITAL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "IT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "JPCT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "KRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LACS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LAW": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LING_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LMA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "LTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MARL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSCR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDIV": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRPL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MATH_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MI": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MDPH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MHA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MMG": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MESAS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MBC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MKT_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MLP_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "M2M": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MRL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "MUS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NCSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NBB": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLNT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NTRN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "NRSG": {
+            "sections": 33,
+            "source_total": 33,
+            "requests": 1
+          },
+          "NHS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OCFT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OAM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INTER_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "OXST_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PACE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PERS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLPC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHIL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PE_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PAE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PHYS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "POLS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PBEE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PORT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "P": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRECOL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PRS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PSYC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "PUBH": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "INFO": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "QTM_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RADT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RE": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLL": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ROTC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RUSS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "REES": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SOC_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SPAN_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "SUST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ST": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TATT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "THEA_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLTS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "TBT": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "CPTR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "URP": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VET": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "VMR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "ARTVIS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RLAR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WTM": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WGS_OX": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "WR": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "W": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "YDD": {
+            "sections": 0,
+            "source_total": 0,
+            "requests": 1
+          },
+          "RES": {
+            "sections": 1,
+            "source_total": 1,
+            "requests": 1
+          }
+        }
+      }
+    },
+    "subjects": {
+      "OISP": 6,
+      "ACT": 26,
+      "ACT_OX": 2,
+      "AAS": 36,
+      "AAS_OX": 1,
+      "AFS": 19,
+      "AFS_OX": 1,
+      "AMST": 10,
+      "AMST_OX": 2,
+      "ANCMED": 2,
+      "ANMED_OX": 0,
+      "ANES": 0,
+      "ANT": 45,
+      "ANTH_OX": 10,
+      "APHI": 0,
+      "AEPI": 0,
+      "ARAB": 6,
+      "ARAB_OX": 1,
+      "ART_OX": 9,
+      "ARTHIST": 25,
+      "ASTR_OX": 0,
+      "ATA": 0,
+      "BAPS": 0,
+      "BAHS": 0,
+      "BSHES": 0,
+      "BI": 0,
+      "BL": 0,
+      "BCDB": 0,
+      "BIOETH": 0,
+      "BIOL": 119,
+      "BIOL_OX": 37,
+      "BMED": 0,
+      "BMI": 0,
+      "BIOS": 0,
+      "BCS": 0,
+      "BMID": 0,
+      "BSHE": 0,
+      "BUS_OX": 0,
+      "BUS": 84,
+      "CB": 0,
+      "CCS": 0,
+      "CHEM": 66,
+      "CHEM_OX": 37,
+      "CHN_OX": 3,
+      "CHN": 20,
+      "CHP": 0,
+      "CC": 0,
+      "CM": 0,
+      "CL": 13,
+      "CL_OX": 1,
+      "CO": 0,
+      "CBSC": 1,
+      "CPLT": 16,
+      "CS": 58,
+      "CS_OX": 9,
+      "CE": 0,
+      "CPTS": 0,
+      "ENGCW": 19,
+      "ENGCW_OX": 2,
+      "CVP": 0,
+      "DANC": 30,
+      "DANC_OX": 2,
+      "DASCI_OX": 18,
+      "DATA": 0,
+      "DATASCI": 52,
+      "DS": 0,
+      "MDP": 0,
+      "DSMS": 0,
+      "DSC_OX": 34,
+      "DM": 0,
+      "DPT": 0,
+      "DRPH": 0,
+      "EAS_OX": 0,
+      "EAS": 8,
+      "ECON": 72,
+      "ECON_OX": 16,
+      "EDS": 0,
+      "ECS": 96,
+      "ENG": 37,
+      "ENG_OX": 18,
+      "ENGRD": 35,
+      "ESL": 0,
+      "TESL": 0,
+      "ELSP": 0,
+      "EH": 0,
+      "EHS": 0,
+      "ENVS": 57,
+      "ENVS_OX": 4,
+      "EPI": 0,
+      "ER": 0,
+      "ES": 0,
+      "RLE": 0,
+      "EV": 0,
+      "FH": 0,
+      "FILM": 36,
+      "FILM_OX": 10,
+      "FIN_OX": 0,
+      "FIN": 46,
+      "FREN": 19,
+      "FREN_OX": 3,
+      "GMB": 0,
+      "GEOL_OX": 0,
+      "GER": 13,
+      "GER_OX": 2,
+      "GHD": 0,
+      "GH": 0,
+      "GHCS": 0,
+      "GAH": 0,
+      "GRAD": 0,
+      "GRAD_OX": 0,
+      "GRK": 7,
+      "PE": 32,
+      "HPM": 0,
+      "HCO": 0,
+      "HEBR": 9,
+      "RLHB": 0,
+      "HNDI": 5,
+      "HISP": 0,
+      "RLHT": 0,
+      "HIST": 55,
+      "HIST_OX": 5,
+      "HC": 0,
+      "HSP": 0,
+      "HGC": 0,
+      "HLTH": 131,
+      "HLTH_OX": 2,
+      "IMP": 0,
+      "ISOM": 28,
+      "ILA": 0,
+      "IBS": 0,
+      "IDS": 16,
+      "IDS_OX": 1,
+      "INTERN": 2,
+      "ICIVS": 0,
+      "ISOM_OX": 0,
+      "ITAL": 16,
+      "IT": 0,
+      "JPN": 13,
+      "JS": 15,
+      "JPE": 0,
+      "JPCT": 0,
+      "KRN": 16,
+      "LACS_OX": 2,
+      "LAT": 9,
+      "LAT_OX": 2,
+      "LACS": 11,
+      "LAW": 0,
+      "LA": 0,
+      "LTL_OX": 2,
+      "LING": 21,
+      "LING_OX": 5,
+      "LMA": 0,
+      "LTC": 0,
+      "MKT": 31,
+      "MARL": 0,
+      "MSCR": 0,
+      "MDIV": 0,
+      "MRPL": 0,
+      "MTS": 0,
+      "THM": 0,
+      "MATH": 75,
+      "MATH_OX": 14,
+      "MC": 0,
+      "MI": 34,
+      "MDPH": 0,
+      "MD": 0,
+      "MHA": 0,
+      "MMG": 0,
+      "MESAS_OX": 1,
+      "MESAS": 25,
+      "MBC": 0,
+      "M": 0,
+      "MKT_OX": 0,
+      "MLP_OX": 0,
+      "MSP": 0,
+      "M2M": 0,
+      "MRL": 0,
+      "MUS": 69,
+      "MUS_OX": 7,
+      "NBB_OX": 2,
+      "NCSS": 0,
+      "NS": 0,
+      "NBB": 34,
+      "NT": 0,
+      "RLNT": 0,
+      "NRSG_OX": 3,
+      "NTRN": 0,
+      "NRSG": 33,
+      "NHS": 0,
+      "OCS_OX": 1,
+      "OCFT": 0,
+      "OT": 0,
+      "OAM": 56,
+      "INTER_OX": 5,
+      "OXST_OX": 1,
+      "PACE": 0,
+      "PC": 0,
+      "PERS": 2,
+      "RLPC": 0,
+      "PHIL": 46,
+      "PHIL_OX": 8,
+      "PE_OX": 22,
+      "PHT": 0,
+      "PAE": 0,
+      "PHYS": 85,
+      "PHYS_OX": 9,
+      "POLS": 45,
+      "POLS_OX": 9,
+      "PBEE": 0,
+      "PORT": 11,
+      "PT": 0,
+      "P": 0,
+      "PRECOL": 0,
+      "PRS": 0,
+      "PSP": 0,
+      "PSYC": 73,
+      "PSYC_OX": 11,
+      "PUBH": 0,
+      "INFO": 0,
+      "QTM": 0,
+      "QTM_OX": 0,
+      "RADT": 10,
+      "RLR": 0,
+      "REL_OX": 6,
+      "REL": 33,
+      "RP": 0,
+      "RE": 0,
+      "RLL": 0,
+      "ROTC": 0,
+      "RUSS": 5,
+      "REES": 0,
+      "SOC": 40,
+      "SOC_OX": 10,
+      "SR": 0,
+      "SPAN": 40,
+      "SPAN_OX": 10,
+      "SUST": 2,
+      "ST": 0,
+      "TATT": 0,
+      "THEA": 34,
+      "THEA_OX": 7,
+      "RLTS": 0,
+      "TBT": 1,
+      "CPTR": 0,
+      "URP": 0,
+      "VET": 0,
+      "VMR": 0,
+      "ARTVIS": 21,
+      "RLAR": 0,
+      "WTM": 0,
+      "WGS": 24,
+      "WGS_OX": 3,
+      "WR": 0,
+      "W": 0,
+      "YDD": 0,
+      "ARCH": 3,
+      "RES": 11,
+      "SIRE": 4
+    },
+    "discovered_subjects": {
+      "ARCH": {
+        "source": "career_roster",
+        "careers": [
+          "UCOL"
+        ]
+      },
+      "RES": {
+        "source": "career_roster",
+        "careers": [
+          "UCOL",
+          "UAH",
+          "UBUS",
+          "UNUR"
+        ]
+      },
+      "SIRE": {
+        "source": "career_roster",
+        "careers": [
+          "UCOL"
+        ]
+      }
+    },
+    "duplicates": []
+  },
+  "requirements": {
+    "status": "disabled",
+    "errors": []
+  },
+  "details": {
+    "enabled": true,
+    "errors": [],
+    "status": "complete"
+  },
+  "finished_at": "2026-10-07T19:35:53.017Z",
+  "generation": "20261007T193553018Z-048875e9",
+  "path": "snapshots/Fall_2026/20261007T193553018Z-048875e9",
+  "courses": 1341
+}

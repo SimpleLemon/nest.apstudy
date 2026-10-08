@@ -1,0 +1,392 @@
+{
+  "course_code": "CHEM 203",
+  "course_title": "Advanced Reactivity",
+  "subject": "CHEM",
+  "catalog_number": "203",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CHEM 203 will focus on the chemistry of organic and organometallic compounds; specifically how the molecular orbital theory can be used to predict structure and properties. This course covers kinetics, mechanisms, and catalysis.",
+  "course_notes": "This course is typically offered in fall and summer semesters. An off-sequence section may be offered in the spring but is not guaranteed.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "563",
+      "academic_career": "UCOL",
+      "crn": "2779",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Frank McDonald",
+      "instructors": [
+        {
+          "name": "Frank McDonald",
+          "email": "fmcdona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2546"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 96,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "564",
+      "academic_career": "UCOL",
+      "crn": "2781",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "William Wuest",
+      "instructors": [
+        {
+          "name": "William Wuest",
+          "email": "william.wuest@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "13757"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 72,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "565",
+      "academic_career": "UCOL",
+      "crn": "2782",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Kimberly Taylor",
+      "instructors": [
+        {
+          "name": "Kimberly Taylor",
+          "email": "kimberly.taylor3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47480"
+        }
+      ],
+      "location": "White Hall 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 99,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "566",
+      "academic_career": "UCOL",
+      "crn": "2784",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Matthew Weinschenk",
+      "instructors": [
+        {
+          "name": "Matthew Weinschenk",
+          "email": "mweinsc@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2726"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 96,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "567",
+      "academic_career": "UCOL",
+      "crn": "2785",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Julia Smith",
+      "instructors": [
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39590"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 96,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "568",
+      "academic_career": "UCOL",
+      "crn": "5898",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Elise Bezold",
+      "instructors": [
+        {
+          "name": "Elise Bezold",
+          "email": "elise.bezold@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32561"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 6,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elise Bezold",
+    "Frank McDonald",
+    "Julia Smith",
+    "Kimberly Taylor",
+    "Matthew Weinschenk",
+    "William Wuest"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.033Z"
+}

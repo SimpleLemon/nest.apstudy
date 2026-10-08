@@ -1,0 +1,628 @@
+{
+  "course_code": "MATH 111",
+  "course_title": "Calculus I",
+  "subject": "MATH",
+  "catalog_number": "111",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Limits, continuity, derivatives, antiderivatives, the definite integral.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "465",
+      "academic_career": "UCOL",
+      "crn": "2853",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Neha Gupta",
+      "instructors": [
+        {
+          "name": "Neha Gupta",
+          "email": "neha.gupta@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31603"
+        }
+      ],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "466",
+      "academic_career": "UCOL",
+      "crn": "3179",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Marchelle Beougher",
+      "instructors": [
+        {
+          "name": "Marchelle Beougher",
+          "email": "marchelle.beougher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40421"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "467",
+      "academic_career": "UCOL",
+      "crn": "3184",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Nelson Navarrete",
+      "instructors": [
+        {
+          "name": "Nelson Navarrete",
+          "email": "nelson.navarrete@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34086"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "468",
+      "academic_career": "UCOL",
+      "crn": "3192",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Xiangxiang Michael Zheng",
+      "instructors": [
+        {
+          "name": "Xiangxiang Michael Zheng",
+          "email": "xiangxiang.michael.zheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40562"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "469",
+      "academic_career": "UCOL",
+      "crn": "3195",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Yizhou(Riley) Chen",
+      "instructors": [
+        {
+          "name": "Yizhou(Riley) Chen",
+          "email": "yizhou.chen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "29290"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "470",
+      "academic_career": "UCOL",
+      "crn": "3199",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Quincy Alston",
+      "instructors": [
+        {
+          "name": "Quincy Alston",
+          "email": "quincy.alston@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40331"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 19,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "471",
+      "academic_career": "UCOL",
+      "crn": "3204",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Akash Sureshkumar",
+      "instructors": [
+        {
+          "name": "Akash Sureshkumar",
+          "email": "akash.sureshkumar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40344"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "472",
+      "academic_career": "UCOL",
+      "crn": "3215",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "Rafael Kazuhiro Miyazaki",
+      "instructors": [
+        {
+          "name": "Rafael Kazuhiro Miyazaki",
+          "email": "rafael.kazuhiro.miyazaki@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40497"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "473",
+      "academic_career": "UCOL",
+      "crn": "3216",
+      "section_number": "9",
+      "schedule_type": "LEC",
+      "instructor": "Caleb Fikes",
+      "instructors": [
+        {
+          "name": "Caleb Fikes",
+          "email": "cfikes@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40520"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "474",
+      "academic_career": "UCOL",
+      "crn": "3218",
+      "section_number": "10",
+      "schedule_type": "LEC",
+      "instructor": "Lola Vescovo",
+      "instructors": [
+        {
+          "name": "Lola Vescovo",
+          "email": "lola.vescovo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40580"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 10,
+    "lectures": 10,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 10,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Akash Sureshkumar",
+    "Caleb Fikes",
+    "Lola Vescovo",
+    "Marchelle Beougher",
+    "Neha Gupta",
+    "Nelson Navarrete",
+    "Quincy Alston",
+    "Rafael Kazuhiro Miyazaki",
+    "Xiangxiang Michael Zheng",
+    "Yizhou(Riley) Chen"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.749Z"
+}

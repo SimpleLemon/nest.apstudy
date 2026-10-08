@@ -1,0 +1,215 @@
+{
+  "course_code": "ENG 190",
+  "course_title": "Freshman Seminar:English: Literature and Empathy",
+  "subject": "ENG",
+  "catalog_number": "190",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Every semester. Freshmen only. Through readings on variable topics, frequent writing assignments, and in-class discussions, the seminar emphasizes reasoned discourse and intellectual community. Does not satisfy first-year writing requirement.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) (What would it be like to think the thoughts of other people and to feel what they feel? What surprising things would we learn about the lives of other people? And what would we learn about ourselves? How would having access to what other people think and feel change us? The power and the magic of literature is precisely this: by immersing ourselves in fictional worlds, we imagine that we are coming as close as possible to walking, as the saying goes, \"in someone else's shoes.\" We commonly use the word \"empathy\" to describe this experience. At first glance, empathy seems like a very good thing-and indeed, it often is. But does this imaginative experience have its limits or even its dangers? Is giving access to other people's lives a promise that literature can keep, or are there reasons to believe that this might be an illusion? Can all of these possibilities be true at the same time? In this course, we will address these and related questions, as we ponder the relationship between literature and empathy through our study and discussion of several extraordinary novels. These novels include Mary Shelley, Frankenstein; Charles Dickens, A Christmas Carol; Virginia Woolf, Mrs. Dalloway; and Toni Morrison, Beloved.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "679",
+      "academic_career": "UCOL",
+      "crn": "1858",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Paul Kelleher",
+      "instructors": [
+        {
+          "name": "Paul Kelleher",
+          "email": "pkelleh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4217"
+        }
+      ],
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "680",
+      "academic_career": "UCOL",
+      "crn": "1859",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Michelle Wright",
+      "instructors": [
+        {
+          "name": "Michelle Wright",
+          "email": "michelle.maria.wright@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "13983"
+        }
+      ],
+      "location": "Callaway S101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "681",
+      "academic_career": "UCOL",
+      "crn": "1860",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "James Morey",
+      "instructors": [
+        {
+          "name": "James Morey",
+          "email": "jmorey@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1770"
+        }
+      ],
+      "location": "Callaway N111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "James Morey",
+    "Michelle Wright",
+    "Paul Kelleher"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.529Z"
+}

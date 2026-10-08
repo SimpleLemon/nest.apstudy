@@ -1,0 +1,100 @@
+{
+  "course_code": "ECON 433",
+  "course_title": "Advanced Financial Markets",
+  "subject": "ECON",
+  "catalog_number": "433",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an in-depth, technical study of financial markets and investments. We study measures of risk, capital allocation to risky portfolios, optimal portfolios, the capital asset pricing model, indicators of market efficiency, and valuation of various financial instruments.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2126",
+      "academic_career": "UCOL",
+      "crn": "2121",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Srinivas Pulavarti",
+      "instructors": [
+        {
+          "name": "Srinivas Pulavarti",
+          "email": "srinivas.pulavarti@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42167"
+        },
+        {
+          "name": "Alexis Toda",
+          "email": "alexis.akira.toda@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39309"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexis Toda",
+    "Srinivas Pulavarti"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.720Z"
+}

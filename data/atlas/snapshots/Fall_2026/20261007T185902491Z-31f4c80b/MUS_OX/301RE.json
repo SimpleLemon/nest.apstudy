@@ -1,0 +1,93 @@
+{
+  "course_code": "MUS_OX 301RE",
+  "course_title": "The Oxford Soul Collective Popular Music Ensemble",
+  "subject": "MUS_OX",
+  "catalog_number": "301RE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course studies African American history and culture through culturally informed musical performance. Centered within the African American popular music traditions of Soul, Funk, and R&B, The Oxford Soul Collective provides a unique learning experience and an opportunity to tell the compelling story of the African American experience through music. Audition required. May be repeated for credit.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4613",
+      "academic_career": "UOXF",
+      "crn": "4232",
+      "section_number": "1",
+      "schedule_type": "MUS",
+      "instructor": "Marvin McNeill",
+      "instructors": [
+        {
+          "name": "Marvin McNeill",
+          "email": "marvin.mcneill@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31525"
+        }
+      ],
+      "location": "FEW Music",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 7:30-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1930",
+            "end": "2100"
+          },
+          {
+            "day": "Thu",
+            "start": "1930",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Marvin McNeill"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.611Z"
+}

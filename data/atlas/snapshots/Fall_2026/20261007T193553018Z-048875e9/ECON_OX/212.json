@@ -1,0 +1,155 @@
+{
+  "course_code": "ECON_OX 212",
+  "course_title": "Intermediate Macroeconomics",
+  "subject": "ECON_OX",
+  "catalog_number": "212",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "The economy as a whole; factors that determine overall employment levels, national income, and national output; economic fluctuation; macro monetary theory; the general price level; the rate of economic growth; and international income relationships.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "39",
+      "academic_career": "UOXF",
+      "crn": "4090",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jasminka Ninkovic",
+      "instructors": [
+        {
+          "name": "Jasminka Ninkovic",
+          "email": "jninkov@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2199"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "40",
+      "academic_career": "UOXF",
+      "crn": "4091",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Jasminka Ninkovic",
+      "instructors": [
+        {
+          "name": "Jasminka Ninkovic",
+          "email": "jninkov@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2199"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jasminka Ninkovic"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.120Z"
+}

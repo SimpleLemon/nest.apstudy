@@ -1,0 +1,206 @@
+{
+  "course_code": "BIOL 301",
+  "course_title": "Biochemistry I",
+  "subject": "BIOL",
+  "catalog_number": "301",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An integrated approach to the synthesis, structure, and function of macromolecular biomolecules, including proteins, carbohydrates, DNA, and RNA.",
+  "course_notes": "The cell is an amazing network of self-organizing machinery that drives life in all its forms. This course begins by defining the molecular wheels and cogs of the cell's machines and how their capabilities are defined by their chemistries. The chemistries of each component are then explored to understand how they contribute to the operation and control of the cellular machinery. We will further explore how all of the cellular components are governed, by kinetic and non-kinetic controls, to produce a coherent and responsive metabolism that efficiently creates and utilizes the energy stored in chemical compounds, such as glucose and fats. Human metabolic disorders such as diabetes will provide models of how metabolism is controlled at the systematic level in complex organisms using biochemical signaling pathways to coordinate metabolic pathways in different tissues. This course will fulfill elective credit for the Biology major and should provide students with a firm foundation in Biochemistry.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "540",
+      "academic_career": "UCOL",
+      "crn": "2954",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Escobar",
+      "instructors": [
+        {
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1428"
+        }
+      ],
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 100,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "541",
+      "academic_career": "UCOL",
+      "crn": "2957",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Escobar",
+      "instructors": [
+        {
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1428"
+        }
+      ],
+      "location": "White Hall 206",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "3",
+      "enrollment_capacity": 90,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "542",
+      "academic_career": "UCOL",
+      "crn": "6217",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Daniel Tehrani",
+      "instructors": [
+        {
+          "name": "Daniel Tehrani",
+          "email": "daniel.mohsen.tehrani@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43822"
+        }
+      ],
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 80,
+      "seats_available": 31,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8-9:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "800",
+            "end": "915"
+          },
+          {
+            "day": "Thu",
+            "start": "800",
+            "end": "915"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexander Escobar",
+    "Daniel Tehrani"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.506Z"
+}

@@ -1,0 +1,88 @@
+{
+  "course_code": "ARTHIST 210",
+  "course_title": "Introduction to Graphics & CAD",
+  "subject": "ARTHIST",
+  "catalog_number": "210",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to drafting, modeling, rendering and animation in which students explore the potential of the computer as an active analytical and design instrument. We take a hands-on approach, focusing on two projects selected according to students' own disciplinary interests.",
+  "course_notes": "\"Architecture Visualization and Modeling Lab\"Creating architecture within the digital world has given the designer the power to showcase their ideas in new and unimaginable ways. The creator is no longer limited by their physical capabilities and can explore ideas in 2-D, 3-D, and simple motion. This class serves as an introduction to software mediums in which you can tell the story of architecture. This class is open to all students with a variety of backgrounds. Architectural Studies minor: core requirement Art History major / minor: maters & materials",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3582",
+      "academic_career": "UCOL",
+      "crn": "1748",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Chloe Newton",
+      "instructors": [
+        {
+          "name": "Chloe Newton",
+          "email": "chloe.olivia.newton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30158"
+        }
+      ],
+      "location": "Math & Science Center - E301A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Chloe Newton"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.026Z"
+}

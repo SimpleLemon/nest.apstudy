@@ -1,0 +1,145 @@
+{
+  "course_code": "ACT_OX 200",
+  "course_title": "Accounting: The Language of Business",
+  "subject": "ACT_OX",
+  "catalog_number": "200",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Accounting is called \"the language of business\" because its purpose is to measure, analyze, and report financial and nonfinancial information to help plan, communicate, and implement an organization's strategic goals and evaluate and control its performance. Using real data, you will learn to identify and measure costs and benefits for decision-making, effectively allocate an organization's economic resources, analyze typical business transactions, construct and interpret financial statements, and use financial and nonfinancial measures to evaluate an organization's economic performance.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4490",
+      "academic_career": "UOXF",
+      "crn": "4275",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Satish Shah",
+      "instructors": [
+        {
+          "name": "Satish Shah",
+          "email": "sshah71@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40060"
+        }
+      ],
+      "location": "Humanities Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4491",
+      "academic_career": "UOXF",
+      "crn": "4276",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Satish Shah",
+      "instructors": [
+        {
+          "name": "Satish Shah",
+          "email": "sshah71@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40060"
+        }
+      ],
+      "location": "Humanities Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Satish Shah"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.114Z"
+}

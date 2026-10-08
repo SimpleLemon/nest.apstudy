@@ -1,0 +1,146 @@
+{
+  "course_code": "ARTVIS 103",
+  "course_title": "Introduction to Printmaking",
+  "subject": "ARTVIS",
+  "catalog_number": "103",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A \"print\" is essentially anything that is made in a reproducible format. In this course, students are introduced to the fundamentals of printmaking through the study of four traditional processes and they are exposed to the contemporary practice of printmaking as an art form.",
+  "course_notes": "Monday Only Classes: Wednesday, December 9, 2026, will serve as the designated class meeting day for all Fall 2026 courses that are regularly scheduled to meet only on Mondays. If you have any questions, please contact the Office of Undergraduate Education.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "766",
+      "academic_career": "UCOL",
+      "crn": "2579",
+      "section_number": "1",
+      "schedule_type": "ART",
+      "instructor": "Krista Clark",
+      "instructors": [
+        {
+          "name": "Krista Clark",
+          "email": "krista.marie.clark@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36108"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-4:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1630"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "767",
+      "academic_career": "UCOL",
+      "crn": "2582",
+      "section_number": "2",
+      "schedule_type": "ART",
+      "instructor": "Leonard Reidelbach",
+      "instructors": [
+        {
+          "name": "Leonard Reidelbach",
+          "email": "leonard.reidelbach@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47168"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 1-4:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1630"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Krista Clark",
+    "Leonard Reidelbach"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.503Z"
+}

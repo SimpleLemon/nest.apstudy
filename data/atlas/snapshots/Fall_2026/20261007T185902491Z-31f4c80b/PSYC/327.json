@@ -1,0 +1,100 @@
+{
+  "course_code": "PSYC 327",
+  "course_title": "Human Social Neuroscience",
+  "subject": "PSYC",
+  "catalog_number": "327",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Neurobiological substrates supporting human social cognition and behavior. Review and synthesis of relevant research in neuropsychology, psychiatry, neuroimaging, and experimental animal research.",
+  "course_notes": "(Same as ANT 317 1, NBB 317 1) Prior completion of PSYC 110 or NBB 201 or equivalent; others, permission is required for enrollment. Freshmen cannot enroll in this class.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "488",
+      "academic_career": "UCOL",
+      "crn": "2178",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "James K Rilling",
+      "instructors": [
+        {
+          "name": "James K Rilling",
+          "email": "jrillin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1385"
+        },
+        {
+          "name": "Dana Smith",
+          "email": "dana.smith@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43905"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Dana Smith",
+    "James K Rilling"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.578Z"
+}

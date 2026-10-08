@@ -1,0 +1,97 @@
+{
+  "course_code": "MUS_OX 101",
+  "course_title": "Introduction To Music",
+  "subject": "MUS_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduction to Music is made for students with little to no music background who seek to understand how music works. This course is designed to provide a survey of genres and its lyrical, harmonic, and instrumental characteristics. Music is about social life and is communicated through sounds and rhythms. This class will teach students about the ways music communicates emotions, thoughts, and has been used to relay coded messages. Students will be introduced to the details of basic music theory and the technical aspects of music, such as, intervals and notation. Introduction to Music will discuss the ethical implications of race, genre, ethnicity and class in global societies and build attentive listening techniques.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "68",
+      "academic_career": "UOXF",
+      "crn": "6246",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Madison Tiegreen",
+      "instructors": [
+        {
+          "name": "Madison Tiegreen",
+          "email": "madison.elise.tiegreen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46617"
+        }
+      ],
+      "location": "FEW Music",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Madison Tiegreen"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.125Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "FIN 488",
+  "course_title": "Real Estate Development and Investment",
+  "subject": "FIN",
+  "catalog_number": "488",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will present a comprehensive look at the real estate development & investment process. The curriculum will discuss the broad concepts and techniques employed in a successful real estate investment, both new development and through acquisitions. The class will tackle specific components of a real estate asset and the individuals involved in the successful execution of a project.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2542",
+      "academic_career": "UBUS",
+      "crn": "3731",
+      "section_number": "1141",
+      "schedule_type": "LEC",
+      "instructor": "Lyle Fogarty",
+      "instructors": [
+        {
+          "name": "Lyle Fogarty",
+          "email": "lfogart@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7585"
+        },
+        {
+          "name": "Conor McNally",
+          "email": "conor.mcnally@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7166"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1830",
+            "end": "2130"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Conor McNally",
+    "Lyle Fogarty"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.142Z"
+}

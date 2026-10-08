@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 495BW",
+  "course_title": "Honors Research",
+  "subject": "BIOL",
+  "catalog_number": "495BW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: consent of departmental honors coordinator. Final semester of independent research for students invited to participate in the biology department Honors Program. WR is satisfied by submission and acceptance of completed honors thesis based on this research.",
+  "course_notes": "This is the second semester of the Biology Honors Program, for Senior Biology majors in their last semester at Emory. Permission of instructor is required. Contact Tonya Woolcock at tdavis6@emory.edu to request a permission number for Biology 495BW and add the course to your schedule before the add/drop/swap period ends for the semester. This course will fulfill elective and upper-level lab requirements for the Biology major and a writing requirement for the GERs. See the COURSE ATLAS for additional information.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1267",
+      "academic_career": "UCOL",
+      "crn": "2086",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        },
+        {
+          "name": "Leila Rieder",
+          "email": "leila.rieder@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "20110"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Leila Rieder",
+    "Skye Comstra"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.702Z"
+}

@@ -1,0 +1,248 @@
+{
+  "course_code": "ARAB 101",
+  "course_title": "Elementary Arabic I",
+  "subject": "ARAB",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "First in a series of courses that develop reading, speaking, listening, writing, and cultural skills in Arabic. Course includes video materials and stresses communication in formal and spoken Arabic.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "491",
+      "academic_career": "UCOL",
+      "crn": "2682",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rkia E Cornell",
+      "instructors": [
+        {
+          "name": "Rkia E Cornell",
+          "email": "recorne@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3985"
+        },
+        {
+          "name": "Rkia E Cornell",
+          "email": "recorne@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3985"
+        }
+      ],
+      "location": "Candler Library 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; Th 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "492",
+      "academic_career": "UCOL",
+      "crn": "2917",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Gehane Shehata",
+      "instructors": [
+        {
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7962"
+        },
+        {
+          "name": "Gehane Shehata",
+          "email": "gshehat@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7962"
+        }
+      ],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p; Th 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "493",
+      "academic_career": "UCOL",
+      "crn": "2970",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Devin Stewart",
+      "instructors": [
+        {
+          "name": "Devin Stewart",
+          "email": "dstewar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1204"
+        },
+        {
+          "name": "Devin Stewart",
+          "email": "dstewar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1204"
+        }
+      ],
+      "location": "Anthropology Bldg 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p; Th 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Devin Stewart",
+    "Gehane Shehata",
+    "Rkia E Cornell"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.025Z"
+}

@@ -1,0 +1,139 @@
+{
+  "course_code": "BIOL 370L",
+  "course_title": "Intro to Microbiology Lab",
+  "subject": "BIOL",
+  "catalog_number": "370L",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to basic laboratory techniques in microbiology. Experiments dealing with the physiology, biochemistry, genetics, and molecular biology of microbes will be included. (This course meets the upper-level laboratory requirement and will count as elective credit for the Biology major.)",
+  "course_notes": "This is the 2-credit hour OPTIONAL laboratory to accompany Biology 370 (Introduction to Microbiology) and will introduce students to some of the basic techniques used in the study of physiology, biochemistry, and genetics of microorganisms. There is no textbook for this course. This course will fulfill two (2) hours of elective credit AND the upper-level lab requirement for the Biology major. Prerequisites: Biology 142 + 142L; pre- or co-requisite: Biology 370. (BIOL 370LW will no longer be offered.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "139",
+      "academic_career": "UCOL",
+      "crn": "2075",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 14,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-4p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "140",
+      "academic_career": "UCOL",
+      "crn": "2076",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 117",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 14,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-4p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1600"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Battaglioli"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.702Z"
+}

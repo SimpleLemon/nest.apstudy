@@ -1,0 +1,97 @@
+{
+  "course_code": "PSYC 473W",
+  "course_title": "Adv Topics In Abn Psychology: Neurobiology of PTSD",
+  "subject": "PSYC",
+  "catalog_number": "473W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected issues in psychopathology theory and research with a writing component.",
+  "course_notes": "(Permission Required Prior to Enrollment) Please contact Dr. Andrew Kazama (akazama@emory.edu) for permission to enroll in the class.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1246",
+      "academic_career": "UCOL",
+      "crn": "2186",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Andrew Kazama",
+      "instructors": [
+        {
+          "name": "Andrew Kazama",
+          "email": "akazama@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7915"
+        }
+      ],
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Kazama"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.578Z"
+}

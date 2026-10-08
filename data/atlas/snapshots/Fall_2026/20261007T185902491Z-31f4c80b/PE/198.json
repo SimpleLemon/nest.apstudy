@@ -1,0 +1,155 @@
+{
+  "course_code": "PE 198",
+  "course_title": "Weights - All Levels",
+  "subject": "PE",
+  "catalog_number": "198",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course is open to students with little or no experience as well as to students with experience in training with free weights and/or machines. Free weights, Cybex systems machines and free-standing equipment are used for the development of muscle strength, muscle fitness, and/or muscle endurance.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1068",
+      "academic_career": "UCOL",
+      "crn": "3408",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Elizabeth Noell",
+      "instructors": [
+        {
+          "name": "Elizabeth Noell",
+          "email": "enoell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2820"
+        }
+      ],
+      "location": "Woodruff PE Center Cybex Area",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1069",
+      "academic_career": "UCOL",
+      "crn": "4496",
+      "section_number": "2",
+      "schedule_type": "PE",
+      "instructor": "Elizabeth Noell",
+      "instructors": [
+        {
+          "name": "Elizabeth Noell",
+          "email": "enoell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2820"
+        }
+      ],
+      "location": "Woodruff PE Center Cybex Area",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elizabeth Noell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.568Z"
+}

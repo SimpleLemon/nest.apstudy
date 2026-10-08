@@ -1,0 +1,151 @@
+{
+  "course_code": "ECON_OX 220",
+  "course_title": "Data Science for Economists",
+  "subject": "ECON_OX",
+  "catalog_number": "220",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course will examine methods of collection, presentation, and analysis of economic data. Measures of central tendency and dispersion, probability, estimation, and hypothesis testing will be at the center of discussions of how economists analyze research problems. Regression analysis will be introduced (time permitting).",
+  "course_notes": "Students will need to register for both the lecture and the lab.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3815",
+      "academic_career": "UOXF",
+      "crn": "4131",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jasminka Ninkovic",
+      "instructors": [
+        {
+          "name": "Jasminka Ninkovic",
+          "email": "jninkov@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2199"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3816",
+      "academic_career": "UOXF",
+      "crn": "4132",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Teresa Romano",
+      "instructors": [
+        {
+          "name": "Teresa Romano",
+          "email": "teresa.romano@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14546"
+        }
+      ],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jasminka Ninkovic",
+    "Teresa Romano"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.120Z"
+}

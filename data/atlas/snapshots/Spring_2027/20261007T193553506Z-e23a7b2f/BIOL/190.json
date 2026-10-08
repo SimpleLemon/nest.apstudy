@@ -1,0 +1,156 @@
+{
+  "course_code": "BIOL 190",
+  "course_title": "Freshman Seminar:Biology: Perception",
+  "subject": "BIOL",
+  "catalog_number": "190",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Freshmen only. Variable topics.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only) (Complete Topic - Perception: Experiencing the World) This course will be LINKED with ART HISTORY _____. We will study what has been learned about our sensory systems and how they work. Each sense is unique and the systems that process each type of sensation is distinct. \"Sensation and Perception, 5th Edition\" (Oxford University Press) will serve as our text as we explore this fascinating field. As with any significant question of nature, it is important to go beyond the borders of any specific field of study to develop a complete understanding. In our course, we will focus on the neurobiology supporting subjective experience, but also consider concepts from cognitive science and philosophy of mind. This will be an interesting and exciting study of one of the most important natural science questions of our time.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "104",
+      "academic_career": "UCOL",
+      "crn": "1989",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Alexander Escobar",
+      "instructors": [
+        {
+          "name": "Alexander Escobar",
+          "email": "alexander.escobar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1428"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "105",
+      "academic_career": "UCOL",
+      "crn": "2006",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Malavika Murugan",
+      "instructors": [
+        {
+          "name": "Malavika Murugan",
+          "email": "malavika.murugan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "23166"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexander Escobar",
+    "Malavika Murugan"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.517Z"
+}

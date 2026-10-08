@@ -1,0 +1,71 @@
+{
+  "course_code": "RES 999UNUR",
+  "course_title": "Undergrad Residence Full-Time",
+  "subject": "RES",
+  "catalog_number": "999UNUR",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "0",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Undergrad Residence Full-Time",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2270",
+      "academic_career": "UNUR",
+      "crn": "4546",
+      "section_number": "1",
+      "schedule_type": "RES",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:35:53.150Z"
+}

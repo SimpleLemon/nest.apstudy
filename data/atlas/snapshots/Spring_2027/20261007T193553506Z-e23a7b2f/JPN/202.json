@@ -1,0 +1,156 @@
+{
+  "course_code": "JPN 202",
+  "course_title": "Intermediate Japanese II",
+  "subject": "JPN",
+  "catalog_number": "202",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Continuation of Japanese 201. This course is designed to complete the introduction and practice of basic grammar of Japanese. More authentic language material will be introduced.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "440",
+      "academic_career": "UCOL",
+      "crn": "1853",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ren Tan",
+      "instructors": [
+        {
+          "name": "Ren Tan",
+          "email": "ren.tan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32251"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "441",
+      "academic_career": "UCOL",
+      "crn": "1854",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Keeko Kawata",
+      "instructors": [
+        {
+          "name": "Keeko Kawata",
+          "email": "keeko.kawata@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43484"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Keeko Kawata",
+    "Ren Tan"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.560Z"
+}

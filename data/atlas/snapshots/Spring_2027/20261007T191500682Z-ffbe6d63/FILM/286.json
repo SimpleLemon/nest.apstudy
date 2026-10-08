@@ -1,0 +1,150 @@
+{
+  "course_code": "FILM 286",
+  "course_title": "Special Topics Crosslisted: Made in Her Image",
+  "subject": "FILM",
+  "catalog_number": "286",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Rotating topics in film and media across disciplines and crosslisted with other departments. May be repeated for credit when the topic varies.",
+  "course_notes": "(Same as AAS 285 4 and WGS 285 1) (Complete Topic - Made in Her Image: A Black Feminist Visual Cultural History) (This course examines the long-shadowed visual histories and artistic legacies of twentieth-century Black women filmmakers and photographers. Foregrounding Black women's roles in shaping visual culture more broadly, this course examines their historical relationship to looking and the aesthetic choices used across visual mediums to fashion agency and resist dominant representations of race, gender, sexuality, and class. Students will be challenged to imagine visual cultural history as non-linear yet interconnected to consider an intergenerational genealogy of image-making through a Black feminist lens. Thus, this course aims to recover histories unknown to respond critically to Alice Walker's question: What did it mean for a black woman to be an artist in our grandmothers' time? Using historical and visual analysis, feminist theory, and literary criticism, students will be able to recover and situate Black women's image-making practices within the broader landscape of American visual culture.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2551",
+      "academic_career": "UCOL",
+      "crn": "3430",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lizette London",
+      "instructors": [
+        {
+          "name": "Lizette London",
+          "email": "lizette.london@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36385"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2552",
+      "academic_career": "UCOL",
+      "crn": "3540",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Achille Castaldo",
+      "instructors": [
+        {
+          "name": "Achille Castaldo",
+          "email": "achille.castaldo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24748"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Achille Castaldo",
+    "Lizette London"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.731Z"
+}

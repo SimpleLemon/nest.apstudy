@@ -1,0 +1,97 @@
+{
+  "course_code": "CS_OX 110",
+  "course_title": "Computer Science Fundamentals",
+  "subject": "CS_OX",
+  "catalog_number": "110",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "An introductory course in computing fundamentals in Python including basics of computer organization, data representation, manipulation of various types of data, algorithm design, abstraction, programming essentials, functions, and programming applications. Not intended for students needing a programming background for further work in computer science.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4964",
+      "academic_career": "UOXF",
+      "crn": "4382",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ting Li",
+      "instructors": [
+        {
+          "name": "Ting Li",
+          "email": "ting.li@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "20369"
+        }
+      ],
+      "location": "Pierce Hall 104",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ting Li"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.602Z"
+}

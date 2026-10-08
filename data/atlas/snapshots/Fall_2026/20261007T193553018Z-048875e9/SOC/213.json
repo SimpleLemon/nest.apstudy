@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 213",
+  "course_title": "Sociology of the Family",
+  "subject": "SOC",
+  "catalog_number": "213",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Organization, functions, and present status of the family, primarily in the United States. Problems of partner selection and marital adjustment treated on the basis of recent and current research in the field.",
+  "course_notes": "This course is designed to challenge you to think about family in new ways by exposing you to sociological approaches to understanding the family as a social institution. Over the course of the semester, you will learn about how the family intersects with other social structures and inequalities such as those by social class, gender, sexuality, and race. In addition, you will learn about patterns of family change over time and the diversity of family forms and practices found around the world. The objectives of this course are to: 1. Develop an understanding of how family life intersects with other social structures and identities 2. Read and critically assess sociological research on the family 3. Learn and be able to discuss the broad trends and patterns in family life within the US and globally.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1309",
+      "academic_career": "UCOL",
+      "crn": "2979",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Megan Reed",
+      "instructors": [
+        {
+          "name": "Megan Reed",
+          "email": "megan.nicole.reed@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "33212"
+        }
+      ],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Megan Reed"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.105Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "PHYS 437",
+  "course_title": "Physics and AI",
+  "subject": "PHYS",
+  "catalog_number": "437",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores the intersection of physics and artificial intelligence. Covering statistical inference and neural networks as physical systems, students will learn how network architecture, optimization, and data properties drive emergent behaviors, all with a hands-on computational focus.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2570",
+      "academic_career": "UCOL",
+      "crn": "1474",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Tankut Can",
+      "instructors": [
+        {
+          "name": "Tankut Can",
+          "email": "tankut.uzay.can@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38859"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tankut Can"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.760Z"
+}

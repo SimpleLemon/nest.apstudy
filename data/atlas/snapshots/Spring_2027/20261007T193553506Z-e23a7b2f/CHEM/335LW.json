@@ -1,0 +1,97 @@
+{
+  "course_code": "CHEM 335LW",
+  "course_title": "Quantum Chemistry Lab",
+  "subject": "CHEM",
+  "catalog_number": "335LW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the foundational and practical aspects of modeling chemical reactions with modern computational chemistry techniques. Students will learn how to run quantum chemistry computations to predict thermodynamic properties, simulate spectra, and model the mechanisms of simple reactions.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2337",
+      "academic_career": "UCOL",
+      "crn": "2646",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Francesco Evangelista",
+      "instructors": [
+        {
+          "name": "Francesco Evangelista",
+          "email": "francesco.evangelista@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5684"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Francesco Evangelista"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.522Z"
+}

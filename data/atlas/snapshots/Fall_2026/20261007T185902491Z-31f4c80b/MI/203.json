@@ -1,0 +1,80 @@
+{
+  "course_code": "MI 203",
+  "course_title": "Medical Terminology",
+  "subject": "MI",
+  "catalog_number": "203",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "This course introduces the student to medical terminology. Emphasis is placed on terminology pertinent to diagnostic radiology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2476",
+      "academic_career": "UAH",
+      "crn": "1044",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Jacki Harmon",
+      "instructors": [
+        {
+          "name": "Jacki Harmon",
+          "email": "jacki.harmon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28217"
+        }
+      ],
+      "location": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 77,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jacki Harmon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.617Z"
+}

@@ -1,0 +1,397 @@
+{
+  "course_code": "BIOL 141",
+  "course_title": "Foundations of Modern Biol I",
+  "subject": "BIOL",
+  "catalog_number": "141",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Major topics include: biomolecules, cell structure and function, energy metabolism, and cell reproduction. Fulfills biology major and pre-health requirements. Note: students receiving credit for Biol 141 must still take Biol 141L.",
+  "course_notes": "This is the first semester of a two-semester introductory biology course that is required for all Biology majors. This courses will provide a topic-driven overview of evolution, molecular and cellular biology, biochemistry, genetics, and ecology. The topics covered in LECTURE will address major issues in human biology, medicine, evolution, and ecology, with an emphasis on the basic principles and critical thinking involved in modern biological discovery. Students must also register for a BIOLOGY 141 Laboratory (BIOL 141L). In LAB, students will design and perform experiments using several important model systems. These courses include classical and molecular genetics and meet the biology premedical requirements. Some exams may be administered in the evening. AP Biology scores of 4 or 5 count for the Biology 141 LECTURE ONLY. Students with AP credit for the lecture are required to take the Lab (BIOL 141L). Co-requisite: Biology 141L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "499",
+      "academic_career": "UCOL",
+      "crn": "1655",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Miguel Reyes",
+      "instructors": [
+        {
+          "name": "Miguel Reyes",
+          "email": "miguel.l.reyes@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7203"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "500",
+      "academic_career": "UCOL",
+      "crn": "1656",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        }
+      ],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 65,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "501",
+      "academic_career": "UCOL",
+      "crn": "1657",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Levi Morran",
+      "instructors": [
+        {
+          "name": "Levi Morran",
+          "email": "levi.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5875"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "502",
+      "academic_career": "UCOL",
+      "crn": "1659",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Edward Nam",
+      "instructors": [
+        {
+          "name": "Edward Nam",
+          "email": "eanam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24995"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "503",
+      "academic_career": "UCOL",
+      "crn": "1660",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Jacobus De Roode",
+      "instructors": [
+        {
+          "name": "Jacobus De Roode",
+          "email": "jderood@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3745"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 100,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 9-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "900",
+            "end": "950"
+          },
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "504",
+      "academic_career": "UCOL",
+      "crn": "4450",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Matthew Ellis",
+      "instructors": [
+        {
+          "name": "Matthew Ellis",
+          "email": "matthew.ellis@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46812"
+        }
+      ],
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "6",
+      "enrollment_capacity": 80,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 6,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Edward Nam",
+    "Jacobus De Roode",
+    "Levi Morran",
+    "Matthew Ellis",
+    "Miguel Reyes",
+    "Skye Comstra"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.504Z"
+}

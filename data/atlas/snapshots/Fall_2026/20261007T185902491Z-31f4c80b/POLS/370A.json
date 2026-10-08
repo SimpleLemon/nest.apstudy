@@ -1,0 +1,93 @@
+{
+  "course_code": "POLS 370A",
+  "course_title": "Community Building and Social Change I - Principles and Perspectives",
+  "subject": "POLS",
+  "catalog_number": "370A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Open only to undergraduate students by permission of the instructor. Additionally, this course is required for all students seeking to apply for the fellowship in Community Building and Social Change.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1208",
+      "academic_career": "UCOL",
+      "crn": "2652",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Michael Rich",
+      "instructors": [
+        {
+          "name": "Michael Rich",
+          "email": "mrich@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1689"
+        }
+      ],
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Michael Rich"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.575Z"
+}

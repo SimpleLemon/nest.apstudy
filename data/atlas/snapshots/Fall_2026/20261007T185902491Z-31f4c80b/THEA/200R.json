@@ -1,0 +1,80 @@
+{
+  "course_code": "THEA 200R",
+  "course_title": "Theater Practicum",
+  "subject": "THEA",
+  "catalog_number": "200R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A required course for all majors and minors. Students undertake a substantial technical theater responsibility in a Theater Emory production (e.g. light or sound operator, costume crew, running props backstage, etc.)",
+  "course_notes": "This course is instructor permission-only. Please reach out to the instructor directly & CC Theater Studies' Program Coordinator, Ashley Alves (ashley.alves@emory.edu), for enrollment permission.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3077",
+      "academic_career": "UCOL",
+      "crn": "2557",
+      "section_number": "1",
+      "schedule_type": "PRA",
+      "instructor": "Brent Glenn",
+      "instructors": [
+        {
+          "name": "Brent Glenn",
+          "email": "brent.glenn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5552"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brent Glenn"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.594Z"
+}

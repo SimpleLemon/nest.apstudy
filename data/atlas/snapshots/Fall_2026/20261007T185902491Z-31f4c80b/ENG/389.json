@@ -1,0 +1,154 @@
+{
+  "course_code": "ENG 389",
+  "course_title": "Special Topics: Literature: Black Women Writers",
+  "subject": "ENG",
+  "catalog_number": "389",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Literary topics vary. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AAS 374 1) Topic Title: Audacious Women This course explores 19th-21st century Black women's writing. We will examine how Black women writers have grappled with issues of race, gender, identity, sexuality and citizenship, as well as how forms of literary audacity function within and across these works. As such, we will interrogate texts at the levels of formal, or aesthetic production, their political and social valences, and their cultural receptions and afterlives. We will ask what constitutes Black women's audacity (in all its registers: loudness, boldness, spunk, grit, defiance, sassiness, unconventionality, etc.) in the public imaginary.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3414",
+      "academic_career": "UCOL",
+      "crn": "3901",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Meina Yates-Richard",
+      "instructors": [
+        {
+          "name": "Meina Yates-Richard",
+          "email": "meina.yates-richard@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18440"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3415",
+      "academic_career": "UCOL",
+      "crn": "4012",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Mehtap Ozdemir",
+      "instructors": [
+        {
+          "name": "Mehtap Ozdemir",
+          "email": "mehtap.ozdemir@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35784"
+        }
+      ],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mehtap Ozdemir",
+    "Meina Yates-Richard"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.530Z"
+}

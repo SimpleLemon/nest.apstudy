@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 329",
+  "course_title": "Coastal Biology with Lab",
+  "subject": "BIOL",
+  "catalog_number": "329",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emphasizes basic principles of coastal ecology, human impact on coastal ecosystems, and the diversity of organisms living in these ecosystems. The course involves an eight-day laboratory/field trip to St. Simons Island, Georgia and other Georgia Sea Islands over Spring Break.",
+  "course_notes": "This course requires permission of the instructor AND a Laboratory/Field Course fee of (TO BE DETERMINED) (paid to the Biology Department). This lecture and laboratory course emphasizes basic principles of coastal biology, including the distribution and types of coastlines, coastal animals and plants, important ecological and physical processes, and the services, management, and threats for coastal areas (particularly the Georgia coast). The course involves an eight-day laboratory/field trip to St. Simons Island, Georgia and other Georgia Sea Islands during Spring Break, which will require a lab/field course fee. Prerequisites: Biology 142 + 142L AND permission of instructor. Contact Dr. Dave Civitello at david.james.civitello@emory.edu for permission. A $600 NON-REFUNDABLE DEPOSIT (personal check or money order made out to the Emory University Department of Biology) will be required during registration, prior to receiving a permission number to enroll in the course. The remaining balance will be due at the beginning of the Spring semester, before the end of add/drop/swap. Non-payment will result in being dropped from the course. Financial Aid scholarships from the Biology Department are available to eligible students who submit an application for the aid. Contact Barbara Shannon at barbara.shannon@emory.edu for payment information.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "106",
+      "academic_career": "UCOL",
+      "crn": "2054",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David Civitello",
+      "instructors": [
+        {
+          "name": "David Civitello",
+          "email": "david.james.civitello@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12609"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MF 2-3:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1400",
+            "end": "1515"
+          },
+          {
+            "day": "Fri",
+            "start": "1400",
+            "end": "1515"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Civitello"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.701Z"
+}

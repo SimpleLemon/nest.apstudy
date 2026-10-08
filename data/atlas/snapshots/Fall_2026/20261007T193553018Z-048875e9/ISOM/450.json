@@ -1,0 +1,80 @@
+{
+  "course_code": "ISOM 450",
+  "course_title": "Foundations of Digital Enterp.",
+  "subject": "ISOM",
+  "catalog_number": "450",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Our personal interactions, our interactions with businesses and government, and interactions between businesses are increasingly occurring in digital environments. Understanding the foundations of these digital environments will be critical to your role as a leader in the next decade, as advances in technology continue to lead to new ways of working, new ways of interacting, and new ways of making money. This course lies at the intersection of business, economics, and digital technology. You will emerge from the course with an appreciation of how the technology powering digital enterprises and markets is creating new business opportunities as well as shaping the way we live and work.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "332",
+      "academic_career": "UBUS",
+      "crn": "6637",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Declan Clear"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.143Z"
+}

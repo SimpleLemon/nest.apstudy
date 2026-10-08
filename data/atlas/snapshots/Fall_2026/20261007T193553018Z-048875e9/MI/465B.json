@@ -1,0 +1,80 @@
+{
+  "course_code": "MI 465B",
+  "course_title": "CT Practicum",
+  "subject": "MI",
+  "catalog_number": "465B",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "These courses involve the application of didactic information in the clinical setting. The student will observe, assist, and perform basic patient care and clinical procedures under direct supervision. The student will be required to demonstrate competency in numerous CT procedures. Format: Traditional.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2574",
+      "academic_career": "UAH",
+      "crn": "1063",
+      "section_number": "000",
+      "schedule_type": "LAB",
+      "instructor": "Kimberly Cross",
+      "instructors": [
+        {
+          "name": "Kimberly Cross",
+          "email": "kgreen6@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7869"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kimberly Cross"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.135Z"
+}

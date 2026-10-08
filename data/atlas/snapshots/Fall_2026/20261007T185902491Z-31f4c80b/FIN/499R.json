@@ -1,0 +1,91 @@
+{
+  "course_code": "FIN 499R",
+  "course_title": "Special Topics: Behavioral Economics",
+  "subject": "FIN",
+  "catalog_number": "499R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special topics courses include courses that address a current or timely topic, that are in a \"pilot\" phase before being offered on an ongoing basis, or that are known to be one time offerings. Special topics course offerings can vary from term to term.",
+  "course_notes": "Standard economic models assume people are perfectly rational. They're not - and it matters. This course explores what happens to markets, prices, and financial decisions when real human behavior - biases, short-sightedness, overconfidence, and social pressure - enters the picture. You'll run experiments, analyze real market data, and learn frameworks that apply directly to careers in finance, consulting, product design, and policy - and to your own financial life.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4137",
+      "academic_career": "UBUS",
+      "crn": "3783",
+      "section_number": "1101",
+      "schedule_type": "LEC",
+      "instructor": "Shankar Ramachandran",
+      "instructors": [
+        {
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36012"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shankar Ramachandran"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.627Z"
+}

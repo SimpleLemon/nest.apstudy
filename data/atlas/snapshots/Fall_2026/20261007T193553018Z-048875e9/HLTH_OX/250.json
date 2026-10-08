@@ -1,0 +1,155 @@
+{
+  "course_code": "HLTH_OX 250",
+  "course_title": "Foundations in Global Health",
+  "subject": "HLTH_OX",
+  "catalog_number": "250",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "An introduction to the overall field of global health, its history, methods, and key principles, with case studies illustrating the burden of disease in nations with strikingly different political-economic context.",
+  "course_notes": "Cross-listed with ANTH_OX 205 1",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4119",
+      "academic_career": "UOXF",
+      "crn": "4137",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Ham",
+      "instructors": [
+        {
+          "name": "Jessica Ham",
+          "email": "jessica.ham@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17276"
+        }
+      ],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4120",
+      "academic_career": "UOXF",
+      "crn": "4138",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Ham",
+      "instructors": [
+        {
+          "name": "Jessica Ham",
+          "email": "jessica.ham@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17276"
+        }
+      ],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jessica Ham"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.123Z"
+}

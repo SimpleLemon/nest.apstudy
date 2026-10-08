@@ -1,0 +1,177 @@
+{
+  "course_code": "GRK 201",
+  "course_title": "Intermediate Greek: Prose",
+  "subject": "GRK",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A review of grammar and introduction to Greek prose through selections from one or more authors such as Plato, Herodotus, Lysias, and Xenophon.",
+  "course_notes": "This course is designed to develop the reading skills of students who have completed Greek 101-102 or the equivalent, and to acquaint them with Plato's literary masterpiece, the Symposium, and its larger cultural context. We will review the grammar of first year Greek to increase confidence and fluency and work on expanding vocabulary to improve reading speed and enjoyment. We will study aspects of culture relevant to the Symposium that are of interest to members of the class.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "756",
+      "academic_career": "UCOL",
+      "crn": "1981",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Louise Pratt",
+      "instructors": [
+        {
+          "name": "Louise Pratt",
+          "email": "louise.pratt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "243"
+        },
+        {
+          "name": "Louise Pratt",
+          "email": "louise.pratt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "243"
+        }
+      ],
+      "location": "Candler Library 222A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:50-9:40a; F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "850",
+            "end": "940"
+          },
+          {
+            "day": "Wed",
+            "start": "850",
+            "end": "940"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "757",
+      "academic_career": "UCOL",
+      "crn": "5675",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Louise Pratt",
+      "instructors": [
+        {
+          "name": "Louise Pratt",
+          "email": "louise.pratt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "243"
+        },
+        {
+          "name": "Louise Pratt",
+          "email": "louise.pratt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "243"
+        }
+      ],
+      "location": "Candler Library 222A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-4:50p; F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Louise Pratt"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.063Z"
+}

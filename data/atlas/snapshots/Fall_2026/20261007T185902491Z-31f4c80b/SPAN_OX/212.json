@@ -1,0 +1,155 @@
+{
+  "course_code": "SPAN_OX 212",
+  "course_title": "Introduction to Hispanic Texts and Contexts",
+  "subject": "SPAN_OX",
+  "catalog_number": "212",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Development of advanced language, reading, conversation, and writing skills through discussion of readings and films from contemporary Hispanic culture. Not intended for native speakers of Spanish or those who speak with native fluency. Excellent bridge course from intermediate to advanced coursework in Spanish. This is the first course that counts towards Spanish minor/major. This course may be taught by Oxford faculty in summer session or during SAP in Spain.",
+  "course_notes": "Placement exam required for all SPAN_OX classes. Students will not be allowed to remain enrolled if they do not complete the placement exam.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "127",
+      "academic_career": "UOXF",
+      "crn": "4179",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Maria E Davis",
+      "instructors": [
+        {
+          "name": "Maria E Davis",
+          "email": "medavi3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3676"
+        }
+      ],
+      "location": "Pierce Hall 228",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "128",
+      "academic_career": "UOXF",
+      "crn": "4180",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Maria E Davis",
+      "instructors": [
+        {
+          "name": "Maria E Davis",
+          "email": "medavi3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3676"
+        }
+      ],
+      "location": "Pierce Hall 228",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Maria E Davis"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.616Z"
+}

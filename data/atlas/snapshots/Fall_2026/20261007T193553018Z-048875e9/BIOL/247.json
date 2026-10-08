@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 247",
+  "course_title": "Ecology",
+  "subject": "BIOL",
+  "catalog_number": "247",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an overview of the principles of ecology and the study of relationships between organisms and their environment. Processes and properties of individuals, populations, communities, and ecosystems will be emphasized. Lectures will emphasize active and collaborative learning.",
+  "course_notes": "(Same as ENVS 247 1) (This course provides a broad overview of ecology, ranging from evolutionary ecology to ecosystems ecology. The emphasis of the course is on data interpretation and experimental design in the context of the ecological concepts we are discussing. Students will work in small groups on applying basic ecological principles to data interpretation and experimental design. This course will fulfill the Column C requirement (or elective credit) for the Biology major. There will be three exams plus a cumulative final exam. Students will also be evaluated on class discussions. A separate, optional, 3 credit hour laboratory (Biology 247LW/ENVS 247LW) is associated with this course (in fall semester). (The lab is not required)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "518",
+      "academic_career": "UCOL",
+      "crn": "1669",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Miguel Reyes",
+      "instructors": [
+        {
+          "name": "Miguel Reyes",
+          "email": "miguel.l.reyes@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7203"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 70,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Miguel Reyes"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.030Z"
+}

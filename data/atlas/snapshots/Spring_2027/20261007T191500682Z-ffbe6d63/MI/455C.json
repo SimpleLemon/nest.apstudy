@@ -1,0 +1,87 @@
+{
+  "course_code": "MI 455C",
+  "course_title": "MRI Procedures III",
+  "subject": "MI",
+  "catalog_number": "455C",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "MRI protocols will be taught for differentiation of specific structures and pathology. Patient history, education and preparation, contrast media type, amount and administration route, patient positioning and orientation, scan parameters, filming and common pathology will be covered. These courses complement Clinical Practicum I, II, and III. Format: On-line.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-04",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1372",
+      "academic_career": "UAH",
+      "crn": "3705",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Lamiis Khalifa",
+      "instructors": [
+        {
+          "name": "Lamiis Khalifa",
+          "email": "lkhalif@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8635"
+        },
+        {
+          "name": "Sean Strickler",
+          "email": null,
+          "role": "Primary Instructor",
+          "atlas_id": "13193"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-04",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lamiis Khalifa",
+    "Sean Strickler"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.776Z"
+}

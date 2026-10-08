@@ -1,0 +1,97 @@
+{
+  "course_code": "ECON 350",
+  "course_title": "Economics of Systemic Racism",
+  "subject": "ECON",
+  "catalog_number": "350",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Investigate the limitations behind traditional approaches to racial discrimination in economics; explore the history of anti-Black racism in the US and its economic consequences, and consider how understanding of systemic racism could lead to pragmatic policy solutions to racial inequities.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2357",
+      "academic_career": "UCOL",
+      "crn": "1893",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David McMillon",
+      "instructors": [
+        {
+          "name": "David McMillon",
+          "email": "david.mcmillon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28262"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David McMillon"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.719Z"
+}

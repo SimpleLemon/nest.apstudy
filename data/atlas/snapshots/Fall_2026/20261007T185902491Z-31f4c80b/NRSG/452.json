@@ -1,0 +1,86 @@
+{
+  "course_code": "NRSG 452",
+  "course_title": "Frontline: Caring for Our Veterans",
+  "subject": "NRSG",
+  "catalog_number": "452",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Focused on the unique health and care delivery needs of veterans and their families, students will learn best practices to address physiological and psychological conditions. Interprofessional care models within the Veteran Health Care System for improved health care outcomes and QOL are emphasized.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3616",
+      "academic_career": "UNUR",
+      "crn": "4552",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Erica Davis",
+      "instructors": [
+        {
+          "name": "Erica Davis",
+          "email": "erica.n.davis@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18621"
+        }
+      ],
+      "location": "Nursing School - 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Erica Davis"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.634Z"
+}

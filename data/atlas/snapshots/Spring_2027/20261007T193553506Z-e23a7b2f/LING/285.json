@@ -1,0 +1,93 @@
+{
+  "course_code": "LING 285",
+  "course_title": "Intro Topics in Linguistics: Intro.to East AsianLinguistics",
+  "subject": "LING",
+  "catalog_number": "285",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course focuses on the introductory level of a particular issue or topic in the study of language, linguistics, and communication. May be repeated when topic varies.",
+  "course_notes": "(Same as EAS 285 1) (The course Introduction to East Asian Linguistics offers a comparative and interdisciplinary introduction to the linguistic structure and use of three major East Asian languages: Mandarin Chinese, Japanese, and Korean. Designed for undergraduate students with a little or no prior background in linguistics, the course explores the historical development, writing systems, sound patterns, grammatical structures, and social contexts of these languages. Topics include language families and typological classification, the historical relationship among Chinese characters, kana, and Hangul/Hanja, as well as foundational concepts in phonetics, phonology, morphology, and syntax. The course also introduces sociolinguistic perspectives, examining issues such as language and gender, multilingualism, and linguistic landscapes in East Asian societies.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1922",
+      "academic_career": "UCOL",
+      "crn": "3634",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hsu-Te Cheng",
+      "instructors": [
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hsu-Te Cheng"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.563Z"
+}

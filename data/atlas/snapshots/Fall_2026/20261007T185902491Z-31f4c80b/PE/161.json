@@ -1,0 +1,97 @@
+{
+  "course_code": "PE 161",
+  "course_title": "Cognitively Based Compassion",
+  "subject": "PE",
+  "catalog_number": "161",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CBCT is a system of meditative practices designed to expand and strengthen compassion for self and others. Practices include training in Attentional stability and increased emotional awareness, as well as targeted analytical reflections to better understand one¿s relationship with self and others.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1053",
+      "academic_career": "UCOL",
+      "crn": "3363",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Nic Alarcon",
+      "instructors": [
+        {
+          "name": "Nic Alarcon",
+          "email": "naalarc@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39035"
+        }
+      ],
+      "location": "Woodruff PE Center Mult",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nic Alarcon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.567Z"
+}

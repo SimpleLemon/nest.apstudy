@@ -1,0 +1,93 @@
+{
+  "course_code": "DATASCI 150",
+  "course_title": "Introduction to Statistical Computing I",
+  "subject": "DATASCI",
+  "catalog_number": "150",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the R programming language. It will cover the programming basics of R: data types, controlling flow using loops/conditionals, and writing functions. In addition to these basics, this course will emphasize skills that are relevant for data analysis.",
+  "course_notes": "Please note that DATASCI 185 Computational Methods in Data Sci (sections 1 and 3) will count for both DATASCI 150 and DATASCI 151. DATASCI majors and minors are encouraged to enroll for these courses instead.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3980",
+      "academic_career": "UCOL",
+      "crn": "1883",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Nathan Gabriel",
+      "instructors": [
+        {
+          "name": "Nathan Gabriel",
+          "email": "nathan.gabriel@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43764"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 75,
+      "seats_available": 46,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nathan Gabriel"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.043Z"
+}

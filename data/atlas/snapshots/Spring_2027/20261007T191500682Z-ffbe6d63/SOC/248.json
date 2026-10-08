@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 248",
+  "course_title": "Sociological Imagination",
+  "subject": "SOC",
+  "catalog_number": "248",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an introduction to sociological thinking and concepts using various television shows (and sometimes films) as a springboard. Topics covered include race, class, gender, sexuality, social structure, immigration, intersectionality and political economy.",
+  "course_notes": "(Same as AAS 248 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2375",
+      "academic_career": "UCOL",
+      "crn": "3417",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Janeria Easley",
+      "instructors": [
+        {
+          "name": "Janeria Easley",
+          "email": "janeria.easley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21842"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Janeria Easley"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.770Z"
+}

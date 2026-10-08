@@ -1,0 +1,155 @@
+{
+  "course_code": "PHIL 220W",
+  "course_title": "History of Political Philosophy",
+  "subject": "PHIL",
+  "catalog_number": "220W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Surveys key texts in political philosophy, including ancient, early modern, 19th and 20th century sources. Key issues include the nature of the just state and the rights and responsibilities of citizens.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2169",
+      "academic_career": "UCOL",
+      "crn": "1521",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Arslan Tazeem",
+      "instructors": [
+        {
+          "name": "Arslan Tazeem",
+          "email": "arslan.tazeem@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44655"
+        }
+      ],
+      "location": "Bowden Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2170",
+      "academic_career": "UCOL",
+      "crn": "2687",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Arslan Tazeem",
+      "instructors": [
+        {
+          "name": "Arslan Tazeem",
+          "email": "arslan.tazeem@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44655"
+        }
+      ],
+      "location": "Bowden Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Arslan Tazeem"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.573Z"
+}

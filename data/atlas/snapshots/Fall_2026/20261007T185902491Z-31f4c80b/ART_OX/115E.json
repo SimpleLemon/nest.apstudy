@@ -1,0 +1,145 @@
+{
+  "course_code": "ART_OX 115E",
+  "course_title": "Introduction to Ceramics",
+  "subject": "ART_OX",
+  "catalog_number": "115E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed as an introduction to clay modeling, hand-building, and throwing. In this class you will engage in making clay vessels and sculpture using a variety of construction techniques. Beginning with hand building methods (pinch technique, coil building, and slab building) you will then move on to begin throwing on the electric potter's wheel. Once you have been introduced to the various methods of construction, you will then begin to design and build your own ceramic vessels and sculpture.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4470",
+      "academic_career": "UOXF",
+      "crn": "4229",
+      "section_number": "1",
+      "schedule_type": "ART",
+      "instructor": "Julia Burns",
+      "instructors": [
+        {
+          "name": "Julia Burns",
+          "email": "julia.burns@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32051"
+        }
+      ],
+      "location": "Tarbutton Art",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4471",
+      "academic_career": "UOXF",
+      "crn": "4230",
+      "section_number": "2",
+      "schedule_type": "ART",
+      "instructor": "Julia Burns",
+      "instructors": [
+        {
+          "name": "Julia Burns",
+          "email": "julia.burns@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32051"
+        }
+      ],
+      "location": "Tarbutton Art",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Julia Burns"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.598Z"
+}

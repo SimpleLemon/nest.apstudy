@@ -1,0 +1,104 @@
+{
+  "course_code": "CHEM 203ZL",
+  "course_title": "Advanced Reactivity Lab",
+  "subject": "CHEM",
+  "catalog_number": "203ZL",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Chem 203zL introduces more sophisticated methods for studying the reactivity of compounds. The preparation and structure elucidation of organic and organometallic compounds will be studied in the context of a research lab type setting.",
+  "course_notes": "This course is only intended for students enrolled in CHEM 203Z.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2230",
+      "academic_career": "UCOL",
+      "crn": "3034",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Adam Hand",
+      "instructors": [
+        {
+          "name": "Adam Hand",
+          "email": "adam.thomas.hand@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40075"
+        },
+        {
+          "name": "Adam Hand",
+          "email": "adam.thomas.hand@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40075"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p; M 3:45-5:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Mon",
+            "start": "1545",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Adam Hand"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.703Z"
+}

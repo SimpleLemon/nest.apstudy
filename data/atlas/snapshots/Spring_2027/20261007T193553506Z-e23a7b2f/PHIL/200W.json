@@ -1,0 +1,156 @@
+{
+  "course_code": "PHIL 200W",
+  "course_title": "Ancient Greek & Medieval Phil",
+  "subject": "PHIL",
+  "catalog_number": "200W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will introduce the principal figures and topics in ancient Greek and medieval philosophy.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "581",
+      "academic_career": "UCOL",
+      "crn": "1514",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jeremy Bell",
+      "instructors": [
+        {
+          "name": "Jeremy Bell",
+          "email": "naia.bell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7640"
+        }
+      ],
+      "location": "Bowden Hall 216",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "582",
+      "academic_career": "UCOL",
+      "crn": "1347",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Eric Sanday",
+      "instructors": [
+        {
+          "name": "Eric Sanday",
+          "email": "sanday.ec@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46397"
+        }
+      ],
+      "location": "Bowden Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Sanday",
+    "Jeremy Bell"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.573Z"
+}

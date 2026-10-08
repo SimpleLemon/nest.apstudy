@@ -1,0 +1,128 @@
+{
+  "course_code": "ECON 496R",
+  "course_title": "Tutorial in Economics",
+  "subject": "ECON",
+  "catalog_number": "496R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Directed, intensive study using intermediate theory on a topic not covered in a course to be offered before a student would normally graduate. Students must receive departmental permission from the director of undergraduate studies in the semester preceding the one in which the student intends to participate.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3365",
+      "academic_career": "UCOL",
+      "crn": "6580",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Stephen O'Connell",
+      "instructors": [
+        {
+          "name": "Stephen O'Connell",
+          "email": "soconnell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18381"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1,2,3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3366",
+      "academic_career": "UCOL",
+      "crn": "6600",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Yuki Wang",
+      "instructors": [
+        {
+          "name": "Yuki Wang",
+          "email": "xue.wang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "20064"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Stephen O'Connell",
+    "Yuki Wang"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.527Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "SOC 314",
+  "course_title": "Work & Occupations",
+  "subject": "SOC",
+  "catalog_number": "314",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the sociology of work and occupations. Topics range from the macro to micro level, including the global economy, technological change, diversity and inequality in the workplace, and how work affects our social and personal identity.",
+  "course_notes": "Work is a fundamental part of our lives. Work defines how we live our lives and is a crucial feature affecting our social and personal identity. This course is designed to provide students with a broad overview of the study of work, which has long been a central topic in sociology. Throughout the course, we will read classic and more recent studies to understand sociological perspectives on work-related issues at both the macro level (e.g., the U.S. and global economics, occupational structure, changes of technology) and the micro level (e.g., the dynamics individual workers¿ attributes shape and are shaped by work). Some of the major topics we¿ll examine include: classical theories of the labor process, professionalism, emotional labor and service work, stigmatized or dirty work, the overwork culture, work in the gig economy, and gender, race, and class dimensions of work.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1140",
+      "academic_career": "UCOL",
+      "crn": "2832",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ju Hyun Park",
+      "instructors": [
+        {
+          "name": "Ju Hyun Park",
+          "email": "ju.hyun.park@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "10417"
+        }
+      ],
+      "location": "Tarbutton Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ju Hyun Park"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.586Z"
+}

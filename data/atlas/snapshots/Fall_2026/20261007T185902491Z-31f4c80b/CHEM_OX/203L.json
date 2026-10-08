@@ -1,0 +1,242 @@
+{
+  "course_code": "CHEM_OX 203L",
+  "course_title": "Advanced Reactivity Lab",
+  "subject": "CHEM_OX",
+  "catalog_number": "203L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Students will be exposed to the practical aspects of working with small molecules, both organic and inorganic. Students will learn to synthesize compounds and analyze their characteristic properties such as structure, function, size distribution, and purity. It is recommended that students who withdraw from the laboratory course withdraw from the corequisite lecture course as well.",
+  "course_notes": "Must enroll in Chem_OX 203.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3971",
+      "academic_career": "UOXF",
+      "crn": "4364",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Vivian Ezeh",
+      "instructors": [
+        {
+          "name": "Vivian Ezeh",
+          "email": "vivian.ezeh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39712"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 24,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3972",
+      "academic_career": "UOXF",
+      "crn": "4365",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Vivian Ezeh",
+      "instructors": [
+        {
+          "name": "Vivian Ezeh",
+          "email": "vivian.ezeh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39712"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 24,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3973",
+      "academic_career": "UOXF",
+      "crn": "4366",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Lyndsey Prosser",
+      "instructors": [
+        {
+          "name": "Lyndsey Prosser",
+          "email": "lyndsey.prosser@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25936"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 24,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3974",
+      "academic_career": "UOXF",
+      "crn": "4367",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Lyndsey Prosser",
+      "instructors": [
+        {
+          "name": "Lyndsey Prosser",
+          "email": "lyndsey.prosser@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25936"
+        }
+      ],
+      "location": "Oxford Science Bldg. 401",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 0,
+    "labs": 4,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lyndsey Prosser",
+    "Vivian Ezeh"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.601Z"
+}

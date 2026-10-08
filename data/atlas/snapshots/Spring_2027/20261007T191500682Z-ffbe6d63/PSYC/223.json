@@ -1,0 +1,92 @@
+{
+  "course_code": "PSYC 223",
+  "course_title": "Drugs & Behavior",
+  "subject": "PSYC",
+  "catalog_number": "223",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A review of the behavioral and neurobiological actions of all the major psychoactive drugs, focusing on how drugs alter behavior by influencing brain mechanisms.",
+  "course_notes": "(This class is hybrid. It meets in-person on Mondays, 1:00-2:15, AND synchronous zoom meeting on Wednesdays, 1:00-2:15.) (Prior completion of Psyc 110. First year students CANNOT take this class.) (This course is a survey of the neurobehavioral effects of the various classes of psychoactive drugs, (e.g., stimulants, depressants, etc.), as well as their clinical implications. Although human experience is taken as the starting point of each drug covered, multiple biological and environmental factors shape the progression of initial exposure to addiction and the success of treatment. A fundamental underpinning of this course is that individual differences in drug response can be explained by understanding the brain mechanisms through which psychoactive drugs exert their effects and the behavioral and sociocultural factors that shape our expectations and experiences.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "694",
+      "academic_career": "UCOL",
+      "crn": "1625",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Prof. Rohan Palmer",
+      "instructors": [
+        {
+          "name": "Prof. Rohan Palmer",
+          "email": "rohan.palmer@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7143"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Prof. Rohan Palmer"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.765Z"
+}

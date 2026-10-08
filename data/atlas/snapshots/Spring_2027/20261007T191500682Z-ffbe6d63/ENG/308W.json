@@ -1,0 +1,97 @@
+{
+  "course_code": "ENG 308W",
+  "course_title": "Arthurian Literature",
+  "subject": "ENG",
+  "catalog_number": "308W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Readings in the medieval and subsequent Arthurian tradition.",
+  "course_notes": "The historical King Arthur probably had a Roman father and a Celtic mother. As King of the Britons he combated the Angles and the Saxons, the very people who became the English and who claimed¿without irony--their former adversary as a national hero. The Britons, the English, and the French then created the corpus of Arthurian legend that continues to grow today. We will read a range of medieval and modern texts in order to understand how the legend--known as the Matter of Britain--defines the mythic imagination and how the legend explores fate and free will, heroic conduct, the supernatural, courtly love, chivalry, and the origin of evil. This course fulfills the pre-1700 requirement for the English major. Texts: Latin chronicles; Middle English Breton Lays; Sir Gawain and the Green Knight; Sir Thomas Malory, Morte Darthur; Mark Twain, A Connecticut Yankee in King Arthur¿s Court; C. S. Lewis, That Hideous Strength; Kazuo Ishiguro, The Buried Giant.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "269",
+      "academic_career": "UCOL",
+      "crn": "2346",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "James Morey",
+      "instructors": [
+        {
+          "name": "James Morey",
+          "email": "jmorey@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1770"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "James Morey"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.722Z"
+}

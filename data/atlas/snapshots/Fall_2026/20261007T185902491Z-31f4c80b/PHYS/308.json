@@ -1,0 +1,93 @@
+{
+  "course_code": "PHYS 308",
+  "course_title": "Observational Astrophysics",
+  "subject": "PHYS",
+  "catalog_number": "308",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the techniques and tools of modern astronomical observations. Topics include telescopes and detectors, coordinates and timekeeping, photometry, spectroscopy, astrometry, and data analysis, with student-designed observational projects.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4984",
+      "academic_career": "UCOL",
+      "crn": "4482",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Alissa Bans",
+      "instructors": [
+        {
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14786"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alissa Bans"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.572Z"
+}

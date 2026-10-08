@@ -1,0 +1,82 @@
+{
+  "course_code": "LING_OX 397RE",
+  "course_title": "Directed Study in Linguistics",
+  "subject": "LING_OX",
+  "catalog_number": "397RE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course gives undergraduate students the opportunity to follow a reading plan and/or conduct empirical research under the direction of a faculty member.",
+  "course_notes": "Oxford Research Scholars (Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4179",
+      "academic_career": "UOXF",
+      "crn": "5694",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Daniel Walter",
+      "instructors": [
+        {
+          "name": "Daniel Walter",
+          "email": "daniel.walter@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7140"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daniel Walter"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.609Z"
+}

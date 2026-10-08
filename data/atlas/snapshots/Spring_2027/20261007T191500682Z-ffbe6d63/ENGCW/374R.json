@@ -1,0 +1,88 @@
+{
+  "course_code": "ENGCW 374R",
+  "course_title": "Creative Writing: Advanced Poetry",
+  "subject": "ENGCW",
+  "catalog_number": "374R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Spring semester. Admittance by assessment of readiness for advanced work by intermediate level instructor in genre. Intensive workshop in the writing of poetry for advanced students. May be repeated for a maximum of eight hours credit.",
+  "course_notes": "(Permission Required Prior to Enrollment) Application required. If accepted, YOU MUST ATTEND THE FIRST CLASS session to remain enrolled. Class description and application form are available on the Creative Writing Program website: https://creativewriting.emory.edu/academics/applications.html. Please email nora.lewis@emory.edu if you have any questions.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1813",
+      "academic_career": "UCOL",
+      "crn": "3375",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Jericho Brown",
+      "instructors": [
+        {
+          "name": "Jericho Brown",
+          "email": "jerichobro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5535"
+        }
+      ],
+      "location": "Modern Language TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jericho Brown"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.725Z"
+}

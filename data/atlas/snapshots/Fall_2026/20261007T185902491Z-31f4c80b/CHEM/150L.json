@@ -1,0 +1,429 @@
+{
+  "course_code": "CHEM 150L",
+  "course_title": "Structure and Properties Lab",
+  "subject": "CHEM",
+  "catalog_number": "150L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CHEM 150L is the first lab for students taking Chemistry at Emory. The lab focuses on experimental practices including experimental design, accuracy and precision, data collection and analysis, and the use of evidence to make conclusions. Experiments will connect structure to properties of matter.",
+  "course_notes": "This lab is offered in the fall and summer semesters only.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3928",
+      "academic_career": "UCOL",
+      "crn": "2977",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 96,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-2:15p; T 2:15-4:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Tue",
+            "start": "1415",
+            "end": "1620"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3929",
+      "academic_career": "UCOL",
+      "crn": "2984",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 96,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4:30-5:45p; T 5:45-7:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1630",
+            "end": "1745"
+          },
+          {
+            "day": "Tue",
+            "start": "1745",
+            "end": "1950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3930",
+      "academic_career": "UCOL",
+      "crn": "2986",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 96,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-5:15p; W 5:15-7:20p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1715",
+            "end": "1920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3931",
+      "academic_career": "UCOL",
+      "crn": "2989",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 64,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 11:30a-12:45p; Th 12:45-2:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1245",
+            "end": "1450"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3932",
+      "academic_career": "UCOL",
+      "crn": "2993",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 96,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-5:15p; Th 5:15-7:20p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1715",
+            "end": "1920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3933",
+      "academic_career": "UCOL",
+      "crn": "3209",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 95,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a; F 11:15a-1:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1115",
+            "end": "1320"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3934",
+      "academic_career": "UCOL",
+      "crn": "2997",
+      "section_number": "7",
+      "schedule_type": "LAB",
+      "instructor": "Andres Gonzalez Socorro",
+      "instructors": [
+        {
+          "name": "Andres Gonzalez Socorro",
+          "email": "andres.gonzalez.socorro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32000"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 260",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 96,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1:30-2:45p; F 2:45-4:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1330",
+            "end": "1445"
+          },
+          {
+            "day": "Fri",
+            "start": "1445",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 0,
+    "labs": 7,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andres Gonzalez Socorro"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.509Z"
+}

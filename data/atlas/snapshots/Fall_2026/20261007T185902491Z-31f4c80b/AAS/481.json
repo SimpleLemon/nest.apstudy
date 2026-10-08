@@ -1,0 +1,97 @@
+{
+  "course_code": "AAS 481",
+  "course_title": "Atlanta Civil Rights Histories",
+  "subject": "AAS",
+  "catalog_number": "481",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will examine the ways in which the twentieth-century black Civil Rights Movement and the movement for LGBT rights have intersected through the activism of black LGBT activists in the city of Atlanta. Students will conduct ground-breaking research in Atlanta's black LGBT community.",
+  "course_notes": "We will explore major African American civil rights campaigns in Atlanta in the 20th century.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3491",
+      "academic_career": "UCOL",
+      "crn": "3191",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Crystal Sanders",
+      "instructors": [
+        {
+          "name": "Crystal Sanders",
+          "email": "crystal.sanders@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31395"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Crystal Sanders"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.494Z"
+}

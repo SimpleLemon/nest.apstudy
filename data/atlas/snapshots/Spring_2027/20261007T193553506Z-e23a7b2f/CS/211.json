@@ -1,0 +1,93 @@
+{
+  "course_code": "CS 211",
+  "course_title": "Introduction to Artificial Intelligence",
+  "subject": "CS",
+  "catalog_number": "211",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fundamentals, modern concepts, and practices in Artificial Intelligence including computational decision making, knowledge-based agents, propositional logic, search, heuristics, and machine learning. Assessment includes exams and hands-on projects based on real-world problems.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2406",
+      "academic_career": "UCOL",
+      "crn": "2971",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Subhasish Das",
+      "instructors": [
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Subhasish Das"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.527Z"
+}

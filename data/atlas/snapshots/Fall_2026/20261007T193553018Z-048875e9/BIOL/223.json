@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 223",
+  "course_title": "Developmental Biology",
+  "subject": "BIOL",
+  "catalog_number": "223",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "How does a single cell embryo develop into a fully functional adult organism? We will examine the basic principles underlying development at the cellular, molecular, and organismal levels. Topics covered will include body plan development, examples of organogenesis and cell differentiation.",
+  "course_notes": "This course will introduce you to the broad field of Developmental Biology. The fertilized egg, a single cell, gives rise to many cells that form complex multicellular organisms with many different cell types, tissues, and organs. The overall goal of developmental biology is to elucidate the cellular and molecular processes that control this amazing achievement. The study of development spans molecular biology, cell biology, genetics, embryology, and importantly, evolution. These perspectives will be used to explore general principals and fundamental mechanisms that are shared between many diverse organisms, focusing on invertebrate and vertebrate animals. This includes consideration of human development with examples of medically relevant disorders and social and ethical questions related to the field. This course fulfills the Column A requirement (or elective credit) for the Biology major. Prerequisites: Biology 142 + 142L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "508",
+      "academic_career": "UCOL",
+      "crn": "1772",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Iain Shepherd",
+      "instructors": [
+        {
+          "name": "Iain Shepherd",
+          "email": "ishephe@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3268"
+        }
+      ],
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 80,
+      "seats_available": 26,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Iain Shepherd"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.029Z"
+}

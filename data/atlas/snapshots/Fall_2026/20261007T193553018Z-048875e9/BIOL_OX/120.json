@@ -1,0 +1,97 @@
+{
+  "course_code": "BIOL_OX 120",
+  "course_title": "Concepts in Biology",
+  "subject": "BIOL_OX",
+  "catalog_number": "120",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course reviews the principles of genetics, physiology, ecology, taxonomy, and evolution with special reference to contemporary life situations. Intended for non-science majors. This course does not fulfill the requirements for medical and dental schools or a biology major, but will fulfill the GER for Natural Science.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "7",
+      "academic_career": "UOXF",
+      "crn": "4278",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lauren Essler",
+      "instructors": [
+        {
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43354"
+        }
+      ],
+      "location": "Pierce Hall 140",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lauren Essler"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

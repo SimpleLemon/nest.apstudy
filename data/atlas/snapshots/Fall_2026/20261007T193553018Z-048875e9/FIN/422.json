@@ -1,0 +1,80 @@
+{
+  "course_code": "FIN 422",
+  "course_title": "Advanced Financial Markets",
+  "subject": "FIN",
+  "catalog_number": "422",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The purpose of this course is to tie together many of the concepts you have been taught during your undergraduate studies and to prepare the student for a career, perhaps in the financial markets. The course has been designed to study economic and financial theory from the daily changes in market prices, rather than from a textbook.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "301",
+      "academic_career": "UBUS",
+      "crn": "6627",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Declan Clear"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.141Z"
+}

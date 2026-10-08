@@ -1,0 +1,155 @@
+{
+  "course_code": "ANTH_OX 101",
+  "course_title": "Introduction to Anthropology",
+  "subject": "ANTH_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "A four-field survey of anthropology: the study of humans and their cultures past and present. The course introduces the subfields of Archaeology, Linguistics, Physical Anthropology and Cultural Anthropology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1",
+      "academic_career": "UOXF",
+      "crn": "4079",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "SJ Dillon",
+      "instructors": [
+        {
+          "name": "SJ Dillon",
+          "email": "sarah.dillon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25906"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2",
+      "academic_career": "UOXF",
+      "crn": "4080",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "SJ Dillon",
+      "instructors": [
+        {
+          "name": "SJ Dillon",
+          "email": "sarah.dillon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25906"
+        }
+      ],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "SJ Dillon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.597Z"
+}

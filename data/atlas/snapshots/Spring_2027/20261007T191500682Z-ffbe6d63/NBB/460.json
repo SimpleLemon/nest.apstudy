@@ -1,0 +1,93 @@
+{
+  "course_code": "NBB 460",
+  "course_title": "Building Brains",
+  "subject": "NBB",
+  "catalog_number": "460",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Explores our current understanding of the mechanisms that regulate development of the nervous system. Topics covered include neurogenesis, axon guidance, programmed cell death, and synapse formation.",
+  "course_notes": "(Same as BIOL 460 1) (This course explores our current understanding of the mechanisms that regulate development of the nervous system. Topics covered include neurogenesis, axon guidance, programmed cell death, and synapse formation.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1288",
+      "academic_career": "UCOL",
+      "crn": "3530",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Patrick William Cafferty",
+      "instructors": [
+        {
+          "name": "Patrick William Cafferty",
+          "email": "patrick.w.cafferty@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5239"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Patrick William Cafferty"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.755Z"
+}

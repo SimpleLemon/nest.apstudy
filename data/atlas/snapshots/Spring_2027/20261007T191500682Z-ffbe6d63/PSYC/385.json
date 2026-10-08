@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 385",
+  "course_title": "Special Topics in Psychology",
+  "subject": "PSYC",
+  "catalog_number": "385",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A series of special topics of concern to the discipline of psychology. Content will vary in successive offerings. May be repeated for credit when topic varies.",
+  "course_notes": "Topic title and course description: TBD",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1935",
+      "academic_career": "UCOL",
+      "crn": "2219",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rohini Murugan",
+      "instructors": [
+        {
+          "name": "Rohini Murugan",
+          "email": "rohini.murugan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28645"
+        }
+      ],
+      "location": "Psychology Bldg 393",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Rohini Murugan"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.766Z"
+}

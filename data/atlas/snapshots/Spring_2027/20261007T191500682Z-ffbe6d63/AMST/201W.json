@@ -1,0 +1,97 @@
+{
+  "course_code": "AMST 201W",
+  "course_title": "Introduction to American Studies",
+  "subject": "AMST",
+  "catalog_number": "201W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An interdisciplinary, historically grounded introduction to scholarly approaches to the U.S. and the broader Americas, with emphasis on issues of class, ethnicity, gender, and cross-cultural studies. Prerequisite: ENGRD 223 Rhetorical Grammar (1 credit), which can be taken simultaneously.",
+  "course_notes": "What does it mean to be American? Who counts as an American--and who doesn't? Recently, the coronavirus pandemic, the Black Lives Matter movement, and immigration policy have brought these questions into sharp focus, starting a national conversation on the American society we live in and the one we would like to create. This class will look at current events--the pandemic, immigration, issues of social justice and racial and class inequality--and set them in an historical context. We will draw connections between past events and the conversations they provoked about the idea of \"America\" to events happening today. For example, what can we learn from flu epidemic of 1918 that will help us understand America's reaction to the coronavirus? How does the Black Lives Matter movement grow out of and build upon the Civil Rights movement of the 1950s and 60s? This course will explore how people experience disruptive cultural events given their own identities and roles in American society, how the media and other cultural artifacts frame such events, and how such events might encourage (or inhibit) social change. Using the methods and key ideas of American Studies scholarship, we will seek to begin to understand and define for ourselves what it means to be American.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1260",
+      "academic_career": "UCOL",
+      "crn": "2221",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Kim Loudermilk",
+      "instructors": [
+        {
+          "name": "Kim Loudermilk",
+          "email": "klouder@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1301"
+        }
+      ],
+      "location": "Callaway S420",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kim Loudermilk"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.687Z"
+}

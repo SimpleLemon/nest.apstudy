@@ -1,0 +1,240 @@
+{
+  "course_code": "BIOL_OX 340E",
+  "course_title": "Discovery and Independent Research in Biology",
+  "subject": "BIOL_OX",
+  "catalog_number": "340E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "All prerequisite classes and laboratories must be completed with a grade of B or higher. Student will engage in the process of scientific investigation, working in collaborative teams to design, conduct, and analyze experiments and to gain expertise in a variety of laboratory instrumentation, techniques, skills, and procedures. The course is an integrated class with laboratory where research topics will vary each semester.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3912",
+      "academic_career": "UOXF",
+      "crn": "4388",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "LaTonia Taliaferro-Smith",
+      "instructors": [
+        {
+          "name": "LaTonia Taliaferro-Smith",
+          "email": "ltsmit3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4295"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3913",
+      "academic_career": "UOXF",
+      "crn": "4389",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Jordan Silva",
+      "instructors": [
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3910",
+      "academic_career": "UOXF",
+      "crn": "4340",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "LaTonia Taliaferro-Smith",
+      "instructors": [
+        {
+          "name": "LaTonia Taliaferro-Smith",
+          "email": "ltsmit3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4295"
+        }
+      ],
+      "location": "Oxford Science Bldg. 301",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3911",
+      "academic_career": "UOXF",
+      "crn": "4341",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Jordan Silva",
+      "instructors": [
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        }
+      ],
+      "location": "Oxford Science Bldg. 317",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 8,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 4,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jordan Silva",
+    "LaTonia Taliaferro-Smith"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.599Z"
+}

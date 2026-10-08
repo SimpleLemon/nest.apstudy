@@ -1,0 +1,97 @@
+{
+  "course_code": "PE_OX 153",
+  "course_title": "Bal-A-Vis-X",
+  "subject": "PE_OX",
+  "catalog_number": "153",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed to provide students with an understanding of rhythm using a series of Balance, Auditory and Vision exercises using bags and balls. Exercises address visual tracking deficiencies, auditory imprecision, impulsivity, rhythmic balance, and anxiety issues. We will be focusing on all this using Bal-A-Vis-X exercises.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4574",
+      "academic_career": "UOXF",
+      "crn": "4078",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Gregory Moss-Brown",
+      "instructors": [
+        {
+          "name": "Gregory Moss-Brown",
+          "email": "mossbrown@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4923"
+        }
+      ],
+      "location": "Williams Hall Gym",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Gregory Moss-Brown"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.612Z"
+}

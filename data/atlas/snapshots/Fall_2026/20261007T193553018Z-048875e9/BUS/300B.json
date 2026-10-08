@@ -1,0 +1,80 @@
+{
+  "course_code": "BUS 300B",
+  "course_title": "BBA Boardroom B",
+  "subject": "BUS",
+  "catalog_number": "300B",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "0.5",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Board Rooms build community, engagement, and cohesion while connecting students to each other and to resources at Goizueta. Each student will stay in the same Room for their tenure in the program. Cohorts will meet monthly, with 1-2 additional community events offered each semester. Each Room will have one lead faculty/staff member. At each meeting, specific content around a provided subject will be developed and led by the student members. Individual sessions will feature program announcements, a student-led discussion of a contemporary problem, networking, and celebration of achievements.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4765",
+      "academic_career": "UBUS",
+      "crn": "5080",
+      "section_number": "1101",
+      "schedule_type": "LEC",
+      "instructor": "Jeremy Billetdeaux",
+      "instructors": [
+        {
+          "name": "Jeremy Billetdeaux",
+          "email": "jeremy.billetdeaux@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6308"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "0.5",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 38,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jeremy Billetdeaux"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.138Z"
+}

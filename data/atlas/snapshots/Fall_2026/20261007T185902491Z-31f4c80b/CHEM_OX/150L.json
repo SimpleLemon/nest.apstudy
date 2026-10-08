@@ -1,0 +1,346 @@
+{
+  "course_code": "CHEM_OX 150L",
+  "course_title": "Structure and Properties Lab",
+  "subject": "CHEM_OX",
+  "catalog_number": "150L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course focuses on experimental practices including experimental design, accuracy and precision, data collection and analysis, and the use of evidence to make conclusions. Experiments will connect structure to properties of matter. It is recommended that students who withdraw from the laboratory course withdraw from the co-requisite lecture course as well.",
+  "course_notes": "Must enroll in CHEM_OX 150. Wednesday, December 9, 2026, will serve as a designated class meeting day for Fall 2026 courses that are regularly scheduled to meet only on Mondays. If you have any questions, please contact the Oxford College Registrar's Office - oxregistrar@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3955",
+      "academic_career": "UOXF",
+      "crn": "4348",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Sean Mo",
+      "instructors": [
+        {
+          "name": "Sean Mo",
+          "email": "sean.mo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2824"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3956",
+      "academic_career": "UOXF",
+      "crn": "4349",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Austin Scharf",
+      "instructors": [
+        {
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14496"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3957",
+      "academic_career": "UOXF",
+      "crn": "4350",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Austin Scharf",
+      "instructors": [
+        {
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14496"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3958",
+      "academic_career": "UOXF",
+      "crn": "4351",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Andrew Puente",
+      "instructors": [
+        {
+          "name": "Andrew Puente",
+          "email": "andrew.puente@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46853"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3959",
+      "academic_career": "UOXF",
+      "crn": "4352",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Andrew Puente",
+      "instructors": [
+        {
+          "name": "Andrew Puente",
+          "email": "andrew.puente@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46853"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3960",
+      "academic_career": "UOXF",
+      "crn": "4353",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Lloyd R Parker",
+      "instructors": [
+        {
+          "name": "Lloyd R Parker",
+          "email": "lparker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "653"
+        }
+      ],
+      "location": "Oxford Science Bldg. 417",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 0,
+    "labs": 6,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 5,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Puente",
+    "Austin Scharf",
+    "Lloyd R Parker",
+    "Sean Mo"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.600Z"
+}

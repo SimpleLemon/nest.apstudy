@@ -1,0 +1,93 @@
+{
+  "course_code": "REL 341",
+  "course_title": "Medieval Jewish Thought",
+  "subject": "REL",
+  "catalog_number": "341",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Intensive study of a major work on an important theme in medieval Jewish thought such as Maimonides' Guide for the Perplexed, Saadia's Beliefs and Opinions, and medieval Jewish exegesis of the Bible.",
+  "course_notes": "(Same as JS 341 1, Phil 385 2) This course explores the moral and political thought of one of the great thinkers of the Middle Ages and arguably the most important Jewish philosopher of any age, Moses Maimonides (sometimes known in Hebrew as Rambam). Maimonides (1135-1204) was a jurist, philosopher, communal leader and physician. He was deeply steeped both in the Greco-Islamic philosophical tradition (i.e., Plato and Aristotle via writers like Alfarabi, Avicenna and Al-Ghazali) and was also an unparalleled master of the entire rabbinic and biblical corpus. This makes him of special interest to students across a wide variety of areas, including religion, philosophy, politics, Jewish Studies and Middle Eastern Studies among others. No single student is likely to have a background in all these areas, so I want to emphasize that there are no prerequisites for the course. It would be silly to think that knowing Hebrew or Arabic are not helpful, but all of our readings will be in English translation; knowing something about philosophy or Judaism is of course helpful but is not required.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "738",
+      "academic_career": "UCOL",
+      "crn": "3673",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Don Seeman",
+      "instructors": [
+        {
+          "name": "Don Seeman",
+          "email": "dseeman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3517"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Don Seeman"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.584Z"
+}

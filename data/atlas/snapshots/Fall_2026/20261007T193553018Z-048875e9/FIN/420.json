@@ -1,0 +1,80 @@
+{
+  "course_code": "FIN 420",
+  "course_title": "Advanced Corporate Finance",
+  "subject": "FIN",
+  "catalog_number": "420",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course is structured along the \"life cycle\" of a firm, covering the following topics: (1) Early-stage financing and IPO, introduction of financing securities, and how they align entrepreneurs with their capital providers. (2) Financial management of a publicly traded firm (or mature private firm): Optimal capital structure; merger and acquisitions, risk management, corporate control and takeovers, and shareholder activism. (3) Going private/buyout, and bankruptcy. The course immerses with issues an executive, investor, a banker, or an analyst encounters, and connects to current issues.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "300",
+      "academic_career": "UBUS",
+      "crn": "6626",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Declan Clear"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.141Z"
+}

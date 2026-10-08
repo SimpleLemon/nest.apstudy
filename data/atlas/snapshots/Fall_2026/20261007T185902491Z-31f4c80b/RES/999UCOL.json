@@ -1,0 +1,107 @@
+{
+  "course_code": "RES 999UCOL",
+  "course_title": "Undergrad Residence Full-Time",
+  "subject": "RES",
+  "catalog_number": "999UCOL",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "0",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Undergraduate UCOL residence course.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2268",
+      "academic_career": "UCOL",
+      "crn": "5050",
+      "section_number": "1",
+      "schedule_type": "RES",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "0",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2269",
+      "academic_career": "UCOL",
+      "crn": "5051",
+      "section_number": "2",
+      "schedule_type": "RES",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "0",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T18:59:02.581Z"
+}

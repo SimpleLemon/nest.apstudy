@@ -1,0 +1,97 @@
+{
+  "course_code": "ARTHIST 103",
+  "course_title": "Understanding Architecture",
+  "subject": "ARTHIST",
+  "catalog_number": "103",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to architecture considering the built environment we experience daily as well as historical buildings and practices. We will study architecture as a process of design, negotiation, construction, and reception and explore critical and social issues of representation and meaning.",
+  "course_notes": "\"Discovering the Built Environment\"How are houses designed? How are cities planned? Why do they work the way they do? What ideas, challenges, and solutions shape the spaces around us? And if you could create a new building, what would it look like? In this introductory studio, we will explore fundamental elements and features of the built environment. Discover fascinating examples from all over the world of original houses, iconic skyscrapers, grandiose monuments, lively streetscapes, groundbreaking parks, experimental neighborhoods, repurposed industries, ingenious infrastructures, mobile dwellings, and non-human constructions. Practice the basics of architectural representation and design, including reading and drawings plans and sections at different scales, as well as building physical models. Complete the course by designing an imaginary project of your own. Architectural Studies minor: core requirement Art History major/minor: makers & materials course",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "765",
+      "academic_career": "UCOL",
+      "crn": "1502",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Andre Patrao",
+      "instructors": [
+        {
+          "name": "Andre Patrao",
+          "email": "andre.patrao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "41484"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andre Patrao"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.026Z"
+}

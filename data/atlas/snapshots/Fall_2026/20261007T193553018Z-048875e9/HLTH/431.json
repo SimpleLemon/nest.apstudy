@@ -1,0 +1,88 @@
+{
+  "course_code": "HLTH 431",
+  "course_title": "Stigma & Health",
+  "subject": "HLTH",
+  "catalog_number": "431",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores stigma as a social construct that shapes many different health conditions and illness experiences. Focus areas include non-normative body appearance, impaired mobility, chronic disease, mental health, and reproductive health. Various anti-stigma interventions are also examined.",
+  "course_notes": "Class meets in SON Building, Room 276. This course explores the sociocultural process of stigma as a fundamental determinant of health that shapes a range of health conditions through social exclusion. As situated within the context of biomedicine, we will explore the ways in which stigma produces illness (manifesting as uneven patterns of disease in populations), as well as how illness produces stigma (embodied in personal and collective experience). Broad areas of application include non-normative body appearance, impaired physical mobility, chronic disease, mental health, and reproductive health. We will also examine anti-stigma interventions that effectively target stigma processes at the intrapersonal, interpersonal, and institutional/structural levels.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4579",
+      "academic_career": "UCOL",
+      "crn": "2635",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sydney Spangler",
+      "instructors": [
+        {
+          "name": "Sydney Spangler",
+          "email": "s.spangler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5214"
+        }
+      ],
+      "location": "Nursing School - 276",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 19,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 4-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sydney Spangler"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.070Z"
+}

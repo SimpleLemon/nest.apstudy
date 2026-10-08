@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST 260",
+  "course_title": "East Asia: 1500 to Present",
+  "subject": "HIST",
+  "catalog_number": "260",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will emphasize transnational aspects of East Asian history, focusing on how the East Asian international system interacted with Southeast Asia, South Asia, Inner Asia, as well as with Europe and the U.S. from 1500 to the present.",
+  "course_notes": "(Same as CHN 260 1, EAS 260 1, and KRN 260 1) (Spanning from 1500 to the present, this course treats the histories of China, Japan, and Korea as a deeply interconnected whole rather than as separate national stories. We will explore the shared heritage and parallel developments that define the region, revealing that \"globalization\" - driven by centuries of trade, religion, and diplomacy - is far from a new phenomenon in East Asia. We investigate a distinct East Asian path to modernization, tracing an alternative developmental trajectory to Europe's up until the late nineteenth century, when imperialist powers increasingly made inroads into the region. We then examine East Asia's rapid and tumultuous catch-up period throughout the twentieth century, during which it gradually integrated European models of development. Underpinning this intellectual pursuit are foundational themes of state-building, economic dynamics, and cultural traditions. Grounded in recent scholarship, the course also highlights new perspectives in environmental and technological history.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1397",
+      "academic_career": "UCOL",
+      "crn": "2741",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Yuan Wang",
+      "instructors": [
+        {
+          "name": "Yuan Wang",
+          "email": "yuan.wang2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40542"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Yuan Wang"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.735Z"
+}

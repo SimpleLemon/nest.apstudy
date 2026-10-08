@@ -1,0 +1,148 @@
+{
+  "course_code": "ENVS 491",
+  "course_title": "Environmental Science Practicum",
+  "subject": "ENVS",
+  "catalog_number": "491",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Student teams work on an environmental project for an external stakeholder, using problem identification, research and analysis, report and policy drafting, and public presentation skills. Project and stakeholders vary by semester. Fulfills an ENVS Independent Study.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "301",
+      "academic_career": "UCOL",
+      "crn": "2197",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shahnawaz Rafi",
+      "instructors": [
+        {
+          "name": "Shahnawaz Rafi",
+          "email": "shahnawaz.rafi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43575"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "302",
+      "academic_career": "UCOL",
+      "crn": "2198",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Shahnawaz Rafi",
+      "instructors": [
+        {
+          "name": "Shahnawaz Rafi",
+          "email": "shahnawaz.rafi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43575"
+        }
+      ],
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shahnawaz Rafi"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.546Z"
+}

@@ -1,0 +1,454 @@
+{
+  "course_code": "CS 170",
+  "course_title": "Introduction To Computer Science I",
+  "subject": "CS",
+  "catalog_number": "170",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to Computer Science for students expecting to utilize serious computing in coursework, research, or employment. Emphasis is on computing concepts, programming principles, algorithm development and basic data structures, using the Java programming language and Unix operating system.",
+  "course_notes": "Enrollment is tiered for this course. Waitlists will be added for the incoming first year preregistration.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "590",
+      "academic_career": "UCOL",
+      "crn": "3175",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Subhasish Das",
+      "instructors": [
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        },
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 8-8:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "800",
+            "end": "850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "591",
+      "academic_career": "UCOL",
+      "crn": "3176",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Subhasish Das",
+      "instructors": [
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        },
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "592",
+      "academic_career": "UCOL",
+      "crn": "3177",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Subhasish Das",
+      "instructors": [
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        },
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "593",
+      "academic_career": "UCOL",
+      "crn": "3180",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "594",
+      "academic_career": "UCOL",
+      "crn": "3181",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 3-3:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1500",
+            "end": "1550"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "595",
+      "academic_career": "UCOL",
+      "crn": "3182",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "White Hall 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "6",
+      "enrollment_capacity": 25,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 6,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Abbey Julian",
+    "Subhasish Das"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.514Z"
+}

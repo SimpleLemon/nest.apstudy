@@ -1,0 +1,157 @@
+{
+  "course_code": "HIST 385",
+  "course_title": "Spec Topics: History: Histories of Policing in US",
+  "subject": "HIST",
+  "catalog_number": "385",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics in history for advanced students. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as AAS 385 3) (This course investigates the historical construction of police power in the United States, tracing its evolution from the early twentieth-century Great Migration to the modern era of mass incarceration. Rather than viewing policing as a static institution, we examine it as a dynamic political force shaped by the intersections of race, gender, and grassroots struggle. Using mostly U.S. as sites of inquiry, alongside national analyses of police organizing, we will explore how discretionary authority was built through the surveillance of Black and Brown neighborhoods and the regulation of women's bodies. Course readings will cover topics that include: the rise of rank-and-file unionism and its impact on democratic oversight; the role of morals laws and sexual policing in expanding state power; and the persistent cycles of police violence and community resistance, from the 1919 Red Summer to the 1992 Los Angeles rebellion. By the end of the semester, students will understand how policing became a primary engine of urban transformation and social control.) This course investigates the historical construction of police power in the United States, tracing its evolution from the early twentieth-century Great Migration to the modern era of mass incarceration. Rather than viewing policing as a static institution, we examine it as a dynamic political force shaped by the intersections of race, gender, and grassroots struggle. Using mostly U.S. as sites of inquiry, alongside national analyses of police organizing, we will explore how discretionary authority was built through the surveillance of Black and Brown neighborhoods and the regulation of women's bodies. Course readings will cover topics that include: the rise of rank-and-file unionism and its impact on democratic oversight; the role of morals laws and sexual policing in expanding state power; and the persistent cycles of police violence and community resistance, from the 1919 Red Summer to the 1992 Los Angeles rebellion. By the end of the semester, students will understand how policing became a primary engine of urban transformation and social control.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3382",
+      "academic_career": "UCOL",
+      "crn": "2543",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Carl Suddler",
+      "instructors": [
+        {
+          "name": "Carl Suddler",
+          "email": "carl.suddler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6659"
+        },
+        {
+          "name": "Jayden Trawick-Junta",
+          "email": "jayden.trawick-junta@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44046"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3383",
+      "academic_career": "UCOL",
+      "crn": "2546",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Brian Vick",
+      "instructors": [
+        {
+          "name": "Brian Vick",
+          "email": "bvick@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4478"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brian Vick",
+    "Carl Suddler",
+    "Jayden Trawick-Junta"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.544Z"
+}

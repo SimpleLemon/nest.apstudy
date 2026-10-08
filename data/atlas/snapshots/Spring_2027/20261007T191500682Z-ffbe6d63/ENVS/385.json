@@ -1,0 +1,207 @@
+{
+  "course_code": "ENVS 385",
+  "course_title": "Topics: Environmental Studies: Intro to Atmospheric Physics",
+  "subject": "ENVS",
+  "catalog_number": "385",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable topics that are offered as irregular courses. Past course topics have included: Finding Place: Technology, Stories, and the Environment; Introduction to Botany; Environment, Health, and Development; Conservation and Development; Booms and Busts in Resources of Georgia; and Paleoecology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1894",
+      "academic_career": "UCOL",
+      "crn": "1798",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Avramov",
+      "instructors": [
+        {
+          "name": "Alexander Avramov",
+          "email": "alexander.avramov@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6984"
+        }
+      ],
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1895",
+      "academic_career": "UCOL",
+      "crn": "2077",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Joseph Baecher",
+      "instructors": [
+        {
+          "name": "Joseph Baecher",
+          "email": "alexbaecher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46553"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1896",
+      "academic_career": "UCOL",
+      "crn": "2106",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Julie Clennon",
+      "instructors": [
+        {
+          "name": "Julie Clennon",
+          "email": "jclenno@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4557"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexander Avramov",
+    "Joseph Baecher",
+    "Julie Clennon"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.728Z"
+}

@@ -1,0 +1,165 @@
+{
+  "course_code": "POLS 497R",
+  "course_title": "Directed Study: Franklin Fellows Reading Grp",
+  "subject": "POLS",
+  "catalog_number": "497R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit, one to twelve hours. Prerequisite: consent of instructor. Independent reading and research under the direction of a faculty member. May be repeated for credit.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3345",
+      "academic_career": "UCOL",
+      "crn": "5612",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Evan Gee",
+      "instructors": [
+        {
+          "name": "Evan Gee",
+          "email": "evan.cree.gee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43760"
+        },
+        {
+          "name": "Ian MacFarlane",
+          "email": "ian.macfarlane@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46966"
+        },
+        {
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3061"
+        }
+      ],
+      "location": "Tarbutton Hall 313",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3346",
+      "academic_career": "UCOL",
+      "crn": "6101",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Evan Gee",
+      "instructors": [
+        {
+          "name": "Evan Gee",
+          "email": "evan.cree.gee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43760"
+        },
+        {
+          "name": "Ian MacFarlane",
+          "email": "ian.macfarlane@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46966"
+        },
+        {
+          "name": "Judd Owen",
+          "email": "jjowen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3061"
+        }
+      ],
+      "location": "Tarbutton Hall 313",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1:15-2:30p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1315",
+            "end": "1430"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Evan Gee",
+    "Ian MacFarlane",
+    "Judd Owen"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.099Z"
+}

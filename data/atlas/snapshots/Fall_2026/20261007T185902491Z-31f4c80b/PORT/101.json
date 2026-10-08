@@ -1,0 +1,109 @@
+{
+  "course_code": "PORT 101",
+  "course_title": "Elementary Portuguese I",
+  "subject": "PORT",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The first half of a yearlong introductory course designed to train students to understand, speak, read, and write Portuguese.",
+  "course_notes": "This course helps students develop a basic ability to communicate in Portuguese. Class time is dedicated to interactive activities that allow students to acquire skills in speaking, listening, reading and writing. Through music, videos, and readings of authentic materials, students are also introduced to many aspects of Brazilian culture as well as that of other countries where Portuguese is spoken. Class meets three times per week and is conducted in Portuguese to maximize exposure to the language. Students who are Spanish speakers or/and have placed above Span 212 in the Spanish Placement Test are not allowed to take Port 101. They should register for Port 110. PARTICULARS: Evaluation is based on daily and active participation, homework, quizzes, writing activities, exams, final presentation, and Portuguese program activities.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2282",
+      "academic_career": "UCOL",
+      "crn": "2707",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Courtney Callahan",
+      "instructors": [
+        {
+          "name": "Courtney Callahan",
+          "email": "courtney.callahan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12938"
+        },
+        {
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "6184"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MWF 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ana Catarina Teixeira",
+    "Courtney Callahan"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.576Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "MESAS 319",
+  "course_title": "Media, Islam, and Social Movements",
+  "subject": "MESAS",
+  "catalog_number": "319",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "How do we understand the events that recently erupted with different degrees of violence in North African and Middle Eastern countries? Why were experts including diplomats, pundits, and politicians taken by surprise? How do media outlets like CNN, BBC, and Al Jazeera cover this \"social uprising\"?",
+  "course_notes": "(Same as AFS 319 1, FILM 319 1, and SOC 319 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1972",
+      "academic_career": "UCOL",
+      "crn": "2674",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sam Cherribi",
+      "instructors": [
+        {
+          "name": "Sam Cherribi",
+          "email": "scherri@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3532"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 50,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sam Cherribi"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.083Z"
+}

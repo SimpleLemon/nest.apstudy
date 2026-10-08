@@ -1,0 +1,148 @@
+{
+  "course_code": "ENVS 230",
+  "course_title": "Fundamentals of Geology w/Lab",
+  "subject": "ENVS",
+  "catalog_number": "230",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to earth processes. Topics include minerals, the rock cycle, the hydrologic cycle, stream dynamics, glacial and coastal processes, energy resources, plate tectonics, earthquakes and volcanism.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "291",
+      "academic_career": "UCOL",
+      "crn": "2047",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Anthony Martin",
+      "instructors": [
+        {
+          "name": "Anthony Martin",
+          "email": "geoam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "839"
+        }
+      ],
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "292",
+      "academic_career": "UCOL",
+      "crn": "2048",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Anthony Martin",
+      "instructors": [
+        {
+          "name": "Anthony Martin",
+          "email": "geoam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "839"
+        }
+      ],
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Anthony Martin"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.727Z"
+}

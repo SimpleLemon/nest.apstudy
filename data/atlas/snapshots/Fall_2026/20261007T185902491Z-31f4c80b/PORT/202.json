@@ -1,0 +1,104 @@
+{
+  "course_code": "PORT 202",
+  "course_title": "Intermediate Portuguese II",
+  "subject": "PORT",
+  "catalog_number": "202",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The second half of a yearlong review, with emphasis on continued development of the four basic linguistic skills (speaking, listening, reading, and writing) and knowledge of Lusophone cultures and societies.",
+  "course_notes": "CONTENT: This course aims to further develop communication skills in Portuguese and expand knowledge of Lusophone cultural traditions. We will review and refine our Portuguese grammar and vocabulary while engaging creatively and critically with short stories, films, songs, and other materials from Brazil, Angola, Mozambique, and Portugal. REQUIRED TEXTBOOK: Contextos: Curso Intermediário de Português, print or electronic edition. PARTICULARS: Evaluation is based on daily and active participation, homework, written and oral compositions, quizzes, exams, and Portuguese program activities. PREREQUISITES: Port 201 or equivalent.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2284",
+      "academic_career": "UCOL",
+      "crn": "2698",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Courtney Callahan",
+      "instructors": [
+        {
+          "name": "Courtney Callahan",
+          "email": "courtney.callahan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12938"
+        },
+        {
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "6184"
+        }
+      ],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ana Catarina Teixeira",
+    "Courtney Callahan"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.576Z"
+}

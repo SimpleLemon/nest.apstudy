@@ -1,0 +1,104 @@
+{
+  "course_code": "ENVS 130",
+  "course_title": "Environmental Sciences",
+  "subject": "ENVS",
+  "catalog_number": "130",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the concepts and methods related to the study of environmental sciences. Students will be introduced to relevant theories from physical, ecological and social sciences. This course is intended for majors and minors in Environmental Sciences.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3876",
+      "academic_career": "UCOL",
+      "crn": "1902",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Deere",
+      "instructors": [
+        {
+          "name": "Jessica Deere",
+          "email": "jessica.r.deere@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28249"
+        },
+        {
+          "name": "Bryton Codd",
+          "email": "bryton.codd@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44166"
+        }
+      ],
+      "location": "Math & Science Center - E208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 60,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Bryton Codd",
+    "Jessica Deere"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.533Z"
+}

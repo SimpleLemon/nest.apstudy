@@ -1,0 +1,80 @@
+{
+  "course_code": "MKT 447",
+  "course_title": "Sports Marketing",
+  "subject": "MKT",
+  "catalog_number": "447",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to important topics in sports marketing, particularly \"marketing assets\" such as brand equity, customer equity, and inventory equity. This course focuses on the business side of sports",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "331",
+      "academic_career": "UBUS",
+      "crn": "6650",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Declan Clear"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.630Z"
+}

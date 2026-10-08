@@ -1,0 +1,97 @@
+{
+  "course_code": "ENVS 224",
+  "course_title": "Economy and the Environment",
+  "subject": "ENVS",
+  "catalog_number": "224",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course investigates the interactions between economic systems and the environment, focusing on the economic drivers of and solutions to environmental change.Topics include food and water security, economic valuation and externalities, market failures, and socioenvironmental inequality.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4249",
+      "academic_career": "UCOL",
+      "crn": "3368",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shahnawaz Rafi",
+      "instructors": [
+        {
+          "name": "Shahnawaz Rafi",
+          "email": "shahnawaz.rafi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43575"
+        }
+      ],
+      "location": "Math & Science Center - N302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shahnawaz Rafi"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.056Z"
+}

@@ -1,0 +1,94 @@
+{
+  "course_code": "RADT 4102L",
+  "course_title": "Radiographic Procedures Clinical Lab IV",
+  "subject": "RADT",
+  "catalog_number": "4102L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Clinical laboratory experience will be used to complement the didactic portion of Radiographic Procedures IV course content which will allow the student to demonstrate the applied theories and principles introduced in RADT 4102 .",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4818",
+      "academic_career": "UAH",
+      "crn": "1009",
+      "section_number": "000",
+      "schedule_type": "LAB",
+      "instructor": "Christy Evans",
+      "instructors": [
+        {
+          "name": "Christy Evans",
+          "email": "christy.evans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40255"
+        },
+        {
+          "name": "Nytavia Jackson",
+          "email": "nytavia.wallace@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47820"
+        },
+        {
+          "name": "Traci Monfort",
+          "email": "traci.monfort@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40258"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christy Evans",
+    "Nytavia Jackson",
+    "Traci Monfort"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.136Z"
+}

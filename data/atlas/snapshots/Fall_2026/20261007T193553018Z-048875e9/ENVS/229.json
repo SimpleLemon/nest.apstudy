@@ -1,0 +1,148 @@
+{
+  "course_code": "ENVS 229",
+  "course_title": "Atmospheric Science with Lab",
+  "subject": "ENVS",
+  "catalog_number": "229",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Meteorology is the science of the atmosphere and the weather it produces. It seeks to understand the dynamics of the system in terms of available energy and how those dynamics produce the daily weather and long-term climate of the globe. This course will include a weekly lab.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2332",
+      "academic_career": "UCOL",
+      "crn": "1787",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shaunna Donaher",
+      "instructors": [
+        {
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6265"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2333",
+      "academic_career": "UCOL",
+      "crn": "1788",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Shaunna Donaher",
+      "instructors": [
+        {
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6265"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-3:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shaunna Donaher"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.056Z"
+}

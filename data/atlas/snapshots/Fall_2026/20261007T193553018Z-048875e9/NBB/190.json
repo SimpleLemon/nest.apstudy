@@ -1,0 +1,156 @@
+{
+  "course_code": "NBB 190",
+  "course_title": "Fresh Sem: NBB: Neuroscience and of Health Behavior",
+  "subject": "NBB",
+  "catalog_number": "190",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable topics of special interest in the field of Neuroscience and Behavioral Biology. Any of these NBB 190 courses will satisfy the new General Education freshman seminar requirement but will not count as an NBB elective.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1031",
+      "academic_career": "UCOL",
+      "crn": "1832",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Keith Easterling",
+      "instructors": [
+        {
+          "name": "Keith Easterling",
+          "email": "keaster@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1612"
+        }
+      ],
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1032",
+      "academic_career": "UCOL",
+      "crn": "3539",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Anthony Martin",
+      "instructors": [
+        {
+          "name": "Anthony Martin",
+          "email": "geoam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "839"
+        }
+      ],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 9,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Anthony Martin",
+    "Keith Easterling"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.088Z"
+}

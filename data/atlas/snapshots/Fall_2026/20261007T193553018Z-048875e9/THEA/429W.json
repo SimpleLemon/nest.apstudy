@@ -1,0 +1,97 @@
+{
+  "course_code": "THEA 429W",
+  "course_title": "Art as Work: Self, Community, and Practice",
+  "subject": "THEA",
+  "catalog_number": "429W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores the practical, aesthetic, and current issues of the performing arts as they relate to the development of individual artists and the communities that support their work. Focus areas include arts advocacy, grant writing, and the arts as a reflection of contemporary culture.",
+  "course_notes": "(Same as DANC 429W 1) (Permission Required Prior to Enrollment) Open to declared dance or theater majors or minors only in their senior or junior year. Please email Sally Radell, sradell@emory.edu for a permission number.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4701",
+      "academic_career": "UCOL",
+      "crn": "3987",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Sally A Radell",
+      "instructors": [
+        {
+          "name": "Sally A Radell",
+          "email": "sradell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "887"
+        }
+      ],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 3,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sally A Radell"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.111Z"
+}

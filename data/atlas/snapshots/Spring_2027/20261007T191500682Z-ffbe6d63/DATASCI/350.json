@@ -1,0 +1,93 @@
+{
+  "course_code": "DATASCI 350",
+  "course_title": "Data Science Computing",
+  "subject": "DATASCI",
+  "catalog_number": "350",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course emphasizes programming for data science, rather than programming for the sake of programming. Students learn essential computer literacy (e.g. shell commands), computing concepts & workflow for reproducible research. Students primarily write Python code and use cloud computing resources.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2229",
+      "academic_career": "UCOL",
+      "crn": "3302",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Danilo Freire",
+      "instructors": [
+        {
+          "name": "Danilo Freire",
+          "email": "danilo.freire@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40658"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Danilo Freire"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.717Z"
+}

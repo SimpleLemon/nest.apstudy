@@ -1,0 +1,320 @@
+{
+  "course_code": "DATASCI 498RW",
+  "course_title": "Quantitative Science Capstone",
+  "subject": "DATASCI",
+  "catalog_number": "498RW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application with Cont.Comm(*)",
+  "requirements": [
+    "Experience and Application with Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The capstone course provides an opportunity for students to apply their knowledge of the foundations, theory and methods of data science, along with their substantive expertise to address data driven practical problems in industry, government, and the non-profit sector.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2596",
+      "academic_career": "UCOL",
+      "crn": "3329",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Allison Cuttner",
+      "instructors": [
+        {
+          "name": "Allison Cuttner",
+          "email": "allison.wasson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11630"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2597",
+      "academic_career": "UCOL",
+      "crn": "3330",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "Danilo Freire",
+      "instructors": [
+        {
+          "name": "Danilo Freire",
+          "email": "danilo.freire@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40658"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2598",
+      "academic_career": "UCOL",
+      "crn": "3331",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "Anthony/James DeMattee",
+      "instructors": [
+        {
+          "name": "Anthony/James DeMattee",
+          "email": "anthony.demattee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "26379"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Wed",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2599",
+      "academic_career": "UCOL",
+      "crn": "3332",
+      "section_number": "4",
+      "schedule_type": "RSC",
+      "instructor": "Michael Czajkowski",
+      "instructors": [
+        {
+          "name": "Michael Czajkowski",
+          "email": "michael.david.czajkowski@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42333"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2600",
+      "academic_career": "UCOL",
+      "crn": "3333",
+      "section_number": "5",
+      "schedule_type": "RSC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 5,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Allison Cuttner",
+    "Anthony/James DeMattee",
+    "Danilo Freire",
+    "Michael Czajkowski"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.717Z"
+}

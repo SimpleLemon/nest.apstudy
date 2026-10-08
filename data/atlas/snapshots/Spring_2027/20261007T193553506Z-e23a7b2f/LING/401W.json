@@ -1,0 +1,97 @@
+{
+  "course_code": "LING 401W",
+  "course_title": "Language, Mind & Society",
+  "subject": "LING",
+  "catalog_number": "401W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students think critically about fundamental questions in linguistics, including: Is language a product of how the mind works or a product of social interaction? What are the sources of linguistic structure? Is language innate in humans? Various perspectives are compared &amp; contrasted.",
+  "course_notes": "Why is language structured the way it is? How and why is it limited in what it can express? Answers to questions such as these usually stem from two opposing views. One focuses on language and meaning as products of how the mind works. The other stresses language as a product of social interaction. In this course, we will consider a series of questions to better understand these two views. Topics will include what the sources of linguistic structure might be; whether (or how much of) language is innate in humans; how language reflects categories and helps us form categories; and to what extent language influences thought. Required Textbook(s): No textbook required; readings will be available on Canvas. The course is only available to graduating seniors who have declared the following majors or minors: Linguistics, Psych/Ling, Span/Ling, or Data Science major w/ concentration in Linguistics. Permission number required to enroll; contact dbolde2@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "455",
+      "academic_career": "UCOL",
+      "crn": "1545",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Jose Luis Boigues-Lopez",
+      "instructors": [
+        {
+          "name": "Jose Luis Boigues-Lopez",
+          "email": "jboigue@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1628"
+        }
+      ],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jose Luis Boigues-Lopez"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.564Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 245",
+  "course_title": "Individual & Society",
+  "subject": "SOC",
+  "catalog_number": "245",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Conditions and processes of group formation and change, and the effects of these on individual behavior and adaptation.",
+  "course_notes": "How do groups-ranging from small friendship circles to ethnic groups to entire societies-affect the life of an individual and how does the individual, in turn, affect the group? This course examines the reciprocal relationship between individual-level and group-level phenomena, beginning with a focus on the nature of social psychology and its methodology. Attention turns to defining situations and the identity processes that unfold. The second part of the course examines the cognitions, attitudes, and feelings of individuals in social interaction. The course concludes with an analysis of dynamics of power, status, and fairness. Consideration of intergroup processes bring together components of the course and illustrate prejudice and discrimination. In doing so, the course exemplifies how inequalities that emerge in interaction have consequences for larger groups. Book: Hegtvedt, Karen A. and Cathryn Johnson. 2018. Social Psychology: Individuals, Interactions, and Inequality. Thousand Oaks, CA: Sage. (Required) Priority will be given to sophomores and juniors should a waitlist emerge.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1313",
+      "academic_career": "UCOL",
+      "crn": "2985",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Karen A Hegtvedt",
+      "instructors": [
+        {
+          "name": "Karen A Hegtvedt",
+          "email": "khegtve@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1195"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 35,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Karen A Hegtvedt"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.583Z"
+}

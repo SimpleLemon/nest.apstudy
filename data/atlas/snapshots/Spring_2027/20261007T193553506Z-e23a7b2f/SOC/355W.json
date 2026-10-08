@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 355W",
+  "course_title": "Research Methods in Sociology",
+  "subject": "SOC",
+  "catalog_number": "355W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to research design and data analysis, including logic of research, methods of data collection, elementary statistics, and computer analysis.",
+  "course_notes": "Course Description: This course introduces students to the research methods commonly used in sociology and related fields. Topics include measurement validity and reliability; random and nonrandom sampling; experimental and quasi-experimental designs; survey research and questionnaire construction; ethnographic methods such as participant observation and intensive interviewing; evaluation research versus traditional social research; and ethical issues such as informed consent, privacy, and conflicts of interest. The course has four basic objectives. First, you will learn how to translate abstract theoretical ideas into testable hypotheses. Second, you will be able to identify the strengths and limitations of different methods and determine which methods are most appropriate for answering your particular research questions. Third, you will become better equipped to critically assess the methodological soundness of research presented in scholarly journals and the news media. Fourth, you will develop a detailed understanding of research ethics, including how ethical guidelines have evolved historically and how they potentially vary across different methods and fields of study. The overarching goal of this course is to provide you with the necessary practical skills for being a discerning consumer and producer of social research. The course is required for sociology majors and fulfills a continuing writing requirement.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "760",
+      "academic_career": "UCOL",
+      "crn": "2773",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Megan Reed",
+      "instructors": [
+        {
+          "name": "Megan Reed",
+          "email": "megan.nicole.reed@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "33212"
+        }
+      ],
+      "location": "Tarbutton Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Megan Reed"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.586Z"
+}

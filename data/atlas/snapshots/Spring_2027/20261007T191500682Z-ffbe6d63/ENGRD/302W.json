@@ -1,0 +1,156 @@
+{
+  "course_code": "ENGRD 302W",
+  "course_title": "Technical Writing",
+  "subject": "ENGRD",
+  "catalog_number": "302W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This writing-intensive course provides students with practice developing rhetorically effective and ethically sensitive communication in genres that characterize professional activity across and outside the university. No prior technical knowledge required.",
+  "course_notes": "(Same as DATASCI 302W 1) (Permission Required Prior to Enrollment) Juniors and seniors with declared majors or minors offered by the Department of Data and Decision Sciences or the Writing (RWID) Program will receive permission codes for this course prior to the pre-registration period. DATASCI and RWID students must use the provided code to enroll during their assigned registration period. Enrollment will be on a first-come, first-served basis, and once the enrollment cap is reached, the waitlist will be activated automatically. For enrollment in ENGRD 302W-01 only: Non-RWID students may contact ahackne@emory.edu for a permission code beginning November 23, 2026. Technical Writing for Data Science - In this writing-intensive course, we will practice the effective and ethical communication of specialized technical knowledge and quantitative data. Because data are information given order, we will consider their arrangement and re-arrangement as rhetoric. We will introduce rhetorical analysis as a model for understanding how quantitative data can be interpreted and conveyed for audiences ranging from professional researchers to the lay public. You will exercise strategies for communicating via the text, speech, and visual conventions integral to preparing \"technical\" genres such as research translations, code notebooks, presentations and data repositories. We will adapt these genres and their conventions for our course goals that center collaboration, transparency, and reproducibility, while emphasizing the methodological questions to ask when bringing new purposes to data prepared by others, as well as whom to ask, and how. As you gain comfort with thinking of writing and analysis as intertwined practices of exploratory inquiry, we will focus on how these practices shape the social impacts of our data-driven narratives.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2102",
+      "academic_career": "UCOL",
+      "crn": "1674",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Greg Palermo",
+      "instructors": [
+        {
+          "name": "Greg Palermo",
+          "email": "gregory.palermo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32007"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2103",
+      "academic_career": "UCOL",
+      "crn": "1675",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Donna McDermott",
+      "instructors": [
+        {
+          "name": "Donna McDermott",
+          "email": "donna.rosa.mcdermott@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12140"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Donna McDermott",
+    "Greg Palermo"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.726Z"
+}

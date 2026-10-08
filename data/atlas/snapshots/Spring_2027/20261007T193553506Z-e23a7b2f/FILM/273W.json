@@ -1,0 +1,108 @@
+{
+  "course_code": "FILM 273W",
+  "course_title": "Tarkovsky",
+  "subject": "FILM",
+  "catalog_number": "273W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "5",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course delves into the cinema by the Russian filmmaker Andrei Tarkovsky, exploring how his work revolutionized ideas about what cinema could and should be. Tarkovsky's cinema also invites us cultural dynamics of the latter half of the twentieth century: Soviet communism and the Cold War.",
+  "course_notes": "(Same as RUSS 273W 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2588",
+      "academic_career": "UCOL",
+      "crn": "3640",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Raymond De Luca",
+      "instructors": [
+        {
+          "name": "Raymond De Luca",
+          "email": "raymond.scott.de.luca@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39681"
+        },
+        {
+          "name": "Raymond De Luca",
+          "email": "raymond.scott.de.luca@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39681"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; W 7:30-9:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1930",
+            "end": "2130"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Raymond De Luca"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.547Z"
+}

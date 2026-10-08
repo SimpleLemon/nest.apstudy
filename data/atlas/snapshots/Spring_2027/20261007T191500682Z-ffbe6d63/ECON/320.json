@@ -1,0 +1,253 @@
+{
+  "course_code": "ECON 320",
+  "course_title": "Econometrics",
+  "subject": "ECON",
+  "catalog_number": "320",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to construction and testing of econometric models; analysis and critique of general linear regression model; simultaneous equations models; computer program for regression analysis; applications.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "248",
+      "academic_career": "UCOL",
+      "crn": "2111",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Jillian Dickens",
+      "instructors": [
+        {
+          "name": "Jillian Dickens",
+          "email": "jillian.dickens@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36396"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "249",
+      "academic_career": "UCOL",
+      "crn": "2112",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Jillian Dickens",
+      "instructors": [
+        {
+          "name": "Jillian Dickens",
+          "email": "jillian.dickens@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36396"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "246",
+      "academic_career": "UCOL",
+      "crn": "2109",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Zheng Fang",
+      "instructors": [
+        {
+          "name": "Zheng Fang",
+          "email": "zheng.fang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31597"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "247",
+      "academic_career": "UCOL",
+      "crn": "2110",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Pedro Sant'Anna",
+      "instructors": [
+        {
+          "name": "Pedro Sant'Anna",
+          "email": "pedro.santanna@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36037"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 2,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 4,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jillian Dickens",
+    "Pedro Sant'Anna",
+    "Zheng Fang"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.719Z"
+}

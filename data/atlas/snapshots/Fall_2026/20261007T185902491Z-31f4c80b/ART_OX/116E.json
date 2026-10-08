@@ -1,0 +1,92 @@
+{
+  "course_code": "ART_OX 116E",
+  "course_title": "Color Theory",
+  "subject": "ART_OX",
+  "catalog_number": "116E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course explores both the perception and science of color. Through experiential projects and seminar, students will examine color through multiple lenses: biological, optical, artistic and cultural. Manipulation and organization of color will be studied along with perceptual processes and color's cultural ability to empower, transform and transfix. Paint, pigment and light will all be used. This course is technical in nature but builds in expressive opportunities for students, especially in the form of a final semester student-directed project. This is an experiential course, and thus sustained active learning is expected.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4952",
+      "academic_career": "UOXF",
+      "crn": "4237",
+      "section_number": "1",
+      "schedule_type": "ART",
+      "instructor": "Mary Johnson",
+      "instructors": [
+        {
+          "name": "Mary Johnson",
+          "email": "mary.abigail.johnson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39485"
+        }
+      ],
+      "location": "Pierce Hall 110",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mary Johnson"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.598Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 457W",
+  "course_title": "Development Of Sociological Theory",
+  "subject": "SOC",
+  "catalog_number": "457W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: one sociology course or consent of instructor. Analysis of development of sociological theory as tradition of inquiry into organization and change of groups and societies. Covers classical and major contemporary contributions.",
+  "course_notes": "Sociological theory sometimes has the unfortunate reputation of being (a) removed from empirical matters and (b) done by people who are now long-dead. That reputation cannot be further from the truth. In fact, sociological theory remains vibrant in the present and, in both its classical and contemporary formulations, it has remained tied to understanding the world in which we live. One thread that runs through sociological theory is the concern with inequality, both in terms of understanding why it occurs and what needs to be done to eliminate it. To that end, sociologists have put forward theories that address inequality by emphasizing race, gender, class, status and the like (as well as the interplay and intersections found between them). We take that thread as the organizing principle of this theory class. Indeed, we focus on sociological theory dealing with the mechanisms by which inequality is produced and reproduced, as well as sociological theory that offers solutions about those mechanisms. In the process, we will show, on the one hand, how sociological theory is firmly linked to empirical research and, on the other hand, how sociological theories are formulated and refined by people addressing the present world, both in understanding and improving it.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "763",
+      "academic_career": "UCOL",
+      "crn": "2779",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Timothy J Dowd",
+      "instructors": [
+        {
+          "name": "Timothy J Dowd",
+          "email": "tdowd@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1763"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Timothy J Dowd"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.587Z"
+}

@@ -1,0 +1,86 @@
+{
+  "course_code": "DATASCI 495A",
+  "course_title": "Honors Research",
+  "subject": "DATASCI",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "For students participating in the Data Science honors program. Student is expected to pursue an honors committee approved project. Course objectives include support for research, analysis of data, synthesis and presentation of results/observations, and initiation of writing the thesis.",
+  "course_notes": "For additional information, see our webpage at https://datascience.emory.edu/undergraduate/experiential-learning/honors.html.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3982",
+      "academic_career": "UCOL",
+      "crn": "5306",
+      "section_number": "1",
+      "schedule_type": "THE",
+      "instructor": "Kevin McAlister",
+      "instructors": [
+        {
+          "name": "Kevin McAlister",
+          "email": "kevin.mcalister@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25072"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kevin McAlister"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.523Z"
+}

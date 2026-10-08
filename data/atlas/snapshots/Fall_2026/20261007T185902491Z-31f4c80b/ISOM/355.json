@@ -1,0 +1,91 @@
+{
+  "course_code": "ISOM 355",
+  "course_title": "Appcology: New Commerce Infrastructure",
+  "subject": "ISOM",
+  "catalog_number": "355",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will explore issues associated with the emerging forms of applications and services changing software ecosystems and commerce interactions. We will involve both design and development of real apps, gizmos, and widgets. This course will enable students to learn the design, development and distribution of the small and the many, and leave with a portfolio, not just a certificate.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "280",
+      "academic_career": "UBUS",
+      "crn": "5668",
+      "section_number": "1184",
+      "schedule_type": "LEC",
+      "instructor": "Huy Huynh",
+      "instructors": [
+        {
+          "name": "Huy Huynh",
+          "email": "huy.huynh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38350"
+        }
+      ],
+      "location": "Goizueta Business School 231",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 59,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Huy Huynh"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.627Z"
+}

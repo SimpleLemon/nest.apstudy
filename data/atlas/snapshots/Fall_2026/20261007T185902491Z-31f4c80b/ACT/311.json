@@ -1,0 +1,91 @@
+{
+  "course_code": "ACT 311",
+  "course_title": "Sustainability Measurement and Reporting",
+  "subject": "ACT",
+  "catalog_number": "311",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a critical analysis of current practices in business sustainability reporting and analysis. Topics covered include sustainability initiatives and challenges, reporting practices, reporting frameworks, reporting standards, regulatory requirements, NGOs, and rating agencies. The course also analyzes guidance for synthesizing information from corporate sustainability disclosures into traditional financial and valuation analyses. The class format combines lectures, interactive discussions, cases studies and project presentations.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4909",
+      "academic_career": "UBUS",
+      "crn": "3872",
+      "section_number": "1120",
+      "schedule_type": "LEC",
+      "instructor": "Usha Rackliffe",
+      "instructors": [
+        {
+          "name": "Usha Rackliffe",
+          "email": "usha.rackliffe@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6513"
+        }
+      ],
+      "location": "Goizueta Business School 334",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 26,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Usha Rackliffe"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.622Z"
+}

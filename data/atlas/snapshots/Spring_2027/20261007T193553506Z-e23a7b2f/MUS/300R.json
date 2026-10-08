@@ -1,0 +1,831 @@
+{
+  "course_code": "MUS 300R",
+  "course_title": "Ensemble: Orchestra",
+  "subject": "MUS",
+  "catalog_number": "300R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Group instruction in instrumental and/or vocal music and the performance of selected repertoire. Ensemble enrollment requires instructor approval. Interested students may participate in more than one ensemble; may be repeated for credit. For additional information, see music.emory.edu.",
+  "course_notes": "Audition and Area Coordinator approval required to enroll",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "528",
+      "academic_career": "UCOL",
+      "crn": "2148",
+      "section_number": "1",
+      "schedule_type": "MUS",
+      "instructor": "Paul Bhasin",
+      "instructors": [
+        {
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6546"
+        }
+      ],
+      "location": "Schwartz Center 202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 90,
+      "seats_available": 90,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4:30-6:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1630",
+            "end": "1830"
+          },
+          {
+            "day": "Thu",
+            "start": "1630",
+            "end": "1830"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "529",
+      "academic_career": "UCOL",
+      "crn": "2149",
+      "section_number": "2",
+      "schedule_type": "MUS",
+      "instructor": "Michael Kobito",
+      "instructors": [
+        {
+          "name": "Michael Kobito",
+          "email": "michael.kobito@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36158"
+        },
+        {
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "6546"
+        }
+      ],
+      "location": "Schwartz Center 202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4:30-6:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1630",
+            "end": "1830"
+          },
+          {
+            "day": "Wed",
+            "start": "1630",
+            "end": "1830"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "530",
+      "academic_career": "UCOL",
+      "crn": "2150",
+      "section_number": "3",
+      "schedule_type": "MUS",
+      "instructor": "Paul Bhasin",
+      "instructors": [
+        {
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6546"
+        }
+      ],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "531",
+      "academic_career": "UCOL",
+      "crn": "2151",
+      "section_number": "4",
+      "schedule_type": "MUS",
+      "instructor": "Gary Motley",
+      "instructors": [
+        {
+          "name": "Gary Motley",
+          "email": "gmotley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2145"
+        },
+        {
+          "name": "Randall Hunter",
+          "email": "rhunte4@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "4553"
+        }
+      ],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8-10p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "2000",
+            "end": "2200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "532",
+      "academic_career": "UCOL",
+      "crn": "2152",
+      "section_number": "5",
+      "schedule_type": "MUS",
+      "instructor": "Gary Motley",
+      "instructors": [
+        {
+          "name": "Gary Motley",
+          "email": "gmotley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2145"
+        },
+        {
+          "name": "Penelope Williams",
+          "email": "penelope.williams2@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "28465"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 5:30-7:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1930"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "533",
+      "academic_career": "UCOL",
+      "crn": "2153",
+      "section_number": "6",
+      "schedule_type": "MUS",
+      "instructor": "Liljana Andonovska",
+      "instructors": [
+        {
+          "name": "Liljana Andonovska",
+          "email": "liljana.andonovska@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42820"
+        }
+      ],
+      "location": "Schwartz Center 332",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4:30-6:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1630",
+            "end": "1830"
+          },
+          {
+            "day": "Wed",
+            "start": "1630",
+            "end": "1830"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "534",
+      "academic_career": "UCOL",
+      "crn": "2154",
+      "section_number": "7",
+      "schedule_type": "MUS",
+      "instructor": "Elena Cholakova",
+      "instructors": [
+        {
+          "name": "Elena Cholakova",
+          "email": "elena.cholakova@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4976"
+        }
+      ],
+      "location": "BRB Performing Arts Studio",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "535",
+      "academic_career": "UCOL",
+      "crn": "2155",
+      "section_number": "8",
+      "schedule_type": "MUS",
+      "instructor": "Patricia A Dinkins-Matthews",
+      "instructors": [
+        {
+          "name": "Patricia A Dinkins-Matthews",
+          "email": "pdinkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2524"
+        },
+        {
+          "name": "Bethany Mamola",
+          "email": "bethany.grace.mamola@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28488"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "536",
+      "academic_career": "UCOL",
+      "crn": "2156",
+      "section_number": "9",
+      "schedule_type": "MUS",
+      "instructor": "Eric Nelson",
+      "instructors": [
+        {
+          "name": "Eric Nelson",
+          "email": "benelso@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2290"
+        }
+      ],
+      "location": "Schwartz Center 245",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 7:30-9:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1930",
+            "end": "2130"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "537",
+      "academic_career": "UCOL",
+      "crn": "2157",
+      "section_number": "10",
+      "schedule_type": "MUS",
+      "instructor": "Eric Nelson",
+      "instructors": [
+        {
+          "name": "Eric Nelson",
+          "email": "benelso@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2290"
+        }
+      ],
+      "location": "Schwartz Center 245",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-6p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1800"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1800"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "538",
+      "academic_career": "UCOL",
+      "crn": "2158",
+      "section_number": "11",
+      "schedule_type": "MUS",
+      "instructor": "FNU Darsono",
+      "instructors": [
+        {
+          "name": "FNU Darsono",
+          "email": "darsono@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34734"
+        }
+      ],
+      "location": "Burlington Road Building 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6:30-8:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1830",
+            "end": "2030"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "539",
+      "academic_career": "UCOL",
+      "crn": "2159",
+      "section_number": "12",
+      "schedule_type": "MUS",
+      "instructor": "Elena Cholakova",
+      "instructors": [
+        {
+          "name": "Elena Cholakova",
+          "email": "elena.cholakova@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4976"
+        },
+        {
+          "name": "Jessica Shuang Wu",
+          "email": "swu22@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "4041"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "540",
+      "academic_career": "UCOL",
+      "crn": "2160",
+      "section_number": "13",
+      "schedule_type": "MUS",
+      "instructor": "Paul Bhasin",
+      "instructors": [
+        {
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6546"
+        },
+        {
+          "name": "Colm O'Hara",
+          "email": "colm.ohara@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44322"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "541",
+      "academic_career": "UCOL",
+      "crn": "2161",
+      "section_number": "14",
+      "schedule_type": "MUS",
+      "instructor": "Paul Bhasin",
+      "instructors": [
+        {
+          "name": "Paul Bhasin",
+          "email": "paul.bhasin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6546"
+        },
+        {
+          "name": "Colm O'Hara",
+          "email": "colm.ohara@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44322"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 14,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 14,
+    "open": 14,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Bethany Mamola",
+    "Colm O'Hara",
+    "Elena Cholakova",
+    "Eric Nelson",
+    "FNU Darsono",
+    "Gary Motley",
+    "Jessica Shuang Wu",
+    "Liljana Andonovska",
+    "Michael Kobito",
+    "Patricia A Dinkins-Matthews",
+    "Paul Bhasin",
+    "Penelope Williams",
+    "Randall Hunter"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.569Z"
+}

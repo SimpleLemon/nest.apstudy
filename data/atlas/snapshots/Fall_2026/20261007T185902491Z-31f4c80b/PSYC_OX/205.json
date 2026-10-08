@@ -1,0 +1,155 @@
+{
+  "course_code": "PSYC_OX 205",
+  "course_title": "Child Development",
+  "subject": "PSYC_OX",
+  "catalog_number": "205",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "The purpose of this course is to trace the cognitive, physical, and psychosocial changes of the human being from conception through adolescence and to examine the factors that influence this course of development.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "106",
+      "academic_career": "UOXF",
+      "crn": "4099",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ebru Pinar",
+      "instructors": [
+        {
+          "name": "Ebru Pinar",
+          "email": "ebru.pinar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43554"
+        }
+      ],
+      "location": "Johnson Hall 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "107",
+      "academic_career": "UOXF",
+      "crn": "4100",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Ebru Pinar",
+      "instructors": [
+        {
+          "name": "Ebru Pinar",
+          "email": "ebru.pinar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43554"
+        }
+      ],
+      "location": "Johnson Hall 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ebru Pinar"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.615Z"
+}

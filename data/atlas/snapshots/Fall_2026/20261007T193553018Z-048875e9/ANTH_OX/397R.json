@@ -1,0 +1,128 @@
+{
+  "course_code": "ANTH_OX 397R",
+  "course_title": "Directed Study",
+  "subject": "ANTH_OX",
+  "catalog_number": "397R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Independent reading and research under the direction of a faculty member. Students must submit for instructor approval a one-page written proposal of the work to be done. This course does not satisfy distribution requirements in history and social sciences.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3",
+      "academic_career": "UOXF",
+      "crn": "6394",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Jessica Ham",
+      "instructors": [
+        {
+          "name": "Jessica Ham",
+          "email": "jessica.ham@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17276"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4",
+      "academic_career": "UOXF",
+      "crn": "6432",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "SJ Dillon",
+      "instructors": [
+        {
+          "name": "SJ Dillon",
+          "email": "sarah.dillon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25906"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jessica Ham",
+    "SJ Dillon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

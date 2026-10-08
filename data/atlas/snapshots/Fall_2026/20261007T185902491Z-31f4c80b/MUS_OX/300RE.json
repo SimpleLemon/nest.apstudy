@@ -1,0 +1,138 @@
+{
+  "course_code": "MUS_OX 300RE",
+  "course_title": "Oxford Chorale",
+  "subject": "MUS_OX",
+  "catalog_number": "300RE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "We are an introductory mixed-voice ensemble that is devoted to performing a diverse selection of repertoire. Comprised of undergraduate students, every student will learn proper and healthy singing techniques, musical terms, choral concepts, and advantage of exploring compositions from a variety of eras and cultures.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "69",
+      "academic_career": "UOXF",
+      "crn": "4165",
+      "section_number": "1",
+      "schedule_type": "MUS",
+      "instructor": "Madison Tiegreen",
+      "instructors": [
+        {
+          "name": "Madison Tiegreen",
+          "email": "madison.elise.tiegreen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46617"
+        }
+      ],
+      "location": "FEW Music",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "70",
+      "academic_career": "UOXF",
+      "crn": "6453",
+      "section_number": "2",
+      "schedule_type": "MUS",
+      "instructor": "Madison Tiegreen",
+      "instructors": [
+        {
+          "name": "Madison Tiegreen",
+          "email": "madison.elise.tiegreen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46617"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 7,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Madison Tiegreen"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.610Z"
+}

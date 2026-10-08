@@ -1,0 +1,80 @@
+{
+  "course_code": "MI 213D",
+  "course_title": "Medical Imaging Procedures",
+  "subject": "MI",
+  "catalog_number": "213D",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2528",
+      "academic_career": "UAH",
+      "crn": "1050",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Jacki Harmon",
+      "instructors": [
+        {
+          "name": "Jacki Harmon",
+          "email": "jacki.harmon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28217"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jacki Harmon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.618Z"
+}

@@ -1,0 +1,118 @@
+{
+  "course_code": "POLS 111",
+  "course_title": "Principles of Political Science",
+  "subject": "POLS",
+  "catalog_number": "111",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course is organized around the following questions: What is politics, and what is political science? How do political groups form? How do groups make decisions? How are group decisions implemented? We approach these questions using ideas that are found across the sub-fields of political science.",
+  "course_notes": "Please note: this class will offer regular optional tutorials on Fridays at 11 am and 1 pm. Though optional, students are encouraged to note these times as they construct their schedule so that, if they choose to, they may attend one of those sessions",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4247",
+      "academic_career": "UCOL",
+      "crn": "2650",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Danielle Jung",
+      "instructors": [
+        {
+          "name": "Danielle Jung",
+          "email": "danielle.jung@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5829"
+        },
+        {
+          "name": "Gavin Kiger",
+          "email": "gavin.kiger@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "32756"
+        },
+        {
+          "name": "Kevin Russell",
+          "email": "kevin.russell@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "28682"
+        },
+        {
+          "name": "Hanh Linh Tran",
+          "email": "hanh.linh.tran@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "32753"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 175,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Danielle Jung",
+    "Gavin Kiger",
+    "Hanh Linh Tran",
+    "Kevin Russell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.573Z"
+}

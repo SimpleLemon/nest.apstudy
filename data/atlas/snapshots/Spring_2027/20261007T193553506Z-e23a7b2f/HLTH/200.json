@@ -1,0 +1,669 @@
+{
+  "course_code": "HLTH 200",
+  "course_title": "Peer Health Training",
+  "subject": "HLTH",
+  "catalog_number": "200",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A course training students to be peer health partners for the HLTH 100 course. Strong focus on health education and working as a peer partner.",
+  "course_notes": "This course will train students to be peer health partners for the Health 100 course (taught during fall semesters). Students will be provided an opportunity to become involved in a personalized approach to health and well-being by offering the tools to discover their own health and to develop healthy lifestyle behaviors. During the semester, we will cover problems and issues relevant to Emory students, evidence-based approaches to health and wellness, and information on the resources and tools available at Emory for all students. Though designed to prepare students to facilitate and present to freshmen in Health 100, not all students who successfully complete this course will go on to do so. This course will benefit any student with an interest in health who also has the aim of broader intellectual development.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1665",
+      "academic_career": "UCOL",
+      "crn": "1565",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1666",
+      "academic_career": "UCOL",
+      "crn": "3340",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1667",
+      "academic_career": "UCOL",
+      "crn": "3341",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1668",
+      "academic_career": "UCOL",
+      "crn": "3342",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1669",
+      "academic_career": "UCOL",
+      "crn": "3343",
+      "section_number": "5",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1670",
+      "academic_career": "UCOL",
+      "crn": "3344",
+      "section_number": "6",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1671",
+      "academic_career": "UCOL",
+      "crn": "3345",
+      "section_number": "7",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1672",
+      "academic_career": "UCOL",
+      "crn": "3346",
+      "section_number": "8",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 1-2:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1673",
+      "academic_career": "UCOL",
+      "crn": "3347",
+      "section_number": "9",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1674",
+      "academic_career": "UCOL",
+      "crn": "3348",
+      "section_number": "10",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 10,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 6,
+    "other": 0,
+    "open": 10,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Logan Edwards",
+    "Madison Campbell",
+    "Noni Keyton"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.555Z"
+}

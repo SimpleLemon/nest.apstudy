@@ -1,0 +1,86 @@
+{
+  "course_code": "PE 410R",
+  "course_title": "PPF: Varsity Volleyball (Women)",
+  "subject": "PE",
+  "catalog_number": "410R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Must register by permission only from head coach. Meets the Principles of Physical Fitness (PPF) requirement with exams on curricular content.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1076",
+      "academic_career": "UCOL",
+      "crn": "3000",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Chadwick Hixon",
+      "instructors": [
+        {
+          "name": "Chadwick Hixon",
+          "email": "chadwick.bryce.hixon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27794"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 100,
+      "seats_available": 82,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Chadwick Hixon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.092Z"
+}

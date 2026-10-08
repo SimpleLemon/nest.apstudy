@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 249",
+  "course_title": "Criminology",
+  "subject": "SOC",
+  "catalog_number": "249",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Antisocial behavior in relation to cultural, social biological, and psychological factors.",
+  "course_notes": "This course addresses major themes and questions in the sociological study of criminology. We will examine some of the most influential explanations for criminal behavior, including strain theory and social control theory among others. The course will focus on the ways in which social context shapes beliefs about crime. What are the causes of crime? How can crime be reduced? In what ways is criminal justice decision-making influenced by race, class, and gender biases? To develop a thorough understanding of the nature of crime, we will examine a range of empirical work and substantive issues but will focus on issues around mass incarceration, prison systems, and white collar crime.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1320",
+      "academic_career": "UCOL",
+      "crn": "3057",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sonal Nalkur",
+      "instructors": [
+        {
+          "name": "Sonal Nalkur",
+          "email": "snalkur@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8170"
+        }
+      ],
+      "location": "White Hall 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sonal Nalkur"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.583Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "HLTH 328",
+  "course_title": "Textbook to Table",
+  "subject": "HLTH",
+  "catalog_number": "328",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "We will examine the evidence for potential benefits of a plant-based diet and apply the findings through hands-on cooking experiences, group projects and community engagement. We will consider the potential influence of science, culture, sociology, economics, and sustainability on dietary choices.",
+  "course_notes": "When we sit down at the table to eat, many different factors influence our food choices and its preparation. In this course, students will learn and use evidence-based nutrition knowledge to examine the potential benefits of a plant-based diet. In addition, students will consider the potential influence of science, culture, sociology, economics and sustainability on these choices. Topics of investigation will be presented through a transdisciplinary perspective utilizing lectures and group discussions, hands-on cooking experiences, group projects and community engagement.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4308",
+      "academic_career": "UCOL",
+      "crn": "2288",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jill Welkley",
+      "instructors": [
+        {
+          "name": "Jill Welkley",
+          "email": "jwelkle@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1378"
+        }
+      ],
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jill Welkley"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.547Z"
+}

@@ -1,0 +1,469 @@
+{
+  "course_code": "HLTH 385",
+  "course_title": "Special Topics: Human Health: Contemp. Issues in HLTH Ethics",
+  "subject": "HLTH",
+  "catalog_number": "385",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar of lecture series of topics in human health. May be repeated for credit when topic varies. Credit varies from one to four hours.",
+  "course_notes": "This course examines contemporary ethical challenges in healthcare, public health, and emerging biotechnologies. Students will apply moral theories and core health ethics principles to real-world cases involving chronic and mental illness, aging, xenotransplantation, climate change, reproductive technologies, AI in medicine, health data privacy, and more. Special Note: HLTH 385 courses count differently within the majors/minors; they are not all equivalent. Please pay close attention to the exact course title and categories that specific title counts in, which you can find on our requirements sheets and course summary sheets. If you have any questions, please reach out to CSHH administration.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1907",
+      "academic_career": "UCOL",
+      "crn": "1597",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ju Zhang",
+      "instructors": [
+        {
+          "name": "Ju Zhang",
+          "email": "ju.zhang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34356"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1908",
+      "academic_career": "UCOL",
+      "crn": "1598",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Andrea Fitzroy",
+      "instructors": [
+        {
+          "name": "Andrea Fitzroy",
+          "email": "andrea.fitzroy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27641"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1909",
+      "academic_career": "UCOL",
+      "crn": "1599",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Andrea Fitzroy",
+      "instructors": [
+        {
+          "name": "Andrea Fitzroy",
+          "email": "andrea.fitzroy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27641"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1910",
+      "academic_career": "UCOL",
+      "crn": "1709",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1911",
+      "academic_career": "UCOL",
+      "crn": "3353",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1912",
+      "academic_career": "UCOL",
+      "crn": "3356",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1913",
+      "academic_career": "UCOL",
+      "crn": "3667",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Don Seeman",
+      "instructors": [
+        {
+          "name": "Don Seeman",
+          "email": "dseeman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3517"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 7,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1914",
+      "academic_career": "UCOL",
+      "crn": "4051",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "Héctor Alvarez",
+      "instructors": [
+        {
+          "name": "Héctor Alvarez",
+          "email": "hector.alvarez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39587"
+        },
+        {
+          "name": "Brendan Ozawa-de Silva",
+          "email": "bozawad@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30925"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 13,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 8,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrea Fitzroy",
+    "Brendan Ozawa-de Silva",
+    "Don Seeman",
+    "Héctor Alvarez",
+    "Ju Zhang"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.557Z"
+}

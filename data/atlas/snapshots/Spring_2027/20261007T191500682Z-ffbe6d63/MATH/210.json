@@ -1,0 +1,216 @@
+{
+  "course_code": "MATH 210",
+  "course_title": "Advanced Calculus for Data Sciences",
+  "subject": "MATH",
+  "catalog_number": "210",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a short treatment of MATH 112 and 211 with a lab component. It is not appropriate for students who have taken MATH 211 . Topics include: advanced integration, Taylor series; and multivariable differentiation, optimization and integration; and applications to statistics and science.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "484",
+      "academic_career": "UCOL",
+      "crn": "2920",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "485",
+      "academic_career": "UCOL",
+      "crn": "2924",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Audrey Bu",
+      "instructors": [
+        {
+          "name": "Audrey Bu",
+          "email": "audrey.bu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32401"
+        },
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "486",
+      "academic_career": "UCOL",
+      "crn": "2925",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Audrey Bu",
+      "instructors": [
+        {
+          "name": "Audrey Bu",
+          "email": "audrey.bu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32401"
+        },
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Audrey Bu",
+    "Mike Carr"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.750Z"
+}

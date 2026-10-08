@@ -1,0 +1,93 @@
+{
+  "course_code": "ECS 201",
+  "course_title": "Emory Edge: Transfers",
+  "subject": "ECS",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides a framework for students to articulate how to leverage a liberal arts education as they launch their post-graduation pursuits. Through assignments focused on self-assessment and exploration, students will identify and translate skills that transfer from college to career.",
+  "course_notes": "This course, ECS 201: Transfers, is for new transfer students only. First-year undergraduates should register for a section of ECS 101: Emory Essentials.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4480",
+      "academic_career": "UCOL",
+      "crn": "2891",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rebecca Rego",
+      "instructors": [
+        {
+          "name": "Rebecca Rego",
+          "email": "rebecca.rego@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14614"
+        },
+        {
+          "name": "Cristina Griffin",
+          "email": "cristina.griffin@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46548"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristina Griffin",
+    "Rebecca Rego"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.528Z"
+}

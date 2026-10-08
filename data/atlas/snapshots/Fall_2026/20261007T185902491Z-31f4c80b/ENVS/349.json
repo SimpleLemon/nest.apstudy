@@ -1,0 +1,104 @@
+{
+  "course_code": "ENVS 349",
+  "course_title": "Ecology of Invasions",
+  "subject": "ENVS",
+  "catalog_number": "349",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will familiarize students with principles of ecological invasions and methods for assessing the spread and impacts of invasive species on a global scale. Students will also become familiar with major sources of exotic species introductions and methods available for prevention and control.",
+  "course_notes": "(Same as BIOL 349 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2415",
+      "academic_career": "UCOL",
+      "crn": "2088",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Carolyn Keogh",
+      "instructors": [
+        {
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "16812"
+        },
+        {
+          "name": "Carolyn Keogh",
+          "email": "carolyn.keogh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "16812"
+        }
+      ],
+      "location": "Math & Science Center - W501",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p; W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Carolyn Keogh"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.534Z"
+}

@@ -1,0 +1,155 @@
+{
+  "course_code": "SOC 221",
+  "course_title": "Culture and Society",
+  "subject": "SOC",
+  "catalog_number": "221",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the sociological study of culture. Examines relationships between values, beliefs, and expressive symbols, on the one hand, and the institutional structure of society on the other. Attention to art, media, religion, and ideology.",
+  "course_notes": "Course Overview: This is a survey course in the sociology of culture. Providing a precise definition of culture is quite challenging because it means different things to different people. Nevertheless, culture has become an essential concept in sociology and is one of the most vibrant fields of the discipline. Throughout the course, we will examine theoretical and empirical work to understand what culture is and why it matters from a sociological perspective. The class is organized into three broad parts.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1310",
+      "academic_career": "UCOL",
+      "crn": "2884",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ju Hyun Park",
+      "instructors": [
+        {
+          "name": "Ju Hyun Park",
+          "email": "ju.hyun.park@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "10417"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1311",
+      "academic_career": "UCOL",
+      "crn": "3023",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Ju Hyun Park",
+      "instructors": [
+        {
+          "name": "Ju Hyun Park",
+          "email": "ju.hyun.park@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "10417"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 39,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ju Hyun Park"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.583Z"
+}

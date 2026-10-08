@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 352",
+  "course_title": "Epigenetics & Human Disease",
+  "subject": "BIOL",
+  "catalog_number": "352",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Epigenetics is the study of heritable characteristics not caused by changes in DNA sequence, but rather induced by non-genetic factors that alter gene expression and are dependent on time and location. The course explores epigenetics and its relation to normal development and disease.",
+  "course_notes": "Epigenetics is the study of heritable characteristics not caused by changes in DNA sequence, but rather induced by non-genetic factors that alter gene expression and are dependent on time and location. The course explores epigenetics and its relation to normal development and disease. This course may be taken as elective credit for the Biology major. Prerequisites: Biology 142, 142L, and 264.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1653",
+      "academic_career": "UCOL",
+      "crn": "1998",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Arri Eisen",
+      "instructors": [
+        {
+          "name": "Arri Eisen",
+          "email": "aeisen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "837"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Arri Eisen"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.519Z"
+}

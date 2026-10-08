@@ -1,0 +1,97 @@
+{
+  "course_code": "PSYC 209",
+  "course_title": "Perception and Action",
+  "subject": "PSYC",
+  "catalog_number": "209",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Perception of the world through the senses, gathering information about one's surroundings by seeing, hearing, smelling, tasting, touching, and acting.",
+  "course_notes": "How do humans (and others) take in the surrounding world? What is perception in the first place, why does it sometimes fail us, and how do individual differences play a role? How do visual (and other) illusions work, and what do they tell us? How does perception emerge from the brain and over the course of development? The purpose of this course is to examine how perceivers gather, organize, and act on information experienced through the senses. Topics covered include: 1) vision, hearing, somatosensation, taste and smell; 2) behavioral and neurological research methods for uncovering sensory and perceptual processes; and 3) motor control perception-action links.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "684",
+      "academic_career": "UCOL",
+      "crn": "1617",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hillary R Rodman",
+      "instructors": [
+        {
+          "name": "Hillary R Rodman",
+          "email": "hrrodma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1805"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hillary R Rodman"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.581Z"
+}

@@ -1,0 +1,506 @@
+{
+  "course_code": "KRN 102",
+  "course_title": "Elementary Korean II",
+  "subject": "KRN",
+  "catalog_number": "102",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for those who have taken KRN 101 or have some knowledge of Korean. Basic communication skills, vocabulary,and grammar patterns will be covered.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1385",
+      "academic_career": "UCOL",
+      "crn": "1941",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sorin Huh",
+      "instructors": [
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1386",
+      "academic_career": "UCOL",
+      "crn": "1942",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Sorin Huh",
+      "instructors": [
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1387",
+      "academic_career": "UCOL",
+      "crn": "1943",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Sorin Huh",
+      "instructors": [
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1388",
+      "academic_career": "UCOL",
+      "crn": "1944",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Sorin Huh",
+      "instructors": [
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1389",
+      "academic_career": "UCOL",
+      "crn": "1945",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Ji hye Sohn",
+      "instructors": [
+        {
+          "name": "Ji hye Sohn",
+          "email": "jihye.sohn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43774"
+        },
+        {
+          "name": "Ji hye Sohn",
+          "email": "jihye.sohn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43774"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1390",
+      "academic_career": "UCOL",
+      "crn": "1946",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Hyekyung Jin",
+      "instructors": [
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        },
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1391",
+      "academic_career": "UCOL",
+      "crn": "1947",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Eunae Jo",
+      "instructors": [
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        },
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 7,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 7,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eunae Jo",
+    "Hyekyung Jin",
+    "Ji hye Sohn",
+    "Nayoung Kim",
+    "Sorin Huh"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.561Z"
+}

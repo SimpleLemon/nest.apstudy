@@ -1,0 +1,86 @@
+{
+  "course_code": "THEA 495A",
+  "course_title": "Honors Research in Theater",
+  "subject": "THEA",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course captures candidates for Honors in Theater Studies's completion of independent honors research.",
+  "course_notes": "Email instructor & CC Theater Studies Program Coordinator, Ashley Alves (ashley.alves@emory.edu) for permission",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3487",
+      "academic_career": "UCOL",
+      "crn": "2614",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Michael Evenden",
+      "instructors": [
+        {
+          "name": "Michael Evenden",
+          "email": "mevende@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1189"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Michael Evenden"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.595Z"
+}

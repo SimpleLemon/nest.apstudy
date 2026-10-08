@@ -1,0 +1,185 @@
+{
+  "course_code": "ANT 202",
+  "course_title": "Concepts and Methods in Cultural Anthropology",
+  "subject": "ANT",
+  "catalog_number": "202",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores key concepts in cultural anthropology. Through engaging ethnographic accounts from different world areas, students will analyze anthropological debates about culture, race, religion, ritual, health, gender, sexuality, politics, and/or exchange and learn about fieldwork methods.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1770",
+      "academic_career": "UCOL",
+      "crn": "3137",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Glass",
+      "instructors": [
+        {
+          "name": "Jessica Glass",
+          "email": "j.l.glass@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38917"
+        }
+      ],
+      "location": "Anthropology Bldg TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1771",
+      "academic_career": "UCOL",
+      "crn": "3382",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Anthropology Bldg TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1772",
+      "academic_career": "UCOL",
+      "crn": "3414",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Anthropology Bldg TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 17,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 2,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jessica Glass"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.690Z"
+}

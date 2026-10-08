@@ -1,0 +1,97 @@
+{
+  "course_code": "ARTHIST 225",
+  "course_title": "Ancient Mesoamerican Art/Architect",
+  "subject": "ARTHIST",
+  "catalog_number": "225",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the art and architecture of ancient Mesoamerica (lower Mexico and upper Central America), particularly the Olmec, Maya, and Aztec cultures. Includes artworks in jade, ceramic, stone, obsidian, and bone from the Carlos Museum.",
+  "course_notes": "(Same as ANT 285 1) This course is a survey of the art and architecture of ancient Mesoamerica (Mexico and Central America), beginning with the Olmec on Mexico's Gulf Coast, covering the immense metropolis of Teotihuacan and the Maya and Zapotec civilizations, and ending with the Mexica (Aztec) Empire. This course covers architecture and art in a variety of media, addressing a range of topics including materials and manufacturing, aesthetics, history, mythology, politics, writing, urbanism, and sacred landscapes. The course will draw on Carlos Museum collections and explore issues relating to the display, interpretation, and ethics of ancient Mesoamerican art in museums. Art History major/minor: Division IV Architectural Studies minor: elective Art History major with Museums Concentration: core or elective",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "359",
+      "academic_career": "UCOL",
+      "crn": "1981",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Megan O'Neil",
+      "instructors": [
+        {
+          "name": "Megan O'Neil",
+          "email": "megan.eileen.oneil@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18257"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Megan O'Neil"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.693Z"
+}

@@ -1,0 +1,92 @@
+{
+  "course_code": "ECON 499RW",
+  "course_title": "Undergraduate Research in Economics",
+  "subject": "ECON",
+  "catalog_number": "499RW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application with Cont.Comm(*)",
+  "requirements": [
+    "Experience and Application with Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will learn the craft of research in economics. Coursework will consist of synthesis of literature; collection, collation, cleaning of data; data analysis, contributing to manuscript preparation, and/or other work related to the sustaining of an academic research project.",
+  "course_notes": "Class Description: This course focuses on applications of advanced causal inference methods to existing and new research. Coursework will consist of learning and applying advanced econometric tools using data from recently published empirical papers. Select topics will include: regression kink designs, staggered difference-in-differences, shift-share designs, synthetic regressions, dealing with missing data and attrition, dimensionality reduction etc. Students will have hands on experience with the latest research and policy applications of various econometric methods. Furthermore, they will participate in replication and econometric games and compete against teams from other universities in the country and worldwide. This section is open only to current enrollees of Fall 2026 ECON 499RW-3 who will have completed Econ 320 before Spring 2025.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2283",
+      "academic_career": "UCOL",
+      "crn": "2129",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Krzysztof Karbownik",
+      "instructors": [
+        {
+          "name": "Krzysztof Karbownik",
+          "email": "krzysztof.karbownik@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "20905"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-6:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Krzysztof Karbownik"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.538Z"
+}

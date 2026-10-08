@@ -1,0 +1,97 @@
+{
+  "course_code": "CHN 303W",
+  "course_title": "Advanced Chinese for Heritage Speakers",
+  "subject": "CHN",
+  "catalog_number": "303W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An advanced course for heritage learners with emphasis on improving reading and writing abilities. Through reading and discussion of texts on Chinese life, culture, and society, the course enhances students??? overall Chinese proficiency and understanding of the Chinese culture.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2735",
+      "academic_career": "UCOL",
+      "crn": "2106",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Qiong Le",
+      "instructors": [
+        {
+          "name": "Qiong Le",
+          "email": "qiong.le@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5014"
+        }
+      ],
+      "location": "Woodruff Library 875",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Qiong Le"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.512Z"
+}

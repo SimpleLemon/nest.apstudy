@@ -1,0 +1,80 @@
+{
+  "course_code": "NRSG 403",
+  "course_title": "Pediatric Specialty Nursing",
+  "subject": "NRSG",
+  "catalog_number": "403",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This elective course provides opportunities for students to enhance their understanding of the multiple specialty roles of pediatric nursing in the acute and ambulatory settings. Quality and safety, patient- and family-centered care and evidence based practice are emphasized.",
+  "course_notes": "The course is for CHOA PEP students only. Students cannot self-register. The Office of Education will process the registration. Clinical times TBA",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3945",
+      "academic_career": "UNUR",
+      "crn": "5788",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Christina Calamaro",
+      "instructors": [
+        {
+          "name": "Christina Calamaro",
+          "email": "christina.j.calamaro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17433"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christina Calamaro"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.633Z"
+}

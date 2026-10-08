@@ -1,0 +1,130 @@
+{
+  "course_code": "INTER_OX 492RE",
+  "course_title": "Disciplinary Internship",
+  "subject": "INTER_OX",
+  "catalog_number": "492RE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Course offers students opportunity to earn one academic credit for on- or off-campus internship experience alongside disciplinary work with a faculty member. Application and course approval required.",
+  "course_notes": "Instructor permission required to enroll ,Spanish for Healthcare",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4194",
+      "academic_career": "UOXF",
+      "crn": "4274",
+      "section_number": "1",
+      "schedule_type": "IND",
+      "instructor": "Cristina Tarazona",
+      "instructors": [
+        {
+          "name": "Cristina Tarazona",
+          "email": "cristina.tarazona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4227"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4195",
+      "academic_career": "UOXF",
+      "crn": "5737",
+      "section_number": "2",
+      "schedule_type": "IND",
+      "instructor": "Timothy Leyson",
+      "instructors": [
+        {
+          "name": "Timothy Leyson",
+          "email": "timothy.paul.leyson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43550"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-2p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1400"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristina Tarazona",
+    "Timothy Leyson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.123Z"
+}

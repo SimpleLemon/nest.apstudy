@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 230",
+  "course_title": "Sociologic. Aspects Health/Illness",
+  "subject": "SOC",
+  "catalog_number": "230",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Social etiology and ecology of disease, sociological factors affecting treatment and rehabilitation, and the organization of medical care and medicine as a social institution.",
+  "course_notes": "The \"life chances\" that we are dealt by society have vast implications for our health. Indeed, social phenomena such as racism, stigma, and immigration manage to get \"under the skin\" and determine health outcomes. Perspectives derived from the sociology of health and illness (also termed \"medical sociology\") help us understand what makes people sick and what keeps them healthy. Sociological understandings of health and illness provide critical contributions to sociology as well as medicine, epidemiology, public health, and population health. The goal of this course is to think critically about how social processes shape health and are written on the body. We will draw from multiple disciplines alongside sociology, with the aim of broadening our powers of sociological imagination. This course is organized around four broad themes: 1) Theories and approaches, 2) Social identities and health inequalities, 3) Social interactions, relationships, and the illness experience, and 4) Social nature of medical structures. Through these modules, this course will introduce key concepts from the study of health and illness, including: social determinants of health, health inequalities, social stress, medicalization, the development of medical knowledge, the structure of the healthcare workforce and healthcare delivery, institutional harm, and medical ethics.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "755",
+      "academic_career": "UCOL",
+      "crn": "2781",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Surbhi Shrivastava",
+      "instructors": [
+        {
+          "name": "Surbhi Shrivastava",
+          "email": "surbhi.shrivastava@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27041"
+        }
+      ],
+      "location": "White Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Surbhi Shrivastava"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.586Z"
+}

@@ -1,0 +1,155 @@
+{
+  "course_code": "ENG 205W",
+  "course_title": "Poetry",
+  "subject": "ENG",
+  "catalog_number": "205W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Studies in poetry and poetic forms. Readings may vary in individual sections, but all sections emphasize critical reading and writing about poetic art. Required for English majors.",
+  "course_notes": "Poetry 205: Freeing the Verse In this course, we will begin with the fundamentals of poetic theory and form, and from there, explore how the poets of the shifting cultures of the last century (roughly modernism through hip-hop) have experimented beyond traditional verse. We will also examine the historical contexts in which the poets were writing within. The course focuses primarily on American authors across a diverse array of backgrounds. Course authors include Gertrude Stein, ee cummings, Jack Kerouac, Tan Lin, Lucille Clifton, Gil Scott-Heron, Danez Smith, Chen Chen, Alexis Pauline Gumbs, Fatimah Ashghar, and Kendrick Lamar. This is a writing-intensive course that focuses on prose-based poetic criticism, but will still include some exhibition poetry exercises during class. The course grades will be determined by a mix of class participation, short essays, and midterm & final exams.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "684",
+      "academic_career": "UCOL",
+      "crn": "5791",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "Alanna Prince",
+      "instructors": [
+        {
+          "name": "Alanna Prince",
+          "email": "alanna.maria.prince@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43577"
+        }
+      ],
+      "location": "Few Bldg 129",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "685",
+      "academic_career": "UCOL",
+      "crn": "5792",
+      "section_number": "4",
+      "schedule_type": "SEM",
+      "instructor": "Alanna Prince",
+      "instructors": [
+        {
+          "name": "Alanna Prince",
+          "email": "alanna.maria.prince@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43577"
+        }
+      ],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alanna Prince"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.052Z"
+}

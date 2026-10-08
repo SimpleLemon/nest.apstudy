@@ -1,0 +1,359 @@
+{
+  "course_code": "BIOL_OX 141L",
+  "course_title": "Foundations of Modern Biology I Laboratory",
+  "subject": "BIOL_OX",
+  "catalog_number": "141L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "The study of cell structure and function including cellular metabolism, fundamentals of genetics, evolution, and diversity of life. Introduces students to scientific inquiry and communication in the laboratory. One three-hour laboratory per week.",
+  "course_notes": "Must also enroll in BIOL_OX141.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4122",
+      "academic_career": "UOXF",
+      "crn": "4368",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Sheldon Lawrence",
+      "instructors": [
+        {
+          "name": "Sheldon Lawrence",
+          "email": "sheldon.lawrence@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27642"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4123",
+      "academic_career": "UOXF",
+      "crn": "4369",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Michael Martin",
+      "instructors": [
+        {
+          "name": "Michael Martin",
+          "email": "michael.martin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14492"
+        },
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4124",
+      "academic_career": "UOXF",
+      "crn": "4370",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Kelly Murray-Stoker",
+      "instructors": [
+        {
+          "name": "Kelly Murray-Stoker",
+          "email": "kelly.mackenzie.murray-stoker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39548"
+        },
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4125",
+      "academic_career": "UOXF",
+      "crn": "4371",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Lauren Essler",
+      "instructors": [
+        {
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43354"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4126",
+      "academic_career": "UOXF",
+      "crn": "4372",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Lauren Essler",
+      "instructors": [
+        {
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43354"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4127",
+      "academic_career": "UOXF",
+      "crn": "4373",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Kelly Murray-Stoker",
+      "instructors": [
+        {
+          "name": "Kelly Murray-Stoker",
+          "email": "kelly.mackenzie.murray-stoker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39548"
+        }
+      ],
+      "location": "Oxford Science Bldg. 325",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "6",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 0,
+    "labs": 6,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 6,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jordan Silva",
+    "Kelly Murray-Stoker",
+    "Lauren Essler",
+    "Michael Martin",
+    "Sheldon Lawrence"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.599Z"
+}

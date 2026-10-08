@@ -1,0 +1,93 @@
+{
+  "course_code": "DATASCI 420",
+  "course_title": "PPE 2: Social Choice & Welfare",
+  "subject": "DATASCI",
+  "catalog_number": "420",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is Part 2 of the two-course PPE (Philosophy, Politics, & Econmics) sequence. PPE 2 applies the tools learned from PPE 1 to examine major topics in social choice, distributive justice, and welfare economics, focusing on foundational results and debates by Arrow, Sen, Harsanyi, Rawls, and others.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2621",
+      "academic_career": "UCOL",
+      "crn": "3304",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hun Chung",
+      "instructors": [
+        {
+          "name": "Hun Chung",
+          "email": "hun.chung@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39619"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hun Chung"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.534Z"
+}

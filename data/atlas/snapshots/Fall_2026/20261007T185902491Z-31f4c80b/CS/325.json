@@ -1,0 +1,93 @@
+{
+  "course_code": "CS 325",
+  "course_title": "Artificial Intelligence",
+  "subject": "CS",
+  "catalog_number": "325",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Foundations and problems of machine intelligence, application areas, representation of knowledge, constraint processing, AI programming languages, expert systems, design of an intelligent system.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "606",
+      "academic_career": "UCOL",
+      "crn": "3015",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Steven La Fleur",
+      "instructors": [
+        {
+          "name": "Steven La Fleur",
+          "email": "slafleu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8606"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Steven La Fleur"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.515Z"
+}

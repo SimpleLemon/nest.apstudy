@@ -1,0 +1,80 @@
+{
+  "course_code": "RADT 5100",
+  "course_title": "Radiation Protection II",
+  "subject": "RADT",
+  "catalog_number": "5100",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to provide an overview of the principles of the interaction of radiation with living systems. Radiation effects on molecules, cells, tissues and the body as a whole are presented. Factors affecting biological response are presented, including acute and chronic effects of radiation, designing for radiation protection and radiation protection procedures.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-04",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2542",
+      "academic_career": "UAH",
+      "crn": "3803",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Shaun Taylor",
+      "instructors": [
+        {
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40254"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-04",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shaun Taylor"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.596Z"
+}

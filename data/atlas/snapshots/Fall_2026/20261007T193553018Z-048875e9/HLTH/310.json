@@ -1,0 +1,88 @@
+{
+  "course_code": "HLTH 310",
+  "course_title": "Defining Health: Biocultural Perspectives",
+  "subject": "HLTH",
+  "catalog_number": "310",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "How paradigms of health-focused beliefs and systems develop, are maintained, and change reflect history, society, and technology. We interrogate the scientific basis for present biomedical concepts that have co-opted concepts of the human body's health and well-being.",
+  "course_notes": "(Same as ANT 339 1) Biomedicine has co-opted concepts of the human body's health and well-being and biomedicine stands as the pinnacle of health care based on claims of scientific evidence. This course considers the nature of paradigms and critically assesses how paradigms of health-focused systems develop, are maintained and change. The nature of evidence is interrogated and we consider the important influences of historical, social, political, economic, religious, ethical, cultural and psychological factors on how health-related issues become organized into belief systems, and critically assess the challenges confronting modification and advancement of health and health care theory, evidence and practice.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2793",
+      "academic_career": "UCOL",
+      "crn": "2637",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Michelle Lampl",
+      "instructors": [
+        {
+          "name": "Michelle Lampl",
+          "email": "mlampl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1783"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 80,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 1-2:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Michelle Lampl"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.069Z"
+}

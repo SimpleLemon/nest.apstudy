@@ -1,0 +1,206 @@
+{
+  "course_code": "BIOL 236L",
+  "course_title": "Human Anatomy & Physiology I with Lab",
+  "subject": "BIOL",
+  "catalog_number": "236L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Human Anatomy & Physiology I with Lab examines the interrelationship and integration of the structure and function of the human body on the molecular, cellular, tissue and organ system levels. Topics include body organization, homeostasis, cytology, histology, and the integumentary, skeletal, muscular, and nervous systems.",
+  "course_notes": "Permission is required for this course. Students requiring an Anatomy & Physiology course for a post-bac school should contact the PHA (Pre-Health Advising) office for permission to take this course. Students approved by the PHA will be added to the course by the Biology Department during add/drop/swap, space permitting. THIS COURSE DOES NOT COUNT FOR THE BIOLOGY MAJOR IN ANY WAY. This is the first semester of a two-semester course and includes a lecture and a laboratory component. This course examines the interrelationship and integration of the structure and function of the human body on the molecular, cellular, tissue, and organ system levels. Topics include body organization, homeostasis, cytology, histology, and the integumentary, skeletal, muscular, and nervous systems. Textbook will be Anatomy & Physiology: The Unity of Form and Function, by Kenneth S. Saladin (McGraw-Hill).",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4912",
+      "academic_career": "UCOL",
+      "crn": "1665",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Josephine Bou Dagher",
+      "instructors": [
+        {
+          "name": "Josephine Bou Dagher",
+          "email": "josephine.bou.dagher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39310"
+        },
+        {
+          "name": "Josephine Bou Dagher",
+          "email": "josephine.bou.dagher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39310"
+        }
+      ],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 48,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a; T 11:30a-12:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1230"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4913",
+      "academic_career": "UCOL",
+      "crn": "1667",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Josephine Bou Dagher",
+      "instructors": [
+        {
+          "name": "Josephine Bou Dagher",
+          "email": "josephine.bou.dagher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39310"
+        }
+      ],
+      "location": "1462 Clifton Rd 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-12p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4914",
+      "academic_career": "UCOL",
+      "crn": "3098",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Josephine Bou Dagher",
+      "instructors": [
+        {
+          "name": "Josephine Bou Dagher",
+          "email": "josephine.bou.dagher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39310"
+        }
+      ],
+      "location": "1462 Clifton Rd 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 11:30a-1:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1330"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 3,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Josephine Bou Dagher"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.504Z"
+}

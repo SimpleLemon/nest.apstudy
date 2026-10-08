@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 310",
+  "course_title": "Cognitive Development",
+  "subject": "PSYC",
+  "catalog_number": "310",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Examines the development of abilities such as thinking, reasoning, learning, remembering, language, spatial skills, categorization, and counting.",
+  "course_notes": "(Prior completion of Psyc 110, 111, or AP/IB credit in Psychology.) (This course examines the development of abilities such as thinking and reasoning. There is also an emphasis on how children learn to use spatial skills, numerical representations, memory, and language. The focus is on how scientific theory and principles can inform our understanding of these abilities.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "689",
+      "academic_career": "UCOL",
+      "crn": "1628",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Stella Lourenco",
+      "instructors": [
+        {
+          "name": "Stella Lourenco",
+          "email": "stella.lourenco@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4079"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Stella Lourenco"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.581Z"
+}

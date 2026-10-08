@@ -1,0 +1,145 @@
+{
+  "course_code": "ACT 301",
+  "course_title": "Strategic Cost Management",
+  "subject": "ACT",
+  "catalog_number": "301",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course covers the internal generation and interpretation of information for strategic and operational decision-making purposes, which is of paramount importance for decision-making in organizations. You will learn how to identify information that is relevant for decision-making, cost and revenue behavior, different costing techniques, profit planning, customer profitability analysis, and how to evaluate performance against plans. This course is especially useful if you are interested in consulting and will prepare you for your interviews with consulting companies.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4823",
+      "academic_career": "UBUS",
+      "crn": "3849",
+      "section_number": "1116",
+      "schedule_type": "LEC",
+      "instructor": "Jeff Byrne",
+      "instructors": [
+        {
+          "name": "Jeff Byrne",
+          "email": "jbyrne5@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24903"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 38,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4824",
+      "academic_career": "UBUS",
+      "crn": "3850",
+      "section_number": "1117",
+      "schedule_type": "LEC",
+      "instructor": "Jeff Byrne",
+      "instructors": [
+        {
+          "name": "Jeff Byrne",
+          "email": "jbyrne5@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24903"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W100",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 43,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jeff Byrne"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.622Z"
+}

@@ -1,0 +1,92 @@
+{
+  "course_code": "ARTVIS 204",
+  "course_title": "Intermediate Drawing",
+  "subject": "ARTVIS",
+  "catalog_number": "204",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class will explore the role of drawing in the 21st Century. Throughout the semester we will look at and discuss different formal and conceptual approaches to drawing with a focus on variable topics that expand the language of drawing.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "783",
+      "academic_career": "UCOL",
+      "crn": "2613",
+      "section_number": "1",
+      "schedule_type": "ART",
+      "instructor": "Krista Clark",
+      "instructors": [
+        {
+          "name": "Krista Clark",
+          "email": "krista.marie.clark@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36108"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-4:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1630"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Krista Clark"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.029Z"
+}

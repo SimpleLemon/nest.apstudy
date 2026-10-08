@@ -1,0 +1,102 @@
+{
+  "course_code": "FREN_OX 310W",
+  "course_title": "Writing Skills in French",
+  "subject": "FREN_OX",
+  "catalog_number": "310W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Third-year-level course given in French. Intensive study of written French based on syntactic and lexical analysis of a variety of texts. Work on clear expression and control of the fine points of French grammar. Bi-weekly compositions with extensive revisions and concern for the process of writing in a foreign language.",
+  "course_notes": "Required course materials: Krueger and Fauvel, _Tâches d'encre: French Composition_, 5th ed. ISBN: 978-0-357-65888-8. Assessment: engaged participation, six staged formal essays, three short presentations, other small writing assignments and language exercises. Prerequisites: French 203, a score of '4' or '5' on the French AP exam, or equivalent experience.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3294",
+      "academic_career": "UOXF",
+      "crn": "4207",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Matthew Moyle",
+      "instructors": [
+        {
+          "name": "Matthew Moyle",
+          "email": "matthew.moyle@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5173"
+        }
+      ],
+      "location": "Pierce Hall 228",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Matthew Moyle"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.607Z"
+}

@@ -1,0 +1,203 @@
+{
+  "course_code": "ENVS_OX 131E",
+  "course_title": "Introduction to Environmental Studies",
+  "subject": "ENVS_OX",
+  "catalog_number": "131E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "5",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Basic ecological concepts, study of ecosystems, and application of ecological principles to local and global environmental problems. Labs focus on investigating local ecosystems and will be primarily spent outdoors, involving light to moderate physical activity. This is the foundational course required for majors and minors in Environmental Sciences. Three hours of lecture and one three-hour laboratory per week.",
+  "course_notes": "Students must enroll in one of the ENVS 131E lab sections.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3295",
+      "academic_career": "UOXF",
+      "crn": "4333",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jenny Burgman",
+      "instructors": [
+        {
+          "name": "Jenny Burgman",
+          "email": "jenny.burgman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39482"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "5",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "3",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3296",
+      "academic_career": "UOXF",
+      "crn": "4334",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Jenny Burgman",
+      "instructors": [
+        {
+          "name": "Jenny Burgman",
+          "email": "jenny.burgman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39482"
+        }
+      ],
+      "location": "Oxford Science Bldg. 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "5",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "3",
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3297",
+      "academic_career": "UOXF",
+      "crn": "4335",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Jenny Burgman",
+      "instructors": [
+        {
+          "name": "Jenny Burgman",
+          "email": "jenny.burgman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39482"
+        }
+      ],
+      "location": "Oxford Science Bldg. 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "5",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "3",
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jenny Burgman"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.606Z"
+}

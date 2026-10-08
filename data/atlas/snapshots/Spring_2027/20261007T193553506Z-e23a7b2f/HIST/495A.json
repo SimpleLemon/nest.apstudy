@@ -1,0 +1,92 @@
+{
+  "course_code": "HIST 495A",
+  "course_title": "Intro Historical Interpretation I",
+  "subject": "HIST",
+  "catalog_number": "495A",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "For honors students in history. Addresses historiographical and methodological issues, and offers practical guidance in thesis design and research, with details and emphases at discretion of instructor.",
+  "course_notes": "(Permission Required Prior to Enrollment) For History majors accepted into the History Honors Program only.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "413",
+      "academic_career": "UCOL",
+      "crn": "2809",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Brian Vick",
+      "instructors": [
+        {
+          "name": "Brian Vick",
+          "email": "bvick@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4478"
+        }
+      ],
+      "location": "Bowden Hall 323",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-6:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brian Vick"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.555Z"
+}

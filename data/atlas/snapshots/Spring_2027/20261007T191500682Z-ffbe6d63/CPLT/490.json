@@ -1,0 +1,93 @@
+{
+  "course_code": "CPLT 490",
+  "course_title": "Comparative Literature Major Seminar",
+  "subject": "CPLT",
+  "catalog_number": "490",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Intensive reading of literary and theoretical texts that raise critical issues in the field of Comparative Literature and related disciplines. Note: This course is non-repeatable.",
+  "course_notes": "Major Seminar: Reading Lessons: Exemplary Approaches to Interpretation (From E.A. Poe to O. Butler) | What does it mean to read? We tend to think that reading is a skill learned once and then applied: a method that stays the same whether its object is a poem, a court decision, a painting, or a film. This seminar starts from the opposite hypothesis. Reading can only be learned by example, and every powerful reading changes what counts as reading in the first place. Texts and images don't simply wait to be interpreted; they resist, redirect, and sometimes anticipate the readings brought to them. Following these encounters leads to questions central to philosophy, psychoanalysis, and critical theory: how meaning is made and unmade, what claim a reading has to truth, and how history, desire, and the very definition of the human shape the way we read. The seminar works as a reading workshop built around a series of exemplary encounters between readers and ¿texts.¿ Paul de Man and Barbara Johnson read the rhetoric of lyric poetry, Walter Benjamin reads Baudelaire, and Fredric Jameson reads Van Gogh and Warhol. Jacques Lacan and Jacques Derrida argue over Poe's \"The Purloined Letter,\" Claire Nouvet and Gayatri Chakravorty Spivak reread Ovid's myth of Echo, Sylvia Wynter and Judith Butler read Do the Right Thing and Paris is Burning, and Zakiyyah Iman Jackson reads Octavia Butler. Each encounter will offer us a lesson in how to read. Each also shows that such lessons can't be turned into rules, because an example always teaches something more, or other, than a universal method. As they work through these readings, students will develop their own interpretive practice, learning to attend to what a text says, what it does, and what it lets slip.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "463",
+      "academic_career": "UCOL",
+      "crn": "3372",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Ronald Mendoza-De Jesus",
+      "instructors": [
+        {
+          "name": "Ronald Mendoza-De Jesus",
+          "email": "ronald.mendoza-de.jesus@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8551"
+        }
+      ],
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ronald Mendoza-De Jesus"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.708Z"
+}

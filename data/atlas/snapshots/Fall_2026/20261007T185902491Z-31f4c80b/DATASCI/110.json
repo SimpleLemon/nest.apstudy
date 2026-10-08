@@ -1,0 +1,155 @@
+{
+  "course_code": "DATASCI 110",
+  "course_title": "Introduction to Scientific Methods",
+  "subject": "DATASCI",
+  "catalog_number": "110",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduces students to the style of analytic thinking required for research and concepts and procedures used in the conduct of empirical research: sampling, hypothesis testing, Bayesian inference, regression, experiments, instrumental variables, differences indifferences, regression discontinuity.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3668",
+      "academic_career": "UCOL",
+      "crn": "1880",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Kevin McAlister",
+      "instructors": [
+        {
+          "name": "Kevin McAlister",
+          "email": "kevin.mcalister@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25072"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 100,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3669",
+      "academic_career": "UCOL",
+      "crn": "1881",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Kevin McAlister",
+      "instructors": [
+        {
+          "name": "Kevin McAlister",
+          "email": "kevin.mcalister@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25072"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 100,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kevin McAlister"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.520Z"
+}

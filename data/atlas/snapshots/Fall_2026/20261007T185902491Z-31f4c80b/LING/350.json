@@ -1,0 +1,93 @@
+{
+  "course_code": "LING 350",
+  "course_title": "Health Communication",
+  "subject": "LING",
+  "catalog_number": "350",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "We examine the language around health and health care as a type of intercultural discourse, including communication between doctors and patients, between health care providers, and discussions of health in the media. We also examine language as a diagnostic tool.",
+  "course_notes": "(Same as HLTH 379 1) In this course, we will be discussing Health Communication, broadly defined: the study of language and discourse about health and health care as used a) between health care providers and patients, b) among health care professionals, and c) among members of the larger society and the media. The study of health communication also includes using linguistic data as a diagnostic tool, development and implementation of healthcare materials, and the recording, retrieval, and interpretation of personal health information. We will examine health communication as a kind of intercultural discourse, in which participants often communicate across various kinds of social, cultural and linguistic barriers, even though these are not always evident to participants themselves.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3299",
+      "academic_career": "UCOL",
+      "crn": "1529",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Susan Tamasi",
+      "instructors": [
+        {
+          "name": "Susan Tamasi",
+          "email": "stamasi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1499"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Susan Tamasi"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.557Z"
+}

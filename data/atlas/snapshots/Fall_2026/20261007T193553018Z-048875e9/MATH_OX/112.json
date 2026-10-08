@@ -1,0 +1,177 @@
+{
+  "course_code": "MATH_OX 112",
+  "course_title": "Calculus II",
+  "subject": "MATH_OX",
+  "catalog_number": "112",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Techniques of integration, exponential and logarithm functions, sequences and series, polar coordinates.",
+  "course_notes": "Placement test must be taken prior to enrollment",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "62",
+      "academic_career": "UOXF",
+      "crn": "4305",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Tien Chih",
+      "instructors": [
+        {
+          "name": "Tien Chih",
+          "email": "tien.chih@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31123"
+        },
+        {
+          "name": "Tien Chih",
+          "email": "tien.chih@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31123"
+        }
+      ],
+      "location": "Pierce Hall 237",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "63",
+      "academic_career": "UOXF",
+      "crn": "4306",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Tien Chih",
+      "instructors": [
+        {
+          "name": "Tien Chih",
+          "email": "tien.chih@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31123"
+        },
+        {
+          "name": "Tien Chih",
+          "email": "tien.chih@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31123"
+        }
+      ],
+      "location": "Pierce Hall 237",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tien Chih"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.125Z"
+}

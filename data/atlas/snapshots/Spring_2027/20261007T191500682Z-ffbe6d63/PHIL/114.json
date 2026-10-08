@@ -1,0 +1,102 @@
+{
+  "course_code": "PHIL 114",
+  "course_title": "Latin American, Latinx Thought",
+  "subject": "PHIL",
+  "catalog_number": "114",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts with Race & Ethnicity(*)",
+  "requirements": [
+    "Humanities and Arts with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores key topics in Latin American and Latinx thought, including identity, liberation, coloniality and decoloniality, and border feminisms.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2298",
+      "academic_career": "UCOL",
+      "crn": "2690",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Daniel Estrada",
+      "instructors": [
+        {
+          "name": "Daniel Estrada",
+          "email": "daniel.estrada@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32580"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts with Race & Ethnicity(*)",
+      "requirements": [
+        "Humanities and Arts with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "920"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daniel Estrada"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.756Z"
+}

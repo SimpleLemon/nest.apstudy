@@ -1,0 +1,178 @@
+{
+  "course_code": "GER 201",
+  "course_title": "Intermediate German I",
+  "subject": "GER",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall, Summer (Vienna). The first of the two-course sequence (201-202) that explores how different societal factors have affected German-speaking young adults' coming of age and draws comparisons with English language cultures. Continued focus on development of students' German language abilities.",
+  "course_notes": "Entitled \"Coming of age through the ages,\" German 201 is the first of a two-course sequence that moves students from the focus on personal identity in first-year German to an examination of how young adults have come of age over time in the German-speaking world. Following a thematically-based approach to language instruction, this course explores how different societal factors affected German-speaking youth's coming of age in the 18th and 19th centuries and draws comparisons with comings of age in English language cultures. Specifically, the following themes as they pertain to coming of age will be studied in German 201: - Family (conformity to or rebellion against family order) - Nature (nature as a hindrance or ally for maturation) - Travel (gaining self-knowledge through travel) Through this focus on coming of age in 18th and 19th-century German cultural history, students will build on the foundation established in first-year German and develop further their abilities as readers, writers, and speakers of German. In this course (201) and in its sequel (202), that examines coming of age in the 20th and 21st century German speaking world, students will use supplemental texts and a grammar review textbook to acquire the language necessary to communicate meaningfully about the topic of coming of age.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "750",
+      "academic_career": "UCOL",
+      "crn": "1910",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Hiram Maxim",
+      "instructors": [
+        {
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4241"
+        },
+        {
+          "name": "Hiram Maxim",
+          "email": "hmaxim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4241"
+        }
+      ],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "751",
+      "academic_career": "UCOL",
+      "crn": "2193",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Julia Ruck",
+      "instructors": [
+        {
+          "name": "Julia Ruck",
+          "email": "julia.ruck@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35240"
+        },
+        {
+          "name": "Julia Ruck",
+          "email": "julia.ruck@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35240"
+        }
+      ],
+      "location": "Callaway N111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hiram Maxim",
+    "Julia Ruck"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.062Z"
+}

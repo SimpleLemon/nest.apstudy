@@ -1,0 +1,100 @@
+{
+  "course_code": "HLTH 320",
+  "course_title": "Nutrition and Chronic Disease",
+  "subject": "HLTH",
+  "catalog_number": "320",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Nutrition and Chronic Disease provides an overview of the role of nutrition in chronic disease prevention, development and treatment.",
+  "course_notes": "This course will explore current evidence relating diet, nutrition, and the food environment to promoting health and preventing disease. The focus will be on digestive health, obesity type 2 diabetes, cardiovascular disease, bone health, and cancer. Students will learn about diet and related factors that increase or decrease risk of these conditions, evaluate evidence, and compare intervention strategies. (Prerequisite: HLTH 220)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3689",
+      "academic_career": "UCOL",
+      "crn": "2545",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jean Welsh",
+      "instructors": [
+        {
+          "name": "Jean Welsh",
+          "email": "jwelsh1@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7916"
+        },
+        {
+          "name": "Pragya Thapa",
+          "email": "pragya.thapa@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "47904"
+        }
+      ],
+      "location": "1462 Clifton Rd 100A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 19,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jean Welsh",
+    "Pragya Thapa"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.069Z"
+}

@@ -1,0 +1,150 @@
+{
+  "course_code": "DATASCI 340",
+  "course_title": "Approaches to Data Sci.w/Text",
+  "subject": "DATASCI",
+  "catalog_number": "340",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Teaches common theories & techniques in data science using Python. Focus is text analysis (e.g., text parsing, language models, sequence estimation, vector space models & distributional semantics, cluster analysis, supervised learning). Cloud computing, big data, & data visualization are discussed.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2246",
+      "academic_career": "UCOL",
+      "crn": "3299",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jo Guldi",
+      "instructors": [
+        {
+          "name": "Jo Guldi",
+          "email": "jo.guldi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35777"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2247",
+      "academic_career": "UCOL",
+      "crn": "3300",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Sandeep Soni",
+      "instructors": [
+        {
+          "name": "Sandeep Soni",
+          "email": "sandeep.soni@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35760"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jo Guldi",
+    "Sandeep Soni"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.716Z"
+}

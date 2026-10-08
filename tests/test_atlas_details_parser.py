@@ -7,8 +7,10 @@ from services.atlas_client import (
     merge_section_with_details,
     parse_atlas_details_payload,
     _parse_seats_html,
+    _live_row_from_raw,
     _section_row_from_course_data,
 )
+from services.professor_rating_identity import section_instructors
 
 FIXTURE_DIR = os.path.join(os.path.dirname(__file__), "fixtures", "atlas")
 
@@ -46,6 +48,7 @@ class AtlasDetailsParserTests(unittest.TestCase):
         self.assertEqual(parsed["requirement_designation"], "Natural Sciences(*)")
         self.assertEqual(parsed["campus_description"], "ATL@ATLANTA")
         self.assertEqual(parsed["location"], "Atwood Chemistry Bldg. 260")
+        self.assertEqual(parsed["instructors"][0]["atlas_id"], "3022")
 
     def test_parse_eng_ox_185_details(self):
         search = load_fixture("search_eng_ox_185_crn_4196.json")
@@ -56,6 +59,67 @@ class AtlasDetailsParserTests(unittest.TestCase):
         self.assertEqual(parsed["campus_description"], "OXF@OXFORD")
         self.assertEqual(parsed["location"], "Humanities Hall 201")
         self.assertEqual(parsed["waitlist_capacity"], 6)
+        self.assertEqual(parsed["instructors"][0]["atlas_id"], "3054")
+
+    def _instructor_html(self, attributes="", name="Jane Example", extra=""):
+        return (f'<div class="instructor-detail"><div class="instructor-name">'
+                f'<a {attributes}>{name}</a></div>{extra}'
+                '<div class="instructor-email"><a href="mailto:jane@example.test">jane@example.test</a></div>'
+                '<div class="instructor-role">Primary Instructor</div></div>')
+
+    def test_native_instructor_ids_survive_attribute_variations_and_live_normalization(self):
+        for attributes in (
+            'data-search-data-provider="search-by-instructor" data-id="500"',
+            "data-id = '500' data-search-data-provider = 'search-by-instructor'",
+            'DATA-ID=500 DATA-SEARCH-DATA-PROVIDER=search-by-instructor',
+        ):
+            with self.subTest(attributes=attributes):
+                raw = merge_section_with_details(
+                    {"code": "TEST 100", "crn": "1", "no": "1", "campus": "Atlanta"},
+                    {"instructordetail_html": self._instructor_html(attributes)},
+                )
+                row = _live_row_from_raw("Fall_2026", raw)
+                self.assertEqual(row["instructors"][0]["atlas_id"], "500")
+                self.assertEqual(next(section_instructors(row))["instructor_key"], "340:atlas:500")
+
+    def test_incidental_data_id_is_not_an_instructor_identity(self):
+        for attributes in ('data-id="500"', 'data-id="500" data-search-data-provider="search-by-course"'):
+            with self.subTest(attributes=attributes):
+                parsed = parse_atlas_details_payload({"instructordetail_html": self._instructor_html(attributes)})
+                self.assertNotIn("atlas_id", parsed["instructors"][0])
+
+    def test_conflicting_native_ids_cannot_recover_the_original_identity(self):
+        attributes = 'data-id="500" data-search-data-provider="search-by-instructor"'
+        extra = '<a data-search-data-provider="search-by-instructor" data-id="501"></a>'
+        raw = merge_section_with_details(
+            {"code": "TEST 100", "campus": "Atlanta", "instructors": [{"name": "Jane Example", "atlas_id": "500"}]},
+            {"instructordetail_html": self._instructor_html(attributes, extra=extra)},
+        )
+        row = _live_row_from_raw("Fall_2026", raw)
+        instructor = row["instructors"][0]
+        self.assertNotIn("atlas_id", instructor)
+        self.assertTrue(instructor["atlas_id_conflict"])
+        identity = next(section_instructors(row))
+        self.assertTrue(identity["atlas_id_conflict"])
+        self.assertEqual(identity["instructor_key"], "340:conflict:name:jane example")
+
+    def test_duplicate_parsed_names_do_not_inherit_one_original_id(self):
+        raw = merge_section_with_details(
+            {"code": "TEST 100", "campus": "Atlanta", "instructors": [{"name": "Jane Example", "atlas_id": "500"}]},
+            {"instructordetail_html": self._instructor_html() + self._instructor_html(name="Jane-Example")},
+        )
+        self.assertEqual(len(raw["instructors"]), 2)
+        for instructor in raw["instructors"]:
+            self.assertNotIn("atlas_id", instructor)
+            self.assertTrue(instructor["atlas_id_conflict"])
+
+    def test_explicit_native_id_replaces_original_aliases(self):
+        raw = merge_section_with_details(
+            {"code": "TEST 100", "instructors": [{"name": "Jane Example", "instructor_id": "old"}]},
+            {"instructordetail_html": self._instructor_html('data-id="new" data-search-data-provider="search-by-instructor"')},
+        )
+        self.assertEqual(raw["instructors"][0]["atlas_id"], "new")
+        self.assertNotIn("instructor_id", raw["instructors"][0])
 
     def test_section_row_from_enriched_course_data(self):
         search = load_fixture("search_chem_150_crn_2760.json")
@@ -80,7 +144,7 @@ class AtlasDetailsParserTests(unittest.TestCase):
                 "requirement_designation": merged["requirement_designation"],
                 "requirements": merged["requirements"],
                 "enrollment_status": merged["enrollment_status"],
-                "enrollment_count": merged["total"],
+                "enrollment_count": None,
                 "enrollment_capacity": merged["enrollment_capacity"],
                 "seats_available": merged["seats_available"],
                 "grading_mode": merged["grading_mode"],
@@ -96,6 +160,7 @@ class AtlasDetailsParserTests(unittest.TestCase):
         row = _section_row_from_course_data("Fall_2026", "CHEM", "150", course_data, section)
 
         self.assertEqual(row["seats_available"], 34)
+        self.assertEqual(row["enrollment_count"], "")
         self.assertEqual(row["enrollment_capacity"], 36)
         self.assertEqual(row["grading_mode"], "Student Option")
         self.assertEqual(row["instruction_method"], "In Person")
@@ -104,6 +169,21 @@ class AtlasDetailsParserTests(unittest.TestCase):
             row["id"],
             build_section_id("Fall_2026", "CHEM", "150", "2760", "1"),
         )
+
+    def test_live_course_section_total_is_not_enrollment(self):
+        raw = {"code": "BIOL 141L", "career": "UCOL", "total": "39", "enrollment_capacity": 17, "seats_available": 0}
+        row = _live_row_from_raw("Fall_2026", raw)
+        self.assertEqual(row["enrollment_count"], "")
+        self.assertEqual(row["academic_career"], "UCOL")
+        self.assertEqual(row["enrollment_capacity"], 17)
+        self.assertEqual(row["seats_available"], 0)
+        raw["enrollment_count"] = 0
+        self.assertEqual(_live_row_from_raw("Fall_2026", raw)["enrollment_count"], "0")
+
+    def test_cached_explicit_zero_enrollment_is_preserved(self):
+        row = _section_row_from_course_data("Fall_2026", "BIOL", "141L", {}, {"enrollment_count": 0, "academic_career": "UCOL"})
+        self.assertEqual(row["enrollment_count"], "0")
+        self.assertEqual(row["academic_career"], "UCOL")
 
 
 if __name__ == "__main__":

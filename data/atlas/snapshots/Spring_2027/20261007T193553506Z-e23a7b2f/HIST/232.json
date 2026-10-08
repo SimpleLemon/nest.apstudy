@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST 232",
+  "course_title": "Making of Modern America: U.S. Since 1877",
+  "subject": "HIST",
+  "catalog_number": "232",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course introduces the social, political, economic, and diplomatic forces that have shaped modern America. Special emphasis on how diverse components of the American population have interacted in American society.",
+  "course_notes": "(Same as AMST 285 2) (How was the United States transformed, after the end of Reconstruction, from a farmers' republic into an industrial superpower? This course will emphasize the importance of immigration, changing gender and family relations, and the social history of everyday life, but it will also follow the grand themes of national strategy, the world wars and the Cold War, urbanization, and the growing importance of technology. Readings will be from the autobiographies of a wide array of Americans from all parts of the country, all ways of life, and all social, racial, and ethnic groups. Two midterms, a final, and two short papers.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "393",
+      "academic_career": "UCOL",
+      "crn": "2737",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Patrick Allitt",
+      "instructors": [
+        {
+          "name": "Patrick Allitt",
+          "email": "pallitt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1246"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Patrick Allitt"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.552Z"
+}

@@ -1,0 +1,174 @@
+{
+  "course_code": "HIST 398R",
+  "course_title": "Research Tutorial",
+  "subject": "HIST",
+  "catalog_number": "398R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable credit. Prerequisite: approval of project by instructor. Focused on students' pursuing projects of their own design or gaining research skills through work with the instructor.",
+  "course_notes": "(Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1687",
+      "academic_career": "UCOL",
+      "crn": "2566",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1688",
+      "academic_career": "UCOL",
+      "crn": "6291",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "Yanna Yannakakis",
+      "instructors": [
+        {
+          "name": "Yanna Yannakakis",
+          "email": "yanna.yannakakis@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4687"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1689",
+      "academic_career": "UCOL",
+      "crn": "6545",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "Malinda Lowery",
+      "instructors": [
+        {
+          "name": "Malinda Lowery",
+          "email": "malinda.maynor.lowery@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28182"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 1,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Malinda Lowery",
+    "Yanna Yannakakis"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.066Z"
+}

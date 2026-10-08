@@ -1,0 +1,97 @@
+{
+  "course_code": "AFS_OX 263",
+  "course_title": "Introduction to African Studies",
+  "subject": "AFS_OX",
+  "catalog_number": "263",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course introduces students to different aspects (historical, sociopolitical, and economic) of the African continent, the African experience, and the academic discipline of African Studies. It delves into the diversity of a complex continent in constant mutation and conversation with the forces of the past, present, and future.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2481",
+      "academic_career": "UOXF",
+      "crn": "5426",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Elijah Zehyoue",
+      "instructors": [
+        {
+          "name": "Elijah Zehyoue",
+          "email": "elijah.robert.zehyoue@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39910"
+        }
+      ],
+      "location": "Library Rm 230",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elijah Zehyoue"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.114Z"
+}

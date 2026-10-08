@@ -1,0 +1,86 @@
+{
+  "course_code": "ITAL 495A",
+  "course_title": "Honors",
+  "subject": "ITAL",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Course engages in critical methods in analysis and interpretation of literature and cultural studies, bibliographic materials and methods of independent research. Course culminates in an honors thesis, written in Italian, demonstrating the application of principles learned. Course carefully follows the College guidelines for writing requirement.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "864",
+      "academic_career": "UCOL",
+      "crn": "6193",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Angela Porcarelli",
+      "instructors": [
+        {
+          "name": "Angela Porcarelli",
+          "email": "angela.porcarelli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4741"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Angela Porcarelli"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.551Z"
+}

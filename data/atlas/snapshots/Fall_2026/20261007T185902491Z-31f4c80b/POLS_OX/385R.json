@@ -1,0 +1,146 @@
+{
+  "course_code": "POLS_OX 385R",
+  "course_title": "Spec. Topics In Political Science: African Politics",
+  "subject": "POLS_OX",
+  "catalog_number": "385R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "May be repeated for credit when topic varies. Seminar and/or advanced class in selected political science topics. Primarily for students interested in politics.",
+  "course_notes": "Instructor strongly recommends that a student enrolling in the course should have previously taken at least one introductory political science course",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "103",
+      "academic_career": "UOXF",
+      "crn": "4098",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Salmon Shomade",
+      "instructors": [
+        {
+          "name": "Salmon Shomade",
+          "email": "salmon.shomade@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7255"
+        }
+      ],
+      "location": "Johnson Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "104",
+      "academic_career": "UOXF",
+      "crn": "6185",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Daphne Orr",
+      "instructors": [
+        {
+          "name": "Daphne Orr",
+          "email": "daphne.orr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31934"
+        },
+        {
+          "name": "Natalie Raymond",
+          "email": "natalie.raymond@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34291"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 34,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daphne Orr",
+    "Natalie Raymond",
+    "Salmon Shomade"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.614Z"
+}

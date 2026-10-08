@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 309",
+  "course_title": "Brain and Language",
+  "subject": "PSYC",
+  "catalog_number": "309",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course examines the relationship between brain mechanisms and language behavior. Topics include aphasia and language disorders, aphasia in the deaf, critical periods in children, and gender differences in brain organization.",
+  "course_notes": "(Same as LING 309 1) Prior completion of PSYC 110, or PSYC 111, or AP/IP credit in psychology or equivalent. OPUS waitlist is available.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1237",
+      "academic_career": "UCOL",
+      "crn": "4004",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Tamara Nicol Medina",
+      "instructors": [
+        {
+          "name": "Tamara Nicol Medina",
+          "email": "tamara.n.medina@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35813"
+        }
+      ],
+      "location": "White Hall 102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tamara Nicol Medina"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.101Z"
+}

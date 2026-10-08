@@ -1,0 +1,93 @@
+{
+  "course_code": "CPLT 333",
+  "course_title": "Literature & Other Disciplines",
+  "subject": "CPLT",
+  "catalog_number": "333",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A study of literary texts and their complex interplay with other disciplines (e.g., literature and psychoanalysis, literature and philosophy, literature and law, and literature and religion.)",
+  "course_notes": "Lit. & Other Disciplines: Sovereigns on Stage: Performing Political Theology| From the media frenzy that follows the coronation of a new European monarch to the comedic scene of POTUS pardoning a turkey for Thanksgiving, sovereigns wield a power that exceeds their strict juridical function, namely, the power to capture our political imaginations by taking the center stage of society. But what is the source of this strange power that seems to give rulers control over other bodies and other wills? And how can this power be transformed, resisted, or even challenged? This course addresses these questions through a reading of selected texts from the Western traditions of literature and political philosophy. How have political philosophers conceived of the sovereign? What kind of powers or attributes do they ascribe to this figure? Which arguments have they provided to justify or challenge the power that the sovereign exerts over a polity? Conversely, how has does literature put sovereignty on stage? Can literary texts provide us a way of both understanding and resisting the logic that grants some human being, because of their political status, power over life and death as well as immunity from legal prosecution?",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "462",
+      "academic_career": "UCOL",
+      "crn": "3369",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ronald Mendoza-De Jesus",
+      "instructors": [
+        {
+          "name": "Ronald Mendoza-De Jesus",
+          "email": "ronald.mendoza-de.jesus@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8551"
+        }
+      ],
+      "location": "Callaway S108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ronald Mendoza-De Jesus"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.708Z"
+}

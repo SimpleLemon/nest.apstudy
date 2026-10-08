@@ -1,0 +1,182 @@
+{
+  "course_code": "MATH 499R",
+  "course_title": "Independent Research",
+  "subject": "MATH",
+  "catalog_number": "499R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students conduct independent research in support of their own research agenda or question with guidance from a faculty member. Permission of the department and a supervising faculty member is required.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1745",
+      "academic_career": "UCOL",
+      "crn": "5506",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Julianne Chung",
+      "instructors": [
+        {
+          "name": "Julianne Chung",
+          "email": "julianne.mei-lynn.chung@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22883"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1746",
+      "academic_career": "UCOL",
+      "crn": "6548",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "Levon Nurbekyan",
+      "instructors": [
+        {
+          "name": "Levon Nurbekyan",
+          "email": "levon.nurbekyan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35420"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1747",
+      "academic_career": "UCOL",
+      "crn": "6549",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "Yiran Wang",
+      "instructors": [
+        {
+          "name": "Yiran Wang",
+          "email": "yiran.wang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22066"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Julianne Chung",
+    "Levon Nurbekyan",
+    "Yiran Wang"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.082Z"
+}

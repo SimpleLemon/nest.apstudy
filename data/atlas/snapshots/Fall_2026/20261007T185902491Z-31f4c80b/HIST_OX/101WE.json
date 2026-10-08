@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST_OX 101WE",
+  "course_title": "The Renaissance and Beyond",
+  "subject": "HIST_OX",
+  "catalog_number": "101WE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences with Continuing Communication(*)",
+  "requirements": [
+    "Social Sciences with Continuing Communication(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Examines the Renaissance in the context of its position between Medieval and Modern times, and its close associations with the Classical World. Topics include the idea of the Dark Ages, the rise of Medieval Universities, the Mediterranean and Atlantic economies, learning and the Arts, and the Renaissance idea in other historical contexts, like the Harlem Renaissance.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "55",
+      "academic_career": "UOXF",
+      "crn": "4093",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David Leinweber",
+      "instructors": [
+        {
+          "name": "David Leinweber",
+          "email": "david.leinweber@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1618"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Social Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Leinweber"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.607Z"
+}

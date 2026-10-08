@@ -1,0 +1,155 @@
+{
+  "course_code": "PE_OX 123",
+  "course_title": "Beginner Pickleball",
+  "subject": "PE_OX",
+  "catalog_number": "123",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course teaches the fundamental skills of pickleball for the beginner player. Students will learn specific warm-up and cool down techniques, basic pickleball strokes, strategy, footwork, court positioning and point play in both singles and doubles (including pickleball rules and scoring). Students will participate in practice drills, fun pickleball games, and match play. The course will include a reflection log to be completed before and after each class. Students will be encouraged to find and take advantage of opportunities for organized recreational pickleball play.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "77",
+      "academic_career": "UOXF",
+      "crn": "4061",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Jonathan Bennett",
+      "instructors": [
+        {
+          "name": "Jonathan Bennett",
+          "email": "jonathan.bennett@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38320"
+        }
+      ],
+      "location": "Oxford Tennis Court",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "78",
+      "academic_career": "UOXF",
+      "crn": "4062",
+      "section_number": "2",
+      "schedule_type": "PE",
+      "instructor": "Jonathan Bennett",
+      "instructors": [
+        {
+          "name": "Jonathan Bennett",
+          "email": "jonathan.bennett@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38320"
+        }
+      ],
+      "location": "Oxford Tennis Court",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jonathan Bennett"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.127Z"
+}

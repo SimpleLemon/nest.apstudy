@@ -1,0 +1,124 @@
+{
+  "course_code": "ISOM 497",
+  "course_title": "Directed Study: Applied Predicted Modeling",
+  "subject": "ISOM",
+  "catalog_number": "497",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A Directed Study (DS) is conducted with permission and semi-autonomously, under the supervision of a Goizueta faculty member. The content should represent a line of intellectual inquiry that is aligned with, but falls outside, what is available in the context of the School's elective offerings. It replaces an academic course and may carry variable academic hours. The DS project should contain significant & commensurate content that carries the rigor, time commitment & standards of an elective in the area of study.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4564",
+      "academic_career": "UBUS",
+      "crn": "6155",
+      "section_number": "1101",
+      "schedule_type": "SUP",
+      "instructor": "Anna Errore",
+      "instructors": [
+        {
+          "name": "Anna Errore",
+          "email": "anna.errore@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32250"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4565",
+      "academic_career": "UBUS",
+      "crn": "6604",
+      "section_number": "1102",
+      "schedule_type": "SUP",
+      "instructor": "Anandhi Bharadwaj",
+      "instructors": [
+        {
+          "name": "Anandhi Bharadwaj",
+          "email": "a.bharadwaj@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1668"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Anandhi Bharadwaj",
+    "Anna Errore"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.628Z"
+}

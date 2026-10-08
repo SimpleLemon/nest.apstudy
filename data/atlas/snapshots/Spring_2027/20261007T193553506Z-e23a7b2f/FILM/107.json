@@ -1,0 +1,146 @@
+{
+  "course_code": "FILM 107",
+  "course_title": "Introduction to Media Production",
+  "subject": "FILM",
+  "catalog_number": "107",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A hands-on introduction to the production of cinematic media. The course focuses on the basic gestures of filmmaking (from writing to filming and editing) in order to develop successful visual storytelling skills. Significant amounts of filming and editing take place outside of class.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "349",
+      "academic_career": "UCOL",
+      "crn": "2341",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Alonso Llosa",
+      "instructors": [
+        {
+          "name": "Alonso Llosa",
+          "email": "alonso.llosa@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39592"
+        }
+      ],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4:15-7p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1615",
+            "end": "1900"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "350",
+      "academic_career": "UCOL",
+      "crn": "2348",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Adam Diller",
+      "instructors": [
+        {
+          "name": "Adam Diller",
+          "email": "adam.diller@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46591"
+        }
+      ],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9:15a-12p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "915",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Adam Diller",
+    "Alonso Llosa"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.547Z"
+}

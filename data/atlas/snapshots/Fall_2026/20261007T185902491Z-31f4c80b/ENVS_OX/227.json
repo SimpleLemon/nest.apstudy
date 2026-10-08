@@ -1,0 +1,97 @@
+{
+  "course_code": "ENVS_OX 227",
+  "course_title": "Environmental Policy",
+  "subject": "ENVS_OX",
+  "catalog_number": "227",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "The goal of this course is to introduce you to the complexity of issues and concepts surrounding American environmental policy. We will begin by examining the fundamentals and historical challenges of environmental governance in the U.S. and the process of policy formation. The interplay of knowledge, power, and politics in the policy-making process will be explored while covering the following fundamental concepts: (1) Federal and sub-national environmental policy-making in the U.S.; (2) Approaches to environmental policy analysis; and (3) The role of the U.S. in international environmental governance.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4767",
+      "academic_career": "UOXF",
+      "crn": "4381",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jenny Burgman",
+      "instructors": [
+        {
+          "name": "Jenny Burgman",
+          "email": "jenny.burgman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39482"
+        }
+      ],
+      "location": "Oxford Science Bldg. 223",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jenny Burgman"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.606Z"
+}

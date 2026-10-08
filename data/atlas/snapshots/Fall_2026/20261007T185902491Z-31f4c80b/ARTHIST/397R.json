@@ -1,0 +1,86 @@
+{
+  "course_code": "ARTHIST 397R",
+  "course_title": "Internship In History of Art",
+  "subject": "ARTHIST",
+  "catalog_number": "397R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Supervised participation in museum, gallery, or other art-related activity. Requires approval by the ARTHIST Internship Coordinator. May be repeated, with permission, for up to 12 credit hours. Credit ranges from one (for 50 hrs., or 4 hrs./week) to four (200 hrs., or 14 hrs./week).",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "794",
+      "academic_career": "UCOL",
+      "crn": "1761",
+      "section_number": "1",
+      "schedule_type": "DIS",
+      "instructor": "Giovanni Lovisetto",
+      "instructors": [
+        {
+          "name": "Giovanni Lovisetto",
+          "email": "giovanni.lovisetto@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39591"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Giovanni Lovisetto"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.502Z"
+}

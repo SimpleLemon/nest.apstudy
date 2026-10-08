@@ -1,0 +1,97 @@
+{
+  "course_code": "REL 190",
+  "course_title": "Fresh Sem: Religion: Dracula",
+  "subject": "REL",
+  "catalog_number": "190",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Dynamics of inquiry on a focused research topic. Will include discussion, debate, oral and written presentations. Topic varies.",
+  "course_notes": "This course satisfies the Religion major requirement:- Theme. We will discuss Dracula by Bram Stoker (1897), as related to issues of gender, sexuality, race, nationalism, technology, mental illness, blood, colonialism, the British Empire, Freud, science, narrative, genre, horror, souls, magic, and religion. Featuring a cast of stiff-upper-lip Brits, a weird old Catholic from Holland, a married woman who parades around like a sex worker, hypnosis, evil aristocrats, ruined abbeys, decapitation, gender inversions, experiments in a mental asylum, and a happy ending. Students should have already read the novel at the start of the course.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1286",
+      "academic_career": "UCOL",
+      "crn": "2490",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Eric Reinders",
+      "instructors": [
+        {
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2454"
+        }
+      ],
+      "location": "Candler Library 124",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Reinders"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.103Z"
+}

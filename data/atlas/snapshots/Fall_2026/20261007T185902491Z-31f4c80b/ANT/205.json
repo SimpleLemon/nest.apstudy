@@ -1,0 +1,97 @@
+{
+  "course_code": "ANT 205",
+  "course_title": "Foundations of Global Health",
+  "subject": "ANT",
+  "catalog_number": "205",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "An introduction to the overall field of global health, its history, methods, and key principles, with case studies illustrating the burden of disease in nations with strikingly different political-economic contexts.",
+  "course_notes": "(Same as HLTH 250 1, SOC 250 1) * This course has been moved online; please see the course Canvas page and syllabus for the Zoom login details.* This interdisciplinary course explores the complex causes of serious health problems in both low-income and rich countries throughout the world, as well as strategies of health programs aimed at their solution. Global Health refers not only to the health problems of \"others\" living in far corners of the world but also to our own health problems as citizens of a very rich nation; most importantly it is about how those health problems are the result of global, social, economic and political interactions.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2550",
+      "academic_career": "UCOL",
+      "crn": "3523",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Helena Pachon",
+      "instructors": [
+        {
+          "name": "Helena Pachon",
+          "email": "helena.pachon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2333"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Helena Pachon"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.497Z"
+}

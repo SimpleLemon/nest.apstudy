@@ -1,0 +1,442 @@
+{
+  "course_code": "ECON_OX 101",
+  "course_title": "Principles Of Microeconomics",
+  "subject": "ECON_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduction to the theory of markets, including consumer and producer choice and how they interact to determine prices and resource allocations. Applications may include price controls, production, market structures, environmental economics, governmental regulation of the economy, labor and capital markets, and international exchange.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "29",
+      "academic_career": "UOXF",
+      "crn": "4081",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Christopher Blake",
+      "instructors": [
+        {
+          "name": "Christopher Blake",
+          "email": "christopher.blake@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14548"
+        }
+      ],
+      "location": "Seney Hall 215",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "30",
+      "academic_career": "UOXF",
+      "crn": "4082",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Christopher Blake",
+      "instructors": [
+        {
+          "name": "Christopher Blake",
+          "email": "christopher.blake@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14548"
+        }
+      ],
+      "location": "Johnson Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "31",
+      "academic_career": "UOXF",
+      "crn": "4083",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Teresa Romano",
+      "instructors": [
+        {
+          "name": "Teresa Romano",
+          "email": "teresa.romano@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14546"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "32",
+      "academic_career": "UOXF",
+      "crn": "4084",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Teresa Romano",
+      "instructors": [
+        {
+          "name": "Teresa Romano",
+          "email": "teresa.romano@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14546"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "33",
+      "academic_career": "UOXF",
+      "crn": "4085",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Dan Ludwinski",
+      "instructors": [
+        {
+          "name": "Dan Ludwinski",
+          "email": "dludwinski@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24920"
+        }
+      ],
+      "location": "Johnson Hall 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "34",
+      "academic_career": "UOXF",
+      "crn": "4086",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Dan Ludwinski",
+      "instructors": [
+        {
+          "name": "Dan Ludwinski",
+          "email": "dludwinski@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24920"
+        }
+      ],
+      "location": "Johnson Hall 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 28,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "35",
+      "academic_career": "UOXF",
+      "crn": "6182",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Daphne Orr",
+      "instructors": [
+        {
+          "name": "Daphne Orr",
+          "email": "daphne.orr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31934"
+        },
+        {
+          "name": "Natalie Raymond",
+          "email": "natalie.raymond@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34291"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "enrollment_capacity": 32,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 7,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christopher Blake",
+    "Dan Ludwinski",
+    "Daphne Orr",
+    "Natalie Raymond",
+    "Teresa Romano"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.604Z"
+}

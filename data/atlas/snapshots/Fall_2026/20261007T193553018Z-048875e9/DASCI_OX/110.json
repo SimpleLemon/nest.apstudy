@@ -1,0 +1,155 @@
+{
+  "course_code": "DASCI_OX 110",
+  "course_title": "Introduction to Scientific Methods",
+  "subject": "DASCI_OX",
+  "catalog_number": "110",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is designed to introduce students to the style of analytical thinking required for research and the concepts and procedures used in the conduct of empirical research. Students will be introduced to the basic toolkit of researchers which includes sampling, hypothesis testing, Bayesian inference, regression, experiments, instrumental variables, differences in differences, and regression discontinuity.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4254",
+      "academic_career": "UOXF",
+      "crn": "4145",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Noah Mancuso",
+      "instructors": [
+        {
+          "name": "Noah Mancuso",
+          "email": "noah.mancuso@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32383"
+        }
+      ],
+      "location": "Pierce Hall 237",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4255",
+      "academic_career": "UOXF",
+      "crn": "4146",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Noah Mancuso",
+      "instructors": [
+        {
+          "name": "Noah Mancuso",
+          "email": "noah.mancuso@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32383"
+        }
+      ],
+      "location": "Pierce Hall 237",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Noah Mancuso"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.119Z"
+}

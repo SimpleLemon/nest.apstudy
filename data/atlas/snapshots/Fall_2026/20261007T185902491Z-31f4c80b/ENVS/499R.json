@@ -1,0 +1,86 @@
+{
+  "course_code": "ENVS 499R",
+  "course_title": "Advanced Independent Research",
+  "subject": "ENVS",
+  "catalog_number": "499R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students design a research project in collaboration with ENVS faculty. Permission required. Intended for students with previous research experience. Fulfills the ENVS Independent Study requirement.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3386",
+      "academic_career": "UCOL",
+      "crn": "6417",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Eri Saikawa",
+      "instructors": [
+        {
+          "name": "Eri Saikawa",
+          "email": "eri.saikawa@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5401"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 5,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eri Saikawa"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.536Z"
+}

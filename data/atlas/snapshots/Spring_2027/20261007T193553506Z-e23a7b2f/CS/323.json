@@ -1,0 +1,93 @@
+{
+  "course_code": "CS 323",
+  "course_title": "Machine Learning Applications",
+  "subject": "CS",
+  "catalog_number": "323",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Machine learning techniques and their use in solving problems from multiple real-world domains. Topics covered include data analytics, regression, classification, clustering, decision trees, and neural networks using Python libraries. Focuses on applications and use rather than algorithms or theory.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2408",
+      "academic_career": "UCOL",
+      "crn": "3038",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Subhasish Das",
+      "instructors": [
+        {
+          "name": "Subhasish Das",
+          "email": "subhasish.das@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43255"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Subhasish Das"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.528Z"
+}

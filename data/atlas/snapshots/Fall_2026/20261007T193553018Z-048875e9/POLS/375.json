@@ -1,0 +1,93 @@
+{
+  "course_code": "POLS 375",
+  "course_title": "Contemporary Chinese Politics",
+  "subject": "POLS",
+  "catalog_number": "375",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Examines contemporary Chinese politics, covering regime institutions and processes, policies and their effects, and the dynamics of political development, including Chinese Communist party and central government, as well as the role of subnational government.",
+  "course_notes": "This course is taught by Emory Ph.D. candidate Linchuan Zhang. It provides a broad introduction to domestic politics in contemporary China. Major themes include historical foundations, institutions, political economy, and state-society relations.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2281",
+      "academic_career": "UCOL",
+      "crn": "5112",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Linchuan Zhang",
+      "instructors": [
+        {
+          "name": "Linchuan Zhang",
+          "email": "linchuan.zhang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28747"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Linchuan Zhang"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.098Z"
+}

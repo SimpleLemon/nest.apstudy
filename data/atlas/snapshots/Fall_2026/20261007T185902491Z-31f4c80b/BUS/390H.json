@@ -1,0 +1,80 @@
+{
+  "course_code": "BUS 390H",
+  "course_title": "TechTool: Building AI Agents",
+  "subject": "BUS",
+  "catalog_number": "390H",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "0.5",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "ONLIN@ONLINE",
+  "campus_description": "ONLIN@ONLINE",
+  "course_description": "Given the sudden rise of AI agents, this tech toolbox will introduce students to the underlying technology and have them build a basic agents to assist them in increasing their productivity. It will take advantage of computer use (available from both Anthropic via Claude and Amazon via Nova Act). Students will use Python to make API calls that will enable them to perform tasks such as adding appointments to their calendar from emails that are in their inboxes, automating product ordering, and automating email replies.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4927",
+      "academic_career": "UBUS",
+      "crn": "5865",
+      "section_number": "1101",
+      "schedule_type": "LEC",
+      "instructor": "David Schweidel",
+      "instructors": [
+        {
+          "name": "David Schweidel",
+          "email": "dschweidel@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5441"
+        }
+      ],
+      "location": null,
+      "campus": "ONLIN@ONLINE",
+      "campus_description": "ONLIN@ONLINE",
+      "credit_hours": "0.5",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 300,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Schweidel"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.624Z"
+}

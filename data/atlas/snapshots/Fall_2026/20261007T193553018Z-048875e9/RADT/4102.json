@@ -1,0 +1,94 @@
+{
+  "course_code": "RADT 4102",
+  "course_title": "Radiographic Procedures IV",
+  "subject": "RADT",
+  "catalog_number": "4102",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to build upon previous exposure to knowledge base in anatomy and physiology. Components of the tissues, organs and systems are described and discussed. Content is also designed to provide the knowledge base necessary to perform standard imaging procedures, along with the application to special studies. Consideration is given to the evaluation of optimal diagnostic images. Laboratory experience will be used to complement the didactic portion.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4817",
+      "academic_career": "UAH",
+      "crn": "1008",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Christy Evans",
+      "instructors": [
+        {
+          "name": "Christy Evans",
+          "email": "christy.evans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40255"
+        },
+        {
+          "name": "Traci Monfort",
+          "email": "traci.monfort@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40258"
+        },
+        {
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40254"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christy Evans",
+    "Shaun Taylor",
+    "Traci Monfort"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.136Z"
+}

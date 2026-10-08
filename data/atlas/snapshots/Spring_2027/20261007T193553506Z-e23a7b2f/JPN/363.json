@@ -1,0 +1,93 @@
+{
+  "course_code": "JPN 363",
+  "course_title": "Literary and Visual Culture in Japan",
+  "subject": "JPN",
+  "catalog_number": "363",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An exploration of the complex interactions between written texts and the visual arts in Japan from the classical era to the present. Discussion will include prose, poetry, printing, picture scrolls, calligraphy, woodblock prints, and film.",
+  "course_notes": "(Same as ARTHIST 363 1 and EAS 363 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1807",
+      "academic_career": "UCOL",
+      "crn": "1858",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Cheryl Crowley",
+      "instructors": [
+        {
+          "name": "Cheryl Crowley",
+          "email": "ccrowle@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2817"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cheryl Crowley"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.560Z"
+}

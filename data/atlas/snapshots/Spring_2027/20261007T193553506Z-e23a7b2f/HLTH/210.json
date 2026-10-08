@@ -1,0 +1,97 @@
+{
+  "course_code": "HLTH 210",
+  "course_title": "Predictive Health and Society",
+  "subject": "HLTH",
+  "catalog_number": "210",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course introduces the evidence base for the science of health and emphasizes STEM educational translations to the population, clinic and individual levels. Innovative efforts are needed to drive changes in health care from a reactive, disease-focused system to a proactive health-focused one.",
+  "course_notes": "(Same as ANT 231 1) (The idea that health is about illness, and health care means medical care or an intervention for disease or injury, is embedded in our culture. We assume that predicting our health means we are predicting disease, and that predictive health involves a search for a disease-specific gene. Introduction to Predictive Health and Society explores a radically different approach to health. Health is not the state of not being sick, rather it is what we live every day \"it is the state of our bodies\" cells and cellular changes over time. We are building the science of health, not disease, with new insights into biomarkers of the ongoing cellular functions. In short, health prediction is a fundamental and revolutionary paradigm shift that focuses health care on health and supports disease prevention by pre-emption. We will be joined by ethicists, behaviorists, geneticists, infectious disease experts, leaders in public health, health economists and research scientists from a number of disciplines and schools across the university, and around the world. Each class encourages you to reflect on the material as it pertains to you in your daily lived experience of health. Each topic will have a bearing on choices available to you and how you yourself choose to live your life - the way you eat, sleep, experience stress and we encourage you to consider daily challenges in a new perspective.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1431",
+      "academic_career": "UCOL",
+      "crn": "1576",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Michelle Lampl",
+      "instructors": [
+        {
+          "name": "Michelle Lampl",
+          "email": "mlampl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1783"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 125,
+      "seats_available": 125,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Michelle Lampl"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.555Z"
+}

@@ -1,0 +1,156 @@
+{
+  "course_code": "PSYC 111",
+  "course_title": "Intro To Psyc II",
+  "subject": "PSYC",
+  "catalog_number": "111",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to social behavior, development, and individual differences.",
+  "course_notes": "OPUS waitlist available at the beginning of add/drop/swap. (There will be small group discussions. This second semester of introductory psychology will cover in broad brushstrokes the major areas of research design, social psychology, social and emotional development, personality measurement and theory, psychopathology, and therapeutic interventions. Emphasis will be on the empirical foundations of psychological knowledge, and on fostering students' scientific thinking about behavior. Particulars: There will be one primary textbook and supplemental readings. Participation in research projects or equivalent is required.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "673",
+      "academic_career": "UCOL",
+      "crn": "1558",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Elizabeth Kim",
+      "instructors": [
+        {
+          "name": "Elizabeth Kim",
+          "email": "elizabeth.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5890"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "674",
+      "academic_career": "UCOL",
+      "crn": "1603",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Maria Jones",
+      "instructors": [
+        {
+          "name": "Maria Jones",
+          "email": "maria.jones@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8136"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elizabeth Kim",
+    "Maria Jones"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.581Z"
+}

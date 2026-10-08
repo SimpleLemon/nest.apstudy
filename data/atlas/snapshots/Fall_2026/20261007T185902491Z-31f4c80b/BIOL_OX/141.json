@@ -1,0 +1,339 @@
+{
+  "course_code": "BIOL_OX 141",
+  "course_title": "Foundations of Modern Biology I",
+  "subject": "BIOL_OX",
+  "catalog_number": "141",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "The study of cell structure and function including cellular metabolism, fundamentals of genetics, evolution, and population genetics. Emphasizes scientific inquiry. Fulfills biology major and pre-health requirements. Note: students receiving AP/IB credit for BIOL 141 must still take BIOL_OX 141L or BIOL 141L for SNTL, biology, or pre-health requirements.",
+  "course_notes": "Must also enroll in BIOL_OX 141L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "10",
+      "academic_career": "UOXF",
+      "crn": "4281",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sheldon Lawrence",
+      "instructors": [
+        {
+          "name": "Sheldon Lawrence",
+          "email": "sheldon.lawrence@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27642"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "11",
+      "academic_career": "UOXF",
+      "crn": "4282",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Sarah Fankhauser",
+      "instructors": [
+        {
+          "name": "Sarah Fankhauser",
+          "email": "sarah.fankhauser@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5979"
+        },
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "12",
+      "academic_career": "UOXF",
+      "crn": "4283",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Lauren Essler",
+      "instructors": [
+        {
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43354"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "13",
+      "academic_career": "UOXF",
+      "crn": "4284",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Kelly Murray-Stoker",
+      "instructors": [
+        {
+          "name": "Kelly Murray-Stoker",
+          "email": "kelly.mackenzie.murray-stoker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39548"
+        }
+      ],
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "14",
+      "academic_career": "UOXF",
+      "crn": "4285",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Sarah Fankhauser",
+      "instructors": [
+        {
+          "name": "Sarah Fankhauser",
+          "email": "sarah.fankhauser@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5979"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 24,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 5,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jordan Silva",
+    "Kelly Murray-Stoker",
+    "Lauren Essler",
+    "Sarah Fankhauser",
+    "Sheldon Lawrence"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.599Z"
+}

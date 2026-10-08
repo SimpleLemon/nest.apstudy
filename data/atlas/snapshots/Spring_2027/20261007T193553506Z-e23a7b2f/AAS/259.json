@@ -1,0 +1,97 @@
+{
+  "course_code": "AAS 259",
+  "course_title": "Race, Place, and Political Economy",
+  "subject": "AAS",
+  "catalog_number": "259",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+  "requirements": [
+    "Social Sciences with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course focuses on dominant themes in political economy, geography, and behavior literature in the post-Civil Rights Movement era. The intersection of race and class at the local level is addressed while exploring issues of institutional discrimination and redistribution.",
+  "course_notes": "(Same as POLS 285 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2394",
+      "academic_career": "UCOL",
+      "crn": "1907",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jessica Lynn Stewart",
+      "instructors": [
+        {
+          "name": "Jessica Lynn Stewart",
+          "email": "jessica.lynn.stewart@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22002"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences with Race & Ethnicity(*)",
+      "requirements": [
+        "Social Sciences with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jessica Lynn Stewart"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.507Z"
+}

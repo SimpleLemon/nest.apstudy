@@ -1,0 +1,200 @@
+{
+  "course_code": "POLS 494W",
+  "course_title": "Research Topics Seminar in Political Sciences: Illicit Organizations",
+  "subject": "POLS",
+  "catalog_number": "494W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Research Seminar on selected topics and problems in political science. Class will fulfill the \"research\" requirement for the political science major. May be repeated for credit when the topic varies.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2059",
+      "academic_career": "UCOL",
+      "crn": "1743",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Danielle Jung",
+      "instructors": [
+        {
+          "name": "Danielle Jung",
+          "email": "danielle.jung@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5829"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2060",
+      "academic_career": "UCOL",
+      "crn": "1820",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Michael Owens",
+      "instructors": [
+        {
+          "name": "Michael Owens",
+          "email": "michael.leo.owens@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3059"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2061",
+      "academic_career": "UCOL",
+      "crn": "1825",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Richard Doner",
+      "instructors": [
+        {
+          "name": "Richard Doner",
+          "email": "rdoner@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "320"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 8:30-11:15a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Danielle Jung",
+    "Michael Owens",
+    "Richard Doner"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.579Z"
+}

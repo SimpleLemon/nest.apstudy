@@ -1,0 +1,333 @@
+{
+  "course_code": "MATH 210",
+  "course_title": "Advanced Calculus for Data Sciences",
+  "subject": "MATH",
+  "catalog_number": "210",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is a short treatment of MATH 112 and 211 with a lab component. It is not appropriate for students who have taken MATH 211 . Topics include: advanced integration, Taylor series; and multivariable differentiation, optimization and integration; and applications to statistics and science.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "928",
+      "academic_career": "UCOL",
+      "crn": "3366",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        }
+      ],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 40,
+      "seats_available": 34,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "929",
+      "academic_career": "UCOL",
+      "crn": "3385",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        }
+      ],
+      "location": "Math & Science Center - N304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 40,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "930",
+      "academic_career": "UCOL",
+      "crn": "3398",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        },
+        {
+          "name": "Mitchell Scott",
+          "email": "mitchell.scott@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "36390"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "931",
+      "academic_career": "UCOL",
+      "crn": "3412",
+      "section_number": "7",
+      "schedule_type": "LAB",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        },
+        {
+          "name": "Mitchell Scott",
+          "email": "mitchell.scott@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "36390"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "932",
+      "academic_career": "UCOL",
+      "crn": "3442",
+      "section_number": "9",
+      "schedule_type": "LAB",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        },
+        {
+          "name": "Mitchell Scott",
+          "email": "mitchell.scott@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "36390"
+        }
+      ],
+      "location": "Math & Science Center - W303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 20,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 2,
+    "labs": 3,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mike Carr",
+    "Mitchell Scott"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.558Z"
+}

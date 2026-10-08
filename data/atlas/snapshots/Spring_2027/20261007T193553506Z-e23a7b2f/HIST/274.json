@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST 274",
+  "course_title": "Introduction to Korean History",
+  "subject": "HIST",
+  "catalog_number": "274",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed as a foundation course on Korean history, preparing students for other Korean history courses, both pre-modern and modern, as well as students' individual research on Korean past. It surveys the major events and topics in Korean history from ancient times to the modern era.",
+  "course_notes": "(Same as KRN 274 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "396",
+      "academic_career": "UCOL",
+      "crn": "3638",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hwisang Cho",
+      "instructors": [
+        {
+          "name": "Hwisang Cho",
+          "email": "hwisang.cho@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18393"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hwisang Cho"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.553Z"
+}

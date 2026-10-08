@@ -1,0 +1,513 @@
+{
+  "course_code": "PHYS 397R",
+  "course_title": "Directed Study",
+  "subject": "PHYS",
+  "catalog_number": "397R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit, two to four hours. Prerequisite: consent of instructor. Adapted to particular needs of individual student with instructor acting as adviser.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1150",
+      "academic_career": "UCOL",
+      "crn": "1396",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Alissa Bans",
+      "instructors": [
+        {
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14786"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1151",
+      "academic_career": "UCOL",
+      "crn": "5468",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 991,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1152",
+      "academic_career": "UCOL",
+      "crn": "6259",
+      "section_number": "3",
+      "schedule_type": "SUP",
+      "instructor": "John A Malko",
+      "instructors": [
+        {
+          "name": "John A Malko",
+          "email": "jmalko@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "86"
+        }
+      ],
+      "location": "Math & Science Center - N215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 10,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1153",
+      "academic_career": "UCOL",
+      "crn": "6418",
+      "section_number": "4",
+      "schedule_type": "SUP",
+      "instructor": "Shashank Shekhar",
+      "instructors": [
+        {
+          "name": "Shashank Shekhar",
+          "email": "shekhar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24931"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 997,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1154",
+      "academic_career": "UCOL",
+      "crn": "6423",
+      "section_number": "5",
+      "schedule_type": "SUP",
+      "instructor": "Sergei Urazhdin",
+      "instructors": [
+        {
+          "name": "Sergei Urazhdin",
+          "email": "sergei.urazhdin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5261"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1155",
+      "academic_career": "UCOL",
+      "crn": "6440",
+      "section_number": "6",
+      "schedule_type": "SUP",
+      "instructor": "Justin C Burton",
+      "instructors": [
+        {
+          "name": "Justin C Burton",
+          "email": "justin.c.burton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5836"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1156",
+      "academic_career": "UCOL",
+      "crn": "6441",
+      "section_number": "7",
+      "schedule_type": "SUP",
+      "instructor": "Alissa Bans",
+      "instructors": [
+        {
+          "name": "Alissa Bans",
+          "email": "alissa.sue.bans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14786"
+        },
+        {
+          "name": "Merida Batiste",
+          "email": "merida.g.batiste@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14443"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1157",
+      "academic_career": "UCOL",
+      "crn": "6442",
+      "section_number": "8",
+      "schedule_type": "SUP",
+      "instructor": "Erin Wells Bonning",
+      "instructors": [
+        {
+          "name": "Erin Wells Bonning",
+          "email": "erin.bonning@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5852"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1158",
+      "academic_career": "UCOL",
+      "crn": "6551",
+      "section_number": "9",
+      "schedule_type": "SUP",
+      "instructor": "Minsu Kim",
+      "instructors": [
+        {
+          "name": "Minsu Kim",
+          "email": "minsu.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46970"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1159",
+      "academic_career": "UCOL",
+      "crn": "6565",
+      "section_number": "10",
+      "schedule_type": "SUP",
+      "instructor": "Katherine Davis",
+      "instructors": [
+        {
+          "name": "Katherine Davis",
+          "email": "katherine.davis@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22924"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "10",
+      "enrollment_capacity": 999,
+      "seats_available": 998,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 10,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 10,
+    "open": 10,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alissa Bans",
+    "Erin Wells Bonning",
+    "John A Malko",
+    "Justin C Burton",
+    "Katherine Davis",
+    "Merida Batiste",
+    "Minsu Kim",
+    "Sergei Urazhdin",
+    "Shashank Shekhar",
+    "Thomas Bing"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.573Z"
+}

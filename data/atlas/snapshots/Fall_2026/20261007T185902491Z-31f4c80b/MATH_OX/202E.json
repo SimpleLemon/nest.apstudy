@@ -1,0 +1,88 @@
+{
+  "course_code": "MATH_OX 202E",
+  "course_title": "Mathematics Center Practicum",
+  "subject": "MATH_OX",
+  "catalog_number": "202E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Designed as a companion to the first semester experience as a Mathematics Center tutor. Course includes reflection on tutoring experiences and practice in tutoring strategies. Included will be an in depth review of essential mathematical concepts and proofs in the Calculus sequence, theoretical and pedagogical readings, and tutoring reflections and observations.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4257",
+      "academic_career": "UOXF",
+      "crn": "4374",
+      "section_number": "1",
+      "schedule_type": "PRA",
+      "instructor": "Christina Lee",
+      "instructors": [
+        {
+          "name": "Christina Lee",
+          "email": "christina.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6669"
+        }
+      ],
+      "location": "Pierce Hall 228",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christina Lee"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.609Z"
+}

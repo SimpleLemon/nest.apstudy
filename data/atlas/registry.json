@@ -1,0 +1,1237 @@
+{
+  "version": 1,
+  "complete": true,
+  "source": "https://atlas.emory.edu/",
+  "discovered_at": "2026-10-07T19:35:52.408Z",
+  "career_field": "career",
+  "subject_field": "subject",
+  "terms": {
+    "Spring_2026": {
+      "srcdb": "5261",
+      "label": "Spring 2026",
+      "published": true
+    },
+    "Fall_2026": {
+      "srcdb": "5269",
+      "label": "Fall 2026",
+      "published": true
+    },
+    "Spring_2027": {
+      "srcdb": "5271",
+      "label": "Spring 2027",
+      "published": true,
+      "tentative": true,
+      "notice": "Spring 2027 Classes are tentatively scheduled and subject to change."
+    },
+    "Summer_2026": {
+      "srcdb": "5266",
+      "label": "Summer 2026",
+      "published": true
+    },
+    "Fall_2025": {
+      "srcdb": "5259",
+      "label": "Fall 2025",
+      "published": true
+    },
+    "Summer_2025": {
+      "srcdb": "5256",
+      "label": "Summer 2025",
+      "published": true
+    },
+    "Spring_2025": {
+      "srcdb": "5251",
+      "label": "Spring 2025",
+      "published": true
+    },
+    "Fall_2024": {
+      "srcdb": "5249",
+      "label": "Fall 2024",
+      "published": true
+    },
+    "Summer_2024": {
+      "srcdb": "5246",
+      "label": "Summer 2024",
+      "published": true
+    },
+    "Spring_2024": {
+      "srcdb": "5241",
+      "label": "Spring 2024",
+      "published": true
+    },
+    "Fall_2023": {
+      "srcdb": "5239",
+      "label": "Fall 2023",
+      "published": true
+    },
+    "Summer_2023": {
+      "srcdb": "5236",
+      "label": "Summer 2023",
+      "published": true
+    },
+    "Spring_2023": {
+      "srcdb": "5231",
+      "label": "Spring 2023",
+      "published": true
+    },
+    "Fall_2022": {
+      "srcdb": "5229",
+      "label": "Fall 2022",
+      "published": true
+    },
+    "Summer_2022": {
+      "srcdb": "5226",
+      "label": "Summer 2022",
+      "published": true
+    },
+    "Spring_2022": {
+      "srcdb": "5221",
+      "label": "Spring 2022",
+      "published": true
+    },
+    "Fall_2021": {
+      "srcdb": "5219",
+      "label": "Fall 2021",
+      "published": true
+    },
+    "Summer_2021": {
+      "srcdb": "5216",
+      "label": "Summer 2021",
+      "published": true
+    },
+    "Spring_2021": {
+      "srcdb": "5211",
+      "label": "Spring 2021",
+      "published": true
+    },
+    "Fall_2020": {
+      "srcdb": "5209",
+      "label": "Fall 2020",
+      "published": true
+    },
+    "Summer_2020": {
+      "srcdb": "5206",
+      "label": "Summer 2020",
+      "published": true
+    },
+    "Spring_2020": {
+      "srcdb": "5201",
+      "label": "Spring 2020",
+      "published": true
+    },
+    "Fall_2019": {
+      "srcdb": "5199",
+      "label": "Fall 2019",
+      "published": true
+    },
+    "Summer_2019": {
+      "srcdb": "5196",
+      "label": "Summer 2019",
+      "published": true
+    },
+    "Spring_2019": {
+      "srcdb": "5191",
+      "label": "Spring 2019",
+      "published": true
+    }
+  },
+  "careers": [
+    {
+      "value": "UCOL",
+      "label": "Emory College"
+    },
+    {
+      "value": "GAH",
+      "label": "Graduate Allied Health"
+    },
+    {
+      "value": "GBUS",
+      "label": "Graduate Business"
+    },
+    {
+      "value": "GNUR",
+      "label": "Graduate Nursing"
+    },
+    {
+      "value": "GSAS",
+      "label": "Graduate School"
+    },
+    {
+      "value": "LAW",
+      "label": "Law"
+    },
+    {
+      "value": "MED",
+      "label": "Medicine"
+    },
+    {
+      "value": "UOXF",
+      "label": "Oxford College"
+    },
+    {
+      "value": "PUBH",
+      "label": "Public Health"
+    },
+    {
+      "value": "THEO",
+      "label": "Theology"
+    },
+    {
+      "value": "UAH",
+      "label": "Undergraduate Allied Health"
+    },
+    {
+      "value": "UBUS",
+      "label": "Undergraduate Business"
+    },
+    {
+      "value": "UNUR",
+      "label": "Undergraduate Nursing"
+    }
+  ],
+  "subjects": [
+    {
+      "value": "OISP",
+      "label": "Academic Study Abroad Course (OISP)"
+    },
+    {
+      "value": "ACT",
+      "label": "Accounting (ACT)"
+    },
+    {
+      "value": "ACT_OX",
+      "label": "Accounting - Oxford (ACT_OX)"
+    },
+    {
+      "value": "AAS",
+      "label": "African American Studies (AAS)"
+    },
+    {
+      "value": "AAS_OX",
+      "label": "African American Studies - Oxford (AAS_OX)"
+    },
+    {
+      "value": "AFS",
+      "label": "African Studies (AFS)"
+    },
+    {
+      "value": "AFS_OX",
+      "label": "African Studies – Oxford (AFS_OX)"
+    },
+    {
+      "value": "AMST",
+      "label": "American Studies (AMST)"
+    },
+    {
+      "value": "AMST_OX",
+      "label": "American Studies - Oxford (AMST_OX)"
+    },
+    {
+      "value": "ANCMED",
+      "label": "Ancient Mediterranean Studies (ANCMED)"
+    },
+    {
+      "value": "ANMED_OX",
+      "label": "Ancient Mediterranean Studies (ANMED_OX)"
+    },
+    {
+      "value": "ANES",
+      "label": "Anesthesiology (ANES)"
+    },
+    {
+      "value": "ANT",
+      "label": "Anthropology (ANT)"
+    },
+    {
+      "value": "ANTH_OX",
+      "label": "Anthropology - Oxford (ANTH_OX)"
+    },
+    {
+      "value": "APHI",
+      "label": "Appl Public Health Informatics (APHI)"
+    },
+    {
+      "value": "AEPI",
+      "label": "Applied Epidemiology (AEPI)"
+    },
+    {
+      "value": "ARAB",
+      "label": "Arabic (ARAB)"
+    },
+    {
+      "value": "ARAB_OX",
+      "label": "Arabic - Oxford (ARAB_OX)"
+    },
+    {
+      "value": "ART_OX",
+      "label": "Art - Oxford (ART_OX)"
+    },
+    {
+      "value": "ARTHIST",
+      "label": "Art History (ARTHIST)"
+    },
+    {
+      "value": "ASTR_OX",
+      "label": "Astronomy - Oxford (ASTR_OX)"
+    },
+    {
+      "value": "ATA",
+      "label": "Atlanta Theological Assoc (ATA)"
+    },
+    {
+      "value": "BAPS",
+      "label": "Baptist Studies (BAPS)"
+    },
+    {
+      "value": "BAHS",
+      "label": "Basic Health Sciences (BAHS)"
+    },
+    {
+      "value": "BSHES",
+      "label": "Behavioral, Social, and Health Education Sciences (BSHES)"
+    },
+    {
+      "value": "BI",
+      "label": "Biblical Interpretation (BI)"
+    },
+    {
+      "value": "BL",
+      "label": "Biblical Languages (BL)"
+    },
+    {
+      "value": "BCDB",
+      "label": "Biochemistry, Cell & Dev Biol (BCDB)"
+    },
+    {
+      "value": "BIOETH",
+      "label": "Bioethics (BIOETH)"
+    },
+    {
+      "value": "BIOL",
+      "label": "Biology (BIOL)"
+    },
+    {
+      "value": "BIOL_OX",
+      "label": "Biology - Oxford (BIOL_OX)"
+    },
+    {
+      "value": "BMED",
+      "label": "Biomedical Engineering (BMED)"
+    },
+    {
+      "value": "BMI",
+      "label": "Biomedical Informatics (BMI)"
+    },
+    {
+      "value": "BIOS",
+      "label": "Biostatistics (BIOS)"
+    },
+    {
+      "value": "BCS",
+      "label": "Black Church Studies (BCS)"
+    },
+    {
+      "value": "BMID",
+      "label": "BMID (BMID)"
+    },
+    {
+      "value": "BSHE",
+      "label": "BSHE (BSHE)"
+    },
+    {
+      "value": "BUS_OX",
+      "label": "BUS_OX (BUS_OX)"
+    },
+    {
+      "value": "BUS",
+      "label": "Business (BUS)"
+    },
+    {
+      "value": "CB",
+      "label": "Cancer Biology (CB)"
+    },
+    {
+      "value": "CCS",
+      "label": "CCS (CCS)"
+    },
+    {
+      "value": "CHEM",
+      "label": "Chemistry (CHEM)"
+    },
+    {
+      "value": "CHEM_OX",
+      "label": "Chemistry - Oxford (CHEM_OX)"
+    },
+    {
+      "value": "CHN_OX",
+      "label": "Chinese - Oxford (CHN_OX)"
+    },
+    {
+      "value": "CHN",
+      "label": "Chinese Language (CHN)"
+    },
+    {
+      "value": "CHP",
+      "label": "CHP (CHP)"
+    },
+    {
+      "value": "CC",
+      "label": "Church and Community (CC)"
+    },
+    {
+      "value": "CM",
+      "label": "Church and Music (CM)"
+    },
+    {
+      "value": "CL",
+      "label": "Classics (CL)"
+    },
+    {
+      "value": "CL_OX",
+      "label": "Classics - Oxford (CL_OX)"
+    },
+    {
+      "value": "CO",
+      "label": "Columbia Cross Registration (CO)"
+    },
+    {
+      "value": "CBSC",
+      "label": "Community Bldg & Social Change (CBSC)"
+    },
+    {
+      "value": "CPLT",
+      "label": "Comparative Literature (CPLT)"
+    },
+    {
+      "value": "CS",
+      "label": "Computer Science (CS)"
+    },
+    {
+      "value": "CS_OX",
+      "label": "Computer Science - Oxford (CS_OX)"
+    },
+    {
+      "value": "CE",
+      "label": "Contextual Education (CE)"
+    },
+    {
+      "value": "CPTS",
+      "label": "CPTS (CPTS)"
+    },
+    {
+      "value": "ENGCW",
+      "label": "Creative Writing (ENGCW)"
+    },
+    {
+      "value": "ENGCW_OX",
+      "label": "Creative Writing - Oxford (ENGCW_OX)"
+    },
+    {
+      "value": "CVP",
+      "label": "CVP (CVP)"
+    },
+    {
+      "value": "DANC",
+      "label": "Dance (DANC)"
+    },
+    {
+      "value": "DANC_OX",
+      "label": "Dance - Oxford (DANC_OX)"
+    },
+    {
+      "value": "DASCI_OX",
+      "label": "DASCI_OX (DASCI_OX)"
+    },
+    {
+      "value": "DATA",
+      "label": "DATA (DATA)"
+    },
+    {
+      "value": "DATASCI",
+      "label": "Data Science and Analysis (DATASCI)"
+    },
+    {
+      "value": "DS",
+      "label": "Denominational Studies (DS)"
+    },
+    {
+      "value": "MDP",
+      "label": "Development Practice (MDP)"
+    },
+    {
+      "value": "DSMS",
+      "label": "Digital Schol and Media Study (DSMS)"
+    },
+    {
+      "value": "DSC_OX",
+      "label": "Discovery Seminar - Oxford (DSC_OX)"
+    },
+    {
+      "value": "DM",
+      "label": "Doctor of Ministry (DM)"
+    },
+    {
+      "value": "DPT",
+      "label": "Doctor of Physical Therapy (DPT)"
+    },
+    {
+      "value": "DRPH",
+      "label": "DRPH (DRPH)"
+    },
+    {
+      "value": "EAS_OX",
+      "label": "EAS_OX (EAS_OX)"
+    },
+    {
+      "value": "EAS",
+      "label": "East Asian Studies (EAS)"
+    },
+    {
+      "value": "ECON",
+      "label": "Economics (ECON)"
+    },
+    {
+      "value": "ECON_OX",
+      "label": "Economics - Oxford (ECON_OX)"
+    },
+    {
+      "value": "EDS",
+      "label": "Educational Studies (EDS)"
+    },
+    {
+      "value": "ECS",
+      "label": "Emory College Seminar (ECS)"
+    },
+    {
+      "value": "ENG",
+      "label": "English (ENG)"
+    },
+    {
+      "value": "ENG_OX",
+      "label": "English - Oxford (ENG_OX)"
+    },
+    {
+      "value": "ENGRD",
+      "label": "English - Writing Program (ENGRD)"
+    },
+    {
+      "value": "ESL",
+      "label": "English as a Second Language (ESL)"
+    },
+    {
+      "value": "TESL",
+      "label": "English as a Second Language (TESL)"
+    },
+    {
+      "value": "ELSP",
+      "label": "English Lang. Support Program (ELSP)"
+    },
+    {
+      "value": "EH",
+      "label": "Environmental Health (EH)"
+    },
+    {
+      "value": "EHS",
+      "label": "Environmental Health Sciences (EHS)"
+    },
+    {
+      "value": "ENVS",
+      "label": "Environmental Sciences (ENVS)"
+    },
+    {
+      "value": "ENVS_OX",
+      "label": "Environmental Studies - Oxford (ENVS_OX)"
+    },
+    {
+      "value": "EPI",
+      "label": "Epidemiology (EPI)"
+    },
+    {
+      "value": "ER",
+      "label": "Erskine Cross Registration (ER)"
+    },
+    {
+      "value": "ES",
+      "label": "Ethical Studies (ES)"
+    },
+    {
+      "value": "RLE",
+      "label": "Ethics and Society (RLE)"
+    },
+    {
+      "value": "EV",
+      "label": "Evangelism (EV)"
+    },
+    {
+      "value": "FH",
+      "label": "Faith and Health (FH)"
+    },
+    {
+      "value": "FILM",
+      "label": "Film and Media (FILM)"
+    },
+    {
+      "value": "FILM_OX",
+      "label": "Film Studies - Oxford (FILM_OX)"
+    },
+    {
+      "value": "FIN_OX",
+      "label": "FIN_OX (FIN_OX)"
+    },
+    {
+      "value": "FIN",
+      "label": "Finance (FIN)"
+    },
+    {
+      "value": "FREN",
+      "label": "French (FREN)"
+    },
+    {
+      "value": "FREN_OX",
+      "label": "French - Oxford (FREN_OX)"
+    },
+    {
+      "value": "GMB",
+      "label": "Genetics and Molecular Biology (GMB)"
+    },
+    {
+      "value": "GEOL_OX",
+      "label": "Geology - Oxford (GEOL_OX)"
+    },
+    {
+      "value": "GER",
+      "label": "German (GER)"
+    },
+    {
+      "value": "GER_OX",
+      "label": "German - Oxford (GER_OX)"
+    },
+    {
+      "value": "GHD",
+      "label": "GHD (GHD)"
+    },
+    {
+      "value": "GH",
+      "label": "Global Health (GH)"
+    },
+    {
+      "value": "GHCS",
+      "label": "Global Hlth, Culture & Society (GHCS)"
+    },
+    {
+      "value": "GAH",
+      "label": "Graduate Allied Health (GAH)"
+    },
+    {
+      "value": "GRAD",
+      "label": "Graduate Coursework (GRAD)"
+    },
+    {
+      "value": "GRAD_OX",
+      "label": "Graduate Coursework - Oxford (GRAD_OX)"
+    },
+    {
+      "value": "GRK",
+      "label": "Greek (GRK)"
+    },
+    {
+      "value": "PE",
+      "label": "Health and Physical Education (PE)"
+    },
+    {
+      "value": "HPM",
+      "label": "Health Policy and Management (HPM)"
+    },
+    {
+      "value": "HCO",
+      "label": "Heath Care Outcomes (HCO)"
+    },
+    {
+      "value": "HEBR",
+      "label": "Hebrew (HEBR)"
+    },
+    {
+      "value": "RLHB",
+      "label": "Hebrew Bible (RLHB)"
+    },
+    {
+      "value": "HNDI",
+      "label": "Hindi (HNDI)"
+    },
+    {
+      "value": "HISP",
+      "label": "Hispanic Studies (HISP)"
+    },
+    {
+      "value": "RLHT",
+      "label": "Historical Studies in Theology (RLHT)"
+    },
+    {
+      "value": "HIST",
+      "label": "History (HIST)"
+    },
+    {
+      "value": "HIST_OX",
+      "label": "History - Oxford (HIST_OX)"
+    },
+    {
+      "value": "HC",
+      "label": "History of Christianity (HC)"
+    },
+    {
+      "value": "HSP",
+      "label": "HSP (HSP)"
+    },
+    {
+      "value": "HGC",
+      "label": "Human Genetics Counseling (HGC)"
+    },
+    {
+      "value": "HLTH",
+      "label": "Human Health Program (HLTH)"
+    },
+    {
+      "value": "HLTH_OX",
+      "label": "Human Health Program - Oxford (HLTH_OX)"
+    },
+    {
+      "value": "IMP",
+      "label": "Immunology and Molecular Path (IMP)"
+    },
+    {
+      "value": "ISOM",
+      "label": "Info.Systems/Operations Mngm. (ISOM)"
+    },
+    {
+      "value": "ILA",
+      "label": "Institute of Liberal Arts (ILA)"
+    },
+    {
+      "value": "IBS",
+      "label": "Inter Biological Sciences (IBS)"
+    },
+    {
+      "value": "IDS",
+      "label": "Interdisciplinary Studies (IDS)"
+    },
+    {
+      "value": "IDS_OX",
+      "label": "Interdisciplinary Studies - Oxfrod (IDS_OX)"
+    },
+    {
+      "value": "INTERN",
+      "label": "INTERN (INTERN)"
+    },
+    {
+      "value": "ICIVS",
+      "label": "Islamic Civilizations Studies (ICIVS)"
+    },
+    {
+      "value": "ISOM_OX",
+      "label": "ISOM_OX (ISOM_OX)"
+    },
+    {
+      "value": "ITAL",
+      "label": "Italian (ITAL)"
+    },
+    {
+      "value": "IT",
+      "label": "ITC-Cross Registration (IT)"
+    },
+    {
+      "value": "JPN",
+      "label": "Japanese (JPN)"
+    },
+    {
+      "value": "JS",
+      "label": "Jewish Studies (JS)"
+    },
+    {
+      "value": "JPE",
+      "label": "Jones Program in Ethics (JPE)"
+    },
+    {
+      "value": "JPCT",
+      "label": "JPCT (JPCT)"
+    },
+    {
+      "value": "KRN",
+      "label": "Korean (KRN)"
+    },
+    {
+      "value": "LACS_OX",
+      "label": "Lat. Amer. & Caribbean - Oxford (LACS_OX)"
+    },
+    {
+      "value": "LAT",
+      "label": "Latin (LAT)"
+    },
+    {
+      "value": "LAT_OX",
+      "label": "Latin - Oxford (LAT_OX)"
+    },
+    {
+      "value": "LACS",
+      "label": "Latin Amer & Caribbean Studies (LACS)"
+    },
+    {
+      "value": "LAW",
+      "label": "Law (LAW)"
+    },
+    {
+      "value": "LA",
+      "label": "Leadership & Administration (LA)"
+    },
+    {
+      "value": "LTL_OX",
+      "label": "Learning to Lead (LTL_OX)"
+    },
+    {
+      "value": "LING",
+      "label": "Linguistics (LING)"
+    },
+    {
+      "value": "LING_OX",
+      "label": "Linguistics - Oxford (LING_OX)"
+    },
+    {
+      "value": "LMA",
+      "label": "LMA (LMA)"
+    },
+    {
+      "value": "LTC",
+      "label": "LTC - Cross Registration (LTC)"
+    },
+    {
+      "value": "MKT",
+      "label": "Marketing (MKT)"
+    },
+    {
+      "value": "MARL",
+      "label": "MARL (MARL)"
+    },
+    {
+      "value": "MSCR",
+      "label": "Master - Clinical Research (MSCR)"
+    },
+    {
+      "value": "MDIV",
+      "label": "Master of Divinity (MDIV)"
+    },
+    {
+      "value": "MRPL",
+      "label": "Master of Religion and Public (MRPL)"
+    },
+    {
+      "value": "MTS",
+      "label": "Master of Theological Studies (MTS)"
+    },
+    {
+      "value": "THM",
+      "label": "Master of Theology (THM)"
+    },
+    {
+      "value": "MATH",
+      "label": "Mathematics (MATH)"
+    },
+    {
+      "value": "MATH_OX",
+      "label": "Mathematics - Oxford (MATH_OX)"
+    },
+    {
+      "value": "MC",
+      "label": "MC (MC)"
+    },
+    {
+      "value": "MI",
+      "label": "Medical Imaging (MI)"
+    },
+    {
+      "value": "MDPH",
+      "label": "Medical/PHD Courses (MDPH)"
+    },
+    {
+      "value": "MD",
+      "label": "Medicine (MD)"
+    },
+    {
+      "value": "MHA",
+      "label": "MHA (MHA)"
+    },
+    {
+      "value": "MMG",
+      "label": "Micrbio & Molecular Genetics (MMG)"
+    },
+    {
+      "value": "MESAS_OX",
+      "label": "Middle Eastern & S. Asian Stdy - Oxford (MESAS_OX)"
+    },
+    {
+      "value": "MESAS",
+      "label": "Middle Eastern & South Asian (MESAS)"
+    },
+    {
+      "value": "MBC",
+      "label": "Mind, Brain and Culture (MBC)"
+    },
+    {
+      "value": "M",
+      "label": "Missions (M)"
+    },
+    {
+      "value": "MKT_OX",
+      "label": "MKT_OX (MKT_OX)"
+    },
+    {
+      "value": "MLP_OX",
+      "label": "MLP_OX (MLP_OX)"
+    },
+    {
+      "value": "MSP",
+      "label": "Molecular & Systems Pharmacology (MSP)"
+    },
+    {
+      "value": "M2M",
+      "label": "Molecules to Mankind (M2M)"
+    },
+    {
+      "value": "MRL",
+      "label": "MRL (MRL)"
+    },
+    {
+      "value": "MUS",
+      "label": "Music (MUS)"
+    },
+    {
+      "value": "MUS_OX",
+      "label": "Music - Oxford (MUS_OX)"
+    },
+    {
+      "value": "NBB_OX",
+      "label": "NBB_OX (NBB_OX)"
+    },
+    {
+      "value": "NCSS",
+      "label": "NCSS (NCSS)"
+    },
+    {
+      "value": "NS",
+      "label": "Neuroscience (NS)"
+    },
+    {
+      "value": "NBB",
+      "label": "Neuroscience & Behavioral Bio (NBB)"
+    },
+    {
+      "value": "NT",
+      "label": "New Testament (NT)"
+    },
+    {
+      "value": "RLNT",
+      "label": "New Testament (RLNT)"
+    },
+    {
+      "value": "NRSG_OX",
+      "label": "NRSG_OX (NRSG_OX)"
+    },
+    {
+      "value": "NTRN",
+      "label": "NTRN (NTRN)"
+    },
+    {
+      "value": "NRSG",
+      "label": "Nursing (NRSG)"
+    },
+    {
+      "value": "NHS",
+      "label": "Nutrition and Health Science (NHS)"
+    },
+    {
+      "value": "OCS_OX",
+      "label": "OCS_OX (OCS_OX)"
+    },
+    {
+      "value": "OCFT",
+      "label": "Off Campus (OCFT)"
+    },
+    {
+      "value": "OT",
+      "label": "Old Testament (OT)"
+    },
+    {
+      "value": "OAM",
+      "label": "Organizational Management (OAM)"
+    },
+    {
+      "value": "INTER_OX",
+      "label": "Oxford College Internship (INTER_OX)"
+    },
+    {
+      "value": "OXST_OX",
+      "label": "Oxford Studies - Oxford (OXST_OX)"
+    },
+    {
+      "value": "PACE",
+      "label": "PACE (PACE)"
+    },
+    {
+      "value": "PC",
+      "label": "Pastoral Care (PC)"
+    },
+    {
+      "value": "PERS",
+      "label": "Persian (PERS)"
+    },
+    {
+      "value": "RLPC",
+      "label": "Person, Community and Practice (RLPC)"
+    },
+    {
+      "value": "PHIL",
+      "label": "Philosophy (PHIL)"
+    },
+    {
+      "value": "PHIL_OX",
+      "label": "Philosophy - Oxford (PHIL_OX)"
+    },
+    {
+      "value": "PE_OX",
+      "label": "Physical Education - Oxford (PE_OX)"
+    },
+    {
+      "value": "PHT",
+      "label": "Physical Therapy (PHT)"
+    },
+    {
+      "value": "PAE",
+      "label": "Physician Asst Education (PAE)"
+    },
+    {
+      "value": "PHYS",
+      "label": "Physics (PHYS)"
+    },
+    {
+      "value": "PHYS_OX",
+      "label": "Physics - Oxford (PHYS_OX)"
+    },
+    {
+      "value": "POLS",
+      "label": "Political Science (POLS)"
+    },
+    {
+      "value": "POLS_OX",
+      "label": "Political Science - Oxford (POLS_OX)"
+    },
+    {
+      "value": "PBEE",
+      "label": "Population Biol, Ecology&Evolu (PBEE)"
+    },
+    {
+      "value": "PORT",
+      "label": "Portuguese (PORT)"
+    },
+    {
+      "value": "PT",
+      "label": "Practical Theology (PT)"
+    },
+    {
+      "value": "P",
+      "label": "Preaching (P)"
+    },
+    {
+      "value": "PRECOL",
+      "label": "PRECOL (PRECOL)"
+    },
+    {
+      "value": "PRS",
+      "label": "Prevention Science (PRS)"
+    },
+    {
+      "value": "PSP",
+      "label": "Psychoanalytical Studies (PSP)"
+    },
+    {
+      "value": "PSYC",
+      "label": "Psychology (PSYC)"
+    },
+    {
+      "value": "PSYC_OX",
+      "label": "Psychology - Oxford (PSYC_OX)"
+    },
+    {
+      "value": "PUBH",
+      "label": "Public Health (PUBH)"
+    },
+    {
+      "value": "INFO",
+      "label": "Public Health Informatics (INFO)"
+    },
+    {
+      "value": "QTM",
+      "label": "Quantitative Theory & Methods (QTM)"
+    },
+    {
+      "value": "QTM_OX",
+      "label": "Quantitative Theory & Methods (QTM_OX)"
+    },
+    {
+      "value": "RADT",
+      "label": "RADT (RADT)"
+    },
+    {
+      "value": "RLR",
+      "label": "Religion - Graduate (RLR)"
+    },
+    {
+      "value": "REL_OX",
+      "label": "Religion - Oxford (REL_OX)"
+    },
+    {
+      "value": "REL",
+      "label": "Religion - Undergraduate (REL)"
+    },
+    {
+      "value": "RP",
+      "label": "Religion and Personality (RP)"
+    },
+    {
+      "value": "RE",
+      "label": "Religious Education (RE)"
+    },
+    {
+      "value": "RLL",
+      "label": "RLL (RLL)"
+    },
+    {
+      "value": "ROTC",
+      "label": "ROTC (ROTC)"
+    },
+    {
+      "value": "RUSS",
+      "label": "Russian (RUSS)"
+    },
+    {
+      "value": "REES",
+      "label": "Russian, E European, Eurasian (REES)"
+    },
+    {
+      "value": "SOC",
+      "label": "Sociology (SOC)"
+    },
+    {
+      "value": "SOC_OX",
+      "label": "Sociology - Oxford (SOC_OX)"
+    },
+    {
+      "value": "SR",
+      "label": "Sociology of Religion (SR)"
+    },
+    {
+      "value": "SPAN",
+      "label": "Spanish (SPAN)"
+    },
+    {
+      "value": "SPAN_OX",
+      "label": "Spanish - Oxford (SPAN_OX)"
+    },
+    {
+      "value": "SUST",
+      "label": "Sustainability (SUST)"
+    },
+    {
+      "value": "ST",
+      "label": "Systematic Theology (ST)"
+    },
+    {
+      "value": "TATT",
+      "label": "Tatto Program (TATT)"
+    },
+    {
+      "value": "THEA",
+      "label": "Theater Studies (THEA)"
+    },
+    {
+      "value": "THEA_OX",
+      "label": "Theater Studies - Oxford (THEA_OX)"
+    },
+    {
+      "value": "RLTS",
+      "label": "Theological Studies (RLTS)"
+    },
+    {
+      "value": "TBT",
+      "label": "Tibetan (TBT)"
+    },
+    {
+      "value": "CPTR",
+      "label": "Translational Research Cert (CPTR)"
+    },
+    {
+      "value": "URP",
+      "label": "URP (URP)"
+    },
+    {
+      "value": "VET",
+      "label": "VET (VET)"
+    },
+    {
+      "value": "VMR",
+      "label": "Visiting Medical Research (VMR)"
+    },
+    {
+      "value": "ARTVIS",
+      "label": "Visual Arts (ARTVIS)"
+    },
+    {
+      "value": "RLAR",
+      "label": "West & South Asian Religions (RLAR)"
+    },
+    {
+      "value": "WTM",
+      "label": "Women in Theology and Ministry (WTM)"
+    },
+    {
+      "value": "WGS",
+      "label": "Women's Gender & Sexuality (WGS)"
+    },
+    {
+      "value": "WGS_OX",
+      "label": "Women's Gender & Sexuality - Oxford (WGS_OX)"
+    },
+    {
+      "value": "WR",
+      "label": "World Religion (WR)"
+    },
+    {
+      "value": "W",
+      "label": "Worship and Liturgy (W)"
+    },
+    {
+      "value": "YDD",
+      "label": "Yiddish (YDD)"
+    },
+    {
+      "value": "ARCH",
+      "label": "ARCH",
+      "source": "career_roster",
+      "discovered_in": "Fall_2026"
+    },
+    {
+      "value": "RES",
+      "label": "RES",
+      "source": "career_roster",
+      "discovered_in": "Fall_2026"
+    },
+    {
+      "value": "SIRE",
+      "label": "SIRE",
+      "source": "career_roster",
+      "discovered_in": "Fall_2026"
+    },
+    {
+      "value": "CNST",
+      "label": "CNST",
+      "source": "career_roster",
+      "discovered_in": "Spring_2027"
+    }
+  ]
+}

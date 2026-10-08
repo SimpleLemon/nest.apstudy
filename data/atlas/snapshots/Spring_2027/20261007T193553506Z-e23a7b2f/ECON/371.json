@@ -1,0 +1,93 @@
+{
+  "course_code": "ECON 371",
+  "course_title": "Health Economics",
+  "subject": "ECON",
+  "catalog_number": "371",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to the application of the theories and principles of microeconomics to issues in health care. Increase understanding of microeconomic theory and the basic structure of health care delivery and health care financing in the United States and other countries.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1412",
+      "academic_career": "UCOL",
+      "crn": "1894",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sara Markowitz",
+      "instructors": [
+        {
+          "name": "Sara Markowitz",
+          "email": "smarko2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4483"
+        }
+      ],
+      "location": "Rich Building TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 30,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sara Markowitz"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.537Z"
+}

@@ -1,0 +1,178 @@
+{
+  "course_code": "KRN 202",
+  "course_title": "Intermediate Korean II",
+  "subject": "KRN",
+  "catalog_number": "202",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for those who have taken KRN 201 or have an equivalent level of proficiency. The course focuses on expanding conversational skills with an emphasis on Korean culture and society.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1393",
+      "academic_career": "UCOL",
+      "crn": "1951",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ji hye Sohn",
+      "instructors": [
+        {
+          "name": "Ji hye Sohn",
+          "email": "jihye.sohn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43774"
+        },
+        {
+          "name": "Ji hye Sohn",
+          "email": "jihye.sohn@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43774"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1394",
+      "academic_career": "UCOL",
+      "crn": "1953",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Junghyun Kim",
+      "instructors": [
+        {
+          "name": "Junghyun Kim",
+          "email": "junghyun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47043"
+        },
+        {
+          "name": "Junghyun Kim",
+          "email": "junghyun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47043"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ji hye Sohn",
+    "Junghyun Kim"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.561Z"
+}

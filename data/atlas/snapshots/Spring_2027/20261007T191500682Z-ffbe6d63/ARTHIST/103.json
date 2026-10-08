@@ -1,0 +1,97 @@
+{
+  "course_code": "ARTHIST 103",
+  "course_title": "Understanding Architecture",
+  "subject": "ARTHIST",
+  "catalog_number": "103",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to architecture considering the built environment we experience daily as well as historical buildings and practices. We will study architecture as a process of design, negotiation, construction, and reception and explore critical and social issues of representation and meaning.",
+  "course_notes": "This studio and lecture course introduces the skills needed to ¿read¿ architecture, a language comprised of drawings, models, renderings, photographs, films, buildings, and landscapes. Organized by the primary forms of architectural representation, this hands-on course introduces students to myriad modes of seeing and intervening in the built environment. Lectures focus on design projects that highlight architectural ideas and tools, and readings introduce students to varying types of architectural writing. Course work includes reading responses, discussions, and drawing and modeling projects. We will study architecture as a process of imagination, design, negotiation, construction, and reception, and will explore critical and social issues of space, representation, and meaning. Students complete the course by designing an imaginary project of their own. Architectural Studies major/minor: core requirement Art History major/minor: makers & materials course",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "342",
+      "academic_career": "UCOL",
+      "crn": "1534",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Christina Crawford",
+      "instructors": [
+        {
+          "name": "Christina Crawford",
+          "email": "christina.crawford@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7169"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christina Crawford"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.693Z"
+}

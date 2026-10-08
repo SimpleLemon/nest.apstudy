@@ -1,0 +1,97 @@
+{
+  "course_code": "CPLT 489W",
+  "course_title": "Advanced Special Topics: Heidegger's Being and Time",
+  "subject": "CPLT",
+  "catalog_number": "489W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to give advanced students the opportunity to investigate intensively an area of special interest. A reading knowledge of one foreign language is prerequisite. Topics may vary, but the goal of the course remains unchanged: the courses focuses on contemporary literary theory.",
+  "course_notes": "(Same as PHIL 480RW 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3320",
+      "academic_career": "UCOL",
+      "crn": "5478",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Andrew J Mitchell",
+      "instructors": [
+        {
+          "name": "Andrew J Mitchell",
+          "email": "amitch5@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4232"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 4,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew J Mitchell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.514Z"
+}

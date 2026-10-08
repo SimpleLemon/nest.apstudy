@@ -1,0 +1,222 @@
+{
+  "course_code": "PSYC 110",
+  "course_title": "Intro Psyc I:Psychobio & Cognition",
+  "subject": "PSYC",
+  "catalog_number": "110",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the biological basis of behavior and the experimental approach to cognition.",
+  "course_notes": "(\"This is one-half of a two-semester introduction to the field of contemporary psychology. The course has to do with the organization and operation of the nervous system as it pertains to behavior and its cognitive underpinnings. Topics receiving special attention include the development of sexual identity, sensation and perception, learning and memory, love, fear, and other emotions. The course fulfills one-half of the introductory course requirement for psychology majors. All students enrolled in the course are required to participate in psychology department human subject research studies. Students have the option of substituting a writing project for this participation, details to be arranged with Professor Edwards.\")",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1218",
+      "academic_career": "UCOL",
+      "crn": "2118",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David A Edwards",
+      "instructors": [
+        {
+          "name": "David A Edwards",
+          "email": "edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1193"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 108,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1219",
+      "academic_career": "UCOL",
+      "crn": "2119",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Andrew Kazama",
+      "instructors": [
+        {
+          "name": "Andrew Kazama",
+          "email": "akazama@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7915"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 106,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1220",
+      "academic_career": "UCOL",
+      "crn": "2120",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Rohini Murugan",
+      "instructors": [
+        {
+          "name": "Rohini Murugan",
+          "email": "rohini.murugan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28645"
+        },
+        {
+          "name": "Logan Sandwick",
+          "email": "logan.brownell@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43983"
+        }
+      ],
+      "location": "Psychology Bldg 290",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 108,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Kazama",
+    "David A Edwards",
+    "Logan Sandwick",
+    "Rohini Murugan"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.100Z"
+}

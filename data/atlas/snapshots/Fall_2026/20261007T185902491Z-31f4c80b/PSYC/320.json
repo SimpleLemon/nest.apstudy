@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 320",
+  "course_title": "Animal Behavior",
+  "subject": "PSYC",
+  "catalog_number": "320",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Structure and function of animal behavior from a comparative, evolutionary perspective.",
+  "course_notes": "(Same as BIOL 320 1) This course provides an overview of major research areas in the field of animal behavior. The behavior of animals will be discussed from an evolutionary and comparative perspective. Specific topics include genetic influences on behavior, neuroethology, evolution of sexual reproduction, biological rhythms, communication, courtship and mating strategies, and parental behavior.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1239",
+      "academic_career": "UCOL",
+      "crn": "2176",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Donna Maney",
+      "instructors": [
+        {
+          "name": "Donna Maney",
+          "email": "dmaney@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3416"
+        }
+      ],
+      "location": "Psychology Bldg 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 30,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Donna Maney"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.578Z"
+}

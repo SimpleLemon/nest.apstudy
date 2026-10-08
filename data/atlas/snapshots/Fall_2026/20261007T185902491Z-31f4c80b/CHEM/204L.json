@@ -1,0 +1,161 @@
+{
+  "course_code": "CHEM 204L",
+  "course_title": "Macromolecules Lab",
+  "subject": "CHEM",
+  "catalog_number": "204L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The relationship between sequence, structure, and function of macromolecules focusing on the practical aspects of macromolecular synthesis, structural and functional characterization, and degradation.",
+  "course_notes": "This lab is typically offered in fall, spring, and summer semesters.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4094",
+      "academic_career": "UCOL",
+      "crn": "3187",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Julia Smith",
+      "instructors": [
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39590"
+        },
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39590"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 48,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-2:15p; M 2:15-4:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Mon",
+            "start": "1415",
+            "end": "1620"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4095",
+      "academic_career": "UCOL",
+      "crn": "3188",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Julia Smith",
+      "instructors": [
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39590"
+        },
+        {
+          "name": "Julia Smith",
+          "email": "julia.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39590"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 72,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4:30-5:45p; M 5:45-7:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1630",
+            "end": "1745"
+          },
+          {
+            "day": "Mon",
+            "start": "1745",
+            "end": "1950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Julia Smith"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.510Z"
+}

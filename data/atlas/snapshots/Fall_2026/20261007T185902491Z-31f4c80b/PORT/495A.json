@@ -1,0 +1,86 @@
+{
+  "course_code": "PORT 495A",
+  "course_title": "Honors Thesis",
+  "subject": "PORT",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall semester component of the Honors Program. Student and faculty advisor meet regularly to discuss the syllabus agreed upon at the beginning of the term and evaluate progress in research/writing. PORT 495A does not count as one of the 400 -level seminars required forthe Span/Port major.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3480",
+      "academic_career": "UCOL",
+      "crn": "6496",
+      "section_number": "1",
+      "schedule_type": "THE",
+      "instructor": "Ana Catarina Teixeira",
+      "instructors": [
+        {
+          "name": "Ana Catarina Teixeira",
+          "email": "ana.teixeira@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6184"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ana Catarina Teixeira"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.576Z"
+}

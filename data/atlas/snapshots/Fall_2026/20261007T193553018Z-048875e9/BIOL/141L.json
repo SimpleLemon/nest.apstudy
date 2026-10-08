@@ -1,0 +1,2287 @@
+{
+  "course_code": "BIOL 141L",
+  "course_title": "Foundations of Modern Biology I Lab",
+  "subject": "BIOL",
+  "catalog_number": "141L",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduces students to scientific inquiry in the laboratory. Students design, implement, analyze and present authentic research projects. Along with Biology 141, 142 and 142L, meets the requirement for medical and dental school and the biology major.",
+  "course_notes": "In lab, you will learn to: (1) design and carry out independent research projects, (2) organize and analyze simple experimental datasets, and (3) communicate findings with concise graphs, text, or presentations. Pre- or co-requisite: Biology 141 or AP credit.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3620",
+      "academic_career": "UCOL",
+      "crn": "1662",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Ian Pyne",
+          "email": "ian.pyne@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32720"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3621",
+      "academic_career": "UCOL",
+      "crn": "1711",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Kaleigh Coker",
+      "instructors": [
+        {
+          "name": "Kaleigh Coker",
+          "email": "kaleigh.coker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43951"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3622",
+      "academic_career": "UCOL",
+      "crn": "1712",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Vincent Ciavatta",
+      "instructors": [
+        {
+          "name": "Vincent Ciavatta",
+          "email": "vciavat@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3293"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3623",
+      "academic_career": "UCOL",
+      "crn": "1713",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Steven Cai",
+      "instructors": [
+        {
+          "name": "Steven Cai",
+          "email": "xinyong.cai@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36668"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3624",
+      "academic_career": "UCOL",
+      "crn": "1714",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Carly Roman",
+          "email": "carly.roman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32629"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3625",
+      "academic_career": "UCOL",
+      "crn": "1715",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Paola Merino",
+          "email": "paola.valeria.merino@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6901"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-9p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3626",
+      "academic_career": "UCOL",
+      "crn": "1716",
+      "section_number": "7",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Samantha Reed",
+          "email": "samantha.lynn.reed@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18563"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-9p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3627",
+      "academic_career": "UCOL",
+      "crn": "1717",
+      "section_number": "8",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Cristian Sanchez",
+          "email": "cristian.julian.sanchez-torres@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35059"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-9p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3628",
+      "academic_career": "UCOL",
+      "crn": "1718",
+      "section_number": "9",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Christina Kiessling",
+          "email": "christina.kiessling@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43729"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-9p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3629",
+      "academic_career": "UCOL",
+      "crn": "1719",
+      "section_number": "10",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Carly Roman",
+          "email": "carly.roman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32629"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-9p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3630",
+      "academic_career": "UCOL",
+      "crn": "1720",
+      "section_number": "11",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Beth Gleason",
+          "email": "elizabeth.j.gleason@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "45999"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8-11a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3631",
+      "academic_career": "UCOL",
+      "crn": "1721",
+      "section_number": "12",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Chelsea Philpot",
+          "email": "chelsea.philpot@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40560"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8-11a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3632",
+      "academic_career": "UCOL",
+      "crn": "1722",
+      "section_number": "13",
+      "schedule_type": "LAB",
+      "instructor": "David Banks",
+      "instructors": [
+        {
+          "name": "David Banks",
+          "email": "david.banks2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40334"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3633",
+      "academic_career": "UCOL",
+      "crn": "1723",
+      "section_number": "14",
+      "schedule_type": "LAB",
+      "instructor": "Emilie Bonilla",
+      "instructors": [
+        {
+          "name": "Emilie Bonilla",
+          "email": "emilie.bonilla@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43872"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3634",
+      "academic_career": "UCOL",
+      "crn": "1724",
+      "section_number": "15",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Jordan Goldy",
+          "email": "jordan.nelson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28623"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3635",
+      "academic_career": "UCOL",
+      "crn": "1725",
+      "section_number": "16",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Avery Kyle",
+          "email": "avery.kyle@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43995"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3636",
+      "academic_career": "UCOL",
+      "crn": "1726",
+      "section_number": "17",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "London Harper",
+          "email": "london.harper@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40521"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3637",
+      "academic_career": "UCOL",
+      "crn": "1727",
+      "section_number": "18",
+      "schedule_type": "LAB",
+      "instructor": "Shahenvaz Alam",
+      "instructors": [
+        {
+          "name": "Shahenvaz Alam",
+          "email": "shahenvaz.alam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39797"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3638",
+      "academic_career": "UCOL",
+      "crn": "1728",
+      "section_number": "19",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Chumeng Yang",
+          "email": "chumeng.yang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43861"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3639",
+      "academic_career": "UCOL",
+      "crn": "1729",
+      "section_number": "20",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Kory Wells",
+          "email": "kory.wells@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28620"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3640",
+      "academic_career": "UCOL",
+      "crn": "1730",
+      "section_number": "21",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3641",
+      "academic_career": "UCOL",
+      "crn": "1731",
+      "section_number": "22",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "London Harper",
+          "email": "london.harper@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40521"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-9p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3642",
+      "academic_career": "UCOL",
+      "crn": "1733",
+      "section_number": "23",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Emily Laskey",
+          "email": "emily.laskey@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32039"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 8-11a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3643",
+      "academic_career": "UCOL",
+      "crn": "1734",
+      "section_number": "24",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Chelsea Philpot",
+          "email": "chelsea.philpot@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40560"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 8-11a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3644",
+      "academic_career": "UCOL",
+      "crn": "1735",
+      "section_number": "25",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Lonnie Schneider",
+          "email": "lonnie.emmett.schneider@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "33807"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3645",
+      "academic_career": "UCOL",
+      "crn": "1736",
+      "section_number": "26",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Kimberly Morsheimer",
+          "email": "kimberly.morsheimer@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44019"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3646",
+      "academic_career": "UCOL",
+      "crn": "1737",
+      "section_number": "27",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Beth Gleason",
+          "email": "elizabeth.j.gleason@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "45999"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3647",
+      "academic_career": "UCOL",
+      "crn": "1738",
+      "section_number": "28",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Rachel Thomas",
+          "email": "rachel.thomas@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43859"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3648",
+      "academic_career": "UCOL",
+      "crn": "1739",
+      "section_number": "29",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Andrew Ho",
+          "email": "andrew.ho@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36313"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3649",
+      "academic_career": "UCOL",
+      "crn": "1740",
+      "section_number": "30",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Kory Wells",
+          "email": "kory.wells@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28620"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-9p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3650",
+      "academic_career": "UCOL",
+      "crn": "1741",
+      "section_number": "31",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "SYEDA WARISUL Fatima",
+          "email": "syeda.warisul.fatima@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "37690"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-9p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3651",
+      "academic_career": "UCOL",
+      "crn": "1742",
+      "section_number": "32",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Tiara Hamilton",
+          "email": "tiara.hamilton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32433"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3652",
+      "academic_career": "UCOL",
+      "crn": "1743",
+      "section_number": "33",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Jose Lopez",
+          "email": "jose.lopez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43915"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3653",
+      "academic_career": "UCOL",
+      "crn": "1744",
+      "section_number": "34",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Austre Schiaffino Bustamante",
+          "email": "austre.yareli.schiaffino@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28834"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3654",
+      "academic_career": "UCOL",
+      "crn": "6213",
+      "section_number": "35",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Reegan Kehres",
+          "email": "reegan.kehres@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43984"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3655",
+      "academic_career": "UCOL",
+      "crn": "6214",
+      "section_number": "36",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Lucy Robbie",
+          "email": "lrobbie@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42423"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:30p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3656",
+      "academic_career": "UCOL",
+      "crn": "6216",
+      "section_number": "37",
+      "schedule_type": "LAB",
+      "instructor": "Megan F. Cole",
+      "instructors": [
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        },
+        {
+          "name": "Sara Guedez Suarez",
+          "email": "sara.guedez.suarez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43965"
+        }
+      ],
+      "location": "1462 Clifton Rd 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 8-11a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3657",
+      "academic_career": "UCOL",
+      "crn": "6256",
+      "section_number": "38",
+      "schedule_type": "LAB",
+      "instructor": "Smriti Bahl",
+      "instructors": [
+        {
+          "name": "Smriti Bahl",
+          "email": "smriti.bahl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43910"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 8-11a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "800",
+            "end": "1100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3658",
+      "academic_career": "UCOL",
+      "crn": "6358",
+      "section_number": "39",
+      "schedule_type": "LAB",
+      "instructor": "Zachary Bell",
+      "instructors": [
+        {
+          "name": "Zachary Bell",
+          "email": "zachary.bell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43941"
+        },
+        {
+          "name": "Megan F. Cole",
+          "email": "megan.f.cole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4917"
+        }
+      ],
+      "location": "1462 Clifton Rd 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-9p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2100"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 39,
+    "lectures": 0,
+    "labs": 39,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Ho",
+    "Austre Schiaffino Bustamante",
+    "Avery Kyle",
+    "Beth Gleason",
+    "Carly Roman",
+    "Chelsea Philpot",
+    "Christina Kiessling",
+    "Chumeng Yang",
+    "Cristian Sanchez",
+    "David Banks",
+    "Emilie Bonilla",
+    "Emily Laskey",
+    "Ian Pyne",
+    "Jordan Goldy",
+    "Jose Lopez",
+    "Kaleigh Coker",
+    "Kimberly Morsheimer",
+    "Kory Wells",
+    "London Harper",
+    "Lonnie Schneider",
+    "Lucy Robbie",
+    "Megan F. Cole",
+    "Paola Merino",
+    "Rachel Thomas",
+    "Reegan Kehres",
+    "SYEDA WARISUL Fatima",
+    "Samantha Reed",
+    "Sara Guedez Suarez",
+    "Shahenvaz Alam",
+    "Smriti Bahl",
+    "Steven Cai",
+    "Tiara Hamilton",
+    "Vincent Ciavatta",
+    "Zachary Bell"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.029Z"
+}

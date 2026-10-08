@@ -1,0 +1,5469 @@
+{
+  "course_code": "ECS 101",
+  "course_title": "Emory Essentials",
+  "subject": "ECS",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Essentials introduces Emory College first-year students to university resources, opportunities, and policies. Through class discussions, small-group activities, and homework assignments, students will reflect, explore, and begin designing their unique Emory experience.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4354",
+      "academic_career": "UCOL",
+      "crn": "2491",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Laura Calvert",
+          "email": "laura.calvert@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35845"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4355",
+      "academic_career": "UCOL",
+      "crn": "2492",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Mindy Filien",
+          "email": "mfilien@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24780"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4356",
+      "academic_career": "UCOL",
+      "crn": "2494",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Vernon Smith",
+          "email": "vernon.smith@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "17833"
+        }
+      ],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4357",
+      "academic_career": "UCOL",
+      "crn": "2495",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Nydia Araya",
+          "email": "nydia.j.araya@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46202"
+        },
+        {
+          "name": "Nicole Corrigan",
+          "email": "nicole.corrigan@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "10965"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4358",
+      "academic_career": "UCOL",
+      "crn": "2496",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Hector Cuevas",
+          "email": "hector.cuevas@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "21043"
+        }
+      ],
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4359",
+      "academic_career": "UCOL",
+      "crn": "2497",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Chadwick Hixon",
+          "email": "chadwick.bryce.hixon@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "27794"
+        }
+      ],
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4360",
+      "academic_career": "UCOL",
+      "crn": "2498",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Jessica Fritsche",
+          "email": "jessica.fritsche@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "23387"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4361",
+      "academic_career": "UCOL",
+      "crn": "2499",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Hannah Williams",
+          "email": "hannah.beverly.williams@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46201"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 9-9:50a",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4362",
+      "academic_career": "UCOL",
+      "crn": "2500",
+      "section_number": "9",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Micah Tucker",
+          "email": "micah.tucker@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31754"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4363",
+      "academic_career": "UCOL",
+      "crn": "2501",
+      "section_number": "10",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Brigette Kinkade",
+          "email": "brigette.kinkade@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35854"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4364",
+      "academic_career": "UCOL",
+      "crn": "2502",
+      "section_number": "11",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Victoria Voelkel",
+          "email": "vvoelkel1@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39516"
+        }
+      ],
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4365",
+      "academic_career": "UCOL",
+      "crn": "2503",
+      "section_number": "12",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Tina Hildebrand",
+          "email": "cmhilde@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46196"
+        },
+        {
+          "name": "Brandy Hughes",
+          "email": "brandy.hughes@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "21045"
+        }
+      ],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4366",
+      "academic_career": "UCOL",
+      "crn": "2504",
+      "section_number": "13",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Peter Shirts",
+          "email": "pshirts@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "17834"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4367",
+      "academic_career": "UCOL",
+      "crn": "2505",
+      "section_number": "14",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Shanoa Young",
+          "email": "shanoa.nicole.young@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39517"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4368",
+      "academic_career": "UCOL",
+      "crn": "2506",
+      "section_number": "15",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Brandi Benton",
+          "email": "brandi.benton@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "17835"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4369",
+      "academic_career": "UCOL",
+      "crn": "2507",
+      "section_number": "16",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Amelia Lee",
+          "email": "amelia.elizabeth.lee@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46836"
+        },
+        {
+          "name": "Liliana Lim Lam",
+          "email": "liliana.lim.lam@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31764"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4370",
+      "academic_career": "UCOL",
+      "crn": "2508",
+      "section_number": "17",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Roderick Ford",
+          "email": "roderick.d.ford@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35848"
+        },
+        {
+          "name": "Tyunia Stewart",
+          "email": "tyunia.yuvette.stewart@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46198"
+        }
+      ],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4371",
+      "academic_career": "UCOL",
+      "crn": "2509",
+      "section_number": "18",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Greg Pak",
+          "email": "greg.pak@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43224"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4372",
+      "academic_career": "UCOL",
+      "crn": "2510",
+      "section_number": "19",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Gregory Hollinger",
+          "email": "gregory.hollinger@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24779"
+        },
+        {
+          "name": "Mike Jones",
+          "email": "allen.michael.jones@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46203"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4373",
+      "academic_career": "UCOL",
+      "crn": "2511",
+      "section_number": "20",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Jordan Anunike",
+          "email": "jordan.anunike@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "38419"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4374",
+      "academic_career": "UCOL",
+      "crn": "2512",
+      "section_number": "21",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Christina Wan",
+          "email": "christina.wan@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35841"
+        }
+      ],
+      "location": "Goizueta Business School 421",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4375",
+      "academic_career": "UCOL",
+      "crn": "2513",
+      "section_number": "22",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Dina Thornton",
+          "email": "dina.thornton@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "27814"
+        }
+      ],
+      "location": "COX 230B",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4376",
+      "academic_career": "UCOL",
+      "crn": "2514",
+      "section_number": "23",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Caroline Duffy",
+          "email": "caroline.duffy@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39522"
+        },
+        {
+          "name": "Sarah Roberts",
+          "email": "sarah.roberts@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46205"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4377",
+      "academic_career": "UCOL",
+      "crn": "2515",
+      "section_number": "24",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Nikki Laird",
+          "email": "nikki.laird@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46199"
+        },
+        {
+          "name": "Savvy McLeod",
+          "email": "savvy.mcleod@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46195"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4378",
+      "academic_career": "UCOL",
+      "crn": "2516",
+      "section_number": "25",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Maddie Herlong",
+          "email": "mhend25@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31763"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4379",
+      "academic_career": "UCOL",
+      "crn": "2659",
+      "section_number": "26",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Natalie Cruz",
+          "email": "natalie.cruz@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31750"
+        },
+        {
+          "name": "Jordan Postal",
+          "email": "jpostal@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39505"
+        }
+      ],
+      "location": "Callaway S105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4380",
+      "academic_career": "UCOL",
+      "crn": "2662",
+      "section_number": "27",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Anna Gibbons",
+          "email": "anna.hobby@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "3075"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4381",
+      "academic_career": "UCOL",
+      "crn": "2663",
+      "section_number": "28",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Kash Chapman",
+          "email": "kamalik@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "27791"
+        },
+        {
+          "name": "Katherine Hur",
+          "email": "katherine.hur@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "9963"
+        }
+      ],
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4382",
+      "academic_career": "UCOL",
+      "crn": "2665",
+      "section_number": "29",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Faith Derricott",
+          "email": "faith.yvette.derricott@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39507"
+        },
+        {
+          "name": "Celia Diller",
+          "email": "celia.diller@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "36317"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4383",
+      "academic_career": "UCOL",
+      "crn": "2666",
+      "section_number": "30",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Kellyn Ward",
+          "email": "kellyn.hewitt@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39520"
+        }
+      ],
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4384",
+      "academic_career": "UCOL",
+      "crn": "2759",
+      "section_number": "31",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Carolyn McCarthy",
+          "email": "carolyn.mccarthy@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39780"
+        },
+        {
+          "name": "Jennifer Sharpe",
+          "email": "jennifer.sharpe@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46211"
+        }
+      ],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 9-9:50a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4385",
+      "academic_career": "UCOL",
+      "crn": "2761",
+      "section_number": "32",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Maggie Beker",
+          "email": "margaret.elizabeth.beker@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "14416"
+        },
+        {
+          "name": "Adam Dobucki",
+          "email": "adam.dobucki@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39497"
+        }
+      ],
+      "location": "COX 230B",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4-4:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4386",
+      "academic_career": "UCOL",
+      "crn": "2762",
+      "section_number": "33",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Lex Hackney",
+          "email": "lex.hackney@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35820"
+        }
+      ],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4387",
+      "academic_career": "UCOL",
+      "crn": "2766",
+      "section_number": "34",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Whitney Miller",
+          "email": "whitneymiller@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43227"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4388",
+      "academic_career": "UCOL",
+      "crn": "2767",
+      "section_number": "35",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Sandra Aguilera",
+          "email": "sandra.e.aguilera@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "9743"
+        }
+      ],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4389",
+      "academic_career": "UCOL",
+      "crn": "2768",
+      "section_number": "36",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Ben Pearce",
+          "email": "benjamin.f.pearce@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "27788"
+        }
+      ],
+      "location": "Goizueta Business School 338",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4390",
+      "academic_career": "UCOL",
+      "crn": "2769",
+      "section_number": "37",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Bailey Rundle",
+          "email": "bailey.li@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46224"
+        },
+        {
+          "name": "Cecilia Vu",
+          "email": "cecilia.vu@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46207"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4391",
+      "academic_career": "UCOL",
+      "crn": "2771",
+      "section_number": "38",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Brittain Lawrence",
+          "email": "brittain.lawrence@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "28995"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4392",
+      "academic_career": "UCOL",
+      "crn": "2773",
+      "section_number": "39",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Bria Taylor",
+          "email": "b.taylor@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46200"
+        }
+      ],
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4393",
+      "academic_career": "UCOL",
+      "crn": "2775",
+      "section_number": "40",
+      "schedule_type": "LEC",
+      "instructor": "Luz Caraballo",
+      "instructors": [
+        {
+          "name": "Luz Caraballo",
+          "email": "luz.caraballo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46210"
+        },
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Benjamin Kasavan",
+          "email": "bkasava@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "11463"
+        }
+      ],
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4394",
+      "academic_career": "UCOL",
+      "crn": "2778",
+      "section_number": "41",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Kristina Storey",
+          "email": "kristina.storey@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46206"
+        }
+      ],
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-4:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4395",
+      "academic_career": "UCOL",
+      "crn": "2789",
+      "section_number": "42",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Janet Gonzales",
+          "email": "janet.gonzales@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24784"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4396",
+      "academic_career": "UCOL",
+      "crn": "2790",
+      "section_number": "43",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Ashley McKelvy",
+          "email": "ashley.mckelvy@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39519"
+        }
+      ],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4397",
+      "academic_career": "UCOL",
+      "crn": "2792",
+      "section_number": "44",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Haylee Fisher",
+          "email": "haylee.fisher@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46831"
+        },
+        {
+          "name": "Tanner Senter",
+          "email": "tanner.senter@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43237"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4398",
+      "academic_career": "UCOL",
+      "crn": "2797",
+      "section_number": "45",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Frank Gaertner",
+          "email": "fgaertn@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "1557"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4399",
+      "academic_career": "UCOL",
+      "crn": "2799",
+      "section_number": "46",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Jolayna Palm",
+          "email": "jolayna.palm@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35844"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 5-5:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4400",
+      "academic_career": "UCOL",
+      "crn": "2801",
+      "section_number": "47",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Susan D Cook",
+          "email": "scook01@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31747"
+        }
+      ],
+      "location": "Tarbutton Hall 218",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4401",
+      "academic_career": "UCOL",
+      "crn": "2805",
+      "section_number": "48",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Zachary Issenberg",
+          "email": "zachary.nicholas.issenberg@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39537"
+        }
+      ],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4402",
+      "academic_career": "UCOL",
+      "crn": "2810",
+      "section_number": "49",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Donald Cornwell",
+          "email": "dcornwe@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "14597"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4403",
+      "academic_career": "UCOL",
+      "crn": "2815",
+      "section_number": "50",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Susan Pak",
+          "email": "susan.pak@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24763"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4404",
+      "academic_career": "UCOL",
+      "crn": "2883",
+      "section_number": "51",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Holli Bice",
+          "email": "hbice@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39518"
+        }
+      ],
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4405",
+      "academic_career": "UCOL",
+      "crn": "2820",
+      "section_number": "52",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Morgan Connor",
+          "email": "morgan.juliette.connor@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46457"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4406",
+      "academic_career": "UCOL",
+      "crn": "2823",
+      "section_number": "53",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Rachael Wagner",
+          "email": "rachael.wagner@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46209"
+        }
+      ],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4407",
+      "academic_career": "UCOL",
+      "crn": "2828",
+      "section_number": "54",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Alan Pogue",
+          "email": "alan.pogue@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46187"
+        }
+      ],
+      "location": "Anthropology Bldg 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4408",
+      "academic_career": "UCOL",
+      "crn": "2831",
+      "section_number": "55",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Merideth Ray",
+          "email": "merideth.ray@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "17840"
+        }
+      ],
+      "location": "Woodruff Library 773",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4409",
+      "academic_career": "UCOL",
+      "crn": "2837",
+      "section_number": "56",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Russ Peterson",
+          "email": "russel.peterson@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39509"
+        }
+      ],
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4410",
+      "academic_career": "UCOL",
+      "crn": "2841",
+      "section_number": "57",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Victor Lopez Henriquez",
+          "email": "victor.lopez@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43235"
+        }
+      ],
+      "location": "Rich Building 104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4411",
+      "academic_career": "UCOL",
+      "crn": "2843",
+      "section_number": "59",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Tara McCurley",
+          "email": "tara.mccurley@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "36104"
+        }
+      ],
+      "location": "COX 230A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4412",
+      "academic_career": "UCOL",
+      "crn": "2844",
+      "section_number": "60",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Amy Stalzer",
+          "email": "amy.stalzer@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14866"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4413",
+      "academic_career": "UCOL",
+      "crn": "2845",
+      "section_number": "61",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Scott B. Larimore",
+          "email": "scott.larimore@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46189"
+        },
+        {
+          "name": "Alyssa O'Keefe",
+          "email": "alyssa.okeefe@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "34445"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4414",
+      "academic_career": "UCOL",
+      "crn": "2848",
+      "section_number": "62",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Jamie Kirk",
+          "email": "jamie.n.kirk@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39501"
+        },
+        {
+          "name": "Jasmine Winston",
+          "email": "jconant@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46190"
+        }
+      ],
+      "location": "Nursing School - 110",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4415",
+      "academic_career": "UCOL",
+      "crn": "2849",
+      "section_number": "63",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Kimberly Richardson",
+          "email": "kimberly.ann.richardson@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46197"
+        }
+      ],
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4416",
+      "academic_career": "UCOL",
+      "crn": "2850",
+      "section_number": "64",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Christine Rose",
+          "email": "christine.fabre.rose@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46963"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4417",
+      "academic_career": "UCOL",
+      "crn": "2851",
+      "section_number": "65",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Danielle Bruce-Steele",
+          "email": "danielle.bruce.steele@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "47282"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4418",
+      "academic_career": "UCOL",
+      "crn": "2853",
+      "section_number": "66",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Christine Chandler",
+          "email": "christine.talley@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43238"
+        },
+        {
+          "name": "Emily Fan",
+          "email": "emily.fan@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "19153"
+        }
+      ],
+      "location": "Modern Language 330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4419",
+      "academic_career": "UCOL",
+      "crn": "2854",
+      "section_number": "67",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Gabriel Mendez",
+          "email": "gabriel.agustin.mendez@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43538"
+        },
+        {
+          "name": "Emily Tallant",
+          "email": "emily.tallant@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46186"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 316",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4420",
+      "academic_career": "UCOL",
+      "crn": "2855",
+      "section_number": "68",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Matthew Hill",
+          "email": "matthew.ryan.hill@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46863"
+        }
+      ],
+      "location": "Rich Building 211",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4421",
+      "academic_career": "UCOL",
+      "crn": "2856",
+      "section_number": "69",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Todd Wilson",
+          "email": "todd.wilson@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43232"
+        }
+      ],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4422",
+      "academic_career": "UCOL",
+      "crn": "2857",
+      "section_number": "70",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Patrick Wright",
+          "email": "patrick.james.wright@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46237"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4423",
+      "academic_career": "UCOL",
+      "crn": "2859",
+      "section_number": "72",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "LaShawn Barnes",
+          "email": "lashawn.r.barnes@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46236"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4424",
+      "academic_career": "UCOL",
+      "crn": "2860",
+      "section_number": "73",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Byron Jones",
+          "email": "byron.bernard.jones@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39533"
+        }
+      ],
+      "location": "Psychology Bldg 225",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4425",
+      "academic_career": "UCOL",
+      "crn": "2861",
+      "section_number": "74",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Katie Upchurch",
+          "email": "katie.leigh.upchurch@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43231"
+        },
+        {
+          "name": "Yumei Yan",
+          "email": "yumei.yan@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46726"
+        }
+      ],
+      "location": "Callaway S109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4426",
+      "academic_career": "UCOL",
+      "crn": "2862",
+      "section_number": "75",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Steven Blalock",
+          "email": "steven.blalock@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31741"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4427",
+      "academic_career": "UCOL",
+      "crn": "2863",
+      "section_number": "76",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Jasmine Hardaway",
+          "email": "jasmine.hardaway@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24782"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4428",
+      "academic_career": "UCOL",
+      "crn": "2864",
+      "section_number": "77",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Carlee Beard",
+          "email": "carlee.beard@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "24778"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4429",
+      "academic_career": "UCOL",
+      "crn": "2865",
+      "section_number": "78",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Emily Culbertson",
+          "email": "emily.culbertson@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31752"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4430",
+      "academic_career": "UCOL",
+      "crn": "2866",
+      "section_number": "79",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Carol Riddock",
+          "email": "carol.c.riddock@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "32096"
+        }
+      ],
+      "location": "Tarbutton Hall 105",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4431",
+      "academic_career": "UCOL",
+      "crn": "2867",
+      "section_number": "80",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Will Martinez",
+          "email": "will.martinez@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "10723"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4432",
+      "academic_career": "UCOL",
+      "crn": "2869",
+      "section_number": "81",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Renoal Murat",
+          "email": "renoal.murat@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "31755"
+        }
+      ],
+      "location": "Tarbutton Hall 106",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4433",
+      "academic_career": "UCOL",
+      "crn": "2870",
+      "section_number": "82",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Chris Doty",
+          "email": "chris.doty@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "6092"
+        },
+        {
+          "name": "Lucas Wright",
+          "email": "lucas.wright@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "21357"
+        }
+      ],
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 12-12:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1200",
+            "end": "1250"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4434",
+      "academic_career": "UCOL",
+      "crn": "2871",
+      "section_number": "83",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Marshall Tucker",
+          "email": "marshall.tucker@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "35842"
+        }
+      ],
+      "location": "Psychology Bldg 250",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4435",
+      "academic_career": "UCOL",
+      "crn": "2873",
+      "section_number": "84",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Louise Turner",
+          "email": "louise.m.turner@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "39510"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4436",
+      "academic_career": "UCOL",
+      "crn": "2874",
+      "section_number": "85",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Magdalena Shumanova",
+          "email": "magdalena.angelova.shumanova@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "30010"
+        }
+      ],
+      "location": "Psychology Bldg 220",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4437",
+      "academic_career": "UCOL",
+      "crn": "2875",
+      "section_number": "86",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Ashley Chilla",
+          "email": "ashley.marie.chilla@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46204"
+        },
+        {
+          "name": "Sandra Edwards",
+          "email": "sandra.edwards@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46188"
+        }
+      ],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 17,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4438",
+      "academic_career": "UCOL",
+      "crn": "2876",
+      "section_number": "87",
+      "schedule_type": "LEC",
+      "instructor": "Emily Morran",
+      "instructors": [
+        {
+          "name": "Emily Morran",
+          "email": "emily.morran@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31751"
+        },
+        {
+          "name": "Shari Obrentz",
+          "email": "sobrent@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3842"
+        },
+        {
+          "name": "Giles Eady",
+          "email": "giles.eady@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "43223"
+        },
+        {
+          "name": "Kizzy Williams",
+          "email": "kizzy.williams@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "46191"
+        }
+      ],
+      "location": "Math & Science Center - N301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 85,
+    "lectures": 85,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 16,
+    "closed": 11,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Adam Dobucki",
+    "Alan Pogue",
+    "Alyssa O'Keefe",
+    "Amelia Lee",
+    "Amy Stalzer",
+    "Anna Gibbons",
+    "Ashley Chilla",
+    "Ashley McKelvy",
+    "Bailey Rundle",
+    "Ben Pearce",
+    "Benjamin Kasavan",
+    "Brandi Benton",
+    "Brandy Hughes",
+    "Bria Taylor",
+    "Brigette Kinkade",
+    "Brittain Lawrence",
+    "Byron Jones",
+    "Carlee Beard",
+    "Carol Riddock",
+    "Caroline Duffy",
+    "Carolyn McCarthy",
+    "Cecilia Vu",
+    "Celia Diller",
+    "Chadwick Hixon",
+    "Chris Doty",
+    "Christina Wan",
+    "Christine Chandler",
+    "Christine Rose",
+    "Danielle Bruce-Steele",
+    "Dina Thornton",
+    "Donald Cornwell",
+    "Emily Culbertson",
+    "Emily Fan",
+    "Emily Morran",
+    "Emily Tallant",
+    "Faith Derricott",
+    "Frank Gaertner",
+    "Gabriel Mendez",
+    "Giles Eady",
+    "Greg Pak",
+    "Gregory Hollinger",
+    "Hannah Williams",
+    "Haylee Fisher",
+    "Hector Cuevas",
+    "Holli Bice",
+    "Jamie Kirk",
+    "Janet Gonzales",
+    "Jasmine Hardaway",
+    "Jasmine Winston",
+    "Jennifer Sharpe",
+    "Jessica Fritsche",
+    "Jolayna Palm",
+    "Jordan Anunike",
+    "Jordan Postal",
+    "Kash Chapman",
+    "Katherine Hur",
+    "Katie Upchurch",
+    "Kellyn Ward",
+    "Kimberly Richardson",
+    "Kizzy Williams",
+    "Kristina Storey",
+    "LaShawn Barnes",
+    "Laura Calvert",
+    "Lex Hackney",
+    "Liliana Lim Lam",
+    "Louise Turner",
+    "Lucas Wright",
+    "Luz Caraballo",
+    "Maddie Herlong",
+    "Magdalena Shumanova",
+    "Maggie Beker",
+    "Marshall Tucker",
+    "Matthew Hill",
+    "Merideth Ray",
+    "Micah Tucker",
+    "Mike Jones",
+    "Mindy Filien",
+    "Morgan Connor",
+    "Natalie Cruz",
+    "Nicole Corrigan",
+    "Nikki Laird",
+    "Nydia Araya",
+    "Patrick Wright",
+    "Peter Shirts",
+    "Rachael Wagner",
+    "Renoal Murat",
+    "Roderick Ford",
+    "Russ Peterson",
+    "Sandra Aguilera",
+    "Sandra Edwards",
+    "Sarah Roberts",
+    "Savvy McLeod",
+    "Scott B. Larimore",
+    "Shanoa Young",
+    "Shari Obrentz",
+    "Steven Blalock",
+    "Susan D Cook",
+    "Susan Pak",
+    "Tanner Senter",
+    "Tara McCurley",
+    "Tina Hildebrand",
+    "Todd Wilson",
+    "Tyunia Stewart",
+    "Vernon Smith",
+    "Victor Lopez Henriquez",
+    "Victoria Voelkel",
+    "Whitney Miller",
+    "Will Martinez",
+    "Yumei Yan",
+    "Zachary Issenberg"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.050Z"
+}

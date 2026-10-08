@@ -1,0 +1,394 @@
+{
+  "course_code": "MATH 116",
+  "course_title": "Life Sciences Calculus II",
+  "subject": "MATH",
+  "catalog_number": "116",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Integration, differential equations, multivariable calculus, and discrete probability and statistics, with an emphasis on applications to biology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "478",
+      "academic_career": "UCOL",
+      "crn": "2839",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Chelsea Drum",
+      "instructors": [
+        {
+          "name": "Chelsea Drum",
+          "email": "chelsea.nicole.drum@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40429"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "479",
+      "academic_career": "UCOL",
+      "crn": "2915",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Andrew Lyons",
+      "instructors": [
+        {
+          "name": "Andrew Lyons",
+          "email": "andrew.hugh.lyons@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42950"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "480",
+      "academic_career": "UCOL",
+      "crn": "3232",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Maddie Allen",
+      "instructors": [
+        {
+          "name": "Maddie Allen",
+          "email": "maddie.allen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36376"
+        },
+        {
+          "name": "Andrew Lyons",
+          "email": "andrew.hugh.lyons@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42950"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "481",
+      "academic_career": "UCOL",
+      "crn": "3234",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Maddie Allen",
+      "instructors": [
+        {
+          "name": "Maddie Allen",
+          "email": "maddie.allen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36376"
+        },
+        {
+          "name": "Andrew Lyons",
+          "email": "andrew.hugh.lyons@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42950"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "482",
+      "academic_career": "UCOL",
+      "crn": "3235",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Chelsea Drum",
+      "instructors": [
+        {
+          "name": "Chelsea Drum",
+          "email": "chelsea.nicole.drum@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40429"
+        },
+        {
+          "name": "Eion Mulrenin",
+          "email": "eion.mulrenin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36427"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "483",
+      "academic_career": "UCOL",
+      "crn": "3236",
+      "section_number": "6",
+      "schedule_type": "LAB",
+      "instructor": "Chelsea Drum",
+      "instructors": [
+        {
+          "name": "Chelsea Drum",
+          "email": "chelsea.nicole.drum@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40429"
+        },
+        {
+          "name": "Eion Mulrenin",
+          "email": "eion.mulrenin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36427"
+        }
+      ],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 2,
+    "labs": 4,
+    "discussions": 0,
+    "other": 0,
+    "open": 6,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Lyons",
+    "Chelsea Drum",
+    "Eion Mulrenin",
+    "Maddie Allen"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.565Z"
+}

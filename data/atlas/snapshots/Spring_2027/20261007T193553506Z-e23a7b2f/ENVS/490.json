@@ -1,0 +1,88 @@
+{
+  "course_code": "ENVS 490",
+  "course_title": "ENVS Senior Capstone Portfolio",
+  "subject": "ENVS",
+  "catalog_number": "490",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is required for all ENVS majors (BA and BS) in their final semester prior to graduation.During this course you will develop a capstone portfolio that includes examples of past coursework and has written reflections evaluating your academic growth throughout the major.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2295",
+      "academic_career": "UCOL",
+      "crn": "1685",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Shaunna Donaher",
+      "instructors": [
+        {
+          "name": "Shaunna Donaher",
+          "email": "shaunna.donaher@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6265"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shaunna Donaher"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.546Z"
+}

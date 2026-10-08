@@ -1,0 +1,214 @@
+{
+  "course_code": "SPAN_OX 201",
+  "course_title": "Intermediate Spanish I.",
+  "subject": "SPAN_OX",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Students learn to communicate through activities in speaking, listening, reading, and writing; review and learning of vocabulary, grammar, and pronunciation; and study of Hispanic cultures and societies. This course may be taught by Oxford faculty in summer session in Spain.",
+  "course_notes": "Placement exam required for all SPAN_OX classes. Students will not be allowed to remain enrolled if they do not complete the placement exam.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "124",
+      "academic_career": "UOXF",
+      "crn": "4176",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Guillermo Pupo Pernet",
+      "instructors": [
+        {
+          "name": "Guillermo Pupo Pernet",
+          "email": "guillermo.pupo.pernet@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39528"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 4,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "125",
+      "academic_career": "UOXF",
+      "crn": "4177",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Cristina Tarazona",
+      "instructors": [
+        {
+          "name": "Cristina Tarazona",
+          "email": "cristina.tarazona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4227"
+        }
+      ],
+      "location": "Library Rm 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "126",
+      "academic_career": "UOXF",
+      "crn": "4178",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Cristina Tarazona",
+      "instructors": [
+        {
+          "name": "Cristina Tarazona",
+          "email": "cristina.tarazona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4227"
+        }
+      ],
+      "location": "Library Rm 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 20,
+      "seats_available": 3,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristina Tarazona",
+    "Guillermo Pupo Pernet"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.616Z"
+}

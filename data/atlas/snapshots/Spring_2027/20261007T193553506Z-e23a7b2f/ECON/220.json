@@ -1,0 +1,487 @@
+{
+  "course_code": "ECON 220",
+  "course_title": "Data Science for Economists",
+  "subject": "ECON",
+  "catalog_number": "220",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Methods of collection, classification, analysis, and interpretation of economic data; measures of central tendency and dispersion; probability; estimation; hypothesis testing; regression analysis.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "240",
+      "academic_career": "UCOL",
+      "crn": "1884",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Benjamin Harrison",
+      "instructors": [
+        {
+          "name": "Benjamin Harrison",
+          "email": "benjamin.harrison@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36391"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "241",
+      "academic_career": "UCOL",
+      "crn": "1885",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Benjamin Harrison",
+      "instructors": [
+        {
+          "name": "Benjamin Harrison",
+          "email": "benjamin.harrison@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36391"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "242",
+      "academic_career": "UCOL",
+      "crn": "1886",
+      "section_number": "LAB3",
+      "schedule_type": "LAB",
+      "instructor": "Joaquin Barrutia Alvarez",
+      "instructors": [
+        {
+          "name": "Joaquin Barrutia Alvarez",
+          "email": "joaquin.barrutia.alvarez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40328"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "243",
+      "academic_career": "UCOL",
+      "crn": "1887",
+      "section_number": "LAB4",
+      "schedule_type": "LAB",
+      "instructor": "Joaquin Barrutia Alvarez",
+      "instructors": [
+        {
+          "name": "Joaquin Barrutia Alvarez",
+          "email": "joaquin.barrutia.alvarez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40328"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "236",
+      "academic_career": "UCOL",
+      "crn": "1880",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sam Wunderly",
+      "instructors": [
+        {
+          "name": "Sam Wunderly",
+          "email": "sam.wunderly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15396"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "237",
+      "academic_career": "UCOL",
+      "crn": "1881",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Sam Wunderly",
+      "instructors": [
+        {
+          "name": "Sam Wunderly",
+          "email": "sam.wunderly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15396"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "238",
+      "academic_career": "UCOL",
+      "crn": "1882",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Jong Kim",
+      "instructors": [
+        {
+          "name": "Jong Kim",
+          "email": "jong.hwa.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2186"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "239",
+      "academic_career": "UCOL",
+      "crn": "1883",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Hau Nguyen",
+      "instructors": [
+        {
+          "name": "Hau Nguyen",
+          "email": "hau.nguyen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31708"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 45,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 4,
+    "labs": 4,
+    "discussions": 0,
+    "other": 0,
+    "open": 8,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Benjamin Harrison",
+    "Hau Nguyen",
+    "Joaquin Barrutia Alvarez",
+    "Jong Kim",
+    "Sam Wunderly"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.536Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST 279W",
+  "course_title": "Chinese History: Mao to Now",
+  "subject": "HIST",
+  "catalog_number": "279W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Social Sciences with Continuing Communication(*)",
+  "requirements": [
+    "Social Sciences with Continuing Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores China's Communist era under Chairman Mao (1949-76) and the period of rapid economic growth that followed. Topics to be covered include the Great Leap Forward, the Cultural Revolution, the 1989 Tiananmen Movement, urban-rural inequality, the environment, and the One-Child Policy.",
+  "course_notes": "(Same as CHN 279W 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3909",
+      "academic_career": "UCOL",
+      "crn": "3967",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sarah M. Rodriguez",
+      "instructors": [
+        {
+          "name": "Sarah M. Rodriguez",
+          "email": "sarah.rodriguez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39626"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Social Sciences with Continuing Communication(*)",
+      "requirements": [
+        "Social Sciences with Continuing Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Sarah M. Rodriguez"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.543Z"
+}

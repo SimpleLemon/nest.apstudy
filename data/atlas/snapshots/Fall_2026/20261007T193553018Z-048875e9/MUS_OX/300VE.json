@@ -1,0 +1,93 @@
+{
+  "course_code": "MUS_OX 300VE",
+  "course_title": "Oxford Chamber Ensemble",
+  "subject": "MUS_OX",
+  "catalog_number": "300VE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Group instruction in instrumental music and performance of selected repertoire. This course is comprised of multiple units of instrumentalists that are organized based on instrumentation availability. When appropriate, the Oxford Chamber Ensemble organizes into a single unit to explore repertoire within a larger ensemble setting. May be repeated for credit, with total credit not to exceed four hours.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2472",
+      "academic_career": "UOXF",
+      "crn": "4187",
+      "section_number": "1",
+      "schedule_type": "MUS",
+      "instructor": "Joe Skerik",
+      "instructors": [
+        {
+          "name": "Joe Skerik",
+          "email": "joseph.thomas.skerik@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36913"
+        }
+      ],
+      "location": "FEW Music",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-7p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1900"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1900"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Joe Skerik"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.126Z"
+}

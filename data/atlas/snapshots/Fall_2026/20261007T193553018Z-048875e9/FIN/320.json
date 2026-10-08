@@ -1,0 +1,731 @@
+{
+  "course_code": "FIN 320",
+  "course_title": "Corporate Finance",
+  "subject": "FIN",
+  "catalog_number": "320",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides an introduction to finance. It addresses the theory and practice of financial management and the generation and allocation of financial resources. It has three major objectives: 1. To provide you with a foundation in the basic concepts of finance, including the time value of money, the role of financial markets, asset valuation, portfolio theory, asset pricing, and the risk-return tradeoff. 2. To develop your skills in financial analysis, planning, and decision-making. 3. To expand your awareness of institutions and practices in business and finance.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "218",
+      "academic_career": "UBUS",
+      "crn": "6619",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "219",
+      "academic_career": "UBUS",
+      "crn": "3561",
+      "section_number": "1129",
+      "schedule_type": "LEC",
+      "instructor": "Shankar Ramachandran",
+      "instructors": [
+        {
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36012"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 59,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "220",
+      "academic_career": "UBUS",
+      "crn": "3562",
+      "section_number": "1130",
+      "schedule_type": "LEC",
+      "instructor": "Brian Jonghwan Lee",
+      "instructors": [
+        {
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39796"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 59,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "221",
+      "academic_career": "UBUS",
+      "crn": "3563",
+      "section_number": "1131",
+      "schedule_type": "LEC",
+      "instructor": "Brian Jonghwan Lee",
+      "instructors": [
+        {
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39796"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "222",
+      "academic_career": "UBUS",
+      "crn": "3564",
+      "section_number": "1132",
+      "schedule_type": "LEC",
+      "instructor": "Tarun Chordia",
+      "instructors": [
+        {
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3023"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 62,
+      "seats_available": 11,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "223",
+      "academic_career": "UBUS",
+      "crn": "3565",
+      "section_number": "1133",
+      "schedule_type": "LEC",
+      "instructor": "Tarun Chordia",
+      "instructors": [
+        {
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3023"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 34,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "224",
+      "academic_career": "UBUS",
+      "crn": "3566",
+      "section_number": "1134",
+      "schedule_type": "LEC",
+      "instructor": "Shankar Ramachandran",
+      "instructors": [
+        {
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36012"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "225",
+      "academic_career": "UBUS",
+      "crn": "3567",
+      "section_number": "1429",
+      "schedule_type": "LEC",
+      "instructor": "Shankar Ramachandran",
+      "instructors": [
+        {
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36012"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "226",
+      "academic_career": "UBUS",
+      "crn": "3568",
+      "section_number": "1430",
+      "schedule_type": "LEC",
+      "instructor": "Brian Jonghwan Lee",
+      "instructors": [
+        {
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39796"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "227",
+      "academic_career": "UBUS",
+      "crn": "3569",
+      "section_number": "1431",
+      "schedule_type": "LEC",
+      "instructor": "Brian Jonghwan Lee",
+      "instructors": [
+        {
+          "name": "Brian Jonghwan Lee",
+          "email": "brian.jonghwan.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39796"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "228",
+      "academic_career": "UBUS",
+      "crn": "3570",
+      "section_number": "1432",
+      "schedule_type": "LEC",
+      "instructor": "Tarun Chordia",
+      "instructors": [
+        {
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3023"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "229",
+      "academic_career": "UBUS",
+      "crn": "3571",
+      "section_number": "1433",
+      "schedule_type": "LEC",
+      "instructor": "Tarun Chordia",
+      "instructors": [
+        {
+          "name": "Tarun Chordia",
+          "email": "tarun.chordia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3023"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "230",
+      "academic_career": "UBUS",
+      "crn": "3572",
+      "section_number": "1434",
+      "schedule_type": "LEC",
+      "instructor": "Shankar Ramachandran",
+      "instructors": [
+        {
+          "name": "Shankar Ramachandran",
+          "email": "rlshankar@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36012"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 13,
+    "lectures": 13,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 6,
+    "closed": 6,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brian Jonghwan Lee",
+    "Declan Clear",
+    "Shankar Ramachandran",
+    "Tarun Chordia"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.140Z"
+}

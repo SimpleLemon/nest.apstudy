@@ -1,0 +1,97 @@
+{
+  "course_code": "SOC 225",
+  "course_title": "Sociology of Sex and Gender",
+  "subject": "SOC",
+  "catalog_number": "225",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An examination of the nature, causes, and consequences of sex roles in our society, including how male and female roles are learned through socialization, and how they affect work and family.",
+  "course_notes": "(Same as WGS 231 1) Content: To learn about theories, debates and issues that are central to scholarship in the sociology of sex and gender. Skills: To build skills in critical analysis that will help you to effectively engage with the arguments presented in the readings and discussions, evaluate evidence, apply sociological theory and concepts to key issues, and articulate your own position. Self-understanding: To discover how the social constructions of gender, race, class and sexuality are at work in your own life, and to understand how your individual biography is related to broader economic, political and cultural forces. Community: To participate in creating a collaborative learning setting within our classroom, and understand how this approach enhances your own skill-building and learning.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "754",
+      "academic_career": "UCOL",
+      "crn": "2813",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Irene Browne",
+      "instructors": [
+        {
+          "name": "Irene Browne",
+          "email": "socib@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1256"
+        }
+      ],
+      "location": "Tarbutton Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Irene Browne"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.586Z"
+}

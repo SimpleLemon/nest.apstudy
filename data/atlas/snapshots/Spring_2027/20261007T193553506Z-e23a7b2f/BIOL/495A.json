@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 495A",
+  "course_title": "Honors Research",
+  "subject": "BIOL",
+  "catalog_number": "495A",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: consent of departmental honors coordinator. Independent research for students invited to participate in the biology department Honors Program.",
+  "course_notes": "First semester of the Biology Honors Program for Senior Biology majors in their last two semesters at Emory. Eligible students will be contacted in the SUMMER (or FALL) and invited to participate in the program. A 3.7 minimum GPA is required for both the Biology major and cumulative. Students accepted into the Honors Program will need to contact Tonya Woolcock at tdavis6@emory.edu to request a permission number for Biology 495A and add the course to their schedule before add/drop/swap ends for the semester. See the Biology Department website for additional information. Prerequisites: Biology 142, 142L, and a declared Biology major. Students graduating in a fall semester should take Biology 495A in the spring semester prior to their graduation semester and Biology 495BW in the fall of their graduating semester.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1268",
+      "academic_career": "UCOL",
+      "crn": "2078",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Skye Comstra",
+      "instructors": [
+        {
+          "name": "Skye Comstra",
+          "email": "skye.comstra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4936"
+        },
+        {
+          "name": "Leila Rieder",
+          "email": "leila.rieder@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "20110"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Leila Rieder",
+    "Skye Comstra"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.520Z"
+}

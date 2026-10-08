@@ -1,0 +1,182 @@
+{
+  "course_code": "DANC 207R",
+  "course_title": "Emory Dance Company",
+  "subject": "DANC",
+  "catalog_number": "207R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Emory Dance Company is a professionally oriented performance company that exposes students to the diverse choreographic approaches of faculty, student and guest artist work, as well as historical reconstructions. Course admission is by audition. Students gain performance techniques, collaborative skills, and often contribute to the making of original choreography as they prepare for a fully produced dance concert. Simultaneous enrollment in a dance technique class is required. In addition, students gain experience in some of the technical aspects of dance concert production. Credit hours are assigned in accordance with the number of works in which a student participates. Evaluation procedures announced in class.",
+  "course_notes": "(Permission Required Prior to Enrollment) Entrance by audition only at the beginning of the semester. Check www.dance.emory.edu for audition details or email dance@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "612",
+      "academic_career": "UCOL",
+      "crn": "2403",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "George Staib",
+      "instructors": [
+        {
+          "name": "George Staib",
+          "email": "gstaib@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3229"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "613",
+      "academic_career": "UCOL",
+      "crn": "2404",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Julio Medina",
+      "instructors": [
+        {
+          "name": "Julio Medina",
+          "email": "julio.ulises.medina@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22097"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "614",
+      "academic_career": "UCOL",
+      "crn": "2405",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Lori Teague",
+      "instructors": [
+        {
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1408"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "George Staib",
+    "Julio Medina",
+    "Lori Teague"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.041Z"
+}

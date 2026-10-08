@@ -1,0 +1,80 @@
+{
+  "course_code": "RADT 4101",
+  "course_title": "Radiation Protection I",
+  "subject": "RADT",
+  "catalog_number": "4101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to present students with an overview of the principles of Radiation protection including the responsibilities of the Radiographer for patients, personnel and the public. Radiation health and safety requirements of federal and state regulatory agencies, accreditation agencies and health care organizations are incorporated. This course will also help to establish a basic knowledge of atomic structure and terminology, as well as the nature and characteristics of Radiation, x-ray production and the fundamentals of photon interactions with matter, and cell biology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4816",
+      "academic_career": "UAH",
+      "crn": "1007",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Shaun Taylor",
+      "instructors": [
+        {
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40254"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Shaun Taylor"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.621Z"
+}

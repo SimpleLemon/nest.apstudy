@@ -1,0 +1,134 @@
+{
+  "course_code": "AAS 495BW",
+  "course_title": "Honors Thesis",
+  "subject": "AAS",
+  "catalog_number": "495BW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable credit with a maximum credit of eight hours. Prerequisite: approval of adviser and the director of undergraduate studies. Open to majors and minors writing honors thesis. Writing requirement.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1337",
+      "academic_career": "UCOL",
+      "crn": "2338",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Michelle Gordon",
+      "instructors": [
+        {
+          "name": "Michelle Gordon",
+          "email": "michelle.yvonne.gordon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6657"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1338",
+      "academic_career": "UCOL",
+      "crn": "2339",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Kyrah Malika Daniels",
+      "instructors": [
+        {
+          "name": "Kyrah Malika Daniels",
+          "email": "kyrah.malika.daniels@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31392"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kyrah Malika Daniels",
+    "Michelle Gordon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.508Z"
+}

@@ -1,0 +1,108 @@
+{
+  "course_code": "FILM 495A",
+  "course_title": "Honors Thesis",
+  "subject": "FILM",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Prerequisite: Admission to the Honors Program and approval of adviser. Open to students writing honors theses. This course fulfills the postfreshman year writing requirement.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3418",
+      "academic_career": "UCOL",
+      "crn": "3885",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Gregory Zinman",
+      "instructors": [
+        {
+          "name": "Gregory Zinman",
+          "email": "gregory.austen.zinman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36162"
+        },
+        {
+          "name": "Gregory Zinman",
+          "email": "gregory.austen.zinman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36162"
+        }
+      ],
+      "location": "Rich Building 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; T 8-10p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Tue",
+            "start": "2000",
+            "end": "2200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Gregory Zinman"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.538Z"
+}

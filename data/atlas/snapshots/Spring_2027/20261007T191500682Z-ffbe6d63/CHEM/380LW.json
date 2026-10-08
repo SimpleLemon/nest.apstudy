@@ -1,0 +1,103 @@
+{
+  "course_code": "CHEM 380LW",
+  "course_title": "Chemistry of Color Lab",
+  "subject": "CHEM",
+  "catalog_number": "380LW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Advanced lab course investigating the origins of color from a chemist's point of view. Study color agents (such as organic dyes, semiconductor nanoparticles, and transition metal complexes) by synthesis and spectroscopy, learn their mechanisms of color generation, and use them in your own creations.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2612",
+      "academic_career": "UCOL",
+      "crn": "3515",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Douglas Mulford",
+      "instructors": [
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4013"
+        },
+        {
+          "name": "Douglas Mulford",
+          "email": "dmulfor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4013"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 240",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-3:45p; M 3:45-5:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Mon",
+            "start": "1545",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Douglas Mulford"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.704Z"
+}

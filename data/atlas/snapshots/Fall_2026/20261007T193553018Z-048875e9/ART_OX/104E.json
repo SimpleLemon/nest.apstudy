@@ -1,0 +1,145 @@
+{
+  "course_code": "ART_OX 104E",
+  "course_title": "Drawing I",
+  "subject": "ART_OX",
+  "catalog_number": "104E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This class introduces observational drawing as the translation of human visual and sensory perception onto a two-dimensional plane. This translation as a discovery-based process reliant on epistemic curiosity and the human hand are emphasized. A variety of drawing tools will be explored alongside topics: mark-making, composition, line and value. Students are encouraged to appreciate drawing's development of skills such as focused perception and process-oriented thinking as applicable to a broad range of fields. This is an experiential course, and thus sustained active learning is expected.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2568",
+      "academic_career": "UOXF",
+      "crn": "4192",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Mary Johnson",
+      "instructors": [
+        {
+          "name": "Mary Johnson",
+          "email": "mary.abigail.johnson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39485"
+        }
+      ],
+      "location": "Pierce Hall 111",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2569",
+      "academic_career": "UOXF",
+      "crn": "4193",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Mary Johnson",
+      "instructors": [
+        {
+          "name": "Mary Johnson",
+          "email": "mary.abigail.johnson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39485"
+        }
+      ],
+      "location": "Pierce Hall 111",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 10a-12:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mary Johnson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

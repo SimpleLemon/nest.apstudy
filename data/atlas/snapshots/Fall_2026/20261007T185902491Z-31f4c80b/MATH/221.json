@@ -1,0 +1,692 @@
+{
+  "course_code": "MATH 221",
+  "course_title": "Linear Algebra",
+  "subject": "MATH",
+  "catalog_number": "221",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Systems of linear equations, matrices, determinants, linear transformations, eigenvalues and eigenvectors, least-squares.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "939",
+      "academic_career": "UCOL",
+      "crn": "3103",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Yifeng Huang",
+      "instructors": [
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "30564"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "30564"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "940",
+      "academic_career": "UCOL",
+      "crn": "3424",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Yifeng Huang",
+      "instructors": [
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "30564"
+        },
+        {
+          "name": "Alina Chen",
+          "email": "jiayi.chen@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "30564"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "941",
+      "academic_career": "UCOL",
+      "crn": "3425",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Juan Villeta-García",
+      "instructors": [
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44063"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44063"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "942",
+      "academic_career": "UCOL",
+      "crn": "3426",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Juan Villeta-García",
+      "instructors": [
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44063"
+        },
+        {
+          "name": "Viktorya Grigoryan",
+          "email": "viktorya.grigoryan@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "44063"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "943",
+      "academic_career": "UCOL",
+      "crn": "3427",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Juan Villeta-García",
+      "instructors": [
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Melissa Wang",
+          "email": "xu.wang2@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43901"
+        },
+        {
+          "name": "Melissa Wang",
+          "email": "xu.wang2@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43901"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "944",
+      "academic_career": "UCOL",
+      "crn": "3428",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Juan Villeta-García",
+      "instructors": [
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Juan Villeta-García",
+          "email": "juan.villeta-garcia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15067"
+        },
+        {
+          "name": "Melissa Wang",
+          "email": "xu.wang2@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43901"
+        },
+        {
+          "name": "Melissa Wang",
+          "email": "xu.wang2@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43901"
+        }
+      ],
+      "location": "Math & Science Center - W201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 25,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "945",
+      "academic_career": "UCOL",
+      "crn": "3436",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Yifeng Huang",
+      "instructors": [
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Clara Armstrong",
+          "email": "clara.armstrong@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43940"
+        },
+        {
+          "name": "Clara Armstrong",
+          "email": "clara.armstrong@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43940"
+        }
+      ],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "8",
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "946",
+      "academic_career": "UCOL",
+      "crn": "3438",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "Yifeng Huang",
+      "instructors": [
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Yifeng Huang",
+          "email": "yifeng.huang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46799"
+        },
+        {
+          "name": "Clara Armstrong",
+          "email": "clara.armstrong@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43940"
+        },
+        {
+          "name": "Clara Armstrong",
+          "email": "clara.armstrong@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "43940"
+        }
+      ],
+      "location": "Math & Science Center - W301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 20,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 8,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 6,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alina Chen",
+    "Clara Armstrong",
+    "Juan Villeta-García",
+    "Melissa Wang",
+    "Viktorya Grigoryan",
+    "Yifeng Huang"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.559Z"
+}

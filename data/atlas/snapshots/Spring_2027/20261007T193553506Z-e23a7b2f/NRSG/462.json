@@ -1,0 +1,82 @@
+{
+  "course_code": "NRSG 462",
+  "course_title": "Care of the Person with Complex Health Conditions: BSN",
+  "subject": "NRSG",
+  "catalog_number": "462",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "In this course, students will examine and apply new and existing knowledge from nursing and related sciences to the care of adults with complex health needs leading to the prioritization and evaluation of evidence-based interventions.",
+  "course_notes": "This section is for traditional BSN semester 4 students only.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1198",
+      "academic_career": "UNUR",
+      "crn": "2365",
+      "section_number": "100",
+      "schedule_type": "LEC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 170,
+      "seats_available": 170,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TW 10-11:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1120"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1120"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:35:53.598Z"
+}

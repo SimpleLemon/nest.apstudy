@@ -1,0 +1,93 @@
+{
+  "course_code": "CHEM 205",
+  "course_title": "Light and Matter",
+  "subject": "CHEM",
+  "catalog_number": "205",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "CHEM 205 will address the origins of electronic orbitals and the quantized energy states associated with molecular motions. How light causes transitions between energy levels will be central to our discussion, illuminating topics from spectroscopy to the Earth's climate and solar energy conversion.",
+  "course_notes": "This course is typically offered in the fall, spring, and summer semesters.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2191",
+      "academic_career": "UCOL",
+      "crn": "2615",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Yao Wang",
+      "instructors": [
+        {
+          "name": "Yao Wang",
+          "email": "yao.wang@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35647"
+        }
+      ],
+      "location": "Atwood Chemistry Bldg. 215",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Yao Wang"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.521Z"
+}

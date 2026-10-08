@@ -1,0 +1,213 @@
+{
+  "course_code": "CHEM_OX 202",
+  "course_title": "Principles of Reactivity",
+  "subject": "CHEM_OX",
+  "catalog_number": "202",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course provides a basic understanding of the kinetics and thermodynamics associated with reactions, how these are related to the structures of reactants and products and the pathways between them, and how reactivity can be controlled through choices of reacting molecules and conditions. It is recommended that students who withdraw from the lecture withdraw from the co-requisite laboratory course as well.",
+  "course_notes": "Must enroll in CHEM_OX 202L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3961",
+      "academic_career": "UOXF",
+      "crn": "4354",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Nichole Powell",
+      "instructors": [
+        {
+          "name": "Nichole Powell",
+          "email": "nichole.powell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4720"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3962",
+      "academic_career": "UOXF",
+      "crn": "4355",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Nichole Powell",
+      "instructors": [
+        {
+          "name": "Nichole Powell",
+          "email": "nichole.powell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4720"
+        }
+      ],
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3963",
+      "academic_career": "UOXF",
+      "crn": "4356",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Nichole Powell",
+      "instructors": [
+        {
+          "name": "Nichole Powell",
+          "email": "nichole.powell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4720"
+        }
+      ],
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 24,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nichole Powell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.600Z"
+}

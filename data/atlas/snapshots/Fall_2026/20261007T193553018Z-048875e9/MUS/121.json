@@ -1,0 +1,325 @@
+{
+  "course_code": "MUS 121",
+  "course_title": "Theory, Analysis, Aural Skills I",
+  "subject": "MUS",
+  "catalog_number": "121",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an applied technical study of harmony and counterpoint focusing on the written and aural aspects of the common-practice period, but including repertory from earlier periods and modern times. This course is designed for music majors and minors.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "975",
+      "academic_career": "UCOL",
+      "crn": "3364",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Nathan Cobb",
+      "instructors": [
+        {
+          "name": "Nathan Cobb",
+          "email": "nathan.cobb@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43571"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "976",
+      "academic_career": "UCOL",
+      "crn": "3367",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Nathan Cobb",
+      "instructors": [
+        {
+          "name": "Nathan Cobb",
+          "email": "nathan.cobb@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43571"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "977",
+      "academic_career": "UCOL",
+      "crn": "3369",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Patricia A Dinkins-Matthews",
+      "instructors": [
+        {
+          "name": "Patricia A Dinkins-Matthews",
+          "email": "pdinkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2524"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "978",
+      "academic_career": "UCOL",
+      "crn": "3371",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Jason Eklund",
+      "instructors": [
+        {
+          "name": "Jason Eklund",
+          "email": "jason.r.eklund@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4245"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "979",
+      "academic_career": "UCOL",
+      "crn": "3373",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Jason Eklund",
+      "instructors": [
+        {
+          "name": "Jason Eklund",
+          "email": "jason.r.eklund@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4245"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 2,
+    "labs": 3,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jason Eklund",
+    "Nathan Cobb",
+    "Patricia A Dinkins-Matthews"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.084Z"
+}

@@ -1,0 +1,216 @@
+{
+  "course_code": "MATH 116",
+  "course_title": "Life Sciences Calculus II",
+  "subject": "MATH",
+  "catalog_number": "116",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Integration, differential equations, multivariable calculus, and discrete probability and statistics, with an emphasis on applications to biology.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "924",
+      "academic_career": "UCOL",
+      "crn": "2758",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jay Mayfield",
+      "instructors": [
+        {
+          "name": "Jay Mayfield",
+          "email": "jay.mayfield@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38416"
+        }
+      ],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 45,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "925",
+      "academic_career": "UCOL",
+      "crn": "3225",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Jay Mayfield",
+      "instructors": [
+        {
+          "name": "Jay Mayfield",
+          "email": "jay.mayfield@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38416"
+        },
+        {
+          "name": "Audrey Bu",
+          "email": "audrey.bu@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "32401"
+        }
+      ],
+      "location": "Math & Science Center - N306",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 23,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "926",
+      "academic_career": "UCOL",
+      "crn": "3429",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Jay Mayfield",
+      "instructors": [
+        {
+          "name": "Jay Mayfield",
+          "email": "jay.mayfield@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38416"
+        },
+        {
+          "name": "Audrey Bu",
+          "email": "audrey.bu@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "32401"
+        }
+      ],
+      "location": "Emerson Chemistry Bldg. E363",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 23,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 1,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Audrey Bu",
+    "Jay Mayfield"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.080Z"
+}

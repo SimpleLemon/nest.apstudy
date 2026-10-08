@@ -1,0 +1,97 @@
+{
+  "course_code": "FILM 379RW",
+  "course_title": "Advanced Screenwriting",
+  "subject": "FILM",
+  "catalog_number": "379RW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An advanced writing-intensive course in the construction and formatting of screenplays for upper-level undergraduates, which also broaches various aspects of pre-production planning.",
+  "course_notes": "(Same as ENGCW 379RW 1)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2210",
+      "academic_career": "UCOL",
+      "crn": "1724",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Joe Conway",
+      "instructors": [
+        {
+          "name": "Joe Conway",
+          "email": "joe.conway@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5930"
+        }
+      ],
+      "location": "Rich Building TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 9,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4:15-5:30p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1615",
+            "end": "1730"
+          },
+          {
+            "day": "Wed",
+            "start": "1615",
+            "end": "1730"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Joe Conway"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.548Z"
+}

@@ -1,0 +1,77 @@
+{
+  "course_code": "NRSG 454",
+  "course_title": "BSN Honors Thesis Synthesis",
+  "subject": "NRSG",
+  "catalog_number": "454",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics relevant to the development and completion of the honors thesis are discussed. Under the advisement of the project mentor, students will complete the written thesis. The quality of the student's work will be determined at a defense of the thesis before a certifying committee.",
+  "course_notes": "Must seek permission from faculty. Student cannot self-register. Registration will be processed by the Office of Education.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2125",
+      "academic_career": "UNUR",
+      "crn": "3010",
+      "section_number": "1",
+      "schedule_type": "THE",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": "Nursing School - 114",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 12-1p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1200",
+            "end": "1300"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:15:00.780Z"
+}

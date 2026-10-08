@@ -1,0 +1,86 @@
+{
+  "course_code": "FIN 485",
+  "course_title": "Entrepreneurial Private Equity",
+  "subject": "FIN",
+  "catalog_number": "485",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for students interested in better understanding (i) how the private equity industry works, (ii) how to structure the acquisition of a business and (iii) how to make money by leveraging key value drivers in a business. Unlike traditional courses, this course takes a unique approach by bringing in leading experts and practitioners to provide industry perspectives for almost every class. More information at www.emoryprof.com.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2376",
+      "academic_career": "UBUS",
+      "crn": "3717",
+      "section_number": "1140",
+      "schedule_type": "LEC",
+      "instructor": "Klaas Baks",
+      "instructors": [
+        {
+          "name": "Klaas Baks",
+          "email": "klaas.baks@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3332"
+        }
+      ],
+      "location": "Goizueta Business School 208",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 103,
+      "seats_available": 9,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5:15-7:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1715",
+            "end": "1945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Klaas Baks"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.627Z"
+}

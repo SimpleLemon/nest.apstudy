@@ -1,0 +1,150 @@
+{
+  "course_code": "PHIL 385",
+  "course_title": "Special Topics in Philosophy: Buddhist Philosophy",
+  "subject": "PHIL",
+  "catalog_number": "385",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics and problems in philosophy. Content will vary in successive offerings of this course. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as REL 365 1) This course satisfies the Religion major requirement: Tradition-Buddhism. This course is an introduction to Buddhist philosophy with an emphasis on its development in South Asia. The focus will be on the main philosophical innovations of the Indian Buddhist tradition, starting with the earliest dialogues and moving through the classical developments of the Abhidharma, Madhyamaka, and Yog¿c¿ra streams. Some topics to be covered include the Buddha's diagnosis of the human condition and its causes; suffering and freedom from suffering; personal identity in the absence of an enduring self; emptiness or the absence of inherent existence in things; critique of the body-mind distinction; the theory of two truths, conventional and ultimate, and the implications for knowledge; ethical cultivation without a self; altruism as enlightened self-interest; and theory and practice of meditation.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1931",
+      "academic_career": "UCOL",
+      "crn": "3664",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Sara L McClintock",
+      "instructors": [
+        {
+          "name": "Sara L McClintock",
+          "email": "slmccli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3796"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 3,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1932",
+      "academic_career": "UCOL",
+      "crn": "3674",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Don Seeman",
+      "instructors": [
+        {
+          "name": "Don Seeman",
+          "email": "dseeman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3517"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Don Seeman",
+    "Sara L McClintock"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.573Z"
+}

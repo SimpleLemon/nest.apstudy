@@ -1,0 +1,113 @@
+{
+  "course_code": "TBT 101",
+  "course_title": "Elementary Tibetan I",
+  "subject": "TBT",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "5",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to Tibetan that seeks to develop listening, reading, speaking, writing, and cultural skills in Tibetan. No previous knowledge of Tibetan is assumed.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2297",
+      "academic_career": "UCOL",
+      "crn": "5093",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Tsepak Rigzin",
+      "instructors": [
+        {
+          "name": "Tsepak Rigzin",
+          "email": "trigzin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4777"
+        },
+        {
+          "name": "Tsepak Rigzin",
+          "email": "trigzin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4777"
+        }
+      ],
+      "location": "Callaway C203",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-10:50a; TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tsepak Rigzin"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.110Z"
+}

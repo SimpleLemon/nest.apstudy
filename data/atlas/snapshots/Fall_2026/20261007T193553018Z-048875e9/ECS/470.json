@@ -1,0 +1,89 @@
+{
+  "course_code": "ECS 470",
+  "course_title": "FCHI Honors Fellow Seminar",
+  "subject": "ECS",
+  "catalog_number": "470",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The seminar provides a forum for honors students to explore the nature of interdisciplinarity and to test the boundaries of their respective disciplines, in the context of the Fox Center, Emory¿s interdisciplinary institute for advanced study in the Humanities.",
+  "course_notes": "This course is for students selected for the 2026-2027 Fox Center Undergraduate Honors Fellowship Program. The class/fellowship details can be found on our website: https://fchi.emory.edu/fellowships/fellowship-types/ug-fellowship.html. Applicants should review the fellowship's expectations and opportunities. This class will meet once a month in person. Schedule TBD. Location: Fox Center Seminar Room",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4297",
+      "academic_career": "UCOL",
+      "crn": "6042",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Kaelyn McAdams",
+      "instructors": [
+        {
+          "name": "Kaelyn McAdams",
+          "email": "kaelyn.olivia.jack.mcadams@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18592"
+        },
+        {
+          "name": "Benjamin Reiss",
+          "email": "breiss@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3976"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Benjamin Reiss",
+    "Kaelyn McAdams"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.051Z"
+}

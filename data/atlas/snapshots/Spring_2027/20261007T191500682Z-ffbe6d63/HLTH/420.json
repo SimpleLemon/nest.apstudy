@@ -1,0 +1,93 @@
+{
+  "course_code": "HLTH 420",
+  "course_title": "Mythbusters: Nutrition Facts and Fiction",
+  "subject": "HLTH",
+  "catalog_number": "420",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Nutrition is at the center of a cultural dialogue about health. The line between scientific knowledge and cultural ideology is increasingly unclear. This course will systematically cover many misnomers, myths and fads in our society in contrast to the science of nutrition.",
+  "course_notes": "Nutrition is at the center of a cultural dialogue about health, though the line between cultural ideology and scientific knowledge is increasingly unclear. In this course, students will learn and use evidence-based nutrition knowledge to critically analyze health-related information, fads, and myths in popular media and translate the scientific evidence to the greater community. (Prerequisite: HLTH 220)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1733",
+      "academic_career": "UCOL",
+      "crn": "1595",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Myra Woodworth-Hobbs",
+      "instructors": [
+        {
+          "name": "Myra Woodworth-Hobbs",
+          "email": "mewoodw@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8823"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 19,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Myra Woodworth-Hobbs"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.740Z"
+}

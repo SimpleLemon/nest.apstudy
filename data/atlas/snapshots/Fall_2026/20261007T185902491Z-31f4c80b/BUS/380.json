@@ -1,0 +1,436 @@
+{
+  "course_code": "BUS 380",
+  "course_title": "Professional Development",
+  "subject": "BUS",
+  "catalog_number": "380",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Professional Development is composed of a series of sessions and assignments intended to help you prepare for your career and position you for success at Goizueta and beyond. Professional Development incorporates career education and exploration with tools you'll use to successfully navigate your internship search. You will learn about different industries and functions, you will explore how your personal interests align with potential careers, you will develop and refine your personal brand, and you will sharpen your interview skills. After you complete this course, you will have a list of target companies, you will have started to build your professional network, and you will have laid the foundation for a successful internship and full-time search at Goizueta. You will have a better understanding of yourself and your interests, and you'll be able to articulate your experiences through your personal brand materials, networking, and interviews.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2435",
+      "academic_career": "UBUS",
+      "crn": "5082",
+      "section_number": "1101",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Nikki Smith",
+          "email": "nikki.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31460"
+        },
+        {
+          "name": "Nikki Smith",
+          "email": "nikki.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31460"
+        }
+      ],
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9a-4p; F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "1600"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2436",
+      "academic_career": "UBUS",
+      "crn": "5083",
+      "section_number": "1102",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Nikki Smith",
+          "email": "nikki.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31460"
+        }
+      ],
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2437",
+      "academic_career": "UBUS",
+      "crn": "5084",
+      "section_number": "1103",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Kim Timpone",
+          "email": "kimberly.timpone@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34088"
+        }
+      ],
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2438",
+      "academic_career": "UBUS",
+      "crn": "5085",
+      "section_number": "1104",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Kim Timpone",
+          "email": "kimberly.timpone@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34088"
+        }
+      ],
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2439",
+      "academic_career": "UBUS",
+      "crn": "5086",
+      "section_number": "1105",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Carla Morales",
+          "email": "carlamorales@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40035"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2440",
+      "academic_career": "UBUS",
+      "crn": "5087",
+      "section_number": "1106",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        },
+        {
+          "name": "Carla Morales",
+          "email": "carlamorales@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40035"
+        }
+      ],
+      "location": "Goizueta Business School 331",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2441",
+      "academic_career": "UBUS",
+      "crn": "5088",
+      "section_number": "1107",
+      "schedule_type": "SEM",
+      "instructor": "Sarah Leist",
+      "instructors": [
+        {
+          "name": "Sarah Leist",
+          "email": "sarah.leist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32582"
+        }
+      ],
+      "location": "Goizueta Business School 301",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "7",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 7,
+    "open": 4,
+    "closed": 3,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Carla Morales",
+    "Kim Timpone",
+    "Nikki Smith",
+    "Sarah Leist"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.624Z"
+}

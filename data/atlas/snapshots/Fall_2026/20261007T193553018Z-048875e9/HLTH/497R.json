@@ -1,0 +1,82 @@
+{
+  "course_code": "HLTH 497R",
+  "course_title": "Independent Reading",
+  "subject": "HLTH",
+  "catalog_number": "497R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Under faculty mentorship, students propose a focused research question and design a reading plan to explore the available evidence in depth through independent study. Students will write a semester paper which describes our current understanding of the topic and critiques the available evidence.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3761",
+      "academic_career": "UCOL",
+      "crn": "2646",
+      "section_number": "1",
+      "schedule_type": "IND",
+      "instructor": "Myra Woodworth-Hobbs",
+      "instructors": [
+        {
+          "name": "Myra Woodworth-Hobbs",
+          "email": "mewoodw@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8823"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 999,
+      "seats_available": 999,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Myra Woodworth-Hobbs"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.071Z"
+}

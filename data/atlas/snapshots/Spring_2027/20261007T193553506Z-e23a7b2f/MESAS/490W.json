@@ -1,0 +1,97 @@
+{
+  "course_code": "MESAS 490W",
+  "course_title": "Senior Seminar in MESAS",
+  "subject": "MESAS",
+  "catalog_number": "490W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is the capstone seminar for MESAS majors. Students will conduct an in-depth examination of selected topics linking South Asia and the Middle East. Topics will change according to the choice of the instructor.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "518",
+      "academic_career": "UCOL",
+      "crn": "2014",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Vincent Cornell",
+      "instructors": [
+        {
+          "name": "Vincent Cornell",
+          "email": "vcornel@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3977"
+        }
+      ],
+      "location": "Callaway S319",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Vincent Cornell"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.568Z"
+}

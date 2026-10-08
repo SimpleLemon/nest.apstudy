@@ -1,0 +1,156 @@
+{
+  "course_code": "CPLT 201W",
+  "course_title": "Reading Comparatively",
+  "subject": "CPLT",
+  "catalog_number": "201W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+  "requirements": [
+    "Humanities and Arts with Cont.Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course draws on classical, modern, and contemporary texts to introduce skills required for reading comparatively across national traditions and academic disciplines with an emphasis on close reading, critical interpretation, and the multiplicity of linguistic traditions around the world. *Note: This course is non-repeatable.",
+  "course_notes": "\"Trans Lives and Literatures\" | More people think about being trans today than at any point in history. ¿Being trans¿ means, on the one hand, that more people are considering and/or enacting some form of gender transition, and, on the other hand, that there has never been more panic about other people being trans. The public discussion of trans issues highlights medical access, sports, bathrooms, and education. However, the hypervisibility of transness has almost nothing to do with the actual lives of trans people. Even among pro-trans allies and advocates, much more attention is paid to political, economic, and sociological analyses of trans issues than to what it is actually like to be trans and why trans people want to live as trans in spite of so many difficulties. This course focuses directly on issues of trans experience: What does it ¿feel like¿ to be trans? Why does transition matter? How does one¿s consciousness and selfhood change across the stages of transition? How do trans experiences of euphoria and dysphoria relate to normative gender formations? The readings for this course include essays, life writing, fiction, and philosophy. The philosophical material from this class is drawn from a field called ¿trans phenomenology,¿ which studies consciousness and first-person experience. The more literary materials are authored exclusively by trans people staging trans characters in fiction and/or recounting their own experiences. Readings may include selections from Phenomenology of Perception by Maurice Merleau-Ponty, Disorienting Phenomenology: Queer Space and Trans Life by Eden Kinkaid, Trans: A Memoir by Juliet Jacques, and Detransition, Baby by Torrey Peters. Assignments will include reading reflections, contributions to a class Zine, and a research paper on a student¿s chosen topic.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "456",
+      "academic_career": "UCOL",
+      "crn": "2728",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Emma Smith",
+      "instructors": [
+        {
+          "name": "Emma Smith",
+          "email": "samuel.smith@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32638"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "457",
+      "academic_career": "UCOL",
+      "crn": "3363",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Santiago Pierre-Neptune",
+      "instructors": [
+        {
+          "name": "Santiago Pierre-Neptune",
+          "email": "santiago.pierre-neptune@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40352"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts with Cont.Communication(*)",
+      "requirements": [
+        "Humanities and Arts with Cont.Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Emma Smith",
+    "Santiago Pierre-Neptune"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.526Z"
+}

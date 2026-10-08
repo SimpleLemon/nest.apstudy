@@ -1,0 +1,104 @@
+{
+  "course_code": "CL 228",
+  "course_title": "The Age of Nero: Art and Decadence",
+  "subject": "CL",
+  "catalog_number": "228",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A study of Silver Age literature, art, and culture during the reign of Nero.",
+  "course_notes": "(Same as ARTHIST 259R 1) Students may register for the course under either CL 228 or ARTHIST 259R-1",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "584",
+      "academic_career": "UCOL",
+      "crn": "1979",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Niall W Slater",
+      "instructors": [
+        {
+          "name": "Niall W Slater",
+          "email": "nslater@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "824"
+        },
+        {
+          "name": "Eric Varner",
+          "email": "evarner@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1395"
+        }
+      ],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Varner",
+    "Niall W Slater"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.036Z"
+}

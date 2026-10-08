@@ -1,0 +1,102 @@
+{
+  "course_code": "PE 116",
+  "course_title": "PPF/Indoor Cycling",
+  "subject": "PE",
+  "catalog_number": "116",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course will incorporate indoor cycling (spinning) for both the novice and the experienced cyclist. Instruction provided in proper biomechanics and cycling techniques as well as safety. Interval training on the bike and body weight resistance exercises are utilized. Fulfills the PPF requirement.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1050",
+      "academic_career": "UCOL",
+      "crn": "3375",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Elizabeth Noell",
+      "instructors": [
+        {
+          "name": "Elizabeth Noell",
+          "email": "enoell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2820"
+        }
+      ],
+      "location": "Woodruff PE Center Cycle Studi",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1220"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elizabeth Noell"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.567Z"
+}

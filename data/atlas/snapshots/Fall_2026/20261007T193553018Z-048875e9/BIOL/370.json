@@ -1,0 +1,297 @@
+{
+  "course_code": "BIOL 370",
+  "course_title": "Introduction to Microbiology",
+  "subject": "BIOL",
+  "catalog_number": "370",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution.",
+  "course_notes": "This course will provide an Introduction to the concepts of microbial physiology, biochemistry, genetics, and evolution. This course will fulfill the Column B requirement (or elective credit) for the Biology major. Students must also register for and attend a BIOL 370 Discussion Section. There is an optional 2-credit laboratory (BIOL 370L) associated with this course. Prerequisites: Biology 142 + 142L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "533",
+      "academic_career": "UCOL",
+      "crn": "1672",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 80,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "534",
+      "academic_career": "UCOL",
+      "crn": "1774",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-6:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "1850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "535",
+      "academic_career": "UCOL",
+      "crn": "1777",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 6-6:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1800",
+            "end": "1850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "536",
+      "academic_career": "UCOL",
+      "crn": "1778",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-6:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "1850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "537",
+      "academic_career": "UCOL",
+      "crn": "1779",
+      "section_number": "5",
+      "schedule_type": "DIS",
+      "instructor": "Eric Battaglioli",
+      "instructors": [
+        {
+          "name": "Eric Battaglioli",
+          "email": "eric.john.battaglioli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34258"
+        }
+      ],
+      "location": "1462 Clifton Rd 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 6-6:50p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1800",
+            "end": "1850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 4,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eric Battaglioli"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.031Z"
+}

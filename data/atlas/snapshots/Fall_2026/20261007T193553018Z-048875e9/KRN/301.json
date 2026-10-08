@@ -1,0 +1,97 @@
+{
+  "course_code": "KRN 301",
+  "course_title": "Advanced Korean I",
+  "subject": "KRN",
+  "catalog_number": "301",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to enable learners to achieve the advanced level of speaking, listening, reading, writing and grammar skills in Korean. Also, this course aims to help students understand various aspects of Korean culture and society. KRN 202 , KRN 203 , or instructor permission required.",
+  "course_notes": "For permission to enroll, please contact bumyongchoi@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3321",
+      "academic_career": "UCOL",
+      "crn": "1926",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Eunae Jo",
+      "instructors": [
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        }
+      ],
+      "location": "Callaway S104",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Eunae Jo"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.076Z"
+}

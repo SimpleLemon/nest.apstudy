@@ -1,0 +1,178 @@
+{
+  "course_code": "MATH_OX 108",
+  "course_title": "Cornerstones in Mathematics",
+  "subject": "MATH_OX",
+  "catalog_number": "108",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Beginning with \"strange arithmetics\" connected to braiding cords, paper-flipping, and clocks, and ending with the fundamental theorem of algebra and Abel¿s shocking \"impossibility theorem\" -- this course reveals new connections and unexpected motivations for familiar ideas from precalculus. (e.g., trigonometry as birthed by complex numbers; solutions to the general cubic and quartic equations; hyperbolic trigonometry derived from logarithms) In doing so, the course includes a good review of algebra and transcendental functions and provides a solid foundation for subsequent study of calculus.",
+  "course_notes": "Placement test must be taken prior to enrollment",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "57",
+      "academic_career": "UOXF",
+      "crn": "4300",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Fang Chen",
+      "instructors": [
+        {
+          "name": "Fang Chen",
+          "email": "fchen2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2927"
+        },
+        {
+          "name": "Fang Chen",
+          "email": "fchen2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2927"
+        }
+      ],
+      "location": "Seney Hall 208",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "58",
+      "academic_career": "UOXF",
+      "crn": "4301",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Paul Oser",
+      "instructors": [
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        },
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        }
+      ],
+      "location": "Pierce Hall 140",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 8,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Fang Chen",
+    "Paul Oser"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.609Z"
+}

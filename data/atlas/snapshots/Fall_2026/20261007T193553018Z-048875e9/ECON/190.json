@@ -1,0 +1,157 @@
+{
+  "course_code": "ECON 190",
+  "course_title": "Freshman Seminar:Economics: Economics of Money Laundering",
+  "subject": "ECON",
+  "catalog_number": "190",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar",
+    "First Year Seminar with Race & Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Open only to students with freshman standing. Topics and prerequisites vary; consult the Course Atlas.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "632",
+      "academic_career": "UCOL",
+      "crn": "2903",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Melvin D Ayogu",
+      "instructors": [
+        {
+          "name": "Melvin D Ayogu",
+          "email": "melvin.ayogu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24991"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "633",
+      "academic_career": "UCOL",
+      "crn": "4453",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "David McMillon",
+      "instructors": [
+        {
+          "name": "David McMillon",
+          "email": "david.mcmillon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28262"
+        }
+      ],
+      "location": "Candler Library 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar with Race & Ethnicity(*)",
+      "requirements": [
+        "First Year Seminar with Race & Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David McMillon",
+    "Melvin D Ayogu"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.047Z"
+}

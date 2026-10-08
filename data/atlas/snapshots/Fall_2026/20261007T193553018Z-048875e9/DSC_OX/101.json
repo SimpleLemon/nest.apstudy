@@ -1,0 +1,1952 @@
+{
+  "course_code": "DSC_OX 101",
+  "course_title": "Discovery Seminar: The US Healthcare System",
+  "subject": "DSC_OX",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Introduces students to ways of knowing and producing knowledge within a field of study. Emphasizes inquiry, communication, and development of critical thinking and research abilities through exploration of a specific topic.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3985",
+      "academic_career": "UOXF",
+      "crn": "4240",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Dan Ludwinski",
+      "instructors": [
+        {
+          "name": "Dan Ludwinski",
+          "email": "dludwinski@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24920"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3986",
+      "academic_career": "UOXF",
+      "crn": "4251",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Elise Blasingame",
+      "instructors": [
+        {
+          "name": "Elise Blasingame",
+          "email": "elise.blasingame@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43353"
+        }
+      ],
+      "location": "Seney Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3987",
+      "academic_career": "UOXF",
+      "crn": "4262",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "Melissa Hage",
+      "instructors": [
+        {
+          "name": "Melissa Hage",
+          "email": "melissa.hage@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14494"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3988",
+      "academic_career": "UOXF",
+      "crn": "4268",
+      "section_number": "4",
+      "schedule_type": "SEM",
+      "instructor": "Jessica Ham",
+      "instructors": [
+        {
+          "name": "Jessica Ham",
+          "email": "jessica.ham@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17276"
+        }
+      ],
+      "location": "Pierce Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3989",
+      "academic_career": "UOXF",
+      "crn": "4269",
+      "section_number": "5",
+      "schedule_type": "SEM",
+      "instructor": "Donald Beaudette",
+      "instructors": [
+        {
+          "name": "Donald Beaudette",
+          "email": "donald.beaudette@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8177"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3990",
+      "academic_career": "UOXF",
+      "crn": "4270",
+      "section_number": "6",
+      "schedule_type": "SEM",
+      "instructor": "David Leinweber",
+      "instructors": [
+        {
+          "name": "David Leinweber",
+          "email": "david.leinweber@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1618"
+        }
+      ],
+      "location": "Seney Hall 322",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3991",
+      "academic_career": "UOXF",
+      "crn": "4271",
+      "section_number": "7",
+      "schedule_type": "SEM",
+      "instructor": "Devon Goss",
+      "instructors": [
+        {
+          "name": "Devon Goss",
+          "email": "devon.goss@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17523"
+        }
+      ],
+      "location": "Johnson Hall 102",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3992",
+      "academic_career": "UOXF",
+      "crn": "4272",
+      "section_number": "8",
+      "schedule_type": "SEM",
+      "instructor": "Jack Hardy",
+      "instructors": [
+        {
+          "name": "Jack Hardy",
+          "email": "jack.hardy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5224"
+        }
+      ],
+      "location": "Humanities Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3993",
+      "academic_career": "UOXF",
+      "crn": "4273",
+      "section_number": "9",
+      "schedule_type": "SEM",
+      "instructor": "Kenneth E Carter",
+      "instructors": [
+        {
+          "name": "Kenneth E Carter",
+          "email": "kcart01@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1691"
+        }
+      ],
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3994",
+      "academic_career": "UOXF",
+      "crn": "4242",
+      "section_number": "11",
+      "schedule_type": "SEM",
+      "instructor": "Masha Vlasova",
+      "instructors": [
+        {
+          "name": "Masha Vlasova",
+          "email": "mariya.vlasova@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31991"
+        }
+      ],
+      "location": "Humanities Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3995",
+      "academic_career": "UOXF",
+      "crn": "4243",
+      "section_number": "12",
+      "schedule_type": "SEM",
+      "instructor": "Marvin McNeill",
+      "instructors": [
+        {
+          "name": "Marvin McNeill",
+          "email": "marvin.mcneill@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31525"
+        }
+      ],
+      "location": "FEW Music",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3996",
+      "academic_career": "UOXF",
+      "crn": "4244",
+      "section_number": "13",
+      "schedule_type": "SEM",
+      "instructor": "David B Gowler",
+      "instructors": [
+        {
+          "name": "David B Gowler",
+          "email": "dgowler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2956"
+        }
+      ],
+      "location": "Library Rm 230",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3997",
+      "academic_career": "UOXF",
+      "crn": "4245",
+      "section_number": "14",
+      "schedule_type": "SEM",
+      "instructor": "Brad K Hawley",
+      "instructors": [
+        {
+          "name": "Brad K Hawley",
+          "email": "bhawley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3848"
+        }
+      ],
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3998",
+      "academic_career": "UOXF",
+      "crn": "4246",
+      "section_number": "15",
+      "schedule_type": "SEM",
+      "instructor": "Tameka Cage Conley",
+      "instructors": [
+        {
+          "name": "Tameka Cage Conley",
+          "email": "tameka.latrece.cage.conley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24921"
+        }
+      ],
+      "location": "Humanities Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3999",
+      "academic_career": "UOXF",
+      "crn": "4247",
+      "section_number": "16",
+      "schedule_type": "SEM",
+      "instructor": "Joshua Mousie",
+      "instructors": [
+        {
+          "name": "Joshua Mousie",
+          "email": "joshua.mousie@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8336"
+        }
+      ],
+      "location": "Johnson Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4000",
+      "academic_career": "UOXF",
+      "crn": "4248",
+      "section_number": "17",
+      "schedule_type": "SEM",
+      "instructor": "Danielle Griffin",
+      "instructors": [
+        {
+          "name": "Danielle Griffin",
+          "email": "danielle.griffin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43553"
+        }
+      ],
+      "location": "Seney Hall 208",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4001",
+      "academic_career": "UOXF",
+      "crn": "4249",
+      "section_number": "18",
+      "schedule_type": "SEM",
+      "instructor": "Stacy A McQuaide",
+      "instructors": [
+        {
+          "name": "Stacy A McQuaide",
+          "email": "smcquai@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1793"
+        }
+      ],
+      "location": "Pierce Hall 227",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4002",
+      "academic_career": "UOXF",
+      "crn": "4250",
+      "section_number": "19",
+      "schedule_type": "SEM",
+      "instructor": "Eve L Mullen",
+      "instructors": [
+        {
+          "name": "Eve L Mullen",
+          "email": "emullen@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4008"
+        }
+      ],
+      "location": "Seney Hall 215",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4003",
+      "academic_career": "UOXF",
+      "crn": "4252",
+      "section_number": "20",
+      "schedule_type": "SEM",
+      "instructor": "Cristina Tarazona",
+      "instructors": [
+        {
+          "name": "Cristina Tarazona",
+          "email": "cristina.tarazona@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4227"
+        }
+      ],
+      "location": "Library Rm 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4004",
+      "academic_career": "UOXF",
+      "crn": "4253",
+      "section_number": "21",
+      "schedule_type": "SEM",
+      "instructor": "Brenda B Harmon",
+      "instructors": [
+        {
+          "name": "Brenda B Harmon",
+          "email": "bharmon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2149"
+        }
+      ],
+      "location": "Oxford Science Bldg. 423",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4005",
+      "academic_career": "UOXF",
+      "crn": "4254",
+      "section_number": "22",
+      "schedule_type": "SEM",
+      "instructor": "Michael Martin",
+      "instructors": [
+        {
+          "name": "Michael Martin",
+          "email": "michael.martin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14492"
+        }
+      ],
+      "location": "Oxford Science Bldg. 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4006",
+      "academic_career": "UOXF",
+      "crn": "4255",
+      "section_number": "23",
+      "schedule_type": "SEM",
+      "instructor": "Sheldon Lawrence",
+      "instructors": [
+        {
+          "name": "Sheldon Lawrence",
+          "email": "sheldon.lawrence@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27642"
+        }
+      ],
+      "location": "Oxford Science Bldg. 301",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4007",
+      "academic_career": "UOXF",
+      "crn": "4256",
+      "section_number": "24",
+      "schedule_type": "SEM",
+      "instructor": "Emily Mclean",
+      "instructors": [
+        {
+          "name": "Emily Mclean",
+          "email": "emily.mclean@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17064"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4008",
+      "academic_career": "UOXF",
+      "crn": "4257",
+      "section_number": "25",
+      "schedule_type": "SEM",
+      "instructor": "Michael K Rogers",
+      "instructors": [
+        {
+          "name": "Michael K Rogers",
+          "email": "mroge02@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1752"
+        }
+      ],
+      "location": "Pierce Hall 239",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4009",
+      "academic_career": "UOXF",
+      "crn": "4258",
+      "section_number": "26",
+      "schedule_type": "SEM",
+      "instructor": "Fang Chen",
+      "instructors": [
+        {
+          "name": "Fang Chen",
+          "email": "fchen2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2927"
+        }
+      ],
+      "location": "Seney Hall 208",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4010",
+      "academic_career": "UOXF",
+      "crn": "4259",
+      "section_number": "27",
+      "schedule_type": "SEM",
+      "instructor": "Julie Hulgan",
+      "instructors": [
+        {
+          "name": "Julie Hulgan",
+          "email": "jhulgan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7912"
+        }
+      ],
+      "location": "Seney Hall 215",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4011",
+      "academic_career": "UOXF",
+      "crn": "4260",
+      "section_number": "28",
+      "schedule_type": "SEM",
+      "instructor": "Hai Le",
+      "instructors": [
+        {
+          "name": "Hai Le",
+          "email": "hai.le@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35423"
+        }
+      ],
+      "location": "Pierce Hall 104",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4012",
+      "academic_career": "UOXF",
+      "crn": "4261",
+      "section_number": "29",
+      "schedule_type": "SEM",
+      "instructor": "Mohammad Reza Saadein",
+      "instructors": [
+        {
+          "name": "Mohammad Reza Saadein",
+          "email": "mrsaadein@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "184"
+        }
+      ],
+      "location": "Oxford Science Bldg. 415",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4013",
+      "academic_career": "UOXF",
+      "crn": "4263",
+      "section_number": "30",
+      "schedule_type": "SEM",
+      "instructor": "Rick Thompson",
+      "instructors": [
+        {
+          "name": "Rick Thompson",
+          "email": "rick.thompson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21636"
+        }
+      ],
+      "location": "Pierce Hall 140",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4014",
+      "academic_career": "UOXF",
+      "crn": "4264",
+      "section_number": "31",
+      "schedule_type": "SEM",
+      "instructor": "Phil Segre",
+      "instructors": [
+        {
+          "name": "Phil Segre",
+          "email": "phil.segre@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3695"
+        }
+      ],
+      "location": "Oxford Science Bldg. 217",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4015",
+      "academic_career": "UOXF",
+      "crn": "4265",
+      "section_number": "32",
+      "schedule_type": "SEM",
+      "instructor": "Annette Neuman",
+      "instructors": [
+        {
+          "name": "Annette Neuman",
+          "email": "annette.neuman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7898"
+        }
+      ],
+      "location": "Oxford Science Bldg. 223",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4016",
+      "academic_career": "UOXF",
+      "crn": "6039",
+      "section_number": "35",
+      "schedule_type": "SEM",
+      "instructor": "Bridgette Gunnels",
+      "instructors": [
+        {
+          "name": "Bridgette Gunnels",
+          "email": "bridgette.w.gunnels@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5228"
+        }
+      ],
+      "location": "Pierce Hall 140",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4017",
+      "academic_career": "UOXF",
+      "crn": "6062",
+      "section_number": "36",
+      "schedule_type": "SEM",
+      "instructor": "Leyla Eghbalzad",
+      "instructors": [
+        {
+          "name": "Leyla Eghbalzad",
+          "email": "leyla.eghbalzad@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28437"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4018",
+      "academic_career": "UOXF",
+      "crn": "6063",
+      "section_number": "37",
+      "schedule_type": "SEM",
+      "instructor": "Anouar El Younssi",
+      "instructors": [
+        {
+          "name": "Anouar El Younssi",
+          "email": "anouar.el.younssi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17522"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 34,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 34,
+    "open": 16,
+    "closed": 17,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Annette Neuman",
+    "Anouar El Younssi",
+    "Brad K Hawley",
+    "Brenda B Harmon",
+    "Bridgette Gunnels",
+    "Cristina Tarazona",
+    "Dan Ludwinski",
+    "Danielle Griffin",
+    "David B Gowler",
+    "David Leinweber",
+    "Devon Goss",
+    "Donald Beaudette",
+    "Elise Blasingame",
+    "Emily Mclean",
+    "Eve L Mullen",
+    "Fang Chen",
+    "Hai Le",
+    "Jack Hardy",
+    "Jessica Ham",
+    "Joshua Mousie",
+    "Julie Hulgan",
+    "Kenneth E Carter",
+    "Leyla Eghbalzad",
+    "Marvin McNeill",
+    "Masha Vlasova",
+    "Melissa Hage",
+    "Michael K Rogers",
+    "Michael Martin",
+    "Mohammad Reza Saadein",
+    "Phil Segre",
+    "Rick Thompson",
+    "Sheldon Lawrence",
+    "Stacy A McQuaide",
+    "Tameka Cage Conley"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.119Z"
+}

@@ -1,0 +1,86 @@
+{
+  "course_code": "PE 399R",
+  "course_title": "Adaptive Physical Education",
+  "subject": "PE",
+  "catalog_number": "399R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course is designed for students who are currently registered with the Office of Disability Services. Options for physical education credit may include: attending physical therapy as prescribed by the student's physician, modified physical activity, attending PPF lectures, and labs and quizzes.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1072",
+      "academic_career": "UCOL",
+      "crn": "2928",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Corey Jones",
+      "instructors": [
+        {
+          "name": "Corey Jones",
+          "email": "corey.ellis.jones@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "45660"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Corey Jones"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.568Z"
+}

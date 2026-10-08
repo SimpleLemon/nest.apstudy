@@ -1,0 +1,148 @@
+{
+  "course_code": "AAS 325",
+  "course_title": "Black Love",
+  "subject": "AAS",
+  "catalog_number": "325",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "\"Explores historical & contemporary notions of love with emphasis on love's powerful & controversial presence/absence in the lives of Black people in the North American context. Readings include religious studies, philosophical, historical, literary, social scientific and neurobiological texts.\"",
+  "course_notes": "(Same as REL 325 DISC)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "78",
+      "academic_career": "UCOL",
+      "crn": "3663",
+      "section_number": "DISC",
+      "schedule_type": "DIS",
+      "instructor": "Dianne Stewart",
+      "instructors": [
+        {
+          "name": "Dianne Stewart",
+          "email": "dstewa4@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3187"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "77",
+      "academic_career": "UCOL",
+      "crn": "3662",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Dianne Stewart",
+      "instructors": [
+        {
+          "name": "Dianne Stewart",
+          "email": "dstewa4@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3187"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Dianne Stewart"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.508Z"
+}

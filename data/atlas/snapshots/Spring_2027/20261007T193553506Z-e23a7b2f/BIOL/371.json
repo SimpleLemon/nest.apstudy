@@ -1,0 +1,88 @@
+{
+  "course_code": "BIOL 371",
+  "course_title": "Ecology of the Tropics",
+  "subject": "BIOL",
+  "catalog_number": "371",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Explores the diverse biomes of the tropics. Focus will be on tropical forests and grasslands, with an emphasis on ecological processes, biodiversity, human impact in the tropics, indigenous peoples, and ethnobotany.",
+  "course_notes": "(Same as ENVS 371 1) This 2-credit hour lecture course will explore the diverse biomes of the tropics. The focus will be on tropical forests and grasslands, with an emphasis on ecological processes, biodiversity, human impact on the tropics, indigenous peoples, and ethnobotany. Prerequisites: Biology 142 and Biology 142L (for Biology 371). This course is taught by Dr. Larry Wilson (adjunct faculty), is SHARED by the Biology and Environmental Science Departments, and may be taken as elective credit for the biology major. There is also an optional field course/lab associated with this course that travels to Peru during Spring Break (see BIOL 372/ENVS 372).]",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "297",
+      "academic_career": "UCOL",
+      "crn": "2222",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lawrence Wilson",
+      "instructors": [
+        {
+          "name": "Lawrence Wilson",
+          "email": "lwilso3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1517"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-4:30p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1630"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lawrence Wilson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.519Z"
+}

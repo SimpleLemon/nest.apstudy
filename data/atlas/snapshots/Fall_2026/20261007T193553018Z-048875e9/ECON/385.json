@@ -1,0 +1,157 @@
+{
+  "course_code": "ECON 385",
+  "course_title": "Special Topics in Economics: Economics of Performing Arts",
+  "subject": "ECON",
+  "catalog_number": "385",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected topics in Economics. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as DANC 385 1) This course, co-taught by professors in Economics and Dance and Movement Studies, introduces students to the economics of the performing arts. Students will explore live performance as an investment; creative production, performances, audience demand and prestige; how public and nonprofit support are shaped by markets and value systems; contracting and incentives for performers and producers; the role of digital platforms in streaming, ticketing, and promotion; property rights and royalties, as well as labor markets for artists and unions. Case studies, drawn from non-profit and profitable models, anchor theory in real-world applications. Performing Arts students missing ECON 101 and 112, please contact Erica Bowersox (erica.bowersox@emory.edu) for enrollment.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3525",
+      "academic_career": "UCOL",
+      "crn": "2978",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Kelli Lanier",
+      "instructors": [
+        {
+          "name": "Kelli Lanier",
+          "email": "klanier@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7825"
+        },
+        {
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "1408"
+        }
+      ],
+      "location": "Rich Building 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3526",
+      "academic_career": "UCOL",
+      "crn": "5676",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Elena Pesavento",
+      "instructors": [
+        {
+          "name": "Elena Pesavento",
+          "email": "epesave@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2961"
+        }
+      ],
+      "location": "Callaway S102",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 23,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elena Pesavento",
+    "Kelli Lanier",
+    "Lori Teague"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.049Z"
+}

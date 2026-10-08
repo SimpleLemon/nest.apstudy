@@ -1,0 +1,93 @@
+{
+  "course_code": "BIOL 450",
+  "course_title": "Computational Neuroscience",
+  "subject": "BIOL",
+  "catalog_number": "450",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Intro to computational neuroscience with an emphasis on biophysical neuronal modeling of single neurons and small networks. Other topics include spike train analysis, dynamical systems analysis, and dimensionality reductions methods. Some Matlab and general programming skills are required.",
+  "course_notes": "The goal of this course is to provide students with a broad outline of ideas and current research areas in computational neuroscience, ranging from ion channels up to organismal behavior. Class meetings will consist of a combination of lectures and in-class computational exercises. Prerequisites: Biology 142 + 142L. Although the class will be largely self-contained, a working knowledge of introductory calculus, statistics, linear algebra, and some exposure to differential equations will be helpful (although a mathematical review will be provided). Knowing some neuroscience may also be helpful, but it is not required. Although most of the course will be taught in Matlab, only a working knowledge of basic programming control structures (e.g., for/while loops & if/then structures, etc.) is necessary, as we will devote time to coding tutorials at the beginning of the semester. If you have some coding experience but have learned R or C or Java or python, you should be fine. (This course is also taught as IBS 534.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "144",
+      "academic_career": "UCOL",
+      "crn": "1993",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Gordon Berman",
+      "instructors": [
+        {
+          "name": "Gordon Berman",
+          "email": "gordon.berman@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6579"
+        }
+      ],
+      "location": "1462 Clifton Rd 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Gordon Berman"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.702Z"
+}

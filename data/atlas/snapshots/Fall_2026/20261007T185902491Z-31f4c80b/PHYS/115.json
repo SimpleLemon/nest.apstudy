@@ -1,0 +1,155 @@
+{
+  "course_code": "PHYS 115",
+  "course_title": "Intro Astronomy",
+  "subject": "PHYS",
+  "catalog_number": "115",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students having taken Physics 116 for credit may not take this course. A descriptive overview of astronomy. The celestial coordinate system, time keeping, the planetary system, ancient astronomy, the sun, stellar evolution, galactic astronomy, cosmology, and the origin of the universe.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1108",
+      "academic_career": "UCOL",
+      "crn": "1385",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Erin Wells Bonning",
+      "instructors": [
+        {
+          "name": "Erin Wells Bonning",
+          "email": "erin.bonning@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5852"
+        }
+      ],
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 36,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1109",
+      "academic_career": "UCOL",
+      "crn": "1386",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Erin Wells Bonning",
+      "instructors": [
+        {
+          "name": "Erin Wells Bonning",
+          "email": "erin.bonning@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5852"
+        }
+      ],
+      "location": "Math & Science Center - E300",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 36,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Erin Wells Bonning"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.571Z"
+}

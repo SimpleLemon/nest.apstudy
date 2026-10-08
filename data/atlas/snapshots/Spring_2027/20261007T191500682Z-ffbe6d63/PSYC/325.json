@@ -1,0 +1,93 @@
+{
+  "course_code": "PSYC 325",
+  "course_title": "Primate Social Psychology",
+  "subject": "PSYC",
+  "catalog_number": "325",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Recent progress in the field of primate social behavior, particularly the role of cognition in complex social strategies.",
+  "course_notes": "(Same as BIOL 325 1) (Following a general introduction to primatology, this course covers recent progress in the growing field of primate social behavior. Topics range from aggression and dominance to affiliation, sex and peaceful coexistence. The evolution of the large brain and remarkable intelligence of primates has been explained as related to the complexity of their societies: survival in such societies requires sophisticated social skills and a thorough understanding of the relationship network. Course segments focus on the motivational and cognitive processes underlying coalition formation, reciprocal exchange of benefits, reconciliation following conflict, and the origin of moral systems. Parallels with human behavior will be discussed.) (This course requires PSYC 110 or BIOL 142 or BIOL_OX142 or equivalent transfer credit as a prerequisite.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "695",
+      "academic_career": "UCOL",
+      "crn": "1632",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ben Wilson",
+      "instructors": [
+        {
+          "name": "Ben Wilson",
+          "email": "benjamin.wilson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21795"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ben Wilson"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.765Z"
+}

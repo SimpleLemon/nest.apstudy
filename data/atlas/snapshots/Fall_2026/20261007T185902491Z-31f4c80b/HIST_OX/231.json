@@ -1,0 +1,97 @@
+{
+  "course_code": "HIST_OX 231",
+  "course_title": "Foundations of American Society:  Beginning to 1877",
+  "subject": "HIST_OX",
+  "catalog_number": "231",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Considers the development of American society from tentative beginnings to the Civil War. Special emphasis is given to certain critical periods including colonialism and the Atlantic World, the American Revolution, nineteenth-century reform movements, slavery and the sectional crisis, and the Civil War.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2366",
+      "academic_career": "UOXF",
+      "crn": "4108",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Susan Ashmore",
+      "instructors": [
+        {
+          "name": "Susan Ashmore",
+          "email": "sashmor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2955"
+        }
+      ],
+      "location": "Johnson Hall 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Susan Ashmore"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.607Z"
+}

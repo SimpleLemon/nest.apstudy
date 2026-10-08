@@ -1,0 +1,177 @@
+{
+  "course_code": "KRN 102",
+  "course_title": "Elementary Korean II",
+  "subject": "KRN",
+  "catalog_number": "102",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed for those who have taken KRN 101 or have some knowledge of Korean. Basic communication skills, vocabulary,and grammar patterns will be covered.",
+  "course_notes": "For permission to enroll, please contact bumyongchoi@emory.edu.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2666",
+      "academic_career": "UCOL",
+      "crn": "1921",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hyekyung Jin",
+      "instructors": [
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        },
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2667",
+      "academic_career": "UCOL",
+      "crn": "5650",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hyekyung Jin",
+      "instructors": [
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        },
+        {
+          "name": "Hyekyung Jin",
+          "email": "hyekyung.jin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36207"
+        }
+      ],
+      "location": "MODERN LANGUAGE_302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hyekyung Jin"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.076Z"
+}

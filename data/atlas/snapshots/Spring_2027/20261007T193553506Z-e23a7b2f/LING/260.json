@@ -1,0 +1,97 @@
+{
+  "course_code": "LING 260",
+  "course_title": "Speech Science",
+  "subject": "LING",
+  "catalog_number": "260",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fundamentals of speech and hearing science, for students interested in speech and its application in real-world scenarios, speech-language pathology and audiology. Topics include physical properties of sound waves, anatomy and physiology of speech production and hearing, acoustics and perception.",
+  "course_notes": "Ever wonder how a thought becomes a sound - or how that sound reaches someone else's brain? Speech Science explores how speech is produced, transmitted, and perceived, from the physics of sound waves to the respiratory, phonatory, articulatory, auditory, and nervous systems that make communication possible. Along the way, we'll use hands-on activities, acoustic analysis tools such as Praat, and real-world clinical cases to connect science to speech, hearing, and communication disorders. This course is especially relevant for students interested in linguistics, speech-language pathology, audiology, neuroscience, or simply the science behind how we speak and hear.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2675",
+      "academic_career": "UCOL",
+      "crn": "3583",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Yun Kim",
+      "instructors": [
+        {
+          "name": "Yun Kim",
+          "email": "yun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6718"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Yun Kim"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.563Z"
+}

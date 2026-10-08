@@ -1,0 +1,97 @@
+{
+  "course_code": "SPAN 300",
+  "course_title": "Introduction to Hispanic Cultural History",
+  "subject": "SPAN",
+  "catalog_number": "300",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The foundation course for the major and minor. A course in Hispanic cultural literacy that also strengthens written and oral language skills.",
+  "course_notes": "The primary objective of this Foundational Course is to provide students with the historical, political, geographic, and aesthetic background relevant to the study of Hispanic culture, that is, to develop a student's cultural literacy with regards to the Spanish-speaking world. This course also stresses the techniques of historical/textual criticism and their relationship to the cultural history of the Spanish-speaking world. The immediate pedagogical aim of Spanish 300 is to prepare students intellectually and linguistically to undertake advanced work in Spanish both at Emory and abroad. More generally, the course will help prepare students to engage more thoughtfully in acts of communication that cross cultural borders with and within the Spanish-speaking world. Spanish 300 satisfies the Emory College GER in \"Intercultural Communication.\"PREREQUISITE: SPAN 212 or an Official Spanish Placement into our Foundational Course level (Span 300-318). Take the online Spanish Placement Exam at http://spanport.emory.edu/home/undergraduate/placement/index.html.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1788",
+      "academic_career": "UCOL",
+      "crn": "1961",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Donald Tuten",
+      "instructors": [
+        {
+          "name": "Donald Tuten",
+          "email": "dtuten@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2135"
+        }
+      ],
+      "location": "Modern Language TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Donald Tuten"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.588Z"
+}

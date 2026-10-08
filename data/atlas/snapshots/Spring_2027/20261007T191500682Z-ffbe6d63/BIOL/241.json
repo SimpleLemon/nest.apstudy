@@ -1,0 +1,455 @@
+{
+  "course_code": "BIOL 241",
+  "course_title": "Evolutionary Biology",
+  "subject": "BIOL",
+  "catalog_number": "241",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A study of the factors that cause genetic change and of the evolutionary consequences of such changes. Topics include population genetics, adaptation and natural selection, evolution of genes, proteins and genomes, sexual selection, kin selection, speciation, and diversification of taxa.",
+  "course_notes": "This course is a study of factors that cause genetic change and of the evolutionary consequences of such changes. Topics include population genetics, adaptation and natural selection, evolution of genes, proteins, and genomes, sexual selection, kin selection, speciation, and diversification of taxa. Emphasis will be on molecular, genetic, ecological, and evolutionary factors related to variation and adaptation to environment, and constraints on adaptation. Students must also register for a BIOL 241-1 Discussion Section. Prerequisites: Biology 142 and Biology 142L. This course fulfills the Column C (or elective) requirement for the biology major.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "109",
+      "academic_career": "UCOL",
+      "crn": "2060",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 65,
+      "seats_available": 65,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "110",
+      "academic_career": "UCOL",
+      "crn": "2061",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 9-9:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "111",
+      "academic_career": "UCOL",
+      "crn": "2062",
+      "section_number": "3",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "112",
+      "academic_career": "UCOL",
+      "crn": "2064",
+      "section_number": "4",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 21,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 11-11:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "113",
+      "academic_career": "UCOL",
+      "crn": "2065",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clifton Rd 308",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 65,
+      "seats_available": 65,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "114",
+      "academic_career": "UCOL",
+      "crn": "2066",
+      "section_number": "6",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "115",
+      "academic_career": "UCOL",
+      "crn": "2068",
+      "section_number": "7",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2-2:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1400",
+            "end": "1450"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "116",
+      "academic_career": "UCOL",
+      "crn": "2069",
+      "section_number": "8",
+      "schedule_type": "DIS",
+      "instructor": "Michal Arbilly",
+      "instructors": [
+        {
+          "name": "Michal Arbilly",
+          "email": "michal.arbilly@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6692"
+        }
+      ],
+      "location": "1462 Clfton Rd TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "8",
+      "enrollment_capacity": 21,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 3-3:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1500",
+            "end": "1550"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 6,
+    "other": 0,
+    "open": 8,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Michal Arbilly"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.700Z"
+}

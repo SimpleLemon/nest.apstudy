@@ -1,0 +1,474 @@
+{
+  "course_code": "HLTH 300R",
+  "course_title": "Peer Health Partners",
+  "subject": "HLTH",
+  "catalog_number": "300R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course provides students the opportunity to become involved in a personalized approach to health and well-being by sharing with peers strategic approaches for the implementation of a healthy lifestyle. Offered Yearly. Repeatable for up to Twelve Semester Hours.",
+  "course_notes": "Permission required prior to enrollment. Meets synchronously on Thursday; Students will also be enrolled in an accompanying discussion section. This course provides students the opportunity to become involved in a personalized approach to health and well-being by sharing with peers strategic approaches for the implementation of a healthy lifestyle. Peer Health Partners will enroll in one section of HLTH 300R and will facilitate one section of HLTH 100 during fall semester. (Prerequisite: HLTH 200)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3213",
+      "academic_career": "UCOL",
+      "crn": "2648",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "1462 Clifton Rd 101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 10-11:15a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3214",
+      "academic_career": "UCOL",
+      "crn": "2675",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "1462 Clifton Rd 123",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3215",
+      "academic_career": "UCOL",
+      "crn": "2676",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 36,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3216",
+      "academic_career": "UCOL",
+      "crn": "2677",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "1462 Clifton Rd 230",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 40,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 4-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3217",
+      "academic_career": "UCOL",
+      "crn": "2680",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-11:15a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3218",
+      "academic_career": "UCOL",
+      "crn": "2681",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3219",
+      "academic_career": "UCOL",
+      "crn": "2684",
+      "section_number": "9",
+      "schedule_type": "DIS",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 224,
+      "seats_available": 77,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 7,
+    "lectures": 6,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 6,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Logan Edwards",
+    "Madison Campbell",
+    "Noni Keyton"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.069Z"
+}

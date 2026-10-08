@@ -1,0 +1,138 @@
+{
+  "course_code": "NRSG_OX 201",
+  "course_title": "Hum. Anatomy & Physiology I W/Lab",
+  "subject": "NRSG_OX",
+  "catalog_number": "201",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course is an introduction to the structure and function of the human body. Topics covered include cell structure, function, and biochemistry; characteristics of tissues; control systems and homeostasis; and skeletal, muscle, and nervous system function. Laboratory experiences involve dissection, study of human specimens, and experiments in physiology. The course fulfills requirements for admission to nursing schools and many allied health programs. Three hours of lecture and one three-hour laboratory per week.",
+  "course_notes": "Instructor permission required to enroll. Students must contact the Advising Support Center to request permission numbers.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "8",
+      "academic_career": "UOXF",
+      "crn": "4279",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Cristy Tower-Gilchrist",
+      "instructors": [
+        {
+          "name": "Cristy Tower-Gilchrist",
+          "email": "cristy.tower-gilchrist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5207"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "9",
+      "academic_career": "UOXF",
+      "crn": "4280",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Cristy Tower-Gilchrist",
+      "instructors": [
+        {
+          "name": "Cristy Tower-Gilchrist",
+          "email": "cristy.tower-gilchrist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5207"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 35,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristy Tower-Gilchrist"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.126Z"
+}

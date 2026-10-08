@@ -1,0 +1,149 @@
+{
+  "course_code": "BIOL 240",
+  "course_title": "Organismal Form and Function",
+  "subject": "BIOL",
+  "catalog_number": "240",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Major topics include the biology of animals and plants, physiology, evolution, and ecology.",
+  "course_notes": "Recommended for second-year Biology students. Major topics include evolutionary biology and the physiology of animals and plants in an evolutionary and ecological context. This course will fulfill the Column B requirement (or elective credit) for the Biology major. Prerequisites: Biology 141 (or AP credit). Students with AP credit for Biology 141 may take Biology 240 before (or at the same time) as taking Biology 142 and Biology 142L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2797",
+      "academic_career": "UCOL",
+      "crn": "1679",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Kate O'Toole",
+      "instructors": [
+        {
+          "name": "Kate O'Toole",
+          "email": "kate.k.otoole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8025"
+        }
+      ],
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2798",
+      "academic_career": "UCOL",
+      "crn": "2470",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Kate O'Toole",
+      "instructors": [
+        {
+          "name": "Kate O'Toole",
+          "email": "kate.k.otoole@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8025"
+        }
+      ],
+      "location": "1525Clifton-Alperin Auditorium",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kate O'Toole"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.504Z"
+}

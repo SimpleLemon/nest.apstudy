@@ -1,0 +1,91 @@
+{
+  "course_code": "OAM 464",
+  "course_title": "Future of Specialty Coffee",
+  "subject": "OAM",
+  "catalog_number": "464",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course allows students to explore the interplay between markets on the one hand, and culture and society on the other. We focus on a connected set of issues that define the past, present, and future of the global specialty coffee market. This should appeal to business students who want to examine the impacts that markets have, and might have, in a globally important industry. It should also appeal to non-business students who want to explore how perspectives on culture and society merge with current and potential market practices.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4472",
+      "academic_career": "UBUS",
+      "crn": "3815",
+      "section_number": "1101",
+      "schedule_type": "LEC",
+      "instructor": "Peter Roberts",
+      "instructors": [
+        {
+          "name": "Peter Roberts",
+          "email": "peter.roberts@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3504"
+        }
+      ],
+      "location": "Goizueta Business School 334",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Peter Roberts"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.147Z"
+}

@@ -1,0 +1,82 @@
+{
+  "course_code": "PHYS_OX 399R",
+  "course_title": "Undergraduate Research",
+  "subject": "PHYS_OX",
+  "catalog_number": "399R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "For students who want to participate in physics research with an Oxford College physics faculty member acting as research director.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2817",
+      "academic_career": "UOXF",
+      "crn": "4332",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Ross Cawthon",
+      "instructors": [
+        {
+          "name": "Ross Cawthon",
+          "email": "ross.william.cawthon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43552"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ross Cawthon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.129Z"
+}

@@ -1,0 +1,164 @@
+{
+  "course_code": "HLTH 485",
+  "course_title": "Variable Topics in Human Health: Community Hlth.Educ.Strategies",
+  "subject": "HLTH",
+  "catalog_number": "485",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Seminar or lecture in various topics on human health. May be repeated for credit (up to 9 hours) when topic varies.",
+  "course_notes": "Complete Topic: Community Health Education Strategies. This course builds upon foundational health courses offered through CSHH and the Health 123 program by allowing students to translate knowledge gained in the classroom to novel settings. Students will identify & analyze various techniques, media & approaches used in community health education. Students will be introduced to concepts of program planning by participating in the development of currently functioning health education programs at Emory and within the Atlanta community. Completion of the Health 300 course is preferred but not required. This is a permission only course, please email Dr. Logan Edwards at logan.edwards@emory.edu for permission to enroll. Special Note: HLTH 485 courses count differently within the majors/minors; they are not all equivalent. Please pay close attention to the exact course title and categories that specific title counts in, which you can find on our requirements sheets and course summary sheets. If you have any questions, please reach out to CSHH administration.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1965",
+      "academic_career": "UCOL",
+      "crn": "1566",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Madison Campbell",
+      "instructors": [
+        {
+          "name": "Madison Campbell",
+          "email": "madison.w.campbell@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38384"
+        },
+        {
+          "name": "Logan Edwards",
+          "email": "logan.edwards@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36059"
+        },
+        {
+          "name": "Noni Keyton",
+          "email": "noni.keyton@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30044"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1966",
+      "academic_career": "UCOL",
+      "crn": "3648",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Laura Torres-Rodriguez",
+      "instructors": [
+        {
+          "name": "Laura Torres-Rodriguez",
+          "email": "laura.juliana.torres-rodriguez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36189"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 2,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Laura Torres-Rodriguez",
+    "Logan Edwards",
+    "Madison Campbell",
+    "Noni Keyton"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.557Z"
+}

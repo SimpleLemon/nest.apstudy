@@ -1,0 +1,156 @@
+{
+  "course_code": "RUSS 101",
+  "course_title": "Elementary Russian I",
+  "subject": "RUSS",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to spoken and written language. Oral practice emphasized through multimedia exercises and drills.",
+  "course_notes": "This class will meet in person MW with additional online materials to be completed asynchronously.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1301",
+      "academic_career": "UCOL",
+      "crn": "2016",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Vera Proskurina",
+      "instructors": [
+        {
+          "name": "Vera Proskurina",
+          "email": "vprosku@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4030"
+        }
+      ],
+      "location": "Few Bldg 131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1302",
+      "academic_career": "UCOL",
+      "crn": "2017",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Zhanna Budenkova",
+      "instructors": [
+        {
+          "name": "Zhanna Budenkova",
+          "email": "zhanna.aleksandrovna.budenkova@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43829"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Vera Proskurina",
+    "Zhanna Budenkova"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.105Z"
+}

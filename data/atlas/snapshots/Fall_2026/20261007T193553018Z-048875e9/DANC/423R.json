@@ -1,0 +1,97 @@
+{
+  "course_code": "DANC 423R",
+  "course_title": "Contemporary Modern Dance IV (Advanced)",
+  "subject": "DANC",
+  "catalog_number": "423R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed for advance dance students who can demonstrate a consistent repertoire of technical skill absent of fundamental body issues. Class material challenges the student's technical and performance range and develops a sophisticated understanding of movement concepts.",
+  "course_notes": "Contact Lori Teague, lteague@emory.edu for a permission number. (Permission of XXXXXXXXXXXXXXXXXXXXX Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "624",
+      "academic_career": "UCOL",
+      "crn": "2419",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Kristin O'Neal",
+      "instructors": [
+        {
+          "name": "Kristin O'Neal",
+          "email": "kristin.o",
+          "role": "Primary Instructor",
+          "atlas_id": "6284"
+        }
+      ],
+      "location": "Woodruff PE - Dance",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kristin O'Neal"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.042Z"
+}

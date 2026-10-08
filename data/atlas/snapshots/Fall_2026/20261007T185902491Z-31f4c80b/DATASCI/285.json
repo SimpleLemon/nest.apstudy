@@ -1,0 +1,104 @@
+{
+  "course_code": "DATASCI 285",
+  "course_title": "Topics in Data Science: Prediction/InferenceCausality1",
+  "subject": "DATASCI",
+  "catalog_number": "285",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Includes topics related to statistical computing.",
+  "course_notes": "This course will count as DATASCI 210. To succeed in the course, you must have taken MATH 210 or 211; DATASCI 150 or equivalent This sequence is a modern, mathematically rigorous introduction to probabilistic and statistical modeling and data-driven decision-making that provides a foundation for upper-level classes in the department. We will focus on prediction (using data we have to tell us something about data we don't), statistical inference (characterizing the uncertainty we have about the accuracy of these predictions), and causal inference (understanding what the relationships we see in the data tell us about the impact of actions we might take). While the class will emphasize the intuitive and mathematical foundations of these concepts, we will also cover the implementation of these techniques in applications using the statistical programming language R. Part 1 focuses on one and two sample problems, i.e. the analysis of simple one-question surveys and randomized experiments. The Prediction, Inference, Causality 2-course sequence will be accepted in place of DATASCI 210+220 as a prerequisite and there is substantial overlap in content between the two sequences. However, there will be a greater emphasis on the precision with which we move from stories and intuition to formal mathematical reasoning (and back) in this course. Data visualization, including sketching by hand and plotting in R, will be emphasized as a tool for making this connection. Being precise about how and why our methods work makes it easier to adapt them to answer new questions and work with new types of data.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3907",
+      "academic_career": "UCOL",
+      "crn": "1892",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "David Hirshberg",
+      "instructors": [
+        {
+          "name": "David Hirshberg",
+          "email": "davidahirshberg@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28482"
+        },
+        {
+          "name": "David Hirshberg",
+          "email": "davidahirshberg@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28482"
+        }
+      ],
+      "location": "Psychology Bldg 235",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "David Hirshberg"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.521Z"
+}

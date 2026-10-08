@@ -1,0 +1,93 @@
+{
+  "course_code": "HLTH 343",
+  "course_title": "Science of Integrative Health",
+  "subject": "HLTH",
+  "catalog_number": "343",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course explores the convergence of conventional medical therapies and complementary and alternative practices in therapeutic care models focused on the whole person: body, mind, and spirit. Discussions will explore physical, mental, social, spiritual and environmental determinants of health.",
+  "course_notes": "The Science of Integrative Health explores approaches to health and medicine integrating practices from contemporary biomedicine models and various healing traditions that have existed for thousands of years. In the recent convergence of conventional medical therapies and complementary and alternative practices, this course reviews various modalities used in therapeutic care models focused on the whole person: body, mind and spirit, and for which there is scientific basis for safety and efficacy. In evidence-informed study, the course examines a range of integrative modalities applied to the physical, emotional, mental, social, spiritual and environmental determinants of health and healing. Important elements related to philosophy, practice, and policy are addressed as underpinnings to this integrative health paradigm)(Prerequisite: HLTH 210)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4580",
+      "academic_career": "UCOL",
+      "crn": "2554",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Donald Noble",
+      "instructors": [
+        {
+          "name": "Donald Noble",
+          "email": "djnoble@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8761"
+        }
+      ],
+      "location": "1462 Clifton Rd 100C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 19,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Donald Noble"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.547Z"
+}

@@ -2,8 +2,8 @@
 services/atlas_client.py
 
 Reads scraped Atlas course data from disk and returns structured dicts.
-Data lives in atlas-data/{term}/{SUBJECT}/{catalog}.json, written by
-the one-time bulk scraper (atlasMainScraper.js) [3] [4].
+Data comes from immutable manifest-selected snapshots, with the legacy
+{repository root}/{term}/{SUBJECT}/{catalog}.json corpus as a fallback.
 
 All functions return plain Python dicts/lists suitable for JSON serialization.
 The blueprint layer (atlas_api.py) handles Flask response formatting.
@@ -15,6 +15,12 @@ import json
 import requests
 from datetime import datetime, timedelta
 from threading import Lock
+from contextvars import ContextVar
+from functools import wraps
+from html.parser import HTMLParser
+
+from services.atlas_catalog_store import CatalogStore
+from services.professor_rating_identity import preserve_instructor_ids
 
 # Resolve project root from services/.
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,10 +34,6 @@ TERM_SEASON_ORDER = {
     "Winter": 4,
 }
 ATLAS_BASE_URL = "https://atlas.emory.edu/api/"
-ATLAS_TERM_SRCDB = {
-    "Spring_2026": "5261",
-    "Fall_2026": "5269",
-}
 ATLAS_REQUIRED_HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json, text/javascript, */*; q=0.01",
@@ -150,10 +152,31 @@ _cache_lock = Lock()
 _CACHE_TTL = timedelta(minutes=30)
 
 
+_catalog_context = ContextVar("atlas_catalog_view", default=None)
+
+
+def _catalog_view():
+    return _catalog_context.get() or CatalogStore(COURSE_DATA_ROOT).view()
+
+
+def _catalog_operation(function):
+    """Pin one manifest generation across nested reads in this operation."""
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        if _catalog_context.get() is not None:
+            return function(*args, **kwargs)
+        token = _catalog_context.set(CatalogStore(COURSE_DATA_ROOT).view())
+        try:
+            return function(*args, **kwargs)
+        finally:
+            _catalog_context.reset(token)
+    return wrapped
+
+
 def _cache_get(key):
     """Return cached value if it exists and has not expired, else None."""
     with _cache_lock:
-        entry = _cache.get(key)
+        entry = _cache.get((_catalog_view().cache_token, key))
         if entry and datetime.utcnow() - entry["ts"] < _CACHE_TTL:
             return entry["data"]
         return None
@@ -162,7 +185,11 @@ def _cache_get(key):
 def _cache_set(key, data):
     """Store a value in the cache with a current timestamp."""
     with _cache_lock:
-        _cache[key] = {"data": data, "ts": datetime.utcnow()}
+        # Old immutable generations are no longer useful once their readers finish.
+        now = datetime.utcnow()
+        for stale in [item for item, entry in _cache.items() if now - entry["ts"] >= _CACHE_TTL]:
+            del _cache[stale]
+        _cache[(_catalog_view().cache_token, key)] = {"data": data, "ts": now}
 
 
 def invalidate_cache():
@@ -175,7 +202,7 @@ def invalidate_cache():
 
 def _term_path(term):
     """Return the absolute path to a term's data directory."""
-    return os.path.join(COURSE_DATA_ROOT, term)
+    return str(_catalog_view().current_path(term) or os.path.join(COURSE_DATA_ROOT, "__unavailable__"))
 
 
 def _term_sort_key(term_name):
@@ -191,21 +218,8 @@ def _term_sort_key(term_name):
 
 
 def _discover_terms_uncached():
-    """Discover top-level term directories like Fall_2026."""
-    if not os.path.isdir(COURSE_DATA_ROOT):
-        return []
-
-    terms = []
-    for entry in os.listdir(COURSE_DATA_ROOT):
-        if entry.startswith("."):
-            continue
-        full_path = os.path.join(COURSE_DATA_ROOT, entry)
-        if not os.path.isdir(full_path):
-            continue
-        if TERM_DIR_PATTERN.match(entry):
-            terms.append(entry)
-
-    return sorted(terms, key=_term_sort_key, reverse=True)
+    """Discover published snapshots and legacy term directories."""
+    return _catalog_view().terms()
 
 
 def _discover_terms():
@@ -224,6 +238,7 @@ def _default_term():
     return terms[0] if terms else None
 
 
+@_catalog_operation
 def get_default_term():
     """Return a best-effort default term for legacy callers."""
     return _default_term() or "Fall_2026"
@@ -250,7 +265,7 @@ def _safe_path(base, *parts):
     """
     joined = os.path.join(base, *parts)
     resolved = os.path.realpath(joined)
-    if not resolved.startswith(os.path.realpath(base)):
+    if os.path.commonpath([resolved, os.path.realpath(base)]) != os.path.realpath(base):
         return None
     return resolved
 
@@ -382,6 +397,19 @@ def _parse_campus_from_all_sections(html, crn=None, section_number=None):
     return None
 
 
+class _InstructorIdentityParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.identifiers = set()
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if attributes.get("data-search-data-provider") == "search-by-instructor":
+            identifier = str(attributes.get("data-id") or "").strip()
+            if identifier:
+                self.identifiers.add(identifier)
+
+
 def _parse_instructor_detail_html(html):
     source = str(html or "")
     if not source:
@@ -400,10 +428,15 @@ def _parse_instructor_detail_html(html):
             (re.search(r"instructor-role[^>]*>([\s\S]*?)</div>", block, re.I) or [None, ""])[1]
         )
         if name:
+            identity = _InstructorIdentityParser()
+            identity.feed(block)
+            atlas_id = next(iter(identity.identifiers)) if len(identity.identifiers) == 1 else None
             instructors.append({
                 "name": name,
                 "email": email_match.group(1) if email_match else None,
                 "role": role or None,
+                **({"atlas_id": atlas_id} if atlas_id else {}),
+                **({"atlas_id_conflict": True} if len(identity.identifiers) > 1 else {}),
             })
     return instructors
 
@@ -469,8 +502,11 @@ def merge_section_with_details(search_row, details_payload):
     merged = {**search_row, **parsed}
     merged["campus"] = _normalize_campus_value(campus_description, subject=subject)
     merged["campus_description"] = campus_description
+    original_instructors = _normalize_instructors(search_row.get("instructors"))
     if parsed.get("instructors"):
-        merged["instructors"] = parsed["instructors"]
+        merged["instructors"] = preserve_instructor_ids(original_instructors, parsed["instructors"])
+    elif original_instructors:
+        merged["instructors"] = original_instructors
     if parsed.get("instructor"):
         merged["instructor"] = parsed["instructor"]
         merged["instr"] = parsed["instructor"]
@@ -809,7 +845,12 @@ def _normalize_instructors(value):
                 name = str(item or "").strip()
                 email = ""
             if name:
-                instructors.append({"name": name, "email": email or None})
+                instructor = {"name": name, "email": email or None}
+                if isinstance(item, dict):
+                    for key in ("atlas_id", "instructor_id", "id", "role", "atlas_id_conflict"):
+                        if item.get(key) not in (None, ""):
+                            instructor[key] = item[key]
+                instructors.append(instructor)
         return instructors
     names = [
         part.strip()
@@ -893,6 +934,7 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
     return {
         "id": unique_id,
         "term": course_term,
+        "academic_career": section.get("academic_career") or course_data.get("academic_career"),
         "subject": subject_name,
         "catalog_number": str(catalog_number),
         "course_code": course_code,
@@ -904,7 +946,7 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
         "instructors": instructors,
         "location": _first_value(section, LOCATION_KEYS),
         "enrollment_status": status,
-        "enrollment_count": str(section.get("enrollment_count") or ""),
+        "enrollment_count": str(section["enrollment_count"]) if section.get("enrollment_count") is not None else "",
         "seats_available": seats_available,
         "enrollment_capacity": _first_int(section, CAPACITY_KEYS),
         "waitlist_total": _first_int(section, ("waitlist_total",)),
@@ -968,6 +1010,7 @@ def _live_row_from_raw(term, raw):
         "id": build_section_id(term, subject, catalog, crn, section_number),
         "atlas_key": str(raw.get("key") or "").strip() or None,
         "term": term,
+        "academic_career": _first_value(raw, ("academic_career", "acad_career", "career")),
         "subject": subject,
         "catalog_number": catalog,
         "course_code": course_code,
@@ -979,7 +1022,8 @@ def _live_row_from_raw(term, raw):
         "instructors": instructors,
         "location": _first_value(raw, LOCATION_KEYS),
         "enrollment_status": status,
-        "enrollment_count": str(raw.get("total") or raw.get("enrollment_count") or ""),
+        # Native `total` counts course sections, not enrolled students.
+        "enrollment_count": str(raw["enrollment_count"]) if raw.get("enrollment_count") is not None else "",
         "seats_available": seats_available,
         "enrollment_capacity": _first_int(raw, CAPACITY_KEYS),
         "waitlist_total": _first_int(raw, ("waitlist_total",)),
@@ -1099,21 +1143,14 @@ def _section_rank(section, query):
 
 
 def _srcdb_for_course(term, subject=None, catalog=None):
-    if subject and catalog:
-        course = get_course(subject, catalog, term)
-        if "error" not in course and course.get("srcdb"):
-            return str(course.get("srcdb"))
-    return ATLAS_TERM_SRCDB.get(term)
+    return _catalog_view().srcdb(term)
 
 
+@_catalog_operation
 def get_atlas_term_srcdb():
-    """Return Atlas FOSE srcdb values for terms known to this app."""
-    valid_terms = set(_discover_terms())
-    return {
-        term: srcdb
-        for term, srcdb in ATLAS_TERM_SRCDB.items()
-        if term in valid_terms
-    }
+    """Return registry Atlas IDs for locally usable terms."""
+    view = _catalog_view()
+    return {term: view.srcdb(term) for term in _discover_terms() if view.srcdb(term)}
 
 
 def is_section_trackable(section):
@@ -1130,6 +1167,7 @@ def is_section_trackable(section):
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
+@_catalog_operation
 def get_subjects(term=None):
     """
     Return a sorted list of subject codes that have data for the given term.
@@ -1165,6 +1203,7 @@ def get_subjects(term=None):
     return result
 
 
+@_catalog_operation
 def get_courses(subject, term=None):
     """
     Return a sorted list of catalog numbers for a subject in a given term.
@@ -1207,6 +1246,7 @@ def get_courses(subject, term=None):
     return result
 
 
+@_catalog_operation
 def get_course(subject, catalog, term=None):
     """
     Return the full JSON content of a specific course file.
@@ -1227,17 +1267,35 @@ def get_course(subject, catalog, term=None):
     subject = subject.upper().strip()
     catalog = catalog.strip()
 
-    filepath = _safe_path(_term_path(term), subject, f"{catalog}.json")
-    if not filepath or not os.path.isfile(filepath):
+    paths = _catalog_view().course_paths(term, subject, catalog, include_history=True)
+    if not paths:
         return {"error": f"Course {subject} {catalog} not found in {term}"}
 
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (json.JSONDecodeError, IOError) as e:
-        return {"error": f"Failed to read course data: {str(e)}"}
+    # Course detail is also used to restore persisted selections. Retain sections
+    # removed from active search, preferring current data for unchanged IDs.
+    result = None
+    seen = set()
+    for filepath in paths:
+        try:
+            with filepath.open("r", encoding="utf-8") as handle:
+                course = json.load(handle)
+            if not isinstance(course, dict) or not isinstance(course.get("sections"), list):
+                continue
+        except (ValueError, OSError):
+            continue
+        if result is None:
+            result = {**course, "sections": []}
+        for section in course["sections"]:
+            if not isinstance(section, dict):
+                continue
+            identity = build_section_id(term, subject, catalog, section.get("crn"), section.get("section_number"))
+            if identity not in seen:
+                seen.add(identity)
+                result["sections"].append(section)
+    return result if result is not None else {"error": "Failed to read course data"}
 
 
+@_catalog_operation
 def search_courses(query, term=None):
     """
     Search for courses matching a query string.
@@ -1307,6 +1365,7 @@ def search_courses(query, term=None):
     }
 
 
+@_catalog_operation
 def get_terms():
     """
     Return dynamically discovered top-level term directories.
@@ -1319,6 +1378,7 @@ def get_terms():
         "terms": terms,
         "default_term": terms[0] if terms else None,
         "count": len(terms),
+        "term_metadata": _catalog_view().term_metadata(),
     }
 
 
@@ -1330,6 +1390,7 @@ def _section_number_sort_key(section_number):
     return (1, float("inf"), section_str)
 
 
+@_catalog_operation
 def get_sections_index(
     term=None,
     include_cancelled=True,
@@ -1516,6 +1577,7 @@ def _filter_sections_result(
     }
 
 
+@_catalog_operation
 def get_sections_by_ids(section_ids, include_cancelled=True):
     """
     Return only the requested section rows by unique section id.
@@ -1550,34 +1612,27 @@ def get_sections_by_ids(section_ids, include_cancelled=True):
 
     sections = []
 
+    found = set()
     for term, subject, catalog in files_to_scan.keys():
-        filepath = _safe_path(_term_path(term), subject, f"{catalog}.json")
-        if not filepath or not os.path.isfile(filepath):
-            continue
-
-        try:
-            with open(filepath, "r", encoding="utf-8") as handle:
-                course_data = json.load(handle)
-        except (json.JSONDecodeError, OSError):
-            continue
-
-        for section in course_data.get("sections", []):
-            is_cancelled = bool(section.get("is_cancelled", False))
-            if not include_cancelled and is_cancelled:
+        for filepath in _catalog_view().course_paths(term, subject, catalog, include_history=True):
+            try:
+                with filepath.open("r", encoding="utf-8") as handle:
+                    course_data = json.load(handle)
+                if not isinstance(course_data, dict):
+                    continue
+            except (ValueError, OSError):
                 continue
-
-            row = _section_row_from_course_data(
-                term,
-                subject,
-                catalog,
-                course_data,
-                section,
-            )
-
-            if row["id"] not in requested_ids:
-                continue
-
-            sections.append(row)
+            for section in course_data.get("sections", []):
+                if not isinstance(section, dict):
+                    continue
+                row = _section_row_from_course_data(term, subject, catalog, course_data, section)
+                if row["id"] not in requested_ids or row["id"] in found:
+                    continue
+                # Current cancellation wins over historical active state.
+                found.add(row["id"])
+                if not include_cancelled and row["is_cancelled"]:
+                    continue
+                sections.append(row)
 
     sections.sort(
         key=lambda row: (
@@ -1593,6 +1648,7 @@ def get_sections_by_ids(section_ids, include_cancelled=True):
     }
 
 
+@_catalog_operation
 def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
     """
     Fetch live Atlas sections for a subject, optionally narrowed to a catalog.
@@ -1660,6 +1716,7 @@ def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
     return {"term": term, "subject": subject, "sections": sections, "count": len(sections)}
 
 
+@_catalog_operation
 def fetch_atlas_section_details(term, atlas_key, timeout=15):
     """Fetch Atlas FOSE details for a section key."""
     term = _validate_term(term or _default_term())
@@ -1670,7 +1727,7 @@ def fetch_atlas_section_details(term, atlas_key, timeout=15):
     if not atlas_key:
         return {"error": "Missing atlas key"}
 
-    srcdb = ATLAS_TERM_SRCDB.get(term)
+    srcdb = _catalog_view().srcdb(term)
     if not srcdb:
         return {"error": f"No Atlas srcdb configured for {term}"}
 
@@ -1694,11 +1751,12 @@ def fetch_atlas_section_details(term, atlas_key, timeout=15):
     return payload if isinstance(payload, dict) else {"error": "Live Atlas details returned invalid data"}
 
 
+@_catalog_operation
 def _fetch_atlas_search_row(term, crn=None, subject=None, timeout=15):
     term = _validate_term(term or _default_term())
     if not term:
         return None
-    srcdb = ATLAS_TERM_SRCDB.get(term)
+    srcdb = _catalog_view().srcdb(term)
     if not srcdb:
         return None
 
@@ -1733,6 +1791,7 @@ def _fetch_atlas_search_row(term, crn=None, subject=None, timeout=15):
     return results[0] if results else None
 
 
+@_catalog_operation
 def fetch_live_section_status(term, subject, catalog, crn=None, section_number=None, timeout=15):
     """Fetch a single live Atlas section and return the normalized row."""
     term = _validate_term(term or _default_term())
@@ -1771,6 +1830,7 @@ def fetch_live_section_status(term, subject, catalog, crn=None, section_number=N
     return {"section": row}
 
 
+@_catalog_operation
 def get_meta():
     """
     Return the scrape metadata from _meta.json.
@@ -1779,8 +1839,10 @@ def get_meta():
         dict with scrape timestamps, term statistics, and error lists,
         or dict with key: error (str) if no metadata file exists.
     """
-    legacy_meta_path = os.path.join(_PROJECT_ROOT, "atlas-data", "_meta.json")
-    root_meta_path = os.path.join(_PROJECT_ROOT, "_meta.json")
+    if _catalog_view().manifest:
+        return {**_catalog_view().manifest, "term_metadata": _catalog_view().term_metadata()}
+    legacy_meta_path = os.path.join(COURSE_DATA_ROOT, "atlas-data", "_meta.json")
+    root_meta_path = os.path.join(COURSE_DATA_ROOT, "_meta.json")
     meta_path = root_meta_path if os.path.isfile(root_meta_path) else legacy_meta_path
 
     if not os.path.isfile(meta_path):

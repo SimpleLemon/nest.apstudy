@@ -1,0 +1,131 @@
+{
+  "course_code": "ITAL 110",
+  "course_title": "Intensive Elementary Italian",
+  "subject": "ITAL",
+  "catalog_number": "110",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "8",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Innovative eBook Italian Virtual Class: engaging approach to language learning, full immersion in Italian culture, literature and art with authentic materials; development of analytical, critical skills, cross-cultural competency and higher than norm linguistic fluency.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "429",
+      "academic_career": "UCOL",
+      "crn": "1640",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Antonietta Di Pietro",
+      "instructors": [
+        {
+          "name": "Antonietta Di Pietro",
+          "email": "adipietro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28455"
+        },
+        {
+          "name": "Antonietta Di Pietro",
+          "email": "adipietro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28455"
+        },
+        {
+          "name": "Angela Porcarelli",
+          "email": "angela.porcarelli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4741"
+        },
+        {
+          "name": "Angela Porcarelli",
+          "email": "angela.porcarelli@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4741"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "8",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MTWTh 11:30a-12:45p; F 11-11:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1100",
+            "end": "1150"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Angela Porcarelli",
+    "Antonietta Di Pietro"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.743Z"
+}

@@ -1,0 +1,93 @@
+{
+  "course_code": "LING 318",
+  "course_title": "Second Language Acquisition",
+  "subject": "LING",
+  "catalog_number": "318",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is an introduction to the field of second language acquisition (SLA), which seeks to understand the linguistic, psychological and social processes that underlie the learning and use of second language(s).",
+  "course_notes": "(Same as GER 375 3) This course offers an introduction to various models of second language acquisition (SLA), and explores their applications to several areas of contemporary research. These areas include: the impact of a first language when learning additional languages; the effect of individual and sociocultural factors on language learning; and the linguistic, cognitive and neurological processes that contribute to second language acquisition. In addition to the required textbook, we will regularly engage with foundational and current research articles covering SLA theory as well as commonly utilized methodologies in the field. Emphasis is placed on actively applying knowledge in developing, implementing, analyzing, and reporting on SLA research. While we will draw on studies from a German language learning context wherever appropriate, knowledge of German is not required",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1732",
+      "academic_career": "UCOL",
+      "crn": "1567",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Julia Ruck",
+      "instructors": [
+        {
+          "name": "Julia Ruck",
+          "email": "julia.ruck@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35240"
+        }
+      ],
+      "location": "Modern Language TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 12,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Julia Ruck"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.564Z"
+}

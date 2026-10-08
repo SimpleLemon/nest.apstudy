@@ -1,0 +1,97 @@
+{
+  "course_code": "ENVS 285W",
+  "course_title": "Special Topics: Practical Methods in Env Sci",
+  "subject": "ENVS",
+  "catalog_number": "285W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A course designed for second year students on topics of interest in environmental sciences. This course may count as elective credit for the ENVS major and minor; relevant topics may count towards the ENVS Sustainability Sciences or Earth and Atmospheric Sciences minors. See current course atlas.",
+  "course_notes": "This course will focus on the practice of scientific methods across ecological and socio-environmental contexts. Scientific techniques covered will include experimental studies, observational field studies, surveys, and modeling approaches. Students will develop skills in study design, data collection, quantitative and qualitative data analysis and reasoning, interpretation of results, and scientific communication.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2134",
+      "academic_career": "UCOL",
+      "crn": "1750",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Julie Clennon",
+      "instructors": [
+        {
+          "name": "Julie Clennon",
+          "email": "jclenno@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4557"
+        }
+      ],
+      "location": "Math & Science Center - W502",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 16,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Julie Clennon"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.727Z"
+}

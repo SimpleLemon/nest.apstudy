@@ -1,0 +1,150 @@
+{
+  "course_code": "IDS 290R",
+  "course_title": "Interdisciplinary Sidecar: Demystifying Awkwardness",
+  "subject": "IDS",
+  "catalog_number": "290R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
+  "course_notes": "Awkwardness is usually treated as something to avoid, so then why do humans even feel awkward? Is it a powerful tool for connection, growth, and creativity? In this course, we will reframe awkwardness as a social signal, learning mechanism, and bridge between strangers. Students will think more deeply about societal norms, embodiment, and relational dynamics, reflecting on their own experiences of discomfort, belonging, and self-expression. Additionally, through live interactions, real-world challenges, and interdisciplinary conversations, students will explore the meanings and mechanisms hidden in moments of human discomfort. Monday Only Classes: Wednesday, December 9, 2026, will serve as the designated class meeting day for all Fall 2026 courses that are regularly scheduled to meet only on Mondays. If you have any questions, please contact the Office of Undergraduate Education.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3898",
+      "academic_career": "UCOL",
+      "crn": "5346",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Brendan Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "Brendan Ozawa-de Silva",
+          "email": "bozawad@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30925"
+        },
+        {
+          "name": "Lori Teague",
+          "email": "lteague@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1408"
+        }
+      ],
+      "location": "Bowden Hall 116",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3899",
+      "academic_career": "UCOL",
+      "crn": "5698",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Megan O'Neil",
+      "instructors": [
+        {
+          "name": "Megan O'Neil",
+          "email": "megan.eileen.oneil@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18257"
+        },
+        {
+          "name": "Eric Reinders",
+          "email": "ereinde@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2454"
+        }
+      ],
+      "location": "Psychology Bldg 493",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brendan Ozawa-de Silva",
+    "Eric Reinders",
+    "Lori Teague",
+    "Megan O'Neil"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.071Z"
+}

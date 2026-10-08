@@ -1,0 +1,113 @@
+{
+  "course_code": "HLTH 495A",
+  "course_title": "Honors Research",
+  "subject": "HLTH",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3,4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This class is a requirement for students invited into the honors program during which they focus on their independent honors' research under the guidance of faculty.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3691",
+      "academic_career": "UCOL",
+      "crn": "2624",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Myra Woodworth-Hobbs",
+      "instructors": [
+        {
+          "name": "Myra Woodworth-Hobbs",
+          "email": "mewoodw@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8823"
+        },
+        {
+          "name": "Dan Benardot",
+          "email": "dan.benardot@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "18875"
+        },
+        {
+          "name": "Rachel Hall-Clifford",
+          "email": "hall-clifford@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "20642"
+        },
+        {
+          "name": "Michelle Lampl",
+          "email": "mlampl@emory.edu",
+          "role": "Secondary Instructor",
+          "atlas_id": "1783"
+        }
+      ],
+      "location": "1462 Clifton Rd 109",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3,4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 14,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Dan Benardot",
+    "Michelle Lampl",
+    "Myra Woodworth-Hobbs",
+    "Rachel Hall-Clifford"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.070Z"
+}

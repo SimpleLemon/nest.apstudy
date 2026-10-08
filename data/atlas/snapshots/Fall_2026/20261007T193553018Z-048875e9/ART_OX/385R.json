@@ -1,0 +1,89 @@
+{
+  "course_code": "ART_OX 385R",
+  "course_title": "Special Topic in Art History: The Architecture of London",
+  "subject": "ART_OX",
+  "catalog_number": "385R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course will offer opportunities for our students to study specialized topics within Art History. The course may be repeated for credit when topics vary.",
+  "course_notes": "Oxford Launch: London course. Only open to students in the Oxford Launch: London program fall 2026. Topic: The Architecture of London: 1600-Present Day",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4608",
+      "academic_career": "UOXF",
+      "crn": "6181",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Daphne Orr",
+      "instructors": [
+        {
+          "name": "Daphne Orr",
+          "email": "daphne.orr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31934"
+        },
+        {
+          "name": "Natalie Raymond",
+          "email": "natalie.raymond@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "34291"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 30,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daphne Orr",
+    "Natalie Raymond"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

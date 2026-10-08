@@ -1,0 +1,84 @@
+{
+  "course_code": "DATASCI 496RW",
+  "course_title": "Data Science Internship",
+  "subject": "DATASCI",
+  "catalog_number": "496RW",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": "Experience and Application with Cont.Comm(*)",
+  "requirements": [
+    "Experience and Application with Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Open to Data Science majors only. Permission required by Internship Director. Supervised participation in a quantitatively focused internship approved by the Institute. A 3.0 minimum GPA required.",
+  "course_notes": "Students with an unpaid internship during the semester may receive course credit for their internship. Students are responsible for securing their own internships and credit enrollment is by application only. Please see our webpage https://datascience.emory.edu/undergraduate/experiential-learning/internships.html for more details.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3787",
+      "academic_career": "UCOL",
+      "crn": "5305",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Allison Cuttner",
+      "instructors": [
+        {
+          "name": "Allison Cuttner",
+          "email": "allison.wasson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11630"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 50,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Allison Cuttner"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.523Z"
+}

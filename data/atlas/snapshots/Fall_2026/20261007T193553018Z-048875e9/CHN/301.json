@@ -1,0 +1,97 @@
+{
+  "course_code": "CHN 301",
+  "course_title": "Advanced Chinese I: Oral/Writ Comm",
+  "subject": "CHN",
+  "catalog_number": "301",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "First semester of Advanced Chinese. The course emphasizes advanced reading, grammar, and conversation. Authentic materials are included, such as news articles, television, fiction, and film. Students will learn to read both traditional and simplified characters. For non-heritage students only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "579",
+      "academic_career": "UCOL",
+      "crn": "2105",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jie Yao",
+      "instructors": [
+        {
+          "name": "Jie Yao",
+          "email": "jie.yao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28497"
+        }
+      ],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jie Yao"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.035Z"
+}

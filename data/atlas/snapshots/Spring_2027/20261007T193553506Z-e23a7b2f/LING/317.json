@@ -1,0 +1,93 @@
+{
+  "course_code": "LING 317",
+  "course_title": "Psycholinguistics",
+  "subject": "LING",
+  "catalog_number": "317",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Psycholinguistics addresses how language might be realized as a component within the general cognitive system, drawing on linguistics, psychology, neuroscience and computer science. We will study how language is comprehended, produced, acquired, and represented, in a rigorous, hypothesis-driven way.",
+  "course_notes": "(Same as PSYC 317 1) (Permission Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1081",
+      "academic_career": "UCOL",
+      "crn": "3620",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Tamara Nicol Medina",
+      "instructors": [
+        {
+          "name": "Tamara Nicol Medina",
+          "email": "tamara.n.medina@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35813"
+        }
+      ],
+      "location": "Psychology Bldg TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 7,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tamara Nicol Medina"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.564Z"
+}

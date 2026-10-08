@@ -1,0 +1,86 @@
+{
+  "course_code": "DATASCI 499R",
+  "course_title": "Directed Research",
+  "subject": "DATASCI",
+  "catalog_number": "499R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Designed for majors (Data Science, AMS, PPA, and BBA + Data Science, etc.) working on independent research under the direction of faculty. Students expected to be familiar with the project, and involvement must include the employment of their statistical, computational, mathematical, and/or theoretical knowledge.",
+  "course_notes": "Research Fellowships are by application and departmental permission. Students are responsible for securing their own research supervisor/lab position and credit enrollment is by application only. Please see our webpage for more details https://datascience.emory.edu/undergraduate/experiential-learning/undergraduate-research.html",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4134",
+      "academic_career": "UCOL",
+      "crn": "5303",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Allison Cuttner",
+      "instructors": [
+        {
+          "name": "Allison Cuttner",
+          "email": "allison.wasson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11630"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 36,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Allison Cuttner"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.523Z"
+}

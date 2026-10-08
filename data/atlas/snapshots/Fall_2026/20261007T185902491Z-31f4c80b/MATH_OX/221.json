@@ -1,0 +1,177 @@
+{
+  "course_code": "MATH_OX 221",
+  "course_title": "Linear Algebra",
+  "subject": "MATH_OX",
+  "catalog_number": "221",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Systems of linear equations and matrices, determinants, linear transformations, vector spaces, and eigenvectors.",
+  "course_notes": "Placement test must be taken prior to enrollment",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "66",
+      "academic_career": "UOXF",
+      "crn": "4309",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Paul Oser",
+      "instructors": [
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        },
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        }
+      ],
+      "location": "Pierce Hall 239",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "67",
+      "academic_career": "UOXF",
+      "crn": "4310",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Paul Oser",
+      "instructors": [
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        },
+        {
+          "name": "Paul Oser",
+          "email": "poser3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4007"
+        }
+      ],
+      "location": "Pierce Hall 239",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Paul Oser"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.610Z"
+}

@@ -1,0 +1,144 @@
+{
+  "course_code": "BIOL 351",
+  "course_title": "Immunology and Disease",
+  "subject": "BIOL",
+  "catalog_number": "351",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The basic principles of immunology, the causes of pathogenesis during the course of infection with microparasites, and the limitations to the understanding of infectious diseases (such as HIV/AIDS, tuberculosis, and malaria) caused by viruses, bacteria, and unicellular eukaryotes.",
+  "course_notes": "Students must also enroll in a BIOL 351 Discussion Section. The basic principles of immunology, the causes of pathogenesis during the course of infection with microparasites, and the limitations to the understanding of infectious diseases (such as HIV/AIDS, tuberculosis, and malaria) caused by viruses, bacteria, and unicellular eukaryotes. This course will fulfill elective credit for the Biology major. Prerequisites: Biology 142 + 142L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "122",
+      "academic_career": "UCOL",
+      "crn": "2331",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rustom Antia",
+      "instructors": [
+        {
+          "name": "Rustom Antia",
+          "email": "rantia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1818"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MF 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "123",
+      "academic_career": "UCOL",
+      "crn": "2332",
+      "section_number": "2",
+      "schedule_type": "DIS",
+      "instructor": "Rustom Antia",
+      "instructors": [
+        {
+          "name": "Rustom Antia",
+          "email": "rantia@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1818"
+        }
+      ],
+      "location": "1462 Clifton Rd 126",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 35,
+      "seats_available": 35,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:20-3:10p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1420",
+            "end": "1510"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Rustom Antia"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.701Z"
+}

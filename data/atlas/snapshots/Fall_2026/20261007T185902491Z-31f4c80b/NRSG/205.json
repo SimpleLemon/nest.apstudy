@@ -1,0 +1,135 @@
+{
+  "course_code": "NRSG 205",
+  "course_title": "Fundamentals of Microbiology with Lab",
+  "subject": "NRSG",
+  "catalog_number": "205",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "This course introduces students to core principles and concepts of microbiology. Topic areas include microorganisms (bacteria, fungi, protozoa, viruses), microbial taxonomy, technology used to study microorganisms, microbial life cycle/metabolism and host-microbe interaction. Laboratory experiences.",
+  "course_notes": "Online asynchronous",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3799",
+      "academic_career": "UNUR",
+      "crn": "4562",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Asha Stephens",
+      "instructors": [
+        {
+          "name": "Asha Stephens",
+          "email": "asha.stephens@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "27629"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 50,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Meets Online",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3798",
+      "academic_career": "UNUR",
+      "crn": "4561",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jasmine Clark",
+      "instructors": [
+        {
+          "name": "Jasmine Clark",
+          "email": "jrainey@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8265"
+        }
+      ],
+      "location": "Nursing School - 112",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 50,
+      "seats_available": 17,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Asha Stephens",
+    "Jasmine Clark"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.632Z"
+}

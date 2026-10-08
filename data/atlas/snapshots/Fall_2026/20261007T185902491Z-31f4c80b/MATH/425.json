@@ -1,0 +1,100 @@
+{
+  "course_code": "MATH 425",
+  "course_title": "Mathematical Economics",
+  "subject": "MATH",
+  "catalog_number": "425",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to the use of calculus in economic analysis; comparative static problem and optimization theory; consideration of the mathematical techniques used in game theory.",
+  "course_notes": "(Same as ECON 425 1) Students, please copy and past this link in your browser to complete the enrollment request form: https://forms.office.com/pages/responsepage.aspx?id=nPsE4KSwT0K80DImBtXfOLvImdUxeSZHj9gS8LFCanlUQUtIMTZVOVdYOUZLNTBKRThWV0VWRTBNNS4u&route=shorturl Seating is extremely limited.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "961",
+      "academic_career": "UCOL",
+      "crn": "3127",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Mike Carr",
+      "instructors": [
+        {
+          "name": "Mike Carr",
+          "email": "mpcarr@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7429"
+        },
+        {
+          "name": "Teddy Kim",
+          "email": "kyungmin.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21989"
+        }
+      ],
+      "location": "Callaway C101",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mike Carr",
+    "Teddy Kim"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.560Z"
+}

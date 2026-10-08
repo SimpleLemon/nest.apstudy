@@ -1,0 +1,86 @@
+{
+  "course_code": "PE_OX 166R",
+  "course_title": "Varsity Sports - Men's Cross Country",
+  "subject": "PE_OX",
+  "catalog_number": "166R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "For athletes participating and meeting the requirements to earn credit with the men's cross country team. Permission only.",
+  "course_notes": "(Permission Required Prior to Enrollment) Open to members of the Varsity Cross Country team only",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3906",
+      "academic_career": "UOXF",
+      "crn": "4077",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Ellakisha O'Kelley",
+      "instructors": [
+        {
+          "name": "Ellakisha O'Kelley",
+          "email": "ella.okelley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6169"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 7,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ellakisha O'Kelley"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.128Z"
+}

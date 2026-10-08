@@ -1,0 +1,93 @@
+{
+  "course_code": "WGS 316",
+  "course_title": "Politics-Recognition-Exclusion",
+  "subject": "WGS",
+  "catalog_number": "316",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "How are citizenship and recognition construed throughout the history of political theory? How are individual's gender, race, and ethnicity noted implicitly or explicitly in \"universalist\" political frameworks? In this course, we will explore dominant theories to show how non-recognition works.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2158",
+      "academic_career": "UCOL",
+      "crn": "1780",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Mansi Hitesh",
+      "instructors": [
+        {
+          "name": "Mansi Hitesh",
+          "email": "mansi.hitesh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28679"
+        }
+      ],
+      "location": "Candler Library TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Mansi Hitesh"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.594Z"
+}

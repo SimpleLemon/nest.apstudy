@@ -1,0 +1,92 @@
+{
+  "course_code": "ARTHIST 203",
+  "course_title": "Architectural Design Studio",
+  "subject": "ARTHIST",
+  "catalog_number": "203",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This hands-on design studio introduces basic architectural concepts and techniques through making. Regular design presentations and feedback on drawing and modeling projects will teach students rigorous design methodology and how it leads to meaningful contributions to the built environment.",
+  "course_notes": "Architectural Design Studio: Visionary Architecture Some of the most extraordinary designs in architecture are not made to be built. Because they can only exist in drawings, they are often referred to as \"paper architecture.\" But these unbuildable designs perform important roles that built ones cannot. Because they see beyond the limits of their time and circumstances, they are also known as \"visionary architecture.\" They are free experiments, speculations, statements, illustrations, and critiques in the form of imaginary spaces. They transform design tools into unique means of analysis, thought, and representation. They explore different cultural, historical, socio-political, aesthetic, and critical dimensions of the built environment. They create unreal worlds that defy the limits of what ours can become. In this advanced studio, we will explore centuries of such incredible designs, and you will have the opportunity to create a visionary architecture of your own. Architectural Studies minor: makers Art History major/minor: makers & materials course",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2336",
+      "academic_career": "UCOL",
+      "crn": "1589",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Andre Patrao",
+      "instructors": [
+        {
+          "name": "Andre Patrao",
+          "email": "andre.patrao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "41484"
+        }
+      ],
+      "location": "Visual Arts 145",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 1-5p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1700"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andre Patrao"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.514Z"
+}

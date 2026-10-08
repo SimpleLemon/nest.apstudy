@@ -8,7 +8,7 @@ const {
   mergeSectionWithDetails,
   parseAtlasDetailsPayload,
   parseSeatsHtml,
-} = require('../../atlasCourseUtils');
+} = require('../../scripts/atlas/atlasCourseUtils');
 
 const fixtureDir = path.join(__dirname, '..', 'fixtures', 'atlas');
 
@@ -82,4 +82,14 @@ test('buildCourseObject writes enriched section fields from merged rows', () => 
   assert.equal(section.campus, 'Atlanta');
   assert.equal(section.campus_description, 'ATL@ATLANTA');
   assert.equal(section.location, 'Atwood Chemistry Bldg. 260');
+  assert.equal(section.enrollment_count, null);
+});
+
+test('course section totals never become enrolled-student counts', () => {
+  const course = buildCourseObject('BIOL 141L', [
+    { total: '39', enrollment_capacity: 17, seats_available: 0 },
+    { total: '39', enrollment_count: 0, enrollment_capacity: 17, seats_available: 17 },
+    { total: '39', enrollment_count: 12, enrollment_capacity: 17, seats_available: 5 },
+  ], 'Fall_2026', '5269');
+  assert.deepEqual(course.sections.map(section => section.enrollment_count), [null, 0, 12]);
 });

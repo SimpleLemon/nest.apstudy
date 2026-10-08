@@ -1,0 +1,88 @@
+{
+  "course_code": "ARTHIST 212",
+  "course_title": "Intro.to Digital Art History",
+  "subject": "ARTHIST",
+  "catalog_number": "212",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course introduces students to digital humanities as a way of approaching art history and architecture. DH methods enable new ways of engaging with historical and cultural materials. Students will learn about these techniques by working with digital tools and exploring existing digital projects.",
+  "course_notes": "This course introduces students to the digital humanities as a method to approach art and architectural histories. Students will learn techniques and technologies frequently employed in the digital humanities, such as digital curation, digital mapping, and 3D modeling, as well as explore existing digital projects to develop a framework for evaluating the purpose and effectiveness of digital humanities tools. This is NOT a studio art class, but rather a course that uses digital tools to better understand and present art historical research. Art History major/minor: makers & materials course",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "357",
+      "academic_career": "UCOL",
+      "crn": "1591",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Nicole Corrigan",
+      "instructors": [
+        {
+          "name": "Nicole Corrigan",
+          "email": "nicole.corrigan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "10965"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 10a-12p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nicole Corrigan"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.693Z"
+}

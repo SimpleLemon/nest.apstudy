@@ -1,0 +1,156 @@
+{
+  "course_code": "MUS 190",
+  "course_title": "Fresh Sem: Music: Music and Democracy",
+  "subject": "MUS",
+  "catalog_number": "190",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "First Year Seminar",
+  "requirements": [
+    "First Year Seminar"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fulfills the freshman seminar requirement of the General Education Requirements. A variety of courses covering a wide range of topics in music. Refer to the Music Department website for a listing of classes currently offered.",
+  "course_notes": "(Freshmen Seminar - Limited to First Year Students Only)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "980",
+      "academic_career": "UCOL",
+      "crn": "2422",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Daniel Castro Pantoja",
+      "instructors": [
+        {
+          "name": "Daniel Castro Pantoja",
+          "email": "danielcastropantoja@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39621"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "981",
+      "academic_career": "UCOL",
+      "crn": "2424",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Dwight D Andrews",
+      "instructors": [
+        {
+          "name": "Dwight D Andrews",
+          "email": "dwightandrews@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "918"
+        }
+      ],
+      "location": "Burlington Road Building 307",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "First Year Seminar",
+      "requirements": [
+        "First Year Seminar"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Daniel Castro Pantoja",
+    "Dwight D Andrews"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.085Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "AAS 388",
+  "course_title": "Topics: Race, Gender, and the South",
+  "subject": "AAS",
+  "catalog_number": "388",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The \"South\" has played a central role in our national imagination.This course explores the ways in which certain stereotypes suchas Southern Bell, Mammy, Southern Gentleman, Jezebel, and Uncle Tom remain relevant across the decades.",
+  "course_notes": "(Same as WGS 385 2) (What does it mean for you to go to college in the South? What stories do we tell about the South-and who gets to tell them? In this African American Studies course, we will explore the ways race and gender continue to shape Southern history, culture, and identity through literature and film.) *NO FRESHMEN*",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2135",
+      "academic_career": "UCOL",
+      "crn": "1875",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Kimberly Wallace-Sanders",
+      "instructors": [
+        {
+          "name": "Kimberly Wallace-Sanders",
+          "email": "kwalla2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2055"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kimberly Wallace-Sanders"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.508Z"
+}

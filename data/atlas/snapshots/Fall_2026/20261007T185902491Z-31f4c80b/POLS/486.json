@@ -1,0 +1,80 @@
+{
+  "course_code": "POLS 486",
+  "course_title": "Washington Semester",
+  "subject": "POLS",
+  "catalog_number": "486",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "16",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Credit sixteen hours, satisfactory/unsatisfactory. Special course for students selected by the department to study for one semester in the nation's capital, with an occasional abroad component.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1212",
+      "academic_career": "UCOL",
+      "crn": "6080",
+      "section_number": "1",
+      "schedule_type": "DIS",
+      "instructor": "Matthew Baker",
+      "instructors": [
+        {
+          "name": "Matthew Baker",
+          "email": "matthew.e.baker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36180"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "16",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Closed",
+      "enrollment_count": "1",
+      "enrollment_capacity": 2,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 1,
+    "other": 0,
+    "open": 0,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Matthew Baker"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.575Z"
+}

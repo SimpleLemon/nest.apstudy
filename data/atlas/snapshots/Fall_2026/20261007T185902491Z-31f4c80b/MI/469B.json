@@ -1,0 +1,124 @@
+{
+  "course_code": "MI 469B",
+  "course_title": "Advanced Clinical Practicum II: Interventional Radiology",
+  "subject": "MI",
+  "catalog_number": "469B",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "These courses involve the application of didactic information in the clinical setting. The student will observe, assist, and perform basic patient care and clinical procedures under direct supervision. The student will be required to demonstrate competency in numerous IR procedures. Format: Traditional.",
+  "course_notes": "(Letter Grade Only)(School of Medicine Students Only)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3086",
+      "academic_career": "UAH",
+      "crn": "1068",
+      "section_number": "000",
+      "schedule_type": "PRA",
+      "instructor": "Kimberly Cross",
+      "instructors": [
+        {
+          "name": "Kimberly Cross",
+          "email": "kgreen6@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7869"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3087",
+      "academic_career": "UAH",
+      "crn": "1095",
+      "section_number": "001",
+      "schedule_type": "PRA",
+      "instructor": "Theodore Brzinski",
+      "instructors": [
+        {
+          "name": "Theodore Brzinski",
+          "email": "ted.brzinski@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3714"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Kimberly Cross",
+    "Theodore Brzinski"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.620Z"
+}

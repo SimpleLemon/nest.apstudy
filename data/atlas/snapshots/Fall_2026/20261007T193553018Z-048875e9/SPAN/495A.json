@@ -1,0 +1,134 @@
+{
+  "course_code": "SPAN 495A",
+  "course_title": "Honors",
+  "subject": "SPAN",
+  "catalog_number": "495A",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Experience and Application(*)",
+  "requirements": [
+    "Experience and Application(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall semester component of the Honors Program. Student and faculty adviser meet regularly to discuss the syllabus agreed upon at the beginning of the term and evaluate progress in research/writing. Spanish 495A does not count as one of the 400-level seminars required for the major.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1365",
+      "academic_career": "UCOL",
+      "crn": "5611",
+      "section_number": "1",
+      "schedule_type": "SUP",
+      "instructor": "Laura Torres-Rodriguez",
+      "instructors": [
+        {
+          "name": "Laura Torres-Rodriguez",
+          "email": "laura.juliana.torres-rodriguez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36189"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1366",
+      "academic_career": "UCOL",
+      "crn": "6577",
+      "section_number": "2",
+      "schedule_type": "SUP",
+      "instructor": "Alejandro Herrero-Olaizola",
+      "instructors": [
+        {
+          "name": "Alejandro Herrero-Olaizola",
+          "email": "alejandro@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "37931"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Experience and Application(*)",
+      "requirements": [
+        "Experience and Application(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 0,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alejandro Herrero-Olaizola",
+    "Laura Torres-Rodriguez"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.110Z"
+}

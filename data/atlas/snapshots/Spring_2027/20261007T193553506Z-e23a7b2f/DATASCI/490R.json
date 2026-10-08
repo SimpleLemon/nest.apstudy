@@ -1,0 +1,251 @@
+{
+  "course_code": "DATASCI 490R",
+  "course_title": "Advanced Seminar: Data Science with Text II",
+  "subject": "DATASCI",
+  "catalog_number": "490R",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Selected advanced topics in data science. Open only to junior and senior majors; others by permission of instructor.",
+  "course_notes": "This advanced seminar will teach state-of-the-art techniques in machine learning and natural language processing and review applications of these techniques. As preparation for this course, students should have previously taken DATASCI 340 or DATASCI 329",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2205",
+      "academic_career": "UCOL",
+      "crn": "3325",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Sandeep Soni",
+      "instructors": [
+        {
+          "name": "Sandeep Soni",
+          "email": "sandeep.soni@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35760"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2206",
+      "academic_career": "UCOL",
+      "crn": "3326",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "David Hirshberg",
+      "instructors": [
+        {
+          "name": "David Hirshberg",
+          "email": "davidahirshberg@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28482"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 5:30-6:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1730",
+            "end": "1845"
+          },
+          {
+            "day": "Thu",
+            "start": "1730",
+            "end": "1845"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2207",
+      "academic_career": "UCOL",
+      "crn": "3327",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "Allison Stashko",
+      "instructors": [
+        {
+          "name": "Allison Stashko",
+          "email": "allison.stashko@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35759"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "2208",
+      "academic_career": "UCOL",
+      "crn": "3328",
+      "section_number": "4",
+      "schedule_type": "SEM",
+      "instructor": "Jo Guldi",
+      "instructors": [
+        {
+          "name": "Jo Guldi",
+          "email": "jo.guldi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35777"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-3:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 4,
+    "open": 4,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Allison Stashko",
+    "David Hirshberg",
+    "Jo Guldi",
+    "Sandeep Soni"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.535Z"
+}

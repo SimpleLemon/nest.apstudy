@@ -1,0 +1,93 @@
+{
+  "course_code": "REL 323",
+  "course_title": "Death & Dying",
+  "subject": "REL",
+  "catalog_number": "323",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ONLINE",
+  "course_description": "Understanding death through a study of religious attitudes and practices, modern therapies for the dying, ethical issues, and Western and Asian theological perspectives.",
+  "course_notes": "This course satisfies the Religion major requirement: Tradition-Christianity, Theme. This course will be taught online. It meets for two synchronous 75-minute sessions per week on MW. Death is a central category in the study of religions. It is, more importantly, one of the few constants throughout human history. How the body is ushered out of the living community, and what symbols and rituals are employed during this period of transition, often speak to the strongest and deepest values of a culture. Although politics, economics, and psychology contribute to how these values are shaped and expressed, religion and the religious imagination are intimately and integrally related to cultural responses to the reality of mortality. The course will cover a variety of topics and cultural landscapes.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "737",
+      "academic_career": "UCOL",
+      "crn": "3258",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Gary Laderman",
+      "instructors": [
+        {
+          "name": "Gary Laderman",
+          "email": "gladerm@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1721"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 100,
+      "seats_available": 100,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Gary Laderman"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.768Z"
+}

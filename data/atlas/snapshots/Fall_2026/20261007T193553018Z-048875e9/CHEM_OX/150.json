@@ -1,0 +1,389 @@
+{
+  "course_code": "CHEM_OX 150",
+  "course_title": "Structure and Properties",
+  "subject": "CHEM_OX",
+  "catalog_number": "150",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Oxford College Chemistry Preparation (OCCP) online module should be completed prior to end of drop/add/swap as it counts 3% of grade. Corequisite: Chemistry 150L. This course will build a strong foundation in atomic and molecular structure. Students will interpret experimental data to explain structure, properties, and relationships. It is recommended that students who withdraw from the lecture withdraw from the corequisite laboratory course as well.",
+  "course_notes": "Must complete OCCP by Sept. 9. Must enroll in CHEM_OX 150L.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3949",
+      "academic_career": "UOXF",
+      "crn": "4342",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Austin Scharf",
+      "instructors": [
+        {
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14496"
+        }
+      ],
+      "location": "Oxford Science Bldg. 423",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3950",
+      "academic_career": "UOXF",
+      "crn": "4343",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Austin Scharf",
+      "instructors": [
+        {
+          "name": "Austin Scharf",
+          "email": "austin.scharf@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14496"
+        }
+      ],
+      "location": "Oxford Science Bldg. 423",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3951",
+      "academic_career": "UOXF",
+      "crn": "4344",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Lloyd R Parker",
+      "instructors": [
+        {
+          "name": "Lloyd R Parker",
+          "email": "lparker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "653"
+        }
+      ],
+      "location": "Oxford Science Bldg. 423",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3952",
+      "academic_career": "UOXF",
+      "crn": "4345",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Lloyd R Parker",
+      "instructors": [
+        {
+          "name": "Lloyd R Parker",
+          "email": "lparker@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "653"
+        }
+      ],
+      "location": "Oxford Science Bldg. 423",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3953",
+      "academic_career": "UOXF",
+      "crn": "4346",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Andrew Puente",
+      "instructors": [
+        {
+          "name": "Andrew Puente",
+          "email": "andrew.puente@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46853"
+        }
+      ],
+      "location": "Library Rm 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3954",
+      "academic_career": "UOXF",
+      "crn": "4347",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Andrew Puente",
+      "instructors": [
+        {
+          "name": "Andrew Puente",
+          "email": "andrew.puente@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46853"
+        }
+      ],
+      "location": "Library Rm 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 6,
+    "lectures": 6,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 5,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrew Puente",
+    "Austin Scharf",
+    "Lloyd R Parker"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.117Z"
+}

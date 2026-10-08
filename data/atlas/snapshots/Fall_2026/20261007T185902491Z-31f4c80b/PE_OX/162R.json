@@ -1,0 +1,86 @@
+{
+  "course_code": "PE_OX 162R",
+  "course_title": "Varsity Sport - Women's Soccer",
+  "subject": "PE_OX",
+  "catalog_number": "162R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": "Physical Education(*)",
+  "requirements": [
+    "Physical Education(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "For athletes participating and meeting the requirements to earn credit with the women's soccer team. Permission only.",
+  "course_notes": "(Permission Required Prior to Enrollment) Open to members of the Varsity Women's Soccer team only",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3825",
+      "academic_career": "UOXF",
+      "crn": "4075",
+      "section_number": "1",
+      "schedule_type": "PE",
+      "instructor": "Ruth Geiger",
+      "instructors": [
+        {
+          "name": "Ruth Geiger",
+          "email": "rgeiger@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "15078"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": "Physical Education(*)",
+      "requirements": [
+        "Physical Education(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Ruth Geiger"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.612Z"
+}

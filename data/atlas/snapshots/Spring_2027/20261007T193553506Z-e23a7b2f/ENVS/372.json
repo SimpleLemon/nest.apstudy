@@ -1,0 +1,82 @@
+{
+  "course_code": "ENVS 372",
+  "course_title": "Ecology of the Tropics Field Course",
+  "subject": "ENVS",
+  "catalog_number": "372",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Permission required. This is the field course to accompany the lecture course on tropical ecology. Field trip will take place during the spring recess.",
+  "course_notes": "(Same as BIOL 372 1) (This 2-credit hour field course is part of the Office of International and Summer Programs (OISP) and will be taught during Spring Break week (March ______, 2027) in the Amazon River lowland rainforests of southern Peru (Tambopata Research Station), famous for its huge flocks of colorful Macaws. This field course will give the student a real hands-on rainforest experience, complete with bromeliads, toucans, sloths, and the sounds of the night. Graduating Seniors and students who have previously completed BIOL 371/ENVS 371 have priority for this course. Cost for the trip is approximately $3200 (depending on airfare prices). Permission of instructor is required. This course is taught by Dr. Lawrence Wilson (lwilso3@emory.edu; adjunct faculty), is SHARED by the Biology and Environmental Science Departments, and may be taken as elective and upper-level laboratory credit for the biology major. Biology majors may submit an application to Barbara Shannon at barbara.shannon@emory.edu (and Leah Thomas in ENVS at leah.thomas@emory.edu for ENVS 372). Selected students will be notified and will have additional requirements by OISP. See the OISP website for additional information. Financial Aid scholarships from the Biology Department are available to eligible Biology majors who submit an application for the aid.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "298",
+      "academic_career": "UCOL",
+      "crn": "3529",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Lawrence Wilson",
+      "instructors": [
+        {
+          "name": "Lawrence Wilson",
+          "email": "lwilso3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1517"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Lawrence Wilson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.546Z"
+}

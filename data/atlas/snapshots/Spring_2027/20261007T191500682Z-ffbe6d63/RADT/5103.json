@@ -1,0 +1,94 @@
+{
+  "course_code": "RADT 5103",
+  "course_title": "Professional Development & Independent Study",
+  "subject": "RADT",
+  "catalog_number": "5103",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "2",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course is designed to promote continuing professional education and lifelong learning. Students are assigned articles and/or computer modules of current topics in the imaging field for independent study and class discussion. This course will also help to promote critical thinking skills, while enhancing problem-solving skills. Students will be assigned case study topics for discussion; students will then be required to present image studies as a class presentation, including image evaluation criteria, proper positioning, appropriate radiographic quality, type of pathology and/or reported diagnosis.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-04",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2546",
+      "academic_career": "UAH",
+      "crn": "3807",
+      "section_number": "000",
+      "schedule_type": "LEC",
+      "instructor": "Christy Evans",
+      "instructors": [
+        {
+          "name": "Christy Evans",
+          "email": "christy.evans@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40255"
+        },
+        {
+          "name": "Traci Monfort",
+          "email": "traci.monfort@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40258"
+        },
+        {
+          "name": "Shaun Taylor",
+          "email": "shaun.taylor@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40254"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "2",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 40,
+      "seats_available": 40,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-04",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christy Evans",
+    "Shaun Taylor",
+    "Traci Monfort"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.778Z"
+}

@@ -1,0 +1,200 @@
+{
+  "course_code": "FILM 107",
+  "course_title": "Introduction to Media Production",
+  "subject": "FILM",
+  "catalog_number": "107",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A hands-on introduction to the production of cinematic media. The course focuses on the basic gestures of filmmaking (from writing to filming and editing) in order to develop successful visual storytelling skills. Significant amounts of filming and editing take place outside of class.",
+  "course_notes": "This class will be held in the Department of Film and Media's brand new production facility located at Emory Point. Address: 1568 Avenue Pl Ste 140 Atlanta, GA 30329 This class has an Equipment Fee of $125 which grants students access to equipment provided by the department.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "777",
+      "academic_career": "UCOL",
+      "crn": "3877",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Alonso Llosa",
+      "instructors": [
+        {
+          "name": "Alonso Llosa",
+          "email": "alonso.llosa@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39592"
+        }
+      ],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 4:15-7p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1615",
+            "end": "1900"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "778",
+      "academic_career": "UCOL",
+      "crn": "3878",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Tanju Ozdemir",
+      "instructors": [
+        {
+          "name": "Tanju Ozdemir",
+          "email": "tanju.ozdemir@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "35737"
+        }
+      ],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 9:30a-12p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "930",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "779",
+      "academic_career": "UCOL",
+      "crn": "3879",
+      "section_number": "3",
+      "schedule_type": "SEM",
+      "instructor": "Dehanza Rogers",
+      "instructors": [
+        {
+          "name": "Dehanza Rogers",
+          "email": "dehanza.rogers@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21807"
+        }
+      ],
+      "location": "EP_118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "3",
+      "enrollment_capacity": 12,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1:15-3:45p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1315",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alonso Llosa",
+    "Dehanza Rogers",
+    "Tanju Ozdemir"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.536Z"
+}

@@ -1,0 +1,169 @@
+{
+  "course_code": "DATASCI 185",
+  "course_title": "Applied Topics in Data Science: Computational Methods-Data Sci",
+  "subject": "DATASCI",
+  "catalog_number": "185",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Topics course intended for early-career students. Topics allow students to explore the foundations, theory, and methods of data science, and examine the ways in which data driven solutions power industry, government, and the non-profit sector in an applied setting.",
+  "course_notes": "This course introduces programming fundamentals and helps prepare students for upper-level data science related courses. The course covers functional & object-oriented programming in Python, the development of data science pipelines and workflows, and best practices for debugging code and ensuring robustness. Application datasets are analyzed and visualized using libraries such as pandas, NumPy, and Matplotlib. This course will count for DATASCI 150 AND DATASCI 151. This course does not cover any material from DATASCI 150. Instead, it is intended as a more updated and extended version of DATASCI 151.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4473",
+      "academic_career": "UCOL",
+      "crn": "1886",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Nathan Gabriel",
+      "instructors": [
+        {
+          "name": "Nathan Gabriel",
+          "email": "nathan.gabriel@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43764"
+        },
+        {
+          "name": "Nathan Gabriel",
+          "email": "nathan.gabriel@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43764"
+        },
+        {
+          "name": "Peter Sentz",
+          "email": "peter.thomas.sentz@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43494"
+        },
+        {
+          "name": "Peter Sentz",
+          "email": "peter.thomas.sentz@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43494"
+        }
+      ],
+      "location": "White Hall 103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 50,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4474",
+      "academic_career": "UCOL",
+      "crn": "4931",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "Nate Silverblatt",
+      "instructors": [
+        {
+          "name": "Nate Silverblatt",
+          "email": "nate.silverblatt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30430"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Nate Silverblatt",
+    "Nathan Gabriel",
+    "Peter Sentz"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.520Z"
+}

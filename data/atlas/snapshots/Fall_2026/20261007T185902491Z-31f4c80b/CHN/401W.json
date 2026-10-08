@@ -1,0 +1,97 @@
+{
+  "course_code": "CHN 401W",
+  "course_title": "Advanced Readings in Modern Chn I",
+  "subject": "CHN",
+  "catalog_number": "401W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Conducted in Chinese, this course focuses on readings and discussion of authentic reading material. The goal is to develop students' knowledge of Chinese culture and ability to understand and use Chinese at a more advanced level. This course is designed for non-heritage track students only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "581",
+      "academic_career": "UCOL",
+      "crn": "2109",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hsu-Te Cheng",
+      "instructors": [
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        }
+      ],
+      "location": "MODERN LANGUAGE_302",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 12,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hsu-Te Cheng"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.512Z"
+}

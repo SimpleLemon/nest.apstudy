@@ -1,0 +1,326 @@
+{
+  "course_code": "MUS 122",
+  "course_title": "Theory, Analysis, Aural Skills II",
+  "subject": "MUS",
+  "catalog_number": "122",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Continuation of Theory,Analysis,Aural Skills I. Applied technical study of harmony and counterpoint focusing on written and aural aspects of the common-practice period but including repertoire from earlier periods and modern times. Designed for music majors and minors.",
+  "course_notes": "(Prerequisite: XXX) MUS 121",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "521",
+      "academic_career": "UCOL",
+      "crn": "2135",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Liam Hynes-Tawa",
+      "instructors": [
+        {
+          "name": "Liam Hynes-Tawa",
+          "email": "lhynestawa@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46923"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 108",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "522",
+      "academic_career": "UCOL",
+      "crn": "2136",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Laura Emmery",
+      "instructors": [
+        {
+          "name": "Laura Emmery",
+          "email": "laura.emmery@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6212"
+        }
+      ],
+      "location": "Burlington Rd Bldg. 107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 22,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "523",
+      "academic_career": "UCOL",
+      "crn": "2138",
+      "section_number": "3",
+      "schedule_type": "LAB",
+      "instructor": "Patricia A Dinkins-Matthews",
+      "instructors": [
+        {
+          "name": "Patricia A Dinkins-Matthews",
+          "email": "pdinkin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2524"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "524",
+      "academic_career": "UCOL",
+      "crn": "2139",
+      "section_number": "4",
+      "schedule_type": "LAB",
+      "instructor": "Jason Eklund",
+      "instructors": [
+        {
+          "name": "Jason Eklund",
+          "email": "jason.r.eklund@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4245"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "525",
+      "academic_career": "UCOL",
+      "crn": "2140",
+      "section_number": "5",
+      "schedule_type": "LAB",
+      "instructor": "Liam Hynes-Tawa",
+      "instructors": [
+        {
+          "name": "Liam Hynes-Tawa",
+          "email": "lhynestawa@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46923"
+        }
+      ],
+      "location": "Burlington Road Building 324",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "5",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 5,
+    "lectures": 2,
+    "labs": 3,
+    "discussions": 0,
+    "other": 0,
+    "open": 5,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Jason Eklund",
+    "Laura Emmery",
+    "Liam Hynes-Tawa",
+    "Patricia A Dinkins-Matthews"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.753Z"
+}

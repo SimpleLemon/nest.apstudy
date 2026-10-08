@@ -1,0 +1,97 @@
+{
+  "course_code": "CPLT 302W",
+  "course_title": "Literary Theory",
+  "subject": "CPLT",
+  "catalog_number": "302W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Continuing Communication and Writing(*)",
+  "requirements": [
+    "Continuing Communication and Writing(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Learning to read literature from a rheoretical viewpoint, its formal properties, distinctive features, origins, purposes, and capacities for representing the world; representative critics and schools from contemporary and earlier periods. *Note: This course is non-repeatable.",
+  "course_notes": "Literary Theory: The Power of Language and the Limits of the Human |This course explores how theoretical approaches to literature and language have altered the way we read and think. Working with foundational texts in modern French thought (by figures such as Saussure, Barthes, Derrida, Foucault, Cixous, Lacan, and Fanon) as well as some more contemporary texts (that may include writings by Judith Butler, Barbara Johnson, Hortense Spillers, Donna Haraway, and Cathy Caruth), we will examine how theoretical reflections about language challenge traditional models of subjectivity, the limits of the human, identity, sexual difference, race, power, technology, the law, and historical trauma. Throughout the course, we will look at selected short literary works alongside the theoretical texts to explore how literary theory helps us think critically about the many different kinds of texts that make up our world.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1299",
+      "academic_career": "UCOL",
+      "crn": "3376",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Elissa Marder",
+      "instructors": [
+        {
+          "name": "Elissa Marder",
+          "email": "emarder@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1766"
+        }
+      ],
+      "location": "Callaway Center TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Continuing Communication and Writing(*)",
+      "requirements": [
+        "Continuing Communication and Writing(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elissa Marder"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.708Z"
+}

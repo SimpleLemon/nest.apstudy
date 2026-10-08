@@ -1,0 +1,315 @@
+{
+  "course_code": "CS 170",
+  "course_title": "Introduction To Computer Science I",
+  "subject": "CS",
+  "catalog_number": "170",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to Computer Science for students expecting to utilize serious computing in coursework, research, or employment. Emphasis is on computing concepts, programming principles, algorithm development and basic data structures, using the Java programming language and Unix operating system.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "189",
+      "academic_career": "UCOL",
+      "crn": "3272",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "Math & Science Center - E308A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 8-8:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "800",
+            "end": "850"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "190",
+      "academic_career": "UCOL",
+      "crn": "3278",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "Math & Science Center - E308A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 9-9:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "900",
+            "end": "950"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "191",
+      "academic_career": "UCOL",
+      "crn": "3275",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "Math & Science Center - E308A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 3-3:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1500",
+            "end": "1550"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "192",
+      "academic_career": "UCOL",
+      "crn": "3276",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Abbey Julian",
+      "instructors": [
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        },
+        {
+          "name": "Abbey Julian",
+          "email": "abigail.julian@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22398"
+        }
+      ],
+      "location": "Math & Science Center - E308A",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 4,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Abbey Julian"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.527Z"
+}

@@ -1,0 +1,151 @@
+{
+  "course_code": "PHYS_OX 151",
+  "course_title": "General Physics: Mechanics W/Lab",
+  "subject": "PHYS_OX",
+  "catalog_number": "151",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "A calculus-based introductory course covering mechanics, thermodynamics, and wave motion. Four hours of lecture and one three-hour laboratory per week.",
+  "course_notes": "Students must enroll in PHYS_OX 151 lab.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "95",
+      "academic_career": "UOXF",
+      "crn": "4313",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Ross Cawthon",
+      "instructors": [
+        {
+          "name": "Ross Cawthon",
+          "email": "ross.william.cawthon@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43552"
+        }
+      ],
+      "location": "Oxford Science Bldg. 217",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "96",
+      "academic_career": "UOXF",
+      "crn": "4314",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Clayton Ristow",
+      "instructors": [
+        {
+          "name": "Clayton Ristow",
+          "email": "clayton.james.ristow@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39529"
+        }
+      ],
+      "location": "Oxford Science Bldg. 217",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 24,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Clayton Ristow",
+    "Ross Cawthon"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.129Z"
+}

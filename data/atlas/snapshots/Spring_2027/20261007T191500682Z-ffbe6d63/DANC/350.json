@@ -1,0 +1,104 @@
+{
+  "course_code": "DANC 350",
+  "course_title": "Choreography II",
+  "subject": "DANC",
+  "catalog_number": "350",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "5",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Students will utilize skills acquired in Choreography I. Choreography II emphasizes deeper exploration and understanding of the elements of space, time, and energy in group works. This course meets twice a week, with an additional evening lab for viewing and critiquing works in progress. Students participate in many aspects of the production process.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "214",
+      "academic_career": "UCOL",
+      "crn": "1913",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "George Staib",
+      "instructors": [
+        {
+          "name": "George Staib",
+          "email": "gstaib@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3229"
+        },
+        {
+          "name": "George Staib",
+          "email": "gstaib@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3229"
+        }
+      ],
+      "location": "Schwartz Center 255",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "5",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 10,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p; M 6-8p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2000"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "George Staib"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.714Z"
+}

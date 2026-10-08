@@ -1,0 +1,88 @@
+{
+  "course_code": "GER 192R",
+  "course_title": "Beginning Conversation",
+  "subject": "GER",
+  "catalog_number": "192R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Fall and spring. Credit, one. Opportunity for beginners to practice German.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2375",
+      "academic_career": "UCOL",
+      "crn": "5507",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Paula Engelhardt",
+      "instructors": [
+        {
+          "name": "Paula Engelhardt",
+          "email": "paula.engelhardt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47309"
+        }
+      ],
+      "location": "Modern Language 219",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 14,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 5-5:50p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1700",
+            "end": "1750"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Paula Engelhardt"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.540Z"
+}

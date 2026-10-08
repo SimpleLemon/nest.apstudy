@@ -1,0 +1,93 @@
+{
+  "course_code": "SOC 333",
+  "course_title": "Sociology of Religion",
+  "subject": "SOC",
+  "catalog_number": "333",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Origins, structures, and functions of religious institutions and their roles in the maintenance and change of social systems. Emphasis on the religious response to the problems of ultimate meaning in various societies, including the United States.",
+  "course_notes": "The sociology of religion studies the social aspect of religion and the constant interaction between religion and its social environment. In this course, we will analyze religious beliefs, practices, and organizations, explain theories and key concepts, and deal with case studies with a primary focus on religion in contemporary American society.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "759",
+      "academic_career": "UCOL",
+      "crn": "2911",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Andrea Barra",
+      "instructors": [
+        {
+          "name": "Andrea Barra",
+          "email": "andrea.barra@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "32525"
+        }
+      ],
+      "location": "Tarbutton Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 25,
+      "seats_available": 25,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Andrea Barra"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.770Z"
+}

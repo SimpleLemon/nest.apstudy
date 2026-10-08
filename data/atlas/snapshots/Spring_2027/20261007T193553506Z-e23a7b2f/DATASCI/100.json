@@ -1,0 +1,533 @@
+{
+  "course_code": "DATASCI 100",
+  "course_title": "Intro to Stat Inference",
+  "subject": "DATASCI",
+  "catalog_number": "100",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Intro to descriptive and inferential stats with emphasis on practice and implementation. Introduces basic statistical concepts and encourages critical thinking about data. A primary focus of the course is on implementation of appropriate statistical analysis and interpretation of results.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1745",
+      "academic_career": "UCOL",
+      "crn": "3249",
+      "section_number": "L1",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1746",
+      "academic_career": "UCOL",
+      "crn": "3251",
+      "section_number": "L2",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1747",
+      "academic_career": "UCOL",
+      "crn": "3252",
+      "section_number": "L3",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1748",
+      "academic_career": "UCOL",
+      "crn": "3253",
+      "section_number": "L4",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1749",
+      "academic_career": "UCOL",
+      "crn": "3255",
+      "section_number": "L5",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1750",
+      "academic_career": "UCOL",
+      "crn": "3256",
+      "section_number": "L6",
+      "schedule_type": "LAB",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 60,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1742",
+      "academic_career": "UCOL",
+      "crn": "3238",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Anqi Hu",
+      "instructors": [
+        {
+          "name": "Anqi Hu",
+          "email": "anqi.hu@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "11352"
+        },
+        {
+          "name": "Ho Jin Kim",
+          "email": "jin.kim3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8358"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1743",
+      "academic_career": "UCOL",
+      "crn": "3239",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Zhiyun Gong",
+      "instructors": [
+        {
+          "name": "Zhiyun Gong",
+          "email": "zgong5@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6575"
+        },
+        {
+          "name": "Ho Jin Kim",
+          "email": "jin.kim3@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8358"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "1744",
+      "academic_career": "UCOL",
+      "crn": "3240",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Zhiyun Gong",
+      "instructors": [
+        {
+          "name": "Zhiyun Gong",
+          "email": "zgong5@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6575"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 5,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 9,
+    "lectures": 3,
+    "labs": 6,
+    "discussions": 0,
+    "other": 0,
+    "open": 9,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Anqi Hu",
+    "Ho Jin Kim",
+    "Zhiyun Gong"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.531Z"
+}

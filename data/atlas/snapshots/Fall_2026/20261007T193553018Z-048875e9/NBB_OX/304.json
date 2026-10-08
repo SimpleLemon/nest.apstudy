@@ -1,0 +1,93 @@
+{
+  "course_code": "NBB_OX 304",
+  "course_title": "Hormones and Behavior",
+  "subject": "NBB_OX",
+  "catalog_number": "304",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "A course focused on the relationships between hormones, brain function and behavior, as well as the techniques used to investigate them.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4240",
+      "academic_career": "UOXF",
+      "crn": "4140",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Rick Thompson",
+      "instructors": [
+        {
+          "name": "Rick Thompson",
+          "email": "rick.thompson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21636"
+        }
+      ],
+      "location": "Pierce Hall 239",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 5,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 4-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Rick Thompson"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.126Z"
+}

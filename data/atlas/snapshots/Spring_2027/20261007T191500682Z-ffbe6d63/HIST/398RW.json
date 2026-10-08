@@ -1,0 +1,77 @@
+{
+  "course_code": "HIST 398RW",
+  "course_title": "Research Tutorial",
+  "subject": "HIST",
+  "catalog_number": "398RW",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": "Experience and Application with Cont.Comm(*)",
+  "requirements": [
+    "Experience and Application with Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variable credit. Prerequisite: approval of project by instructor. Focused on students' pursuing projects of their own design or gaining research skills through work with the instructor.",
+  "course_notes": "(Permission Required Prior to Enrollment) This tutorial class is for students who want to work on a project of their own design or want to gain research skills. Students should consult with a history faculty with whom they want to work to receive permission for enrollment. Students can receive 1-4 credit hours based on the extent of the project and/or research work.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2202",
+      "academic_career": "UCOL",
+      "crn": "2793",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Staff",
+      "instructors": [],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": "Experience and Application with Cont.Comm(*)",
+      "requirements": [
+        "Experience and Application with Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 1,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [],
+  "scraped_at": "2026-10-07T19:15:00.737Z"
+}

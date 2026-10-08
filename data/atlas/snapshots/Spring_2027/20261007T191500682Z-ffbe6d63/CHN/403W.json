@@ -1,0 +1,97 @@
+{
+  "course_code": "CHN 403W",
+  "course_title": "Advanced High Chinese for Heritage Speakers",
+  "subject": "CHN",
+  "catalog_number": "403W",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is a post-advanced course for Chinese heritage speakers. Through close reading and intensive writing on major social issues of contemporary China, it aims to further enhance students' Chinese language proficiency and deepen their understanding of the Chinese society beyond the advanced level.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2130",
+      "academic_career": "UCOL",
+      "crn": "1834",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Qiong Le",
+      "instructors": [
+        {
+          "name": "Qiong Le",
+          "email": "qiong.le@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5014"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 18,
+      "seats_available": 18,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Qiong Le"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.706Z"
+}

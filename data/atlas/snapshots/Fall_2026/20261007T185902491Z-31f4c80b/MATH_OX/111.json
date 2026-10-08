@@ -1,0 +1,247 @@
+{
+  "course_code": "MATH_OX 111",
+  "course_title": "Calculus I",
+  "subject": "MATH_OX",
+  "catalog_number": "111",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Quantitative Reasoning(*)",
+  "requirements": [
+    "Quantitative Reasoning(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Limits, continuity, derivatives, antiderivatives, the definite integral.",
+  "course_notes": "Placement test must be taken prior to enrollment",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "59",
+      "academic_career": "UOXF",
+      "crn": "4302",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Julie Hulgan",
+      "instructors": [
+        {
+          "name": "Julie Hulgan",
+          "email": "jhulgan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7912"
+        },
+        {
+          "name": "Julie Hulgan",
+          "email": "jhulgan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7912"
+        }
+      ],
+      "location": "Seney Hall 215",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "60",
+      "academic_career": "UOXF",
+      "crn": "4303",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Julie Hulgan",
+      "instructors": [
+        {
+          "name": "Julie Hulgan",
+          "email": "jhulgan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7912"
+        },
+        {
+          "name": "Julie Hulgan",
+          "email": "jhulgan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7912"
+        }
+      ],
+      "location": "Seney Hall 215",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "61",
+      "academic_career": "UOXF",
+      "crn": "4304",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Christina Lee",
+      "instructors": [
+        {
+          "name": "Christina Lee",
+          "email": "christina.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6669"
+        },
+        {
+          "name": "Christina Lee",
+          "email": "christina.lee@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "6669"
+        }
+      ],
+      "location": "Pierce Hall 237",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "4",
+      "requirement_designation": "Quantitative Reasoning(*)",
+      "requirements": [
+        "Quantitative Reasoning(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 25,
+      "seats_available": 7,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Wed",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 3,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Christina Lee",
+    "Julie Hulgan"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.609Z"
+}

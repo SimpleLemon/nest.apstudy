@@ -1,0 +1,156 @@
+{
+  "course_code": "ARTVIS 111",
+  "course_title": "Modes of Visual Thinking",
+  "subject": "ARTVIS",
+  "catalog_number": "111",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This introductory art course offers a comprehensive exploration of both 2D and 3D media, providing students of all levels and artistic backgrounds with a multifaceted entry point into contemporary art practices. Throughout the course, students will delve into various methods of making and thinking.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3617",
+      "academic_career": "UCOL",
+      "crn": "2603",
+      "section_number": "1",
+      "schedule_type": "LAB",
+      "instructor": "Larkin Ford",
+      "instructors": [
+        {
+          "name": "Larkin Ford",
+          "email": "larkin.henry.ford@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28487"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10a-12p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1200"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3618",
+      "academic_career": "UCOL",
+      "crn": "2605",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "Aaron Putt",
+      "instructors": [
+        {
+          "name": "Aaron Putt",
+          "email": "aaron.putt@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36107"
+        }
+      ],
+      "location": "Visual Arts 113",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10a-12p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1200"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 2,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Aaron Putt",
+    "Larkin Ford"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.503Z"
+}

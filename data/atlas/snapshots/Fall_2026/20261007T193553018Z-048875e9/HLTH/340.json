@@ -1,0 +1,93 @@
+{
+  "course_code": "HLTH 340",
+  "course_title": "Food, Health, and Society",
+  "subject": "HLTH",
+  "catalog_number": "340",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Human health is intrinsically linked to dietary practices. The pharmacological properties of foods will be examined and case studies of dietary complexes will be examined in order to better understand the food-medicine continuum as a determinant of health and well-being.",
+  "course_notes": "(Same as ANT 349 1, BIOL 344 1) Human health is intrinsically linked to dietary practices. Plants, in particular, may be used both as medicine and food, and it can often be difficult to draw a line between the two groups: food may be used as medicine and vice versa. The lens of ethnopharmacology can be used to gain an integrated biocultural perspective on foods, encompassing not only the substantive (or physical) qualities, but also the intangible (symbolic). In this course, we will explore the ways that human groups identify, collect, create, and transform foods, how they shape those into dietary behaviors, and how this influences human health. The pharmacological properties of foods will be examined and we will use case studies of dietary complexes, such as the Mediterranean diet, in order to better understand the food-medicine continuum as a determinant of health and well-being. Lastly, we will examine trends in the industrialization of food, and the resulting health impact of modern food practices.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3590",
+      "academic_career": "UCOL",
+      "crn": "2559",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Cassandra Quave",
+      "instructors": [
+        {
+          "name": "Cassandra Quave",
+          "email": "cassandra.leah.quave@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2802"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 75,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cassandra Quave"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.069Z"
+}

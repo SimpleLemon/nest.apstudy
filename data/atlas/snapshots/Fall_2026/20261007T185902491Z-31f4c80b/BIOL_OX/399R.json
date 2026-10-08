@@ -1,0 +1,174 @@
+{
+  "course_code": "BIOL_OX 399R",
+  "course_title": "Undergraduate Research",
+  "subject": "BIOL_OX",
+  "catalog_number": "399R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1,2,3,4",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Research participation in biology. Requires an independent project with laboratory or field work. This course does not satisfy distribution requirements in natural science and mathematics.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2717",
+      "academic_career": "UOXF",
+      "crn": "4320",
+      "section_number": "1",
+      "schedule_type": "RSC",
+      "instructor": "Natalia Bayona Vasquez",
+      "instructors": [
+        {
+          "name": "Natalia Bayona Vasquez",
+          "email": "natalia.juliana.bayona.vasquez@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25143"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "3",
+      "enrollment_capacity": 6,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2718",
+      "academic_career": "UOXF",
+      "crn": "6575",
+      "section_number": "2",
+      "schedule_type": "RSC",
+      "instructor": "Rick Thompson",
+      "instructors": [
+        {
+          "name": "Rick Thompson",
+          "email": "rick.thompson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "21636"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1,2,3,4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2719",
+      "academic_career": "UOXF",
+      "crn": "6601",
+      "section_number": "3",
+      "schedule_type": "RSC",
+      "instructor": "Cristy Tower-Gilchrist",
+      "instructors": [
+        {
+          "name": "Cristy Tower-Gilchrist",
+          "email": "cristy.tower-gilchrist@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5207"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "3",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 3,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 3,
+    "open": 1,
+    "closed": 2,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cristy Tower-Gilchrist",
+    "Natalia Bayona Vasquez",
+    "Rick Thompson"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.600Z"
+}

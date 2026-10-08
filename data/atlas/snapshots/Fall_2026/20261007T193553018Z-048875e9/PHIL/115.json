@@ -1,0 +1,168 @@
+{
+  "course_code": "PHIL 115",
+  "course_title": "Introduction to Ethics",
+  "subject": "PHIL",
+  "catalog_number": "115",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introductory examination of fundamental moral questions, such as the best way of life for a human being, the relationship between happiness and moral excellence, and the nature of ethical reasoning, as treated by major philosophers in the history of philosophy.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1086",
+      "academic_career": "UCOL",
+      "crn": "1688",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "John Lysaker",
+      "instructors": [
+        {
+          "name": "John Lysaker",
+          "email": "jlysake@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4723"
+        },
+        {
+          "name": "Sophie Pandita",
+          "email": "sophie.pandita@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "44086"
+        }
+      ],
+      "location": "Ethics Center - RARB_162",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1087",
+      "academic_career": "UCOL",
+      "crn": "3384",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Kyriaki Schoina",
+      "instructors": [
+        {
+          "name": "Kyriaki Schoina",
+          "email": "kyriaki.schoina@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "40482"
+        }
+      ],
+      "location": "Bowden Hall 118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TThF 4-4:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Thu",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Fri",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "John Lysaker",
+    "Kyriaki Schoina",
+    "Sophie Pandita"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.092Z"
+}

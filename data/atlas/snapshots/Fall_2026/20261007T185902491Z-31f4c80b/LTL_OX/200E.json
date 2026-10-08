@@ -1,0 +1,129 @@
+{
+  "course_code": "LTL_OX 200E",
+  "course_title": "Teaching to Lead",
+  "subject": "LTL_OX",
+  "catalog_number": "200E",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Teaching to Lead 200 is a course designed to prepare Learning to Lead Facilitators (LTLFs) to co-teach Learning to Lead 101 ( LTL 101 ).",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4150",
+      "academic_career": "UOXF",
+      "crn": "5843",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "LaJoi Boone",
+      "instructors": [
+        {
+          "name": "LaJoi Boone",
+          "email": "lajoi.boone@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46422"
+        }
+      ],
+      "location": "Seney Hall 209",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 10,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 1-2p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1400"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4151",
+      "academic_career": "UOXF",
+      "crn": "6569",
+      "section_number": "2",
+      "schedule_type": "SEM",
+      "instructor": "LaJoi Boone",
+      "instructors": [
+        {
+          "name": "LaJoi Boone",
+          "email": "lajoi.boone@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46422"
+        }
+      ],
+      "location": null,
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "2",
+      "enrollment_capacity": 1,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 1,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "LaJoi Boone"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.609Z"
+}

@@ -1,0 +1,154 @@
+{
+  "course_code": "HLTH 285",
+  "course_title": "Topics in Human Health: Rx Religion for Health?",
+  "subject": "HLTH",
+  "catalog_number": "285",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Special Topics course.",
+  "course_notes": "(Same as REL 270 2) This course satisfies the Religion major requirement:- Tradition-Christianity, Region. When confronted with illness, disease, and suffering, religious people repeatedly turn to their faith to make sense of their health, well-being, and mortality. Prayer and religious service attendance, for example, are practices that can serve as reminders to trust in God for healing, which inherently become sources of comfort and peace. But religion may truly be beneficial to overall health. Decades of research suggest that religion and spirituality can influence our mental health, doctor-patient relationships, health behaviors, and underlying biology. In this course, students will grapple with one central question: Is religion good for our health? We will explore the complex relationships between religion and overall health, with greater emphasis placed on Christianity in America, translational applications to clinical settings, community health promotion interventions, health disparities research, and policy implications in the US.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3610",
+      "academic_career": "UCOL",
+      "crn": "4023",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Jason Ashe",
+      "instructors": [
+        {
+          "name": "Jason Ashe",
+          "email": "jason.ashe@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43176"
+        }
+      ],
+      "location": "Tarbutton Hall 111",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 10,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "3611",
+      "academic_career": "UCOL",
+      "crn": "6279",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Geremy Lowe",
+      "instructors": [
+        {
+          "name": "Geremy Lowe",
+          "email": "geremy.demetrius.lowe@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46931"
+        }
+      ],
+      "location": "Anthropology Bldg 303",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 13,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1715"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Geremy Lowe",
+    "Jason Ashe"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.069Z"
+}

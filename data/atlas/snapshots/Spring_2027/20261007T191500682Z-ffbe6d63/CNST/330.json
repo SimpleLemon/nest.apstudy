@@ -1,0 +1,93 @@
+{
+  "course_code": "CNST 330",
+  "course_title": "Compassion and Human Health",
+  "subject": "CNST",
+  "catalog_number": "330",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This interdisciplinary course surveys research in psychology, neuroscience, anthropology, and religious studies to investigate the role of compassion and empathy in human health and how practices for cultivating compassion are secularized and implemented in schools, prisons, and other settings.",
+  "course_notes": "(Same as ANT 348 1 and HLTH 348 1) (Compassion and empathy are more than states inside a single mind. They are enacted between people, and they shape how we treat patients, teach children, and interact in our social life. This course explores our social nature (compassion and empathy, as well as how they can go missing in stigma, loneliness and grief) from both first- and third-person perspectives, through in-class activities, games, reflective practices, and an engagement with the recent research in psychology, anthropology, and contemplative science.)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "2416",
+      "academic_career": "UCOL",
+      "crn": "3531",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Brendan Ozawa-de Silva",
+      "instructors": [
+        {
+          "name": "Brendan Ozawa-de Silva",
+          "email": "bozawad@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "30925"
+        }
+      ],
+      "location": "Rich Building 205",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 6,
+      "seats_available": 6,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Brendan Ozawa-de Silva"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.707Z"
+}

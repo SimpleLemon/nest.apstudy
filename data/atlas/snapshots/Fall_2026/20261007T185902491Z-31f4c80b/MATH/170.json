@@ -1,0 +1,150 @@
+{
+  "course_code": "MATH 170",
+  "course_title": "Intro.Scientific Computing",
+  "subject": "MATH",
+  "catalog_number": "170",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "The course introduces Python for Scientific Computing for students who will likely use it in upper-level courses. Students will know how to algorithmically formulate a mathematical problem, solve simple scientific computing problems, visualize data, and consider different programming paradigms.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4727",
+      "academic_career": "UCOL",
+      "crn": "3091",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "JIMENA MARTIN TEMPESTTI",
+      "instructors": [
+        {
+          "name": "JIMENA MARTIN TEMPESTTI",
+          "email": "jimena.martin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "33257"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 23,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4728",
+      "academic_career": "UCOL",
+      "crn": "3097",
+      "section_number": "2",
+      "schedule_type": "LAB",
+      "instructor": "JIMENA MARTIN TEMPESTTI",
+      "instructors": [
+        {
+          "name": "JIMENA MARTIN TEMPESTTI",
+          "email": "jimena.martin@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "33257"
+        }
+      ],
+      "location": "Math & Science Center - W307C",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 23,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 1,
+    "labs": 1,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "JIMENA MARTIN TEMPESTTI"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.558Z"
+}

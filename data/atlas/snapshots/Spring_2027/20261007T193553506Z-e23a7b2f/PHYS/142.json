@@ -1,0 +1,955 @@
+{
+  "course_code": "PHYS 142",
+  "course_title": "Intro Physics II W/Lab",
+  "subject": "PHYS",
+  "catalog_number": "142",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "4",
+  "requirement_designation": "Natural Sciences(*)",
+  "requirements": [
+    "Natural Sciences(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Introduction to electricity, magnetism, optics, and the essentials of quantum mechanics, atomic and nuclear physics, and special relativity.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "592",
+      "academic_career": "UCOL",
+      "crn": "3193",
+      "section_number": "L10",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-8:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "593",
+      "academic_career": "UCOL",
+      "crn": "3196",
+      "section_number": "L11",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "594",
+      "academic_career": "UCOL",
+      "crn": "3198",
+      "section_number": "L12",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Th 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "595",
+      "academic_career": "UCOL",
+      "crn": "3200",
+      "section_number": "L13",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "596",
+      "academic_career": "UCOL",
+      "crn": "3202",
+      "section_number": "L14",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "597",
+      "academic_career": "UCOL",
+      "crn": "3174",
+      "section_number": "LAB1",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "598",
+      "academic_career": "UCOL",
+      "crn": "3175",
+      "section_number": "LAB2",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "599",
+      "academic_career": "UCOL",
+      "crn": "3176",
+      "section_number": "LAB3",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "600",
+      "academic_career": "UCOL",
+      "crn": "3177",
+      "section_number": "LAB4",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "601",
+      "academic_career": "UCOL",
+      "crn": "3180",
+      "section_number": "LAB5",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "602",
+      "academic_career": "UCOL",
+      "crn": "3183",
+      "section_number": "LAB6",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "T 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "603",
+      "academic_career": "UCOL",
+      "crn": "3186",
+      "section_number": "LAB7",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "604",
+      "academic_career": "UCOL",
+      "crn": "3187",
+      "section_number": "LAB8",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 2:30-5:15p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1715"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "605",
+      "academic_career": "UCOL",
+      "crn": "3189",
+      "section_number": "LAB9",
+      "schedule_type": "LAB",
+      "instructor": "Thomas Bing",
+      "instructors": [
+        {
+          "name": "Thomas Bing",
+          "email": "tbing@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "4519"
+        },
+        {
+          "name": "Cordell Donofrio",
+          "email": "cjdonof@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2943"
+        }
+      ],
+      "location": "Math & Science Center - W202",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 20,
+      "seats_available": 20,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 6-8:45p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "590",
+      "academic_career": "UCOL",
+      "crn": "1355",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Keith Berland",
+      "instructors": [
+        {
+          "name": "Keith Berland",
+          "email": "kberlan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2715"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 140,
+      "seats_available": 140,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    },
+    {
+      "atlas_key": "591",
+      "academic_career": "UCOL",
+      "crn": "1357",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Keith Berland",
+      "instructors": [
+        {
+          "name": "Keith Berland",
+          "email": "kberlan@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "2715"
+        }
+      ],
+      "location": "Registrar Room Pool",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Natural Sciences(*)",
+      "requirements": [
+        "Natural Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 140,
+      "seats_available": 140,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 16,
+    "lectures": 2,
+    "labs": 14,
+    "discussions": 0,
+    "other": 0,
+    "open": 16,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Cordell Donofrio",
+    "Keith Berland",
+    "Thomas Bing"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.575Z"
+}

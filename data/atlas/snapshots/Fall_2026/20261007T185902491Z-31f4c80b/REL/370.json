@@ -1,0 +1,149 @@
+{
+  "course_code": "REL 370",
+  "course_title": "Special Topics in Religion: The Bible and Asian America",
+  "subject": "REL",
+  "catalog_number": "370",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Race and Ethnicity(*)",
+  "requirements": [
+    "Race and Ethnicity(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Variety of subjects pertaining to religion. Content will vary in successive offerings. May be repeated for credit when topic varies.",
+  "course_notes": "(Same as EAS 385 2) (This course satisfies the Religion major requirement:- Tradition-Christianity, Region.) (The course will explore the interplay between the Bible and the experience of Asian Americans, with particular focus on how race and ethnicity shape interpretation. Topics are biblical, historical and social. Biblically, the course will introduce students to the growing field of Asian American interpretation. Historically, the class will examine how prominent events in Asian American history, such as the Chinese Exclusion Act, the Delano Grape Strike, and the passage of the Hart-Cellar Act, may dialogue with biblical texts. We will analyze how these historical moments, which are deeply tied to issues of race, ethnicity, and citizenship, have influenced Asian Americans' understanding of biblical stories and themes of justice, community, and belonging. Socially, the class will examine confluences and tensions when Asian American interpretations interact with modern faith communities. How do Asian American Christians, as racial and ethnic minorities, experience their faith in relation to dominant religious narratives?)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1297",
+      "academic_career": "UCOL",
+      "crn": "2344",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Roger Nam",
+      "instructors": [
+        {
+          "name": "Roger Nam",
+          "email": "rnam@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "24926"
+        }
+      ],
+      "location": "Rita Anne Rollins Building_322",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Race and Ethnicity(*)",
+      "requirements": [
+        "Race and Ethnicity(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 8,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1298",
+      "academic_career": "UCOL",
+      "crn": "2912",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Devaka Premawardhana",
+      "instructors": [
+        {
+          "name": "Devaka Premawardhana",
+          "email": "devaka.premawardhana@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "17993"
+        }
+      ],
+      "location": "Callaway S107",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 4,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "M 6-8:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1800",
+            "end": "2045"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Devaka Premawardhana",
+    "Roger Nam"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.581Z"
+}

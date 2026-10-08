@@ -1,0 +1,305 @@
+{
+  "course_code": "CHN 101",
+  "course_title": "Elementary Chinese I",
+  "subject": "CHN",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is the first of two courses that introduce students to modern Mandarin Chinese. It covers the sound system of Mandarin Chinese and moves on to basic skills in listening, speaking, reading, and writing, and offers an introduction to Chinese culture. For non-heritage students only.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "571",
+      "academic_career": "UCOL",
+      "crn": "2097",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hsu-Te Cheng",
+      "instructors": [
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        },
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "572",
+      "academic_career": "UCOL",
+      "crn": "2098",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hsu-Te Cheng",
+      "instructors": [
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        },
+        {
+          "name": "Hsu-Te Cheng",
+          "email": "hsu-te.cheng@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "7104"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "573",
+      "academic_career": "UCOL",
+      "crn": "2099",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Lijuan Cao",
+      "instructors": [
+        {
+          "name": "Lijuan Cao",
+          "email": "lijuan.cao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "38768"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p; F 11:30a-12:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Fri",
+            "start": "1130",
+            "end": "1220"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "574",
+      "academic_career": "UCOL",
+      "crn": "2100",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Jie Yao",
+      "instructors": [
+        {
+          "name": "Jie Yao",
+          "email": "jie.yao@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "28497"
+        }
+      ],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "4",
+      "enrollment_capacity": 15,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 4,
+    "lectures": 4,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 3,
+    "closed": 1,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hsu-Te Cheng",
+    "Jie Yao",
+    "Lijuan Cao"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.511Z"
+}

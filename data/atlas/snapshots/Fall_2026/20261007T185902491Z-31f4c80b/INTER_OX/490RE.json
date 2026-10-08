@@ -1,0 +1,136 @@
+{
+  "course_code": "INTER_OX 490RE",
+  "course_title": "Introduction Liberal Arts Internship",
+  "subject": "INTER_OX",
+  "catalog_number": "490RE",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Course offers students opportunity to earn one academic credit for on- or off-campus internship experience with formal reflection on professional field. Application and course approval required.",
+  "course_notes": "(Permission of Instructor Required Prior to Enrollment)",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4192",
+      "academic_career": "UOXF",
+      "crn": "4514",
+      "section_number": "1",
+      "schedule_type": "IND",
+      "instructor": "Ayanna Young",
+      "instructors": [
+        {
+          "name": "Ayanna Young",
+          "email": "ayanna.faith.young@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "42169"
+        }
+      ],
+      "location": "Johnson Hall 201",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 28,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-2p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1400"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "4193",
+      "academic_career": "UOXF",
+      "crn": "4515",
+      "section_number": "2",
+      "schedule_type": "IND",
+      "instructor": "Adelaide Richardson",
+      "instructors": [
+        {
+          "name": "Adelaide Richardson",
+          "email": "adelaide.richardson@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39389"
+        }
+      ],
+      "location": "Johnson Hall 202",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "2",
+      "enrollment_capacity": 40,
+      "seats_available": 22,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "W 1-2p",
+        "meetings": [
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1400"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 2,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Adelaide Richardson",
+    "Ayanna Young"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.608Z"
+}

@@ -1,0 +1,97 @@
+{
+  "course_code": "ART_OX 213",
+  "course_title": "Ancient Egypt Art and Architecture 5000-1550 B.C.E.",
+  "subject": "ART_OX",
+  "catalog_number": "213",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course examines the art and architecture of ancient Egypt from the development of rock art and pottery (5000 B.C.E) through the end of the Second Intermediate Period (1550 B.C.E.). This course may be taken as ANCMED_OX 201R.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3900",
+      "academic_career": "UOXF",
+      "crn": "4215",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Tasha Dobbin-Bennett",
+      "instructors": [
+        {
+          "name": "Tasha Dobbin-Bennett",
+          "email": "tasha.dobbin-bennett@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "8357"
+        }
+      ],
+      "location": "Pierce Hall 238",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 25,
+      "seats_available": 2,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Thu",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Tasha Dobbin-Bennett"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.115Z"
+}

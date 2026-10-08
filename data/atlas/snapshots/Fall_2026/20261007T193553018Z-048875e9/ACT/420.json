@@ -1,0 +1,91 @@
+{
+  "course_code": "ACT 420",
+  "course_title": "Accounting Analytics: Insights for Actions",
+  "subject": "ACT",
+  "catalog_number": "420",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This course teaches students how to use analytics with financial data to make better, data informed decisions. This course is an overview course and is designed to expose students to the many different ways in which data analytic tools can be used in accounting settings. To teach students how to successfully combine their understanding of accounting concepts with data analytics skills and tools, this course focuses on: 1. Reframing business issues that require the use of accounting knowledge into specific analytical questions 2. Manipulating data and calculating answers to the above framed questions 3. Communicating results with appropriate context in a meaningful and easy to understand manner",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4641",
+      "academic_career": "UBUS",
+      "crn": "3829",
+      "section_number": "1171",
+      "schedule_type": "LEC",
+      "instructor": "Allison Kays",
+      "instructors": [
+        {
+          "name": "Allison Kays",
+          "email": "allison.kays@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "18342"
+        }
+      ],
+      "location": "Goizueta Business School 304",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 28,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Allison Kays"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.137Z"
+}

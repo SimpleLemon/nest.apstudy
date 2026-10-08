@@ -1,0 +1,155 @@
+{
+  "course_code": "SPAN 302W",
+  "course_title": "Modern Hispanic Texts & Contexts",
+  "subject": "SPAN",
+  "catalog_number": "302W",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+  "requirements": [
+    "Intercultural Communication w.Cont.Comm(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "A survey course in Spanish and Spanish American culture from the eighteenth century to the present.",
+  "course_notes": "CONTENT: Spanish 302W is one of the foundational courses for the major and minor in Spanish. This course has a transatlantic and interdisciplinary approach and introduces students to the analysis of cultural texts (novel, poetry, art) in Spain and Latin America from the eighteenth century to the present. PREREQUISITE: SPAN 212 or Official Placement for a Foundational Course (Span 300-318) from the Department of Spanish and Portuguese. Take the Spanish Placement Exam at http://spanport.emory.edu/home/undergraduate/placement/index.html",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "1359",
+      "academic_career": "UCOL",
+      "crn": "1638",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Hernan Feldman",
+      "instructors": [
+        {
+          "name": "Hernan Feldman",
+          "email": "hfeldma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3824"
+        }
+      ],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 10,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "1360",
+      "academic_career": "UCOL",
+      "crn": "1563",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Hernan Feldman",
+      "instructors": [
+        {
+          "name": "Hernan Feldman",
+          "email": "hfeldma@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "3824"
+        }
+      ],
+      "location": "Candler Library 122",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication w.Cont.Comm(*)",
+      "requirements": [
+        "Intercultural Communication w.Cont.Comm(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 15,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 2,
+    "lectures": 2,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 2,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Hernan Feldman"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.109Z"
+}

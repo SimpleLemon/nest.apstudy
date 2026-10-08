@@ -1,0 +1,93 @@
+{
+  "course_code": "SOC 443",
+  "course_title": "Sociology of Music",
+  "subject": "SOC",
+  "catalog_number": "443",
+  "term": "Spring_2027",
+  "srcdb": "5271",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This seminar deals with the sociocultural foundations of music, attending to scholarship on the production, content, and reception of various types of music.",
+  "course_notes": "THIS CLASS IS OPEN TO NON-SENIORS The sociology of music has a long history. Its initial development benefited from the work of scholars who played central roles in the sociological discipline, including WEB Du Bois and Max Weber. Its subsequent development was aided by emergent schools of thoughts whose respective proponents accumulated systematic analyses of musical life. At its core this scholarship deals with the social aspects of music, emphasizing the context that surrounds and enables musical content. We delve into this exciting literature and grapple with the social aspects of music in three broad sections, considering (1) the production of music,(2) the content of music, and (3) the reception and uses of music. Along the way, we address a number of important questions, which include the following: How did we come to have the current system of music, with its particular notes and forms of composition? Why does much music often sound so similar? What types of environments foster innovative music and musical diversity? Why are some types of music (e.g., the works of Beethoven) deemed as high culture while other types (e.g., hip hop) are often classified as popular culture? How do issues of race, gender, and class shape the production and consumption of music? How do people use music in their everyday lives?",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2027-01-11",
+    "end": "2027-04-26"
+  },
+  "sections": [
+    {
+      "atlas_key": "1321",
+      "academic_career": "UCOL",
+      "crn": "2854",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Timothy J Dowd",
+      "instructors": [
+        {
+          "name": "Timothy J Dowd",
+          "email": "tdowd@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1763"
+        }
+      ],
+      "location": "Tarbutton Hall TBA",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 15,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2027-01-11",
+        "end": "2027-04-26"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Timothy J Dowd"
+  ],
+  "scraped_at": "2026-10-07T19:15:00.771Z"
+}

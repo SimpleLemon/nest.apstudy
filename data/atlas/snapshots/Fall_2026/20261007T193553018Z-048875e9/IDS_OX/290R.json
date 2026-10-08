@@ -1,0 +1,107 @@
+{
+  "course_code": "IDS_OX 290R",
+  "course_title": "Interdisciplinary Sidecar: Gut Check",
+  "subject": "IDS_OX",
+  "catalog_number": "290R",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "1",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "A side-car course brings together a subset of students from two courses that overlap in methodologies, topics, etc., to create a short interdisciplinary course that runs simultaneously with its two sponsoring courses. One credit, S/U only. Schedule and format arranged by sponsoring professors.",
+  "course_notes": "Title: Gut Check: Science Communication, Literacy, and the Microbes of Cancer We plan to spotlight diverse groups of scientists and explore their current research including excerpts of primary literature. We intend to tie this into the purpose and perception of science communication at different levels (from primary article to news and social media). Our teaching team expertise spans the fields of Cancer Biology (Dr. Silva) Microbiology (Dr. Essler), and Science, Writing & Communication (Dr. Reid). This class will meet on the following dates: 8/28, 9/4, 9/18, 10/2, 10/16, 10/30, 11/13.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3435",
+      "academic_career": "UOXF",
+      "crn": "5415",
+      "section_number": "1",
+      "schedule_type": "SEM",
+      "instructor": "Lauren Essler",
+      "instructors": [
+        {
+          "name": "Lauren Essler",
+          "email": "lauren.essler@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "43354"
+        },
+        {
+          "name": "Gwendolynne Reid",
+          "email": "gwendolynne.reid@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "14547"
+        },
+        {
+          "name": "Jordan Silva",
+          "email": "jordan.silva@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25817"
+        },
+        {
+          "name": "Molly Huang",
+          "email": "molly.huang@emory.edu",
+          "role": "Teaching Assistant",
+          "atlas_id": "47020"
+        }
+      ],
+      "location": "Oxford Science Bldg. 101",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "1",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 16,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "F 10a-12p",
+        "meetings": [
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1200"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 0,
+    "labs": 0,
+    "discussions": 0,
+    "other": 1,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Gwendolynne Reid",
+    "Jordan Silva",
+    "Lauren Essler",
+    "Molly Huang"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.123Z"
+}

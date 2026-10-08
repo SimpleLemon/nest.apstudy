@@ -1,0 +1,587 @@
+{
+  "course_code": "KRN 101",
+  "course_title": "Elementary Korean I",
+  "subject": "KRN",
+  "catalog_number": "101",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "4",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "This is the first half of the Elementary Korean language course. It is designed for those who have very limited or no prior knowledge of Korean language. Emphasis is placed on the fundamentals of listening, speaking, reading, and writing.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "2658",
+      "academic_career": "UCOL",
+      "crn": "1913",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Eunae Jo",
+      "instructors": [
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        },
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        }
+      ],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 14,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a; F 8:30-9:20a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Fri",
+            "start": "830",
+            "end": "920"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2659",
+      "academic_career": "UCOL",
+      "crn": "1914",
+      "section_number": "2",
+      "schedule_type": "LEC",
+      "instructor": "Eunae Jo",
+      "instructors": [
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        },
+        {
+          "name": "Eunae Jo",
+          "email": "eunae.jo@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36528"
+        }
+      ],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a; F 10-10:50a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Fri",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2660",
+      "academic_career": "UCOL",
+      "crn": "1915",
+      "section_number": "3",
+      "schedule_type": "LEC",
+      "instructor": "Sorin Huh",
+      "instructors": [
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        },
+        {
+          "name": "Sorin Huh",
+          "email": "sorin.huh@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "22084"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 8,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p; F 1-1:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Fri",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2661",
+      "academic_career": "UCOL",
+      "crn": "1916",
+      "section_number": "4",
+      "schedule_type": "LEC",
+      "instructor": "Bumyong Choi",
+      "instructors": [
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Junghyun Kim",
+          "email": "junghyun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47043"
+        },
+        {
+          "name": "Junghyun Kim",
+          "email": "junghyun.kim@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47043"
+        }
+      ],
+      "location": "Modern Language 127",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p; F 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Fri",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2662",
+      "academic_career": "UCOL",
+      "crn": "1917",
+      "section_number": "5",
+      "schedule_type": "LEC",
+      "instructor": "Bumyong Choi",
+      "instructors": [
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Callaway N118",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 10-10:50a",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1000",
+            "end": "1050"
+          },
+          {
+            "day": "Thu",
+            "start": "1000",
+            "end": "1050"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2663",
+      "academic_career": "UCOL",
+      "crn": "1918",
+      "section_number": "6",
+      "schedule_type": "LEC",
+      "instructor": "Bumyong Choi",
+      "instructors": [
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Modern Language 201",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-1:50p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1350"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1350"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2664",
+      "academic_career": "UCOL",
+      "crn": "1919",
+      "section_number": "7",
+      "schedule_type": "LEC",
+      "instructor": "Bumyong Choi",
+      "instructors": [
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "Modern Language 219",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Blended/Hybrid",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 14,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 2:30-3:20p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1430",
+            "end": "1520"
+          },
+          {
+            "day": "Thu",
+            "start": "1430",
+            "end": "1520"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "2665",
+      "academic_career": "UCOL",
+      "crn": "1920",
+      "section_number": "8",
+      "schedule_type": "LEC",
+      "instructor": "Bumyong Choi",
+      "instructors": [
+        {
+          "name": "Bumyong Choi",
+          "email": "bumyongchoi@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "5190"
+        },
+        {
+          "name": "Nayoung Kim",
+          "email": "nayoung.kim2@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "47284"
+        }
+      ],
+      "location": "ONLINE",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ONLINE",
+      "credit_hours": "4",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "Distance Learning",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 4-4:50p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1600",
+            "end": "1650"
+          },
+          {
+            "day": "Wed",
+            "start": "1600",
+            "end": "1650"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 8,
+    "lectures": 8,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 6,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Bumyong Choi",
+    "Eunae Jo",
+    "Junghyun Kim",
+    "Nayoung Kim",
+    "Sorin Huh"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.076Z"
+}

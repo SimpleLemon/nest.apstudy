@@ -26,7 +26,7 @@ if PROJECT_ROOT not in sys.path:
 from services.atlas_client import (
     ATLAS_BASE_URL,
     ATLAS_REQUIRED_HEADERS,
-    ATLAS_TERM_SRCDB,
+    get_atlas_term_srcdb,
     STARRED_GENERAL_ED_REQUIREMENTS,
     parse_atlas_details_payload,
 )
@@ -252,7 +252,7 @@ def parse_list(value: str | None, fallback: tuple[str, ...]) -> list[str]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Ping Atlas FOSE criteria candidates without modifying scraper output.")
-    parser.add_argument("--term", default=DEFAULT_TERM, choices=sorted(ATLAS_TERM_SRCDB.keys()))
+    parser.add_argument("--term", default=DEFAULT_TERM, choices=sorted(get_atlas_term_srcdb().keys()))
     parser.add_argument("--subject", default=DEFAULT_SUBJECT)
     parser.add_argument("--requirement", default=DEFAULT_REQUIREMENT, choices=STARRED_GENERAL_ED_REQUIREMENTS)
     parser.add_argument("--campus-values", default=None, help="Comma-separated campus values to test.")
@@ -270,7 +270,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    srcdb = ATLAS_TERM_SRCDB[args.term]
+    srcdb = get_atlas_term_srcdb()[args.term]
     print(f"Atlas ping diagnostics: term={args.term} srcdb={srcdb} subject={args.subject}")
     print("No files will be written.\n")
 

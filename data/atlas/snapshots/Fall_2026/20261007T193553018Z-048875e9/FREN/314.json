@@ -1,0 +1,97 @@
+{
+  "course_code": "FREN 314",
+  "course_title": "Reading Across Media",
+  "subject": "FREN",
+  "catalog_number": "314",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Intercultural Communication(*)",
+  "requirements": [
+    "Intercultural Communication(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "An introduction to the reading and interpretation of a variety of literary and cultural media including poetry, drama, prose fiction, political writings, publicity, films, painting, and architecture.",
+  "course_notes": "FREN 314 Reading Across Media. Professor Elissa Marder (TT 1:00-2:15pm). Content: This class proposes an introduction to French literary studies with a focus on close reading and textual analysis. Its objective is to provide students with methodological foundations and tools that will allow them to engage creatively with texts from different periods and in different genres. Those genres may include fairytales, verse and prose poetry, classical tragedy, a nineteenth-century short story, essayistic literature, paintings, music, and films. Our theme this semester will be \"Monstrous Passions.\" Throughout the semester, we will examine a wide range of major French and Francophone works that explore what it means to be human by looking at the disruptive force of passions such as curiosity, transgressive desire, fascination with unknowable others, mad love, trans-generational memories, and creative expressions of resistance to colonial oppression. Texts studied include short written works by Perrault, Racine, Ronsard, Baudelaire, Balzac, Chamoiseau, Césaire, Cixous, Duras, Louise Labé, and films by Alain Resnais and Mati Diop.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "735",
+      "academic_career": "UCOL",
+      "crn": "1524",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Elissa Marder",
+      "instructors": [
+        {
+          "name": "Elissa Marder",
+          "email": "emarder@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "1766"
+        }
+      ],
+      "location": "Callaway S103",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Intercultural Communication(*)",
+      "requirements": [
+        "Intercultural Communication(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 18,
+      "seats_available": 3,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 1-2:15p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Thu",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Elissa Marder"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.061Z"
+}

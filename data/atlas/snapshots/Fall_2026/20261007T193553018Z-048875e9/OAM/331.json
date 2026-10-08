@@ -1,0 +1,730 @@
+{
+  "course_code": "OAM 331",
+  "course_title": "Strategic Management",
+  "subject": "OAM",
+  "catalog_number": "331",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Strategic management focuses on the \"big picture\" questions in business: What drives the total profitability of an entire corporation? Why do some companies succeed while others fail? And what -- if anything -- can managers really do about it? The main strategic problem for any company is to diagnose its situation correctly despite incomplete and ambiguous information about the problems and opportunities that it faces.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "242",
+      "academic_career": "UBUS",
+      "crn": "6652",
+      "section_number": "1109",
+      "schedule_type": "LEC",
+      "instructor": "Declan Clear",
+      "instructors": [
+        {
+          "name": "Declan Clear",
+          "email": "declan.joseph.clear@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "36315"
+        }
+      ],
+      "location": null,
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Satisfactory/Unsatisfactory",
+      "grading_mode_options": [
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 66,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "Does Not Meet",
+        "meetings": []
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "243",
+      "academic_career": "UBUS",
+      "crn": "3583",
+      "section_number": "1163",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 64,
+      "seats_available": 5,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "244",
+      "academic_career": "UBUS",
+      "crn": "3584",
+      "section_number": "1164",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 64,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "245",
+      "academic_career": "UBUS",
+      "crn": "3585",
+      "section_number": "1165",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": null,
+      "enrollment_capacity": 65,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "246",
+      "academic_career": "UBUS",
+      "crn": "3586",
+      "section_number": "1166",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 60,
+      "seats_available": 1,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "247",
+      "academic_career": "UBUS",
+      "crn": "5627",
+      "section_number": "1186",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Oettl",
+      "instructors": [
+        {
+          "name": "Alexander Oettl",
+          "email": "aoettl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46473"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 33,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "248",
+      "academic_career": "UBUS",
+      "crn": "5629",
+      "section_number": "1187",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Oettl",
+      "instructors": [
+        {
+          "name": "Alexander Oettl",
+          "email": "aoettl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46473"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 66,
+      "seats_available": 21,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "249",
+      "academic_career": "UBUS",
+      "crn": "3587",
+      "section_number": "1463",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "250",
+      "academic_career": "UBUS",
+      "crn": "3588",
+      "section_number": "1464",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W330",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 10-11:15a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1000",
+            "end": "1115"
+          },
+          {
+            "day": "Wed",
+            "start": "1000",
+            "end": "1115"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "251",
+      "academic_career": "UBUS",
+      "crn": "3589",
+      "section_number": "1465",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "252",
+      "academic_career": "UBUS",
+      "crn": "3590",
+      "section_number": "1466",
+      "schedule_type": "LEC",
+      "instructor": "John Kim",
+      "instructors": [
+        {
+          "name": "John Kim",
+          "email": "jkstrategy@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "12712"
+        }
+      ],
+      "location": "Goizueta Business School 204",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "253",
+      "academic_career": "UBUS",
+      "crn": "5628",
+      "section_number": "1486",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Oettl",
+      "instructors": [
+        {
+          "name": "Alexander Oettl",
+          "email": "aoettl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46473"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 1-2:15p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1300",
+            "end": "1415"
+          },
+          {
+            "day": "Wed",
+            "start": "1300",
+            "end": "1415"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    },
+    {
+      "atlas_key": "254",
+      "academic_career": "UBUS",
+      "crn": "5630",
+      "section_number": "1487",
+      "schedule_type": "LEC",
+      "instructor": "Alexander Oettl",
+      "instructors": [
+        {
+          "name": "Alexander Oettl",
+          "email": "aoettl@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "46473"
+        }
+      ],
+      "location": "Goizueta Foundation Ctr W131",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Graded",
+      "grading_mode_options": [
+        "GRD",
+        "Graded"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Closed",
+      "enrollment_count": null,
+      "enrollment_capacity": 0,
+      "seats_available": 0,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 2:30-3:45p",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "1430",
+            "end": "1545"
+          },
+          {
+            "day": "Wed",
+            "start": "1430",
+            "end": "1545"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 13,
+    "lectures": 13,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 6,
+    "closed": 6,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Alexander Oettl",
+    "Declan Clear",
+    "John Kim"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.145Z"
+}

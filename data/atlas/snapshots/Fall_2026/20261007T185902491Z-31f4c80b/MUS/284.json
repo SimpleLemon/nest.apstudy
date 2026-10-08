@@ -1,0 +1,97 @@
+{
+  "course_code": "MUS 284",
+  "course_title": "20th and 21st Century Music",
+  "subject": "MUS",
+  "catalog_number": "284",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Humanities and Arts(*)",
+  "requirements": [
+    "Humanities and Arts(*)"
+  ],
+  "campus": "Atlanta",
+  "campus_description": "ATL@ATLANTA",
+  "course_description": "Offers a detailed historical examination of Western classical music composed since 1900, emphasizing both repertoire and the cultural practice of music-making.",
+  "course_notes": "",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "3055",
+      "academic_career": "UCOL",
+      "crn": "3021",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Heidi Senungetuk",
+      "instructors": [
+        {
+          "name": "Heidi Senungetuk",
+          "email": "heidi.aklaseaq.senungetuk@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "25410"
+        }
+      ],
+      "location": "Burlington Road Building 307",
+      "campus": "Atlanta",
+      "campus_description": "ATL@ATLANTA",
+      "credit_hours": "3",
+      "requirement_designation": "Humanities and Arts(*)",
+      "requirements": [
+        "Humanities and Arts(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": "1",
+      "enrollment_capacity": 15,
+      "seats_available": 2,
+      "waitlist_total": null,
+      "waitlist_capacity": null,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Heidi Senungetuk"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.563Z"
+}

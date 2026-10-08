@@ -1,0 +1,93 @@
+{
+  "course_code": "NRSG_OX 207",
+  "course_title": "Introduction to Clinical Nutrition",
+  "subject": "NRSG_OX",
+  "catalog_number": "207",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": null,
+  "requirements": [],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "This course introduces nutrition science knowledge that emphasizes 1) basic biochemical functions and interactions of macronutrients/micronutrients and effect on human physiology, and 2) how nutrition research is used to develop dietary recommendations for individuals and specific populations .",
+  "course_notes": "Instructor permission required to enroll. Students must contact the Advising Support Center to request permission numbers.",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4273",
+      "academic_career": "UOXF",
+      "crn": "4376",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Caroline Brantley",
+      "instructors": [
+        {
+          "name": "Caroline Brantley",
+          "email": "caroline.michelle.brantley@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "39679"
+        }
+      ],
+      "location": "Oxford Science Bldg. 115",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": null,
+      "requirements": [],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Wait List",
+      "enrollment_count": "1",
+      "enrollment_capacity": 33,
+      "seats_available": 0,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "MW 8:30-9:45a",
+        "meetings": [
+          {
+            "day": "Mon",
+            "start": "830",
+            "end": "945"
+          },
+          {
+            "day": "Wed",
+            "start": "830",
+            "end": "945"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 0,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Caroline Brantley"
+  ],
+  "scraped_at": "2026-10-07T18:59:02.611Z"
+}

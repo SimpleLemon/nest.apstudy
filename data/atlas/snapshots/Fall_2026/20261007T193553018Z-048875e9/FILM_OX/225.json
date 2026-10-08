@@ -1,0 +1,97 @@
+{
+  "course_code": "FILM_OX 225",
+  "course_title": "Foundation in Media Psychology",
+  "subject": "FILM_OX",
+  "catalog_number": "225",
+  "term": "Fall_2026",
+  "srcdb": "5269",
+  "credit_hours": "3",
+  "requirement_designation": "Social Sciences(*)",
+  "requirements": [
+    "Social Sciences(*)"
+  ],
+  "campus": "Oxford",
+  "campus_description": "OXF@OXFORD",
+  "course_description": "Media Psychology sits at the intersection between the media and the human mind. This course is designed as an interdisciplinary course between the Psychology and the Film and Media Studies departments for Oxford College, Emory University. This course aims to present a foundational exploration of media psychology that can be applied to a diverse range of media choices consumers have today.This course is cross-listed with Film_OX 225 and will count as an elective for the Film and Media department.",
+  "course_notes": "Cross-listed with PSYC_OX 225",
+  "requisites": null,
+  "cross_listed": null,
+  "date_range": {
+    "start": "2026-08-26",
+    "end": "2026-12-09"
+  },
+  "sections": [
+    {
+      "atlas_key": "4705",
+      "academic_career": "UOXF",
+      "crn": "4233",
+      "section_number": "1",
+      "schedule_type": "LEC",
+      "instructor": "Scott Garner",
+      "instructors": [
+        {
+          "name": "Scott Garner",
+          "email": "sgarne4@emory.edu",
+          "role": "Primary Instructor",
+          "atlas_id": "31179"
+        }
+      ],
+      "location": "Pierce Hall 140",
+      "campus": "Oxford",
+      "campus_description": "OXF@OXFORD",
+      "credit_hours": "3",
+      "requirement_designation": "Social Sciences(*)",
+      "requirements": [
+        "Social Sciences(*)"
+      ],
+      "grading_mode": "Student Option",
+      "grading_mode_options": [
+        "GRD",
+        "Graded",
+        "SUS",
+        "Satisfactory/Unsatisfactory"
+      ],
+      "instruction_method": "In Person",
+      "enrollment_status": "Open",
+      "enrollment_count": null,
+      "enrollment_capacity": 12,
+      "seats_available": 1,
+      "waitlist_total": 0,
+      "waitlist_capacity": 6,
+      "is_cancelled": false,
+      "schedule": {
+        "display": "TTh 11:30a-12:45p",
+        "meetings": [
+          {
+            "day": "Tue",
+            "start": "1130",
+            "end": "1245"
+          },
+          {
+            "day": "Thu",
+            "start": "1130",
+            "end": "1245"
+          }
+        ]
+      },
+      "date_range": {
+        "start": "2026-08-26",
+        "end": "2026-12-09"
+      }
+    }
+  ],
+  "section_summary": {
+    "total_sections": 1,
+    "lectures": 1,
+    "labs": 0,
+    "discussions": 0,
+    "other": 0,
+    "open": 1,
+    "closed": 0,
+    "waitlisted": 0
+  },
+  "instructors_unique": [
+    "Scott Garner"
+  ],
+  "scraped_at": "2026-10-07T19:35:53.121Z"
+}
