@@ -24,12 +24,15 @@ function avatarUrlForSize(url, size = 32) {
   let parsedUrl;
   try {
     parsedUrl = new URL(rawUrl, window.location.origin);
-  } catch (error) {
+  } catch {
     return rawUrl;
   }
 
   const host = parsedUrl.hostname.toLowerCase();
   const normalizedSize = Math.max(16, Math.min(Number.parseInt(size, 10) || 32, 512));
+
+  // Nest avatar objects keep one canonical URL at every display size.
+  if (parsedUrl.pathname.startsWith('/api/avatars/')) return rawUrl;
 
   if (host.includes('githubusercontent.com')) {
     parsedUrl.searchParams.set('s', String(normalizedSize));
@@ -116,7 +119,7 @@ function ensureCommandPaletteModule() {
   }
 
   if (!commandPaletteModulePromise) {
-    commandPaletteModulePromise = import('/static/js/core/command-palette.js')
+    commandPaletteModulePromise = import('/static/js/core/dist/command-palette.js')
       .then((module) => module.commandPalette || window.APSTUDY_COMMAND_PALETTE)
       .catch((error) => {
         commandPaletteModulePromise = null;
@@ -172,7 +175,7 @@ async function refreshFocusModeStatus() {
     if (!response.ok) return;
     const payload = await response.json();
     setFocusModeStatus(payload.active === true);
-  } catch (_error) {
+  } catch {
     // Profile status is supplemental; the Focus page remains authoritative.
   }
 }

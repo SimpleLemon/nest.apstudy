@@ -1,5 +1,5 @@
-import * as React from 'https://esm.sh/react@18.3.1';
-import { Command } from 'https://esm.sh/cmdk@1.1.1?deps=react@18.3.1,react-dom@18.3.1';
+import * as React from 'react';
+import { Command } from './command-palette-controls.js';
 import { WORKSPACE_SEARCH_GROUPS, formatSearchTimestamp } from './command-palette-search.js';
 
 const h = React.createElement;

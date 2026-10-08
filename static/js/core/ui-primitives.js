@@ -11,13 +11,7 @@
 (() => {
     if (window.APStudyUIPrimitives) return;
 
-    const escapeHtml = (value) => {
-        const div = document.createElement('div');
-        div.textContent = value == null ? '' : String(value);
-        return div.innerHTML
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    };
+    const { escapeHtml } = globalThis.APStudyCoreServices.escaping;
 
     const normalizeFields = (fields) => (Array.isArray(fields) ? fields : [fields]).filter(Boolean);
     const autoClearHandlers = new WeakMap();
@@ -320,6 +314,13 @@
         return message.trim() || fallback;
     }
 
+    /**
+     * commit and dismiss choose commit; undo chooses restoration. The first
+     * operation wins, and every control shares its completion promise. It resolves
+     * { action, ok } after callbacks, restoration and feedback finish; handled
+     * failures resolve { action, ok: false, error, restoreError? } rather than
+     * rejecting, so automatic dismissal and pagehide never leak a rejection.
+     */
     function stageUndoableAction(options = {}) {
         if (!options || typeof options !== 'object') return null;
         const message = toastText(options.message);
@@ -328,6 +329,7 @@
         const record = {
             settled: false,
             restored: false,
+            completion: null,
             toast: null,
         };
 
@@ -339,46 +341,61 @@
             }
         };
 
-        const undo = async (reason = 'action') => {
-            if (record.settled) return;
+        const settle = (operation) => {
+            if (record.settled) return record.completion;
             record.settled = true;
             pendingUndoOperations.delete(record);
-            try {
-                await restore(reason);
-                if (typeof options.onUndo === 'function') options.onUndo({ reason });
-            } catch (error) {
-                window.APStudyToast?.error?.(
-                    undoErrorMessage(error, options.undoErrorMessage || 'Refresh the page to recover the item.'),
-                    { title: options.undoErrorTitle || 'Couldn’t undo removal' },
-                );
-            }
+            // Defer the callback until completion is stored, including reentry.
+            record.completion = Promise.resolve().then(operation);
+            return record.completion;
         };
 
-        const commit = async (reason = 'timeout') => {
-            if (record.settled) return;
-            record.settled = true;
-            pendingUndoOperations.delete(record);
+        const undo = (reason = 'action') => settle(async () => {
             try {
-                if (typeof options.commit === 'function') {
-                    await options.commit({ reason });
-                }
-                if (typeof options.onCommit === 'function') options.onCommit({ reason });
+                await restore(reason);
+                if (typeof options.onUndo === 'function') await options.onUndo({ reason });
+                return { action: 'undo', ok: true };
             } catch (error) {
                 try {
-                    await restore('commit-error');
-                } catch (restoreError) {
-                    console.error('Unable to restore an item after deletion failed.', restoreError);
-                }
-                if (typeof options.onCommitError === 'function') {
-                    options.onCommitError(error);
-                } else {
                     window.APStudyToast?.error?.(
-                        undoErrorMessage(error, options.errorMessage || 'The item was restored. Try again in a moment.'),
-                        { title: options.errorTitle || 'Couldn’t delete item' },
+                        undoErrorMessage(error, options.undoErrorMessage || 'Refresh the page to recover the item.'),
+                        { title: options.undoErrorTitle || 'Couldn’t undo removal' },
                     );
+                } catch (feedbackError) {
+                    console.error('Unable to report an undo failure.', feedbackError);
                 }
+                return { action: 'undo', ok: false, error };
             }
-        };
+        });
+
+        const commit = (reason = 'timeout') => settle(async () => {
+            try {
+                if (typeof options.commit === 'function') await options.commit({ reason });
+                if (typeof options.onCommit === 'function') await options.onCommit({ reason });
+                return { action: 'commit', ok: true };
+            } catch (error) {
+                let restoreError;
+                try {
+                    await restore('commit-error');
+                } catch (failure) {
+                    restoreError = failure;
+                    console.error('Unable to restore an item after deletion failed.', failure);
+                }
+                try {
+                    if (typeof options.onCommitError === 'function') {
+                        await options.onCommitError(error);
+                    } else {
+                        window.APStudyToast?.error?.(
+                            undoErrorMessage(error, options.errorMessage || 'The item was restored. Try again in a moment.'),
+                            { title: options.errorTitle || 'Couldn’t delete item' },
+                        );
+                    }
+                } catch (feedbackError) {
+                    console.error('Unable to report a deletion failure.', feedbackError);
+                }
+                return { action: 'commit', ok: false, error, ...(restoreError ? { restoreError } : {}) };
+            }
+        });
 
         pendingUndoOperations.add(record);
         record.commit = commit;
@@ -389,9 +406,7 @@
             duration: options.duration == null ? 10_000 : options.duration,
             action: {
                 label: options.actionLabel || 'Undo',
-                onClick: () => {
-                    void undo('action');
-                },
+                onClick: () => undo('action'),
             },
             onDismiss: (reason) => {
                 if (reason !== 'action') void commit(reason);
@@ -399,14 +414,19 @@
         });
         return {
             commit: () => {
+                const completion = commit('commit');
                 record.toast?.dismiss?.('commit');
+                return completion;
             },
             dismiss: () => {
+                const completion = commit('programmatic');
                 record.toast?.dismiss?.('programmatic');
+                return completion;
             },
             undo: () => {
-                void undo('programmatic');
+                const completion = undo('programmatic');
                 record.toast?.dismiss?.('action');
+                return completion;
             },
         };
     }

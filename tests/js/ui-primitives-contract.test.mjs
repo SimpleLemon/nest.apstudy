@@ -12,26 +12,17 @@ const baseExtendsPattern = /{%\s*extends\s+['"]base\.html['"]\s*%}/;
 const blockPattern = /{%\s*block\s+([A-Za-z_][A-Za-z0-9_]*)\s*%}([\s\S]*?){%\s*endblock\s*%}/g;
 const primitives = fs.readFileSync(path.join(repoRoot, 'static/js/core/ui-primitives.js'), 'utf8');
 const primitivesModule = fs.readFileSync(path.join(repoRoot, 'static/js/core/ui-primitives-module.js'), 'utf8');
+const escaping = fs.readFileSync(path.join(repoRoot, 'static/js/core/escaping.js'), 'utf8');
 const feedbackOverlays = fs.readFileSync(path.join(repoRoot, 'static/css/core/feedback-overlays.css'), 'utf8');
 
 function loadUiPrimitives() {
     const window = { addEventListener() {} };
     const document = {
         addEventListener() {},
-        createElement() {
-            let text = '';
-            return {
-                set textContent(value) { text = value; },
-                get innerHTML() {
-                    return text
-                        .replace(/&/g, '&amp;')
-                        .replace(/</g, '&lt;')
-                        .replace(/>/g, '&gt;');
-                },
-            };
-        },
     };
-    vm.runInNewContext(primitives, { document, window });
+    const context = vm.createContext({ document, window });
+    vm.runInContext(escaping, context);
+    vm.runInContext(primitives, context);
     return window.APStudyUIPrimitives;
 }
 
@@ -59,12 +50,10 @@ test('shared UI primitive module has substantive owned APIs', () => {
         assert.match(primitives, new RegExp(`window\\.${api}`));
     }
     assert.match(primitives, /window\.APStudyUIPrimitives = Object\.freeze/);
-    assert.match(primitives, /div\.textContent = value == null \? '' : String\(value\)/);
-    assert.match(primitives, /\.replace\(\/"\/g, '&quot;'\)/);
-    assert.match(primitives, /\.replace\(\/'\/g, '&#39;'\)/);
+    assert.match(primitives, /const \{ escapeHtml \} = globalThis\.APStudyCoreServices\.escaping/);
     assert.match(primitives, /Object\.freeze\(\{\s*escapeHtml,/);
-    assert.match(primitivesModule, /import '\.\/ui-primitives\.js(\?v=[0-9a-f]{64})?'/);
-    assert.match(primitivesModule, /export const \{ escapeHtml \} = window\.APStudyUIPrimitives/);
+    assert.match(primitivesModule, /import '\.\/escaping\.js(\?v=[0-9a-f]{64})?'/);
+    assert.match(primitivesModule, /export const \{ escapeHtml \} = globalThis\.APStudyCoreServices\.escaping/);
     assert.ok(primitives.length > 8_000, 'ui-primitives.js must not become an empty compatibility shim');
     const globalSource = fs.readFileSync(path.join(repoRoot, 'static/js/core/global.js'), 'utf8');
     assert.doesNotMatch(globalSource, /window\.APStudy(?:FormField|Loader|Skeleton|Toast|Confirm)\s*=/);
@@ -106,6 +95,7 @@ test('every template using global.js receives primitives first through the share
     const runtime = fs.readFileSync(path.join(repoRoot, 'templates/_shared_runtime_assets.html'), 'utf8');
     assert.match(diagnostics, /include "_shared_runtime_assets\.html"/);
     assert.match(runtime, /js\/core\/ui-primitives\.js/);
+    assert.ok(runtime.indexOf('js/core/escaping.js') < runtime.indexOf('js/core/ui-primitives.js'));
 
     const templates = fs.readdirSync(templatesRoot)
         .filter((filename) => filename.endsWith('.html'));
@@ -115,4 +105,133 @@ test('every template using global.js receives primitives first through the share
         assert.ok(source.includes('_diagnostics_assets.html'), `${filename} skips shared runtime assets`);
         assert.ok(source.indexOf('_diagnostics_assets.html') < source.indexOf('js/core/global.js'), `${filename} loads primitives after global.js`);
     }
+});
+
+function undoRuntime() {
+    const elements = [];
+    const listeners = new Map();
+    const timers = new Map();
+    const errors = [];
+    let timerId = 0;
+    function element(tag) {
+        const callbacks = new Map();
+        const node = {
+            tag, children: [], className: '', style: { setProperty() {} },
+            classList: { add() {}, remove() {}, toggle() {} },
+            setAttribute() {}, removeAttribute() {},
+            appendChild(child) { this.children.push(child); },
+            append(...children) { this.children.push(...children); },
+            prepend(child) { this.children.unshift(child); },
+            remove() { this.removed = true; }, contains: () => false,
+            addEventListener(type, callback) { callbacks.set(type, callback); },
+            fire: type => callbacks.get(type)?.({ relatedTarget: null }),
+        };
+        elements.push(node);
+        return node;
+    }
+    const document = {
+        body: element('body'), addEventListener() {},
+        getElementById: id => elements.find(node => node.id === id),
+        createElement: element, createElementNS: (_namespace, tag) => element(tag),
+    };
+    const window = {
+        addEventListener(type, callback) { listeners.set(type, callback); },
+        setTimeout(callback, delay) { const id = ++timerId; timers.set(id, { callback, delay }); return id; },
+        clearTimeout: id => timers.delete(id),
+    };
+    const context = vm.createContext({ document, window, Error, console: { error: (...values) => errors.push(values) }, performance: { now: () => 0 }, requestAnimationFrame: callback => callback() });
+    vm.runInContext(escaping, context);
+    vm.runInContext(primitives, context);
+    return {
+        api: window.APStudyUndo, errors,
+        pagehide: () => listeners.get('pagehide')(),
+        timeout() { const timer = [...timers.values()].find(entry => entry.delay === 10_000); assert.ok(timer); timer.callback(); },
+        action: () => elements.find(node => node.className === 'apstudy-toast__action'),
+        close: () => elements.find(node => node.className === 'apstudy-toast__close'),
+        feedback: () => elements.filter(node => node.className === 'apstudy-toast is-error'),
+    };
+}
+
+for (const winner of ['commit', 'dismiss', 'undo']) {
+    test(`Undo ${winner} returns one winning promise through repeated and competing controls`, async () => {
+        const fixture = undoRuntime();
+        const work = Promise.withResolvers();
+        const calls = [];
+        let reentrant;
+        const controller = fixture.api.stage({ message: 'Removed',
+            commit: async () => { calls.push('commit'); reentrant = controller.undo(); await work.promise; },
+            restore: async () => { calls.push('restore'); reentrant = controller.commit(); await work.promise; },
+        });
+        assert.equal(fixture.api.pendingCount(), 1);
+        const completion = controller[winner]();
+        assert.equal(fixture.api.pendingCount(), 0);
+        for (const action of ['undo', 'commit', 'dismiss', winner]) assert.equal(controller[action](), completion);
+        await Promise.resolve();
+        assert.equal(reentrant, completion);
+        let finished = false;
+        completion.then(() => { finished = true; });
+        await Promise.resolve();
+        assert.equal(finished, false);
+        work.resolve();
+        const result = await completion;
+        assert.equal(result.action, winner === 'undo' ? 'undo' : 'commit');
+        assert.equal(result.ok, true);
+        assert.deepEqual(calls, [winner === 'undo' ? 'restore' : 'commit']);
+    });
+}
+
+test('Undo actual toast action restores once and all later controller calls share its completion', async () => {
+    const fixture = undoRuntime();
+    const work = Promise.withResolvers();
+    let restored = 0;
+    let committed = 0;
+    const controller = fixture.api.stage({ message: 'Removed', restore: async () => { restored += 1; await work.promise; }, commit: () => { committed += 1; } });
+    const click = fixture.action().fire('click');
+    assert.equal(fixture.action().disabled, true);
+    const completion = controller.commit();
+    assert.equal(controller.undo(), completion);
+    work.resolve();
+    await click;
+    assert.equal((await completion).action, 'undo');
+    assert.equal(restored, 1);
+    assert.equal(committed, 0);
+    assert.equal(fixture.action().disabled, false);
+});
+
+for (const automatic of ['timeout', 'pagehide', 'close']) {
+    test(`Undo ${automatic} contains commit, restoration and feedback failure and exposes the same handled result`, async () => {
+        const fixture = undoRuntime();
+        const commitError = new Error('Deletion failed');
+        const restoreError = new Error('Restoration failed');
+        const feedbackError = new Error('Feedback failed');
+        const calls = [];
+        const controller = fixture.api.stage({ message: 'Removed',
+            commit: async ({ reason }) => { calls.push(reason); throw commitError; },
+            restore: async ({ reason }) => { calls.push(reason); throw restoreError; },
+            onCommitError: async () => { calls.push('feedback'); throw feedbackError; },
+        });
+        if (automatic === 'close') fixture.close().fire('click');
+        else fixture[automatic]();
+        const completion = controller.undo();
+        assert.equal(controller.dismiss(), completion);
+        const result = await completion;
+        assert.equal(result.action, 'commit');
+        assert.equal(result.ok, false);
+        assert.equal(result.error, commitError);
+        assert.equal(result.restoreError, restoreError);
+        assert.deepEqual(calls, [automatic, 'commit-error', 'feedback']);
+        assert.equal(fixture.errors.length, 2);
+        assert.equal(fixture.api.pendingCount(), 0);
+    });
+}
+
+test('Undo restoration failure resolves a handled failure and renders real error feedback', async () => {
+    const fixture = undoRuntime();
+    const restoreError = new Error('Restore failed');
+    const controller = fixture.api.stage({ message: 'Removed', restore: async () => { throw restoreError; } });
+    const result = await controller.undo();
+    assert.equal(result.action, 'undo');
+    assert.equal(result.ok, false);
+    assert.equal(result.error, restoreError);
+    assert.equal(fixture.feedback().length, 1);
 });

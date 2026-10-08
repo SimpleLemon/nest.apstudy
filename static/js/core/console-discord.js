@@ -24,7 +24,7 @@
         if (typeof value === "object") {
             try {
                 return JSON.stringify(value);
-            } catch (error) {
+            } catch {
                 return String(value);
             }
         }

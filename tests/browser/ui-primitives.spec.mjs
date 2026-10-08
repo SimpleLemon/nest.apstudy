@@ -3,7 +3,7 @@ import { expect, test } from "playwright/test";
 test("shared form, loader, skeleton, toast, and dialog primitives initialize independently", async ({ page, baseURL }) => {
     await page.route("**/ui-primitives-harness", (route) => route.fulfill({
         contentType: "text/html",
-        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><button id="trigger">Delete</button><input id="field"><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
+        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><button id="trigger">Delete</button><input id="field"><script src="/static/js/core/escaping.js"></script><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
     }));
     await page.goto(`${baseURL}/ui-primitives-harness`, { waitUntil: "networkidle" });
 
@@ -45,7 +45,7 @@ test("shared form, loader, skeleton, toast, and dialog primitives initialize ind
 test("toast variants normalize content and expose a consistent accessible structure", async ({ page, baseURL }) => {
     await page.route("**/ui-primitives-harness", (route) => route.fulfill({
         contentType: "text/html",
-        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
+        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/escaping.js"></script><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
     }));
     await page.goto(`${baseURL}/ui-primitives-harness`, { waitUntil: "networkidle" });
 
@@ -92,7 +92,7 @@ test("toast timing pauses with interaction and reduced motion suppresses progres
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.route("**/ui-primitives-harness", (route) => route.fulfill({
         contentType: "text/html",
-        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
+        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/escaping.js"></script><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
     }));
     await page.goto(`${baseURL}/ui-primitives-harness`, { waitUntil: "networkidle" });
 
@@ -110,7 +110,7 @@ test("toast layout remains bounded and usable on a narrow viewport", async ({ pa
     await page.setViewportSize({ width: 390, height: 640 });
     await page.route("**/ui-primitives-harness", (route) => route.fulfill({
         contentType: "text/html",
-        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
+        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/global.css"><link rel="stylesheet" href="/static/css/core/feedback-overlays.css"></head><body><script src="/static/js/core/escaping.js"></script><script src="/static/js/core/ui-primitives.js"></script></body></html>`,
     }));
     await page.goto(`${baseURL}/ui-primitives-harness`, { waitUntil: "networkidle" });
     await page.evaluate(() => {

@@ -15,9 +15,11 @@ const SIDEBAR_ICONS = {
   expand: sidebarSvgIcon("M7.293 14.707a1 1 0 0 1 0-1.414L10.586 10 7.293 6.707a1 1 0 1 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0"),
 };
 
-function materialSymbol(name) {
-  return `<span class="material-symbols-outlined sidebar-material-icon" aria-hidden="true">${name}</span>`;
-}
+const SIDEBAR_MOTION = {
+  duration: 240,
+  easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+};
+
 
 function sidebarSvgIcon(path) {
   return `<svg class="sidebar-toggle-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentcolor" fill-rule="evenodd" d="${path}" clip-rule="evenodd"></path></svg>`;
@@ -69,6 +71,8 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   const toggleTooltip = toggleHandle?.querySelector('.sidebar-toggle-tooltip');
   const items = document.querySelectorAll('.sidebar-item');
   const mobileQuery = window.matchMedia('(max-width: 1024px)');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let sidebarMotionRunning = false;
 
   function isMobileShell() {
     return mobileQuery.matches;
@@ -138,13 +142,9 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
   });
 
   const handleShellSizeChange = () => {
-    if (!isMobileShell()) {
-      setMobileSidebarOpen(false);
-      sidebar.setAttribute('aria-hidden', 'false');
-      sidebar.removeAttribute('inert');
-    } else {
-      sidebar.setAttribute('aria-hidden', sidebar.classList.contains('mobile-open') ? 'false' : 'true');
-    }
+    // Apply the complete drawer state on both sides of the breakpoint: hidden
+    // mobile navigation must also be inert, and desktop must lose modal state.
+    setMobileSidebarOpen(isMobileShell() && sidebar.classList.contains('mobile-open'));
   };
   if (typeof mobileQuery.addEventListener === 'function') {
     mobileQuery.addEventListener('change', handleShellSizeChange);
@@ -179,6 +179,92 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     }));
   }
 
+  function readSidebarWidth(shouldCollapse) {
+    const property = shouldCollapse ? '--sidebar-collapsed' : '--sidebar-expanded';
+    const value = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue(property));
+    return Number.isFinite(value) ? value : (shouldCollapse ? 60 : 208);
+  }
+
+  function canAnimateSidebar() {
+    return !isMobileShell()
+      && !reducedMotionQuery.matches
+      && typeof sidebar.animate === 'function'
+      && typeof document.body.animate === 'function';
+  }
+
+  function animateSidebarCollapsedState(shouldCollapse, options = {}) {
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    if (sidebarMotionRunning) return;
+    if (isCollapsed === shouldCollapse || !canAnimateSidebar()) {
+      applySidebarCollapsedState(shouldCollapse, options);
+      return;
+    }
+
+    const fromWidth = readSidebarWidth(isCollapsed);
+    const toWidth = readSidebarWidth(shouldCollapse);
+    const labelAnimations = [];
+    const labelKeyframes = shouldCollapse
+      ? [
+          { opacity: 1, transform: 'translateX(0)' },
+          { opacity: 0, transform: 'translateX(-5px)' },
+        ]
+      : [
+          { opacity: 0, transform: 'translateX(-5px)' },
+          { opacity: 1, transform: 'translateX(0)' },
+        ];
+
+    sidebarMotionRunning = true;
+
+    // Expanding applies the final structure first so labels reveal as the rail
+    // grows. Collapsing keeps the current structure until the rail finishes
+    // shrinking so the icons stay anchored instead of jumping inward.
+    if (!shouldCollapse) {
+      applySidebarCollapsedState(false, options);
+    }
+
+    const sidebarAnimation = sidebar.animate(
+      [
+        { width: `${fromWidth}px` },
+        { width: `${toWidth}px` },
+      ],
+      {
+        duration: SIDEBAR_MOTION.duration,
+        easing: SIDEBAR_MOTION.easing,
+        fill: 'forwards',
+      },
+    );
+    const layoutAnimation = document.body.animate(
+      [
+        { gridTemplateColumns: `${fromWidth}px minmax(0, 1fr)` },
+        { gridTemplateColumns: `${toWidth}px minmax(0, 1fr)` },
+      ],
+      {
+        duration: SIDEBAR_MOTION.duration,
+        easing: SIDEBAR_MOTION.easing,
+        fill: 'forwards',
+      },
+    );
+
+    sidebar.querySelectorAll('.sidebar-item-label, .sidebar-section-label').forEach((label, index) => {
+      labelAnimations.push(label.animate(labelKeyframes, {
+        duration: shouldCollapse ? 140 : 180,
+        delay: shouldCollapse ? 0 : Math.min(index * 10, 60),
+        easing: SIDEBAR_MOTION.easing,
+        fill: shouldCollapse ? 'forwards' : 'backwards',
+      }));
+    });
+
+    Promise.allSettled([sidebarAnimation.finished, layoutAnimation.finished]).then(() => {
+      if (shouldCollapse) {
+        applySidebarCollapsedState(true, options);
+      }
+      sidebarAnimation.cancel();
+      layoutAnimation.cancel();
+      labelAnimations.forEach((animation) => animation.cancel());
+      sidebarMotionRunning = false;
+    });
+  }
+
   // Load per-session state first. On a fresh login, localStorage is cleared,
   // so the server-rendered preference becomes the default.
   const isCollapsed = resolveSidebarCollapsed(sidebarDefault);
@@ -194,7 +280,7 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
     toggleHandle.addEventListener('click', (e) => {
       e.preventDefault();
       const shouldCollapse = !sidebar.classList.contains('collapsed');
-      applySidebarCollapsedState(shouldCollapse, {
+      animateSidebarCollapsedState(shouldCollapse, {
         persist: !document.body.classList.contains('focus-mode-active'),
       });
       if (tooltip) tooltip.classList.remove('visible');
@@ -226,7 +312,6 @@ function setupSidebarInteractions(sidebarDefault = 'expanded') {
       tooltip.classList.add('visible');
       
       // Position tooltip to the right of the icon
-      const tooltipWidth = tooltip.offsetWidth;
       tooltip.style.left = (rect.right + 12) + 'px';
       tooltip.style.top = (rect.top + rect.height / 2 - tooltip.offsetHeight / 2) + 'px';
     });

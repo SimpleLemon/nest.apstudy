@@ -229,12 +229,12 @@ test("consent initialization reuses an existing root and has one delegated bindi
 
 test("full templates declare authenticated, public-choice, hybrid, or off analytics modes", async () => {
     const authenticatedTemplates = [
-        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html",
-        "calendar.html", "chat.html", "courses.html", "dashboard.html", "derek_echo.html", "files.html", "focus.html", "notes.html",
+        "admin.html", "admin_analytics.html", "admin_apswiftly.html", "admin_auth.html", "admin_detail.html", "admin_tiers.html", "admin_streak_review.html", "admin_themes.html",
+        "calendar.html", "calendar_connections.html", "chat.html", "courses.html", "dashboard.html", "derek_echo.html", "files.html", "focus.html", "notes.html",
         "onboarding.html", "settings.html", "task.html",
     ];
     const publicTemplates = [
-        "landing.html",
+        "landing.html", "community_themes.html",
         "legal_document.html",
         "user_profile.html",
         "calendar_share.html",
@@ -242,7 +242,7 @@ test("full templates declare authenticated, public-choice, hybrid, or off analyt
         "file_share_folder.html",
         "notes_shared_folder.html",
     ];
-    const offTemplates = ["404.html", "login.html", "extension_connect.html"];
+    const offTemplates = ["404.html", "login.html", "extension_connect.html", "calendar_connection_complete.html"];
     const hybridTemplates = ["notes_editor.html"];
     const templateDirectory = path.join(repoRoot, "templates");
     const { readdir } = await import("node:fs/promises");

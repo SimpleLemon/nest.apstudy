@@ -1,4 +1,4 @@
-/* global window, document, navigator, fetch, atob, setTimeout, clearTimeout, Notification, DOMException */
+/* global window, document, navigator, atob, setTimeout, clearTimeout, Notification, DOMException */
 
 (function notificationShell(global) {
   const FOREGROUND_SYNC_MS = 15000;
@@ -10,7 +10,7 @@
     foregroundReady: false,
     knownIds: new Set(),
     syncTimer: null,
-    syncing: false,
+    syncing: null,
     tabId: '',
     tray: null,
     unread: 0,
@@ -19,6 +19,8 @@
     isLeader: false,
     lockPending: false,
     releaseLock: null,
+    foregroundLifecycleBound: false,
+    foregroundSuspended: false,
   };
 
   const csrf = () => document.cookie.match(/(?:^|; )csrf_token=([^;]*)/)?.[1] || '';
@@ -26,10 +28,14 @@
   async function api(url, options = {}) {
     const headers = { ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...(options.headers || {}) };
     if (options.method && options.method !== 'GET') headers['X-CSRFToken'] = decodeURIComponent(csrf());
-    const response = await fetch(url, { credentials: 'same-origin', ...options, headers });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || 'Notification request failed.');
-    return payload;
+    return global.APStudyHttp.fetchJson(url, {
+      credentials: 'same-origin',
+      ...options,
+      headers,
+      jsonMode: 'required',
+      pendingLabel: 'notifications-save',
+      errorFactory: (payload) => new Error(payload?.error || 'Notification request failed.'),
+    });
   }
 
   function base64Key(value) {
@@ -54,11 +60,11 @@
 
   function mappedError(error) {
     const name = String(error?.name || '');
-    if (name === 'NotAllowedError') return new Error('Notifications are blocked. Allow them for nest.apstudy.org in your browser’s site settings, then try again.');
-    if (name === 'AbortError') return new Error('The browser could not reach its push service. In Brave, turn on push messaging in Privacy and security, fully restart Brave, then try again.');
-    if (name === 'InvalidStateError') return new Error('The saved browser subscription is no longer valid. Reload the page and enable notifications again.');
-    if (name === 'SecurityError') return new Error('Background notifications require a secure HTTPS connection.');
-    return error instanceof Error ? error : new Error('This browser could not enable background notifications.');
+    if (name === 'NotAllowedError') return new Error('Notifications are blocked. Allow them for nest.apstudy.org in your browser’s site settings, then try again.', { cause: error });
+    if (name === 'AbortError') return new Error('The browser could not reach its push service. In Brave, turn on push messaging in Privacy and security, fully restart Brave, then try again.', { cause: error });
+    if (name === 'InvalidStateError') return new Error('The saved browser subscription is no longer valid. Reload the page and enable notifications again.', { cause: error });
+    if (name === 'SecurityError') return new Error('Background notifications require a secure HTTPS connection.', { cause: error });
+    return error instanceof Error ? error : new Error('This browser could not enable background notifications.', { cause: error });
   }
 
   async function withTimeout(promise, milliseconds, message) {
@@ -200,17 +206,25 @@
         }
       });
       prompt.querySelector('[data-not-now]').addEventListener('click', async () => {
-        await api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify({ prompt_dismissed: true }) });
-        prompt.remove();
+        const button = prompt.querySelector('[data-not-now]');
+        button.disabled = true;
+        try {
+          await api('/api/notifications/preferences', { method: 'PATCH', body: JSON.stringify({ prompt_dismissed: true }) });
+          prompt.remove();
+        } catch {
+          global.APStudyToast?.show?.({ title: 'Couldn’t dismiss notification prompt', message: 'Try “Not now” again in a moment.', type: 'error' });
+        } finally {
+          button.disabled = false;
+        }
       });
-    } catch (_) {}
+    } catch {}
   }
 
   async function refreshCount() {
     try {
       const data = await api('/api/notifications/unread-count');
       setUnreadCount(data.unread_count);
-    } catch (_) {}
+    } catch {}
   }
 
   function isLaptopOrTablet() {
@@ -220,7 +234,7 @@
   }
 
   function isForegroundActive() {
-    return isLaptopOrTablet() && document.visibilityState === 'visible' && (document.hasFocus?.() ?? true);
+    return !state.foregroundSuspended && isLaptopOrTablet() && document.visibilityState === 'visible' && (document.hasFocus?.() ?? true);
   }
 
   function foregroundTabId() {
@@ -235,7 +249,7 @@
       const created = (global.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
       sessionStorage.setItem(key, created);
       state.tabId = created;
-    } catch (_) {
+    } catch {
       state.tabId = (global.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
     }
     return state.tabId;
@@ -295,8 +309,9 @@
     if (!active && !inactive) return;
     if (active && !state.isLeader) return;
     if (state.syncing && !inactive) return;
+    const requestOwner = {};
     if (inactive) state.foregroundReady = false;
-    else state.syncing = true;
+    else state.syncing = requestOwner;
     try {
       const data = await api('/api/notifications/sync', {
         method: 'POST',
@@ -307,6 +322,7 @@
         }),
         keepalive,
       });
+      if (active && (state.syncing !== requestOwner || !state.isLeader || !isForegroundActive())) return;
       if (typeof data.focus_mode_active === 'boolean') {
         global.APStudyProfileStatus?.setFocusMode?.(data.focus_mode_active);
       }
@@ -322,18 +338,19 @@
         && !state.knownIds.has(String(item.id))
         && (state.foregroundReady || pending.has(String(item.id)))
       ));
-      remember(items);
-      state.foregroundReady = true;
       setUnreadCount(data.unread_count);
       broadcastSyncState(data);
       await showForegroundItems(fresh);
+      if (state.syncing !== requestOwner || !state.isLeader || !isForegroundActive()) return;
+      remember(items);
+      state.foregroundReady = true;
       if (acknowledgedPendingIds.length) {
         await api('/api/notifications/foreground-ack', { method: 'POST', body: JSON.stringify({ ids: acknowledgedPendingIds }) });
       }
-    } catch (_) {
+    } catch {
       // Foreground sync is opportunistic; the feed and background push remain available.
     } finally {
-      if (!inactive) state.syncing = false;
+      if (state.syncing === requestOwner) state.syncing = null;
     }
   }
 
@@ -348,6 +365,7 @@
     if (state.isLeader === next) return;
     state.isLeader = next;
     stopSyncTimer();
+    if (!next) state.syncing = null;
     if (next && isForegroundActive()) {
       void syncForeground();
       state.syncTimer = global.setInterval(syncForeground, FOREGROUND_SYNC_MS);
@@ -357,7 +375,7 @@
   function readLease() {
     try {
       return JSON.parse(global.localStorage?.getItem(LEADER_LEASE_KEY) || 'null');
-    } catch (_) {
+    } catch {
       return null;
     }
   }
@@ -374,7 +392,7 @@
     try {
       global.localStorage?.setItem(LEADER_LEASE_KEY, JSON.stringify({ tab_id: tabId, expires_at: now + LEADER_LEASE_MS }));
       setLeader(readLease()?.tab_id === tabId);
-    } catch (_) {
+    } catch {
       // Storage can be unavailable in strict private modes. One tab still syncs.
       setLeader(true);
     }
@@ -388,7 +406,7 @@
     if (!navigator.locks?.request) {
       const lease = readLease();
       if (lease?.tab_id === foregroundTabId()) {
-        try { global.localStorage?.removeItem(LEADER_LEASE_KEY); } catch (_) {}
+        try { global.localStorage?.removeItem(LEADER_LEASE_KEY); } catch {}
       }
     }
     setLeader(false);
@@ -433,6 +451,8 @@
   function startForegroundDelivery() {
     if (state.electionTimer) return;
     initializeCrossTabSync();
+    if (state.foregroundLifecycleBound) return;
+    state.foregroundLifecycleBound = true;
     global.addEventListener('focus', requestLeadership);
     global.addEventListener('blur', () => {
       void syncForeground({ inactive: true, keepalive: true });
@@ -445,9 +465,18 @@
       } else requestLeadership();
     });
     global.addEventListener('pagehide', () => {
+      state.foregroundSuspended = true;
       void syncForeground({ inactive: true, keepalive: true });
       releaseLeadership();
+      global.clearInterval(state.electionTimer);
+      state.electionTimer = null;
       state.channel?.close?.();
+      state.channel = null;
+    });
+    global.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
+      state.foregroundSuspended = false;
+      startForegroundDelivery();
     });
   }
 

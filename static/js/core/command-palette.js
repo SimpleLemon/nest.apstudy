@@ -1,13 +1,13 @@
-import * as React from 'https://esm.sh/react@18.3.1';
-import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1';
-import { Command } from 'https://esm.sh/cmdk@1.1.1?deps=react@18.3.1,react-dom@18.3.1';
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Command } from './command-palette/command-palette-controls.js';
 import {
   COMMAND_SEARCH_DEBOUNCE_MS,
   COMMAND_SEARCH_MIN_LENGTH,
   emptyWorkspaceGroups,
   fetchWorkspaceSearch,
-} from './command-palette-search.js';
-import { renderWorkspaceResults } from './command-palette-workspace.js';
+} from './command-palette/command-palette-search.js';
+import { renderWorkspaceResults } from './command-palette/command-palette-workspace.js';
 
 const h = React.createElement;
 
@@ -202,7 +202,7 @@ function normalizeRoutePath(route) {
   try {
     const url = new URL(route, window.location.origin);
     return url.pathname.replace(/\/+$/, '') || '/';
-  } catch (error) {
+  } catch {
     return String(route || '').replace(/\/+$/, '') || '/';
   }
 }
@@ -363,6 +363,7 @@ function CommandPaletteApp() {
     return () => {
       window.clearTimeout(timer);
       controller.abort();
+      requestSequence.current += 1;
     };
   }, [open, search]);
 
@@ -386,8 +387,6 @@ function CommandPaletteApp() {
     Command.Dialog,
     {
       label: 'Command palette',
-      loop: true,
-      shouldFilter: !workspaceMode,
       className: 'apstudy-command-palette',
       open,
       onOpenChange: (nextOpen) => {
@@ -410,7 +409,6 @@ function CommandPaletteApp() {
       { className: 'apstudy-command-palette-input-row' },
       h(Command.Input, {
         'aria-label': 'Search anything in Nest',
-        autoFocus: true,
         placeholder: 'Search anything in Nest',
         value: search,
         onValueChange: setSearch,
@@ -433,7 +431,7 @@ function CommandPaletteApp() {
           },
           renderIcon,
         })
-        : renderDefaultCommands(close),
+        : renderDefaultCommands(close, search),
     ),
     h(
       'div',
@@ -454,18 +452,19 @@ function CommandPaletteApp() {
   );
 }
 
-function renderDefaultCommands(close) {
-  return [
-    h(Command.Empty, { className: 'apstudy-command-palette-empty', key: 'empty' },
-      h('strong', null, 'No commands found.'),
-      h('span', null, "Try searching for 'settings' or 'theme'.")),
-    h(Command.Group, { heading: 'Navigation', key: 'navigation' },
-      COMMAND_PALETTE_PAGES.map((item) => renderPageCommand(item, close))),
-    h(Command.Group, { heading: 'Help', key: 'help' },
-      HELP_ITEMS.map((item) => renderHelpCommand(item, close))),
-    h(Command.Group, { heading: 'Appearance', key: 'appearance' },
-      THEME_ITEMS.map((item) => renderThemeCommand(item, close))),
+function renderDefaultCommands(close, query) {
+  const groups = [
+    { heading: 'Navigation', key: 'navigation', items: COMMAND_PALETTE_PAGES, render: renderPageCommand },
+    { heading: 'Help', key: 'help', items: HELP_ITEMS, render: renderHelpCommand },
+    { heading: 'Appearance', key: 'appearance', items: THEME_ITEMS, render: renderThemeCommand },
   ];
+  const content = groups.flatMap(({ heading, key, items, render }) => {
+    const matches = items.filter((item) => commandMatches(item, query));
+    return matches.length ? [h(Command.Group, { heading, key }, matches.map((item) => render(item, close)))] : [];
+  });
+  return content.length ? content : h('div', { className: 'apstudy-command-palette-empty' },
+    h('strong', null, 'No commands found.'),
+    h('span', null, "Try searching for 'settings' or 'theme'."));
 }
 
 function commandMatches(item, query) {

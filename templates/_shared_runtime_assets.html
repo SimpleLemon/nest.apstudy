@@ -1,3 +1,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/core/feedback-overlays.css') }}">
+<script src="{{ url_for('static', filename='js/core/escaping.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/core/ui-primitives.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/csrf.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/pending-mutations.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/accessibility.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/date-time.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/session.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/http.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/presence.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/core/shell-chrome.js') }}" defer></script>
 <script type="application/json" id="apstudy-server-toasts">{{ server_toasts|default([])|tojson }}</script>

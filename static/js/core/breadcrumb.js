@@ -29,7 +29,7 @@
         return `<li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">${escapeHtml(item.label ?? "")}</span></li>`;
     }
 
-    function ellipsisItemHtml(escapeHtml) {
+    function ellipsisItemHtml() {
         return `<li class="breadcrumb-item"><button type="button" class="breadcrumb-ellipsis" aria-haspopup="menu" aria-expanded="false" aria-label="Show more path segments"><span class="material-symbols-outlined" aria-hidden="true">more_horiz</span><span class="sr-only">More</span></button></li>`;
     }
 
@@ -108,7 +108,7 @@
         if (resolved.collapsed) {
             parts.push(linkItemHtml(resolved.first, escapeHtml));
             parts.push(separatorHtml());
-            parts.push(ellipsisItemHtml(escapeHtml));
+            parts.push(ellipsisItemHtml());
             parts.push(separatorHtml());
             parts.push(linkItemHtml(resolved.parent, escapeHtml));
             parts.push(separatorHtml());

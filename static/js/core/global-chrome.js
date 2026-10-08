@@ -96,7 +96,7 @@
   function resolveUrl(rawUrl) {
     try {
       return new URL(String(rawUrl || ''), window.location.href);
-    } catch (_error) {
+    } catch {
       return null;
     }
   }

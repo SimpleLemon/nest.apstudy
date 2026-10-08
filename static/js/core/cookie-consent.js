@@ -32,7 +32,7 @@
             if (![ACCEPTED, REJECTED].includes(parsed?.choice)) return null;
             if (!Number.isFinite(decidedAt) || age < 0 || age > MAX_AGE_MS) return null;
             return parsed;
-        } catch (_error) {
+        } catch {
             return null;
         }
     }
@@ -45,7 +45,7 @@
         };
         try {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(decision));
-        } catch (_error) {
+        } catch {
             // The choice still applies to this page when browser storage is unavailable.
         }
         return decision;

@@ -8,7 +8,7 @@ async function sourceFor(path) {
 
 test("command palette search opens resource hrefs and retains grouped keyboard results", async () => {
     const source = await sourceFor("static/js/core/command-palette.js");
-    const workspaceSource = await sourceFor("static/js/core/command-palette-workspace.js");
+    const workspaceSource = await sourceFor("static/js/core/command-palette/command-palette-workspace.js");
     assert.match(source, /fetchWorkspaceSearch\(query/);
     assert.match(workspaceSource, /WORKSPACE_SEARCH_GROUPS/);
     assert.match(source, /navigateTo\(result\.href\)/);

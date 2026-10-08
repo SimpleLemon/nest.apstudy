@@ -1,3 +1,4 @@
-import './ui-primitives.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3';
+// Utility consumers do not install the shared UI runtime.
+import './escaping.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079';
 
-export const { escapeHtml } = window.APStudyUIPrimitives;
+export const { escapeHtml } = globalThis.APStudyCoreServices.escaping;

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const source = await readFile(new URL("../../static/js/core/command-palette-search.js", import.meta.url), "utf8");
+const source = await readFile(new URL("../../static/js/core/command-palette/command-palette-search.js", import.meta.url), "utf8");
 const {
     COMMAND_SEARCH_DEBOUNCE_MS,
     COMMAND_SEARCH_MIN_LENGTH,
