@@ -570,7 +570,7 @@ class AtlasLiveVerificationTests(unittest.TestCase):
         ]
         response = mock.Mock()
         response.raise_for_status.return_value = None
-        response.json.return_value = {"results": raw_rows}
+        response.json.return_value = {"srcdb": "5269", "results": raw_rows}
 
         ids = [
             build_section_id(TERM, "CHEM", "150", "2760", "1"),

@@ -44,6 +44,12 @@ to both Fall 2026 and Spring 2027 without loosening automatic name matching.
 Original profile capture timestamps are retained. Identity corrections are
 recorded separately in the report from the last complete directory refresh.
 
+Live Atlas details requests use top-level `srcdb` and the native encoded JSON
+body. Search and details responses must verify the requested semester, and
+details must match the live search's course, CRN, section, and key before their
+instructors or seats can be saved. Cached snapshots without verified semester
+provenance are ignored in favor of the catalog until successfully refreshed.
+
 Spring 2026 remains available as `legacy/unverified`; it was not backfilled in
 this refresh. Automated live seat checks remain separate and were unavailable
 in the local visual preview. The real-data preview uses the saved verified

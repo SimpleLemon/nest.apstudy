@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from urllib.parse import unquote
 
 from services import atlas_client
 from services.atlas_catalog_store import CatalogStore
@@ -188,9 +189,9 @@ class AtlasCatalogStoreTests(unittest.TestCase):
     def test_new_term_live_lookup_uses_registry_without_source_code_changes(self):
         (self.root / "Spring_2027" / "CHEM").mkdir(parents=True)
         with patch.object(atlas_client.requests, "post") as post:
-            post.return_value.json.return_value = {"results": []}
+            post.return_value.json.return_value = {"srcdb": "5271", "results": []}
             self.assertEqual(atlas_client.fetch_live_subject_sections("Spring_2027", "CHEM")["count"], 0)
-        self.assertEqual(post.call_args.kwargs["json"]["other"]["srcdb"], "5271")
+        self.assertEqual(json.loads(unquote(post.call_args.kwargs["data"]))["other"]["srcdb"], "5271")
 
 
 if __name__ == "__main__":

@@ -18,6 +18,7 @@ from threading import Lock
 from contextvars import ContextVar
 from functools import wraps
 from html.parser import HTMLParser
+from urllib.parse import quote
 
 from services.atlas_catalog_store import CatalogStore
 from services.professor_rating_identity import preserve_instructor_ids
@@ -473,6 +474,7 @@ def parse_atlas_details_payload(details, search_row=None):
     credit_hours = details.get("credit_hours_options") or _strip_tags(details.get("hours_html")) or None
     return {
         "atlas_key": str(details.get("key") or search_row.get("key") or "").strip() or None,
+        "atlas_srcdb": str(details.get("srcdb") or search_row.get("atlas_srcdb") or "").strip() or None,
         "credit_hours": credit_hours,
         "enrollment_capacity": seats["enrollment_capacity"],
         "seats_available": seats["seats_available"],
@@ -496,6 +498,17 @@ def parse_atlas_details_payload(details, search_row=None):
 
 
 def merge_section_with_details(search_row, details_payload):
+    expected = {
+        "key": search_row.get("key") or search_row.get("atlas_key"),
+        "code": search_row.get("code") or search_row.get("course_code"),
+        "crn": search_row.get("crn"),
+        "section": search_row.get("no") or search_row.get("section_number"),
+        "srcdb": search_row.get("atlas_srcdb") or search_row.get("srcdb"),
+    }
+    for field, value in expected.items():
+        actual = details_payload.get(field)
+        if value not in (None, "") and actual not in (None, "") and str(value).strip() != str(actual).strip():
+            raise ValueError(f"Atlas details response did not match this section ({field}).")
     parsed = parse_atlas_details_payload(details_payload, search_row)
     subject, _catalog = _split_course_code(search_row.get("code") or search_row.get("course_code"))
     campus_description = parsed.get("campus_description") or _first_value(search_row, CAMPUS_KEYS)
@@ -933,6 +946,7 @@ def _section_row_from_course_data(term_name, subject_name, catalog_number, cours
     credit_hours = _first_value(section, ("credit_hours", "credits", "hours")) or course_data.get("credit_hours")
     return {
         "id": unique_id,
+        "atlas_srcdb": str(course_data.get("srcdb") or _catalog_view().srcdb(course_term) or "").strip() or None,
         "term": course_term,
         "academic_career": section.get("academic_career") or course_data.get("academic_career"),
         "subject": subject_name,
@@ -1008,7 +1022,8 @@ def _live_row_from_raw(term, raw):
         meetings = _parse_meeting_times(raw.get("meetingTimes") or raw.get("meetings"))
     return {
         "id": build_section_id(term, subject, catalog, crn, section_number),
-        "atlas_key": str(raw.get("key") or "").strip() or None,
+        "atlas_key": str(raw.get("key") or raw.get("atlas_key") or "").strip() or None,
+        "atlas_srcdb": str(raw.get("atlas_srcdb") or raw.get("srcdb") or "").strip() or None,
         "term": term,
         "academic_career": _first_value(raw, ("academic_career", "acad_career", "career")),
         "subject": subject,
@@ -1648,6 +1663,25 @@ def get_sections_by_ids(section_ids, include_cancelled=True):
     }
 
 
+def _post_atlas(route, body, srcdb, timeout):
+    # Match native FOSE serialization. Search nests the term under `other`,
+    # while details requires top-level `srcdb` or silently uses the default term.
+    response = requests.post(
+        ATLAS_BASE_URL,
+        params={"page": "fose", "route": route},
+        data=quote(json.dumps(body), safe=""),
+        headers=ATLAS_REQUIRED_HEADERS,
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    if not isinstance(payload, dict):
+        raise ValueError(f"Atlas {route} returned invalid data")
+    if not payload.get("fatal") and str(payload.get("srcdb") or "") != str(srcdb):
+        raise ValueError(f"Atlas {route} response term did not match the requested term")
+    return payload
+
+
 @_catalog_operation
 def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
     """
@@ -1670,18 +1704,13 @@ def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
         return {"error": f"No Atlas srcdb configured for {term}"}
 
     try:
-        response = requests.post(
-            ATLAS_BASE_URL,
-            params={"page": "fose", "route": "search"},
-            json={
+        payload = _post_atlas(
+            "search", {
                 "other": {"srcdb": srcdb},
                 "criteria": [{"field": "subject", "value": subject}],
             },
-            headers=ATLAS_REQUIRED_HEADERS,
-            timeout=timeout,
+            srcdb, timeout,
         )
-        response.raise_for_status()
-        payload = response.json()
     except (requests.RequestException, ValueError) as exc:
         return {"error": f"Live Atlas request failed: {exc}"}
 
@@ -1699,7 +1728,7 @@ def fetch_live_subject_sections(term, subject, catalog=None, timeout=15):
     for raw in raw_results:
         if not isinstance(raw, dict):
             continue
-        row = _live_row_from_raw(term, raw)
+        row = _live_row_from_raw(term, {**raw, "atlas_srcdb": srcdb})
         if row.get("subject") != subject:
             continue
         if catalog_filter and str(row.get("catalog_number") or "").upper() != catalog_filter:
@@ -1732,15 +1761,9 @@ def fetch_atlas_section_details(term, atlas_key, timeout=15):
         return {"error": f"No Atlas srcdb configured for {term}"}
 
     try:
-        response = requests.post(
-            ATLAS_BASE_URL,
-            params={"page": "fose", "route": "details"},
-            json={"other": {"srcdb": srcdb}, "group": f"key:{atlas_key}"},
-            headers=ATLAS_REQUIRED_HEADERS,
-            timeout=timeout,
+        payload = _post_atlas(
+            "details", {"srcdb": srcdb, "group": f"key:{atlas_key}"}, srcdb, timeout,
         )
-        response.raise_for_status()
-        payload = response.json()
     except (requests.RequestException, ValueError) as exc:
         return {"error": f"Live Atlas details request failed: {exc}"}
 
@@ -1748,6 +1771,9 @@ def fetch_atlas_section_details(term, atlas_key, timeout=15):
         return {"error": "Live Atlas details returned an empty response"}
     if isinstance(payload, dict) and payload.get("fatal"):
         return {"error": f"Live Atlas details error: {payload.get('fatal')}"}
+    if (str(payload.get("key") or "") != atlas_key
+            or any(not payload.get(field) for field in ("code", "crn", "section"))):
+        return {"error": "Live Atlas details response did not match the requested section key"}
     return payload if isinstance(payload, dict) else {"error": "Live Atlas details returned invalid data"}
 
 
@@ -1769,15 +1795,9 @@ def _fetch_atlas_search_row(term, crn=None, subject=None, timeout=15):
         return None
 
     try:
-        response = requests.post(
-            ATLAS_BASE_URL,
-            params={"page": "fose", "route": "search"},
-            json={"other": {"srcdb": srcdb}, "criteria": criteria},
-            headers=ATLAS_REQUIRED_HEADERS,
-            timeout=timeout,
+        payload = _post_atlas(
+            "search", {"other": {"srcdb": srcdb}, "criteria": criteria}, srcdb, timeout,
         )
-        response.raise_for_status()
-        payload = response.json()
     except (requests.RequestException, ValueError):
         return None
 
@@ -1787,8 +1807,9 @@ def _fetch_atlas_search_row(term, crn=None, subject=None, timeout=15):
     if crn:
         for row in results:
             if str(row.get("crn") or "") == str(crn):
-                return row
-    return results[0] if results else None
+                return {**row, "atlas_srcdb": srcdb}
+        return None
+    return {**results[0], "atlas_srcdb": srcdb} if results else None
 
 
 @_catalog_operation
@@ -1816,7 +1837,10 @@ def fetch_live_section_status(term, subject, catalog, crn=None, section_number=N
     if atlas_key:
         details = fetch_atlas_section_details(term, atlas_key, timeout=timeout)
         if isinstance(details, dict) and "error" not in details:
-            merged = merge_section_with_details(search_row, details)
+            try:
+                merged = merge_section_with_details(search_row, details)
+            except ValueError as exc:
+                return {"error": str(exc)}
             row = _live_row_from_raw(term, merged)
             if str(row.get("subject") or "").upper() == str(subject or "").upper():
                 catalog_filter = str(catalog or "").strip().upper()

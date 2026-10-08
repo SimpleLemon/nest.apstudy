@@ -108,7 +108,7 @@ def _nonempty(value):
 
 def merge_snapshot(section, snapshot, now=None):
     merged = dict(section or {})
-    if not snapshot:
+    if not snapshot or not _snapshot_matches_section(merged, snapshot):
         merged["live_snapshot_available"] = False
         merged["live_stale"] = True
         return merged
@@ -184,10 +184,13 @@ def upsert_snapshot(section, fetched_at=None):
 def _live_section_matches(local_section, live_section):
     if not local_section or not live_section:
         return False
+    expected_srcdb = local_section.get("atlas_srcdb")
+    if expected_srcdb and str(live_section.get("atlas_srcdb") or "") != str(expected_srcdb):
+        return False
     live_id = live_section.get("id") or live_section.get("section_id")
     local_id = local_section.get("id") or local_section.get("section_id")
-    if live_id and local_id:
-        return str(live_id) == str(local_id)
+    if live_id and local_id and str(live_id) != str(local_id):
+        return False
     return (
         str(live_section.get("term") or "") == str(local_section.get("term") or "")
         and str(live_section.get("subject") or "").upper() == str(local_section.get("subject") or "").upper()
@@ -198,10 +201,20 @@ def _live_section_matches(local_section, live_section):
     )
 
 
+def _snapshot_matches_section(section, snapshot):
+    # Old snapshots predate term verification and may contain default-semester
+    # details under a different semester's ID. Keep the catalog until refreshed.
+    if not section.get("atlas_srcdb"):
+        return True
+    return _live_section_matches(section, snapshot_payload(snapshot))
+
+
 def refresh_section_snapshot(section, *, force=False, now=None):
     now = now or utcnow()
     section_id = str((section or {}).get("id") or (section or {}).get("section_id") or "")
     existing = get_snapshot(section_id)
+    if existing and not _snapshot_matches_section(section, existing):
+        existing = None
     if existing and not force and snapshot_is_fresh(existing, now=now):
         return merge_snapshot(section, existing, now=now), None, existing.get("fetched_at"), False
 

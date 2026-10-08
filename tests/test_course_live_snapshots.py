@@ -139,6 +139,44 @@ class CourseLiveSnapshotTests(unittest.TestCase):
         self.assertEqual(rating["overall_rating"], 4.2)
         self.assertEqual(rating["profile_url"], "https://www.ratemyprofessors.com/professor/100")
 
+    def test_unverified_or_wrong_term_snapshot_cannot_replace_the_catalog_professor(self):
+        original = self._roster_section([{"name": "Jane Example", "atlas_id": "500"}], atlas_srcdb="5269")
+        for srcdb in (None, "5271"):
+            with self.subTest(srcdb=srcdb):
+                payload = self._roster_section([{"name": "Unrelated Professor", "atlas_id": "600"}],
+                                               atlas_srcdb=srcdb, seats_available=20)
+                merged = snapshots.merge_snapshot(original, {"payload_json": payload, "fetched_at": snapshots.isoformat()})
+                self.assertEqual(merged["instructors"], original["instructors"])
+                self.assertEqual(merged["seats_available"], original["seats_available"])
+                self.assertFalse(merged["live_snapshot_available"])
+                self.assertTrue(merged["live_stale"])
+
+    def test_old_unverified_snapshot_forces_a_verified_refresh(self):
+        now = snapshots.utcnow()
+        original = self._roster_section([{"name": "Jane Example", "atlas_id": "500"}], atlas_srcdb="5269")
+        old = self._roster_section([{"name": "Unrelated Professor", "atlas_id": "600"}])
+        snapshots.upsert_snapshot(old, fetched_at=snapshots.isoformat(now))
+        live = {**original, "seats_available": 11}
+        with patch.object(snapshots, "fetch_live_section_status", return_value={"section": live}) as fetch_live:
+            merged, error, _fetched_at, stale = snapshots.refresh_section_snapshot(original, now=now)
+        fetch_live.assert_called_once()
+        self.assertIsNone(error)
+        self.assertFalse(stale)
+        self.assertEqual(merged["instructors"], original["instructors"])
+        self.assertEqual(merged["seats_available"], 11)
+        self.assertEqual(snapshots.snapshot_payload(snapshots.get_snapshot(original["id"]))["atlas_srcdb"], "5269")
+
+    def test_failed_refresh_does_not_restore_an_unverified_professor(self):
+        original = self._roster_section([{"name": "Jane Example", "atlas_id": "500"}], atlas_srcdb="5269")
+        old = self._roster_section([{"name": "Unrelated Professor", "atlas_id": "600"}])
+        snapshots.upsert_snapshot(old)
+        with patch.object(snapshots, "fetch_live_section_status", return_value={"error": "Atlas unavailable"}):
+            merged, error, fetched_at, stale = snapshots.refresh_section_snapshot(original)
+        self.assertEqual(error, "Atlas unavailable")
+        self.assertEqual(merged["instructors"], original["instructors"])
+        self.assertIsNone(fetched_at)
+        self.assertTrue(stale)
+
     def test_changed_name_does_not_inherit_original_id(self):
         merged = self._merge_roster([{"name": "Jane Example", "atlas_id": "500"}], [{"name": "Janet Example"}])
         self.assertNotIn("atlas_id", merged["instructors"][0])
