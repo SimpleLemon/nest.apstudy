@@ -21,6 +21,7 @@ test("dashboard calendar popovers expose and clean up their accessible relations
             <dialog id="dashboard-discard-dialog"><button id="dashboard-keep-editing">Keep editing</button><button id="dashboard-confirm-discard">Discard</button></dialog>
             <div id="dashboard-layout-announcer"></div>
             <script>
+                localStorage.setItem('apstudy.dashboard.eggCrackQuote.visible.v1', 'false');
                 window.APStudyHttp = { fetchJson: async () => ({
                     available_tiles: ["calendar"],
                     dashboard_layout: { version: 4, daily_quote_visible: false, tiles: [{ instance_id: "calendar-1", type: "calendar", size: "standard", view: "month", density: "comfortable", item_limit: 5 }] },
@@ -31,14 +32,12 @@ test("dashboard calendar popovers expose and clean up their accessible relations
                     checklist: { hidden: true, items: [] }
                 }) };
             </script>
+            <script src="${baseURL}/static/js/core/escaping.js"></script>
             <script src="${baseURL}/static/js/core/ui-primitives.js"></script>
-            <script src="${baseURL}/static/js/dashboard/utils.js"></script>
-            <script src="${baseURL}/static/js/dashboard/renderers.js"></script>
-            <script src="${baseURL}/static/js/dashboard/layout-editor.js"></script>
-            <script src="${baseURL}/static/js/dashboard/index.js"></script>
+            <script type="module" src="${baseURL}/static/js/dashboard/index.js"></script>
         </body></html>`,
     }));
-    await page.goto(`${baseURL}/dashboard-calendar-accessibility-harness`, { waitUntil: "networkidle" });
+    await page.goto(`${baseURL}/dashboard-calendar-accessibility-harness`, { waitUntil: "domcontentloaded" });
 
     const firstDay = page.locator('.dashboard-day[data-date="2026-07-15"]');
     const secondDay = page.locator('.dashboard-day[data-date="2026-07-16"]');
@@ -99,10 +98,9 @@ test("dashboard calendar markers and empty days remain accessible to native cont
         body: `<!doctype html><html><body>
             <div id="dashboard-tiles"></div>
             <script>window.APStudyUIPrimitives = { escapeHtml: (value) => String(value ?? "") };</script>
-            <script src="${baseURL}/static/js/dashboard/utils.js"></script>
-            <script src="${baseURL}/static/js/dashboard/renderers.js"></script>
-            <script>
-                const html = window.APStudyDashboardRenderers.renderTile(
+            <script type="module">
+                import { renderTile } from '${baseURL}/static/js/dashboard/renderers.js';
+                const html = renderTile(
                     "calendar", "standard",
                     { month: "2026-07", events: [{ id: "event-1", date: "2026-07-15", title: "Office hours", start: "2026-07-15T14:00:00" }] },
                     { instance_id: "calendar-1", type: "calendar", view: "month" },
@@ -111,7 +109,7 @@ test("dashboard calendar markers and empty days remain accessible to native cont
             </script>
         </body></html>`,
     }));
-    await page.goto(`${baseURL}/dashboard-calendar-accessibility-harness`, { waitUntil: "networkidle" });
+    await page.goto(`${baseURL}/dashboard-calendar-accessibility-harness`, { waitUntil: "domcontentloaded" });
 
     const eventDay = page.locator('.dashboard-day[data-date="2026-07-15"]');
     await expect(eventDay).toHaveAttribute("aria-label", /Office hours/);

@@ -33,11 +33,10 @@ test("tile settings preview live, open opposite the tile, and keep move boundari
         <dialog id="discard"><button id="keep">Keep</button><button id="discard-confirm">Discard</button></dialog>
         <div id="announcer"></div>
     `);
+    await page.addScriptTag({ url: `${baseURL}/static/js/core/escaping.js` });
     await page.addScriptTag({ url: `${baseURL}/static/js/core/ui-primitives.js` });
-    await page.addScriptTag({ url: `${baseURL}/static/js/dashboard/utils.js` });
-    await page.addScriptTag({ url: `${baseURL}/static/js/dashboard/layout-editor.js` });
-
-    await page.evaluate((initialLayout) => {
+    await page.evaluate(async (initialLayout) => {
+        const { createLayoutEditor } = await import('/static/js/dashboard/layout-editor.js');
         const elements = {
             tiles: document.querySelector("#tiles"),
             quoteSlot: document.querySelector("#quote"),
@@ -67,7 +66,7 @@ test("tile settings preview live, open opposite the tile, and keep move boundari
             `).join("");
             editor?.bindTiles();
         };
-        editor = window.APStudyDashboardLayoutEditor.create({
+        editor = createLayoutEditor({
             elements,
             getSummary: () => summary,
             render,
