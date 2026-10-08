@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 import json
+from os import PathLike
+import sqlite3
 import uuid
 from typing import Protocol
 
@@ -46,7 +48,7 @@ class ConsentRecord:
     source_key: str
     account_key: str
     version: int
-    scopes: dict
+    scopes: dict[str, bool]
     state: str
     created_at: str
     updated_at: str
@@ -56,11 +58,11 @@ class ConsentRecord:
     archive_state: str
 
     @property
-    def granted_scopes(self):
+    def granted_scopes(self) -> tuple[str, ...]:
         return tuple(scope for scope in CONSENT_SCOPES if self.scopes.get(scope, False))
 
     @property
-    def current(self):
+    def current(self) -> bool:
         granted = set(self.granted_scopes)
         if self.version == EXTENSION_READ_CONSENT_VERSION:
             return granted == CURRENT_CONSENT_SCOPES
@@ -68,11 +70,11 @@ class ConsentRecord:
             return bool(granted) and granted <= CURRENT_WRITE_CONSENT_SCOPES
         return False
 
-    def to_payload(self):
+    def to_payload(self) -> dict[str, object]:
         granted_scopes = list(self.granted_scopes)
         active = self.state == ACTIVE_STATE
         current = self.current
-        payload = {
+        payload: dict[str, object] = {
             "version": self.version,
             "sourceKey": self.source_key,
             "source_key": self.source_key,
@@ -118,7 +120,7 @@ class ConsentRevocationHooks(Protocol):
         """Request archival/deletion handling for source data owned by this consent."""
 
 
-def deferred_revocation_state():
+def deferred_revocation_state() -> dict[str, str]:
     """Return Phase 1's explicit no-op state for future cancellation/archive work."""
     return {
         "cancellation": DEFERRED_STATE,
@@ -126,7 +128,7 @@ def deferred_revocation_state():
     }
 
 
-def _scopes_json(scopes):
+def _scopes_json(scopes: dict[str, bool] | tuple[str, ...] | list[str]) -> str:
     return json.dumps(
         {
             scope: bool(scopes.get(scope, False)) if isinstance(scopes, dict) else scope in scopes
@@ -137,7 +139,7 @@ def _scopes_json(scopes):
     )
 
 
-def _scopes_from_row(raw_value):
+def _scopes_from_row(raw_value: str | None) -> dict[str, bool]:
     try:
         decoded = json.loads(raw_value or "{}")
     except (TypeError, json.JSONDecodeError) as exc:
@@ -147,7 +149,7 @@ def _scopes_from_row(raw_value):
     return {scope: bool(decoded.get(scope, False)) for scope in CONSENT_SCOPES}
 
 
-def _record_from_row(row):
+def _record_from_row(row: sqlite3.Row | None) -> ConsentRecord | None:
     if row is None:
         return None
     return ConsentRecord(
@@ -167,7 +169,7 @@ def _record_from_row(row):
     )
 
 
-def _validate_identity(user_id, source_key, account_key):
+def _validate_identity(user_id: str, source_key: str, account_key: str) -> tuple[str, str, str]:
     normalized_user_id = str(user_id or "").strip()
     if not normalized_user_id:
         raise ExtensionContractError("invalid_user", "Authenticated user id is required.")
@@ -175,7 +177,10 @@ def _validate_identity(user_id, source_key, account_key):
     return normalized_user_id, validate_source_key(source_key, account_key=account_key), account_key
 
 
-def get_consent(user_id, source_key, account_key, version=EXTENSION_READ_CONSENT_VERSION, path=None):
+def get_consent(
+    user_id: str, source_key: str, account_key: str,
+    version: int = EXTENSION_READ_CONSENT_VERSION, path: str | PathLike[str] | None = None,
+) -> ConsentRecord | None:
     normalized_user_id, source_key, account_key = _validate_identity(
         user_id, source_key, account_key
     )
@@ -195,7 +200,10 @@ def get_consent(user_id, source_key, account_key, version=EXTENSION_READ_CONSENT
     return _record_from_row(row)
 
 
-def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, path=None):
+def put_consent(
+    user_id: str, source_key: str, account_key: str, *, action: str, scopes: list[str],
+    version: int = 1, path: str | PathLike[str] | None = None,
+) -> ConsentRecord:
     normalized_user_id, source_key, account_key = _validate_identity(
         user_id, source_key, account_key
     )
@@ -358,14 +366,19 @@ def put_consent(user_id, source_key, account_key, *, action, scopes, version=1, 
                 now=now,
             )
 
-        return _record_from_row(
+        persisted = _record_from_row(
             connection.execute(
                 f"SELECT * FROM {CONSENT_TABLE} WHERE id = ?", [row_id]
             ).fetchone()
         )
+        if persisted is None:
+            raise RuntimeError("Consent record was not persisted.")
+        return persisted
 
 
-def empty_consent_payload(source_key, account_key, version=EXTENSION_READ_CONSENT_VERSION):
+def empty_consent_payload(
+    source_key: str, account_key: str, version: int = EXTENSION_READ_CONSENT_VERSION,
+) -> dict[str, object]:
     validate_version(version)
     account_key = validate_account_key(account_key)
     source_key = validate_source_key(source_key, account_key=account_key)

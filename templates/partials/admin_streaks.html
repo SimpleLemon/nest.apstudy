@@ -1,0 +1,26 @@
+<section class="admin-card" aria-labelledby="streak-heading">
+    <h2 id="streak-heading">APStudyCanvas streaks</h2>
+    {% if streak_records is none %}<p>Streak storage is unavailable. Apply the streak database migration.</p>{% else %}
+    {% for record in streak_records %}
+    <details class="admin-card">
+        <summary>{{ record.timeZone }} · {{ record.history.current }} day streak · Best {{ record.history.best }}</summary>
+        <p>Canvas account: <code>{{ record.accountKey }}</code></p>
+        <p>Last verified: {{ record.history.lastVerified or 'Not verified yet' }}</p>
+        <form method="post" action="{{ url_for('admin.admin_streak_correction', user_id=user.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="accountKey" value="{{ record.accountKey }}">
+            <input type="hidden" name="timeZone" value="{{ record.timeZone }}">
+            <input type="hidden" name="revision" value="{{ record.revision }}">
+            <fieldset><legend>Recorded missed dates</legend>
+            {% for entry in record.history.days if entry.state == 'missed' %}
+                <label><input type="checkbox" name="dates" value="{{ entry.date }}"> {{ entry.date }}{% if entry.date in record.history.forgiven %} — forgiven{% endif %}</label><br>
+            {% else %}<p>No recorded missed dates.</p>{% endfor %}
+            </fieldset>
+            <label>Action <select name="action"><option value="forgive">Forgive selected dates</option><option value="revoke">Revoke forgiveness</option></select></label>
+            <label>Reason <textarea name="reason" required maxlength="1000"></textarea></label>
+            <button class="admin-button" type="submit" name="preview" value="1">Preview correction</button>
+        </form>
+    </details>
+    {% else %}<p>No synchronized streaks for this user.</p>{% endfor %}
+    {% endif %}
+</section>

@@ -2,8 +2,10 @@
 import json
 import re
 from services.calendar_store import calendar_connection
-from services.calendar_events import (_require_canvas_source, _canvas_source_consent, _canvas_now,
-    _canvas_json, _canvas_hash, _canvas_link_payload)
+from services.canvas_domain import (
+    _canvas_now, _canvas_json, _canvas_hash, _canvas_link_payload,
+)
+from services.canvas_sources import _require_canvas_source, _canvas_source_consent
 from services.extension_contract import ExtensionContractError
 from services.extension_mirrors import _fields, _queue, planner_deadline
 from services.extension_bridge import personal_target

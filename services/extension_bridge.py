@@ -2,10 +2,10 @@
 
 import json
 
-from services.calendar_events import (
-    _canvas_now, _canvas_hash, _canvas_json, _canvas_link_payload,
-    _canvas_writeback_payload, _require_canvas_source, _canvas_source_consent,
+from services.canvas_domain import (
+    _canvas_now, _canvas_hash, _canvas_json, _canvas_link_payload, _canvas_writeback_payload,
 )
+from services.canvas_sources import _require_canvas_source, _canvas_source_consent
 from services.calendar_store import calendar_connection
 from services.extension_contract import ExtensionContractError
 

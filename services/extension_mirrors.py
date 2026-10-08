@@ -5,10 +5,10 @@ import uuid
 from datetime import date, datetime, time, timezone
 
 from services.calendar_store import calendar_connection
-from services.calendar_events import (
+from services.canvas_domain import (
     _canvas_hash, _canvas_json, _canvas_now, _canvas_source_ref,
-    _canvas_source_consent, _require_canvas_source,
 )
+from services.canvas_sources import _canvas_source_consent, _require_canvas_source
 from services.extension_bridge import personal_target, _unlink
 from services.extension_contract import ExtensionContractError
 from services.extension_write_validation import personal_calendar

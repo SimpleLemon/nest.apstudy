@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body_attrs %} class="admin-page" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}
+{% block body_content %}
+<main class="admin-shell">
+<h1>Review streak correction</h1>
+<p>{{ result.history.current }} day streak · Best {{ result.history.best }} · {{ zone }}</p>
+<p>Selected dates: {{ dates|join(', ') }}</p>
+<p>{{ reason }}</p>
+<form method="post">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<input type="hidden" name="accountKey" value="{{ account }}">
+<input type="hidden" name="timeZone" value="{{ zone }}">
+<input type="hidden" name="revision" value="{{ revision }}">
+<input type="hidden" name="action" value="{{ action }}">
+<input type="hidden" name="reason" value="{{ reason }}">
+{% for d in dates %}<input type="hidden" name="dates" value="{{ d }}">{% endfor %}
+<button class="admin-button" type="submit">Confirm correction</button>
+<a href="{{ url_for('admin.admin_detail', user_id=user_id) }}">Cancel</a>
+</form>
+</main>
+{% endblock %}
+{% block feature_styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">{% endblock %}

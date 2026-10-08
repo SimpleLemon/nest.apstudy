@@ -17,9 +17,8 @@ EXTENSION_CALENDAR_ROLLOUT_ENV = "APSTUDY_EXTENSION_CALENDAR_ROLLOUT"
 EXTENSION_CALENDAR_READ_ONLY_ROLLOUT = "readonly-v1"
 EXTENSION_CALENDAR_WRITE_ROLLOUT = "writes-v2"
 # This is deliberately an exact-value mode, not a generic boolean parser.
-# The operator must opt into the complete read-only cohort as one reviewed
-# configuration value.  No environment value enables source mutation,
-# mirroring, or writeback.
+# readonly-v1 enables the read cohort; writes-v2 also enables mirroring and
+# two-way writeback. Source mutation remains disabled in both modes.
 READ_ONLY_ROLLOUT_CAPABILITIES = frozenset({
     EXTENSION_CALENDAR_CAPABILITY,
     "calendar_read",
@@ -92,9 +91,8 @@ def extension_capabilities_for_rollout(value):
     """Build the production capability snapshot for an operator rollout.
 
     Unknown, empty, boolean-looking, and future values remain fail-closed.
-    Destructive capabilities are never enabled by this rollout mode; their
-    existing app-config injection seam is retained for isolated tests and
-    separately authorized future work.
+    readonly-v1 enables read capabilities. writes-v2 adds mirroring and
+    two-way writeback; neither mode enables calendar source mutation.
     """
     capabilities = dict(EXTENSION_CAPABILITIES)
     if extension_read_only_rollout_enabled(value) or value == EXTENSION_CALENDAR_WRITE_ROLLOUT:
