@@ -55,11 +55,15 @@ function absoluteFromYjs(state, value) {
             Y.createRelativePositionFromJSON(JSON.parse(value)),
             binding.mapping
         );
-    } catch (error) {
+    } catch {
         return null;
     }
 }
 
+/**
+ * @param {import('@blocknote/core').BlockNoteEditor} editor
+ * @returns {import('./review-contracts.js').CommentAnchor}
+ */
 export function captureCommentAnchor(editor) {
     const state = editor?._tiptapEditor?.state;
     if (!state) return { kind: 'document', state: 'detached', version: 1 };
@@ -100,6 +104,11 @@ export function captureCommentAnchor(editor) {
     };
 }
 
+/**
+ * @param {{_tiptapEditor?: {state?: import('@tiptap/pm/state').EditorState}}|null|undefined} editor
+ * @param {import('./review-contracts.js').CommentAnchor|null} anchor
+ * @returns {{from: number, to: number}|null}
+ */
 export function resolveCommentAnchor(editor, anchor) {
     const state = editor?._tiptapEditor?.state;
     if (!state || !anchor || anchor.state === 'detached') return null;
@@ -137,12 +146,21 @@ function decorationsForThreads(state, threads, activeId) {
     return DecorationSet.create(state.doc, decorations);
 }
 
+/**
+ * @param {import('@blocknote/core').BlockNoteEditor} editor
+ * @param {import('./review-contracts.js').CommentThread[]} threads
+ * @param {string|null} activeId
+ */
 export function updateCommentDecorations(editor, threads, activeId) {
     const tiptap = editor?._tiptapEditor;
     if (!tiptap) return;
     tiptap.view.dispatch(tiptap.state.tr.setMeta(commentPluginKey, { threads, activeId }));
 }
 
+/**
+ * @param {import('@blocknote/core').BlockNoteEditor} editor
+ * @param {import('./review-contracts.js').CommentThread} thread
+ */
 export function scrollToCommentAnchor(editor, thread) {
     const tiptap = editor?._tiptapEditor;
     const range = resolveCommentAnchor(editor, thread?.anchor);
@@ -153,13 +171,17 @@ export function scrollToCommentAnchor(editor, thread) {
     return true;
 }
 
+/**
+ * @param {import('@blocknote/core').BlockNoteEditor} editor
+ * @param {import('./review-contracts.js').CommentThread} thread
+ */
 export function commentAnchorViewportTop(editor, thread) {
     const tiptap = editor?._tiptapEditor;
     const range = resolveCommentAnchor(editor, thread?.anchor);
     if (!tiptap || !range) return null;
     try {
         return tiptap.view.coordsAtPos(range.from).top;
-    } catch (error) {
+    } catch {
         return null;
     }
 }

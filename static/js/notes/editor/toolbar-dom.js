@@ -5,7 +5,7 @@ import {
     blockIconClass,
     filterBlockCatalog,
 } from './block-catalog.js';
-import { claimElementBinding, handlePageSetupToolbarClick, floatingPopoverPosition } from './utils.js';
+import { claimElementBinding, handlePageSetupToolbarClick, positionFloatingElement } from './utils.js';
 
 export function createToolbarDom({
     writingToolbar,
@@ -27,12 +27,54 @@ export function createToolbarDom({
     let toolbarOverflowController = null;
     let addBlockActiveIndex = 0;
 
-    function iconHtml(icon) {
-        if (!icon) return '';
-        if (icon.startsWith?.('H')) {
-            return icon;
-        }
-        return icon;
+    // Paired history/indent commands share their existing action-aware owners.
+    const historyCommand = {
+        run: (data, button, action) => actions.runHistoryAction(action),
+        disabled: (state, action) => !canRunHistoryAction(action),
+    };
+    const indentCommand = {
+        run: (data, button, action) => actions.runIndentAction(action),
+        disabled: (state, action) => !canRunIndentAction(action),
+    };
+    // Each command owns its execution, selection state and menu behavior.
+    const commands = {
+        'focus-body': { run: () => actions.focusEditorBody() },
+        'insert-block': { run: (data, button) => actions.insertBlockFromMenu(button) },
+        undo: historyCommand,
+        redo: historyCommand,
+        'zoom-out': { run: () => pageSetup?.setZoomIndex(getZoomIndex() - 1), disabled: () => getZoomIndex() === 0 },
+        'zoom-in': { run: () => pageSetup?.setZoomIndex(getZoomIndex() + 1), disabled: () => getZoomIndex() === getZoomLevels().length - 1 },
+        'basic-style': { run: (data) => actions.toggleBasicStyle(data.style), active: (data, state) => Boolean(state.styles?.[data.style]), pressed: true },
+        'text-color': { run: (data) => actions.applyTextColor(data.color || 'default'), active: (data, state) => (state.styles?.textColor || 'default') === data.color, close: true },
+        'highlight-color': { run: (data) => actions.applyHighlightColor(data.color || 'default'), active: (data, state) => (state.styles?.backgroundColor || 'default') === data.color, close: true },
+        'font-size': { run: (data) => actions.applyFontSizePreset(data.fontSize || 'default'), active: (data, state) => state.fontPreset.value === data.fontSize, close: true },
+        'remove-link': { run: () => actions.removeSelectedLink() },
+        'set-block': {
+            run: (data) => actions.setSelectedBlockType(data.blockType, data.blockType === 'heading' ? { level: Number(data.level) || 1 } : undefined),
+            active: (data, state) => state.block?.type === data.blockType && (data.blockType !== 'heading' || Number(state.block?.props?.level) === Number(data.level)),
+            close: true,
+        },
+        align: { run: (data) => actions.applyTextAlignment(data.align || 'left'), active: (data, state) => data.align === state.alignment, close: true },
+        indent: indentCommand,
+        outdent: indentCommand,
+        'copy-blocks': { run: () => actions.copySelectedBlocks(), disabled: noBlocks, close: true },
+        'cut-blocks': { run: () => actions.copySelectedBlocks({ cut: true }), disabled: noBlocks, close: true },
+        'duplicate-blocks': { run: () => actions.duplicateSelectedBlocks(), disabled: noBlocks, close: true },
+        'delete-blocks': { run: () => actions.deleteSelectedBlocks(), disabled: noBlocks, close: true },
+        'move-blocks-up': { run: () => actions.moveSelectedBlocks('up'), disabled: noBlocks, close: true },
+        'move-blocks-down': { run: () => actions.moveSelectedBlocks('down'), disabled: noBlocks, close: true },
+        'toggle-heading-collapse': { run: () => actions.toggleHeadingCollapse(), disabled: (state) => state.block?.type !== 'heading', close: true },
+    };
+
+    function noBlocks(state) { return state.blocks.length === 0; }
+
+    function executeCommand(action, button) {
+        const command = commands[action];
+        if (!command || !getCanEdit()) return;
+        const blocks = getSelectedBlocks();
+        if (command.disabled?.({ blocks, block: blocks[0] }, action)) return;
+        command.run(button?.dataset || {}, button, action);
+        if (command.close) closeToolbarMenus();
     }
 
     function closeToolbarMenus() {
@@ -44,24 +86,6 @@ export function createToolbarDom({
         writingToolbar.querySelectorAll('[data-toolbar-menu-trigger]').forEach((trigger) => {
             trigger.setAttribute('aria-expanded', 'false');
         });
-    }
-
-    function positionFloatingElement(trigger, element, { triggerRectOverride = null, boundaryRect = null } = {}) {
-        if (!trigger || !element) return;
-        const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
-        element.style.left = '0px';
-        element.style.top = '0px';
-        element.style.transform = 'none';
-
-        const originRect = element.getBoundingClientRect();
-        const position = floatingPopoverPosition({
-            triggerRect,
-            popoverRect: originRect,
-            boundaryRect,
-        });
-
-        element.style.left = `${Math.round(position.left - originRect.left)}px`;
-        element.style.top = `${Math.round(position.top - originRect.top)}px`;
     }
 
     function positionToolbarMenu(trigger, menu, triggerRectOverride = null) {
@@ -136,7 +160,7 @@ export function createToolbarDom({
         list.dataset.rendered = 'catalog';
         list.innerHTML = BLOCK_CATALOG.map((item) => `
         <button type="button" class="notes-add-block-item" data-editor-action="insert-block" data-block-key="${item.key}" data-block-type="${item.type}">
-            <span class="${blockIconClass(item.icon)}" aria-hidden="true">${iconHtml(item.icon)}</span>
+            <span class="${blockIconClass(item.icon)}" aria-hidden="true">${item.icon || ''}</span>
             <span><strong>${item.label}</strong><small>${item.description}</small></span>
         </button>
     `).join('');
@@ -249,37 +273,26 @@ export function createToolbarDom({
             ? getEditor().getActiveStyles()
             : {};
         const activeFontPreset = FONT_SIZE_PRESETS.find((item) => item.cssValue && item.cssValue === activeStyles?.fontSize) || FONT_SIZE_PRESETS[0];
-        const textBlockOptions = [
-            { label: 'Paragraph', type: 'paragraph', icon: 'subject', key: 'paragraph' },
-            { label: 'Heading 1', type: 'heading', props: { level: 1 }, icon: 'H1', key: 'heading-1' },
-            { label: 'Heading 2', type: 'heading', props: { level: 2 }, icon: 'H2', key: 'heading-2' },
-            { label: 'Heading 3', type: 'heading', props: { level: 3 }, icon: 'H3', key: 'heading-3' },
-            { label: 'Quote', type: 'quote', icon: 'format_quote', key: 'quote' },
-            { label: 'Code block', type: 'codeBlock', icon: 'code_blocks', key: 'codeBlock' },
-            { label: 'Callout', type: 'callout', icon: 'lightbulb', key: 'callout' },
-        ];
-        const listStyleOptions = [
-            { label: 'Bulleted list', type: 'bulletListItem', icon: 'format_list_bulleted', key: 'bulletListItem' },
-            { label: 'Numbered list', type: 'numberedListItem', icon: 'format_list_numbered', key: 'numberedListItem' },
-            { label: 'Checklist', type: 'checkListItem', icon: 'checklist', key: 'checkListItem' },
-        ];
-        const alignmentOptions = [
-            { label: 'Align left', value: 'left', icon: 'format_align_left', key: 'align-left' },
-            { label: 'Align center', value: 'center', icon: 'format_align_center', key: 'align-center' },
-            { label: 'Align right', value: 'right', icon: 'format_align_right', key: 'align-right' },
-            { label: 'Justify', value: 'justify', icon: 'format_align_justify', key: 'align-justify' },
-        ];
+        const blockStyleOptions = BLOCK_CATALOG.filter((item) => item.turnInto).map((item) => ({
+            ...item,
+            // Existing template checks use block types except for numbered headings.
+            key: item.type === 'heading' ? item.key : item.type,
+            // Selection ignores catalog creation defaults such as checked/collapsed state.
+            props: item.type === 'heading' ? { level: item.props.level } : undefined,
+        }));
+        const textBlockOptions = blockStyleOptions.filter((item) => item.group !== 'Lists');
+        const listStyleOptions = blockStyleOptions.filter((item) => item.group === 'Lists');
         const activeBlockOption = textBlockOptions.find((option) => isBlockStyleSelected(block, option)) || textBlockOptions[0];
         const activeListOption = listStyleOptions.find((option) => isBlockStyleSelected(block, option));
         const currentAlignment = getSelectedTextAlignment();
-        const activeAlignment = alignmentOptions.find((option) => option.value === currentAlignment) || alignmentOptions[0];
+        const displayAlignment = ['left', 'center', 'right', 'justify'].includes(currentAlignment) ? currentAlignment : 'left';
 
         const blockIcon = writingToolbar.querySelector('[data-current-block-icon]');
         const blockLabel = writingToolbar.querySelector('[data-current-block-label]');
         if (blockIcon) {
             blockIcon.classList.toggle('notes-toolbar-text-icon', activeBlockOption.icon.startsWith('H'));
             blockIcon.classList.toggle('material-symbols-outlined', !activeBlockOption.icon.startsWith('H'));
-            blockIcon.textContent = iconHtml(activeBlockOption.icon);
+            blockIcon.textContent = activeBlockOption.icon || '';
         }
         if (blockLabel) blockLabel.textContent = activeBlockOption.label;
 
@@ -287,47 +300,21 @@ export function createToolbarDom({
         if (listIcon) listIcon.textContent = activeListOption?.icon || 'format_list_bulleted';
 
         const alignIcon = writingToolbar.querySelector('[data-current-align-icon]');
-        if (alignIcon) alignIcon.textContent = activeAlignment.icon;
+        if (alignIcon) alignIcon.textContent = `format_align_${displayAlignment}`;
 
         const collapseIcon = writingToolbar.querySelector('[data-heading-collapse-icon]');
         const collapseLabel = writingToolbar.querySelector('[data-heading-collapse-label]');
         if (collapseIcon) collapseIcon.textContent = block?.props?.isCollapsed ? 'unfold_more' : 'unfold_less';
         if (collapseLabel) collapseLabel.textContent = block?.props?.isCollapsed ? 'Expand heading' : 'Collapse heading';
 
+        const state = { blocks, block, styles: activeStyles, fontPreset: activeFontPreset, alignment: currentAlignment };
         writingToolbar.querySelectorAll('button[data-editor-action]').forEach((button) => {
             const action = button.dataset.editorAction;
-            let active = false;
-            let disabled = false;
-            if (action === 'set-block') {
-                const blockType = button.dataset.blockType;
-                active = blockType === 'heading'
-                    ? block?.type === 'heading' && Number(block?.props?.level) === Number(button.dataset.level)
-                    : block?.type === blockType;
-            } else if (action === 'align') {
-                active = button.dataset.align === currentAlignment;
-            } else if (action === 'basic-style') {
-                active = Boolean(activeStyles?.[button.dataset.style]);
-            } else if (action === 'text-color') {
-                active = (activeStyles?.textColor || 'default') === button.dataset.color;
-            } else if (action === 'highlight-color') {
-                active = (activeStyles?.backgroundColor || 'default') === button.dataset.color;
-            } else if (action === 'font-size') {
-                active = activeFontPreset.value === button.dataset.fontSize;
-            } else if (action === 'undo' || action === 'redo') {
-                disabled = !canRunHistoryAction(action);
-            } else if (action === 'indent' || action === 'outdent') {
-                disabled = !canRunIndentAction(action);
-            } else if (action === 'toggle-heading-collapse') {
-                disabled = block?.type !== 'heading';
-            } else if (['copy-blocks', 'cut-blocks', 'duplicate-blocks', 'delete-blocks', 'move-blocks-up', 'move-blocks-down'].includes(action)) {
-                disabled = blocks.length === 0;
-            } else if (action === 'zoom-out') {
-                disabled = getZoomIndex() === 0;
-            } else if (action === 'zoom-in') {
-                disabled = getZoomIndex() === getZoomLevels().length - 1;
-            }
+            const command = commands[action];
+            const active = command?.active?.(button.dataset, state) || false;
+            const disabled = command?.disabled?.(state, action) || false;
             button.classList.toggle('is-active', active);
-            if (action === 'basic-style') {
+            if (command?.pressed) {
                 button.setAttribute('aria-pressed', String(active));
             } else {
                 button.removeAttribute('aria-pressed');
@@ -340,7 +327,7 @@ export function createToolbarDom({
             const key = item.dataset.menuCheck;
             const checked = key === activeBlockOption.key
                 || key === activeListOption?.key
-                || key === activeAlignment.key
+                || key === `align-${displayAlignment}`
                 || key === `text-color-${activeStyles?.textColor || 'default'}`
                 || key === `highlight-color-${activeStyles?.backgroundColor || 'default'}`
                 || key === `font-size-${activeFontPreset.value}`;
@@ -387,62 +374,7 @@ export function createToolbarDom({
             if (!actionButton || !writingToolbar.contains(actionButton)) return;
             event.preventDefault();
 
-            const action = actionButton.dataset.editorAction;
-            if (action === 'focus-body') {
-                actions.focusEditorBody();
-            } else if (action === 'insert-block') {
-                actions.insertBlockFromMenu(actionButton);
-            } else if (action === 'undo' || action === 'redo') {
-                actions.runHistoryAction(action);
-            } else if (action === 'zoom-out') {
-                pageSetup?.setZoomIndex(getZoomIndex() - 1);
-            } else if (action === 'zoom-in') {
-                pageSetup?.setZoomIndex(getZoomIndex() + 1);
-            } else if (action === 'basic-style') {
-                actions.toggleBasicStyle(actionButton.dataset.style);
-            } else if (action === 'text-color') {
-                actions.applyTextColor(actionButton.dataset.color || 'default');
-                closeToolbarMenus();
-            } else if (action === 'highlight-color') {
-                actions.applyHighlightColor(actionButton.dataset.color || 'default');
-                closeToolbarMenus();
-            } else if (action === 'font-size') {
-                actions.applyFontSizePreset(actionButton.dataset.fontSize || 'default');
-                closeToolbarMenus();
-            } else if (action === 'remove-link') {
-                actions.removeSelectedLink();
-            } else if (action === 'set-block') {
-                const blockType = actionButton.dataset.blockType;
-                const level = Number(actionButton.dataset.level);
-                actions.setSelectedBlocks(blockType, blockType === 'heading' ? { level: level || 1 } : undefined);
-                closeToolbarMenus();
-            } else if (action === 'align') {
-                actions.applyTextAlignment(actionButton.dataset.align || 'left');
-                closeToolbarMenus();
-            } else if (action === 'indent' || action === 'outdent') {
-                actions.runIndentAction(action);
-            } else if (action === 'copy-blocks') {
-                void actions.copySelectedBlocks();
-                closeToolbarMenus();
-            } else if (action === 'cut-blocks') {
-                void actions.copySelectedBlocks({ cut: true });
-                closeToolbarMenus();
-            } else if (action === 'duplicate-blocks') {
-                actions.duplicateSelectedBlocks();
-                closeToolbarMenus();
-            } else if (action === 'delete-blocks') {
-                actions.deleteSelectedBlocks();
-                closeToolbarMenus();
-            } else if (action === 'move-blocks-up') {
-                actions.moveSelectedBlocks('up');
-                closeToolbarMenus();
-            } else if (action === 'move-blocks-down') {
-                actions.moveSelectedBlocks('down');
-                closeToolbarMenus();
-            } else if (action === 'toggle-heading-collapse') {
-                actions.toggleHeadingCollapse();
-                closeToolbarMenus();
-            }
+            executeCommand(actionButton.dataset.editorAction, actionButton);
         });
 
         writingToolbar.addEventListener('input', (event) => {
@@ -465,7 +397,7 @@ export function createToolbarDom({
                 setActiveAddBlockItem(menu, addBlockActiveIndex - 1);
             } else if (event.key === 'Enter') {
                 event.preventDefault();
-                actions.insertBlockFromMenu(items[addBlockActiveIndex] || items[0]);
+                executeCommand('insert-block', items[addBlockActiveIndex] || items[0]);
             }
         });
 
@@ -481,8 +413,7 @@ export function createToolbarDom({
                 closeToolbarMenus();
             }
             if (actions.hasUrlBlockPopover() && !actions.getUrlBlockPopover().contains(event.target) && !writingToolbar?.contains(event.target)) {
-                actions.resolveUrlBlockPopover('');
-                actions.removeUrlBlockPopover();
+                actions.removeUrlBlockPopover('');
             }
             if (!pageSetupPopover || pageSetupPopover.hidden) return;
             if (pageSetupPopover.contains(event.target) || actions.getActivePageSetupTrigger()?.contains(event.target)) return;
@@ -495,8 +426,7 @@ export function createToolbarDom({
                 if (activeToolbarMenu) closeToolbarMenus();
                 if (pageSetupPopover && !pageSetupPopover.hidden) pageSetup?.closePageSetupPopover?.({ restoreFocus: true });
                 if (actions.hasUrlBlockPopover()) {
-                    actions.resolveUrlBlockPopover('');
-                    actions.removeUrlBlockPopover();
+                    actions.removeUrlBlockPopover('');
                 }
                 return;
             }
@@ -516,16 +446,16 @@ export function createToolbarDom({
                 openToolbarMenu('highlight-color', trigger);
             } else if (mod && event.altKey && event.key.toLowerCase() === 'h') {
                 event.preventDefault();
-                actions.toggleHeadingCollapse();
+                executeCommand('toggle-heading-collapse');
             } else if (event.altKey && !event.shiftKey && !event.metaKey && !event.ctrlKey && event.key === 'ArrowUp') {
                 event.preventDefault();
-                actions.moveSelectedBlocks('up');
+                executeCommand('move-blocks-up');
             } else if (event.altKey && !event.shiftKey && !event.metaKey && !event.ctrlKey && event.key === 'ArrowDown') {
                 event.preventDefault();
-                actions.moveSelectedBlocks('down');
+                executeCommand('move-blocks-down');
             } else if ((event.key === 'Delete' || event.key === 'Backspace') && getSelectedBlocks().length > 1) {
                 event.preventDefault();
-                actions.deleteSelectedBlocks();
+                executeCommand('delete-blocks');
             }
         });
 

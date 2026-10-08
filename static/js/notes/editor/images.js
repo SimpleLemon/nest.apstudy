@@ -35,7 +35,7 @@ export function clipboardHtmlImageSources(clipboardData) {
         .filter((src) => /^data:image\/(?:jpeg|png|gif|webp);base64,/i.test(src) || /^https?:\/\//i.test(src));
 }
 
-export async function dataImageFile(source, index = 0) {
+export async function imageSourceFile(source, index = 0) {
     const response = await fetch(source);
     const blob = await response.blob();
     return new File([blob], `clipboard-image-${index + 1}.${blob.type === 'image/jpeg' ? 'jpg' : blob.type.split('/')[1] || 'png'}`, { type: blob.type });

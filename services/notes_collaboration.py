@@ -6,19 +6,24 @@ import base64
 import json
 import os
 import re
+import shutil
 import sqlite3
 import subprocess
 import urllib.error
 import urllib.request
 import uuid
+from contextlib import contextmanager, nullcontext
 from datetime import datetime, timedelta, timezone
 
 from appwrite.exception import AppwriteException
 
 from services.database import db_connection, utcnow_iso
-from services import note_store
+from services import note_media, note_store
 from services.database import BASE_DIR
-from services.environment_config import runtime_environment_config
+from services.environment_config import notes_collaboration_callback_base_url, runtime_environment_config
+from services.entitlements import check_storage_transaction
+from services.storage_backend import require_mutations_enabled
+from services.storage_objects import write_transaction
 
 
 ROLE_LEVELS = {"viewer", "reviewer", "editor"}
@@ -29,26 +34,93 @@ INVITATION_DAYS = 7
 VERSION_DAYS = 30
 
 
-def _collaboration_secret():
-    configured = runtime_environment_config()
+class CollaborationRevisionConflict(ValueError):
+    def __init__(self):
+        super().__init__("collaboration_revision_conflict")
+
+
+class CollaborationReplacementUnavailable(RuntimeError):
+    def __init__(self, *, committed=False):
+        self.committed = committed
+        super().__init__("collaboration_replacement_reload_failed" if committed else
+                         "collaboration_replacement_flush_failed")
+
+
+class _CallbackRedirectsDenied(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, response, code, message, headers, new_url):
+        # Callback credentials belong only to the configured sidecar listener.
+        return None
+
+
+@contextmanager
+def _collaboration_replacement(note_id):
+    """Freeze/flush the sidecar before reading, and retire its old generation."""
+    payload = {"note_id": str(note_id), "replacement_id": row_id()}
+    state = {"committed": False}
+    try:
+        if not _post_collaboration_callback("prepare-replacement", payload, timeout=40):
+            raise CollaborationReplacementUnavailable()
+        yield state
+    except BaseException:
+        # A commit is followed only by retirement, never by reopening the old cache.
+        if not state["committed"]:
+            _post_collaboration_callback("cancel-replacement", payload, timeout=10)
+        raise
+    if state["committed"]:
+        if not _reload_collaboration_document(note_id, payload["replacement_id"]):
+            raise CollaborationReplacementUnavailable(committed=True)
+    else:
+        _post_collaboration_callback("cancel-replacement", payload, timeout=10)
+
+
+def _document_revision(conn, note_id):
+    row = conn.execute(
+        "SELECT durable_revision FROM note_collaboration_documents WHERE note_id = ?",
+        [str(note_id)],
+    ).fetchone()
+    return int(row["durable_revision"] or 0) if row else 0
+
+
+def _node_executable():
+    executable = shutil.which("node")
+    if not executable:
+        raise ValueError("Node.js is required to convert collaboration documents.")
+    return os.path.abspath(executable)
+
+
+def _run_document_transform(script, payload):
+    completed = subprocess.run(
+        [_node_executable(), os.path.join(BASE_DIR, "collaboration", script)], cwd=BASE_DIR,
+        input=json.dumps(payload), text=True, capture_output=True, timeout=30,
+    )
+    if completed.returncode:
+        if "suggestion_conflicted" in (completed.stderr or ""):
+            raise ValueError("suggestion_conflicted")
+        raise ValueError("Unable to replace collaboration document.")
+    result = json.loads(completed.stdout)
+    blob = base64.b64decode(result["ydoc_base64"], validate=True)
+    if len(blob) > 10 * 1024 * 1024:
+        raise ValueError("Collaboration document is too large.")
+    return result, blob
+
+
+def _collaboration_secret(configured=None):
+    if configured is None:
+        configured = runtime_environment_config()
     return configured.notes_collaboration_internal_secret or configured.notes_collaboration_secret
 
 
-def _broadcast_review_event(note_id, event_type, resource_id):
-    secret = _collaboration_secret()
+def _post_collaboration_callback(path, payload, *, timeout):
+    configured = runtime_environment_config()
+    secret = _collaboration_secret(configured)
     if not secret:
-        return
-    payload = json.dumps({
-        "note_id": str(note_id),
-        "event": {
-            "id": row_id(),
-            "type": str(event_type),
-            "resource_id": str(resource_id),
-        },
-    }).encode("utf-8")
+        return False
+    base_url = notes_collaboration_callback_base_url(configured)
+    if not base_url:
+        return False
     request = urllib.request.Request(
-        "http://127.0.0.1:1234/events",
-        data=payload,
+        f"{base_url}/{path}",
+        data=json.dumps(payload).encode("utf-8"),
         method="POST",
         headers={
             "Content-Type": "application/json",
@@ -56,28 +128,46 @@ def _broadcast_review_event(note_id, event_type, resource_id):
         },
     )
     try:
-        with urllib.request.urlopen(request, timeout=0.75):
+        opener = urllib.request.build_opener(_CallbackRedirectsDenied())
+        with opener.open(request, timeout=timeout):
             pass
+        return True
+    except urllib.error.HTTPError as error:
+        error.close()
+        return False
     except (OSError, urllib.error.URLError):
-        # Database state is authoritative; connected clients can still refresh manually.
-        pass
+        # Permission callbacks have periodic and per-message checks in the sidecar
+        # as a fallback. Review callbacks remain best effort.
+        return False
 
 
-def _reload_collaboration_document(note_id):
-    secret = _collaboration_secret()
-    if not secret:
-        return
-    request = urllib.request.Request(
-        "http://127.0.0.1:1234/reload",
-        data=json.dumps({"note_id": str(note_id)}).encode("utf-8"),
-        method="POST",
-        headers={"Content-Type": "application/json", "X-Nest-Collaboration-Secret": secret},
+def _broadcast_review_event(note_id, event_type, resource_id):
+    _post_collaboration_callback("events", {
+        "note_id": str(note_id),
+        "event": {
+            "id": row_id(),
+            "type": str(event_type),
+            "resource_id": str(resource_id),
+        },
+    }, timeout=0.75)
+
+
+def _reload_collaboration_document(note_id, replacement_id):
+    return _post_collaboration_callback("reload", {
+        "note_id": str(note_id), "replacement_id": str(replacement_id),
+    }, timeout=10)
+
+
+def invalidate_access(resource_type, resource_id, *, note_ids=None):
+    """Disconnect affected loaded documents after an ACL transaction commits."""
+    if note_ids is None:
+        note_ids = ([str(resource_id)] if resource_type == "note" else
+                    [note["$id"] for note in note_store.list_notes_in_folder(resource_id)])
+    if not note_ids:
+        return True
+    return _post_collaboration_callback(
+        "access-invalidation", {"note_ids": [str(value) for value in note_ids]}, timeout=1.5,
     )
-    try:
-        with urllib.request.urlopen(request, timeout=1.5):
-            pass
-    except (OSError, urllib.error.URLError):
-        pass
 
 
 def row_id():
@@ -133,9 +223,9 @@ def record_access_event(
         )
 
 
-def list_pending_invitations(resource_type, resource_id):
+def list_pending_invitations(resource_type, resource_id, *, conn=None):
     now = utcnow_iso()
-    with db_connection() as conn:
+    with (db_connection() if conn is None else nullcontext(conn)) as conn:
         conn.execute(
             """
             UPDATE note_share_invitations
@@ -173,7 +263,10 @@ def replace_pending_invitations(
     owner_user_id,
     invitations,
     actor_user_id,
+    *,
+    conn=None,
 ):
+    """Replace invitations; a supplied connection belongs to the sharing writer transaction."""
     normalized = []
     seen = set()
     for invitation in invitations:
@@ -187,7 +280,18 @@ def replace_pending_invitations(
 
     now = utcnow_iso()
     expiry = _iso_after(INVITATION_DAYS)
-    with db_connection() as conn:
+    owns_transaction = conn is None
+    with (db_connection() if owns_transaction else nullcontext(conn)) as conn:
+        if owns_transaction:
+            conn.execute("BEGIN IMMEDIATE")
+        table = "notes" if resource_type == "note" else "note_folders"
+        resource = conn.execute(
+            f"SELECT * FROM {table} WHERE id = ? AND user_id = ?",
+            [str(resource_id), str(owner_user_id)],
+        ).fetchone()
+        if not resource:
+            raise ValueError("sharing_access_denied")
+        note_store._require_resource_share(conn, resource_type, str(resource_id), resource, actor_user_id)
         existing = {
             row["email_normalized"]: dict(row)
             for row in conn.execute(
@@ -231,11 +335,13 @@ def replace_pending_invitations(
                         display, role, str(actor_user_id), expiry, now, now,
                     ],
                 )
-        table = "notes" if resource_type == "note" else "note_folders"
         conn.execute(
             f"UPDATE {table} SET access_version = access_version + 1, updated_at = ? WHERE id = ?",
             [now, str(resource_id)],
         )
+        if not owns_transaction:
+            return list_pending_invitations(resource_type, resource_id, conn=conn)
+    invalidate_access(resource_type, resource_id)
     return list_pending_invitations(resource_type, resource_id)
 
 
@@ -302,6 +408,8 @@ def claim_pending_invitations(user_id, email):
                 [str(user_id), now, now, row["id"]],
             )
             claimed.append(dict(row))
+    for resource_type, resource_id in {(row["resource_type"], row["resource_id"]) for row in claimed}:
+        invalidate_access(resource_type, resource_id)
     return claimed
 
 
@@ -440,63 +548,75 @@ def create_suggestion(note_id, author_user_id, payload):
     return next(row for row in list_suggestions(note_id) if row["id"] == suggestion_id)
 
 
-def _apply_suggestion(note_id, row):
-    with db_connection() as conn:
-        document = conn.execute(
-            "SELECT * FROM note_collaboration_documents WHERE note_id = ?",
-            [str(note_id)],
-        ).fetchone()
-    if not document:
-        raise ValueError("suggestion_conflicted")
-    completed = subprocess.run(
-        ["node", os.path.join(BASE_DIR, "collaboration", "apply-suggestion.mjs")],
-        cwd=BASE_DIR,
-        input=json.dumps({
+def _apply_suggestion(note_id, row, resolver_user_id=None):
+    require_mutations_enabled()
+    deleted = []
+    with _collaboration_replacement(note_id) as replacement:
+        # Prepare has flushed accepted sidecar edits. A suggestion must be
+        # computed from that latest state, not the earlier cached SQLite blob.
+        document = get_collaboration_document(note_id)
+        if not document:
+            raise ValueError("suggestion_conflicted")
+        generation = row_id()
+        applied, blob = _run_document_transform("apply-suggestion.mjs", {
             "ydoc_base64": base64.b64encode(document["ydoc_blob"]).decode("ascii"),
             "base_state_vector": row["base_state_vector"],
             "target_kind": row["target_kind"] or "body",
             "operations": json.loads(row["operations_json"] or "[]"),
-        }),
-        text=True,
-        capture_output=True,
-        timeout=30,
-    )
-    if completed.returncode:
-        detail = completed.stderr or "suggestion_apply_failed"
-        if "suggestion_conflicted" in detail:
-            raise ValueError("suggestion_conflicted")
-        raise ValueError("Unable to apply suggestion.")
-    applied = json.loads(completed.stdout)
-    blob = base64.b64decode(applied["ydoc_base64"], validate=True)
-    now = utcnow_iso()
-    with db_connection() as conn:
-        conn.execute(
-            """
-            UPDATE note_collaboration_documents
-            SET ydoc_blob = ?, durable_revision = durable_revision + 1,
-                projection_revision = projection_revision + 1, updated_at = ?
-            WHERE note_id = ?
-            """,
-            [blob, now, str(note_id)],
-        )
-        updates = {"updated_at": now}
-        if applied.get("title") is not None:
-            updates["title"] = str(applied["title"]) or "Untitled"
-        if applied.get("content_json") is not None:
-            updates["content"] = applied["content_json"]
-            from services.notes_preview import preview_text_from_content
-            updates["preview_text"] = preview_text_from_content(applied["content_json"])
-        if applied.get("page_setup") is not None:
-            updates["page_setup_json"] = json.dumps(applied["page_setup"], separators=(",", ":"))
-        assignments = ", ".join(f"{key} = ?" for key in updates)
-        conn.execute(
-            f"UPDATE notes SET {assignments} WHERE id = ?",
-            [*updates.values(), str(note_id)],
-        )
-    _reload_collaboration_document(note_id)
+            "document_generation": generation,
+        })
+        now = utcnow_iso()
+        with write_transaction() as conn:
+            note = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
+            if not note:
+                raise ValueError("sharing_access_denied")
+            note_store._require_resource_share(conn, "note", note_id, note, resolver_user_id)
+            if _document_revision(conn, note_id) != document["durable_revision"]:
+                raise CollaborationRevisionConflict()
+            current = conn.execute(
+                "SELECT status FROM note_suggestions WHERE id = ? AND note_id = ?",
+                [row["id"], str(note_id)],
+            ).fetchone()
+            if not current or current["status"] != "open":
+                raise ValueError("Suggestion is already resolved.")
+            conn.execute(
+                """
+                UPDATE note_collaboration_documents
+                SET ydoc_blob = ?, document_generation = ?, durable_revision = durable_revision + 1,
+                    projection_revision = projection_revision + 1, updated_at = ?
+                WHERE note_id = ?
+                """, [blob, generation, now, str(note_id)],
+            )
+            updates = {"updated_at": now}
+            if applied.get("title") is not None:
+                updates["title"] = str(applied["title"]) or "Untitled"
+            if applied.get("content_json") is not None:
+                updates["content"] = applied["content_json"]
+                from services.notes_preview import preview_text_from_content
+                updates["preview_text"] = preview_text_from_content(applied["content_json"])
+            if applied.get("page_setup") is not None:
+                updates["page_setup_json"] = json.dumps(applied["page_setup"], separators=(",", ":"))
+            assignments = ", ".join(f"{key} = ?" for key in updates)
+            conn.execute(
+                f"UPDATE notes SET {assignments} WHERE id = ?", [*updates.values(), str(note_id)],
+            )
+            if "content" in updates:
+                deleted = note_media.sync_note_media(note_id, updates["content"], conn=conn)
+            # Commit review resolution with the replacement. A failed reload
+            # must never leave an already-applied suggestion open for replay.
+            conn.execute(
+                """UPDATE note_suggestions SET status = 'accepted', resolved_by_user_id = ?,
+                    resolved_at = ?, updated_at = ? WHERE id = ?""",
+                [str(resolver_user_id or ""), now, now, row["id"]],
+            )
+        replacement["committed"] = True
+    note_media.cleanup_legacy_media(deleted)
 
 
 def resolve_suggestion(note_id, suggestion_id, resolver_user_id, status):
+    applied = False
+    if status == "accepted":
+        require_mutations_enabled()
     if status not in {"accepted", "rejected", "conflicted"}:
         raise ValueError("Unsupported suggestion status.")
     now = utcnow_iso()
@@ -521,19 +641,27 @@ def resolve_suggestion(note_id, suggestion_id, resolver_user_id, status):
             ).fetchone() is not None
         if has_document:
             try:
-                _apply_suggestion(note_id, row)
+                _apply_suggestion(note_id, row, resolver_user_id)
+                applied = True
             except ValueError as exc:
                 if str(exc) != "suggestion_conflicted":
                     raise
                 status = "conflicted"
-    with db_connection() as conn:
-        conn.execute(
-            """
-            UPDATE note_suggestions SET status = ?, resolved_by_user_id = ?,
-                resolved_at = ?, updated_at = ? WHERE id = ?
-            """,
-            [status, str(resolver_user_id), now, now, str(suggestion_id)],
-        )
+    if not applied:
+        with write_transaction() as conn:
+            note = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
+            if not note:
+                raise ValueError("sharing_access_denied")
+            note_store._require_resource_share(conn, "note", note_id, note, resolver_user_id)
+            result = conn.execute(
+                """
+                UPDATE note_suggestions SET status = ?, resolved_by_user_id = ?,
+                    resolved_at = ?, updated_at = ? WHERE id = ? AND status = 'open'
+                """,
+                [status, str(resolver_user_id), now, now, str(suggestion_id)],
+            )
+            if not result.rowcount:
+                raise ValueError("Suggestion is already resolved.")
     create_notification(
         row["author_user_id"], f"note_suggestion_{status}",
         f"Your note suggestion was {status}.", actor_user_id=resolver_user_id,
@@ -913,37 +1041,87 @@ def list_versions(note_id):
 
 
 def restore_version(note_id, version_id, actor_user_id):
-    create_version(note_id, actor_user_id, reason="before_restore")
-    now = utcnow_iso()
+    require_mutations_enabled()
     with db_connection() as conn:
         version = conn.execute(
             "SELECT * FROM note_versions WHERE id = ? AND note_id = ?",
             [str(version_id), str(note_id)],
         ).fetchone()
-        if not version:
-            return None
-        conn.execute(
-            """
-            UPDATE notes SET title = ?, content = ?, page_setup_json = ?,
-                updated_at = ?, access_version = access_version + 1 WHERE id = ?
-            """,
-            [version["title"], version["content"], version["page_setup_json"], now, str(note_id)],
-        )
-        if version["ydoc_blob"] is not None:
+    if not version:
+        return None
+    current = get_collaboration_document(note_id)
+    collaborative = current is not None or version["ydoc_blob"] is not None
+    context = _collaboration_replacement(note_id) if collaborative else nullcontext({"committed": False})
+    deleted = []
+    with context as replacement:
+        current = get_collaboration_document(note_id)
+        expected_revision = int(current["durable_revision"]) if current else 0
+        blob = version["ydoc_blob"]
+        generation = row_id()
+        if collaborative:
+            if blob is None:
+                # A pre-migration version must replace the collaborative body
+                # too, or a subsequent sidecar save would resurrect it.
+                blocks = json.loads(version["content"] or "[]")
+                if not isinstance(blocks, list):
+                    raise ValueError("Version content is not a BlockNote array.")
+                _, blob = _run_document_transform("convert-note.mjs", {
+                    "title": version["title"] or "Untitled",
+                    "blocks": blocks or [{"type": "paragraph", "content": ""}],
+                    "page_setup": json.loads(version["page_setup_json"] or "{}"),
+                })
+            _, blob = _run_document_transform("replace-generation.mjs", {
+                "ydoc_base64": base64.b64encode(blob).decode("ascii"),
+                "document_generation": generation,
+            })
+        now = utcnow_iso()
+        with write_transaction() as conn:
+            if _document_revision(conn, note_id) != expected_revision:
+                raise CollaborationRevisionConflict()
+            note = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
+            if not note:
+                return None
+            note_store._require_resource_share(conn, "note", note_id, note, actor_user_id)
+            # Commit the checkpoint and replacement together, after checking
+            # actor access. It includes accepted edits flushed during prepare.
+            conn.execute(
+                """INSERT INTO note_versions (
+                    id, note_id, actor_user_id, reason, ydoc_blob, title, content,
+                    page_setup_json, durable_revision, created_at, expires_at
+                ) VALUES (?, ?, ?, 'before_restore', ?, ?, ?, ?, ?, ?, ?)""",
+                [row_id(), str(note_id), str(actor_user_id), current["ydoc_blob"] if current else None,
+                 note["title"] or "Untitled", note["content"] or "", note["page_setup_json"],
+                 expected_revision, now, _iso_after(VERSION_DAYS)],
+            )
+            from services.notes_preview import preview_text_from_content
             conn.execute(
                 """
-                INSERT INTO note_collaboration_documents (
-                    note_id, ydoc_blob, schema_version, durable_revision,
-                    projection_revision, initialized_at, updated_at
-                ) VALUES (?, ?, 1, 1, 1, ?, ?)
-                ON CONFLICT(note_id) DO UPDATE SET
-                    ydoc_blob = excluded.ydoc_blob,
-                    durable_revision = note_collaboration_documents.durable_revision + 1,
-                    projection_revision = note_collaboration_documents.projection_revision + 1,
-                    updated_at = excluded.updated_at
+                UPDATE notes SET title = ?, content = ?, preview_text = ?, page_setup_json = ?,
+                    updated_at = ?, access_version = access_version + 1 WHERE id = ?
                 """,
-                [str(note_id), version["ydoc_blob"], now, now],
+                [version["title"], version["content"], preview_text_from_content(version["content"]),
+                 version["page_setup_json"], now, str(note_id)],
             )
+            if blob is not None:
+                conn.execute(
+                    """
+                    INSERT INTO note_collaboration_documents (
+                        note_id, ydoc_blob, schema_version, durable_revision,
+                        projection_revision, document_generation, initialized_at, updated_at
+                    ) VALUES (?, ?, 1, ?, ?, ?, ?, ?)
+                    ON CONFLICT(note_id) DO UPDATE SET
+                        ydoc_blob = excluded.ydoc_blob,
+                        durable_revision = excluded.durable_revision,
+                        projection_revision = excluded.projection_revision,
+                        document_generation = excluded.document_generation,
+                        updated_at = excluded.updated_at
+                    """,
+                    [str(note_id), blob, expected_revision + 1, expected_revision + 1, generation, now, now],
+                )
+                conn.execute("UPDATE notes SET collaboration_enabled = 1 WHERE id = ?", [str(note_id)])
+            deleted = note_media.sync_note_media(note_id, version["content"], conn=conn)
+        replacement["committed"] = True
+    note_media.cleanup_legacy_media(deleted)
     return note_store.get_note(note_id)
 
 
@@ -956,19 +1134,43 @@ def get_collaboration_document(note_id):
     return dict(row) if row else None
 
 
-def store_collaboration_document(note_id, blob, *, title=None, content=None, page_setup_json=None, schema_version=1):
+def get_collaboration_generation(note_id):
+    """Read replacement identity without loading the potentially large Yjs blob."""
+    with db_connection() as conn:
+        row = conn.execute(
+            "SELECT document_generation FROM note_collaboration_documents WHERE note_id = ?",
+            [str(note_id)],
+        ).fetchone()
+    return row["document_generation"] if row else "initial"
+
+
+def store_collaboration_document(note_id, blob, *, title=None, content=None, page_setup_json=None, schema_version=1, expected_revision=None, document_generation=None):
+    require_mutations_enabled()
     if not isinstance(blob, (bytes, bytearray)) or len(blob) > 10 * 1024 * 1024:
         raise ValueError("Collaboration document is invalid or too large.")
+    if expected_revision is not None and (type(expected_revision) is not int or expected_revision < 0):
+        raise ValueError("expected_revision must be a nonnegative integer.")
+    if document_generation is not None and (
+        not isinstance(document_generation, str) or not document_generation.strip()
+    ):
+        raise ValueError("document_generation must be a nonempty string.")
     now = utcnow_iso()
-    with db_connection() as conn:
+    deleted = []
+    with write_transaction() as conn:
         note = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
         if not note:
             return None
+        current_revision = _document_revision(conn, note_id)
+        if expected_revision is not None and expected_revision != current_revision:
+            raise CollaborationRevisionConflict()
         current = conn.execute(
-            "SELECT durable_revision FROM note_collaboration_documents WHERE note_id = ?",
+            "SELECT document_generation FROM note_collaboration_documents WHERE note_id = ?",
             [str(note_id)],
         ).fetchone()
-        revision = int(current["durable_revision"] or 0) + 1 if current else 1
+        generation = current["document_generation"] if current else "initial"
+        if document_generation is not None and document_generation != generation:
+            raise CollaborationRevisionConflict()
+        revision = current_revision + 1
         conn.execute(
             """
             INSERT INTO note_collaboration_documents (
@@ -998,13 +1200,17 @@ def store_collaboration_document(note_id, blob, *, title=None, content=None, pag
             f"UPDATE notes SET {assignments} WHERE id = ?",
             [*updates.values(), str(note_id)],
         )
-    return {"note_id": str(note_id), "durable_revision": revision, "updated_at": now}
+        if content is not None:
+            deleted = note_media.sync_note_media(note_id, str(content), conn=conn)
+    note_media.cleanup_legacy_media(deleted)
+    return {"note_id": str(note_id), "durable_revision": revision, "document_generation": generation, "updated_at": now}
 
 
 def transfer_note(note_id, current_owner_id, new_owner_id):
+    require_mutations_enabled()
     now = utcnow_iso()
     create_version(note_id, current_owner_id, reason="before_transfer")
-    with db_connection() as conn:
+    with write_transaction() as conn:
         note = conn.execute(
             "SELECT * FROM notes WHERE id = ? AND user_id = ?",
             [str(note_id), str(current_owner_id)],
@@ -1065,6 +1271,16 @@ def transfer_note(note_id, current_owner_id, new_owner_id):
                 effective_target = level
         if not target or effective_target != "editor":
             raise ValueError("Ownership can only be transferred to an existing Editor.")
+        media_bytes = conn.execute(
+            "SELECT COALESCE(SUM(file_size_bytes), 0) FROM note_media WHERE note_id = ? AND user_id <> ?",
+            [str(note_id), str(new_owner_id)],
+        ).fetchone()[0]
+        if media_bytes:
+            check_storage_transaction(conn, new_owner_id, int(media_bytes))
+        conn.execute(
+            "UPDATE note_media SET user_id = ?, updated_at = ? WHERE note_id = ?",
+            [str(new_owner_id), now, str(note_id)],
+        )
         conn.execute(
             "DELETE FROM note_access_grants WHERE resource_type = 'note' AND resource_id = ? AND principal_type = 'user' AND principal_id = ?",
             [str(note_id), str(new_owner_id)],
@@ -1090,6 +1306,7 @@ def transfer_note(note_id, current_owner_id, new_owner_id):
             "UPDATE note_share_invitations SET owner_user_id = ?, updated_at = ? WHERE resource_type = 'note' AND resource_id = ? AND status = 'pending'",
             [str(new_owner_id), now, str(note_id)],
         )
+    invalidate_access("note", note_id)
     create_notification(
         new_owner_id, "note_ownership_transferred", "You are now the owner of a shared note.",
         actor_user_id=current_owner_id, note_id=note_id,
@@ -1098,8 +1315,9 @@ def transfer_note(note_id, current_owner_id, new_owner_id):
 
 
 def transfer_folder(folder_id, current_owner_id, new_owner_id):
+    require_mutations_enabled()
     now = utcnow_iso()
-    with db_connection() as conn:
+    with write_transaction() as conn:
         folder = conn.execute(
             "SELECT * FROM note_folders WHERE id = ? AND user_id = ?",
             [str(folder_id), str(current_owner_id)],
@@ -1118,6 +1336,22 @@ def transfer_folder(folder_id, current_owner_id, new_owner_id):
         if not target or not grant or grant["access_level"] != "editor":
             raise ValueError("Ownership can only be transferred to an existing folder Editor.")
         note_ids = [row["id"] for row in conn.execute("SELECT id FROM notes WHERE folder_id = ?", [str(folder_id)]).fetchall()]
+        media_bytes = conn.execute(
+            """
+            SELECT COALESCE(SUM(file_size_bytes), 0) FROM note_media
+            WHERE note_id IN (SELECT id FROM notes WHERE folder_id = ?) AND user_id <> ?
+            """,
+            [str(folder_id), str(new_owner_id)],
+        ).fetchone()[0]
+        if media_bytes:
+            check_storage_transaction(conn, new_owner_id, int(media_bytes))
+        conn.execute(
+            """
+            UPDATE note_media SET user_id = ?, updated_at = ?
+            WHERE note_id IN (SELECT id FROM notes WHERE folder_id = ?)
+            """,
+            [str(new_owner_id), now, str(folder_id)],
+        )
         for note_id in note_ids:
             # Record a projection snapshot inside the same transaction.
             note = conn.execute("SELECT * FROM notes WHERE id = ?", [note_id]).fetchone()
@@ -1174,6 +1408,7 @@ def transfer_folder(folder_id, current_owner_id, new_owner_id):
             "UPDATE note_share_invitations SET owner_user_id = ?, updated_at = ? WHERE resource_type = 'folder' AND resource_id = ? AND status = 'pending'",
             [str(new_owner_id), now, str(folder_id)],
         )
+    invalidate_access("folder", folder_id, note_ids=note_ids)
     create_notification(
         new_owner_id, "note_folder_ownership_transferred", "You are now the owner of a shared notes folder.",
         actor_user_id=current_owner_id,
@@ -1183,6 +1418,8 @@ def transfer_folder(folder_id, current_owner_id, new_owner_id):
 
 def migrate_notes_to_collaboration(*, report_only=True, note_ids=None):
     """Convert legacy BlockNote JSON with the production schema before enabling Yjs."""
+    if not report_only:
+        require_mutations_enabled()
     selected = {str(value) for value in (note_ids or []) if value}
     with db_connection() as conn:
         rows = _dicts(conn.execute(
@@ -1206,7 +1443,7 @@ def migrate_notes_to_collaboration(*, report_only=True, note_ids=None):
                 blocks = [{"type": "paragraph", "content": ""}]
             page_setup = json.loads(note.get("page_setup_json") or "{}")
             completed = subprocess.run(
-                ["node", converter],
+                [_node_executable(), converter],
                 cwd=BASE_DIR,
                 input=json.dumps({
                     "title": note.get("title") or "Untitled",
@@ -1225,7 +1462,7 @@ def migrate_notes_to_collaboration(*, report_only=True, note_ids=None):
                 continue
             create_version(note["id"], reason="before_migration")
             now = utcnow_iso()
-            with db_connection() as conn:
+            with write_transaction() as conn:
                 existing = conn.execute(
                     "SELECT 1 FROM note_collaboration_documents WHERE note_id = ?",
                     [str(note["id"])],

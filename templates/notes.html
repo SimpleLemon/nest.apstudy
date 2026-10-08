@@ -28,10 +28,7 @@
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/vendor/dist/sortable-global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/notes/sharing.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes/list/utils.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes/list/cards.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes/list/drag-drop.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/notes/list.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/notes/list.js') }}" type="module"></script>
 {% endblock %}
 
 {% block body_attrs %} class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}

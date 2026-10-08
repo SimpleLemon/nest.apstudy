@@ -12,9 +12,12 @@ from appwrite_helpers import (
     list_rows_all,
     update_row_safe,
 )
+from services import database
 from services.database import db_connection, utcnow_iso
 from services.notes_preview import preview_text_from_content
 from services.row_utils import row_id as _row_id
+from services.storage_backend import require_mutations_enabled
+from services.storage_objects import StorageNotFound, write_transaction
 
 logger = logging.getLogger(__name__)
 
@@ -252,7 +255,9 @@ def resolve_note_access(note, viewer_id=None):
     folder_id = note.get("folder_id")
     folder_grant = None
     if folder_id:
-        folder_grant = _best_grant(_owned_resource_grants("folder", folder_id, owner_id), viewer_id)
+        folder = get_folder(folder_id)
+        if folder and str(folder.get("user_id") or "") == owner_id:
+            folder_grant = _best_grant(_owned_resource_grants("folder", folder_id, owner_id), viewer_id)
 
     choices = []
     if direct:
@@ -277,6 +282,7 @@ def replace_resource_grants(
     grants=None,
     granted_by_user_id,
     expected_revision=None,
+    invitations=None,
 ):
     resource_type = str(resource_type)
     resource_id = str(resource_id)
@@ -301,15 +307,25 @@ def replace_resource_grants(
     table_id = "notes" if resource_type == "note" else "note_folders"
     try:
         with db_connection() as conn:
+            # Lock before reading actor access. A prior HTTP admission may
+            # already have been revoked, and the actor must remain authorized
+            # until this replacement commits.
+            conn.execute("BEGIN IMMEDIATE")
             current = conn.execute(
-                f"SELECT access_version FROM {table_id} WHERE id = ? AND user_id = ?",
+                f"SELECT * FROM {table_id} WHERE id = ? AND user_id = ?",
                 [resource_id, owner_user_id],
             ).fetchone()
             if not current:
-                raise AppwriteException("Shared resource was not found.")
+                raise ValueError("sharing_access_denied")
+            _require_resource_share(conn, resource_type, resource_id, current, granted_by_user_id)
             current_revision = int(current["access_version"] or 1)
             if expected_revision is not None and int(expected_revision) != current_revision:
                 raise ValueError("sharing_revision_conflict")
+            if invitations is not None:
+                from services.notes_collaboration import replace_pending_invitations
+                replace_pending_invitations(
+                    resource_type, resource_id, owner_user_id, invitations, granted_by_user_id, conn=conn,
+                )
             conn.execute(
                 "DELETE FROM note_access_grants WHERE resource_type = ? AND resource_id = ?",
                 [resource_type, resource_id],
@@ -344,62 +360,95 @@ def replace_resource_grants(
     except Exception as exc:
         logger.exception("Failed to replace %s sharing grants for %s", resource_type, resource_id)
         raise AppwriteException("Unable to update note sharing.") from exc
+    from services.notes_collaboration import invalidate_access
+    invalidate_access(resource_type, resource_id)
     return resource_grants(resource_type, resource_id)
 
 
-def delete_resource_grants(resource_type, resource_id):
+def _require_resource_share(conn, resource_type, resource_id, resource, actor_user_id):
+    actor_user_id = str(actor_user_id or "")
+    owner_user_id = str(resource["user_id"] or "")
+    if actor_user_id and actor_user_id == owner_user_id:
+        return
+    folder_id = resource["folder_id"] if resource_type == "note" else None
+    grant = conn.execute(
+        """
+        SELECT 1 FROM note_access_grants AS grants
+        WHERE grants.owner_user_id = ? AND grants.principal_type = 'user'
+          AND grants.principal_id = ? AND LOWER(TRIM(grants.access_level)) = 'editor'
+          AND ((grants.resource_type = ? AND grants.resource_id = ?)
+            OR (grants.resource_type = 'folder' AND grants.resource_id = ?
+              AND EXISTS (
+                SELECT 1 FROM note_folders AS folder
+                WHERE folder.id = grants.resource_id AND folder.user_id = ?
+              )))
+        LIMIT 1
+        """,
+        [owner_user_id, actor_user_id, resource_type, resource_id, folder_id, owner_user_id],
+    ).fetchone()
+    if not actor_user_id or not grant:
+        raise ValueError("sharing_access_denied")
+
+
+def delete_resource_grants(resource_type, resource_id, *, conn=None):
+    if conn is None:
+        with db_connection() as owned_conn:
+            return delete_resource_grants(resource_type, resource_id, conn=owned_conn)
     try:
-        with db_connection() as conn:
-            conn.execute(
-                "DELETE FROM note_access_grants WHERE resource_type = ? AND resource_id = ?",
-                [str(resource_type), str(resource_id)],
-            )
+        conn.execute(
+            "DELETE FROM note_access_grants WHERE resource_type = ? AND resource_id = ?",
+            [str(resource_type), str(resource_id)],
+        )
     except Exception as exc:
         logger.exception("Failed to delete note sharing grants")
         raise AppwriteException("Unable to delete note sharing grants.") from exc
 
 
-def delete_note_collaboration_rows(note_id):
+def delete_note_collaboration_rows(note_id, *, conn=None):
     note_id = str(note_id)
+    if conn is None:
+        with db_connection() as owned_conn:
+            return delete_note_collaboration_rows(note_id, conn=owned_conn)
     try:
-        with db_connection() as conn:
-            conn.execute(
-                """
-                DELETE FROM note_comment_replies
-                WHERE thread_id IN (SELECT id FROM note_comment_threads WHERE note_id = ?)
-                """,
-                [note_id],
-            )
-            conn.execute("DELETE FROM note_comment_threads WHERE note_id = ?", [note_id])
-            conn.execute("DELETE FROM note_suggestions WHERE note_id = ?", [note_id])
-            conn.execute("DELETE FROM note_versions WHERE note_id = ?", [note_id])
-            conn.execute("DELETE FROM note_collaboration_documents WHERE note_id = ?", [note_id])
-            conn.execute(
-                "DELETE FROM note_share_invitations WHERE resource_type = 'note' AND resource_id = ?",
-                [note_id],
-            )
-            conn.execute("DELETE FROM user_notifications WHERE note_id = ?", [note_id])
-            conn.execute(
-                "DELETE FROM note_access_events WHERE resource_type = 'note' AND resource_id = ?",
-                [note_id],
-            )
+        conn.execute(
+            """
+            DELETE FROM note_comment_replies
+            WHERE thread_id IN (SELECT id FROM note_comment_threads WHERE note_id = ?)
+            """,
+            [note_id],
+        )
+        conn.execute("DELETE FROM note_comment_threads WHERE note_id = ?", [note_id])
+        conn.execute("DELETE FROM note_suggestions WHERE note_id = ?", [note_id])
+        conn.execute("DELETE FROM note_versions WHERE note_id = ?", [note_id])
+        conn.execute("DELETE FROM note_collaboration_documents WHERE note_id = ?", [note_id])
+        conn.execute(
+            "DELETE FROM note_share_invitations WHERE resource_type = 'note' AND resource_id = ?",
+            [note_id],
+        )
+        conn.execute("DELETE FROM user_notifications WHERE note_id = ?", [note_id])
+        conn.execute(
+            "DELETE FROM note_access_events WHERE resource_type = 'note' AND resource_id = ?",
+            [note_id],
+        )
     except Exception as exc:
         logger.exception("Failed to delete note collaboration rows")
         raise AppwriteException("Unable to delete note collaboration rows.") from exc
 
 
-def delete_folder_collaboration_rows(folder_id):
+def delete_folder_collaboration_rows(folder_id, *, conn=None):
     folder_id = str(folder_id)
+    if conn is None:
+        with db_connection() as owned_conn:
+            return delete_folder_collaboration_rows(folder_id, conn=owned_conn)
     try:
-        with db_connection() as conn:
-            conn.execute(
-                "DELETE FROM note_share_invitations WHERE resource_type = 'folder' AND resource_id = ?",
-                [folder_id],
-            )
-            conn.execute(
-                "DELETE FROM note_access_events WHERE resource_type = 'folder' AND resource_id = ?",
-                [folder_id],
-            )
+        conn.execute(
+            "DELETE FROM note_share_invitations WHERE resource_type = 'folder' AND resource_id = ?",
+            [folder_id],
+        )
+        conn.execute(
+            "DELETE FROM note_access_events WHERE resource_type = 'folder' AND resource_id = ?",
+            [folder_id],
+        )
     except Exception as exc:
         logger.exception("Failed to delete folder collaboration rows")
         raise AppwriteException("Unable to delete folder collaboration rows.") from exc
@@ -512,6 +561,7 @@ def list_shared_for_user(user_id):
 
 
 def create_note(user_id, *, title, content="", folder_id=None, now=None):
+    require_mutations_enabled()
     timestamp = now or utcnow_iso()
     preview = preview_text_from_content(content)
     return create_row_safe(
@@ -530,16 +580,81 @@ def create_note(user_id, *, title, content="", folder_id=None, now=None):
     )
 
 
-def update_note(note_id, updates):
+def _require_note_edit(conn, note_id, user_id):
+    note = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
+    if not note:
+        raise StorageNotFound("Note was not found.")
+    if str(note["user_id"]) == str(user_id):
+        return
+    grant = conn.execute(
+        """
+        SELECT 1 FROM note_access_grants
+        WHERE owner_user_id = ? AND principal_type = 'user' AND principal_id = ?
+          AND LOWER(TRIM(access_level)) = 'editor'
+          AND ((resource_type = 'note' AND resource_id = ?)
+            OR (resource_type = 'folder' AND resource_id = ?))
+        LIMIT 1
+        """,
+        [note["user_id"], str(user_id), str(note_id), note["folder_id"]],
+    ).fetchone()
+    if not grant:
+        raise StorageNotFound("Note was not found.")
+
+
+def update_note(note_id, updates, *, user_id=None):
+    require_mutations_enabled()
+    from services import note_media
+
+    updates = dict(updates)
     if "content" in updates:
         updates["preview_text"] = preview_text_from_content(updates.get("content") or "")
-    return update_row_safe(NOTES_TABLE_ID, note_id, updates)
+    deleted = []
+    with write_transaction() as conn:
+        if user_id is not None:
+            _require_note_edit(conn, note_id, user_id)
+        payload = database._clean_payload(conn, NOTES_TABLE_ID, updates)
+        if payload:
+            assignments = ", ".join(f'"{column}" = ?' for column in payload)
+            cursor = conn.execute(
+                f"UPDATE notes SET {assignments} WHERE id = ?",
+                [*payload.values(), str(note_id)],
+            )
+            if not cursor.rowcount:
+                raise StorageNotFound("Note was not found.")
+        if "content" in payload:
+            deleted = note_media.sync_note_media(note_id, payload["content"], conn=conn)
+        row = conn.execute("SELECT * FROM notes WHERE id = ?", [str(note_id)]).fetchone()
+        if not row:
+            raise StorageNotFound("Note was not found.")
+        updated = database._row_to_dict(NOTES_TABLE_ID, row)
+    note_media.cleanup_legacy_media(deleted)
+    if {"folder_id", "user_id", "access_version"}.intersection(updates):
+        from services.notes_collaboration import invalidate_access
+        invalidate_access("note", note_id)
+    return updated
 
 
-def delete_note(note_id):
-    delete_note_collaboration_rows(note_id)
-    delete_resource_grants("note", note_id)
-    delete_row_safe(NOTES_TABLE_ID, note_id)
+def _delete_note(conn, note_id):
+    from services import note_media
+
+    deleted = note_media.delete_note_media(note_id, conn=conn)
+    delete_note_collaboration_rows(note_id, conn=conn)
+    delete_resource_grants("note", note_id, conn=conn)
+    conn.execute("DELETE FROM notes WHERE id = ?", [str(note_id)])
+    return deleted
+
+
+def delete_note(note_id, *, user_id=None):
+    require_mutations_enabled()
+    from services import note_media
+
+    with write_transaction() as conn:
+        if user_id is not None:
+            note_media._require_owner(conn, note_id, user_id)
+        deleted = _delete_note(conn, note_id)
+    from services.notes_collaboration import invalidate_access
+    invalidate_access("note", note_id)
+    note_media.cleanup_legacy_media(deleted)
 
 
 def create_folder(user_id, *, name, now=None):
@@ -558,26 +673,37 @@ def create_folder(user_id, *, name, now=None):
 
 
 def update_folder(folder_id, updates):
-    return update_row_safe(FOLDERS_TABLE_ID, folder_id, updates)
+    updated = update_row_safe(FOLDERS_TABLE_ID, folder_id, updates)
+    if {"user_id", "access_version"}.intersection(updates):
+        from services.notes_collaboration import invalidate_access
+        invalidate_access("folder", folder_id)
+    return updated
 
 
 def delete_folder_and_notes(user_id, folder_id):
-    notes = list_rows_all(
-        NOTES_TABLE_ID,
-        queries=[
-            Query.equal("user_id", [str(user_id)]),
-            Query.equal("folder_id", [folder_id]),
-        ],
-    )
-    for note in notes:
-        note_id = _row_id(note)
-        if note_id:
-            delete_note_collaboration_rows(note_id)
-            delete_resource_grants("note", note_id)
-            delete_row_safe(NOTES_TABLE_ID, note_id)
-    delete_folder_collaboration_rows(folder_id)
-    delete_resource_grants("folder", folder_id)
-    delete_row_safe(FOLDERS_TABLE_ID, folder_id)
+    require_mutations_enabled()
+    from services import note_media
+
+    deleted = []
+    with write_transaction() as conn:
+        folder = conn.execute(
+            "SELECT id FROM note_folders WHERE id = ? AND user_id = ?",
+            [str(folder_id), str(user_id)],
+        ).fetchone()
+        if not folder:
+            raise StorageNotFound("Note folder was not found.")
+        notes = conn.execute(
+            "SELECT id FROM notes WHERE user_id = ? AND folder_id = ?",
+            [str(user_id), str(folder_id)],
+        ).fetchall()
+        for note in notes:
+            deleted.extend(_delete_note(conn, note["id"]))
+        delete_folder_collaboration_rows(folder_id, conn=conn)
+        delete_resource_grants("folder", folder_id, conn=conn)
+        conn.execute("DELETE FROM note_folders WHERE id = ?", [str(folder_id)])
+    from services.notes_collaboration import invalidate_access
+    invalidate_access("folder", folder_id, note_ids=[note["id"] for note in notes])
+    note_media.cleanup_legacy_media(deleted)
 
 
 def backfill_preview_texts(batch_size=100, path=None):

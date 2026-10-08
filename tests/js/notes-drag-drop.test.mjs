@@ -1,18 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import vm from 'node:vm';
+import featureModules from './helpers/feature-modules.cjs';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const source = readFileSync(path.join(root, 'static/js/notes/list/drag-drop.js'), 'utf8');
+const { loadFeatureModule } = featureModules;
 
 function loadDragDrop(overrides = {}) {
     const context = { window: {}, setTimeout, ...overrides };
     context.window = context;
-    vm.runInNewContext(source, context);
-    return context.APStudyNotesListDragDrop;
+    return loadFeatureModule('notes/list/drag-drop.js', context);
 }
 
 test('note dragging is enabled for larger tablet and laptop contexts', () => {

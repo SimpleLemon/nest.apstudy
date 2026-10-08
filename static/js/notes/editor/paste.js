@@ -1,7 +1,7 @@
 import {
     clipboardHtmlImageSources,
     clipboardImageFiles,
-    dataImageFile,
+    imageSourceFile,
 } from './images.js';
 import { normalizeClipboardMarkdown, normalizeClipboardText, clipboardTextLooksStructured } from './markdown-repair.js';
 import { insertInlineImageFile, insertInlineImageNode } from './image-runtime.js';
@@ -19,7 +19,7 @@ export function handleNotesPaste({ event, editor, defaultPasteHandler, noteId, o
         event.preventDefault();
         htmlImages.forEach((source, index) => {
             if (/^data:/i.test(source)) {
-                void dataImageFile(source, index).then((file) => insertInlineImageFile(editor, file, { noteId, onChange }));
+                void imageSourceFile(source, index).then((file) => insertInlineImageFile(editor, file, { noteId, onChange }));
             } else {
                 insertInlineImageNode(editor, { url: source, mediaId: '', clientId: `url-${Date.now()}-${index}`, alt: '', width: 240, layout: 'inline', alignment: 'left', status: 'ready', error: '' });
             }

@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 import blueprints.notes_api as notes_api
 from tests.support.harness import reset_flask_login_manager
+from tests.support.factory import isolated_factory_environment
 
 
 class NotesLinkPreviewTests(unittest.TestCase):
@@ -75,10 +76,12 @@ class NotesLinkPreviewTests(unittest.TestCase):
     def test_route_requires_authentication(self):
         from app import create_app
 
-        app = create_app()
-        response = app.test_client().get("/api/notes/tools/link-preview?url=https://example.com")
+        with isolated_factory_environment(), patch("services.discord_audit.init_discord_audit"), \
+                patch("services.scheduler.init_scheduler"):
+            app = create_app()
+            response = app.test_client().get("/api/notes/tools/link-preview?url=https://example.com")
 
-        self.assertIn(response.status_code, {302, 401})
+            self.assertIn(response.status_code, {302, 401})
 
 
 if __name__ == "__main__":

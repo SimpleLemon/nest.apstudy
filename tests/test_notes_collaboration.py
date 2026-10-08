@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
 
-from services import database, notes_collaboration
+from services import database, note_store, notes_collaboration
 
 
 # Derived from the real clock at import so expiry comparisons made against the
@@ -71,6 +71,11 @@ class CollaborationDatabaseTestCase(unittest.TestCase):
 
 class NotesCollaborationDatabaseTests(CollaborationDatabaseTestCase):
     def test_replace_invitations_canonicalizes_duplicates_and_revokes_removed_rows(self):
+        note_store.replace_resource_grants(
+            "note", "note-1", "owner", public=False,
+            grants=[{"user_id": "editor", "role": "editor"}], granted_by_user_id="owner",
+        )
+        initial_revision = self.row("SELECT access_version FROM notes WHERE id = 'note-1'")["access_version"]
         with patch.object(notes_collaboration, "utcnow_iso", return_value=NOW), patch.object(
             notes_collaboration, "_iso_after", return_value=NEXT_WEEK
         ):
@@ -105,7 +110,7 @@ class NotesCollaborationDatabaseTests(CollaborationDatabaseTestCase):
         )
         self.assertEqual(old["status"], "revoked")
         version = self.row("SELECT access_version FROM notes WHERE id = 'note-1'")
-        self.assertEqual(version["access_version"], 3)
+        self.assertEqual(version["access_version"], initial_revision + 2)
 
     def test_pending_invitations_expire_before_listing_and_are_sorted_case_insensitively(self):
         with database.db_connection(self.path) as conn:
@@ -335,6 +340,10 @@ class NotesCollaborationDatabaseTests(CollaborationDatabaseTestCase):
         self.assertEqual(self.row("SELECT COUNT(*) AS count FROM note_suggestions")["count"], 0)
 
     def test_suggestion_resolution_is_single_use_and_notifies_original_author(self):
+        note_store.replace_resource_grants(
+            "note", "note-1", "owner", public=False,
+            grants=[{"user_id": "editor", "role": "editor"}], granted_by_user_id="owner",
+        )
         with patch.object(notes_collaboration, "utcnow_iso", return_value=NOW):
             suggestion = notes_collaboration.create_suggestion(
                 "note-1", "owner", {"operations": [{"type": "insert"}]}
@@ -347,7 +356,7 @@ class NotesCollaborationDatabaseTests(CollaborationDatabaseTestCase):
         self.assertEqual(resolved["resolved_by"]["id"], "editor")
         self.assertEqual(
             self.row(
-                "SELECT notification_type FROM user_notifications WHERE suggestion_id = ?",
+                "SELECT notification_type FROM user_notifications WHERE suggestion_id = ? AND user_id = 'owner'",
                 [suggestion["id"]],
             )["notification_type"],
             "note_suggestion_accepted",

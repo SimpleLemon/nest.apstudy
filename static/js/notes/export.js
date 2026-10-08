@@ -63,7 +63,7 @@
             try {
                 const parsed = JSON.parse(trimmed);
                 if (Array.isArray(parsed)) return parsed;
-            } catch (error) {
+            } catch {
                 return [
                     {
                         type: 'paragraph',

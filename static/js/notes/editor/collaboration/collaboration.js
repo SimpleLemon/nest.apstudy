@@ -1,6 +1,7 @@
 import { HocuspocusProvider } from '@hocuspocus/provider';
 import * as Y from 'yjs';
-import { escapeHtml } from '../../core/ui-primitives-module.js';
+import { createCollaborationSession } from './collaboration-session.js';
+import { escapeHtml } from '../../../core/ui-primitives-module.js';
 
 const ACTIVE_ROLES = new Set(['owner', 'editor', 'reviewer']);
 const CURSOR_COLORS = ['#7c3aed', '#0ea5e9', '#16a34a', '#f97316', '#db2777', '#0891b2', '#9333ea', '#dc2626'];
@@ -35,7 +36,7 @@ function absoluteWebSocketUrl(path) {
 
 function safeUserFromToken(tokenPayload, access) {
     const user = tokenPayload.user || {};
-    const role = user.role || access?.role || 'viewer';
+    const role = access?.role || 'viewer';
     const id = user.id || tokenPayload.user_id || '';
     const name = user.name || user.username || 'Nest User';
     return {
@@ -121,70 +122,18 @@ export function bindPresenceOverflow(root) {
 }
 
 export async function createNoteCollaborationSession({
-    noteId,
-    access,
-    presenceRoot,
-    onStatus,
-    onReviewEvent,
+    noteId, access, initialGeneration, presenceRoot, onStatus, onAccessChange, onReviewEvent, onPendingChanges, onDocumentChange, getDraftContent,
 } = {}) {
     if (!noteId) return null;
-    const tokenResponse = await fetch(`/api/notes/${encodeURIComponent(noteId)}/collaboration-token`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}',
-    });
-    const tokenPayload = await tokenResponse.json().catch(() => ({}));
-    if (!tokenResponse.ok) {
-        throw new Error(tokenPayload.error || 'Unable to connect to note collaboration.');
-    }
-
-    const document = new Y.Doc();
-    const provider = new HocuspocusProvider({
-        url: absoluteWebSocketUrl(tokenPayload.provider_url || '/ws/notes'),
-        name: `notes:${noteId}`,
-        document,
-        token: tokenPayload.token,
-        onStatus: ({ status }) => {
-            if (status === 'connected') onStatus?.('saved');
-            if (status === 'connecting') onStatus?.('connecting');
-            if (status === 'disconnected') onStatus?.('reconnecting');
-        },
-        onAuthenticationFailed: () => onStatus?.('offline-readonly'),
-        onStateless: ({ payload }) => {
-            try {
-                const event = JSON.parse(payload || '{}');
-                if (String(event.type || '').startsWith('review.')) onReviewEvent?.(event);
-            } catch (error) {
-                // Ignore non-review stateless messages used by other collaboration features.
-            }
+    bindPresenceOverflow(presenceRoot);
+    return createCollaborationSession({
+        noteId, access, initialGeneration, document: new Y.Doc(),
+        // Each editor owns this socket. Pausing its provider must also stop the
+        // transport; the provider's shared-socket default keeps it connected.
+        createProvider: (options) => new HocuspocusProvider({ ...options, preserveConnection: false, url: absoluteWebSocketUrl('/ws/notes') }),
+        userFromToken: safeUserFromToken, onStatus, onAccessChange, onReviewEvent, onPendingChanges, onDocumentChange, getDraftContent,
+        onPresence: (provider, user, enabled) => {
+            renderTopbarPresence(presenceRoot, enabled ? collaboratorsFromAwareness(provider, user.id) : []);
         },
     });
-    const user = safeUserFromToken(tokenPayload, access);
-    if (tokenPayload.awareness_allowed) {
-        provider.awareness?.setLocalStateField?.('user', user);
-        const renderPresence = () => {
-            renderTopbarPresence(presenceRoot, collaboratorsFromAwareness(provider, user.id));
-        };
-        bindPresenceOverflow(presenceRoot);
-        provider.awareness?.on?.('change', renderPresence);
-        renderPresence();
-    }
-
-    return {
-        document,
-        provider,
-        fragment: document.getXmlFragment('document-store'),
-        user,
-        access: tokenPayload.access || access,
-        setMode(mode) {
-            user.mode = mode;
-            if (tokenPayload.awareness_allowed) {
-                provider.awareness?.setLocalStateField?.('user', { ...user });
-            }
-        },
-        destroy() {
-            provider.destroy();
-            document.destroy();
-        },
-    };
 }

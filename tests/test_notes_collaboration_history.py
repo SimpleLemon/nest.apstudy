@@ -118,8 +118,10 @@ class NotesCollaborationHistoryTests(CollaborationDatabaseTestCase):
 
         with patch.object(notes_collaboration, "utcnow_iso", return_value=NEXT_WEEK), patch.object(
             notes_collaboration, "_iso_after", return_value=NEXT_MONTH
+        ), patch.object(notes_collaboration, "_post_collaboration_callback", return_value=True), patch.object(
+            notes_collaboration, "_run_document_transform", return_value=({}, b"version-bytes")
         ):
-            restored = notes_collaboration.restore_version("note-1", version["id"], "editor")
+            restored = notes_collaboration.restore_version("note-1", version["id"], "owner")
 
         self.assertEqual(restored["title"], "Current")
         self.assertEqual(restored["content"], "current")

@@ -1,8 +1,12 @@
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+from flask import Flask
+
 import blueprints.notes_api as notes_api
-from services import note_store
+from services import database, note_store
 from tests.support.harness import reset_flask_login_manager
 
 
@@ -31,11 +35,11 @@ class NotesListApiTests(unittest.TestCase):
             }
         ]
 
-        from app import create_app
-
-        app = create_app()
+        app = Flask(__name__)
         with app.test_request_context("/api/notes"):
-            with patch.object(notes_api, "current_user", self.user):
+            with patch.object(notes_api, "current_user", self.user), patch.object(
+                notes_api.note_store, "shared_resource_ids", return_value=set()
+            ):
                 response = notes_api.list_notes.__wrapped__()
 
         payload = response.get_json()
@@ -44,13 +48,28 @@ class NotesListApiTests(unittest.TestCase):
         self.assertEqual(note["preview_text"], "Secret body")
         self.assertNotIn("content", note)
 
-    @patch.object(note_store, "update_row_safe")
-    def test_note_store_update_adds_preview_text(self, update_row_safe):
-        update_row_safe.return_value = {"$id": "note-1"}
+    def test_note_store_update_adds_preview_text(self):
         content = '[{"type":"paragraph","content":[{"text":"Saved text"}]}]'
-        note_store.update_note("note-1", {"content": content})
-        updates = update_row_safe.call_args.args[2]
-        self.assertEqual(updates["preview_text"], "Saved text")
+        with tempfile.TemporaryDirectory() as directory:
+            app = Flask(__name__)
+            app.config.update(
+                DATABASE_PATH=str(Path(directory) / "notes.sqlite3"),
+                NEST_STORAGE_BACKEND="sqlite", NEST_STORAGE_MUTATIONS_PAUSED=False,
+            )
+            with app.app_context():
+                database.init_db(app=app)
+                with database.db_connection() as conn:
+                    conn.execute(
+                        "INSERT INTO users (id, google_id, email, created_at) "
+                        "VALUES ('user-1', 'google-1', 'user@example.test', '2026-01-01T00:00:00Z')",
+                    )
+                    conn.execute(
+                        "INSERT INTO notes (id, user_id, title, content, created_at) "
+                        "VALUES ('note-1', 'user-1', 'Note', '[]', '2026-01-01T00:00:00Z')",
+                    )
+                updated = note_store.update_note("note-1", {"content": content})
+                self.assertEqual(updated["preview_text"], "Saved text")
+                self.assertEqual(note_store.get_note("note-1")["preview_text"], "Saved text")
 
 
 if __name__ == "__main__":

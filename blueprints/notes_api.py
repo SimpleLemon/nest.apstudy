@@ -2,6 +2,7 @@ import logging
 import base64
 import json
 import io
+import hmac
 import uuid
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
@@ -21,7 +22,7 @@ from appwrite_helpers import (
 from services.discord_audit import emit_creation_event, format_actor
 from services.chat_formatting import _is_public_host, fetch_link_preview, safe_url, url_hash
 from services.database import db_connection
-from services import invites, note_media, note_store, notes_collaboration
+from services import invites, note_media, note_store, notes_collaboration, notes_access
 from services.appwrite_storage import note_media_upload_failure
 from services.entitlements import EntitlementError, EntitlementLimitError, check_limit, check_storage, request_entitlements
 from services.environment_config import runtime_environment_config
@@ -32,6 +33,10 @@ from services.note_page_setup import (
     PAGE_SETUP_MARGIN_MIN,
 )
 from services.time_utils import utcnow_iso as _utcnow_iso
+from services.storage_objects import (
+    StorageError, StorageIntegrityError, StorageMutationPaused, StorageNotFound,
+    StorageUnavailable, StorageValidationError,
+)
 
 
 notes_api_bp = Blueprint("notes_api", __name__)
@@ -47,6 +52,20 @@ def notes_not_found(error):
 @notes_api_bp.errorhandler(500)
 def notes_server_error(error):
     return jsonify({"error": "Unable to complete notes request."}), 500
+
+
+@notes_api_bp.errorhandler(StorageError)
+def notes_storage_error(error):
+    if isinstance(error, StorageNotFound):
+        return jsonify({"error": "Not found."}), 404
+    if isinstance(error, StorageValidationError):
+        return jsonify({"error": str(error), "code": "storage_validation"}), 400
+    if isinstance(error, StorageMutationPaused):
+        return jsonify({"error": "Uploads and note changes are temporarily paused.", "code": "storage_paused"}), 503
+    if isinstance(error, StorageUnavailable):
+        return jsonify({"error": "Image storage is temporarily unavailable.", "code": "storage_unavailable"}), 503
+    logger.error("Note storage operation failed", exc_info=(type(error), error, error.__traceback__))
+    return jsonify({"error": "Unable to complete image storage request.", "code": "storage_integrity"}), 500
 
 
 def _parse_page_setup(value):
@@ -171,16 +190,15 @@ def _collaboration_serializer():
 
 def _internal_collaboration_authorized():
     configured = runtime_environment_config()
+    # Keep the same secret precedence as the collaboration sidecar.
     secret = (
         configured.notes_collaboration_internal_secret
         or configured.notes_collaboration_secret
     )
-    provided = request.headers.get("X-Nest-Collaboration-Secret") or request.args.get("secret")
-    if secret:
-        return provided == secret
-    if configured.flask_env == "production":
+    provided = request.headers.get("X-Nest-Collaboration-Secret")
+    if not secret or not provided:
         return False
-    return request.remote_addr in {"127.0.0.1", "::1", "localhost", None}
+    return hmac.compare_digest(provided.encode("utf-8"), secret.encode("utf-8"))
 
 
 def _sharing_url(resource_type, resource_id):
@@ -517,6 +535,7 @@ def upload_note_media(note_id):
         return _notes_json({"error": "Choose an image to upload."}, 400)
     if not uploaded_file.filename:
         uploaded_file.filename = "clipboard-image.png"
+    entitlements = None
     if hasattr(current_user, "_data"):
         try:
             entitlements = request_entitlements(current_user)
@@ -529,9 +548,18 @@ def upload_note_media(note_id):
             logger.exception("Failed to verify note media limits")
             return _notes_json({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}, 503)
     try:
-        media = note_media.create_media(note_id, current_user.id, uploaded_file)
+        media = note_media.create_media(note_id, current_user.id, uploaded_file, entitlements=entitlements)
+    except EntitlementLimitError as exc:
+        return _notes_json(exc.payload(), 403)
+    except EntitlementError:
+        logger.exception("Failed to verify transactional note media limits")
+        return _notes_json({"error": "Unable to verify your storage limits right now.", "code": "tier_check_unavailable"}, 503)
     except ValueError as exc:
         return _notes_json({"error": str(exc)}, 400)
+    except StorageError as exc:
+        response, status = notes_storage_error(exc)
+        response.status_code = status
+        return response
     except AppwriteException as exc:
         status_code, error = note_media_upload_failure(exc)
         logger.exception(
@@ -549,28 +577,33 @@ def upload_note_media(note_id):
 @notes_api_bp.route("/api/notes/<note_id>/media/<media_id>", methods=["GET"])
 def get_note_media(note_id, media_id):
     note = note_store.get_note(note_id)
-    media = note_media.get_media(media_id)
-    if not note or not media or str(media.get("note_id")) != str(note_id):
+    if not note:
         abort(404)
     access = note_store.resolve_note_access(note, _viewer_id())
     if not access["can_view"]:
         return _access_denied_response()
+    media = note_media.get_media(media_id)
+    if not media or str(media.get("note_id")) != str(note_id):
+        abort(404)
     try:
         data = note_media.media_bytes(media)
-    except AppwriteException:
+    except (AppwriteException, StorageNotFound):
         logger.exception("Failed to read note media")
         abort(404)
+    allowed_mimes = {details[0] for details in note_media.ALLOWED_IMAGE_FORMATS.values()}
+    if media.get("mime_type") not in allowed_mimes:
+        raise StorageIntegrityError("Note image has an invalid MIME type.")
     response = send_file(
         io.BytesIO(data),
-        mimetype=media.get("mime_type") or "application/octet-stream",
+        mimetype=media["mime_type"],
         as_attachment=False,
         download_name=media.get("original_filename") or "image",
         conditional=True,
+        etag=str(media.get("storage_file_id") or media_id),
     )
     response.headers["Cache-Control"] = "private, no-cache"
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.set_etag(str(media.get("storage_file_id") or media_id))
-    return response.make_conditional(request)
+    return response
 
 
 @notes_api_bp.route("/api/notes/<note_id>/media/<media_id>", methods=["DELETE"])
@@ -582,7 +615,7 @@ def delete_note_media(note_id, media_id):
     if not access["can_edit"] or not media or str(media.get("note_id")) != str(note_id):
         abort(404)
     try:
-        note_media.delete_media(media)
+        note_media.delete_media(media, user_id=current_user.id)
     except AppwriteException:
         logger.exception("Failed to delete note media")
         return jsonify({"error": "Unable to delete this image."}), 500
@@ -602,7 +635,14 @@ def get_note(note_id):
         logger.exception("Failed to load note page setup defaults")
         global_page_setup = {}
     owner = note_store.get_safe_user(note.get("user_id"))
-    return jsonify(_note_to_payload(note, global_page_setup=global_page_setup, access=access, owner=owner))
+    generation = (notes_collaboration.get_collaboration_generation(note_id)
+                  if note.get("collaboration_enabled") else "initial")
+    payload = _note_to_payload(note, global_page_setup=global_page_setup, access=access, owner=owner)
+    payload["document_generation"] = generation
+    response = jsonify(payload)
+    response.headers["X-Nest-Document-Generation"] = generation
+    response.headers["Cache-Control"] = "private, no-store"
+    return response
 
 
 @notes_api_bp.route("/api/notes/<note_id>", methods=["PATCH"])
@@ -644,7 +684,7 @@ def update_note(note_id):
     updates["updated_at"] = _utcnow_iso()
 
     try:
-        updated = note_store.update_note(note_id, updates)
+        updated = note_store.update_note(note_id, updates, user_id=current_user.id)
     except AppwriteException:
         logger.exception("Failed to update note")
         return jsonify({"error": "Unable to update note."}), 500
@@ -675,7 +715,7 @@ def note_sharing(note_id):
 def delete_note(note_id):
     _note_owner_or_404(note_id)
     try:
-        note_store.delete_note(note_id)
+        note_store.delete_note(note_id, user_id=current_user.id)
     except AppwriteException:
         logger.exception("Failed to delete note")
         return jsonify({"error": "Unable to delete note."}), 500
@@ -871,15 +911,11 @@ def _replace_sharing(resource_type, resource_id, owner_user_id):
             grants=grants,
             granted_by_user_id=current_user.id,
             expected_revision=expected_revision,
-        )
-        notes_collaboration.replace_pending_invitations(
-            resource_type,
-            resource_id,
-            owner_user_id,
-            invitations,
-            current_user.id,
+            invitations=invitations,
         )
     except ValueError as exc:
+        if str(exc) == "sharing_access_denied":
+            abort(404)
         if str(exc) == "sharing_revision_conflict":
             return jsonify({
                 "error": "Sharing changed in another tab.",
@@ -917,20 +953,27 @@ def _replace_sharing(resource_type, resource_id, owner_user_id):
 
 @notes_api_bp.route("/api/notes/<note_id>/collaboration-token", methods=["POST"])
 def create_note_collaboration_token(note_id):
-    note = _note_or_404(note_id)
-    access = note_store.resolve_note_access(note, _viewer_id())
-    if not access["can_view"]:
+    _note_or_404(note_id)
+    try:
+        current_access = notes_access.collaboration_access(note_id, _viewer_id())
+    except Exception:
+        logger.exception("Collaboration admission permission check failed")
+        return jsonify({"error": "collaboration_permissions_unavailable"}), 503
+    if not current_access:
         return _access_denied_response()
-    is_anonymous = not current_user.is_authenticated
-    is_public = "public" in str(access.get("source") or "")
+    access = current_access["access"]
+    is_anonymous = current_access["anonymous"]
+    is_public = current_access["public"]
     expires_at = datetime.now(timezone.utc) + timedelta(minutes=5)
     token_payload = {
         "token_id": str(uuid.uuid4()),
         "user_id": str(current_user.id) if current_user.is_authenticated else None,
         "session_id": session.get("_id"),
+        "permission_revision": current_access["permission_revision"],
+        "document_generation": current_access["document_generation"],
         "note_id": str(note_id),
         "role": access.get("role") or "viewer",
-        "access_revision": int(note.get("access_version") or 1),
+        "access_revision": current_access["access_revision"],
         "public": bool(is_public),
         "anonymous": bool(is_anonymous),
         "expires_at": expires_at.isoformat().replace("+00:00", "Z"),
@@ -941,9 +984,10 @@ def create_note_collaboration_token(note_id):
         "expires_in": 300,
         "ws_url": f"/ws/notes/{note_id}?ticket={token}",
         "provider_url": "/ws/notes",
+        "document_generation": current_access["document_generation"],
         "access": access,
-        "awareness_allowed": not is_anonymous and not is_public,
-        "user": note_store.get_safe_user(current_user.id) if current_user.is_authenticated else None,
+        "awareness_allowed": current_access["awareness_allowed"],
+        "user": current_access["user"],
     })
 
 
@@ -970,7 +1014,13 @@ def resolve_note_suggestion(note_id, suggestion_id, action):
         return jsonify({"error": "Unsupported suggestion action."}), 400
     try:
         suggestion = notes_collaboration.resolve_suggestion(note_id, suggestion_id, current_user.id, status)
+    except notes_collaboration.CollaborationReplacementUnavailable as exc:
+        return jsonify({"error": str(exc), "document_committed": exc.committed}), 503
+    except notes_collaboration.CollaborationRevisionConflict as exc:
+        return jsonify({"error": str(exc)}), 409
     except ValueError as exc:
+        if str(exc) == "sharing_access_denied":
+            abort(404)
         return jsonify({"error": str(exc)}), 400
     if not suggestion:
         abort(404)
@@ -1110,7 +1160,16 @@ def note_versions(note_id):
 @login_required
 def restore_note_version(note_id, version_id):
     _note, access = _require_note_access(note_id, "can_edit")
-    restored = notes_collaboration.restore_version(note_id, version_id, current_user.id)
+    try:
+        restored = notes_collaboration.restore_version(note_id, version_id, current_user.id)
+    except notes_collaboration.CollaborationReplacementUnavailable as exc:
+        return jsonify({"error": str(exc), "document_committed": exc.committed}), 503
+    except notes_collaboration.CollaborationRevisionConflict as exc:
+        return jsonify({"error": str(exc)}), 409
+    except ValueError as exc:
+        if str(exc) == "sharing_access_denied":
+            abort(404)
+        return jsonify({"error": str(exc)}), 400
     if not restored:
         abort(404)
     try:
@@ -1197,6 +1256,7 @@ def internal_get_collaboration_document(note_id):
     response = Response(doc["ydoc_blob"], mimetype="application/octet-stream")
     response.headers["X-Nest-Durable-Revision"] = str(doc.get("durable_revision") or 0)
     response.headers["X-Nest-Schema-Version"] = str(doc.get("schema_version") or 1)
+    response.headers["X-Nest-Document-Generation"] = doc.get("document_generation") or "initial"
     return response
 
 
@@ -1205,9 +1265,15 @@ def internal_store_collaboration_document(note_id):
     if not _internal_collaboration_authorized():
         abort(403)
     payload = request.get_json(silent=True) or {}
+    if not isinstance(payload, dict):
+        return jsonify({"error": "A collaboration document object is required."}), 400
     encoded = payload.get("ydoc_base64")
     if not isinstance(encoded, str):
         return jsonify({"error": "ydoc_base64 is required."}), 400
+    if type(payload.get("expected_revision")) is not int or payload["expected_revision"] < 0:
+        return jsonify({"error": "expected_revision must be a nonnegative integer."}), 400
+    if not isinstance(payload.get("document_generation"), str) or not payload["document_generation"].strip():
+        return jsonify({"error": "document_generation is required."}), 400
     try:
         blob = base64.b64decode(encoded.encode("ascii"), validate=True)
         result = notes_collaboration.store_collaboration_document(
@@ -1217,7 +1283,11 @@ def internal_store_collaboration_document(note_id):
             content=payload.get("content"),
             page_setup_json=payload.get("page_setup_json"),
             schema_version=int(payload.get("schema_version") or 1),
+            expected_revision=payload["expected_revision"],
+            document_generation=payload["document_generation"],
         )
+    except notes_collaboration.CollaborationRevisionConflict as exc:
+        return jsonify({"error": str(exc)}), 409
     except (ValueError, TypeError) as exc:
         return jsonify({"error": str(exc)}), 400
     if not result:
@@ -1229,7 +1299,32 @@ def internal_store_collaboration_document(note_id):
 def internal_note_access_invalidation():
     if not _internal_collaboration_authorized():
         abort(403)
-    return jsonify({"ok": True, "message": "Sidecar should close or downgrade sessions for the submitted resources."})
+    payload = request.get_json(silent=True) or {}
+    resource_type = payload.get("resource_type")
+    resource_id = str(payload.get("resource_id") or "").strip()
+    if resource_type not in {"note", "folder"} or not resource_id:
+        return jsonify({"error": "resource_type and resource_id are required."}), 400
+    delivered = notes_collaboration.invalidate_access(resource_type, resource_id)
+    return jsonify({"ok": delivered}), 200 if delivered else 503
+
+
+@notes_api_bp.route("/api/internal/notes/collaboration-access", methods=["POST"])
+def internal_current_collaboration_access():
+    if not _internal_collaboration_authorized():
+        abort(403)
+    payload = request.get_json(silent=True) or {}
+    note_id = str(payload.get("note_id") or "").strip()
+    user_id = payload.get("user_id")
+    if not note_id or (user_id is not None and not isinstance(user_id, str)):
+        return jsonify({"error": "Invalid collaboration identity."}), 400
+    try:
+        access = notes_access.collaboration_access(note_id, user_id)
+    except Exception:
+        logger.exception("Current collaboration permission check failed")
+        return jsonify({"error": "collaboration_permissions_unavailable"}), 503
+    if not access:
+        return jsonify({"error": "collaboration_access_revoked"}), 403
+    return jsonify(access)
 
 
 @notes_api_bp.route("/api/internal/notes/collaboration-health", methods=["GET"])
@@ -1244,10 +1339,15 @@ def internal_note_collaboration_health():
             notes_columns = {
                 row["name"] for row in conn.execute("PRAGMA table_info(notes)").fetchall()
             }
+            document_columns = {
+                row["name"] for row in conn.execute("PRAGMA table_info(note_collaboration_documents)").fetchall()
+            }
     except Exception:
         logger.exception("Collaboration health check failed")
         return jsonify({"ok": False, "schema_version": 0}), 503
-    schema_ready = bool(collab_table) and {"collaboration_enabled", "access_version"}.issubset(notes_columns)
+    schema_ready = (bool(collab_table)
+                    and {"collaboration_enabled", "access_version"}.issubset(notes_columns)
+                    and {"durable_revision", "projection_revision", "document_generation"}.issubset(document_columns))
     return jsonify({
         "ok": schema_ready,
         "schema_version": 1 if schema_ready else 0,
@@ -1281,20 +1381,15 @@ def internal_verify_collaboration_token():
     if token_revision != current_revision:
         return jsonify({"error": "collaboration_token_stale", "access_revision": current_revision}), 401
     user_id = claims.get("user_id")
-    access = note_store.resolve_note_access(note, user_id)
-    if not access["can_view"] and not claims.get("public"):
+    try:
+        access = notes_access.collaboration_access(note_id, user_id)
+    except Exception:
+        logger.exception("Collaboration token permission check failed")
+        return jsonify({"error": "collaboration_permissions_unavailable"}), 503
+    if not access:
         return jsonify({"error": "collaboration_access_revoked"}), 403
-    role = access.get("role") if access["can_view"] else "viewer"
-    return jsonify({
-        "ok": True,
-        "note_id": note_id,
-        "user_id": user_id,
-        "role": role,
-        "can_write": role in {"owner", "editor"},
-        "can_review": role in {"owner", "editor", "reviewer"},
-        "awareness_allowed": bool(user_id and not claims.get("public") and not claims.get("anonymous")),
-        "public": bool(claims.get("public")),
-        "anonymous": bool(claims.get("anonymous")),
-        "access_revision": current_revision,
-        "user": note_store.get_safe_user(user_id) if user_id else None,
-    })
+    if claims.get("permission_revision") is not None and claims["permission_revision"] != access["permission_revision"]:
+        return jsonify({"error": "collaboration_token_stale"}), 401
+    if (claims.get("document_generation") or "initial") != access["document_generation"]:
+        return jsonify({"error": "collaboration_token_stale"}), 401
+    return jsonify(access)

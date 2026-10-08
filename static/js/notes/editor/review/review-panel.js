@@ -1,24 +1,67 @@
-import { escapeHtml } from '../../core/ui-primitives-module.js';
+import { escapeHtml } from '../../../core/ui-primitives-module.js';
 
 function requestId() {
     return globalThis.crypto?.randomUUID?.() || `comment-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
+/** @returns {Promise<Record<string, unknown>>} */
 async function apiJson(url, options = {}, signal) {
-    const response = await fetch(url, {
-        ...options,
-        signal,
-        headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || 'Unable to load review data.');
+    signal?.throwIfAborted();
+    let response;
+    try {
+        response = await fetch(url, {
+            ...options,
+            signal,
+            headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+        });
+    } catch (error) {
+        if (error.name === 'AbortError') throw error;
+        throw new Error('Unable to reach Nest. Check your connection and try again.', { cause: error });
+    }
+    signal?.throwIfAborted();
+    if (response.redirected || response.status === 401) {
+        throw new Error('Sign in to Nest, then try again.');
+    }
+    let payload;
+    try {
+        payload = await response.json();
+    } catch (error) {
+        if (error.name === 'AbortError') throw error;
+        if (response.ok) throw new Error('Nest returned invalid review data. Try again.', { cause: error });
+    }
+    signal?.throwIfAborted();
+    if (!response.ok) {
+        const message = typeof payload?.error === 'string' ? payload.error : payload?.error?.message;
+        throw new Error(message || (response.status === 403
+            ? 'You no longer have permission for this review action.'
+            : 'Unable to load review data. Try again.'));
+    }
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+        throw new Error('Nest returned invalid review data. Try again.');
+    }
     return payload;
+}
+
+/**
+ * @template {'threads'|'suggestions'|'versions'} K
+ * @param {Record<string, unknown>} payload
+ * @param {K} key
+ * @returns {import('./review-contracts.js').ReviewRecords[K]}
+ */
+function reviewItems(payload, key) {
+    const isRecord = (item) => item && typeof item === 'object' && !Array.isArray(item) && item.id != null;
+    if (!Array.isArray(payload[key]) || !payload[key].every((item) => (
+        isRecord(item) && (key !== 'threads' || item.replies == null
+            || (Array.isArray(item.replies) && item.replies.every(isRecord)))
+    ))) throw new Error('Nest returned invalid review data. Try again.');
+    return /** @type {import('./review-contracts.js').ReviewRecords[K]} */ (payload[key]);
 }
 
 function statusBadge(status) {
     return `<span class="notes-review-badge notes-review-badge--${escapeHtml(status || 'open')}">${escapeHtml(status || 'open')}</span>`;
 }
 
+/** @param {import('./review-contracts.js').ReviewSuggestion} suggestion */
 function suggestionHtml(suggestion, canManageReviews) {
     return `
         <article class="notes-review-card notes-suggestion-card" data-suggestion-id="${escapeHtml(suggestion.id)}">
@@ -32,6 +75,7 @@ function suggestionHtml(suggestion, canManageReviews) {
         </article>`;
 }
 
+/** @param {import('./review-contracts.js').CommentReply} reply */
 function replyHtml(reply) {
     const deleted = Boolean(reply.deleted_at);
     return `
@@ -45,6 +89,7 @@ function replyHtml(reply) {
         </div>`;
 }
 
+/** @param {import('./review-contracts.js').CommentThread} thread */
 function commentHtml(thread) {
     const deleted = Boolean(thread.deleted_at);
     const detached = thread.anchor?.state === 'detached';
@@ -70,6 +115,7 @@ function commentHtml(thread) {
         </article>`;
 }
 
+/** @param {import('./review-contracts.js').NoteVersion} version */
 function versionHtml(version) {
     return `<article class="notes-review-card"><header><strong>${escapeHtml(version.name || version.reason || 'Snapshot')}</strong><small>${escapeHtml(version.created_at || '')}</small></header><p>${escapeHtml(version.actor?.name ? `By ${version.actor.name}` : 'Automatic version')}</p><div class="notes-review-card-actions"><button type="button" data-version-restore="${escapeHtml(version.id)}">Restore</button></div></article>`;
 }
@@ -78,6 +124,10 @@ function emptyHtml(message) {
     return `<p class="notes-review-empty">${escapeHtml(message)}</p>`;
 }
 
+/**
+ * @param {Partial<import('./review-contracts.js').ReviewPanelOptions>} options
+ * @returns {import('./review-contracts.js').ReviewPanelController|null}
+ */
 export function bindReviewPanel({
     noteId,
     canReview,
@@ -101,10 +151,75 @@ export function bindReviewPanel({
     let mode = 'review';
     let tab = 'comments';
     let filter = 'open';
+    /** @type {import('./review-contracts.js').CommentThread[]} */
     let threads = [];
+    /** @type {import('./review-contracts.js').CommentAnchor|null} */
     let pendingAnchor = null;
     let activeThreadId = null;
+    let hasRenderedContent = false;
+    let loadPromise = null;
+    let refreshPromise = null;
+    let refreshRequested = false;
+    let alignmentFrame = null;
+    const drafts = new Map();
     const inFlight = new Set();
+
+    function draftKey(field) {
+        const form = field.closest('form');
+        if (form?.matches('[data-comment-create]')) return 'comment';
+        if (form?.matches('[data-comment-reply]')) return `reply:${form.dataset.commentReply}`;
+        if (form?.matches('[data-version-create]')) return 'version';
+        return null;
+    }
+
+    function replaceContent(html) {
+        let focusedDraft = null;
+        body.querySelectorAll('input[name], textarea[name]').forEach((field) => {
+            const key = draftKey(field);
+            if (!key) return;
+            drafts.set(key, field.value);
+            if (field === panel.ownerDocument?.activeElement) {
+                focusedDraft = { key, start: field.selectionStart, end: field.selectionEnd };
+            }
+        });
+        body.innerHTML = html;
+        body.querySelectorAll('input[name], textarea[name]').forEach((field) => {
+            const key = draftKey(field);
+            if (!key || !drafts.has(key)) return;
+            field.value = drafts.get(key);
+            if (key === focusedDraft?.key) {
+                field.focus({ preventScroll: true });
+                field.setSelectionRange(focusedDraft.start, focusedDraft.end);
+            }
+        });
+    }
+
+    function clearDraft(key, submittedValue) {
+        const field = [...body.querySelectorAll('input[name], textarea[name]')].find((item) => draftKey(item) === key);
+        const currentValue = field?.value ?? drafts.get(key) ?? '';
+        if (String(currentValue).trim() !== submittedValue) return false;
+        drafts.delete(key);
+        if (field) field.value = '';
+        return true;
+    }
+
+    function showRequestError(error) {
+        if (error.name === 'AbortError' || lifecycle.signal.aborted) return;
+        const message = error.message || 'Unable to load review data. Try again.';
+        if (!hasRenderedContent) body.innerHTML = emptyHtml(message);
+        if (toast?.show) toast.show({ message, type: 'error' });
+        else if (hasRenderedContent) {
+            let errorNode = body.querySelector('[data-review-error]');
+            if (!errorNode) {
+                errorNode = panel.ownerDocument.createElement('p');
+                errorNode.dataset.reviewError = '';
+                errorNode.className = 'notes-review-empty';
+                errorNode.setAttribute('role', 'alert');
+                body.prepend(errorNode);
+            }
+            errorNode.textContent = message;
+        }
+    }
 
     function visibleThreads() {
         return threads.filter((thread) => {
@@ -115,6 +230,7 @@ export function bindReviewPanel({
     }
 
     function alignCards() {
+        if (lifecycle.signal.aborted || panel.hidden) return;
         if (window.innerWidth < 1180 || tab !== 'comments') return;
         let previousBottom = 0;
         panel.querySelectorAll('[data-comment-id]').forEach((card) => {
@@ -131,7 +247,7 @@ export function bindReviewPanel({
     function renderComments() {
         const visible = visibleThreads();
         title.textContent = 'Review';
-        body.innerHTML = `
+        replaceContent(`
             <div class="notes-review-tabs" role="tablist">
                 <button type="button" role="tab" data-review-tab="comments" aria-selected="true">Comments</button>
                 <button type="button" role="tab" data-review-tab="suggestions" aria-selected="false">Suggestions</button>
@@ -147,57 +263,95 @@ export function bindReviewPanel({
             </form>` : ''}
             <section class="notes-review-section notes-comment-thread-list">
                 ${visible.length ? visible.map(commentHtml).join('') : emptyHtml(`No ${filter} comments.`)}
-            </section>`;
-        requestAnimationFrame(alignCards);
+            </section>`);
+        hasRenderedContent = true;
+        if (alignmentFrame !== null) window.cancelAnimationFrame(alignmentFrame);
+        alignmentFrame = requestAnimationFrame(() => {
+            alignmentFrame = null;
+            alignCards();
+        });
     }
 
-    async function renderSuggestions() {
-        const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/suggestions`, {}, loadController?.signal);
+    async function renderSuggestions(signal = lifecycle.signal) {
+        const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/suggestions`, {}, signal);
+        const suggestions = reviewItems(payload, 'suggestions');
+        if (signal.aborted) return;
         title.textContent = 'Review';
-        body.innerHTML = `
+        replaceContent(`
             <div class="notes-review-tabs" role="tablist">
                 <button type="button" role="tab" data-review-tab="comments" aria-selected="false">Comments</button>
                 <button type="button" role="tab" data-review-tab="suggestions" aria-selected="true">Suggestions</button>
             </div>
-            <section class="notes-review-section">${(payload.suggestions || []).length ? payload.suggestions.map((item) => suggestionHtml(item, canManageReviews)).join('') : emptyHtml('No suggestions yet.')}</section>`;
+            <section class="notes-review-section">${suggestions.length ? suggestions.map((item) => suggestionHtml(item, canManageReviews)).join('') : emptyHtml('No suggestions yet.')}</section>`);
+        hasRenderedContent = true;
     }
 
-    async function loadComments() {
-        const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/comments`, {}, loadController?.signal);
-        threads = payload.threads || [];
+    async function loadComments(signal = lifecycle.signal) {
+        const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/comments`, {}, signal);
+        const nextThreads = reviewItems(payload, 'threads');
+        if (signal.aborted) return;
+        threads = nextThreads;
         onThreads?.(threads, activeThreadId);
         renderComments();
     }
 
-    async function renderReview() {
-        if (!canReview) return;
+    function renderReview() {
+        if (!canReview || lifecycle.signal.aborted) return;
         loadController?.abort();
         loadController = new AbortController();
-        body.innerHTML = emptyHtml('Loading review activity...');
-        if (tab === 'suggestions') await renderSuggestions();
-        else await loadComments();
+        if (!hasRenderedContent) body.innerHTML = emptyHtml('Loading review activity...');
+        const signal = loadController.signal;
+        loadPromise = (async () => {
+            try {
+                if (tab === 'suggestions') await renderSuggestions(signal);
+                else await loadComments(signal);
+            } catch (error) { showRequestError(error); }
+        })().finally(() => { if (loadController?.signal === signal) loadPromise = null; });
+        return loadPromise;
     }
 
-    async function renderHistory() {
-        if (!canViewVersions) return;
+    function renderHistory() {
+        if (!canViewVersions || lifecycle.signal.aborted) return;
         loadController?.abort();
         loadController = new AbortController();
-        title.textContent = 'Version history';
-        body.innerHTML = emptyHtml('Loading versions...');
-        const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/versions`, {}, loadController.signal);
-        body.innerHTML = `<section class="notes-review-section"><h3>Snapshots</h3>${(payload.versions || []).length ? payload.versions.map(versionHtml).join('') : emptyHtml('No versions yet.')}</section><form class="notes-review-new-version" data-version-create><input type="text" name="name" placeholder="Snapshot name"><button type="submit">Create snapshot</button></form>`;
+        if (!hasRenderedContent) body.innerHTML = emptyHtml('Loading versions...');
+        const signal = loadController.signal;
+        loadPromise = (async () => { try {
+            const payload = await apiJson(`/api/notes/${encodeURIComponent(noteId)}/versions`, {}, signal);
+            const versions = reviewItems(payload, 'versions');
+            if (signal.aborted) return;
+            title.textContent = 'Version history';
+            replaceContent(`<section class="notes-review-section"><h3>Snapshots</h3>${versions.length ? versions.map(versionHtml).join('') : emptyHtml('No versions yet.')}</section><form class="notes-review-new-version" data-version-create><input type="text" name="name" placeholder="Snapshot name"><button type="submit">Create snapshot</button></form>`);
+            hasRenderedContent = true;
+        } catch (error) { showRequestError(error); } })()
+            .finally(() => { if (loadController?.signal === signal) loadPromise = null; });
+        return loadPromise;
+    }
+
+    function refresh() {
+        if (lifecycle.signal.aborted || panel.hidden) return Promise.resolve();
+        refreshRequested = true;
+        if (refreshPromise) return refreshPromise;
+        refreshPromise = (async () => {
+            // Keep the initial open or tab request alive. A burst of remote
+            // events requires at most one subsequent request per pending load.
+            if (loadPromise) await loadPromise;
+            while (refreshRequested && !lifecycle.signal.aborted && !panel.hidden) {
+                refreshRequested = false;
+                if (mode === 'history') await renderHistory();
+                else await renderReview();
+            }
+        })().finally(() => { refreshPromise = null; });
+        return refreshPromise;
     }
 
     async function open(nextMode = 'review') {
+        if (lifecycle.signal.aborted) return;
         mode = nextMode;
         panel.hidden = false;
         panel.dataset.mode = mode;
-        try {
-            if (mode === 'history') await renderHistory();
-            else await renderReview();
-        } catch (error) {
-            if (error.name !== 'AbortError') body.innerHTML = emptyHtml(error.message || 'Unable to load panel.');
-        }
+        if (mode === 'history') await renderHistory();
+        else await renderReview();
     }
 
     function close() { panel.hidden = true; }
@@ -207,7 +361,9 @@ export function bindReviewPanel({
         pendingAnchor = anchor || { kind: 'document', state: 'detached', version: 1 };
         tab = 'comments';
         filter = 'open';
-        void open('review').then(() => body.querySelector('[data-comment-create] textarea')?.focus());
+        void open('review').then(() => {
+            if (!lifecycle.signal.aborted && !panel.hidden) body.querySelector('[data-comment-create] textarea')?.focus();
+        });
     }
 
     function selectThread(id) {
@@ -219,9 +375,11 @@ export function bindReviewPanel({
     }
 
     async function perform(key, action) {
-        if (inFlight.has(key)) return;
+        if (lifecycle.signal.aborted || inFlight.has(key)) return;
         inFlight.add(key);
-        try { await action(); } finally { inFlight.delete(key); }
+        try { await action(); }
+        catch (error) { showRequestError(error); }
+        finally { inFlight.delete(key); }
     }
 
     function handleClick(event) {
@@ -229,7 +387,7 @@ export function bindReviewPanel({
         if (tabButton) { tab = tabButton.dataset.reviewTab; void renderReview(); return; }
         const filterButton = event.target.closest('[data-review-filter]');
         if (filterButton) { filter = filterButton.dataset.reviewFilter; renderComments(); return; }
-        if (event.target.closest('[data-comment-cancel]')) { pendingAnchor = null; renderComments(); return; }
+        if (event.target.closest('[data-comment-cancel]')) { pendingAnchor = null; renderComments(); drafts.delete('comment'); return; }
         const card = event.target.closest('[data-comment-id]');
         if (card && !event.target.closest('button,input,form')) selectThread(card.dataset.commentId);
         const suggestionAction = event.target.closest('[data-suggestion-action]');
@@ -293,14 +451,18 @@ export function bindReviewPanel({
             try {
                 if (commentCreate) {
                     await apiJson(`/api/notes/${encodeURIComponent(noteId)}/comments`, { method: 'POST', body: JSON.stringify({ body: bodyValue, anchor: pendingAnchor, client_request_id: requestId() }) }, lifecycle.signal);
-                    pendingAnchor = null;
+                    const submittedDraftCleared = clearDraft('comment', bodyValue);
+                    if (submittedDraftCleared) pendingAnchor = null;
                     await loadComments();
+                    if (submittedDraftCleared) drafts.delete('comment');
                 } else if (commentReply) {
                     await apiJson(`/api/notes/${encodeURIComponent(noteId)}/comments/${encodeURIComponent(commentReply.dataset.commentReply)}/replies`, { method: 'POST', body: JSON.stringify({ body: bodyValue, client_request_id: requestId() }) }, lifecycle.signal);
+                    clearDraft(`reply:${commentReply.dataset.commentReply}`, bodyValue);
                     await loadComments();
                 } else {
                     const name = String(formData.get('name') || '').trim() || 'Manual snapshot';
                     await apiJson(`/api/notes/${encodeURIComponent(noteId)}/versions`, { method: 'POST', body: JSON.stringify({ name }) }, lifecycle.signal);
+                    clearDraft('version', String(formData.get('name') || '').trim());
                     await renderHistory();
                 }
             } catch (error) {
@@ -327,11 +489,16 @@ export function bindReviewPanel({
         close,
         startComment,
         selectThread,
-        refresh: () => (mode === 'review' && !panel.hidden ? renderReview() : Promise.resolve()),
+        refresh,
         refreshDecorations: () => onThreads?.(threads, activeThreadId),
         destroy() {
+            if (lifecycle.signal.aborted) return;
+            refreshRequested = false;
             loadController?.abort();
             lifecycle.abort();
+            if (alignmentFrame !== null) window.cancelAnimationFrame(alignmentFrame);
+            alignmentFrame = null;
+            drafts.clear();
             panel.hidden = true;
             onThreads?.([], null);
         },

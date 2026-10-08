@@ -1,6 +1,7 @@
+// Shared BlockNote document schema for the browser editor and converter.
 import * as React from 'react';
 import { createReactBlockSpec, createReactStyleSpec } from '@blocknote/react';
-import { BlockNoteSchema, defaultBlockSpecs, defaultInlineContentSpecs, defaultStyleSpecs, imageBlockConfig, imageParse } from '@blocknote/core';
+import { BlockNoteSchema, defaultBlockSpecs, defaultInlineContentSpecs, defaultStyleSpecs, imageBlockConfig, imageParse, propsToAttributes } from '@blocknote/core';
 import { inlineImageSpec } from './editor/images.js';
 
 const indentLevelProp = {
@@ -21,6 +22,19 @@ function extendBlockProps(blockSpec, extraProps) {
                 ...blockSpec.config.propSchema,
                 ...extraProps,
             },
+        },
+        implementation: {
+            ...blockSpec.implementation,
+            // BlockNote's API prop schema and its underlying TipTap node must
+            // agree, or block/node and Yjs conversions discard these props.
+            node: blockSpec.implementation.node.extend({
+                addAttributes() {
+                    return {
+                        ...this.parent?.(),
+                        ...propsToAttributes(extraProps),
+                    };
+                },
+            }),
         },
     };
 }
@@ -279,7 +293,7 @@ const bookmarkBlock = createReactBlockSpec(
             if (!hostname && url) {
                 try {
                     hostname = new URL(url).hostname;
-                } catch (error) {
+                } catch {
                     hostname = '';
                 }
             }

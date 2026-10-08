@@ -82,7 +82,7 @@ function safePrintUrl(value, { image = false } = {}) {
     try {
         const parsed = new URL(raw);
         return parsed.protocol === 'http:' || parsed.protocol === 'https:' ? parsed.href : '';
-    } catch (error) {
+    } catch {
         return '';
     }
 }
@@ -157,12 +157,11 @@ function replaceImageWithFallback(image) {
 }
 
 function replaceMediaElementWithLink(element, type) {
-    const documentRef = element?.ownerDocument;
-    if (!documentRef || typeof element.replaceWith !== 'function') return;
+    const documentRef = element.ownerDocument;
     const source = element.currentSrc
         || element.src
-        || element.getAttribute?.('src')
-        || element.querySelector?.('source[src]')?.getAttribute('src');
+        || element.getAttribute('src')
+        || element.querySelector('source[src]')?.getAttribute('src');
     const href = safePrintUrl(source);
     const label = `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
     const replacement = documentRef.createElement(href ? 'a' : 'span');
@@ -176,22 +175,22 @@ function replaceMediaElementWithLink(element, type) {
 }
 
 function applyPrintColors(root) {
-    root.querySelectorAll?.('[data-text-color]').forEach((element) => {
+    root.querySelectorAll('[data-text-color]').forEach((element) => {
         const color = printColorFor(element.getAttribute('data-text-color'));
         if (color) element.style.setProperty('color', color, 'important');
     });
-    root.querySelectorAll?.('[data-background-color]').forEach((element) => {
+    root.querySelectorAll('[data-background-color]').forEach((element) => {
         const color = printColorFor(element.getAttribute('data-background-color'), { highlight: true });
         if (color) element.style.setProperty('background-color', color, 'important');
     });
 }
 
 function sanitizePrintSurface(root) {
-    root.querySelectorAll?.('script, style, iframe, object, embed, button, textarea, select').forEach((element) => element.remove());
-    root.querySelectorAll?.('video, audio').forEach((element) => {
+    root.querySelectorAll('script, style, iframe, object, embed, button, textarea, select').forEach((element) => element.remove());
+    root.querySelectorAll('video, audio').forEach((element) => {
         replaceMediaElementWithLink(element, element.tagName.toLowerCase());
     });
-    root.querySelectorAll?.('input').forEach((input) => {
+    root.querySelectorAll('input').forEach((input) => {
         if (input.type === 'checkbox') {
             const marker = input.ownerDocument.createElement('span');
             marker.className = 'notes-print-checkbox';
@@ -202,7 +201,7 @@ function sanitizePrintSurface(root) {
             input.remove();
         }
     });
-    root.querySelectorAll?.('a[href]').forEach((anchor) => {
+    root.querySelectorAll('a[href]').forEach((anchor) => {
         const href = safePrintUrl(anchor.getAttribute('href'));
         if (!href) {
             anchor.removeAttribute('href');
@@ -212,12 +211,12 @@ function sanitizePrintSurface(root) {
         anchor.setAttribute('rel', 'noopener noreferrer');
         anchor.removeAttribute('target');
     });
-    root.querySelectorAll?.('*').forEach((element) => {
-        Array.from(element.attributes || []).forEach((attribute) => {
+    root.querySelectorAll('*').forEach((element) => {
+        Array.from(element.attributes).forEach((attribute) => {
             if (/^on/i.test(attribute.name)) element.removeAttribute(attribute.name);
         });
-        element.removeAttribute?.('contenteditable');
-        element.removeAttribute?.('draggable');
+        element.removeAttribute('contenteditable');
+        element.removeAttribute('draggable');
     });
     applyPrintColors(root);
 }
@@ -257,7 +256,7 @@ function clampSideMargins(value) {
 }
 
 function createPrintSurface({ documentRef, title, html, fontFamily, sideMargins }) {
-    documentRef.querySelectorAll?.('.notes-print-surface').forEach((surface) => surface.remove());
+    documentRef.querySelectorAll('.notes-print-surface').forEach((surface) => surface.remove());
     const surface = documentRef.createElement('article');
     surface.className = 'notes-print-surface';
     surface.setAttribute('aria-hidden', 'true');

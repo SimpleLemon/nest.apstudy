@@ -49,7 +49,7 @@ export const listItemHardBreakShortcuts = Extension.create({
                 let blockType;
                 try {
                     blockType = getBlockInfoFromSelection(this.editor.state).blockNoteType;
-                } catch (error) {
+                } catch {
                     return false;
                 }
                 return insertListHardBreak(

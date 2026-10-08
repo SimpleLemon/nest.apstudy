@@ -1,4 +1,4 @@
-import { floatingPopoverPosition } from './utils.js';
+import { positionFloatingElement } from './utils.js';
 
 const ZOOM_STORAGE_KEY = 'apstudy.notes.editor.zoom';
 const ZOOM_LEVELS = [0.85, 1, 1.15, 1.3, 1.5];
@@ -51,6 +51,13 @@ export function createPageSetupRuntime({
     let pageSetupPositionRafId = null;
     let defaultSideMarginPercent = null;
     let bound = false;
+    let disposed = false;
+    let pageSetupSaveTask = null;
+    let pageSetupSaveController = null;
+    const pageSetupVersions = { note: 0, global: 0 };
+    const dirtyPageSetupScopes = new Set();
+    const requestedPageSetupScopes = new Set();
+    const bindingsController = new AbortController();
 
     function clampZoomIndex(index) {
         return Math.min(ZOOM_LEVELS.length - 1, Math.max(0, index));
@@ -61,7 +68,7 @@ export function createPageSetupRuntime({
             const stored = Number(window.localStorage?.getItem(ZOOM_STORAGE_KEY));
             const index = ZOOM_LEVELS.findIndex((level) => Math.round(level * 100) === stored);
             return index >= 0 ? index : DEFAULT_ZOOM_INDEX;
-        } catch (error) {
+        } catch {
             return DEFAULT_ZOOM_INDEX;
         }
     }
@@ -69,7 +76,7 @@ export function createPageSetupRuntime({
     function storeZoomLevel(level) {
         try {
             window.localStorage?.setItem(ZOOM_STORAGE_KEY, String(Math.round(level * 100)));
-        } catch (error) {
+        } catch {
             // localStorage can be unavailable in private or restricted contexts.
         }
     }
@@ -180,24 +187,6 @@ export function createPageSetupRuntime({
         });
     }
 
-    function positionFloatingElement(trigger, element, { triggerRectOverride = null, boundaryRect = null } = {}) {
-        if (!trigger || !element) return;
-        const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
-        element.style.left = '0px';
-        element.style.top = '0px';
-        element.style.transform = 'none';
-
-        const originRect = element.getBoundingClientRect();
-        const position = floatingPopoverPosition({
-            triggerRect,
-            popoverRect: originRect,
-            boundaryRect,
-        });
-
-        element.style.left = `${Math.round(position.left - originRect.left)}px`;
-        element.style.top = `${Math.round(position.top - originRect.top)}px`;
-    }
-
     function closePageSetupPopover({ restoreFocus = false } = {}) {
         if (!pageSetupPopover) return;
         const triggerToRestore = activePageSetupTrigger;
@@ -233,7 +222,7 @@ export function createPageSetupRuntime({
     }
 
     function schedulePageSetupPopoverPosition() {
-        if (!pageSetupPopover || pageSetupPopover.hidden || pageSetupPositionRafId) return;
+        if (disposed || !pageSetupPopover || pageSetupPopover.hidden || pageSetupPositionRafId) return;
         pageSetupPositionRafId = window.requestAnimationFrame(() => {
             pageSetupPositionRafId = null;
             positionPageSetupPopover(activePageSetupTrigger, activePageSetupTriggerRect);
@@ -241,7 +230,7 @@ export function createPageSetupRuntime({
     }
 
     function openPageSetupPopover(trigger, triggerRect = null) {
-        if (!pageSetupPopover) return;
+        if (disposed || !pageSetupPopover) return;
         closeToolbarMenus?.();
         activePageSetupTrigger = trigger || null;
         activePageSetupTriggerRect = triggerRect || usableTriggerRect(trigger);
@@ -250,77 +239,93 @@ export function createPageSetupRuntime({
         updatePageSetupControls();
         positionPageSetupPopover(activePageSetupTrigger, activePageSetupTriggerRect);
         window.requestAnimationFrame(() => {
-            if (pageSetupPopover.hidden) return;
+            if (disposed || pageSetupPopover.hidden) return;
             pageSetupPopover.querySelector('[data-page-setup-dropdown-trigger]')?.focus({ preventScroll: true });
         });
     }
 
-    async function saveNotePageSetup() {
-        if (!getCanEdit() || !noteId || getNoteCollaborationEnabled()) return;
-        try {
-            const response = await (window.APStudyPendingMutations?.track(fetch(`/api/notes/${noteId}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ page_setup_json: notePageSetup }),
-            }), 'notes-page-setup') || fetch(`/api/notes/${noteId}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ page_setup_json: notePageSetup }),
-            }));
-            if (!response.ok) throw new Error('Page setup save failed');
-            const updated = await response.json();
-            notePageSetup = normalizePageSetup(updated?.page_setup);
-            globalPageSetup = normalizePageSetup(updated?.global_page_setup);
-            applyPageSetupVariables();
-            updatePageSetupControls();
-        } catch (error) {
-            console.error(error);
-            setSaveStatus('error', { message: 'Page setup save failed' });
+    function canSaveScope(scope) {
+        return !disposed && getCanEdit() && (scope === 'global' || (noteId && !getNoteCollaborationEnabled()));
+    }
+
+    async function saveRequestedPageSetup() {
+        while (requestedPageSetupScopes.size && !disposed) {
+            const scope = requestedPageSetupScopes.values().next().value;
+            requestedPageSetupScopes.delete(scope);
+            if (!canSaveScope(scope)) continue;
+            const versions = { ...pageSetupVersions };
+            const global = scope === 'global';
+            const controller = new AbortController();
+            pageSetupSaveController = controller;
+            try {
+                const request = fetch(global ? '/settings/api/notes-page-setup' : `/api/notes/${noteId}`, {
+                    method: global ? 'POST' : 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(global ? { page_setup: globalPageSetup } : { page_setup_json: notePageSetup }),
+                    signal: controller.signal,
+                });
+                const response = await (window.APStudyPendingMutations?.track(request, 'notes-page-setup') ?? request);
+                if (disposed) return;
+                if (!response.ok) throw new Error('Page setup save failed');
+                const updated = await response.json();
+                if (disposed) return;
+                const savedSetup = global ? updated?.notes_page_setup : updated?.page_setup;
+                if (!savedSetup || typeof savedSetup !== 'object' || Array.isArray(savedSetup)) {
+                    throw new Error('Invalid page setup response');
+                }
+                if (!global && versions.note === pageSetupVersions.note) {
+                    notePageSetup = normalizePageSetup(savedSetup);
+                }
+                if (versions.global === pageSetupVersions.global
+                    && (global || !dirtyPageSetupScopes.has('global'))) {
+                    globalPageSetup = normalizePageSetup(global ? updated?.notes_page_setup : updated?.global_page_setup);
+                }
+                if (versions[scope] === pageSetupVersions[scope]) dirtyPageSetupScopes.delete(scope);
+                applyPageSetupVariables();
+                updatePageSetupControls();
+            } catch (error) {
+                if (disposed) return;
+                console.error(error);
+                setSaveStatus('error', { message: 'Page setup save failed' });
+            } finally {
+                if (pageSetupSaveController === controller) pageSetupSaveController = null;
+            }
         }
     }
 
-    async function saveGlobalPageSetup() {
-        if (!getCanEdit()) return;
-        try {
-            const response = await (window.APStudyPendingMutations?.track(fetch('/settings/api/notes-page-setup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ page_setup: globalPageSetup }),
-            }), 'notes-page-setup') || fetch('/settings/api/notes-page-setup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ page_setup: globalPageSetup }),
-            }));
-            if (!response.ok) throw new Error('Global page setup save failed');
-            const updated = await response.json();
-            globalPageSetup = normalizePageSetup(updated?.notes_page_setup);
-            applyPageSetupVariables();
-            updatePageSetupControls();
-        } catch (error) {
-            console.error(error);
-            setSaveStatus('error', { message: 'Page setup save failed' });
+    function savePageSetup() {
+        if (disposed) return Promise.resolve();
+        for (const scope of dirtyPageSetupScopes) {
+            if (canSaveScope(scope)) requestedPageSetupScopes.add(scope);
         }
+        if (!pageSetupSaveTask) {
+            pageSetupSaveTask = saveRequestedPageSetup().finally(() => {
+                pageSetupSaveTask = null;
+                if (requestedPageSetupScopes.size && !disposed) return savePageSetup();
+            });
+        }
+        return pageSetupSaveTask;
     }
 
     function schedulePageSetupSave() {
-        if (!getCanEdit()) return;
+        if (disposed || !getCanEdit()) return;
         if (pageSetupSaveTimer) clearTimeout(pageSetupSaveTimer);
         pageSetupSaveTimer = window.setTimeout(() => {
-            if (pageSetupScope === 'global') {
-                void saveGlobalPageSetup();
-            } else {
-                void saveNotePageSetup();
-            }
+            pageSetupSaveTimer = null;
+            void savePageSetup();
         }, PAGE_SETUP_SAVE_DEBOUNCE_MS);
     }
 
     function updateCurrentPageSetup(key, value) {
+        if (!canSaveScope(pageSetupScope)) return;
         const nextValue = key === 'sideMargins' ? clampSideMargins(value) : value;
         if (pageSetupScope === 'global') {
             globalPageSetup = normalizePageSetup({ ...globalPageSetup, [key]: nextValue });
         } else {
             notePageSetup = normalizePageSetup({ ...notePageSetup, [key]: nextValue });
         }
+        pageSetupVersions[pageSetupScope] += 1;
+        dirtyPageSetupScopes.add(pageSetupScope);
         applyPageSetupVariables();
         updatePageSetupControls();
         schedulePageSetupSave();
@@ -351,7 +356,7 @@ export function createPageSetupRuntime({
     }
 
     function bind() {
-        if (bound) return;
+        if (disposed || bound) return;
         bound = true;
 
         pageSetupPopover?.addEventListener('click', (event) => {
@@ -393,16 +398,16 @@ export function createPageSetupRuntime({
             input.value = setupOption.dataset.value || '';
             closePageSetupDropdowns();
             updateCurrentPageSetup(input.dataset.pageSetupInput, input.value);
-        });
+        }, { signal: bindingsController.signal });
 
         pageSetupPopover?.addEventListener('input', (event) => {
             const input = event.target.closest('[data-page-setup-input="sideMargins"]');
             if (!input) return;
             updateCurrentPageSetup('sideMargins', input.value);
-        });
+        }, { signal: bindingsController.signal });
 
-        editorPage?.addEventListener('scroll', schedulePageSetupPopoverPosition, { passive: true });
-        window.addEventListener('resize', schedulePageSetupPopoverPosition);
+        editorPage?.addEventListener('scroll', schedulePageSetupPopoverPosition, { passive: true, signal: bindingsController.signal });
+        window.addEventListener('resize', schedulePageSetupPopoverPosition, { signal: bindingsController.signal });
     }
 
     function clearTimers() {
@@ -413,10 +418,29 @@ export function createPageSetupRuntime({
     }
 
     function setLoadedPageSetup(noteSetup, globalSetup) {
+        if (disposed) return;
         notePageSetup = normalizePageSetup(noteSetup);
         globalPageSetup = normalizePageSetup(globalSetup);
         applyPageSetupVariables();
         updatePageSetupControls();
+    }
+
+    function warnBeforeUnload(event) {
+        if (!dirtyPageSetupScopes.size) return;
+        event.preventDefault();
+        event.returnValue = '';
+    }
+
+    window.addEventListener('beforeunload', warnBeforeUnload);
+
+    function dispose() {
+        if (disposed) return;
+        disposed = true;
+        clearTimers();
+        requestedPageSetupScopes.clear();
+        pageSetupSaveController?.abort();
+        bindingsController.abort();
+        window.removeEventListener('beforeunload', warnBeforeUnload);
     }
 
     function setInitialZoom() {
@@ -429,6 +453,7 @@ export function createPageSetupRuntime({
         bind,
         clearPageSetupDropdowns: closePageSetupDropdowns,
         clearTimers,
+        dispose,
         closePageSetupPopover,
         effectivePageSetup,
         getPageSetupFontFamily: () => PAGE_SETUP_FONT_TYPES[effectivePageSetup().fontType] || PAGE_SETUP_FONT_TYPES.default,
@@ -439,6 +464,7 @@ export function createPageSetupRuntime({
         schedulePageSetupPopoverPosition,
         setInitialZoom,
         setLoadedPageSetup,
+        savePageSetup,
         setZoomIndex,
         updatePageSetupControls,
     };

@@ -66,44 +66,27 @@ export function floatingPopoverPosition({
     return { left, top };
 }
 
+export function positionFloatingElement(trigger, element, { triggerRectOverride = null, boundaryRect = null } = {}) {
+    if (!trigger || !element) return;
+    const triggerRect = triggerRectOverride || trigger.getBoundingClientRect();
+    element.style.left = '0px';
+    element.style.top = '0px';
+    element.style.transform = 'none';
+
+    const originRect = element.getBoundingClientRect();
+    const position = floatingPopoverPosition({
+        triggerRect,
+        popoverRect: originRect,
+        boundaryRect,
+    });
+
+    element.style.left = `${Math.round(position.left - originRect.left)}px`;
+    element.style.top = `${Math.round(position.top - originRect.top)}px`;
+}
+
+
 export function buildLoadingIndicatorHtml(label = 'Loading...', options = {}) {
     return window.APStudyLoader.html(label, options);
-}
-
-export function parseSavedDate(value) {
-    if (typeof value !== 'string' || value.trim() === '') return null;
-
-    const parsed = new Date(value);
-    return Number.isNaN(parsed.getTime()) ? null : parsed;
-}
-
-export function formatRelativeSavedTime(date) {
-    if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
-
-    const elapsedSeconds = Math.max(0, Math.floor((Date.now() - date.getTime()) / 1000));
-    if (elapsedSeconds < 10) return 'just now';
-    if (elapsedSeconds < 60) return `${elapsedSeconds} sec ago`;
-
-    const elapsedMinutes = Math.floor(elapsedSeconds / 60);
-    if (elapsedMinutes < 60) {
-        return `${elapsedMinutes} min ago`;
-    }
-
-    const elapsedHours = Math.floor(elapsedMinutes / 60);
-    if (elapsedHours < 24) {
-        return `${elapsedHours} hr ago`;
-    }
-
-    const elapsedDays = Math.floor(elapsedHours / 24);
-    if (elapsedDays < 7) {
-        return `${elapsedDays} day${elapsedDays === 1 ? '' : 's'} ago`;
-    }
-
-    return date.toLocaleDateString(undefined, {
-        month: 'short',
-        day: 'numeric',
-        year: date.getFullYear() === new Date().getFullYear() ? undefined : 'numeric',
-    });
 }
 
 export function blockOwnContentIsEmpty(block) {

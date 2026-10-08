@@ -9,13 +9,7 @@ import {
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 import { History } from '@tiptap/extension-history';
-import { notesEditorSchema } from '../toolbar.js';
-import {
-    blockIconClass,
-    blockPayloadForCatalogItem,
-    catalogItemByKey,
-    filterBlockCatalog,
-} from './block-catalog.js';
+import { notesEditorSchema } from '../editor-schema.js';
 import { listItemHardBreakShortcuts, preserveRangeSelectionShortcuts, createSelectAllShortcuts } from './keyboard-shortcuts.js';
 import { normalizeCopiedPlainText, normalizeImportedMarkdownBlocks } from './markdown-repair.js';
 import { buildLoadingIndicatorHtml, documentHasText, isBlankTitle } from './utils.js';
@@ -24,7 +18,6 @@ import { handleNotesPaste } from './paste.js';
 const NORMAL_HISTORY_DEPTH = 100;
 const LONG_DOCUMENT_HISTORY_DEPTH = 35;
 const LARGE_DOCUMENT_BLOCK_COUNT = 120;
-const GRAMMARLY_DISABLED_ATTRS = 'data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"';
 
 export function createReactShell({
     noteContext,
@@ -42,6 +35,7 @@ export function createReactShell({
     setNotePrintReady,
     setNoteCollaborationEnabled,
     setSaveStatus,
+    setCollaborationPendingChanges,
     setLastSavedPayloadFingerprint,
     notePayloadFingerprint,
     getEditorPageDisposed,
@@ -55,16 +49,11 @@ export function createReactShell({
     insertImageFromDialog,
     bindCollaborativeTitle,
     bindLazyReviewPanel,
+    invalidateReviewPanel,
+    resetReviewPanel,
     pageSetup,
-    safeSetBlockSelection,
-    selectBlockRange,
-    insertCatalogItem,
-    copySelectedBlocks,
-    duplicateSelectedBlocks,
-    deleteSelectedBlocks,
-    moveSelectedBlocks,
+    menus,
     toggleHeadingCollapse,
-    updateBlockPayloadForPreservedText,
     focusEditorBody,
 }) {
     let noteEditorReactRoot = null;
@@ -73,26 +62,13 @@ export function createReactShell({
     let editorInitialFocusTimer = null;
     let activeCollaborationSession = null;
     let activeCollaborativeTitleCleanup = null;
+    let pageEventController = null;
+    let documentGeneration = 0;
 
     function historyDepthForDocument(documentValue) {
         return (Array.isArray(documentValue) ? documentValue.length : 0) >= LARGE_DOCUMENT_BLOCK_COUNT
             ? LONG_DOCUMENT_HISTORY_DEPTH
             : NORMAL_HISTORY_DEPTH;
-    }
-
-    function materialIcon(name, className = 'material-symbols-outlined') {
-        return React.createElement('span', {
-            className,
-            'aria-hidden': 'true',
-        }, name);
-    }
-
-    function iconHtml(icon) {
-        if (!icon) return '';
-        if (icon.startsWith?.('H')) {
-            return icon;
-        }
-        return icon;
     }
 
     function renderMissingNoteState(message = 'This note could not be opened.') {
@@ -114,174 +90,14 @@ export function createReactShell({
         setSaveStatus('error', { message: 'Unable to load', retry: false });
     }
 
-    function NotesSlashMenu(props) {
-        const { items, selectedIndex, onItemClick } = props;
-        return React.createElement(
-            'div',
-            { className: 'notes-slash-menu', role: 'listbox' },
-            items.map((item, index) => React.createElement(
-                'button',
-                {
-                    key: item.key || item.label,
-                    type: 'button',
-                    className: `notes-slash-item${index === selectedIndex ? ' is-active' : ''}`,
-                    role: 'option',
-                    'aria-selected': String(index === selectedIndex),
-                    onMouseDown: (event) => event.preventDefault(),
-                    onClick: (event) => {
-                        event.stopPropagation();
-                        onItemClick?.(item);
-                    },
-                },
-                React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
-                React.createElement('span', null,
-                    React.createElement('strong', null, item.label),
-                    React.createElement('small', null, item.description)
-                )
-            ))
-        );
-    }
-
-    function NotesSideMenu(props) {
-        const { block, blockDragStart, blockDragEnd, freezeMenu, unfreezeMenu } = props;
-        const [open, setOpen] = React.useState(false);
-        const [turnIntoOpen, setTurnIntoOpen] = React.useState(false);
-        const toolsRef = React.useRef(null);
-        const closeMenu = React.useCallback(() => {
-            setTurnIntoOpen(false);
-            setOpen(false);
-        }, []);
-        const selectActionBlock = React.useCallback(() => {
-            if (!getEditor() || !block) return;
-            safeSetBlockSelection(block, block);
-        }, [block]);
-
-        React.useEffect(() => {
-            if (!open) return undefined;
-
-            freezeMenu?.();
-            const handlePointerDown = (event) => {
-                if (toolsRef.current?.contains(event.target)) return;
-                closeMenu();
-            };
-            const handleKeyDown = (event) => {
-                if (event.key !== 'Escape') return;
-                event.preventDefault();
-                closeMenu();
-            };
-            document.addEventListener('pointerdown', handlePointerDown);
-            document.addEventListener('keydown', handleKeyDown);
-
-            return () => {
-                document.removeEventListener('pointerdown', handlePointerDown);
-                document.removeEventListener('keydown', handleKeyDown);
-                unfreezeMenu?.();
-            };
-        }, [closeMenu, freezeMenu, open, unfreezeMenu]);
-
-        const select = (event) => {
-            event.preventDefault();
-            selectBlockRange(block, event.shiftKey);
-        };
-        const addBelow = async (event) => {
-            event.preventDefault();
-            getEditor()?.setTextCursorPosition?.(block);
-            await insertCatalogItem(catalogItemByKey('paragraph'), event.currentTarget.getBoundingClientRect());
-        };
-        const duplicate = () => {
-            selectActionBlock();
-            duplicateSelectedBlocks();
-            closeMenu();
-        };
-        const remove = () => {
-            selectActionBlock();
-            deleteSelectedBlocks();
-            closeMenu();
-        };
-        const turnIntoItems = filterBlockCatalog('', { includeAtoms: false, turnIntoOnly: true });
-        const turnIntoMenu = turnIntoOpen ? React.createElement(
-            'div',
-            { className: 'notes-side-submenu' },
-            turnIntoItems.map((item) => React.createElement(
-                'button',
-                {
-                    key: item.key,
-                    type: 'button',
-                    onClick: () => {
-                        selectActionBlock();
-                        const payload = blockPayloadForCatalogItem(item);
-                        getEditor().updateBlock(block, updateBlockPayloadForPreservedText(block, payload));
-                        closeMenu();
-                        updateEditorChrome();
-                        triggerDebouncedSave();
-                    },
-                },
-                React.createElement('span', { className: blockIconClass(item.icon), 'aria-hidden': 'true' }, iconHtml(item.icon)),
-                React.createElement('span', null, item.label)
-            ))
-        ) : null;
-        return React.createElement(
-            'div',
-            {
-                ref: toolsRef,
-                className: 'notes-side-tools',
-                onClick: (event) => event.stopPropagation(),
-            },
-            React.createElement('button', {
-                type: 'button',
-                className: 'notes-side-button',
-                title: 'Add block below',
-                'aria-label': 'Add block below',
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: addBelow,
-            }, materialIcon('add')),
-            React.createElement('button', {
-                type: 'button',
-                className: 'notes-side-button notes-block-select-handle',
-                title: 'Select block',
-                'aria-label': 'Select block',
-                draggable: true,
-                onDragStart: (event) => blockDragStart?.(event, block),
-                onDragEnd: blockDragEnd,
-                onClick: select,
-            }, materialIcon('drag_indicator')),
-            React.createElement('button', {
-                type: 'button',
-                className: 'notes-side-button',
-                title: 'Block actions',
-                'aria-label': 'Block actions',
-                'aria-expanded': String(open),
-                onMouseDown: (event) => event.preventDefault(),
-                onClick: () => {
-                    if (open) {
-                        closeMenu();
-                    } else {
-                        setOpen(true);
-                    }
-                },
-            }, materialIcon('more_vert')),
-            open ? React.createElement(
-            'div',
-            {
-                className: 'notes-side-menu',
-                onMouseDown: (event) => event.preventDefault(),
-            },
-                React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); void copySelectedBlocks(); closeMenu(); } }, materialIcon('content_copy'), React.createElement('span', null, 'Copy')),
-                React.createElement('button', { type: 'button', 'aria-expanded': String(turnIntoOpen), onClick: () => setTurnIntoOpen(!turnIntoOpen) }, materialIcon('swap_vert'), React.createElement('span', null, 'Turn into')),
-                turnIntoMenu,
-                React.createElement('button', { type: 'button', onClick: duplicate }, materialIcon('content_copy'), React.createElement('span', null, 'Duplicate')),
-                React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); moveSelectedBlocks('up'); closeMenu(); } }, materialIcon('arrow_upward'), React.createElement('span', null, 'Move up')),
-                React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); moveSelectedBlocks('down'); closeMenu(); } }, materialIcon('arrow_downward'), React.createElement('span', null, 'Move down')),
-                block.type === 'heading'
-                    ? React.createElement('button', { type: 'button', onClick: () => { selectActionBlock(); toggleHeadingCollapse(block); closeMenu(); } }, materialIcon(block.props?.isCollapsed ? 'unfold_more' : 'unfold_less'), React.createElement('span', null, 'Collapse'))
-                    : null,
-                React.createElement('button', { type: 'button', className: 'is-danger', onClick: remove }, materialIcon('delete'), React.createElement('span', null, 'Delete'))
-            ) : null
-        );
-    }
-
     function NoteEditor({ initialContent, initialContentWasNormalized = false, collaborationSession = null }) {
-        const canEdit = getCanEdit();
+        const [canEdit, setCanEdit] = React.useState(getCanEdit());
+        React.useEffect(() => {
+            const updatePermission = () => setCanEdit(getCanEdit());
+            const unsubscribe = collaborationSession?.subscribeAccess(updatePermission);
+            updatePermission();
+            return unsubscribe;
+        }, [collaborationSession]);
         const historyDepth = historyDepthForDocument(initialContent);
         let blockNoteEditorRef = null;
         const tiptapExtensions = [
@@ -321,17 +137,11 @@ export function createReactShell({
         const editor = useCreateBlockNote(editorOptions);
         blockNoteEditorRef = editor;
 
-        const getSlashItems = React.useCallback(async (query) => (
-            filterBlockCatalog(query).map((item) => ({
-                ...item,
-                onItemClick: async () => {
-                    await insertCatalogItem(item, null, editor);
-                },
-            }))
-        ), [editor]);
+        const getSlashItems = React.useCallback((query) => menus.getSlashItems(query, editor), [editor]);
 
         React.useEffect(() => {
             setEditorInstance(editor);
+            editor.isEditable = getCanEdit();
             setNotePrintReady(true);
             editorReadyTimer = window.setTimeout(() => {
                 editorReadyTimer = null;
@@ -392,16 +202,99 @@ export function createReactShell({
             canEdit ? React.createElement(SuggestionMenuController, {
                 triggerCharacter: '/',
                 getItems: getSlashItems,
-                suggestionMenuComponent: NotesSlashMenu,
+                suggestionMenuComponent: menus.NotesSlashMenu,
             }) : null,
             canEdit ? React.createElement(SideMenuController, {
-                sideMenu: NotesSideMenu,
+                sideMenu: menus.NotesSideMenu,
             }) : null
         );
     }
 
+    async function connectDocumentCollaboration(note, noteTitle, initialGeneration, isCurrentDocument) {
+        setSaveStatus('connecting');
+        try {
+            const { createNoteCollaborationSession } = await import('./collaboration/collaboration.js');
+            if (!isCurrentDocument()) return;
+            const collaborationSession = await createNoteCollaborationSession({
+                noteId,
+                access: note?.access || noteContext.access,
+                initialGeneration,
+                presenceRoot: collaboratorsRoot,
+                onStatus: (status, options) => setSaveStatus(status, options),
+                onPendingChanges: setCollaborationPendingChanges,
+                getDraftContent: currentDocumentSnapshot,
+                onReviewEvent: (event) => {
+                    if (isCurrentDocument()) invalidateReviewPanel?.(event);
+                },
+                onDocumentChange: () => {
+                    // Replacement or lost edit permission requires a clean Y.Doc.
+                    // The prior session checkpoints its draft before this callback.
+                    window.setTimeout(() => {
+                        if (!isCurrentDocument()) return;
+                        release();
+                        void initEditorPage();
+                    }, 0);
+                },
+                onAccessChange: (access, { readOnly, ready }) => {
+                    if (!isCurrentDocument()) return;
+                    noteContext.access = access;
+                    note.access = access;
+                    setEditorReadOnlyMode(readOnly);
+                    bindLazyReviewPanel({
+                        canReview: ready && access.can_review === true,
+                        canManageReviews: ready && access.can_manage_reviews === true,
+                        canViewVersions: ready && access.can_edit === true,
+                    });
+                },
+            });
+            if (!isCurrentDocument()) {
+                collaborationSession?.destroy();
+                return;
+            }
+            activeCollaborationSession = collaborationSession;
+            activeCollaborativeTitleCleanup = bindCollaborativeTitle(activeCollaborationSession, noteTitle);
+        } catch (error) {
+            if (!isCurrentDocument()) return;
+            console.error('Failed to connect note collaboration', error);
+            activeCollaborationSession = null;
+            setEditorReadOnlyMode(true);
+            setSaveStatus('offline-readonly');
+        }
+    }
+
+    function bindEditorPageEvents(rootElement) {
+        pageEventController?.abort();
+        pageEventController = new AbortController();
+        const pageEventOptions = { signal: pageEventController.signal };
+        titleInput.addEventListener('input', () => {
+            if (getCanEdit()) triggerDebouncedSave();
+        }, pageEventOptions);
+        titleInput.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' || !getCanEdit()) return;
+            event.preventDefault();
+            focusEditorBody();
+        }, pageEventOptions);
+        rootElement.addEventListener('click', (event) => {
+            if (!getCanEdit()) return;
+            const collapseButton = event.target.closest('.notes-heading-collapse-toggle');
+            if (collapseButton) {
+                event.preventDefault();
+                event.stopPropagation();
+                const blockId = collapseButton.closest('.bn-block-outer[data-id]')?.dataset.id;
+                const block = blockId ? getEditor()?.getBlock?.(blockId) : null;
+                toggleHeadingCollapse(block);
+                return;
+            }
+            focusEditorBody();
+        }, pageEventOptions);
+        rootElement.addEventListener('copy', normalizeNativeEditorCopy, pageEventOptions);
+        rootElement.addEventListener('cut', normalizeNativeEditorCopy, pageEventOptions);
+    }
+
     async function initEditorPage() {
         if (getEditorPageDisposed()) return;
+        const mountingGeneration = ++documentGeneration;
+        const isCurrentDocument = () => !getEditorPageDisposed() && mountingGeneration === documentGeneration;
         if (!noteId || !titleInput) {
             renderMissingNoteState('Open or create a note from the Notes page first.');
             return;
@@ -417,25 +310,28 @@ export function createReactShell({
     `;
 
         let note = null;
+        let initialGeneration = null;
+        editorLoadController?.abort();
+        const loadingController = new AbortController();
+        editorLoadController = loadingController;
 
         try {
-            editorLoadController?.abort();
-            editorLoadController = new AbortController();
-            const response = await fetch(`/api/notes/${noteId}`, { signal: editorLoadController.signal });
+            const response = await fetch(`/api/notes/${noteId}`, { signal: loadingController.signal });
             if (!response.ok) {
                 throw new Error('Failed to fetch note');
             }
             note = await response.json();
+            initialGeneration = response.headers.get('X-Nest-Document-Generation');
         } catch (error) {
-            if (error?.name === 'AbortError' || getEditorPageDisposed()) return;
+            if (error?.name === 'AbortError' || !isCurrentDocument()) return;
             console.error(error);
             renderMissingNoteState('The note may have been deleted or is unavailable.');
             return;
         } finally {
-            editorLoadController = null;
+            if (editorLoadController === loadingController) editorLoadController = null;
         }
 
-        if (getEditorPageDisposed()) return;
+        if (!isCurrentDocument()) return;
 
         const noteTitle = typeof note?.title === 'string' ? note.title : '';
         titleInput.value = noteTitle;
@@ -449,28 +345,17 @@ export function createReactShell({
             setLastSavedPayloadFingerprint(notePayloadFingerprint(noteTitle, note.content));
         }
 
+        noteContext.access = note?.access || noteContext.access;
+        setEditorReadOnlyMode(note?.collaboration_enabled === true || noteContext.access?.can_edit !== true);
+
         if (note?.collaboration_enabled === true) {
-            setSaveStatus('connecting');
-            try {
-                const { createNoteCollaborationSession } = await import('./collaboration.js');
-                activeCollaborationSession = await createNoteCollaborationSession({
-                    noteId,
-                    access: note?.access || noteContext.access,
-                    presenceRoot: collaboratorsRoot,
-                    onStatus: (status) => setSaveStatus(status),
-                });
-                activeCollaborativeTitleCleanup = bindCollaborativeTitle(activeCollaborationSession, noteTitle);
-            } catch (error) {
-                console.error('Failed to connect note collaboration', error);
-                activeCollaborationSession = null;
-                setEditorReadOnlyMode(true);
-                setSaveStatus('offline-readonly');
-            }
+            await connectDocumentCollaboration(note, noteTitle, initialGeneration, isCurrentDocument);
+            if (!isCurrentDocument()) return;
         }
         bindLazyReviewPanel({
-            canReview: note?.access?.can_review === true,
-            canManageReviews: note?.access?.can_manage_reviews === true,
-            canViewVersions: note?.access?.can_edit === true,
+            canReview: (!note?.collaboration_enabled || activeCollaborationSession?.ready === true) && note?.access?.can_review === true,
+            canManageReviews: (!note?.collaboration_enabled || activeCollaborationSession?.ready === true) && note?.access?.can_manage_reviews === true,
+            canViewVersions: (!note?.collaboration_enabled || activeCollaborationSession?.ready === true) && note?.access?.can_edit === true,
         });
 
         let parsedContent = undefined;
@@ -478,7 +363,7 @@ export function createReactShell({
         if (typeof note?.content === 'string' && note.content.trim() !== '') {
             try {
                 parsedContent = JSON.parse(note.content);
-            } catch (error) {
+            } catch {
                 parsedContent = undefined;
             }
         }
@@ -503,31 +388,7 @@ export function createReactShell({
             setSaveStatus('error');
         }
 
-        if (getCanEdit()) {
-            titleInput.addEventListener('input', () => {
-                triggerDebouncedSave();
-            });
-            titleInput.addEventListener('keydown', (event) => {
-                if (event.key !== 'Enter') return;
-                event.preventDefault();
-                focusEditorBody();
-            });
-        }
-        rootElement.addEventListener('click', (event) => {
-            if (!getCanEdit()) return;
-            const collapseButton = event.target.closest('.notes-heading-collapse-toggle');
-            if (collapseButton) {
-                event.preventDefault();
-                event.stopPropagation();
-                const blockId = collapseButton.closest('.bn-block-outer[data-id]')?.dataset.id;
-                const block = blockId ? getEditor()?.getBlock?.(blockId) : null;
-                toggleHeadingCollapse(block);
-                return;
-            }
-            focusEditorBody();
-        });
-        rootElement.addEventListener('copy', normalizeNativeEditorCopy);
-        rootElement.addEventListener('cut', normalizeNativeEditorCopy);
+        bindEditorPageEvents(rootElement);
         editorInitialFocusTimer = window.setTimeout(() => {
             editorInitialFocusTimer = null;
             if (getEditorPageDisposed()) return;
@@ -550,13 +411,27 @@ export function createReactShell({
     }
 
     function release() {
+        documentGeneration += 1;
+        resetReviewPanel?.();
         clearTimers();
+        pageEventController?.abort();
+        pageEventController = null;
         activeCollaborativeTitleCleanup?.();
         activeCollaborativeTitleCleanup = null;
         activeCollaborationSession?.destroy?.();
         activeCollaborationSession = null;
         noteEditorReactRoot?.unmount();
         noteEditorReactRoot = null;
+    }
+
+    function pause() {
+        // A persisted page keeps its editor and pending Y.Doc for Browser Back.
+        // Only transport pauses; resuming rechecks current admission permissions.
+        activeCollaborationSession?.pause();
+    }
+
+    function resume() {
+        if (!getEditorPageDisposed()) activeCollaborationSession?.resume();
     }
 
     function normalizeNativeEditorCopy(event) {
@@ -571,6 +446,8 @@ export function createReactShell({
         clearTimers,
         initEditorPage,
         release,
+        pause,
+        resume,
         renderMissingNoteState,
     };
 }

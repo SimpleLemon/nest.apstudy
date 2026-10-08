@@ -8,13 +8,9 @@ import {
 } from './images.js';
 
 const pendingImageFiles = new Map();
+const activeUploads = new Map();
 let activeDialog = null;
 let activeDialogResolve = null;
-
-function csrfToken() {
-    const entry = document.cookie.split(';').map((item) => item.trim()).find((item) => item.startsWith('csrf_token='));
-    return entry ? decodeURIComponent(entry.slice('csrf_token='.length)) : '';
-}
 
 function closeImageDialog(result = null) {
     activeDialog?.remove();
@@ -113,7 +109,7 @@ export function insertInlineImageNode(editor, props) {
     try {
         editor.insertInlineContent([{ type: 'inlineImage', props }]);
         return true;
-    } catch (error) {
+    } catch {
         const current = editor.getTextCursorPosition?.()?.block;
         if (!current) return false;
         const paragraph = editor.insertBlocks?.([{ type: 'paragraph' }], current, 'after')?.[0];
@@ -124,38 +120,55 @@ export function insertInlineImageNode(editor, props) {
     }
 }
 
-export function uploadInlineImage(file, clientId, { editor, noteId, onChange }) {
+export async function uploadInlineImage(file, clientId, { editor, noteId, onChange }) {
     const errorMessage = noteImageError(file);
     if (errorMessage) {
         updateInlineImage(editor, clientId, { status: 'error', error: errorMessage });
         return;
     }
     pendingImageFiles.set(clientId, file);
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', `/api/notes/${encodeURIComponent(noteId)}/media`);
-    const token = csrfToken();
-    if (token) xhr.setRequestHeader('X-CSRFToken', token);
-    xhr.upload.onprogress = (event) => {
-        if (event.lengthComputable) window.dispatchEvent(new CustomEvent('notes-image-upload-progress', { detail: { clientId, progress: Math.round((event.loaded / event.total) * 100) } }));
-    };
-    xhr.onload = () => {
-        let payload = {};
-        try { payload = JSON.parse(xhr.responseText || '{}'); } catch (error) { payload = {}; }
+    activeUploads.get(clientId)?.controller.abort();
+    const controller = new AbortController();
+    activeUploads.set(clientId, { controller, editor });
+    try {
+        const formData = new FormData();
+        formData.append('file', file, file.name || 'clipboard-image.png');
+        const xhr = await window.APStudyHttp.uploadXhr(`/api/notes/${encodeURIComponent(noteId)}/media`, {
+            body: formData,
+            responseType: 'json',
+            signal: controller.signal,
+            pendingLabel: 'note-image-upload',
+            onProgress: (event) => {
+                if (event.lengthComputable && !controller.signal.aborted) window.dispatchEvent(new CustomEvent('notes-image-upload-progress', { detail: { clientId, progress: Math.round((event.loaded / event.total) * 100) } }));
+            },
+        });
+        if (activeUploads.get(clientId)?.controller !== controller) return;
+        const payload = xhr.response || {};
+        if (xhr.status === 0) {
+            updateInlineImage(editor, clientId, { status: 'error', error: 'Network error during upload.' });
+            return;
+        }
         if (xhr.status < 200 || xhr.status >= 300) {
             updateInlineImage(editor, clientId, { status: 'error', error: payload.error || 'Upload failed.' });
             return;
         }
+        if (typeof payload.id !== 'string' || !payload.id.trim()
+            || typeof payload.url !== 'string' || !payload.url.trim()) {
+            updateInlineImage(editor, clientId, { status: 'error', error: 'Invalid upload response. Try again.' });
+            return;
+        }
         pendingImageFiles.delete(clientId);
         updateInlineImage(editor, clientId, {
-            status: 'ready', error: '', url: payload.url || '', mediaId: payload.id || '',
+            status: 'ready', error: '', url: payload.url, mediaId: payload.id,
             alt: payload.name || file.name || '', width: Math.max(48, Math.min(240, Number(payload.width || 240))),
         });
         onChange();
-    };
-    xhr.onerror = () => updateInlineImage(editor, clientId, { status: 'error', error: 'Network error during upload.' });
-    const formData = new FormData();
-    formData.append('file', file, file.name || 'clipboard-image.png');
-    xhr.send(formData);
+    } catch (error) {
+        if (activeUploads.get(clientId)?.controller !== controller || controller.signal.aborted) return;
+        updateInlineImage(editor, clientId, { status: 'error', error: error.message || 'Network error during upload.' });
+    } finally {
+        if (activeUploads.get(clientId)?.controller === controller) activeUploads.delete(clientId);
+    }
 }
 
 export function insertInlineImageFile(editor, file, options) {
@@ -176,13 +189,20 @@ export function bindImageRuntime({ editor, editorPage, noteId, onChange, openDia
         }
     };
     const remove = (event) => {
-        const removed = removeInlineImage(editor, event.detail?.clientId);
+        const clientId = event.detail?.clientId;
+        const removed = removeInlineImage(editor, clientId);
         if (!removed) return;
+        const interrupted = activeUploads.get(clientId);
+        activeUploads.delete(clientId);
+        interrupted?.controller.abort();
         onChange();
         window.APStudyUndo?.stage?.({
             message: 'Image deleted from note.',
             restore: () => {
-                if (restoreInlineImage(editor, removed)) onChange();
+                if (!restoreInlineImage(editor, removed)) return;
+                onChange();
+                const file = pendingImageFiles.get(clientId);
+                if (interrupted && file) uploadInlineImage(file, clientId, { editor, ...options });
             },
         });
     };
@@ -219,6 +239,12 @@ export function bindImageRuntime({ editor, editorPage, noteId, onChange, openDia
     editorPage?.addEventListener('drop', drop, true);
     return () => {
         closeImageDialog();
+        for (const [clientId, upload] of activeUploads) {
+            if (upload.editor !== editor) continue;
+            activeUploads.delete(clientId);
+            pendingImageFiles.delete(clientId);
+            upload.controller.abort();
+        }
         window.removeEventListener('notes-image-retry', retry);
         window.removeEventListener('notes-image-remove', remove);
         window.removeEventListener('notes-image-replace', replace);

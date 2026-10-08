@@ -9,6 +9,7 @@
     let activeModal = null;
     let returnFocus = null;
     let searchTimer = null;
+    let modalGeneration = 0;
 
     function normalizeRole(value) {
         const role = String(value || 'viewer').toLowerCase();
@@ -38,14 +39,25 @@
     async function apiJson(url, options = {}) {
         return global.APStudyHttp.fetchJson(url, {
             ...options,
-            jsonMode: 'optional',
+            jsonMode: 'required',
             errorFactory: (payload, response) => {
-                const error = new Error(payload.error || 'Unable to update sharing.');
+                const error = new Error(payload?.error || 'Unable to update sharing.');
                 error.payload = payload;
                 error.status = response.status;
                 return error;
             },
         });
+    }
+
+    function validateSharing(sharing, resourceType, resourceId) {
+        if (sharing?.resource_type !== resourceType || sharing.resource_id !== resourceId
+            || !Number.isSafeInteger(sharing.revision) || sharing.revision < 1
+            || typeof sharing.public !== 'boolean' || !Array.isArray(sharing.users)
+            || !Array.isArray(sharing.pending_invitations) || !Array.isArray(sharing.inherited)
+            || typeof sharing.share_url !== 'string') {
+            throw new Error('The server did not confirm the sharing settings. Reopen this dialog and try again.');
+        }
+        return sharing;
     }
 
     function endpointFor(resourceType, resourceId) {
@@ -56,10 +68,12 @@
     }
 
     function close() {
+        modalGeneration += 1;
+        clearTimeout(searchTimer);
+        searchTimer = null;
         if (!activeModal) return;
         activeModal.remove();
         activeModal = null;
-        clearTimeout(searchTimer);
         document.body.classList.remove('notes-modal-open');
         returnFocus?.focus?.({ preventScroll: true });
         returnFocus = null;
@@ -178,6 +192,8 @@
         const pending = [...(sharing.pending_invitations || [])].map((invite) => ({ ...invite, role: normalizeRole(invite.role) }));
         const inherited = [...(sharing.inherited || [])];
         const modal = document.createElement('div');
+        const isCurrentModal = () => activeModal === modal && modal.isConnected;
+        let searchRevision = 0;
         modal.className = 'notes-modal';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
@@ -317,6 +333,7 @@
             }
             const add = event.target.closest('[data-add-user]');
             if (add) {
+                searchRevision += 1;
                 const results = modal._shareSearchResults || [];
                 const user = results.find((entry) => String(entry.id) === add.dataset.addUser);
                 if (user && !users.some((entry) => String(entry.id) === String(user.id))) {
@@ -329,6 +346,7 @@
             }
             const addEmail = event.target.closest('[data-add-email]');
             if (addEmail) {
+                searchRevision += 1;
                 const email = addEmail.dataset.addEmail;
                 if (email && !pending.some((entry) => String(entry.email).toLowerCase() === email.toLowerCase())) {
                     pending.push({ email, role: normalizeRole(modal._shareAddRole), status: 'pending' });
@@ -363,10 +381,14 @@
                         invitations: pending.map((invite) => ({ email: invite.email, role: normalizeRole(invite.role) })),
                     }),
                 });
+                validateSharing(updated, resourceType, resourceId);
                 onSaved?.(updated);
-                global.APStudyToast?.show?.({ message: 'Sharing updated.', type: 'success' });
-                close();
+                if (isCurrentModal()) {
+                    global.APStudyToast?.show?.({ message: 'Sharing updated.', type: 'success' });
+                    close();
+                }
             } catch (error) {
+                if (!isCurrentModal()) return;
                 const conflict = error.payload?.code === 'sharing_revision_conflict';
                 setError(modal, conflict ? 'Sharing changed in another tab. Reopen this dialog to review the latest access.' : (error.message || 'Unable to update sharing.'));
                 save.disabled = false;
@@ -375,6 +397,7 @@
 
         const search = modal.querySelector('[data-share-search]');
         search.addEventListener('input', () => {
+            const revision = ++searchRevision;
             clearTimeout(searchTimer);
             const query = search.value.trim();
             const results = modal.querySelector('[data-share-results]');
@@ -386,6 +409,7 @@
             searchTimer = setTimeout(async () => {
                 try {
                     const payload = await apiJson(`/api/notes/share-users?q=${encodeURIComponent(query)}`);
+                    if (!isCurrentModal() || revision !== searchRevision) return;
                     modal._shareSearchResults = payload.results || [];
                     renderSearchResults(
                         modal,
@@ -394,6 +418,7 @@
                         payload.email
                     );
                 } catch (error) {
+                    if (!isCurrentModal() || revision !== searchRevision) return;
                     results.hidden = false;
                     results.innerHTML = `<p class="notes-share-empty">${escapeHtml(error.message)}</p>`;
                 }
@@ -405,14 +430,17 @@
     async function open({ resourceType, resourceId, resourceTitle, onSaved } = {}) {
         if (!resourceId || !['note', 'folder'].includes(resourceType)) return;
         close();
+        const generation = modalGeneration;
         returnFocus = document.activeElement;
         try {
-            const sharing = await apiJson(endpointFor(resourceType, resourceId));
+            const sharing = validateSharing(await apiJson(endpointFor(resourceType, resourceId)), resourceType, resourceId);
+            if (generation !== modalGeneration) return;
             activeModal = buildModal(resourceType, resourceId, resourceTitle, sharing, onSaved);
             document.body.appendChild(activeModal);
             document.body.classList.add('notes-modal-open');
             activeModal.querySelector('[data-share-search]')?.focus({ preventScroll: true });
         } catch (error) {
+            if (generation !== modalGeneration) return;
             global.APStudyToast?.show?.({
                 title: 'Couldn’t load sharing settings',
                 message: error.message || 'Try again in a moment.',
