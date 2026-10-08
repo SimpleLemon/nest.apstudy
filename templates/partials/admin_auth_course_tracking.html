@@ -4,20 +4,6 @@
             <h2 id="course-tracking-title" class="admin-title admin-title--small">Course Tracking</h2>
         </div>
         <div class="admin-tracking-tools">
-            <div class="admin-tracking-gate" data-spring-tracking-gate>
-                <span class="admin-field-label">Spring tracking</span>
-                <span class="admin-badge {{ '' if spring_tracking_open else 'admin-badge--muted' }}" data-spring-tracking-state>
-                    {{ "Open" if spring_tracking_open else "Closed" }}
-                </span>
-                <button
-                    id="admin-spring-tracking-toggle"
-                    class="admin-button admin-button--ghost"
-                    type="button"
-                    data-enabled="{{ 'false' if spring_tracking_open else 'true' }}"
-                >
-                    {{ "Close Spring" if spring_tracking_open else "Open Spring" }}
-                </button>
-            </div>
             <label class="admin-select-field" for="admin-tracking-refresh">
                 <span>Scheduler tick</span>
                 <select id="admin-tracking-refresh" disabled aria-describedby="admin-tracking-refresh-help">
@@ -25,12 +11,22 @@
                 </select>
                 <small id="admin-tracking-refresh-help">Individual trackers run when their tier interval is due.</small>
             </label>
-            <button id="admin-test-chem-150" class="admin-button" type="button">
-                <span class="material-symbols-outlined" aria-hidden="true">bug_report</span>
-                Test Fall 2026 CHEM 150
-            </button>
+
         </div>
     </div>
+    <section class="admin-tracking-terms" data-tracking-terms aria-labelledby="tracking-terms-title">
+        <h3 id="tracking-terms-title" class="admin-title admin-title--small">Tracking by term</h3>
+        <p>Upcoming: students can queue trackers without seat checks. Open: checks and alerts run. Closed: checks stop and students cannot enable tracking.</p>
+        <p>Set opening and closing times to switch automatically. Selecting Closed clears the schedule. User-paused trackers stay paused.</p>
+        <p data-term-timezone></p>
+        <div class="admin-term-toolbar">
+            <label for="tracking-year">Year<select id="tracking-year" data-term-year aria-label="Tracking year"></select></label>
+            <form data-add-year><label for="tracking-add-year">Add year<input id="tracking-add-year" type="number" min="2000" max="2199" required placeholder="2028"></label><button type="submit" class="admin-button admin-button--ghost">Add year</button></form>
+            <button type="button" class="admin-button admin-button--ghost" data-terms-reload>Reload settings</button>
+        </div>
+        <p data-terms-notice role="status"></p>
+        <div data-term-rows></div>
+    </section>
     <div id="admin-tracking-alert" class="admin-inline-notice" role="status" hidden></div>
     {% if tracking_error %}
         <div class="admin-alert admin-alert--error">{{ tracking_error }}</div>
@@ -43,10 +39,12 @@
                         <span class="admin-track-summary-main">
                             <strong>{{ group.course_code or (group.subject ~ " " ~ group.catalog) }}</strong>
                             <span>{{ group.course_title or "Tracked course" }}</span>
+                            <span>{{ group.term | replace("_", " ") }} · CRN {{ group.crn or "—" }}</span>
                         </span>
                         <span class="admin-track-summary-meta">
                             <span class="admin-badge">{{ group.active_count }} active</span>
                             <span class="admin-badge admin-badge--muted">{{ group.paused_count }} paused</span>
+                            {% if group.waiting_count %}<span class="admin-badge admin-badge--muted">{{ group.waiting_count }} suspended</span>{% endif %}
                             <span>{{ group.user_count }} users</span>
                         </span>
                     </summary>
@@ -57,7 +55,7 @@
                                 <span class="admin-field-value">{{ group.last_status or "--" }} / {{ group.last_seats_available if group.last_seats_available is not none else "--" }} seats</span>
                             </div>
                             <div class="admin-action-row">
-                                <button class="admin-button admin-button--ghost" type="button" data-group-toggle="true">Resume group</button>
+                                <button class="admin-button admin-button--ghost" type="button" data-group-toggle="true" {% if not group.can_enable %}disabled title="Term tracking has closed"{% endif %}>Resume group</button>
                                 <button class="admin-button admin-button--ghost" type="button" data-group-toggle="false">Pause group</button>
                             </div>
                         </div>
@@ -65,7 +63,7 @@
                             <thead>
                                 <tr>
                                     <th>User ID</th>
-                                    <th>Enabled</th>
+                                    <th>Tracking</th>
                                     <th>Last Status</th>
                                     <th>Seats</th>
                                     <th>Last Notified</th>
@@ -76,12 +74,12 @@
                                 {% for track in group.tracks %}
                                     <tr data-track-id="{{ track.id }}">
                                         <td data-label="User ID"><a class="admin-link" href="{{ url_for('admin.admin_detail', user_id=track.user_id, section='seat_tracks') }}">{{ track.user_id }}</a></td>
-                                        <td data-label="Enabled">{{ "Yes" if track.enabled else "No" }}</td>
+                                        <td data-label="Tracking">{{ track.tracking_state | title }}</td>
                                         <td data-label="Last Status">{{ track.last_status or "--" }}</td>
                                         <td data-label="Seats">{{ track.last_seats_available if track.last_seats_available is not none else "--" }}</td>
                                         <td data-label="Last Notified"><span data-admin-timestamp="{{ track.last_notified_at or '' }}">{{ track.last_notified_at or "--" }}</span></td>
                                         <td data-label="Actions">
-                                            <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}">
+                                            <button class="admin-button admin-button--ghost" type="button" data-track-toggle="{{ 'false' if track.enabled else 'true' }}" {% if not track.enabled and not group.can_enable %}disabled{% endif %}>
                                                 {{ "Pause" if track.enabled else "Resume" }}
                                             </button>
                                         </td>

@@ -9,6 +9,12 @@ from services import course_tracking
 
 
 class CourseTrackingTests(unittest.TestCase):
+    def setUp(self):
+        # These legacy delivery tests exercise an explicitly open term.
+        gate = patch.object(course_tracking, "term_is_polling", return_value=True)
+        gate.start()
+        self.addCleanup(gate.stop)
+
     def _track(self, row_id, user_id, section_id="Fall_2026-CS-170-1234-1"):
         return {
             "$id": row_id,
@@ -47,7 +53,7 @@ class CourseTrackingTests(unittest.TestCase):
             "seats_available": 0,
         }
 
-    def test_no_enabled_tracks_skips_atlas_ping(self):
+    def test_no_enabled_tracks_skips_atlas_ping_and_discord_notification(self):
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=[]), \
                 patch.object(course_tracking, "fetch_live_section_status") as fetch_status, \
@@ -57,11 +63,13 @@ class CourseTrackingTests(unittest.TestCase):
 
         self.assertEqual(notified, 0)
         fetch_status.assert_not_called()
-        emit_event.assert_called_once()
-        self.assertEqual(emit_event.call_args.args[0], "Automated Course Track Poll Skipped")
-        metadata = emit_event.call_args.kwargs["metadata"]
+        emit_event.assert_not_called()
+        metadata = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(metadata["event_title"], "Automated Course Track Poll Skipped")
         self.assertEqual(metadata["reason"], "no_enabled_tracks")
+        self.assertEqual(metadata["enabled_track_count"], 0)
         self.assertEqual(metadata["track_count"], 0)
+        self.assertFalse(metadata["discord_emit_returned"])
         update_topic.assert_called_once_with(0)
 
     def test_missing_collection_mapping_emits_skipped_poll_log(self):
@@ -420,6 +428,11 @@ class CourseTrackingTests(unittest.TestCase):
 
 
 class CourseTrackingEmailTests(unittest.TestCase):
+    def setUp(self):
+        gate = patch.object(course_tracking, "term_is_polling", return_value=True)
+        gate.start()
+        self.addCleanup(gate.stop)
+
     def _track(self, row_id, user_id):
         return {
             "$id": row_id, "user_id": user_id, "section_id": "Fall_2026-CS-170-1234-1",
@@ -567,19 +580,24 @@ class CourseTrackingEmailTests(unittest.TestCase):
         self.assertTrue(updates["cooldown_until_closed"])
         self.assertEqual(updates["next_check_at"], "2026-05-29T03:00:00Z")
 
-    def test_future_tracker_is_not_polled(self):
+    def test_future_tracker_is_not_polled_and_sends_no_discord_notification(self):
         track = {**self._track("track-1", "user-1"), "next_check_at": "2026-05-29T00:15:00Z"}
         with patch.dict(course_tracking.COLLECTIONS, {"course_seat_tracks": "tracks"}, clear=False), \
                 patch.object(course_tracking, "list_rows_all", return_value=[track]), \
                 patch.object(course_tracking, "fetch_live_section_status") as fetch_status, \
-                patch.object(course_tracking, "emit_course_track_event"), \
+                patch.object(course_tracking, "emit_course_track_event") as emit_event, \
                 patch.object(course_tracking, "update_course_tracks_channel_topic"), \
                 patch.object(course_tracking, "_now_utc", return_value=datetime(2026, 5, 29, tzinfo=timezone.utc)):
             notified = course_tracking.check_course_seat_tracks()
 
         self.assertEqual(notified, 0)
         fetch_status.assert_not_called()
-        self.assertEqual(course_tracking.get_last_course_tracking_poll()["reason"], "no_due_tracks")
+        emit_event.assert_not_called()
+        metadata = course_tracking.get_last_course_tracking_poll()
+        self.assertEqual(metadata["reason"], "no_due_tracks")
+        self.assertEqual(metadata["enabled_track_count"], 1)
+        self.assertEqual(metadata["track_count"], 0)
+        self.assertFalse(metadata["discord_emit_returned"])
 
     def test_cooldown_restores_preferred_interval_after_availability_closes(self):
         track = {**self._track("track-1", "user-1"), "cooldown_until_closed": True, "interval_minutes": 15}
