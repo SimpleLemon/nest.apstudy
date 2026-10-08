@@ -1,12 +1,24 @@
 import { buildSectionSearchBlob } from './utils.js';
 
+const TERM_SEASONS = { Spring: 1, Summer: 2, Fall: 3, Winter: 4 };
+
+function compareTerms(a, b) {
+  const [seasonA, yearA] = a.split('_');
+  const [seasonB, yearB] = b.split('_');
+  return Number(yearA) - Number(yearB)
+    || (TERM_SEASONS[seasonA] || 0) - (TERM_SEASONS[seasonB] || 0)
+    || a.localeCompare(b);
+}
+
 function createCourseData({
   state, fetchJson, render, renderCourses, renderCalendarHeader,
   scheduleVisibleLiveHydration, verifyCurrentAvailability, timeInputToAtlasToken,
 }) {
   async function loadTerms() {
     const payload = await fetchJson("/api/atlas/terms");
-    state.terms = Array.isArray(payload.terms) ? payload.terms : [];
+    state.terms = [...new Set(Array.isArray(payload.terms) ? payload.terms : [])]
+      .filter((term) => typeof term === 'string' && term)
+      .sort(compareTerms);
     state.termMetadata = payload.term_metadata || {};
     if (!state.terms.length) {
       throw new Error("No Emory Atlas terms are available.");

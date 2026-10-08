@@ -151,13 +151,9 @@ function createCourseCalendar({
   function computeCalendarCredits() {
     let total = 0;
     for (const course of state.savedCoursesBySection.values()) {
+      if (course.term !== state.selectedTerm) continue;
       const c = Number(course?.credit_hours ?? course?.credits ?? 0);
-      if (!Number.isNaN(c)) total += c;
-    }
-    if (state.hoveredSectionId && !state.savedCoursesBySection.has(state.hoveredSectionId)) {
-      const s = getSection(state.hoveredSectionId);
-      const c = Number(s?.credit_hours ?? s?.credits ?? 0);
-      if (!Number.isNaN(c)) total += c;
+      if (Number.isFinite(c)) total += c;
     }
     return Math.round(total * 100) / 100;
   }
@@ -234,7 +230,7 @@ function createCourseCalendar({
   }
 
   function meetingEventsForSection(section, preview, savedCourseId) {
-    if (!section) return [];
+    if (!section || section.term !== state.selectedTerm) return [];
     return (section.meetings || [])
       .filter((meeting) => COURSE_DAYS.some((day) => day.key === meeting.day))
       .map((meeting) => {

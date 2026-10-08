@@ -85,6 +85,7 @@ function createCourseControls({
 
     document.getElementById("courses-term-select")?.addEventListener("change", (event) => {
       state.selectedTerm = event.target.value || "";
+      state.hoveredSectionId = null;
       clearDetailReturnContext();
       state.detailSectionId = null;
       state.editingSectionId = null;

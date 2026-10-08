@@ -312,6 +312,7 @@ function changeTermBy(delta) {
   const nextIndex = currentIndex + delta;
   if (nextIndex < 0 || nextIndex >= state.terms.length) return;
   state.selectedTerm = state.terms[nextIndex];
+  state.hoveredSectionId = null;
   clearDetailReturnContext();
   state.detailSectionId = null;
   state.editingSectionId = null;

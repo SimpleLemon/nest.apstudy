@@ -57,7 +57,7 @@ async function mount() {
   const sectionsRequest = deferred();
   let delaySections = false;
   window.APStudyHttp = { fetchJson: async url => {
-    if (url === '/api/atlas/terms') return { terms: ['Fall_2026', 'Spring_2027'], default_term: 'Fall_2026' };
+    if (url === '/api/atlas/terms') return { terms: ['Spring_2027', 'Fall_2026', 'Spring_2026'], default_term: 'Fall_2026' };
     if (url === '/api/courses/saved') return { courses: [{ ...section, id: 'saved-course', color_key: 'course-color-01' }] };
     if (url === '/api/courses/tracks') return { tracks: [] };
     if (url.startsWith('/api/atlas/sections?')) {
@@ -129,5 +129,28 @@ test('changing terms updates the schedule immediately and fills in its dates aft
     await settle();
     assert.match(view.document.getElementById('courses-term-dates').textContent, /Jan 11, 2027/);
     assert.equal(view.document.getElementById('courses-prev-term').disabled, false);
+  } finally { view.window.close(); }
+});
+
+test('the right arrow moves from Fall 2026 to Spring 2027 and the left arrow returns to Fall', async () => {
+  const view = await mount();
+  try {
+    const title = () => textContent(view.document.getElementById('courses-week-title'));
+    assert.match(title(), /Fall 2026.*3 credits/);
+    const options = view.document.getElementById('courses-term-select').innerHTML;
+    assert.ok(options.indexOf('Spring_2026') < options.indexOf('Fall_2026'));
+    assert.ok(options.indexOf('Fall_2026') < options.indexOf('Spring_2027'));
+    view.document.getElementById('courses-next-term').dispatchEvent(new view.window.Event('click', { bubbles: true }));
+    await settle();
+    assert.match(title(), /Spring 2027.*0 credits/);
+    assert.equal(view.document.getElementById('courses-next-term').disabled, true);
+    view.document.getElementById('courses-prev-term').dispatchEvent(new view.window.Event('click', { bubbles: true }));
+    await settle();
+    assert.match(title(), /Fall 2026.*3 credits/);
+    assert.equal(view.document.getElementById('courses-prev-term').disabled, false);
+    view.document.getElementById('courses-prev-term').dispatchEvent(new view.window.Event('click', { bubbles: true }));
+    await settle();
+    assert.match(title(), /Spring 2026.*0 credits/);
+    assert.equal(view.document.getElementById('courses-prev-term').disabled, true);
   } finally { view.window.close(); }
 });
