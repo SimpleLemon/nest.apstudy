@@ -1,60 +1,15 @@
+import featureModules from './helpers/feature-modules.cjs';
+const { loadFeatureModule } = featureModules;
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import test from "node:test";
-import vm from "node:vm";
-import { fileURLToPath } from "node:url";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const plain = (value) => JSON.parse(JSON.stringify(value));
-const dashboardBundle = (await Promise.all([
-    "static/js/dashboard/utils.js",
-    "static/js/dashboard/renderers.js",
-    "static/js/dashboard/index.js",
-].map((relativePath) => readFile(path.join(repoRoot, relativePath), "utf8")))).join("\n");
-
-function loadDashboardUtils(source) {
-    const document = {
-        getElementById() {
-            return null;
-        },
-        addEventListener() {},
-        createElement() {
-            return {
-                textContent: "",
-                get innerHTML() {
-                    return String(this.textContent)
-                        .replace(/&/g, "&amp;")
-                        .replace(/</g, "&lt;")
-                        .replace(/>/g, "&gt;");
-                },
-            };
-        },
-        body: {
-            appendChild() {},
-        },
-        querySelector() {
-            return null;
-        },
-    };
-    const context = {
-        document,
-        window: {
-            APStudyUIPrimitives: { escapeHtml: String },
-            setTimeout() {},
-        },
-        Date,
-        fetch() {
-            throw new Error("fetch should not run while loading utils");
-        },
-    };
-    context.window.document = document;
-    vm.runInNewContext(source, context);
-    return context.window.APStudyDashboardUtils;
+function loadDashboardUtils() {
+    return loadFeatureModule('dashboard/utils.js');
 }
 
 test("dashboard utilities group events and format bytes", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     const grouped = utils.groupEventsByDate([
         { title: "A", date: "2026-05-01" },
@@ -68,7 +23,7 @@ test("dashboard utilities group events and format bytes", async () => {
 });
 
 test("dashboard utility applies saved tile order while appending missing tiles", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     assert.deepEqual(
         Array.from(utils.normalizeTileOrder(["messages", "calendar", "messages"], ["calendar", "tasks", "messages"])),
@@ -77,7 +32,7 @@ test("dashboard utility applies saved tile order while appending missing tiles",
 });
 
 test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     const legacy = plain(utils.normalizeTileLayout(["messages", "calendar"], ["calendar", "tasks", "messages"]));
     assert.deepEqual(legacy.map(({ type, size }) => ({ type, size })), [
@@ -109,7 +64,7 @@ test("dashboard utility normalizes v1 and v2 tile layouts", async () => {
 });
 
 test("dashboard utility applies new size and calendar view rules", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     assert.equal(utils.normalizeTileSize("calendar", "medium"), "standard");
     assert.equal(utils.normalizeTileSize("tasks", "large"), "wide");
@@ -123,7 +78,7 @@ test("dashboard utility applies new size and calendar view rules", async () => {
 });
 
 test("dashboard calendar helpers label views and derive event dates", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     assert.equal(utils.tileTitle("calendar", "month"), "Calendar: Month");
     assert.equal(utils.tileTitle("calendar", "week"), "Calendar: Week");
@@ -135,7 +90,7 @@ test("dashboard calendar helpers label views and derive event dates", async () =
 });
 
 test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
 
     const summaryLayout = utils.summaryLayoutSource({
         tile_layout_version: 3,
@@ -150,7 +105,7 @@ test("dashboard summary tile layout arrays preserve v3 hidden tiles", async () =
 });
 
 test("dashboard v4 layouts preserve duplicate instances and per-tile settings", async () => {
-    const utils = loadDashboardUtils(dashboardBundle);
+    const utils = loadDashboardUtils();
     const layout = utils.normalizeDashboardLayout({
         version: 4,
         daily_quote_visible: false,

@@ -24,34 +24,87 @@ from services.environment_config import runtime_environment_config
 from services.atlas_client import DEFAULT_TERM, get_atlas_term_srcdb, get_general_ed_composite_requirements, get_general_ed_requirement_aliases, get_starred_general_ed_requirements
 from services.daily_quote import get_daily_quote_payload
 from services.calendar_store import first_calendar_row, list_calendar_rows_all
-from services.calendar_assets import calendar_asset_version
+from services.calendar_assets import calendar_asset_version as _calendar_asset_version
+from services.calendar_feed_sources import (
+    _configured_feed_urls,
+    _load_calendar_feed_metadata,
+    _filter_configured_cache_events,
+)
+from services.calendar_sources import (
+    _load_local_calendar_sources,
+    _load_calendar_preferences,
+    _configured_calendar_sources,
+    _load_event_overrides,
+)
+from services.calendar_serialization import (
+    _serialize_event,
+    _serialize_user_event,
+    _api_event_overlaps_range,
+    _apply_event_override,
+)
+from services.canvas_routing import (
+    _project_canvas_calendar_events as _project_canvas_events,
+)
+from services.calendar_shares import (
+    _public_calendar_share_context,
+)
 from services.dashboard_summary import (
     DASHBOARD_CALENDAR_UPCOMING_LIMIT,
     DASHBOARD_LIST_LIMIT,
     DASHBOARD_TASK_FILTER_SOURCE_LIMIT,
     DASHBOARD_TASK_LIMIT,
     DASHBOARD_TASK_PRIORITY_RANK,
-    as_utc as dashboard_as_utc,
     can_access_channel,
-    dashboard_task_bucket,
-    date_key as dashboard_date_key,
+    date_key as _date_key,
     load_courses_summary,
     load_calendar_summary,
     load_message_rooms,
     load_recent_files,
     load_recent_notes,
     load_tasks_summary,
-    save_dashboard_layout,
-    sort_key as dashboard_sort_key,
+    sort_key as _sort_key,
     task_is_complete,
     task_list_payload,
     task_payload,
     task_priority_rank,
 )
+from services.dashboard_layout import (
+    DASHBOARD_TILE_IDS,
+    DEFAULT_DASHBOARD_TILE_ORDER,
+    DASHBOARD_DEFAULT_TILE_SIZES,
+    DASHBOARD_ALLOWED_TILE_SIZES,
+    DASHBOARD_LAYOUT_VERSION,
+    DASHBOARD_CALENDAR_VIEWS,
+    DASHBOARD_DEFAULT_CALENDAR_VIEW,
+    DASHBOARD_TILE_LIMIT,
+    DASHBOARD_DUPLICATE_TILE_LIMIT,
+    DASHBOARD_DUPLICATE_TILE_TYPES,
+    DASHBOARD_ITEM_LIMITS,
+    DASHBOARD_DENSITIES,
+    DASHBOARD_CALENDAR_UPCOMING_DAYS,
+    DASHBOARD_TASK_DEADLINE_DAYS,
+    DASHBOARD_TASK_PRIORITIES,
+    DASHBOARD_TITLE_MAX_LENGTH,
+    _default_tile_size,
+    _layout_version,
+    _normalize_tile_size,
+    _normalize_calendar_view,
+    _normalize_task_list_ids,
+    _legacy_instance_id,
+    _normalized_choice,
+    _normalized_item_limit,
+    _layout_tile_payload,
+    _coerce_layout,
+    _coerce_layout_order,
+    _ordered_tile_layout,
+    _validated_tile_size,
+    _validated_calendar_view,
+    save_dashboard_layout,
+)
 from services.dashboard_context import (
     is_emory_or_oxford_user,
     load_user_settings,
-    theme_from_settings,
+    theme_from_settings as _theme_from_settings,
     user_payload,
 )
 from services.row_utils import row_id as _row_id
@@ -60,41 +113,6 @@ from services import note_store
 
 dashboard_bp = Blueprint("dashboard", __name__)
 logger = logging.getLogger(__name__)
-
-DASHBOARD_TILE_IDS = ("calendar", "tasks", "files", "notes", "messages", "courses")
-DEFAULT_DASHBOARD_TILE_ORDER = ("calendar", "tasks", "files", "notes", "messages", "courses")
-DASHBOARD_DEFAULT_TILE_SIZES = {
-    "calendar": "standard",
-    "tasks": "standard",
-    "files": "standard",
-    "notes": "standard",
-    "messages": "standard",
-    "courses": "wide",
-}
-DASHBOARD_ALLOWED_TILE_SIZES = {
-    "calendar": ("standard", "tall", "wide"),
-    "tasks": ("standard", "tall", "wide"),
-    "files": ("standard", "tall", "wide"),
-    "notes": ("standard", "tall", "wide"),
-    "messages": ("standard", "tall", "wide"),
-    "courses": ("standard", "wide"),
-}
-DASHBOARD_LAYOUT_VERSION = 4
-DASHBOARD_CALENDAR_VIEWS = ("month", "week", "upcoming")
-DASHBOARD_DEFAULT_CALENDAR_VIEW = "month"
-DASHBOARD_TILE_LIMIT = 12
-DASHBOARD_DUPLICATE_TILE_LIMIT = 4
-DASHBOARD_DUPLICATE_TILE_TYPES = {"calendar", "tasks"}
-DASHBOARD_ITEM_LIMITS = (3, 5, 8)
-DASHBOARD_DENSITIES = ("compact", "comfortable")
-DASHBOARD_CALENDAR_UPCOMING_DAYS = (7, 14, 30)
-DASHBOARD_TASK_DEADLINE_DAYS = (7, 30)
-DASHBOARD_TASK_PRIORITIES = ("high", "medium", "low", "none")
-DASHBOARD_TITLE_MAX_LENGTH = 60
-
-
-def _calendar_asset_version():
-    return calendar_asset_version()
 
 
 def _is_emory_or_oxford_user():
@@ -169,85 +187,13 @@ def _ensure_user_settings(user_id):
     if settings:
         return settings
 
-    from blueprints.settings import _settings_defaults
+    from services.settings_defaults import settings_defaults as _settings_defaults
 
     return create_row_safe(
         COLLECTIONS["user_settings"],
         row_id=str(user_id),
         data={**_settings_defaults(str(user_id)), "updated_at": format_datetime(datetime.now(timezone.utc))},
     )
-
-
-def _configured_feed_urls(settings):
-    from services.calendar_events import _configured_feed_urls as service_fn
-
-    return service_fn(settings)
-
-
-def _load_calendar_feed_metadata(user_id, list_rows_fn=None):
-    from services.calendar_events import _load_calendar_feed_metadata as service_fn
-
-    return service_fn(user_id, list_rows_fn)
-
-
-def _load_local_calendar_sources(user_id, list_rows_fn=None):
-    from services.calendar_events import _load_local_calendar_sources as service_fn
-
-    return service_fn(user_id, list_rows_fn)
-
-
-def _load_calendar_preferences(user_id, list_rows_fn=None):
-    from services.calendar_events import _load_calendar_preferences as service_fn
-
-    return service_fn(user_id, list_rows_fn)
-
-
-def _configured_calendar_sources(*args, **kwargs):
-    from services.calendar_events import _configured_calendar_sources as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _filter_configured_cache_events(*args, **kwargs):
-    from services.calendar_events import _filter_configured_cache_events as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _serialize_event(*args, **kwargs):
-    from services.calendar_events import _serialize_event as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _serialize_user_event(*args, **kwargs):
-    from services.calendar_events import _serialize_user_event as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _load_event_overrides(user_id, list_rows_fn=None):
-    from services.calendar_events import _load_event_overrides as service_fn
-
-    return service_fn(user_id, list_rows_fn)
-
-
-def _project_canvas_events(*args, **kwargs):
-    from services.calendar_events import _project_canvas_calendar_events as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _api_event_overlaps_range(*args, **kwargs):
-    from services.calendar_events import _api_event_overlaps_range as service_fn
-
-    return service_fn(*args, **kwargs)
-
-
-def _apply_event_override(*args, **kwargs):
-    from services.calendar_events import _apply_event_override as service_fn
-
-    return service_fn(*args, **kwargs)
 
 
 def _task_calendar_events_for_user(user_id, range_start=None, range_end=None):
@@ -261,10 +207,6 @@ def _task_calendar_events_for_user(user_id, range_start=None, range_end=None):
     )
 
 
-def _theme_from_settings(user_settings):
-    return theme_from_settings(user_settings)
-
-
 def _resolve_calendar_share_by_code(share_code, active_only=True):
     from services.calendar_events import (
         _resolve_calendar_share_by_code as resolve_calendar_share_by_code,
@@ -275,259 +217,6 @@ def _resolve_calendar_share_by_code(share_code, active_only=True):
         active_only,
         first_calendar_row_fn=first_calendar_row,
     )
-
-
-def _public_calendar_share_context(share):
-    from services.calendar_events import (
-        _public_calendar_share_context as public_calendar_share_context,
-    )
-
-    return public_calendar_share_context(share)
-
-
-def _as_utc(value):
-    return dashboard_as_utc(value)
-
-
-def _date_key(value):
-    return dashboard_date_key(value)
-
-
-def _sort_key(value):
-    return dashboard_sort_key(value)
-
-
-def _default_tile_size(tile_id):
-    return DASHBOARD_DEFAULT_TILE_SIZES.get(tile_id, "standard")
-
-
-def _layout_version(parsed):
-    if isinstance(parsed, dict):
-        try:
-            return int(parsed.get("version") or 2)
-        except (TypeError, ValueError):
-            return 2
-    if isinstance(parsed, list):
-        return 1
-    return 2
-
-
-def _normalize_tile_size(tile_id, size):
-    normalized = str(size or "").strip().lower()
-    if normalized in {"compact", "medium"}:
-        normalized = "standard"
-    elif normalized == "large":
-        normalized = "wide"
-    if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
-        return _default_tile_size(tile_id)
-    return normalized
-
-
-def _normalize_calendar_view(view):
-    normalized = str(view or DASHBOARD_DEFAULT_CALENDAR_VIEW).strip().lower()
-    return normalized if normalized in DASHBOARD_CALENDAR_VIEWS else DASHBOARD_DEFAULT_CALENDAR_VIEW
-
-
-def _normalize_task_list_ids(raw_list_ids, available_list_ids=None):
-    if not isinstance(raw_list_ids, list):
-        return []
-    available = set(str(item) for item in available_list_ids) if available_list_ids is not None else None
-    normalized = []
-    for item in raw_list_ids:
-        list_id = str(item or "").strip()
-        if not list_id or list_id in normalized:
-            continue
-        if available is not None and list_id not in available:
-            continue
-        normalized.append(list_id)
-    return normalized
-
-
-def _legacy_instance_id(tile_id):
-    return f"legacy-{tile_id}"
-
-
-def _normalized_choice(value, allowed, default):
-    normalized = str(value or default).strip().lower()
-    return normalized if normalized in allowed else default
-
-
-def _normalized_item_limit(value):
-    try:
-        normalized = int(value)
-    except (TypeError, ValueError):
-        normalized = 5
-    return normalized if normalized in DASHBOARD_ITEM_LIMITS else 5
-
-
-def _layout_tile_payload(
-    tile_id,
-    size=None,
-    view=None,
-    task_list_ids=None,
-    *,
-    instance_id=None,
-    title=None,
-    density=None,
-    item_limit=None,
-    upcoming_days=None,
-    deadline_days=None,
-    include_overdue=None,
-    include_undated=None,
-    priorities=None,
-    starred_only=None,
-):
-    payload = {
-        "instance_id": str(instance_id or _legacy_instance_id(tile_id)).strip(),
-        "type": tile_id,
-        "size": _normalize_tile_size(tile_id, size),
-        "density": _normalized_choice(density, DASHBOARD_DENSITIES, "comfortable"),
-        "item_limit": _normalized_item_limit(item_limit),
-    }
-    normalized_title = str(title or "").strip()[:DASHBOARD_TITLE_MAX_LENGTH]
-    if normalized_title:
-        payload["title"] = normalized_title
-    if tile_id == "calendar":
-        payload["view"] = _normalize_calendar_view(view)
-        payload["upcoming_days"] = int(upcoming_days) if upcoming_days in DASHBOARD_CALENDAR_UPCOMING_DAYS else 7
-    if tile_id == "tasks":
-        list_ids = _normalize_task_list_ids(task_list_ids)
-        if list_ids:
-            payload["task_list_ids"] = list_ids
-        payload["deadline_days"] = int(deadline_days) if deadline_days in DASHBOARD_TASK_DEADLINE_DAYS else 30
-        payload["include_overdue"] = True if include_overdue is None else bool(include_overdue)
-        payload["include_undated"] = True if include_undated is None else bool(include_undated)
-        normalized_priorities = [
-            priority for priority in DASHBOARD_TASK_PRIORITIES
-            if priority in {str(item or "").strip().lower() for item in (priorities or DASHBOARD_TASK_PRIORITIES)}
-        ]
-        payload["priorities"] = normalized_priorities or list(DASHBOARD_TASK_PRIORITIES)
-        payload["starred_only"] = bool(starred_only)
-    return payload
-
-
-def _coerce_layout(raw_value):
-    if isinstance(raw_value, (dict, list)):
-        parsed = raw_value
-    else:
-        try:
-            parsed = json.loads(raw_value or "[]")
-        except (TypeError, ValueError):
-            parsed = {}
-
-    version = _layout_version(parsed)
-    source_tiles = []
-    if isinstance(parsed, dict):
-        source_tiles = parsed.get("tiles") if isinstance(parsed.get("tiles"), list) else []
-    elif isinstance(parsed, list):
-        source_tiles = parsed
-
-    tiles = []
-    seen_instances = set()
-    seen_legacy_types = set()
-    for item in source_tiles:
-        if isinstance(item, dict):
-            tile_id = str(item.get("type") or item.get("id") or "").strip()
-            instance_id = str(item.get("instance_id") or (item.get("id") if item.get("type") else "") or _legacy_instance_id(tile_id)).strip()
-            size = item.get("size")
-            view = item.get("view")
-            task_list_ids = item.get("task_list_ids")
-        else:
-            tile_id = str(item or "").strip()
-            instance_id = _legacy_instance_id(tile_id)
-            size = None
-            view = None
-            task_list_ids = None
-        if tile_id not in DASHBOARD_TILE_IDS or instance_id in seen_instances:
-            continue
-        if version < DASHBOARD_LAYOUT_VERSION and tile_id in seen_legacy_types:
-            continue
-        tiles.append(_layout_tile_payload(
-            tile_id,
-            size,
-            view,
-            task_list_ids,
-            instance_id=instance_id,
-            title=item.get("title") if isinstance(item, dict) else None,
-            density=item.get("density") if isinstance(item, dict) else None,
-            item_limit=item.get("item_limit") if isinstance(item, dict) else None,
-            upcoming_days=item.get("upcoming_days") if isinstance(item, dict) else None,
-            deadline_days=item.get("deadline_days") if isinstance(item, dict) else None,
-            include_overdue=item.get("include_overdue") if isinstance(item, dict) else None,
-            include_undated=item.get("include_undated") if isinstance(item, dict) else None,
-            priorities=item.get("priorities") if isinstance(item, dict) else None,
-            starred_only=item.get("starred_only") if isinstance(item, dict) else None,
-        ))
-        seen_instances.add(instance_id)
-        seen_legacy_types.add(tile_id)
-    quote_visible = parsed.get("daily_quote_visible") if isinstance(parsed, dict) else None
-    return {"version": version, "daily_quote_visible": quote_visible if isinstance(quote_visible, bool) else None, "tiles": tiles}
-
-
-def _coerce_layout_order(raw_value):
-    return [tile["type"] for tile in _coerce_layout(raw_value)["tiles"]]
-
-
-def _ordered_tile_layout(saved_layout, available_tile_ids):
-    available = [tile_id for tile_id in available_tile_ids if tile_id in DASHBOARD_TILE_IDS]
-    version = int(saved_layout.get("version") or 2) if isinstance(saved_layout, dict) else 2
-    saved_tiles = saved_layout.get("tiles") if isinstance(saved_layout, dict) else []
-    ordered = []
-    seen = set()
-    for item in saved_tiles:
-        tile_id = str(item.get("type") or item.get("id") or "").strip() if isinstance(item, dict) else ""
-        instance_id = str(item.get("instance_id") or _legacy_instance_id(tile_id)).strip() if isinstance(item, dict) else ""
-        if tile_id not in available or instance_id in seen:
-            continue
-        ordered.append(_layout_tile_payload(
-            tile_id,
-            item.get("size"),
-            item.get("view"),
-            item.get("task_list_ids"),
-            instance_id=instance_id,
-            title=item.get("title"),
-            density=item.get("density"),
-            item_limit=item.get("item_limit"),
-            upcoming_days=item.get("upcoming_days"),
-            deadline_days=item.get("deadline_days"),
-            include_overdue=item.get("include_overdue"),
-            include_undated=item.get("include_undated"),
-            priorities=item.get("priorities"),
-            starred_only=item.get("starred_only"),
-        ))
-        seen.add(instance_id)
-    if version >= 3:
-        return ordered
-    seen_types = {tile["type"] for tile in ordered}
-    for tile_id in DEFAULT_DASHBOARD_TILE_ORDER:
-        if tile_id in available and tile_id not in seen_types:
-            ordered.append(_layout_tile_payload(tile_id))
-            seen_types.add(tile_id)
-    for tile_id in available:
-        if tile_id not in seen_types:
-            ordered.append(_layout_tile_payload(tile_id))
-            seen_types.add(tile_id)
-    return ordered
-
-
-def _validated_tile_size(tile_id, raw_size):
-    if raw_size is None or str(raw_size).strip() == "":
-        return _default_tile_size(tile_id)
-    normalized = str(raw_size).strip().lower()
-    if normalized in {"compact", "medium"}:
-        normalized = "standard"
-    elif normalized == "large":
-        normalized = "wide"
-    if normalized not in DASHBOARD_ALLOWED_TILE_SIZES.get(tile_id, ()):
-        return None
-    return normalized
-
-
-def _validated_calendar_view(raw_view):
-    if raw_view is None or str(raw_view).strip() == "":
-        return DASHBOARD_DEFAULT_CALENDAR_VIEW
-    normalized = str(raw_view).strip().lower()
-    return normalized if normalized in DASHBOARD_CALENDAR_VIEWS else None
 
 
 def _checklist_signature(items):
@@ -589,7 +278,13 @@ def _load_calendar_summary(user_id, user_settings):
     return load_calendar_summary(
         user_id,
         user_settings,
-        _dashboard_summary_dependencies(),
+        list_calendar_rows_all=list_calendar_rows_all,
+        load_calendar_feed_metadata=_load_calendar_feed_metadata,
+        load_calendar_preferences=_load_calendar_preferences,
+        load_event_overrides=_load_event_overrides,
+        load_local_calendar_sources=_load_local_calendar_sources,
+        logger=logger,
+        task_calendar_events_for_user=_task_calendar_events_for_user,
     )
 
 
@@ -598,85 +293,44 @@ def _task_is_complete(task):
 
 
 def _task_payload(row, now):
-    return task_payload(row, now, {
-        "as_utc": _as_utc,
-        "format_datetime": format_datetime,
-        "row_id": _row_id,
-        "task_is_complete": _task_is_complete,
-    })
+    return task_payload(row, now)
 
 
 def _task_list_payload(row):
-    return task_list_payload(row, {"row_id": _row_id})
+    return task_list_payload(row)
 
 
 def _task_priority_rank(row):
     return task_priority_rank(row)
 
 
-def _dashboard_task_bucket(row, now, seven_day_end, thirty_day_end):
-    return dashboard_task_bucket(
-        row,
-        now,
-        seven_day_end,
-        thirty_day_end,
-        _as_utc,
-    )
-
-
-def _dashboard_summary_dependencies():
-    return {
-        "as_utc": _as_utc,
-        "can_access_channel": _dashboard_can_access_channel,
-        "configured_calendar_sources": _configured_calendar_sources,
-        "configured_feed_urls": _configured_feed_urls,
-        "dashboard_task_bucket": _dashboard_task_bucket,
-        "date_key": _date_key,
-        "filter_configured_cache_events": _filter_configured_cache_events,
-        "format_datetime": format_datetime,
-        "api_event_overlaps_range": _api_event_overlaps_range,
-        "load_calendar_feed_metadata": _load_calendar_feed_metadata,
-        "load_calendar_preferences": _load_calendar_preferences,
-        "load_local_calendar_sources": _load_local_calendar_sources,
-        "load_event_overrides": _load_event_overrides,
-        "list_calendar_rows_all": list_calendar_rows_all,
-        "list_rows_all": list_rows_all,
-        "list_rows_safe": list_rows_safe,
-        "logger": logger,
-        "normalize_task_list_ids": _normalize_task_list_ids,
-        "row_id": _row_id,
-        "sort_key": _sort_key,
-        "apply_event_override": _apply_event_override,
-        "project_canvas_events": _project_canvas_events,
-        "serialize_event": _serialize_event,
-        "serialize_user_event": _serialize_user_event,
-        "task_calendar_events_for_user": _task_calendar_events_for_user,
-        "task_is_complete": _task_is_complete,
-        "task_list_payload": _task_list_payload,
-        "task_payload": _task_payload,
-        "task_priority_rank": _task_priority_rank,
-        "url_for": url_for,
-    }
-
-
 def _load_tasks_summary(user_id, selected_list_ids=None):
     return load_tasks_summary(
         user_id,
         selected_list_ids,
-        _dashboard_summary_dependencies(),
+        list_rows_all=list_rows_all,
+        logger=logger,
     )
 
 
 def _load_recent_files(user_id):
-    return load_recent_files(user_id, _dashboard_summary_dependencies())
+    return load_recent_files(user_id, list_rows_all=list_rows_all,
+        logger=logger,
+        url_for=url_for)
 
 
 def _load_recent_notes(user_id):
-    return load_recent_notes(user_id, _dashboard_summary_dependencies())
+    return load_recent_notes(user_id, list_rows_all=list_rows_all,
+        logger=logger,
+        url_for=url_for)
 
 
 def _load_message_rooms(user_id):
-    return load_message_rooms(user_id, _dashboard_summary_dependencies())
+    return load_message_rooms(user_id, can_access_channel=_dashboard_can_access_channel,
+        list_rows_all=list_rows_all,
+        list_rows_safe=list_rows_safe,
+        logger=logger,
+        url_for=url_for)
 
 
 def _dashboard_can_access_channel(channel):
@@ -687,7 +341,8 @@ def _load_courses_summary(user_id):
     return load_courses_summary(
         user_id,
         _is_emory_or_oxford_user(),
-        _dashboard_summary_dependencies(),
+        list_rows_all=list_rows_all,
+        logger=logger,
     )
 
 
@@ -825,46 +480,21 @@ def report_dashboard_quote_error():
     return jsonify({"status": "ok", "reason": metadata["reason"]})
 
 
-def _dashboard_layout_dependencies():
-    return {
-        "calendar_upcoming_days": DASHBOARD_CALENDAR_UPCOMING_DAYS,
-        "coerce_layout": _coerce_layout,
-        "densities": DASHBOARD_DENSITIES,
-        "duplicate_tile_limit": DASHBOARD_DUPLICATE_TILE_LIMIT,
-        "duplicate_tile_types": DASHBOARD_DUPLICATE_TILE_TYPES,
-        "ensure_user_settings": _ensure_user_settings,
-        "format_datetime": format_datetime,
-        "item_limits": DASHBOARD_ITEM_LIMITS,
-        "jsonify": jsonify,
-        "layout_version": _layout_version,
-        "layout_version_number": DASHBOARD_LAYOUT_VERSION,
-        "legacy_instance_id": _legacy_instance_id,
-        "list_rows_all": list_rows_all,
-        "logger": logger,
-        "normalize_task_list_ids": _normalize_task_list_ids,
-        "row_id": _row_id,
-        "settings_row_id": _settings_row_id,
-        "task_deadline_days": DASHBOARD_TASK_DEADLINE_DAYS,
-        "task_priorities": DASHBOARD_TASK_PRIORITIES,
-        "tile_ids": DASHBOARD_TILE_IDS,
-        "tile_limit": DASHBOARD_TILE_LIMIT,
-        "title_max_length": DASHBOARD_TITLE_MAX_LENGTH,
-        "update_row_safe": update_row_safe,
-        "validated_calendar_view": _validated_calendar_view,
-        "validated_tile_size": _validated_tile_size,
-    }
-
-
 @dashboard_bp.route("/api/dashboard/layout", methods=["PATCH"])
 @login_required
 def update_dashboard_layout():
     """Persist a validated v4 dashboard layout draft."""
-    payload = request.get_json(silent=True) or {}
-    return save_dashboard_layout(
-        current_user,
-        payload,
-        _dashboard_layout_dependencies(),
+    if not current_user.onboarding_complete:
+        return jsonify({"error": "Onboarding is required."}), 403
+    payload, status = save_dashboard_layout(
+        str(current_user.id),
+        request.get_json(silent=True) or {},
+        list_rows_all_fn=list_rows_all,
+        ensure_user_settings_fn=_ensure_user_settings,
+        update_row_fn=update_row_safe,
     )
+    response = jsonify(payload)
+    return response if status == 200 else (response, status)
 
 
 @dashboard_bp.route("/api/dashboard/checklist/hidden", methods=["POST"])

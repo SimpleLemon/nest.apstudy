@@ -12,23 +12,7 @@ from appwrite_helpers import first_row
 logger = logging.getLogger(__name__)
 
 
-def is_emory_or_oxford_user(user):
-    school = str(getattr(user, "school", "") or "").strip().lower()
-    school_key = str(getattr(user, "school_key", "") or "").strip().lower()
-    return bool(getattr(user, "emory_student", False)) or school in {
-        "emory",
-        "emory university",
-        "emory university-oxford",
-        "emory university oxford",
-        "oxford college",
-        "oxford college of emory university",
-    } or school_key in {
-        "emory",
-        "emory-university",
-        "emory-university-oxford",
-        "oxford-college",
-        "oxford-college-of-emory-university",
-    }
+from services.user_profile import is_emory_or_oxford_user
 
 
 def user_payload(user, *, emory_predicate=None):
