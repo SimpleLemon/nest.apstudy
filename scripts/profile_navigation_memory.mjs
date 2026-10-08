@@ -80,7 +80,7 @@ function rendererRssBytes(processInfo) {
       .map(Number)
       .filter(Number.isFinite)
       .reduce((sum, kilobytes) => sum + kilobytes * 1024, 0);
-  } catch (_error) {
+  } catch {
     return 0;
   }
 }
@@ -122,7 +122,7 @@ async function sampleMemory(page, pageClient, browserClient, cycle) {
     page.evaluate(() => {
       try {
         return JSON.parse(sessionStorage.getItem('apstudy-memory-lifecycle') || '[]');
-      } catch (_error) {
+      } catch {
         return [];
       }
     }),
@@ -177,7 +177,7 @@ async function main() {
         const events = JSON.parse(sessionStorage.getItem(key) || '[]');
         events.push({ type, persisted: Boolean(event.persisted), at: Date.now(), path: location.pathname });
         sessionStorage.setItem(key, JSON.stringify(events.slice(-200)));
-      } catch (_error) {
+      } catch {
         // Cross-origin login pages can deny storage access.
       }
     };

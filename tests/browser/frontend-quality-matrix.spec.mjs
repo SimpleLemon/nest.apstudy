@@ -53,25 +53,33 @@ test("landing calendar demo binds the shared escapeHtml primitive", async ({ pag
 });
 
 test("computed calendar event colors retain AA contrast in light and dark themes", async ({ page, baseURL }) => {
-  await page.setContent(`<!doctype html><html><body><div id="events"></div><script src="${baseURL}/static/js/core/ui-primitives.js"></script><script src="${baseURL}/static/js/calendar/utils.js"></script></body></html>`);
-  const results = await page.evaluate(() => {
+  const pageErrors = [];
+  page.on("pageerror", error => pageErrors.push(error.message));
+  await page.route("**/calendar-contrast-harness", route => route.fulfill({
+    contentType: "text/html",
+    body: `<!doctype html><html><body><div id="events"></div></body></html>`,
+  }));
+  await page.goto(`${baseURL}/calendar-contrast-harness`);
+  const results = await page.evaluate(async () => {
+    const { createAccessibleEventPalette, contrastRatio } = await import("/static/js/calendar/utils.js");
     const accents = ["#000000", "#ffffff", "#777777", "#ef4444", "rgb(18, 120, 210)"];
     const themes = [
       { surface: "#f0eeeb", onSurface: "#1f1f1e" },
       { surface: "#171719", onSurface: "#f5f5f4" },
     ];
     return themes.flatMap((theme) => accents.map((accent) => {
-      const palette = window.APStudyCalendarUtils.createAccessibleEventPalette(accent, theme.surface, theme.onSurface);
+      const palette = createAccessibleEventPalette(accent, theme.surface, theme.onSurface);
       const element = document.createElement("div");
       element.style.cssText = `background:${palette.background};color:${palette.text};border:1px solid ${palette.border}`;
       document.querySelector("#events").appendChild(element);
       const computed = getComputedStyle(element);
       return {
-        text: window.APStudyCalendarUtils.contrastRatio(computed.color, computed.backgroundColor),
-        border: window.APStudyCalendarUtils.contrastRatio(computed.borderTopColor, computed.backgroundColor),
+        text: contrastRatio(computed.color, computed.backgroundColor),
+        border: contrastRatio(computed.borderTopColor, computed.backgroundColor),
       };
     }));
   });
+  expect(pageErrors).toEqual([]);
   for (const result of results) {
     expect(result.text).toBeGreaterThanOrEqual(4.5);
     expect(result.border).toBeGreaterThanOrEqual(3);

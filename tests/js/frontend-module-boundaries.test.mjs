@@ -19,7 +19,7 @@ test("onboarding keeps executable behavior out of the server-rendered template",
 });
 
 test("chat runtime delegates cache, presentation, realtime, presence, message DOM, room, and composer responsibilities", async () => {
-  const [runtime, cache, presentation, realtime, presence, messagesDom, rooms, composer] = await Promise.all([
+  const [runtime, cache, presentation, realtime, presence, messagesDom, rooms, composer, profiles] = await Promise.all([
     read("static/js/chat/runtime.js"),
     read("static/js/chat/cache.js"),
     read("static/js/chat/presentation.js"),
@@ -28,9 +28,11 @@ test("chat runtime delegates cache, presentation, realtime, presence, message DO
     read("static/js/chat/messages-dom.js"),
     read("static/js/chat/rooms.js"),
     read("static/js/chat/composer.js"),
+    read("static/js/chat/profiles.js"),
   ]);
   assert.match(runtime, /from "\.\/cache\.js"/);
-  assert.match(runtime, /from "\.\/presentation\.js"/);
+  assert.match(runtime, /from "\.\/profiles\.js"/);
+  assert.match(profiles, /from "\.\/presentation\.js"/);
   assert.match(runtime, /from "\.\/realtime\.js"/);
   assert.match(runtime, /from "\.\/presence\.js"/);
   assert.match(runtime, /from "\.\/messages-dom\.js"/);
@@ -45,14 +47,16 @@ test("chat runtime delegates cache, presentation, realtime, presence, message DO
   assert.match(realtime, /function handleRealtimePayload/);
   assert.match(realtime, /function startRealtimeFallback/);
   assert.match(presence, /export function createChatPresence/);
-  assert.match(presence, /function renderPresenceDrivenUi/);
+  assert.match(runtime, /function renderPresenceDrivenUi/);
+  assert.doesNotMatch(presence, /rooms\.|profiles\./);
   assert.match(presence, /function scheduleTypingPresence/);
   assert.match(messagesDom, /export function createChatMessagesDom/);
   assert.match(messagesDom, /function syncMessagesToDom/);
   assert.match(messagesDom, /function renderLeadMessage/);
   assert.match(rooms, /export function createChatRooms/);
   assert.match(rooms, /async function selectRoom/);
-  assert.match(rooms, /function markRoomRead/);
+  assert.doesNotMatch(rooms, /function markRoomRead|\/api\/chat\/summary/);
+  assert.match(runtime, /from "\.\/read-state\.js"/);
   assert.match(composer, /export function createChatComposer/);
   assert.match(composer, /async function sendActiveMessage/);
   assert.match(composer, /async function retryMessage/);

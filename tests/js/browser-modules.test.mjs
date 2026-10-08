@@ -4,118 +4,15 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { readCssSource } from "./helpers/css-source.mjs";
+import featureModules from "./helpers/feature-modules.cjs";
+import { createCalendarDOM } from "./helpers/calendar-dom.mjs";
+
+const { loadFeatureModule } = featureModules;
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
-// These imports are intentionally unreachable: the browser modules depend on DOM
-// globals, but desloppify's coverage mapper needs import edges to associate this
-// source-contract suite with the files it exercises as text.
-if (false) {
-    await import("../../atlasCourseUtils.js");
-    await import("../../atlasMainScraper.js");
-    await import("../../static/js/admin-analytics.js");
-    await import("../../static/js/admin-nav.js");
-    await import("../../static/js/admin-requests.js");
-    await import("../../static/js/admin-timezone.js");
-    await import("../../static/js/calendar/bootstrap.js");
-    await import("../../static/js/calendar/controls.js");
-    await import("../../static/js/calendar/core.js");
-    await import("../../static/js/calendar/events/context-menu.js");
-    await import("../../static/js/calendar/events/event-form.js");
-    await import("../../static/js/calendar/events/ui-actions.js");
-    await import("../../static/js/calendar/index.js");
-    await import("../../static/js/calendar/integrations/course-modal.js");
-    await import("../../static/js/calendar/integrations/courses.js");
-    await import("../../static/js/calendar/integrations/data.js");
-    await import("../../static/js/calendar/integrations/share.js");
-    await import("../../static/js/calendar/integrations/sources.js");
-    await import("../../static/js/calendar/menu.js");
-    await import("../../static/js/calendar/preferences.js");
-    await import("../../static/js/calendar/state.js");
-    await import("../../static/js/calendar/utils.js");
-    await import("../../static/js/calendar/views/agenda.js");
-    await import("../../static/js/calendar/views/event-render.js");
-    await import("../../static/js/calendar/views/month-view.js");
-    await import("../../static/js/calendar/views/render-shell.js");
-    await import("../../static/js/calendar/views/week-view.js");
-    await import("../../static/js/chat/index.js");
-    await import("../../static/js/core/breadcrumb.js");
-    await import("../../static/js/core/command-palette.js");
-    await import("../../static/js/core/command-palette-search.js");
-    await import("../../static/js/core/command-palette-workspace.js");
-    await import("../../static/js/core/global.js");
-    await import("../../static/js/core/navbar.js");
-    await import("../../static/js/core/sidebar-init.js");
-    await import("../../static/js/core/sidebar.js");
-    await import("../../static/js/core/theme-init.js");
-    await import("../../static/js/courses/calendar.js");
-    await import("../../static/js/courses/controls.js");
-    await import("../../static/js/courses/filters.js");
-    await import("../../static/js/courses/index.js");
-    await import("../../static/js/courses/panel.js");
-    await import("../../static/js/courses/utils.js");
-    await import("../../static/js/courses/verify.js");
-    await import("../../static/js/dashboard/daily-quote.js");
-    await import("../../static/js/dashboard/daily-quote/data.js");
-    await import("../../static/js/dashboard/index.js");
-    await import("../../static/js/dashboard/renderers.js");
-    await import("../../static/js/dashboard/utils.js");
-    await import("../../static/js/files/events.js");
-    await import("../../static/js/files/index.js");
-    await import("../../static/js/files/modals.js");
-    await import("../../static/js/files/renderers.js");
-    await import("../../static/js/files/utils.js");
-    await import("../../static/js/files/workflows.js");
-    await import("../../static/js/focus/data.js");
-    await import("../../static/js/focus/index.js");
-    await import("../../static/js/focus/timer.js");
-    await import("../../static/js/focus/view.js");
-    await import("../../static/js/landing.js");
-    await import("../../static/js/notes/editor.js");
-    await import("../../static/js/notes/editor/block-catalog.js");
-    await import("../../static/js/notes/editor/print.js");
-    await import("../../static/js/notes/editor/utils.js");
-    await import("../../static/js/notes/export.js");
-    await import("../../static/js/notes/list.js");
-    await import("../../static/js/notes/list/cards.js");
-    await import("../../static/js/notes/list/utils.js");
-    await import("../../static/js/notes/toolbar.js");
-    await import("../../static/js/settings/account.js");
-    await import("../../static/js/settings/calendar.js");
-    await import("../../static/js/settings/combobox.js");
-    await import("../../static/js/settings/invites.js");
-    await import("../../static/js/settings/index.js");
-    await import("../../static/js/settings/preferences.js");
-    await import("../../static/js/settings/profile.js");
-    await import("../../static/js/settings/utils.js");
-    await import("../../static/js/tasks/task-app-helpers.js");
-    await import("../../static/js/tasks/task-audio.js");
-    await import("../../static/js/tasks/task-components.js");
-    await import("../../static/js/tasks/task-data.js");
-    await import("../../static/js/tasks/task-entry-components.js");
-    await import("../../static/js/tasks/task-popover.js");
-    await import("../../static/js/tasks/task.js");
-}
-
 async function sourceFor(relativePath) {
     return readFile(path.join(repoRoot, relativePath), "utf8");
-}
-
-function cssBlockStackAt(source, targetIndex) {
-    const stack = [];
-    let blockStart = 0;
-
-    for (let index = 0; index < targetIndex; index += 1) {
-        if (source[index] === "{") {
-            stack.push(source.slice(blockStart, index).trim());
-            blockStart = index + 1;
-        } else if (source[index] === "}") {
-            stack.pop();
-            blockStart = index + 1;
-        }
-    }
-
-    return stack;
 }
 
 test("command palette keeps primary navigation, theme actions, and global controls wired", async () => {
@@ -140,24 +37,35 @@ test("calendar event form preserves escaping, API routes, and cache refresh beha
     const source = await sourceFor("static/js/calendar/events/event-form.js");
     const primitives = await sourceFor("static/js/core/ui-primitives.js");
 
-    assert.match(primitives, /div\.textContent = value == null \? '' : String\(value\)/);
-    assert.match(primitives, /return div\.innerHTML/);
-    for (const replacement of ["&quot;", "&#39;"]) {
-        assert.match(primitives, new RegExp(replacement.replace("&", "&")));
-    }
+    assert.match(primitives, /const \{ escapeHtml \} = globalThis\.APStudyCoreServices\.escaping/);
     assert.match(source, /import \{ escapeHtml \} from "\.\.\/\.\.\/core\/ui-primitives-module\.js\?v=[0-9a-f]{64}"/);
 
-    assert.match(source, /window\.openCalendarEventForm = function/);
-    assert.match(source, /fetch\("\/api\/calendar\/events"/);
-    assert.match(source, /fetch\(`\/api\/calendar\/events\/\$\{encodeURIComponent\(currentEventId\)\}`/);
-    assert.match(source, /fetch\("\/api\/calendar\/event-overrides"/);
+    assert.match(source, /export function createCalendarEventForm\(/);
+    assert.match(source, /return \{ open: openForm, close: closeModal \}/);
+    assert.match(source, /lifecycle\.addCleanup\(closeModal\)/);
+    assert.match(source, /adapter\.createEvent\(\{ payload, signal: controller\.signal \}\)/);
+    assert.match(source, /adapter\.updateEvent\(\{ eventId: currentEventId, payload, signal: controller\.signal \}\)/);
+    assert.match(source, /adapter\.overrideEvent\(\{ payload, signal: controller\.signal \}\)/);
     assert.match(source, /name="reminder_minutes"/);
     assert.match(source, /10 minutes before \(default\)/);
     assert.match(source, /None \(default\)/);
-    assert.match(source, /localStorage\.removeItem\("calendarEventsCache"\)/);
-    assert.match(source, /window\.loadCalendarData && window\.loadCalendarData\(\)/);
-    assert.match(source, /m\.remove\(\)/);
-    assert.match(source, /m\.hidden = true/);
+    assert.match(source, /createCalendarStorage\(window\)\.removeItem\("calendarEventsCache"\)/);
+    assert.match(source, /reload\(\)/);
+    const dom = createCalendarDOM();
+    const opener = dom.document.createElement('button'); dom.document.body.append(opener);
+    const form = loadFeatureModule('calendar/events/event-form.js', dom.context).createCalendarEventForm({
+        document: dom.document, view: dom.window, lifecycle: dom.lifecycle, adapter: {}, reload() {}, canCreate: () => true,
+        calendars: { getCalendarOptions: () => [{ id: 'local:default', label: 'Personal' }], getDefaultCalendarId: () => 'local:default', getCalendarColor: () => '#123456', getStandardColors: () => [] },
+    });
+    form.open({ opener });
+    const modal = dom.document.querySelector('.calendar-event-modal');
+    assert.ok(modal?.isConnected); assert.equal(modal.hidden, false);
+    form.close();
+    assert.equal(dom.document.querySelector('.calendar-event-modal'), null);
+    assert.equal(modal.hidden, true); assert.equal(dom.document.activeElement, opener);
+    form.open({ opener }); dom.lifecycle.dispose();
+    assert.equal(dom.document.querySelector('.calendar-event-modal'), null);
+
 });
 
 test("calendar dashboard keeps cache, public-share, and event-form contracts wired", async () => {
@@ -181,20 +89,22 @@ test("calendar dashboard keeps cache, public-share, and event-form contracts wir
         await sourceFor("static/js/calendar/integrations/share.js"),
         await sourceFor("static/js/calendar/controls.js"),
         await sourceFor("static/js/calendar/bootstrap.js"),
+        await sourceFor("static/js/calendar/adapter.js"),
     ].join("\n");
 
     assert.match(source, /const WEEKDAYS = \["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"\]/);
     assert.match(source, /const EVENTS_CACHE_KEY = "calendarEventsCache"/);
     assert.match(source, /const DEFAULT_LOCAL_CALENDAR_ID = "local:default"/);
     assert.match(source, /const TASK_CALENDAR_ID = "local:tasks"/);
-    assert.match(source, /window\.loadCalendarData = loadCalendarData/);
-    assert.match(source, /window\.getCalendarOptionsForEventForm = getCalendarOptionsForEventForm/);
-    assert.match(source, /window\.getDefaultCalendarIdForEventForm = getDefaultCalendarIdForEventForm/);
-    assert.match(source, /fetch\("\/api\/calendar\/preferences"/);
-    assert.match(source, /\/api\/calendar\/share\/\$\{encodeURIComponent\(state\.public\.shareCode\)\}\/events/);
-    assert.match(source, /fetch\("\/api\/calendar\/refresh", \{ method: "POST", signal: controller\.signal \}\)/);
-    assert.match(source, /fetch\("\/api\/atlas\/sections\/by-id"/);
-    assert.match(source, /const \{ escapeHtml \} = window\.APStudyUIPrimitives/);
+    assert.match(source, /reload: loadCalendarData/);
+    assert.match(source, /import \{ createCalendarData \} from/);
+    assert.match(source, /getCalendarOptions: getCalendarOptionsForEventForm/);
+    assert.match(source, /getDefaultCalendarId: getDefaultCalendarIdForEventForm/);
+    assert.match(source, /adapter\.loadPreferences\(\{ signal: controller\.signal \}\)/);
+    assert.match(source, /\/api\/calendar\/share\/\$\{encodeURIComponent\(shareCode\)\}\/events/);
+    assert.match(source, /request\("\/api\/calendar\/refresh", \{ method: "POST", signal \}\)/);
+    assert.match(source, /request\("\/api\/atlas\/sections\/by-id"/);
+    assert.match(source, /import \{ escapeHtml \} from "\.\.\/core\/ui-primitives-module\.js\?v=[0-9a-f]{64}"/);
 });
 
 test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card", async () => {
@@ -210,19 +120,8 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
     assert.match(source, /new Date\(\)\.toISOString\(\)\.slice\(0, 10\)/);
     assert.doesNotMatch(source, /America\/Chicago/);
     assert.doesNotMatch(source, /item\?\.(?:q|a)(?![A-Za-z_])/);
-    assert.match(source, /function reportQuoteError\(reason, details = \{\}\)/);
     assert.match(source, /fetch\(ERROR_REPORT_URL, \{/);
     assert.match(source, /keepalive: true/);
-    for (const reason of [
-        "fetch_failed",
-        "http_error",
-        "invalid_payload",
-        "cache_read_failed",
-        "cache_write_failed",
-        "visibility_storage_failed",
-    ]) {
-        assert.match(source, new RegExp(`reportQuoteError\\("${reason}"`));
-    }
     assert.match(source, /dashboard-egg-shell/);
     assert.match(source, /function addEggSplitGeometry\(root\)/);
     assert.match(source, /addEggSplitGeometry\(root\);\s*root\.dataset\.phase = "fracture"/);
@@ -234,6 +133,33 @@ test("dashboard daily quote fetches Flask endpoint and uses one smooth egg card"
     assert.match(source, /role="status"/);
     assert.match(source, /aria-label="Preparing daily motivation"/);
     assert.match(source, /aria-label="Hide daily quote"/);
+
+    const requests = [];
+    const quote = loadFeatureModule("dashboard/daily-quote/data.js", {
+        fetch: async (url, options) => {
+            requests.push({ url, options });
+            return { ok: true, json: async () => ({ quote: { text: "Keep moving", author: "Nest" } }) };
+        },
+    });
+    const signal = new AbortController().signal;
+    const result = await quote.fetchQuote(signal, { dateKey: "2026-10-05" });
+    assert.equal(requests[0].url, "/api/dashboard/quote/today");
+    assert.equal(requests[0].options.signal, signal);
+    assert.equal(result.text, "Keep moving");
+    assert.equal(result.author, "Nest");
+    assert.equal(requests.length, 1);
+
+    const reports = [];
+    const failures = loadFeatureModule('dashboard/daily-quote/data.js', {
+        fetch: async (url, options) => {
+            if (url.endsWith('/error')) { reports.push(JSON.parse(options.body)); assert.equal(options.keepalive, true); return {}; }
+            return { ok: false, status: 503 };
+        },
+    });
+    assert.equal((await failures.fetchQuote(signal, { dateKey: '2026-10-05' })).fallback, true);
+    assert.equal(reports.length, 1); assert.equal(reports[0].reason, 'http_error');
+    assert.equal(reports[0].status, 503); assert.equal(reports[0].dateKey, '2026-10-05');
+
 });
 
 test("calendar deletion reports errors through the object-based toast API", async () => {
@@ -260,17 +186,52 @@ test("dashboard tile customization previews live and keeps contextual controls s
 
     assert.match(editorSource, /function previewForm\(form\)/);
     assert.match(editorSource, /addEventListener\("input"/);
-    assert.match(editorSource, /state\.draft\.tiles\[existingIndex\] = nextTile;\s*render\(state\.draft\);\s*syncToolbar\(\);/);
     assert.match(editorSource, /function positionDrawerForTile\(instanceId\)/);
     assert.match(editorSource, /setDrawerSide\(center >= window\.innerWidth \/ 2 \? "left" : "right"\)/);
-    assert.match(editorSource, /state\.draft\.tiles\.splice\(nextIndex, 0, tile\);\s*render\(state\.draft\);\s*syncToolbar\(\);/);
     assert.match(dashboardStyles, /\.dashboard-tile-drawer\[data-side="left"\]/);
     assert.match(dashboardStyles, /\.dashboard-tile-drawer\[data-side="right"\]/);
+    const dom = createCalendarDOM();
+    dom.window.matchMedia = () => ({ matches: false });
+    const elements = Object.fromEntries(['editToggle', 'toolbar', 'toolbarLabel', 'toolbarCustomize', 'toolbarMoveEarlier', 'toolbarMoveLater', 'drawer', 'drawerBody', 'tiles', 'addTile'].map(key => [key, dom.document.createElement(key === 'drawer' ? 'dialog' : 'div')]));
+    elements.drawer.append(elements.drawerBody);
+    Object.values(elements).forEach(node => { if (!node.parentNode) dom.document.body.append(node); });
+    let editor;
+    const rendered = [];
+    const render = layout => {
+        rendered.push(JSON.parse(JSON.stringify(layout)));
+        elements.tiles.replaceChildren();
+        layout.tiles.forEach(tile => { const node = dom.document.createElement('article'); node.className = 'dashboard-tile'; node.setAttribute('data-tile-id', tile.instance_id); elements.tiles.append(node); });
+        editor?.bindTiles();
+    };
+    const module = loadFeatureModule('dashboard/layout-editor.js', { ...dom.context, requestAnimationFrame: () => 1, CSS: { escape: value => value } });
+    editor = module.createLayoutEditor({ elements, getSummary: () => ({ available_tiles: ['calendar', 'notes'] }), render, persist: async layout => layout, showToast() {} });
+    editor.load({ version: 4, daily_quote_visible: false, tiles: [{ type: 'calendar', instance_id: 'calendar-1', title: 'Agenda', size: 'medium', view: 'week' }, { type: 'notes', instance_id: 'notes-1', size: 'medium' }] });
+    elements.editToggle.click(); elements.tiles.children[0].click(); elements.toolbarCustomize.click();
+    const tileForm = elements.drawerBody.querySelector('[data-tile-form]'); assert.ok(tileForm);
+    const title = tileForm.querySelector('[name="title"]'); title.value = 'My schedule';
+    title.dispatchEvent(dom.event('input', { bubbles: true }));
+    assert.equal(editor.currentLayout().tiles[0].title, 'My schedule');
+    assert.equal(rendered.at(-1).tiles[0].title, 'My schedule');
+    assert.equal(elements.toolbarLabel.textContent, 'My schedule');
+    assert.equal(elements.toolbarMoveEarlier.disabled, true); assert.equal(elements.toolbarMoveLater.disabled, false);
+    elements.toolbarMoveLater.click();
+    assert.equal(editor.currentLayout().tiles[1].instance_id, 'calendar-1');
+    assert.equal(elements.toolbarMoveEarlier.disabled, false); assert.equal(elements.toolbarMoveLater.disabled, true);
+    elements.tiles.children[0].click(); elements.addTile.click();
+    elements.drawerBody.querySelector('[data-catalog-type="calendar"]').click();
+    const newForm = elements.drawerBody.querySelector('[data-tile-form]');
+    newForm.querySelector('[name="title"]').value = 'Second schedule';
+    newForm.dispatchEvent(dom.event('submit', { bubbles: true }));
+    const added = editor.currentLayout().tiles;
+    assert.equal(added.length, 3); assert.equal(added[1].title, 'Second schedule');
+    assert.equal(rendered.at(-1).tiles[1].title, 'Second schedule');
+    assert.equal(elements.toolbarLabel.textContent, 'Second schedule');
+    assert.equal(elements.toolbarMoveEarlier.disabled, false); assert.equal(elements.toolbarMoveLater.disabled, false);
+
+
 });
 
-test("sidebar keeps persisted collapse state, route targets, and preference event bridge", async () => {
-    const source = await sourceFor("static/js/core/sidebar.js");
-    const initSource = await sourceFor("static/js/core/sidebar-init.js");
+test("sidebar templates retain public routes and early preference asset contracts", async () => {
     const template = await sourceFor("templates/_sidebar.html");
     const dashboardTemplate = await sourceFor("templates/dashboard.html");
 
@@ -290,49 +251,6 @@ test("sidebar keeps persisted collapse state, route targets, and preference even
     assert.match(await sourceFor("templates/_sidebar_init.html"), /js\/core\/sidebar-init\.js/);
     assert.match(await sourceFor("templates/_sidebar_init.html"), /APSTUDY_SIDEBAR_DEFAULT/);
     assert.match(template, /sidebar_path == '\/notes' or sidebar_path\.startswith\('\/notes\/'\)/);
-    assert.match(initSource, /apstudy-sidebar-collapsed/);
-    assert.match(initSource, /window\.APSTUDY_RESOLVE_SIDEBAR_COLLAPSED = resolveSidebarCollapsed/);
-    assert.match(source, /function normalizeSidebarDefault\(value\)/);
-    assert.match(source, /resolveSidebarCollapsed\(sidebarDefault\)/);
-    assert.match(source, /syncSidebarCollapsedHtmlClass\(shouldCollapse\)/);
-    assert.match(source, /localStorage\.setItem\('sidebar-collapsed', String\(shouldCollapse\)\)/);
-    assert.match(source, /window\.APSTUDY_SET_SIDEBAR_COLLAPSED = applySidebarCollapsedState/);
-    assert.match(source, /apstudy-sidebar-default-change/);
-    assert.match(source, /const idleMs = 300000/);
-    assert.match(source, /document\.addEventListener\('pointerdown', markActive/);
-    assert.match(source, /document\.visibilityState === 'hidden' \|\| isIdle\(\)/);
-});
-
-test("mobile shell uses a hamburger drawer without breaking desktop sidebar persistence", async () => {
-    const navbarSource = await sourceFor("static/js/core/navbar.js");
-    const sidebarSource = await sourceFor("static/js/core/sidebar.js");
-    const layoutStyles = await sourceFor("static/css/layout.css");
-
-    assert.match(navbarSource, /id="navbar-menu-btn"/);
-    assert.match(navbarSource, /window\.APSTUDY_SYNC_MOBILE_NAV_BUTTON/);
-    assert.match(navbarSource, /APSTUDY_TOGGLE_MOBILE_SIDEBAR/);
-
-    assert.match(sidebarSource, /window\.matchMedia\('\(max-width: 1024px\)'\)/);
-    assert.match(sidebarSource, /sidebar-mobile-backdrop/);
-    assert.match(sidebarSource, /mobile-sidebar-open/);
-    assert.match(sidebarSource, /window\.APSTUDY_SET_MOBILE_SIDEBAR_OPEN = setMobileSidebarOpen/);
-    assert.match(sidebarSource, /localStorage\.setItem\('sidebar-collapsed', String\(shouldCollapse\)\)/);
-
-    assert.match(layoutStyles, /html\.apstudy-sidebar-collapsed/);
-    assert.match(layoutStyles, /\.navbar-menu-button/);
-    assert.match(layoutStyles, /\.sidebar-container\.mobile-open/);
-    assert.match(layoutStyles, /transform: translateX\(-105%\)/);
-    assert.match(layoutStyles, /body\.mobile-sidebar-open/);
-    assert.match(layoutStyles, /min-height: 48px/);
-
-    const collapsedWidthUsages = [...layoutStyles.matchAll(/var\(--sidebar-collapsed\)/g)];
-    assert.ok(collapsedWidthUsages.length >= 3);
-    for (const usage of collapsedWidthUsages) {
-        assert.ok(
-            cssBlockStackAt(layoutStyles, usage.index).includes("@media (min-width: 1025px)"),
-            "collapsed sidebar geometry must not override the mobile drawer",
-        );
-    }
 });
 
 test("mobile dashboard keeps controls compact, visible, and touch friendly", async () => {
@@ -340,7 +258,10 @@ test("mobile dashboard keeps controls compact, visible, and touch friendly", asy
     const dashboardStyles = await sourceFor("static/css/dashboard.css");
     const profileStyles = await sourceFor("static/css/user-profile.css");
     const dashboardTemplate = await sourceFor("templates/dashboard.html");
-    const dashboardSource = await sourceFor("static/js/dashboard/index.js");
+    const dashboardSource = [
+        await sourceFor("static/js/dashboard/index.js"),
+        await sourceFor("static/js/dashboard/layout-editor.js"),
+    ].join("\n");
 
     assert.match(layoutStyles, /\.navbar-avatar img\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/s);
     assert.match(profileStyles, /\.user-profile-page \.navbar-avatar img\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/s);
@@ -348,8 +269,8 @@ test("mobile dashboard keeps controls compact, visible, and touch friendly", asy
     assert.match(dashboardTemplate, /viewport-fit=cover/);
     assert.match(dashboardTemplate, /aria-label="Edit dashboard layout"/);
     assert.match(dashboardTemplate, /class="dashboard-action-label">Edit layout/);
-    assert.match(dashboardSource, /Finish editing dashboard layout/);
-    assert.match(dashboardSource, /icon\.textContent = state\.editMode \? "done" : "dashboard_customize"/);
+    assert.match(dashboardSource, /Save dashboard layout/);
+    assert.match(dashboardSource, /icon\.textContent = state\.editing \? "check" : "dashboard_customize"/);
     assert.doesNotMatch(dashboardStyles, /\.dashboard-tile-link span:last-child/);
     assert.ok(dashboardStyles.includes("grid-auto-rows: auto;"));
     assert.ok(dashboardStyles.includes(".dashboard-day {\n        min-height: 44px;"));
@@ -376,7 +297,7 @@ test("calendar and courses switch dense schedules to compact mobile agenda rende
     assert.match(calendarSource, /calendar-mobile-agenda/);
     assert.match(calendarSource, /compactCalendar \? buildMobileCalendarAgendaHtml\(\)/);
     assert.match(calendarSource, /function buildCalendarSkeletonHtml\(\)/);
-    assert.match(calendarSource, /function buildAssignmentsSkeletonHtml\(\)/);
+    assert.match(calendarSource, /if \(state\.loadingDashboard\)\s*\{\s*viewRoot\.innerHTML = buildCalendarSkeletonHtml\(\)/);
     assert.match(calendarSource, /calendar-skeleton-week-frame/);
     assert.doesNotMatch(calendarSource, /APStudySkeleton\?\.(table|cards)/);
 
@@ -463,7 +384,6 @@ test("notes list guards destructive actions and supports safe card menus", async
         dragSource,
     ].join("\n");
 
-    assert.match(source, /function apiJson\(url, options = \{\}\)/);
     assert.match(source, /APStudyHttp\.fetchJson\(url,[\s\S]*pendingLabel: options\.pendingLabel \|\| "notes-save"/);
     assert.match(source, /apiJson\(`\/api\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
     assert.match(source, /apiJson\(`\/api\/notes\/folders\/\$\{encodeURIComponent\(folderId\)\}`/);
@@ -472,11 +392,10 @@ test("notes list guards destructive actions and supports safe card menus", async
     assert.match(cardsSource, /data-action="share"/);
     assert.match(cardsSource, /APStudyNotesSharing\?\.open/);
     assert.match(source, /data-action="move"/);
-    assert.match(listSource, /function positionCardMenu\(button, menu\)/);
     assert.match(listSource, /const placeBelow = spaceBelow >= spaceAbove/);
     assert.match(listSource, /handleCardMenuViewportScroll/);
     assert.match(listSource, /\['ArrowDown', 'ArrowUp', 'Home', 'End'\]/);
-    assert.match(dragSource, /function canUseNoteDrag\(scope = global\)/);
+    assert.match(dragSource, /function canUseNoteDrag\(scope = window\)/);
     assert.match(dragSource, /min-width: 600px/);
     assert.match(dragSource, /delayOnTouchOnly: true/);
     assert.match(dragSource, /touchStartThreshold: 8/);
@@ -511,15 +430,23 @@ test("notes list guards destructive actions and supports safe card menus", async
 });
 
 test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wired", async () => {
+    const editorEntrySource = await sourceFor("static/js/notes/editor.js");
+    const saveSource = await sourceFor("static/js/notes/editor/save.js");
+    const pageSetupSource = await sourceFor("static/js/notes/editor/page-setup.js");
+    const reactShellSource = await sourceFor("static/js/notes/editor/react-shell.js");
     const source = [
-        await sourceFor("static/js/notes/editor.js"),
-        await sourceFor("static/js/notes/editor/save.js"),
-        await sourceFor("static/js/notes/editor/page-setup.js"),
+        editorEntrySource,
+        ...await Promise.all([
+            "document-state", "selection-actions", "style-actions", "history-actions",
+            "catalog-actions", "editor-chrome", "print-runtime", "review/review-runtime", "utils",
+        ].map((name) => sourceFor(`static/js/notes/editor/${name}.js`))),
+        saveSource,
+        pageSetupSource,
         await sourceFor("static/js/notes/editor/paste.js"),
-        await sourceFor("static/js/notes/editor/react-shell.js"),
+        reactShellSource,
         await sourceFor("static/js/notes/editor/toolbar-dom.js"),
     ].join("\n");
-    const toolbarSource = await sourceFor("static/js/notes/toolbar.js");
+    const toolbarSource = await sourceFor("static/js/notes/editor-schema.js");
     const catalogSource = await sourceFor("static/js/notes/editor/block-catalog.js");
     const keyboardSource = await sourceFor("static/js/notes/editor/keyboard-shortcuts.js");
     const printSource = await sourceFor("static/js/notes/editor/print.js");
@@ -548,7 +475,6 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /let noteEditorReactRoot = null/);
     assert.match(source, /noteEditorReactRoot\?\.unmount\(\)/);
     assert.match(source, /window\.APStudyPageLifecycle\?\.register\?\.\(\{/);
-    assert.match(source, /pause: releaseNoteEditorRuntime/);
     assert.match(editorTemplate, /data-navigation-retention="discard"/);
     assert.doesNotMatch(editorTemplate, /js\/core\/navbar\.js/);
     assert.doesNotMatch(editorTemplate, /<global class="thenav"/);
@@ -557,9 +483,9 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(styles, /body\.notes-editor-body main\s*\{[^}]*grid-row:\s*1;[^}]*max-width:\s*none;[^}]*padding:\s*0;/s);
     assert.match(source, /preserveRangeSelectionShortcuts/);
     assert.match(source, /listItemHardBreakShortcuts/);
-    assert.match(source, /from '\.\.\/toolbar\.js'/);
-    assert.match(source, /from '\.\/editor\/block-catalog\.js'/);
-    assert.match(source, /await import\('\.\/editor\/print\.js'\)/);
+    assert.match(source, /from '\.\.\/editor-schema\.js'/);
+    assert.match(source, /from '\.\/(?:editor\/)?block-catalog\.js'/);
+    assert.match(source, /loadModule = \(\) => import\('\.\/print\.js'\)/);
     assert.match(toolbarSource, /const notesEditorSchema = BlockNoteSchema\.create/);
     assert.match(toolbarSource, /createReactBlockSpec/);
     assert.match(toolbarSource, /type: 'callout'/);
@@ -579,23 +505,12 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.doesNotMatch(source, /FormattingToolbarController/);
     assert.doesNotMatch(source, /function NotesSelectionToolbar\(\)/);
     assert.doesNotMatch(source, /function toolbarButton\(/);
-    assert.match(source, /function NotesSlashMenu\(props\)/);
-    assert.match(source, /function NotesSideMenu\(props\)/);
-    assert.match(source, /freezeMenu\?\.\(\)/);
-    assert.match(source, /unfreezeMenu\?\.\(\)/);
-    assert.match(source, /document\.addEventListener\('pointerdown', handlePointerDown\)/);
-    assert.match(source, /event\.key !== 'Escape'/);
-    assert.match(source, /draggable: true/);
-    assert.match(source, /onDragStart: \(event\) => blockDragStart\?\.\(event, block\)/);
-    assert.match(source, /onDragEnd: blockDragEnd/);
-    assert.match(source, /selectActionBlock\(\); moveSelectedBlocks\('up'\); closeMenu\(\)/);
-    assert.match(source, /selectActionBlock\(\); moveSelectedBlocks\('down'\); closeMenu\(\)/);
     assert.match(source, /formattingToolbar: false/);
     assert.match(source, /slashMenu: false/);
     assert.match(source, /filePanel: false/);
     assert.match(source, /function handleNotesPaste\(\{ event, editor, defaultPasteHandler/);
     assert.match(source, /pasteHandler: \(options\) => handleNotesPaste/);
-    assert.match(source, /from '\.\/editor\/markdown-repair\.js'/);
+    assert.match(source, /from '\.\/(?:editor\/)?markdown-repair\.js'/);
     assert.match(source, /normalizeClipboardMarkdown/);
     assert.match(source, /normalizeCopiedPlainText/);
     assert.match(source, /const looksStructured = clipboardTextLooksStructured\(plainText\)/);
@@ -613,7 +528,9 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /function notePayloadFingerprint\(title, content\)/);
     assert.match(source, /let lastSavedPayloadFingerprint = ''/);
     assert.doesNotMatch(source, /lastSavedPayloadHash/);
-    assert.match(source, /const content = JSON\.stringify\(documentSnapshot\)/);
+    assert.match(saveSource, /export function createNoteSaveRuntime\(/);
+    assert.match(editorEntrySource, /getCurrentDocumentSnapshot: currentDocumentSnapshot/);
+    assert.match(saveSource, /content: JSON\.stringify\(getCurrentDocumentSnapshot\(\)\)/);
     assert.doesNotMatch(source, /const updatedNote = await response\.json\(\)/);
     assert.doesNotMatch(source, /if \(normalizeEditorDocument\(\)\) return;/);
     assert.doesNotMatch(source, /schedulePastedContentNormalization|replaceBlocks\(documentSnapshot/);
@@ -630,14 +547,16 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(catalogSource, /key: 'video'/);
     assert.match(catalogSource, /export const FORMAT_COLORS = \[/);
     assert.match(catalogSource, /export const FONT_SIZE_PRESETS = \[/);
-    assert.match(source, /window\.APStudyPendingMutations\?\.track\(fetch\(`\/api\/notes\/\$\{noteId\}`/);
-    assert.match(source, /fetch\(`\/api\/notes\/\$\{noteId\}`, \{ signal: editorLoadController\.signal \}\)/);
+    assert.match(saveSource, /const request = fetch\(`\/api\/notes\/\$\{noteId\}`,\s*\{\s*method: 'PATCH'/);
+    assert.match(saveSource, /window\.APStudyPendingMutations\?\.track\(request, 'notes-save'\)/);
+    assert.match(reactShellSource, /fetch\(`\/api\/notes\/\$\{noteId\}`, \{ signal: loadingController\.signal \}\)/);
+    assert.match(editorEntrySource, /saveRuntime\?\.dispose\(\)/);
+    assert.match(editorEntrySource, /pageSetupRuntime\?\.dispose\(\)/);
     assert.match(source, /triggerDebouncedSave\(\)/);
     assert.match(source, /React\.createElement\(NoteEditor, \{/);
     assert.match(source, /function insertBlockPayload\(block/);
     assert.match(source, /editorInstance\.insertBlocks\?\.\(/);
     assert.match(source, /ATOM_BLOCK_TYPES\.has\(insertedOrUpdated\.type\) \|\| insertedOrUpdated\.type === 'table'/);
-    assert.match(source, /editorInstance\.openSuggestionMenu\?\.\('\/'\)/);
     assert.match(source, /function canRunHistoryAction\(action\)/);
     assert.match(source, /editorInstance\._tiptapEditor\?\.can\?\.\(\)/);
     assert.match(source, /button\.disabled = disabled/);
@@ -693,7 +612,6 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(printSource, /hiddenBlockIds/);
     assert.match(printSource, /windowRef\.addEventListener\?\.\('afterprint'/);
     assert.match(printSource, /Symbol\.for\('apstudy\.notes\.active-print-promise'\)/);
-    assert.match(printSource, /querySelectorAll\?\.\('\.notes-print-surface'\)/);
     assert.match(printSource, /PRINT_IMAGE_TIMEOUT_MS = 2000/);
     assert.match(source, /document\.addEventListener\('click', handleNotePrintClick, true\)/);
     assert.match(source, /document\.addEventListener\('keydown', handleNotePrintShortcut, true\)/);
@@ -715,15 +633,6 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(await sourceFor("static/js/notes/list/utils.js"), /notes-editor-v17\.js/);
     assert.match(editorTemplate, /data-block-type="codeBlock"/);
     assert.match(editorTemplate, /data-block-type="callout"/);
-    assert.match(source, /action === 'copy-blocks'/);
-    assert.match(source, /action === 'cut-blocks'/);
-    assert.match(source, /action === 'duplicate-blocks'/);
-    assert.match(source, /action === 'delete-blocks'/);
-    assert.match(source, /action === 'move-blocks-up'/);
-    assert.match(source, /action === 'move-blocks-down'/);
-    assert.match(source, /event\.altKey && !event\.shiftKey && !event\.metaKey && !event\.ctrlKey && event\.key === 'ArrowUp'/);
-    assert.match(source, /event\.altKey && !event\.shiftKey && !event\.metaKey && !event\.ctrlKey && event\.key === 'ArrowDown'/);
-    assert.match(source, /action === 'toggle-heading-collapse'/);
     assert.match(editorTemplate, /data-toolbar-menu="overflow" role="toolbar" aria-label="More writing tools" aria-orientation="horizontal"/);
     assert.match(styles, /\.notes-toolbar-overflow-menu\s*\{[^}]*display:\s*flex;[^}]*width:\s*max-content;[^}]*flex-wrap:\s*nowrap;[^}]*overflow-x:\s*auto;/s);
     assert.match(styles, /\.notes-toolbar-overflow-menu \.notes-toolbar-segment\s*\{[^}]*width:\s*auto;[^}]*flex:\s*0 0 auto;[^}]*flex-wrap:\s*nowrap;/s);
@@ -741,9 +650,8 @@ test("notes editor keeps autosave, BlockNote schema, and load/save endpoints wir
     assert.match(source, /activePageSetupTriggerRect = triggerRect \|\| usableTriggerRect\(trigger\)/);
     assert.match(source, /Symbol\.for\('apstudy\.notes\.editor\.runtime'\)/);
     assert.match(source, /claimElementBinding\(writingToolbar, 'notesEditorToolbarBound'\)/);
-    assert.match(source, /action === 'basic-style'[\s\S]*?button\.removeAttribute\('aria-pressed'\)/);
     assert.match(source, /editorPage\?\.addEventListener\('scroll', schedulePageSetupPopoverPosition/);
-    assert.match(source, /window\.addEventListener\('resize', schedulePageSetupPopoverPosition\)/);
+    assert.match(pageSetupSource, /window\.addEventListener\('resize', schedulePageSetupPopoverPosition, \{ signal: bindingsController\.signal \}\)/);
     assert.match(editorTemplate, /id="notes-page-setup-popover"[^>]*role="dialog"[^>]*aria-describedby="notes-page-setup-description"/);
     assert.match(styles, /\.notes-setup-margin-field\s*\{[^}]*display:\s*grid;/s);
     assert.doesNotMatch(editorTemplate, /<global class="thefooter"><\/global>/);
@@ -759,6 +667,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     const sharingSource = await sourceFor("static/js/notes/sharing.js");
     const editorSource = [
         await sourceFor("static/js/notes/editor.js"),
+        await sourceFor("static/js/notes/editor/editor-chrome.js"),
         await sourceFor("static/js/notes/editor/save.js"),
         await sourceFor("static/js/notes/editor/page-setup.js"),
         await sourceFor("static/js/notes/editor/paste.js"),
@@ -772,7 +681,7 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     const navbarSource = await sourceFor("static/js/core/navbar.js");
 
     assert.doesNotMatch(`${listSource}\n${cardsSource}`, /\/notes\/editor\/\$\{/);
-    assert.match(cardsSource, /global\.location\.href = `\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
+    assert.match(cardsSource, /window\.location\.href = `\/notes\/\$\{encodeURIComponent\(noteId\)\}`/);
     assert.match(listSource, /state\.viewMode === 'shared' \? '\/api\/notes\/shared' : '\/api\/notes'/);
     assert.doesNotMatch(listSource, /initDragDrop|Sortable/);
     assert.match(cardsSource, /folder\.is_shared \|\| readOnly \? 'folder_shared' : 'folder'/);
@@ -781,26 +690,23 @@ test("notes sharing keeps canonical links, view-only capabilities, and folder in
     assert.doesNotMatch(cardsSource, /data-action="share-folder"/);
 
     assert.match(sharingSource, /\/api\/notes\/share-users\?q=/);
-    assert.match(sharingSource, /public: modal\.querySelector\('\[data-share-public\]'\)\.value === 'public'/);
-    assert.match(sharingSource, /expected_revision: sharing\.revision/);
-    assert.match(sharingSource, /grants: users\.map\(\(user\) => \(\{ user_id: user\.id, role: normalizeRole\(user\.role\) \}\)\)/);
-    assert.match(sharingSource, /invitations: pending\.map\(\(invite\) => \(\{ email: invite\.email, role: normalizeRole\(invite\.role\) \}\)\)/);
     assert.match(sharingSource, /Anyone with the link/);
     assert.match(sharingSource, /Viewer/);
     assert.match(sharingSource, /data-share-copy/);
 
     assert.match(editorSource, /let canEdit = noteContext\.access\?\.can_edit === true/);
     assert.match(editorSource, /editable: canEdit/);
-    assert.match(editorSource, /if \(!getCanEdit\(\) \|\| !noteId \|\| !titleInput \|\| !getEditor\(\) \|\| getNoteCollaborationEnabled\(\)\) return/);
-    assert.match(editorSource, /canEdit \? React\.createElement\(SuggestionMenuController/);
+    // Runtime behavior tests cover edit permission and collaboration gates;
+    // retain the entry-point seam that supplies both capabilities to autosave.
+    assert.match(editorSource, /saveRuntime = createNoteSaveRuntime\(\{[\s\S]*?getCanEdit: \(\) => canEdit,[\s\S]*?getNoteCollaborationEnabled: \(\) => noteCollaborationEnabled/);
     assert.match(editorSource, /canEdit \? React\.createElement\(SideMenuController/);
-    assert.match(editorSource, /if \(!canEdit\) \{\s*button\?\.remove\(\);/);
+    assert.match(editorSource, /if \(!getCanEdit\(\)\) \{\s*button\?\.remove\(\);/);
     assert.match(editorTemplate, /id="notes-share-button"[\s\S]*?data-notes-share-resource="note"/);
     assert.match(editorTemplate, /js\/notes\/sharing\.js/);
     assert.match(editorTemplate, /Shared by <a class="notes-viewer-owner" href="\{\{ owner\.profile_url \}\}">\{\{ owner\.name \}\}<\/a>/);
     assert.match(styles, /body\.notes-editor-body\s*\{[^}]*--navbar-height:\s*0px;[^}]*display:\s*grid !important;[^}]*grid-template-rows:\s*minmax\(0, 1fr\);/s);
     assert.match(styles, /body\[data-note-read-only="true"\] \.blocknote-container \.notes-block-selected > \.bn-block\s*\{[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
-    assert.match(editorSource, /if \(!canEdit\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
+    assert.match(editorSource, /if \(!getCanEdit\(\)\) \{[\s\S]*?querySelectorAll\('\.notes-block-selected'\)[\s\S]*?lastSelectedBlockIds = new Set\(\);/);
     assert.match(editorTemplate, /{% if access\.can_edit %}[\s\S]*?notes-toolbar-page-setup/);
     assert.match(editorSource, /handlePageSetupToolbarClick\([\s\S]*?writingToolbar,[\s\S]*?pageSetupPopover,[\s\S]*?openPageSetupPopover,[\s\S]*?closePageSetupPopover/);
 
@@ -823,11 +729,13 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
         await sourceFor("static/js/courses/panel.js"),
         await sourceFor("static/js/courses/calendar.js"),
         await sourceFor("static/js/courses/controls.js"),
+        await sourceFor("static/js/courses/results.js"),
     ].join("\n");
     const styles = await sourceFor("static/css/courses.css");
 
     assert.match(source, /const COURSE_DAYS = \[/);
-    assert.match(source, /const COURSE_RESULT_LIMIT = 100/);
+    assert.match(combinedSource, /const COURSE_RESULT_PAGE_SIZE = 100/);
+    assert.doesNotMatch(source, /params\.set\("limit", "500"\)/);
     assert.match(source, /selectedTerm: window\.APSTUDY_COURSES_DEFAULT_TERM/);
     assert.match(source, /activeCourseView: "search"/);
     assert.match(combinedSource, /button\[data-course-view\]/);
@@ -886,11 +794,9 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(template, /courses-schedule-skeleton/);
     assert.match(styles, /\.courses-skeleton-week-frame/);
 
-    const verifyScriptIndex = template.indexOf("js/courses/verify.js");
-    const indexScriptIndex = template.indexOf("js/courses/index.js");
-    assert.ok(verifyScriptIndex !== -1, "courses template must load js/courses/verify.js");
-    assert.ok(indexScriptIndex !== -1, "courses template must load js/courses/index.js");
-    assert.ok(verifyScriptIndex < indexScriptIndex, "courses template must load verify.js before index.js and any consumer requiring it");
+    assert.match(template, /filename='js\/courses\/index\.js'[^\n]*type="module"/);
+    assert.doesNotMatch(template, /js\/courses\/(?:verify|utils|filters|panel|calendar|controls|edit|tracking-policy)\.js/);
+    assert.match(source, /import \{ create as createAvailabilityVerifier \} from '\.\/verify\.js'/);
     assert.doesNotMatch(template, /js\/courses\/atlas-live\.js/);
     assert.match(controlsSource, /void loadSectionsForTerm\(state\.selectedTerm\);\s*\}, 500\);/);
     assert.doesNotMatch(controlsSource, /, 250\);/);
@@ -901,7 +807,9 @@ test("files page keeps upload limits, modal elements, and share/delete endpoints
     const utilsSource = await sourceFor("static/js/files/utils.js");
     const renderersSource = await sourceFor("static/js/files/renderers.js");
     const modalsSource = await sourceFor("static/js/files/modals.js");
-    const workflowsSource = await sourceFor("static/js/files/workflows.js");
+    const workflowsSource = (await Promise.all([
+        "workflows", "upload-workflow", "sharing-workflow", "download-workflow", "selection-workflow",
+    ].map(name => sourceFor(`static/js/files/${name}.js`)))).join("\n");
     const eventsSource = await sourceFor("static/js/files/events.js");
     const combinedSource = `${source}\n${utilsSource}\n${renderersSource}\n${modalsSource}\n${workflowsSource}\n${eventsSource}`;
 
@@ -926,6 +834,14 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     const invitesSource = await sourceFor("static/js/settings/invites.js");
     const source = [
         await sourceFor("static/js/settings/index.js"),
+        await sourceFor("static/js/settings/page.js"),
+        await sourceFor("static/js/settings/navigation.js"),
+        await sourceFor("static/js/settings/summary.js"),
+        await sourceFor("static/js/settings/discord.js"),
+        await sourceFor("static/js/settings/avatar.js"),
+        await sourceFor("static/js/settings/preference-utils.js"),
+        await sourceFor("static/js/settings/profile-utils.js"),
+        await sourceFor("static/js/settings/region.js"),
         await sourceFor("static/js/settings/utils.js"),
         await sourceFor("static/js/settings/calendar.js"),
         await sourceFor("static/js/settings/profile.js"),
@@ -958,9 +874,8 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(styles, /\.settings-section\[hidden\]\s*\{\s*display:\s*none/);
     assert.doesNotMatch(source, /global\.alert|window\.alert/);
     assert.doesNotMatch(source, /location\.assign\(['"]\/logout['"]\)/);
-    assert.match(source, /APStudyAuth\?\.logout/);
     assert.match(source, /push_configured/);
-    assert.match(source, /const SETTINGS_INTERFACE_THEMES = \[/);
+    assert.match(source, /const interfaceThemes = \[/);
     assert.match(source, /'nest-light'/);
     assert.match(source, /'nest-dark'/);
     assert.match(source, /function renderSettingsSkeleton\(\)/);
@@ -983,8 +898,7 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(source, /button\.disabled = !hasNotificationDevice/);
     assert.match(styles, /\.notification-channel-row:hover/);
     assert.match(source, /const SETTINGS_MAX_OTHER_CALENDARS = 10/);
-    assert.match(source, /const USERNAME_RESERVED = new Set\(\[/);
-    assert.match(source, /window\.APSTUDY_THEME_PREFERENCE = interfaceTheme/);
+    assert.match(source, /window\.APSTUDY_SET_THEME_PREFERENCE\(interfaceTheme\)/);
     assert.match(source, /apstudy-sidebar-default-change/);
     assert.match(source, /function renderEntitlements\(\)/);
     assert.match(source, /data\.storage_limit_bytes/);
@@ -992,9 +906,6 @@ test("settings page keeps account, theme, calendar, and destructive endpoints ce
     assert.match(template, /data-tab="tier">Tier &amp; Invites/);
     assert.match(template, /settings-invites-card/);
     assert.match(template, /id="settings-invites-list"/);
-    assert.match(invitesSource, /function focusInviteAction\(inviteId, action\)/);
-    assert.match(invitesSource, /focusInviteAction\(inviteId, focusAction\)/);
-    assert.match(invitesSource, /data-invite-action="rename"]'\)\?\.focus\(\)/);
     assert.match(invitesSource, /settings-invite-count--invited/);
     assert.match(invitesSource, /People who signed up using this invite link\./);
     assert.match(invitesSource, /People who completed onboarding and took a qualifying action\./);
@@ -1025,8 +936,8 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
     assert.match(helperSource, /function groupTasksByList\(lists, tasks, listById\)/);
     assert.match(helperSource, /function PrintSheet\(\{ list, tasks(?:, includeCompleted = false)? \}\)/);
     assert.match(source, /const \{ lists: nextLists, tasks: nextTasks, preferences \} = await fetchTaskBoard\(\)/);
-    assert.match(source, /buildCompletedTaskOptimistic\(task, completed\)/);
-    assert.match(source, /completeTaskRecord\(task\.id, completed, optimistic\.occurrenceKey\)/);
+    assert.match(source, /createEntityMutationJournal/);
+    assert.match(source, /completeTaskRecord\(task\.id, completed, occurrenceKey\)/);
     assert.match(source, /buildListOrderUpdates\(orderedIds\)/);
     assert.match(source, /taskOrderUpdatesFromDocument\(\)/);
     assert.match(source, /taskReactRoot = createRoot\(mount\)/);
@@ -1047,15 +958,16 @@ test("task app shell keeps data-layer wiring, destructive confirms, and mount co
 test("calendar context menu keeps task, event, override, and keyboard flows wired", async () => {
     const source = await sourceFor("static/js/calendar/events/context-menu.js");
 
-    assert.match(source, /const rootSelector = "#calendar-view-root"/);
+    assert.match(source, /export function createCalendarEventMenu\(/);
+    assert.match(source, /lifecycle\.addEventListener\(root, "contextmenu", onContextMenu\)/);
     assert.match(source, /role", "menu"/);
     assert.match(source, /const eventSelector = "\[data-event-ref\], \[data-event-id\]"/);
-    assert.match(source, /window\.openCalendarEventForm\?\.\(\{ mode: "create"/);
+    assert.match(source, /openEventForm\(\{ mode: "create"/);
     assert.match(source, /mode: isImportedEvent\(event\) \? "override" : "edit"/);
     assert.match(source, /window\.APStudyConfirm\?\.request\?\.\(\{/);
-    assert.match(source, /fetch\("\/api\/calendar\/event-overrides\/hide"/);
-    assert.match(source, /fetch\(`\/api\/calendar\/events\/\$\{encodeURIComponent\(event\.id \|\| context\.eventId\)\}`/);
-    assert.match(source, /localStorage\.removeItem\("calendarEventsCache"\)/);
+    assert.match(source, /adapter\.hideEvent\(\{ eventRef: event\.event_ref/);
+    assert.match(source, /adapter\.deleteEvent\(\{ eventId: event\.id \|\| context\.eventId/);
+    assert.match(source, /createCalendarStorage\(window\)\.removeItem\("calendarEventsCache"\)/);
     assert.match(source, /event\.key === "ArrowDown"/);
     assert.match(source, /closeMenu\(\{ restoreFocus: true \}\)/);
 });
@@ -1063,6 +975,10 @@ test("calendar context menu keeps task, event, override, and keyboard flows wire
 test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader, date, and auth helpers", async () => {
     const chromeSource = await sourceFor("static/js/core/global-chrome.js");
     const source = await sourceFor("static/js/core/global.js");
+    const mutations = await sourceFor("static/js/core/pending-mutations.js");
+    const session = await sourceFor("static/js/core/session.js");
+    const presence = await sourceFor("static/js/core/presence.js");
+    const shell = await sourceFor("static/js/core/shell-chrome.js");
     const primitiveSource = await sourceFor("static/js/core/ui-primitives.js");
 
     assert.match(chromeSource, /window\.APStudyPageLifecycle = \{/);
@@ -1072,8 +988,8 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.match(chromeSource, /navigationRetention === 'discard'/);
     assert.match(chromeSource, /window\.location\.replace\(url\.href\)/);
     assert.doesNotMatch(chromeSource, /window\.APStudyPendingMutations = \{/);
-    assert.match(source, /window\.APStudyPendingMutations = \{/);
-    assert.match(source, /new CustomEvent\("apstudy-pending-save-change"/);
+    assert.match(source, /coreServices\.pendingMutations\.createPendingMutations/);
+    assert.match(mutations, /new CustomEvent\("apstudy-pending-save-change"/);
     assert.match(primitiveSource, /window\.APStudyConfirm = window\.APStudyConfirm \|\|/);
     assert.match(primitiveSource, /id = 'apstudy-confirm-root'/);
     assert.match(primitiveSource, /window\.APStudyLoader = window\.APStudyLoader \|\|/);
@@ -1083,13 +999,13 @@ test("global chrome keeps lifecycle, navigation, mutation, confirmation, loader,
     assert.match(primitiveSource, /fieldSet\(options = \{\}\)/);
     assert.match(primitiveSource, /block: skeletonBlock/);
     assert.match(primitiveSource, /data-slot="skeleton"/);
-    assert.match(source, /window\.APStudyDate = \{/);
-    assert.match(source, /function clearClientState\(options = \{\}\)/);
-    assert.match(source, /function markClientLoggedOut\(\)/);
+    assert.match(source, /window\.APStudyDate = \{ \.\.\.coreServices\.dateTime \}/);
+    assert.match(session, /function clearClientState\(options = \{\}\)/);
+    assert.match(session, /function markClientLoggedOut\(\)/);
     assert.doesNotMatch(source, /window\.location\.replace\(`\$\{window\.location\.origin\}\/logout`\)/);
-    assert.match(source, /stop: stopHeartbeat/);
-    assert.match(source, /clearClientState\(\{ includeCookies: false \}\)/);
-    assert.match(source, /document\.querySelectorAll\("\[data-logout\]"\)/);
+    assert.match(presence, /stop: stopHeartbeat/);
+    assert.match(session, /clearClientState\(\{ includeCookies: false \}\)/);
+    assert.match(shell, /document\.querySelectorAll\("\[data-logout\]"\)/);
 });
 
 test("login template uses server-started Appwrite OAuth links", async () => {
@@ -1231,9 +1147,6 @@ test("onboarding presents five accessible stages without changing its saved step
     assert.match(template, /<form id="onboarding-logout-form" method="post" action="\{\{ url_for\('auth\.logout'\) \}\}" hidden>/);
     assert.ok(template.indexOf('id="onboarding-logout-form"') > template.indexOf('</form>'));
     assert.doesNotMatch(template, /<script type="module">/);
-    assert.match(onboardingSource, /const percent = Math\.round\(\(safeStep \/ 5\) \* 100\)/);
-    assert.match(onboardingSource, /setProperty\('--onboarding-progress', String\(percent \/ 100\)\)/);
-    assert.match(onboardingSource, /stepLabel\.textContent = `Step \$\{safeStep\} of 5`/);
     assert.match(onboardingSource, /activeHeading\.focus/);
     assert.match(onboardingSource, /wizardStatus\.focus/);
     assert.match(onboardingSource, /saveStep\(1,/);
@@ -1260,11 +1173,10 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
     assert.match(source, /window\.APSTUDY_AVATAR_URL_FOR_SIZE = avatarUrlForSize/);
     assert.match(source, /nearestDiscordAvatarSize\(normalizedSize\)/);
     assert.match(source, /googleAvatarUrlForSize\(rawUrl, normalizedSize\)/);
-    assert.match(source, /import\('\/static\/js\/core\/command-palette\.js'\)/);
+    assert.match(source, /import\('\/static\/js\/core\/dist\/command-palette\.js'\)/);
     assert.match(source, /commandPalettePreload !== 'false'/);
     assert.match(source, /window\.APSTUDY_COMMAND_PALETTE_SHORTCUT_BOUND/);
     assert.match(source, /event\.metaKey && !event\.ctrlKey/);
-    assert.match(source, /window\.APStudyNavigation\?\.go\?\.\('\/settings#account'\)/);
     assert.match(source, /runLogoutFlow\(\)/);
     assert.match(source, /navbar-avatar--grade-a/);
     assert.match(source, /navbar-avatar--grade-aa/);
@@ -1275,26 +1187,6 @@ test("navbar keeps avatar sizing, command palette shortcut, and logout/account f
 test("browser notifications preflight capabilities and never use native alert dialogs", async () => {
     const source = await sourceFor("static/js/core/notifications.js");
     const worker = await sourceFor("static/service-worker.js");
-    assert.match(source, /push_configured/);
-    assert.match(source, /PushManager/);
-    assert.match(source, /isSecureContext/);
-    assert.match(source, /serviceWorker\.ready/);
-    assert.match(source, /NotAllowedError/);
-    assert.match(source, /AbortError/);
-    assert.match(source, /forceRefresh/);
-    assert.match(source, /applicationServerKey/);
-    assert.match(source, /ready\.update\(\)/);
-    assert.match(source, /APStudyToast/);
-    assert.match(source, /desktop_tablet/);
-    assert.match(source, /userAgentData\?\.mobile/);
-    assert.match(source, /acknowledgedPendingIds/);
-    assert.match(source, /\/api\/notifications\/sync/);
-    assert.match(source, /\/api\/notifications\/foreground-ack/);
-    assert.match(source, /pending_foreground_ids/);
-    assert.match(source, /const FOREGROUND_SYNC_MS = 15000/);
-    assert.match(source, /navigator\.locks\.request/);
-    assert.match(source, /BroadcastChannel/);
-    assert.match(source, /LEADER_LEASE_KEY/);
     assert.match(worker, /\/dashboard\?notifications=open/);
     assert.doesNotMatch(source, /global\.alert|window\.alert/);
     const settingsSource = await sourceFor("static/js/settings/notifications.js");

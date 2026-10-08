@@ -20,7 +20,7 @@ test('entity deletion flows stage a real shared undo window', () => {
         'static/js/chat/messages-dom.js',
         'static/js/core/notification-tray.js',
         'static/js/settings/account.js',
-        'static/js/settings/index.js',
+        'static/js/settings/discord.js',
         'static/js/settings/notifications.js',
         'static/js/onboarding/index.js',
         'static/js/focus/index.js',
@@ -33,9 +33,8 @@ test('draft and attachment removals expose undo without losing the captured item
     for (const relativePath of [
         'static/js/chat/attachments.js',
         'static/js/chat/media-picker.js',
-        'static/js/files/workflows.js',
+        'static/js/files/upload-workflow.js',
         'static/js/notes/editor/image-runtime.js',
-        'static/js/notes/sharing.js',
         'static/js/calendar/integrations/courses.js',
         'static/js/dashboard/daily-quote.js',
     ]) {

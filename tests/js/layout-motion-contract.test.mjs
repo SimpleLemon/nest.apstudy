@@ -36,6 +36,6 @@ test('progress indicators animate transforms rather than width', () => {
     ].join('\n');
     assert.doesNotMatch(sources, /transition\s*:[^;}]*\bwidth\b/i);
     assert.match(sources, /transform:\s*scaleX/);
-    assert.match(read('static/js/files/workflows.js'), /style\.transform = `scaleX/);
-    assert.match(read('static/js/settings/index.js'), /style\.transform = `scaleX/);
+    assert.match(read('static/js/files/upload-workflow.js'), /style\.transform = `scaleX/);
+    assert.match(read('static/js/settings/summary.js'), /style\.transform = `scaleX/);
 });

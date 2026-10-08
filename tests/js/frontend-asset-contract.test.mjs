@@ -52,14 +52,16 @@ test("dashboard and notes use the deferred first-party Sortable bridge", async (
     const localAsset = "js/vendor/dist/sortable-global.js";
 
     for (const [name, template, consumer] of [
-        ["dashboard", dashboard, "js/dashboard/layout-editor.js"],
-        ["notes", notes, "js/notes/list/drag-drop.js"],
+        ["dashboard", dashboard, "js/dashboard/index.js"],
+        ["notes", notes, "js/notes/list.js"],
     ]) {
         assert.doesNotMatch(template, /https:\/\/cdn\.jsdelivr\.net\/npm\/sortablejs/);
         const assetIndex = template.indexOf(localAsset);
         assert.ok(assetIndex >= 0, `${name} loads the local Sortable bridge`);
         assert.match(template.slice(assetIndex - 40, assetIndex + localAsset.length + 40), /defer/);
         assert.ok(assetIndex < template.indexOf(consumer), `${name} loads Sortable before its consumer`);
+        const entryScript = template.match(new RegExp(`<script[^>]*${consumer.replaceAll('.', '\\.')}[^>]*>`))?.[0];
+        assert.match(entryScript, /type="module"/, `${name} defers its feature module entry`);
     }
 
     assert.match(bridgeSource, /import Sortable from ["']sortablejs["']/);

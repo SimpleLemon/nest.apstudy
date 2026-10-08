@@ -167,6 +167,11 @@ logs/
 !.github/workflows/*.yaml
 codex-attention-notifier
 docs/
+!docs/
+docs/*
+!docs/storage-sqlite-migration.md
+!docs/storage-sqlite-runbook.md
+!docs/course-data-refresh.md
 .scorecard.png
 setup_appwrite_db.py
 REMNUS_BLOCK_EDITOR_REFERENCE.md
@@ -174,3 +179,10 @@ REMNUS_BLOCK_EDITOR_REFERENCE.md
 # Temporary July 2026 RSVP service (local/VPS direct deployment only)
 /temporary_rsvp/
 /TEMP_RSVP.md
+
+# Deliver the locally bundled shared command palette.
+!static/js/core/dist/
+!static/js/core/dist/command-palette.js
+data/atlas/browser-captures/
+data/rmp/browser-captures/
+/test-results/

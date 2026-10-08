@@ -3,13 +3,8 @@ import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
-const globalSource = fs.readFileSync('static/js/core/global.js', 'utf8');
-
-function csrfFetchWrapperSource() {
-    const start = globalSource.indexOf('(() => {\n    if (window.__apstudyCsrfFetchInstalled');
-    const end = globalSource.indexOf('\n})();', start);
-    return globalSource.slice(start, end + '\n})();'.length);
-}
+const csrfSource = fs.readFileSync('static/js/core/csrf.js', 'utf8');
+const sessionSource = fs.readFileSync('static/js/core/session.js', 'utf8');
 
 function installCsrfFetchHarness(handler, initialCookie = 'csrf_token=stale') {
     let cookie = initialCookie;
@@ -35,14 +30,15 @@ function installCsrfFetchHarness(handler, initialCookie = 'csrf_token=stale') {
         fetch: nativeFetch,
         location: { href: 'https://nest.apstudy.org/notes/editor/note-1', origin: 'https://nest.apstudy.org' },
     };
-    vm.runInNewContext(csrfFetchWrapperSource(), { window, document, Request, Headers, URL, Error });
+    vm.runInNewContext(csrfSource, { window, document, Request, Headers, URL, Error });
+    window.APStudyCsrf = window.APStudyCoreServices.csrf.installCsrfFetch({ window, document });
     return { calls, fetch: window.fetch };
 }
 
 test('same-origin unsafe fetches receive the CSRF header', () => {
-    assert.match(globalSource, /unsafeMethods = new Set\(\["POST", "PUT", "PATCH", "DELETE"\]\)/);
-    assert.match(globalSource, /url\.origin !== window\.location\.origin/);
-    assert.match(globalSource, /headers\.set\("X-CSRFToken", token\)/);
+    assert.match(csrfSource, /unsafeMethods = new Set\(\["POST", "PUT", "PATCH", "DELETE"\]\)/);
+    assert.match(csrfSource, /url\.origin !== window\.location\.origin/);
+    assert.match(csrfSource, /headers\.set\("X-CSRFToken", token\)/);
 });
 
 test('marked CSRF failures refresh once and retry the original mutation', async () => {
@@ -113,7 +109,7 @@ test('concurrent CSRF failures share one token refresh', async () => {
 });
 
 test('logout uses a CSRF-protected POST instead of navigation GET', () => {
-    assert.match(globalSource, /fetch\("\/logout", \{/);
-    assert.match(globalSource, /method: "POST"/);
-    assert.doesNotMatch(globalSource, /location\.assign\(`\$\{window\.location\.origin\}\/logout`\)/);
+    assert.match(sessionSource, /fetch\("\/logout", \{/);
+    assert.match(sessionSource, /method: "POST"/);
+    assert.doesNotMatch(sessionSource, /location\.assign\(`\$\{window\.location\.origin\}\/logout`\)/);
 });
