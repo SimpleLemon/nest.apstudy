@@ -1,17 +1,11 @@
+const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 const STATUS_LABELS = { open: 'Open', closed: 'Closed', waitlist: 'Waitlist' };
 
 function loadFilters() {
-  const source = fs.readFileSync(path.join(__dirname, '../../static/js/courses/filters.js'), 'utf8');
-  const context = { window: {} };
-  vm.createContext(context);
-  vm.runInContext(source, context);
-  return context.window.APStudyCoursesFilters;
+  return loadFeatureModule('courses/filters.js', { window: {} });
 }
 
 function catalogVerifiedAvailability(section) {
@@ -39,7 +33,7 @@ function createFilters(statusFilters, options = {}) {
     tracksBySection: new Map(),
     removedSelectedSections: new Map(),
   };
-  return loadFilters().create({
+  return loadFilters().createCourseFilters({
     state,
     COURSE_START_MINUTES: 360,
     COURSE_END_MINUTES: 1440,
@@ -172,7 +166,7 @@ test('default fallback derives catalog status but marks it unverified', () => {
     tracksBySection: new Map(),
     removedSelectedSections: new Map(),
   };
-  const { getFilteredSections } = source.create({
+  const { getFilteredSections } = source.createCourseFilters({
     state,
     COURSE_START_MINUTES: 360,
     COURSE_END_MINUTES: 1440,

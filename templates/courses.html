@@ -35,14 +35,7 @@
     <script src="{{ url_for('static', filename='js/core/global.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/navbar.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/core/sidebar.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/utils.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/filters.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/panel.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/calendar.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/edit.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/controls.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/verify.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/courses/index.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/courses/index.js') }}" type="module"></script>
 {% endblock %}
 
 {% block body_attrs %} class="courses-body bg-surface text-on-surface font-body min-h-screen antialiased" data-analytics-mode="authenticated" data-analytics-measurement-id="G-0NT330ZX5L"{% endblock %}
@@ -57,6 +50,7 @@
                 <div>
                     <h1 class="workspace-page-title">Courses</h1>
                     <p id="courses-result-summary">Loading Emory Atlas...</p>
+                    <p id="courses-catalog-status" class="courses-catalog-status"></p>
                 </div>
             </section>
             <section class="courses-search-stack" id="courses-search-stack" aria-label="Course filters">

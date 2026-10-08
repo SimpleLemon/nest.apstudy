@@ -1,11 +1,8 @@
+const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-const VERIFY_PATH = path.join(__dirname, '../../static/js/courses/verify.js');
-const verifySource = fs.readFileSync(VERIFY_PATH, 'utf8');
 
 function loadVerify() {
   const context = {
@@ -17,9 +14,8 @@ function loadVerify() {
     Set,
   };
   vm.createContext(context);
-  vm.runInContext(verifySource, context, { filename: 'verify.js' });
-  const api = context.window.APStudyCoursesVerify;
-  assert.ok(api && typeof api.create === 'function', 'verify.js must expose APStudyCoursesVerify');
+  const api = loadFeatureModule('courses/verify.js', context);
+  assert.ok(api && typeof api.create === 'function', 'verify module must export create');
   return api;
 }
 
@@ -121,7 +117,7 @@ test('buildQuerySignature sorts days, ignores statuses/statusFilters, and change
   );
 });
 
-test('_beginGeneration dedupes candidate ids and caps the list at 120', () => {
+test('_beginGeneration dedupes candidate ids without truncating the query', () => {
   const ids = ['dup', 'dup', ...Array.from({ length: 130 }, (_, i) => `s${i}`)];
   const controller = verifyModule.create({
     fetchImpl: () => {
@@ -131,14 +127,14 @@ test('_beginGeneration dedupes candidate ids and caps the list at 120', () => {
 
   const first = controller._beginGeneration({ sectionIds: ids, queryInput: { term: 'Fall_2026' } });
   assert.equal(first.changed, true);
-  assert.equal(first.sectionIds.length, 120);
-  assert.equal(new Set(first.sectionIds).size, 120);
+  assert.equal(first.sectionIds.length, 131);
+  assert.equal(new Set(first.sectionIds).size, 131);
   assert.equal(first.sectionIds[0], 'dup');
   assert.ok(first.sectionIds.includes('s118'));
-  assert.ok(!first.sectionIds.includes('s119'));
+  assert.ok(first.sectionIds.includes('s129'));
 
   const state = controller.getState();
-  assert.equal(state.phases.size, 120);
+  assert.equal(state.phases.size, 131);
   for (const id of first.sectionIds) {
     assert.equal(state.phases.get(id), 'pending');
   }
@@ -887,7 +883,7 @@ test('reset aborts active requests and returns sections to unverified', async ()
   const recorder = createFetchRecorder();
   const controller = createController(recorder.fetchImpl);
 
-  const statusPending = controller.startQuery({ sectionIds: ['s1'], queryInput: {} });
+  void controller.startQuery({ sectionIds: ['s1'], queryInput: {} });
   await flush();
   const statusSignal = recorder.calls[0].signal;
   controller.reset();
@@ -918,7 +914,7 @@ test('reset aborts active requests and returns sections to unverified', async ()
     verified_by_id: { s1: { enrollment_status: 'Open', seats_available: 3 } },
   });
   await next;
-  const detailsPending = controller.requestDetails(['s1']);
+  void controller.requestDetails(['s1']);
   await flush();
   const detailsSignal = recorder.calls[2].signal;
   controller.reset();
@@ -964,5 +960,78 @@ test('verify requests hit the same-origin endpoint with credentials, JSON body, 
   });
   await detailsPending;
 
-  assert.doesNotMatch(verifySource, /atlas\.emory\.edu/);
+});
+
+
+test('stale detail cleanup cannot release newer generation inflight ids or controller', async () => {
+  const recorder = createFetchRecorder();
+  const controller = createController(recorder.fetchImpl);
+  let status = controller.startQuery({ sectionIds: ['same'], queryInput: { query: 'old' } });
+  await flush();
+  respondJson(recorder.calls[0], { verified_by_id: { same: { enrollment_status: 'Open' } } });
+  await status;
+  const oldDetails = controller.requestDetails(['same']);
+  await flush();
+  status = controller.startQuery({ sectionIds: ['same'], queryInput: { query: 'new' } });
+  await flush();
+  respondJson(recorder.calls[2], { verified_by_id: { same: { enrollment_status: 'Open' } } });
+  await status;
+  const newDetails = controller.requestDetails(['same']);
+  await flush();
+  respondJson(recorder.calls[1], { details_by_id: { same: { seats_available: 9 } } });
+  await oldDetails;
+  assert.equal(controller.getState().detailInflightIds.has('same'), true);
+  assert.equal(controller.requestDetails(['same']), newDetails, 'duplicate callers reuse the current detail request');
+  assert.equal(recorder.calls.length, 4);
+  controller.reset();
+  assert.equal(recorder.calls[3].signal.aborted, true, 'old cleanup retains the current abort controller');
+  respondJson(recorder.calls[3], { details_by_id: { same: { seats_available: 5 } } });
+  await newDetails;
+  assert.equal(controller.getState().detailInflightIds.size, 0);
+});
+
+test('status progress failures release the promise so the same query can settle again', async () => {
+  const recorder = createFetchRecorder();
+  const controller = verifyModule.create({ fetchImpl: recorder.fetchImpl, onStatusProgress() { throw new Error('render failed'); } });
+  const pending = controller.startQuery({ sectionIds: ['one'], queryInput: {} });
+  const rejected = assert.rejects(pending, /render failed/);
+  await flush();
+  respondJson(recorder.calls[0], { verified_by_id: { one: { enrollment_status: 'Open' } } });
+  await rejected;
+  const next = await controller.startQuery({ sectionIds: ['one'], queryInput: {} });
+  assert.equal(next.phases.get('one'), 'verified');
+  assert.equal(recorder.calls.length, 1);
+});
+
+test('all candidates beyond 500 verify with bounded request sizes and subject groups', async () => {
+  const ids = Array.from({ length: 625 }, (_, index) => `Fall_2026|SUB${Math.floor(index / 5)}|${index}`);
+  const calls = [];
+  const controller = createController(async (_url, options) => {
+    const { section_ids: batch } = JSON.parse(options.body);
+    calls.push(batch);
+    return { ok: true, json: async () => ({ verified_by_id: Object.fromEntries(batch.map((id) => [id, { enrollment_status: 'Open' }])) }) };
+  });
+  await controller.startQuery({ sectionIds: ids, queryInput: { term: 'Fall_2026' } });
+  assert.deepEqual(calls.flat(), ids);
+  assert.equal(controller.getState().verified.size, 625);
+  assert.equal(controller.getSectionState(ids[624]).phase, 'verified');
+  for (const batch of calls) {
+    assert.ok(batch.length <= 120);
+    assert.ok(new Set(batch.map((id) => id.split('|').slice(0, 2).join('|'))).size <= 24);
+  }
+});
+
+test('a single subject with over 500 sections still splits at 120 ids', async () => {
+  const ids = Array.from({ length: 601 }, (_, index) => `Fall_2026|BIOL|${index}`);
+  const batchSizes = [];
+  const controller = createController(async (_url, options) => {
+    const batch = JSON.parse(options.body).section_ids;
+    batchSizes.push(batch.length);
+    return { ok: true, json: async () => ({ verified_by_id: Object.fromEntries(batch.map((id) => [id, { enrollment_status: 'Closed' }])) }) };
+  });
+  await controller.startQuery({ sectionIds: ids });
+  assert.deepEqual(batchSizes, [120, 120, 120, 120, 120, 1]);
+  const previous = controller.getState().generation;
+  const next = controller._beginGeneration({ sectionIds: [...ids.slice(0, -1), 'Fall_2026|BIOL|new'] });
+  assert.equal(next.generation, previous + 1, 'candidate changes after the first 120 must invalidate the generation');
 });

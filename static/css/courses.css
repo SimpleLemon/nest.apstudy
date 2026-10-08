@@ -1513,7 +1513,9 @@ body.courses-body {
     grid-row: 3;
     height: auto;
     min-height: calc(100vh - var(--navbar-height));
+    display: block;
     grid-template-columns: 1fr;
+    overflow: visible;
   }
 
   .courses-panel {
@@ -1524,10 +1526,12 @@ body.courses-body {
   }
 
   .courses-panel-content {
+    flex: 0 1 auto;
     max-height: 48vh;
   }
 
   .courses-calendar-shell {
+    height: auto;
     min-height: 680px;
   }
 }
@@ -1721,4 +1725,133 @@ body.courses-body {
     font-size: 13px;
     padding: 6px 2px 8px;
   }
+}
+
+
+.courses-panel-header .courses-catalog-status {
+  margin-top: 6px;
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.courses-results-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.course-professor-ratings {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.course-professor-ratings.is-compact {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-block: 0;
+  font: inherit;
+}
+
+.course-card-schedule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.course-professor-ratings.is-compact strong { font-weight: 400; }
+
+.course-professor-ratings.is-compact .course-rating,
+.course-rating-heading {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.course-rating strong { min-inline-size: 0; }
+
+.course-rating .course-rating-badge {
+  --rating-background: #e4e4e4;
+  --rating-border: #727272;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 30px;
+  box-sizing: border-box;
+  border: 1px solid var(--rating-border);
+  border-radius: calc(var(--radius-control) * 1.5);
+  background: var(--rating-background);
+  color: #151515;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* Inline scores fit within the schedule's original text line. */
+.course-professor-ratings.is-compact .course-rating { gap: 4px; }
+.course-professor-ratings.is-compact .course-rating-badge {
+  inline-size: 24px;
+  block-size: 16px;
+  border-radius: var(--radius-control);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Palette and score bands match RMP's public quality cards. */
+.course-rating-badge.is-green { --rating-background: #7ff6c3; --rating-border: #41755d; }
+.course-rating-badge.is-yellow { --rating-background: #fff170; --rating-border: #807938; }
+.course-rating-badge.is-red { --rating-background: #ff9c9c; --rating-border: #804e4e; }
+
+.course-rating a.course-rating-badge { cursor: pointer; }
+.course-rating a.course-rating-badge:hover { filter: brightness(0.94); }
+
+.course-professor-ratings h3 {
+  margin: 0;
+  color: var(--color-on-surface);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.course-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.course-rating strong { font-weight: 600; }
+.course-rating-detail { flex-basis: 100%; }
+.course-rating-note { margin: 0; }
+.course-rating a:not(.course-rating-badge) {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.course-rating a:not(.course-rating-badge):hover { text-decoration-thickness: 2px; }
+.course-rating a:focus-visible,
+.courses-results-more button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }

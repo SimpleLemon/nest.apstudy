@@ -1,11 +1,8 @@
+const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-const PANEL_PATH = path.join(__dirname, '../../static/js/courses/panel.js');
-const panelSource = fs.readFileSync(PANEL_PATH, 'utf8');
 
 const UNAVAILABLE_SEATS_TITLE = 'Live availability could not be verified from Atlas just now.';
 
@@ -76,7 +73,7 @@ function renderCard({ section, availability, withResolver = true }) {
   };
   const context = { window: {}, document: documentStub };
   vm.createContext(context);
-  vm.runInContext(panelSource, context, { filename: 'panel.js' });
+  const panel = loadFeatureModule('courses/panel.js', context);
 
   const options = {
     state: baseState(),
@@ -89,7 +86,7 @@ function renderCard({ section, availability, withResolver = true }) {
     utils: UTILS,
   };
   if (withResolver) options.getEffectiveAvailability = () => availability;
-  context.window.APStudyCoursesPanel.create(options).renderPanel();
+  panel.createCoursePanel(options).renderPanel();
   return content.innerHTML;
 }
 
@@ -421,8 +418,8 @@ function renderEmptyPanel({ candidates, availability, statusFilters = ['open'] }
   };
   const context = { window: {}, document: documentStub };
   vm.createContext(context);
-  vm.runInContext(panelSource, context, { filename: 'panel.js' });
-  context.window.APStudyCoursesPanel.create({
+  const panel = loadFeatureModule('courses/panel.js', context);
+  panel.createCoursePanel({
     state: { ...baseState(), statusFilters: new Set(statusFilters) },
     COURSE_COLOR_PALETTE: [{ key: 'course-color-01' }],
     COURSE_DAYS: [{ key: 'Mon', index: 1 }],

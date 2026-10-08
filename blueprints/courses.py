@@ -1,6 +1,5 @@
 import logging
 import json
-import random
 from datetime import datetime
 
 from flask import Blueprint, jsonify, request
@@ -27,9 +26,13 @@ from services.atlas_client import (
     is_section_trackable,
     parse_section_id,
 )
-from services.app_config import spring_course_tracking_open
+from services.course_tracking_terms import term_policy, track_policy_fields, policy_error
+from services.atlas_client import get_terms
 from services.course_live_snapshots import merge_snapshots_into_sections, refresh_section_snapshot
 from services.course_catalog import get_course_catalog_metadata
+from services.professor_ratings import enrich_sections_with_professor_ratings
+from services import saved_courses
+from services.saved_courses import COURSE_COLOR_KEYS, COURSE_OVERRIDE_STRING_FIELDS, COURSE_OVERRIDE_FIELDS
 from services.discord_audit import (
     emit_course_track_event,
     emit_creation_event,
@@ -43,25 +46,7 @@ from services.user_profile import is_emory_or_oxford_user
 courses_bp = Blueprint("courses", __name__)
 logger = logging.getLogger(__name__)
 
-COURSE_COLOR_KEYS = tuple(f"course-color-{index:02d}" for index in range(1, 17))
-COURSE_OVERRIDE_STRING_FIELDS = {
-    "course_code": 64,
-    "course_title": 255,
-    "course_name": 255,
-    "section_number": 64,
-    "instructor": 255,
-    "instructor_name": 255,
-    "schedule_type": 64,
-    "schedule_display": 255,
-    "location": 255,
-    "campus": 64,
-    "campus_description": 255,
-    "credit_hours": 64,
-    "requirement_designation": 255,
-    "course_description": 4000,
-    "course_notes": 4000,
-}
-COURSE_OVERRIDE_FIELDS = set(COURSE_OVERRIDE_STRING_FIELDS) | {"meetings"}
+
 COURSE_DAY_KEYS = {"Mon", "Tue", "Wed", "Thu", "Fri"}
 MAX_LIVE_BATCH_SECTIONS = 20
 
@@ -87,37 +72,16 @@ def _payload_bool(payload, key, default=False):
 
 
 def _get_section_by_id(section_id):
-    parsed = parse_section_id(section_id)
-    if not parsed:
-        return None
-
-    result = get_sections_by_ids([section_id], include_cancelled=True)
-    sections = result.get("sections") or []
-    if sections:
-        return merge_snapshots_into_sections(sections)[0]
-
-    fallback = get_sections_index(term=parsed["term"], include_cancelled=True)
-    for section in fallback.get("sections", []):
-        if section.get("id") == section_id:
-            return merge_snapshots_into_sections([section])[0]
-    return None
+    return saved_courses._get_section_by_id(
+        section_id, parse_id=parse_section_id, get_sections=get_sections_by_ids,
+        get_index=get_sections_index, merge_snapshots=merge_snapshots_into_sections,
+    )
 
 
-def _course_row_id(course):
-    return course.get("$id") or course.get("id")
+_course_row_id = saved_courses._course_row_id
 
 
-def _parse_course_overrides(course):
-    raw = course.get("course_overrides_json")
-    if not raw:
-        return {}
-    if isinstance(raw, dict):
-        return raw
-    try:
-        parsed = json.loads(raw)
-    except (TypeError, ValueError):
-        return {}
-    return parsed if isinstance(parsed, dict) else {}
+_parse_course_overrides = saved_courses._parse_course_overrides
 
 
 def _sanitize_text(value, max_length):
@@ -172,154 +136,28 @@ def _sanitize_course_overrides(value):
     return {key: val for key, val in overrides.items() if val not in (None, "")}
 
 
-def _used_color_keys(courses, term=None, exclude_course_id=None):
-    used = set()
-    for course in courses:
-        if term and course.get("term") != term:
-            continue
-        if exclude_course_id and _course_row_id(course) == exclude_course_id:
-            continue
-        color_key = course.get("color_key")
-        if color_key in COURSE_COLOR_KEYS:
-            used.add(color_key)
-    return used
+_used_color_keys = saved_courses._used_color_keys
 
 
-def _choose_course_color(courses, term, exclude_course_id=None):
-    used = _used_color_keys(courses, term=term, exclude_course_id=exclude_course_id)
-    available = [key for key in COURSE_COLOR_KEYS if key not in used]
-    return random.choice(available or list(COURSE_COLOR_KEYS))
+_choose_course_color = saved_courses._choose_course_color
 
 
 def _ensure_course_colors(user_id, courses):
-    changed = []
-    now = format_datetime(datetime.utcnow())
-    for course in courses:
-        if course.get("color_key") in COURSE_COLOR_KEYS:
-            continue
-        row_id = _course_row_id(course)
-        if not row_id:
-            continue
-        color_key = _choose_course_color(courses, course.get("term"), exclude_course_id=row_id)
-        try:
-            updated = update_row_safe(
-                COLLECTIONS["user_courses"],
-                row_id,
-                {"color_key": color_key, "updated_at": now},
-            )
-        except AppwriteException:
-            logger.exception("Failed to assign course color")
-            continue
-        course.update(updated)
-        changed.append(row_id)
-    return changed
+    return saved_courses._ensure_course_colors(
+        user_id, courses, choose_color=_choose_course_color, update_row=update_row_safe,
+    )
 
 
-def _merge_course_overrides(serialized, overrides):
-    for key, value in overrides.items():
-        if key not in COURSE_OVERRIDE_FIELDS:
-            continue
-        if key == "course_name":
-            serialized["course_name"] = value
-            serialized["course_title"] = value
-            continue
-        if key == "course_title":
-            serialized["course_title"] = value
-            serialized["course_name"] = value
-            continue
-        if key == "instructor_name":
-            serialized["instructor_name"] = value
-            serialized["instructor"] = value
-            continue
-        if key == "instructor":
-            serialized["instructor"] = value
-            serialized["instructor_name"] = value
-            continue
-        serialized[key] = value
-    return serialized
+_merge_course_overrides = saved_courses._merge_course_overrides
 
 
 def _find_section_for_course(course, index_cache):
-    term = course.get("term")
-    subject = str(course.get("subject") or "").upper()
-    catalog = str(course.get("catalog") or "")
-    crn = str(course.get("crn") or "")
-    section_number = str(course.get("section_number") or "")
-    if not term or not subject or not catalog:
-        return None
-
-    if crn and section_number:
-        section_id = build_section_id(term, subject, catalog, crn, section_number)
-        section = _get_section_by_id(section_id)
-        if section:
-            return section
-
-    if term not in index_cache:
-        index_cache[term] = get_sections_index(term=term, include_cancelled=True).get("sections", [])
-
-    best_match = None
-    for section in index_cache[term]:
-        if section.get("term") != term:
-            continue
-        if str(section.get("subject") or "").upper() != subject:
-            continue
-        if str(section.get("catalog_number") or "") != catalog:
-            continue
-        if crn and str(section.get("crn") or "") == crn:
-            return section
-        if section_number and str(section.get("section_number") or "") == section_number:
-            return section
-        if best_match is None:
-            best_match = section
-    return best_match
+    return saved_courses._find_section_for_course(
+        course, index_cache, get_section=_get_section_by_id, get_index=get_sections_index,
+    )
 
 
-def _serialize_course(course, section=None):
-    section = section or {}
-    overrides = _parse_course_overrides(course)
-    subject = course.get("subject") or section.get("subject")
-    catalog = course.get("catalog") or section.get("catalog_number")
-    course_code = section.get("course_code") or f"{subject} {catalog}".strip()
-    serialized = {
-        "id": _course_row_id(course),
-        "section_id": section.get("id"),
-        "term": course.get("term") or section.get("term"),
-        "subject": subject,
-        "catalog": catalog,
-        "catalog_number": catalog,
-        "crn": course.get("crn") or section.get("crn"),
-        "section_number": course.get("section_number") or section.get("section_number"),
-        "course_code": course_code,
-        "course_title": course.get("course_name") or section.get("course_title"),
-        "course_name": course.get("course_name") or section.get("course_title"),
-        "instructor": course.get("instructor_name") or section.get("instructor"),
-        "instructor_name": course.get("instructor_name") or section.get("instructor"),
-        "instructors": section.get("instructors") or [],
-        "location": section.get("location"),
-        "schedule_type": section.get("schedule_type"),
-        "schedule_display": section.get("schedule_display"),
-        "meetings": section.get("meetings") or [],
-        "date_range": section.get("date_range"),
-        "credit_hours": section.get("credit_hours"),
-        "requirement_designation": section.get("requirement_designation"),
-        "requirements": section.get("requirements") or [],
-        "course_description": section.get("course_description"),
-        "course_notes": section.get("course_notes"),
-        "enrollment_status": section.get("enrollment_status"),
-        "enrollment_count": section.get("enrollment_count"),
-        "seats_available": section.get("seats_available"),
-        "enrollment_capacity": section.get("enrollment_capacity"),
-        "waitlist_total": section.get("waitlist_total"),
-        "waitlist_capacity": section.get("waitlist_capacity"),
-        "live_updated_at": section.get("live_updated_at"),
-        "live_snapshot_available": section.get("live_snapshot_available", False),
-        "live_stale": section.get("live_stale", True),
-        "is_cancelled": section.get("is_cancelled", False),
-        "color_key": course.get("color_key"),
-        "overrides": overrides,
-        "updated_at": course.get("updated_at"),
-    }
-    return _merge_course_overrides(serialized, overrides)
+_serialize_course = saved_courses._serialize_course
 
 
 def _track_for_section(user_id, section):
@@ -337,6 +175,7 @@ def _track_for_section(user_id, section):
 
 def _serialize_track(track):
     return {
+        **track_policy_fields(track),
         "id": track.get("$id") or track.get("id"),
         "section_id": track.get("section_id"),
         "term": track.get("term"),
@@ -356,11 +195,6 @@ def _serialize_track(track):
         "last_waitlist_capacity": track.get("last_waitlist_capacity"),
         "cooldown_until_closed": bool(track.get("cooldown_until_closed", False)),
     }
-
-
-def _spring_tracking_closed_for_section(section):
-    term = str((section or {}).get("term") or "").strip()
-    return term.startswith("Spring_") and not spring_course_tracking_open()
 
 
 def _merge_catalog_section(section):
@@ -394,25 +228,14 @@ def list_saved_courses():
         return forbidden
 
     try:
-        courses = list_rows_all(
-            COLLECTIONS["user_courses"],
-            [
-                Query.equal("user_id", [_current_user_id()]),
-                Query.order_asc("term"),
-                Query.order_asc("subject"),
-                Query.order_asc("catalog"),
-            ],
+        serialized = saved_courses.list_saved_courses_for_user(
+            _current_user_id(), list_rows=list_rows_all, ensure_colors=_ensure_course_colors,
+            find_section=_find_section_for_course, serialize=_serialize_course,
         )
     except AppwriteException:
         logger.exception("Failed to list user courses")
         return jsonify({"error": "Unable to load courses."}), 500
 
-    _ensure_course_colors(_current_user_id(), courses)
-    index_cache = {}
-    serialized = [
-        _serialize_course(course, _find_section_for_course(course, index_cache))
-        for course in courses
-    ]
     return jsonify({"count": len(serialized), "courses": serialized})
 
 
@@ -622,6 +445,7 @@ def list_tracks():
             for track in serialized
             if track.get("section_id")
         },
+        "term_policies": {term: term_policy(term) for term in set(get_terms()["terms"]) | {row.get("term") for row in tracks}},
         "allowed_intervals_minutes": allowed_intervals,
         "tier": tier,
         "usage": usage,
@@ -638,22 +462,22 @@ def upsert_track():
 
     payload = request.get_json(silent=True) or {}
     section_id = payload.get("section_id")
-    enabled = bool(payload.get("enabled", True))
+    enabled = payload.get("enabled", True)
+    if type(enabled) is not bool:
+        return jsonify({"error": "Enabled must be true or false."}), 400
     section = _get_section_by_id(section_id)
     if not section:
         return jsonify({"error": "Course section not found."}), 404
 
-    if enabled and _spring_tracking_closed_for_section(section):
-        return jsonify({
-            "error": "Spring course tracking is not open yet.",
-            "section": section,
-            "spring_course_tracking_open": False,
-        }), 403
+    policy = term_policy(section.get("term"))
+    if enabled and not policy["can_enable"]:
+        body, status = policy_error(policy)
+        return jsonify(body), status
 
     live_error = None
     last_updated_at = None
     live_stale = False
-    if enabled:
+    if enabled and policy["polling_enabled"]:
         section, live_error, last_updated_at, live_stale = _merge_live_section(section, payload)
 
     user_id = _current_user_id()
@@ -718,7 +542,10 @@ def upsert_track():
                 row_id=ID.unique(),
                 data=data,
             )
-    except AppwriteException:
+    except AppwriteException as exc:
+        if "course_tracking_closed" in str(exc):
+            body, status = policy_error(term_policy(section.get("term")))
+            return jsonify(body), status
         logger.exception("Failed to update course track")
         return jsonify({"error": "Unable to update course tracking."}), 500
 
@@ -783,6 +610,7 @@ def section_status():
         return jsonify({"error": "Course section not found."}), 404
 
     section, live_error, last_updated_at, live_stale = _merge_live_section(section, payload)
+    section = enrich_sections_with_professor_ratings([section])[0]
     return jsonify({
         "section": section,
         "trackable": is_section_trackable(section),
@@ -833,6 +661,13 @@ def section_status_batch():
         if live_error:
             errors_by_id[section_id] = live_error
 
+    sections_by_id = {
+        section_id: section
+        for section_id, section in zip(
+            sections_by_id,
+            enrich_sections_with_professor_ratings(list(sections_by_id.values())),
+        )
+    }
     return jsonify({
         "status": "ok",
         "count": len(sections_by_id),

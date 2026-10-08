@@ -67,6 +67,15 @@ async function mountCourses(page, baseURL, { delayLiveStatus = false, savedSecti
         <div style="block-size: ${documentHeight}px"></div>
     </body></html>`);
     await page.evaluate(() => {
+        window.APStudyHttp = { fetchJson: async (url, options = {}) => {
+            const response = await fetch(url, {
+                ...options,
+                headers: { "Content-Type": "application/json", ...options.headers },
+            });
+            const payload = await response.json();
+            if (!response.ok) throw new Error(payload.error || "Request failed.");
+            return payload;
+        } };
         window.APStudyUIPrimitives = { escapeHtml: (value) => String(value ?? "") };
         window.APStudyToast = { show() {} };
         window.APStudyConfirm = { request: async () => true };
@@ -74,19 +83,7 @@ async function mountCourses(page, baseURL, { delayLiveStatus = false, savedSecti
         window.APSTUDY_COURSES_DEFAULT_TERM = "Fall_2026";
         window.APSTUDY_COURSES_DEFAULT_CAMPUS = "atlanta";
     });
-    for (const source of [
-        "utils.js",
-        "filters.js",
-        "panel.js",
-        "calendar.js",
-        "edit.js",
-        "controls.js",
-        "verify.js",
-        "index.js",
-    ]) {
-        await page.addScriptTag({ url: `${baseURL}/static/js/courses/${source}` });
-    }
-    await page.evaluate(() => document.dispatchEvent(new Event("DOMContentLoaded")));
+    await page.addScriptTag({ url: `${baseURL}/static/js/courses/index.js`, type: "module" });
     await expect.poll(() => {
         if (pageErrors.length) throw new Error(pageErrors.join("\n"));
         return page.locator(".course-card[data-section-id]").count();

@@ -1,25 +1,22 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const dataUrl = (source) => `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`;
-const escapeBridgeUrl = dataUrl(`export const escapeHtml = (value) => String(value ?? "")
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;")
-  .replaceAll("'", "&#39;");`);
-const utilsSource = await readFile(path.join(repoRoot, "static/js/derek/echo-utils.js"), "utf8");
-const utilsUrl = dataUrl(utilsSource.replace("../core/ui-primitives-module.js", escapeBridgeUrl));
+const moduleRoot = await mkdtemp(path.join(os.tmpdir(), "apstudy-echo-esm-"));
+test.after(() => rm(moduleRoot, { recursive: true, force: true }));
+await writeFile(path.join(moduleRoot, "package.json"), '{"type":"module"}\n');
+await cp(path.join(repoRoot, "static/js/derek"), path.join(moduleRoot, "static/js/derek"), { recursive: true });
+await mkdir(path.join(moduleRoot, "static/js/core"), { recursive: true });
+for (const filename of ["escaping.js", "ui-primitives-module.js"]) {
+  await cp(path.join(repoRoot, "static/js/core", filename), path.join(moduleRoot, "static/js/core", filename));
+}
 
 async function loadEchoModule(relativePath) {
-  const source = await readFile(path.join(repoRoot, relativePath), "utf8");
-  return import(dataUrl(source
-    .replace("../core/ui-primitives-module.js", escapeBridgeUrl)
-    .replaceAll('"./echo-utils.js"', `"${utilsUrl}"`)));
+  return import(pathToFileURL(path.join(moduleRoot, relativePath)).href);
 }
 
 const utils = await loadEchoModule("static/js/derek/echo-utils.js");

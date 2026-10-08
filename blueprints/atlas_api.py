@@ -17,6 +17,7 @@ from services.atlas_client import (
     get_starred_general_ed_requirements,
 )
 from services.course_live_snapshots import isoformat, merge_snapshots_into_sections
+from services.professor_ratings import enrich_sections_with_professor_ratings
 from services.user_profile import is_emory_or_oxford_user
 
 
@@ -92,7 +93,7 @@ def list_terms():
 
 @atlas_bp.route("/subjects")
 def list_subjects():
-    term = request.args.get("term", "Fall_2026")
+    term = request.args.get("term")
     result = get_subjects(term)
     if "error" in result:
         return jsonify(result), 400 if "Invalid" in result["error"] else 404
@@ -110,7 +111,7 @@ def list_general_ed_requirements():
 @atlas_bp.route("/search")
 def search():
     query = request.args.get("query", "")
-    term = request.args.get("term", "Fall_2026")
+    term = request.args.get("term")
     result = search_courses(query, term)
     if "error" in result:
         return jsonify(result), 400 if "Invalid" in result["error"] or "Missing" in result["error"] else 404
@@ -144,7 +145,9 @@ def list_sections():
         return jsonify(result), 400 if "Invalid" in result["error"] else 404
     result = {
         **result,
-        "sections": merge_snapshots_into_sections(result.get("sections") or []),
+        "sections": enrich_sections_with_professor_ratings(
+            merge_snapshots_into_sections(result.get("sections") or [])
+        ),
     }
     if statuses:
         result = _filter_live_sections_by_status(result, statuses, limit=limit, offset=offset)
@@ -165,7 +168,9 @@ def list_sections_by_id():
         return jsonify(result), 400
     result = {
         **result,
-        "sections": merge_snapshots_into_sections(result.get("sections") or []),
+        "sections": enrich_sections_with_professor_ratings(
+            merge_snapshots_into_sections(result.get("sections") or [])
+        ),
     }
     return jsonify(result)
 

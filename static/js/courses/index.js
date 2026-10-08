@@ -1,3 +1,11 @@
+import * as courseUtils from './utils.js';
+import { collectMeetingOverrides, meetingRemovalFocusPlan } from './edit.js';
+import { create as createAvailabilityVerifier } from './verify.js';
+import { createCourseFilters } from './filters.js';
+import { createCoursePanel } from './panel.js';
+import { createCourseCalendar } from './calendar.js';
+import { createCourseControls } from './controls.js';
+
 const COURSE_DAYS = [
   { key: "Mon", index: 1 },
   { key: "Tue", index: 2 },
@@ -10,7 +18,6 @@ const COURSE_END_HOUR = 24;
 const COURSE_START_MINUTES = COURSE_START_HOUR * 60;
 const COURSE_END_MINUTES = COURSE_END_HOUR * 60;
 const COURSE_HOUR_HEIGHT = 64;
-const COURSE_RESULT_LIMIT = 100;
 const COURSE_LIVE_HYDRATION_OVERSCAN = 5;
 const COMPACT_COURSES_QUERY = window.matchMedia("(max-width: 640px)");
 const BODY_SCROLLING_COURSES_QUERY = window.matchMedia("(max-width: 1024px)");
@@ -22,9 +29,8 @@ const {
   cssEscape,
   parseAtlasTimeToken,
   parseCoursesSectionDeepLink,
-} = window.APStudyCoursesUtils;
-const { collectMeetingOverrides, meetingRemovalFocusPlan } = window.APStudyCoursesEdit;
-const availabilityVerifier = window.APStudyCoursesVerify.create({
+} = courseUtils;
+const availabilityVerifier = createAvailabilityVerifier({
   onStatusProgress: renderCourses,
 });
 
@@ -34,12 +40,14 @@ const state = {
   savingIds: new Set(),
   trackingIds: new Set(),
   terms: [],
+  termMetadata: {},
   selectedTerm: window.APSTUDY_COURSES_DEFAULT_TERM || "",
   sections: [],
   sectionsById: {},
   currentSectionsRequest: 0,
   savedCoursesBySection: new Map(),
   tracksBySection: new Map(),
+  trackingTermPolicies: {},
   allowedTrackIntervals: [30],
   trackingTier: { key: "free", label: "Free" },
   trackingUsage: 0,
@@ -70,26 +78,25 @@ const state = {
   initialScrollDone: false,
 };
 
-const courseFilters = window.APStudyCoursesFilters.create({
+const courseFilters = createCourseFilters({
   state,
   COURSE_START_MINUTES,
   COURSE_END_MINUTES,
   getSection,
   rememberSection,
   getEffectiveAvailability: (section) => availabilityVerifier.getEffectiveAvailability(section),
-  utils: window.APStudyCoursesUtils,
+  utils: courseUtils,
 });
 const { getFilteredSections, isAvailabilityVerificationPending } = courseFilters;
-const coursePanel = window.APStudyCoursesPanel.create({
+const coursePanel = createCoursePanel({
   state,
   COURSE_COLOR_PALETTE,
   COURSE_DAYS,
-  COURSE_RESULT_LIMIT,
   getFilteredSections,
   getSection,
   isTrackable,
   getEffectiveAvailability,
-  utils: window.APStudyCoursesUtils,
+  utils: courseUtils,
 });
 const {
   getCourseColor,
@@ -99,7 +106,7 @@ const {
   syncFilterControls,
   timeInputToAtlasToken,
 } = coursePanel;
-const courseCalendar = window.APStudyCoursesCalendar.create({
+const courseCalendar = createCourseCalendar({
   state,
   COURSE_DAYS,
   COURSE_START_HOUR,
@@ -110,14 +117,14 @@ const courseCalendar = window.APStudyCoursesCalendar.create({
   COMPACT_COURSES_QUERY,
   getCourseColor,
   getSection,
-  utils: window.APStudyCoursesUtils,
+  utils: courseUtils,
 });
 const {
   isCompactCoursesViewport,
   renderCalendar,
   resetWeekScroll,
 } = courseCalendar;
-const { wireControls } = window.APStudyCoursesControls.create({
+const { wireControls } = createCourseControls({
   state,
   addCourse,
   buildMeetingRowHtml,
@@ -138,15 +145,22 @@ const { wireControls } = window.APStudyCoursesControls.create({
   setTrack,
   startEditingCourse,
   syncFilterControls,
+  scheduleVisibleLiveHydration,
   verifyCurrentAvailability,
   meetingRemovalFocusPlan,
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+function startCourses() {
   wireControls();
   wireLiveHydrationControls();
   void bootstrap();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startCourses, { once: true });
+} else {
+  startCourses();
+}
 
 async function bootstrap() {
   try {
@@ -198,30 +212,14 @@ async function applyCoursesDeepLink() {
   }
 }
 
-async function fetchJson(url, options = {}) {
-  if (window.APStudyHttp?.fetchJson) {
-    return window.APStudyHttp.fetchJson(url, options);
-  }
-  const response = await fetch(url, {
-    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-    ...options,
-  });
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    const error = new Error(payload.error || "Request failed.");
-    if (payload && typeof payload === "object") {
-      ["code", "resource", "limit", "current", "requested"].forEach((key) => {
-        if (payload[key] != null) error[key] = payload[key];
-      });
-    }
-    throw error;
-  }
-  return payload;
+function fetchJson(url, options = {}) {
+  return window.APStudyHttp.fetchJson(url, { pendingLabel: "courses-save", ...options });
 }
 
 async function loadTerms() {
   const payload = await fetchJson("/api/atlas/terms");
   state.terms = Array.isArray(payload.terms) ? payload.terms : [];
+  state.termMetadata = payload.term_metadata || {};
   if (!state.terms.length) {
     throw new Error("No Emory Atlas terms are available.");
   }
@@ -247,7 +245,6 @@ async function loadSectionsForTerm(term) {
     const query = state.searchQuery.trim();
     if (query) {
       params.set("q", query);
-      params.set("limit", "500");
     }
     if (state.dayFilters.size) {
       params.set("days", Array.from(state.dayFilters).join(","));
@@ -365,6 +362,7 @@ function applySavedCourse(course) {
 
 async function loadTracks() {
   const payload = await fetchJson("/api/courses/tracks");
+  state.trackingTermPolicies = payload.term_policies || {};
   state.allowedTrackIntervals = payload.allowed_intervals_minutes || [30];
   state.trackingTier = payload.tier || { key: "free", label: "Free" };
   state.trackingUsage = Number(payload.usage || 0);
@@ -754,9 +752,11 @@ async function setTrack(sectionId, enabled, intervalMinutes = null) {
     if (payload.section) rememberSection(payload.section);
     if (payload.track?.section_id) {
       state.tracksBySection.set(String(payload.track.section_id), payload.track);
+      if (payload.track.term_policy) state.trackingTermPolicies[payload.track.term] = payload.track.term_policy;
     }
     if (enabled !== wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage + (enabled ? 1 : -1));
-    showToast(intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
+    const queued = enabled && payload.track?.tracking_state === "queued";
+    showToast(queued ? "Tracker queued. Checks begin when this term opens." : intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
     if (enabled && !wasEnabled) window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'course-tracking' } }));
   } catch (error) {
     console.error(error);
@@ -842,6 +842,7 @@ function wireLiveHydrationControls() {
   const content = document.getElementById("courses-panel-content");
   content?.addEventListener("scroll", scheduleVisibleLiveHydration, { passive: true });
   window.addEventListener("resize", scheduleVisibleLiveHydration);
+  window.addEventListener("scroll", scheduleVisibleLiveHydration, { passive: true });
 }
 
 function scheduleVisibleLiveHydration() {
@@ -857,11 +858,13 @@ function visibleHydrationSectionIds() {
   if (!cards.length) return [];
 
   const contentRect = content.getBoundingClientRect();
+  const viewportTop = Math.max(0, contentRect.top);
+  const viewportBottom = Math.min(window.innerHeight, contentRect.bottom);
   const selected = [];
   let lastVisibleIndex = -1;
   cards.forEach((card, index) => {
     const rect = card.getBoundingClientRect();
-    const visible = rect.bottom >= contentRect.top && rect.top <= contentRect.bottom;
+    const visible = rect.bottom >= viewportTop && rect.top <= viewportBottom;
     if (!visible) return;
     selected.push(card.dataset.sectionId);
     lastVisibleIndex = Math.max(lastVisibleIndex, index);

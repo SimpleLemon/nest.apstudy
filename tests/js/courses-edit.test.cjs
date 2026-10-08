@@ -1,15 +1,9 @@
+const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 function loadEditHelpers() {
-  const source = fs.readFileSync(path.join(__dirname, '../../static/js/courses/edit.js'), 'utf8');
-  const context = { window: {} };
-  vm.createContext(context);
-  vm.runInContext(source, context);
-  return context.window.APStudyCoursesEdit;
+  return loadFeatureModule('courses/edit.js', {});
 }
 
 function parseAtlasTimeToken(value) {

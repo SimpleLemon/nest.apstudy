@@ -5,6 +5,7 @@ from appwrite.exception import AppwriteException
 
 from services import database
 from services.atlas_client import fetch_live_section_status
+from services.professor_rating_identity import preserve_instructor_ids
 
 
 TABLE = "course_section_live_snapshots"
@@ -115,6 +116,9 @@ def merge_snapshot(section, snapshot, now=None):
     payload = snapshot_payload(snapshot)
     for key in LIVE_SECTION_FIELDS:
         value = payload.get(key)
+        if key == "instructors" and isinstance(value, list):
+            merged[key] = preserve_instructor_ids(merged.get(key), value)
+            continue
         if _nonempty(value):
             merged[key] = value
 

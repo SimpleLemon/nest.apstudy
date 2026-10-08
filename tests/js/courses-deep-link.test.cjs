@@ -1,19 +1,9 @@
+const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 function loadCoursesUtils() {
-  const source = fs.readFileSync(path.join(__dirname, '../../static/js/courses/utils.js'), 'utf8');
-  const context = {
-    console,
-    URLSearchParams,
-    window: { APStudyUIPrimitives: { escapeHtml: String } },
-  };
-  vm.createContext(context);
-  vm.runInContext(source, context);
-  return context.window.APStudyCoursesUtils;
+  return loadFeatureModule('courses/utils.js', { URLSearchParams });
 }
 
 test('parseCoursesSectionDeepLink reads hash section param', () => {

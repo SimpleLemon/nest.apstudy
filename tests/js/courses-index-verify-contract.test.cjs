@@ -28,11 +28,11 @@ function extractBracedBlock(source, anchor, label) {
 }
 
 test('index.js wires exactly one availability verifier into the courses filters', () => {
-  const createCalls = indexSource.match(/APStudyCoursesVerify\.create\(/g) || [];
+  const createCalls = indexSource.match(/createAvailabilityVerifier\(/g) || [];
   assert.equal(createCalls.length, 1);
   assert.match(
     indexSource,
-    /const availabilityVerifier = window\.APStudyCoursesVerify\.create\(\{\s*onStatusProgress: renderCourses,\s*\}\);/,
+    /const availabilityVerifier = createAvailabilityVerifier\(\{\s*onStatusProgress: renderCourses,\s*\}\);/,
   );
   assert.match(
     indexSource,
@@ -157,12 +157,9 @@ test('search input keeps its 500ms debounced section reload', () => {
   assert.doesNotMatch(controlsSource, /, 250\);/);
 });
 
-test('courses template loads verify.js before index.js and drops the dead atlas-live script', () => {
-  const verifyScriptIndex = templateSource.indexOf('js/courses/verify.js');
-  const indexScriptIndex = templateSource.indexOf('js/courses/index.js');
-  assert.ok(verifyScriptIndex !== -1, 'courses template must load js/courses/verify.js');
-  assert.ok(indexScriptIndex !== -1, 'courses template must load js/courses/index.js');
-  assert.ok(verifyScriptIndex < indexScriptIndex, 'courses template must load verify.js before index.js');
+test('courses template has a single module entry for its imported feature definitions', () => {
+  assert.match(templateSource, /filename='js\/courses\/index\.js'[^\n]*type="module"/);
+  assert.doesNotMatch(templateSource, /js\/courses\/(?:verify|utils|panel|filters|controls|edit|calendar|tracking-policy)\.js/);
   assert.doesNotMatch(templateSource, /js\/courses\/atlas-live\.js/);
 });
 

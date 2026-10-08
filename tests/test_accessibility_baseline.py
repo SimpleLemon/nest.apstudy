@@ -105,13 +105,21 @@ class AccessibilityBaselineTests(unittest.TestCase):
             if stylesheet.name in excluded:
                 continue
             source = stylesheet.read_text()
+            compact_rating = re.search(
+                r"\.course-professor-ratings\.is-compact \.course-rating-badge\s*\{[^}]*\}",
+                source,
+            ) if stylesheet.name == "courses.css" else None
             literal_radii.extend(
                 f"{stylesheet.name}: {match.group(0)}"
                 for match in re.finditer(r"border-radius:\s*[^;]*(?:px|rem)", source)
             )
             for match in re.finditer(r"font-size:\s*([0-9.]+)(px|rem)", source):
                 value = float(match.group(1)) * (16 if match.group(2) == "rem" else 1)
-                if value < 12:
+                # Inline RMP scores use smaller text at the user's request.
+                if value < 12 and not (
+                    value == 10 and compact_rating
+                    and compact_rating.start() <= match.start() < compact_rating.end()
+                ):
                     undersized_text.append(f"{stylesheet.name}: {match.group(0)}")
         self.assertEqual([], literal_radii)
         self.assertEqual([], undersized_text)
@@ -247,7 +255,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
 
     def test_shared_accessibility_layer_covers_focus_dialogs_and_motion(self):
         css = (ROOT / "static/css/global-foundation.css").read_text()
-        javascript = (ROOT / "static/js/core/global.js").read_text()
+        javascript = (ROOT / "static/js/core/accessibility.js").read_text()
         self.assertIn(".apstudy-skip-link", css)
         self.assertRegex(css, r"::selection\s*\{[^}]*--color-on-surface")
         for template in TEMPLATES.glob("*.html"):
@@ -264,7 +272,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
     def test_dynamic_primary_controls_keep_accessible_names_and_dialog_semantics(self):
         course_modal = (ROOT / "static/js/calendar/integrations/course-modal.js").read_text()
         sources = (ROOT / "static/js/calendar/integrations/sources.js").read_text()
-        share = (ROOT / "static/js/calendar/integrations/share.js").read_text()
+        share = (ROOT / "static/js/calendar/integrations/share-row.js").read_text()
         courses = (ROOT / "static/js/courses/panel.js").read_text()
         chat = "\n".join(
             (
@@ -282,13 +290,13 @@ class AccessibilityBaselineTests(unittest.TestCase):
         self.assertIn('drawer.setAttribute("aria-modal", "true")', chat)
 
     def test_keyboard_paths_cover_menus_mobile_navigation_and_drag_alternatives(self):
-        global_js = (ROOT / "static/js/core/global.js").read_text()
+        accessibility = (ROOT / "static/js/core/accessibility.js").read_text()
         navbar = (ROOT / "static/js/core/navbar.js").read_text()
         sidebar = (ROOT / "static/js/core/sidebar.js").read_text()
         dashboard = (ROOT / "static/js/dashboard/layout-editor.js").read_text()
         notes = (ROOT / "static/js/notes/list/cards.js").read_text()
         tasks = (ROOT / "static/js/tasks/task-app-helpers.js").read_text()
-        self.assertIn('["ArrowDown", "ArrowUp", "Home", "End"]', global_js)
+        self.assertIn('["ArrowDown", "ArrowUp", "Home", "End"]', accessibility)
         self.assertIn("aria-haspopup=\"menu\"", navbar)
         self.assertIn("avatarBtn?.focus", navbar)
         self.assertIn("sidebar.toggleAttribute('inert'", sidebar)

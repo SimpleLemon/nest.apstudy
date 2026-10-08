@@ -12,10 +12,9 @@
  * already verified status and phase: they only clear seat details, record a
  * detail error, and mark the detail attempted so it is never refetched.
  */
-(function () {
   'use strict';
 
-  var MAX_CANDIDATES = 120;
+  var MAX_IDS_PER_REQUEST = 120;
   var MAX_GROUPS_PER_REQUEST = 24;
   var MAX_DETAIL_IDS = 12;
   var DEFAULT_STATUS_ENDPOINT = '/api/atlas/sections/verify';
@@ -98,21 +97,19 @@
     return JSON.stringify(signature);
   }
 
-  function dedupeIds(ids, max) {
-    var limit = typeof max === 'number' && max > 0 ? max : MAX_CANDIDATES;
+  function dedupeIds(ids) {
     var seen = new Set();
     var out = [];
-    (Array.isArray(ids) ? ids : []).some(function (id) {
+    (Array.isArray(ids) ? ids : []).forEach(function (id) {
       if (id === null || id === undefined || id === '' || seen.has(id)) return false;
       seen.add(id);
       out.push(id);
-      return out.length >= limit;
     });
     return out;
   }
 
   function buildCandidateSignature(ids) {
-    return JSON.stringify(dedupeIds(ids, MAX_CANDIDATES));
+    return JSON.stringify(dedupeIds(ids));
   }
 
   function clonePlain(value) {
@@ -154,7 +151,8 @@
     var seenGroups = new Set();
     ids.forEach(function (id) {
       var key = sectionGroupKey(id);
-      if (key && !seenGroups.has(key) && currentGroupCount >= MAX_GROUPS_PER_REQUEST) {
+      if (currentIds.length >= MAX_IDS_PER_REQUEST ||
+        (key && !seenGroups.has(key) && currentGroupCount >= MAX_GROUPS_PER_REQUEST)) {
         chunks.push(currentIds);
         currentIds = [];
         currentGroupCount = 0;
@@ -261,7 +259,7 @@
 
     function beginGeneration(payload) {
       payload = payload || {};
-      var sectionIds = dedupeIds(payload.sectionIds, MAX_CANDIDATES);
+      var sectionIds = dedupeIds(payload.sectionIds);
       var querySignature = buildQuerySignature(payload.queryInput);
       var candidateSignature = buildCandidateSignature(sectionIds);
       var changed = querySignature !== state.querySignature ||
@@ -376,7 +374,7 @@
         });
       }
 
-      function runChunk(ids) {
+      async function runChunk(ids) {
         var AbortCtor = typeof window.AbortController === 'function' ? window.AbortController : null;
         var requestAbort = AbortCtor ? new AbortCtor() : null;
         var requestOptions = {
@@ -390,39 +388,31 @@
           state.statusAbort = requestAbort;
         }
 
-        return Promise.resolve()
-          .then(function () {
-            return performFetch(endpoints.status || DEFAULT_STATUS_ENDPOINT, requestOptions);
-          })
-          .then(parseStatusResponse)
-          .then(function (payload) {
-            applyChunk(ids, payload);
-          })
-          .catch(function (error) {
-            if (isCurrent() && !(error && error.name === 'AbortError')) {
-              markUnavailable(ids, VERIFICATION_FAILURE_MESSAGE);
-            }
-          })
-          .then(function () {
-            if (state.statusAbort === requestAbort) state.statusAbort = null;
-          });
+        try {
+          var response = await performFetch(endpoints.status || DEFAULT_STATUS_ENDPOINT, requestOptions);
+          var payload = await parseStatusResponse(response);
+          applyChunk(ids, payload);
+        } catch (error) {
+          if (isCurrent() && !(error && error.name === 'AbortError')) {
+            markUnavailable(ids, VERIFICATION_FAILURE_MESSAGE);
+          }
+        } finally {
+          if (state.statusAbort === requestAbort) state.statusAbort = null;
+        }
       }
 
       var chunks = buildStatusChunks(sectionIds);
-      var promise = chunks.reduce(function (chain, ids) {
-        return chain.then(function () {
-          if (!isCurrent()) return getState();
-          return runChunk(ids).then(function () {
+      var promise = Promise.resolve().then(async function () {
+        try {
+          for (var ids of chunks) {
+            if (!isCurrent()) break;
+            await runChunk(ids);
             if (isCurrent()) notifyStatusProgress();
-            return getState();
-          });
-        });
-      }, Promise.resolve()).then(function (value) {
-        if (state.statusPromise === promise) state.statusPromise = null;
-        return value;
-      }, function (error) {
-        if (state.statusPromise === promise) state.statusPromise = null;
-        throw error;
+          }
+          return getState();
+        } finally {
+          if (state.statusPromise === promise) state.statusPromise = null;
+        }
       });
 
       state.statusPromise = promise;
@@ -454,7 +444,7 @@
       state.detailErrors.set(id, error || { message: DETAILS_FAILURE_MESSAGE });
     }
 
-    function executeDetailRequest(captured, isCurrent, releaseInflight) {
+    async function executeDetailRequest(captured, isCurrent) {
       var selectedIds = captured.selectedIds;
       var AbortCtor = typeof window.AbortController === 'function' ? window.AbortController : null;
       var requestAbort = AbortCtor ? new AbortCtor() : null;
@@ -518,22 +508,15 @@
         return getState();
       }
 
-      return Promise.resolve()
-        .then(function () {
-          return performFetch(endpoints.details || DEFAULT_STATUS_ENDPOINT, requestOptions);
-        })
-        .then(parseStatusResponse)
-        .then(applyDetailPayload)
-        .catch(handleFailure)
-        .then(function (value) {
-          releaseInflight();
-          if (state.detailsAbort === requestAbort) state.detailsAbort = null;
-          return value;
-        }, function (error) {
-          releaseInflight();
-          if (state.detailsAbort === requestAbort) state.detailsAbort = null;
-          throw error;
-        });
+      try {
+        var response = await performFetch(endpoints.details || DEFAULT_STATUS_ENDPOINT, requestOptions);
+        var payload = await parseStatusResponse(response);
+        return applyDetailPayload(payload);
+      } catch (error) {
+        return handleFailure(error);
+      } finally {
+        if (state.detailsAbort === requestAbort) state.detailsAbort = null;
+      }
     }
 
     function requestDetails(sectionIds) {
@@ -543,8 +526,9 @@
         return state.detailsPromise || Promise.resolve(getState());
       }
 
+      var inflightIds = state.detailInflightIds;
       selected.forEach(function (id) {
-        state.detailInflightIds.add(id);
+        inflightIds.add(id);
       });
 
       var captured = {
@@ -562,27 +546,23 @@
 
       function releaseInflight() {
         captured.selectedIds.forEach(function (id) {
-          state.detailInflightIds.delete(id);
+          inflightIds.delete(id);
         });
       }
 
-      var run = (state.detailsChain || Promise.resolve()).then(function () {
-        if (!isCurrent()) {
+      var previous = state.detailsChain || Promise.resolve();
+      var promise = (async function () {
+        try {
+          await previous;
+          if (!isCurrent()) return getState();
+          return await executeDetailRequest(captured, isCurrent);
+        } finally {
           releaseInflight();
-          return getState();
+          if (state.detailsPromise === promise) state.detailsPromise = null;
         }
-        return executeDetailRequest(captured, isCurrent, releaseInflight);
-      });
+      })();
 
-      var promise = run.then(function (value) {
-        if (state.detailsPromise === promise) state.detailsPromise = null;
-        return value;
-      }, function (error) {
-        if (state.detailsPromise === promise) state.detailsPromise = null;
-        throw error;
-      });
-
-      state.detailsChain = run.then(function () {}, function () {});
+      state.detailsChain = promise.then(function () {}, function () {});
       state.detailsPromise = promise;
       return promise;
     }
@@ -683,8 +663,7 @@
     };
   }
 
-  window.APStudyCoursesVerify = {
-    buildQuerySignature: buildQuerySignature,
-    create: create
+  export {
+    buildQuerySignature,
+    create
   };
-})();
