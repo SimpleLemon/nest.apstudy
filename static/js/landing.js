@@ -1,5 +1,4 @@
 (() => {
-    const { escapeHtml } = window.APStudyUIPrimitives;
     const nav = document.querySelector("[data-landing-nav]");
     const navToggle = document.querySelector("[data-landing-nav-toggle]");
     const navMenu = document.querySelector("[data-landing-nav-menu]");
