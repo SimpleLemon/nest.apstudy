@@ -1,81 +1,76 @@
-const csrf = () => document.cookie.match(/(?:^|; )csrf_token=([^;]*)/)?.[1] || '';
-
-export async function request(url, options = {}) {
-  const headers = {
-    ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-    ...(options.headers || {}),
-  };
-  if (options.method && options.method !== 'GET') {
-    headers['X-CSRFToken'] = decodeURIComponent(csrf());
-  }
-  const response = await fetch(url, {
+export function request(url, options = {}) {
+  const method = String(options.method || 'GET').toUpperCase();
+  return window.APStudyHttp.fetchJson(url, {
     credentials: 'same-origin',
     ...options,
-    headers,
+    jsonMode: 'required',
+    pendingLabel: ['GET', 'HEAD', 'OPTIONS'].includes(method) ? null : 'focus-save',
+    errorFactory: (payload) => new Error(payload?.error || 'Focus Mode could not save that change.'),
   });
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    const error = new Error(payload.error || 'Focus Mode could not save that change.');
-    if (payload.code) error.code = payload.code;
-    if (payload.resource) error.resource = payload.resource;
-    if (payload.limit != null) error.limit = payload.limit;
-    if (payload.current != null) error.current = payload.current;
-    throw error;
-  }
-  return payload;
 }
 
 export const focusApi = {
-  state: () => request('/api/focus'),
-  start: (payload) => request('/api/focus/sessions', {
+  state: (options = {}) => request('/api/focus', options),
+  start: (payload, options = {}) => request('/api/focus/sessions', {
+    ...options,
     method: 'POST',
     body: JSON.stringify(payload),
   }),
-  updateSession: (sessionId, action) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+  updateSession: (sessionId, action, options = {}) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    ...options,
     method: 'PATCH',
     body: JSON.stringify({ action }),
   }),
-  setPlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+  setPlaylist: (sessionId, playlistUrl, options = {}) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    ...options,
     method: 'PATCH',
-    body: JSON.stringify({ action: 'set_playlist', spotify_url: spotifyUrl }),
+    body: JSON.stringify({ action: 'set_playlist', spotify_url: playlistUrl }),
   }),
-  removeSessionPlaylist: (sessionId, spotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+  removeSessionPlaylist: (sessionId, playlistUrl, options = {}) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    ...options,
     method: 'PATCH',
-    body: JSON.stringify({ action: 'remove_playlist', spotify_url: spotifyUrl }),
+    body: JSON.stringify({ action: 'remove_playlist', spotify_url: playlistUrl }),
   }),
-  addPlaylist: (spotifyUrl) => request('/api/focus/playlists', {
+  addPlaylist: (playlistUrl, options = {}) => request('/api/focus/playlists', {
+    ...options,
     method: 'POST',
-    body: JSON.stringify({ spotify_url: spotifyUrl }),
+    body: JSON.stringify({ spotify_url: playlistUrl }),
   }),
-  removePlaylist: (spotifyUrl) => request('/api/focus/playlists', {
+  removePlaylist: (playlistUrl, options = {}) => request('/api/focus/playlists', {
+    ...options,
     method: 'DELETE',
-    body: JSON.stringify({ spotify_url: spotifyUrl }),
+    body: JSON.stringify({ spotify_url: playlistUrl }),
   }),
-  setActivePlaylist: (spotifyUrl) => request('/api/focus/playlists/active', {
+  setActivePlaylist: (playlistUrl, options = {}) => request('/api/focus/playlists/active', {
+    ...options,
     method: 'PATCH',
-    body: JSON.stringify({ spotify_url: spotifyUrl }),
+    body: JSON.stringify({ spotify_url: playlistUrl }),
   }),
-  restorePlaylist: (sessionId, spotifyUrl, activeSpotifyUrl) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+  restorePlaylist: (sessionId, playlistUrl, activePlaylistUrl, options = {}) => request(`/api/focus/sessions/${encodeURIComponent(sessionId)}`, {
+    ...options,
     method: 'PATCH',
     body: JSON.stringify({
       action: 'restore_playlist',
-      spotify_url: spotifyUrl,
-      active_spotify_url: activeSpotifyUrl,
+      spotify_url: playlistUrl,
+      active_spotify_url: activePlaylistUrl,
     }),
   }),
-  previewPlaylist: (spotifyUrl) => request('/api/focus/playlists/preview', {
+  previewPlaylist: (playlistUrl, options = {}) => request('/api/focus/playlists/preview', {
+    ...options,
     method: 'POST',
-    body: JSON.stringify({ spotify_url: spotifyUrl }),
+    body: JSON.stringify({ spotify_url: playlistUrl }),
   }),
-  saveRoutine: (payload, routineId = '') => request(
+  saveRoutine: (payload, routineId = '', options = {}) => request(
     routineId ? `/api/focus/routines/${encodeURIComponent(routineId)}` : '/api/focus/routines',
-    { method: routineId ? 'PATCH' : 'POST', body: JSON.stringify(payload) },
+    { ...options, method: routineId ? 'PATCH' : 'POST', body: JSON.stringify(payload) },
   ),
   deleteRoutine: (routineId, options = {}) => request(`/api/focus/routines/${encodeURIComponent(routineId)}`, {
+    ...options,
     method: 'DELETE',
     keepalive: options.keepalive === true,
   }),
-  savePlayerPreferences: (preferences) => request('/api/focus/player-preferences', {
+  savePlayerPreferences: (preferences, options = {}) => request('/api/focus/player-preferences', {
+    ...options,
     method: 'PATCH',
     body: JSON.stringify(preferences),
   }),
@@ -161,7 +156,7 @@ export function formPayload(form) {
       try {
         const parsed = JSON.parse(String(values.get('spotify_playlists') || '[]'));
         return Array.isArray(parsed) ? parsed : [];
-      } catch (_error) {
+      } catch {
         return [];
       }
     })(),
@@ -183,7 +178,7 @@ export function playlistProvider(value) {
       return parsed.hostname === 'music.youtube.com' ? 'youtube_music' : 'youtube';
     }
     return '';
-  } catch (_error) {
+  } catch {
     return '';
   }
 }
@@ -203,7 +198,7 @@ export function normalizePlaylist(value) {
       return `https://${host}/playlist?list=${encodeURIComponent(parsed.searchParams.get('list'))}`;
     }
     return '';
-  } catch (_error) {
+  } catch {
     return '';
   }
 }
@@ -219,14 +214,6 @@ export function playlistEmbedUrl(value) {
   }
   const id = parsed.searchParams.get('list');
   return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(id)}&enablejsapi=1&playsinline=1`;
-}
-
-export function spotifyEmbedUrl(value) {
-  return playlistEmbedUrl(value);
-}
-
-export function normalizeSpotifyPlaylist(value) {
-  return normalizePlaylist(value);
 }
 
 export function routineFromState(state, routineId) {

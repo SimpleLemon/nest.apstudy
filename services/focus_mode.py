@@ -94,11 +94,6 @@ def normalize_playlist_url(value):
     raise ValueError("Use a Spotify, YouTube, or YouTube Music playlist link.")
 
 
-def normalize_spotify_url(value):
-    """Backward-compatible storage boundary for playlist URLs."""
-    return normalize_playlist_url(value)
-
-
 def playlist_embed_url(value):
     normalized = normalize_playlist_url(value)
     if not normalized:
@@ -109,11 +104,6 @@ def playlist_embed_url(value):
         return f"https://open.spotify.com/embed/playlist/{playlist_id}?utm_source=generator&theme=0"
     playlist_id = parse_qs(urlparse(normalized).query)["list"][0]
     return f"https://www.youtube-nocookie.com/embed/videoseries?{urlencode({'list': playlist_id, 'enablejsapi': 1, 'playsinline': 1})}"
-
-
-def spotify_embed_url(value):
-    """Backward-compatible serialized field for the generalized playlist player."""
-    return playlist_embed_url(value)
 
 
 def _playlist_metadata(spotify_url):
@@ -198,10 +188,6 @@ def playlist(value):
         "spotify_embed_url": playlist_embed_url(spotify_url),
         **_playlist_metadata(spotify_url),
     }
-
-
-def spotify_playlist(value):
-    return playlist(value)
 
 
 def _active_playlist_url(conn, user_id):
@@ -424,7 +410,7 @@ def _routine_payload(payload):
         "break_minutes": break_minutes,
         "long_break_minutes": long_break_minutes,
         "cycles": cycles,
-        "spotify_url": normalize_spotify_url(payload.get("spotify_url")),
+        "spotify_url": normalize_playlist_url(payload.get("spotify_url")),
     }
 
 
@@ -631,7 +617,8 @@ def _reconcile(conn, row, now=None, force_once=False):
     return current
 
 
-def get_session(user_id, session_id, *, reconcile=True):
+def load_and_reconcile_session(user_id, session_id, *, reconcile=True):
+    """Load a session and persist overdue phases; reconcile=False skips advancement."""
     now = _now()
     with db_connection() as conn:
         row = conn.execute(
@@ -643,7 +630,8 @@ def get_session(user_id, session_id, *, reconcile=True):
         return _serialize_session(row, now=now, conn=conn)
 
 
-def get_active_session(user_id, *, reconcile=True):
+def load_and_reconcile_active_session(user_id, *, reconcile=True):
+    """Load an active session, advancing persisted phases unless reconcile=False."""
     now = _now()
     with db_connection() as conn:
         row = conn.execute(
@@ -762,7 +750,7 @@ def update_session(user_id, session_id, action, payload=None, *, entitlements=No
         elif action == "set_playlist":
             if row["state"] not in ACTIVE_STATES:
                 raise ValueError("This Focus Mode session is no longer active.")
-            spotify_url = normalize_spotify_url(payload.get("spotify_url"))
+            spotify_url = normalize_playlist_url(payload.get("spotify_url"))
             if spotify_url:
                 _add_user_playlist_conn(conn, user_id, spotify_url, entitlements)
                 _set_active_playlist_conn(conn, user_id, spotify_url)
@@ -775,7 +763,7 @@ def update_session(user_id, session_id, action, payload=None, *, entitlements=No
         elif action == "remove_playlist":
             if row["state"] not in ACTIVE_STATES:
                 raise ValueError("This Focus Mode session is no longer active.")
-            spotify_url = normalize_spotify_url(payload.get("spotify_url"))
+            spotify_url = normalize_playlist_url(payload.get("spotify_url"))
             _remove_user_playlist_conn(conn, user_id, spotify_url)
             active_url = _active_playlist_url(conn, user_id)
             conn.execute(
@@ -1016,18 +1004,24 @@ def snapshot(user_id, *, entitlements=None):
     }
 
 
-def active_focus_user_ids(user_ids=None):
+def _select_active_focus_sessions(conn, user_ids=None):
+    """Query stored active states without advancing phases or recording history."""
     requested = [str(value) for value in (user_ids or []) if str(value or "").strip()]
     clauses = ["state IN ('running','paused')"]
     args = []
     if requested:
         clauses.append(f"user_id IN ({','.join('?' for _ in requested)})")
         args.extend(requested)
+    return conn.execute(
+        f"SELECT * FROM focus_sessions WHERE {' AND '.join(clauses)} ORDER BY started_at DESC",
+        args,
+    ).fetchall()
+
+
+def reconcile_active_focus_user_ids(user_ids=None):
+    """Persist due phase transitions and return users with a remaining active session."""
     with db_connection() as conn:
-        rows = conn.execute(
-            f"SELECT * FROM focus_sessions WHERE {' AND '.join(clauses)} ORDER BY started_at DESC",
-            args,
-        ).fetchall()
+        rows = _select_active_focus_sessions(conn, user_ids)
         active = set()
         for row in rows:
             current = _reconcile(conn, row)
@@ -1036,5 +1030,6 @@ def active_focus_user_ids(user_ids=None):
     return active
 
 
-def is_focus_mode_active(user_id):
-    return str(user_id) in active_focus_user_ids([user_id])
+def reconcile_focus_mode_status(user_id):
+    """Reconcile a user's session history, then return whether focus remains active."""
+    return str(user_id) in reconcile_active_focus_user_ids([user_id])

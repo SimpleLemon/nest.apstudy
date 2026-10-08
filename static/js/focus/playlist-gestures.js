@@ -4,7 +4,7 @@ const MAX_DRAG = 104;
 function pointerCapture(item, pointerId, capture) {
   try {
     item?.[capture ? 'setPointerCapture' : 'releasePointerCapture']?.(pointerId);
-  } catch (_error) {
+  } catch {
     // Synthetic events and older touch engines may not expose an active pointer capture.
   }
 }

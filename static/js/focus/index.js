@@ -9,20 +9,22 @@ import { clockedSession, remainingSeconds } from './timer.js';
 import { createFocusView } from './view.js';
 
 const view = createFocusView({
-  savePlayerPreferences: (preferences) => focusApi.savePlayerPreferences(preferences),
+  savePlayerPreferences,
   notify: ({ message, type = 'error', title = '' } = {}) => toast(message, type, title),
   onRoutineSelect: (routineId) => {
+    if (!isCurrentOperation(currentOperation())) return;
     const routine = routineFromState(state, routineId);
     view.fillRoutine(routine, { updatePicker: false });
-    if (routine?.spotify_url && state.spotifySource?.playlists?.some((playlist) => playlist.spotify_url === routine.spotify_url)) {
-      state.spotifySource = localPlaylistSource(state.spotifySource, state.spotifySource.playlists, routine.spotify_url);
+    if (routine?.spotify_url && state.playlistSource?.playlists?.some((playlist) => playlist.spotify_url === routine.spotify_url)) {
+      state.playlistSource = localPlaylistSource(state.playlistSource, state.playlistSource.playlists, routine.spotify_url);
     }
-    view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+    view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
     view.setSettingsStatus();
     view.setPlaylistStatus();
     renderSuggestions();
   },
   onRoutineCreate: () => {
+    if (!isCurrentOperation(currentOperation())) return;
     view.fillRoutine(null, { updatePicker: false });
     view.setSettingsStatus();
   },
@@ -34,31 +36,38 @@ let completionPreparePromise = null;
 let disposePlaylistGestures = null;
 let playlistGesturesPromise = null;
 
-async function ensureCompletionEffects() {
-  if (state.disposed) return null;
+async function ensureCompletionEffects(operation = currentOperation()) {
+  if (!isCurrentOperation(operation)) return null;
   if (completionEffects) return completionEffects;
   completionEffectsPromise ||= import('./completion.js');
   const { createCompletionEffects } = await completionEffectsPromise;
-  if (state.disposed) return null;
+  if (!isCurrentOperation(operation)) return null;
   completionEffects ||= createCompletionEffects();
   return completionEffects;
 }
 
 async function prepareCompletionEffects() {
-  completionPreparePromise ||= ensureCompletionEffects().then((effects) => effects?.prepare());
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
+  completionPreparePromise ||= ensureCompletionEffects(operation)
+    .then((effects) => effects?.prepare({ signal: operation.signal }))
+    .catch(() => {});
   return completionPreparePromise;
 }
 
-async function playCompletionEffects(phase) {
-  const effects = await ensureCompletionEffects();
-  effects?.complete(phase);
+async function playCompletionEffects(phase, operation) {
+  try {
+    const effects = await ensureCompletionEffects(operation);
+    if (isCurrentOperation(operation)) effects?.complete(phase, { signal: operation.signal });
+  } catch { /* Optional completion effects must not interrupt the timer. */ }
 }
 
 async function ensurePlaylistGestures() {
-  if (state.disposed || disposePlaylistGestures || !elements.playlistList?.children.length) return;
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation) || disposePlaylistGestures || !elements.playlistList?.children.length) return;
   playlistGesturesPromise ||= import('./playlist-gestures.js');
   const { bindPlaylistGestures } = await playlistGesturesPromise;
-  if (state.disposed || !elements.playlistList?.children.length || disposePlaylistGestures) return;
+  if (!isCurrentOperation(operation) || !elements.playlistList?.children.length || disposePlaylistGestures) return;
   disposePlaylistGestures = bindPlaylistGestures(elements.playlistList, {
     onRemove: (url) => { void removePlaylist(url); },
     onSelect: (url) => { void selectPlaylist(url); },
@@ -71,14 +80,60 @@ const state = {
   playerPreferences: null,
   session: null,
   completedSession: null,
-  spotifySource: null,
+  playlistSource: null,
   playlistEntitlements: null,
   timerId: null,
   advanceInFlight: false,
   sessionActionInFlight: false,
   shellActive: false,
   disposed: false,
+  paused: false,
+  generation: 0,
+  requestController: new AbortController(),
 };
+
+function currentOperation() {
+  return { generation: state.generation, signal: state.requestController.signal };
+}
+
+function isCurrentOperation(operation) {
+  return !state.disposed && !state.paused && !operation.signal.aborted
+    && operation.generation === state.generation;
+}
+
+async function savePlayerPreferences(preferences) {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
+  try {
+    const response = await focusApi.savePlayerPreferences(preferences, { signal: operation.signal });
+    if (isCurrentOperation(operation)) return response;
+  } catch (error) {
+    if (isCurrentOperation(operation)) showError(error, 'Couldn’t save player preferences');
+  }
+}
+
+function pauseRuntime() {
+  state.paused = true;
+  state.generation += 1;
+  state.requestController.abort();
+  completionPreparePromise = null;
+  stopTimer();
+  state.advanceInFlight = false;
+  state.sessionActionInFlight = false;
+  view.setSessionBusy(false);
+  view.setBusy(false);
+  view.setPlaylistBusy(false);
+  elements.saveRoutines.forEach((button) => { button.disabled = false; });
+  view.pauseMusic();
+}
+
+function resumeRuntime() {
+  if (state.disposed || !state.paused) return;
+  state.paused = false;
+  state.requestController = new AbortController();
+  // Reconcile server mutations that may have completed while the page was cached.
+  void loadState({ restored: true });
+}
 
 function toast(message, type = 'success', title = '', duration = 3500, action = null) {
   window.APStudyToast?.show?.({
@@ -102,7 +157,7 @@ function showPlaylistError(error, title, fallback = 'Try again in a moment.') {
   showError(error, title, fallback);
 }
 
-function spotifySourceFromLibrary(playlists = [], activeUrl = '') {
+function playlistSourceFromLibrary(playlists = [], activeUrl = '') {
   const list = Array.isArray(playlists) ? playlists : [];
   const url = String(activeUrl || '').trim() || list[0]?.spotify_url || '';
   if (!url && !list.length) return null;
@@ -119,24 +174,24 @@ function spotifySourceFromLibrary(playlists = [], activeUrl = '') {
 
 function applyLibraryResponse(payload) {
   state.playlistEntitlements = payload.playlist_entitlements || state.playlistEntitlements;
-  state.spotifySource = spotifySourceFromLibrary(
+  state.playlistSource = playlistSourceFromLibrary(
     payload.playlists,
     payload.spotify_url || payload.active_playlist_url,
   );
-  view.renderSpotify(state.spotifySource, state.playlistEntitlements);
-  return state.spotifySource;
+  view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
+  return state.playlistSource;
 }
 
 function syncSessionPlaylistSource(session) {
-  if (!session) return state.spotifySource;
-  state.spotifySource = spotifySourceFromLibrary(session.playlists, session.spotify_url);
+  if (!session) return state.playlistSource;
+  state.playlistSource = playlistSourceFromLibrary(session.playlists, session.spotify_url);
   if (state.playlistEntitlements) {
     state.playlistEntitlements = {
       ...state.playlistEntitlements,
       usage: Array.isArray(session.playlists) ? session.playlists.length : state.playlistEntitlements.usage,
     };
   }
-  return state.spotifySource;
+  return state.playlistSource;
 }
 
 function playlistToast(message, action = null) {
@@ -144,7 +199,7 @@ function playlistToast(message, action = null) {
 }
 
 function announceSessionChange(message, title, type = 'info') {
-  view.announce(message);
+  view.announce(message, { signal: state.requestController.signal });
   toast(message, type, title);
 }
 
@@ -163,27 +218,6 @@ function announcePhaseTransition(previousPhase, nextSession) {
 
 function selectedRoutine() {
   return routineFromState(state, elements.routineSelect?.value);
-}
-
-function userPlaylistSourceFromPayload(payload) {
-  const playlists = payload?.playlists;
-  if (!Array.isArray(playlists) || !playlists.length) return null;
-  const activeUrl = payload.active_playlist_url
-    || playlists.find((playlist) => playlist.active)?.spotify_url
-    || playlists[0]?.spotify_url
-    || '';
-  return {
-    spotify_url: activeUrl,
-    playlists,
-  };
-}
-
-function applyUserPlaylistResponse(response) {
-  state.playlistEntitlements = response.playlist_entitlements || state.playlistEntitlements;
-  state.spotifySource = response.playlists?.length
-    ? { spotify_url: response.spotify_url || '', playlists: response.playlists }
-    : null;
-  return state.spotifySource;
 }
 
 function hideSidebarForFocus() {
@@ -236,7 +270,7 @@ function renderActiveSession() {
   if (!state.session) return;
   syncSessionPlaylistSource(state.session);
   view.renderSession(state.session);
-  view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+  view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
   tick();
 }
 
@@ -245,7 +279,7 @@ function renderCompletedSession() {
   stopTimer();
   view.renderSession(state.completedSession);
   view.renderTick(state.completedSession, 0);
-  view.renderSpotify(state.spotifySource || spotifySourceFromLibrary([], state.completedSession.spotify_url), state.playlistEntitlements);
+  view.renderPlaylists(state.playlistSource || playlistSourceFromLibrary([], state.completedSession.spotify_url), state.playlistEntitlements);
   document.title = 'Focus complete - Nest';
 }
 
@@ -265,24 +299,30 @@ function renderCurrentMode() {
     document.title = 'Focus Mode - APStudy Nest';
     focusSidebar(false);
     renderSetup();
-    view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+    view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
   }
 }
 
-async function loadState() {
+async function loadState({ restored = false } = {}) {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   try {
-    const payload = await focusApi.state();
+    const payload = await focusApi.state({ signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     state.routines = payload.routines || [];
     state.history = payload.history || [];
     state.recentSelections = payload.recent_selections || [];
     state.playerPreferences = payload.player_preferences || state.playerPreferences;
     if (state.playerPreferences) view.applyPlayerPreferences(state.playerPreferences);
     state.playlistEntitlements = payload.playlist_entitlements || state.playlistEntitlements;
-    state.spotifySource = spotifySourceFromLibrary(payload.playlists, payload.active_playlist_url);
+    state.playlistSource = playlistSourceFromLibrary(payload.playlists, payload.active_playlist_url);
     state.session = clockedSession(payload.active_session);
     if (state.session) state.completedSession = null;
+    if (restored && !state.completedSession) view.resetEgg();
     renderCurrentMode();
+    if (restored && state.session?.phase === 'focus' && state.session.state === 'running') view.resumeMusic();
   } catch (error) {
+    if (!isCurrentOperation(operation)) return;
     elements.loading.hidden = true;
     elements.setup.hidden = false;
     showError(error, 'Couldn’t load Focus Mode');
@@ -291,54 +331,66 @@ async function loadState() {
 
 function scheduleTick() {
   stopTimer();
-  if (!state.session || state.session.state !== 'running' || state.disposed) return;
+  if (!state.session || state.session.state !== 'running' || state.disposed || state.paused) return;
   const delay = 1000 - (Date.now() % 1000) + 20;
-  state.timerId = window.setTimeout(tick, delay);
+  const operation = currentOperation();
+  state.timerId = window.setTimeout(() => {
+    if (isCurrentOperation(operation)) tick();
+  }, delay);
+}
+
+async function applyPhaseCompletion(previousSession, payload, operation) {
+  if (!isCurrentOperation(operation)) return;
+  const previousPhase = previousSession.phase;
+  const next = payload.active ? clockedSession(payload.session) : null;
+  view.pauseMusic();
+  void playCompletionEffects(previousPhase, operation);
+  if (next) {
+    view.renderSession(next);
+    view.renderTick(next, remainingSeconds(next));
+  } else {
+    view.renderTick(previousSession, 0);
+  }
+  await view.playEggOpening(previousPhase, { signal: operation.signal });
+  if (!isCurrentOperation(operation)) return;
+  state.session = next;
+  state.completedSession = next ? null : {
+    ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0,
+  };
+  if (next) view.resetEgg();
+  renderCurrentMode();
+  announcePhaseTransition(previousPhase, next);
+  if (next?.phase === 'focus' && next.state === 'running') view.resumeMusic();
+  await refreshHistory(operation);
+  if (isCurrentOperation(operation)) scheduleTick();
 }
 
 async function advancePhase() {
-  if (!state.session || state.advanceInFlight || state.sessionActionInFlight) return;
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation) || !state.session || state.advanceInFlight || state.sessionActionInFlight) return;
+  const previousSession = state.session;
   state.advanceInFlight = true;
   view.setSessionBusy(true);
   stopTimer();
   try {
-    const previousPhase = state.session.phase;
-    const previousSession = state.session;
-    const payload = await focusApi.updateSession(state.session.id, 'advance');
-    const next = clockedSession(payload.session);
-    view.pauseSpotify();
-    void playCompletionEffects(previousPhase);
-    if (!payload.active) {
-      view.renderTick(state.session, 0);
-      await view.playEggOpening(previousPhase);
-      state.session = null;
-      state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
-      announcePhaseTransition(previousPhase, null);
-      renderCurrentMode();
-      await refreshHistory();
-      return;
-    }
-    state.session = next;
-    view.renderSession(next);
-    view.renderTick(next, remainingSeconds(next));
-    await view.playEggOpening(previousPhase);
-    view.resetEgg();
-    view.renderTick(next, remainingSeconds(next));
-    announcePhaseTransition(previousPhase, next);
-    if (next.phase === 'focus' && next.state === 'running') view.resumeSpotify();
-    await refreshHistory();
-    scheduleTick();
-  } catch (error) {
+    const payload = await focusApi.updateSession(previousSession.id, 'advance', { signal: operation.signal });
+    await applyPhaseCompletion(previousSession, payload, operation);
+  } catch {
+    if (!isCurrentOperation(operation)) return;
     toast('The timer will retry when Nest reconnects.', 'error', 'Couldn’t sync this phase');
-    state.timerId = window.setTimeout(advancePhase, 15000);
+    state.timerId = window.setTimeout(() => {
+      if (isCurrentOperation(operation)) void advancePhase();
+    }, 15000);
   } finally {
-    state.advanceInFlight = false;
-    view.setSessionBusy(false);
+    if (isCurrentOperation(operation)) {
+      state.advanceInFlight = false;
+      view.setSessionBusy(false);
+    }
   }
 }
 
 function tick() {
-  if (!state.session) return;
+  if (state.disposed || state.paused || !state.session || state.advanceInFlight || state.sessionActionInFlight) return;
   const remaining = remainingSeconds(state.session);
   view.renderTick(state.session, remaining);
   if (state.session.state === 'running' && remaining <= 0) {
@@ -348,63 +400,53 @@ function tick() {
   scheduleTick();
 }
 
-async function refreshHistory() {
+async function refreshHistory(operation = currentOperation()) {
+  if (!isCurrentOperation(operation)) return;
   try {
-    const payload = await focusApi.state();
+    const payload = await focusApi.state({ signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     state.history = payload.history || [];
     state.recentSelections = payload.recent_selections || [];
     view.renderHistory(state.history);
     view.renderRecent(state.recentSelections);
-  } catch (_error) {
+  } catch {
     // The next meaningful session action will refresh history again.
   }
 }
 
 async function updateSession(action) {
-  if (!state.session || state.sessionActionInFlight) return;
-  const previousPhase = state.session.phase;
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation) || !state.session || state.sessionActionInFlight || state.advanceInFlight) return;
+  const previousSession = state.session;
   state.sessionActionInFlight = true;
   const button = action === 'pause' || action === 'resume' ? elements.toggle : elements.completePhase;
   view.setSessionBusy(true, button);
-  if (action === 'pause') view.pauseSpotify();
-  if (action === 'resume') view.resumeSpotify();
+  stopTimer();
+  if (action === 'pause') view.pauseMusic();
+  if (action === 'resume') view.resumeMusic();
   try {
-    const payload = await focusApi.updateSession(state.session.id, action);
-    const previousSession = state.session;
-    state.session = payload.active ? clockedSession(payload.session) : null;
-    if (!state.session) {
-      if (action === 'complete_phase') {
-        view.renderTick(previousSession, 0);
-        view.pauseSpotify();
-        void playCompletionEffects(previousPhase);
-        await view.playEggOpening(previousPhase);
-        state.completedSession = { ...previousSession, state: 'completed', remaining_seconds: 0, _clockRemaining: 0 };
-        renderCurrentMode();
-        await refreshHistory();
-      }
-      if (action === 'complete_phase') announcePhaseTransition(previousPhase, null);
-      return;
-    }
-    renderActiveSession();
+    const payload = await focusApi.updateSession(previousSession.id, action, { signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     if (action === 'complete_phase') {
-      view.pauseSpotify();
-      void playCompletionEffects(previousPhase);
-      await view.playEggOpening(previousPhase);
-      view.resetEgg();
-      renderActiveSession();
-      announcePhaseTransition(previousPhase, state.session);
-      if (state.session.phase === 'focus' && state.session.state === 'running') view.resumeSpotify();
-      await refreshHistory();
+      await applyPhaseCompletion(previousSession, payload, operation);
     } else {
+      state.session = payload.active ? clockedSession(payload.session) : null;
+      renderActiveSession();
       const message = action === 'pause' ? 'Timer paused.' : 'Timer resumed.';
       announceSessionChange(message, action === 'pause' ? 'Timer paused' : 'Timer resumed');
     }
   } catch (error) {
-    if (action === 'resume') view.pauseSpotify();
+    if (!isCurrentOperation(operation)) return;
+    if (action === 'resume') view.pauseMusic();
     showError(error, 'Couldn’t update the timer');
+    if (action === 'complete_phase') scheduleTick();
   } finally {
-    state.sessionActionInFlight = false;
-    view.setSessionBusy(false);
+    if (isCurrentOperation(operation)) {
+      state.sessionActionInFlight = false;
+      view.setSessionBusy(false);
+      // Ordinary actions also stop the old timer while their request is pending.
+      if (action !== 'complete_phase') scheduleTick();
+    }
   }
 }
 
@@ -420,22 +462,27 @@ async function confirmEndSession() {
 }
 
 async function endSession() {
-  if (!state.session || state.sessionActionInFlight) return;
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation) || !state.session || state.sessionActionInFlight || state.advanceInFlight) return;
   state.sessionActionInFlight = true;
   view.setSessionBusy(true, elements.end);
   try {
-    if (!(await confirmEndSession())) return;
-    view.pauseSpotify();
-    await focusApi.updateSession(state.session.id, 'exit');
+    if (!(await confirmEndSession()) || !isCurrentOperation(operation)) return;
+    view.pauseMusic();
+    await focusApi.updateSession(state.session.id, 'exit', { signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     state.session = null;
     focusSidebar(false);
     await loadState();
+    if (!isCurrentOperation(operation)) return;
     announceSessionChange('Session ended. Completed phases remain in your history.', 'Focus session ended');
   } catch (error) {
-    showError(error, 'Couldn’t end Focus Mode');
+    if (isCurrentOperation(operation)) showError(error, 'Couldn’t end Focus Mode');
   } finally {
-    state.sessionActionInFlight = false;
-    view.setSessionBusy(false);
+    if (isCurrentOperation(operation)) {
+      state.sessionActionInFlight = false;
+      view.setSessionBusy(false);
+    }
   }
 }
 
@@ -454,67 +501,78 @@ function applySelection(selection) {
   renderSuggestions();
   if (Object.prototype.hasOwnProperty.call(selection, 'spotify_url')) {
     const url = selection.spotify_url || '';
-    if (url && state.spotifySource?.playlists?.some((playlist) => playlist.spotify_url === url)) {
-      state.spotifySource = localPlaylistSource(state.spotifySource, state.spotifySource.playlists, url);
+    if (url && state.playlistSource?.playlists?.some((playlist) => playlist.spotify_url === url)) {
+      state.playlistSource = localPlaylistSource(state.playlistSource, state.playlistSource.playlists, url);
     }
-    view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+    view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
   }
 }
 
 async function startSession(event) {
   event.preventDefault();
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   void prepareCompletionEffects();
-  const { routine_id: _routineId, spotify_playlists: _playlists, ...payload } = formPayload(elements.form);
+  const payload = formPayload(elements.form);
+  delete payload.routine_id;
+  delete payload.spotify_playlists;
   view.setBusy(true);
   try {
-    const response = await focusApi.start(payload);
+    const response = await focusApi.start(payload, { signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     state.session = clockedSession(response.session);
     state.completedSession = null;
     syncSessionPlaylistSource(state.session);
     view.setBusy(false);
     renderCurrentMode();
-    void view.activateSpotify({ autoplay: true });
-    void view.startCountdown();
+    void view.activateMusic({ autoplay: true, signal: operation.signal });
+    void view.startCountdown({ signal: operation.signal });
     announceSessionChange('Focus Mode started. Nonurgent Nest notifications are muted.', 'Focus Mode started');
   } catch (error) {
-    view.pauseSpotify();
+    if (!isCurrentOperation(operation)) return;
+    view.pauseMusic();
     view.setBusy(false);
     showError(error, 'Couldn’t start Focus Mode');
   }
 }
 
 async function applyPlaylist() {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   const normalized = view.syncPlaylistControls({ clearStatus: true });
   if (!normalized) {
     showError(null, 'Couldn’t add playlist', 'Use a Spotify, YouTube, or YouTube Music playlist URL.');
-    elements.spotifyUrl?.focus();
+    elements.playlistUrlInput?.focus();
     return;
   }
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.setPlaylist(state.session.id, normalized);
+      const response = await focusApi.setPlaylist(state.session.id, normalized, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       state.session = clockedSession(response.session);
       syncSessionPlaylistSource(state.session);
-      view.renderSpotify(state.spotifySource, state.playlistEntitlements);
-      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
+      view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
+      void view.activateMusic({ autoplay: state.session.phase === 'focus' && state.session.state === 'running', signal: operation.signal });
       playlistToast('Playlist added to this session.');
       return;
     }
-    const existing = (state.spotifySource?.playlists || []).find((playlist) => playlist.spotify_url === normalized);
+    const existing = (state.playlistSource?.playlists || []).find((playlist) => playlist.spotify_url === normalized);
     let response = existing
-      ? await focusApi.setActivePlaylist(normalized)
-      : await focusApi.addPlaylist(normalized);
+      ? await focusApi.setActivePlaylist(normalized, { signal: operation.signal })
+      : await focusApi.addPlaylist(normalized, { signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     if (!existing && response.spotify_url !== normalized) {
-      response = await focusApi.setActivePlaylist(normalized);
+      response = await focusApi.setActivePlaylist(normalized, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
     }
     applyLibraryResponse(response);
-    void view.activateSpotify({ autoplay: false });
+    void view.activateMusic({ autoplay: false, signal: operation.signal });
     playlistToast(existing ? 'Playlist selected.' : 'Playlist added.');
   } catch (error) {
-    showPlaylistError(error, 'Couldn’t add playlist');
+    if (isCurrentOperation(operation)) showPlaylistError(error, 'Couldn’t add playlist');
   } finally {
-    view.setPlaylistBusy(false);
+    if (isCurrentOperation(operation)) view.setPlaylistBusy(false);
   }
 }
 
@@ -536,31 +594,38 @@ function localPlaylistSource(source, playlists, activeUrl) {
 }
 
 async function restorePlaylist(record) {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.restorePlaylist(state.session.id, record.playlist.spotify_url, record.activeUrl);
+      const response = await focusApi.restorePlaylist(state.session.id, record.playlist.spotify_url, record.activeUrl, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       state.session = clockedSession(response.session);
       syncSessionPlaylistSource(state.session);
-      view.renderSpotify(state.spotifySource, state.playlistEntitlements);
-      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
+      view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
+      void view.activateMusic({ autoplay: state.session.phase === 'focus' && state.session.state === 'running', signal: operation.signal });
     } else {
-      let response = await focusApi.addPlaylist(record.playlist.spotify_url);
+      let response = await focusApi.addPlaylist(record.playlist.spotify_url, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       if (record.activeUrl && response.spotify_url !== record.activeUrl) {
-        response = await focusApi.setActivePlaylist(record.activeUrl);
+        response = await focusApi.setActivePlaylist(record.activeUrl, { signal: operation.signal });
+        if (!isCurrentOperation(operation)) return;
       }
       applyLibraryResponse(response);
     }
     playlistToast('Playlist restored.');
   } catch (error) {
-    showPlaylistError(error, 'Couldn’t restore playlist');
+    if (isCurrentOperation(operation)) showPlaylistError(error, 'Couldn’t restore playlist');
   } finally {
-    view.setPlaylistBusy(false);
+    if (isCurrentOperation(operation)) view.setPlaylistBusy(false);
   }
 }
 
 async function removePlaylist(playlistUrl = '') {
-  const source = state.spotifySource || state.session || {};
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
+  const source = state.playlistSource || state.session || {};
   const targetUrl = playlistUrl || source.spotify_url;
   const playlists = Array.isArray(source.playlists) ? source.playlists : [];
   const index = playlists.findIndex((playlist) => playlist.spotify_url === targetUrl);
@@ -574,45 +639,51 @@ async function removePlaylist(playlistUrl = '') {
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.removeSessionPlaylist(state.session.id, targetUrl);
+      const response = await focusApi.removeSessionPlaylist(state.session.id, targetUrl, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       state.session = clockedSession(response.session);
       syncSessionPlaylistSource(state.session);
-      view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+      view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
     } else {
-      const response = await focusApi.removePlaylist(targetUrl);
+      const response = await focusApi.removePlaylist(targetUrl, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       applyLibraryResponse(response);
     }
     playlistToast(`${playlist.title || 'Playlist'} removed.`, {
       label: 'Undo',
-      onClick: () => { void restorePlaylist(record); },
+      onClick: () => { if (isCurrentOperation(operation)) void restorePlaylist(record); },
     });
   } catch (error) {
-    showPlaylistError(error, 'Couldn’t remove playlist');
+    if (isCurrentOperation(operation)) showPlaylistError(error, 'Couldn’t remove playlist');
   } finally {
-    view.setPlaylistBusy(false);
+    if (isCurrentOperation(operation)) view.setPlaylistBusy(false);
   }
 }
 
-async function selectPlaylist(spotifyUrl) {
-  const current = state.session || state.spotifySource;
-  if (!current || current.spotify_url === spotifyUrl) return;
+async function selectPlaylist(playlistUrl) {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
+  const current = state.session || state.playlistSource;
+  if (!current || current.spotify_url === playlistUrl) return;
   view.setPlaylistBusy(true);
   try {
     if (state.session) {
-      const response = await focusApi.setPlaylist(state.session.id, spotifyUrl);
+      const response = await focusApi.setPlaylist(state.session.id, playlistUrl, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       state.session = clockedSession(response.session);
       syncSessionPlaylistSource(state.session);
-      view.renderSpotify(state.spotifySource, state.playlistEntitlements);
-      void view.activateSpotify({ autoplay: state.session.phase === 'focus' && state.session.state === 'running' });
+      view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
+      void view.activateMusic({ autoplay: state.session.phase === 'focus' && state.session.state === 'running', signal: operation.signal });
     } else {
-      const response = await focusApi.setActivePlaylist(spotifyUrl);
+      const response = await focusApi.setActivePlaylist(playlistUrl, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       applyLibraryResponse(response);
     }
     playlistToast('Playlist selected.');
   } catch (error) {
-    showPlaylistError(error, 'Couldn’t select playlist');
+    if (isCurrentOperation(operation)) showPlaylistError(error, 'Couldn’t select playlist');
   } finally {
-    view.setPlaylistBusy(false);
+    if (isCurrentOperation(operation)) view.setPlaylistBusy(false);
   }
 }
 
@@ -629,35 +700,43 @@ function payloadFromRoutine(routine) {
 }
 
 async function undoRoutineSave(record) {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   try {
     if (record.previous) {
-      const response = await focusApi.saveRoutine(payloadFromRoutine(record.previous), record.saved.id);
+      const response = await focusApi.saveRoutine(payloadFromRoutine(record.previous), record.saved.id, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       const index = state.routines.findIndex((routine) => routine.id === record.saved.id);
       if (index >= 0) state.routines[index] = response.routine;
       view.renderRoutines(state.routines, response.routine.id);
       view.fillRoutine(response.routine);
-      if (response.routine.spotify_url && state.spotifySource?.playlists?.some((playlist) => playlist.spotify_url === response.routine.spotify_url)) {
-        state.spotifySource = localPlaylistSource(state.spotifySource, state.spotifySource.playlists, response.routine.spotify_url);
+      if (response.routine.spotify_url && state.playlistSource?.playlists?.some((playlist) => playlist.spotify_url === response.routine.spotify_url)) {
+        state.playlistSource = localPlaylistSource(state.playlistSource, state.playlistSource.playlists, response.routine.spotify_url);
       }
-      view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+      view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
     } else {
-      await focusApi.deleteRoutine(record.saved.id);
+      await focusApi.deleteRoutine(record.saved.id, { signal: operation.signal });
+      if (!isCurrentOperation(operation)) return;
       state.routines = state.routines.filter((routine) => routine.id !== record.saved.id);
       view.renderRoutines(state.routines);
       view.fillRoutine(null);
-      state.spotifySource = null;
-      view.renderSpotify(null, state.playlistEntitlements);
+      state.playlistSource = null;
+      view.renderPlaylists(null, state.playlistEntitlements);
       renderSuggestions();
     }
     view.setSettingsStatus('Saved setup restored.', 'success');
     playlistToast('Focus setup restored.');
   } catch (error) {
-    showError(error, 'Couldn’t undo the save');
+    if (isCurrentOperation(operation)) showError(error, 'Couldn’t undo the save');
   }
 }
 
 async function saveRoutine() {
-  const { routine_id: _routineId, spotify_playlists: _playlists, ...payload } = formPayload(elements.form);
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
+  const payload = formPayload(elements.form);
+  delete payload.routine_id;
+  delete payload.spotify_playlists;
   const selectedId = elements.routineSelect.value;
   const creating = !selectedId;
   if (creating && !elements.routineName.value.trim()) {
@@ -676,15 +755,16 @@ async function saveRoutine() {
       ...previous,
       playlists: (previous.playlists || []).map((playlist) => ({ ...playlist })),
     } : null;
-    const response = await focusApi.saveRoutine(payload, selectedId);
+    const response = await focusApi.saveRoutine(payload, selectedId, { signal: operation.signal });
+    if (!isCurrentOperation(operation)) return;
     const index = state.routines.findIndex((routine) => routine.id === response.routine.id);
     if (index >= 0) state.routines[index] = response.routine;
     else state.routines.unshift(response.routine);
     view.renderRoutines(state.routines, response.routine.id);
-    if (response.routine.spotify_url && state.spotifySource?.playlists?.some((playlist) => playlist.spotify_url === response.routine.spotify_url)) {
-      state.spotifySource = localPlaylistSource(state.spotifySource, state.spotifySource.playlists, response.routine.spotify_url);
+    if (response.routine.spotify_url && state.playlistSource?.playlists?.some((playlist) => playlist.spotify_url === response.routine.spotify_url)) {
+      state.playlistSource = localPlaylistSource(state.playlistSource, state.playlistSource.playlists, response.routine.spotify_url);
     }
-    view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+    view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
     const setupName = response.routine.name;
     view.setSettingsStatus(
       previousSnapshot ? `Changes saved to “${setupName}”.` : `“${setupName}” saved as a new setup.`,
@@ -695,16 +775,18 @@ async function saveRoutine() {
       'success',
       previousSnapshot ? `Changes saved to “${setupName}”` : `“${setupName}” saved`,
       10_000,
-      { label: 'Undo', onClick: () => { void undoRoutineSave({ previous: previousSnapshot, saved: response.routine }); } },
+      { label: 'Undo', onClick: () => { if (isCurrentOperation(operation)) void undoRoutineSave({ previous: previousSnapshot, saved: response.routine }); } },
     );
   } catch (error) {
-    showError(error, 'Couldn’t save focus setup');
+    if (isCurrentOperation(operation)) showError(error, 'Couldn’t save focus setup');
   } finally {
-    elements.saveRoutines.forEach((button) => { button.disabled = false; });
+    if (isCurrentOperation(operation)) elements.saveRoutines.forEach((button) => { button.disabled = false; });
   }
 }
 
 async function deleteRoutine() {
+  const operation = currentOperation();
+  if (!isCurrentOperation(operation)) return;
   const routine = selectedRoutine();
   if (!routine) return;
   const accepted = window.APStudyConfirm?.request
@@ -715,28 +797,33 @@ async function deleteRoutine() {
       danger: true,
     })
     : window.confirm(`Delete “${routine.name}”?`);
-  if (!accepted) return;
+  if (!accepted || !isCurrentOperation(operation)) return;
   const routineIndex = state.routines.findIndex((item) => item.id === routine.id);
-  const previousSpotifySource = state.spotifySource;
+  const previousPlaylistSource = state.playlistSource;
   state.routines = state.routines.filter((item) => item.id !== routine.id);
   view.renderRoutines(state.routines);
   view.fillRoutine(null);
-  view.renderSpotify(null, state.playlistEntitlements);
-  state.spotifySource = null;
+  view.renderPlaylists(null, state.playlistEntitlements);
+  state.playlistSource = null;
   renderSuggestions();
   view.setSettingsStatus('Routine deleted.');
   if (window.APStudyUndo?.stage) {
     window.APStudyUndo.stage({
       message: `“${routine.name}” deleted.`,
-      commit: ({ reason }) => focusApi.deleteRoutine(routine.id, { keepalive: reason === 'pagehide' }),
+      commit: ({ reason }) => {
+        // Staged deletion must still commit when pagehide flushes the undo window.
+        if (reason === 'pagehide') return focusApi.deleteRoutine(routine.id, { keepalive: true });
+        if (isCurrentOperation(operation)) return focusApi.deleteRoutine(routine.id, { signal: operation.signal });
+      },
       restore: () => {
+        if (!isCurrentOperation(operation)) return;
         if (!state.routines.some((item) => item.id === routine.id)) {
           state.routines.splice(Math.min(Math.max(0, routineIndex), state.routines.length), 0, routine);
         }
-        if (!state.spotifySource) state.spotifySource = previousSpotifySource;
+        if (!state.playlistSource) state.playlistSource = previousPlaylistSource;
         view.renderRoutines(state.routines, routine.id);
         view.fillRoutine(routine);
-        view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+        view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
         renderSuggestions();
         view.setSettingsStatus('Routine restored.', 'success');
       },
@@ -745,15 +832,16 @@ async function deleteRoutine() {
     return;
   }
   try {
-    await focusApi.deleteRoutine(routine.id);
+    await focusApi.deleteRoutine(routine.id, { signal: operation.signal });
   } catch (error) {
+    if (!isCurrentOperation(operation)) return;
     if (!state.routines.some((item) => item.id === routine.id)) {
       state.routines.splice(Math.min(Math.max(0, routineIndex), state.routines.length), 0, routine);
     }
-    if (!state.spotifySource) state.spotifySource = previousSpotifySource;
+    if (!state.playlistSource) state.playlistSource = previousPlaylistSource;
     view.renderRoutines(state.routines, routine.id);
     view.fillRoutine(routine);
-    view.renderSpotify(state.spotifySource, state.playlistEntitlements);
+    view.renderPlaylists(state.playlistSource, state.playlistEntitlements);
     renderSuggestions();
     showError(error, 'Couldn’t delete focus setup');
   }
@@ -797,9 +885,9 @@ function bindEvents() {
     if (!Number(elements.longBreakMinutes.value)) elements.longBreakMinutes.value = button.dataset.breakSuggestion;
   }, listenerOptions);
   elements.layoutInputs.forEach((input) => input.addEventListener('change', () => {
-    if (input.checked) view.setSpotifyLayout(input.value);
+    if (input.checked) view.setMusicLayout(input.value);
   }, listenerOptions));
-  elements.spotifyUrl?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }), listenerOptions);
+  elements.playlistUrlInput?.addEventListener('input', () => view.syncPlaylistControls({ clearStatus: true }), listenerOptions);
   elements.playlistToggle?.addEventListener('click', () => {
     const open = elements.playlistToggle.getAttribute('aria-expanded') !== 'true';
     view.setPlaylistEditor(open);
@@ -815,11 +903,12 @@ function bindEvents() {
     }
     void removePlaylist();
   }, listenerOptions);
-  elements.spotifyEmbed?.addEventListener('click', (event) => {
+  elements.playerHost?.addEventListener('click', (event) => {
     if (!event.target.closest('[data-focus-player-load]')) return;
-    void view.activateSpotify({ autoplay: false });
+    const operation = currentOperation();
+    if (isCurrentOperation(operation)) void view.activateMusic({ autoplay: false, signal: operation.signal });
   }, listenerOptions);
-  elements.spotifyUrl?.addEventListener('keydown', (event) => {
+  elements.playlistUrlInput?.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       event.preventDefault();
       view.setPlaylistEditor(false);
@@ -870,11 +959,11 @@ function bindEvents() {
     if (state.session && remainingSeconds(state.session) <= 0) void advancePhase();
   }, listenerOptions);
   window.APStudyPageLifecycle?.register?.({
-    pause: stopTimer,
-    resume: tick,
+    pause: pauseRuntime,
+    resume: resumeRuntime,
     dispose: () => {
+      pauseRuntime();
       state.disposed = true;
-      stopTimer();
       eventController.abort();
       disposePlaylistGestures?.();
       disposePlaylistGestures = null;

@@ -55,7 +55,7 @@ function normalizeEmbedFrame(host) {
   if (iframe.hasAttribute('allowFullscreen')) iframe.removeAttribute('allowFullscreen');
 }
 
-export function createSpotifyPlayer(host) {
+export function createMusicPlayer(host) {
   let controller = null;
   let currentUrl = '';
   let loadingUrl = '';
@@ -63,6 +63,7 @@ export function createSpotifyPlayer(host) {
   let generation = 0;
   let disposed = false;
   let loadPromise = null;
+  let cancelPendingLoad = null;
 
   function destroyController() {
     controller?.destroy?.();
@@ -70,28 +71,44 @@ export function createSpotifyPlayer(host) {
     host?.replaceChildren();
   }
 
-  async function load(spotifyUrl, embedUrl) {
-    if (!host || disposed || !spotifyUrl) return false;
-    if (spotifyUrl === currentUrl) return true;
-    if (spotifyUrl === loadingUrl) return loadPromise;
+  async function load(playlistUrl, embedUrl, { signal } = {}) {
+    if (!host || disposed || !playlistUrl || signal?.aborted) return false;
+    if (playlistUrl === currentUrl) return true;
+    if (playlistUrl === loadingUrl) return loadPromise;
+    cancelPendingLoad?.();
     const requestGeneration = ++generation;
-    loadingUrl = spotifyUrl;
+    const cancelled = () => disposed || signal?.aborted || requestGeneration !== generation || loadingUrl !== playlistUrl;
+    const abort = () => {
+      if (requestGeneration === generation && loadingUrl === playlistUrl) clear();
+    };
+    signal?.addEventListener('abort', abort, { once: true });
+    loadingUrl = playlistUrl;
     host.hidden = false;
-    const provider = new URL(spotifyUrl).hostname === 'open.spotify.com' ? 'spotify' : 'youtube';
+    const provider = new URL(playlistUrl).hostname === 'open.spotify.com' ? 'spotify' : 'youtube';
     if (provider !== 'spotify') {
       destroyController();
       fallbackEmbed(host, embedUrl, provider);
-      currentUrl = spotifyUrl;
+      currentUrl = playlistUrl;
       loadingUrl = '';
+      signal?.removeEventListener('abort', abort);
       return true;
     }
     loadPromise = (async () => {
-      const api = await loadSpotifyApi();
-      if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) return false;
+      let cancelSdk;
+      const sdkCancelled = new Promise((resolve) => {
+        cancelSdk = () => {
+          if (cancelPendingLoad === cancelSdk) cancelPendingLoad = null;
+          resolve(null);
+        };
+        cancelPendingLoad = cancelSdk;
+      });
+      const api = await Promise.race([loadSpotifyApi(), sdkCancelled]);
+      if (cancelPendingLoad === cancelSdk) cancelPendingLoad = null;
+      if (cancelled()) return false;
       destroyController();
       if (!api?.createController) {
         fallbackEmbed(host, embedUrl, provider);
-        currentUrl = spotifyUrl;
+        currentUrl = playlistUrl;
         loadingUrl = '';
         return true;
       }
@@ -99,37 +116,53 @@ export function createSpotifyPlayer(host) {
       mount.className = 'focus-spotify-controller';
       host.replaceChildren(mount);
       return new Promise((resolve) => {
+        const finish = (loaded) => {
+          if (cancelPendingLoad === cancel) cancelPendingLoad = null;
+          resolve(loaded);
+        };
+        const cancel = () => {
+          window.clearTimeout(controllerTimeout);
+          finish(false);
+        };
         const controllerTimeout = window.setTimeout(() => {
-          if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
-            resolve(false);
+          if (cancelled()) {
+            finish(false);
             return;
           }
           fallbackEmbed(host, embedUrl, provider);
-          currentUrl = spotifyUrl;
+          currentUrl = playlistUrl;
           loadingUrl = '';
-          resolve(true);
+          finish(true);
         }, 5000);
-        api.createController(mount, { url: spotifyUrl, width: '100%', height: 352 }, (nextController) => {
+        cancelPendingLoad = cancel;
+        api.createController(mount, { url: playlistUrl, width: '100%', height: 352 }, (nextController) => {
           window.clearTimeout(controllerTimeout);
-          if (disposed || requestGeneration !== generation || loadingUrl !== spotifyUrl) {
+          if (cancelled()) {
             nextController.destroy?.();
-            resolve(false);
+            finish(false);
             return;
           }
           controller = nextController;
-          currentUrl = spotifyUrl;
+          currentUrl = playlistUrl;
           loadingUrl = '';
           normalizeEmbedFrame(host);
           if (resumeWhenReady) controller.resume?.();
-          resolve(true);
+          finish(true);
         });
       });
-    })();
+    })().finally(() => {
+      signal?.removeEventListener('abort', abort);
+      if (requestGeneration === generation) {
+        cancelPendingLoad = null;
+        if (loadingUrl === playlistUrl) loadingUrl = '';
+      }
+    });
     return loadPromise;
   }
 
   function clear() {
     generation += 1;
+    cancelPendingLoad?.();
     destroyController();
     resumeWhenReady = false;
     currentUrl = '';

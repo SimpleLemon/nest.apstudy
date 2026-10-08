@@ -6,6 +6,7 @@ import {
   playlistProvider,
 } from './data.js';
 import { createRoutinePicker } from './routine-picker.js';
+import { createEggAnimation } from './egg-animation.js';
 import {
   eggCrackLevel,
   formatTimer,
@@ -178,17 +179,17 @@ export function completionMessage(phase, randomValue = Math.random()) {
 }
 
 export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect, onRoutineCreate } = {}) {
-  let countdownTimer = null;
-  let eggOpenTimer = null;
-  let countdownResolve = null;
-  let eggOpenResolve = null;
+  let announceTimer = null;
+  let removeAnnounceAbort = null;
   let playlistBusy = false;
   let playlistEntitlements = null;
   let musicRuntime = null;
   let musicRuntimePromise = null;
-  let deferredSpotifySource = null;
+  let deferredPlaylistSource = null;
   let playerLoadingTimer = null;
   let playerAssistTimer = null;
+  let playerAssistRemovalTimer = null;
+  let musicActivation = null;
   let pendingPlayerPreferences = { layout: 'beside' };
   let pendingHistory = [];
   let historyModulePromise = null;
@@ -232,8 +233,8 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     saveRoutines: [...document.querySelectorAll('[data-focus-save-routine]')],
     saveRoutineLabels: [...document.querySelectorAll('[data-focus-save-routine-label]')],
     deleteRoutine: document.querySelector('[data-focus-delete-routine]'),
-    spotifyUrl: document.getElementById('focus-spotify-url'),
-    activeSpotifyUrl: document.querySelector('[data-focus-active-playlist-url]'),
+    playlistUrlInput: document.getElementById('focus-spotify-url'),
+    activePlaylistUrlInput: document.querySelector('[data-focus-active-playlist-url]'),
     playlistComposer: document.querySelector('[data-focus-playlist-composer]'),
     playlistToggle: document.querySelector('[data-focus-playlist-toggle]'),
     playlistEditor: document.querySelector('[data-focus-playlist-editor]'),
@@ -261,7 +262,7 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     history: document.querySelector('[data-focus-history]'),
     historyRegion: document.querySelector('[data-focus-history-region]'),
     playerFrame: document.querySelector('[data-focus-player-frame]'),
-    spotifyEmbed: document.querySelector('[data-focus-spotify-embed]'),
+    playerHost: document.querySelector('[data-focus-spotify-embed]'),
     floatingControls: document.querySelector('[data-focus-floating-controls]'),
     floatingHandle: document.querySelector('[data-focus-floating-handle]'),
     floatingSize: document.querySelector('[data-focus-floating-size]'),
@@ -297,12 +298,21 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     return lazyStylesPromise;
   }
 
-  async function ensureMusicRuntime() {
-    if (disposed) return null;
+  const isCurrentMusic = (operation) => !disposed && musicActivation === operation
+    && !operation.controller.signal.aborted && operation.source === deferredPlaylistSource;
+
+  function cancelMusicActivation() {
+    musicActivation?.controller.abort();
+    musicActivation = null;
+    clearPlayerFeedback();
+  }
+
+  async function ensureMusicRuntime(operation) {
+    if (!isCurrentMusic(operation)) return null;
     if (musicRuntime) return musicRuntime;
     musicRuntimePromise ||= import('./music-runtime.js');
     const { createMusicRuntime } = await musicRuntimePromise;
-    if (disposed) return null;
+    if (!isCurrentMusic(operation)) return null;
     musicRuntime ||= createMusicRuntime({ elements, savePreferences: savePlayerPreferences });
     musicRuntime.applyPreferences(pendingPlayerPreferences);
     return musicRuntime;
@@ -311,53 +321,69 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
   function clearPlayerFeedback() {
     window.clearTimeout(playerLoadingTimer);
     window.clearTimeout(playerAssistTimer);
+    window.clearTimeout(playerAssistRemovalTimer);
     playerLoadingTimer = null;
     playerAssistTimer = null;
-    elements.spotifyEmbed?.classList.remove('is-player-loading');
+    playerAssistRemovalTimer = null;
+    elements.playerHost?.classList.remove('is-player-loading');
     document.querySelector('[data-focus-player-assist]')?.remove();
   }
 
   function renderPlayerPlaceholder() {
-    if (!elements.spotifyEmbed || !deferredSpotifySource) return;
+    if (!elements.playerHost || !deferredPlaylistSource) return;
     clearPlayerFeedback();
-    elements.spotifyEmbed.hidden = false;
-    elements.spotifyEmbed.dataset.playerState = 'deferred';
-    elements.spotifyEmbed.replaceChildren(playerPlaceholder(deferredSpotifySource));
+    elements.playerHost.hidden = false;
+    elements.playerHost.dataset.playerState = 'deferred';
+    elements.playerHost.replaceChildren(playerPlaceholder(deferredPlaylistSource));
   }
 
-  async function activateSpotify({ autoplay = false } = {}) {
-    if (disposed || !deferredSpotifySource || !elements.spotifyEmbed) return false;
-    const source = deferredSpotifySource;
-    clearPlayerFeedback();
-    elements.spotifyEmbed.dataset.playerState = 'loading';
+  async function activateMusic({ autoplay = false, signal } = {}) {
+    if (disposed || !deferredPlaylistSource || !elements.playerHost || signal?.aborted) return false;
+    const source = deferredPlaylistSource;
+    cancelMusicActivation();
+    const operation = { source, controller: new AbortController() };
+    musicActivation = operation;
+    const abort = () => {
+      operation.controller.abort();
+      if (musicActivation === operation) musicRuntime?.pause();
+    };
+    signal?.addEventListener('abort', abort, { once: true });
+    operation.controller.signal.addEventListener('abort', () => {
+      signal?.removeEventListener('abort', abort);
+      if (musicActivation === operation) clearPlayerFeedback();
+    }, { once: true });
+    elements.playerHost.dataset.playerState = 'loading';
     playerLoadingTimer = window.setTimeout(() => {
-      if (elements.spotifyEmbed?.dataset.playerState === 'loading') {
-        elements.spotifyEmbed.classList.add('is-player-loading');
+      if (isCurrentMusic(operation) && elements.playerHost?.dataset.playerState === 'loading') {
+        elements.playerHost.classList.add('is-player-loading');
       }
     }, 100);
     try {
-      const runtime = await ensureMusicRuntime();
-      if (!runtime) return false;
-      const loaded = await runtime.activate(source, { autoplay });
-      if (source !== deferredSpotifySource) return false;
+      const runtime = await ensureMusicRuntime(operation);
+      if (!runtime || !isCurrentMusic(operation)) return false;
+      const loaded = await runtime.activate(source, { autoplay, signal: operation.controller.signal });
+      if (!isCurrentMusic(operation)) return false;
       window.clearTimeout(playerLoadingTimer);
-      elements.spotifyEmbed.classList.remove('is-player-loading');
-      elements.spotifyEmbed.dataset.playerState = loaded ? 'ready' : 'deferred';
+      elements.playerHost.classList.remove('is-player-loading');
+      elements.playerHost.dataset.playerState = loaded ? 'ready' : 'deferred';
       if (!loaded) renderPlayerPlaceholder();
       if (loaded && autoplay) {
         playerAssistTimer = window.setTimeout(() => {
-          if (!elements.spotifyEmbed || elements.spotifyEmbed.dataset.playerState !== 'ready') return;
+          if (!isCurrentMusic(operation) || !elements.playerHost || elements.playerHost.dataset.playerState !== 'ready') return;
           const assist = document.createElement('p');
           assist.className = 'focus-player-assist';
           assist.dataset.focusPlayerAssist = 'true';
           assist.textContent = 'If music does not start, press play in the player.';
-          elements.spotifyEmbed.insertAdjacentElement('afterend', assist);
-          window.setTimeout(() => assist.remove(), 6000);
+          elements.playerHost.insertAdjacentElement('afterend', assist);
+          playerAssistRemovalTimer = window.setTimeout(() => {
+            if (isCurrentMusic(operation)) assist.remove();
+          }, 6000);
         }, 1000);
       }
       return loaded;
-    } catch (_error) {
-      if (source === deferredSpotifySource) renderPlayerPlaceholder();
+    } catch {
+      if (!isCurrentMusic(operation)) return false;
+      renderPlayerPlaceholder();
       notify?.({
         message: 'The player could not load. Your timer is still running.',
         title: 'Couldn’t load playlist player',
@@ -508,8 +534,8 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     elements.breakMinutes.value = routine?.break_minutes ?? 0;
     elements.longBreakMinutes.value = routine?.long_break_minutes ?? routine?.break_minutes ?? 0;
     elements.cycles.value = routine?.cycles ?? 1;
-    if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = routine?.spotify_url || '';
-    if (elements.spotifyUrl) elements.spotifyUrl.value = '';
+    if (elements.activePlaylistUrlInput) elements.activePlaylistUrlInput.value = routine?.spotify_url || '';
+    if (elements.playlistUrlInput) elements.playlistUrlInput.value = '';
     if (updatePicker) {
       if (routine?.id) routinePickerControl?.setValue(routine.id);
       else routinePickerControl?.enterCreateMode({ notify: false });
@@ -676,14 +702,14 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
   }
 
   function syncPlaylistControls({ clearStatus = false, entitlements = playlistEntitlements, playlists = [] } = {}) {
-    const raw = String(elements.spotifyUrl?.value || '').trim();
+    const raw = String(elements.playlistUrlInput?.value || '').trim();
     const normalized = normalizePlaylist(raw);
     const invalid = Boolean(raw && !normalized);
     const list = Array.isArray(playlists) ? playlists : [];
     const atLimit = entitlements?.limit != null && Number(entitlements.usage) >= Number(entitlements.limit);
     const isNew = Boolean(normalized && !list.some((playlist) => playlist.spotify_url === normalized));
     const blocked = atLimit && isNew;
-    elements.spotifyUrl?.setAttribute('aria-invalid', String(invalid));
+    elements.playlistUrlInput?.setAttribute('aria-invalid', String(invalid));
     if (elements.playlistApply) {
       elements.playlistApply.hidden = !normalized;
       elements.playlistApply.disabled = playlistBusy || !normalized || blocked;
@@ -714,8 +740,8 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
   function setPlaylistEditor(open, { force = false } = {}) {
     if (!elements.playlistEditor || !elements.playlistToggle || !elements.playlistComposer) return;
     if (!open && playlistBusy && !force) return;
-    if (elements.spotifyUrl) elements.spotifyUrl.value = '';
-    elements.spotifyUrl?.setAttribute('aria-invalid', 'false');
+    if (elements.playlistUrlInput) elements.playlistUrlInput.value = '';
+    elements.playlistUrlInput?.setAttribute('aria-invalid', 'false');
     elements.playlistEditor.hidden = !open;
     elements.playlistToggle.setAttribute('aria-expanded', String(open));
     elements.playlistToggle.setAttribute('aria-hidden', String(open));
@@ -723,32 +749,32 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     elements.playlistComposer.classList.toggle('is-open', open);
     if (!open) setPlaylistStatus();
     syncPlaylistControls();
-    if (open) window.setTimeout(() => elements.spotifyUrl?.focus(), 0);
+    if (open) window.setTimeout(() => elements.playlistUrlInput?.focus(), 0);
   }
 
-  function renderSpotify(source, entitlements = playlistEntitlements) {
+  function renderPlaylists(source, entitlements = playlistEntitlements) {
     playlistEntitlements = entitlements || playlistEntitlements;
-    const spotifyUrl = source?.spotify_url || '';
-    const embedUrl = source?.embed_url || source?.spotify_embed_url || playlistEmbedUrl(spotifyUrl);
-    const playlists = Array.isArray(source?.playlists) ? source.playlists : (spotifyUrl ? [{
-      spotify_url: spotifyUrl,
+    const playlistUrl = source?.spotify_url || '';
+    const embedUrl = source?.embed_url || source?.spotify_embed_url || playlistEmbedUrl(playlistUrl);
+    const playlists = Array.isArray(source?.playlists) ? source.playlists : (playlistUrl ? [{
+      spotify_url: playlistUrl,
       spotify_embed_url: embedUrl,
       embed_url: embedUrl,
-      provider: playlistProvider(spotifyUrl),
+      provider: playlistProvider(playlistUrl),
       title: 'Playlist',
       creator: 'Music',
     }] : []);
-    const activePlaylist = playlists.find((playlist) => playlist.spotify_url === spotifyUrl) || {};
-    const preservePlayer = deferredSpotifySource?.spotify_url === spotifyUrl
-      && ['loading', 'ready'].includes(elements.spotifyEmbed?.dataset.playerState)
-      && Boolean(elements.spotifyEmbed?.querySelector('iframe, .focus-spotify-controller'));
-    if (elements.activeSpotifyUrl) elements.activeSpotifyUrl.value = spotifyUrl;
+    const activePlaylist = playlists.find((playlist) => playlist.spotify_url === playlistUrl) || {};
+    const preservePlayer = deferredPlaylistSource?.spotify_url === playlistUrl
+      && ['loading', 'ready'].includes(elements.playerHost?.dataset.playerState)
+      && Boolean(elements.playerHost?.querySelector('iframe, .focus-spotify-controller'));
+    if (elements.activePlaylistUrlInput) elements.activePlaylistUrlInput.value = playlistUrl;
     if (elements.playlistData) {
       elements.playlistData.value = JSON.stringify(playlists.map((playlist) => playlist.spotify_url));
     }
     if (elements.playlistList) {
       const inactivePlaylists = playlists
-        .filter((playlist) => playlist.spotify_url !== spotifyUrl)
+        .filter((playlist) => playlist.spotify_url !== playlistUrl)
         .map(playlistCard);
       elements.playlistList.replaceChildren(...inactivePlaylists);
       elements.playlistList.hidden = playlists.length <= 1;
@@ -762,36 +788,41 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
       elements.playlistRemove.setAttribute('aria-label', `Remove ${activePlaylist.title || 'active playlist'}`);
     }
     elements.playerFrame?.classList.remove('is-actions-visible');
-    if (embedUrl && elements.spotifyEmbed) {
+    if (embedUrl && elements.playerHost) {
       void ensureLazyStyles();
-      void ensureMusicRuntime();
-      deferredSpotifySource = {
+      const nextSource = {
         ...source,
         ...activePlaylist,
-        spotify_url: spotifyUrl,
+        spotify_url: playlistUrl,
         spotify_embed_url: embedUrl,
         embed_url: embedUrl,
       };
-      elements.spotifyEmbed.hidden = false;
-      elements.spotifyEmbed.dataset.playlistProvider = source?.playlist_provider || playlistProvider(spotifyUrl);
+      if (preservePlayer) Object.assign(deferredPlaylistSource, nextSource);
+      else {
+        cancelMusicActivation();
+        deferredPlaylistSource = nextSource;
+      }
+      elements.playerHost.hidden = false;
+      elements.playerHost.dataset.playlistProvider = source?.playlist_provider || playlistProvider(playlistUrl);
       if (!preservePlayer) {
         musicRuntime?.clear();
-        void activateSpotify({ autoplay: false });
+        void activateMusic({ autoplay: false });
       }
     } else {
-      deferredSpotifySource = null;
-      elements.spotifyEmbed?.removeAttribute('data-playlist-provider');
-      elements.spotifyEmbed?.removeAttribute('data-player-state');
+      cancelMusicActivation();
+      deferredPlaylistSource = null;
+      elements.playerHost?.removeAttribute('data-playlist-provider');
+      elements.playerHost?.removeAttribute('data-player-state');
       clearPlayerFeedback();
       musicRuntime?.clear();
-      elements.spotifyEmbed?.replaceChildren();
-      if (elements.spotifyEmbed) elements.spotifyEmbed.hidden = true;
+      elements.playerHost?.replaceChildren();
+      if (elements.playerHost) elements.playerHost.hidden = true;
     }
     setPlaylistEditor(false, { force: true });
     syncPlaylistControls({ entitlements: playlistEntitlements, playlists });
   }
 
-  function setSpotifyLayout(value, persist = true) {
+  function setMusicLayout(value, persist = true) {
     pendingPlayerPreferences = { ...pendingPlayerPreferences, layout: value };
     document.body.dataset.spotifyLayout = value;
     elements.layoutInputs.forEach((input) => { input.checked = input.value === value; });
@@ -808,85 +839,28 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     musicRuntime?.applyPreferences(pendingPlayerPreferences);
   }
 
-  function startCountdown() {
-    if (!elements.countdown || !elements.egg) return Promise.resolve();
-    window.clearTimeout(countdownTimer);
-    window.clearTimeout(eggOpenTimer);
-    countdownResolve?.();
-    eggOpenResolve?.();
-    countdownResolve = null;
-    eggOpenResolve = null;
-    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    const interval = reducedMotion ? 120 : 380;
-    let number = 3;
-    elements.egg.dataset.eggState = 'countdown';
-    elements.session?.setAttribute('data-countdown-active', 'true');
-    elements.countdown.hidden = false;
-    return new Promise((resolve) => {
-      countdownResolve = resolve;
-      const showNumber = () => {
-        if (number === 0) {
-          elements.countdown.hidden = true;
-          elements.countdown.textContent = '';
-          elements.egg.dataset.eggState = 'closed';
-          elements.session?.removeAttribute('data-countdown-active');
-          countdownResolve = null;
-          resolve();
-          return;
-        }
-        text(elements.countdown, number);
-        elements.countdown.classList.remove('is-counting');
-        void elements.countdown.offsetWidth;
-        elements.countdown.classList.add('is-counting');
-        number -= 1;
-        countdownTimer = window.setTimeout(showNumber, interval);
-      };
-      showNumber();
-    });
+  const eggAnimation = createEggAnimation(elements, completionMessage);
+  const { startCountdown, resetEgg, playEggOpening } = eggAnimation;
+
+  function cancelAnnouncement() {
+    window.clearTimeout(announceTimer);
+    announceTimer = null;
+    removeAnnounceAbort?.();
+    removeAnnounceAbort = null;
   }
 
-  function resetEgg() {
-    window.clearTimeout(eggOpenTimer);
-    eggOpenResolve?.();
-    eggOpenResolve = null;
-    if (!elements.egg) return;
-    elements.egg.dataset.eggState = 'closed';
-    elements.egg.dataset.crackLevel = '0';
-    elements.egg.dataset.nestStage = '0';
-    elements.egg.style.setProperty('--focus-egg-progress', '0');
-    elements.egg.setAttribute('aria-label', 'An egg resting in a nest');
-    text(elements.eggResult, 'Focus complete.');
-  }
-
-  function playEggOpening(phase) {
-    if (!elements.egg) return Promise.resolve();
-    window.clearTimeout(countdownTimer);
-    window.clearTimeout(eggOpenTimer);
-    countdownResolve?.();
-    eggOpenResolve?.();
-    countdownResolve = null;
-    eggOpenResolve = null;
-    elements.session?.removeAttribute('data-countdown-active');
-    elements.egg.dataset.nestStage = '8';
-    elements.egg.dataset.crackLevel = '3';
-    elements.egg.dataset.eggState = 'opening';
-    text(elements.eggResult, completionMessage(phase));
-    elements.egg.setAttribute('aria-label', `${phase === 'break' ? 'Break' : 'Focus'} complete; an open book rises from the egg`);
-    requestAnimationFrame(() => {
-      if (elements.egg) elements.egg.dataset.eggState = 'open';
-    });
-    return new Promise((resolve) => {
-      eggOpenResolve = resolve;
-      eggOpenTimer = window.setTimeout(() => {
-        eggOpenResolve = null;
-        resolve();
-      }, 3000);
-    });
-  }
-
-  function announce(message) {
+  function announce(message, { signal } = {}) {
+    cancelAnnouncement();
+    if (disposed || signal?.aborted) return;
     text(elements.announcer, '');
-    window.setTimeout(() => text(elements.announcer, message), 20);
+    if (signal) {
+      signal.addEventListener('abort', cancelAnnouncement, { once: true });
+      removeAnnounceAbort = () => signal.removeEventListener('abort', cancelAnnouncement);
+    }
+    announceTimer = window.setTimeout(() => {
+      cancelAnnouncement();
+      if (!disposed && !signal?.aborted) text(elements.announcer, message);
+    }, 20);
   }
 
   return {
@@ -909,37 +883,35 @@ export function createFocusView({ savePlayerPreferences, notify, onRoutineSelect
     renderSession,
     renderTick,
     renderHistory,
-    renderSpotify,
+    renderPlaylists,
     setPlaylistEditor,
     syncPlaylistControls,
-    setSpotifyLayout,
+    setMusicLayout,
     applyPlayerPreferences,
-    activateSpotify,
+    activateMusic,
     mountHistory,
     startCountdown,
     playEggOpening,
     resetEgg,
-    pauseSpotify: () => musicRuntime?.pause(),
-    resumeSpotify: () => {
-      if (musicRuntime) musicRuntime.resume();
-      else void activateSpotify({ autoplay: true });
+    pauseMusic: () => {
+      cancelMusicActivation();
+      musicRuntime?.pause();
     },
-    clearSpotify: () => {
-      clearPlayerFeedback();
-      deferredSpotifySource = null;
-      elements.spotifyEmbed?.removeAttribute('data-player-state');
-      elements.spotifyEmbed?.removeAttribute('data-playlist-provider');
+    resumeMusic: () => {
+      if (!disposed) void activateMusic({ autoplay: true });
+    },
+    clearMusic: () => {
+      cancelMusicActivation();
+      deferredPlaylistSource = null;
+      elements.playerHost?.removeAttribute('data-player-state');
+      elements.playerHost?.removeAttribute('data-playlist-provider');
       musicRuntime?.clear();
     },
     dispose: () => {
       disposed = true;
-      window.clearTimeout(countdownTimer);
-      window.clearTimeout(eggOpenTimer);
-      countdownResolve?.();
-      eggOpenResolve?.();
-      countdownResolve = null;
-      eggOpenResolve = null;
-      clearPlayerFeedback();
+      eggAnimation.dispose();
+      cancelAnnouncement();
+      cancelMusicActivation();
       musicRuntime?.dispose();
       musicRuntime = null;
       musicRuntimePromise = null;

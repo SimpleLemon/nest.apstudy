@@ -112,7 +112,11 @@ function focusFixture() {
 }
 
 async function installFocusApi(page) {
+    await page.addScriptTag({ url: "/static/js/core/pending-mutations.js" });
+    await page.addScriptTag({ url: "/static/js/core/http.js" });
     await page.evaluate(({ initialSpotifyUrl }) => {
+        const pendingMutations = window.APStudyCoreServices.pendingMutations.createPendingMutations({ window, document });
+        window.APStudyHttp = window.APStudyCoreServices.http.createHttpService({ window, pendingMutations });
         const playlistFixtureMeta = (url) => {
             const id = url.includes("list=") ? url.split("list=").pop() : url.split("/").at(-1);
             const isAbc = url.includes("abc123");
@@ -169,7 +173,10 @@ async function installFocusApi(page) {
             document.querySelector(".sidebar-container").classList.toggle("collapsed", collapsed);
             document.dispatchEvent(new CustomEvent("apstudy-sidebar-state-change", { detail: { collapsed } }));
         };
-        const response = (payload, ok = true) => ({ ok, json: async () => payload });
+        const response = (payload, ok = true) => new Response(JSON.stringify(payload), {
+            status: ok ? 200 : 400,
+            headers: { "Content-Type": "application/json" },
+        });
         const libraryResponse = () => window.__focusTestHelpers.libraryFixtureResponse(window.__focusTest);
         const syncSessionPlaylists = () => {
             if (!window.__focusTest.session) return;
@@ -940,7 +947,7 @@ test("playlist tier limits disable add controls when the library is full", async
     await page.goto(`${baseURL}/static/js/focus/index.js`);
     await page.setContent(focusFixture());
     await installFocusApi(page);
-    await page.evaluate(({ spotifyUrl, replacementSpotifyUrl, thirdSpotifyUrl }) => {
+    await page.evaluate(({ spotifyUrl, replacementSpotifyUrl }) => {
         window.__focusTest.playlistLimit = 2;
         window.__focusTest.userPlaylists = [spotifyUrl, replacementSpotifyUrl]
             .map((url) => window.__focusTestHelpers.playlistFixtureMeta(url));

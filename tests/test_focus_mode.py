@@ -80,7 +80,7 @@ class FocusModeTests(unittest.TestCase):
         })
         self.assertEqual(session["state"], "running")
         self.assertEqual(session["cycle_number"], 1)
-        self.assertTrue(focus_mode.is_focus_mode_active("u1"))
+        self.assertTrue(focus_mode.reconcile_focus_mode_status("u1"))
 
         paused = focus_mode.update_session("u1", session["id"], "pause")
         self.assertEqual(paused["state"], "paused")
@@ -107,8 +107,8 @@ class FocusModeTests(unittest.TestCase):
         })
         completed = focus_mode.update_session("u1", session["id"], "complete_phase")
         self.assertEqual(completed["state"], "completed")
-        self.assertFalse(focus_mode.is_focus_mode_active("u1"))
-        self.assertIsNone(focus_mode.get_active_session("u1"))
+        self.assertFalse(focus_mode.reconcile_focus_mode_status("u1"))
+        self.assertIsNone(focus_mode.load_and_reconcile_active_session("u1"))
         self.assertEqual(len(focus_mode.list_history("u1")), 1)
 
     def test_due_session_recovers_from_server_timestamps(self):
@@ -123,13 +123,49 @@ class FocusModeTests(unittest.TestCase):
         expired = (datetime.now(timezone.utc) - timedelta(minutes=1)).isoformat().replace("+00:00", "Z")
         with db_connection() as conn:
             conn.execute("UPDATE focus_sessions SET phase_ends_at=? WHERE id=?", [expired, session["id"]])
-        self.assertIsNone(focus_mode.get_active_session("u1"))
-        stored = focus_mode.get_session("u1", session["id"])
+        loaded = focus_mode.load_and_reconcile_active_session("u1", reconcile=False)
+        self.assertEqual(loaded["state"], "running")
+        self.assertEqual(focus_mode.load_and_reconcile_session("u1", session["id"], reconcile=False)["state"], "running")
+        self.assertEqual(focus_mode.list_history("u1"), [])
+        self.assertIsNone(focus_mode.load_and_reconcile_active_session("u1"))
+        stored = focus_mode.load_and_reconcile_session("u1", session["id"])
         self.assertEqual(stored["state"], "completed")
+
+    def test_focus_status_query_does_not_reconcile_but_status_command_does(self):
+        session = focus_mode.start_session("u1", {
+            "name": "Expired session",
+            "focus_minutes": 10,
+            "cycles": 1,
+        })
+        expired = (datetime.now(timezone.utc) - timedelta(minutes=1)).isoformat()
+        with db_connection() as conn:
+            conn.execute("UPDATE focus_sessions SET phase_ends_at=? WHERE id=?", [expired, session["id"]])
+        with db_connection() as conn:
+            statements = []
+            conn.set_trace_callback(statements.append)
+            rows = focus_mode._select_active_focus_sessions(conn, ["u1"])
+            self.assertEqual([row["id"] for row in rows], [session["id"]])
+            self.assertEqual(rows[0]["state"], "running")
+            self.assertTrue(all(statement.lstrip().upper().startswith("SELECT ") for statement in statements))
+        self.assertEqual(focus_mode.list_history("u1"), [])
+        self.assertFalse(focus_mode.reconcile_focus_mode_status("u1"))
+        self.assertEqual(focus_mode.load_and_reconcile_session("u1", session["id"], reconcile=False)["state"], "completed")
+        self.assertEqual(len(focus_mode.list_history("u1")), 1)
+
+    def test_focus_status_reconciliation_stays_scoped_to_requested_users(self):
+        session = focus_mode.start_session("u2", {"focus_minutes": 10, "cycles": 1})
+        expired = (datetime.now(timezone.utc) - timedelta(minutes=1)).isoformat()
+        with db_connection() as conn:
+            conn.execute("UPDATE focus_sessions SET phase_ends_at=? WHERE id=?", [expired, session["id"]])
+        self.assertEqual(focus_mode.reconcile_active_focus_user_ids(["u1"]), set())
+        self.assertEqual(focus_mode.load_and_reconcile_session("u2", session["id"], reconcile=False)["state"], "running")
+        self.assertEqual(focus_mode.list_history("u2"), [])
+        self.assertEqual(focus_mode.reconcile_active_focus_user_ids(["u2"]), set())
+        self.assertEqual(len(focus_mode.list_history("u2")), 1)
 
     def test_validation_rejects_invalid_spotify_and_breakless_cycles(self):
         with self.assertRaisesRegex(ValueError, "Spotify, YouTube"):
-            focus_mode.normalize_spotify_url("https://example.com/playlist/abc")
+            focus_mode.normalize_playlist_url("https://example.com/playlist/abc")
         with self.assertRaisesRegex(ValueError, "Choose a break time"):
             focus_mode.start_session("u1", {
                 "name": "Invalid",

@@ -6,16 +6,19 @@ function createAudioContext() {
 export function createCompletionEffects() {
   let audioContext = null;
   let notificationsEnabled = false;
+  let disposed = false;
 
-  async function prepare() {
+  async function prepare({ signal } = {}) {
+    if (disposed || signal?.aborted) return;
     audioContext ||= createAudioContext();
     if (audioContext?.state === 'suspended') await audioContext.resume().catch(() => {});
+    if (disposed || signal?.aborted) return;
     notificationsEnabled = 'Notification' in window && Notification.permission === 'granted';
     if (!window.APStudyNotifications?.api) return;
     try {
       const payload = await window.APStudyNotifications.api('/api/notifications/preferences');
-      notificationsEnabled = Boolean(payload.preferences?.push_enabled);
-    } catch (_error) { /* Browser permission remains the safe fallback. */ }
+      if (!disposed && !signal?.aborted) notificationsEnabled = Boolean(payload.preferences?.push_enabled);
+    } catch { /* Browser permission remains the safe fallback. */ }
   }
 
   function tap(frequency, startsAt) {
@@ -50,28 +53,31 @@ export function createCompletionEffects() {
     tap(783.99, now + 0.34);
   }
 
-  async function notify(title, body) {
-    if (!notificationsEnabled || !('Notification' in window) || Notification.permission !== 'granted') return;
+  async function notify(title, body, signal) {
+    if (disposed || signal?.aborted || !notificationsEnabled || !('Notification' in window) || Notification.permission !== 'granted') return;
     const options = { body, icon: '/static/images/brand/nest-logo-v1-192.png', tag: 'nest-focus-complete' };
     if (document.hidden && navigator.serviceWorker) {
       const registration = await navigator.serviceWorker.getRegistration('/').catch(() => null);
+      if (disposed || signal?.aborted) return;
       if (registration) {
         await registration.showNotification(title, options).catch(() => {});
         return;
       }
     }
-    try { new Notification(title, options); } catch (_error) { /* Permission can change mid-session. */ }
+    try { new Notification(title, options); } catch { /* Permission can change mid-session. */ }
   }
 
-  function complete(phase) {
+  function complete(phase, { signal } = {}) {
+    if (disposed || signal?.aborted) return;
     playPianoCue();
     const isBreak = phase === 'break';
     void notify(isBreak ? 'Break complete' : 'Focus complete', isBreak
       ? 'Your next focus block is ready.'
-      : 'Nice work. Return to Nest when you’re ready.');
+      : 'Nice work. Return to Nest when you’re ready.', signal);
   }
 
   function dispose() {
+    disposed = true;
     void audioContext?.close?.().catch(() => {});
     audioContext = null;
     notificationsEnabled = false;

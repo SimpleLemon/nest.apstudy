@@ -76,7 +76,7 @@ def get_focus_state():
 @login_required
 def get_focus_status():
     try:
-        return jsonify({"active": focus_mode.is_focus_mode_active(current_user.id)})
+        return jsonify({"active": focus_mode.reconcile_focus_mode_status(current_user.id)})
     except sqlite3.Error as error:
         return _error_response(error)
 

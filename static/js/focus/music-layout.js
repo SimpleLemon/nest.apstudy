@@ -12,7 +12,7 @@ const LAYOUT_MAP = new Map([
 function readPreference(key, fallback) {
   try {
     return window.localStorage.getItem(key) ?? fallback;
-  } catch (_error) {
+  } catch {
     return fallback;
   }
 }
@@ -20,12 +20,12 @@ function readPreference(key, fallback) {
 function writePreference(key, value) {
   try {
     window.localStorage.setItem(key, String(value));
-  } catch (_error) {
+  } catch {
     // Browser preferences are optional; storage restrictions must not block the timer.
   }
 }
 
-export function createSpotifyLayout({ elements, savePreferences } = {}) {
+export function createMusicLayout({ elements, savePreferences } = {}) {
   let preferences = {
     layout: 'beside', floating_size: 'compact', floating_x: 1, floating_y: 1, panel_width: 0, panel_height: 0,
   };
@@ -99,7 +99,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   function snapPlayerHeight(height, bounds) {
     if (!height) return 0;
     const chrome = playerChromeHeight();
-    const provider = elements.spotifyEmbed?.dataset.playlistProvider || 'spotify';
+    const provider = elements.playerHost?.dataset.playlistProvider || 'spotify';
     if (provider !== 'spotify') {
       return Math.min(bounds.maxHeight, Math.max(height, chrome + VIDEO_PLAYER_MIN_HEIGHT));
     }
@@ -317,7 +317,7 @@ export function createSpotifyLayout({ elements, savePreferences } = {}) {
   let saved = {};
   try {
     saved = JSON.parse(readPreference(PLAYER_PREFERENCES_KEY, '{}'));
-  } catch (_error) {
+  } catch {
     saved = {};
   }
   applyPreferences({ layout: readPreference(LAYOUT_KEY, 'beside'), ...saved });
