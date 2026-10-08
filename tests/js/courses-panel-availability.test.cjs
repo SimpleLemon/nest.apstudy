@@ -59,7 +59,7 @@ function chips(html) {
     .map((match) => ({ class: match[1].trim(), text: match[2] }));
 }
 
-function renderCard({ section, availability, withResolver = true }) {
+function renderCard({ section, availability, withResolver = true, stateOverrides = {} }) {
   const summary = { textContent: '' };
   const content = { innerHTML: '', scrollTop: 0 };
   const documentStub = {
@@ -76,7 +76,7 @@ function renderCard({ section, availability, withResolver = true }) {
   const panel = loadFeatureModule('courses/panel.js', context);
 
   const options = {
-    state: baseState(),
+    state: { ...baseState(), ...stateOverrides },
     COURSE_COLOR_PALETTE: [{ key: 'course-color-01' }],
     COURSE_DAYS: [{ key: 'Mon', index: 1 }],
     COURSE_RESULT_LIMIT: 100,
@@ -89,6 +89,28 @@ function renderCard({ section, availability, withResolver = true }) {
   panel.createCoursePanel(options).renderPanel();
   return content.innerHTML;
 }
+
+test('detail tracking uses concise copy for the actual term state and retains queued status', () => {
+  const section = { id: 's1', term: 'Spring_2027', course_code: 'BIO 201' };
+  for (const [state, label, disabled] of [
+    ['upcoming', 'Track seats once term opens.', false], ['open', 'Track when seats open.', false],
+    ['closed', 'Tracking has closed.', true], ['unavailable', 'Tracking unavailable.', true],
+  ]) {
+    const html = renderCard({ section, stateOverrides: {
+      detailSectionId: 's1', trackingTermPolicies: { Spring_2027: { state, effective_state: state, available: true } },
+    } });
+    assert.ok(html.includes(label));
+    const toggle = html.match(/<button[^>]*class="track-toggle"[^>]*>/)[0];
+    assert.equal(toggle.includes('disabled'), disabled);
+    assert.doesNotMatch(html, /Track availability|Queue this tracker now|Professor ratings|Source: Rate My Professors/);
+  }
+  const html = renderCard({ section, stateOverrides: {
+    detailSectionId: 's1', tracksBySection: new Map([['s1', { enabled: true }]]),
+    trackingTermPolicies: { Spring_2027: { state: 'upcoming', effective_state: 'upcoming', available: true } },
+  } });
+  assert.match(html, /Status: queued/);
+  assert.match(html, /aria-pressed="true"/);
+});
 
 test('pending cards render exact Checking chips with loading classes and no title', () => {
   const html = renderCard({

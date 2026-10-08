@@ -62,6 +62,7 @@ body.courses-body {
   background: var(--color-surface-container-low);
 }
 
+.courses-panel.is-detailing .courses-panel-header,
 .courses-panel.is-detailing .courses-search-stack {
   display: none;
 }
@@ -763,9 +764,10 @@ body.courses-body {
 }
 
 .courses-detail-meta .course-chip {
-  min-height: 44px;
-  padding: 0 18px;
-  font-size: 16px;
+  min-height: 26px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
   border-radius: var(--radius-pill);
 }
 
@@ -983,15 +985,23 @@ body.courses-body {
 }
 
 .track-control {
-  display: flex;
+  display: grid;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.track-control-main {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 48px;
+  gap: 10px;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px;
-  border-radius: var(--radius-control);
-  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 50%, transparent);
-  background: var(--color-surface-container-low);
-  flex-wrap: wrap;
+  min-height: 40px;
+}
+
+.track-control-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-on-surface-variant);
 }
 
 .track-settings {
@@ -1062,6 +1072,8 @@ body.courses-body {
 .track-control-text strong {
   color: var(--color-on-surface);
   font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .track-control-text span {
@@ -1070,15 +1082,7 @@ body.courses-body {
   line-height: 1.35;
 }
 
-.track-control-actions {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-inline-start: auto;
-}
-
-.track-interval {
+.track-settings .track-interval {
   display: inline-flex;
   align-items: center;
   gap: 5px !important;
@@ -1097,6 +1101,8 @@ body.courses-body {
 .track-toggle {
   width: 48px;
   min-width: 48px;
+  height: 28px;
+  min-height: 28px;
   padding: 3px;
   border-radius: var(--radius-pill);
   background: var(--color-surface-container-high);
@@ -1125,6 +1131,11 @@ body.courses-body {
 .track-toggle:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.track-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 .courses-calendar-shell {
@@ -1562,8 +1573,7 @@ body.courses-body {
   .courses-week-controls button,
   .courses-detail-actions button,
   .courses-meeting-remove,
-  .course-card-action,
-  .track-toggle {
+  .course-card-action {
     min-height: 48px;
     font-size: 16px;
   }
@@ -1728,13 +1738,6 @@ body.courses-body {
 }
 
 
-.courses-panel-header .courses-catalog-status {
-  margin-top: 6px;
-  color: var(--color-on-surface-variant);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
 .courses-results-more {
   display: flex;
   align-items: center;
@@ -1809,6 +1812,7 @@ body.courses-body {
 
 /* Inline scores fit within the schedule's original text line. */
 .course-professor-ratings.is-compact .course-rating { gap: 4px; }
+.course-instructors .course-rating-badge,
 .course-professor-ratings.is-compact .course-rating-badge {
   inline-size: 24px;
   block-size: 16px;
@@ -1850,6 +1854,39 @@ body.courses-body {
   text-underline-offset: 3px;
 }
 .course-rating a:not(.course-rating-badge):hover { text-decoration-thickness: 2px; }
+
+.courses-instructor-row { align-items: baseline; }
+.courses-instructor-row > span { flex: 0 0 auto; }
+.course-instructors {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 8px;
+}
+
+.course-instructor.course-rating {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.course-instructor a.course-instructor-email {
+  color: var(--color-on-surface);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.course-instructor a.course-instructor-email:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+}
+
 .course-rating a:focus-visible,
 .courses-results-more button:focus-visible {
   outline: 2px solid var(--color-primary);

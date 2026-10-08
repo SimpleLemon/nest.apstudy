@@ -14,6 +14,7 @@ async function mount(page, baseURL, { count = 625 } = {}) {
     const sections = Array.from({ length: count }, (_, index) => ({
         id: `Fall_2026|TEST|${index + 1}`, term: 'Fall_2026', course_code: `TEST ${String(index + 1).padStart(3, '0')}`,
         course_title: `Course ${index + 1}`, section_number: '001', instructor: 'My instructor label',
+        instructors: ratings.map((rating, person) => ({ name: rating.name, email: `instructor${person}@example.edu` })),
         overrides: { instructor: 'My instructor label' }, professor_ratings: ratings,
         enrollment_status: 'Closed', seats_available: 0, enrollment_capacity: 20, campus: 'Atlanta',
         schedule_display: 'Mon 9:00 AM-10:00 AM', meetings: [{ day: 'Mon', start: '0900', end: '1000' }],
@@ -43,7 +44,7 @@ async function mount(page, baseURL, { count = 625 } = {}) {
     await page.goto(`${baseURL}/static/js/courses/index.js`);
     await page.setContent(`<!doctype html><html><body>
         <style>#courses-panel-content { block-size: 500px; overflow: auto; } .course-card { min-block-size: 240px; } .course-rating { display: block; }</style>
-        <aside class="courses-panel"><p id="courses-result-summary"></p><p id="courses-catalog-status"></p>
+        <aside class="courses-panel"><p id="courses-result-summary"></p>
         <input id="courses-search-input" type="search" aria-label="Search courses">
         <div id="courses-availability-filter"><label><input type="checkbox" value="closed">Closed only</label></div>
         <section id="courses-panel-content"></section></aside>
@@ -68,7 +69,7 @@ test('over 500 courses are reachable and verified; pagination survives detail cl
     expect(sectionRequests.every((url) => !new URL(url).searchParams.has('limit'))).toBe(true);
     expect(batches.every((batch) => batch.length <= 120)).toBe(true);
     await expect(page.locator('#courses-result-summary')).toContainText('625');
-    await expect(page.locator('#courses-catalog-status')).toContainText('Coverage unverified');
+    await expect(page.locator('#courses-catalog-status')).toHaveCount(0);
     await page.getByLabel('Closed only').check();
     await expect(page.locator('.course-card')).toHaveCount(100);
     for (let count = 200; count <= 600; count += 100) {
@@ -181,12 +182,14 @@ test('RMP badges pair each name with its score and support mouse and keyboard wi
     const refresh = page.waitForResponse('**/api/courses/section-status');
     await card.press('Enter');
     await refresh;
-    await expect(page.getByRole('heading', { name: 'Professor ratings' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Professor ratings' })).toHaveCount(0);
     const detail = page.locator('.courses-detail');
     const detailRating = detail.locator('.course-rating').filter({ has: page.getByText('Ada Example', { exact: true }) });
-    await expect(detailRating.locator('.course-rating-heading > strong')).toHaveText('Ada Example');
-    await expect(detailRating.locator('.course-rating-heading > strong + .course-rating-badge')).toHaveText('4.8');
-    await expect(page.locator('.courses-detail')).toContainText('12 ratings · Difficulty 2.3/5 · Updated');
-    await expect(page.locator('.courses-detail')).toContainText('Ratings refer to Atlas instructors; your instructor label is customized.');
-    await expect(page.locator('.courses-detail')).not.toContainText('Difficulty 0.0');
+    const instructor = detailRating.locator('.course-instructor-email');
+    await expect(instructor).toHaveText('Ada Example');
+    await expect(instructor).toHaveAttribute('href', 'mailto:instructor0@example.edu');
+    await expect(instructor).toHaveAttribute('target', '_blank');
+    await expect(detailRating.locator('.course-rating-badge')).toHaveText('4.8');
+    await expect(detail).not.toContainText('12 ratings · Difficulty');
+    await expect(detail).not.toContainText('Source: Rate My Professors');
 });

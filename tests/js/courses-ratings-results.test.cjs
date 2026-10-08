@@ -4,6 +4,7 @@ const { parseFragment } = require('parse5');
 const { loadFeatureModule } = require('./helpers/feature-modules.cjs');
 
 const { renderProfessorRatings, renderCourseCardSchedule, safeRatingUrl } = loadFeatureModule('courses/ratings.js', { URL });
+const { renderCourseInstructors } = loadFeatureModule('courses/instructors.js', { URL });
 const { visibleCourseResults, showMoreCourseResults } = loadFeatureModule('courses/results.js');
 const { catalogStatusText } = loadFeatureModule('courses/catalog-status.js');
 
@@ -13,6 +14,43 @@ const rating = {
   profile_url: 'https://www.ratemyprofessors.com/professor/123',
   search_url: 'https://www.ratemyprofessors.com/search/professors/340?q=Ada',
 };
+
+test('detail instructor links hide emails and keep each rating with its teacher when ratings arrive out of order', () => {
+  const html = renderCourseInstructors({
+    instructors: [{ name: 'Ada Example', email: 'ada@example.edu' }, { name: 'Grace Example', email: 'grace@example.edu' }],
+    professor_ratings: [{ ...rating, name: 'Grace Example', overall_rating: 2.4 }, rating],
+  });
+  const rows = elements(parseFragment(html), node => hasClass(node, 'course-instructor'));
+  assert.equal(rows.length, 2);
+  for (const [index, name, email, score] of [[0, 'Ada Example', 'ada@example.edu', '4.8'], [1, 'Grace Example', 'grace@example.edu', '2.4']]) {
+    const link = elements(rows[index], node => hasClass(node, 'course-instructor-email'))[0];
+    assert.equal(textContent(link), name);
+    assert.equal(attribute(link, 'href'), `mailto:${email}`);
+    assert.equal(attribute(link, 'target'), '_blank');
+    assert.equal(attribute(link, 'rel'), 'noopener noreferrer');
+    assert.equal(textContent(elements(rows[index], node => hasClass(node, 'course-rating-badge'))[0]), score);
+  }
+  assert.doesNotMatch(textContent(parseFragment(html)), /example.edu|Professor ratings|Difficulty|12 ratings/);
+});
+
+test('detail instructors without email or ratings remain readable and placeholders have no badge', () => {
+  const html = renderCourseInstructors({ instructors: ['Ada Example', { name: 'Staff' }], professor_ratings: [
+    { ...rating, name: 'Another Teacher' },
+  ] });
+  const rows = elements(parseFragment(html), node => hasClass(node, 'course-instructor'));
+  assert.equal(textContent(rows[0]), 'Ada Example–');
+  assert.equal(textContent(rows[1]), 'Staff');
+  assert.doesNotMatch(html, /<a /);
+  assert.match(renderCourseInstructors({}), /TBA/);
+});
+
+test('detail instructor names are escaped and email links cannot add mail headers', () => {
+  const html = renderCourseInstructors({ instructors: [{ name: '<img src=x>', email: 'ada@example.edu?bcc=other@example.edu' }] });
+  assert.match(html, /&lt;img/);
+  assert.doesNotMatch(html, /<img|<a /);
+  const encoded = renderCourseInstructors({ instructors: [{ name: 'Ada', email: 'ada+courses@example.edu' }] });
+  assert.match(encoded, /href="mailto:ada%2Bcourses@example.edu"/);
+});
 
 function attribute(node, name) {
   return node.attrs?.find(item => item.name === name)?.value;

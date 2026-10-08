@@ -8,7 +8,7 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 
 const confirmCallsites = [
     "static/js/calendar/events/context-menu.js",
-    "static/js/courses/index.js",
+    "static/js/courses/actions.js",
     "static/js/notes/list.js",
     "static/js/settings/account.js",
     "static/js/tasks/task-app-helpers.js",

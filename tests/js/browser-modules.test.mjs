@@ -723,6 +723,11 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     const controlsSource = await sourceFor("static/js/courses/controls.js");
     const combinedSource = [
         source,
+        await sourceFor("static/js/courses/data.js"),
+        await sourceFor("static/js/courses/actions.js"),
+        await sourceFor("static/js/courses/details.js"),
+        await sourceFor("static/js/courses/detail-view.js"),
+        await sourceFor("static/js/courses/edit.js"),
         await sourceFor("static/js/courses/utils.js"),
         await sourceFor("static/js/courses/verify.js"),
         await sourceFor("static/js/courses/filters.js"),
@@ -740,10 +745,10 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(source, /activeCourseView: "search"/);
     assert.match(combinedSource, /button\[data-course-view\]/);
     assert.match(combinedSource, /state\.activeCourseView = nextView/);
-    assert.match(source, /fetchJson\("\/api\/atlas\/terms"\)/);
-    assert.match(source, /new URLSearchParams\(\{\s*term,\s*include_cancelled: "0",\s*\}\)/);
-    assert.match(source, /params\.set\("q", query\)/);
-    assert.doesNotMatch(source, /params\.set\("statuses",/); // verify.js owns the Atlas query contract; index.js must not send statuses directly.
+    assert.match(combinedSource, /fetchJson\("\/api\/atlas\/terms"\)/);
+    assert.match(combinedSource, /new URLSearchParams\(\{\s*term,\s*include_cancelled: "0",\s*\}\)/);
+    assert.match(combinedSource, /params\.set\("q", query\)/);
+    assert.doesNotMatch(combinedSource, /params\.set\("statuses",/); // verify.js owns the Atlas query contract.
     assert.match(source, /COURSE_LIVE_HYDRATION_OVERSCAN = 5/);
     assert.match(source, /availabilityVerifier\.requestDetails\(sectionIds\)/);
     assert.match(source, /beforeState\.generation !== currentState\.generation/);
@@ -751,9 +756,9 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.doesNotMatch(source, /section-status\/batch/); // verify.js owns live hydration; the old batch endpoint must stay gone.
     assert.doesNotMatch(source, /liveHydrationInFlight|liveHydrationFailures/);
     assert.doesNotMatch(source, /APStudyAtlasLive\.fetchSectionStatus/);
-    assert.match(source, /fetchJson\("\/api\/courses\/saved"\)/);
-    assert.match(source, /fetchJson\("\/api\/courses\/tracks"\)/);
-    assert.match(source, /buildSectionSearchBlob\(normalized\)/);
+    assert.match(combinedSource, /fetchJson\("\/api\/courses\/saved"\)/);
+    assert.match(combinedSource, /fetchJson\("\/api\/courses\/tracks"\)/);
+    assert.match(combinedSource, /buildSectionSearchBlob\(normalized\)/);
     assert.match(combinedSource, /state\.activeCourseView === "selected"/);
     assert.match(combinedSource, /state\.activeCourseView === "tracked"/);
     assert.doesNotMatch(combinedSource, /\.filter\(\(\[, track\]\) => Boolean\(track\?\.enabled\)\)/);
@@ -762,7 +767,7 @@ test("courses page keeps Atlas APIs, filtering state, and schedule constants con
     assert.match(combinedSource, /data-remove-track-id/);
     assert.match(combinedSource, /checking every 3 hours until it closes/);
     assert.match(source, /removedSelectedSections: new Map\(\)/);
-    assert.match(source, /state\.removedSelectedSections\.set\(String\(sectionId\), \{ \.\.\.removedSection, id: String\(sectionId\) \}\)/);
+    assert.match(combinedSource, /state\.removedSelectedSections\.set\(String\(sectionId\), \{ \.\.\.removedSection, id: String\(sectionId\) \}\)/);
     assert.match(combinedSource, /return sections\.sort\(compareCourseSections\)/);
     assert.match(combinedSource, /\.filter\(Boolean\)\s*\.sort\(compareCourseSections\)/);
     assert.match(combinedSource, /function layoutConflictGroup\(events\)/);

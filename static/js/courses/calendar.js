@@ -44,8 +44,6 @@ function createCourseCalendar({
 
   function renderCalendar() {
     const root = document.getElementById("courses-calendar-root");
-    const title = document.getElementById("courses-week-title");
-    const subtitle = document.getElementById("courses-term-dates");
     if (!root) return;
     if (state.weekScrollResetPending) {
       state.weekScrollTop = null;
@@ -54,16 +52,9 @@ function createCourseCalendar({
     } else {
       rememberWeekScroll();
     }
-    if (title) {
-      const credits = computeCalendarCredits();
-      title.innerHTML = `<strong>${escapeHtml(formatTermLabel(state.selectedTerm))}</strong> <span class="courses-term-credits">${escapeHtml(String(credits))} credits</span>`;
-    }
-    if (subtitle) {
-      subtitle.textContent = getSelectedTermDateText();
-    }
-    syncTermControls();
+    renderCalendarHeader();
 
-    if (state.loading || state.sectionsLoading) {
+    if (state.loading) {
       root.innerHTML = buildCourseScheduleSkeletonHtml();
       return;
     }
@@ -171,17 +162,27 @@ function createCourseCalendar({
     return Math.round(total * 100) / 100;
   }
 
+  function renderCalendarHeader() {
+    const title = document.getElementById("courses-week-title");
+    const subtitle = document.getElementById("courses-term-dates");
+    if (title) {
+      const credits = computeCalendarCredits();
+      title.innerHTML = `<strong>${escapeHtml(formatTermLabel(state.selectedTerm))}</strong> <span class="courses-term-credits">${escapeHtml(String(credits))} credits</span>`;
+    }
+    if (subtitle) subtitle.textContent = getSelectedTermDateText();
+    syncTermControls();
+  }
+
   function syncTermControls() {
     const currentIndex = state.terms.indexOf(state.selectedTerm);
     const prev = document.getElementById("courses-prev-term");
     const next = document.getElementById("courses-next-term");
-    if (prev) prev.disabled = currentIndex <= 0 || state.sectionsLoading;
-    if (next) next.disabled = currentIndex < 0 || currentIndex >= state.terms.length - 1 || state.sectionsLoading;
+    if (prev) prev.disabled = currentIndex <= 0;
+    if (next) next.disabled = currentIndex < 0 || currentIndex >= state.terms.length - 1;
   }
 
   function getSelectedTermDateText() {
-    if (state.sectionsLoading) return `Loading ${formatTermLabel(state.selectedTerm)} dates...`;
-    const range = state.sections.find((section) => {
+    const range = state.termDateRanges?.[state.selectedTerm] || state.sections.find((section) => {
       return section.term === state.selectedTerm && section.date_range?.start && section.date_range?.end;
     })?.date_range;
     if (range?.start && range?.end) return formatDateRange(range);
@@ -359,6 +360,7 @@ function createCourseCalendar({
   return {
     isCompactCoursesViewport,
     renderCalendar,
+    renderCalendarHeader,
     resetWeekScroll,
   };
 }

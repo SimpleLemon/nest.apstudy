@@ -1,7 +1,8 @@
 import { describe as describeTrackingPolicy } from './tracking-policy.js';
-import { renderProfessorRatings, renderCourseCardSchedule } from './ratings.js';
+import { renderCourseCardSchedule } from './ratings.js';
+import { createCourseDetailView } from './detail-view.js';
+import { createCourseEditor } from './edit.js';
 import { visibleCourseResults, preserveCourseListPosition } from './results.js';
-import { renderCatalogStatus } from './catalog-status.js';
 
 const AVAILABILITY_PHASES = {
   UNVERIFIED: "unverified",
@@ -24,14 +25,15 @@ function createCoursePanel({
   const {
     cssEscape,
     escapeHtml,
-    formatDateRange,
-    formatDateTime,
-    formatSeats,
     formatTermLabel,
-    normalizeScheduleDisplay,
-    parseAtlasTimeToken,
-    parseTimeInput,
   } = utils;
+
+  const { buildDetailHtml } = createCourseDetailView({
+    state, getSection, formatCampus, formatRequirement, utils,
+  });
+  const { buildEditHtml, buildMeetingRowHtml, timeInputToAtlasToken } = createCourseEditor({
+    state, COURSE_COLOR_PALETTE, COURSE_DAYS, getSection, getCourseColor, formatCampus, formatRequirement, utils,
+  });
 
   function buildCourseResultsSkeletonHtml(label = "Loading courses...") {
     const block = (className) => window.APStudySkeleton?.block?.(className)
@@ -82,7 +84,6 @@ function createCoursePanel({
     if (!summary || !content) return;
 
     document.querySelector(".courses-panel")?.classList.toggle("is-detailing", Boolean(state.detailSectionId || state.editingSectionId));
-    renderCatalogStatus(state);
     syncViewControls();
     syncFilterControls();
 
@@ -378,286 +379,8 @@ function createCoursePanel({
     `;
   }
 
-  function buildDetailHtml(sectionId) {
-    const section = getSection(sectionId);
-    if (!section) return `<div class="courses-state">Course section not found.</div>`;
-    const addedCourse = state.savedCoursesBySection.get(sectionId);
-    const track = state.tracksBySection.get(sectionId);
-    const trackEnabled = Boolean(track?.enabled);
-    const trackingPolicy = describeTrackingPolicy(state.trackingTermPolicies?.[section.term] || track?.term_policy, trackEnabled);
-    const saving = state.savingIds.has(sectionId);
-    const tracking = state.trackingIds.has(sectionId);
-    const status = section.enrollment_status || "Unknown";
-    const statusClass = status.toLowerCase() === "open" ? "is-open" : status.toLowerCase() === "closed" ? "is-closed" : "";
-    const liveText = state.detailLoading
-      ? "Refreshing seats from Atlas..."
-      : state.detailLiveError
-        ? `Atlas live refresh unavailable. Showing saved catalog data.`
-        : section.live_updated_at
-          ? `Updated ${formatDateTime(section.live_updated_at)}`
-          : "Showing local catalog data.";
-    const description = section.course_description || section.description || "Description unavailable.";
-    const selectedInterval = Number(track?.interval_minutes || state.allowedTrackIntervals[0] || 30);
-    const trackDescription = section.is_cancelled ? "This section is cancelled." : trackingPolicy?.description || "Tracking settings are loading.";
-    const waitlistTotal = section.waitlist_total !== null && section.waitlist_total !== undefined && Number.isFinite(Number(section.waitlist_total)) ? Number(section.waitlist_total) : null;
-    const waitlistCapacity = section.waitlist_capacity !== null && section.waitlist_capacity !== undefined && Number.isFinite(Number(section.waitlist_capacity)) ? Number(section.waitlist_capacity) : null;
-    const waitlistText = waitlistTotal === null || waitlistCapacity === null ? "Unavailable" : `${waitlistTotal} of ${waitlistCapacity} filled`;
-
-    return `
-      <article class="courses-detail">
-        <div class="courses-detail-header">
-          <div>
-            <h2>${escapeHtml(section.course_code || "Course")}</h2>
-            <p>${escapeHtml(section.course_title || "Untitled course")}</p>
-            ${section.section_number ? `<span class="courses-section-kicker">Section ${escapeHtml(section.section_number)}</span>` : ""}
-          </div>
-          <button class="courses-detail-close" type="button" data-close-detail aria-label="Close course details">
-            <span class="material-symbols-outlined" aria-hidden="true">close</span>
-          </button>
-        </div>
-        <div class="courses-detail-meta">
-          <span class="course-chip">${escapeHtml(formatTermLabel(section.term))}</span>
-          <span class="course-chip ${statusClass}">${escapeHtml(status)}</span>
-        </div>
-        <section class="track-control">
-          <div class="track-control-text">
-            <strong>Track availability</strong>
-            <span>${escapeHtml(trackDescription)}</span>
-          </div>
-          <div class="track-control-actions">
-            ${track ? `
-              <label class="track-interval">
-                <span>Every</span>
-                <select data-track-interval-section-id="${escapeHtml(sectionId)}" aria-label="Check interval" ${tracking || !trackEnabled || !trackingPolicy?.canEnable ? "disabled" : ""}>
-                  ${[5, 15, 30].map((minutes) => {
-                    const allowed = state.allowedTrackIntervals.includes(minutes);
-                    return `<option value="${minutes}" ${minutes === selectedInterval ? "selected" : ""} ${allowed ? "" : "disabled"}>${minutes} min${allowed ? "" : " · higher tier"}</option>`;
-                  }).join("")}
-                </select>
-              </label>
-            ` : ""}
-            <button type="button" class="track-toggle" data-track-section-id="${escapeHtml(sectionId)}" aria-label="${trackEnabled ? "Turn off" : "Turn on"} availability tracking" aria-pressed="${trackEnabled ? "true" : "false"}" ${tracking || (!trackEnabled && (section.is_cancelled || !trackingPolicy?.canEnable)) ? "disabled" : ""}></button>
-          </div>
-          ${track ? `
-            <div class="track-settings">
-              <span class="track-tier-note">${escapeHtml(state.trackingTier.label)} · ${state.trackingUsage}${state.trackingLimit === null ? "" : ` of ${state.trackingLimit}`} subscriptions</span>
-              ${trackingPolicy?.active && track.cooldown_until_closed ? `<span class="track-cooldown"><span class="material-symbols-outlined" aria-hidden="true">schedule</span>Availability found; checking every 3 hours until it closes.</span>` : ""}
-              <dl class="track-timing">
-                <div><dt>Last checked</dt><dd>${escapeHtml(track.last_checked_at ? formatDateTime(track.last_checked_at) : "Pending")}</dd></div>
-                <div><dt>Next check</dt><dd>${escapeHtml(!trackEnabled ? "Paused by you" : trackingPolicy?.next || (track.next_check_at ? formatDateTime(track.next_check_at) : "Soon"))}</dd></div>
-              </dl>
-            </div>
-          ` : ""}
-        </section>
-        <div class="courses-detail-actions">
-          <button type="button" class="courses-secondary-action" data-refresh-section-id="${escapeHtml(sectionId)}" ${state.detailLoading ? "disabled" : ""}>
-            <span class="material-symbols-outlined" aria-hidden="true">sync</span>
-            <span>${state.detailLoading ? "Refreshing" : "Refresh"}</span>
-          </button>
-          ${addedCourse
-            ? `
-              <button type="button" class="courses-secondary-action" data-open-edit-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>
-                <span class="material-symbols-outlined" aria-hidden="true">edit</span>
-                <span>Edit</span>
-              </button>
-              <button type="button" class="courses-danger-action" data-remove-course-id="${escapeHtml(addedCourse.id)}" data-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Remove Class</button>
-            `
-            : `<button type="button" class="courses-primary-action" data-add-section-id="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>Add Class</button>`
-          }
-        </div>
-        <section class="courses-detail-card">
-          ${detailRow("Instructor", formatInstructors(section))}
-          ${detailRow("Schedule", normalizeScheduleDisplay(section.schedule_display || "TBA"))}
-          ${detailRow("CRN", section.crn || "N/A")}
-          ${detailRow("Type", section.schedule_type || "N/A")}
-          ${detailRow("Location", section.location || "TBA")}
-          ${detailRow("Campus", formatCampus(section))}
-          ${detailRow("Seats", formatSeats(section))}
-          ${detailRow("Waitlist", waitlistText)}
-          ${detailRow("Credits", section.credit_hours || "N/A")}
-          ${detailRow("Grading Mode", section.grading_mode || "N/A")}
-          ${detailRow("Instruction Method", section.instruction_method || "N/A")}
-          ${detailRow("Requirement", formatRequirement(section))}
-          ${detailRow("Dates", formatDateRange(section.date_range))}
-          ${detailRow("Live Status", liveText)}
-        </section>
-        ${renderProfessorRatings(section)}
-        <section class="courses-description-card">
-          <span class="material-symbols-outlined" aria-hidden="true">notes</span>
-          <div>
-            <h3>Description</h3>
-            <p>${escapeHtml(description)}</p>
-          </div>
-        </section>
-      </article>
-    `;
-  }
-
-  function buildEditHtml(sectionId) {
-    const section = getSection(sectionId);
-    const savedCourse = state.savedCoursesBySection.get(String(sectionId));
-    if (!section || !savedCourse) return `<div class="courses-state">Saved course not found.</div>`;
-    const selectedColorKey = getCourseColor(savedCourse).key;
-    const meetings = normalizeMeetingsForEdit(section.meetings);
-    const saving = state.editingSaving || state.savingIds.has(sectionId);
-
-    return `
-      <article class="courses-edit" data-editing-section-id="${escapeHtml(sectionId)}">
-        <div class="courses-detail-header">
-          <div>
-            <h2>Edit Class</h2>
-            <p>${escapeHtml(section.course_code || "Course")} ${section.section_number ? `Section ${escapeHtml(section.section_number)}` : ""}</p>
-          </div>
-          <button class="courses-detail-close" type="button" data-edit-cancel aria-label="Close edit class">
-            <span class="material-symbols-outlined" aria-hidden="true">close</span>
-          </button>
-        </div>
-
-        <section class="courses-edit-card courses-edit-color-card">
-          <div class="courses-edit-section-heading">
-            <h3>Color</h3>
-            <span>Choose how this class appears on your week.</span>
-          </div>
-          <div class="courses-color-grid" role="group" aria-label="Course color">
-            ${COURSE_COLOR_PALETTE.map((color) => {
-              const isSelected = selectedColorKey === color.key;
-              return `
-                <button
-                  type="button"
-                  class="courses-color-swatch ${escapeHtml(color.key)} ${isSelected ? "is-selected" : ""}"
-                  data-course-color-key="${escapeHtml(color.key)}"
-                  aria-label="${escapeHtml(color.key.replace("course-color-", "Color "))}"
-                  aria-pressed="${isSelected ? "true" : "false"}"
-                >
-                  <span class="material-symbols-outlined" aria-hidden="true">check</span>
-                </button>
-              `;
-            }).join("")}
-          </div>
-        </section>
-
-        <section class="courses-edit-card">
-          <div class="courses-edit-grid">
-            ${editField("course_code", "Course Code", section.course_code || "")}
-            ${editField("section_number", "Section", section.section_number || "")}
-            ${editField("course_title", "Title", section.course_title || "", "wide")}
-            ${editField("instructor", "Instructor", section.instructor || section.instructor_name || "", "wide")}
-            ${editField("schedule_type", "Type", section.schedule_type || "")}
-            ${editField("credit_hours", "Credits", section.credit_hours || "")}
-            ${editField("location", "Location", section.location || "")}
-            ${editField("campus", "Campus", formatCampus(section))}
-            ${editField("requirement_designation", "Requirement", formatRequirement(section) === "N/A" ? "" : formatRequirement(section))}
-            ${editField("schedule_display", "Schedule Text", section.schedule_display || "", "wide")}
-          </div>
-        </section>
-
-        <section class="courses-edit-card">
-          <div class="courses-edit-section-heading">
-            <h3>Meeting Times</h3>
-            <span>Each row appears on your weekly view. Add a row for another meeting on the same day.</span>
-          </div>
-          <div class="courses-meeting-editor" data-meeting-editor>
-            ${meetings.length ? meetings.map(buildMeetingRowHtml).join("") : buildMeetingRowHtml()}
-          </div>
-          <button type="button" class="courses-secondary-action courses-add-meeting" data-add-meeting>
-            <span class="material-symbols-outlined" aria-hidden="true">add</span>
-            <span>Add meeting</span>
-          </button>
-        </section>
-
-        <section class="courses-edit-card">
-          ${editTextarea("course_description", "Description", section.course_description || section.description || "")}
-          ${editTextarea("course_notes", "Notes", section.course_notes || "")}
-        </section>
-
-        <div class="courses-detail-actions courses-edit-actions">
-          <button type="button" class="courses-primary-action" data-edit-save="${escapeHtml(sectionId)}" ${saving ? "disabled" : ""}>${saving ? "Saving..." : "Save"}</button>
-          <button type="button" class="courses-secondary-action" data-edit-cancel ${saving ? "disabled" : ""}>Cancel</button>
-        </div>
-      </article>
-    `;
-  }
-
-  function editField(name, label, value, className = "") {
-    return `
-      <label class="courses-edit-field ${className}">
-        <span>${escapeHtml(label)}</span>
-        <input type="text" name="${escapeHtml(name)}" value="${escapeHtml(value)}" />
-      </label>
-    `;
-  }
-
-  function editTextarea(name, label, value) {
-    return `
-      <label class="courses-edit-field wide">
-        <span>${escapeHtml(label)}</span>
-        <textarea name="${escapeHtml(name)}" rows="5">${escapeHtml(value)}</textarea>
-      </label>
-    `;
-  }
-
   function getCourseColor(course) {
     return COURSE_COLOR_PALETTE.find((color) => color.key === course?.color_key) || COURSE_COLOR_PALETTE[0];
-  }
-
-  function normalizeMeetingsForEdit(meetings) {
-    return (meetings || [])
-      .map((meeting) => ({
-        day: meeting.day,
-        start: meeting.start,
-        end: meeting.end,
-        startInput: atlasTokenToTimeInput(meeting.start),
-        endInput: atlasTokenToTimeInput(meeting.end),
-      }))
-      .filter((meeting) => COURSE_DAYS.some((day) => day.key === meeting.day));
-  }
-
-  function buildMeetingRowHtml(meeting = {}) {
-    const day = COURSE_DAYS.some((option) => option.key === meeting.day) ? meeting.day : COURSE_DAYS[0].key;
-    return `
-      <div class="courses-meeting-row">
-        <select data-meeting-day aria-label="Meeting day">
-          ${COURSE_DAYS.map((option) => `<option value="${escapeHtml(option.key)}" ${option.key === day ? "selected" : ""}>${escapeHtml(option.key)}</option>`).join("")}
-        </select>
-        <input type="time" data-meeting-start aria-label="Meeting start time" value="${escapeHtml(meeting.startInput || "09:00")}" min="06:00" max="23:59" />
-        <input type="time" data-meeting-end aria-label="Meeting end time" value="${escapeHtml(meeting.endInput || "09:50")}" min="06:00" max="23:59" />
-        <button type="button" class="courses-meeting-remove" data-remove-meeting aria-label="Remove meeting">
-          <span class="material-symbols-outlined" aria-hidden="true">close</span>
-        </button>
-      </div>
-    `;
-  }
-
-  function atlasTokenToTimeInput(token) {
-    const minutes = parseAtlasTimeToken(token);
-    if (minutes === null) return "";
-    const hour = Math.floor(minutes / 60);
-    const minute = minutes % 60;
-    return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
-  }
-
-  function timeInputToAtlasToken(value) {
-    const minutes = parseTimeInput(value);
-    if (minutes === null) return "";
-    const hour = Math.floor(minutes / 60);
-    const minute = minutes % 60;
-    return `${String(hour).padStart(2, "0")}${String(minute).padStart(2, "0")}`;
-  }
-
-  function detailRow(label, value) {
-    return `<div class="courses-detail-row"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || "N/A")}</strong></div>`;
-  }
-
-  function formatInstructors(section) {
-    const instructors = Array.isArray(section?.instructors) ? section.instructors : [];
-    const names = instructors
-      .map((instructor) => {
-        if (typeof instructor === "string") return instructor;
-        const email = instructor?.email ? ` (${instructor.email})` : "";
-        return instructor?.name ? `${instructor.name}${email}` : "";
-      })
-      .filter(Boolean);
-    return names.length ? names.join(", ") : section?.instructor || "TBA";
   }
 
   function formatRequirement(section) {

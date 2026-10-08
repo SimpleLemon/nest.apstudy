@@ -1,5 +1,8 @@
 import * as courseUtils from './utils.js';
-import { collectMeetingOverrides, meetingRemovalFocusPlan } from './edit.js';
+import { createCourseData } from './data.js';
+import { meetingRemovalFocusPlan } from './edit.js';
+import { createCourseDetails } from './details.js';
+import { createCourseActions } from './actions.js';
 import { create as createAvailabilityVerifier } from './verify.js';
 import { createCourseFilters } from './filters.js';
 import { createCoursePanel } from './panel.js';
@@ -25,9 +28,6 @@ const COURSE_COLOR_PALETTE = Array.from({ length: 16 }, (_, index) => ({
   key: `course-color-${String(index + 1).padStart(2, "0")}`,
 }));
 const {
-  buildSectionSearchBlob,
-  cssEscape,
-  parseAtlasTimeToken,
   parseCoursesSectionDeepLink,
 } = courseUtils;
 const availabilityVerifier = createAvailabilityVerifier({
@@ -41,6 +41,7 @@ const state = {
   trackingIds: new Set(),
   terms: [],
   termMetadata: {},
+  termDateRanges: {},
   selectedTerm: window.APSTUDY_COURSES_DEFAULT_TERM || "",
   sections: [],
   sectionsById: {},
@@ -77,6 +78,15 @@ const state = {
   weekScrollResetPending: false,
   initialScrollDone: false,
 };
+
+const {
+  loadTerms, loadSectionsForTerm, loadSavedCourses, applySavedCourse, loadTracks, rememberSection, getSection,
+} = createCourseData({
+  state, fetchJson, render, renderCourses,
+  renderCalendarHeader: () => renderCalendarHeader(),
+  timeInputToAtlasToken: (value) => timeInputToAtlasToken(value),
+  scheduleVisibleLiveHydration, verifyCurrentAvailability,
+});
 
 const courseFilters = createCourseFilters({
   state,
@@ -122,8 +132,18 @@ const courseCalendar = createCourseCalendar({
 const {
   isCompactCoursesViewport,
   renderCalendar,
+  renderCalendarHeader,
   resetWeekScroll,
 } = courseCalendar;
+const { startEditingCourse, saveEditedCourse, openDetail, closeDetail, clearDetailReturnContext, refreshSectionStatus } = createCourseDetails({
+  state, COURSE_COLOR_PALETTE, COURSE_DAYS, BODY_SCROLLING_COURSES_QUERY,
+  applySavedCourse, fetchJson, rememberSection, render, renderCalendar, renderPanel,
+  showToast, timeInputToAtlasToken, utils: courseUtils,
+});
+const { addCourse, removeCourse, setTrack, removeTrack } = createCourseActions({
+  state, applySavedCourse, clearDetailReturnContext, fetchJson, getSection,
+  rememberSection, render, renderPanel, showToast,
+});
 const { wireControls } = createCourseControls({
   state,
   addCourse,
@@ -216,70 +236,6 @@ function fetchJson(url, options = {}) {
   return window.APStudyHttp.fetchJson(url, { pendingLabel: "courses-save", ...options });
 }
 
-async function loadTerms() {
-  const payload = await fetchJson("/api/atlas/terms");
-  state.terms = Array.isArray(payload.terms) ? payload.terms : [];
-  state.termMetadata = payload.term_metadata || {};
-  if (!state.terms.length) {
-    throw new Error("No Emory Atlas terms are available.");
-  }
-  if (!state.selectedTerm || !state.terms.includes(state.selectedTerm)) {
-    state.selectedTerm = payload.default_term && state.terms.includes(payload.default_term)
-      ? payload.default_term
-      : state.terms[0];
-  }
-}
-
-async function loadSectionsForTerm(term) {
-  if (!term) return;
-  const requestId = state.currentSectionsRequest + 1;
-  state.currentSectionsRequest = requestId;
-  state.sectionsLoading = true;
-  state.error = "";
-  render();
-  try {
-    const params = new URLSearchParams({
-      term,
-      include_cancelled: "0",
-    });
-    const query = state.searchQuery.trim();
-    if (query) {
-      params.set("q", query);
-    }
-    if (state.dayFilters.size) {
-      params.set("days", Array.from(state.dayFilters).join(","));
-    }
-    if (state.timeEnabled) {
-      params.set("time_start", timeInputToAtlasToken(state.timeStart) || "0600");
-      params.set("time_end", timeInputToAtlasToken(state.timeEnd) || "2359");
-    }
-    if (state.campusFilter && state.campusFilter !== "all") {
-      params.set("campus", state.campusFilter);
-    }
-    if (state.requirementFilter && state.requirementFilter !== "all") {
-      params.set("requirement", state.requirementFilter);
-    }
-    const payload = await fetchJson(`/api/atlas/sections?${params.toString()}`);
-    if (requestId !== state.currentSectionsRequest) return;
-    state.sectionsById = Object.fromEntries(
-      Object.entries(state.sectionsById).filter(([id]) => (
-        state.savedCoursesBySection.has(id) || state.tracksBySection.has(id)
-      ))
-    );
-    const rawSections = Array.isArray(payload.sections) ? payload.sections : [];
-    state.sections = rawSections.map((section) => rememberSection(section)).filter(Boolean);
-    void verifyCurrentAvailability();
-  } catch (error) {
-    if (requestId !== state.currentSectionsRequest) return;
-    console.error(error);
-    state.error = error.message || "Unable to load course sections.";
-  } finally {
-    if (requestId !== state.currentSectionsRequest) return;
-    state.sectionsLoading = false;
-    render();
-  }
-}
-
 function buildAvailabilityQueryInput() {
   return {
     term: state.selectedTerm,
@@ -344,93 +300,6 @@ async function verifyCurrentAvailability() {
   renderCourses();
 }
 
-async function loadSavedCourses() {
-  const payload = await fetchJson("/api/courses/saved");
-  state.savedCoursesBySection = new Map();
-  state.removedSelectedSections.clear();
-  for (const course of payload.courses || []) {
-    applySavedCourse(course);
-  }
-}
-
-function applySavedCourse(course) {
-  if (!course?.section_id) return;
-  const sectionId = String(course.section_id);
-  state.savedCoursesBySection.set(sectionId, course);
-  rememberSection(course);
-}
-
-async function loadTracks() {
-  const payload = await fetchJson("/api/courses/tracks");
-  state.trackingTermPolicies = payload.term_policies || {};
-  state.allowedTrackIntervals = payload.allowed_intervals_minutes || [30];
-  state.trackingTier = payload.tier || { key: "free", label: "Free" };
-  state.trackingUsage = Number(payload.usage || 0);
-  state.trackingLimit = payload.limit ?? null;
-  state.tracksBySection = new Map();
-  for (const track of payload.tracks || []) {
-    if (track.section_id) {
-      state.tracksBySection.set(String(track.section_id), track);
-    }
-  }
-}
-
-function rememberSection(section) {
-  const id = String(section?.section_id || section?.id || "");
-  if (!id) return null;
-  const normalized = { ...state.sectionsById[id], ...section, id };
-  if (state.savedCoursesBySection.has(id)) {
-    Object.assign(normalized, getDisplayCourse(id));
-  }
-  normalized.searchBlob = buildSectionSearchBlob(normalized);
-  state.sectionsById[id] = normalized;
-  return normalized;
-}
-
-function getDisplayCourse(sectionId) {
-  const savedCourse = state.savedCoursesBySection.get(String(sectionId));
-  if (!savedCourse) return {};
-  const display = {};
-  [
-    "term",
-    "subject",
-    "catalog",
-    "crn",
-    "course_code",
-    "course_title",
-    "course_name",
-    "section_number",
-    "instructor",
-    "instructor_name",
-    "instructors",
-    "schedule_type",
-    "schedule_display",
-    "meetings",
-    "date_range",
-    "location",
-    "credit_hours",
-    "requirement_designation",
-    "requirements",
-    "campus",
-    "campus_description",
-    "course_description",
-    "description",
-    "grading_mode",
-    "grading_mode_options",
-    "instruction_method",
-    "atlas_key",
-    "color_key",
-    "overrides",
-    "updated_at",
-  ].forEach((key) => {
-    if (typeof savedCourse[key] !== "undefined" && savedCourse[key] !== null) {
-      display[key] = savedCourse[key];
-    }
-  });
-  display.section_id = savedCourse.section_id || sectionId;
-  return display;
-}
-
 function render() {
   renderTermSelect();
   renderCourses();
@@ -450,371 +319,7 @@ function changeTermBy(delta) {
   state.removedSelectedSections.clear();
   resetWeekScroll();
   renderTermSelect();
-  void loadSectionsForTerm(state.selectedTerm);
-}
-
-function startEditingCourse(sectionId) {
-  if (!sectionId || !state.savedCoursesBySection.has(String(sectionId))) return;
-  state.detailSectionId = sectionId;
-  state.editingSectionId = sectionId;
-  state.filtersOpen = false;
-  renderPanel();
-  scrollPanelContentToTop();
-}
-
-async function saveEditedCourse(sectionId) {
-  const savedCourse = state.savedCoursesBySection.get(String(sectionId));
-  if (!savedCourse?.id || state.editingSaving) return;
-  const form = document.querySelector(`.courses-edit[data-editing-section-id="${cssEscape(sectionId)}"]`);
-  if (!form) return;
-
-  const selectedColor = form.querySelector("[data-course-color-key].is-selected")?.dataset.courseColorKey
-    || savedCourse.color_key
-    || COURSE_COLOR_PALETTE[0].key;
-  const overrides = collectEditOverrides(form);
-
-  state.editingSaving = true;
-  state.savingIds.add(sectionId);
-  renderPanel();
-  try {
-    const payload = await fetchJson(`/api/courses/saved/${encodeURIComponent(savedCourse.id)}`, {
-      method: "PATCH",
-      body: JSON.stringify({ color_key: selectedColor, overrides }),
-    });
-    if (payload.course?.section_id) {
-      applySavedCourse(payload.course);
-      state.detailSectionId = String(payload.course.section_id);
-      state.editingSectionId = null;
-    }
-    showToast("Class updated.");
-  } catch (error) {
-    console.error(error);
-    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t update class" });
-  } finally {
-    state.editingSaving = false;
-    state.savingIds.delete(sectionId);
-    render();
-  }
-}
-
-function collectEditOverrides(form) {
-  const valueFor = (name) => form.querySelector(`[name="${name}"]`)?.value?.trim() || "";
-  const overrides = {
-    course_code: valueFor("course_code"),
-    course_title: valueFor("course_title"),
-    section_number: valueFor("section_number"),
-    instructor: valueFor("instructor"),
-    schedule_type: valueFor("schedule_type"),
-    schedule_display: valueFor("schedule_display"),
-    location: valueFor("location"),
-    credit_hours: valueFor("credit_hours"),
-    requirement_designation: valueFor("requirement_designation"),
-    campus: valueFor("campus"),
-    course_description: valueFor("course_description"),
-    course_notes: valueFor("course_notes"),
-    meetings: [],
-  };
-
-  overrides.meetings = collectMeetingOverrides(
-    Array.from(form.querySelectorAll(".courses-meeting-row")).map((row) => ({
-      day: row.querySelector("[data-meeting-day]")?.value,
-      start: row.querySelector("[data-meeting-start]")?.value,
-      end: row.querySelector("[data-meeting-end]")?.value,
-    })),
-    { COURSE_DAYS, parseAtlasTimeToken, timeInputToAtlasToken },
-  );
-
-  return overrides;
-}
-
-function openDetail(sectionId, opener = null) {
-  if (!sectionId) return;
-  captureDetailReturnContext(sectionId, opener);
-  state.detailSectionId = sectionId;
-  state.editingSectionId = null;
-  state.detailLiveError = "";
-  state.filtersOpen = false;
-  renderPanel();
-  scrollPanelContentToTop();
-  void refreshSectionStatus(sectionId, { force: false });
-}
-
-function captureDetailReturnContext(sectionId, opener) {
-  const normalizedSectionId = String(sectionId);
-  if (state.detailReturnContext?.sectionId === normalizedSectionId) return;
-  clearDetailReturnContext();
-  const content = document.getElementById("courses-panel-content");
-  const hasListOrigin = opener instanceof HTMLElement
-    && content?.contains(opener)
-    && opener.matches(".course-card[data-section-id]")
-    && String(opener.dataset.sectionId) === normalizedSectionId;
-  if (!hasListOrigin) return;
-  const focusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  state.detailReturnContext = {
-    sectionId: normalizedSectionId,
-    panelScrollTop: content?.scrollTop || 0,
-    documentScroll: BODY_SCROLLING_COURSES_QUERY.matches
-      ? { left: window.scrollX || 0, top: window.scrollY || 0 }
-      : null,
-    opener: opener instanceof HTMLElement ? opener : focusedElement,
-  };
-}
-
-function clearDetailReturnContext() {
-  state.detailReturnContext = null;
-}
-
-function closeDetail() {
-  const closingSectionId = String(state.detailSectionId || state.editingSectionId || "");
-  const returnContext = state.detailReturnContext?.sectionId === closingSectionId
-    ? state.detailReturnContext
-    : null;
-  state.detailSectionId = null;
-  state.editingSectionId = null;
-  state.detailLiveError = "";
-  clearDetailReturnContext();
-  renderPanel();
-  if (returnContext) restoreDetailReturnContext(returnContext);
-}
-
-function restoreDetailReturnContext(returnContext) {
-  const restoreScroll = () => {
-    const content = document.getElementById("courses-panel-content");
-    if (content) content.scrollTop = returnContext.panelScrollTop;
-    if (returnContext.documentScroll && BODY_SCROLLING_COURSES_QUERY.matches) {
-      window.scrollTo({
-        left: returnContext.documentScroll.left,
-        top: returnContext.documentScroll.top,
-        behavior: "auto",
-      });
-    }
-  };
-
-  restoreScroll();
-  window.requestAnimationFrame?.(restoreScroll);
-
-  const fallback = document.getElementById("courses-search-input") || document.getElementById("courses-result-summary");
-  const focusTarget = focusCourseCard(returnContext.sectionId) || getConnectedFocusTarget(returnContext.opener) || fallback;
-  if (focusTarget === document.getElementById("courses-result-summary")) {
-    focusTarget.tabIndex = -1;
-  }
-  if (focusTarget !== document.activeElement) focusTarget?.focus?.({ preventScroll: true });
-}
-
-function focusCourseCard(sectionId) {
-  const content = document.getElementById("courses-panel-content");
-  const card = content?.querySelector(`.course-card[data-section-id="${cssEscape(sectionId)}"]`);
-  card?.focus?.({ preventScroll: true });
-  return card || null;
-}
-
-function getConnectedFocusTarget(element) {
-  if (!(element instanceof HTMLElement) || !element.isConnected || element.matches(":disabled")) return null;
-  if (element.tabIndex >= 0 || element.matches("a[href], button, input, select, textarea, [contenteditable='true']")) {
-    return element;
-  }
-  return null;
-}
-
-async function refreshSectionStatus(sectionId, options = {}) {
-  state.detailLoading = true;
-  renderPanel();
-  try {
-    const payload = await fetchJson("/api/courses/section-status", {
-      method: "POST",
-      body: JSON.stringify({
-        section_id: sectionId,
-        force: options.force !== false,
-      }),
-    });
-    if (payload.section) {
-      payload.section.live_updated_at = payload.last_updated_at || new Date().toISOString();
-      rememberSection(payload.section);
-    }
-    state.detailLiveError = payload.live_error || "";
-    if (payload.live_error) {
-      showToast(payload.live_error || "Live Atlas status unavailable.", true);
-    }
-  } catch (error) {
-    console.error(error);
-    state.detailLiveError = error.message || "Live status unavailable.";
-    showToast(state.detailLiveError, true);
-  } finally {
-    state.detailLoading = false;
-    const focusedCardId = state.detailSectionId
-      ? null
-      : document.activeElement?.closest?.(".course-card[data-section-id]")?.dataset.sectionId;
-    renderPanel();
-    if (focusedCardId) focusCourseCard(focusedCardId);
-    renderCalendar();
-  }
-}
-
-async function addCourse(sectionId) {
-  if (!sectionId || state.savedCoursesBySection.has(sectionId)) return;
-  state.savingIds.add(sectionId);
-  render();
-  try {
-    const payload = await fetchJson("/api/courses/saved", {
-      method: "POST",
-      body: JSON.stringify({ section_id: sectionId }),
-    });
-    if (payload.course?.section_id) {
-      applySavedCourse(payload.course);
-      state.removedSelectedSections.delete(String(payload.course.section_id));
-    }
-    showToast("Class added.");
-  } catch (error) {
-    console.error(error);
-    showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t add class" });
-  } finally {
-    state.savingIds.delete(sectionId);
-    render();
-  }
-}
-
-async function removeCourse(courseId, sectionId) {
-  if (!courseId) return;
-  const accepted = await (window.APStudyConfirm?.request?.({
-    title: "Remove class?",
-    message: "This class will be removed from your weekly view.",
-    acceptLabel: "Remove class",
-    danger: true,
-  }) ?? Promise.resolve(false));
-  if (!accepted) return;
-  if (sectionId) state.savingIds.add(sectionId);
-  const savedCourse = sectionId ? state.savedCoursesBySection.get(String(sectionId)) : null;
-  const removedSection = sectionId ? getSection(sectionId) : null;
-  const previousDetailSectionId = state.detailSectionId;
-  const previousEditingSectionId = state.editingSectionId;
-  const restoresRemovedDetail = state.detailSectionId === sectionId || state.editingSectionId === sectionId;
-  const previousDetailReturnContext = restoresRemovedDetail && state.detailReturnContext?.sectionId === String(sectionId)
-    ? state.detailReturnContext
-    : null;
-  if (sectionId) state.savedCoursesBySection.delete(String(sectionId));
-  if (sectionId && state.activeCourseView === "selected" && removedSection) {
-    state.removedSelectedSections.set(String(sectionId), { ...removedSection, id: String(sectionId) });
-  }
-  if (restoresRemovedDetail) clearDetailReturnContext();
-  if (state.detailSectionId === sectionId) state.detailSectionId = null;
-  if (state.editingSectionId === sectionId) state.editingSectionId = null;
-  render();
-  window.APStudyUndo?.stage?.({
-    message: `${removedSection?.course_code || removedSection?.course_title || "Class"} removed.`,
-    commit: ({ reason }) => fetchJson(`/api/courses/saved/${encodeURIComponent(courseId)}`, {
-      method: "DELETE",
-      keepalive: reason === "pagehide",
-    }),
-    restore: () => {
-      if (sectionId && savedCourse) state.savedCoursesBySection.set(String(sectionId), savedCourse);
-      if (sectionId) state.removedSelectedSections.delete(String(sectionId));
-      state.detailSectionId = previousDetailSectionId;
-      state.editingSectionId = previousEditingSectionId;
-      state.detailReturnContext = restoresRemovedDetail && previousDetailReturnContext?.sectionId === String(sectionId)
-        ? previousDetailReturnContext
-        : null;
-      if (sectionId) state.savingIds.delete(sectionId);
-      render();
-    },
-    onCommit: () => {
-      if (sectionId) state.savingIds.delete(sectionId);
-      render();
-    },
-    errorTitle: "Couldn’t remove class",
-  });
-  if (!window.APStudyUndo?.stage) {
-    try {
-      await fetchJson(`/api/courses/saved/${encodeURIComponent(courseId)}`, { method: "DELETE" });
-    } catch (error) {
-      if (sectionId && savedCourse) state.savedCoursesBySection.set(String(sectionId), savedCourse);
-      showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t remove class" });
-    } finally {
-      if (sectionId) state.savingIds.delete(sectionId);
-      render();
-    }
-  }
-}
-
-async function setTrack(sectionId, enabled, intervalMinutes = null) {
-  if (!sectionId) return;
-  const wasEnabled = Boolean(state.tracksBySection.get(String(sectionId))?.enabled);
-  state.trackingIds.add(sectionId);
-  renderPanel();
-  try {
-    const payload = await fetchJson("/api/courses/tracks", {
-      method: "POST",
-      body: JSON.stringify({
-        section_id: sectionId,
-        enabled,
-        ...(intervalMinutes ? { interval_minutes: Number(intervalMinutes) } : {}),
-      }),
-    });
-    if (payload.section) rememberSection(payload.section);
-    if (payload.track?.section_id) {
-      state.tracksBySection.set(String(payload.track.section_id), payload.track);
-      if (payload.track.term_policy) state.trackingTermPolicies[payload.track.term] = payload.track.term_policy;
-    }
-    if (enabled !== wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage + (enabled ? 1 : -1));
-    const queued = enabled && payload.track?.tracking_state === "queued";
-    showToast(queued ? "Tracker queued. Checks begin when this term opens." : intervalMinutes ? `Checking every ${Number(intervalMinutes)} minutes.` : enabled ? "Tracking enabled." : "Tracking paused.");
-    if (enabled && !wasEnabled) window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'course-tracking' } }));
-  } catch (error) {
-    console.error(error);
-    const limitReached = error?.code === "tier_limit";
-    showToast(
-      error.message || "Try again in a moment.",
-      true,
-      { title: limitReached ? "Tracking limit reached" : "Couldn’t update tracking" },
-    );
-  } finally {
-    state.trackingIds.delete(sectionId);
-    render();
-  }
-}
-
-async function removeTrack(trackId, sectionId) {
-  if (!trackId || !sectionId) return;
-  const track = state.tracksBySection.get(String(sectionId));
-  const wasEnabled = Boolean(track?.enabled);
-  const previousUsage = state.trackingUsage;
-  state.trackingIds.add(sectionId);
-  state.tracksBySection.delete(String(sectionId));
-  if (wasEnabled) state.trackingUsage = Math.max(0, state.trackingUsage - 1);
-  renderPanel();
-  window.APStudyUndo?.stage?.({
-    message: "Course tracker removed.",
-    commit: ({ reason }) => fetchJson(`/api/courses/tracks/${encodeURIComponent(trackId)}`, {
-      method: "DELETE",
-      keepalive: reason === "pagehide",
-    }),
-    restore: () => {
-      if (track) state.tracksBySection.set(String(sectionId), track);
-      state.trackingUsage = previousUsage;
-      state.trackingIds.delete(sectionId);
-      render();
-    },
-    onCommit: () => {
-      state.trackingIds.delete(sectionId);
-      render();
-    },
-    errorTitle: "Couldn’t remove tracker",
-  });
-  if (!window.APStudyUndo?.stage) {
-    try {
-      await fetchJson(`/api/courses/tracks/${encodeURIComponent(trackId)}`, { method: "DELETE" });
-    } catch (error) {
-      if (track) state.tracksBySection.set(String(sectionId), track);
-      state.trackingUsage = previousUsage;
-      showToast(error.message || "Try again in a moment.", true, { title: "Couldn’t remove tracker" });
-    } finally {
-      state.trackingIds.delete(sectionId);
-      render();
-    }
-  }
-}
-
-function getSection(sectionId) {
-  return state.sectionsById[String(sectionId)] || state.savedCoursesBySection.get(String(sectionId));
+  void loadSectionsForTerm(state.selectedTerm, { termChanged: true });
 }
 
 function isTrackable(section) {
@@ -827,15 +332,6 @@ function isTrackable(section) {
 
 function getEffectiveAvailability(section) {
   return availabilityVerifier.getEffectiveAvailability(section);
-}
-
-function scrollPanelContentToTop() {
-  const content = document.getElementById("courses-panel-content");
-  if (!content) return;
-  content.scrollTop = 0;
-  window.requestAnimationFrame?.(() => {
-    content.scrollTop = 0;
-  });
 }
 
 function wireLiveHydrationControls() {
@@ -914,9 +410,7 @@ async function hydrateVisibleLiveSections() {
 
 function rerenderAfterLiveHydration() {
   const before = document.getElementById("courses-panel-content")?.scrollTop || 0;
-  renderTermSelect();
   renderCourses();
-  renderCalendar();
   const content = document.getElementById("courses-panel-content");
   if (content) content.scrollTop = before;
   scheduleVisibleLiveHydration();

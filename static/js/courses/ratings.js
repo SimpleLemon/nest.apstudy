@@ -115,4 +115,4 @@ function renderCourseCardSchedule(section) {
   return `${schedule ? `<span>${escapeHtml(schedule)}</span><span aria-hidden="true">|</span>` : ''}${ratings}`;
 }
 
-export { renderProfessorRatings, renderCourseCardSchedule, safeRatingUrl, ratingSummary };
+export { renderProfessorRatings, renderCourseCardSchedule, renderRatingBadge, safeRatingUrl, ratingSummary };

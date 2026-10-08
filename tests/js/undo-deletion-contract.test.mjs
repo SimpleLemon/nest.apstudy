@@ -13,7 +13,7 @@ function source(relativePath) {
 test('entity deletion flows stage a real shared undo window', () => {
     for (const relativePath of [
         'static/js/tasks/task.js',
-        'static/js/courses/index.js',
+        'static/js/courses/actions.js',
         'static/js/notes/list.js',
         'static/js/files/index.js',
         'static/js/calendar/events/context-menu.js',

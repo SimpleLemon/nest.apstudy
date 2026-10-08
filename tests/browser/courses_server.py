@@ -55,9 +55,9 @@ def seed_catalog(root):
         person = index % len(people)
         name = people[person][0]
         catalog = str(100 + index)
-        instructors = [{"name": name, "atlas_id": f"fixture-{person}", "role": "Primary Instructor"}]
+        instructors = [{"name": name, "email": f"instructor{person}@example.edu", "atlas_id": f"fixture-{person}", "role": "Primary Instructor"}]
         if index == 0:
-            instructors.append({"name": people[1][0], "atlas_id": "fixture-1"})
+            instructors.append({"name": people[1][0], "email": "instructor1@example.edu", "atlas_id": "fixture-1"})
         _write(root / f"data/atlas/snapshots/{TERM}/fixture/DEMO/{catalog}.json", {
             "term": TERM, "srcdb": "5269", "subject": "DEMO", "catalog_number": catalog,
             "course_code": f"DEMO {catalog}", "course_title": f"Synthetic course {index + 1}",
@@ -86,7 +86,7 @@ def seed_catalog(root):
 def courses_test_app(port=8806):
     with storage_test_app(port=port) as app, ExitStack() as stack:
         from blueprints import courses
-        from services import atlas_client, atlas_live_verification, calendar_ics_courses, database, professor_ratings
+        from services import atlas_client, atlas_live_verification, calendar_ics_courses, course_tracking_terms, database, professor_ratings
         from models import User
 
         root = Path(app.extensions["storage_test_fixture"]["temporary_directory"]) / "courses"
@@ -110,8 +110,13 @@ def courses_test_app(port=8806):
         @app.get("/__test__/courses/auth")
         def authenticate():
             theme = request.args.get("theme", "obsidian-dark")
-            if theme not in {"obsidian-dark", "parchment-light"}:
+            tracking = request.args.get("tracking", "upcoming")
+            if theme not in {"obsidian-dark", "parchment-light"} or tracking not in {"upcoming", "open", "closed"}:
                 abort(400)
+            policy = course_tracking_terms.term_policy(TERM)
+            course_tracking_terms.save_term_policy(TERM, {
+                "state": tracking, "expected_revision": policy["revision"],
+            }, OWNER_ID)
             database.update_row("user_settings", OWNER_ID, data={
                 "interface_theme": theme, "theme": "dark" if theme == "obsidian-dark" else "light",
             })

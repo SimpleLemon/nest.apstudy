@@ -91,7 +91,7 @@ function createCourseControls({
       state.filtersOpen = false;
       state.removedSelectedSections.clear();
       resetWeekScroll();
-      void loadSectionsForTerm(state.selectedTerm);
+      void loadSectionsForTerm(state.selectedTerm, { termChanged: true });
     });
 
     document.getElementById("courses-day-toggle")?.addEventListener("click", (event) => {

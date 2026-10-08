@@ -273,7 +273,7 @@ class AccessibilityBaselineTests(unittest.TestCase):
         course_modal = (ROOT / "static/js/calendar/integrations/course-modal.js").read_text()
         sources = (ROOT / "static/js/calendar/integrations/sources.js").read_text()
         share = (ROOT / "static/js/calendar/integrations/share-row.js").read_text()
-        courses = (ROOT / "static/js/courses/panel.js").read_text()
+        courses = (ROOT / "static/js/courses/edit.js").read_text()
         chat = "\n".join(
             (
                 (ROOT / "static/js/chat/runtime.js").read_text(),
