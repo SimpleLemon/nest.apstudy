@@ -1,48 +1,12 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { loadTaskModule } from "./helpers/tasks-app.mjs";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-
-function ensureDateHelpers() {
-    const pad2 = (value) => String(value).padStart(2, "0");
-    if (!globalThis.window) {
-        globalThis.window = {};
-    }
-    globalThis.window.APStudyDate = {
-        toLocalInputValue(date) {
-            if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "";
-            return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}T${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
-        },
-        isoToLocalInput(value) {
-            if (!value) return "";
-            const date = new Date(value);
-            return Number.isNaN(date.getTime()) ? "" : this.toLocalInputValue(date);
-        },
-        localInputToIso(value) {
-            if (!value) return null;
-            const date = new Date(value);
-            return Number.isNaN(date.getTime()) ? null : date.toISOString();
-        },
-    };
-}
-
-function moduleUrl(source) {
-    return `data:text/javascript;charset=utf-8,${encodeURIComponent(source)}`;
-}
-
-async function importTaskData() {
-    ensureDateHelpers();
-    const utilsSource = await readFile(path.join(repoRoot, "static/js/tasks/task-utils.js"), "utf8");
-    const dataSource = await readFile(path.join(repoRoot, "static/js/tasks/task-data.js"), "utf8");
-    return import(moduleUrl(dataSource.replace('from "./task-utils.js"', `from "${moduleUrl(utilsSource)}"`)));
-}
-
-const data = await importTaskData();
+globalThis.window = {};
+const data = await loadTaskModule("task-data.js");
 
 test("builds task API payloads with normalized deadline and recurrence fields", () => {
+    assert.equal(globalThis.window.APStudyDate, undefined);
     const payload = data.buildTaskDraftPayload("list-1", {
         title: "Read",
         priority: "",
@@ -57,6 +21,7 @@ test("builds task API payloads with normalized deadline and recurrence fields", 
     assert.equal(payload.timezone, "America/New_York");
     assert.deepEqual(payload.recurrence, { every: 1, unit: "week" });
     assert.match(payload.deadline_at, /^2026-05-20T/);
+    assert.equal(payload.deadline_at, new Date("2026-05-20T14:30").toISOString());
 });
 
 test("task payloads preserve priority and distinguish date-only from timed deadlines", () => {
@@ -82,6 +47,24 @@ test("task payloads preserve priority and distinguish date-only from timed deadl
     assert.equal(timed.priority, "urgent");
     assert.equal(timed.deadline_time, "14:30");
     assert.equal(timed.reminder_minutes, 10);
+});
+
+test("task payload serialization keeps an explicit undefined deadline time as null", () => {
+    const draft = { title: "Read", deadline_at: "2026-05-20T14:30" };
+    const explicit = data.buildTaskDraftPayload("list-1", { ...draft, deadline_time: undefined }, "UTC");
+    const inferred = data.buildTaskDraftPayload("list-1", draft, "UTC");
+    const serializedExplicit = JSON.parse(JSON.stringify(explicit));
+    const serializedInferred = JSON.parse(JSON.stringify(inferred));
+
+    assert.equal(explicit.deadline_time, null);
+    assert.ok(Object.hasOwn(serializedExplicit, "deadline_time"));
+    assert.equal(serializedExplicit.deadline_time, null);
+    assert.equal(serializedExplicit.reminder_minutes, -1);
+    assert.equal(serializedInferred.deadline_time, "14:30");
+    assert.equal(serializedInferred.reminder_minutes, 10);
+    for (const key of ["list_id", "title", "priority", "deadline_at", "timezone", "recurrence"]) {
+        assert.deepEqual(serializedExplicit[key], serializedInferred[key]);
+    }
 });
 
 test("computes optimistic completed state for one-off and recurring tasks", () => {
@@ -139,4 +122,38 @@ test("normalizes task board payloads returned by the API layer", () => {
     assert.equal(board.tasks[0].priority, "none");
     assert.equal(board.tasks[0].starred, true);
     assert.equal(board.preferences.task_sound_enabled, false);
+});
+
+test('mutation journal settlements preserve pending intentions and discriminate stale tickets', async () => {
+    const journal = data.createEntityMutationJournal();
+    const entity = { id: 'one', title: 'Original', starred: false };
+    const first = journal.begin(entity, { title: 'First' });
+    const second = journal.begin(entity, { title: 'Second' });
+    assert.deepEqual(second.changes, { title: 'Second' });
+    let completed = false;
+    const waiting = journal.waitFor(['one', 'absent']).then(() => { completed = true; });
+    const accepted = journal.settle(first, { ...entity, title: 'Accepted first' });
+    assert.deepEqual(accepted, { stale: false, latest: false, changes: { title: 'Second' } });
+    await Promise.resolve();
+    assert.equal(completed, false, 'completion waits for all pending entries');
+    assert.deepEqual(journal.settle(second), { stale: false, latest: true, changes: { title: 'Accepted first' } });
+    await waiting;
+    assert.equal(completed, true);
+    const third = journal.begin(entity, { starred: true });
+    journal.invalidate('one');
+    assert.deepEqual(journal.settle(third, { ...entity, starred: true }), { stale: true });
+    assert.equal(journal.rebase('one', (value) => value), null);
+});
+
+test('list creation returns nullable cancellation or a normalized API list', async () => {
+    const oldHttp = globalThis.window.APStudyHttp;
+    const requests = [];
+    globalThis.window.APStudyHttp = { fetchJson: async (url, options) => { requests.push({ url, options }); return { list: { id: 'new-list', name: 'Study' } }; } };
+    try {
+        assert.equal(await data.createTaskList({ name: '  ' }), null);
+        assert.equal(requests.length, 0);
+        assert.deepEqual(await data.createTaskList({ name: ' Study ' }), { id: 'new-list', name: 'Study', description: '', hidden: false, sort_mode: 'default' });
+        assert.equal(requests.length, 1);
+        assert.deepEqual(JSON.parse(requests[0].options.body), { name: 'Study', description: '' });
+    } finally { globalThis.window.APStudyHttp = oldHttp; }
 });

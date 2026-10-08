@@ -1,7 +1,7 @@
 import {
     LIST_SORT_OPTIONS,
     formatRepeat,
-    isRepeatingTaskCompleted,
+    isTaskCurrentlyCompleted,
     sortTasksForList,
 } from "./task-utils.js";
 import { formatTaskDeadline } from "./task-deadline.js";
@@ -12,7 +12,7 @@ const h = React.createElement;
 
 export function PrintSheet({ list, tasks, includeCompleted = false }) {
     if (!list) return null;
-    const printableTasks = (tasks || []).filter((task) => includeCompleted || !isRepeatingTaskCompleted(task));
+    const printableTasks = (tasks || []).filter((task) => includeCompleted || !isTaskCurrentlyCompleted(task));
     return h("section", { className: "task-print-sheet", "aria-hidden": "true" },
         h("header", null,
             h("h1", null, list.name),
@@ -20,7 +20,7 @@ export function PrintSheet({ list, tasks, includeCompleted = false }) {
         ),
         printableTasks.length
             ? h("ul", { className: "task-print-list" }, printableTasks.map((task) => {
-                const completed = isRepeatingTaskCompleted(task);
+                const completed = isTaskCurrentlyCompleted(task);
                 return h("li", { key: task.id, className: completed ? "is-completed" : "" },
                     h("span", { className: "task-print-checkbox", "aria-hidden": "true" }, completed ? "✓" : ""),
                     h("div", { className: "task-print-content" },

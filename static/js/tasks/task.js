@@ -5,7 +5,6 @@ import {
     listMenuItems,
     mergeById,
     removeById,
-    replaceById,
     requestDestructiveAction,
     taskMenuItems,
     toggleActionMenu,
@@ -17,7 +16,10 @@ import {
     buildCompletedTaskOptimistic,
     buildListOrderUpdates,
     completeTaskRecord,
+    completedTaskSelection,
+    restoreCapturedCompletions,
     createTaskList,
+    createEntityMutationJournal,
     createTaskRecord,
     destroyCompletedTasks,
     destroyTaskList,
@@ -31,7 +33,7 @@ import {
     updateTaskRecord,
 } from "./task-data.js";
 import {
-    isRepeatingTaskCompleted,
+    isTaskCurrentlyCompleted,
     normalizeList,
     normalizeTask,
     sortedLists,
@@ -107,7 +109,7 @@ function buildTaskLoadingHtml() {
     `;
 }
 
-function TaskApp({ completeSound, uncompleteSound }) {
+export function TaskApp({ completeSound, uncompleteSound }) {
     const [lists, setLists] = React.useState([]);
     const [tasks, setTasks] = React.useState([]);
     const [selectedListId, setSelectedListId] = React.useState("all");
@@ -129,23 +131,19 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [error]);
     const listsRef = React.useRef(lists);
     const tasksRef = React.useRef(tasks);
-    const listMutationVersionsRef = React.useRef(new Map());
-    const taskMutationVersionsRef = React.useRef(new Map());
+    const listMutationsRef = React.useRef(createEntityMutationJournal());
+    const taskMutationsRef = React.useRef(createEntityMutationJournal());
 
     const setListsAndRef = React.useCallback((nextListsOrUpdater) => {
-        setLists((current) => {
-            const nextLists = typeof nextListsOrUpdater === "function" ? nextListsOrUpdater(current) : nextListsOrUpdater;
-            listsRef.current = nextLists;
-            return nextLists;
-        });
+        const next = typeof nextListsOrUpdater === "function" ? nextListsOrUpdater(listsRef.current) : nextListsOrUpdater;
+        listsRef.current = next;
+        setLists(next);
     }, []);
 
     const setTasksAndRef = React.useCallback((nextTasksOrUpdater) => {
-        setTasks((current) => {
-            const nextTasks = typeof nextTasksOrUpdater === "function" ? nextTasksOrUpdater(current) : nextTasksOrUpdater;
-            tasksRef.current = nextTasks;
-            return nextTasks;
-        });
+        const next = typeof nextTasksOrUpdater === "function" ? nextTasksOrUpdater(tasksRef.current) : nextTasksOrUpdater;
+        tasksRef.current = next;
+        setTasks(next);
     }, []);
 
     React.useEffect(() => {
@@ -176,6 +174,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
         setError("");
         try {
             const { lists: nextLists, tasks: nextTasks, preferences } = await fetchTaskBoard();
+            listMutationsRef.current.reset();
+            taskMutationsRef.current.reset();
             setListsAndRef(nextLists);
             setTasksAndRef(nextTasks);
             setSoundEnabled(preferences?.task_sound_enabled !== false);
@@ -213,10 +213,6 @@ function TaskApp({ completeSound, uncompleteSound }) {
         };
     }, [printListId]);
 
-    const updateTaskInState = React.useCallback((updatedTask) => {
-        setTasksAndRef((current) => replaceById(current, updatedTask.id, normalizeTask(updatedTask)));
-    }, [setTasksAndRef]);
-
     const createList = React.useCallback(async ({ name, description = "" }) => {
         const listName = (name || "New List").trim();
         if (!listName) return;
@@ -232,23 +228,21 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [setListsAndRef]);
 
     const updateList = React.useCallback(async (listId, updates) => {
-        const previousLists = listsRef.current;
-        const versions = listMutationVersionsRef.current;
-        const version = (versions.get(listId) || 0) + 1;
-        versions.set(listId, version);
-        const nextUpdates = { ...updates };
-        setListsAndRef((current) => mergeById(current, listId, nextUpdates, normalizeList));
-        if (nextUpdates.hidden) {
-            setSelectedListId((current) => current === listId ? "all" : current);
-        }
+        const previousList = listsRef.current.find((list) => list.id === listId);
+        if (!previousList) return;
+        const journal = listMutationsRef.current;
+        const ticket = journal.begin(previousList, updates);
+        setListsAndRef((current) => mergeById(current, listId, ticket.changes, normalizeList));
+        if (updates.hidden) setSelectedListId((current) => current === listId ? "all" : current);
         try {
-            const updatedList = await updateTaskList(listId, nextUpdates);
-            if (versions.get(listId) !== version) return;
-            setListsAndRef((current) => sortedLists(replaceById(current, listId, updatedList)));
+            const updatedList = await updateTaskList(listId, updates);
+            const outcome = journal.settle(ticket, updatedList);
+            if (!outcome.stale) setListsAndRef((current) => sortedLists(mergeById(current, listId, outcome.changes, normalizeList)));
         } catch (err) {
-            if (versions.get(listId) !== version) return;
-            setError(err.message || "Unable to update list.");
-            setListsAndRef(previousLists);
+            const outcome = journal.settle(ticket);
+            if (outcome.stale) return;
+            if (outcome.latest) setError(err.message || "Unable to update list.");
+            setListsAndRef((current) => mergeById(current, listId, outcome.changes, normalizeList));
         }
     }, [setListsAndRef]);
 
@@ -272,6 +266,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
         const removedTasks = previousTasks
             .map((task, index) => ({ task, index }))
             .filter((record) => record.task.list_id === listId);
+        listMutationsRef.current.invalidate(listId);
+        removedTasks.forEach(({ task }) => taskMutationsRef.current.invalidate(task.id));
         const previousSelectedListId = selectedListId;
         setListsAndRef((current) => removeById(current, listId));
         setTasksAndRef((current) => current.filter((task) => task.list_id !== listId));
@@ -299,6 +295,8 @@ function TaskApp({ completeSound, uncompleteSound }) {
             acceptLabel: "Delete completed",
         });
         if (!accepted) return;
+        // Capture acknowledged completion identities, after existing writes settle.
+        await taskMutationsRef.current.waitFor(tasksRef.current.filter(task => task.list_id === listId).map(task => task.id));
         const previousTasks = tasksRef.current;
         const removedTasks = previousTasks
             .map((task, index) => ({ task, index }))
@@ -307,20 +305,22 @@ function TaskApp({ completeSound, uncompleteSound }) {
                     record.task.recurrence ? record.task.completed_occurrences?.length : record.task.completed
                 )
             ));
+        if (!removedTasks.length) return;
+        removedTasks.forEach(({ task }) => taskMutationsRef.current.invalidate(task.id));
+        const selection = completedTaskSelection(removedTasks.map(record => record.task));
         setTasksAndRef((current) => removeCompletedTasksFromList(current, listId));
         window.APStudyUndo?.stage?.({
             message: `${removedTasks.length} completed task${removedTasks.length === 1 ? "" : "s"} deleted from "${list?.name || "this list"}".`,
-            commit: ({ reason }) => destroyCompletedTasks(listId, { keepalive: reason === "pagehide" }),
+            commit: ({ reason }) => destroyCompletedTasks(listId, { keepalive: reason === "pagehide", selection }),
             restore: () => setTasksAndRef((current) => removedTasks.reduce((items, record) => {
                 const existingIndex = items.findIndex((task) => task.id === record.task.id);
                 if (existingIndex < 0) return restoreItemAtIndex(items, record.task, record.index);
                 const next = [...items];
-                next[existingIndex] = {
-                    ...next[existingIndex],
-                    completed: record.task.completed,
-                    completed_at: record.task.completed_at,
-                    completed_occurrences: record.task.completed_occurrences,
-                };
+                const restored = record.task.recurrence
+                    ? restoreCapturedCompletions(next[existingIndex], record.task)
+                    : next[existingIndex];
+                const pendingChanges = taskMutationsRef.current.rebase(record.task.id, value => restoreCapturedCompletions(value, record.task));
+                next[existingIndex] = pendingChanges ? { ...restored, ...pendingChanges } : restored;
                 return next;
             }, current)),
             errorTitle: "Couldn’t delete completed tasks",
@@ -341,30 +341,32 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [setTasksAndRef]);
 
     const updateTask = React.useCallback(async (taskId, updates) => {
-        const previousTask = tasksRef.current.find((task) => task.id === taskId) || null;
-        const versions = taskMutationVersionsRef.current;
-        const version = (versions.get(taskId) || 0) + 1;
-        versions.set(taskId, version);
+        const previousTask = tasksRef.current.find((task) => task.id === taskId);
+        if (!previousTask) return { ok: false, stale: true };
+        const journal = taskMutationsRef.current;
+        const fields = new Set(Object.keys(updates));
+        if (fields.has("deadline_at")) ["deadline_time", "reminder_minutes"].forEach(field => fields.add(field));
+        if (fields.has("recurrence")) fields.add("next_occurrence_key");
+        const ticket = journal.begin(previousTask, updates, { fields: [...fields] });
         setError("");
-        setTasksAndRef((current) => mergeById(current, taskId, updates, normalizeTask));
+        setTasksAndRef((current) => mergeById(current, taskId, ticket.changes, normalizeTask));
         try {
             const updatedTask = await updateTaskRecord(taskId, updates);
-            if (versions.get(taskId) !== version) return updatedTask;
-            updateTaskInState(updatedTask);
-            promptForTaskNotifications(updatedTask, previousTask);
+            const outcome = journal.settle(ticket, updatedTask);
+            if (!outcome.stale) {
+                setTasksAndRef((current) => mergeById(current, taskId, outcome.changes, normalizeTask));
+                if (outcome.latest) promptForTaskNotifications(updatedTask, previousTask);
+            }
             return updatedTask;
         } catch (err) {
             const message = err.message || "Unable to update task.";
-            if (versions.get(taskId) !== version) {
-                return { ok: false, stale: true, error: message };
-            }
-            setError(message);
-            if (previousTask) {
-                setTasksAndRef((current) => replaceById(current, taskId, previousTask));
-            }
-            return { ok: false, error: message };
+            const outcome = journal.settle(ticket);
+            if (outcome.stale) return { ok: false, stale: true, error: message };
+            if (outcome.latest) setError(message);
+            setTasksAndRef((current) => mergeById(current, taskId, outcome.changes, normalizeTask));
+            return { ok: false, ...(outcome.latest ? {} : { stale: true }), error: message };
         }
-    }, [setTasksAndRef, updateTaskInState]);
+    }, [setTasksAndRef]);
 
     const deleteTask = React.useCallback(async (taskId) => {
         const task = tasksRef.current.find((item) => item.id === taskId);
@@ -376,6 +378,7 @@ function TaskApp({ completeSound, uncompleteSound }) {
         if (!accepted) return;
         const previous = tasksRef.current;
         const taskIndex = previous.findIndex((item) => item.id === taskId);
+        taskMutationsRef.current.invalidate(taskId);
         setTasksAndRef((current) => removeById(current, taskId));
         window.APStudyUndo?.stage?.({
             message: `"${task?.title || "Task"}" deleted.`,
@@ -386,17 +389,37 @@ function TaskApp({ completeSound, uncompleteSound }) {
     }, [setTasksAndRef]);
 
     const completeTask = React.useCallback(async (task, completed) => {
-        const previous = tasksRef.current;
-        const optimistic = buildCompletedTaskOptimistic(task, completed);
-        setTasksAndRef((current) => replaceById(current, task.id, optimistic.task));
+        const previousTask = tasksRef.current.find((item) => item.id === task.id);
+        if (!previousTask) return;
+        const journal = taskMutationsRef.current;
+        const now = new Date();
+        const optimistic = buildCompletedTaskOptimistic(previousTask, completed, now);
+        const occurrenceKey = optimistic.occurrenceKey;
+        const fields = previousTask.recurrence ? ["completed_occurrences"] : ["completed", "completed_at"];
+        const ticket = journal.begin(previousTask, {}, {
+            fields,
+            optimistic: value => buildCompletedTaskOptimistic({ ...value, next_occurrence_key: occurrenceKey }, completed, now).task,
+            accepted: (value, response) => previousTask.recurrence ? {
+                ...value,
+                completed_occurrences: [
+                    ...(value.completed_occurrences || []).filter(item => item.occurrence_key !== occurrenceKey),
+                    ...(response.completed_occurrences || []).filter(item => item.occurrence_key === occurrenceKey),
+                ],
+            } : { ...value, completed: response.completed, completed_at: response.completed_at },
+        });
+        setTasksAndRef((current) => mergeById(current, task.id, ticket.changes, normalizeTask));
         completed ? sounds.playComplete(soundEnabled) : sounds.playUncomplete(soundEnabled);
         try {
-            updateTaskInState(await completeTaskRecord(task.id, completed, optimistic.occurrenceKey));
+            const updatedTask = await completeTaskRecord(task.id, completed, occurrenceKey);
+            const outcome = journal.settle(ticket, updatedTask);
+            if (!outcome.stale) setTasksAndRef((current) => mergeById(current, task.id, outcome.changes, normalizeTask));
         } catch (err) {
-            setError(err.message || "Unable to update completion.");
-            setTasksAndRef(previous);
+            const outcome = journal.settle(ticket);
+            if (outcome.stale) return;
+            if (outcome.latest) setError(err.message || "Unable to update completion.");
+            setTasksAndRef((current) => mergeById(current, task.id, outcome.changes, normalizeTask));
         }
-    }, [setTasksAndRef, soundEnabled, sounds, updateTaskInState]);
+    }, [setTasksAndRef, soundEnabled, sounds]);
 
     const reorderLists = React.useCallback(async (orderedIds) => {
         const updates = buildListOrderUpdates(orderedIds);
@@ -624,7 +647,7 @@ function TaskApp({ completeSound, uncompleteSound }) {
         h(ListEditorDialog, { dialog: listDialog, onClose: () => setListDialog(null), onSubmit: submitListDialog }),
         h(PrintSheet, {
             list: printListRecord,
-            tasks: printTasks.filter((task) => printCompletedOpen || !isRepeatingTaskCompleted(task)),
+            tasks: printTasks.filter((task) => printCompletedOpen || !isTaskCurrentlyCompleted(task)),
             includeCompleted: printCompletedOpen,
         })
     );

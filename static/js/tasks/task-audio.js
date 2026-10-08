@@ -26,7 +26,7 @@ export function createLazyAudioPlayer(src, AudioConstructor = globalThis.Audio) 
         let playback;
         try {
             playback = audio.play?.();
-        } catch (_error) {
+        } catch {
             release(audio);
             return Promise.resolve(false);
         }

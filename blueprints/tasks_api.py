@@ -22,6 +22,17 @@ from appwrite_helpers import (
     update_row_safe,
 )
 from services.task_schedule import next_task_occurrence_key
+from services.task_constants import (
+    RECURRENCE_UNITS,
+    TASK_CALENDAR_COLOR,
+    TASK_CALENDAR_ID,
+    TASK_CALENDAR_NAME,
+    TASK_PRIORITIES as PRIORITIES,
+)
+from services.calendar_constants import (
+    ALL_DAY_EVENT_REMINDERS as DATE_ONLY_REMINDER_MINUTES,
+    TIMED_EVENT_REMINDERS as TIMED_REMINDER_MINUTES,
+)
 from services.task_calendar import (
     build_task_calendar_events as _build_task_calendar_events_service,
     task_calendar_events_for_user as _task_calendar_events_for_user_service,
@@ -39,14 +50,7 @@ logger = logging.getLogger(__name__)
 TASK_LISTS_TABLE_ID = COLLECTIONS.get("task_lists", "task_lists")
 TASKS_TABLE_ID = COLLECTIONS.get("tasks", "tasks")
 TASK_COMPLETIONS_TABLE_ID = COLLECTIONS.get("task_completions", "task_completions")
-TASK_CALENDAR_ID = "local:tasks"
-TASK_CALENDAR_NAME = "Tasks"
-TASK_CALENDAR_COLOR = "#0ea5e9"
-PRIORITIES = {"none", "low", "medium", "high"}
-RECURRENCE_UNITS = {"day", "week", "month", "year"}
 LIST_SORT_MODES = {"default", "date", "deadline", "title"}
-TIMED_REMINDER_MINUTES = {-1, 0, 5, 10, 15, 30, 60, 120, 1440, 2880}
-DATE_ONLY_REMINDER_MINUTES = {-1, -540, 900, 2340, 9540}
 
 
 def _coerce_utc(value):
@@ -520,6 +524,49 @@ def delete_task_list(list_id):
     return jsonify({"ok": True})
 
 
+def _completed_delete_selection(payload):
+    """None keeps the legacy sweep; an explicit list limits deletion to snapshots."""
+    if not isinstance(payload, dict):
+        raise ValueError("Completed-task selection must be an object.")
+    if "selection" not in payload:
+        return None
+    selection = payload["selection"]
+    if not isinstance(selection, list):
+        raise ValueError("selection must be a list.")
+    selected = {}
+    for item in selection:
+        if not isinstance(item, dict) or not isinstance(item.get("task_id"), str) or not item["task_id"].strip():
+            raise ValueError("Every selection needs a task_id.")
+        task_id = item["task_id"]
+        if task_id in selected:
+            raise ValueError("Task selections must be unique.")
+        if "occurrences" in item:
+            if not isinstance(item["occurrences"], list):
+                raise ValueError("occurrences must be a list.")
+            keys = set()
+            for occurrence in item["occurrences"]:
+                if not isinstance(occurrence, dict) or not isinstance(occurrence.get("occurrence_key"), str) or not occurrence["occurrence_key"]:
+                    raise ValueError("Every occurrence needs an occurrence_key.")
+                if occurrence["occurrence_key"] in keys:
+                    raise ValueError("Occurrence selections must be unique.")
+                keys.add(occurrence["occurrence_key"])
+                if occurrence.get("id") is not None and not isinstance(occurrence["id"], str):
+                    raise ValueError("Occurrence id must be a string or null.")
+                if "completed_at" not in occurrence or (occurrence["completed_at"] is not None and not _parse_iso_datetime(occurrence["completed_at"])):
+                    raise ValueError("Every occurrence needs its completed_at boundary.")
+        elif "completed_at" not in item or (item["completed_at"] is not None and not _parse_iso_datetime(item["completed_at"])):
+            raise ValueError("Every completed task needs its completed_at boundary.")
+        selected[task_id] = item
+    return selected
+
+
+def _same_completion_boundary(actual, captured):
+    if actual is None or captured is None:
+        return actual is None and captured is None
+    actual_time = _parse_iso_datetime(actual)
+    return actual_time is not None and actual_time == _parse_iso_datetime(captured)
+
+
 @tasks_api_bp.route("/api/task-lists/<list_id>/completed-tasks", methods=["DELETE"])
 @login_required
 def delete_completed_tasks_in_list(list_id):
@@ -527,26 +574,52 @@ def delete_completed_tasks_in_list(list_id):
     user_id = str(current_user.id)
     deleted_tasks = 0
     cleared_completions = 0
+    try:
+        payload = request.get_json(silent=True)
+        if payload is None:
+            if request.get_data():
+                raise ValueError("Invalid completed-task selection JSON.")
+            payload = {}
+        selection = _completed_delete_selection(payload)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
 
     try:
         tasks = list_rows_all(
             TASKS_TABLE_ID,
-            [
-                Query.equal("user_id", [user_id]),
-                Query.equal("list_id", [list_id]),
-            ],
+            [Query.equal("user_id", [user_id]), Query.equal("list_id", [list_id])],
         )
+        # Recheck ownership/list at the mutation boundary as well as the query.
+        tasks = [task for task in tasks if task.get("user_id") == user_id and task.get("list_id") == list_id]
         for task in tasks:
             task_id = _row_id(task)
+            captured = selection.get(task_id) if selection is not None else None
+            if selection is not None and captured is None:
+                continue
             completions = _completion_rows_for_task(user_id, task_id)
             recurrence = _task_recurrence(task)
             if recurrence:
+                if selection is not None and "occurrences" not in captured:
+                    continue
                 for completion in completions:
+                    if selection is not None:
+                        if completion.get("user_id") != user_id or completion.get("task_id") != task_id:
+                            continue
+                        match = next((item for item in captured["occurrences"] if
+                            item["occurrence_key"] == completion.get("occurrence_key")
+                            and (not item.get("id") or item["id"] == _row_id(completion))
+                            and _same_completion_boundary(completion.get("completed_at"), item["completed_at"])), None)
+                        if match is None:
+                            continue
                     delete_row_safe(TASK_COMPLETIONS_TABLE_ID, _row_id(completion))
                     cleared_completions += 1
                 continue
             if bool(task.get("completed", False)):
+                if selection is not None and ("occurrences" in captured or not _same_completion_boundary(task.get("completed_at"), captured["completed_at"])):
+                    continue
                 for completion in completions:
+                    if selection is not None and (completion.get("user_id") != user_id or completion.get("task_id") != task_id):
+                        continue
                     delete_row_safe(TASK_COMPLETIONS_TABLE_ID, _row_id(completion))
                     cleared_completions += 1
                 delete_row_safe(TASKS_TABLE_ID, task_id)
@@ -555,11 +628,7 @@ def delete_completed_tasks_in_list(list_id):
         logger.exception("Failed to delete completed tasks")
         return jsonify({"error": "Unable to delete completed tasks."}), 500
 
-    return jsonify({
-        "ok": True,
-        "deleted_tasks": deleted_tasks,
-        "cleared_completions": cleared_completions,
-    })
+    return jsonify({"ok": True, "deleted_tasks": deleted_tasks, "cleared_completions": cleared_completions})
 
 
 @tasks_api_bp.route("/api/tasks", methods=["POST"])

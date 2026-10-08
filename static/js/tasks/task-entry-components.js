@@ -1,14 +1,14 @@
 import * as React from "react";
 import { AddTaskPopover } from "./task-popover.js";
 import { DeadlinePanel, formatTaskDeadline, reminderLabel } from "./task-deadline.js";
-import { TaskListbox } from "./task-form-controls.js";
+import { MaterialIcon, menuAnchorFromEvent, menuTrigger, TaskListbox } from "./task-form-controls.js";
 import { RepeatMenuContent } from "./task-recurrence.js";
 
 import {
     PRIORITY_OPTIONS,
     createDefaultRecurrence,
     formatRepeat,
-    isRepeatingTaskCompleted,
+    isTaskCurrentlyCompleted,
 } from "./task-utils.js";
 
 const h = React.createElement;
@@ -23,44 +23,6 @@ export function validateTaskTitle(value) {
 
 export function taskErrorMessage(error, fallback) {
     return error?.message || fallback;
-}
-
-function MaterialIcon({ name, className = "" }) {
-    return h("span", { className: `material-symbols-outlined ${className}`, "aria-hidden": "true" }, name);
-}
-
-function iconButton({ icon, label, className = "", active = false, triggerKey = "", title = label, ...props }) {
-    const triggerProps = triggerKey ? { "data-task-menu-trigger": triggerKey } : {};
-    return h("button", {
-        type: "button",
-        className: cx("task-icon-button", className, active && "is-on"),
-        "aria-label": label,
-        title,
-        ...triggerProps,
-        ...props,
-    }, h(MaterialIcon, { name: icon }));
-}
-
-function menuAnchorFromEvent(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    return {
-        anchor: {
-            top: rect.top,
-            right: rect.right,
-            bottom: rect.bottom,
-            left: rect.left,
-        },
-    };
-}
-
-function menuTrigger({ id, kind, className, label, onOpen, getPosition = menuAnchorFromEvent }) {
-    return iconButton({
-        icon: "more_vert",
-        label,
-        className,
-        triggerKey: `${kind}:${id}`,
-        onClick: (event) => onOpen(id, getPosition(event)),
-    });
 }
 
 function PriorityBadge({ priority }) {
@@ -182,7 +144,7 @@ function TaskDetails({ task, updateTask }) {
 
 export const TaskRow = React.memo(function TaskRow({ task, isExpanded, setExpandedTaskId, updateTask, completeTask, highlighted, openTaskMenu, draggable = true }) {
     const [titleDraft, setTitleDraft] = React.useState(task.title);
-    const completed = isRepeatingTaskCompleted(task);
+    const completed = isTaskCurrentlyCompleted(task);
     React.useEffect(() => setTitleDraft(task.title), [task.title]);
 
     const commitTitle = () => {

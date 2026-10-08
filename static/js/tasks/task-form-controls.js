@@ -1,12 +1,63 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { getFloatingPosition, shouldCloseFloatingLayer } from "./task-floating.js";
+import { useTaskFloatingLayer } from "./task-floating-layer.js";
 
 const h = React.createElement;
+const listboxWidth = (anchor) => Math.min(Math.max(anchor.width, 190), Math.max(1, window.innerWidth - 20));
+const datePickerWidth = () => Math.min(318, Math.max(0, window.innerWidth - 20));
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function cx(...parts) {
     return parts.filter(Boolean).join(" ");
+}
+
+export function MaterialIcon({ name, className = "" }) {
+    return h("span", { className: `material-symbols-outlined ${className}`, "aria-hidden": "true" }, name);
+}
+
+export function iconButton({ icon, label, className = "", active = false, triggerKey = "", title = label, ...props }) {
+    const triggerProps = triggerKey ? { "data-task-menu-trigger": triggerKey } : {};
+    return h("button", {
+        type: "button",
+        className: cx("task-icon-button", className, active && "is-on"),
+        "aria-label": label,
+        title,
+        ...triggerProps,
+        ...props,
+    }, h(MaterialIcon, { name: icon }));
+}
+
+export function buttonWithIcon({ icon, children, className, ...props }) {
+    return h("button", { type: "button", className, ...props },
+        h(MaterialIcon, { name: icon }),
+        h("span", null, children)
+    );
+}
+
+
+export function menuAnchorFromEvent(event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    return {
+        anchor: {
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+            left: rect.left,
+        },
+    };
+}
+
+export function menuTrigger({ id, kind, className, label, onOpen, stopPropagation = false, getPosition = menuAnchorFromEvent }) {
+    return iconButton({
+        icon: "more_vert",
+        label,
+        className,
+        triggerKey: `${kind}:${id}`,
+        onClick: (event) => {
+            if (stopPropagation) event.stopPropagation();
+            onOpen(id, getPosition(event));
+        },
+    });
 }
 
 function localDateString(date) {
@@ -69,46 +120,10 @@ export function TaskListbox({ value, options, onChange, label, disabled = false,
     const selectedIndex = Math.max(0, options.findIndex((option) => option.value === value));
     const selected = options[selectedIndex] || options[0];
 
-    React.useEffect(() => {
-        if (!open) return undefined;
-        const closeOutside = (event) => {
-            if (shouldCloseFloatingLayer(event, { layers: [rootRef.current, listRef.current] })) setOpen(false);
-        };
-        document.addEventListener("pointerdown", closeOutside);
-        return () => document.removeEventListener("pointerdown", closeOutside);
-    }, [open]);
-
-    const [position, setPosition] = React.useState({ top: 0, left: 0, width: 190, ready: false });
-
-    React.useLayoutEffect(() => {
-        if (!open || !triggerRef.current || !listRef.current) return undefined;
-        const reposition = () => {
-            const triggerRect = triggerRef.current?.getBoundingClientRect();
-            if (!triggerRect || !listRef.current) return;
-            const width = Math.min(
-                Math.max(triggerRect.width, 190),
-                Math.max(1, window.innerWidth - 20),
-            );
-            listRef.current.style.width = `${width}px`;
-            const next = getFloatingPosition(triggerRect, listRef.current.getBoundingClientRect(), {
-                align: "start",
-                gap: 5,
-            });
-            setPosition({ ...next, width, ready: true });
-        };
-        reposition();
-        window.addEventListener("scroll", reposition, true);
-        window.addEventListener("resize", reposition);
-        window.visualViewport?.addEventListener("resize", reposition);
-        const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(reposition);
-        observer?.observe(listRef.current);
-        return () => {
-            window.removeEventListener("scroll", reposition, true);
-            window.removeEventListener("resize", reposition);
-            window.visualViewport?.removeEventListener("resize", reposition);
-            observer?.disconnect();
-        };
-    }, [open, selectedIndex, options.length]);
+    const position = useTaskFloatingLayer({
+        open, setOpen, rootRef, triggerRef, floatingRef: listRef,
+        initialWidth: 190, getWidth: listboxWidth, repositionOn: [selectedIndex, options.length],
+    });
 
     React.useEffect(() => {
         if (!open) return;
@@ -284,43 +299,10 @@ export function TaskDatePicker({ value, onChange, label, placeholder = "Choose d
     const rootRef = React.useRef(null);
     const triggerRef = React.useRef(null);
     const menuRef = React.useRef(null);
-    const [position, setPosition] = React.useState({ top: 0, left: 0, width: 318, ready: false });
-
-    React.useEffect(() => {
-        if (!open) return undefined;
-        const closeOutside = (event) => {
-            if (shouldCloseFloatingLayer(event, { layers: [rootRef.current, menuRef.current] })) setOpen(false);
-        };
-        document.addEventListener("pointerdown", closeOutside);
-        return () => document.removeEventListener("pointerdown", closeOutside);
-    }, [open]);
-
-    React.useLayoutEffect(() => {
-        if (!open || !triggerRef.current || !menuRef.current) return undefined;
-        const reposition = () => {
-            const triggerRect = triggerRef.current?.getBoundingClientRect();
-            if (!triggerRect || !menuRef.current) return;
-            const width = Math.min(318, Math.max(0, window.innerWidth - 20));
-            menuRef.current.style.width = `${width}px`;
-            const next = getFloatingPosition(triggerRect, menuRef.current.getBoundingClientRect(), {
-                align: "start",
-                gap: 5,
-            });
-            setPosition({ ...next, width, ready: true });
-        };
-        reposition();
-        window.addEventListener("scroll", reposition, true);
-        window.addEventListener("resize", reposition);
-        window.visualViewport?.addEventListener("resize", reposition);
-        const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(reposition);
-        observer?.observe(menuRef.current);
-        return () => {
-            window.removeEventListener("scroll", reposition, true);
-            window.removeEventListener("resize", reposition);
-            window.visualViewport?.removeEventListener("resize", reposition);
-            observer?.disconnect();
-        };
-    }, [open, value]);
+    const position = useTaskFloatingLayer({
+        open, setOpen, rootRef, triggerRef, floatingRef: menuRef,
+        initialWidth: 318, getWidth: datePickerWidth, repositionOn: [value],
+    });
 
     const menu = open ? h("div", {
         ref: menuRef,

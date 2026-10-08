@@ -3,6 +3,8 @@
 import calendar
 import json
 from collections import defaultdict
+from collections.abc import Mapping, Sequence
+from typing import Any, TypedDict
 from datetime import date, datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
@@ -10,6 +12,17 @@ from services.row_utils import row_id as _row_id
 
 
 MAX_EXPANDED_OCCURRENCES = 1500
+TaskRow = Mapping[str, Any]
+
+
+class TaskOccurrence(TypedDict):
+    task: TaskRow
+    task_id: str
+    occurrence_key: str
+    start: datetime
+    end: datetime
+    is_all_day: bool
+    completed: bool
 
 
 def _coerce_utc(value):
@@ -138,10 +151,17 @@ def _completion_keys(completions):
     return result
 
 
-def build_task_occurrences(tasks, completions=None, range_start=None, range_end=None):
-    """Return normalized one-off and recurring task occurrences in a UTC range."""
+def build_task_occurrences(
+    tasks: Sequence[TaskRow] | None, completions: Sequence[TaskRow] | None = None,
+    range_start: datetime | None = None, range_end: datetime | None = None,
+) -> list[TaskOccurrence]:
+    """Expand tasks overlapping an exclusive UTC range.
+
+    Recurrence advances from the previous clamped date. Each task's search is
+    bounded by MAX_EXPANDED_OCCURRENCES advances, including skipped dates.
+    """
     completed_by_task = _completion_keys(completions)
-    occurrences = []
+    occurrences: list[TaskOccurrence] = []
     for task in tasks or []:
         task_id = _row_id(task)
         deadline = _parse_datetime(task.get("deadline_at"))
@@ -194,7 +214,8 @@ def build_task_occurrences(tasks, completions=None, range_start=None, range_end=
     return sorted(occurrences, key=lambda item: item["start"])
 
 
-def next_task_occurrence_key(task, now=None):
+def next_task_occurrence_key(task: TaskRow, now: datetime | None = None) -> str | None:
+    """Return today's or a future local-date key, or None if the search ends."""
     recurrence = _task_recurrence(task)
     if not recurrence:
         return "single"
@@ -206,4 +227,7 @@ def next_task_occurrence_key(task, now=None):
     while current < local_today and guard < MAX_EXPANDED_OCCURRENCES:
         current = _advance_date(current, recurrence["every"], recurrence["unit"])
         guard += 1
-    return None if end_date and current > end_date else current.isoformat()
+    # A bounded search must never advertise an occurrence that is still past.
+    if current < local_today or (end_date and current > end_date):
+        return None
+    return current.isoformat()

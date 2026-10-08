@@ -1,3 +1,64 @@
+/**
+ * API records retain fields supplied by the server; normalization supplies only
+ * the defaults documented by Task and TaskList, without validating the payload.
+ * @typedef {import('../core/http-types.js').FetchJsonOptions} FetchJsonOptions
+ * @typedef {object} TaskRecurrence
+ * @property {number} every
+ * @property {string} unit
+ * @property {string} [startDate]
+ * @property {string|null} [endDate]
+ * @typedef {object} TaskOccurrence
+ * @property {string} occurrence_key
+ * @property {string} [id]
+ * @property {string} [$id]
+ * @property {string|null} [task_id]
+ * @property {string|null} [completed_at]
+ * @typedef {object} TaskInput
+ * @property {string} id
+ * @property {string} [$id]
+ * @property {string|null} list_id
+ * @property {string} title
+ * @property {string} [priority]
+ * @property {boolean} [starred]
+ * @property {number} [order]
+ * @property {string|null} [deadline_at]
+ * @property {string|null} [deadline_time]
+ * @property {number|string|null} [reminder_minutes]
+ * @property {string} [timezone]
+ * @property {TaskRecurrence|null} [recurrence]
+ * @property {string|null} [next_occurrence_key]
+ * @property {TaskOccurrence[]} [completed_occurrences]
+ * @property {boolean} [completed]
+ * @property {string|null} [completed_at]
+ * @property {string|null} [created_at]
+ * @property {string|null} [updated_at]
+ * @typedef {TaskInput & {priority: string, starred: boolean, reminder_minutes: number, completed_occurrences: TaskOccurrence[]}} Task
+ * @typedef {object} TaskListInput
+ * @property {string} id
+ * @property {string} [$id]
+ * @property {string} name
+ * @property {string} [description]
+ * @property {boolean} [hidden]
+ * @property {boolean} [collapsed]
+ * @property {string} [sort_mode]
+ * @property {number} [order]
+ * @property {string} [source_key] Identifies a list managed by an integration.
+ * @property {string|null} [created_at]
+ * @property {string|null} [updated_at]
+ * @typedef {TaskListInput & {description: string, hidden: boolean, sort_mode: string}} TaskList
+ * @typedef {object} TaskDraft
+ * @property {string} title
+ * @property {string} [priority]
+ * @property {string|null} [deadline_at]
+ * @property {string|null} [deadline_time]
+ * @property {number|string|null} [reminder_minutes]
+ * @property {string} [timezone]
+ * @property {TaskRecurrence|null} [recurrence]
+ * @typedef {{task_sound_enabled: boolean}} TaskPreferences
+ */
+
+export { isoToLocalInput, localInputToIso } from "../core/date-time-module.js";
+
 export const DEFAULT_LIST_NAMES = ["School", "Research", "Personal"];
 export const PRIORITY_OPTIONS = [
     { value: "none", label: "None" },
@@ -39,16 +100,9 @@ export function defaultRecurrenceEndDate(baseDate = new Date()) {
     return dateString(endDate);
 }
 
+/** @returns {TaskRecurrence} A fresh editable recurrence rule. */
 export function createDefaultRecurrence() {
     return { every: 1, unit: DEFAULT_RECURRENCE_UNIT, startDate: todayDateString(), endDate: null };
-}
-
-export function isoToLocalInput(value) {
-    return window.APStudyDate?.isoToLocalInput ? window.APStudyDate.isoToLocalInput(value) : "";
-}
-
-export function localInputToIso(value) {
-    return window.APStudyDate?.localInputToIso ? window.APStudyDate.localInputToIso(value) : null;
 }
 
 export function formatDeadline(value) {
@@ -70,6 +124,10 @@ export function formatRepeat(recurrence) {
     return every === 1 ? `Every ${unit}` : `Every ${every} ${unit}s`;
 }
 
+/**
+ * @param {TaskInput} task
+ * @returns {Task}
+ */
 export function normalizeTask(task) {
     return {
         ...task,
@@ -80,6 +138,10 @@ export function normalizeTask(task) {
     };
 }
 
+/**
+ * @param {TaskListInput} list
+ * @returns {TaskList}
+ */
 export function normalizeList(list) {
     return {
         ...list,
@@ -89,9 +151,15 @@ export function normalizeList(list) {
     };
 }
 
+/**
+ * @param {string|URL|Request} url
+ * @param {FetchJsonOptions} [options]
+ * @returns {Promise<unknown>} Unvalidated server payload.
+ */
 export async function fetchJson(url, options = {}) {
     return window.APStudyHttp.fetchJson(url, {
         ...options,
+        jsonMode: "required",
         pendingLabel: options.pendingLabel || "task-save",
     });
 }
@@ -104,29 +172,49 @@ export function clearCalendarCache() {
     }
 }
 
-export function isRepeatingTaskCompleted(task) {
+/**
+ * Recurring tasks are complete only for their current occurrence key.
+ * @param {TaskInput|null|undefined} task
+ * @returns {boolean}
+ */
+export function isTaskCurrentlyCompleted(task) {
     if (!task?.recurrence) return Boolean(task?.completed);
     const key = task.next_occurrence_key;
     return Boolean(key && task.completed_occurrences?.some((item) => item.occurrence_key === key));
 }
 
+/**
+ * @template {TaskInput} T
+ * @param {T[]|null} [tasks]
+ * @returns {{active: T[], completed: T[]}}
+ */
 export function splitTasksByCompletion(tasks) {
     return (tasks || []).reduce((groups, task) => {
-        groups[isRepeatingTaskCompleted(task) ? "completed" : "active"].push(task);
+        groups[isTaskCurrentlyCompleted(task) ? "completed" : "active"].push(task);
         return groups;
     }, { active: [], completed: [] });
 }
 
+/**
+ * @param {Partial<TaskPreferences>|null} [preferences]
+ * @returns {TaskPreferences}
+ */
 export function normalizeTaskPreferences(preferences) {
     return {
         task_sound_enabled: preferences?.task_sound_enabled !== false,
     };
 }
 
+/** @param {TaskListInput[]} lists @returns {TaskList[]} */
 export function sortedLists(lists) {
     return [...lists].map(normalizeList).sort((a, b) => (a.order || 0) - (b.order || 0) || (a.name || "").localeCompare(b.name || ""));
 }
 
+/**
+ * @template {TaskInput} T
+ * @param {T[]} tasks
+ * @returns {T[]} A sorted copy retaining the original task objects.
+ */
 export function sortedTasks(tasks) {
     return [...tasks].sort((a, b) => (a.order || 0) - (b.order || 0) || (a.title || "").localeCompare(b.title || ""));
 }
@@ -141,6 +229,12 @@ function priorityRank(value) {
     return { high: 3, medium: 2, low: 1, none: 0 }[String(value || "none").toLowerCase()] || 0;
 }
 
+/**
+ * @template {TaskInput} T
+ * @param {T[]} tasks
+ * @param {string} [sortMode]
+ * @returns {T[]}
+ */
 export function sortTasksForList(tasks, sortMode = "default") {
     if (sortMode === "date") {
         return [...tasks].sort((a, b) => timestamp(b.created_at) - timestamp(a.created_at) || (a.order || 0) - (b.order || 0));

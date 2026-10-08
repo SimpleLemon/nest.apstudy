@@ -1,17 +1,19 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { loadTaskModule } from "./helpers/tasks-app.mjs";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+globalThis.window = {};
+const utils = await loadTaskModule("task-utils.js");
 
-async function importBrowserModule(relativePath) {
-    const source = await readFile(path.join(repoRoot, relativePath), "utf8");
-    return import(`data:text/javascript;charset=utf-8,${encodeURIComponent(source)}`);
-}
-
-const utils = await importBrowserModule("static/js/tasks/task-utils.js");
+test("task deadline conversions work before shell compatibility installation", () => {
+    assert.equal(globalThis.window.APStudyDate, undefined);
+    const date = new Date(2026, 9, 6, 15, 30);
+    assert.equal(utils.isoToLocalInput(date.toISOString()), "2026-10-06T15:30");
+    assert.equal(utils.localInputToIso("2026-10-06T15:30"), date.toISOString());
+    assert.equal(utils.isoToLocalInput("invalid"), "");
+    assert.equal(utils.localInputToIso("invalid"), null);
+    assert.equal(utils.localInputToIso(""), null);
+});
 
 test("normalizes task and list defaults without mutating inputs", () => {
     const task = { id: "task-1", title: "Read", completed_occurrences: "bad" };
@@ -103,13 +105,13 @@ test("sorts deadline ties by priority before manual order", () => {
 });
 
 test("detects completed recurring occurrences by next occurrence key", () => {
-    assert.equal(utils.isRepeatingTaskCompleted({ completed: true }), true);
-    assert.equal(utils.isRepeatingTaskCompleted({
+    assert.equal(utils.isTaskCurrentlyCompleted({ completed: true }), true);
+    assert.equal(utils.isTaskCurrentlyCompleted({
         recurrence: { every: 1, unit: "week" },
         next_occurrence_key: "2026-05-20",
         completed_occurrences: [{ occurrence_key: "2026-05-20" }],
     }), true);
-    assert.equal(utils.isRepeatingTaskCompleted({
+    assert.equal(utils.isTaskCurrentlyCompleted({
         recurrence: { every: 1, unit: "week" },
         next_occurrence_key: "2026-05-27",
         completed_occurrences: [{ occurrence_key: "2026-05-20" }],
@@ -150,6 +152,7 @@ test("fetchJson tracks mutations and raises server-provided errors", async () =>
         },
         APStudyHttp: {
             async fetchJson(_url, options) {
+                assert.equal(options.jsonMode, "required");
                 const request = options.method === "POST"
                     ? Promise.resolve({ saved: true })
                     : Promise.reject(new Error("Nope"));
@@ -158,7 +161,7 @@ test("fetchJson tracks mutations and raises server-provided errors", async () =>
         },
     };
 
-    assert.deepEqual(await utils.fetchJson("/api/tasks", { method: "POST", body: "{}" }), { saved: true });
+    assert.deepEqual(await utils.fetchJson("/api/tasks", { method: "POST", body: "{}", jsonMode: "optional" }), { saved: true });
     assert.deepEqual(trackedLabels, ["task-save"]);
     await assert.rejects(() => utils.fetchJson("/api/tasks"), /Nope/);
 });

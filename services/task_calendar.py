@@ -7,13 +7,13 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import first_row, format_datetime, list_rows_all
 from services.row_utils import row_id
+from services.task_constants import (
+    TASK_CALENDAR_COLOR,
+    TASK_CALENDAR_ID,
+    TASK_CALENDAR_NAME,
+    TASK_PRIORITIES,
+)
 from services.task_schedule import build_task_occurrences
-
-
-TASK_CALENDAR_ID = "local:tasks"
-TASK_CALENDAR_NAME = "Tasks"
-TASK_CALENDAR_COLOR = "#0ea5e9"
-TASK_PRIORITIES = {"none", "low", "medium", "high"}
 
 
 def _normalize_priority(value):

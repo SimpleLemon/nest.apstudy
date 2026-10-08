@@ -1,12 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
-
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const moduleUrl = (source) => `data:text/javascript;charset=utf-8,${encodeURIComponent(source)}`;
-const reactStub = `const React = { createElement() {}, useState() {}, useEffect() {}, useLayoutEffect() {}, useRef() {}, useId() {} };`;
+import { loadTaskModule } from "./helpers/tasks-app.mjs";
 
 globalThis.window = {
     APStudyDate: {
@@ -24,18 +18,8 @@ globalThis.window = {
     },
 };
 
-const utilsSource = await readFile(path.join(repoRoot, "static/js/tasks/task-utils.js"), "utf8");
-const controlsSource = (await readFile(path.join(repoRoot, "static/js/tasks/task-form-controls.js"), "utf8"))
-    .replace('import * as React from "react";', reactStub);
-const controlsForDataUrl = controlsSource
-    .replace('import { createPortal } from "react-dom";', "const createPortal = (node) => node;")
-    .replace('import { getFloatingPosition, shouldCloseFloatingLayer } from "./task-floating.js";', "const getFloatingPosition = () => ({ top: 0, left: 0 }); const shouldCloseFloatingLayer = () => false;");
-const controls = await import(moduleUrl(controlsForDataUrl));
-const deadlineSource = (await readFile(path.join(repoRoot, "static/js/tasks/task-deadline.js"), "utf8"))
-    .replace('import * as React from "react";', reactStub)
-    .replace('import { TaskCalendar, TaskListbox } from "./task-form-controls.js";', "const TaskCalendar = () => null; const TaskListbox = () => null;")
-    .replace('from "./task-utils.js"', `from "${moduleUrl(utilsSource)}"`);
-const deadline = await import(moduleUrl(deadlineSource));
+const controls = await loadTaskModule("task-form-controls.js");
+const deadline = await loadTaskModule("task-deadline.js");
 
 test("custom calendar always builds a six-week grid and moves across month edges", () => {
     const cells = controls.calendarCells("2026-02-01");

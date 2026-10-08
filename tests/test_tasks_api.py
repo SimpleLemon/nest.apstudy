@@ -294,5 +294,95 @@ class TestTasksApiRoutes(unittest.TestCase):
         self.assertNotIn("task-recurring", deleted_ids)
 
 
+    def selected_deletion(self, selection, tasks, completions=None):
+        completions = completions or {}
+        with self.app.test_request_context("/api/task-lists/list-1/completed-tasks", method="DELETE", json={"selection": selection}):
+            with patch.object(ta, "current_user", self.user), \
+                    patch.object(ta, "_list_owner_or_404", return_value={"$id": "list-1"}), \
+                    patch.object(ta, "list_rows_all", return_value=tasks), \
+                    patch.object(ta, "_completion_rows_for_task", side_effect=lambda _user_id, task_id: completions.get(task_id, [])), \
+                    patch.object(ta, "delete_row_safe") as delete_row:
+                response = ta.delete_completed_tasks_in_list.__wrapped__("list-1")
+        return response, delete_row
+
+    def test_selected_completed_delete_preserves_later_tasks_and_occurrences(self):
+        old_time = "2026-10-01T12:00:00Z"
+        new_time = "2026-10-05T12:00:00Z"
+        def task(task_id, **updates):
+            return {"$id": task_id, "user_id": "user-1", "list_id": "list-1", "completed": True, "completed_at": old_time, **updates}
+        recurring = task("repeat", recurrence_json=json.dumps({"every": 1, "unit": "week", "startDate": "2026-10-01", "endDate": None}))
+        def occurrence(row_id, key, timestamp, **updates):
+            return {"$id": row_id, "user_id": "user-1", "task_id": "repeat", "occurrence_key": key, "completed_at": timestamp, **updates}
+        selection = [
+            {"task_id": "selected", "completed_at": "2026-10-01T12:00:00.000Z"},
+            {"task_id": "recompleted", "completed_at": old_time},
+            {"task_id": "moved", "completed_at": old_time},
+            {"task_id": "repeat", "occurrences": [
+                {"id": "old-row", "occurrence_key": "old", "completed_at": old_time},
+                {"id": "original-row", "occurrence_key": "recompleted", "completed_at": old_time},
+            ]},
+        ]
+        response, deleted = self.selected_deletion(selection, [task("selected"), task("later", completed_at=new_time),
+            task("recompleted", completed_at=new_time), task("moved", list_id="list-2"), recurring], {"repeat": [
+                occurrence("old-row", "old", old_time), occurrence("new-row", "next", new_time),
+                occurrence("replacement-row", "recompleted", new_time),
+            ]})
+        self.assertEqual(response.get_json(), {"ok": True, "deleted_tasks": 1, "cleared_completions": 1})
+        self.assertEqual([call.args[1] for call in deleted.call_args_list], ["selected", "old-row"])
+
+    def test_empty_selection_is_noop_and_never_falls_back_to_sweep(self):
+        response, deleted = self.selected_deletion([], [{"$id": "done", "user_id": "user-1", "list_id": "list-1", "completed": True}])
+        self.assertEqual(response.get_json()["deleted_tasks"], 0)
+        deleted.assert_not_called()
+
+    def test_selected_delete_filters_foreign_and_other_list_records(self):
+        selection = [{"task_id": task_id, "completed_at": None} for task_id in ["foreign", "other-list"]]
+        response, deleted = self.selected_deletion(selection, [
+            {"$id": "foreign", "user_id": "someone-else", "list_id": "list-1", "completed": True},
+            {"$id": "other-list", "user_id": "user-1", "list_id": "list-2", "completed": True},
+        ])
+        self.assertEqual(response.get_json()["deleted_tasks"], 0)
+        deleted.assert_not_called()
+
+    def test_selected_delete_requires_current_owned_list(self):
+        from werkzeug.exceptions import NotFound
+        with self.app.test_request_context("/api/task-lists/foreign/completed-tasks", method="DELETE", json={"selection": []}):
+            with patch.object(ta, "current_user", self.user), patch.object(ta, "get_row_safe", return_value={"user_id": "someone-else"}), patch.object(ta, "delete_row_safe") as deleted:
+                with self.assertRaises(NotFound):
+                    ta.delete_completed_tasks_in_list.__wrapped__("foreign")
+                deleted.assert_not_called()
+
+    def test_recurring_selection_rechecks_completion_owner_identity_and_timestamp(self):
+        timestamp = "2026-10-01T12:00:00Z"
+        task = {"$id": "repeat", "user_id": "user-1", "list_id": "list-1", "recurrence_json": json.dumps({"every": 1, "unit": "week", "startDate": "2026-10-01"})}
+        selection = [{"task_id": "repeat", "occurrences": [{"id": "captured", "occurrence_key": "old", "completed_at": timestamp}]}]
+        for updates in [{"user_id": "someone-else"}, {"task_id": "different"}, {"$id": "replacement"}, {"completed_at": "2026-10-05T12:00:00Z"}]:
+            with self.subTest(updates=updates):
+                completion = {"$id": "captured", "user_id": "user-1", "task_id": "repeat", "occurrence_key": "old", "completed_at": timestamp, **updates}
+                response, deleted = self.selected_deletion(selection, [task], {"repeat": [completion]})
+                self.assertEqual(response.get_json()["cleared_completions"], 0)
+                deleted.assert_not_called()
+
+    def test_invalid_selected_delete_payloads_reject_before_any_mutation(self):
+        invalid = [None, {}, [None], [{"task_id": "one"}], [{"task_id": "one", "completed_at": "bad"}],
+            [{"task_id": "one", "completed_at": None}, {"task_id": "one", "completed_at": None}],
+            [{"task_id": "repeat", "occurrences": None}],
+            [{"task_id": "repeat", "occurrences": [{"occurrence_key": "old"}]}],
+            [{"task_id": "repeat", "occurrences": [{"occurrence_key": "old", "completed_at": "bad"}]}],
+        ]
+        for selection in invalid:
+            with self.subTest(selection=selection):
+                response, deleted = self.selected_deletion(selection, [])
+                self.assertEqual(response[1], 400)
+                deleted.assert_not_called()
+
+    def test_malformed_selection_json_never_uses_legacy_sweep(self):
+        with self.app.test_request_context("/api/task-lists/list-1/completed-tasks", method="DELETE", data="broken", content_type="application/json"):
+            with patch.object(ta, "current_user", self.user), patch.object(ta, "_list_owner_or_404"), patch.object(ta, "delete_row_safe") as deleted:
+                response = ta.delete_completed_tasks_in_list.__wrapped__("list-1")
+        self.assertEqual(response[1], 400)
+        deleted.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -2,55 +2,21 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import Sortable from "sortablejs";
 import { AddTaskForm, TaskRow } from "./task-entry-components.js";
+import { MaterialIcon, iconButton, buttonWithIcon, menuTrigger } from "./task-form-controls.js";
+export { MaterialIcon } from "./task-form-controls.js";
 import { getFloatingPosition } from "./task-floating.js";
 
 import {
     DEFAULT_LIST_NAMES,
-    isRepeatingTaskCompleted,
+    isTaskCurrentlyCompleted,
     splitTasksByCompletion,
     sortedLists,
 } from "./task-utils.js";
 
 const h = React.createElement;
 
-export function MaterialIcon({ name, className = "" }) {
-    return h("span", { className: `material-symbols-outlined ${className}`, "aria-hidden": "true" }, name);
-}
-
 function cx(...parts) {
     return parts.filter(Boolean).join(" ");
-}
-
-function iconButton({ icon, label, className = "", active = false, triggerKey = "", title = label, ...props }) {
-    const triggerProps = triggerKey ? { "data-task-menu-trigger": triggerKey } : {};
-    return h("button", {
-        type: "button",
-        className: cx("task-icon-button", className, active && "is-on"),
-        "aria-label": label,
-        title,
-        ...triggerProps,
-        ...props,
-    }, h(MaterialIcon, { name: icon }));
-}
-
-function buttonWithIcon({ icon, children, className, ...props }) {
-    return h("button", { type: "button", className, ...props },
-        h(MaterialIcon, { name: icon }),
-        h("span", null, children)
-    );
-}
-
-function menuTrigger({ id, kind, className, label, onOpen, stopPropagation = false, getPosition = menuAnchorFromEvent }) {
-    return iconButton({
-        icon: "more_vert",
-        label,
-        className,
-        triggerKey: `${kind}:${id}`,
-        onClick: (event) => {
-            if (stopPropagation) event.stopPropagation();
-            onOpen(id, getPosition(event));
-        },
-    });
 }
 
 function railButton({ active, icon, label, count, onClick }) {
@@ -280,19 +246,7 @@ export function ListEditorDialog({ dialog, onClose, onSubmit }) {
 }
 
 function countIncomplete(tasks) {
-    return tasks.reduce((count, task) => count + (isRepeatingTaskCompleted(task) ? 0 : 1), 0);
-}
-
-function menuAnchorFromEvent(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    return {
-        anchor: {
-            top: rect.top,
-            right: rect.right,
-            bottom: rect.bottom,
-            left: rect.left,
-        },
-    };
+    return tasks.reduce((count, task) => count + (isTaskCurrentlyCompleted(task) ? 0 : 1), 0);
 }
 
 export function ListRail(props) {
@@ -302,7 +256,6 @@ export function ListRail(props) {
         setSelectedListId,
         tasksByList,
         reorderLists,
-        updateList,
         toggleListVisibility,
         openListDialog,
         openListMenu,

@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { loadTaskModule } from "./helpers/tasks-app.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const source = await readFile(path.join(repoRoot, "static/js/tasks/task-components.js"), "utf8");
@@ -11,7 +12,8 @@ const recurrenceSource = await readFile(path.join(repoRoot, "static/js/tasks/tas
 const deadlineSource = await readFile(path.join(repoRoot, "static/js/tasks/task-deadline.js"), "utf8");
 const controlsSource = await readFile(path.join(repoRoot, "static/js/tasks/task-form-controls.js"), "utf8");
 
-test("task component module keeps the expected public component surface", () => {
+test("task component module keeps the expected public component surface", async () => {
+    const components = await loadTaskModule("task-components.js");
     const expectedExports = [
         "ActionMenu",
         "EmptyStarter",
@@ -22,7 +24,7 @@ test("task component module keeps the expected public component surface", () => 
     ];
 
     for (const exportName of expectedExports) {
-        assert.match(source, new RegExp(`export (?:function|const) ${exportName}\\b`));
+        assert.equal(typeof components[exportName], "function", exportName);
     }
 });
 
