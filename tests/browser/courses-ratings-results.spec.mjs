@@ -100,6 +100,7 @@ test('over 500 courses are reachable and verified; pagination survives detail cl
 
 test('RMP badges pair each name with its score and support mouse and keyboard without opening details', async ({ page, baseURL }) => {
     await mount(page, baseURL, { count: 1 });
+    await page.addStyleTag({ url: `${baseURL}/static/css/global-foundation.css` });
     await page.addStyleTag({ url: `${baseURL}/static/css/courses.css` });
     await page.context().route('https://www.ratemyprofessors.com/**', (route) => route.fulfill({ body: '<h1>Profile fixture</h1>', contentType: 'text/html' }));
     const card = page.locator('.course-card');
