@@ -29,8 +29,8 @@ the source explicitly supplies an enrolled-student count.
 The RMP export covers all 2,153 Emory and 315 Oxford result positions. These
 contain 2,083 and 310 unique profiles respectively; repeated profile IDs were
 deduplicated after complete pagination. The refreshed cache covers 1,321 Atlas
-instructor identities: 572 matched summaries, 51 verified unrated profiles,
-683 unmatched names, and 15 uncertain matches. All current school identities
+instructor identities: 688 matched summaries, 62 verified unrated profiles,
+558 unmatched names, and 13 ambiguous matches. All current school identities
 are verified. Generic `ONLIN@ONLINE` sections are assigned to an institution
 using their captured undergraduate academic career, separately from their
 physical meeting campus. Eleven obsolete unknown-school keys were retired
@@ -46,6 +46,16 @@ profile 2007364, listed as Megan Cole without the middle initial. Her confirmed
 saved summary is 3.4 overall, 3.0 difficulty, and 103 ratings in both terms.
 Original profile capture timestamps are retained. Identity corrections are
 recorded separately in the report from the last complete directory refresh.
+
+The October 7 identity review examined all 698 previously unlinked identities
+using six GPT-6.1 Sol reviewers with High reasoning, individual public RMP name
+searches, department checks, and independent approval review. It added 127
+explicit mappings: 116 rated profiles and 11 unrated profiles. The remaining
+487 missing or unsupported identities and 84 uncertain identities stayed
+unchanged. Audit decisions and source links are recorded in
+`data/rmp/identity-review-20261007.json`; these review outcomes are separate from
+the cache's automatic matching states. Existing linked profiles, skipped
+records, and original Atlas instructor IDs were preserved.
 
 Live Atlas details requests use top-level `srcdb` and the native encoded JSON
 body. Search and details responses must verify the requested semester, and
@@ -267,7 +277,13 @@ Approved identity corrections belong in `scripts/rmp/overrides.json`:
 Use a real numeric professor ID and verify the professor's name and school.
 Cross-school or unknown-campus mappings additionally require
 `allow_cross_school: true`. The profile must still verify the expected name and
-school. `--overrides FILE` selects another reviewed mapping file.
+school. A reviewed profile at a former university is allowed only with a
+canonical positive school ID, an explanatory label, compatible teaching
+subjects, and official university evidence that the same person taught there.
+A degree alone does not establish prior teaching. These mappings are explicit;
+automatic matching remains restricted to the instructor's Emory or Oxford
+school and exact normalized full name. `--overrides FILE` selects another
+reviewed mapping file.
 
 `data/rmp/ratings.json` contains overall score, difficulty, count, profile ID,
 identity verification, original fetch time, and matching state. Publication is

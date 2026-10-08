@@ -1,4 +1,4 @@
-"""Exact, school-scoped identity matching and conservative failure retention."""
+"""Exact school-scoped matching, reviewed overrides, and conservative retention."""
 import math
 
 from services.professor_rating_identity import SCHOOLS, full_name, normalized_name, professor_id
@@ -11,13 +11,14 @@ def validate_overrides(document):
     for key, mapping in document["mappings"].items():
         if not isinstance(key, str) or ":" not in key or not isinstance(mapping, dict) or not professor_id(mapping.get("professor_id")):
             raise ValueError(f"Invalid professor mapping: {key}")
-        if str(mapping.get("school_id")) not in SCHOOLS.values():
+        school = professor_id(mapping.get("school_id"))
+        if not school or (school not in SCHOOLS.values() and mapping.get("allow_cross_school") is not True):
             raise ValueError(f"Unknown school mapping: {key}")
         if not full_name(mapping.get("expected_name")):
             raise ValueError(f"Mapping requires a full expected RMP name: {key}")
         if not isinstance(mapping.get("label"), str) or not mapping["label"].strip():
             raise ValueError(f"Mapping requires an explanatory label: {key}")
-        if str(mapping["school_id"]) != key.split(":", 1)[0] and mapping.get("allow_cross_school") is not True:
+        if school != key.split(":", 1)[0] and mapping.get("allow_cross_school") is not True:
             raise ValueError(f"Cross-school mapping requires allow_cross_school: {key}")
     return document["mappings"]
 
@@ -33,11 +34,12 @@ def resolve(identity, source, override, timestamp):
     if identity.get("atlas_id_conflict"):
         return {**entry, "status": "ambiguous", "error": "Conflicting Atlas instructor identity"}
     school = identity["school_id"]
-    if not school and not override:
+    if school not in SCHOOLS.values() and not override:
         return {**entry, "status": "unavailable", "error": "Unknown Atlas campus"}
     expected_name = identity["name"]
     if override:
-        school = str(override["school_id"])
+        validate_overrides({"schema_version": 1, "mappings": {identity["instructor_key"]: override}})
+        school = professor_id(override["school_id"])
         expected_name = override["expected_name"]
         entry.update(override_label=override["label"], cross_school_override=override.get("allow_cross_school") is True)
         candidate_id = professor_id(override["professor_id"])

@@ -1,10 +1,10 @@
 {
   "instructors": 1321,
   "counts": {
-    "unmatched": 683,
-    "matched": 572,
-    "unrated": 51,
-    "ambiguous": 15
+    "ambiguous": 13,
+    "matched": 688,
+    "unmatched": 558,
+    "unrated": 62
   },
   "failures": [],
   "started_at": "2026-10-07T19:49:46.350973+00:00",
@@ -10995,5 +10995,21 @@
       "fetched_at": "2026-10-07T17:30:22.993Z",
       "reason": "Verified October 7, 2026: Atlas instructor 4917 is Megan F. Cole, teaching Emory Biology. Her confirmed Emory RMP profile 2007364 uses the name Megan Cole without the middle initial."
     }
-  ]
+  ],
+  "identity_review": {
+    "reviewed_at": "2026-10-08T01:57:53.592695+00:00",
+    "audit": "data/rmp/identity-review-20261007.json",
+    "instructors_reviewed": 698,
+    "decisions": {
+      "approve": 127,
+      "skip": 487,
+      "uncertain": 84
+    },
+    "new_link_counts": {
+      "matched": 116,
+      "unrated": 11
+    },
+    "source": "reviewed-public-rmp-profiles",
+    "existing_linked_and_skipped_entries_preserved": true
+  }
 }

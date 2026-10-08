@@ -19,6 +19,806 @@
       "expected_name": "Tom Smith",
       "allow_cross_school": true,
       "label": "Verified October 7, 2026: Atlas instructor 4419 teaches online BUS 390B/390F and Atlanta FIN 201 (Fall 2026, CRN 3553) and ECON 231 (CRN 5350). His Emory RMP profile lists Business and these same courses."
+    },
+    "2633:atlas:1752": {
+      "professor_id": "312654",
+      "school_id": "2633",
+      "expected_name": "Michael Rogers",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1752 (Michael K Rogers; DSC_OX, MATH_OX) is RMP 312654 (Michael Rogers; Mathematics; school 2633). Public RMP first and last name agree after omitting middle names/initials; Mathematics at the Atlas school reasonably fits DSC_OX, MATH_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:1793": {
+      "professor_id": "1499753",
+      "school_id": "2633",
+      "expected_name": "Stacy McQuaide",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1793 (Stacy A McQuaide; DSC_OX, ENG_OX) is RMP 1499753 (Stacy McQuaide; English; school 2633). Public RMP first and last name agree after omitting middle names/initials; English at the Atlas school reasonably fits DSC_OX, ENG_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:2149": {
+      "professor_id": "570198",
+      "school_id": "2633",
+      "expected_name": "Brenda Harmon",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2149 (Brenda B Harmon; CHEM_OX, DSC_OX) is RMP 570198 (Brenda Harmon; Chemistry; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects CHEM_OX, DSC_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:2956": {
+      "professor_id": "483155",
+      "school_id": "2633",
+      "expected_name": "David Gowler",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2956 (David B Gowler; DSC_OX, REL_OX) is RMP 483155 (David Gowler; Religion; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects DSC_OX, REL_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:31321": {
+      "professor_id": "1045510",
+      "school_id": "97",
+      "expected_name": "Kristin Bonnie",
+      "label": "Reviewed October 7, 2026: Atlas instructor 31321 (Kristin Bonnie; DASCI_OX, PSYC_OX) is RMP 1045510 (Kristin Bonnie; Psychology; school 97). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "2633:atlas:3366": {
+      "professor_id": "490158",
+      "school_id": "2633",
+      "expected_name": "Nitya Jacob",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3366 (Nitya P Jacob; BIOL_OX) is RMP 490158 (Nitya Jacob; Biology; school 2633). Public RMP first and last name agree after omitting middle names/initials; Biology at the Atlas school reasonably fits BIOL_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:3848": {
+      "professor_id": "934253",
+      "school_id": "2633",
+      "expected_name": "Brad Hawley",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3848 (Brad K Hawley; DSC_OX, ENG_OX) is RMP 934253 (Brad Hawley; English; school 2633). Brad Hawley is the Oxford English instructor; use school-scoped Oxford profile 934253, not the separate Emory profile 2991604. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:39180": {
+      "professor_id": "3490483",
+      "school_id": "2633",
+      "expected_name": "Joanne Deocampo",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39180 (Joanne Agayoff Deocampo; PSYC_OX) is RMP 3490483 (Joanne Deocampo; Psychology; school 2633). Same first and last name after accent/middle-name normalization; connected Brave independently verified public name, school and Psychology department, compatible with Atlas PSYC_OX. Original directory capture retained. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:39528": {
+      "professor_id": "3049973",
+      "school_id": "2633",
+      "expected_name": "Guillermo Pernet",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39528 (Guillermo Pupo Pernet; SPAN_OX) is RMP 3049973 (Guillermo Pernet; Languages; school 2633). Same first and last name with compound/middle surname omitted; official Oxford directory uses Guillermo Pernet for its visiting Spanish professor, matching the Atlas Spanish identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:39910": {
+      "professor_id": "3043999",
+      "school_id": "340",
+      "expected_name": "Elijah Zehyoue",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39910 (Elijah Zehyoue; AFS_OX) is RMP 3043999 (Elijah Zehyoue; African-American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects AFS_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "2633:atlas:4008": {
+      "professor_id": "925258",
+      "school_id": "2633",
+      "expected_name": "Eve Mullen",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4008 (Eve L Mullen; DSC_OX, REL_OX) is RMP 925258 (Eve Mullen; Religion; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects DSC_OX, REL_OX. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "2633:atlas:42204": {
+      "professor_id": "3112854",
+      "school_id": "340",
+      "expected_name": "Anthony Iliopoulos",
+      "label": "Reviewed October 7, 2026: Atlas instructor 42204 (Anthony Iliopoulos; PHIL_OX) is RMP 3112854 (Anthony Iliopoulos; Philosophy; school 340). Exact first and last name Anthony Iliopoulos, Philosophy at Emory RMP fits Oxford PHIL teaching; official Oxford identity confirms the same instructor. Root independently opened the public RMP profile in connected Brave after web-reader errors. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "2633:atlas:4227": {
+      "professor_id": "2094037",
+      "school_id": "340",
+      "expected_name": "Cristina Tarazona",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4227 (Cristina Tarazona; DSC_OX, INTER_OX, OXST_OX, SPAN_OX) is RMP 2094037 (Cristina Tarazona; Spanish; school 340). Same first and last name and Spanish department; official Oxford biography explicitly states prior teaching at Emory University, establishing the school bridge. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "2633:atlas:5207": {
+      "professor_id": "2191497",
+      "school_id": "340",
+      "expected_name": "Cristy Tower-Gilchrist",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5207 (Cristy Tower-Gilchrist; BIOL_OX, NRSG_OX) is RMP 2191497 (Cristy Tower-Gilchrist; Biology; school 340). Exact first and compound last name; Biology fits Atlas BIOL_OX/NRSG_OX. Official Emory Nursing source explicitly documents teaching employment at RMP school Emory University. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "2633:atlas:653": {
+      "professor_id": "320877",
+      "school_id": "2633",
+      "expected_name": "Lloyd Parker",
+      "label": "Reviewed October 7, 2026: Atlas instructor 653 (Lloyd R Parker; CHEM_OX) is RMP 320877 (Lloyd Parker; Chemistry; school 2633). Public RMP page confirms the same first and last name, Oxford College of Emory University, and Chemistry; department fits Atlas subjects CHEM_OX. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:10852": {
+      "professor_id": "2878988",
+      "school_id": "340",
+      "expected_name": "Rose Deighton-Mohammed",
+      "label": "Reviewed October 7, 2026: Atlas instructor 10852 (Rose Deighton; IDS) is RMP 2878988 (Rose Deighton-Mohammed; Humanities; school 340). Official Emory biography uses Rose Deighton-Mohammed with exact Atlas email rose.deighton@emory.edu and explicitly lists IDS 190 and IDS 216-W teaching. Compound surname addition is documented; Humanities fits Atlas IDS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:11": {
+      "professor_id": "1661897",
+      "school_id": "340",
+      "expected_name": "Sherryl Goodman",
+      "label": "Reviewed October 7, 2026: Atlas instructor 11 (Sherryl H Goodman; PSYC) is RMP 1661897 (Sherryl Goodman; Psychology; school 340). Public RMP page confirms the same first and last name, Emory University, and Psychology; department fits Atlas subjects PSYC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:1193": {
+      "professor_id": "55085",
+      "school_id": "340",
+      "expected_name": "David Edwards",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1193 (David A Edwards; PSYC) is RMP 55085 (David Edwards; Psychology; school 340). Public RMP first and last name agree after omitting middle names/initials; Psychology at the Atlas school reasonably fits PSYC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:1195": {
+      "professor_id": "2353964",
+      "school_id": "340",
+      "expected_name": "Karen Hegtvedt",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1195 (Karen A Hegtvedt; SOC) is RMP 2353964 (Karen Hegtvedt; Sociology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Sociology fits Atlas subjects SOC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:12712": {
+      "professor_id": "2242643",
+      "school_id": "340",
+      "expected_name": "John Kim",
+      "label": "Reviewed October 7, 2026: Atlas instructor 12712 (John Kim; OAM) is RMP 2242643 (John Kim; Business Administration; school 340). Public RMP page confirms the same first and last name, Emory University, and Business Administration; department fits Atlas subjects OAM. Middle names or initials omitted by RMP do not change first/last identity. Other John Kim profile is Economics and lists ECON333, whereas selected Business Administration profile lists OAM330/OAM331. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:12938": {
+      "professor_id": "2703821",
+      "school_id": "15723",
+      "expected_name": "Courtney Callahan",
+      "label": "Reviewed October 7, 2026: Atlas instructor 12938 (Courtney Callahan; PORT) is RMP 2703821 (Courtney Callahan; Spanish; school 15723). Official Emory faculty biography explicitly says Courtney Callahan taught beginner, intermediate and advanced language courses at Arizona State University and is now Visiting Assistant Professor of Portuguese. Same first/last name, matching Atlas email, and related language teaching fit PORT. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:1385": {
+      "professor_id": "1589475",
+      "school_id": "340",
+      "expected_name": "James Rilling",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1385 (James K Rilling; ANT, NBB, PSYC) is RMP 1589475 (James Rilling; Anthropology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:15067": {
+      "professor_id": "2283394",
+      "school_id": "340",
+      "expected_name": "Juan Villeta-Garcia",
+      "label": "Reviewed October 7, 2026: Atlas instructor 15067 (Juan Villeta-García; MATH) is RMP 2283394 (Juan Villeta-Garcia; Mathematics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Mathematics fits Atlas subjects MATH. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:1530": {
+      "professor_id": "1195682",
+      "school_id": "340",
+      "expected_name": "Debra Spitulnik Vidali",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1530 (Debra Vidali; ANT) is RMP 1195682 (Debra Spitulnik Vidali; Anthropology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:15598": {
+      "professor_id": "892790",
+      "school_id": "1111",
+      "expected_name": "Javier Villa-Flores",
+      "label": "Reviewed October 7, 2026: Atlas instructor 15598 (Javier Villa-Flores; ANT, HIST, LACS, REL, SOC) is RMP 892790 (Javier Villa-Flores; Latin American Studies; school 1111). Official UIC profile/news names Javier Villa-Flores an Associate Professor of Latin American and Latino studies and history in 2015; Emory faculty biography confirms the same Latin American religious/colonial history work and exact first/last name. Department fits Atlas LACS/HIST/REL/ANT/SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:1628": {
+      "professor_id": "1619015",
+      "school_id": "340",
+      "expected_name": "Jose Boigues",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1628 (Jose Luis Boigues-Lopez; LING, SPAN) is RMP 1619015 (Jose Boigues; Spanish; school 340). Official Emory faculty bio uses José Luis Boigues (paternal surname) and the Atlas email confirms identity; Spanish and Linguistics match both Atlas subjects. RMP omits Luis and the secondary surname Lopez. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:1763": {
+      "professor_id": "1217257",
+      "school_id": "340",
+      "expected_name": "Timothy Dowd",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1763 (Timothy J Dowd; SOC) is RMP 1217257 (Timothy Dowd; Sociology; school 340). Public RMP page confirms the same first and last name, Emory University, and Sociology; department fits Atlas subjects SOC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:1805": {
+      "professor_id": "485033",
+      "school_id": "340",
+      "expected_name": "Hillary Rodman",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1805 (Hillary R Rodman; NBB, PSYC) is RMP 485033 (Hillary Rodman; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects NBB, PSYC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:18074": {
+      "professor_id": "1221452",
+      "school_id": "617",
+      "expected_name": "Jason Ward",
+      "label": "Reviewed October 7, 2026: Atlas instructor 18074 (Jason Ward; AMST, HIST) is RMP 1221452 (Jason Ward; History; school 617). Exact first and last name and department fit, with official faculty biography/CV confirming teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:18531": {
+      "professor_id": "2559237",
+      "school_id": "340",
+      "expected_name": "Paloma Moyano",
+      "label": "Reviewed October 7, 2026: Atlas instructor 18531 (Paloma Lopez de mesa Moyano; ECON) is RMP 2559237 (Paloma Moyano; Economics; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects ECON. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:18875": {
+      "professor_id": "1332621",
+      "school_id": "360",
+      "expected_name": "Dan Benardot",
+      "label": "Reviewed October 7, 2026: Atlas instructor 18875 (Dan Benardot; HLTH) is RMP 1332621 (Dan Benardot; Nutrition; school 360). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:1973": {
+      "professor_id": "462574",
+      "school_id": "340",
+      "expected_name": "Sarah McPhee",
+      "label": "Reviewed October 7, 2026: Atlas instructor 1973 (Sarah C. McPhee; ARTHIST, CL) is RMP 462574 (Sarah McPhee; Art History; school 340). Public RMP page confirms the same first and last name, Emory University, and Art History; department fits Atlas subjects ARTHIST, CL. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:2000": {
+      "professor_id": "777231",
+      "school_id": "340",
+      "expected_name": "Tracy Scott",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2000 (Tracy L Scott; SOC) is RMP 777231 (Tracy Scott; Sociology; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects SOC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:21807": {
+      "professor_id": "2337183",
+      "school_id": "298",
+      "expected_name": "Dehanza Rogers",
+      "label": "Reviewed October 7, 2026: Atlas instructor 21807 (Dehanza Rogers; FILM) is RMP 2337183 (Dehanza Rogers; Arts amp Sciences; school 298). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:21989": {
+      "professor_id": "2877172",
+      "school_id": "340",
+      "expected_name": "Teddy (Kyungmin) Kim",
+      "label": "Reviewed October 7, 2026: Atlas instructor 21989 (Teddy Kim; ECON, MATH) is RMP 2877172 (Teddy (Kyungmin) Kim; Economics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Economics fits Atlas subjects ECON, MATH. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:22002": {
+      "professor_id": "2799104",
+      "school_id": "340",
+      "expected_name": "Jessica Stewart",
+      "label": "Reviewed October 7, 2026: Atlas instructor 22002 (Jessica Lynn Stewart; AAS, POLS, SOC) is RMP 2799104 (Jessica Stewart; African-American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects AAS, POLS, SOC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:2219": {
+      "professor_id": "2056341",
+      "school_id": "340",
+      "expected_name": "Amanda Freeman",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2219 (Amanda A Freeman; HLTH) is RMP 2056341 (Amanda Freeman; Health Science; school 340). Public RMP first and last name agree after omitting middle names/initials; Health Science at the Atlas school reasonably fits HLTH. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:223": {
+      "professor_id": "1967197",
+      "school_id": "340",
+      "expected_name": "Dennis Liotta",
+      "label": "Reviewed October 7, 2026: Atlas instructor 223 (Dennis C Liotta; CHEM) is RMP 1967197 (Dennis Liotta; Chemistry; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Chemistry fits Atlas subjects CHEM. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:22652": {
+      "professor_id": "2395894",
+      "school_id": "4163",
+      "expected_name": "Shanya Cordis",
+      "label": "Reviewed October 7, 2026: Atlas instructor 22652 (Shanya Cordis; WGS) is RMP 2395894 (Shanya Cordis; Anthropology; school 4163). Same first and last name, compatible department, and explicit official university teaching-employment evidence bridge the former RMP school and current Emory identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:2488": {
+      "professor_id": "2133896",
+      "school_id": "340",
+      "expected_name": "Gregory Berns",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2488 (Gregory S Berns; PSYC) is RMP 2133896 (Gregory Berns; Psychology; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Psychology fits Atlas subjects PSYC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:24884": {
+      "professor_id": "2794335",
+      "school_id": "340",
+      "expected_name": "Fang Liu",
+      "label": "Reviewed October 7, 2026: Atlas instructor 24884 (Fang Liu; CHEM) is RMP 2794335 (Fang Liu; Chemistry; school 340). Public RMP profile directly verifies exact Fang Liu, Chemistry at Emory University; CHEM fit. No ratings yet, so rating/difficulty unavailable and count zero. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:24885": {
+      "professor_id": "2783236",
+      "school_id": "340",
+      "expected_name": "Talea Mayo",
+      "label": "Reviewed October 7, 2026: Atlas instructor 24885 (Talea L. Mayo; MATH) is RMP 2783236 (Talea Mayo; Mathematics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:24921": {
+      "professor_id": "2700447",
+      "school_id": "2633",
+      "expected_name": "Tameka Cage Conley",
+      "label": "Reviewed October 7, 2026: Atlas instructor 24921 (Tameka Cage Conley; ENGCW) is RMP 2700447 (Tameka Cage Conley; English; school 2633). Public RMP page confirms the same first and last name, Oxford College of Emory University, and English; department fits Atlas subjects ENGCW. Middle names or initials omitted by RMP do not change first/last identity. Official Oxford faculty directory establishes English/creative-writing teaching at Oxford. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:24991": {
+      "professor_id": "2621401",
+      "school_id": "340",
+      "expected_name": "Melvin Ayogu",
+      "label": "Reviewed October 7, 2026: Atlas instructor 24991 (Melvin D Ayogu; AFS, ECON) is RMP 2621401 (Melvin Ayogu; Economics; school 340). Public RMP page confirms the same first and last name, Emory University, and Economics; department fits Atlas subjects AFS, ECON. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:24992": {
+      "professor_id": "1135871",
+      "school_id": "601",
+      "expected_name": "Marilia Ribeiro",
+      "label": "Reviewed October 7, 2026: Atlas instructor 24992 (Marilia Ribeiro; PORT, SPAN) is RMP 1135871 (Marilia Ribeiro; Languages; school 601). Official Emory faculty biography explicitly says Marilia Ribeiro taught at Michigan State University; current Portuguese teaching appointment and matching Atlas email establish same first/last name and PORT/SPAN Languages fit. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:271": {
+      "professor_id": "1054114",
+      "school_id": "340",
+      "expected_name": "David Davis",
+      "label": "Reviewed October 7, 2026: Atlas instructor 271 (David Davis III; POLS) is RMP 1054114 (David Davis; Political Science; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Political Science fits Atlas subjects POLS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:27218": {
+      "professor_id": "2744380",
+      "school_id": "340",
+      "expected_name": "Juan David Chacon",
+      "label": "Reviewed October 7, 2026: Atlas instructor 27218 (Juan David Escobar Chacon; LACS, SPAN) is RMP 2744380 (Juan David Chacon; Spanish; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects LACS, SPAN. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:28182": {
+      "professor_id": "848439",
+      "school_id": "399",
+      "expected_name": "Malinda Lowery",
+      "label": "Reviewed October 7, 2026: Atlas instructor 28182 (Malinda Lowery; AMST, HIST) is RMP 848439 (Malinda Lowery; History; school 399). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:2842": {
+      "professor_id": "2282769",
+      "school_id": "340",
+      "expected_name": "Leah Roesch",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2842 (Leah Anderson Roesch; NBB) is RMP 2282769 (Leah Roesch; Biology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:28487": {
+      "professor_id": "2752158",
+      "school_id": "2633",
+      "expected_name": "Larkin Ford",
+      "label": "Reviewed October 7, 2026: Atlas instructor 28487 (Larkin Ford; ARTVIS) is RMP 2752158 (Larkin Ford; Graphic Arts; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects ARTVIS. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:2910": {
+      "professor_id": "2253205",
+      "school_id": "340",
+      "expected_name": "Eric Goldstein",
+      "label": "Reviewed October 7, 2026: Atlas instructor 2910 (Eric L Goldstein; AMST, HIST, JS) is RMP 2253205 (Eric Goldstein; History; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department History fits Atlas subjects AMST, HIST, JS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3029": {
+      "professor_id": "1373897",
+      "school_id": "340",
+      "expected_name": "William Gilders",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3029 (William K Gilders; ANCMED, JS, REL) is RMP 1373897 (William Gilders; Religion; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3111": {
+      "professor_id": "1621344",
+      "school_id": "340",
+      "expected_name": "Peter Wakefield",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3111 (Peter W Wakefield; AMST, IDS) is RMP 1621344 (Peter Wakefield; Philosophy; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:31377": {
+      "professor_id": "2862321",
+      "school_id": "340",
+      "expected_name": "Karida Brown",
+      "label": "Reviewed October 7, 2026: Atlas instructor 31377 (Karida Brown; SOC) is RMP 2862321 (Karida Brown; Sociology; school 340). Public RMP page confirms the same first and last name, Emory University, and Sociology; department fits Atlas subjects SOC. Middle names or initials omitted by RMP do not change first/last identity. Other profile is Social Work and has no ratings; Sociology directly fits Atlas SOC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:31636": {
+      "professor_id": "2990513",
+      "school_id": "340",
+      "expected_name": "Aminah  Birdwell",
+      "label": "Reviewed October 7, 2026: Atlas instructor 31636 (Aminah Hasan-Birdwell; PHIL) is RMP 2990513 (Aminah  Birdwell; Philosophy; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects PHIL. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:31706": {
+      "professor_id": "2890453",
+      "school_id": "340",
+      "expected_name": "Alejandro Becerra",
+      "label": "Reviewed October 7, 2026: Atlas instructor 31706 (Alejandro Sanchez Becerra; DATASCI) is RMP 2890453 (Alejandro Becerra; Quantitative Theory & Methods; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3207": {
+      "professor_id": "2624125",
+      "school_id": "340",
+      "expected_name": "Tara Myers",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3207 (Tara Shepard Myers; DANC) is RMP 2624125 (Tara Myers; Physical Education; school 340). First and last name agree after omitting Shepard; official bio confirms Tara Shepard Myers teaches dance, a reasonable fit for the RMP Physical Education label and Atlas DANC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3455": {
+      "professor_id": "2065970",
+      "school_id": "340",
+      "expected_name": "Holli Semetko",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3455 (Holli A Semetko; POLS) is RMP 2065970 (Holli Semetko; Political Science; school 340). Public RMP page confirms the same first and last name, Emory University, and Political Science; department fits Atlas subjects POLS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:35739": {
+      "professor_id": "3009583",
+      "school_id": "340",
+      "expected_name": "Laura Ackerman",
+      "label": "Reviewed October 7, 2026: Atlas instructor 35739 (Laura K.G. Ackerman-Biegasiewicz; CHEM) is RMP 3009583 (Laura Ackerman; Chemistry; school 340). Official university evidence establishes compound surname variant and the same first name; RMP Chemistry fits Atlas teaching. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:35759": {
+      "professor_id": "2721711",
+      "school_id": "1606",
+      "expected_name": "Allison Stashko",
+      "label": "Reviewed October 7, 2026: Atlas instructor 35759 (Allison Stashko; DATASCI) is RMP 2721711 (Allison Stashko; Finance; school 1606). Official Emory faculty biography explicitly identifies a former Assistant Professor appointment at University of Utah business school, current DATASCI teaching and matching Atlas email allison.stashko@emory.edu. Finance/economics/quantitative business fit DATASCI 315 Game Theory. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:35777": {
+      "professor_id": "2198823",
+      "school_id": "927",
+      "expected_name": "Jo Guldi",
+      "label": "Reviewed October 7, 2026: Atlas instructor 35777 (Jo Guldi; DATASCI) is RMP 2198823 (Jo Guldi; History; school 927). Official Emory faculty biography identifies former Associate Professor of History appointment at Southern Methodist University and current Data & Decision Sciences position using machine learning/statistics; exact first/last name and historical data-science fit Atlas DATASCI. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:35812": {
+      "professor_id": "3006825",
+      "school_id": "340",
+      "expected_name": "Sergio Gárate",
+      "label": "Reviewed October 7, 2026: Atlas instructor 35812 (Sergio Garate; FIN) is RMP 3006825 (Sergio Gárate; Business; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:35813": {
+      "professor_id": "2939676",
+      "school_id": "340",
+      "expected_name": "Tamara Medina",
+      "label": "Reviewed October 7, 2026: Atlas instructor 35813 (Tamara Nicol Medina; LING, PSYC) is RMP 2939676 (Tamara Medina; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects LING, PSYC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:36037": {
+      "professor_id": "2042619",
+      "school_id": "4002",
+      "expected_name": "Pedro Sant'Anna",
+      "label": "Reviewed October 7, 2026: Atlas instructor 36037 (Pedro Sant'Anna; ECON) is RMP 2042619 (Pedro Sant'Anna; Economics; school 4002). Same full first and last name, Economics fits Atlas ECON; official university-hosted biography explicitly identifies prior Vanderbilt Assistant Professor employment. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:36189": {
+      "professor_id": "2374790",
+      "school_id": "675",
+      "expected_name": "Laura Torres-Rodriguez",
+      "label": "Reviewed October 7, 2026: Atlas instructor 36189 (Laura Torres-Rodriguez; HLTH, LACS, SPAN) is RMP 2374790 (Laura Torres-Rodriguez; Spanish; school 675). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:3656": {
+      "professor_id": "779752",
+      "school_id": "340",
+      "expected_name": "Hugo Mialon",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3656 (Hugo M Mialon; ECON) is RMP 779752 (Hugo Mialon; Economics; school 340). Public RMP first and last name agree after omitting middle names/initials; Economics at the Atlas school reasonably fits ECON. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3736": {
+      "professor_id": "810919",
+      "school_id": "340",
+      "expected_name": "Robert Liu",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3736 (Robert C Liu; BIOL, NBB) is RMP 810919 (Robert Liu; Biology; school 340). Public RMP first and last name agree after omitting middle names/initials; Biology at the Atlas school reasonably fits BIOL, NBB. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3796": {
+      "professor_id": "2253024",
+      "school_id": "340",
+      "expected_name": "Sara McClintock",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3796 (Sara L McClintock; PHIL, REL) is RMP 2253024 (Sara McClintock; Religion; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Religion fits Atlas subjects PHIL, REL. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3806": {
+      "professor_id": "1893449",
+      "school_id": "340",
+      "expected_name": "Lynne Huffer",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3806 (Lynne R Huffer; PHIL) is RMP 1893449 (Lynne Huffer; Women's Studies; school 340). First and last name agree; official Emory Philosophy bio confirms philosophy appointment and feminist/queer theory teaching context for RMP Women’s Studies department. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3820": {
+      "professor_id": "2336676",
+      "school_id": "340",
+      "expected_name": "Peter Hoeyng",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3820 (Peter Höyng; GER) is RMP 2336676 (Peter Hoeyng; Languages; school 340). Höyng → Hoeyng is the documented German umlaut transliteration for the same Peter; official Emory bio uses Höyng and phoeyng@emory.edu, and the Emory catalog uses Peter Hoeyng. Languages fits GER. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:38417": {
+      "professor_id": "3015339",
+      "school_id": "340",
+      "expected_name": "Elyce Strong-Mann",
+      "label": "Reviewed October 7, 2026: Atlas instructor 38417 (Elyce Mann; ENGCW, FILM) is RMP 3015339 (Elyce Strong-Mann; Film; school 340). Official university evidence establishes compound surname variant and the same first name; RMP Film fits Atlas teaching. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3898": {
+      "professor_id": "2248018",
+      "school_id": "340",
+      "expected_name": "Astrid Eckert",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3898 (Astrid M. Eckert; GER, HIST, JS) is RMP 2248018 (Astrid Eckert; History; school 340). Public RMP page confirms the same first and last name, Emory University, and History; department fits Atlas subjects GER, HIST, JS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:39587": {
+      "professor_id": "3031553",
+      "school_id": "340",
+      "expected_name": "Hector Alvarez",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39587 (Héctor Alvarez; HLTH, THEA) is RMP 3031553 (Hector Alvarez; Theater; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects HLTH, THEA. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:39592": {
+      "professor_id": "2912616",
+      "school_id": "157",
+      "expected_name": "Alonso Llosa",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39592 (Alonso Llosa; FILM) is RMP 2912616 (Alonso Llosa; Television, Film, & Media Studies; school 157). Identical first and last name, compatible department with Atlas FILM, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:39621": {
+      "professor_id": "3000991",
+      "school_id": "1352",
+      "expected_name": "Daniel Castro Pantoja",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39621 (Daniel Castro Pantoja; MUS) is RMP 3000991 (Daniel Castro Pantoja; Music; school 1352). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:39625": {
+      "professor_id": "2540649",
+      "school_id": "825",
+      "expected_name": "Erica Dunbar",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39625 (Erica Dunbar; AAS, HIST) is RMP 2540649 (Erica Dunbar; History; school 825). Identical first and last name, compatible department with Atlas AAS, HIST, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:39626": {
+      "professor_id": "3121178",
+      "school_id": "340",
+      "expected_name": "Sarah Rodriguez",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39626 (Sarah M. Rodriguez; CHN, HIST, WGS) is RMP 3121178 (Sarah Rodriguez; History; school 340). Public RMP first and last name agree after omitting middle names/initials; History at the Atlas school reasonably fits CHN, HIST, WGS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:39796": {
+      "professor_id": "3098216",
+      "school_id": "340",
+      "expected_name": "Brian Lee",
+      "label": "Reviewed October 7, 2026: Atlas instructor 39796 (Brian Jonghwan Lee; FIN) is RMP 3098216 (Brian Lee; Business; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Business fits Atlas subjects FIN. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:3985": {
+      "professor_id": "1541821",
+      "school_id": "340",
+      "expected_name": "Rkia Cornell",
+      "label": "Reviewed October 7, 2026: Atlas instructor 3985 (Rkia E Cornell; ARAB) is RMP 1541821 (Rkia Cornell; Languages; school 340). Public RMP page confirms the same first and last name, Emory University, and Languages; department fits Atlas subjects ARAB. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:40203": {
+      "professor_id": "5074368",
+      "school_id": "340",
+      "expected_name": "Stella Kim",
+      "label": "Reviewed October 7, 2026: Atlas instructor 40203 (Stella Soojin Kim; SPAN) is RMP 5074368 (Stella Kim; Spanish; school 340). Connected Brave verification by parent confirms same first/last name, Emory University and Atlas department fit. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:40329": {
+      "professor_id": "2955102",
+      "school_id": "1058",
+      "expected_name": "Tavia Stanford",
+      "label": "Reviewed October 7, 2026: Atlas instructor 40329 (Tavia Stanford; WGS) is RMP 2955102 (Tavia Stanford; Women's Studies; school 1058). Exact first and last name and WGS teaching fit. Official Alabama Spring2024 schedule explicitly lists Tavia Stanford as WS200 primary instructor, and official Emory WGSS biography confirms her Alabama academic history; together they establish the prior teaching identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:41484": {
+      "professor_id": "3157268",
+      "school_id": "340",
+      "expected_name": "André Patrão",
+      "label": "Reviewed October 7, 2026: Atlas instructor 41484 (Andre Patrao; ARTHIST, PHIL) is RMP 3157268 (André Patrão; Art History; school 340). Same first and last name after accent/middle-name normalization; connected Brave independently verified public name, school and Art History department, compatible with Atlas ARTHIST, PHIL. Original directory capture retained. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:4232": {
+      "professor_id": "2452083",
+      "school_id": "340",
+      "expected_name": "Andrew Mitchell",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4232 (Andrew J Mitchell; CPLT, PHIL) is RMP 2452083 (Andrew Mitchell; Philosophy; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:4251": {
+      "professor_id": "3072450",
+      "school_id": "340",
+      "expected_name": "Jennifer Frediani",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4251 (Jennifer K Frediani; NRSG) is RMP 3072450 (Jennifer Frediani; Nursing; school 340). Public RMP first and last name agree after omitting middle names/initials; Nursing at the Atlas school reasonably fits NRSG. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:42895": {
+      "professor_id": "2729952",
+      "school_id": "361",
+      "expected_name": "Suchismita Dutta",
+      "label": "Reviewed October 7, 2026: Atlas instructor 42895 (Suchismita Dutta; DATASCI, ENGRD) is RMP 2729952 (Suchismita Dutta; Literature, Media, & Communication; school 361). Identical first and last name, compatible department with Atlas DATASCI, ENGRD, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:4310": {
+      "professor_id": "1489289",
+      "school_id": "340",
+      "expected_name": "Nicole Gerardo",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4310 (Nicole Marie Gerardo; BIOL) is RMP 1489289 (Nicole Gerardo; Biology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Biology fits Atlas subjects BIOL. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:43577": {
+      "professor_id": "2607096",
+      "school_id": "696",
+      "expected_name": "Alanna Prince",
+      "label": "Reviewed October 7, 2026: Atlas instructor 43577 (Alanna Prince; ENG) is RMP 2607096 (Alanna Prince; African-American Studies; school 696). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:43760": {
+      "professor_id": "3162373",
+      "school_id": "340",
+      "expected_name": "Evan Cree Gee",
+      "label": "Reviewed October 7, 2026: Atlas instructor 43760 (Evan Gee; POLS) is RMP 3162373 (Evan Cree Gee; Political Science; school 340). Public RMP first and last name agree after omitting middle names/initials; Political Science at the Atlas school reasonably fits POLS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:43774": {
+      "professor_id": "3164791",
+      "school_id": "340",
+      "expected_name": "Jihye Sohn",
+      "label": "Reviewed October 7, 2026: Atlas instructor 43774 (Ji hye Sohn; KRN) is RMP 3164791 (Jihye Sohn; Languages; school 340). Same name with acceptable punctuation/spacing; public Emory department fits Atlas. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:43777": {
+      "professor_id": "3158676",
+      "school_id": "340",
+      "expected_name": "Zirui (Tony) Yang",
+      "label": "Reviewed October 7, 2026: Atlas instructor 43777 (Zirui Yang; POLS) is RMP 3158676 (Zirui (Tony) Yang; Political Science; school 340). Public RMP lists Zirui (Tony) Yang in Political Science at Emory, preserving the same first and last name and matching Atlas POLS. Root independently verified the profile in connected Brave after web-reader errors. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:43779": {
+      "professor_id": "3061312",
+      "school_id": "18800",
+      "expected_name": "Janette Snyder",
+      "label": "Reviewed October 7, 2026: Atlas instructor 43779 (Janette Snyder; ARTHIST) is RMP 3061312 (Janette Snyder; Classics; school 18800). Exact full first/last Janette Snyder, Classics reasonably fits Atlas ARTHIST101 and current Roman art research. Official FSU teaching schedule explicitly establishes Classics teaching, beyond graduate degree association. Numeric school link and fresh direct public unrated summary independently confirmed. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:4412": {
+      "professor_id": "1868324",
+      "school_id": "340",
+      "expected_name": "John Stuhr",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4412 (John J Stuhr; PHIL) is RMP 1868324 (John Stuhr; Philosophy; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Philosophy fits Atlas subjects PHIL. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:45220": {
+      "professor_id": "3050228",
+      "school_id": "675",
+      "expected_name": "Dishita Turakhia",
+      "label": "Reviewed October 7, 2026: Atlas instructor 45220 (Dishita Turakhia; CS) is RMP 3050228 (Dishita Turakhia; Computer Science; school 675). Same first and last name, compatible department, and explicit official university teaching-employment evidence bridge the former RMP school and current Emory identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:4525": {
+      "professor_id": "2249217",
+      "school_id": "340",
+      "expected_name": "Thomas Gillespie",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4525 (Thomas R. Gillespie; BIOL, ENVS) is RMP 2249217 (Thomas Gillespie; Science; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:46132": {
+      "professor_id": "3042330",
+      "school_id": "1232",
+      "expected_name": "Michael Hallquist",
+      "label": "Reviewed October 7, 2026: Atlas instructor 46132 (Michael Hallquist; PSYC) is RMP 3042330 (Michael Hallquist; Psychology; school 1232). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:46397": {
+      "professor_id": "1232136",
+      "school_id": "1118",
+      "expected_name": "Eric Sanday",
+      "label": "Reviewed October 7, 2026: Atlas instructor 46397 (Eric Sanday; PHIL) is RMP 1232136 (Eric Sanday; Philosophy; school 1118). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:46591": {
+      "professor_id": "2893163",
+      "school_id": "4403",
+      "expected_name": "Adam Diller",
+      "label": "Reviewed October 7, 2026: Atlas instructor 46591 (Adam Diller; FILM) is RMP 2893163 (Adam Diller; Film; school 4403). Identical first and last name, compatible department with Atlas FILM, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:46618": {
+      "professor_id": "2709594",
+      "school_id": "440",
+      "expected_name": "Ellen Stenstrom",
+      "label": "Reviewed October 7, 2026: Atlas instructor 46618 (Ellen Stenstrom; ENGRD) is RMP 2709594 (Ellen Stenstrom; English; school 440). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:46923": {
+      "professor_id": "2876725",
+      "school_id": "1161",
+      "expected_name": "Liam Hynes-Tawa",
+      "label": "Reviewed October 7, 2026: Atlas instructor 46923 (Liam Hynes-Tawa; MUS) is RMP 2876725 (Liam Hynes-Tawa; Music; school 1161). Exact first and last name and department fit, with official faculty biography/CV confirming teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:47027": {
+      "professor_id": "1910707",
+      "school_id": "3071",
+      "expected_name": "Lara Glenum",
+      "label": "Reviewed October 7, 2026: Atlas instructor 47027 (Lara Glenum; ENGCW) is RMP 1910707 (Lara Glenum; English; school 3071). Official Emory faculty biography explicitly says Lara Glenum was Associate Professor of English at LSU and taught creative writing there; now Emory Lecturer in Poetry. Same first/last name, Atlas email lglenum@emory.edu, English/creative-writing fit ENGCW. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:4790": {
+      "professor_id": "2140684",
+      "school_id": "340",
+      "expected_name": "Scott Kugle",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4790 (Scott A Kugle; HIST, MESAS, REL) is RMP 2140684 (Scott Kugle; Middle Eastern Studies; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Middle Eastern Studies fits Atlas subjects HIST, MESAS, REL. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:48045": {
+      "professor_id": "2423789",
+      "school_id": "591",
+      "expected_name": "Shehnaz Haqqani",
+      "label": "Reviewed October 7, 2026: Atlas instructor 48045 (Shehnaz Haqqani; REL) is RMP 2423789 (Shehnaz Haqqani; Religion; school 591). Exact full first and last name Shehnaz Haqqani, Religion fits Atlas REL, and official Mercer faculty appointment news explicitly establishes religion teaching faculty role and Emory Visiting Faculty fellowship. Numeric school link and fresh direct public summary independently confirmed. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:4902": {
+      "professor_id": "1842589",
+      "school_id": "340",
+      "expected_name": "Samuel Sober",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4902 (Samuel J Sober; BIOL) is RMP 1842589 (Samuel Sober; Biology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:4926": {
+      "professor_id": "1930613",
+      "school_id": "340",
+      "expected_name": "Todd Cronan",
+      "label": "Reviewed October 7, 2026: Atlas instructor 4926 (Todd S Cronan; ARTHIST) is RMP 1930613 (Todd Cronan; Art History; school 340). Public RMP first and last name agree after omitting middle names/initials; Art History at the Atlas school reasonably fits ARTHIST. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5224": {
+      "professor_id": "2293272",
+      "school_id": "2633",
+      "expected_name": "Jack Hardy",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5224 (Jack Hardy; LING) is RMP 2293272 (Jack Hardy; Mathematics; school 2633). Identical first and last name. Although RMP department label is Mathematics, its listed LINGOX101 course and official Oxford Associate Professor of Linguistics establish the same instructor teaching Atlas LING. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:5239": {
+      "professor_id": "1711650",
+      "school_id": "340",
+      "expected_name": "Patrick Cafferty",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5239 (Patrick William Cafferty; BIOL, NBB) is RMP 1711650 (Patrick Cafferty; Biology; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Biology fits Atlas subjects BIOL, NBB. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5411": {
+      "professor_id": "1840853",
+      "school_id": "340",
+      "expected_name": "Kristin Phillips",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5411 (Kristin D Phillips; ANT, ENVS) is RMP 1840853 (Kristin Phillips; Anthropology; school 340). Public RMP first and last name agree after omitting middle names/initials; Anthropology at the Atlas school reasonably fits ANT, ENVS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5473": {
+      "professor_id": "1967242",
+      "school_id": "340",
+      "expected_name": "Maria Sibau",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5473 (Maria Franca Sibau; CHN, EAS, REL, THEA) is RMP 1967242 (Maria Sibau; Languages; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Languages fits Atlas subjects CHN, EAS, REL, THEA. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5593": {
+      "professor_id": "1761907",
+      "school_id": "481",
+      "expected_name": "Mara Mandradjieff",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5593 (Mara Mandradjieff; DANC, WGS) is RMP 1761907 (Mara Mandradjieff; Art; school 481). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:5643": {
+      "professor_id": "2057120",
+      "school_id": "340",
+      "expected_name": "Daniel Dilks",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5643 (Daniel D Dilks; PSYC) is RMP 2057120 (Daniel Dilks; Psychology; school 340). Public RMP page confirms the same first and last name, Emory University, and Psychology; department fits Atlas subjects PSYC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5836": {
+      "professor_id": "1839045",
+      "school_id": "340",
+      "expected_name": "Justin Burton",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5836 (Justin C Burton; PHYS, SUST) is RMP 1839045 (Justin Burton; Physics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5852": {
+      "professor_id": "2144069",
+      "school_id": "340",
+      "expected_name": "Erin Bonning",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5852 (Erin Wells Bonning; PHYS) is RMP 2144069 (Erin Bonning; Physics; school 340). Public RMP page confirms the same first and last name, Emory University, and Physics; department fits Atlas subjects PHYS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:5956": {
+      "professor_id": "2217909",
+      "school_id": "360",
+      "expected_name": "Luther Enloe",
+      "label": "Reviewed October 7, 2026: Atlas instructor 5956 (Luther Enloe; MUS) is RMP 2217909 (Luther Enloe; Music; school 360). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:6061": {
+      "professor_id": "3151793",
+      "school_id": "340",
+      "expected_name": "Miguel Rueda",
+      "label": "Reviewed October 7, 2026: Atlas instructor 6061 (Miguel R. Rueda; POLS) is RMP 3151793 (Miguel Rueda; Political Science; school 340). Connected Brave verification by parent confirms same first/last name, Emory University and Atlas department fit. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:6267": {
+      "professor_id": "2204431",
+      "school_id": "340",
+      "expected_name": "Pazit Kahlon-Shelnutt",
+      "label": "Reviewed October 7, 2026: Atlas instructor 6267 (Pazit Kahlon; HEBR, JS) is RMP 2204431 (Pazit Kahlon-Shelnutt; Languages; school 340). Official faculty biography and exact Atlas email establish the compound surname Kahlon-Shelnutt; Languages fits HEBR/JS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:64": {
+      "professor_id": "2472011",
+      "school_id": "340",
+      "expected_name": "Nicholas Valerio",
+      "label": "Reviewed October 7, 2026: Atlas instructor 64 (Nicholas Valerio III; FIN) is RMP 2472011 (Nicholas Valerio; Business; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:6715": {
+      "professor_id": "2205640",
+      "school_id": "340",
+      "expected_name": "Seth Goss",
+      "label": "Reviewed October 7, 2026: Atlas instructor 6715 (Seth J Goss; JPN, LING) is RMP 2205640 (Seth Goss; Languages; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Languages fits Atlas subjects JPN, LING. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:6931": {
+      "professor_id": "2254506",
+      "school_id": "340",
+      "expected_name": "Tian Chan",
+      "label": "Reviewed October 7, 2026: Atlas instructor 6931 (Tian Heong Chan; ISOM) is RMP 2254506 (Tian Chan; Business; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Business fits Atlas subjects ISOM. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:7143": {
+      "professor_id": "2344133",
+      "school_id": "340",
+      "expected_name": "Rohan Palmer",
+      "label": "Reviewed October 7, 2026: Atlas instructor 7143 (Prof. Rohan Palmer; PSYC) is RMP 2344133 (Rohan Palmer; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects PSYC. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:7317": {
+      "professor_id": "1901635",
+      "school_id": "1361",
+      "expected_name": "Rowena Elliott",
+      "label": "Reviewed October 7, 2026: Atlas instructor 7317 (Rowena Elliott; NRSG) is RMP 1901635 (Rowena Elliott; Nursing; school 1361). Identical first and last name, compatible department with Atlas NRSG, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "allow_cross_school": true
+    },
+    "340:atlas:7445": {
+      "professor_id": "1873991",
+      "school_id": "340",
+      "expected_name": "Susan Gagliardi",
+      "label": "Reviewed October 7, 2026: Atlas instructor 7445 (Susan Elizabeth Gagliardi; AFS, ARTHIST, HIST) is RMP 1873991 (Susan Gagliardi; Art History; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Art History fits Atlas subjects AFS, ARTHIST, HIST. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:754": {
+      "professor_id": "526407",
+      "school_id": "340",
+      "expected_name": "Robert Roth",
+      "label": "Reviewed October 7, 2026: Atlas instructor 754 (Robert Roth Jr.; MATH) is RMP 526407 (Robert Roth; Mathematics; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects MATH. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:824": {
+      "professor_id": "1173660",
+      "school_id": "340",
+      "expected_name": "Niall Slater",
+      "label": "Reviewed October 7, 2026: Atlas instructor 824 (Niall W Slater; ARTHIST, CL, LAT) is RMP 1173660 (Niall Slater; Classics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Classics fits Atlas subjects ARTHIST, CL, LAT. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:86": {
+      "professor_id": "1166414",
+      "school_id": "340",
+      "expected_name": "John Malko",
+      "label": "Reviewed October 7, 2026: Atlas instructor 86 (John A Malko; PHYS) is RMP 1166414 (John Malko; Physics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:887": {
+      "professor_id": "2171340",
+      "school_id": "340",
+      "expected_name": "Sally Radell",
+      "label": "Reviewed October 7, 2026: Atlas instructor 887 (Sally A Radell; DANC, THEA) is RMP 2171340 (Sally Radell; Fine Arts; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Fine Arts fits Atlas subjects DANC, THEA. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:918": {
+      "professor_id": "1214985",
+      "school_id": "340",
+      "expected_name": "Dwight Andrews",
+      "label": "Reviewed October 7, 2026: Atlas instructor 918 (Dwight D Andrews; AAS, MUS) is RMP 1214985 (Dwight Andrews; Music; school 340). Public RMP first and last name agree after omitting middle names/initials; Music at the Atlas school reasonably fits AAS, MUS. Evidence: data/rmp/identity-review-20261007.json."
+    },
+    "340:atlas:9810": {
+      "professor_id": "3046248",
+      "school_id": "340",
+      "expected_name": "Taina Figueroa",
+      "label": "Reviewed October 7, 2026: Atlas instructor 9810 (Taína Figueroa; LACS) is RMP 3046248 (Taina Figueroa; Latin American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects LACS. Evidence: data/rmp/identity-review-20261007.json."
     }
   }
 }

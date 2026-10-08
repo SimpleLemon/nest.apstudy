@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from threading import Lock
 
-from services.professor_rating_identity import SCHOOLS, normalized_name, profile_url, search_url, section_instructors
+from services.professor_rating_identity import SCHOOLS, normalized_name, professor_id, profile_url, search_url, section_instructors
 
 SNAPSHOT_PATH = Path(__file__).resolve().parents[1] / "data/rmp/ratings.json"
 _STATUSES = {"matched", "unmatched", "ambiguous", "unrated", "unavailable"}
@@ -48,9 +48,12 @@ def public_entry(identity, stored=None, now=None):
     verified = valid_status and stored.get("verified") is True and status in {"matched", "unrated", "unavailable"}
     same_identity = (stored.get("instructor_key") == identity["instructor_key"]
                      and normalized_name(stored.get("name")) == normalized_name(identity["name"]))
-    target_school = str(stored.get("school_id") or "")
-    same_school = target_school in SCHOOLS.values() and (target_school == identity["school_id"]
-                  or (stored.get("cross_school_override") is True and bool(stored.get("override_label"))))
+    target_school = professor_id(stored.get("school_id"))
+    label = stored.get("override_label")
+    reviewed_cross_school = (stored.get("cross_school_override") is True
+                             and isinstance(label, str) and bool(label.strip()))
+    same_school = bool(target_school) and ((target_school in SCHOOLS.values()
+                  and target_school == identity["school_id"]) or reviewed_cross_school)
     url = profile_url(stored.get("professor_id")) if verified and same_identity and same_school else None
     fetched_at = stored.get("fetched_at") if url else None
     age_stale = bool(url and not fetched_at)

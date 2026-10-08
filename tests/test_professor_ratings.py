@@ -113,6 +113,118 @@ class RatingIdentityTests(unittest.TestCase):
         self.assertEqual(service.public_entry(item, result)["overall_rating"], 4.2)
 
 
+class ExternalSchoolOverrideTests(unittest.TestCase):
+    def setUp(self):
+        self.item = identity("J. Example", atlas_id="reviewed")
+        self.override = {"professor_id": "200", "school_id": "9999", "expected_name": "Jane Example",
+                         "label": "Department confirmed former institution profile", "allow_cross_school": True}
+
+    def resolve_override(self):
+        return resolve(self.item, source(profile("200", "9999")), self.override, STAMP)
+
+    def test_reviewed_external_profile_is_public_without_search_or_network(self):
+        mappings = validate_overrides({"schema_version": 1, "mappings": {self.item["instructor_key"]: self.override}})
+        self.assertEqual(mappings[self.item["instructor_key"]], self.override)
+        with patch.object(FixturePages, "search", side_effect=AssertionError("override must not search")), \
+                patch("requests.Session.get", side_effect=AssertionError("network")):
+            record = self.resolve_override()
+            entry = service.public_entry(self.item, record)
+        self.assertTrue(record["verified"])
+        self.assertTrue(record["cross_school_override"])
+        self.assertEqual(entry["status"], "matched")
+        self.assertEqual(entry["school_id"], "9999")
+        self.assertEqual(entry["overall_rating"], 4.2)
+        self.assertEqual(entry["profile_url"], "https://www.ratemyprofessors.com/professor/200")
+        self.assertEqual(entry["override_label"], self.override["label"])
+        self.assertIn("/search/professors/340?", entry["search_url"])
+
+    def test_external_override_requires_literal_approval_and_nonblank_label(self):
+        from unittest.mock import Mock
+        invalid = [{**self.override, "allow_cross_school": value} for value in (None, False, "true", 1)]
+        invalid.extend({**self.override, "label": value} for value in (None, "", " \t\n", 123))
+        invalid.extend([{key: value for key, value in self.override.items() if key != "allow_cross_school"},
+                        {key: value for key, value in self.override.items() if key != "label"}])
+        for override in invalid:
+            with self.subTest(override=override):
+                client = Mock()
+                with self.assertRaises(ValueError):
+                    validate_overrides({"schema_version": 1, "mappings": {self.item["instructor_key"]: override}})
+                with self.assertRaises(ValueError):
+                    resolve(self.item, client, override, STAMP)
+                client.search.assert_not_called()
+                client.profile.assert_not_called()
+
+    def test_external_cache_requires_review_and_original_instructor_identity(self):
+        record = self.resolve_override()
+        invalid = [{**record, "cross_school_override": value} for value in (None, False, "true", 1)]
+        invalid.extend({**record, "override_label": value} for value in (None, "", " \t\n", 123))
+        invalid.extend([{**record, "verified": False}, {**record, "name": "Someone Else"},
+                        {**record, "instructor_key": "340:atlas:someone-else"}])
+        for stored in invalid:
+            with self.subTest(stored=stored):
+                entry = service.public_entry(self.item, stored)
+                self.assertEqual(entry["status"], "unavailable")
+                for field in ("overall_rating", "difficulty", "rating_count", "professor_id", "profile_url"):
+                    self.assertIsNone(entry[field])
+
+    def test_school_ids_must_be_canonical_positive_numeric_identifiers(self):
+        record = self.resolve_override()
+        for school in (None, "", 0, "0", -1, "-1", True, 9999.0, "09999", " 9999", "9999 ",
+                       "+9999", "9.999e3", "9999/path", "https://example.test/9999", "9" * 13):
+            with self.subTest(school=school):
+                override = {**self.override, "school_id": school}
+                with self.assertRaises(ValueError):
+                    validate_overrides({"schema_version": 1, "mappings": {self.item["instructor_key"]: override}})
+                entry = service.public_entry(self.item, {**record, "school_id": school})
+                self.assertIsNone(entry["profile_url"])
+                self.assertIsNone(entry["overall_rating"])
+        self.override["school_id"] = 9999
+        self.assertEqual(self.resolve_override()["school_id"], "9999")
+
+    def test_external_profile_must_verify_exact_id_school_and_expected_full_name(self):
+        from unittest.mock import Mock
+        for wrong in (profile("201", "9999"), profile("200", "340"), profile("200", "9999", "Someone Else")):
+            with self.subTest(profile=wrong):
+                client = Mock()
+                client.profile.return_value = wrong
+                result = resolve(self.item, client, self.override, STAMP)
+                self.assertEqual(result["status"], "ambiguous")
+                self.assertFalse(result["verified"])
+                self.assertIsNone(result["overall_rating"])
+                self.assertIsNone(service.public_entry(self.item, result)["profile_url"])
+                client.search.assert_not_called()
+        with self.assertRaisesRegex(ValueError, "full expected RMP name"):
+            resolve(self.item, source(profile("200", "9999", "J. Example")),
+                    {**self.override, "expected_name": "J. Example"}, STAMP)
+
+    def test_automatic_matching_remains_restricted_to_atlas_school(self):
+        from unittest.mock import Mock
+        client = Mock()
+        client.search.return_value = [profile("200", "9999")]
+        result = resolve(identity(), client, None, STAMP)
+        self.assertEqual(result["status"], "unmatched")
+        client.search.assert_called_once_with("340", "Jane Example")
+        client.profile.assert_not_called()
+        client.reset_mock()
+        result = resolve({**identity(), "school_id": "9999"}, client, None, STAMP)
+        self.assertEqual(result["status"], "unavailable")
+        client.search.assert_not_called()
+        client.profile.assert_not_called()
+
+    def test_failed_refresh_preserves_reviewed_external_profile_and_timestamp(self):
+        record = self.resolve_override()
+        ratings, report = refresh_entries([self.item], {self.item["instructor_key"]: record},
+                                          source(unavailable=True), {self.item["instructor_key"]: self.override},
+                                          "2026-11-09T00:00:00+00:00")
+        entry = service.public_entry(self.item, ratings[self.item["instructor_key"]])
+        self.assertEqual(entry["status"], "unavailable")
+        self.assertTrue(entry["stale"])
+        self.assertEqual(entry["school_id"], "9999")
+        self.assertEqual(entry["overall_rating"], 4.2)
+        self.assertEqual(entry["fetched_at"], STAMP)
+        self.assertEqual(len(report["failures"]), 1)
+
+
 class RatingCacheTests(unittest.TestCase):
     def test_failure_preserves_numbers_and_original_timestamp(self):
         item = identity()

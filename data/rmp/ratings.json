@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-08T01:26:36.570446+00:00",
+  "updated_at": "2026-10-08T01:57:53.592695+00:00",
   "source": "public-rmp-brave",
   "ratings": {
     "340:atlas:44133": {
@@ -118,15 +118,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1214985",
+      "overall_rating": 3.3,
+      "difficulty": 3.1,
+      "rating_count": 23,
+      "fetched_at": "2026-10-07T17:32:08.710Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 918 (Dwight D Andrews; AAS, MUS) is RMP 1214985 (Dwight Andrews; Music; school 340). Public RMP first and last name agree after omitting middle names/initials; Music at the Atlas school reasonably fits AAS, MUS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:21842": {
       "instructor_key": "340:atlas:21842",
@@ -849,15 +851,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2621401",
+      "overall_rating": 2,
+      "difficulty": 3.2,
+      "rating_count": 32,
+      "fetched_at": "2026-10-07T17:32:08.651Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 24991 (Melvin D Ayogu; AFS, ECON) is RMP 2621401 (Melvin Ayogu; Economics; school 340). Public RMP page confirms the same first and last name, Emory University, and Economics; department fits Atlas subjects AFS, ECON. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:6911": {
       "instructor_key": "340:atlas:6911",
@@ -885,15 +889,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1873991",
+      "overall_rating": 2.8,
+      "difficulty": 3.8,
+      "rating_count": 12,
+      "fetched_at": "2026-10-07T17:32:08.441Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 7445 (Susan Elizabeth Gagliardi; AFS, ARTHIST, HIST) is RMP 1873991 (Susan Gagliardi; Art History; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Art History fits Atlas subjects AFS, ARTHIST, HIST. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35408": {
       "instructor_key": "340:atlas:35408",
@@ -949,19 +955,21 @@
     "2633:atlas:39910": {
       "instructor_key": "2633:atlas:39910",
       "name": "Elijah Zehyoue",
-      "school_id": "2633",
+      "school_id": "340",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3043999",
+      "overall_rating": 5,
+      "difficulty": 1.3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-07T17:32:08.783Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39910 (Elijah Zehyoue; AFS_OX) is RMP 3043999 (Elijah Zehyoue; African-American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects AFS_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:1011": {
       "instructor_key": "340:atlas:1011",
@@ -983,20 +991,22 @@
     "340:atlas:28182": {
       "instructor_key": "340:atlas:28182",
       "name": "Malinda Lowery",
-      "school_id": "340",
+      "school_id": "399",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "848439",
+      "overall_rating": 3.7,
+      "difficulty": 2.2,
+      "rating_count": 13,
+      "fetched_at": "2026-10-08T01:45:54.790228Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 28182 (Malinda Lowery; AMST, HIST) is RMP 848439 (Malinda Lowery; History; school 399). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:2910": {
       "instructor_key": "340:atlas:2910",
@@ -1006,15 +1016,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2253205",
+      "overall_rating": 2.8,
+      "difficulty": 2.7,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T17:35:12.930Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2910 (Eric L Goldstein; AMST, HIST, JS) is RMP 2253205 (Eric Goldstein; History; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department History fits Atlas subjects AMST, HIST, JS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:204": {
       "instructor_key": "340:atlas:204",
@@ -1037,20 +1049,22 @@
     "340:atlas:18074": {
       "instructor_key": "340:atlas:18074",
       "name": "Jason Ward",
-      "school_id": "340",
+      "school_id": "617",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1221452",
+      "overall_rating": 4.2,
+      "difficulty": 3.3,
+      "rating_count": 9,
+      "fetched_at": "2026-10-08T01:45:21Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 18074 (Jason Ward; AMST, HIST) is RMP 1221452 (Jason Ward; History; school 617). Exact first and last name and department fit, with official faculty biography/CV confirming teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:35697": {
       "instructor_key": "340:atlas:35697",
@@ -1078,15 +1092,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1621344",
+      "overall_rating": 4.8,
+      "difficulty": 2.5,
+      "rating_count": 22,
+      "fetched_at": "2026-10-07T17:33:26.346Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3111 (Peter W Wakefield; AMST, IDS) is RMP 1621344 (Peter Wakefield; Philosophy; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:43551": {
       "instructor_key": "2633:atlas:43551",
@@ -1392,20 +1408,22 @@
     "340:atlas:15598": {
       "instructor_key": "340:atlas:15598",
       "name": "Javier Villa-Flores",
-      "school_id": "340",
+      "school_id": "1111",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "892790",
+      "overall_rating": 3.8,
+      "difficulty": 3,
+      "rating_count": 6,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 15598 (Javier Villa-Flores; ANT, HIST, LACS, REL, SOC) is RMP 892790 (Javier Villa-Flores; Latin American Studies; school 1111). Official UIC profile/news names Javier Villa-Flores an Associate Professor of Latin American and Latino studies and history in 2015; Emory faculty biography confirms the same Latin American religious/colonial history work and exact first/last name. Department fits Atlas LACS/HIST/REL/ANT/SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:39591": {
       "instructor_key": "340:atlas:39591",
@@ -1469,15 +1487,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1589475",
+      "overall_rating": 3.1,
+      "difficulty": 3.8,
+      "rating_count": 59,
+      "fetched_at": "2026-10-07T17:32:08.408Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1385 (James K Rilling; ANT, NBB, PSYC) is RMP 1589475 (James Rilling; Anthropology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:43905": {
       "instructor_key": "340:atlas:43905",
@@ -1574,15 +1594,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1840853",
+      "overall_rating": 4.8,
+      "difficulty": 2.3,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T17:35:12.237Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5411 (Kristin D Phillips; ANT, ENVS) is RMP 1840853 (Kristin Phillips; Anthropology; school 340). Public RMP first and last name agree after omitting middle names/initials; Anthropology at the Atlas school reasonably fits ANT, ENVS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:7004": {
       "instructor_key": "340:atlas:7004",
@@ -1609,15 +1631,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1195682",
+      "overall_rating": 4.3,
+      "difficulty": 2.4,
+      "rating_count": 18,
+      "fetched_at": "2026-10-07T17:33:25.803Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1530 (Debra Vidali; ANT) is RMP 1195682 (Debra Spitulnik Vidali; Anthropology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:30925": {
       "instructor_key": "340:atlas:30925",
@@ -1696,15 +1720,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1541821",
+      "overall_rating": 4.7,
+      "difficulty": 1.8,
+      "rating_count": 15,
+      "fetched_at": "2026-10-07T17:35:13.007Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3985 (Rkia E Cornell; ARAB) is RMP 1541821 (Rkia Cornell; Languages; school 340). Public RMP page confirms the same first and last name, Emory University, and Languages; department fits Atlas subjects ARAB. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:7962": {
       "instructor_key": "340:atlas:7962",
@@ -1780,19 +1806,21 @@
     "340:atlas:43779": {
       "instructor_key": "340:atlas:43779",
       "name": "Janette Snyder",
-      "school_id": "340",
+      "school_id": "18800",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "3061312",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-08T01:57:11.065660+00:00",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 43779 (Janette Snyder; ARTHIST) is RMP 3061312 (Janette Snyder; Classics; school 18800). Exact full first/last Janette Snyder, Classics reasonably fits Atlas ARTHIST101 and current Roman art research. Official FSU teaching schedule explicitly establishes Classics teaching, beyond graduate degree association. Numeric school link and fresh direct public unrated summary independently confirmed. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:44143": {
       "instructor_key": "340:atlas:44143",
@@ -1819,15 +1847,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
+      "professor_id": "3157268",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T17:33:25.736Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 41484 (Andre Patrao; ARTHIST, PHIL) is RMP 3157268 (André Patrão; Art History; school 340). Same first and last name after accent/middle-name normalization; connected Brave independently verified public name, school and Art History department, compatible with Atlas ARTHIST, PHIL. Original directory capture retained. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:1973": {
       "instructor_key": "340:atlas:1973",
@@ -1837,15 +1867,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "462574",
+      "overall_rating": 4.2,
+      "difficulty": 3.7,
+      "rating_count": 19,
+      "fetched_at": "2026-10-07T17:33:26.224Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1973 (Sarah C. McPhee; ARTHIST, CL) is RMP 462574 (Sarah McPhee; Art History; school 340). Public RMP page confirms the same first and last name, Emory University, and Art History; department fits Atlas subjects ARTHIST, CL. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:30158": {
       "instructor_key": "340:atlas:30158",
@@ -1890,15 +1922,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1173660",
+      "overall_rating": 4.8,
+      "difficulty": 3,
+      "rating_count": 19,
+      "fetched_at": "2026-10-07T17:32:08.619Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 824 (Niall W Slater; ARTHIST, CL, LAT) is RMP 1173660 (Niall Slater; Classics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Classics fits Atlas subjects ARTHIST, CL, LAT. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:1395": {
       "instructor_key": "340:atlas:1395",
@@ -1925,15 +1959,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1930613",
+      "overall_rating": 3.5,
+      "difficulty": 3.6,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:35:13.007Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4926 (Todd S Cronan; ARTHIST) is RMP 1930613 (Todd Cronan; Art History; school 340). Public RMP first and last name agree after omitting middle names/initials; Art History at the Atlas school reasonably fits ARTHIST. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:43823": {
       "instructor_key": "340:atlas:43823",
@@ -2026,20 +2062,22 @@
     "340:atlas:28487": {
       "instructor_key": "340:atlas:28487",
       "name": "Larkin Ford",
-      "school_id": "340",
+      "school_id": "2633",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2752158",
+      "overall_rating": 5,
+      "difficulty": 2,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T18:49:50.589Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 28487 (Larkin Ford; ARTVIS) is RMP 2752158 (Larkin Ford; Graphic Arts; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects ARTVIS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:36107": {
       "instructor_key": "340:atlas:36107",
@@ -2996,15 +3034,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1842589",
+      "overall_rating": 4.6,
+      "difficulty": 2.2,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:35:12.532Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4902 (Samuel J Sober; BIOL) is RMP 1842589 (Samuel Sober; Biology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3268": {
       "instructor_key": "340:atlas:3268",
@@ -3192,15 +3232,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1711650",
+      "overall_rating": 3.8,
+      "difficulty": 3.4,
+      "rating_count": 97,
+      "fetched_at": "2026-10-07T17:32:08.752Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5239 (Patrick William Cafferty; BIOL, NBB) is RMP 1711650 (Patrick Cafferty; Biology; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Biology fits Atlas subjects BIOL, NBB. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:4525": {
       "instructor_key": "340:atlas:4525",
@@ -3209,15 +3251,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2249217",
+      "overall_rating": 5,
+      "difficulty": 2.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T18:33:05.498Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4525 (Thomas R. Gillespie; BIOL, ENVS) is RMP 2249217 (Thomas Gillespie; Science; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:16812": {
       "instructor_key": "340:atlas:16812",
@@ -3279,15 +3323,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "810919",
+      "overall_rating": 3,
+      "difficulty": 3.8,
+      "rating_count": 21,
+      "fetched_at": "2026-10-07T17:32:08.695Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3736 (Robert C Liu; BIOL, NBB) is RMP 810919 (Robert Liu; Biology; school 340). Public RMP first and last name agree after omitting middle names/initials; Biology at the Atlas school reasonably fits BIOL, NBB. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:15108": {
       "instructor_key": "340:atlas:15108",
@@ -3350,15 +3396,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1489289",
+      "overall_rating": 4.8,
+      "difficulty": 2.2,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T17:35:12.498Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4310 (Nicole Marie Gerardo; BIOL) is RMP 1489289 (Nicole Gerardo; Biology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Biology fits Atlas subjects BIOL. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:25601": {
       "instructor_key": "340:atlas:25601",
@@ -3521,15 +3569,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "490158",
+      "overall_rating": 4.4,
+      "difficulty": 3.6,
+      "rating_count": 25,
+      "fetched_at": "2026-10-07T18:49:50.409Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3366 (Nitya P Jacob; BIOL_OX) is RMP 490158 (Nitya Jacob; Biology; school 2633). Public RMP first and last name agree after omitting middle names/initials; Biology at the Atlas school reasonably fits BIOL_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:25143": {
       "instructor_key": "2633:atlas:25143",
@@ -3602,19 +3652,21 @@
     "2633:atlas:5207": {
       "instructor_key": "2633:atlas:5207",
       "name": "Cristy Tower-Gilchrist",
-      "school_id": "2633",
+      "school_id": "340",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2191497",
+      "overall_rating": 3.3,
+      "difficulty": 4.1,
+      "rating_count": 24,
+      "fetched_at": "2026-10-07T17:32:08.288Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5207 (Cristy Tower-Gilchrist; BIOL_OX, NRSG_OX) is RMP 2191497 (Cristy Tower-Gilchrist; Biology; school 340). Exact first and compound last name; Biology fits Atlas BIOL_OX/NRSG_OX. Official Emory Nursing source explicitly documents teaching employment at RMP school Emory University. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:42132": {
       "instructor_key": "340:atlas:42132",
@@ -4454,15 +4506,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1967197",
+      "overall_rating": 3.5,
+      "difficulty": 3.8,
+      "rating_count": 19,
+      "fetched_at": "2026-10-07T17:30:23.044Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 223 (Dennis C Liotta; CHEM) is RMP 1967197 (Dennis Liotta; Chemistry; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Chemistry fits Atlas subjects CHEM. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:14496": {
       "instructor_key": "2633:atlas:14496",
@@ -4488,15 +4542,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "320877",
+      "overall_rating": 3.7,
+      "difficulty": 2.8,
+      "rating_count": 79,
+      "fetched_at": "2026-10-07T18:49:50.357Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 653 (Lloyd R Parker; CHEM_OX) is RMP 320877 (Lloyd Parker; Chemistry; school 2633). Public RMP page confirms the same first and last name, Oxford College of Emory University, and Chemistry; department fits Atlas subjects CHEM_OX. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:46853": {
       "instructor_key": "2633:atlas:46853",
@@ -4641,15 +4697,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "570198",
+      "overall_rating": 4.6,
+      "difficulty": 2.6,
+      "rating_count": 34,
+      "fetched_at": "2026-10-07T18:49:50.377Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2149 (Brenda B Harmon; CHEM_OX, DSC_OX) is RMP 570198 (Brenda Harmon; Chemistry; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects CHEM_OX, DSC_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:7104": {
       "instructor_key": "340:atlas:7104",
@@ -4749,15 +4807,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1967242",
+      "overall_rating": 4.6,
+      "difficulty": 2.5,
+      "rating_count": 17,
+      "fetched_at": "2026-10-07T17:32:08.701Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5473 (Maria Franca Sibau; CHN, EAS, REL, THEA) is RMP 1967242 (Maria Sibau; Languages; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Languages fits Atlas subjects CHN, EAS, REL, THEA. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:39626": {
       "instructor_key": "340:atlas:39626",
@@ -4767,15 +4827,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3121178",
+      "overall_rating": 5,
+      "difficulty": 2,
+      "rating_count": 1,
+      "fetched_at": "2026-10-07T17:32:08.399Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39626 (Sarah M. Rodriguez; CHN, HIST, WGS) is RMP 3121178 (Sarah Rodriguez; History; school 340). Public RMP first and last name agree after omitting middle names/initials; History at the Atlas school reasonably fits CHN, HIST, WGS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:46615": {
       "instructor_key": "2633:atlas:46615",
@@ -5079,15 +5141,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2452083",
+      "overall_rating": 4.9,
+      "difficulty": 3.8,
+      "rating_count": 8,
+      "fetched_at": "2026-10-07T17:33:26.287Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4232 (Andrew J Mitchell; CPLT, PHIL) is RMP 2452083 (Andrew Mitchell; Philosophy; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:43255": {
       "instructor_key": "340:atlas:43255",
@@ -5448,20 +5512,22 @@
     "340:atlas:45220": {
       "instructor_key": "340:atlas:45220",
       "name": "Dishita Turakhia",
-      "school_id": "340",
+      "school_id": "675",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3050228",
+      "overall_rating": 3.4,
+      "difficulty": 3.2,
+      "rating_count": 11,
+      "fetched_at": "2026-10-08T01:43:45.962951Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 45220 (Dishita Turakhia; CS) is RMP 3050228 (Dishita Turakhia; Computer Science; school 675). Same first and last name, compatible department, and explicit official university teaching-employment evidence bridge the former RMP school and current Emory identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:31215": {
       "instructor_key": "340:atlas:31215",
@@ -5643,15 +5709,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2171340",
+      "overall_rating": 4,
+      "difficulty": 2,
+      "rating_count": 4,
+      "fetched_at": "2026-10-07T18:35:41.125Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 887 (Sally A Radell; DANC, THEA) is RMP 2171340 (Sally Radell; Fine Arts; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Fine Arts fits Atlas subjects DANC, THEA. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:6284": {
       "instructor_key": "340:atlas:6284",
@@ -5679,15 +5747,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2624125",
+      "overall_rating": 5,
+      "difficulty": 1.2,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:33:26.038Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3207 (Tara Shepard Myers; DANC) is RMP 2624125 (Tara Myers; Physical Education; school 340). First and last name agree after omitting Shepard; official bio confirms Tara Shepard Myers teaches dance, a reasonable fit for the RMP Physical Education label and Atlas DANC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3229": {
       "instructor_key": "340:atlas:3229",
@@ -5764,20 +5834,22 @@
     "340:atlas:5593": {
       "instructor_key": "340:atlas:5593",
       "name": "Mara Mandradjieff",
-      "school_id": "340",
+      "school_id": "481",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1761907",
+      "overall_rating": 4.3,
+      "difficulty": 2.1,
+      "rating_count": 9,
+      "fetched_at": "2026-10-08T01:43:47Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5593 (Mara Mandradjieff; DANC, WGS) is RMP 1761907 (Mara Mandradjieff; Art; school 481). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:3397": {
       "instructor_key": "340:atlas:3397",
@@ -5869,19 +5941,21 @@
     "2633:atlas:31321": {
       "instructor_key": "2633:atlas:31321",
       "name": "Kristin Bonnie",
-      "school_id": "2633",
+      "school_id": "97",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1045510",
+      "overall_rating": 4.1,
+      "difficulty": 3,
+      "rating_count": 13,
+      "fetched_at": "2026-10-08T01:45:21Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 31321 (Kristin Bonnie; DASCI_OX, PSYC_OX) is RMP 1045510 (Kristin Bonnie; Psychology; school 97). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "2633:atlas:677": {
       "instructor_key": "2633:atlas:677",
@@ -6218,20 +6292,22 @@
     "340:atlas:35777": {
       "instructor_key": "340:atlas:35777",
       "name": "Jo Guldi",
-      "school_id": "340",
+      "school_id": "927",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2198823",
+      "overall_rating": 3,
+      "difficulty": 4.3,
+      "rating_count": 15,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 35777 (Jo Guldi; DATASCI) is RMP 2198823 (Jo Guldi; History; school 927). Official Emory faculty biography identifies former Associate Professor of History appointment at Southern Methodist University and current Data & Decision Sciences position using machine learning/statistics; exact first/last name and historical data-science fit Atlas DATASCI. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:28482": {
       "instructor_key": "340:atlas:28482",
@@ -6254,38 +6330,42 @@
     "340:atlas:42895": {
       "instructor_key": "340:atlas:42895",
       "name": "Suchismita Dutta",
-      "school_id": "340",
+      "school_id": "361",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2729952",
+      "overall_rating": 4.6,
+      "difficulty": 1.6,
+      "rating_count": 10,
+      "fetched_at": "2026-10-08T01:48:36.639Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 42895 (Suchismita Dutta; DATASCI, ENGRD) is RMP 2729952 (Suchismita Dutta; Literature, Media, & Communication; school 361). Identical first and last name, compatible department with Atlas DATASCI, ENGRD, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:35759": {
       "instructor_key": "340:atlas:35759",
       "name": "Allison Stashko",
-      "school_id": "340",
+      "school_id": "1606",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2721711",
+      "overall_rating": 2.5,
+      "difficulty": 3.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 35759 (Allison Stashko; DATASCI) is RMP 2721711 (Allison Stashko; Finance; school 1606). Official Emory faculty biography explicitly identifies a former Assistant Professor appointment at University of Utah business school, current DATASCI teaching and matching Atlas email allison.stashko@emory.edu. Finance/economics/quantitative business fit DATASCI 315 Game Theory. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:39619": {
       "instructor_key": "340:atlas:39619",
@@ -6364,15 +6444,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2890453",
+      "overall_rating": 4.8,
+      "difficulty": 2.2,
+      "rating_count": 9,
+      "fetched_at": "2026-10-07T17:33:26.268Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 31706 (Alejandro Sanchez Becerra; DATASCI) is RMP 2890453 (Alejandro Becerra; Quantitative Theory & Methods; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:18143": {
       "instructor_key": "340:atlas:18143",
@@ -6691,15 +6773,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "483155",
+      "overall_rating": 4,
+      "difficulty": 3.2,
+      "rating_count": 26,
+      "fetched_at": "2026-10-07T18:49:50.452Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2956 (David B Gowler; DSC_OX, REL_OX) is RMP 483155 (David Gowler; Religion; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects DSC_OX, REL_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:3848": {
       "instructor_key": "2633:atlas:3848",
@@ -6708,15 +6792,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "934253",
+      "overall_rating": 4.3,
+      "difficulty": 3.1,
+      "rating_count": 68,
+      "fetched_at": "2026-10-07T18:49:50.400Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3848 (Brad K Hawley; DSC_OX, ENG_OX) is RMP 934253 (Brad Hawley; English; school 2633). Brad Hawley is the Oxford English instructor; use school-scoped Oxford profile 934253, not the separate Emory profile 2991604. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:24921": {
       "instructor_key": "2633:atlas:24921",
@@ -6776,15 +6862,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "1499753",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:50:47.216Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1793 (Stacy A McQuaide; DSC_OX, ENG_OX) is RMP 1499753 (Stacy McQuaide; English; school 2633). Public RMP first and last name agree after omitting middle names/initials; English at the Atlas school reasonably fits DSC_OX, ENG_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:4008": {
       "instructor_key": "2633:atlas:4008",
@@ -6793,32 +6881,36 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "925258",
+      "overall_rating": 4.2,
+      "difficulty": 2.8,
+      "rating_count": 46,
+      "fetched_at": "2026-10-07T18:49:50.509Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4008 (Eve L Mullen; DSC_OX, REL_OX) is RMP 925258 (Eve Mullen; Religion; school 2633). Public RMP profile confirms the same first and last name and department fit for Atlas subjects DSC_OX, REL_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:4227": {
       "instructor_key": "2633:atlas:4227",
       "name": "Cristina Tarazona",
-      "school_id": "2633",
+      "school_id": "340",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2094037",
+      "overall_rating": 4.1,
+      "difficulty": 3.1,
+      "rating_count": 15,
+      "fetched_at": "2026-10-07T17:35:12.398Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4227 (Cristina Tarazona; DSC_OX, INTER_OX, OXST_OX, SPAN_OX) is RMP 2094037 (Cristina Tarazona; Spanish; school 340). Same first and last name and Spanish department; official Oxford biography explicitly states prior teaching at Emory University, establishing the school bridge. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "2633:atlas:1752": {
       "instructor_key": "2633:atlas:1752",
@@ -6827,15 +6919,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "312654",
+      "overall_rating": 2.8,
+      "difficulty": 4.2,
+      "rating_count": 88,
+      "fetched_at": "2026-10-07T18:49:50.357Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1752 (Michael K Rogers; DSC_OX, MATH_OX) is RMP 312654 (Michael Rogers; Mathematics; school 2633). Public RMP first and last name agree after omitting middle names/initials; Mathematics at the Atlas school reasonably fits DSC_OX, MATH_OX. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:2927": {
       "instructor_key": "2633:atlas:2927",
@@ -7035,15 +7129,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "779752",
+      "overall_rating": 4.5,
+      "difficulty": 2.8,
+      "rating_count": 155,
+      "fetched_at": "2026-10-07T17:30:22.906Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3656 (Hugo M Mialon; ECON) is RMP 779752 (Hugo Mialon; Economics; school 340). Public RMP first and last name agree after omitting middle names/initials; Economics at the Atlas school reasonably fits ECON. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:15396": {
       "instructor_key": "340:atlas:15396",
@@ -7175,15 +7271,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2877172",
+      "overall_rating": 4,
+      "difficulty": 3.2,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T17:32:08.686Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 21989 (Teddy Kim; ECON, MATH) is RMP 2877172 (Teddy (Kyungmin) Kim; Economics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Economics fits Atlas subjects ECON, MATH. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:5916": {
       "instructor_key": "340:atlas:5916",
@@ -7402,15 +7500,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2559237",
+      "overall_rating": 3,
+      "difficulty": 3.4,
+      "rating_count": 35,
+      "fetched_at": "2026-10-07T17:30:22.896Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 18531 (Paloma Lopez de mesa Moyano; ECON) is RMP 2559237 (Paloma Moyano; Economics; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects ECON. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:34770": {
       "instructor_key": "340:atlas:34770",
@@ -9864,20 +9964,22 @@
     "340:atlas:43577": {
       "instructor_key": "340:atlas:43577",
       "name": "Alanna Prince",
-      "school_id": "340",
+      "school_id": "696",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2607096",
+      "overall_rating": 5,
+      "difficulty": 2,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:42:28Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 43577 (Alanna Prince; ENG) is RMP 2607096 (Alanna Prince; African-American Studies; school 696). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:1373": {
       "instructor_key": "340:atlas:1373",
@@ -10111,20 +10213,22 @@
     "340:atlas:47027": {
       "instructor_key": "340:atlas:47027",
       "name": "Lara Glenum",
-      "school_id": "340",
+      "school_id": "3071",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1910707",
+      "overall_rating": 4.1,
+      "difficulty": 2.3,
+      "rating_count": 6,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 47027 (Lara Glenum; ENGCW) is RMP 1910707 (Lara Glenum; English; school 3071). Official Emory faculty biography explicitly says Lara Glenum was Associate Professor of English at LSU and taught creative writing there; now Emory Lecturer in Poetry. Same first/last name, Atlas email lglenum@emory.edu, English/creative-writing fit ENGCW. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:40367": {
       "instructor_key": "340:atlas:40367",
@@ -10204,32 +10308,36 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3015339",
+      "overall_rating": 3,
+      "difficulty": 2.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T17:35:12.398Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 38417 (Elyce Mann; ENGCW, FILM) is RMP 3015339 (Elyce Strong-Mann; Film; school 340). Official university evidence establishes compound surname variant and the same first name; RMP Film fits Atlas teaching. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:24921": {
       "instructor_key": "340:atlas:24921",
       "name": "Tameka Cage Conley",
-      "school_id": "340",
+      "school_id": "2633",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2700447",
+      "overall_rating": 2.4,
+      "difficulty": 1.5,
+      "rating_count": 13,
+      "fetched_at": "2026-10-07T18:49:50.393Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 24921 (Tameka Cage Conley; ENGCW) is RMP 2700447 (Tameka Cage Conley; English; school 2633). Public RMP page confirms the same first and last name, Oxford College of Emory University, and English; department fits Atlas subjects ENGCW. Middle names or initials omitted by RMP do not change first/last identity. Official Oxford faculty directory establishes English/creative-writing teaching at Oxford. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:45548": {
       "instructor_key": "340:atlas:45548",
@@ -10304,20 +10412,22 @@
     "340:atlas:46618": {
       "instructor_key": "340:atlas:46618",
       "name": "Ellen Stenstrom",
-      "school_id": "340",
+      "school_id": "440",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2709594",
+      "overall_rating": 4.3,
+      "difficulty": 3.3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-08T01:44:59Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 46618 (Ellen Stenstrom; ENGRD) is RMP 2709594 (Ellen Stenstrom; English; school 440). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:40457": {
       "instructor_key": "340:atlas:40457",
@@ -10995,20 +11105,22 @@
     "340:atlas:39592": {
       "instructor_key": "340:atlas:39592",
       "name": "Alonso Llosa",
-      "school_id": "340",
+      "school_id": "157",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2912616",
+      "overall_rating": 4,
+      "difficulty": 2,
+      "rating_count": 1,
+      "fetched_at": "2026-10-08T01:48:36.639Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39592 (Alonso Llosa; FILM) is RMP 2912616 (Alonso Llosa; Television, Film, & Media Studies; school 157). Identical first and last name, compatible department with Atlas FILM, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:35737": {
       "instructor_key": "340:atlas:35737",
@@ -11031,20 +11143,22 @@
     "340:atlas:21807": {
       "instructor_key": "340:atlas:21807",
       "name": "Dehanza Rogers",
-      "school_id": "340",
+      "school_id": "298",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2337183",
+      "overall_rating": 1.7,
+      "difficulty": 4.3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-08T01:45:54.790228Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 21807 (Dehanza Rogers; FILM) is RMP 2337183 (Dehanza Rogers; Arts amp Sciences; school 298). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:7207": {
       "instructor_key": "340:atlas:7207",
@@ -11067,20 +11181,22 @@
     "340:atlas:46591": {
       "instructor_key": "340:atlas:46591",
       "name": "Adam Diller",
-      "school_id": "340",
+      "school_id": "4403",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
+      "professor_id": "2893163",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-08T01:48:36.639Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 46591 (Adam Diller; FILM) is RMP 2893163 (Adam Diller; Film; school 4403). Identical first and last name, compatible department with Atlas FILM, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:21747": {
       "instructor_key": "340:atlas:21747",
@@ -11247,15 +11363,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3098216",
+      "overall_rating": 4.2,
+      "difficulty": 3.4,
+      "rating_count": 17,
+      "fetched_at": "2026-10-07T17:33:25.736Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39796 (Brian Jonghwan Lee; FIN) is RMP 3098216 (Brian Lee; Business; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Business fits Atlas subjects FIN. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3023": {
       "instructor_key": "340:atlas:3023",
@@ -11315,15 +11433,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2472011",
+      "overall_rating": 3.6,
+      "difficulty": 2,
+      "rating_count": 7,
+      "fetched_at": "2026-10-07T17:33:26.156Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 64 (Nicholas Valerio III; FIN) is RMP 2472011 (Nicholas Valerio; Business; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35812": {
       "instructor_key": "340:atlas:35812",
@@ -11332,15 +11452,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3006825",
+      "overall_rating": 2,
+      "difficulty": 2.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T17:33:26.030Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 35812 (Sergio Garate; FIN) is RMP 3006825 (Sergio Gárate; Business; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:36036": {
       "instructor_key": "340:atlas:36036",
@@ -11808,15 +11930,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2336676",
+      "overall_rating": 3.8,
+      "difficulty": 2.9,
+      "rating_count": 9,
+      "fetched_at": "2026-10-07T17:32:08.824Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3820 (Peter Höyng; GER) is RMP 2336676 (Peter Hoeyng; Languages; school 340). Höyng → Hoeyng is the documented German umlaut transliteration for the same Peter; official Emory bio uses Höyng and phoeyng@emory.edu, and the Emory catalog uses Peter Hoeyng. Languages fits GER. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:243": {
       "instructor_key": "340:atlas:243",
@@ -11862,15 +11986,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2204431",
+      "overall_rating": 5,
+      "difficulty": 2.3,
+      "rating_count": 12,
+      "fetched_at": "2026-10-07T17:32:08.330Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 6267 (Pazit Kahlon; HEBR, JS) is RMP 2204431 (Pazit Kahlon-Shelnutt; Languages; school 340). Official faculty biography and exact Atlas email establish the compound surname Kahlon-Shelnutt; Languages fits HEBR/JS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35803": {
       "instructor_key": "340:atlas:35803",
@@ -12177,15 +12303,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2248018",
+      "overall_rating": 4.4,
+      "difficulty": 2.7,
+      "rating_count": 12,
+      "fetched_at": "2026-10-07T17:33:26.201Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3898 (Astrid M. Eckert; GER, HIST, JS) is RMP 2248018 (Astrid Eckert; History; school 340). Public RMP page confirms the same first and last name, Emory University, and History; department fits Atlas subjects GER, HIST, JS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:2955": {
       "instructor_key": "2633:atlas:2955",
@@ -12553,20 +12681,22 @@
     "340:atlas:18875": {
       "instructor_key": "340:atlas:18875",
       "name": "Dan Benardot",
-      "school_id": "340",
+      "school_id": "360",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1332621",
+      "overall_rating": 5,
+      "difficulty": 2.3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-08T01:43:10Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 18875 (Dan Benardot; HLTH) is RMP 1332621 (Dan Benardot; Nutrition; school 360). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:40480": {
       "instructor_key": "340:atlas:40480",
@@ -12938,15 +13068,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2878988",
+      "overall_rating": 5,
+      "difficulty": 2,
+      "rating_count": 7,
+      "fetched_at": "2026-10-07T17:32:08.269Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 10852 (Rose Deighton; IDS) is RMP 2878988 (Rose Deighton-Mohammed; Humanities; school 340). Official Emory biography uses Rose Deighton-Mohammed with exact Atlas email rose.deighton@emory.edu and explicitly lists IDS 190 and IDS 216-W teaching. Compound surname addition is documented; Humanities fits Atlas IDS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:18257": {
       "instructor_key": "340:atlas:18257",
@@ -13248,15 +13380,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2254506",
+      "overall_rating": 3.4,
+      "difficulty": 3.6,
+      "rating_count": 26,
+      "fetched_at": "2026-10-07T17:33:26.209Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 6931 (Tian Heong Chan; ISOM) is RMP 2254506 (Tian Chan; Business; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Business fits Atlas subjects ISOM. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35694": {
       "instructor_key": "340:atlas:35694",
@@ -13444,15 +13578,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2205640",
+      "overall_rating": 3.1,
+      "difficulty": 2.8,
+      "rating_count": 11,
+      "fetched_at": "2026-10-07T17:35:12.930Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 6715 (Seth J Goss; JPN, LING) is RMP 2205640 (Seth Goss; Languages; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Languages fits Atlas subjects JPN, LING. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3694": {
       "instructor_key": "340:atlas:3694",
@@ -13480,15 +13616,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1373897",
+      "overall_rating": 3.8,
+      "difficulty": 2.5,
+      "rating_count": 33,
+      "fetched_at": "2026-10-07T17:32:08.678Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3029 (William K Gilders; ANCMED, JS, REL) is RMP 1373897 (William Gilders; Religion; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3680": {
       "instructor_key": "340:atlas:3680",
@@ -13641,15 +13779,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
+      "professor_id": "3164791",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T17:30:22.930Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 43774 (Ji hye Sohn; KRN) is RMP 3164791 (Jihye Sohn; Languages; school 340). Same name with acceptable punctuation/spacing; public Emory department fits Atlas. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:9810": {
       "instructor_key": "340:atlas:9810",
@@ -13659,15 +13799,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3046248",
+      "overall_rating": 4,
+      "difficulty": 1.7,
+      "rating_count": 9,
+      "fetched_at": "2026-10-07T17:32:08.686Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 9810 (Taína Figueroa; LACS) is RMP 3046248 (Taina Figueroa; Latin American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects LACS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:24604": {
       "instructor_key": "340:atlas:24604",
@@ -13711,15 +13853,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2744380",
+      "overall_rating": 2,
+      "difficulty": 3.3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-07T18:33:05.344Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 27218 (Juan David Escobar Chacon; LACS, SPAN) is RMP 2744380 (Juan David Chacon; Spanish; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects LACS, SPAN. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:32095": {
       "instructor_key": "340:atlas:32095",
@@ -13800,15 +13944,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1619015",
+      "overall_rating": 4.2,
+      "difficulty": 3,
+      "rating_count": 23,
+      "fetched_at": "2026-10-07T17:30:22.966Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1628 (Jose Luis Boigues-Lopez; LING, SPAN) is RMP 1619015 (Jose Boigues; Spanish; school 340). Official Emory faculty bio uses José Luis Boigues (paternal surname) and the Atlas email confirms identity; Spanish and Linguistics match both Atlas subjects. RMP omits Luis and the secondary surname Lopez. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35813": {
       "instructor_key": "340:atlas:35813",
@@ -13818,32 +13964,36 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2939676",
+      "overall_rating": 3.2,
+      "difficulty": 2.9,
+      "rating_count": 43,
+      "fetched_at": "2026-10-07T17:32:08.348Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 35813 (Tamara Nicol Medina; LING, PSYC) is RMP 2939676 (Tamara Medina; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects LING, PSYC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:5224": {
       "instructor_key": "340:atlas:5224",
       "name": "Jack Hardy",
-      "school_id": "340",
+      "school_id": "2633",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2293272",
+      "overall_rating": 4.4,
+      "difficulty": 2.4,
+      "rating_count": 28,
+      "fetched_at": "2026-10-07T18:49:50.509Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5224 (Jack Hardy; LING) is RMP 2293272 (Jack Hardy; Mathematics; school 2633). Identical first and last name. Although RMP department label is Mathematics, its listed LINGOX101 course and official Oxford Associate Professor of Linguistics establish the same instructor teaching Atlas LING. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "2633:atlas:46422": {
       "instructor_key": "2633:atlas:46422",
@@ -14282,15 +14432,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "526407",
+      "overall_rating": 2.6,
+      "difficulty": 3.5,
+      "rating_count": 70,
+      "fetched_at": "2026-10-07T17:30:22.939Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 754 (Robert Roth Jr.; MATH) is RMP 526407 (Robert Roth; Mathematics; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects MATH. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:36390": {
       "instructor_key": "340:atlas:36390",
@@ -14423,15 +14575,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2283394",
+      "overall_rating": 3.3,
+      "difficulty": 4,
+      "rating_count": 65,
+      "fetched_at": "2026-10-07T17:30:23.023Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 15067 (Juan Villeta-García; MATH) is RMP 2283394 (Juan Villeta-Garcia; Mathematics; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Mathematics fits Atlas subjects MATH. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:44063": {
       "instructor_key": "340:atlas:44063",
@@ -14601,15 +14755,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2783236",
+      "overall_rating": 3.3,
+      "difficulty": 3.4,
+      "rating_count": 35,
+      "fetched_at": "2026-10-07T17:32:08.590Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 24885 (Talea L. Mayo; MATH) is RMP 2783236 (Talea Mayo; Mathematics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:44072": {
       "instructor_key": "340:atlas:44072",
@@ -14881,15 +15037,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2140684",
+      "overall_rating": 4.2,
+      "difficulty": 3,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:33:26.277Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4790 (Scott A Kugle; HIST, MESAS, REL) is RMP 2140684 (Scott Kugle; Middle Eastern Studies; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Middle Eastern Studies fits Atlas subjects HIST, MESAS, REL. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:4777": {
       "instructor_key": "340:atlas:4777",
@@ -15228,20 +15386,22 @@
     "340:atlas:39621": {
       "instructor_key": "340:atlas:39621",
       "name": "Daniel Castro Pantoja",
-      "school_id": "340",
+      "school_id": "1352",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3000991",
+      "overall_rating": 5,
+      "difficulty": 2,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:45:54.790228Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39621 (Daniel Castro Pantoja; MUS) is RMP 3000991 (Daniel Castro Pantoja; Music; school 1352). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:34734": {
       "instructor_key": "340:atlas:34734",
@@ -15281,20 +15441,22 @@
     "340:atlas:46923": {
       "instructor_key": "340:atlas:46923",
       "name": "Liam Hynes-Tawa",
-      "school_id": "340",
+      "school_id": "1161",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2876725",
+      "overall_rating": 3,
+      "difficulty": 3,
+      "rating_count": 1,
+      "fetched_at": "2026-10-08T01:45:21Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 46923 (Liam Hynes-Tawa; MUS) is RMP 2876725 (Liam Hynes-Tawa; Music; school 1161). Exact first and last name and department fit, with official faculty biography/CV confirming teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:2145": {
       "instructor_key": "340:atlas:2145",
@@ -15479,20 +15641,22 @@
     "340:atlas:5956": {
       "instructor_key": "340:atlas:5956",
       "name": "Luther Enloe",
-      "school_id": "340",
+      "school_id": "360",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2217909",
+      "overall_rating": 4.5,
+      "difficulty": 2.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:43:47Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5956 (Luther Enloe; MUS) is RMP 2217909 (Luther Enloe; Music; school 360). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:43593": {
       "instructor_key": "340:atlas:43593",
@@ -15662,15 +15826,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "485033",
+      "overall_rating": 3.8,
+      "difficulty": 3.2,
+      "rating_count": 22,
+      "fetched_at": "2026-10-07T17:30:22.750Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1805 (Hillary R Rodman; NBB, PSYC) is RMP 485033 (Hillary Rodman; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects NBB, PSYC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:18166": {
       "instructor_key": "340:atlas:18166",
@@ -15698,15 +15864,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2282769",
+      "overall_rating": 4.2,
+      "difficulty": 3.3,
+      "rating_count": 10,
+      "fetched_at": "2026-10-07T18:33:05.354Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2842 (Leah Anderson Roesch; NBB) is RMP 2282769 (Leah Roesch; Biology; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:5821": {
       "instructor_key": "340:atlas:5821",
@@ -15870,15 +16038,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3072450",
+      "overall_rating": 4.8,
+      "difficulty": 1.2,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:32:08.441Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4251 (Jennifer K Frediani; NRSG) is RMP 3072450 (Jennifer Frediani; Nursing; school 340). Public RMP first and last name agree after omitting middle names/initials; Nursing at the Atlas school reasonably fits NRSG. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:40181": {
       "instructor_key": "340:atlas:40181",
@@ -16104,19 +16274,21 @@
     "340:atlas:7317": {
       "instructor_key": "340:atlas:7317",
       "name": "Rowena Elliott",
-      "school_id": "340",
+      "school_id": "1361",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1901635",
+      "overall_rating": 5,
+      "difficulty": 1.5,
+      "rating_count": 4,
+      "fetched_at": "2026-10-08T01:48:36.639Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 7317 (Rowena Elliott; NRSG) is RMP 1901635 (Rowena Elliott; Nursing; school 1361). Identical first and last name, compatible department with Atlas NRSG, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:3062": {
       "instructor_key": "340:atlas:3062",
@@ -16244,15 +16416,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "ambiguous",
+      "professor_id": "2242643",
+      "overall_rating": 4.3,
+      "difficulty": 3.4,
+      "rating_count": 42,
+      "fetched_at": "2026-10-07T17:32:08.252Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 12712 (John Kim; OAM) is RMP 2242643 (John Kim; Business Administration; school 340). Public RMP page confirms the same first and last name, Emory University, and Business Administration; department fits Atlas subjects OAM. Middle names or initials omitted by RMP do not change first/last identity. Other John Kim profile is Economics and lists ECON333, whereas selected Business Administration profile lists OAM330/OAM331. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:46473": {
       "instructor_key": "340:atlas:46473",
@@ -17050,15 +17224,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1893449",
+      "overall_rating": 4.9,
+      "difficulty": 3,
+      "rating_count": 15,
+      "fetched_at": "2026-10-07T17:35:12.432Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3806 (Lynne R Huffer; PHIL) is RMP 1893449 (Lynne Huffer; Women's Studies; school 340). First and last name agree; official Emory Philosophy bio confirms philosophy appointment and feminist/queer theory teaching context for RMP Women’s Studies department. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:32552": {
       "instructor_key": "340:atlas:32552",
@@ -17115,20 +17291,22 @@
     "340:atlas:46397": {
       "instructor_key": "340:atlas:46397",
       "name": "Eric Sanday",
-      "school_id": "340",
+      "school_id": "1118",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1232136",
+      "overall_rating": 3.3,
+      "difficulty": 3.7,
+      "rating_count": 23,
+      "fetched_at": "2026-10-08T01:45:21Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 46397 (Eric Sanday; PHIL) is RMP 1232136 (Eric Sanday; Philosophy; school 1118). Same first and last name on public RMP page. Department fits Atlas teaching; official university biography establishes teaching employment at the RMP school and connection to current Emory/Oxford faculty identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:31636": {
       "instructor_key": "340:atlas:31636",
@@ -17138,15 +17316,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2990513",
+      "overall_rating": 2,
+      "difficulty": 3,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T17:32:08.183Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 31636 (Aminah Hasan-Birdwell; PHIL) is RMP 2990513 (Aminah  Birdwell; Philosophy; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects PHIL. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:44058": {
       "instructor_key": "340:atlas:44058",
@@ -17281,15 +17461,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2253024",
+      "overall_rating": 4.9,
+      "difficulty": 1.8,
+      "rating_count": 16,
+      "fetched_at": "2026-10-07T17:33:25.813Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3796 (Sara L McClintock; PHIL, REL) is RMP 2253024 (Sara McClintock; Religion; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Religion fits Atlas subjects PHIL, REL. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:4412": {
       "instructor_key": "340:atlas:4412",
@@ -17298,15 +17480,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1868324",
+      "overall_rating": 4.3,
+      "difficulty": 4.1,
+      "rating_count": 15,
+      "fetched_at": "2026-10-07T17:35:12.177Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 4412 (John J Stuhr; PHIL) is RMP 1868324 (John Stuhr; Philosophy; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Philosophy fits Atlas subjects PHIL. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:2110": {
       "instructor_key": "340:atlas:2110",
@@ -17329,19 +17513,21 @@
     "2633:atlas:42204": {
       "instructor_key": "2633:atlas:42204",
       "name": "Anthony Iliopoulos",
-      "school_id": "2633",
+      "school_id": "340",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "3112854",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:46:15.203Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 42204 (Anthony Iliopoulos; PHIL_OX) is RMP 3112854 (Anthony Iliopoulos; Philosophy; school 340). Exact first and last name Anthony Iliopoulos, Philosophy at Emory RMP fits Oxford PHIL teaching; official Oxford identity confirms the same instructor. Root independently opened the public RMP profile in connected Brave after web-reader errors. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "2633:atlas:43557": {
       "instructor_key": "2633:atlas:43557",
@@ -17368,15 +17554,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2144069",
+      "overall_rating": 4.8,
+      "difficulty": 3.1,
+      "rating_count": 33,
+      "fetched_at": "2026-10-07T17:32:08.458Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5852 (Erin Wells Bonning; PHYS) is RMP 2144069 (Erin Bonning; Physics; school 340). Public RMP page confirms the same first and last name, Emory University, and Physics; department fits Atlas subjects PHYS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:14786": {
       "instructor_key": "340:atlas:14786",
@@ -17422,15 +17610,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1839045",
+      "overall_rating": 3.4,
+      "difficulty": 2.9,
+      "rating_count": 22,
+      "fetched_at": "2026-10-07T17:33:25.776Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5836 (Justin C Burton; PHYS, SUST) is RMP 1839045 (Justin Burton; Physics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:4519": {
       "instructor_key": "340:atlas:4519",
@@ -17565,15 +17755,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1166414",
+      "overall_rating": 2.4,
+      "difficulty": 3,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T18:40:54.348Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 86 (John A Malko; PHYS) is RMP 1166414 (John Malko; Physics; school 340). Same first and last name after middle-name/initial, accent, compound-surname, or suffix normalization; RMP department fits Atlas teaching subjects. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:46970": {
       "instructor_key": "340:atlas:46970",
@@ -17904,15 +18096,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1054114",
+      "overall_rating": 2.9,
+      "difficulty": 3.2,
+      "rating_count": 59,
+      "fetched_at": "2026-10-07T17:32:08.608Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 271 (David Davis III; POLS) is RMP 1054114 (David Davis; Political Science; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Political Science fits Atlas subjects POLS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:5829": {
       "instructor_key": "340:atlas:5829",
@@ -17990,15 +18184,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3162373",
+      "overall_rating": 5,
+      "difficulty": 3.5,
+      "rating_count": 2,
+      "fetched_at": "2026-10-07T17:30:22.939Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 43760 (Evan Gee; POLS) is RMP 3162373 (Evan Cree Gee; Political Science; school 340). Public RMP first and last name agree after omitting middle names/initials; Political Science at the Atlas school reasonably fits POLS. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:33211": {
       "instructor_key": "340:atlas:33211",
@@ -18061,15 +18257,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2065970",
+      "overall_rating": 2.8,
+      "difficulty": 1.8,
+      "rating_count": 33,
+      "fetched_at": "2026-10-07T17:32:08.669Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 3455 (Holli A Semetko; POLS) is RMP 2065970 (Holli Semetko; Political Science; school 340). Public RMP page confirms the same first and last name, Emory University, and Political Science; department fits Atlas subjects POLS. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:36180": {
       "instructor_key": "340:atlas:36180",
@@ -18217,15 +18415,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "3151793",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:46:15.213Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 6061 (Miguel R. Rueda; POLS) is RMP 3151793 (Miguel Rueda; Political Science; school 340). Connected Brave verification by parent confirms same first/last name, Emory University and Atlas department fit. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:46966": {
       "instructor_key": "340:atlas:46966",
@@ -18265,37 +18465,41 @@
     "340:atlas:12938": {
       "instructor_key": "340:atlas:12938",
       "name": "Courtney Callahan",
-      "school_id": "340",
+      "school_id": "15723",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2703821",
+      "overall_rating": 4.6,
+      "difficulty": 2,
+      "rating_count": 5,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 12938 (Courtney Callahan; PORT) is RMP 2703821 (Courtney Callahan; Spanish; school 15723). Official Emory faculty biography explicitly says Courtney Callahan taught beginner, intermediate and advanced language courses at Arizona State University and is now Visiting Assistant Professor of Portuguese. Same first/last name, matching Atlas email, and related language teaching fit PORT. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:24992": {
       "instructor_key": "340:atlas:24992",
       "name": "Marilia Ribeiro",
-      "school_id": "340",
+      "school_id": "601",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1135871",
+      "overall_rating": 4.8,
+      "difficulty": 3,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 24992 (Marilia Ribeiro; PORT, SPAN) is RMP 1135871 (Marilia Ribeiro; Languages; school 601). Official Emory faculty biography explicitly says Marilia Ribeiro taught at Michigan State University; current Portuguese teaching appointment and matching Atlas email establish same first/last name and PORT/SPAN Languages fit. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:1193": {
       "instructor_key": "340:atlas:1193",
@@ -18305,15 +18509,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "55085",
+      "overall_rating": 3.8,
+      "difficulty": 4.3,
+      "rating_count": 189,
+      "fetched_at": "2026-10-07T17:30:23.001Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1193 (David A Edwards; PSYC) is RMP 55085 (David Edwards; Psychology; school 340). Public RMP first and last name agree after omitting middle names/initials; Psychology at the Atlas school reasonably fits PSYC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:7915": {
       "instructor_key": "340:atlas:7915",
@@ -18639,15 +18845,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2057120",
+      "overall_rating": 3.6,
+      "difficulty": 3.3,
+      "rating_count": 35,
+      "fetched_at": "2026-10-07T17:30:22.872Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 5643 (Daniel D Dilks; PSYC) is RMP 2057120 (Daniel Dilks; Psychology; school 340). Public RMP page confirms the same first and last name, Emory University, and Psychology; department fits Atlas subjects PSYC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:2488": {
       "instructor_key": "340:atlas:2488",
@@ -18657,15 +18865,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2133896",
+      "overall_rating": 4.3,
+      "difficulty": 1.8,
+      "rating_count": 6,
+      "fetched_at": "2026-10-07T17:32:08.776Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2488 (Gregory S Berns; PSYC) is RMP 2133896 (Gregory Berns; Psychology; school 340). Same first and last name after normalizing middle names, suffixes, accents, or parenthetical name; verified Emory Psychology fits Atlas subjects PSYC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:18514": {
       "instructor_key": "340:atlas:18514",
@@ -18710,15 +18920,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2344133",
+      "overall_rating": 4.1,
+      "difficulty": 3.6,
+      "rating_count": 24,
+      "fetched_at": "2026-10-07T17:32:08.368Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 7143 (Prof. Rohan Palmer; PSYC) is RMP 2344133 (Rohan Palmer; Psychology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Psychology fits Atlas subjects PSYC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:1997": {
       "instructor_key": "340:atlas:1997",
@@ -18835,15 +19047,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1661897",
+      "overall_rating": 2.9,
+      "difficulty": 4,
+      "rating_count": 13,
+      "fetched_at": "2026-10-07T18:33:05.531Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 11 (Sherryl H Goodman; PSYC) is RMP 1661897 (Sherryl Goodman; Psychology; school 340). Public RMP page confirms the same first and last name, Emory University, and Psychology; department fits Atlas subjects PSYC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3688": {
       "instructor_key": "340:atlas:3688",
@@ -19012,15 +19226,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "3490483",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:50:47.094Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39180 (Joanne Agayoff Deocampo; PSYC_OX) is RMP 3490483 (Joanne Deocampo; Psychology; school 2633). Same first and last name after accent/middle-name normalization; connected Brave independently verified public name, school and Psychology department, compatible with Atlas PSYC_OX. Original directory capture retained. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:43554": {
       "instructor_key": "2633:atlas:43554",
@@ -19470,15 +19686,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2353964",
+      "overall_rating": 3.8,
+      "difficulty": 3.4,
+      "rating_count": 5,
+      "fetched_at": "2026-10-07T17:35:12.987Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1195 (Karen A Hegtvedt; SOC) is RMP 2353964 (Karen Hegtvedt; Sociology; school 340). Same full first and last name; omitted middle name/initial or title is acceptable. Public Emory profile department Sociology fits Atlas subjects SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:2000": {
       "instructor_key": "340:atlas:2000",
@@ -19488,15 +19706,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "777231",
+      "overall_rating": 4.7,
+      "difficulty": 2.1,
+      "rating_count": 56,
+      "fetched_at": "2026-10-07T17:32:08.269Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2000 (Tracy L Scott; SOC) is RMP 777231 (Tracy Scott; Sociology; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:43173": {
       "instructor_key": "340:atlas:43173",
@@ -19556,15 +19776,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "ambiguous",
+      "professor_id": "2862321",
+      "overall_rating": 2.4,
+      "difficulty": 2.2,
+      "rating_count": 9,
+      "fetched_at": "2026-10-07T17:32:08.695Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 31377 (Karida Brown; SOC) is RMP 2862321 (Karida Brown; Sociology; school 340). Public RMP page confirms the same first and last name, Emory University, and Sociology; department fits Atlas subjects SOC. Middle names or initials omitted by RMP do not change first/last identity. Other profile is Social Work and has no ratings; Sociology directly fits Atlas SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:10397": {
       "instructor_key": "340:atlas:10397",
@@ -19609,15 +19831,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "1217257",
+      "overall_rating": 4.9,
+      "difficulty": 1.7,
+      "rating_count": 17,
+      "fetched_at": "2026-10-07T17:35:12.510Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 1763 (Timothy J Dowd; SOC) is RMP 1217257 (Timothy Dowd; Sociology; school 340). Public RMP page confirms the same first and last name, Emory University, and Sociology; department fits Atlas subjects SOC. Middle names or initials omitted by RMP do not change first/last identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:2960": {
       "instructor_key": "340:atlas:2960",
@@ -19730,15 +19954,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
+      "professor_id": "5074368",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:48:14.855Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 40203 (Stella Soojin Kim; SPAN) is RMP 5074368 (Stella Kim; Spanish; school 340). Connected Brave verification by parent confirms same first/last name, Emory University and Atlas department fit. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:26467": {
       "instructor_key": "340:atlas:26467",
@@ -19848,20 +20074,22 @@
     "340:atlas:36189": {
       "instructor_key": "340:atlas:36189",
       "name": "Laura Torres-Rodriguez",
-      "school_id": "340",
+      "school_id": "675",
       "terms": [
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2374790",
+      "overall_rating": 5,
+      "difficulty": 3,
+      "rating_count": 3,
+      "fetched_at": "2026-10-08T01:43:47Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 36189 (Laura Torres-Rodriguez; HLTH, LACS, SPAN) is RMP 2374790 (Laura Torres-Rodriguez; Spanish; school 675). Exact full first and last name, department fit, and official faculty evidence of teaching employment at the external RMP institution. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "2633:atlas:39528": {
       "instructor_key": "2633:atlas:39528",
@@ -19870,15 +20098,17 @@
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3049973",
+      "overall_rating": 4.3,
+      "difficulty": 1.7,
+      "rating_count": 3,
+      "fetched_at": "2026-10-07T18:49:50.523Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39528 (Guillermo Pupo Pernet; SPAN_OX) is RMP 3049973 (Guillermo Pernet; Languages; school 2633). Same first and last name with compound/middle surname omitted; official Oxford directory uses Guillermo Pernet for its visiting Spanish professor, matching the Atlas Spanish identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "2633:atlas:3676": {
       "instructor_key": "2633:atlas:3676",
@@ -19905,15 +20135,17 @@
         "Fall_2026",
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3031553",
+      "overall_rating": 4,
+      "difficulty": 3,
+      "rating_count": 23,
+      "fetched_at": "2026-10-07T17:32:08.509Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39587 (Héctor Alvarez; HLTH, THEA) is RMP 3031553 (Hector Alvarez; Theater; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects HLTH, THEA. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3224": {
       "instructor_key": "340:atlas:3224",
@@ -20128,19 +20360,21 @@
     "340:atlas:22652": {
       "instructor_key": "340:atlas:22652",
       "name": "Shanya Cordis",
-      "school_id": "340",
+      "school_id": "4163",
       "terms": [
         "Fall_2026"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2395894",
+      "overall_rating": 5,
+      "difficulty": 4,
+      "rating_count": 1,
+      "fetched_at": "2026-10-08T01:43:45.962864Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 22652 (Shanya Cordis; WGS) is RMP 2395894 (Shanya Cordis; Anthropology; school 4163). Same first and last name, compatible department, and explicit official university teaching-employment evidence bridge the former RMP school and current Emory identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:44043": {
       "instructor_key": "340:atlas:44043",
@@ -20360,15 +20594,17 @@
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2799104",
+      "overall_rating": 2,
+      "difficulty": 2,
+      "rating_count": 1,
+      "fetched_at": "2026-10-07T17:30:22.975Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 22002 (Jessica Lynn Stewart; AAS, POLS, SOC) is RMP 2799104 (Jessica Stewart; African-American Studies; school 340). Public RMP profile confirms the same first and last name and department fit for Atlas subjects AAS, POLS, SOC. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:36385": {
       "instructor_key": "340:atlas:36385",
@@ -20441,19 +20677,21 @@
     "340:atlas:39625": {
       "instructor_key": "340:atlas:39625",
       "name": "Erica Dunbar",
-      "school_id": "340",
+      "school_id": "825",
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2540649",
+      "overall_rating": 4.5,
+      "difficulty": 3,
+      "rating_count": 2,
+      "fetched_at": "2026-10-08T01:48:36.639Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 39625 (Erica Dunbar; AAS, HIST) is RMP 2540649 (Erica Dunbar; History; school 825). Identical first and last name, compatible department with Atlas AAS, HIST, and official university biographical evidence establishes teaching employment at the external RMP school. School ID confirmed from linked RMP school page. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:40551": {
       "instructor_key": "340:atlas:40551",
@@ -20904,15 +21142,17 @@
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3009583",
+      "overall_rating": 3.6,
+      "difficulty": 3.4,
+      "rating_count": 9,
+      "fetched_at": "2026-10-07T17:33:26.232Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 35739 (Laura K.G. Ackerman-Biegasiewicz; CHEM) is RMP 3009583 (Laura Ackerman; Chemistry; school 340). Official university evidence establishes compound surname variant and the same first name; RMP Chemistry fits Atlas teaching. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:35711": {
       "instructor_key": "340:atlas:35711",
@@ -20989,15 +21229,17 @@
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
+      "professor_id": "2794335",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-08T01:50:31.727Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 24884 (Fang Liu; CHEM) is RMP 2794335 (Fang Liu; Chemistry; school 340). Public RMP profile directly verifies exact Fang Liu, Chemistry at Emory University; CHEM fit. No ratings yet, so rating/difficulty unavailable and count zero. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:5684": {
       "instructor_key": "340:atlas:5684",
@@ -21631,19 +21873,21 @@
     "340:atlas:36037": {
       "instructor_key": "340:atlas:36037",
       "name": "Pedro Sant'Anna",
-      "school_id": "340",
+      "school_id": "4002",
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2042619",
+      "overall_rating": 3.4,
+      "difficulty": 4.4,
+      "rating_count": 17,
+      "fetched_at": "2026-10-08T01:46:24.154801Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 36037 (Pedro Sant'Anna; ECON) is RMP 2042619 (Pedro Sant'Anna; Economics; school 4002). Same full first and last name, Economics fits Atlas ECON; official university-hosted biography explicitly identifies prior Vanderbilt Assistant Professor employment. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:6995": {
       "instructor_key": "340:atlas:6995",
@@ -22230,15 +22474,17 @@
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2056341",
+      "overall_rating": 3.4,
+      "difficulty": 4.1,
+      "rating_count": 16,
+      "fetched_at": "2026-10-07T17:33:26.330Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 2219 (Amanda A Freeman; HLTH) is RMP 2056341 (Amanda Freeman; Health Science; school 340). Public RMP first and last name agree after omitting middle names/initials; Health Science at the Atlas school reasonably fits HLTH. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:38": {
       "instructor_key": "340:atlas:38",
@@ -22621,15 +22867,17 @@
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
+      "professor_id": "3158676",
       "overall_rating": null,
       "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "rating_count": 0,
+      "fetched_at": "2026-10-07T18:44:36.278Z",
+      "status": "unrated",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 43777 (Zirui Yang; POLS) is RMP 3158676 (Zirui (Tony) Yang; Political Science; school 340). Public RMP lists Zirui (Tony) Yang in Political Science at Emory, preserving the same first and last name and matching Atlas POLS. Root independently verified the profile in connected Brave after web-reader errors. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": false
     },
     "340:atlas:3059": {
       "instructor_key": "340:atlas:3059",
@@ -22685,36 +22933,40 @@
     "340:atlas:46132": {
       "instructor_key": "340:atlas:46132",
       "name": "Michael Hallquist",
-      "school_id": "340",
+      "school_id": "1232",
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "3042330",
+      "overall_rating": 1.3,
+      "difficulty": 4,
+      "rating_count": 6,
+      "fetched_at": "2026-10-08T01:45:54.790228Z",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 46132 (Michael Hallquist; PSYC) is RMP 3042330 (Michael Hallquist; Psychology; school 1232). Same full first and last name and department fit; official university evidence explicitly establishes prior faculty/teaching employment at the external RMP school. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:48045": {
       "instructor_key": "340:atlas:48045",
       "name": "Shehnaz Haqqani",
-      "school_id": "340",
+      "school_id": "591",
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2423789",
+      "overall_rating": 2.1,
+      "difficulty": 4.2,
+      "rating_count": 65,
+      "fetched_at": "2026-10-08T01:57:11.065660+00:00",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 48045 (Shehnaz Haqqani; REL) is RMP 2423789 (Shehnaz Haqqani; Religion; school 591). Exact full first and last name Shehnaz Haqqani, Religion fits Atlas REL, and official Mercer faculty appointment news explicitly establishes religion teaching faculty role and Emory Visiting Faculty fellowship. Numeric school link and fresh direct public summary independently confirmed. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:24418": {
       "instructor_key": "340:atlas:24418",
@@ -22855,19 +23107,21 @@
     "340:atlas:40329": {
       "instructor_key": "340:atlas:40329",
       "name": "Tavia Stanford",
-      "school_id": "340",
+      "school_id": "1058",
       "terms": [
         "Spring_2027"
       ],
-      "professor_id": null,
-      "overall_rating": null,
-      "difficulty": null,
-      "rating_count": null,
-      "fetched_at": null,
-      "status": "unmatched",
+      "professor_id": "2955102",
+      "overall_rating": 5,
+      "difficulty": 1,
+      "rating_count": 3,
+      "fetched_at": "2026-10-08T01:57:11.065660+00:00",
+      "status": "matched",
       "stale": false,
-      "verified": false,
-      "last_attempt_at": "2026-10-07T19:49:46.350973+00:00"
+      "verified": true,
+      "last_attempt_at": "2026-10-08T01:57:53.592695+00:00",
+      "override_label": "Reviewed October 7, 2026: Atlas instructor 40329 (Tavia Stanford; WGS) is RMP 2955102 (Tavia Stanford; Women's Studies; school 1058). Exact first and last name and WGS teaching fit. Official Alabama Spring2024 schedule explicitly lists Tavia Stanford as WS200 primary instructor, and official Emory WGSS biography confirms her Alabama academic history; together they establish the prior teaching identity. Evidence: data/rmp/identity-review-20261007.json.",
+      "cross_school_override": true
     },
     "340:atlas:28673": {
       "instructor_key": "340:atlas:28673",
@@ -22992,10 +23246,10 @@
   "report": {
     "instructors": 1321,
     "counts": {
-      "unmatched": 684,
-      "matched": 571,
-      "unrated": 51,
-      "ambiguous": 15
+      "ambiguous": 13,
+      "matched": 688,
+      "unmatched": 558,
+      "unrated": 62
     },
     "failures": [],
     "started_at": "2026-10-07T19:49:46.350973+00:00",
@@ -33978,7 +34232,30 @@
         "applied_at": "2026-10-08T00:54:22.266543+00:00",
         "fetched_at": "2026-10-07T17:30:23.023Z",
         "reason": "Verified October 7, 2026: Atlas instructor 3543 is Tracy McGill, teaching Emory Chemistry. Her confirmed Emory RMP profile 251830 uses the fuller name Tracy Morkin McGill."
+      },
+      {
+        "instructor_key": "340:atlas:4917",
+        "professor_id": "2007364",
+        "applied_at": "2026-10-08T01:26:36.570446+00:00",
+        "fetched_at": "2026-10-07T17:30:22.993Z",
+        "reason": "Verified October 7, 2026: Atlas instructor 4917 is Megan F. Cole, teaching Emory Biology. Her confirmed Emory RMP profile 2007364 uses the name Megan Cole without the middle initial."
       }
-    ]
+    ],
+    "identity_review": {
+      "reviewed_at": "2026-10-08T01:57:53.592695+00:00",
+      "audit": "data/rmp/identity-review-20261007.json",
+      "instructors_reviewed": 698,
+      "decisions": {
+        "approve": 127,
+        "skip": 487,
+        "uncertain": 84
+      },
+      "new_link_counts": {
+        "matched": 116,
+        "unrated": 11
+      },
+      "source": "reviewed-public-rmp-profiles",
+      "existing_linked_and_skipped_entries_preserved": true
+    }
   }
 }
