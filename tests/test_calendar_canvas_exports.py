@@ -3,7 +3,7 @@ import unittest
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from services import calendar_events, dashboard_summary, ics_builder
+from services import calendar_events, calendar_projection, dashboard_summary, ics_builder
 import blueprints.calendar_api as calendar_api
 
 
@@ -71,35 +71,27 @@ class CalendarCanvasExportTestCase(unittest.TestCase):
             _canvas_row("hidden"),
         ]
         overrides = [{"event_ref": "hidden", "hidden": True}]
-        dependencies = {
-            "configured_feed_urls": lambda _settings: [],
+        calendar_collaborators = {
             "list_calendar_rows_all": lambda table, _queries: (
                 rows if table == "calendar_cache" else []
             ),
             "load_calendar_preferences": lambda *_args: [],
             "load_local_calendar_sources": lambda *_args: [],
             "load_calendar_feed_metadata": lambda *_args: {},
-            "configured_calendar_sources": lambda *_args: [],
-            "filter_configured_cache_events": lambda events, _urls: events,
             "load_event_overrides": lambda _user_id: overrides,
-            "project_canvas_events": _project,
-            "api_event_overlaps_range": calendar_events._api_event_overlaps_range,
-            "serialize_event": calendar_events._serialize_event,
-            "apply_event_override": calendar_events._apply_event_override,
-            "serialize_user_event": calendar_events._serialize_user_event,
             "task_calendar_events_for_user": lambda *_args: [],
             "logger": unittest.mock.Mock(),
-            "as_utc": dashboard_summary.as_utc,
-            "date_key": dashboard_summary.date_key,
-            "sort_key": dashboard_summary.sort_key,
         }
 
-        with patch.object(dashboard_summary, "datetime", wraps=datetime) as clock:
+        with patch.object(dashboard_summary, "datetime", wraps=datetime) as clock, patch.object(calendar_projection, "_project_canvas_calendar_events", side_effect=_project), patch("services.external_calendar_service.project") as providers:
             clock.now.return_value = datetime(2026, 8, 20, 12, tzinfo=timezone.utc)
-            summary = dashboard_summary.load_calendar_summary("user-1", {}, dependencies)
+            summary = dashboard_summary.load_calendar_summary(
+                "user-1", {}, **calendar_collaborators,
+            )
 
         self.assertEqual([event["id"] for event in summary["events"]], ["uid-active"])
         self.assertTrue(summary["setup_complete"])
+        providers.assert_not_called()
 
     def test_public_share_uses_projection_filters_scope_and_strips_private_fields(self):
         outside = _canvas_row("outside")
@@ -127,8 +119,10 @@ class CalendarCanvasExportTestCase(unittest.TestCase):
 
         settings = {"user_id": "user-1", "canvas_ical_url": ""}
         with patch.object(calendar_api, "first_row", return_value=settings), \
-                patch.object(calendar_api, "list_calendar_rows_all", side_effect=list_rows), \
-                patch.object(calendar_api, "_project_canvas_calendar_events", side_effect=_project):
+                patch.object(calendar_projection, "list_calendar_rows_all", side_effect=list_rows), \
+                patch.object(calendar_projection, "_load_calendar_preferences", return_value=[]), \
+                patch.object(calendar_projection, "_load_event_overrides", return_value=[]), \
+                patch.object(calendar_projection, "_project_canvas_calendar_events", side_effect=_project):
             payload = calendar_api._public_calendar_events_payload(
                 share,
                 datetime(2026, 8, 20, tzinfo=timezone.utc),

@@ -1,13 +1,6 @@
+import featureModules from "./helpers/feature-modules.cjs";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
-import vm from "node:vm";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const source = await readFile(path.join(repoRoot, "static/js/calendar/events/ui-actions.js"), "utf8");
-const indexSource = await readFile(path.join(repoRoot, "static/js/calendar/index.js"), "utf8");
 
 class Element {
     constructor(doc, tag = "div", attrs = {}) {
@@ -77,7 +70,7 @@ class Document extends Element {
 function fixture({ readOnly = false } = {}) {
     const document = new Document();
     const context = { document, window: document.defaultView, console };
-    vm.runInNewContext(source, context);
+    const { createCalendarUiActions } = featureModules.loadFeatureModule("calendar/events/ui-actions.js", context);
     const state = {
         public: { readOnly },
         calendars: {
@@ -90,7 +83,7 @@ function fixture({ readOnly = false } = {}) {
         ui: { contextMenuEl: null, contextAnchorEl: null, contextCalendarName: null },
     };
     const calls = [];
-    const actions = context.window.APStudyCalendarUiActions.createCalendarUiActions({
+    const actions = createCalendarUiActions({
         root: document,
         state,
         callbacks: {
@@ -155,56 +148,16 @@ test("Canvas and Tasks menu actions use the direct subscription callback", () =>
     ]);
 });
 
-test("the actual index wiring passes share eligibility and opener callbacks to the per-calendar menu", () => {
-    const start = indexSource.indexOf("const calendarShare = window.APStudyCalendarShare.createCalendarShare(");
-    const end = indexSource.indexOf("const {\n    buildEventChip,", start);
-    assert.ok(start >= 0 && end > start, "calendar share/UI wiring block should remain discoverable");
-    const wiring = indexSource.slice(start, end);
-    const calls = [];
-    let uiCallbacks = null;
-    const canCreateCalendarSubscription = (calendarName) => ["canvas", "tasks", "simulated_courses"].includes(String(calendarName).toLowerCase().replaceAll(" ", "_"));
-    const openCalendarSubscriptionModal = (calendarName) => calls.push(calendarName);
-    const context = {
-        window: {
-            APStudyCalendarShare: {
-                createCalendarShare: () => ({
-                    canCreateCalendarSubscription,
-                    closeCalendarShareModal() {},
-                    openCalendarShareModal() {},
-                    openCalendarSubscriptionModal,
-                }),
-            },
-            APStudyCalendarUiActions: {
-                createCalendarUiActions: ({ callbacks }) => {
-                    uiCallbacks = callbacks;
-                    return {};
-                },
-            },
-        },
-        pageRoot: {},
-        lifecycle: {},
-        adapter: {},
-        state: {},
-        CALENDAR_SHARE_CLOSE_MS: 140,
-        SIMULATED_CALENDAR_NAME: "Simulated Courses",
-        escapeHtml: (value) => String(value),
-        getCalendarLabel: (value) => value,
-        getCalendarLabelFromData: () => "",
-        trackCalendarMutation: (value) => value,
-        getEventCalendarColor: () => "",
-        getCalendarEventCount: () => 0,
-        getEventBadgeColors: () => ({}),
-        getEventBadgeStyle: () => "",
-        getEventElementAttributes: () => "",
-        openCalendarInfoModal() {},
-        openRgbModal() {},
-        setCalendarColor() {},
-        isTaskEvent: () => false,
-    };
-
-    vm.runInNewContext(wiring, context);
-    assert.equal(uiCallbacks.canCreateCalendarSubscription, canCreateCalendarSubscription);
-    assert.equal(uiCallbacks.canCreateCalendarSubscription("Canvas"), true);
-    uiCallbacks.openCalendarSubscriptionModal("Canvas");
-    assert.deepEqual(calls, ["Canvas"]);
+test("actual share factory eligibility feeds the calendar menu", () => {
+    const f = fixture();
+    const { createCalendarShare } = featureModules.loadFeatureModule('calendar/integrations/share.js', { window: f.document.defaultView, document: f.document, console });
+    const share = createCalendarShare({ root: f.document, state: f.state, constants: { simulatedCalendarName: 'Simulated Courses' }, escapeHtml: String, getCalendarLabel: String, getCalendarLabelFromData: () => '', trackCalendarMutation: value => value });
+    assert.equal(share.canCreateCalendarSubscription('Canvas'), true);
+    assert.equal(share.canCreateCalendarSubscription('Tasks'), true);
+    assert.equal(share.canCreateCalendarSubscription('Simulated Courses'), true);
+    assert.equal(share.canCreateCalendarSubscription('Personal'), false);
+    f.state.public.readOnly = true;
+    assert.equal(share.canCreateCalendarSubscription('Canvas'), true);
+    f.actions.openCalendarContextMenu('Canvas', f.document.createElement('button'));
+    assert.equal(f.state.ui.contextMenuEl.querySelector('.js-context-subscription'), null);
 });

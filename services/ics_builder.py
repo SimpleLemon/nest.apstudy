@@ -1,15 +1,4 @@
-"""
-services/ics_builder.py
-
-Builds a filtered .ics (iCalendar) file from a user's cached
-calendar events and optionally their Atlas course schedules.
-
-Output is RFC 5545 compliant [7] and compatible with Apple Calendar,
-Google Calendar, and Outlook subscription feeds.
-
-The generated .ics is served at /api/calendar/feed.ics?token=USER_TOKEN
-by the calendar_api blueprint.
-"""
+"""Build the legacy ICS feed from cached events and saved Atlas schedules."""
 
 import json
 from datetime import date, datetime, timedelta, timezone
@@ -154,13 +143,9 @@ def _add_event_datetime(vevent, field, value, *, all_day, timezone_name=None, ca
 
 
 def _build_event_uid(event_uid, user_id, event_id=None):
-    """
-    Generate a globally unique UID for each event in the output .ics.
+    """Namespace source UIDs by user to avoid subscription collisions.
 
-    If the original Canvas event has a UID, prefix it with the user ID
-    to avoid collisions if multiple users share the same subscription
-    infrastructure. If no UID exists, generate one from the event's
-    database ID.
+    Missing source UIDs use the cached row ID to remain stable across builds.
     """
     if event_uid:
         return f"u{user_id}-{event_uid}"
@@ -170,18 +155,7 @@ def _build_event_uid(event_uid, user_id, event_id=None):
 
 
 def build_ics_for_user(user_id):
-    """
-    Build a complete .ics file string for a user from their cached
-    calendar events.
-
-    Args:
-        user_id: Integer user ID.
-
-    Returns:
-        String containing the full .ics file content, ready to be
-        served with Content-Type: text/calendar.
-    """
-    # Create the top-level VCALENDAR container
+    """Return the user's ICS text for a text/calendar response."""
     cal = icalendar.Calendar()
     cal.add("prodid", "-//nest.apstudy.org//calendar//EN")
     cal.add("version", "2.0")
@@ -191,7 +165,6 @@ def build_ics_for_user(user_id):
     settings = _user_settings(user_id)
     cal.add("x-wr-timezone", _valid_timezone(settings.get("timezone")))
 
-    # Fetch all cached events for this user
     try:
         events = list_calendar_rows_all(
             COLLECTIONS["calendar_cache"],
@@ -224,7 +197,8 @@ def build_ics_for_user(user_id):
 
     now = datetime.now(timezone.utc)
 
-    for event in events:
+    for raw_event in events:
+        event = raw_event
         if event.get("canvas_source_id") or event.get("canvas_event_ref"):
             event_ref = _event_ref_for_cache_event(event)
             projected = (projected_by_ref.get(event_ref) or [])
@@ -242,14 +216,12 @@ def build_ics_for_user(user_id):
                     continue
         vevent = icalendar.Event()
 
-        # UID is required per RFC 5545 and must be globally unique [7]
         event_id = event.get("$id") or event.get("id")
         vevent.add(
             "uid",
             _build_event_uid(event.get("event_uid") or event.get("uid"), user_id, event_id),
         )
 
-        # DTSTAMP is the timestamp of when this .ics was generated [7]
         vevent.add("dtstamp", now)
 
         title = event.get("event_title") or event.get("title")
@@ -266,13 +238,6 @@ def build_ics_for_user(user_id):
         end_value = event.get("event_end") or event.get("end")
         source = None
         if is_canvas:
-            raw_event = next(
-                (
-                    candidate for candidate in events
-                    if _event_ref_for_cache_event(candidate) == event.get("event_ref")
-                ),
-                {},
-            )
             source = canvas_sources.get(
                 (
                     raw_event.get("canvas_source_id"),
@@ -311,34 +276,23 @@ def build_ics_for_user(user_id):
                 else:
                     vevent.add("dtend", event_start + timedelta(hours=1))
 
-        # Add course name as a category for client-side filtering
         course_name = event.get("course_name") or event.get("course")
         if course_name:
             vevent.add("categories", [course_name])
 
-        # Add event type as a custom property
         event_type = event.get("event_type") or event.get("type")
         if event_type and event_type != "unknown":
             vevent.add("x-apstudy-type", event_type)
 
         cal.add_component(vevent)
 
-    # Optionally inject Atlas course schedule as recurring events
     _inject_atlas_schedule(cal, user_id)
 
     return cal.to_ical().decode("utf-8")
 
 
 def _inject_atlas_schedule(cal, user_id):
-    """
-    If the user has selected courses in "My Courses", inject their
-    Atlas meeting times or saved meeting overrides as recurring weekly events.
-
-    This merges class schedules (from the Atlas scrape) with Canvas
-    assignment due dates (from the iCal feed) into a single .ics file.
-
-    Reads from user_courses table and atlas-data/ JSON files.
-    """
+    """Add weekly meetings from saved courses, Atlas files, and overrides."""
     import os
 
     _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -362,7 +316,6 @@ def _inject_atlas_schedule(cal, user_id):
         selected_crn = str(uc.get("crn") or "").strip()
         selected_section_number = str(uc.get("section_number") or "").strip()
 
-        # Read the course JSON file
         filepath = os.path.join(
             ATLAS_DATA_DIR,
             uc.get("term"),
@@ -389,7 +342,6 @@ def _inject_atlas_schedule(cal, user_id):
         )
         date_range = course_data.get("date_range", {})
 
-        # Determine semester date boundaries for RRULE UNTIL
         end_date_str = date_range.get("end")
         if end_date_str:
             try:
@@ -402,7 +354,6 @@ def _inject_atlas_schedule(cal, user_id):
         sections = course_data.get("sections", [])
 
         for section in sections:
-            # If user selected a specific CRN, only include that section
             if selected_crn and str(section.get("crn") or "").strip() != selected_crn:
                 continue
             if (
@@ -429,7 +380,6 @@ def _inject_atlas_schedule(cal, user_id):
             if not meetings:
                 continue
 
-            # Map day names to iCalendar RRULE day codes [7]
             day_to_rrule = {
                 "Mon": "MO", "Tue": "TU", "Wed": "WE",
                 "Thu": "TH", "Fri": "FR", "Sat": "SA", "Sun": "SU",
@@ -444,11 +394,10 @@ def _inject_atlas_schedule(cal, user_id):
             if not rrule_days or not meetings[0].get("start"):
                 continue
 
-            # Use the first meeting's times for the event
+            # All recurrence days share the first meeting's times.
             start_time_str = meetings[0].get("start", "0800")
             end_time_str = meetings[0].get("end", "0900")
 
-            # Parse time strings (e.g., "0830" -> hour=8, minute=30)
             try:
                 start_hour = int(start_time_str[:2]) if len(start_time_str) >= 4 else int(start_time_str[0])
                 start_min = int(start_time_str[-2:])
@@ -457,7 +406,6 @@ def _inject_atlas_schedule(cal, user_id):
             except (ValueError, IndexError):
                 continue
 
-            # Build the VEVENT with RRULE for weekly recurrence
             vevent = icalendar.Event()
 
             summary = f"{course_code} {schedule_type}"
@@ -479,21 +427,14 @@ def _inject_atlas_schedule(cal, user_id):
             desc_parts.append(f"CRN: {section.get('crn', 'N/A')}")
             vevent.add("description", " | ".join(desc_parts))
 
-            # DTSTART for the first occurrence
-            # Use a reference Monday to calculate the correct first day
-            # This is a simplification; a production version would
-            # calculate the actual first class date from the semester start
+            # The legacy recurrence anchor is fixed, not derived from semester start.
             start_dt = datetime(2026, 8, 26, start_hour, start_min)
             end_dt = datetime(2026, 8, 26, end_hour, end_min)
 
-            # Atlas meeting times are campus (Atlanta) wall-clock. Emit them
-            # with a TZID so the receiving calendar resolves the correct
-            # instant and adjusts to the viewer's local timezone, while the
-            # weekly RRULE keeps honoring campus DST.
+            # TZID keeps Atlas campus wall-clock meetings aligned across DST.
             vevent.add("dtstart", start_dt, parameters={"TZID": DEFAULT_ICS_TIMEZONE})
             vevent.add("dtend", end_dt, parameters={"TZID": DEFAULT_ICS_TIMEZONE})
 
-            # Weekly recurrence rule
             rrule = {"freq": "weekly", "byday": rrule_days}
             if semester_end:
                 # RFC 5545: with a TZID-qualified DTSTART, UNTIL must be UTC.

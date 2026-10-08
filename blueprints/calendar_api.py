@@ -22,12 +22,14 @@ from appwrite_helpers import (
     format_datetime,
     update_row_safe,
 )
-from blueprints.settings import (
-    _normalize_calendar_url,
-    _normalize_canvas_calendar_url,
-    _settings_defaults,
-    _validate_other_calendar_urls,
+from services.calendar_urls import (
+    normalize_calendar_url as _normalize_calendar_url,
 )
+from services.settings_defaults import settings_defaults as _settings_defaults
+from services.calendar_feed_sources import _validate_other_calendar_urls, _normalize_canvas_calendar_url
+from services import calendar_personal_events as personal_events
+from services import calendar_preferences as preferences
+from services import calendar_read_operations as read_operations
 from services.calendar_events import (
     CANVAS_SOURCE_ID,
     FEED_SOURCE_PREFIX,
@@ -113,12 +115,12 @@ from services.calendar_events import (
     _resolve_calendar_share_by_code as _resolve_calendar_share_by_code_service,
     _public_calendar_share_context,
     _public_calendar_events_payload as _public_calendar_events_payload_service,
-    get_events_response,
 )
 from services.calendar_urls import (
     iter_valid_other_calendar_urls,
     load_other_calendar_urls,
 )
+from services.calendar_projection import (load_serialized_calendar_events, load_events_payload_with_initial_refresh)
 from services.discord_audit import emit_creation_event, format_actor
 from services.row_utils import row_id as _row_id
 from services.calendar_store import (
@@ -170,22 +172,6 @@ def _load_calendar_preferences(user_id):
     return _load_calendar_preferences_service(user_id, list_calendar_rows_all)
 
 
-def _calendar_serialization_dependencies():
-    return {
-        "api_event_overlaps_range": _api_event_overlaps_range,
-        "apply_event_override": _apply_event_override,
-        "configured_feed_urls": _configured_feed_urls,
-        "filter_configured_cache_events": _filter_configured_cache_events,
-        "list_calendar_rows_all": list_calendar_rows_all,
-        "load_calendar_preferences": _load_calendar_preferences,
-        "load_event_overrides": _load_event_overrides,
-        "project_canvas_events": _project_canvas_calendar_events,
-        "range_queries": _range_queries,
-        "serialize_event": _serialize_event,
-        "serialize_user_event": _serialize_user_event,
-    }
-
-
 def _load_serialized_calendar_events(
     user_id,
     settings,
@@ -195,75 +181,13 @@ def _load_serialized_calendar_events(
     require_shares_ics=False,
 ):
     """Load feed, native, and consented Canvas events through one projection."""
-    dependencies = _calendar_serialization_dependencies()
-    list_rows = dependencies["list_calendar_rows_all"]
-    feed_urls = dependencies["configured_feed_urls"](settings)
-    cache_events = list_rows(
-        COLLECTIONS["calendar_cache"],
-        dependencies["range_queries"](
-            user_id, "event_start", "event_end", "event_start",
-            range_start, range_end,
-        ),
+    return load_serialized_calendar_events(
+        user_id,
+        settings,
+        range_start,
+        range_end,
+        require_shares_ics=require_shares_ics,
     )
-    created_events = list_rows(
-        COLLECTIONS["user_events"],
-        dependencies["range_queries"](
-            user_id, "start", "end", "start", range_start, range_end,
-        ),
-    )
-    event_overrides = dependencies["load_event_overrides"](user_id)
-    overrides_by_ref = {
-        override.get("event_ref"): override
-        for override in event_overrides
-        if override.get("event_ref")
-    }
-    preferences = dependencies["load_calendar_preferences"](user_id)
-    canvas_cache_events = [
-        event for event in cache_events
-        if event.get("canvas_source_id") or event.get("canvas_event_ref")
-    ]
-    feed_cache_events = dependencies["filter_configured_cache_events"](
-        [
-            event for event in cache_events
-            if not (event.get("canvas_source_id") or event.get("canvas_event_ref"))
-        ],
-        feed_urls,
-    )
-    serialized_cache_events = []
-    for event in feed_cache_events:
-        serialized = dependencies["serialize_event"](event, settings)
-        serialized = dependencies["apply_event_override"](
-            serialized,
-            overrides_by_ref.get(serialized.get("event_ref")),
-        )
-        if serialized:
-            serialized_cache_events.append(serialized)
-
-    serialized_canvas_events = []
-    if canvas_cache_events:
-        serialized_canvas_events = dependencies["project_canvas_events"](
-            user_id,
-            canvas_cache_events,
-            overrides_by_ref,
-            preferences=preferences,
-            range_start=range_start,
-            range_end=range_end,
-            api_event_overlaps_range=dependencies["api_event_overlaps_range"],
-            require_shares_ics=require_shares_ics,
-        )
-    serialized_created_events = [
-        dependencies["serialize_user_event"](event)
-        for event in created_events
-    ]
-    events = serialized_cache_events + serialized_canvas_events + serialized_created_events
-    if range_start and range_end:
-        events = [
-            event for event in events
-            if dependencies["api_event_overlaps_range"](
-                event, range_start, range_end,
-            )
-        ]
-    return events, feed_cache_events, created_events
 
 
 def _load_serialized_calendar_events_for_share(
@@ -334,62 +258,28 @@ def _task_calendar_payload_for_share(user_id, preferences, range_start=None, ran
         return [], None
 
 
-def _get_events_dependencies():
-    return {
-        "api_event_overlaps_range": _api_event_overlaps_range,
-        "append_task_calendar_source": _append_task_calendar_source,
-        "apply_event_override": _apply_event_override,
-        "collections": COLLECTIONS,
-        "configured_calendar_sources": _configured_calendar_sources,
-        "configured_feed_urls": _configured_feed_urls,
-        "filter_configured_cache_events": _filter_configured_cache_events,
-        "first_row": first_row,
-        "jsonify": jsonify,
-        "list_calendar_rows_all": list_calendar_rows_all,
-        "load_calendar_feed_metadata": _load_calendar_feed_metadata,
-        "load_calendar_preferences": _load_calendar_preferences,
-        "load_event_overrides": _load_event_overrides,
-        "load_local_calendar_sources": _load_local_calendar_sources,
-        "logger": logger,
-        "parse_range_param": _parse_range_param,
-        "query": Query,
-        "refresh_initial_feed_cache": _refresh_initial_feed_cache,
-        "resolve_last_fetched": _resolve_last_fetched,
-        "serialize_event": _serialize_event,
-        "serialize_user_event": _serialize_user_event,
-        "task_calendar_payload": _task_calendar_payload,
-    }
-
-
 @calendar_bp.route("/events")
 @login_required
 def get_events():
-    """Return cached calendar events for the authenticated user."""
-    return get_events_response(
-        str(current_user.id),
-        current_user.id,
-        request.args,
-        _get_events_dependencies(),
+    """Return owner events, refreshing feeds whose caches need initialization."""
+    payload, status = load_events_payload_with_initial_refresh(
+        str(current_user.id), current_user.id, request.args,
     )
+    return jsonify(payload), status
 
 
 @calendar_bp.route("/shares", methods=["GET"])
 @login_required
 def list_calendar_shares():
-    user_id = str(current_user.id)
-    try:
-        shares = list_calendar_rows_all(
-            _calendar_shares_collection(),
-            [
-                Query.equal("user_id", [user_id]),
-                Query.order_desc("created_at"),
-            ],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load calendar shares")
-        return jsonify({"error": "Unable to load calendar shares."}), 500
-
-    return jsonify({"shares": [_calendar_share_payload(share) for share in shares]})
+    (payload, status) = read_operations.list_calendar_shares(
+        str(current_user.id),
+        dependencies={
+            'list_calendar_rows_all': list_calendar_rows_all,
+            '_calendar_shares_collection': _calendar_shares_collection,
+            '_calendar_share_payload': _calendar_share_payload,
+        },
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 def _calendar_share_request_payload():
@@ -669,332 +559,102 @@ def get_public_calendar_share_events(share_code):
     return jsonify(payload)
 
 
-def _parse_iso_like(s):
-    """Parse ISO-ish datetime or date strings into a naive UTC datetime for storage.
-
-    Accepts date-only strings (YYYY-MM-DD) and full ISO strings that may end with Z.
-    Returns a naive datetime in UTC for timed events, and local-midnight datetime for all-day.
-    """
-    if not s:
-        return None
-
-    s = str(s)
-    # date-only -> treat as local midnight (all-day semantics)
-    import re
-    from datetime import datetime, timezone
-
-    if re.match(r"^\d{4}-\d{2}-\d{2}$", s):
-        parts = s.split("-")
-        return datetime(int(parts[0]), int(parts[1]), int(parts[2]), 0, 0, 0)
-
-    # replace trailing Z with +00:00 for fromisoformat
-    if s.endswith("Z"):
-        s = s[:-1] + "+00:00"
-
-    try:
-        return datetime.fromisoformat(s)
-    except Exception:
-        return None
+_parse_iso_like = personal_events._parse_iso_like
 
 
 @calendar_bp.route("/events", methods=["POST"])
 @login_required
 def create_event():
-    """POST /api/calendar/events - create a user event"""
-    data = request.get_json() or {}
-    title = (data.get("title") or "").strip()
-    description = data.get("description")
-    start_raw = data.get("start_date") or data.get("start")
-    end_raw = data.get("end_date") or data.get("end")
-    all_day = bool(data.get("all_day", False))
-    calendar_id = _normalize_calendar_id(data.get("calendar_id"))
-    try:
-        color = _normalize_color(data.get("color"))
-        reminder_minutes = _normalize_reminder_minutes(data.get("reminder_minutes"), all_day)
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
-
-    if not title:
-        return jsonify({"error": "title is required"}), 400
-
-    start_dt = _parse_iso_like(start_raw)
-    end_dt = _parse_iso_like(end_raw)
-
-    if not start_dt or not end_dt:
-        return jsonify({"error": "start_date and end_date must be valid ISO datetimes"}), 400
-
-    if end_dt <= start_dt:
-        return jsonify({"error": "end_date must be after start_date"}), 400
-
-    try:
-        _ensure_local_calendar_source(user_id=current_user.id, source_id=calendar_id)
-        ev = create_calendar_row(
-            COLLECTIONS["user_events"],
-            row_id=ID.unique(),
-            data={
-                "user_id": str(current_user.id),
-                "title": title,
-                "description": description,
-                "start": format_datetime(start_dt),
-                "end": format_datetime(end_dt),
-                "is_all_day": all_day,
-                "color": color,
-                "calendar_id": calendar_id,
-                "reminder_minutes": reminder_minutes,
-                "created_at": format_datetime(datetime.utcnow()),
-            },
-        )
-    except AppwriteException:
-        logger.exception("Failed to create user event")
-        return jsonify({"error": "Unable to create event."}), 500
-
-    emit_creation_event(
-        "Calendar Event Created",
-        actor=format_actor(current_user),
-        target=title,
-        metadata={
-            "page_context": "calendar/events",
-            "resource_type": "user_event",
-            "resource_id": ev.get("$id") or ev.get("id"),
-            "calendar_id": calendar_id,
-            "is_all_day": all_day,
-            "start": format_datetime(start_dt),
-            "end": format_datetime(end_dt),
+    (payload, status) = personal_events.create_event(
+        str(current_user.id),
+        request.get_json() or {},
+        current_user,
+        dependencies={
+            'create_calendar_row': create_calendar_row,
+            '_ensure_local_calendar_source': _ensure_local_calendar_source,
+            '_serialize_user_event': _serialize_user_event,
+            'emit_creation_event': emit_creation_event,
+            'format_actor': format_actor,
+            '_parse_iso_like': _parse_iso_like,
         },
-        color="green",
     )
-    return jsonify({"success": True, "event": _serialize_user_event(ev)})
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/events/<event_id>", methods=["GET"])
 @login_required
 def get_single_event(event_id):
-    try:
-        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
-    except AppwriteException as exc:
-        if exc.code == 404:
-            return jsonify({"error": "not found"}), 404
-        logger.exception("Failed to load user event")
-        return jsonify({"error": "Unable to load event."}), 500
-
-    if ev.get("user_id") != str(current_user.id):
-        return jsonify({"error": "not found"}), 404
-    return jsonify({"event": _serialize_user_event(ev)})
+    (payload, status) = personal_events.get_single_event(
+        str(current_user.id),
+        event_id,
+        dependencies={'get_calendar_row': get_calendar_row, '_serialize_user_event': _serialize_user_event},
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/events/<event_id>", methods=["PUT"])
 @login_required
 def update_event(event_id):
-    try:
-        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
-    except AppwriteException as exc:
-        if exc.code == 404:
-            return jsonify({"error": "not found"}), 404
-        logger.exception("Failed to load user event")
-        return jsonify({"error": "Unable to load event."}), 500
-
-    if ev.get("user_id") != str(current_user.id):
-        return jsonify({"error": "not found"}), 404
-
-    data = request.get_json() or {}
-    title = data.get("title")
-    description = data.get("description")
-    start_raw = data.get("start_date") or data.get("start")
-    end_raw = data.get("end_date") or data.get("end")
-    all_day = data.get("all_day")
-    calendar_id = data.get("calendar_id")
-
-    updates = {"updated_at": format_datetime(datetime.utcnow())}
-    if title is not None:
-        updates["title"] = title
-    if description is not None:
-        updates["description"] = description
-    if start_raw is not None:
-        parsed = _parse_iso_like(start_raw)
-        if parsed:
-            updates["start"] = format_datetime(parsed)
-    if end_raw is not None:
-        parsed = _parse_iso_like(end_raw)
-        if parsed:
-            updates["end"] = format_datetime(parsed)
-    if all_day is not None:
-        updates["is_all_day"] = bool(all_day)
-    if "reminder_minutes" in data or all_day is not None:
-        reminder_all_day = bool(all_day) if all_day is not None else bool(ev.get("is_all_day"))
-        try:
-            updates["reminder_minutes"] = _normalize_reminder_minutes(data.get("reminder_minutes"), reminder_all_day)
-        except ValueError as exc:
-            return jsonify({"error": str(exc)}), 400
-    if "color" in data:
-        try:
-            updates["color"] = _normalize_color(data.get("color"))
-        except ValueError as exc:
-            return jsonify({"error": str(exc)}), 400
-    if calendar_id is not None:
-        normalized_calendar_id = _normalize_calendar_id(calendar_id)
-        _ensure_local_calendar_source(user_id=current_user.id, source_id=normalized_calendar_id)
-        updates["calendar_id"] = normalized_calendar_id
-
-    try:
-        ev = update_calendar_row(
-            COLLECTIONS["user_events"],
-            event_id,
-            updates,
-        )
-    except AppwriteException:
-        logger.exception("Failed to update user event")
-        return jsonify({"error": "Unable to update event."}), 500
-
-    return jsonify({"success": True, "event": _serialize_user_event(ev)})
+    (payload, status) = personal_events.update_event(
+        str(current_user.id),
+        event_id,
+        request.get_json() or {},
+        dependencies={
+            'get_calendar_row': get_calendar_row,
+            'update_calendar_row': update_calendar_row,
+            '_ensure_local_calendar_source': _ensure_local_calendar_source,
+            '_serialize_user_event': _serialize_user_event,
+            '_parse_iso_like': _parse_iso_like,
+        },
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/events/<event_id>", methods=["DELETE"])
 @login_required
 def delete_event(event_id):
-    try:
-        ev = get_calendar_row(COLLECTIONS["user_events"], event_id)
-    except AppwriteException as exc:
-        if exc.code == 404:
-            return jsonify({"error": "not found"}), 404
-        logger.exception("Failed to load user event")
-        return jsonify({"error": "Unable to delete event."}), 500
-
-    if ev.get("user_id") != str(current_user.id):
-        return jsonify({"error": "not found"}), 404
-
-    from services.extension_mirrors import has_mirror_work
-    if has_mirror_work(str(current_user.id), "user:" + event_id):
-        return jsonify({"error": "Choose whether to delete only Nest or both copies in Canvas copies.", "code": "mirror_delete_choice_required"}), 409
-
-    try:
-        delete_calendar_row(COLLECTIONS["user_events"], event_id)
-    except AppwriteException:
-        logger.exception("Failed to delete user event")
-        return jsonify({"error": "Unable to delete event."}), 500
-
-    return jsonify({"success": True})
+    (payload, status) = personal_events.delete_event(
+        str(current_user.id),
+        event_id,
+        dependencies={'get_calendar_row': get_calendar_row, 'delete_calendar_row': delete_calendar_row},
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/event-overrides", methods=["POST"])
 @login_required
 def upsert_event_override():
-    """Create or update the authenticated user's override for an imported event."""
-    data = request.get_json(silent=True) or {}
-    event_ref = (data.get("event_ref") or "").strip()
-    if not event_ref.startswith("feed:"):
-        return jsonify({"error": "event_ref is required for an imported event."}), 400
-
-    title = (data.get("title") or "").strip()
-    start_raw = data.get("start_date") or data.get("start")
-    end_raw = data.get("end_date") or data.get("end")
-    all_day = bool(data.get("all_day", data.get("is_all_day", False)))
-    calendar_id = _normalize_calendar_id(data.get("calendar_id"))
-
-    if not title:
-        return jsonify({"error": "title is required"}), 400
-
-    start_dt = _parse_iso_like(start_raw)
-    end_dt = _parse_iso_like(end_raw)
-    if not start_dt or not end_dt:
-        return jsonify({"error": "start_date and end_date must be valid ISO datetimes"}), 400
-    if end_dt < start_dt:
-        return jsonify({"error": "end_date must be on or after start_date"}), 400
-
-    try:
-        color = _normalize_color(data.get("color"))
-        reminder_minutes = _normalize_reminder_minutes(data.get("reminder_minutes"), all_day)
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
-
-    try:
-        _ensure_local_calendar_source(current_user.id, calendar_id)
-        override = _upsert_event_override(
-            current_user.id,
-            event_ref,
-            {
-                "title": title,
-                "description": data.get("description") or "",
-                "start": format_datetime(start_dt),
-                "end": format_datetime(end_dt),
-                "is_all_day": all_day,
-                "calendar_id": calendar_id,
-                "color": color,
-                "reminder_minutes": reminder_minutes,
-                "hidden": False,
-            },
-        )
-    except AppwriteException:
-        logger.exception("Failed to save event override")
-        return jsonify({"error": "Unable to save event override."}), 500
-
-    return jsonify({"success": True, "override": override})
+    (payload, status) = personal_events.upsert_event_override(
+        str(current_user.id),
+        request.get_json(silent=True) or {},
+        dependencies={
+            '_ensure_local_calendar_source': _ensure_local_calendar_source,
+            '_upsert_event_override': _upsert_event_override,
+            '_parse_iso_like': _parse_iso_like,
+        },
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/event-overrides/hide", methods=["POST"])
 @login_required
 def hide_event_override():
-    """Hide an imported event for the authenticated user without deleting the source feed event."""
-    data = request.get_json(silent=True) or {}
-    event_ref = (data.get("event_ref") or "").strip()
-    if not event_ref.startswith("feed:"):
-        return jsonify({"error": "event_ref is required for an imported event."}), 400
-
-    try:
-        override = _upsert_event_override(
-            current_user.id,
-            event_ref,
-            {"hidden": True},
-        )
-    except AppwriteException:
-        logger.exception("Failed to hide imported event")
-        return jsonify({"error": "Unable to delete event."}), 500
-
-    return jsonify({"success": True, "override": override})
+    (payload, status) = personal_events.hide_event_override(
+        str(current_user.id),
+        request.get_json(silent=True) or {},
+        dependencies={'_upsert_event_override': _upsert_event_override},
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/refresh", methods=["POST"])
 @login_required
 def refresh_feed():
-    """
-    POST /api/calendar/refresh
-    Triggers an immediate re-fetch of all configured user calendar feeds.
-    """
-    user_id = str(current_user.id)
-    try:
-        settings = first_row(
-            COLLECTIONS["user_settings"],
-            [Query.equal("user_id", [user_id])],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load user settings")
-        return jsonify({"error": "Unable to refresh calendar feeds."}), 500
-
-    feed_urls = _configured_feed_urls(settings)
-
-    if not feed_urls:
-        return jsonify({
-            "error": "No calendar feed URLs configured. Visit Settings to add one."
-        }), 400
-
-    from services.feed_fetcher import fetch_and_cache_feeds
-
-    try:
-        count = fetch_and_cache_feeds(user_id, feed_urls, force=True)
-        update_row_safe(
-            COLLECTIONS["user_settings"],
-            settings.get("$id"),
-            {"updated_at": format_datetime(datetime.utcnow())},
-        )
-        return jsonify({"status": "ok", "events_cached": count})
-    except AppwriteException:
-        logger.exception("Failed to update settings after refresh")
-        return jsonify({"error": "Unable to refresh calendar feeds."}), 500
-    except Exception as e:
-        logger.exception(
-            "Calendar refresh failed",
-            extra={"user_id": user_id, "feed_count": len(feed_urls)},
-        )
-        return jsonify({"error": f"Feed fetch failed: {str(e)}"}), 500
+    (payload, status) = read_operations.refresh_feed(
+        str(current_user.id),
+        dependencies={'first_row': first_row, 'update_row_safe': update_row_safe},
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/status")
@@ -1031,143 +691,39 @@ def feed_status():
 @calendar_bp.route("/preferences", methods=["GET"])
 @login_required
 def get_calendar_preferences():
-    """
-    GET /api/calendar/preferences
-    """
-    user_id = str(current_user.id)
-    try:
-        prefs = list_calendar_rows_all(
-            COLLECTIONS["user_calendar_preferences"],
-            [Query.equal("user_id", [user_id])],
-        )
-    except AppwriteException:
-        logger.exception("Failed to load calendar preferences")
-        return jsonify({"error": "Unable to load calendar preferences."}), 500
-
-    return jsonify({
-        "preferences": [
-            {
-                "calendar_name": p.get("calendar_name"),
-                "color_hex": p.get("color_hex"),
-                "visible": p.get("visible"),
-                "display_name": p.get("display_name") or "",
-            }
-            for p in prefs
-        ]
-    })
+    (payload, status) = preferences.get_calendar_preferences(
+        str(current_user.id),
+        dependencies={'list_calendar_rows_all': list_calendar_rows_all},
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/preferences", methods=["POST"])
 @login_required
 def update_calendar_preferences():
-    """
-    POST /api/calendar/preferences
-    """
-    data = request.get_json() or {}
-    calendar_name = data.get("calendar_name")
-
-    if not calendar_name:
-        return jsonify({"error": "calendar_name is required"}), 400
-
-    user_id = str(current_user.id)
-    try:
-        updates = _calendar_preference_updates(data)
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
-
-    try:
-        pref = first_calendar_row(
-            COLLECTIONS["user_calendar_preferences"],
-            [
-                Query.equal("user_id", [user_id]),
-                Query.equal("calendar_name", [calendar_name]),
-            ],
-        )
-        if pref and updates and _calendar_preference_unchanged(pref, updates):
-            return jsonify({
-                "status": "ok",
-                "calendar_name": calendar_name,
-                "color_hex": pref.get("color_hex"),
-                "visible": pref.get("visible"),
-                "display_name": pref.get("display_name") or "",
-            })
-        if updates or not pref:
-            pref = _upsert_calendar_preference(user_id, calendar_name, updates)
-    except AppwriteException:
-        logger.exception("Failed to update calendar preference")
-        return jsonify({"error": "Unable to update preferences."}), 500
-
-    return jsonify({
-        "status": "ok",
-        "calendar_name": calendar_name,
-        "color_hex": pref.get("color_hex"),
-        "visible": pref.get("visible"),
-        "display_name": pref.get("display_name") or "",
-    })
+    (payload, status) = preferences.update_calendar_preferences(
+        str(current_user.id),
+        request.get_json() or {},
+        dependencies={
+            'first_calendar_row': first_calendar_row,
+            '_upsert_calendar_preference': _upsert_calendar_preference,
+        },
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 @calendar_bp.route("/preferences/batch", methods=["POST"])
 @login_required
 def update_calendar_preferences_batch():
-    """
-    POST /api/calendar/preferences/batch
-    """
-    data = request.get_json() or {}
-    entries = data.get("preferences")
-    if not isinstance(entries, list):
-        return jsonify({"error": "preferences must be a list"}), 400
-    if len(entries) > PREFERENCES_BATCH_LIMIT:
-        return jsonify({"error": f"preferences batch must be <= {PREFERENCES_BATCH_LIMIT}"}), 400
-
-    user_id = str(current_user.id)
-    updated = []
-    skipped = []
-    errors = []
-
-    for index, entry in enumerate(entries):
-        if not isinstance(entry, dict):
-            logger.warning("Invalid calendar preference entry", extra={"index": index})
-            errors.append({"index": index, "error": "Invalid preference entry."})
-            continue
-        calendar_name = entry.get("calendar_name")
-        if not calendar_name:
-            logger.warning("Missing calendar_name in preference batch", extra={"index": index})
-            errors.append({"index": index, "error": "calendar_name is required."})
-            continue
-
-        try:
-            updates = _calendar_preference_updates(entry)
-        except ValueError as exc:
-            logger.warning("Invalid calendar preference update", extra={"calendar_name": calendar_name, "error": str(exc)})
-            errors.append({"calendar_name": calendar_name, "error": str(exc)})
-            continue
-
-        try:
-            pref = first_calendar_row(
-                COLLECTIONS["user_calendar_preferences"],
-                [
-                    Query.equal("user_id", [user_id]),
-                    Query.equal("calendar_name", [calendar_name]),
-                ],
-            )
-            if pref and updates and _calendar_preference_unchanged(pref, updates):
-                skipped.append(calendar_name)
-                continue
-            if updates or not pref:
-                _upsert_calendar_preference(user_id, calendar_name, updates)
-                updated.append(calendar_name)
-            else:
-                skipped.append(calendar_name)
-        except AppwriteException:
-            logger.exception("Failed to update calendar preference", extra={"calendar_name": calendar_name})
-            errors.append({"calendar_name": calendar_name, "error": "Unable to update preferences."})
-
-    return jsonify({
-        "status": "ok",
-        "updated": updated,
-        "skipped": skipped,
-        "errors": errors,
-    })
+    (payload, status) = preferences.update_calendar_preferences_batch(
+        str(current_user.id),
+        request.get_json() or {},
+        dependencies={
+            'first_calendar_row': first_calendar_row,
+            '_upsert_calendar_preference': _upsert_calendar_preference,
+        },
+    )
+    return jsonify(payload) if status == 200 else (jsonify(payload), status)
 
 
 _SHARE_FEED_SECURITY_HEADERS = {

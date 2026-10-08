@@ -12,14 +12,21 @@ test("calendar events activate and expose valid context actions without a mouse"
     </div></body></html>`,
   }));
   await page.goto(`${baseURL}/calendar-event-keyboard-harness`);
-  await page.evaluate(() => {
-    window.state = { public: { readOnly: false } };
-    window.getCalendarEventByRef = () => ({ id: "event-1", title: "Office hours", start: "2026-07-21T14:00:00", end: "2026-07-21T15:00:00" });
+  await page.evaluate(async () => {
+    const { createCalendarEventMenu } = await import("/static/js/calendar/events/context-menu.js");
+    const { createCalendarLifecycle } = await import("/static/js/calendar/lifecycle.js");
     window.__formCalls = [];
-    window.openCalendarEventForm = (payload) => window.__formCalls.push(payload.mode);
+    const menu = createCalendarEventMenu({
+      root: document.querySelector("#calendar-view-root"), document, view: window,
+      lifecycle: createCalendarLifecycle({ view: window }),
+      state: { public: { readOnly: false } },
+      getCalendarEventByRef: () => ({ id: "event-1", title: "Office hours", start: "2026-07-21T14:00:00", end: "2026-07-21T15:00:00" }),
+      openEventForm: (payload) => window.__formCalls.push(payload.mode),
+      canCreate: () => true, canMutateEvent: () => true,
+      goToToday() {}, reload() {},
+    });
+    menu.register();
   });
-  await page.addScriptTag({ url: `${baseURL}/static/js/calendar/events/context-menu.js` });
-  await page.evaluate(() => window.APStudyCalendarEventMenu.register());
 
   const event = page.getByRole("button", { name: /Office hours, July 21 at 2 PM/ });
   await event.focus();

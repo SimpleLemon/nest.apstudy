@@ -1,13 +1,16 @@
 import assert from "node:assert/strict";
-import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
-import vm from "node:vm";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const source = await readFile(path.join(repoRoot, "static/js/calendar/integrations/share.js"), "utf8");
+const shareModuleRoot = await mkdtemp(path.join(os.tmpdir(), "apstudy-calendar-share-esm-"));
+await writeFile(path.join(shareModuleRoot, "package.json"), '{"type":"module"}\n');
+await cp(path.join(repoRoot, "static/js/calendar"), path.join(shareModuleRoot, "calendar"), { recursive: true });
+const { createCalendarShare } = await import(pathToFileURL(path.join(shareModuleRoot, "calendar/integrations/share.js")).href);
+test.after(() => rm(shareModuleRoot, { recursive: true, force: true }));
 
 async function loadCalendarDataAdapter() {
     const moduleRoot = await mkdtemp(path.join(os.tmpdir(), "apstudy-calendar-share-adapter-"));
@@ -58,27 +61,40 @@ class Document extends Element {
     execCommand() { return this.clipboardOk; }
 }
 
-async function fixture({ shares = [], saveResponse = null, detailResponse = null, loadShares = null, autoOpen = true, adapterOverride = null, fallbackFetch = null } = {}) {
+async function fixture({ shares = [], saveResponse = null, detailResponse = null, loadShares = null, autoOpen = true, adapterOverride = null, fallbackFetch = null, scopedRoot = false, documentOverlay = false } = {}) {
     const document = new Document();
-    const context = { document, window: document.defaultView, AbortController, console, setTimeout: (fn) => fn(), ...(fallbackFetch ? { fetch: fallbackFetch } : {}) };
-    vm.runInNewContext(source, context);
-    context.window.APStudyLoader = { html: (text) => text };
+    document.defaultView.AbortController = AbortController;
+    if (fallbackFetch) document.defaultView.fetch = fallbackFetch;
+    document.defaultView.APStudyLoader = { html: (text) => text };
     const state = { public: { readOnly: false }, calendars: { Canvas: { color: "#123" }, Tasks: { color: "#456" } }, shares: { items: shares, loading: false, saving: false, loaded: false, editingId: null, draft: null, focusTarget: "", error: "", notice: "" }, ui: { shareModalEl: null } };
     let rotateRequestSawOldUrl = false;
     let loadCalls = 0;
     let saveCalls = 0;
     let lastSave = null;
-    const adapter = fallbackFetch ? null : adapterOverride || { async loadShares(options) { loadCalls += 1; if (loadShares) return loadShares(options); return { response: { ok: true, status: 200, json: async () => ({ shares }) } }; }, async saveShare(options) { lastSave = options; const { path, method } = options; if (path.endsWith("/ics") && method === "GET") return { response: { ok: (detailResponse?.status || 200) < 400, status: detailResponse?.status || 200, json: async () => detailResponse?.body || {} } }; if (path.endsWith("/ics")) rotateRequestSawOldUrl = state.ui.shareModalEl?.innerHTML.includes("secret.test") || false; saveCalls += 1; return { response: { ok: (saveResponse?.status || 200) < 400, status: saveResponse?.status || 200, json: async () => saveResponse?.body || {} } }; } };
-    const share = context.window.APStudyCalendarShare.createCalendarShare({ root: document, lifecycle: null, dataAdapter: adapter, state, constants: { calendarShareCloseMs: 0, simulatedCalendarName: "Simulated Courses" }, escapeHtml: (v) => String(v ?? ""), getCalendarLabel: (v) => v, getCalendarLabelFromData: (v) => v.label || v.defaultName || "", trackCalendarMutation: (p) => p });
+    const adapter = fallbackFetch ? null : adapterOverride || { async loadShares(options) { loadCalls += 1; if (loadShares) return loadShares(options); return { response: { ok: true, status: 200, json: async () => ({ shares }) } }; }, async saveShare(options) { lastSave = options; const { action } = options; if (action === "ics-detail") return { response: { ok: (detailResponse?.status || 200) < 400, status: detailResponse?.status || 200, json: async () => detailResponse?.body || {} } }; if (action.startsWith("ics-")) rotateRequestSawOldUrl = state.ui.shareModalEl?.innerHTML.includes("secret.test") || false; saveCalls += 1; return { response: { ok: (saveResponse?.status || 200) < 400, status: saveResponse?.status || 200, json: async () => saveResponse?.body || {} } }; } };
+    const root = scopedRoot ? document.appendChild(document.createElement('main')) : document;
+    const share = createCalendarShare({ root, overlayRoot: documentOverlay ? document.body : null, lifecycle: null, dataAdapter: adapter, state, constants: { calendarShareCloseMs: 0, simulatedCalendarName: "Simulated Courses" }, escapeHtml: (v) => String(v ?? ""), getCalendarLabel: (v) => v, getCalendarLabelFromData: (v) => v.label || v.defaultName || "", trackCalendarMutation: (p) => p });
     if (autoOpen) {
         share.openCalendarShareModal();
         await new Promise((resolve) => setImmediate(resolve));
     }
-    return { document, state, share, modal: () => state.ui.shareModalEl, saveResponse, detailResponse, rotateRequestSawOldUrl: () => rotateRequestSawOldUrl, loadCalls: () => loadCalls, saveCalls: () => saveCalls, lastSave: () => lastSave };
+    return { document, root, state, share, modal: () => state.ui.shareModalEl, saveResponse, detailResponse, rotateRequestSawOldUrl: () => rotateRequestSawOldUrl, loadCalls: () => loadCalls, saveCalls: () => saveCalls, lastSave: () => lastSave };
 }
 
 const active = { id: "active", shareCode: "active-code", shareUrl: "https://nest.test/share/active", isActive: true, includeAllCalendars: false, calendarIds: ["canvas"], icsConfigured: true, icsEnabled: true };
 const inactive = { ...active, id: "inactive", isActive: false };
+
+test('sharing can mount above the native page layer while embedded hosts keep their own overlay', async () => {
+    for (const documentOverlay of [false, true]) {
+        const f = await fixture({ scopedRoot: true, documentOverlay });
+        const modal = f.modal();
+        assert.equal(modal.parentElement, documentOverlay ? f.document.body : f.root);
+        assert.equal(f.document.activeElement, modal.querySelector('.js-share-close'));
+        f.share.closeCalendarShareModal(true);
+        assert.equal(modal.parentElement.children.includes(modal), false);
+        assert.equal(f.document.body.children.includes(f.root), true, 'Closing the overlay preserves the mounted feature');
+    }
+});
 
 function deferred() {
     let resolve;
@@ -241,8 +257,8 @@ test("calendar subscription intent preselects one calendar and does not submit u
     form.querySelectorAll = () => [{ value: "Simulated Courses" }];
     await modal.listeners.submit({ target: form, preventDefault() {} });
     assert.equal(f.saveCalls(), 1);
-    assert.equal(typeof f.lastSave().body, "object");
-    assert.deepEqual(JSON.parse(JSON.stringify(f.lastSave().body)), {
+    assert.equal(typeof f.lastSave().payload, "object");
+    assert.deepEqual(JSON.parse(JSON.stringify(f.lastSave().payload)), {
         includeAllCalendars: false,
         calendarIds: ["Simulated Courses"],
         dateScope: "all",
@@ -451,4 +467,33 @@ test("Canvas and Tasks use the direct single-calendar subscription flow", async 
         assert.match(f.modal().innerHTML, new RegExp(`name="calendar_ids"[^>]*value="${calendarName}"[^>]*checked`));
     }
     assert.equal(f.saveCalls(), 0);
+});
+
+test('public share save and update actions preserve one item per id and ignore unidentified results', async () => {
+    const f = await fixture({
+        shares: [{ ...active }, { ...inactive }],
+        saveResponse: { status: 200, body: { share: { ...active, id: 'created', shareCode: 'created-code' } } },
+    });
+    const submit = async () => {
+        const modal = f.modal();
+        await modal.listeners.submit({ target: modal.querySelector('#calendar-share-form'), preventDefault() {} });
+    };
+    await submit();
+    assert.deepEqual(f.state.shares.items.map(share => share.id), ['created', 'active', 'inactive']);
+    f.saveResponse.body = { share: { ...active, shareCode: 'saved-update' } };
+    f.state.shares.editingId = 'active';
+    f.share.renderCalendarShareModal();
+    await submit();
+    assert.deepEqual(f.state.shares.items.map(share => share.id), ['created', 'active', 'inactive']);
+    assert.equal(f.state.shares.items[1].shareCode, 'saved-update');
+    f.saveResponse.body = { share: { ...active, shareCode: 'regenerated-update' } };
+    const modal = f.modal();
+    await modal.listeners.click({ target: modal.querySelector('.js-share-regenerate[data-share-id="active"]') });
+    assert.deepEqual(f.state.shares.items.map(share => share.id), ['created', 'active', 'inactive']);
+    assert.equal(f.state.shares.items[1].shareCode, 'regenerated-update');
+    f.saveResponse.body = { share: { shareCode: 'missing-id' } };
+    await submit();
+    await f.modal().listeners.click({ target: f.modal().querySelector('.js-share-regenerate[data-share-id="active"]') });
+    assert.deepEqual(f.state.shares.items.map(share => share.id), ['created', 'active', 'inactive']);
+    assert.equal(f.state.shares.items[1].shareCode, 'regenerated-update');
 });

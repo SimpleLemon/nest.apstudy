@@ -2,11 +2,15 @@
 
 import json
 
-from flask import Blueprint, make_response, request
+from flask import Blueprint, request
 from flask_login import current_user
 
-from blueprints import calendar_api as calendar
-from blueprints import courses as course_routes
+from services import calendar_personal_events as calendar
+from services import calendar_preferences as calendar_preferences
+from services import calendar_read_operations
+from services.calendar_projection import load_events_payload_with_initial_refresh
+from services.saved_courses import list_saved_courses_for_user
+from services.user_profile import is_emory_or_oxford_user
 from blueprints.extension_api import (
     _auth_or_response, _error_response, _handle_extension_error,
     _phase2_response, _require_capabilities, extension_response_contract,
@@ -20,7 +24,8 @@ extension_calendar_bp.after_request(extension_response_contract)
 EXTENSION_AUX_ITEMS_MAX_BYTES = 96 * 1024
 
 
-def _call(handler, *, read_only=False, capabilities=("calendar_read",), consent_scopes=(), **kwargs):
+def _call(handler, *, read_only=False, capabilities=("calendar_read",), consent_scopes=(),
+          owner=False, include_payload=False, include_actor=False, **kwargs):
     unauthorized = _auth_or_response()
     if unauthorized:
         return unauthorized
@@ -32,17 +37,24 @@ def _call(handler, *, read_only=False, capabilities=("calendar_read",), consent_
                                   required_scopes=tuple(consent_scopes), version=1)
         if request.method != "GET" and not read_only:
             _require_capabilities("calendar_two_way_writeback")
-            body = request.get_json(silent=True) or {}
+            body = _payload()
             account_key = request.headers.get("X-Canvas-Account-Key") or body.get("account_key")
             canvas_consent_status(str(current_user.id), account_key,
                                   required_scopes=("personal_events_write",), version=2)
-        response = make_response(handler(**kwargs))
-        body = response.get_json() or {}
+        if owner:
+            kwargs["user_id"] = str(current_user.id)
+        if include_payload:
+            kwargs["data"] = _payload()
+        if include_actor:
+            kwargs["actor"] = current_user
+        result = handler(**kwargs)
+        body, status = result if isinstance(result, tuple) else (result, 200)
+        body = dict(body)
         body.pop("user_id", None)
         if "calendar_sources" in body:
             body["sources"] = body["calendar_sources"]
-        if response.status_code >= 400:
-            return _error_response("calendar_request_failed", body.get("error", "Calendar request failed."), response.status_code)
+        if status >= 400:
+            return _error_response("calendar_request_failed", body.get("error", "Calendar request failed."), status)
         return _phase2_response(**body)
     except Exception as exc:
         return _handle_extension_error(exc)
@@ -153,13 +165,10 @@ def course_sections():
 
 
 def _saved_courses_payload():
-    response = make_response(course_routes.list_saved_courses())
-    if response.status_code == 403:
+    if not is_emory_or_oxford_user(current_user):
         return {"courses": [], "count": 0, "supported": False}
-    body = response.get_json() or {}
-    if response.status_code >= 400:
-        raise RuntimeError(body.get("error") or "Unable to load saved courses.")
-    courses = _bounded_items([item for item in (_slim_section(row) for row in body.get("courses") or []) if item][:100])
+    rows = list_saved_courses_for_user(str(current_user.id))
+    courses = _bounded_items([item for item in (_slim_section(row) for row in rows) if item][:100])
     return {"courses": courses, "count": len(courses), "supported": True}
 
 
@@ -169,10 +178,9 @@ def saved_courses():
 
 
 def _shares_payload():
-    response = make_response(calendar.list_calendar_shares())
-    body = response.get_json() or {}
-    if response.status_code >= 400:
-        raise RuntimeError(body.get("error") or "Unable to load calendar shares.")
+    body, status = calendar_read_operations.list_calendar_shares(str(current_user.id))
+    if status >= 400:
+        return body, status
     shares = body.get("shares") if isinstance(body.get("shares"), list) else []
     shares = _bounded_items(shares[:100])
     return {"shares": shares, "count": len(shares)}
@@ -184,39 +192,52 @@ def shares():
                  consent_scopes=("ongoing_read", "shares_ics_inclusion"))
 
 
+def _payload():
+    body = request.get_json(silent=True)
+    if body is None:
+        return {}
+    if not isinstance(body, dict):
+        raise ExtensionContractError("invalid_request", "Calendar payload must be an object.")
+    return body
+
+
 @extension_calendar_bp.route("/preferences", methods=["GET", "POST"])
 def preferences():
     if request.method == "GET":
-        return _call(calendar.get_calendar_preferences)
-    body = request.get_json(silent=True) or {}
-    handler = calendar.update_calendar_preferences_batch if isinstance(body, dict) and "preferences" in body else calendar.update_calendar_preferences
-    return _call(handler)
+        return _call(calendar_preferences.get_calendar_preferences, owner=True, consent_scopes=("ongoing_read",))
+    return _call(calendar_preferences.save_calendar_preferences, owner=True, include_payload=True)
 
 
 @extension_calendar_bp.route("/events", methods=["GET", "POST"])
 def events():
-    return _call(calendar.get_events if request.method == "GET" else calendar.create_event)
+    if request.method == "GET":
+        return _call(load_events_payload_with_initial_refresh, owner=True, args=request.args, consent_scopes=("ongoing_read",))
+    return _call(calendar.create_event, owner=True, include_payload=True, include_actor=True)
 
 
 @extension_calendar_bp.route("/events/<event_id>", methods=["GET", "PUT", "DELETE"])
 def event(event_id):
-    # Native handlers load user_events and check user_id before any mutation.
     if event_id.startswith("user:"):
         event_id = event_id[5:]
+    inputs = {"owner": True, "event_id": event_id}
+    if request.method == "GET":
+        inputs["consent_scopes"] = ("ongoing_read",)
+    if request.method == "PUT":
+        inputs["include_payload"] = True
     return _call({"GET": calendar.get_single_event, "PUT": calendar.update_event,
-                  "DELETE": calendar.delete_event}[request.method], event_id=event_id)
+                  "DELETE": calendar.delete_event}[request.method], **inputs)
 
 
 @extension_calendar_bp.route("/event-overrides", methods=["POST"])
 def override():
-    return _call(calendar.upsert_event_override)
+    return _call(calendar.upsert_event_override, owner=True, include_payload=True)
 
 
 @extension_calendar_bp.route("/event-overrides/hide", methods=["POST"])
 def hide():
-    return _call(calendar.hide_event_override)
+    return _call(calendar.hide_event_override, owner=True, include_payload=True)
 
 
 @extension_calendar_bp.route("/refresh", methods=["POST"])
 def refresh():
-    return _call(calendar.refresh_feed)
+    return _call(calendar_read_operations.refresh_feed, owner=True)

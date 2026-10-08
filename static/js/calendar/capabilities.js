@@ -1,3 +1,29 @@
+/**
+ * @typedef {Object} CalendarActions
+ * @property {boolean} routeDisplayOverride
+ * @property {boolean} retryWriteback
+ * @property {boolean} openSourceUrl
+ */
+/**
+ * @typedef {Object} CalendarCanvasData
+ * @property {{label?: string, accountLabel?: string, account_label?: string, sourceId?: string, source_id?: string, url?: string}} [source]
+ * @property {{state?: string, sourceId?: string, source_id?: string, destinationCalendarId?: string, destination_calendar_id?: string, destination?: string, fallbackCalendarId?: string, fallback_calendar_id?: string, degraded?: boolean, displayOverride?: boolean}} [routing]
+ * @property {{status?: string, source?: string}} [completion]
+ * @property {Array<{state: string, error_message?: string, errorMessage?: string}>} [writebacks]
+ */
+/**
+ * @typedef {Object} CalendarCapabilities
+ * @property {1|null} contractVersion Unsupported versions disable actions.
+ * @property {boolean} supported
+ * @property {boolean} readOnly
+ * @property {boolean} readOnlyValid Whether an explicit boolean was supplied.
+ * @property {boolean} shareMode
+ * @property {boolean} shareModeValid
+ * @property {boolean} canMutateNative Whether the contract permits native mutations; mounts additionally require nativeEditable.
+ * @property {Readonly<CalendarActions>} actions
+ * @property {CalendarCanvasData} data Canonical fields; legacy Canvas aliases are accepted at normalization.
+ */
+
 export const CALENDAR_EXTENSION_CONTRACT_VERSION = 1;
 
 export const CALENDAR_WRITEBACK_STATES = Object.freeze([
@@ -36,6 +62,13 @@ function strictBoolean(value) {
     return value === true;
 }
 
+function normalizeWritebacks(value) {
+    return (Array.isArray(value) ? value : value == null ? [] : [value])
+        .map((entry) => isRecord(entry)
+            ? { ...entry, state: normalizeWritebackState(entry.state || entry.status || entry.mirror_state) }
+            : { state: normalizeWritebackState(entry) });
+}
+
 export function normalizeWritebackState(value) {
     const normalized = String(value || "").trim().toLowerCase();
     return CALENDAR_WRITEBACK_STATES.includes(normalized) ? normalized : "unsupported";
@@ -46,6 +79,7 @@ export function writebackStateLabel(value) {
     return WRITEBACK_LABELS[state];
 }
 
+/** @param {Object} [input] @returns {Readonly<CalendarCapabilities>} */
 export function normalizeCalendarCapabilities(input = {}) {
     const raw = isRecord(input) ? input : {};
     const requestedVersion = raw.contractVersion ?? raw.contract_version ?? CALENDAR_EXTENSION_CONTRACT_VERSION;
@@ -78,30 +112,35 @@ export function normalizeCalendarCapabilities(input = {}) {
             && (name === "openSourceUrl" || mutationActionsAllowed),
         ),
     ]));
-    if (contractVersion === null) {
-        for (const name of ACTION_NAMES) actions[name] = false;
-    }
 
-    const data = isRecord(raw.data)
+    const suppliedData = isRecord(raw.data)
         ? raw.data
         : isRecord(raw.canvasState)
             ? raw.canvasState
             : isRecord(raw.canvas)
                 ? raw.canvas
                 : {};
+    const suppliedWritebacks = suppliedData.writebacks ?? suppliedData.writebackStates ?? suppliedData.writeback_state;
+    const hasWritebacks = ["writebacks", "writebackStates", "writeback_state"]
+        .some((key) => Object.prototype.hasOwnProperty.call(suppliedData, key));
+    const data = hasWritebacks
+        ? { ...suppliedData, writebacks: normalizeWritebacks(suppliedWritebacks) }
+        : { ...suppliedData };
 
     return Object.freeze({
         contractVersion,
         supported: contractVersion !== null,
         readOnly,
         readOnlyValid,
-        shareMode: strictBoolean(raw.shareMode) || raw.mode === "share",
+        shareMode,
         shareModeValid,
+        canMutateNative: mutationActionsAllowed,
         actions: Object.freeze(actions),
         data,
     });
 }
 
+/** @param {unknown} value @returns {string|null} Credential-free HTTPS origin only. */
 export function getSafeCanvasSourceUrl(value) {
     if (typeof value !== "string" || !value.trim()) return null;
     let parsed;
@@ -122,6 +161,11 @@ export function getSafeCanvasSourceUrl(value) {
     return parsed.origin;
 }
 
+/**
+ * @param {CalendarCapabilities|Object} capabilities
+ * @param {Array<Record<string, *>>} [events]
+ * @returns {CalendarCapabilities & CalendarCanvasData & {firstEvent: Record<string, *>}}
+ */
 export function getCalendarCapabilityData(capabilities, events = []) {
     const normalized = normalizeCalendarCapabilities(capabilities);
     const data = normalized.data;
@@ -150,16 +194,11 @@ export function getCalendarCapabilityData(capabilities, events = []) {
             status: firstEvent.completion_status || "",
             source: firstEvent.completion_source || "",
         };
-    const suppliedWritebacks = data.writebacks ?? data.writebackStates ?? data.writeback_state;
-    const writebacks = Array.isArray(suppliedWritebacks)
-        ? suppliedWritebacks
-        : suppliedWritebacks == null
-            ? []
-            : [isRecord(suppliedWritebacks) ? suppliedWritebacks : { state: suppliedWritebacks }];
+    const writebacks = data.writebacks || [];
     const eventWritebacks = canvasEvents
         .map((event) => event.writeback_state || event.writebackState || event.mirror_state || event.mirrorState)
         .filter(Boolean)
-        .map((state) => ({ state }));
+        .map((state) => ({ state: normalizeWritebackState(state) }));
 
     return {
         ...normalized,

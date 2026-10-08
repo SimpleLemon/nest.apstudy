@@ -102,6 +102,13 @@ class CalendarStoreTestCase(unittest.TestCase):
         with self.assertRaises(AppwriteException):
             store.create_calendar_row("user_calendar_preferences", "pref-2", payload)
 
+    def test_missing_get_and_first_row_contracts(self):
+        self.assertIsNone(store.first_calendar_row("user_events"))
+        self.assertIsNone(store.get_calendar_row("user_events", "missing", allow_missing=True))
+        with self.assertRaises(AppwriteException) as raised:
+            store.get_calendar_row("user_events", "missing")
+        self.assertEqual(raised.exception.code, 404)
+
     def test_range_queries_and_nullable_boolean_round_trip(self):
         store.create_calendar_row(
             "user_event_overrides",

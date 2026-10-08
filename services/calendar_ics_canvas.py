@@ -1,8 +1,6 @@
-"""Strict Canvas projection for the single-calendar ICS feed.
+"""Project Canvas cache rows for ICS feeds.
 
-This module is deliberately independent from the browser calendar response
-path.  It uses the same cache/source tables and Canvas validation helpers, but
-never converts a source/read error into an empty or partial result.
+Source and read errors fail the projection rather than returning a partial feed.
 """
 
 from datetime import date, datetime, time, timedelta, timezone
@@ -12,6 +10,7 @@ import sqlite3
 from typing import Any, Iterable, Mapping
 
 from services.calendar_ics_contract import (
+    require_utc_range,
     CalendarIcsProjectionOutcome,
     NormalizedCalendarEvent,
 )
@@ -42,7 +41,6 @@ _REQUIRED_CANVAS_ICS_CAPABILITIES = (
 
 
 def _require_canvas_ics_capabilities() -> None:
-    """Require the same read/projection/share gates as the Canvas calendar path."""
     if any(not extension_capability_enabled(capability) for capability in _REQUIRED_CANVAS_ICS_CAPABILITIES):
         raise _source_failure("capability_unavailable", "Canvas calendar capability is unavailable.")
 
@@ -89,20 +87,6 @@ def _utc_datetime(value: Any, field: str) -> datetime:
     return parsed.astimezone(timezone.utc)
 
 
-def _window_datetime(value: Any, field: str) -> datetime:
-    if type(value) is date:
-        return datetime.combine(value, time.min, tzinfo=timezone.utc)
-    return _utc_datetime(value, field)
-
-
-def _validate_window(window_start: Any, window_end: Any) -> tuple[datetime, datetime]:
-    start = _window_datetime(window_start, "window start")
-    end = _window_datetime(window_end, "window end")
-    if end <= start:
-        raise ValueError("Canvas projection window must be a non-empty [start, end) interval.")
-    return start, end
-
-
 def _source_failure(code: str, message: str) -> CanvasProjectionError:
     return CanvasProjectionError(code, message)
 
@@ -121,6 +105,7 @@ def _strict_sources(user_id: str) -> list[dict[str, Any]]:
         _require_canvas_ics_capabilities()
         validated = []
         for source in sources:
+            _source_key(source)
             if source.get("status") != "active":
                 raise _source_failure("source_unavailable", "A configured Canvas source is not active.")
             try:
@@ -139,7 +124,7 @@ def _strict_sources(user_id: str) -> list[dict[str, Any]]:
         return validated
 
 
-def _load_cache_rows(user_id: str, source_rows: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
+def _load_cache_rows(user_id: str, source_rows: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     source_ids = [str(row.get("source_id")) for row in source_rows if row.get("source_id")]
     if not source_ids:
         return []
@@ -153,10 +138,17 @@ def _load_cache_rows(user_id: str, source_rows: list[Mapping[str, Any]]) -> list
     return [dict(row) for row in rows]
 
 
-def _source_key(row: Mapping[str, Any]) -> tuple[str | None, str | None]:
+def _validated_source_key(source_id: object, account_key: object) -> tuple[str, str]:
+    if (not isinstance(source_id, str) or not source_id.strip()
+            or not isinstance(account_key, str) or not account_key.strip()):
+        raise _source_failure("source_invalid", "Canvas source identity must contain non-empty strings.")
+    return source_id, account_key
+
+
+def _source_key(row: Mapping[str, Any]) -> tuple[str, str]:
     if "canvas_source_id" in row:
-        return row.get("canvas_source_id"), row.get("canvas_account_key")
-    return row.get("source_id"), row.get("account_key")
+        return _validated_source_key(row.get("canvas_source_id"), row.get("canvas_account_key"))
+    return _validated_source_key(row.get("source_id"), row.get("account_key"))
 
 
 def _validate_injected_sources(source_rows: list[dict[str, Any]]) -> None:
@@ -168,8 +160,7 @@ def _validate_injected_sources(source_rows: list[dict[str, Any]]) -> None:
             raise _source_failure("source_invalid", "A configured Canvas source has the wrong provider.")
         if source.get("status", "active") != "active":
             raise _source_failure("source_unavailable", "A configured Canvas source is not active.")
-        if not source.get("source_id") or not source.get("account_key"):
-            raise _source_failure("source_invalid", "A configured Canvas source is malformed.")
+        _validated_source_key(source.get("source_id"), source.get("account_key"))
         if source.get("consent_state", "active") != "active" or source.get("consented", True) is False:
             raise _source_failure("source_authentication", "Active Canvas consent is required.")
 
@@ -229,15 +220,16 @@ def _normalized_event(row: Mapping[str, Any], source: Mapping[str, Any]) -> Norm
 
 def project_canvas_calendar(
     user_id: str,
-    window_start: Any,
-    window_end: Any,
+    range_start: datetime,
+    range_end: datetime,
     *,
     cache_events: Iterable[Mapping[str, Any]] | None = None,
     source_rows: Iterable[Mapping[str, Any]] | None = None,
 ) -> CalendarIcsProjectionOutcome:
     """Project all Canvas events intersecting the caller's fixed UTC window."""
 
-    start, end = _validate_window(window_start, window_end)
+    require_utc_range(range_start, range_end)
+    start, end = range_start, range_end
     try:
         sources = [dict(row) for row in source_rows] if source_rows is not None else _strict_sources(str(user_id))
         if source_rows is not None:

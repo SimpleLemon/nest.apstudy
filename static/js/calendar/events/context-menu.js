@@ -1,6 +1,14 @@
+import { createCalendarStorage } from "../storage.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarDataAdapter } from "../adapter.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+
 // Calendar event activation and context menu interactions.
-(function () {
-    const rootSelector = "#calendar-view-root";
+export function createCalendarEventMenu({
+    root, document, view: window, lifecycle, adapter, state, mirrors,
+    getCalendarEventByRef, openEventForm, goToToday, reload,
+    canCreate = () => false,
+    canMutateEvent = () => false,
+}) {
+    adapter = createCalendarDataAdapter(adapter || {}, { window });
     const eventSelector = "[data-event-ref], [data-event-id]";
     let menuEl = null;
     let currentContext = null;
@@ -51,12 +59,8 @@
     }
 
     function isReadOnlyCalendar() {
-        return Boolean(window.state?.public?.readOnly)
+        return Boolean(state.public.readOnly)
             || document.body?.dataset.calendarReadonly === "true";
-    }
-
-    function getAdapter() {
-        return window.APStudyCalendarDataAdapter || null;
     }
 
     function contextForTarget(target, { clientX = 0, clientY = 0 } = {}) {
@@ -70,8 +74,8 @@
             y: clientY,
             eventId,
             eventRef,
-            event: eventRef && window.getCalendarEventByRef
-                ? window.getCalendarEventByRef(eventRef)
+            event: eventRef
+                ? getCalendarEventByRef(eventRef)
                 : null,
             date: dateAttrEl?.getAttribute("data-date") || null,
             time: timeAttrEl?.getAttribute("data-time") || null,
@@ -82,12 +86,18 @@
 
     function getEventMenuItems(context) {
         const event = context.event;
-        if (context.readOnly) {
+        if (context.readOnly || isReadOnlyCalendar()) {
             return event ? [
                 { label: "View Event", icon: "visibility", onClick: openView },
             ] : [];
         }
 
+        if (event?.source_type === "external") {
+            const items = [{ label: "View Event", icon: "visibility", onClick: openView }];
+            if (canMutateEvent(event)) items.push({ label: "Edit Event", icon: "edit_calendar", onClick: openEdit }, { label: "Delete Event", icon: "delete", onClick: deleteEvent, danger: true });
+            if (event.source_url) items.push({ label: event.provider === "google" ? "Open in Google Calendar" : "Open in Outlook", icon: "open_in_new", onClick: () => window.open(event.source_url, "_blank", "noopener,noreferrer") });
+            return items;
+        }
         const isTask = event?.source_type === "task" || event?.type === "task";
         if (isTask) {
             return event?.task_id
@@ -98,21 +108,22 @@
         if (event?.source === "simulated") {
             return [
                 { label: "View Event", icon: "visibility", onClick: openView },
-                { label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent },
+                ...(canCreate() ? [{ label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent }] : []),
             ];
         }
 
+        if (!canMutateEvent(event)) return [{ label: "View Event", icon: "visibility", onClick: openView }];
         if (isImportedEvent(event)) {
             return [
                 { label: "View / Edit Event", icon: "edit_calendar", onClick: openEdit },
-                { label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent },
+                ...(canCreate() ? [{ label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent }] : []),
                 { label: "Hide Imported Event", icon: "visibility_off", onClick: deleteEvent, danger: true },
             ];
         }
 
         return [
             { label: "View / Edit Event", icon: "edit_calendar", onClick: openEdit },
-            { label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent },
+            ...(canCreate() ? [{ label: "Duplicate Event", icon: "content_copy", onClick: duplicateEvent }] : []),
             { label: "Delete Event", icon: "delete", onClick: deleteEvent, danger: true },
         ];
     }
@@ -123,18 +134,19 @@
         const items = context.eventRef
             ? getEventMenuItems(context)
             : [
-                { label: "Create New Event", icon: "calendar_add_on", onClick: createNewFromContext },
+                ...(!context.readOnly && canCreate() ? [{ label: "Create New Event", icon: "calendar_add_on", onClick: createNewFromContext }] : []),
                 { label: "Go to Today", icon: "today", onClick: goToToday },
             ];
-        if (!context.readOnly && window.APStudyCalendarMirrors?.personalRef(context.event)) {
-            items.push({ label: "Mirror to Canvas…", icon: "content_copy", onClick: ctx => window.APStudyCalendarMirrors.open({ event: ctx.event, opener: ctx.anchorEl }) });
+        if (!context.readOnly && canMutateEvent(context.event) && mirrors?.personalRef(context.event)) {
+            items.push({ label: "Mirror to Canvas…", icon: "content_copy", onClick: ctx => {
+                if (!isReadOnlyCalendar() && canMutateEvent(ctx.event)) mirrors.open({ event: ctx.event, opener: ctx.anchorEl });
+            } });
         }
         if (!items.length) return;
         showMenuAt(context.x, context.y, buildMenu(items));
     }
 
     function onContextMenu(event) {
-        const root = document.querySelector(rootSelector);
         if (!root?.contains(event.target)) return;
         event.preventDefault();
         openContextMenu(contextForTarget(event.target, event));
@@ -195,14 +207,12 @@
     }
 
     function onEventClick(event) {
-        const root = document.querySelector(rootSelector);
         const eventEl = event.target.closest?.(eventSelector);
         if (!eventEl || !root?.contains(eventEl)) return;
         activateEventElement(eventEl);
     }
 
     function onEventKeyDown(event) {
-        const root = document.querySelector(rootSelector);
         const eventEl = event.target.closest?.(eventSelector);
         if (!eventEl || !root?.contains(eventEl)) return;
         const opensMenu = event.key === "ContextMenu"
@@ -221,6 +231,7 @@
     }
 
     function createNewFromContext(context) {
+        if (context.readOnly || isReadOnlyCalendar() || !canCreate()) return;
         const startDate = context.date;
         const time = context.time;
         const payload = {};
@@ -233,16 +244,7 @@
             payload.start = `${startDate}T09:00:00`;
             payload.end = `${startDate}T10:00:00`;
         }
-        window.openCalendarEventForm?.({ mode: "create", data: payload });
-    }
-
-    function goToToday() {
-        if (!window.state) return;
-        window.state.anchorDate = new Date();
-        window.render?.();
-        if (window.ensureEventsForRange && window.getBufferedRangeForView) {
-            window.ensureEventsForRange(window.getBufferedRangeForView());
-        }
+        openEventForm({ mode: "create", data: payload });
     }
 
     function openTask(context) {
@@ -266,14 +268,15 @@
 
     function openView(context) {
         const data = formDataForEvent(context.event);
-        if (data) window.openCalendarEventForm?.({ mode: "view", data, opener: context.anchorEl });
+        if (data) openEventForm({ mode: "view", data, opener: context.anchorEl });
     }
 
     function openEdit(context) {
         const event = context.event;
         const data = formDataForEvent(event);
         if (!data) return;
-        window.openCalendarEventForm?.({
+        if (context.readOnly || isReadOnlyCalendar() || !canMutateEvent(event)) return openView(context);
+        openEventForm({
             mode: isImportedEvent(event) ? "override" : "edit",
             data,
             opener: context.anchorEl,
@@ -281,12 +284,13 @@
     }
 
     function duplicateEvent(context) {
+        if (context.readOnly || isReadOnlyCalendar() || !canCreate()) return;
         const data = formDataForEvent(context.event);
         if (!data) return;
         data.title = `${data.title || "Untitled"} (Copy)`;
         delete data.id;
         delete data.event_ref;
-        window.openCalendarEventForm?.({ mode: "create", data, opener: context.anchorEl });
+        openEventForm({ mode: "create", data, opener: context.anchorEl });
     }
 
     function hideEventElements(event, context) {
@@ -322,9 +326,9 @@
 
     async function deleteEvent(context) {
         const event = context.event;
-        if (!event) return;
+        if (!event || context.readOnly || isReadOnlyCalendar() || !canMutateEvent(event)) return;
         const imported = isImportedEvent(event);
-        if (!imported && window.APStudyCalendarMirrors?.open({ event, opener: context.anchorEl, deletion: true })) return;
+        if (!imported && mirrors?.open({ event, opener: context.anchorEl, deletion: true })) return;
         const accepted = await (window.APStudyConfirm?.request?.({
             title: imported ? "Hide imported event?" : "Delete event?",
             message: imported
@@ -333,28 +337,19 @@
             acceptLabel: imported ? "Hide event" : "Delete event",
             danger: true,
         }) ?? Promise.resolve(false));
-        if (!accepted) return;
+        if (!accepted || isReadOnlyCalendar() || !canMutateEvent(event)) return;
         const hiddenElements = hideEventElements(event, context);
         const commit = async ({ reason } = {}) => {
-            const adapter = getAdapter();
+            if (isReadOnlyCalendar() || !canMutateEvent(event)) {
+                restoreEventElements(hiddenElements);
+                return;
+            }
             const response = imported
-                ? adapter?.hideEvent
-                    ? await adapter.hideEvent({ eventRef: event.event_ref, keepalive: reason === "pagehide" })
-                    : await fetch("/api/calendar/event-overrides/hide", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ event_ref: event.event_ref }),
-                        keepalive: reason === "pagehide",
-                    })
-                : adapter?.deleteEvent
-                    ? await adapter.deleteEvent({ eventId: event.id || context.eventId, keepalive: reason === "pagehide" })
-                    : await fetch(`/api/calendar/events/${encodeURIComponent(event.id || context.eventId)}`, {
-                        method: "DELETE",
-                        keepalive: reason === "pagehide",
-                    });
+                ? await adapter.hideEvent({ eventRef: event.event_ref, keepalive: reason === "pagehide" })
+                : await adapter.deleteEvent({ eventId: event.id || context.eventId, revision: event.revision, keepalive: reason === "pagehide" });
             if (!response.ok) throw new Error("delete failed");
-            localStorage.removeItem("calendarEventsCache");
-            window.loadCalendarData?.();
+            createCalendarStorage(window).removeItem("calendarEventsCache");
+            if (!lifecycle.isDisposed()) reload();
         };
         if (window.APStudyUndo?.stage) {
             window.APStudyUndo.stage({
@@ -367,7 +362,7 @@
         }
         try {
             await commit();
-        } catch (_) {
+        } catch {
             restoreEventElements(hiddenElements);
             showEventDeleteError();
         }
@@ -412,29 +407,23 @@
         }
     }
 
+    let registered = false;
     function register() {
-        const root = document.querySelector(rootSelector);
-        if (!root || root.dataset.eventInteractionsWired === "true") return;
-        root.dataset.eventInteractionsWired = "true";
-        root.addEventListener("contextmenu", onContextMenu);
-        root.addEventListener("click", onEventClick);
-        root.addEventListener("keydown", onEventKeyDown);
-        document.getElementById("calendar-week-time-scroller")?.addEventListener("scroll", () => closeMenu());
-        document.addEventListener("click", (event) => {
-            if (event instanceof MouseEvent && event.button === 2) return;
+        if (registered) return;
+        registered = true;
+        lifecycle.addEventListener(root, "contextmenu", onContextMenu);
+        lifecycle.addEventListener(root, "click", onEventClick);
+        lifecycle.addEventListener(root, "keydown", onEventKeyDown);
+        lifecycle.addEventListener(root, "scroll", () => closeMenu(), true);
+        lifecycle.addEventListener(document, "click", (event) => {
+            if (event instanceof window.MouseEvent && event.button === 2) return;
             if (menuEl?.style.display !== "none" && !menuEl?.contains(event.target)) closeMenu();
         });
-        document.addEventListener("keydown", onMenuKeyDown);
+        lifecycle.addEventListener(document, "keydown", onMenuKeyDown);
     }
-
-    window.APStudyCalendarEventMenu = {
-        activateEvent,
-        activateEventElement,
-        closeMenu,
-        getEventMenuItems,
-        handleEventKeyDown: onEventKeyDown,
-        openKeyboardContextMenu,
-        register,
+    lifecycle.addCleanup(() => { closeMenu(); menuEl?.remove(); menuEl = null; });
+    return {
+        activateEvent, activateEventElement, closeMenu, getEventMenuItems,
+        handleEventKeyDown: onEventKeyDown, openKeyboardContextMenu, register,
     };
-    document.addEventListener("DOMContentLoaded", register);
-}());
+}

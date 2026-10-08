@@ -1,3 +1,4 @@
+import { calendarScript } from "./helpers/calendar-script.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -10,7 +11,7 @@ globalThis.document = { documentElement: {} };
 
 async function loadBrowserModule(relativePath) {
     const source = await readFile(path.join(repoRoot, relativePath), "utf8");
-    await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}#${relativePath}`);
+    await import(`data:text/javascript;base64,${Buffer.from(calendarScript(source, "APStudyCalendar" + ({"utils": "Utils", "event-render": "EventRender", "render-shell": "RenderShell", "week-view": "WeekView", "month-view": "MonthView", "agenda": "Agenda", "context-menu": "EventMenu"})[path.basename(relativePath, ".js")])).toString("base64")}#${relativePath}`);
 }
 
 await loadBrowserModule("static/js/calendar/utils.js");
@@ -191,4 +192,17 @@ test("upcoming view keeps period arrows visible and disables them", () => {
     shell.render();
     assert.equal(elements.get("calendar-prev").disabled, false);
     assert.equal(elements.get("calendar-next").disabled, false);
+});
+
+test('calendar CSS colors read the mounted element through its selected runtime', () => {
+    const mountedElement = {};
+    const selectedRuntime = {
+        getComputedStyle(element) {
+            assert.equal(element, mountedElement);
+            return { getPropertyValue: name => name === '--color-surface-container' ? '#123456' : 'invalid' };
+        },
+    };
+    const color = window.APStudyCalendarUtils.getCssColorVariable;
+    assert.equal(color('--color-surface-container', '#ffffff', mountedElement, selectedRuntime), '#123456');
+    assert.equal(color('--color-on-surface', '#ffffff', mountedElement, selectedRuntime), '#ffffff');
 });

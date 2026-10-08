@@ -2,7 +2,7 @@ import unittest
 from datetime import date, datetime, timezone
 from unittest.mock import patch
 
-from services.calendar_ics_canvas import project_canvas_calendar
+from services.calendar_ics_canvas import CanvasProjectionError, _source_key, project_canvas_calendar
 from services.calendar_ics_contract import (
     CalendarIcsProjectionStatus,
     CalendarIcsContractError,
@@ -61,8 +61,8 @@ class CanvasIcsProjectionTests(unittest.TestCase):
     def project(self, rows, *, start="2026-08-01T00:00:00Z", end="2026-09-01T00:00:00Z", sources=None):
         return project_canvas_calendar(
             "user-1",
-            start,
-            end,
+            datetime.fromisoformat(start.replace("Z", "+00:00")) if isinstance(start, str) else start,
+            datetime.fromisoformat(end.replace("Z", "+00:00")) if isinstance(end, str) else end,
             cache_events=rows,
             source_rows=[source_row()] if sources is None else sources,
         )
@@ -70,7 +70,7 @@ class CanvasIcsProjectionTests(unittest.TestCase):
     def test_no_source_and_no_events_are_valid_empty(self):
         self.assertEqual(
             project_canvas_calendar(
-                "user-1", "2026-08-01T00:00:00Z", "2026-09-01T00:00:00Z",
+                "user-1", datetime(2026, 8, 1, tzinfo=UTC), datetime(2026, 9, 1, tzinfo=UTC),
                 cache_events=[], source_rows=[],
             ).status,
             CalendarIcsProjectionStatus.VALID_EMPTY,
@@ -118,6 +118,58 @@ class CanvasIcsProjectionTests(unittest.TestCase):
         self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SOURCE_FAILURE)
         self.assertEqual(outcome.diagnostic_code, "source_authentication")
         self.assertEqual(outcome.events, ())
+
+    def test_injected_source_identity_requires_nonempty_strings(self):
+        for field in ("source_id", "account_key"):
+            for invalid in (None, "", " \t", 1, True, ["identity"], {"identity": "value"}):
+                with self.subTest(field=field, invalid=invalid):
+                    outcome = self.project([event_row()], sources=[source_row(**{field: invalid})])
+                    self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SOURCE_FAILURE)
+                    self.assertEqual(outcome.diagnostic_code, "source_invalid")
+                    self.assertEqual(outcome.events, ())
+
+    def test_cache_identity_requires_nonempty_strings_without_partial_output(self):
+        for field in ("canvas_source_id", "canvas_account_key"):
+            for invalid in (None, "", " \t", 1, True, ["identity"], {"identity": "value"}):
+                with self.subTest(field=field, invalid=invalid):
+                    outcome = self.project([event_row(), event_row(**{field: invalid})])
+                    self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SOURCE_FAILURE)
+                    self.assertEqual(outcome.diagnostic_code, "source_invalid")
+                    self.assertEqual(outcome.events, ())
+
+    def test_source_key_rejects_malformed_identity_at_raw_boundary(self):
+        for row in (source_row(source_id=1), event_row(canvas_account_key=["account-1"])):
+            with self.subTest(row=row), self.assertRaises(CanvasProjectionError) as raised:
+                _source_key(row)
+            self.assertEqual(raised.exception.code, "source_invalid")
+
+    def test_stored_source_identity_is_validated_before_consent_lookup(self):
+        for field in ("source_id", "account_key"):
+            for invalid in (None, "", " \t", 1, ["identity"]):
+                with self.subTest(field=field, invalid=invalid), patch(
+                    "services.calendar_ics_canvas.calendar_connection"
+                ) as connection, patch(
+                    "services.calendar_ics_canvas._canvas_consent_from_connection"
+                ) as consent:
+                    connection.return_value.__enter__.return_value.execute.return_value.fetchall.return_value = [
+                        source_row(**{field: invalid})
+                    ]
+                    outcome = project_canvas_calendar(
+                        "user-1", datetime(2026, 8, 1, tzinfo=UTC), datetime(2026, 9, 1, tzinfo=UTC), cache_events=[],
+                    )
+                    self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SOURCE_FAILURE)
+                    self.assertEqual(outcome.diagnostic_code, "source_invalid")
+                    consent.assert_not_called()
+
+    def test_valid_identity_is_preserved_and_other_sources_are_skipped(self):
+        identity = (" source-1 ", " account-1 ")
+        source = source_row(source_id=identity[0], account_key=identity[1])
+        row = event_row(canvas_source_id=identity[0], canvas_account_key=identity[1])
+        self.assertEqual(_source_key(source), identity)
+        self.assertEqual(_source_key(row), identity)
+        outcome = self.project([row, event_row(canvas_source_id="another-source")], sources=[source])
+        self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SUCCESS)
+        self.assertEqual(len(outcome.events), 1)
 
     def test_description_is_sanitized_and_private_fields_are_not_serialized(self):
         outcome = self.project([event_row()])

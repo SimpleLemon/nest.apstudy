@@ -311,6 +311,8 @@ def _effective_extension_capabilities():
     effective = dict(configured) if isinstance(configured, dict) else dict(EXTENSION_CAPABILITIES)
     for capability in EXTENSION_CAPABILITIES:
         effective[capability] = extension_capability_enabled(capability)
+    from services.external_calendar_service import capabilities as provider_capabilities
+    effective.update({key: value for key, value in provider_capabilities().items() if key != 'providers'})
     return effective
 
 
@@ -1447,3 +1449,25 @@ def refresh_extension_mirrors(source_id):
         return _phase2_response("result", observe(_user_id(), source_id, payload))
     except Exception as exc:
         return _handle_extension_error(exc)
+
+
+@extension_api_bp.route("/api/extension/streak", methods=["GET", "POST"])
+def extension_streak():
+    import sqlite3
+    from services import extension_streaks as streaks
+    unauthorized = _auth_or_response()
+    if unauthorized:
+        return unauthorized
+    try:
+        if request.method == "GET":
+            result = streaks.read(_user_id(), request.args.get("accountKey"), request.args.get("timeZone"))
+        else:
+            result = streaks.sync(_user_id(), _parse_bounded_json_object(), request.headers.get("Idempotency-Key"))
+        return _json_response(result)
+    except streaks.StreakError as exc:
+        return _error_response("streak_conflict" if exc.status == 409 else "invalid_streak", str(exc), exc.status)
+    except ExtensionContractError as exc:
+        return _handle_extension_error(exc)
+    except sqlite3.OperationalError:
+        logger.exception("Streak storage unavailable")
+        return _error_response("streak_unavailable", "Streak synchronization is temporarily unavailable.", 503)

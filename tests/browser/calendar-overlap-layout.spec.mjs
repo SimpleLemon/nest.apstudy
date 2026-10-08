@@ -1,14 +1,20 @@
 import { expect, test } from "playwright/test";
 
+async function openCalendarHarness(page, baseURL) {
+    await page.route("**/calendar-layout-harness", route => route.fulfill({
+        contentType: "text/html",
+        body: `<!doctype html><html><head><link rel="stylesheet" href="/static/css/tailwind.css"></head><body><div id="calendar"></div></body></html>`,
+    }));
+    await page.goto(`${baseURL}/calendar-layout-harness`, { waitUntil: "networkidle" });
+}
+
 test("week rendering gives isolated groups full width and overlapping groups deterministic lanes", async ({ page, baseURL }) => {
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    await page.goto(`${baseURL}/static/js/calendar/utils.js`);
-    await page.setContent(`<!doctype html><html><body><div id="calendar"></div></body></html>`);
-    await page.addScriptTag({ url: `${baseURL}/static/js/core/ui-primitives.js` });
+    await openCalendarHarness(page, baseURL);
     await page.evaluate(async () => {
-        await import("/static/js/calendar/utils.js");
-        await import("/static/js/calendar/views/week-view.js");
+        const utilities = await import("/static/js/calendar/utils.js");
+        const { createCalendarWeekView } = await import("/static/js/calendar/views/week-view.js");
         const day = new Date(2026, 6, 19);
         const at = (hour, minute = 0) => new Date(2026, 6, 19, hour, minute);
         const events = [
@@ -20,7 +26,7 @@ test("week rendering gives isolated groups full width and overlapping groups det
             { id: "triple-b", title: "Triple B", startDate: at(14), endDate: at(15, 30) },
             { id: "triple-c", title: "Triple C", startDate: at(14), endDate: at(15) },
         ];
-        const view = window.APStudyCalendarWeekView.createCalendarWeekView({
+        const view = createCalendarWeekView({
             state: { anchorDate: day },
             constants: { allDayMinHeightPx: 44, hourHeightPx: 60, weekMinimumDayWidthPx: 148, weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
             callbacks: {
@@ -30,7 +36,7 @@ test("week rendering gives isolated groups full width and overlapping groups det
                 getVisibleEvents: () => events,
             },
             formatters: {
-                ...window.APStudyCalendarUtils,
+                ...utilities,
                 escapeHtml: String,
                 formatHourLabel: (hour) => String(hour),
                 isTaskEvent: () => false,
@@ -53,12 +59,12 @@ test("week rendering gives isolated groups full width and overlapping groups det
 });
 
 test("month rendering turns a timed cross-day event into one compact spanning band", async ({ page, baseURL }) => {
-    await page.goto(`${baseURL}/static/js/calendar/utils.js`);
-    await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="${baseURL}/static/css/tailwind.css"></head><body><div id="calendar"></div></body></html>`);
-    await page.addScriptTag({ url: `${baseURL}/static/js/core/ui-primitives.js` });
+    const errors = [];
+    page.on("pageerror", error => errors.push(error.message));
+    await openCalendarHarness(page, baseURL);
     await page.evaluate(async () => {
-        await import("/static/js/calendar/utils.js");
-        await import("/static/js/calendar/views/month-view.js");
+        const utilities = await import("/static/js/calendar/utils.js");
+        const { createCalendarMonthView } = await import("/static/js/calendar/views/month-view.js");
         const spanning = {
             id: "spanning",
             title: "TX > London",
@@ -85,7 +91,7 @@ test("month rendering turns a timed cross-day event into one compact spanning ba
             event.startDate <= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
             && event.endDate > new Date(date.getFullYear(), date.getMonth(), date.getDate())
         );
-        const view = window.APStudyCalendarMonthView.createCalendarMonthView({
+        const view = createCalendarMonthView({
             state: { anchorDate: new Date(2026, 6, 20) },
             constants: { weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
             callbacks: {
@@ -97,7 +103,7 @@ test("month rendering turns a timed cross-day event into one compact spanning ba
                 buildEventChip: (event) => `<div data-month-chip-id="${event.id}">${event.title}</div>`,
             },
             formatters: {
-                ...window.APStudyCalendarUtils,
+                ...utilities,
                 escapeHtml: String,
                 formatDateKey: (date) => date.toISOString().slice(0, 10),
                 formatMonthGridDayLabel: (date) => String(date.getDate()),
@@ -117,15 +123,16 @@ test("month rendering turns a timed cross-day event into one compact spanning ba
     await expect(page.locator('[data-event-id="midnight-end"]')).toHaveCount(0);
     await expect(page.locator('[data-month-chip-id="midnight-end"]')).toHaveCount(1);
     expect(await spanning.evaluate((element) => element.getBoundingClientRect().height)).toBeLessThanOrEqual(27);
+    expect(errors).toEqual([]);
 });
 
 test("week rendering keeps cross-day bands at compact all-day density", async ({ page, baseURL }) => {
-    await page.goto(`${baseURL}/static/js/calendar/utils.js`);
-    await page.setContent(`<!doctype html><html><head><link rel="stylesheet" href="${baseURL}/static/css/tailwind.css"></head><body><div id="calendar"></div></body></html>`);
-    await page.addScriptTag({ url: `${baseURL}/static/js/core/ui-primitives.js` });
+    const errors = [];
+    page.on("pageerror", error => errors.push(error.message));
+    await openCalendarHarness(page, baseURL);
     await page.evaluate(async () => {
-        await import("/static/js/calendar/utils.js");
-        await import("/static/js/calendar/views/week-view.js");
+        const utilities = await import("/static/js/calendar/utils.js");
+        const { createCalendarWeekView } = await import("/static/js/calendar/views/week-view.js");
         const weekStart = new Date(2026, 6, 19);
         const spanning = {
             id: "spanning",
@@ -142,7 +149,7 @@ test("week rendering keeps cross-day bands at compact all-day density", async ({
             isAllDay: false,
         };
         const events = [spanning, midnightEnd];
-        const view = window.APStudyCalendarWeekView.createCalendarWeekView({
+        const view = createCalendarWeekView({
             state: { anchorDate: weekStart },
             constants: { allDayMinHeightPx: 44, hourHeightPx: 60, weekMinimumDayWidthPx: 148, weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
             callbacks: {
@@ -155,7 +162,7 @@ test("week rendering keeps cross-day bands at compact all-day density", async ({
                 getVisibleEvents: () => events,
             },
             formatters: {
-                ...window.APStudyCalendarUtils,
+                ...utilities,
                 escapeHtml: String,
                 formatHourLabel: (hour) => String(hour),
                 isTaskEvent: () => false,
@@ -174,4 +181,5 @@ test("week rendering keeps cross-day bands at compact all-day density", async ({
     await expect(midnightEnd).toHaveCount(1);
     await expect(midnightEnd).toHaveClass(/absolute/);
     await expect(midnightEnd).toHaveAttribute("style", /height:120px/);
+    expect(errors).toEqual([]);
 });

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}<title>Calendar connection</title>{% endblock %}
+{% block head_end %}<script src="{{ url_for('static', filename='js/calendar/connection-complete.js') }}" defer></script>{% endblock %}
+{% block body_attrs %} data-analytics-mode="off" data-result="{{ 'connected' if connected else 'cancelled' }}"{% endblock %}
+{% block body_content %}<main class="workspace-page-shell"><h1>{{ 'Calendar connected' if connected else 'Connection not completed' }}</h1><p>You can close this window and return to Planner.</p></main>{% endblock %}

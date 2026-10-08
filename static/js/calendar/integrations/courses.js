@@ -1,599 +1,582 @@
-(function () {
-    function createCalendarCourses({
-        root = document,
-        lifecycle = null,
-        dataAdapter = null,
-        state,
-        strictLoad = false,
-        authenticatedReadOnly = false,
-        serverSelections = false,
-        remoteResults = false,
-        constants,
-        render,
-        saveCalendarState,
-        escapeHtml,
-    }) {
-        const {
-            coursesSelectionStorageKey,
-            coursesModalAnimationMs,
-            simulatedCalendarName,
-        } = constants;
+import { createCalendarStorage } from "../storage.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarDataAdapter } from "../adapter.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCourseModalRenderer } from "./course-modal.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { parseAtlasTimeToken } from "../../courses/atlas-time.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
 
-        const query = (selector) => root?.querySelector?.(selector);
-        const doc = root.ownerDocument || document;
-        const view = doc.defaultView || window;
-        const storage = view.localStorage || localStorage;
-        const scrollLockTarget = root?.classList ? root : root?.documentElement;
-        const getActiveElement = () => doc.activeElement;
-        let courseLoadGeneration = 0;
-        let activeCourseController = null;
+export function createCalendarCourses({
+    root = document,
+    lifecycle = null,
+    dataAdapter = null,
+    runtimeWindow = null,
+    state,
+    strictLoad = false,
+    authenticatedReadOnly = false,
+    serverSelections = false,
+    remoteResults = false,
+    constants,
+    render,
+    saveCalendarState,
+    escapeHtml,
+}) {
+    const {
+        coursesSelectionStorageKey,
+        coursesModalAnimationMs,
+        simulatedCalendarName,
+    } = constants;
 
-        function requestController() {
-            return lifecycle?.trackAbortController?.() || new AbortController();
-        }
+    const query = (selector) => root?.querySelector?.(selector);
+    const doc = root.ownerDocument || root;
+    const view = runtimeWindow || doc.defaultView || globalThis.window || globalThis;
+    const storage = createCalendarStorage(view);
+    const adapter = createCalendarDataAdapter(dataAdapter || {}, { window: view });
+    const scrollLockTarget = root?.classList ? root : root?.documentElement;
+    const getActiveElement = () => doc.activeElement;
+    let courseLoadGeneration = 0;
+    let activeCourseController = null;
+    let scrollLockWasPresent = null;
 
-        function initializeCourseSelectionsFromStorage() {
-            if (serverSelections) {
-                state.courses.selectedSectionIds = new Set();
-                return;
-            }
-            const persistedSelections = loadSelectedCourseSectionIds();
-            state.courses.selectedSectionIds = new Set(persistedSelections);
-        }
+    function releaseCourseScrollLock() {
+        if (scrollLockWasPresent === false) scrollLockTarget?.classList.remove("overflow-hidden");
+        scrollLockWasPresent = null;
+    }
 
-        function isEmoryStudentSession() {
-            const bodyValue = String(doc.body?.dataset?.emoryStudent || "").toLowerCase();
-            const rootValue = String(root?.dataset?.emoryStudent || "").toLowerCase();
-            const value = bodyValue || rootValue;
-            return value === "true" || value === "1";
-        }
+    lifecycle?.addCleanup?.(() => {
+        releaseCourseScrollLock();
+        state.courses.modalOpen = false;
+        state.courses.isClosing = false;
+        state.courses.modalTriggerEl = null;
+    });
 
-        function sectionFromSavedCourse(course) {
-            const id = String(course?.section_id || course?.id || "");
-            const instructors = Array.isArray(course?.instructors) ? course.instructors : [];
-            const instructorsUnique = Array.isArray(course?.instructors_unique) ? course.instructors_unique : [];
-            const instructor = course?.instructor || course?.instructor_name || "";
-            const courseTitle = course?.course_title || course?.course_name || "";
-            const searchBlob = [
-                courseTitle,
-                course?.subject,
-                course?.course_code,
-                instructor,
-                ...instructors,
-                ...instructorsUnique,
-            ].join(" ").toLowerCase();
-            return {
-                ...course,
-                id,
-                course_code: course?.course_code || "",
-                course_title: courseTitle,
-                instructor,
-                section_number: course?.section_number,
-                meetings: Array.isArray(course?.meetings) ? course.meetings : [],
-                date_range: course?.date_range || {},
-                is_cancelled: Boolean(course?.is_cancelled),
-                searchBlob,
-            };
-        }
+    function requestController() {
+        return lifecycle?.trackAbortController?.() || new (view.AbortController || globalThis.AbortController)();
+    }
 
-        function removeSimulatedCalendarPreference() {
-            if (state.calendars[simulatedCalendarName]) {
-                delete state.calendars[simulatedCalendarName];
-            }
-        }
-
-        function clearSimulatedCourseSelections() {
+    function initializeCourseSelectionsFromStorage() {
+        if (serverSelections) {
             state.courses.selectedSectionIds = new Set();
-            if (!serverSelections) saveSelectedCourseSectionIds();
-            removeSimulatedCalendarPreference();
+            return;
         }
+        const persistedSelections = loadSelectedCourseSectionIds();
+        state.courses.selectedSectionIds = new Set(persistedSelections);
+    }
 
-        function applySavedCourses(courses) {
-            const ids = [];
-            for (const course of courses) {
-                const section = sectionFromSavedCourse(course);
-                if (!section.id) continue;
-                ids.push(section.id);
-                state.courses.sectionsById[section.id] = {
-                    ...(state.courses.sectionsById[section.id] || {}),
-                    ...section,
-                };
-            }
-            state.courses.selectedSectionIds = new Set(ids);
-            if (!serverSelections) saveSelectedCourseSectionIds();
-            ensureSimulatedCalendarPreference();
-        }
+    function isEmoryStudentSession() {
+        const bodyValue = String(doc.body?.dataset?.emoryStudent || "").toLowerCase();
+        const rootValue = String(root?.dataset?.emoryStudent || "").toLowerCase();
+        const value = bodyValue || rootValue;
+        return value === "true" || value === "1";
+    }
 
-        async function hydrateSavedCourses() {
-            if (state.public.readOnly && !authenticatedReadOnly) return;
-            if (!serverSelections && !isEmoryStudentSession()) {
-                clearSimulatedCourseSelections();
-                return;
-            }
-            const controller = requestController();
-            try {
-                const result = dataAdapter?.loadSavedCourses
-                    ? await dataAdapter.loadSavedCourses({ signal: controller.signal })
-                    : { response: await fetch("/api/courses/saved", { signal: controller.signal }) };
-                const response = result.response || result;
-                if (response.status === 403) {
-                    clearSimulatedCourseSelections();
-                    return;
-                }
-                if (!response.ok) {
-                    if (strictLoad) throw new Error("Unable to load saved courses");
-                    return;
-                }
-                const payload = result.payload || await response.json();
-                if (!payload || !Array.isArray(payload.courses)) throw new Error("Saved courses response is invalid");
-                const courses = Array.isArray(payload.courses) ? payload.courses : [];
-                applySavedCourses(courses);
-            } catch (err) {
-                console.error("Failed to hydrate saved courses:", err);
-                if (strictLoad) throw err;
-            } finally {
-                lifecycle?.releaseAbortController?.(controller);
-            }
-        }
-
-        async function hydrateSelectedSimulatedSections() {
-            if (!state.courses.selectedSectionIds.size) return;
-            const missingIds = Array.from(state.courses.selectedSectionIds)
-                .filter((id) => !state.courses.sectionsById[id]);
-            if (!missingIds.length) {
-                ensureSimulatedCalendarPreference();
-                render();
-                return;
-            }
-            const controller = requestController();
-            try {
-                const result = dataAdapter?.loadCourseSectionsById
-                    ? await dataAdapter.loadCourseSectionsById({ sectionIds: missingIds, signal: controller.signal })
-                    : { response: await fetch("/api/atlas/sections/by-id", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ section_ids: missingIds, include_cancelled: true }),
-                        signal: controller.signal,
-                    }) };
-                const res = result.response || result;
-                if (!res.ok) return;
-                const payload = result.payload || await res.json();
-                const sections = Array.isArray(payload.sections) ? payload.sections : [];
-                const foundIds = new Set();
-                for (const section of sections) {
-                    const id = String(section.id || "");
-                    if (!id) continue;
-                    foundIds.add(id);
-                    const searchBlob = [
-                        section.course_title,
-                        section.subject,
-                        section.course_code,
-                        section.instructor,
-                        ...(Array.isArray(section.instructors_unique) ? section.instructors_unique : []),
-                    ].join(" ").toLowerCase();
-                    state.courses.sectionsById[id] = { ...section, searchBlob };
-                }
-                let selectionChanged = false;
-                for (const id of missingIds) {
-                    if (!foundIds.has(id) && state.courses.selectedSectionIds.has(id)) {
-                        state.courses.selectedSectionIds.delete(id);
-                        selectionChanged = true;
-                    }
-                }
-                if (selectionChanged) {
-                    saveSelectedCourseSectionIds();
-                }
-                ensureSimulatedCalendarPreference();
-                render();
-            } catch (err) {
-                console.error("Failed to hydrate selected simulated sections:", err);
-            } finally {
-                lifecycle?.releaseAbortController?.(controller);
-            }
-        }
-
-        function applyCoursesFiltersFromUrl() {
-            const url = new URL(view.location.href);
-            state.courses.searchQuery = (url.searchParams.get("search") || "").trim();
-            state.courses.searchInput = state.courses.searchQuery;
-            state.courses.termFilter = (url.searchParams.get("term") || "").trim();
-        }
-
-        function writeCourseFiltersToUrl() {
-            const url = new URL(view.location.href);
-            const search = state.courses.searchQuery.trim();
-            const term = state.courses.termFilter.trim();
-            if (search) {
-                url.searchParams.set("search", search);
-            } else {
-                url.searchParams.delete("search");
-            }
-            if (term) {
-                url.searchParams.set("term", term);
-            } else {
-                url.searchParams.delete("term");
-            }
-            view.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
-        }
-
-        function formatTermLabel(term) {
-            const parts = String(term || "").split("_");
-            if (parts.length !== 2) return term || "Unknown";
-            return `${parts[0]} ${parts[1]}`;
-        }
-
-        function openCoursesModal(trigger = getActiveElement()) {
-            if (state.courses.modalOpen && !state.courses.isClosing) {
-                closeCoursesModal();
-                return;
-            }
-            state.courses.modalOpen = true;
-            state.courses.isClosing = false;
-            state.courses.animateOnOpen = true;
-            state.courses.modalTriggerEl = trigger && typeof trigger.focus === "function" ? trigger : null;
-            state.courses.searchInput = state.courses.searchQuery;
-            state.courses.pinnedSectionIds = new Set(state.courses.selectedSectionIds);
-            state.courses.showSelectedOnly = state.courses.pinnedSectionIds.size > 0;
-            applyCourseFilters();
-            scrollLockTarget?.classList.add("overflow-hidden");
-            renderCoursesModal();
-            setCoursesModalBackgroundInert(true);
-            if (!state.courses.indexLoaded && !state.courses.loading) {
-                void loadCoursesIndex();
-            }
-        }
-
-        function closeCoursesModal() {
-            if (!state.courses.modalOpen || state.courses.isClosing) return;
-            const overlay = query("#courses-modal-overlay");
-            const panel = query("#courses-modal-panel");
-            state.courses.isClosing = true;
-            if (overlay) {
-                overlay.classList.add("opacity-0", "pointer-events-none");
-            }
-            if (panel) {
-                panel.classList.add("-translate-y-3", "opacity-0");
-            }
-            const schedule = lifecycle?.setTimeout || view.setTimeout.bind(view);
-            schedule(() => {
-                const trigger = state.courses.modalTriggerEl;
-                state.courses.pinnedSectionIds = new Set();
-                state.courses.showSelectedOnly = false;
-                state.courses.modalOpen = false;
-                state.courses.isClosing = false;
-                state.courses.modalTriggerEl = null;
-                scrollLockTarget?.classList.remove("overflow-hidden");
-                renderCoursesModal();
-                setCoursesModalBackgroundInert(false);
-                if (trigger?.isConnected) trigger.focus({ preventScroll: true });
-            }, coursesModalAnimationMs);
-        }
-
-        async function submitCoursesSearch() {
-            state.courses.searchQuery = (state.courses.searchInput || "").trim();
-            state.courses.showSelectedOnly = false;
-            if (!state.courses.indexLoaded || remoteResults) {
-                await loadCoursesIndex();
-                return;
-            }
-            applyCourseFilters();
-            writeCourseFiltersToUrl();
-            renderCoursesModal();
-        }
-
-        function loadSelectedCourseSectionIds() {
-            const raw = storage.getItem(coursesSelectionStorageKey);
-            if (!raw) return [];
-            try {
-                const parsed = JSON.parse(raw);
-                return Array.isArray(parsed) ? parsed.map((item) => String(item)) : [];
-            } catch (err) {
-                console.warn("Ignoring invalid saved course selections:", err);
-                storage.removeItem(coursesSelectionStorageKey);
-                return [];
-            }
-        }
-
-        function saveSelectedCourseSectionIds() {
-            if (serverSelections) return;
-            storage.setItem(
-                coursesSelectionStorageKey,
-                JSON.stringify(Array.from(state.courses.selectedSectionIds))
-            );
-        }
-
-        async function loadCoursesIndex() {
-            if (state.courses.loading && !remoteResults) return;
-            if (state.courses.indexLoaded && !remoteResults) {
-                applyCourseFilters();
-                writeCourseFiltersToUrl();
-                renderCoursesModal();
-                return;
-            }
-            const generation = ++courseLoadGeneration;
-            if (remoteResults) activeCourseController?.abort?.();
-            state.courses.loading = true;
-            state.courses.error = "";
-            renderCoursesModal();
-            const controller = requestController();
-            activeCourseController = controller;
-            try {
-                const result = dataAdapter?.loadCourses
-                    ? await dataAdapter.loadCourses({ query: state.courses.searchQuery, term: state.courses.termFilter, limit: 50, offset: 0, signal: controller.signal })
-                    : await (async () => {
-                        const [termsRes, sectionsRes] = await Promise.all([
-                            fetch("/api/atlas/terms", { signal: controller.signal }),
-                            fetch("/api/atlas/sections?include_cancelled=1", { signal: controller.signal }),
-                        ]);
-                        return {
-                            termsResponse: termsRes,
-                            sectionsResponse: sectionsRes,
-                            termsPayload: await termsRes.json(),
-                            sectionsPayload: await sectionsRes.json(),
-                        };
-                    })();
-                const { termsResponse: termsRes, sectionsResponse: sectionsRes, termsPayload, sectionsPayload } = result;
-                if (generation !== courseLoadGeneration || lifecycle?.isDisposed?.()) return;
-                if (!termsRes.ok) throw new Error("Unable to load terms");
-                if (!sectionsRes.ok) throw new Error("Unable to load sections");
-                state.courses.terms = Array.isArray(termsPayload.terms) ? termsPayload.terms : [];
-                state.courses.sections = Array.isArray(sectionsPayload.sections) ? sectionsPayload.sections : [];
-                state.courses.remoteResults = remoteResults;
-                state.courses.total = Number.isSafeInteger(sectionsPayload.total) ? sectionsPayload.total : state.courses.sections.length;
-                state.courses.hasMore = sectionsPayload.has_more === true;
-                state.courses.offset = Number.isSafeInteger(sectionsPayload.offset) ? sectionsPayload.offset : 0;
-                state.courses.indexLoaded = true;
-                const validTerms = new Set(state.courses.terms);
-                if (state.courses.termFilter && !validTerms.has(state.courses.termFilter)) {
-                    state.courses.termFilter = "";
-                }
-                const preservedById = {};
-                for (const id of state.courses.selectedSectionIds) {
-                    if (state.courses.sectionsById[id]) {
-                        preservedById[id] = state.courses.sectionsById[id];
-                    }
-                }
-                state.courses.sectionsById = { ...preservedById };
-                for (const section of state.courses.sections) {
-                    const id = String(section.id || "");
-                    if (!id) continue;
-                    const searchBlob = [
-                        section.course_title,
-                        section.subject,
-                        section.course_code,
-                        section.instructor,
-                        ...(Array.isArray(section.instructors_unique) ? section.instructors_unique : []),
-                    ].join(" ").toLowerCase();
-                    state.courses.sectionsById[id] = { ...section, searchBlob };
-                }
-                if (!remoteResults) state.courses.selectedSectionIds = new Set(
-                    Array.from(state.courses.selectedSectionIds).filter((id) => Boolean(state.courses.sectionsById[id]))
-                );
-                ensureSimulatedCalendarPreference();
-                applyCourseFilters();
-                writeCourseFiltersToUrl();
-                if (!serverSelections) {
-                    saveSelectedCourseSectionIds();
-                    saveCalendarState();
-                }
-            } catch (err) {
-                if (generation !== courseLoadGeneration || controller.signal.aborted || lifecycle?.isDisposed?.()) return;
-                console.error(err);
-                state.courses.indexLoaded = false;
-                state.courses.error = err?.message || "Failed to load courses";
-            } finally {
-                lifecycle?.releaseAbortController?.(controller);
-                if (activeCourseController === controller) activeCourseController = null;
-                if (generation === courseLoadGeneration) {
-                    state.courses.loading = false;
-                    render();
-                }
-            }
-        }
-
-        function applyCourseFilters() {
-            if (state.courses.showSelectedOnly) {
-                state.courses.filteredSectionIds = Array.from(state.courses.pinnedSectionIds);
-                return;
-            }
-            if (!state.courses.indexLoaded) {
-                state.courses.filteredSectionIds = [];
-                return;
-            }
-            const term = state.courses.termFilter;
-            const query = state.courses.searchQuery.trim().toLowerCase();
-            const filteredIds = [];
-            for (const section of state.courses.sections) {
-                const id = String(section.id || "");
-                if (!id) continue;
-                if (term && section.term !== term) continue;
-                const full = state.courses.sectionsById[id];
-                if (query && (!full || !full.searchBlob.includes(query))) continue;
-                filteredIds.push(id);
-            }
-            state.courses.filteredSectionIds = filteredIds;
-        }
-
-        function toggleCourseSectionSelection(sectionId) {
-            const section = state.courses.sectionsById[sectionId];
-            if (!section || section.is_cancelled) return;
-            const removing = state.courses.selectedSectionIds.has(sectionId);
-            if (removing) {
-                state.courses.selectedSectionIds.delete(sectionId);
-            } else {
-                state.courses.selectedSectionIds.add(sectionId);
-            }
-            ensureSimulatedCalendarPreference();
-            saveSelectedCourseSectionIds();
-            saveCalendarState();
-            render();
-            if (removing) {
-                window.APStudyUndo?.stage?.({
-                    message: `${section.course_code || section.course_title || "Course"} removed from the simulated calendar.`,
-                    restore: () => {
-                        state.courses.selectedSectionIds.add(sectionId);
-                        ensureSimulatedCalendarPreference();
-                        saveSelectedCourseSectionIds();
-                        saveCalendarState();
-                        render();
-                    },
-                });
-            }
-        }
-
-        function formatMeetingTime(timeToken) {
-            const parsed = parseAtlasTimeToken(timeToken);
-            if (!parsed) return "TBA";
-            let hour = parsed.hour;
-            const suffix = hour >= 12 ? "p" : "a";
-            hour %= 12;
-            if (hour === 0) hour = 12;
-            return `${hour}:${String(parsed.minute).padStart(2, "0")}${suffix}`;
-        }
-
-        function parseDateOnlyToLocal(dateStr) {
-            if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateStr || ""))) return null;
-            const [year, month, day] = String(dateStr).split("-").map((value) => parseInt(value, 10));
-            return new Date(year, month - 1, day, 0, 0, 0, 0);
-        }
-
-        function getSectionDateBounds(section) {
-            const range = section?.date_range || {};
-            const start = parseDateOnlyToLocal(range.start);
-            const end = parseDateOnlyToLocal(range.end);
-            return { start, end };
-        }
-
-        function formatSectionDateRange(section) {
-            const bounds = getSectionDateBounds(section);
-            if (!bounds.start || !bounds.end) return "N/A";
-            const startStr = bounds.start.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
-            const endStr = bounds.end.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
-            return `${startStr} - ${endStr}`;
-        }
-
-        function formatSectionTypeLabel(typeValue) {
-            const raw = String(typeValue || "").trim().toUpperCase();
-            const known = {
-                LEC: "LEC (Lecture)",
-            };
-            if (!raw) return "N/A";
-            return known[raw] || raw;
-        }
-
-        const { renderCoursesModal, setCoursesModalBackgroundInert } = window.APStudyCalendarCourseModal.createCourseModalRenderer({
-            root,
-            lifecycle,
-            state,
-            escapeHtml,
-            formatTermLabel,
-            formatMeetingTime,
-            formatSectionDateRange,
-            formatSectionTypeLabel,
-        });
-
-        function ensureSimulatedCalendarPreference() {
-            if (state.courses.selectedSectionIds.size === 0) {
-                removeSimulatedCalendarPreference();
-                return;
-            }
-            if (state.calendars[simulatedCalendarName]) {
-                state.calendars[simulatedCalendarName].visible = true;
-                return;
-            }
-            const colorIndex = Object.keys(state.calendars).length % state.calendarColors.length;
-            state.calendars[simulatedCalendarName] = {
-                visible: true,
-                color: state.calendarColors[colorIndex],
-                colorIndex,
-                label: simulatedCalendarName,
-                defaultName: simulatedCalendarName,
-                kind: "simulated",
-                editable: false,
-                sourceId: null,
-                url: "",
-                legacyNames: [simulatedCalendarName],
-            };
-        }
-
-        function buildSimulatedMeetingEvents(startDate, endDate) {
-            const dayTokenMap = {
-                Sun: 0,
-                Mon: 1,
-                Tue: 2,
-                Wed: 3,
-                Thu: 4,
-                Fri: 5,
-                Sat: 6,
-            };
-            const events = [];
-            for (const sectionId of state.courses.selectedSectionIds) {
-                const section = state.courses.sectionsById[sectionId];
-                if (!section) continue;
-                const sectionBounds = getSectionDateBounds(section);
-                const constrainedStart = sectionBounds.start && sectionBounds.start > startDate ? sectionBounds.start : startDate;
-                const constrainedEnd = sectionBounds.end && sectionBounds.end < endDate ? sectionBounds.end : endDate;
-                if (constrainedEnd < constrainedStart) continue;
-                const meetings = Array.isArray(section.meetings) ? section.meetings : [];
-                for (let cursor = new Date(constrainedStart); cursor <= constrainedEnd; cursor.setDate(cursor.getDate() + 1)) {
-                    for (const meeting of meetings) {
-                        const meetingDay = dayTokenMap[meeting.day];
-                        if (meetingDay !== cursor.getDay()) continue;
-                        const parsedStart = parseAtlasTimeToken(meeting.start);
-                        const parsedEnd = parseAtlasTimeToken(meeting.end);
-                        if (!parsedStart || !parsedEnd) continue;
-                        const eventStart = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate(), parsedStart.hour, parsedStart.minute, 0, 0);
-                        const eventEnd = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate(), parsedEnd.hour, parsedEnd.minute, 0, 0);
-                        if (eventEnd <= eventStart) continue;
-                        const uid = `${sectionId}|${cursor.toISOString().slice(0, 10)}|${meeting.start}|${meeting.end}`;
-                        events.push({
-                            uid,
-                            title: `${section.course_code}`.trim(),
-                            description: `${section.course_title} | Sec ${section.section_number || "?"} | ${section.instructor || "TBA"}`,
-                            course: simulatedCalendarName,
-                            type: "class-meeting",
-                            is_all_day: false,
-                            isAllDay: false,
-                            isMultiDay: false,
-                            spanDays: 1,
-                            source: "simulated",
-                            startDate: eventStart,
-                            endDate: eventEnd,
-                        });
-                    }
-                }
-            }
-            return events.sort((a, b) => a.startDate - b.startDate);
-        }
-
-        function parseAtlasTimeToken(timeToken) {
-            const numeric = String(timeToken || "").replace(/\D/g, "");
-            if (!numeric) return null;
-            const padded = numeric.length >= 4 ? numeric.slice(-4) : numeric.padStart(4, "0");
-            const hour = parseInt(padded.slice(0, 2), 10);
-            const minute = parseInt(padded.slice(2, 4), 10);
-            if (Number.isNaN(hour) || Number.isNaN(minute) || hour > 23 || minute > 59) {
-                return null;
-            }
-            return { hour, minute };
-        }
-
+    function sectionFromSavedCourse(course) {
+        const id = String(course?.section_id || course?.id || "");
+        const instructors = Array.isArray(course?.instructors) ? course.instructors : [];
+        const instructorsUnique = Array.isArray(course?.instructors_unique) ? course.instructors_unique : [];
+        const instructor = course?.instructor || course?.instructor_name || "";
+        const courseTitle = course?.course_title || course?.course_name || "";
+        const searchBlob = [
+            courseTitle,
+            course?.subject,
+            course?.course_code,
+            instructor,
+            ...instructors,
+            ...instructorsUnique,
+        ].join(" ").toLowerCase();
         return {
-            initializeCourseSelectionsFromStorage,
-            hydrateSavedCourses,
-            hydrateSelectedSimulatedSections,
-            applyCoursesFiltersFromUrl,
-            writeCourseFiltersToUrl,
-            openCoursesModal,
-            closeCoursesModal,
-            submitCoursesSearch,
-            applyCourseFilters,
-            toggleCourseSectionSelection,
-            renderCoursesModal,
-            ensureSimulatedCalendarPreference,
-            buildSimulatedMeetingEvents,
+            ...course,
+            id,
+            course_code: course?.course_code || "",
+            course_title: courseTitle,
+            instructor,
+            section_number: course?.section_number,
+            meetings: Array.isArray(course?.meetings) ? course.meetings : [],
+            date_range: course?.date_range || {},
+            is_cancelled: Boolean(course?.is_cancelled),
+            searchBlob,
         };
     }
 
-    window.APStudyCalendarCourses = { createCalendarCourses };
-}());
+    function removeSimulatedCalendarPreference() {
+        if (state.calendars[simulatedCalendarName]) {
+            delete state.calendars[simulatedCalendarName];
+        }
+    }
+
+    function clearSimulatedCourseSelections() {
+        state.courses.selectedSectionIds = new Set();
+        if (!serverSelections) saveSelectedCourseSectionIds();
+        removeSimulatedCalendarPreference();
+    }
+
+    function applySavedCourses(courses) {
+        const ids = [];
+        for (const course of courses) {
+            const section = sectionFromSavedCourse(course);
+            if (!section.id) continue;
+            ids.push(section.id);
+            state.courses.sectionsById[section.id] = {
+                ...(state.courses.sectionsById[section.id] || {}),
+                ...section,
+            };
+        }
+        state.courses.selectedSectionIds = new Set(ids);
+        if (!serverSelections) saveSelectedCourseSectionIds();
+        ensureSimulatedCalendarPreference();
+    }
+
+    async function hydrateSavedCourses() {
+        if (state.public.readOnly && !authenticatedReadOnly) return;
+        if (!serverSelections && !isEmoryStudentSession()) {
+            clearSimulatedCourseSelections();
+            return;
+        }
+        const controller = requestController();
+        try {
+            const { response, payload, ok } = await adapter.loadSavedCourses({ signal: controller.signal });
+            if (lifecycle?.isDisposed?.()) return;
+            if (response.status === 403) {
+                clearSimulatedCourseSelections();
+                return;
+            }
+            if (!ok) {
+                if (strictLoad) throw new Error("Unable to load saved courses");
+                return;
+            }
+            if (!payload || !Array.isArray(payload.courses)) throw new Error("Saved courses response is invalid");
+            const courses = Array.isArray(payload.courses) ? payload.courses : [];
+            applySavedCourses(courses);
+        } catch (err) {
+            console.error("Failed to hydrate saved courses:", err);
+            if (strictLoad) throw err;
+        } finally {
+            lifecycle?.releaseAbortController?.(controller);
+        }
+    }
+
+    async function hydrateSelectedSimulatedSections() {
+        if (!state.courses.selectedSectionIds.size) return;
+        const missingIds = Array.from(state.courses.selectedSectionIds)
+            .filter((id) => !state.courses.sectionsById[id]);
+        if (!missingIds.length) {
+            ensureSimulatedCalendarPreference();
+            render();
+            return;
+        }
+        const controller = requestController();
+        try {
+            const { ok, payload } = await adapter.loadCourseSectionsById({ sectionIds: missingIds, signal: controller.signal });
+            if (lifecycle?.isDisposed?.()) return;
+            if (!ok) return;
+            const sections = Array.isArray(payload.sections) ? payload.sections : [];
+            const foundIds = new Set();
+            for (const section of sections) {
+                const id = String(section.id || "");
+                if (!id) continue;
+                foundIds.add(id);
+                const searchBlob = [
+                    section.course_title,
+                    section.subject,
+                    section.course_code,
+                    section.instructor,
+                    ...(Array.isArray(section.instructors_unique) ? section.instructors_unique : []),
+                ].join(" ").toLowerCase();
+                state.courses.sectionsById[id] = { ...section, searchBlob };
+            }
+            let selectionChanged = false;
+            for (const id of missingIds) {
+                if (!foundIds.has(id) && state.courses.selectedSectionIds.has(id)) {
+                    state.courses.selectedSectionIds.delete(id);
+                    selectionChanged = true;
+                }
+            }
+            if (selectionChanged) {
+                saveSelectedCourseSectionIds();
+            }
+            ensureSimulatedCalendarPreference();
+            render();
+        } catch (err) {
+            console.error("Failed to hydrate selected simulated sections:", err);
+        } finally {
+            lifecycle?.releaseAbortController?.(controller);
+        }
+    }
+
+    function applyCoursesFiltersFromUrl() {
+        const url = new URL(view.location.href);
+        state.courses.searchQuery = (url.searchParams.get("search") || "").trim();
+        state.courses.searchInput = state.courses.searchQuery;
+        state.courses.termFilter = (url.searchParams.get("term") || "").trim();
+    }
+
+    function writeCourseFiltersToUrl() {
+        const url = new URL(view.location.href);
+        const search = state.courses.searchQuery.trim();
+        const term = state.courses.termFilter.trim();
+        if (search) {
+            url.searchParams.set("search", search);
+        } else {
+            url.searchParams.delete("search");
+        }
+        if (term) {
+            url.searchParams.set("term", term);
+        } else {
+            url.searchParams.delete("term");
+        }
+        view.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    function formatTermLabel(term) {
+        const parts = String(term || "").split("_");
+        if (parts.length !== 2) return term || "Unknown";
+        return `${parts[0]} ${parts[1]}`;
+    }
+
+    function openCoursesModal(trigger = getActiveElement()) {
+        if (state.courses.modalOpen && !state.courses.isClosing) {
+            closeCoursesModal();
+            return;
+        }
+        state.courses.modalOpen = true;
+        state.courses.isClosing = false;
+        state.courses.animateOnOpen = true;
+        state.courses.modalTriggerEl = trigger && typeof trigger.focus === "function" ? trigger : null;
+        state.courses.searchInput = state.courses.searchQuery;
+        state.courses.pinnedSectionIds = new Set(state.courses.selectedSectionIds);
+        state.courses.showSelectedOnly = state.courses.pinnedSectionIds.size > 0;
+        applyCourseFilters();
+        if (scrollLockWasPresent === null) scrollLockWasPresent = Boolean(scrollLockTarget?.classList.contains("overflow-hidden"));
+        scrollLockTarget?.classList.add("overflow-hidden");
+        renderCoursesModal();
+        setCoursesModalBackgroundInert(true);
+        if (!state.courses.indexLoaded && !state.courses.loading) {
+            void loadCoursesIndex();
+        }
+    }
+
+    function closeCoursesModal() {
+        if (!state.courses.modalOpen || state.courses.isClosing) return;
+        const overlay = query("#courses-modal-overlay");
+        const panel = query("#courses-modal-panel");
+        state.courses.isClosing = true;
+        if (overlay) {
+            overlay.classList.add("opacity-0", "pointer-events-none");
+        }
+        if (panel) {
+            panel.classList.add("-translate-y-3", "opacity-0");
+        }
+        const schedule = lifecycle?.setTimeout || view.setTimeout.bind(view);
+        schedule(() => {
+            const trigger = state.courses.modalTriggerEl;
+            state.courses.pinnedSectionIds = new Set();
+            state.courses.showSelectedOnly = false;
+            state.courses.modalOpen = false;
+            state.courses.isClosing = false;
+            state.courses.modalTriggerEl = null;
+            releaseCourseScrollLock();
+            renderCoursesModal();
+            setCoursesModalBackgroundInert(false);
+            if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+        }, coursesModalAnimationMs);
+    }
+
+    async function submitCoursesSearch() {
+        state.courses.searchQuery = (state.courses.searchInput || "").trim();
+        state.courses.showSelectedOnly = false;
+        if (!state.courses.indexLoaded || remoteResults) {
+            await loadCoursesIndex();
+            return;
+        }
+        applyCourseFilters();
+        writeCourseFiltersToUrl();
+        renderCoursesModal();
+    }
+
+    function loadSelectedCourseSectionIds() {
+        const raw = storage.getItem(coursesSelectionStorageKey);
+        if (!raw) return [];
+        try {
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed.map((item) => String(item)) : [];
+        } catch (err) {
+            console.warn("Ignoring invalid saved course selections:", err);
+            storage.removeItem(coursesSelectionStorageKey);
+            return [];
+        }
+    }
+
+    function saveSelectedCourseSectionIds() {
+        if (serverSelections) return;
+        storage.setItem(
+            coursesSelectionStorageKey,
+            JSON.stringify(Array.from(state.courses.selectedSectionIds))
+        );
+    }
+
+    async function loadCoursesIndex() {
+        if (state.courses.loading && !remoteResults) return;
+        if (state.courses.indexLoaded && !remoteResults) {
+            applyCourseFilters();
+            writeCourseFiltersToUrl();
+            renderCoursesModal();
+            return;
+        }
+        const generation = ++courseLoadGeneration;
+        if (remoteResults) activeCourseController?.abort?.();
+        state.courses.loading = true;
+        state.courses.error = "";
+        renderCoursesModal();
+        const controller = requestController();
+        activeCourseController = controller;
+        try {
+            const { response, termsResponse, sectionsResponse, payload, ok } = await adapter.loadCourses({
+                query: state.courses.searchQuery, term: state.courses.termFilter, limit: 50, offset: 0, signal: controller.signal,
+            });
+            if (generation !== courseLoadGeneration || lifecycle?.isDisposed?.()) return;
+            if (termsResponse?.ok === false) throw new Error("Unable to load terms");
+            if (sectionsResponse?.ok === false || !ok || !response.ok) throw new Error("Unable to load sections");
+            state.courses.terms = Array.isArray(payload.terms) ? payload.terms : [];
+            state.courses.sections = Array.isArray(payload.sections) ? payload.sections : [];
+            state.courses.remoteResults = remoteResults;
+            state.courses.total = Number.isSafeInteger(payload.total) ? payload.total : state.courses.sections.length;
+            state.courses.hasMore = payload.has_more === true;
+            state.courses.offset = Number.isSafeInteger(payload.offset) ? payload.offset : 0;
+            state.courses.indexLoaded = true;
+            const validTerms = new Set(state.courses.terms);
+            if (state.courses.termFilter && !validTerms.has(state.courses.termFilter)) {
+                state.courses.termFilter = "";
+            }
+            const preservedById = {};
+            for (const id of state.courses.selectedSectionIds) {
+                if (state.courses.sectionsById[id]) {
+                    preservedById[id] = state.courses.sectionsById[id];
+                }
+            }
+            state.courses.sectionsById = { ...preservedById };
+            for (const section of state.courses.sections) {
+                const id = String(section.id || "");
+                if (!id) continue;
+                const searchBlob = [
+                    section.course_title,
+                    section.subject,
+                    section.course_code,
+                    section.instructor,
+                    ...(Array.isArray(section.instructors_unique) ? section.instructors_unique : []),
+                ].join(" ").toLowerCase();
+                state.courses.sectionsById[id] = { ...section, searchBlob };
+            }
+            if (!remoteResults) state.courses.selectedSectionIds = new Set(
+                Array.from(state.courses.selectedSectionIds).filter((id) => Boolean(state.courses.sectionsById[id]))
+            );
+            ensureSimulatedCalendarPreference();
+            applyCourseFilters();
+            writeCourseFiltersToUrl();
+            if (!serverSelections) {
+                saveSelectedCourseSectionIds();
+                saveCalendarState();
+            }
+        } catch (err) {
+            if (generation !== courseLoadGeneration || controller.signal.aborted || lifecycle?.isDisposed?.()) return;
+            console.error(err);
+            state.courses.indexLoaded = false;
+            state.courses.error = err?.message || "Failed to load courses";
+        } finally {
+            lifecycle?.releaseAbortController?.(controller);
+            if (activeCourseController === controller) activeCourseController = null;
+            if (generation === courseLoadGeneration) {
+                state.courses.loading = false;
+                render();
+            }
+        }
+    }
+
+    function applyCourseFilters() {
+        if (state.courses.showSelectedOnly) {
+            state.courses.filteredSectionIds = Array.from(state.courses.pinnedSectionIds);
+            return;
+        }
+        if (!state.courses.indexLoaded) {
+            state.courses.filteredSectionIds = [];
+            return;
+        }
+        const term = state.courses.termFilter;
+        const query = state.courses.searchQuery.trim().toLowerCase();
+        const filteredIds = [];
+        for (const section of state.courses.sections) {
+            const id = String(section.id || "");
+            if (!id) continue;
+            if (term && section.term !== term) continue;
+            const full = state.courses.sectionsById[id];
+            if (query && (!full || !full.searchBlob.includes(query))) continue;
+            filteredIds.push(id);
+        }
+        state.courses.filteredSectionIds = filteredIds;
+    }
+
+    function toggleCourseSectionSelection(sectionId) {
+        const section = state.courses.sectionsById[sectionId];
+        if (!section || section.is_cancelled) return;
+        const removing = state.courses.selectedSectionIds.has(sectionId);
+        if (removing) {
+            state.courses.selectedSectionIds.delete(sectionId);
+        } else {
+            state.courses.selectedSectionIds.add(sectionId);
+        }
+        ensureSimulatedCalendarPreference();
+        saveSelectedCourseSectionIds();
+        saveCalendarState();
+        render();
+        if (removing) {
+            view.APStudyUndo?.stage?.({
+                message: `${section.course_code || section.course_title || "Course"} removed from the simulated calendar.`,
+                restore: () => {
+                    state.courses.selectedSectionIds.add(sectionId);
+                    ensureSimulatedCalendarPreference();
+                    saveSelectedCourseSectionIds();
+                    saveCalendarState();
+                    render();
+                },
+            });
+        }
+    }
+
+    function formatMeetingTime(timeToken) {
+        const parsed = parseAtlasTimeToken(timeToken);
+        if (parsed === null) return "TBA";
+        let hour = Math.floor(parsed / 60) % 24;
+        const suffix = hour >= 12 ? "p" : "a";
+        hour %= 12;
+        if (hour === 0) hour = 12;
+        return `${hour}:${String(parsed % 60).padStart(2, "0")}${suffix}`;
+    }
+
+    function parseDateOnlyToLocal(dateStr) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateStr || ""))) return null;
+        const [year, month, day] = String(dateStr).split("-").map((value) => parseInt(value, 10));
+        return new Date(year, month - 1, day, 0, 0, 0, 0);
+    }
+
+    function getSectionDateBounds(section) {
+        const range = section?.date_range || {};
+        const start = parseDateOnlyToLocal(range.start);
+        const end = parseDateOnlyToLocal(range.end);
+        return { start, end };
+    }
+
+    function formatSectionDateRange(section) {
+        const bounds = getSectionDateBounds(section);
+        if (!bounds.start || !bounds.end) return "N/A";
+        const startStr = bounds.start.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+        const endStr = bounds.end.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+        return `${startStr} - ${endStr}`;
+    }
+
+    function formatSectionTypeLabel(typeValue) {
+        const raw = String(typeValue || "").trim().toUpperCase();
+        const known = {
+            LEC: "LEC (Lecture)",
+        };
+        if (!raw) return "N/A";
+        return known[raw] || raw;
+    }
+
+    const { renderCoursesModal, setCoursesModalBackgroundInert } = createCourseModalRenderer({
+        root,
+        runtimeWindow: view,
+        lifecycle,
+        state,
+        escapeHtml,
+        formatTermLabel,
+        formatMeetingTime,
+        formatSectionDateRange,
+        formatSectionTypeLabel,
+    });
+
+    function ensureSimulatedCalendarPreference() {
+        if (state.courses.selectedSectionIds.size === 0) {
+            removeSimulatedCalendarPreference();
+            return;
+        }
+        if (state.calendars[simulatedCalendarName]) {
+            state.calendars[simulatedCalendarName].visible = true;
+            return;
+        }
+        const colorIndex = Object.keys(state.calendars).length % state.calendarColors.length;
+        state.calendars[simulatedCalendarName] = {
+            visible: true,
+            color: state.calendarColors[colorIndex],
+            colorIndex,
+            label: simulatedCalendarName,
+            defaultName: simulatedCalendarName,
+            kind: "simulated",
+            editable: false,
+            sourceId: null,
+            url: "",
+            legacyNames: [simulatedCalendarName],
+        };
+    }
+
+    function buildSimulatedMeetingEvents(startDate, endDate) {
+        const dayTokenMap = {
+            Sun: 0,
+            Mon: 1,
+            Tue: 2,
+            Wed: 3,
+            Thu: 4,
+            Fri: 5,
+            Sat: 6,
+        };
+        const events = [];
+        for (const sectionId of state.courses.selectedSectionIds) {
+            const section = state.courses.sectionsById[sectionId];
+            if (!section) continue;
+            const sectionBounds = getSectionDateBounds(section);
+            const constrainedStart = sectionBounds.start && sectionBounds.start > startDate ? sectionBounds.start : startDate;
+            const constrainedEnd = sectionBounds.end && sectionBounds.end < endDate ? sectionBounds.end : endDate;
+            if (constrainedEnd < constrainedStart) continue;
+            const meetings = Array.isArray(section.meetings) ? section.meetings : [];
+            for (let cursor = new Date(constrainedStart); cursor <= constrainedEnd; cursor.setDate(cursor.getDate() + 1)) {
+                for (const meeting of meetings) {
+                    const meetingDay = dayTokenMap[meeting.day];
+                    if (meetingDay !== cursor.getDay()) continue;
+                    const parsedStart = parseAtlasTimeToken(meeting.start);
+                    const parsedEnd = parseAtlasTimeToken(meeting.end);
+                    if (parsedStart === null || parsedEnd === null) continue;
+                    const eventStart = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate(), 0, parsedStart, 0, 0);
+                    const eventEnd = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate(), 0, parsedEnd, 0, 0);
+                    if (eventEnd <= eventStart) continue;
+                    const uid = `${sectionId}|${cursor.toISOString().slice(0, 10)}|${meeting.start}|${meeting.end}`;
+                    events.push({
+                        uid,
+                        title: `${section.course_code}`.trim(),
+                        description: `${section.course_title} | Sec ${section.section_number || "?"} | ${section.instructor || "TBA"}`,
+                        course: simulatedCalendarName,
+                        type: "class-meeting",
+                        is_all_day: false,
+                        isAllDay: false,
+                        isMultiDay: false,
+                        spanDays: 1,
+                        source: "simulated",
+                        startDate: eventStart,
+                        endDate: eventEnd,
+                    });
+                }
+            }
+        }
+        return events.sort((a, b) => a.startDate - b.startDate);
+    }
+
+    return {
+        initializeCourseSelectionsFromStorage,
+        hydrateSavedCourses,
+        hydrateSelectedSimulatedSections,
+        applyCoursesFiltersFromUrl,
+        writeCourseFiltersToUrl,
+        openCoursesModal,
+        closeCoursesModal,
+        submitCoursesSearch,
+        applyCourseFilters,
+        toggleCourseSectionSelection,
+        renderCoursesModal,
+        ensureSimulatedCalendarPreference,
+        buildSimulatedMeetingEvents,
+    };
+}

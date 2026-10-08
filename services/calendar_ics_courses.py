@@ -1,8 +1,4 @@
-"""Project persisted saved courses into concrete calendar events.
-
-This module is deliberately limited to the Simulated Courses source.  It does
-not serialize ICS, read browser selections, or consult live course snapshots.
-"""
+"""Project persisted Simulated Courses selections into calendar occurrences."""
 
 from __future__ import annotations
 
@@ -17,7 +13,9 @@ from appwrite.query import Query
 
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import list_rows_all
+from services.atlas_catalog_store import CatalogStore
 from services.calendar_ics_contract import (
+    require_utc_range,
     CalendarIcsDiagnosticCode,
     CalendarIcsProjectionOutcome,
     CAMPUS_TIMEZONE,
@@ -199,6 +197,20 @@ def _selected_sections(row: dict[str, Any], course: dict[str, Any]) -> list[dict
     return selected
 
 
+
+def _resolve_saved_course(view, root, row):
+    # Validate persisted references before allowing the store to resolve paths.
+    _safe_source_path(root, row)
+    paths = view.course_paths(row["term"].strip(), row["subject"].strip().upper(), row["catalog"].strip(), include_history=True)
+    for path in paths:
+        course = _read_course(path)
+        try:
+            return course, _selected_sections(row, course)
+        except _SourceProblem as exc:
+            if exc.code != SOURCE_UNRESOLVED:
+                raise
+    raise _SourceProblem(SOURCE_UNRESOLVED, "A saved course section could not be resolved.")
+
 def _meetings(section: dict[str, Any], overrides: dict[str, Any]) -> list[tuple[int, time, time]]:
     raw_meetings = overrides.get("meetings")
     if raw_meetings is None:
@@ -299,79 +311,20 @@ def _event_for_occurrence(
     )
 
 
-def _coerce_window_datetime(value: date | datetime | str | None) -> datetime | None:
-    if value is None:
-        return None
-    if type(value) is datetime:
-        parsed = value
-    elif type(value) is date:
-        return datetime.combine(value, time.min, tzinfo=timezone.utc)
-    elif isinstance(value, str):
-        text = value.strip()
-        if text.endswith("Z"):
-            text = text[:-1] + "+00:00"
-        try:
-            if "T" in text or " " in text:
-                parsed = datetime.fromisoformat(text)
-            else:
-                return datetime.combine(date.fromisoformat(text), time.min, tzinfo=timezone.utc)
-        except ValueError as exc:
-            raise ValueError("Calendar window values must be valid dates or datetimes.") from exc
-    else:
-        raise ValueError("Calendar window values must be dates or datetimes.")
-    if parsed.tzinfo is None or parsed.utcoffset() != timedelta(0):
-        raise ValueError("Calendar datetime windows must be timezone-aware UTC values.")
-    return parsed.astimezone(timezone.utc)
-
-
-def _projection_window(
-    start: date | datetime | str | None,
-    end: date | datetime | str | None,
-    *,
-    now: date | datetime | None,
-    today: date | None,
-) -> tuple[datetime, datetime]:
-    if start is None and end is None:
-        if today is None:
-            today = now.date() if isinstance(now, datetime) else now
-            today = today or datetime.now(timezone.utc).date()
-        start_date, end_date = subscription_window(today)
-        return (
-            datetime.combine(start_date, time.min, tzinfo=timezone.utc),
-            datetime.combine(end_date, time.min, tzinfo=timezone.utc),
-        )
-    start_datetime = _coerce_window_datetime(start)
-    end_datetime = _coerce_window_datetime(end)
-    if start_datetime is None or end_datetime is None or end_datetime <= start_datetime:
-        raise ValueError("Calendar projection window must be a non-empty [start, end) range.")
-    return start_datetime, end_datetime
-
-
 def project_simulated_courses(
-    user_id: Any,
-    start: date | datetime | str | None = None,
-    end: date | datetime | str | None = None,
+    user_id: str,
+    range_start: datetime,
+    range_end: datetime,
     *,
-    now: date | datetime | None = None,
-    today: date | None = None,
-    window_start: date | datetime | str | None = None,
-    window_end: date | datetime | str | None = None,
     data_root: str | Path | None = None,
     list_rows_fn=None,
 ) -> CalendarIcsProjectionOutcome:
-    """Project the authenticated user's persisted course selections.
+    """Project persisted course selections in a required half-open UTC range.
 
-    The default range is the frozen UTC rolling window.  ``start`` and ``end``
-    are testable/runtime seams for that same half-open date range; no browser
-    selection or transient course payload is accepted here.
+    Invalid caller bounds raise ValueError before any source reads. Source
+    failures return an outcome and never produce a partial calendar.
     """
-    if window_start is not None or window_end is not None:
-        start = window_start
-        end = window_end
-    try:
-        range_start, range_end = _projection_window(start, end, now=now, today=today)
-    except ValueError as exc:
-        return _failure(SOURCE_MALFORMED, str(exc))
+    require_utc_range(range_start, range_end)
 
     try:
         load_rows = list_rows_fn or list_rows_all
@@ -388,15 +341,14 @@ def project_simulated_courses(
         return CalendarIcsProjectionOutcome.valid_empty()
 
     root = Path(data_root) if data_root is not None else COURSE_DATA_ROOT
+    catalog_view = CatalogStore(root).view()
     events: list[NormalizedCalendarEvent] = []
     for row in rows:
         if not isinstance(row, dict) or (row.get("user_id") is not None and str(row.get("user_id")) != str(user_id)):
             return _failure(SOURCE_MALFORMED, "A saved course record is malformed.")
         try:
             overrides = _parse_overrides(row)
-            path = _safe_source_path(root, row)
-            course = _read_course(path)
-            sections = _selected_sections(row, course)
+            course, sections = _resolve_saved_course(catalog_view, root, row)
             last_modified = _parse_last_modified(row)
             for section in sections:
                 if not isinstance(section, dict):
@@ -407,10 +359,8 @@ def project_simulated_courses(
                     first_date = course_start + timedelta(days=(day_number - course_start.weekday()) % 7)
                     occurrence = first_date
                     while occurrence <= course_end:
-                        # Meeting times are campus (Atlanta) wall-clock; localize per
-                        # occurrence so DST is honored, then convert to true UTC for the
-                        # contract. Subscribers' calendars render the Z-suffixed instant
-                        # in their own local timezone.
+                        # Localize each campus occurrence before converting to UTC
+                        # so weekly meetings retain their wall-clock time across DST.
                         start_dt = datetime.combine(occurrence, start_time, tzinfo=_COURSE_ZONE).astimezone(timezone.utc)
                         end_dt = datetime.combine(occurrence, end_time, tzinfo=_COURSE_ZONE).astimezone(timezone.utc)
                         if start_dt < range_end and end_dt > range_start:

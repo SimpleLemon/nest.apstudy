@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import app as app_module
 from extensions import login_manager
-from services import calendar_events
+from services import calendar_events, calendar_sources, canvas_routing
 from services.extension_contract import EXTENSION_CAPABILITIES, canonical_canvas_source_key
 
 
@@ -236,18 +236,18 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
         self.enable_capabilities("calendar_projection")
         self.seed_calendar_destinations()
         with patch.object(
-            calendar_events,
+            calendar_sources,
             "_configured_calendar_sources",
             return_value=[
                 {"id": "local:active", "kind": "local", "default_name": "Active", "status": "active"},
                 {"id": "local:hidden-status", "kind": "local", "default_name": "Hidden", "status": "hidden"},
                 {"id": "local:archived", "kind": "local", "default_name": "Archived", "status": "archived"},
                 {"id": "local:deleted", "kind": "local", "default_name": "Deleted", "status": "deleted"},
-            ]), patch.object(calendar_events, "_load_calendar_preferences", return_value=[]), \
-                patch.object(calendar_events, "_configured_feed_urls", return_value=[]), \
-                patch.object(calendar_events, "_load_calendar_feed_metadata", return_value={}), \
-                patch.object(calendar_events, "_load_local_calendar_sources", return_value=[]), \
-                patch.object(calendar_events, "_task_calendar_payload", return_value=([], None)):
+            ]), patch.object(calendar_sources, "_load_calendar_preferences", return_value=[]), \
+                patch.object(calendar_sources, "_configured_feed_urls", return_value=[]), \
+                patch.object(calendar_sources, "_load_calendar_feed_metadata", return_value={}), \
+                patch.object(calendar_sources, "_load_local_calendar_sources", return_value=[]), \
+                patch.object(calendar_sources, "_task_calendar_payload", return_value=([], None)):
             destinations = calendar_events.extension_calendar_destinations("user-1")
         self.assertEqual([item["id"] for item in destinations], ["local:active"])
 
@@ -316,7 +316,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
             {"id": "local:archived", "visible": False, "routing_eligible": False},
             {"id": "local:deleted", "visible": False, "routing_eligible": False},
         ]
-        with patch.object(calendar_events, "extension_calendar_destinations", return_value=inventory):
+        with patch.object(canvas_routing, "extension_calendar_destinations", return_value=inventory):
             first = client.put(
                 path,
                 json={
@@ -330,7 +330,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
         self.assertTrue(first.get_json()["routing"]["destination_calendar_id"].startswith("local:"))
 
         for invalid_id in ("local:hidden", "local:archived", "local:deleted", "foreign:calendar", "missing:calendar"):
-            with patch.object(calendar_events, "extension_calendar_destinations", return_value=inventory):
+            with patch.object(canvas_routing, "extension_calendar_destinations", return_value=inventory):
                 rejected = client.put(
                     path,
                     json={
@@ -343,7 +343,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
             self.assertEqual(rejected.status_code, 400, rejected.get_data(as_text=True))
             self.assertEqual(rejected.get_json()["error"]["code"], "routing_destination_unavailable")
 
-        with patch.object(calendar_events, "extension_calendar_destinations", return_value=inventory):
+        with patch.object(canvas_routing, "extension_calendar_destinations", return_value=inventory):
             invalid_fallback = client.put(
                 path,
                 json={
@@ -356,7 +356,7 @@ class ExtensionCalendarRouteTests(unittest.TestCase):
         self.assertEqual(invalid_fallback.status_code, 400)
         self.assertEqual(invalid_fallback.get_json()["error"]["code"], "routing_destination_unavailable")
 
-        with patch.object(calendar_events, "extension_calendar_destinations", return_value=[]):
+        with patch.object(canvas_routing, "extension_calendar_destinations", return_value=[]):
             disappeared = client.put(
                 path,
                 json={
@@ -670,15 +670,13 @@ class ExtensionConnectionSettingsTests(unittest.TestCase):
     grant = ExtensionCalendarRouteTests.grant
     register_source = ExtensionCalendarRouteTests.register_source
     def test_extension_preferences_accept_batches_and_preserve_single_updates(self):
-        from blueprints import extension_calendar_api as bridge
-        from flask import Flask
-        app = Flask(__name__)
-        for body, handler in [({"preferences": []}, bridge.calendar.update_calendar_preferences_batch),
-                              ({"calendar_name": "Personal"}, bridge.calendar.update_calendar_preferences)]:
-            with app.test_request_context("/preferences", method="POST", json=body):
-                with patch.object(bridge, "_call", return_value="handled") as call:
-                    self.assertEqual(bridge.preferences(), "handled")
-                    call.assert_called_once_with(handler)
+        from services import calendar_preferences
+        for body, expected in (({"preferences": []}, "batch"), ({"calendar_name": "Personal"}, "single")):
+            with patch.object(calendar_preferences, "update_calendar_preferences_batch", return_value=({}, 200)) as batch, \
+                    patch.object(calendar_preferences, "update_calendar_preferences", return_value=({}, 200)) as single:
+                self.assertEqual(calendar_preferences.save_calendar_preferences("user-1", body), ({}, 200))
+            (batch if expected == "batch" else single).assert_called_once_with("user-1", body, dependencies=None)
+            (single if expected == "batch" else batch).assert_not_called()
 
     def test_auxiliary_calendar_reads_are_extension_scoped_and_bounded(self):
         self.enable_capabilities("calendar_read", "calendar_shares_ics")
@@ -709,8 +707,7 @@ class ExtensionConnectionSettingsTests(unittest.TestCase):
         response = owner.get("/api/extension/calendar/course-sections?ids=" + ",".join(f"s-{i}" for i in range(101)), headers=headers)
         self.assertNotEqual(response.status_code, 200)
 
-        with patch("blueprints.extension_calendar_api.course_routes.list_saved_courses",
-                   return_value=({"error": "Courses are only available to Emory students."}, 403)):
+        with patch("blueprints.extension_calendar_api.is_emory_or_oxford_user", return_value=False):
             response = owner.get("/api/extension/calendar/saved-courses", headers=headers)
         self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
         self.assertEqual(response.get_json()["courses"], [])
@@ -724,7 +721,7 @@ class ExtensionConnectionSettingsTests(unittest.TestCase):
         self.enable_capabilities("calendar_read", "calendar_shares_ics")
         self.grant(owner, capabilities=("calendar_read", "calendar_shares_ics"))
         safe = {"id": "share-1", "shareCode": "public-code", "shareUrl": "https://nest.apstudy.org/calendar/shared/public-code", "icsConfigured": True}
-        with patch("blueprints.extension_calendar_api.calendar.list_calendar_shares", return_value={"shares": [safe]}):
+        with patch("blueprints.extension_calendar_api.calendar_read_operations.list_calendar_shares", return_value=({"shares": [safe]}, 200)):
             response = owner.get("/api/extension/calendar/shares", headers={"X-Canvas-Account-Key": ACCOUNT_1})
         self.assertEqual(response.status_code, 200, response.get_data(as_text=True))
         self.assertEqual(response.get_json()["shares"], [safe])

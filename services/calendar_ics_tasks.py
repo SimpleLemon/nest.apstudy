@@ -1,10 +1,6 @@
-"""Strict Tasks source projector for single-calendar ICS feeds.
+"""Project shared task occurrences into normalized ICS events.
 
-The public surface of this module is deliberately small.  It accepts already
-loaded task rows (or loads them through the existing Appwrite helpers), uses
-the shared task occurrence expander, and emits only the frozen normalized ICS
-event shape.  Source identifiers are used only as private input to the
-central HMAC UID builder.
+Source identifiers remain private inputs to the central UID builder.
 """
 
 from __future__ import annotations
@@ -20,20 +16,22 @@ from appwrite.query import Query
 from appwrite_client import COLLECTIONS
 from appwrite_helpers import list_rows_all
 from services.calendar_ics_contract import (
+    require_utc_range,
     CalendarIcsProjectionOutcome,
     NormalizedCalendarEvent,
 )
 from services.row_utils import row_id
+from services.task_constants import RECURRENCE_UNITS, TASK_PRIORITIES
+from services.calendar_constants import (
+    ALL_DAY_EVENT_REMINDERS as DATE_ONLY_REMINDER_VALUES,
+    TIMED_EVENT_REMINDERS as TIMED_REMINDER_VALUES,
+)
 from services.task_schedule import build_task_occurrences
 
 
 TASKS_CALENDAR_ID = "tasks"
 TASK_SOURCE_TYPE = "task"
 TASK_PRIORITY_VALUES = {"high": 1, "medium": 5, "low": 9}
-TASK_PRIORITIES = {"none", *TASK_PRIORITY_VALUES}
-RECURRENCE_UNITS = {"day", "week", "month", "year"}
-TIMED_REMINDER_VALUES = {-1, 0, 5, 10, 15, 30, 60, 120, 1440, 2880}
-DATE_ONLY_REMINDER_VALUES = {-1, -540, 900, 2340, 9540}
 
 
 class TasksProjectorError(ValueError):
@@ -42,14 +40,6 @@ class TasksProjectorError(ValueError):
 
 def _source_failure(code: str, message: str) -> CalendarIcsProjectionOutcome:
     return CalendarIcsProjectionOutcome.source_failure(code, message)
-
-
-def _require_utc_range(range_start: datetime, range_end: datetime) -> None:
-    for name, value in (("range_start", range_start), ("range_end", range_end)):
-        if type(value) is not datetime or value.tzinfo is None or value.utcoffset() != timedelta(0):
-            raise ValueError(f"{name} must be a timezone-aware UTC datetime.")
-    if range_end <= range_start:
-        raise ValueError("range_end must be after range_start.")
 
 
 def _parse_utc_datetime(value: Any, *, field: str) -> datetime | None:
@@ -259,7 +249,7 @@ def project_tasks(
 ) -> CalendarIcsProjectionOutcome:
     """Project task rows into a complete, fail-closed normalized result."""
 
-    _require_utc_range(range_start, range_end)
+    require_utc_range(range_start, range_end)
     try:
         task_rows = list(tasks)
         completion_rows = list(completions or [])
@@ -285,9 +275,9 @@ def project_tasks_for_user(
     list_rows_fn: Callable[..., Iterable[Mapping[str, Any]]] = list_rows_all,
     occurrence_builder: Callable[..., Iterable[Mapping[str, Any]]] = build_task_occurrences,
 ) -> CalendarIcsProjectionOutcome:
-    """Load both task tables and project them atomically for one owner."""
+    """Load tasks and completions for one owner; fail if either read fails."""
 
-    _require_utc_range(range_start, range_end)
+    require_utc_range(range_start, range_end)
     try:
         tasks = list_rows_fn(
             COLLECTIONS.get("tasks", "tasks"),

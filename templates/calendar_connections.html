@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}<title>Calendar connections · APStudy Nest</title>{% endblock %}
+{% block feature_styles %}<link rel="stylesheet" href="{{ url_for('static', filename='css/calendar-connections.css') }}">{% endblock %}
+{% block shared_head_scripts %}{{ super() }}<script src="{{ url_for('static', filename='js/calendar/connections.js') }}" defer></script>{% endblock %}
+{% block body_attrs %} class="bg-surface text-on-surface font-body min-h-screen antialiased" data-analytics-mode="authenticated"{% endblock %}
+{% block body_content %}
+<main class="calendar-connections" style="padding:clamp(1rem,4vw,3rem)">
+    <a href="/calendar">Back to calendar</a>
+    <h1>Calendar connections</h1>
+    <p>Bring your personal schedule and schoolwork together. Choose which calendars to read and what APStudy publishes.</p>
+    <div data-calendar-connections-native></div>
+</main>
+{% endblock %}

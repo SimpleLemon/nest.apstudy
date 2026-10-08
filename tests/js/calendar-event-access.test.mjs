@@ -1,3 +1,4 @@
+import { calendarScript } from "./helpers/calendar-script.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -13,7 +14,7 @@ globalThis.document = {
 
 async function loadBrowserModule(relativePath) {
     const source = await readFile(path.join(repoRoot, relativePath), "utf8");
-    const url = `data:text/javascript;base64,${Buffer.from(source).toString("base64")}#${relativePath}`;
+    const url = `data:text/javascript;base64,${Buffer.from(calendarScript(source, "APStudyCalendar" + ({"utils": "Utils", "event-render": "EventRender", "render-shell": "RenderShell", "week-view": "WeekView", "month-view": "MonthView", "agenda": "Agenda", "context-menu": "EventMenu"})[path.basename(relativePath, ".js")])).toString("base64")}#${relativePath}`;
     await import(url);
 }
 
@@ -277,7 +278,8 @@ test("short weekly events keep the first wrapped title line visible", () => {
 });
 
 test("event menus expose only valid actions for local, imported, simulated, task, and read-only events", () => {
-    const getLabels = (event, readOnly = false) => window.APStudyCalendarEventMenu
+    const menu = createEventMenu();
+    const getLabels = (event, readOnly = false) => menu
         .getEventMenuItems({ event, readOnly })
         .map((item) => item.label);
 
@@ -308,8 +310,9 @@ test("Enter and Space perform the primary event action", () => {
     window.getCalendarEventByRef = () => timedEvent;
     window.openCalendarEventForm = (options) => calls.push(options);
 
+    const menu = createEventMenu(root, calls);
     let prevented = false;
-    window.APStudyCalendarEventMenu.handleEventKeyDown({
+    menu.handleEventKeyDown({
         key: "Enter",
         target: eventElement,
         preventDefault() { prevented = true; },
@@ -319,7 +322,7 @@ test("Enter and Space perform the primary event action", () => {
     assert.equal(calls[0].opener, eventElement);
 
     document.body.dataset.calendarReadonly = "true";
-    window.APStudyCalendarEventMenu.handleEventKeyDown({
+    menu.handleEventKeyDown({
         key: " ",
         target: eventElement,
         preventDefault() {},
@@ -338,4 +341,41 @@ test("context-menu keyboard contract traps focus and restores the exact anchor",
     assert.match(source, /event\.key === "Tab" && event\.shiftKey/);
     assert.match(source, /closeMenu\(\{ restoreFocus: true \}\)/);
     assert.match(source, /anchorEl\.focus\?\.\(\{ preventScroll: true \}\)/);
+});
+
+function createEventMenu(root = {}, calls = []) {
+    return window.APStudyCalendarEventMenu.createCalendarEventMenu({
+        root, document, view: window, lifecycle: { addCleanup() {}, addEventListener() {} },
+        state: { public: { readOnly: false }, nativeEditable: true }, adapter: {}, mirrors: {},
+        canCreate: () => true,
+        canMutateEvent: () => true,
+        getCalendarEventByRef: () => timedEvent, openEventForm: (options) => calls.push(options),
+        goToToday() {}, reload() {},
+    });
+}
+
+test('external deletion carries the selected event revision through the delayed undo commit', async () => {
+    const event = { ...timedEvent, id: 'external:selected', source_type: 'external', editable: true, revision: 'selected-revision' };
+    let staged; const requests = [];
+    const runtime = {
+        APStudyConfirm: { request: async () => true },
+        APStudyUndo: { stage: options => { staged = options; } },
+    };
+    const previousStorage = globalThis.localStorage;
+    globalThis.localStorage = { removeItem() {} };
+    try {
+        const menu = window.APStudyCalendarEventMenu.createCalendarEventMenu({
+            root: {}, document: { querySelectorAll: () => [] }, view: runtime,
+            lifecycle: { addCleanup() {}, isDisposed: () => false }, state: { public: { readOnly: false } }, mirrors: { open: () => false },
+            adapter: { deleteEvent: async options => { requests.push(options); return { ok: true }; } },
+            getCalendarEventByRef: () => ({ ...event, revision: 'different-event-revision' }),
+            openEventForm() {}, goToToday() {}, reload() {}, canMutateEvent: event => event.editable === true,
+        });
+        const context = { event, eventId: 'different-event', readOnly: false };
+        const deletion = menu.getEventMenuItems(context).find(item => item.label === 'Delete Event');
+        await deletion.onClick(context);
+        assert.equal(requests.length, 0);
+        await staged.commit({ reason: 'pagehide' });
+        assert.deepEqual(requests, [{ eventId: 'external:selected', revision: 'selected-revision', keepalive: true }]);
+    } finally { globalThis.localStorage = previousStorage; }
 });

@@ -8,7 +8,7 @@ from unittest.mock import patch
 from services import database
 from services.extension_consent import put_consent
 from services.extension_contract import ExtensionContractError, canonical_canvas_source_key
-from services import calendar_events as events
+from services import calendar_events as events, canvas_routing, canvas_writeback
 
 
 ACCOUNT_1 = "1" * 64
@@ -60,13 +60,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         })
 
     def start_run(self, user="user-1", source_id="source-1", key="run-key", scope=None):
-        return events.begin_canvas_sync_run(
-            user, source_id,
-            scope=scope or {},
-            consent_version=1,
-            idempotency_key=key,
-            run_id=key,
-        )
+        return events.begin_canvas_sync_run(user, source_id, {'scope': scope or {}, 'consent_version': 1, 'idempotency_key': key, 'run_id': key})
 
     def item(self, item_id="assignment-1", **overrides):
         value = {
@@ -332,14 +326,60 @@ class CalendarPhase2StoreTests(unittest.TestCase):
             {"id": "cal-fallback", "visible": True, "routing_eligible": True},
             {"id": "cal-done", "visible": True, "routing_eligible": True},
         ]
-        with patch.object(events, "extension_calendar_destinations", return_value=inventory):
-            self.assertEqual(events.set_canvas_import_routing("user-1", "source-1", "incomplete", "cal-in", "cal-fallback")["state"], "incomplete")
-            self.assertEqual(events.set_canvas_import_routing("user-1", "source-1", "completed", "cal-done")["destination_calendar_id"], "cal-done")
-        with patch.object(events, "extension_calendar_destinations", return_value=[]):
+        with patch.object(canvas_routing, "extension_calendar_destinations", return_value=inventory):
+            self.assertEqual(events.set_canvas_import_routing('user-1', 'source-1', {'state': 'incomplete', 'destination_calendar_id': 'cal-in', 'fallback_calendar_id': 'cal-fallback'})["state"], "incomplete")
+            self.assertEqual(events.set_canvas_import_routing('user-1', 'source-1', {'state': 'completed', 'destination_calendar_id': 'cal-done'})["destination_calendar_id"], "cal-done")
+        with patch.object(canvas_routing, "extension_calendar_destinations", return_value=[]):
             with self.assertRaisesRegex(ExtensionContractError, "visible"):
-                events.set_canvas_import_routing("user-1", "source-1", "incomplete", "missing-calendar", "cal-fallback")
+                events.set_canvas_import_routing('user-1', 'source-1', {'state': 'incomplete', 'destination_calendar_id': 'missing-calendar', 'fallback_calendar_id': 'cal-fallback'})
         self.assertEqual(events.get_canvas_import_routing("user-1", "source-1", "incomplete")["destination_calendar_id"], "cal-in")
         self.assertEqual(len(events.get_canvas_import_routing("user-1", "source-1")), 2)
+
+    @patch("services.canvas_routing.extension_capability_enabled", return_value=True)
+    def test_shared_projection_and_external_exports_honor_read_and_share_consent(self, _capability):
+        from services.calendar_projection import load_serialized_calendar_events
+        from services.external_calendar_sources import load_sources
+        from services.calendar_shares import _public_calendar_events_payload
+
+        self.source()
+        run = self.start_run()
+        events.ingest_canvas_sync_batch(
+            "user-1", "source-1", run["run_id"], [self.item()],
+            generation=1, lease_token=run["lease_token"], idempotency_key="projection",
+        )
+        projected = load_serialized_calendar_events("user-1", {})[0]
+        self.assertEqual(len(projected), 1)
+        self.assertEqual(projected[0]["source_type"], "canvas")
+        self.assertEqual(load_serialized_calendar_events("user-2", {})[0], [])
+        exports = load_sources("user-1", ["canvas"], ["2026-08-01", "2026-09-01"])
+        self.assertEqual(set(exports), {projected[0]["event_ref"]})
+        self.assertEqual(next(iter(exports.values()))[1]["title"], "Read chapter 1")
+
+        # The sharing rollout gate can close while private read projection remains enabled.
+        _capability.side_effect = lambda capability: capability != "calendar_shares_ics"
+        self.assertEqual(len(load_serialized_calendar_events("user-1", {})[0]), 1)
+        self.assertEqual(load_serialized_calendar_events(
+            "user-1", {}, require_shares_ics=True,
+        )[0], [])
+        share = {"user_id": "user-1", "include_all_calendars": True, "date_scope": "all"}
+        self.assertEqual(_public_calendar_events_payload(
+            share, dependencies={"first_row": lambda *_: {}},
+        )["events"], [])
+
+        _capability.side_effect = None
+        put_consent(
+            "user-1", canonical_canvas_source_key(ACCOUNT_1), ACCOUNT_1,
+            action="revoke", scopes=list(V1_GRANTED_SCOPES), version=1, path=self.db_path,
+        )
+        self.assertEqual(load_serialized_calendar_events("user-1", {})[0], [])
+        self.assertEqual(load_sources(
+            "user-1", ["canvas"], ["2026-08-01", "2026-09-01"],
+        ), {})
+
+        events.archive_canvas_import_source("user-1", "source-1")
+        self.assertEqual(load_sources(
+            "user-1", ["canvas"], ["2026-08-01", "2026-09-01"],
+        ), {})
 
     def personal_source(self):
         self.source()
@@ -358,7 +398,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         })
         # Internal Phase 2 cleanup coverage: public v1 consent intentionally
         # does not grant the future two-way writeback capability.
-        with patch.object(events, "_canvas_source_consent", return_value=(None, 1)):
+        with patch.object(canvas_writeback, "_canvas_source_consent", return_value=(None, 1)):
             writeback = events.create_canvas_writeback("user-1", "source-1", {
                 "account_key": ACCOUNT_1, "operation": "create", "event_ref": "user:one", "idempotency_key": "wb-revoke",
                 "target_account": ACCOUNT_1, "payload": {"title": "new", "start_at": "2026-09-09T10:00:00Z"},
@@ -387,10 +427,10 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ExtensionContractError, "source was not found"):
             events.get_canvas_event_link("user-2", "source-1", "user:one")
         with self.assertRaisesRegex(ExtensionContractError, "revision"):
-            events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", expected_revision="old", source_revision="r2")
-        result = events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", expected_revision="r1", source_revision="r2")
+            events.record_canvas_event_link_result('user-1', 'source-1', {'state': 'applied', 'expected_revision': 'old', 'source_revision': 'r2'}, event_ref='user:one')
+        result = events.record_canvas_event_link_result('user-1', 'source-1', {'state': 'applied', 'expected_revision': 'r1', 'source_revision': 'r2'}, event_ref='user:one')
         self.assertEqual(result["mirror_state"], "applied")
-        self.assertTrue(events.record_canvas_event_link_result("user-1", "source-1", "user:one", state="applied", source_revision="r2")["idempotent"])
+        self.assertTrue(events.record_canvas_event_link_result('user-1', 'source-1', {'state': 'applied', 'source_revision': 'r2'}, event_ref='user:one')["idempotent"])
         self.assertEqual(events.get_canvas_event_link("user-1", "source-1", link["event_ref"])["source_revision"], "r2")
 
     def test_conflict_choice_revalidates_and_queues_reviewed_nest_fields(self):
@@ -432,7 +472,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
         }
         # Future-capability/internal coverage: the public v1 consent contract
         # must continue to reject two_way_writeback grants.
-        with patch.object(events, "_canvas_source_consent", return_value=(None, 1)):
+        with patch.object(canvas_writeback, "_canvas_source_consent", return_value=(None, 1)):
             created = events.create_canvas_writeback("user-1", "source-1", payload)
             self.assertTrue(events.create_canvas_writeback("user-1", "source-1", payload)["idempotent"])
             with self.assertRaisesRegex(ExtensionContractError, "idempotency"):
@@ -450,7 +490,7 @@ class CalendarPhase2StoreTests(unittest.TestCase):
             {"state": "applied", "result_revision": "r2"},
         )["idempotent"])
         with self.assertRaisesRegex(ExtensionContractError, "terminal"):
-            events.record_canvas_writeback_result("user-1", "source-1", created["id"], state="conflict")
+            events.record_canvas_writeback_result('user-1', 'source-1', created['id'], {'state': 'conflict'})
 
 
 if __name__ == "__main__":

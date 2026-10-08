@@ -12,9 +12,8 @@ test("courses dialog traps focus, preserves rerender focus, inerts the page, and
         <main id="background"><a href="#elsewhere">Background link</a></main>
     </body></html>`);
     await page.evaluate(async () => {
-        await import("/static/js/calendar/integrations/course-modal.js");
-        await import("/static/js/calendar/integrations/courses.js");
-        await import("/static/js/calendar/controls.js");
+        const { createCalendarCourses } = await import("/static/js/calendar/integrations/courses.js");
+        const { createCourseControls } = await import("/static/js/calendar/integrations/course-controls.js");
         window.APStudyLoader = { html: (label) => `<p>${label}</p>` };
         const section = {
             id: "section-1",
@@ -60,7 +59,7 @@ test("courses dialog traps focus, preserves rerender focus, inerts the page, and
             },
         };
         let courses;
-        courses = window.APStudyCalendarCourses.createCalendarCourses({
+        courses = createCalendarCourses({
             state,
             constants: {
                 coursesSelectionStorageKey: "browser-course-selections",
@@ -77,24 +76,7 @@ test("courses dialog traps focus, preserves rerender focus, inerts the page, and
                     .replaceAll(">", "&gt;");
             },
         });
-        const noop = () => {};
-        const callbacks = new Proxy({
-            closeCoursesModal: courses.closeCoursesModal,
-            openCoursesModal: courses.openCoursesModal,
-            renderCoursesModal: courses.renderCoursesModal,
-            applyCourseFilters: courses.applyCourseFilters,
-            applyCoursesFiltersFromUrl: courses.applyCoursesFiltersFromUrl,
-            submitCoursesSearch: courses.submitCoursesSearch,
-            toggleCourseSectionSelection: courses.toggleCourseSectionSelection,
-            writeCourseFiltersToUrl: courses.writeCourseFiltersToUrl,
-            isCompactCalendarViewport: () => false,
-            getCurrentRenderRange: () => ({}),
-            getBufferedRange: () => ({}),
-        }, {
-            get(target, property) { return property in target ? target[property] : noop; },
-        });
-        const formatters = new Proxy({}, { get: () => (value) => String(value ?? "") });
-        window.APStudyCalendarControls.createCalendarControls({ state, callbacks, formatters }).wireControls();
+        createCourseControls({ root: document, runtimeWindow: window, state, courses })();
         window.browserCourses = courses;
     });
 

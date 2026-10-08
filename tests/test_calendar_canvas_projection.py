@@ -164,58 +164,6 @@ class CanvasProjectionTests(unittest.TestCase):
         self.assertEqual(event["calendar_id"], "local:completed")
         self.assertFalse(event["routing_degraded"])
 
-    def test_feed_native_task_contract_and_loader_side_effects_remain_unchanged(self):
-        cache_event = {"id": "feed-1"}
-        created_event = {"id": "native-1"}
-        task_event = {"id": "task-1", "source": "tasks"}
-        project_canvas_events = Mock()
-        dependencies = {
-            "collections": {
-                "user_settings": "user_settings",
-                "calendar_cache": "calendar_cache",
-                "user_events": "user_events",
-            },
-            "query": SimpleNamespace(
-                equal=lambda field, values: ("equal", field, values),
-                order_asc=lambda field: ("order_asc", field),
-            ),
-            "jsonify": lambda payload: payload,
-            "first_row": lambda _collection, _queries: {"feed_refresh_minutes": 30},
-            "list_calendar_rows_all": lambda collection, _queries: {
-                "calendar_cache": [cache_event],
-                "user_events": [created_event],
-            }[collection],
-            "logger": Mock(),
-            "parse_range_param": lambda _value: None,
-            "configured_feed_urls": lambda _settings: [],
-            "load_calendar_preferences": lambda _user_id: [],
-            "load_calendar_feed_metadata": lambda _user_id: [],
-            "load_local_calendar_sources": lambda _user_id: [],
-            "load_event_overrides": lambda _user_id: [],
-            "refresh_initial_feed_cache": Mock(return_value=(False, None)),
-            "filter_configured_cache_events": lambda events, _urls: events,
-            "task_calendar_payload": lambda *_args: ([task_event], {"id": "task-source"}),
-            "append_task_calendar_source": lambda sources, source: [*sources, source],
-            "configured_calendar_sources": lambda *_args: [{"id": "feed-source"}],
-            "serialize_event": lambda event, _settings: {"id": event["id"], "source": "feed"},
-            "apply_event_override": lambda event, _override: event,
-            "serialize_user_event": lambda event: {"id": event["id"], "source": "native"},
-            "api_event_overlaps_range": lambda *_args: True,
-            "resolve_last_fetched": lambda _user_id: None,
-            "project_canvas_events": project_canvas_events,
-        }
-
-        response = calendar_events.get_events_response("owner-1", "user-1", {}, dependencies)
-
-        self.assertEqual(
-            response["events"],
-            [
-                {"id": "feed-1", "source": "feed"},
-                {"id": "native-1", "source": "native"},
-                task_event,
-            ],
-        )
-        project_canvas_events.assert_not_called()
 
 
 if __name__ == "__main__":

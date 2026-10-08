@@ -109,9 +109,10 @@ class CalendarAssetRuntimeTests(unittest.TestCase):
         self.assertTrue(any(item["path"].endswith("events/ui-actions.js") for item in manifest["modules"]))
 
     def test_dashboard_reads_the_manifest_aware_version_each_render(self):
+        self.assertIs(dashboard_bp._calendar_asset_version, calendar_assets.calendar_asset_version)
         with self.app.app_context(), patch.object(
             dashboard_bp,
-            "calendar_asset_version",
+            "_calendar_asset_version",
             side_effect=["a" * 64, "b" * 64],
         ):
             self.assertEqual(dashboard_bp._calendar_asset_version(), "a" * 64)

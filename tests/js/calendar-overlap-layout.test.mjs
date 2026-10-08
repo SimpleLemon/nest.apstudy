@@ -1,3 +1,4 @@
+import { calendarScript } from "./helpers/calendar-script.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -8,7 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 globalThis.window = { APStudyUIPrimitives: { escapeHtml: String } };
 globalThis.document = { documentElement: {} };
 const utilsSource = await readFile(path.join(root, "static/js/calendar/utils.js"), "utf8");
-await import(`data:text/javascript;base64,${Buffer.from(utilsSource).toString("base64")}#calendar-overlap-layout`);
+await import(`data:text/javascript;base64,${Buffer.from(calendarScript(utilsSource, "APStudyCalendarUtils")).toString("base64")}#calendar-overlap-layout`);
 const { layoutTimedEvents } = window.APStudyCalendarUtils;
 
 function at(hour, minute = 0) {

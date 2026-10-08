@@ -8,6 +8,7 @@ from unittest.mock import patch
 from flask import Flask
 
 import blueprints.calendar_api as ca
+from services import calendar_projection, calendar_sources
 
 
 class CalendarShareTestCase(unittest.TestCase):
@@ -240,7 +241,9 @@ class CalendarShareTestCase(unittest.TestCase):
 
         with self.app.test_request_context("/api/calendar/share/ABCDEFGHIJKLMNOP/events"):
             with patch.object(ca, "first_row", return_value=settings), \
-                    patch.object(ca, "list_calendar_rows_all", side_effect=list_rows):
+                    patch.object(ca, "list_calendar_rows_all", side_effect=list_rows), \
+                    patch.object(calendar_projection, "list_calendar_rows_all", side_effect=list_rows), \
+                    patch.object(calendar_sources, "list_calendar_rows_all", side_effect=list_rows):
                 payload = ca._public_calendar_events_payload(
                     share,
                     datetime(2026, 5, 20, tzinfo=timezone.utc),

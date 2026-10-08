@@ -2,9 +2,8 @@ import {
     getCalendarCapabilityData,
     getSafeCanvasSourceUrl,
     normalizeCalendarCapabilities,
-    normalizeWritebackState,
     writebackStateLabel,
-} from "./capabilities.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+} from "./capabilities.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
 
 function escapeHtml(value) {
     return String(value ?? "")
@@ -60,6 +59,9 @@ function isMutationAction(action) {
         || /^retry-writeback:\d+$/.test(action);
 }
 
+/**
+ * @param {{capabilities: import("./capabilities.js").CalendarCapabilities|Object, adapter: Partial<import("./adapter.js").CalendarDataAdapter>, data: import("./capabilities.js").CalendarCanvasData & {firstEvent?: Record<string, *>}}} options
+ */
 export function getCalendarExtensionActionAvailability({ capabilities, adapter, data }) {
     const normalized = normalizeCalendarCapabilities(capabilities);
     const sourceUrl = getSafeCanvasSourceUrl(data?.source?.url);
@@ -201,7 +203,7 @@ export function createCalendarExtensionUi({
         const writebacks = Array.isArray(data.writebacks) ? data.writebacks : [];
         const writebackMarkup = writebacks.length
             ? writebacks.map((writeback, index) => {
-                const stateValue = normalizeWritebackState(writeback?.state || writeback?.status || writeback?.mirror_state);
+                const stateValue = writeback.state;
                 const retryLabel = `Retry ${writebackStateLabel(stateValue).toLowerCase()} writeback`;
                 const retryReason = availability.retryEnabled
                     ? "Retry this Canvas writeback"
@@ -284,7 +286,7 @@ export function createCalendarExtensionUi({
             } else if (action === "route-display") {
                 const route = data.routing || {};
                 result = await adapter.setCanvasRouting({
-                    sourceId: firstValue(route.sourceId, route.source_id, data.source?.sourceId, data.firstEvent?.source_id),
+                    sourceId: firstValue(route.sourceId, route.source_id, data.source?.sourceId, data.source?.source_id, data.firstEvent?.source_id),
                     state: firstValue(route.state, data.completion?.status === "completed" ? "completed" : "incomplete"),
                     destinationCalendarId: firstValue(route.destinationCalendarId, route.destination_calendar_id, route.destination, data.firstEvent?.calendar_id),
                     fallbackCalendarId: firstValue(route.fallbackCalendarId, route.fallback_calendar_id),
@@ -293,7 +295,7 @@ export function createCalendarExtensionUi({
             } else if (action === "display-override") {
                 result = await adapter.setDisplayOverride({
                     eventRef: firstValue(data.firstEvent?.event_ref, data.firstEvent?.id),
-                    calendarId: firstValue(data.routing?.destination, data.firstEvent?.calendar_id),
+                    calendarId: firstValue(data.routing?.destinationCalendarId, data.routing?.destination_calendar_id, data.routing?.destination, data.firstEvent?.calendar_id),
                     signal,
                 });
             } else if (action.startsWith("retry-writeback:")) {

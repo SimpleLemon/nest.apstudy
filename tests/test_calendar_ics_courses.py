@@ -1,7 +1,7 @@
 import json
 import tempfile
 import unittest
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timezone
 from pathlib import Path
 from unittest.mock import patch
 
@@ -63,18 +63,66 @@ class SimulatedCoursesProjectorTests(unittest.TestCase):
 
     def _project(self, rows=None, **kwargs):
         with patch.object(courses, "list_rows_all", return_value=self.rows if rows is None else rows):
-            return courses.project_simulated_courses("user-1", data_root=self.root, **kwargs)
+            start = kwargs.pop("start", None)
+            end = kwargs.pop("end", None)
+            now = kwargs.pop("now", None)
+            if start is None and end is None:
+                start, end = contract.subscription_window(now or date.today())
+            start = datetime.combine(start, time.min, tzinfo=timezone.utc) if type(start) is date else start
+            end = datetime.combine(end, time.min, tzinfo=timezone.utc) if type(end) is date else end
+            return courses.project_simulated_courses("user-1", start, end, data_root=self.root, **kwargs)
+
+    def test_published_current_sections_and_retired_saved_sections_use_correct_generation(self):
+        atlas = self.root / "data" / "atlas"
+        historical = atlas / "snapshots" / "Fall_2025" / "old" / "CS"
+        current = atlas / "snapshots" / "Fall_2025" / "new" / "CS"
+        historical.mkdir(parents=True)
+        current.mkdir(parents=True)
+        old_course = json.loads(json.dumps(self.course))
+        old_course["sections"][0]["crn"] = "retired"
+        old_course["sections"][0]["location"] = "Historical Hall"
+        (historical / "170.json").write_text(json.dumps(old_course), encoding="utf-8")
+        new_course = json.loads(json.dumps(self.course))
+        new_course["sections"][0]["location"] = "Current Hall"
+        (current / "170.json").write_text(json.dumps(new_course), encoding="utf-8")
+        (atlas / "manifest.json").write_text(json.dumps({"version": 1, "terms": {"Fall_2025": {
+            "status": "complete", "generation": "new", "path": "snapshots/Fall_2025/new",
+            "previous_generations": [{"generation": "old", "path": "snapshots/Fall_2025/old"}],
+        }}}), encoding="utf-8")
+        for crn, expected in (("12345", "Current Hall"), ("retired", "Historical Hall")):
+            with self.subTest(crn=crn):
+                outcome = self._project(rows=[self._row(crn=crn)], start=date(2025, 8, 25), end=date(2025, 8, 26))
+                self.assertEqual(outcome.status, CalendarIcsProjectionStatus.SUCCESS)
+                self.assertEqual(outcome.events[0].location, expected)
+                self.assertEqual(outcome.events[0].crn, crn)
 
     def test_zero_selection_is_valid_empty(self):
         outcome = self._project()
         self.assertEqual(outcome.status, CalendarIcsProjectionStatus.VALID_EMPTY)
         self.assertEqual(outcome.events, ())
 
+    def test_empty_published_roster_preserves_saved_course_calendar_identity(self):
+        row = self._row()
+        before = self._project(rows=[row], start=date(2025, 8, 25), end=date(2025, 8, 26))
+        atlas = self.root / "data" / "atlas"
+        historical = atlas / "snapshots" / "Fall_2025" / "old" / "CS"
+        historical.mkdir(parents=True)
+        (historical / "170.json").write_text(json.dumps(self.course), encoding="utf-8")
+        (self.root / "Fall_2025" / "CS" / "170.json").unlink()
+        (atlas / "snapshots" / "Fall_2025" / "empty").mkdir()
+        (atlas / "manifest.json").write_text(json.dumps({"version": 1, "terms": {"Fall_2025": {
+            "status": "complete", "generation": "empty", "path": "snapshots/Fall_2025/empty",
+            "previous_generations": [{"generation": "old", "path": "snapshots/Fall_2025/old"}],
+        }}}), encoding="utf-8")
+        after = self._project(rows=[row], start=date(2025, 8, 25), end=date(2025, 8, 26))
+        self.assertEqual(after.status, CalendarIcsProjectionStatus.SUCCESS)
+        self.assertEqual(after.events, before.events)
+
     def test_persisted_rows_are_the_only_selection_authority(self):
         self.rows = [self._row()]
         with patch.object(courses, "list_rows_all", return_value=self.rows) as loader:
             outcome = courses.project_simulated_courses(
-                "user-1", date(2025, 8, 1), date(2025, 9, 1),
+                "user-1", datetime(2025, 8, 1, tzinfo=timezone.utc), datetime(2025, 9, 1, tzinfo=timezone.utc),
                 data_root=self.root,
             )
         loader.assert_called_once()
@@ -162,8 +210,8 @@ class SimulatedCoursesProjectorTests(unittest.TestCase):
     def test_uids_are_stable_and_hmac_based(self):
         self.rows = [self._row()]
         with patch.object(courses, "list_rows_all", return_value=self.rows):
-            first = courses.project_simulated_courses("user-1", date(2025, 8, 25), date(2025, 9, 1), data_root=self.root)
-            second = courses.project_simulated_courses("user-1", date(2025, 8, 25), date(2025, 9, 1), data_root=self.root)
+            first = courses.project_simulated_courses("user-1", datetime(2025, 8, 25, tzinfo=timezone.utc), datetime(2025, 9, 1, tzinfo=timezone.utc), data_root=self.root)
+            second = courses.project_simulated_courses("user-1", datetime(2025, 8, 25, tzinfo=timezone.utc), datetime(2025, 9, 1, tzinfo=timezone.utc), data_root=self.root)
         self.assertEqual([event.uid for event in first.events], [event.uid for event in second.events])
         self.assertTrue(all(event.uid.startswith("nest-ics-v1-") for event in first.events))
         self.assertNotIn("saved-course-1", first.events[0].uid)

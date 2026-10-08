@@ -1,4 +1,4 @@
-"""Frozen contracts for the future single-calendar ICS projector and serializer.
+"""Shared contracts for single-calendar ICS projection and serialization.
 
 This module contains only data contracts and deterministic helpers. It does
 not fetch source events, project them, or serialize an ICS document.
@@ -59,7 +59,7 @@ class CalendarIcsFailureCode(str, Enum):
 
 
 class CalendarIcsFailure(ValueError):
-    """Typed, stable failure for owner lifecycle and future feed lookups."""
+    """Typed, stable failure for owner lifecycle and feed lookups."""
 
     def __init__(self, code: CalendarIcsFailureCode | str, message: str, *, status: int = 400):
         if isinstance(code, CalendarIcsFailureCode):
@@ -101,9 +101,17 @@ def _require_utc_datetime(name: str, value: Any) -> None:
         raise CalendarIcsContractError(f"{name} must be a timezone-aware UTC datetime.")
 
 
+def require_utc_range(range_start: datetime, range_end: datetime) -> None:
+    """Validate caller bounds before source reads; invalid bounds raise ValueError."""
+    _require_utc_datetime("range_start", range_start)
+    _require_utc_datetime("range_end", range_end)
+    if range_end <= range_start:
+        raise CalendarIcsContractError("range_end must be after range_start.")
+
+
 @dataclass(frozen=True, slots=True)
 class NormalizedCalendarEvent:
-    """Secret-free normalized event shape emitted by future source projectors."""
+    """Secret-free normalized event shape emitted by source projectors."""
 
     uid: str
     calendar_id: str
@@ -199,7 +207,7 @@ def _forward_safe_diagnostic_code(value: Any) -> CalendarIcsDiagnosticCode | str
 
 @dataclass(frozen=True, slots=True)
 class CalendarIcsProjectionOutcome:
-    """Forward-safe projector result contract for future source fan-out."""
+    """Projector result contract used by the share feed dispatcher."""
 
     status: CalendarIcsProjectionStatus
     events: tuple[NormalizedCalendarEvent, ...] = ()
@@ -239,7 +247,7 @@ class CalendarIcsUidPolicy:
 
 @dataclass(frozen=True, slots=True)
 class CalendarIcsSerializerContract:
-    """Explicit later serializer metadata contract; no serializer is implemented."""
+    """Serializer metadata shared by projectors and ICS document generation."""
 
     method: str = ICS_METHOD
     method_line: str = "METHOD:PUBLISH"

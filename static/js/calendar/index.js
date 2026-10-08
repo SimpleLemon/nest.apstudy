@@ -1,46 +1,35 @@
-/* ──────────────────────────────────────────────────────────────────────────────
-   Dashboard Calendar & Assignments
-   ──────────────────────────────────────────────────────────────────────────── */
-/* ── Constants ─────────────────────────────────────────────────────────────── */
-import { createCalendarLifecycle } from "./lifecycle.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
-import { normalizeCalendarCapabilities } from "./capabilities.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
-import { createCalendarExtensionUi } from "./extension-ui.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+import { createCalendarHoverCard } from "./events/hover-card.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCourseControls } from "./integrations/course-controls.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarHost } from "./host.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarViews } from "./views/index.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarState } from "./state.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarCore } from "./core.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarMenu } from "./menu.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarPreferences } from "./preferences.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarControls } from "./controls.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarCourses } from "./integrations/courses.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarData } from "./integrations/data.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarShare } from "./integrations/share.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarSources } from "./integrations/sources.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarEventRender } from "./views/event-render.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarRenderShell } from "./views/render-shell.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarUiActions } from "./events/ui-actions.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import * as calendarUtils from "./utils.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarEventForm } from "./events/event-form.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarEventMenu } from "./events/context-menu.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarMirrors } from "./events/mirrors.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarBootstrap } from "./bootstrap.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarExtensionUi } from "./extension-ui.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
 
 export function mountCalendar(root, dataAdapter, capabilities = {}) {
     if (!root || root.nodeType !== 1) return () => {};
 
-    const doc = root.ownerDocument;
-    if (!doc) return () => {};
-    const view = capabilities.view || doc.defaultView || globalThis;
-    const runtimeWindow = capabilities.window || view;
+    if (!root.ownerDocument) return () => {};
+    const { doc, runtimeWindow, pageRoot, body, extensionMount, calendarCapabilities, lifecycle, adapter } = createCalendarHost(root, dataAdapter, capabilities);
     const window = runtimeWindow;
-    const pageRoot = capabilities.pageRoot?.nodeType === 1 ? capabilities.pageRoot : root;
-    const body = doc.body;
-    const extensionMount = capabilities.mode === "overlay" || capabilities.mode === "replace";
-    if (extensionMount) {
-        root.classList.add("apstudy-calendar-host");
-        root.innerHTML = `<header class="apstudy-calendar-toolbar">
-            <div><h2 id="calendar-title">Calendar</h2><p id="calendar-subtitle"></p></div>
-            <nav aria-label="Calendar view"><button id="calendar-view-month" type="button">Month</button><button id="calendar-view-week" type="button">Week</button><button id="calendar-view-upcoming" type="button">Agenda</button></nav>
-            <div id="calendar-period-controls"><button id="calendar-prev" type="button" aria-label="Previous period">Previous</button><button id="calendar-today" type="button">Today</button><button id="calendar-next" type="button" aria-label="Next period">Next</button></div>
-            <button id="calendar-toggle-menu" type="button" aria-expanded="false">Calendars</button><button id="calendar-refresh" type="button">Refresh</button><button id="calendar-new-event" type="button">New event</button>
-        </header><div id="calendar-menu" class="hidden"></div><div id="calendar-view-root" aria-live="polite"></div><div id="calendar-popover-root"></div>`;
-    }
-    const canvasPageReadOnly = body?.dataset.calendarReadonly === "true";
-    const calendarCapabilities = normalizeCalendarCapabilities({
-        ...capabilities,
-        readOnly: canvasPageReadOnly || capabilities.readOnly === true,
-        shareMode: canvasPageReadOnly || capabilities.shareMode === true,
-    });
-    const lifecycle = capabilities.lifecycle
-        || createCalendarLifecycle({ view });
-    const adapter = dataAdapter || capabilities.dataAdapter || {};
     let disposed = false;
-    const previousCalendarDataAdapter = window.APStudyCalendarDataAdapter;
-    window.APStudyCalendarDataAdapter = adapter;
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MINUTES_PER_DAY = 1440;
 const HOUR_HEIGHT_PX = 60;
 const WEEK_MINIMUM_DAY_WIDTH_PX = 100;
 const ALL_DAY_MIN_HEIGHT_PX = 44;
@@ -62,7 +51,6 @@ const CALENDAR_BUFFER_DAYS = Number.isFinite(
 )
     ? Number.parseInt(body?.dataset.calendarBufferDays, 10)
     : DEFAULT_CALENDAR_BUFFER_DAYS;
-const CALENDAR_READ_ONLY = canvasPageReadOnly;
 const PUBLIC_SHARE_CODE = body?.dataset.publicShareCode || "";
 const PUBLIC_CALENDAR_TITLE = body?.dataset.publicCalendarTitle || "Shared Calendar";
 const PUBLIC_CALENDAR_RANGE_LABEL = body?.dataset.publicCalendarRangeLabel || "Shared dates";
@@ -72,7 +60,6 @@ const PREFERENCE_SAVE_TIMEOUT_MS = 5000;
 const PREFERENCE_SAVE_RETRY_DELAYS_MS = [1000, 3000];
 const PREFERENCE_SAVE_WARNING_COOLDOWN_MS = 60000;
 const PREFERENCE_BATCH_LIMIT = 50;
-const PREFERENCE_BATCH_ENDPOINT = "/api/calendar/preferences/batch";
 const PREFERENCE_LOAD_RETRY_COOLDOWN_MS = 15000;
 const TOGGLE_REFRESH_DELAY_MS = 1000;
 const COMPACT_CALENDAR_QUERY = window.matchMedia("(max-width: 640px)");
@@ -93,23 +80,30 @@ const {
     isTaskEvent,
     getTaskPriorityColor,
     createAccessibleEventPalette,
-    getCssColorVariable,
     escapeHtml,
     formatMultilineText,
-} = window.APStudyCalendarUtils;
-const state = window.APStudyCalendarState.createCalendarState({
+} = calendarUtils;
+const state = createCalendarState({
     defaultDashboardView: DEFAULT_DASHBOARD_VIEW,
     publicCalendarRangeLabel: PUBLIC_CALENDAR_RANGE_LABEL,
     publicCalendarTitle: PUBLIC_CALENDAR_TITLE,
     publicShareCode: PUBLIC_SHARE_CODE,
     readOnly: calendarCapabilities.readOnly,
 });
+state.nativeEditable = !extensionMount || capabilities.nestMutation === true;
+const canCreateEvent = () => !state.public.readOnly
+    && calendarCapabilities.supported
+    && calendarCapabilities.canMutateNative
+    && state.nativeEditable === true;
+const canMutateEvent = (event) => event?.source_type === "external"
+    ? !state.public.readOnly && calendarCapabilities.supported
+        && calendarCapabilities.canMutateNative && event.editable === true
+    : canCreateEvent();
 if (extensionMount) {
     state.public.title = "Calendar";
     state.public.rangeLabel = "Read-only";
-    if (window.APStudyDate?.toCalendarDate) state.anchorDate = window.APStudyDate.toCalendarDate(new Date());
 }
-const calendarCore = window.APStudyCalendarCore.createCalendarCore({
+const calendarCore = createCalendarCore({
     authenticatedReadOnly: extensionMount,
     state,
     constants: {
@@ -119,7 +113,7 @@ const calendarCore = window.APStudyCalendarCore.createCalendarCore({
         simulatedCalendarName: SIMULATED_CALENDAR_NAME,
     },
     callbacks: {
-        buildSimulatedMeetingEvents: (...args) => buildSimulatedMeetingEvents(...args),
+        buildSimulatedMeetingEvents: (start, end) => buildSimulatedMeetingEvents(start, end),
         getCurrentViewCountRange: () => getCurrentViewCountRange(),
     },
 });
@@ -135,7 +129,7 @@ const {
     initCalendarState,
     isLocalCalendar,
 } = calendarCore;
-const calendarMenu = window.APStudyCalendarMenu.createCalendarMenu({
+const calendarMenu = createCalendarMenu({
     authenticatedReadOnly: extensionMount,
     root: pageRoot,
     state,
@@ -147,7 +141,7 @@ const calendarMenu = window.APStudyCalendarMenu.createCalendarMenu({
         taskCalendarName: TASK_CALENDAR_NAME,
     },
     callbacks: {
-        buildSimulatedMeetingEvents: (...args) => buildSimulatedMeetingEvents(...args),
+        buildSimulatedMeetingEvents: (start, end) => buildSimulatedMeetingEvents(start, end),
         getCalendarLabel,
         getEventCalendarKey,
         getStartOfWeek,
@@ -160,7 +154,8 @@ const {
     getCurrentViewCountRange,
     renderCalendarMenu,
 } = calendarMenu;
-const calendarRenderShell = window.APStudyCalendarRenderShell.createCalendarRenderShell({
+const calendarRenderShell = createCalendarRenderShell({
+    runtimeWindow,
     root: pageRoot,
     state,
     constants: {
@@ -177,6 +172,7 @@ const calendarRenderShell = window.APStudyCalendarRenderShell.createCalendarRend
         renderAssignments: () => renderAssignments(),
         renderCalendarMenu,
         renderCoursesModal: () => renderCoursesModal(),
+        retryCalendarLoad: () => retryCalendarLoad(),
     },
 });
 const {
@@ -191,18 +187,18 @@ const calendarExtensionUi = createCalendarExtensionUi({
     capabilities: calendarCapabilities,
     lifecycle,
 });
-const render = (...args) => {
-    renderCalendarShell(...args);
+const render = () => {
+    renderCalendarShell();
     calendarExtensionUi.render();
 };
-const calendarPreferences = window.APStudyCalendarPreferences.createCalendarPreferences({
+const calendarPreferences = createCalendarPreferences({
+    runtimeWindow,
     strictLoad: extensionMount,
     authenticatedReadOnly: extensionMount,
     lifecycle,
     dataAdapter: adapter,
     state,
     constants: {
-        batchEndpoint: PREFERENCE_BATCH_ENDPOINT,
         batchLimit: PREFERENCE_BATCH_LIMIT,
         loadRetryCooldownMs: PREFERENCE_LOAD_RETRY_COOLDOWN_MS,
         preferenceSaveDelayMs: PREFERENCE_SAVE_DELAY_MS,
@@ -223,7 +219,8 @@ const {
     trackCalendarMutation,
     writeCalendarStateToStorage,
 } = calendarPreferences;
-const calendarCourses = window.APStudyCalendarCourses.createCalendarCourses({
+const calendarCourses = createCalendarCourses({
+    runtimeWindow,
     root: pageRoot,
     lifecycle,
     dataAdapter: adapter,
@@ -246,17 +243,12 @@ const {
     hydrateSavedCourses,
     hydrateSelectedSimulatedSections,
     applyCoursesFiltersFromUrl,
-    writeCourseFiltersToUrl,
-    openCoursesModal,
-    closeCoursesModal,
-    submitCoursesSearch,
-    applyCourseFilters,
-    toggleCourseSectionSelection,
     renderCoursesModal,
     ensureSimulatedCalendarPreference,
     buildSimulatedMeetingEvents,
 } = calendarCourses;
-const calendarData = window.APStudyCalendarData.createCalendarData({
+const calendarData = createCalendarData({
+    runtimeWindow,
     strictLoad: extensionMount,
     authenticatedReadOnly: extensionMount,
     lifecycle,
@@ -287,13 +279,13 @@ const {
     getEventCalendarColor,
     getVisibleEvents,
     loadCalendarData,
-    refreshCalendarFeed,
     runManualRefresh,
+    retryCalendarLoad,
     setCalendarColor,
     toggleCalendarVisibility,
     ensureEventsForRange,
 } = calendarData;
-const calendarEventRender = window.APStudyCalendarEventRender.createCalendarEventRender({
+const calendarEventRender = createCalendarEventRender({
     state,
     callbacks: {
         getCalendarEventColor: getEventCalendarColor,
@@ -306,7 +298,7 @@ const calendarEventRender = window.APStudyCalendarEventRender.createCalendarEven
         escapeHtml,
         formatAllDayRange,
         formatTimedEventRange,
-        getCssColorVariable,
+        getCssColorVariable: (name, fallback) => calendarUtils.getCssColorVariable(name, fallback, pageRoot, runtimeWindow),
         getTaskPriorityColor,
         isTaskEvent,
     },
@@ -317,8 +309,10 @@ const {
     getEventElementAttributes,
     getEventsForDay,
 } = calendarEventRender;
-const calendarShare = window.APStudyCalendarShare.createCalendarShare({
+const calendarShare = createCalendarShare({
+    runtimeWindow,
     root: pageRoot,
+    overlayRoot: extensionMount ? pageRoot : doc.body,
     lifecycle,
     dataAdapter: adapter,
     state,
@@ -337,7 +331,8 @@ const {
     openCalendarShareModal,
     openCalendarSubscriptionModal,
 } = calendarShare;
-const calendarUiActions = window.APStudyCalendarUiActions.createCalendarUiActions({
+const calendarUiActions = createCalendarUiActions({
+    runtimeWindow,
     root: pageRoot,
     lifecycle,
     state,
@@ -349,9 +344,9 @@ const calendarUiActions = window.APStudyCalendarUiActions.createCalendarUiAction
         getEventBadgeStyle,
         getEventElementAttributes,
         canCreateCalendarSubscription,
-        openCalendarInfoModal: (...args) => openCalendarInfoModal(...args),
-        openCalendarSubscriptionModal: (...args) => openCalendarSubscriptionModal(...args),
-        openRgbModal: (...args) => openRgbModal(...args),
+        openCalendarInfoModal: (calendarName) => openCalendarInfoModal(calendarName),
+        openCalendarSubscriptionModal,
+        openRgbModal: (calendarName) => openRgbModal(calendarName),
         setCalendarColor,
     },
     formatters: {
@@ -365,89 +360,14 @@ const {
     openCalendarContextMenu,
     positionCalendarContextMenu,
 } = calendarUiActions;
-const calendarAgenda = window.APStudyCalendarAgenda.createCalendarAgenda({
-    root: pageRoot,
-    state,
-    callbacks: {
-        getCalendarEventColor: getEventCalendarColor,
-        getCalendarEventLabel: getEventCalendarLabel,
-        getCalendarEventRef,
-        getEventBadgeColors,
-        getEventElementAttributes,
-        getEventsForDay,
-        getVisibleEvents,
-    },
-    formatters: {
-        escapeHtml,
-        formatAllDayRange,
-        formatMultilineText,
-        formatTimedEventRange,
-        getAccent,
-        getStartOfWeek,
-        getUrgencyLabel,
-        getUrgencyLabelAllDay,
-        isTaskEvent,
-        isToday,
-    },
-});
 const {
-    buildMobileCalendarAgendaHtml,
-    buildUpcomingAgendaHtml,
-    renderAssignments,
-} = calendarAgenda;
-const calendarMonthView = window.APStudyCalendarMonthView.createCalendarMonthView({
-    state,
-    constants: {
-        weekdays: WEEKDAYS,
-    },
-    callbacks: {
-        buildEventChip,
-        getEventBadgeColors,
-        getEventBadgeStyle,
-        getEventElementAttributes,
-        getEventsForDay,
-        getVisibleEvents,
-    },
-    formatters: {
-        dateToDayIndex,
-        escapeHtml,
-        formatDateKey,
-        formatMonthGridDayLabel,
-        isToday,
-    },
+    buildMobileCalendarAgendaHtml, buildUpcomingAgendaHtml, renderAssignments,
+    buildMonthViewHtml, buildWeekViewHtml,
+} = createCalendarViews({
+    pageRoot, state, WEEKDAYS, ALL_DAY_MIN_HEIGHT_PX, HOUR_HEIGHT_PX, WEEK_MINIMUM_DAY_WIDTH_PX, getEventCalendarColor, getEventCalendarLabel, getCalendarEventRef, getEventBadgeColors, getEventBadgeStyle, getEventElementAttributes, getEventsForDay, getVisibleEvents, buildEventChip, escapeHtml, formatAllDayRange, formatMultilineText, formatTimedEventRange, getAccent, getStartOfWeek, getUrgencyLabel, getUrgencyLabelAllDay, isTaskEvent, isToday, dateToDayIndex, formatDateKey, formatMonthGridDayLabel, formatHourLabel, formatTimeOnly, layoutTimedEvents
 });
-const {
-    buildMonthViewHtml,
-} = calendarMonthView;
-const calendarWeekView = window.APStudyCalendarWeekView.createCalendarWeekView({
-    state,
-    constants: {
-        allDayMinHeightPx: ALL_DAY_MIN_HEIGHT_PX,
-        hourHeightPx: HOUR_HEIGHT_PX,
-        weekMinimumDayWidthPx: WEEK_MINIMUM_DAY_WIDTH_PX,
-        weekdays: WEEKDAYS,
-    },
-    callbacks: {
-        getEventBadgeStyle,
-        getEventElementAttributes,
-        getEventsForDay,
-        getVisibleEvents,
-    },
-    formatters: {
-        dateToDayIndex,
-        escapeHtml,
-        formatHourLabel,
-        formatTimeOnly,
-        getStartOfWeek,
-        isTaskEvent,
-        isToday,
-        layoutTimedEvents,
-    },
-});
-const {
-    buildWeekViewHtml,
-} = calendarWeekView;
-const calendarSources = window.APStudyCalendarSources.createCalendarSources({
+const calendarSources = createCalendarSources({
+    runtimeWindow,
     root: pageRoot,
     lifecycle,
     dataAdapter: adapter,
@@ -478,43 +398,8 @@ const {
     openCalendarSourceCreateModal,
     openRgbModal,
 } = calendarSources;
-const calendarControls = window.APStudyCalendarControls.createCalendarControls({
-    root: pageRoot,
-    lifecycle,
-    state,
-    callbacks: {
-        applyCourseFilters,
-        applyCoursesFiltersFromUrl,
-        closeCalendarContextMenu,
-        closeCalendarShareModal,
-        closeCalendarSourceCreateModal,
-        closeCoursesModal,
-        closeRgbModal,
-        closeSourceInfoModal,
-        ensureCalendarPreferencesLoaded,
-        ensureEventsForRange,
-        getBufferedRange,
-        getCalendarEventByRef,
-        getCurrentRenderRange,
-        getEventCalendarLabel,
-        isCompactCalendarViewport,
-        openCalendarContextMenu,
-        openCalendarShareModal,
-        openCalendarSourceCreateModal,
-        openCoursesModal,
-        positionCalendarContextMenu,
-        render,
-        renderAssignments,
-        renderCalendarMenu,
-        renderCalendarView,
-        renderCoursesModal,
-        runManualRefresh,
-        scheduleCalendarPreferenceFlush,
-        submitCoursesSearch,
-        toggleCalendarVisibility,
-        toggleCourseSectionSelection,
-        writeCourseFiltersToUrl,
-    },
+const hoverCard = createCalendarHoverCard({
+    root: pageRoot, runtimeWindow, lifecycle, state, getCalendarEventByRef, getEventCalendarLabel,
     formatters: {
         escapeHtml,
         formatAllDayRange,
@@ -522,106 +407,103 @@ const calendarControls = window.APStudyCalendarControls.createCalendarControls({
         formatTimedEventRange,
     },
 });
-const {
-    hideCalendarHoverCard,
-    wireControls,
-} = calendarControls;
-const compatibilityKeys = [
-    "state",
-    "render",
-    "loadCalendarData",
-    "refreshCalendarFeed",
-    "ensureEventsForRange",
-    "runManualRefresh",
-    "getBufferedRangeForView",
-    "getCalendarEventByRef",
-    "getCalendarOptionsForEventForm",
-    "getDefaultCalendarIdForEventForm",
-    "getCalendarColorForEventForm",
-    "getStandardCalendarColors",
-];
-const previousCompatibility = new Map(compatibilityKeys.map((key) => [key, window[key]]));
-const bootstrap = window.APStudyCalendarBootstrap.createCalendarBootstrap({
+const hideCalendarHoverCard = hoverCard.hide;
+const calendarControls = createCalendarControls({
+    runtimeWindow,
+    root: pageRoot,
+    lifecycle,
     state,
+    hoverCard,
+    wireCourseControls: createCourseControls({ root: pageRoot, runtimeWindow, lifecycle, state, courses: calendarCourses }),
     callbacks: {
-        applyCoursesFiltersFromUrl,
+        closeCalendarContextMenu,
+        closeCalendarShareModal,
+        closeCalendarSourceCreateModal,
+        closeRgbModal,
+        closeSourceInfoModal,
+        ensureCalendarPreferencesLoaded,
         ensureEventsForRange,
         getBufferedRange,
-        getCalendarEventByRef,
-        getCalendarOptionsForEventForm,
         getCurrentRenderRange,
-        getDefaultCalendarIdForEventForm,
-        initializeCourseSelectionsFromStorage,
-        hydrateSavedCourses,
-        loadCalendarData,
-        refreshCalendarFeed,
+        isCompactCalendarViewport,
+        openCalendarContextMenu,
+        openCalendarShareModal,
+        openCalendarSourceCreateModal,
+        positionCalendarContextMenu,
         render,
+        renderAssignments,
+        renderCalendarMenu,
+        renderCalendarView,
         runManualRefresh,
-        wireControls,
+        scheduleCalendarPreferenceFlush,
+        toggleCalendarVisibility,
     },
+
 });
-const originalDocumentAddEventListener = doc.addEventListener;
-if (typeof originalDocumentAddEventListener === "function") {
-    doc.addEventListener = function (type, listener, options) {
-        if (type === "DOMContentLoaded" && typeof listener === "function") {
-            originalDocumentAddEventListener.call(this, type, listener, options);
-            lifecycle.addCleanup(() => doc.removeEventListener(type, listener, options));
-            return undefined;
-        }
-        return originalDocumentAddEventListener.call(this, type, listener, options);
-    };
-}
-try {
-    if (extensionMount) {
-        // Register compatibility exports without waiting for a page-load event
-        // that has already fired in the content-script lifecycle.
-        doc.addEventListener = function(type, listener, options) {
-            if (type !== "DOMContentLoaded") originalDocumentAddEventListener.call(this, type, listener, options);
-        };
-    }
-    bootstrap.register();
-} finally {
-    if (typeof originalDocumentAddEventListener === "function") {
-        doc.addEventListener = originalDocumentAddEventListener;
-    }
-}
+const {
+    wireControls,
+} = calendarControls;
+const eventForm = createCalendarEventForm({
+    document: doc, view: runtimeWindow, lifecycle, adapter,
+    canCreate: canCreateEvent,
+    canMutateEvent,
+    calendars: {
+        getCalendarOptions: getCalendarOptionsForEventForm,
+        getDefaultCalendarId: getDefaultCalendarIdForEventForm,
+        getCalendarColor: (id) => state.calendars[id]?.color || state.calendarColors[4] || "#0ea5e9",
+        getStandardColors: () => [...state.calendarColors],
+    },
+    reload: loadCalendarData,
+});
+const mirrors = createCalendarMirrors({ document: doc, view: runtimeWindow, adapter, reload: loadCalendarData, lifecycle });
+const eventMenu = createCalendarEventMenu({
+    root, document: doc, view: runtimeWindow, lifecycle, adapter, state, mirrors,
+    canCreate: canCreateEvent,
+    canMutateEvent,
+    getCalendarEventByRef, openEventForm: eventForm.open,
+    goToToday: () => {
+        state.anchorDate = new Date();
+        render();
+        void ensureEventsForRange(getBufferedRange(getCurrentRenderRange()));
+    },
+    reload: loadCalendarData,
+});
+const bootstrap = createCalendarBootstrap({
+    document: doc, view: runtimeWindow, lifecycle, state,
+    applyCoursesFiltersFromUrl, initializeCourseSelectionsFromStorage,
+    hydrateSavedCourses, loadCalendarData, wireControls,
+    getCalendarEventByRef, activateEvent: eventMenu.activateEvent,
+    registerEventInteractions: eventMenu.register,
+});
 let ready = Promise.resolve();
 if (extensionMount) {
     wireControls();
+    eventMenu.register();
     lifecycle.addEventListener(root.querySelector("#calendar-today"), "click", () => {
-        state.anchorDate = window.APStudyDate?.toCalendarDate?.(new Date()) || new Date();
+        state.anchorDate = new Date();
         render();
         void ensureEventsForRange(getBufferedRange(getCurrentRenderRange()));
     });
     const createButton = root.querySelector("#calendar-new-event");
-    createButton.hidden = calendarCapabilities.readOnly;
-    lifecycle.addEventListener(createButton, "click", () => window.openCalendarEventForm?.({ mode: "create" }));
+    createButton.hidden = !canCreateEvent();
+    lifecycle.addEventListener(createButton, "click", () => {
+        if (canCreateEvent()) eventForm.open({ mode: "create" });
+    });
     render();
     ready = hydrateSavedCourses().then(() => loadCalendarData()).then(() => {
         if (!disposed) { root.setAttribute("data-apstudycanvas-calendar-ready", "1"); root.querySelector("#calendar-view-root").setAttribute("data-apstudycanvas-calendar-content", "1"); }
     });
+} else {
+    bootstrap.register();
 }
-const mountedCompatibility = new Map(compatibilityKeys.map((key) => [key, window[key]]));
 
 const dispose = () => {
     if (disposed) return;
     disposed = true;
-    if (extensionMount) window.closeCalendarEventForm?.();
     calendarExtensionUi.dispose();
     lifecycle.dispose();
-    if (window.APStudyCalendarDataAdapter === adapter) {
-        if (previousCalendarDataAdapter === undefined) delete window.APStudyCalendarDataAdapter;
-        else window.APStudyCalendarDataAdapter = previousCalendarDataAdapter;
-    }
-    for (const key of compatibilityKeys) {
-        if (window[key] === mountedCompatibility.get(key)) {
-            const previous = previousCompatibility.get(key);
-            if (previous === undefined) delete window[key];
-            else window[key] = previous;
-        }
-    }
+
 };
 dispose.ready = ready;
 return dispose;
 }
-/* ── Controls ──────────────────────────────────────────────────────────────── */

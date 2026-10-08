@@ -464,3 +464,196 @@ test("calendar extension build policy rejects dynamic-code call variants without
         await rm(stagedOutputDirectory, { recursive: true, force: true });
     }
 });
+
+test('HTTP calendar adapter operations expose one envelope, including bodyless writes and course status', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const calls = [];
+        const adapter = modules.adapter.createCalendarDataAdapter({ fetch: async (url, options) => {
+            calls.push({ url, options });
+            return { ok: true, status: 200, json: async () => ({ terms: ['Fall'], sections: [], marker: 'payload' }) };
+        } });
+        const options = { shareId: 'one', action: 'save', sourceId: 'one', eventId: 'one', eventRef: 'user:one', payload: { marker: 'request-data' }, sectionIds: ['one'] };
+        for (const method of ['loadRange', 'loadMirrors', 'changeMirror', 'loadPreferences', 'savePreferences', 'refresh', 'loadShares', 'saveShare', 'createEvent', 'updateEvent', 'overrideEvent', 'deleteEvent', 'hideEvent', 'saveSource', 'loadCourses', 'loadCourseSectionsById', 'loadSavedCourses', 'setCanvasRouting', 'setDisplayOverride']) {
+            const result = await adapter[method](options);
+            assert.equal(result.ok, true, method);
+            assert.equal(result.response.status, 200, method);
+            assert.equal(result.payload.marker, 'payload', method);
+        }
+        assert.ok(calls.length > 19);
+        const preferenceWrite = calls.find(call => call.url === '/api/calendar/preferences/batch');
+        assert.equal(preferenceWrite.options.method, 'POST');
+        assert.deepEqual(JSON.parse(preferenceWrite.options.body), options.payload);
+        const result = await adapter.loadCourses();
+        assert.deepEqual(result.payload.terms, ['Fall']);
+        assert.deepEqual(result.payload.sections, []);
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('HTTP error envelopes retain server detail, invalid successful JSON rejects, and bodyless operations succeed', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        let response = { ok: false, status: 422, json: async () => ({ error: 'Calendar is read-only' }) };
+        const adapter = modules.adapter.createCalendarDataAdapter({ fetch: async () => response });
+        const failed = await adapter.loadRange();
+        assert.equal(failed.ok, false); assert.equal(failed.response.status, 422);
+        assert.equal(failed.payload.error, 'Calendar is read-only');
+        response = { ok: true, status: 200, json: async () => { throw SyntaxError('malformed'); } };
+        await assert.rejects(adapter.loadRange(), /invalid JSON/);
+        await assert.rejects(adapter.loadPreferences(), /invalid JSON/);
+        response.status = 204;
+        for (const method of ['refresh', 'deleteEvent', 'hideEvent']) {
+            const result = await adapter[method]({ eventId: 'one', eventRef: 'user:one' });
+            assert.equal(result.ok, true); assert.deepEqual(result.payload, {});
+        }
+        response.ok = false; response.status = 502;
+        const failure = await adapter.createEvent({ payload: {} });
+        assert.equal(failure.ok, false); assert.deepEqual(failure.payload, {});
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('safe source opening reports a request when noopener returns no window handle', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const opened = [];
+        const adapter = modules.adapter.createCalendarDataAdapter({ window: { open(...args) { opened.push(args); return null; } } });
+        assert.deepEqual(await adapter.openSafeSourceUrl({ url: 'https://canvas.example.edu/' }), { ok: true, state: 'requested', url: 'https://canvas.example.edu' });
+        assert.deepEqual(opened, [['https://canvas.example.edu', '_blank', 'noopener,noreferrer']]);
+        assert.equal((await adapter.openSafeSourceUrl({ url: 'https://canvas.example.edu/?token=secret' })).ok, false);
+        assert.equal(opened.length, 1);
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('injected calendar providers normalize legacy results once and retain default undefined methods', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        let reads = 0;
+        const response = { ok: true, status: 200, json: async () => { reads += 1; return { preferences: {} }; } };
+        const fetches = [];
+        const runtime = { fetch: async function (url) { assert.equal(this, runtime); fetches.push(url); return response; } };
+        const adapter = modules.adapter.createCalendarDataAdapter({
+            loadRange: async () => ({ events: [{ id: 'legacy' }] }),
+            loadPreferences: async () => response,
+            saveSource: async () => ({ response, payload: { source: 'injected' }, ok: false }),
+            loadShares: undefined,
+            fetch: undefined,
+        }, { window: runtime });
+        const again = modules.adapter.createCalendarDataAdapter(adapter, { window: runtime });
+        assert.equal(again, adapter);
+        const range = await adapter.loadRange();
+        assert.equal(range.ok, true);
+        assert.deepEqual(range.payload.events, [{ id: 'legacy' }]);
+        assert.equal((await again.loadPreferences()).payload.preferences instanceof Object, true);
+        assert.equal(reads, 1, 'a Response body is consumed once');
+        const source = await adapter.saveSource();
+        assert.equal(source.ok, false, 'an operation failure survives a successful HTTP status');
+        assert.equal(source.response, response);
+        assert.deepEqual(source.payload, { source: 'injected' });
+        assert.equal(reads, 1, 'already decoded envelopes never re-read the Response');
+        await adapter.loadShares();
+        assert.deepEqual(fetches, ['/api/calendar/shares']);
+        for (const value of [null, false, 0, 'invalid']) {
+            assert.throws(() => modules.adapter.createCalendarDataAdapter({ loadRange: value }), /override must be a function/);
+            assert.throws(() => modules.adapter.createCalendarDataAdapter({ fetch: value }), /override must be a function/);
+        }
+        await assert.rejects(modules.adapter.createCalendarDataAdapter({ loadShares: async () => ({ shares: [] }) }).loadShares(), /Response or HTTP result/);
+        await assert.rejects(modules.adapter.createCalendarDataAdapter({ loadPreferences: async () => ({ response, payload: [] }) }).loadPreferences(), /object payload/);
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('legacy course response pairs preserve component errors and reject invalid decoded objects', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const termsResponse = { ok: false, status: 503, json: async () => ({ error: 'Terms unavailable' }) };
+        const sectionsResponse = { ok: true, status: 200, json: async () => ({ sections: [{ id: 'one' }] }) };
+        const adapter = modules.adapter.createCalendarDataAdapter({ loadCourses: async () => ({ termsResponse, sectionsResponse }) });
+        const result = await adapter.loadCourses();
+        assert.equal(result.ok, false);
+        assert.equal(result.response, termsResponse);
+        assert.equal(result.termsResponse, termsResponse);
+        assert.equal(result.sectionsResponse, sectionsResponse);
+        assert.deepEqual(result.payload, { error: 'Terms unavailable', sections: [{ id: 'one' }] });
+        const invalid = modules.adapter.createCalendarDataAdapter({ loadCourses: async () => ({ termsResponse, sectionsResponse, termsPayload: [], sectionsPayload: {} }) });
+        await assert.rejects(invalid.loadCourses(), /object payloads/);
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('public share requests encode their identity and retain range and cancellation options', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const requests = [];
+        const adapter = modules.adapter.createCalendarDataAdapter({ fetch: async (url, options) => {
+            requests.push({ url, options });
+            return { ok: true, status: 200, json: async () => ({ events: [] }) };
+        } });
+        const controller = new AbortController();
+        const range = { start: new Date('2026-10-01T00:00:00Z'), end: new Date('2026-11-01T00:00:00Z') };
+        await adapter.loadRange({ readOnly: true, shareCode: 'public/code?', range, signal: controller.signal });
+        const url = new URL(requests[0].url, 'https://example.test');
+        assert.equal(url.pathname, '/api/calendar/share/public%2Fcode%3F/events');
+        assert.equal(url.searchParams.get('start'), range.start.toISOString());
+        assert.equal(url.searchParams.get('end'), range.end.toISOString());
+        assert.equal(requests[0].options.signal, controller.signal);
+        await adapter.loadRange({ shareCode: 'ignored-for-private-view' });
+        assert.equal(requests[1].url, '/api/calendar/events');
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('injected synchronous calendar actions always return promises and synchronous throws reject', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const accepted = { ok: true, state: 'requested' };
+        const adapter = modules.adapter.createCalendarDataAdapter({
+            openSafeSourceUrl() { return accepted; },
+            retryWriteback() { throw Error('provider failed'); },
+        });
+        const opening = adapter.openSafeSourceUrl({ url: 'https://canvas.example.edu' });
+        assert.equal(typeof opening.then, 'function'); assert.equal(await opening, accepted);
+        let retry; assert.doesNotThrow(() => { retry = adapter.retryWriteback(); });
+        assert.equal(typeof retry.catch, 'function'); await assert.rejects(retry, /provider failed/);
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('capability writebacks canonicalize legacy aliases and scalars while preserving provider detail', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const raw = { status: ' QUEUED ', event_ref: 'canvas:one', error_message: 'Provider detail' };
+        const result = modules.capabilities.getCalendarCapabilityData({ data: { writebacks: [raw, { mirror_state: 'APPLIED' }, 'retryable_failed', null, { state: 'future_state' }] } }, [{ source_type: 'canvas', mirror_state: ' CONFLICT ' }]);
+        assert.deepEqual(result.writebacks.map(item => item.state), ['queued', 'applied', 'retryable_failed', 'unsupported', 'unsupported', 'conflict']);
+        assert.equal(result.writebacks[0].event_ref, raw.event_ref);
+        assert.equal(result.writebacks[0].error_message, raw.error_message);
+        assert.equal(raw.state, undefined);
+        assert.equal(result.data.writebacks[0].state, 'queued');
+        for (const supplied of [{ status: 'queued' }, 'applied']) {
+            const canonical = modules.capabilities.getCalendarCapabilityData({ canvas: { writeback_state: supplied } });
+            assert.equal(canonical.writebacks[0].state, typeof supplied === 'string' ? supplied : 'queued');
+        }
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('native and shared calendars without Canvas data keep the integration panel hidden', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        for (const capabilities of [{ readOnly: false }, { readOnly: true, shareMode: true }, { readOnly: false, data: {} }]) {
+            const panel = { hidden: false, innerHTML: '', setAttribute() {}, addEventListener() {}, remove() {} };
+            const root = { ownerDocument: { createElement() { return panel; } }, querySelector() { return null; }, appendChild() {} };
+            const normalized = modules.capabilities.normalizeCalendarCapabilities(capabilities);
+            assert.deepEqual(normalized.data, {});
+            assert.deepEqual(modules.capabilities.getCalendarCapabilityData(normalized).writebacks, []);
+            const ui = modules.extensionUi.createCalendarExtensionUi({ root, state: { events: [{ id: 'native', source_type: 'user' }] }, adapter: {}, capabilities });
+            assert.equal(panel.hidden, true); assert.equal(panel.innerHTML, '');
+            ui.render(); assert.equal(panel.hidden, true); ui.dispose();
+        }
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});
+
+test('supplied Canvas writebacks retain a visible integration panel and canonical state labels', async () => {
+    const modules = await importCalendarExtensionModules();
+    try {
+        const panel = { hidden: true, innerHTML: '', setAttribute() {}, addEventListener() {}, remove() {} };
+        const root = { ownerDocument: { createElement() { return panel; } }, querySelector() { return null; }, appendChild() {} };
+        const ui = modules.extensionUi.createCalendarExtensionUi({ root, state: { events: [] }, adapter: {}, capabilities: { readOnly: false, data: { writebackStates: [{ status: 'queued', event_ref: 'canvas:one' }] } } });
+        assert.equal(panel.hidden, false); assert.match(panel.innerHTML, /Queued/);
+        ui.dispose();
+    } finally { await rm(modules.moduleRoot, { recursive: true, force: true }); }
+});

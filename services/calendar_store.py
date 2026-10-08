@@ -1,12 +1,18 @@
 from contextlib import contextmanager
+import sqlite3
+from typing import Any, Iterator, Literal, Mapping, overload
 
 from flask import current_app, has_app_context
 
-from config import ENVIRONMENT_CONFIG_EXTENSION_KEY, load_environment_config
+from config import ENVIRONMENT_CONFIG_EXTENSION_KEY, EnvironmentConfig, load_environment_config
 from services import database as _nest_database
+from services.database import DatabasePath, Queries, RowListResponse, RowMapping
 
 
 CALENDAR_TABLES = (
+    "external_calendar_resolutions",
+    "external_calendar_conflicts", "external_calendar_jobs", "external_calendar_events",
+    "external_calendar_exports", "external_calendars", "external_calendar_oauth", "external_calendar_connections",
     "calendar_cache",
     "calendar_feeds",
     "user_calendar_preferences",
@@ -47,7 +53,7 @@ TABLE_COLUMNS = {
     },
     "user_events": {
         "id", "user_id", "title", "description", "start", "end", "is_all_day",
-        "color", "calendar_id", "reminder_minutes", "created_at", "updated_at",
+        "color", "calendar_id", "reminder_minutes", "timezone", "location", "created_at", "updated_at",
     },
     "user_calendar_sources": {
         "id", "user_id", "source_id", "kind", "default_name", "created_at",
@@ -100,7 +106,7 @@ TABLE_COLUMNS = {
 }
 
 
-def _environment_config_snapshot():
+def _environment_config_snapshot() -> EnvironmentConfig:
     if has_app_context():
         configured = current_app.extensions.get(ENVIRONMENT_CONFIG_EXTENSION_KEY)
         if configured is not None:
@@ -108,13 +114,13 @@ def _environment_config_snapshot():
     return load_environment_config()
 
 
-def _validate_table(table_id):
+def _validate_table(table_id: str) -> None:
     if table_id not in TABLE_COLUMNS:
         raise ValueError(f"Unsupported calendar table: {table_id}")
 
 
 # Calendar storage and schema management are shared with the main database.
-def calendar_db_path(path=None):
+def calendar_db_path(path: DatabasePath | None = None) -> DatabasePath:
     if path:
         return _nest_database.resolve_env_path(path) or path
     configured_environment = _environment_config_snapshot()
@@ -127,59 +133,77 @@ def calendar_db_path(path=None):
 
 
 @contextmanager
-def calendar_connection(path=None):
+def calendar_connection(path: DatabasePath | None = None) -> Iterator[sqlite3.Connection]:
     with _nest_database.db_connection(calendar_db_path(path)) as conn:
         yield conn
 
 
-def init_calendar_store(path=None):
+def init_calendar_store(path: DatabasePath | None = None) -> None:
     _nest_database.init_db(path=calendar_db_path(path))
 
 
-def list_calendar_rows_safe(table_id, queries=None):
+def list_calendar_rows_safe(table_id: str, queries: Queries | None = None) -> RowListResponse:
     _validate_table(table_id)
     return _nest_database.list_rows(table_id, queries, path=calendar_db_path())
 
 
-def list_calendar_rows_all(table_id, queries=None, limit=100):
+def list_calendar_rows_all(
+    table_id: str, queries: Queries | None = None, limit: int = 100,
+) -> list[RowMapping]:
     _validate_table(table_id)
     return _nest_database.list_rows_all(table_id, queries, limit=limit, path=calendar_db_path())
 
 
-def first_calendar_row(table_id, queries=None):
+def first_calendar_row(table_id: str, queries: Queries | None = None) -> RowMapping | None:
     _validate_table(table_id)
     return _nest_database.first_row(table_id, queries, path=calendar_db_path())
 
 
-def get_calendar_row(table_id, row_id, *, allow_missing=False):
+@overload
+def get_calendar_row(
+    table_id: str, row_id: object, *, allow_missing: Literal[False] = False,
+) -> RowMapping: ...
+
+
+@overload
+def get_calendar_row(
+    table_id: str, row_id: object, *, allow_missing: bool,
+) -> RowMapping | None: ...
+
+
+def get_calendar_row(table_id: str, row_id: object, *, allow_missing: bool = False) -> RowMapping | None:
     _validate_table(table_id)
     return _nest_database.get_row(table_id, row_id, allow_missing=allow_missing, path=calendar_db_path())
 
 
-def create_calendar_row(table_id, row_id=None, data=None):
+def create_calendar_row(
+    table_id: str, row_id: object = None, data: Mapping[str, Any] | None = None,
+) -> RowMapping:
     _validate_table(table_id)
     return _nest_database.create_row(table_id, row_id=row_id, data=data, path=calendar_db_path())
 
 
-def upsert_calendar_row(table_id, row_id=None, data=None):
+def upsert_calendar_row(
+    table_id: str, row_id: object = None, data: Mapping[str, Any] | None = None,
+) -> RowMapping:
     _validate_table(table_id)
     return _nest_database.upsert_row(table_id, row_id=row_id, data=data, path=calendar_db_path())
 
 
-def update_calendar_row(table_id, row_id, data=None):
+def update_calendar_row(table_id: str, row_id: object, data: Mapping[str, Any] | None = None) -> RowMapping:
     _validate_table(table_id)
     return _nest_database.update_row(table_id, row_id, data=data, path=calendar_db_path())
 
 
-def delete_calendar_row(table_id, row_id):
+def delete_calendar_row(table_id: str, row_id: object) -> None:
     _validate_table(table_id)
     return _nest_database.delete_row(table_id, row_id, path=calendar_db_path())
 
 
-def count_calendar_rows(table_id, queries=None):
+def count_calendar_rows(table_id: str, queries: Queries | None = None) -> int:
     _validate_table(table_id)
     return _nest_database.count_rows(table_id, queries, path=calendar_db_path())
 
 
-def delete_calendar_rows_by_user(user_id):
+def delete_calendar_rows_by_user(user_id: object) -> dict[str, int]:
     return _nest_database.delete_rows_by_user(CALENDAR_TABLES, user_id, path=calendar_db_path())

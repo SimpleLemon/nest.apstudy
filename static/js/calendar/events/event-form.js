@@ -1,42 +1,23 @@
-import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271e96ea7e96b04b0ba16d0d8f7c77974becbf1d7022ca58f4d3";
+import { createCalendarStorage } from "../storage.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { escapeHtml } from "../../core/ui-primitives-module.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
+import { createCalendarDataAdapter } from "../adapter.js?v=4bd55bdec787c1375e384d2ce38fa1ce06e0119c269ef091fc0fbc93438a8079";
 
 // Event create/edit modal and API integration.
-(function () {
+export function createCalendarEventForm({ document, view: window, lifecycle, adapter, calendars, reload, canCreate = () => false, canMutateEvent = () => false }) {
+    adapter = createCalendarDataAdapter(adapter || {}, { window });
+    const { getCalendarOptions, getDefaultCalendarId, getCalendarColor, getStandardColors } = calendars;
     let modal = null;
     let currentMode = "create";
     let currentEventId = null;
     let currentEventRef = null;
+    let currentEventData = null;
+    let providerRevision = null;
+    let providerAttempt = null;
+    let providerAttemptBody = null;
+    let providerTimezone = null;
     let selectedCalendarId = null;
     let selectedColor = null;
     let openerEl = null;
-
-    function getCalendarOptions() {
-        if (typeof window.getCalendarOptionsForEventForm === "function") {
-            return window.getCalendarOptionsForEventForm();
-        }
-        return [{ id: "local:default", label: "Personal", color: "#0ea5e9", kind: "local" }];
-    }
-
-    function getDefaultCalendarId() {
-        if (typeof window.getDefaultCalendarIdForEventForm === "function") {
-            return window.getDefaultCalendarIdForEventForm();
-        }
-        return "local:default";
-    }
-
-    function getCalendarColor(calendarId) {
-        if (typeof window.getCalendarColorForEventForm === "function") {
-            return window.getCalendarColorForEventForm(calendarId);
-        }
-        return "#0ea5e9";
-    }
-
-    function getStandardColors() {
-        if (typeof window.getStandardCalendarColors === "function") {
-            return window.getStandardCalendarColors();
-        }
-        return ["#ef4444", "#f97316", "#eab308", "#84cc16", "#0ea5e9", "#d946ef", "#b08968"];
-    }
 
     function defaultReminderMinutes(isAllDay) {
         return isAllDay ? -1 : 10;
@@ -113,10 +94,6 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
 
     function inputValueToIso(value) {
         return window.APStudyDate?.localInputToIso ? window.APStudyDate.localInputToIso(value) : null;
-    }
-
-    function getAdapter() {
-        return window.APStudyCalendarDataAdapter || null;
     }
 
     function renderModal(data = {}) {
@@ -224,14 +201,33 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
         m.style.display = "flex";
         const form = m.querySelector("form");
         clearFormErrors(form);
+        if (data.source_type === "external" || String(calendarId).startsWith("external:")) {
+            const label = document.createElement("label"); label.textContent = "Location";
+            const location = document.createElement("input"); location.name = "location"; location.value = data.location || ""; location.disabled = isView;
+            label.append(location); form.querySelector(".calendar-event-footer")?.before(label);
+            const select = form.querySelector('[name="calendar_id"]'); if (select && currentMode === "edit") select.disabled = true;
+        }
+
+        if (data.source_type === "external" && data.source_url) {
+            const link = document.createElement("a"); link.textContent = data.provider === "google" ? "Open in Google Calendar" : "Open in Outlook";
+            link.href = data.source_url; link.target = "_blank"; link.rel = "noopener noreferrer"; form.querySelector(".calendar-event-footer")?.prepend(link);
+        }
         form?.querySelector("input[name='title']")?.focus();
     }
 
     function openForm({ mode = "create", data = {}, opener = null } = {}) {
+        if (!["create", "edit", "override", "view"].includes(mode)) return;
+        if (mode === "create" && !canCreate()) return;
+        if ((mode === "edit" || mode === "override") && !canMutateEvent(data)) return;
         openerEl = opener || document.activeElement;
         currentMode = mode;
+        currentEventData = data;
         currentEventId = mode === "edit" ? data.id || null : null;
         currentEventRef = data.event_ref || null;
+        providerRevision = data.revision || null;
+        providerTimezone = data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+        providerAttempt = (window.crypto || globalThis.crypto).randomUUID();
+        providerAttemptBody = null;
         selectedCalendarId = data.calendar_id || getDefaultCalendarId();
         selectedColor = data.color || null;
         renderModal(data);
@@ -276,12 +272,17 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
             reminder_minutes: Number(form.reminder_minutes?.value ?? defaultReminderMinutes(Boolean(form.all_day?.checked))),
             calendar_id: form.calendar_id?.value || selectedCalendarId || getDefaultCalendarId(),
             color: selectedColor,
+            timezone: providerTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
     }
 
     async function onSubmit(event) {
         if (event.target?.id !== "apstudy-event-form") return;
         event.preventDefault();
+        if (currentMode === "view" || (currentMode === "create" && !canCreate())) return;
+        if ((currentMode === "edit" || currentMode === "override") && !canMutateEvent(currentEventData)) return;
+        if (currentMode === "edit" && !currentEventId) return;
+        if (currentMode === "override" && !currentEventRef) return;
         const form = event.target;
         const payload = {
             title: form.title.value.trim(),
@@ -292,7 +293,21 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
             reminder_minutes: Number(form.reminder_minutes.value),
             calendar_id: form.calendar_id.value || getDefaultCalendarId(),
             color: selectedColor,
+            timezone: providerTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
+        if (String(currentEventRef || payload.calendar_id).startsWith("external:")) {
+            payload.revision = providerRevision;
+            payload.idempotency_key = providerAttempt;
+            payload.timezone = providerTimezone;
+            if (form.location) payload.location = form.location.value;
+            payload.start = payload.all_day ? form.start.value.slice(0, 10) : payload.start_date;
+            payload.end = payload.all_day ? form.end.value.slice(0, 10) : payload.end_date;
+        }
+        if (payload.idempotency_key) {
+            const signature = JSON.stringify({ ...payload, idempotency_key: undefined });
+            if (providerAttemptBody && providerAttemptBody !== signature) providerAttempt = (window.crypto || globalThis.crypto).randomUUID();
+            providerAttemptBody = signature; payload.idempotency_key = providerAttempt;
+        }
         if (currentMode === "override") {
             payload.event_ref = currentEventRef;
         }
@@ -319,47 +334,32 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
             submit.textContent = "Saving...";
         }
 
+        const controller = lifecycle.trackAbortController();
         try {
-            const adapter = getAdapter();
+            if ((currentMode === "edit" || currentMode === "override") && !canMutateEvent(currentEventData)) return;
             let result;
             if (currentMode === "override") {
-                result = adapter?.overrideEvent
-                    ? await adapter.overrideEvent({ payload })
-                    : { response: await fetch("/api/calendar/event-overrides", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                    }) };
+                result = await adapter.overrideEvent({ payload, signal: controller.signal });
             } else if (currentMode === "edit" && currentEventId) {
-                result = adapter?.updateEvent
-                    ? await adapter.updateEvent({ eventId: currentEventId, payload })
-                    : { response: await fetch(`/api/calendar/events/${encodeURIComponent(currentEventId)}`, {
-                        method: "PUT",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                    }) };
+                result = await adapter.updateEvent({ eventId: currentEventId, payload, signal: controller.signal });
             } else {
-                result = adapter?.createEvent
-                    ? await adapter.createEvent({ payload })
-                    : { response: await fetch("/api/calendar/events", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                    }) };
+                if (!canCreate()) return;
+                result = await adapter.createEvent({ payload, signal: controller.signal });
             }
-            const res = result?.response || result;
-            const json = result?.payload || await res.json().catch(() => ({}));
-            if (!res.ok) {
+            if (lifecycle.isDisposed()) return;
+            const json = result.payload;
+            if (!result.ok) {
                 showError(json.error || "Save failed.");
                 return;
             }
-            localStorage.removeItem("calendarEventsCache");
+            createCalendarStorage(window).removeItem("calendarEventsCache");
             closeModal();
-            window.loadCalendarData && window.loadCalendarData();
-            if (currentMode !== "edit" && currentMode !== "override") window.dispatchEvent(new CustomEvent('apstudy:notification-intent', { detail: { source: 'calendar' } }));
-        } catch (_) {
-            showError("Save failed.");
+            reload();
+            if (currentMode !== "edit" && currentMode !== "override") window.dispatchEvent(new window.CustomEvent('apstudy:notification-intent', { detail: { source: 'calendar' } }));
+        } catch {
+            if (!lifecycle.isDisposed()) showError("Save failed.");
         } finally {
+            lifecycle.releaseAbortController(controller);
             if (submit) {
                 submit.disabled = false;
                 submit.textContent = previousLabel;
@@ -383,14 +383,9 @@ import { escapeHtml } from "../../core/ui-primitives-module.js?v=1e75801d25f6271
         window.APStudyFormField?.clearAll?.(form || ensureModal().querySelector("form"));
     }
 
-    window.closeCalendarEventForm = closeModal;
-    window.openCalendarEventForm = function (opts) {
-        openForm(opts);
-    };
-
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && modal?.style.display !== "none") {
-            closeModal();
-        }
+    lifecycle.addCleanup(closeModal);
+    lifecycle.addEventListener(document, "keydown", (event) => {
+        if (event.key === "Escape" && modal?.style.display !== "none") closeModal();
     });
-})();
+    return { open: openForm, close: closeModal };
+}

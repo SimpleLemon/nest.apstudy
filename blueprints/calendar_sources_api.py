@@ -14,26 +14,32 @@ from services.calendar_store import list_calendar_rows_all
 from services.calendar_urls import load_other_calendar_urls
 from services import invites
 from services.entitlements import EntitlementError, EntitlementLimitError, request_entitlements
-from blueprints.calendar_api import (
+from services.calendar_constants import (
     DEFAULT_CALENDAR_COLOR,
     DEFAULT_LOCAL_SOURCE_NAME,
     LOCAL_SOURCE_PREFIX,
+)
+from services.calendar_feed_sources import (
     _configured_feed_sources,
     _configured_feed_urls,
+    _filter_configured_cache_events,
+    _load_calendar_feed_metadata,
+    _validate_other_calendar_urls,
+)
+from services.calendar_identity import (
+    _feed_source_id,
+    _normalize_color,
+    _normalize_display_name,
+)
+from services.calendar_sources import (
     _configured_local_sources,
     _ensure_local_calendar_source,
     _ensure_user_settings,
-    _feed_source_id,
-    _filter_configured_cache_events,
-    _load_calendar_feed_metadata,
     _load_calendar_preferences,
     _load_local_calendar_sources,
-    _normalize_color,
-    _normalize_display_name,
     _update_local_calendar_source_payload,
     _update_url_calendar_source_payload,
     _upsert_calendar_preference,
-    _validate_other_calendar_urls,
 )
 
 

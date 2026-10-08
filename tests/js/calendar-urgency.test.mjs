@@ -1,3 +1,4 @@
+import { calendarScript } from "./helpers/calendar-script.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -8,10 +9,10 @@ process.env.TZ = "America/New_York";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 globalThis.window = { APStudyUIPrimitives: { escapeHtml: String } };
 const source = await readFile(path.join(repoRoot, "static/js/calendar/utils.js"), "utf8");
-await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`);
+await import(`data:text/javascript;base64,${Buffer.from(calendarScript(source, "APStudyCalendarUtils")).toString("base64")}`);
 
 const {
-    calendarDayDifference,
+    calendarDaysUntil,
     getUrgencyLabel,
     getUrgencyLabelAllDay,
 } = window.APStudyCalendarUtils;
@@ -43,13 +44,13 @@ test("spring-forward and fall-back transitions do not change Tomorrow labels", (
     const beforeSpringForward = new Date(2026, 2, 7, 23, 30);
     const springTomorrow = new Date(2026, 2, 8, 23, 0);
     assert.ok(springTomorrow - beforeSpringForward < 24 * 60 * 60 * 1000);
-    assert.equal(calendarDayDifference(springTomorrow, beforeSpringForward), 1);
+    assert.equal(calendarDaysUntil(springTomorrow, beforeSpringForward), 1);
     assert.equal(getUrgencyLabel(springTomorrow, beforeSpringForward), "Tomorrow");
 
     const beforeFallBack = new Date(2026, 9, 31, 23, 30);
     const fallTomorrow = new Date(2026, 10, 1, 23, 0);
     assert.ok(fallTomorrow - beforeFallBack > 24 * 60 * 60 * 1000);
-    assert.equal(calendarDayDifference(fallTomorrow, beforeFallBack), 1);
+    assert.equal(calendarDaysUntil(fallTomorrow, beforeFallBack), 1);
     assert.equal(getUrgencyLabel(fallTomorrow, beforeFallBack), "Tomorrow");
 });
 

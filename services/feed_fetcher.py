@@ -10,7 +10,8 @@ import hashlib
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, date as date_type, timezone
-from urllib.parse import urljoin
+from typing import Iterable
+from urllib.parse import urljoin, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import icalendar
@@ -32,6 +33,7 @@ from services.calendar_store import (
 )
 from services.calendar_urls import normalize_calendar_url
 from services.feed_diff import diff_events
+from services.feed_types import FeedEvent, FeedFetchResult, FeedProbeResult
 from services.outbound_http import redacted_url, require_public_http_url
 
 logger = logging.getLogger(__name__)
@@ -40,6 +42,16 @@ MAX_ICAL_REDIRECTS = 5
 PERMANENT_FAILURE_QUARANTINE_THRESHOLD = 2
 TRANSIENT_FAILURE_QUARANTINE_THRESHOLD = 6
 MAX_ERROR_MESSAGE_LENGTH = 500
+
+
+def _redacted_feed_url(value: str | None) -> str:
+    """Feed tokens can occur in the path as well as the query string."""
+    safe_url = redacted_url(value)
+    if safe_url == "[invalid-url]":
+        return safe_url
+    parsed = urlsplit(safe_url)
+    return urlunsplit((parsed.scheme, parsed.netloc, "/[redacted]" if parsed.path else "",
+                       parsed.query, ""))
 
 
 # ── Event type classification ────────────────────────────────────────────────
@@ -187,7 +199,7 @@ def _feed_url_hash(feed_url):
     return hashlib.sha256(_normalize_feed_url(feed_url).encode("utf-8")).hexdigest()
 
 
-def feed_url_hash(feed_url):
+def feed_url_hash(feed_url: str) -> str:
     """Public helper for callers that need the canonical feed URL hash."""
     return _feed_url_hash(feed_url)
 
@@ -287,7 +299,10 @@ def _read_response_bytes(response):
     return b"".join(chunks)
 
 
-def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
+def fetch_and_parse_ical(
+    feed_url: str, timeout: float = 20, etag: str | None = None,
+    last_modified: str | None = None,
+) -> FeedFetchResult:
     """
     Fetch an iCal feed from a URL and parse it into a list of event dicts.
 
@@ -297,11 +312,13 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
 
     Returns:
         Dict containing:
-            status_code, events, etag, last_modified, feed_url
+            status_code, events, etag, last_modified, feed_url, calendar_name.
+        A 304 result is metadata-only: events is empty and calendar_name is
+        None. Callers must retain cached events rather than replace them.
 
     Raises:
-        requests.RequestException on HTTP errors.
-        ValueError if the response is not valid iCalendar data.
+        ValueError for rejected URLs, transport/HTTP failures, or invalid
+        iCalendar data. Request exceptions are normalized to this contract.
     """
     normalized_url = _normalize_feed_url(feed_url)
     if not normalized_url:
@@ -313,7 +330,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     if last_modified:
         headers["If-Modified-Since"] = last_modified
 
-    safe_log_url = redacted_url(normalized_url)
+    safe_log_url = _redacted_feed_url(normalized_url)
     logger.info("Fetching calendar feed: url=%s", safe_log_url)
 
     try:
@@ -336,9 +353,9 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     if response.status_code == 304:
         logger.info(
             "Calendar feed not modified: url=%s",
-            redacted_url(final_url),
+            _redacted_feed_url(final_url),
         )
-        result = {
+        result: FeedFetchResult = {
             "status_code": 304,
             "events": [],
             "etag": response.headers.get("ETag") or etag,
@@ -352,7 +369,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     if response.status_code != 200:
         logger.error(
             "Calendar feed returned non-200 status: url=%s status_code=%s",
-            redacted_url(final_url),
+            _redacted_feed_url(final_url),
             response.status_code,
         )
         response.close()
@@ -362,20 +379,24 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
 
     try:
         raw_bytes = _read_response_bytes(response)
+    except http_requests.RequestException as exc:
+        logger.error("Calendar feed body read failed: url=%s error=%s",
+                     _redacted_feed_url(final_url), type(exc).__name__)
+        raise ValueError("Calendar feed request failed.") from None
     finally:
         response.close()
     encoding = response.encoding if isinstance(getattr(response, "encoding", None), str) else "utf-8"
     raw_text = raw_bytes.decode(encoding or "utf-8", errors="replace")
 
     if not raw_bytes:
-        logger.error("Calendar feed response body is empty: url=%s", redacted_url(final_url))
+        logger.error("Calendar feed response body is empty: url=%s", _redacted_feed_url(final_url))
         raise ValueError("Feed fetch failed: empty response body")
 
     if "BEGIN:VCALENDAR" not in raw_text.upper():
         content_type = response.headers.get("Content-Type", "")
         logger.error(
             "Calendar feed response is not iCalendar data: url=%s status_code=%s content_type=%s",
-            redacted_url(final_url),
+            _redacted_feed_url(final_url),
             response.status_code,
             content_type,
         )
@@ -386,7 +407,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     except Exception as exc:
         logger.error(
             "Calendar feed parse failed: url=%s status_code=%s error_type=%s",
-            redacted_url(final_url),
+            _redacted_feed_url(final_url),
             response.status_code,
             type(exc).__name__,
         )
@@ -397,7 +418,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     is_canvas_feed = "canvas" in prodid.lower()
 
     now = datetime.utcnow()
-    events = []
+    events: list[FeedEvent] = []
     floating_timezone = _feed_floating_timezone(cal)
 
     for component in cal.walk():
@@ -435,7 +456,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
 
     logger.info(
         "Calendar feed parsed successfully: url=%s events_parsed=%s",
-        redacted_url(final_url),
+        _redacted_feed_url(final_url),
         len(events),
     )
     return {
@@ -448,7 +469,7 @@ def fetch_and_parse_ical(feed_url, timeout=20, etag=None, last_modified=None):
     }
 
 
-def probe_calendar_feed(feed_url, timeout=15):
+def probe_calendar_feed(feed_url: str, timeout: float = 15) -> FeedProbeResult:
     """
     Validate that a URL returns iCalendar data before persisting it.
 
@@ -463,7 +484,7 @@ def probe_calendar_feed(feed_url, timeout=15):
         raise ValueError("Calendar URL is required.")
 
     headers = {"User-Agent": "APStudy-Calendar-Fetcher/1.0"}
-    safe_log_url = redacted_url(normalized_url)
+    safe_log_url = _redacted_feed_url(normalized_url)
     logger.info("Probing calendar feed: url=%s", safe_log_url)
 
     try:
@@ -484,6 +505,12 @@ def probe_calendar_feed(feed_url, timeout=15):
 
     try:
         raw_bytes = _read_response_bytes(response)
+    except http_requests.RequestException as exc:
+        logger.error("Calendar feed probe body read failed: url=%s error=%s",
+                     _redacted_feed_url(final_url), type(exc).__name__)
+        raise ValueError(
+            "Unable to reach that calendar URL. Check the link and try again."
+        ) from None
     finally:
         response.close()
 
@@ -511,7 +538,7 @@ def probe_calendar_feed(feed_url, timeout=15):
     }
 
 
-def ensure_fetchable_calendar_url(url, timeout=15):
+def ensure_fetchable_calendar_url(url: str, timeout: float = 15) -> FeedProbeResult:
     """Classify then probe a calendar URL before it is persisted."""
     from services.calendar_urls import classify_calendar_url
 
@@ -560,7 +587,9 @@ def _find_feed_row(user_id, feed_url):
     )
 
 
-def _upsert_feed_metadata(user_id, feed_url, result, fetched_at):
+def _upsert_feed_metadata(
+    user_id: str, feed_url: str, result: FeedFetchResult, fetched_at: datetime,
+) -> None:
     feed_table = COLLECTIONS.get("calendar_feeds")
     if not feed_table:
         return
@@ -731,12 +760,23 @@ def _apply_feed_diffs(user_id, feed_url, events, fetched_at, existing_rows=None)
     return len(diff.to_create) + len(diff.to_update)
 
 
-def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
+def fetch_and_cache_feeds(
+    user_id: str, feed_urls: Iterable[str | None] | None, *, force: bool = False,
+) -> int:
     """
     Fetch user calendar feeds and cache events using upsert/diffing.
 
-    Quarantined feeds are skipped unless force=True. When every configured URL
-    is quarantined, returns 0 instead of raising.
+    Return the total number of created plus updated event rows. Deletions,
+    unchanged events, and HTTP 304 responses do not contribute to the count.
+    URLs are normalized and deduplicated; quarantined feeds are skipped unless
+    force=True. Return 0 when no usable URLs remain, including when every feed
+    is quarantined.
+
+    If any active feed fails to fetch or parse, raise a captured exception
+    without applying any fetched results or their success metadata. Failure
+    metadata and legacy cache repairs may still be persisted. Cache writes
+    after a successful batch are not transactional; persistence errors propagate
+    and may leave earlier writes applied.
     """
     if feed_urls is None:
         feed_urls = []
@@ -759,7 +799,7 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
                 logger.info(
                     "Skipping quarantined calendar feed: user_id=%s url=%s",
                     user_id,
-                    redacted_url(feed_url),
+                    _redacted_feed_url(feed_url),
                 )
                 continue
             active_urls.append(feed_url)
@@ -806,8 +846,8 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
     for row in existing_rows:
         existing_by_feed.setdefault(_normalize_feed_url(row.get("feed_url")), []).append(row)
 
-    results = []
-    errors = []
+    results: list[FeedFetchResult] = []
+    errors: list[Exception] = []
     failed_at = datetime.utcnow()
 
     with ThreadPoolExecutor(max_workers=5) as executor:
@@ -829,7 +869,7 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
             except Exception as exc:
                 logger.error(
                     "Failed to fetch or parse calendar feed: url=%s error_type=%s",
-                    redacted_url(normalized_url),
+                    _redacted_feed_url(normalized_url),
                     type(exc).__name__,
                 )
                 try:
@@ -837,7 +877,7 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
                 except Exception:
                     logger.exception(
                         "Failed to record calendar feed failure: url=%s",
-                        redacted_url(normalized_url),
+                        _redacted_feed_url(normalized_url),
                     )
                 errors.append(exc)
 
@@ -847,15 +887,15 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
     total_changes = 0
     fetched_at = datetime.utcnow()
     for result in results:
-        feed_url = result.get("feed_url")
+        feed_url = result["feed_url"]
         _upsert_feed_metadata(user_id, feed_url, result, fetched_at)
-        if result.get("status_code") == 304:
+        if result["status_code"] == 304:
             # No changes; skip parsing and cache writes.
             continue
         total_changes += _apply_feed_diffs(
             user_id,
             feed_url,
-            result.get("events", []),
+            result["events"],
             fetched_at,
             existing_rows=existing_by_feed.get(feed_url, []),
         )
@@ -863,6 +903,6 @@ def fetch_and_cache_feeds(user_id, feed_urls, *, force=False):
     return total_changes
 
 
-def fetch_and_cache_feed(user_id, feed_url, *, force=False):
+def fetch_and_cache_feed(user_id: str, feed_url: str, *, force: bool = False) -> int:
     """Backward-compatible wrapper for single-feed callers."""
     return fetch_and_cache_feeds(user_id, [feed_url], force=force)

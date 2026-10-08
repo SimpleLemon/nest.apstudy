@@ -9,10 +9,20 @@ test("closing an event editor removes its hit area and returns control to the ca
     </head><body>
         <button id="outside" type="button">Calendar control</button>
     </body></html>`);
-    await page.addScriptTag({ url: `${baseURL}/static/js/calendar/events/event-form.js`, type: "module" });
-
-    await page.evaluate(() => {
-        window.openCalendarEventForm({
+    await page.evaluate(async () => {
+        const { createCalendarEventForm } = await import("/static/js/calendar/events/event-form.js");
+        const { createCalendarLifecycle } = await import("/static/js/calendar/lifecycle.js");
+        const eventForm = createCalendarEventForm({
+            document, view: window, lifecycle: createCalendarLifecycle({ view: window }),
+            canCreate: () => true, canMutateEvent: () => true, reload() {},
+            calendars: {
+                getCalendarOptions: () => [{ id: "local:personal", name: "Personal" }],
+                getDefaultCalendarId: () => "local:personal",
+                getCalendarColor: () => "#0ea5e9",
+                getStandardColors: () => ["#0ea5e9"],
+            },
+        });
+        eventForm.open({
             mode: "edit",
             data: {
                 id: "event-1",

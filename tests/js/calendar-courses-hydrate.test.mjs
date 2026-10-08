@@ -1,5 +1,7 @@
+import featureModules from "./helpers/feature-modules.cjs";
+import { createCalendarDOM } from "./helpers/calendar-dom.mjs";
 import assert from "node:assert/strict";
-import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -41,68 +43,22 @@ function jsonResponse(payload, status = 200) {
     };
 }
 
-const courseModalStub = {
-    createCourseModalRenderer() {
-        return {
-            renderCoursesModal() {},
-            setCoursesModalBackgroundInert() {},
-        };
-    },
-};
-
-let coursesFactory = null;
-
+let coursesFactory;
 async function loadCoursesModule() {
-    if (coursesFactory) {
-        globalThis.window.APStudyCalendarCourseModal = courseModalStub;
-        return { restore() {} };
-    }
-    const view = {
-        localStorage: createMemoryStorage(),
-        location: { href: "https://example.test/calendar" },
-        history: { replaceState() {} },
-        setTimeout,
-        addEventListener() {},
-        APStudyCalendarCourseModal: courseModalStub,
-    };
-    const document = {
-        body: { dataset: {} },
-        defaultView: view,
-        addEventListener() {},
-        querySelector: () => null,
-    };
-    view.document = document;
-    view.window = view;
-    globalThis.window = view;
-    globalThis.document = document;
-    const source = await readFile(path.join(repoRoot, "static/js/calendar/integrations/courses.js"), "utf8");
-    await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}#courses.js`);
-    coursesFactory = view.APStudyCalendarCourses.createCalendarCourses;
+    coursesFactory ||= featureModules.loadFeatureModule('calendar/integrations/courses.js', createCalendarDOM().context).createCalendarCourses;
     return { restore() {} };
 }
 
 function createCoursesRuntime({ emory = true, storage, dataAdapter, readOnly = false, courseOptions = {} } = {}) {
     const memory = storage || createMemoryStorage();
-    const view = {
-        localStorage: memory,
-        location: { href: "https://example.test/calendar" },
-        history: { replaceState() {} },
-        setTimeout,
-        APStudyCalendarCourseModal: courseModalStub,
-    };
-    const document = {
-        body: { dataset: { emoryStudent: emory ? "true" : "false" } },
-        defaultView: view,
-        activeElement: null,
-        querySelector: () => null,
-    };
-    view.document = document;
-    const root = {
-        ownerDocument: document,
-        dataset: { emoryStudent: emory ? "true" : "false" },
-        classList: { add() {}, remove() {} },
-        querySelector: () => null,
-    };
+    const { window: view, document } = createCalendarDOM();
+    view.localStorage = memory;
+    view.history = { replaceState() {} };
+    view.setTimeout = setTimeout;
+    document.body.dataset.emoryStudent = emory ? "true" : "false";
+    const root = document.createElement('div');
+    root.dataset.emoryStudent = emory ? "true" : "false";
+    document.body.append(root);
     const state = {
         public: { readOnly },
         calendars: {},
@@ -127,7 +83,6 @@ function createCoursesRuntime({ emory = true, storage, dataAdapter, readOnly = f
             filteredSectionIds: [],
         },
     };
-    globalThis.window.APStudyCalendarCourseModal = courseModalStub;
     const courses = coursesFactory({
         root,
         lifecycle: {
@@ -345,4 +300,29 @@ test("calendar data adapter loads saved courses from the Nest API", async () => 
     } finally {
         await rm(moduleRoot, { recursive: true, force: true });
     }
+});
+
+test('course search consumes the shared HTTP envelope and preserves endpoint-specific failures', async () => {
+    const runtime = await loadCoursesModule();
+    try {
+        let termOk = true;
+        const { courses, state } = createCoursesRuntime({
+            courseOptions: { remoteResults: true, serverSelections: true },
+            dataAdapter: { async loadCourses() { return {
+                response: { ok: termOk }, ok: termOk,
+                termsResponse: { ok: termOk }, sectionsResponse: { ok: true },
+                payload: { terms: ['Fall_2026'], sections: [savedSection], total: 75, has_more: true },
+            }; } },
+        });
+        await courses.submitCoursesSearch();
+        assert.deepEqual(state.courses.terms, ['Fall_2026']);
+        assert.equal(state.courses.sections[0].id, savedSection.id);
+        assert.equal(state.courses.total, 75);
+        termOk = false;
+        const logError = console.error;
+        console.error = () => {};
+        try { await courses.submitCoursesSearch(); } finally { console.error = logError; }
+        assert.match(state.courses.error, /Unable to load terms/);
+        assert.equal(state.courses.sections[0].id, savedSection.id);
+    } finally { runtime.restore(); }
 });
